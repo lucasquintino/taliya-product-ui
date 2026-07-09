@@ -1,6 +1,6 @@
 # Consumer Bootstrap Audit
 
-Generated: 2026-07-07T11:40:46.800Z
+Generated: 2026-07-09T19:43:33.485Z
 
 Status: pass
 
@@ -12,12 +12,12 @@ Fixture: `C:\Users\lucas\taliya-product-ui\tmp\consumer-bootstrap-fixture`
 
 | Command | Status | Exit code | Duration ms |
 | --- | --- | ---: | ---: |
-| `git init` | pass | 0 | 87 |
-| `C:\Program Files\nodejs\node.exe scripts/bootstrap-consumer-configs.mjs --consumer tmp\consumer-bootstrap-fixture --write --starter-files --report-label bootstrap-fixture` | pass | 0 | 100 |
+| `git init` | pass | 0 | 84 |
+| `C:\Program Files\nodejs\node.exe scripts/bootstrap-consumer-configs.mjs --consumer tmp\consumer-bootstrap-fixture --write --starter-files --report-label bootstrap-fixture` | pass | 0 | 89 |
 | `verify generated future CRM page-kit starter files` | pass | 0 | 0 |
-| `git add taliya-readiness.config.json taliya-page-kit.config.json` | pass | 0 | 69 |
-| `C:\Program Files\nodejs\node.exe scripts/audit-consumer-config-versioning.mjs --check --consumer tmp\consumer-bootstrap-fixture --report-label bootstrap-fixture` | pass | 0 | 534 |
-| `C:\Program Files\nodejs\node.exe scripts/audit-consumer-page-kit.mjs --check --consumer tmp\consumer-bootstrap-fixture --page-kit-config C:\Users\lucas\taliya-product-ui\tmp\consumer-bootstrap-fixture\taliya-page-kit.config.json --report-label bootstrap-fixture` | pass | 0 | 93 |
+| `git add taliya-readiness.config.json taliya-page-kit.config.json` | pass | 0 | 67 |
+| `C:\Program Files\nodejs\node.exe scripts/audit-consumer-config-versioning.mjs --check --consumer tmp\consumer-bootstrap-fixture --report-label bootstrap-fixture` | pass | 0 | 351 |
+| `C:\Program Files\nodejs\node.exe scripts/audit-consumer-page-kit.mjs --check --consumer tmp\consumer-bootstrap-fixture --page-kit-config C:\Users\lucas\taliya-product-ui\tmp\consumer-bootstrap-fixture\taliya-page-kit.config.json --report-label bootstrap-fixture` | pass | 0 | 77 |
 
 ## Generated Configs
 

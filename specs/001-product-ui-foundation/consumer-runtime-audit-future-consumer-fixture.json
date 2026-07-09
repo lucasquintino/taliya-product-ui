@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-07T11:41:02.387Z",
-  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+  "generatedAt": "2026-07-09T19:44:22.463Z",
+  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
   "packageJsonExists": true,
   "requestedScripts": [
     "typecheck",
@@ -16,7 +16,7 @@
       "commandText": "npm run typecheck",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 859,
+      "durationMs": 987,
       "stdout": "> typecheck\n> node scripts/page-kit-smoke.mjs\n\n{\"status\":\"pass\",\"renderedLength\":32488,\"manifestCount\":52,\"subpathManifestMatches\":true,\"resolvedExports\":[\"@taliya/tokens\",\"@taliya/tokens/tokens.css\",\"@taliya/ui\",\"@taliya/ui/styles.css\",\"@taliya/crm\",\"@taliya/crm/standard-page-kit\",\"@taliya/crm/styles.css\"],\"markers\":[\"tcrm-product-shell\",\"tcrm-work-list-detail-page\",\"tcrm-page-filter-bar\",\"tcrm-page-quick-filters\",\"tl-table\",\"tcrm-kanban-board\",\"tcrm-kanban-column\",\"tcrm-kanban-card\",\"tcrm-record-drawer\",\"Novo lead\",\"Ana Silva\"]}",
       "stderr": ""
     },
@@ -25,7 +25,7 @@
       "commandText": "npm run lint",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 911,
+      "durationMs": 1279,
       "stdout": "> lint\n> node scripts/page-kit-smoke.mjs\n\n{\"status\":\"pass\",\"renderedLength\":32488,\"manifestCount\":52,\"subpathManifestMatches\":true,\"resolvedExports\":[\"@taliya/tokens\",\"@taliya/tokens/tokens.css\",\"@taliya/ui\",\"@taliya/ui/styles.css\",\"@taliya/crm\",\"@taliya/crm/standard-page-kit\",\"@taliya/crm/styles.css\"],\"markers\":[\"tcrm-product-shell\",\"tcrm-work-list-detail-page\",\"tcrm-page-filter-bar\",\"tcrm-page-quick-filters\",\"tl-table\",\"tcrm-kanban-board\",\"tcrm-kanban-column\",\"tcrm-kanban-card\",\"tcrm-record-drawer\",\"Novo lead\",\"Ana Silva\"]}",
       "stderr": ""
     },
@@ -34,7 +34,7 @@
       "commandText": "npm run test",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 894,
+      "durationMs": 1106,
       "stdout": "> test\n> node scripts/page-kit-smoke.mjs\n\n{\"status\":\"pass\",\"renderedLength\":32488,\"manifestCount\":52,\"subpathManifestMatches\":true,\"resolvedExports\":[\"@taliya/tokens\",\"@taliya/tokens/tokens.css\",\"@taliya/ui\",\"@taliya/ui/styles.css\",\"@taliya/crm\",\"@taliya/crm/standard-page-kit\",\"@taliya/crm/styles.css\"],\"markers\":[\"tcrm-product-shell\",\"tcrm-work-list-detail-page\",\"tcrm-page-filter-bar\",\"tcrm-page-quick-filters\",\"tl-table\",\"tcrm-kanban-board\",\"tcrm-kanban-column\",\"tcrm-kanban-card\",\"tcrm-record-drawer\",\"Novo lead\",\"Ana Silva\"]}",
       "stderr": ""
     },
@@ -43,7 +43,7 @@
       "commandText": "npm run build",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 946,
+      "durationMs": 1150,
       "stdout": "> build\n> node scripts/page-kit-smoke.mjs\n\n{\"status\":\"pass\",\"renderedLength\":32488,\"manifestCount\":52,\"subpathManifestMatches\":true,\"resolvedExports\":[\"@taliya/tokens\",\"@taliya/tokens/tokens.css\",\"@taliya/ui\",\"@taliya/ui/styles.css\",\"@taliya/crm\",\"@taliya/crm/standard-page-kit\",\"@taliya/crm/styles.css\"],\"markers\":[\"tcrm-product-shell\",\"tcrm-work-list-detail-page\",\"tcrm-page-filter-bar\",\"tcrm-page-quick-filters\",\"tl-table\",\"tcrm-kanban-board\",\"tcrm-kanban-column\",\"tcrm-kanban-card\",\"tcrm-record-drawer\",\"Novo lead\",\"Ana Silva\"]}",
       "stderr": ""
     }

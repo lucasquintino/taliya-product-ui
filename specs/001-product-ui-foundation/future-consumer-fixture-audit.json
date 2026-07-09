@@ -1,38 +1,38 @@
 {
-  "generatedAt": "2026-07-07T11:41:02.400Z",
-  "fixtureRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
-  "status": "pass",
+  "generatedAt": "2026-07-09T19:44:22.489Z",
+  "fixtureRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
+  "status": "fail",
   "steps": [
     {
       "commandText": "git init",
-      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 131,
-      "stdout": "Initialized empty Git repository in C:/Users/lucas/taliya-product-ui/tmp/future-consumer-readiness-fixture-28920/.git/",
+      "durationMs": 86,
+      "stdout": "Initialized empty Git repository in C:/Users/lucas/taliya-product-ui/tmp/future-consumer-readiness-fixture-115032/.git/",
       "stderr": ""
     },
     {
       "commandText": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm install --ignore-scripts --no-audit --no-fund --force --fetch-timeout=60000",
-      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 9437,
-      "stdout": "added 49 packages in 9s",
+      "durationMs": 9970,
+      "stdout": "added 49 packages in 10s",
       "stderr": "npm warn using --force Recommended protections disabled."
     },
     {
-      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/bootstrap-consumer-configs.mjs --consumer tmp\\future-consumer-readiness-fixture-28920 --write --starter-files --report-label future-consumer-fixture",
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/bootstrap-consumer-configs.mjs --consumer tmp\\future-consumer-readiness-fixture-115032 --write --starter-files --report-label future-consumer-fixture",
       "cwd": "C:\\Users\\lucas\\taliya-product-ui",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 67,
-      "stdout": "Consumer config bootstrap write for C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\ncreated: tmp/future-consumer-readiness-fixture-28920/taliya-readiness.config.json\ncreated: tmp/future-consumer-readiness-fixture-28920/taliya-page-kit.config.json\ncreated: tmp/future-consumer-readiness-fixture-28920/components/crm-shell-client.tsx\ncreated: tmp/future-consumer-readiness-fixture-28920/features/crm/work-list/work-list-page.tsx\ncreated: tmp/future-consumer-readiness-fixture-28920/features/crm/kanban/kanban-page.tsx\ncreated: tmp/future-consumer-readiness-fixture-28920/app/crm/page.tsx\ncreated: tmp/future-consumer-readiness-fixture-28920/app/crm/kanban/page.tsx\nNext: run node scripts/audit-library-readiness.mjs --check --consumer <path> after packages and routes exist.",
+      "durationMs": 102,
+      "stdout": "Consumer config bootstrap write for C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032\ncreated: tmp/future-consumer-readiness-fixture-115032/taliya-readiness.config.json\ncreated: tmp/future-consumer-readiness-fixture-115032/taliya-page-kit.config.json\ncreated: tmp/future-consumer-readiness-fixture-115032/components/crm-shell-client.tsx\ncreated: tmp/future-consumer-readiness-fixture-115032/features/crm/work-list/work-list-page.tsx\ncreated: tmp/future-consumer-readiness-fixture-115032/features/crm/kanban/kanban-page.tsx\ncreated: tmp/future-consumer-readiness-fixture-115032/app/crm/page.tsx\ncreated: tmp/future-consumer-readiness-fixture-115032/app/crm/kanban/page.tsx\nNext: run node scripts/audit-library-readiness.mjs --check --consumer <path> after packages and routes exist.",
       "stderr": ""
     },
     {
       "commandText": "verify bootstrap generated installed future CRM starter files",
-      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
       "status": "pass",
       "exitCode": 0,
       "durationMs": 0,
@@ -41,7 +41,7 @@
     },
     {
       "commandText": "enrich installed future CRM page-kit smoke fixture files",
-      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
       "status": "pass",
       "exitCode": 0,
       "durationMs": 0,
@@ -50,64 +50,64 @@
     },
     {
       "commandText": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run typecheck",
-      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 938,
+      "durationMs": 1246,
       "stdout": "> typecheck\n> node scripts/page-kit-smoke.mjs\n\n{\"status\":\"pass\",\"renderedLength\":32488,\"manifestCount\":52,\"subpathManifestMatches\":true,\"resolvedExports\":[\"@taliya/tokens\",\"@taliya/tokens/tokens.css\",\"@taliya/ui\",\"@taliya/ui/styles.css\",\"@taliya/crm\",\"@taliya/crm/standard-page-kit\",\"@taliya/crm/styles.css\"],\"markers\":[\"tcrm-product-shell\",\"tcrm-work-list-detail-page\",\"tcrm-page-filter-bar\",\"tcrm-page-quick-filters\",\"tl-table\",\"tcrm-kanban-board\",\"tcrm-kanban-column\",\"tcrm-kanban-card\",\"tcrm-record-drawer\",\"Novo lead\",\"Ana Silva\"]}",
       "stderr": ""
     },
     {
       "commandText": "git add taliya-readiness.config.json taliya-page-kit.config.json",
-      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 80,
+      "durationMs": 102,
       "stdout": "",
       "stderr": "warning: in the working copy of 'taliya-page-kit.config.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'taliya-readiness.config.json', LF will be replaced by CRLF the next time Git touches it"
     },
     {
-      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-integration.mjs --check --consumer tmp\\future-consumer-readiness-fixture-28920 --vendor vendor/taliya-product-ui --report-label future-consumer-fixture",
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-integration.mjs --check --consumer tmp\\future-consumer-readiness-fixture-115032 --vendor vendor/taliya-product-ui --report-label future-consumer-fixture",
       "cwd": "C:\\Users\\lucas\\taliya-product-ui",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 423,
+      "durationMs": 489,
       "stdout": "Consumer integration audit written to specs\\001-product-ui-foundation\\consumer-integration-audit-future-consumer-fixture.json and specs\\001-product-ui-foundation\\consumer-integration-audit-future-consumer-fixture.md\nConsumer integration: pass",
       "stderr": ""
     },
     {
-      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-package-sync.mjs --check --consumer tmp\\future-consumer-readiness-fixture-28920 --vendor vendor/taliya-product-ui --report-label future-consumer-fixture",
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-package-sync.mjs --check --consumer tmp\\future-consumer-readiness-fixture-115032 --vendor vendor/taliya-product-ui --report-label future-consumer-fixture",
       "cwd": "C:\\Users\\lucas\\taliya-product-ui",
-      "status": "pass",
-      "exitCode": 0,
-      "durationMs": 89,
-      "stdout": "Consumer package sync audit: pass\nWrote C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\consumer-package-sync-audit-future-consumer-fixture.md\nWrote C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\consumer-package-sync-audit-future-consumer-fixture.json",
-      "stderr": ""
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 120,
+      "stdout": "Consumer package sync audit: fail\nWrote C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\consumer-package-sync-audit-future-consumer-fixture.md\nWrote C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\consumer-package-sync-audit-future-consumer-fixture.json",
+      "stderr": "Out-of-sync packages: @taliya/tokens/dist/index.d.ts, @taliya/tokens/dist/index.js, @taliya/tokens/src/tokens.css, @taliya/ui/dist/index.d.ts, @taliya/ui/dist/index.js, @taliya/ui/src/styles.css, @taliya/crm/dist/index.d.ts, @taliya/crm/dist/index.js, @taliya/crm/src/styles.css"
     },
     {
-      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-page-kit.mjs --check --consumer tmp\\future-consumer-readiness-fixture-28920 --page-kit-config C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\taliya-page-kit.config.json --report-label future-consumer-fixture",
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-page-kit.mjs --check --consumer tmp\\future-consumer-readiness-fixture-115032 --page-kit-config C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032\\taliya-page-kit.config.json --report-label future-consumer-fixture",
       "cwd": "C:\\Users\\lucas\\taliya-product-ui",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 80,
+      "durationMs": 101,
       "stdout": "Consumer page kit audit written to specs\\001-product-ui-foundation\\consumer-page-kit-audit-future-consumer-fixture.json and specs\\001-product-ui-foundation\\consumer-page-kit-audit-future-consumer-fixture.md\nConsumer page kit: pass",
       "stderr": ""
     },
     {
-      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-config-versioning.mjs --check --consumer tmp\\future-consumer-readiness-fixture-28920 --report-label future-consumer-fixture",
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-config-versioning.mjs --check --consumer tmp\\future-consumer-readiness-fixture-115032 --report-label future-consumer-fixture",
       "cwd": "C:\\Users\\lucas\\taliya-product-ui",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 469,
+      "durationMs": 558,
       "stdout": "Consumer config versioning audit: pass\nWrote specs/001-product-ui-foundation/consumer-config-versioning-audit-future-consumer-fixture.md\nWrote specs/001-product-ui-foundation/consumer-config-versioning-audit-future-consumer-fixture.json",
       "stderr": ""
     },
     {
-      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-runtime.mjs --check --consumer tmp\\future-consumer-readiness-fixture-28920 --report-label future-consumer-fixture",
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-runtime.mjs --check --consumer tmp\\future-consumer-readiness-fixture-115032 --report-label future-consumer-fixture",
       "cwd": "C:\\Users\\lucas\\taliya-product-ui",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 3687,
+      "durationMs": 4617,
       "stdout": "Consumer runtime audit: pass\nWrote specs/001-product-ui-foundation/consumer-runtime-audit-future-consumer-fixture.md\nWrote specs/001-product-ui-foundation/consumer-runtime-audit-future-consumer-fixture.json",
       "stderr": ""
     }

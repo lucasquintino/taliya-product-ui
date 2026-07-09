@@ -1,12 +1,12 @@
 {
-  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
   "reportLabel": "future-consumer-fixture",
-  "configSource": "tmp/future-consumer-readiness-fixture-28920/taliya-page-kit.config.json",
+  "configSource": "tmp/future-consumer-readiness-fixture-115032/taliya-page-kit.config.json",
   "configValidation": {
     "pass": true,
     "errors": []
   },
-  "generatedAt": "2026-07-07T11:40:58.231Z",
+  "generatedAt": "2026-07-09T19:44:17.305Z",
   "surfaceRows": [
     {
       "id": "crm-shell",

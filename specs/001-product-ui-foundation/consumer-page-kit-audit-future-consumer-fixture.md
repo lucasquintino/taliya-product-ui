@@ -1,7 +1,7 @@
 # Consumer Page Kit Audit
 
-Consumer: `C:\Users\lucas\taliya-product-ui\tmp\future-consumer-readiness-fixture-28920`
-Config: `tmp/future-consumer-readiness-fixture-28920/taliya-page-kit.config.json`
+Consumer: `C:\Users\lucas\taliya-product-ui\tmp\future-consumer-readiness-fixture-115032`
+Config: `tmp/future-consumer-readiness-fixture-115032/taliya-page-kit.config.json`
 
 Status: Pass
 

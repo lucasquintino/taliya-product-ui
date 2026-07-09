@@ -1,5 +1,5 @@
 {
-  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
   "vendorDir": "vendor/taliya-product-ui",
   "reportLabel": "future-consumer-fixture",
   "vendorManifest": {
@@ -7,7 +7,7 @@
     "present": true,
     "packageCount": 3
   },
-  "generatedAt": "2026-07-07T11:40:57.721Z",
+  "generatedAt": "2026-07-09T19:44:16.718Z",
   "packageStatus": {
     "pass": true,
     "missing": [],
