@@ -1,0 +1,230 @@
+{
+  "generatedAt": "2026-07-07T11:40:44.667Z",
+  "status": "pass",
+  "manifest": "specs\\001-product-ui-foundation\\contracts\\public-api-surface.manifest.json",
+  "standardPageKit": {
+    "status": "canonical",
+    "count": 52,
+    "failed": []
+  },
+  "compatibilityAliases": {
+    "count": 5,
+    "failed": [],
+    "rows": [
+      {
+        "name": "Sidebar",
+        "package": "@taliya/crm",
+        "canonicalName": "CrmShellSidebar",
+        "canonicalPackage": "@taliya/crm",
+        "reason": "Legacy short shell name retained for old stories/consumers. New CRM/Internal pages should use CrmProductShell and shell slots, or CrmShellSidebar when a direct shell part is required.",
+        "apiStatus": "compatibility-alias",
+        "exportPresent": true,
+        "canonicalExportPresent": true,
+        "selfAlias": false,
+        "pass": true
+      },
+      {
+        "name": "Topbar",
+        "package": "@taliya/crm",
+        "canonicalName": "CrmShellTopNav",
+        "canonicalPackage": "@taliya/crm",
+        "reason": "Legacy short topbar name retained for compatibility. New page navigation should be provided through CrmProductShell/top-nav props or CrmShellTopNav.",
+        "apiStatus": "compatibility-alias",
+        "exportPresent": true,
+        "canonicalExportPresent": true,
+        "selfAlias": false,
+        "pass": true
+      },
+      {
+        "name": "GlobalActions",
+        "package": "@taliya/crm",
+        "canonicalName": "CrmShellGlobalActions",
+        "canonicalPackage": "@taliya/crm",
+        "reason": "Legacy short action-cluster name retained for compatibility. New shell work should use CrmShellGlobalActions or CrmProductShell global-action props.",
+        "apiStatus": "compatibility-alias",
+        "exportPresent": true,
+        "canonicalExportPresent": true,
+        "selfAlias": false,
+        "pass": true
+      },
+      {
+        "name": "TaskQueueList",
+        "package": "@taliya/crm",
+        "canonicalName": "PageQuickFilters",
+        "canonicalPackage": "@taliya/crm",
+        "reason": "Historical image-23 crop component. New work-list rails must use PageQuickFilters with page-specific items.",
+        "apiStatus": "compatibility-alias",
+        "exportPresent": true,
+        "canonicalExportPresent": true,
+        "selfAlias": false,
+        "pass": true
+      },
+      {
+        "name": "ActionMenu",
+        "package": "@taliya/ui",
+        "canonicalName": "DropdownMenu",
+        "canonicalPackage": "@taliya/ui",
+        "reason": "Semantic alias for action-trigger menus. DropdownMenu owns the primitive implementation.",
+        "apiStatus": "compatibility-alias",
+        "exportPresent": true,
+        "canonicalExportPresent": true,
+        "selfAlias": false,
+        "pass": true
+      }
+    ]
+  },
+  "domainSpecializations": {
+    "count": 11,
+    "failed": [],
+    "rows": [
+      {
+        "name": "PageFilterBar",
+        "package": "@taliya/crm",
+        "baseName": "FilterBar",
+        "basePackage": "@taliya/ui",
+        "reason": "CRM page composition with default search, filters, actions, density, and overflow behavior.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "PageQuickFilters",
+        "package": "@taliya/crm",
+        "baseName": "NavPill",
+        "basePackage": "@taliya/ui",
+        "reason": "CRM quick-filter rail with heading, count grammar, selected state, empty/loading/blocked states, and page rail layout.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "MetricCard",
+        "package": "@taliya/crm",
+        "baseName": "MetricTile",
+        "basePackage": "@taliya/ui",
+        "reason": "Product metric surface with CRM copy density and action context.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "StatusCard",
+        "package": "@taliya/crm",
+        "baseName": "StatusSummaryCard",
+        "basePackage": "@taliya/ui",
+        "reason": "CRM operational status card composed from product status semantics.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "TaskTable",
+        "package": "@taliya/crm",
+        "baseName": "DataTable",
+        "basePackage": "@taliya/ui",
+        "reason": "Task-specific prepared-row table with official task columns, sort affordances, row state, and footer.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "LeadTable",
+        "package": "@taliya/crm",
+        "baseName": "DataTable",
+        "basePackage": "@taliya/ui",
+        "reason": "Lead-specific prepared-row table for consumer pages.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "ChecklistTable",
+        "package": "@taliya/crm",
+        "baseName": "DataTable",
+        "basePackage": "@taliya/ui",
+        "reason": "Checklist-specific prepared-row table with checklist progress and selected-row grammar.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "ApprovalTable",
+        "package": "@taliya/crm",
+        "baseName": "DataTable",
+        "basePackage": "@taliya/ui",
+        "reason": "Approval-specific prepared-row table for human decision queues.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "StudentTable",
+        "package": "@taliya/crm",
+        "baseName": "DataTable",
+        "basePackage": "@taliya/ui",
+        "reason": "Student-specific prepared-row table for student list/profile entry points.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "ReplacementTable",
+        "package": "@taliya/crm",
+        "baseName": "DataTable",
+        "basePackage": "@taliya/ui",
+        "reason": "Replacement-specific prepared-row table for reposicao workflows.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      },
+      {
+        "name": "CrmRecordDrawer",
+        "package": "@taliya/crm",
+        "baseName": "Drawer",
+        "basePackage": "@taliya/ui",
+        "reason": "Generic CRM record drawer wrapper for consumers that need one official drawer anatomy with dynamic sections/actions.",
+        "apiStatus": "domain-specialization",
+        "exportPresent": true,
+        "baseExportPresent": true,
+        "selfSpecialization": false,
+        "pass": true
+      }
+    ]
+  },
+  "policyConflicts": {
+    "duplicatePolicyKeys": [],
+    "standardAliasConflicts": [],
+    "standardSpecializationOverlap": [
+      "@taliya/crm:PageFilterBar",
+      "@taliya/crm:PageQuickFilters",
+      "@taliya/crm:MetricCard",
+      "@taliya/crm:LeadTable",
+      "@taliya/crm:TaskTable",
+      "@taliya/crm:ChecklistTable",
+      "@taliya/crm:ApprovalTable",
+      "@taliya/crm:StudentTable",
+      "@taliya/crm:ReplacementTable",
+      "@taliya/crm:CrmRecordDrawer"
+    ]
+  }
+}

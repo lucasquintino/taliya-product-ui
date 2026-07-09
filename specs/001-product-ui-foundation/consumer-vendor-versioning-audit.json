@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-07-07T11:41:06.154Z",
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
+  "sourceDir": "C:\\Users\\lucas\\taliya-product-ui\\dist-packages",
+  "vendorDir": "C:\\Users\\lucas\\taliya-internal\\vendor\\taliya-product-ui",
+  "reportLabel": "default",
+  "git": {
+    "isGitRepo": true,
+    "gitRoot": "C:/Users/lucas/taliya-internal"
+  },
+  "status": "pass",
+  "rows": [
+    {
+      "fileName": "taliya-tokens-0.0.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": true,
+      "gitStatus": "M vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+      "synced": true,
+      "pass": true
+    },
+    {
+      "fileName": "taliya-ui-0.0.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": true,
+      "gitStatus": "",
+      "synced": true,
+      "pass": true
+    },
+    {
+      "fileName": "taliya-crm-0.0.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": true,
+      "gitStatus": "M vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+      "synced": true,
+      "pass": true
+    },
+    {
+      "fileName": "taliya-product-ui-local-manifest.json",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": true,
+      "gitStatus": "M vendor/taliya-product-ui/taliya-product-ui-local-manifest.json",
+      "synced": true,
+      "pass": true
+    }
+  ]
+}

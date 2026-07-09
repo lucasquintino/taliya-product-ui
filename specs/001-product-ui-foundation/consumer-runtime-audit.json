@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-07-07T11:41:35.490Z",
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
+  "packageJsonExists": true,
+  "requestedScripts": [
+    "typecheck",
+    "lint",
+    "test",
+    "build"
+  ],
+  "missingScripts": [],
+  "status": "pass",
+  "rows": [
+    {
+      "script": "typecheck",
+      "commandText": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 2447,
+      "stdout": "> taliya-internal@0.1.0 typecheck\n> tsc --noEmit",
+      "stderr": ""
+    },
+    {
+      "script": "lint",
+      "commandText": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 5749,
+      "stdout": "> taliya-internal@0.1.0 lint\n> eslint .",
+      "stderr": ""
+    },
+    {
+      "script": "test",
+      "commandText": "npm run test",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 9074,
+      "stdout": "> taliya-internal@0.1.0 test\n> vitest run\n\n\n RUN  v4.1.9 C:/Users/lucas/taliya-internal\n\n\n Test Files  27 passed (27)\n      Tests  165 passed (165)\n   Start at  08:41:16\n   Duration  7.92s (transform 4.12s, setup 7.26s, import 7.81s, tests 2.47s, environment 73.31s)",
+      "stderr": ""
+    },
+    {
+      "script": "build",
+      "commandText": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 10695,
+      "stdout": "> taliya-internal@0.1.0 build\n> next build\n\n▲ Next.js 16.2.9 (Turbopack)\n- Environments: .env.production.local, .env.local\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 2.9s\n  Running TypeScript ...\n  Finished TypeScript in 4.1s ...\n  Collecting page data using 10 workers ...\n  Generating static pages using 10 workers (0/3) ...\n✓ Generating static pages using 10 workers (3/3) in 443ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n├ ƒ /internal\n├ ƒ /internal/actions\n├ ƒ /internal/landing\n├ ƒ /internal/leads\n├ ƒ /internal/leads/kanban\n└ ƒ /internal/session\n\n\nƒ Proxy (Middleware)\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand",
+      "stderr": ""
+    }
+  ]
+}

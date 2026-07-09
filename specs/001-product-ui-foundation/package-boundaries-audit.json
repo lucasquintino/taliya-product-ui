@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-07-07T11:40:44.799Z",
+  "summary": {
+    "pass": true,
+    "failedPackages": []
+  },
+  "packageRows": [
+    {
+      "package": "@taliya/tokens",
+      "packageRoot": "packages/tokens",
+      "dependencyStatus": {
+        "pass": true,
+        "declaredTaliyaDeps": [],
+        "allowedTaliyaDeps": [],
+        "forbiddenDeps": []
+      },
+      "importStatus": {
+        "pass": true,
+        "forbiddenMatches": []
+      },
+      "pass": true
+    },
+    {
+      "package": "@taliya/ui",
+      "packageRoot": "packages/ui",
+      "dependencyStatus": {
+        "pass": true,
+        "declaredTaliyaDeps": [
+          "@taliya/tokens"
+        ],
+        "allowedTaliyaDeps": [
+          "@taliya/tokens"
+        ],
+        "forbiddenDeps": []
+      },
+      "importStatus": {
+        "pass": true,
+        "forbiddenMatches": []
+      },
+      "pass": true
+    },
+    {
+      "package": "@taliya/crm",
+      "packageRoot": "packages/crm",
+      "dependencyStatus": {
+        "pass": true,
+        "declaredTaliyaDeps": [
+          "@taliya/tokens",
+          "@taliya/ui"
+        ],
+        "allowedTaliyaDeps": [
+          "@taliya/tokens",
+          "@taliya/ui"
+        ],
+        "forbiddenDeps": []
+      },
+      "importStatus": {
+        "pass": true,
+        "forbiddenMatches": []
+      },
+      "pass": true
+    },
+    {
+      "package": "@taliya/docs",
+      "packageRoot": "apps/docs",
+      "dependencyStatus": {
+        "pass": true,
+        "declaredTaliyaDeps": [
+          "@taliya/crm",
+          "@taliya/tokens",
+          "@taliya/ui"
+        ],
+        "allowedTaliyaDeps": [
+          "@taliya/tokens",
+          "@taliya/ui",
+          "@taliya/crm"
+        ],
+        "forbiddenDeps": []
+      },
+      "importStatus": {
+        "pass": true,
+        "forbiddenMatches": []
+      },
+      "pass": true
+    }
+  ]
+}

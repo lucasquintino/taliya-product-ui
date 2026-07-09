@@ -1,0 +1,132 @@
+{
+  "generatedAt": "2026-07-07T11:42:06.201Z",
+  "status": "pass-official-library-current-scope",
+  "officialConsumerReady": true,
+  "globalGoalComplete": false,
+  "currentVersion": "0.0.0",
+  "consistentPackageVersion": true,
+  "currentInternalReady": true,
+  "crmRealCanStart": true,
+  "realFutureCrmAdoptionExecuted": false,
+  "releaseCandidateStatus": "pass",
+  "releaseCandidateGateCount": 86,
+  "releaseChannelStatus": "pass-local-release-channel",
+  "releasePolicyStatus": "pass-current-local-policy",
+  "localTarballChannelReady": true,
+  "registryReady": false,
+  "registryManualItems": [
+    "Choose a real semver version before publishing to a registry.",
+    "Choose the target registry and access model before publishing.",
+    "Run npm provenance/publish steps from CI or a controlled release machine.",
+    "Tag the release and sync the consumer vendor tarballs or registry ranges intentionally."
+  ],
+  "reportRows": [
+    {
+      "id": "package-artifacts",
+      "status": "pass",
+      "evidence": "package-artifacts-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "package-boundaries",
+      "status": "pass",
+      "evidence": "package-boundaries-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "public-api",
+      "status": "pass",
+      "evidence": "public-api-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "public-api-surface",
+      "status": "pass",
+      "evidence": "public-api-surface-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "tokens",
+      "status": "pass",
+      "evidence": "token-governance-baseline.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "components",
+      "status": "pass",
+      "evidence": "component-architecture-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "library-consumption",
+      "status": "pass",
+      "evidence": "library-consumption-status.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "crm-real-readiness",
+      "status": "pass",
+      "evidence": "crm-real-readiness-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "release-policy",
+      "status": "pass",
+      "evidence": "release-policy-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "release-channel",
+      "status": "pass",
+      "evidence": "release-channel-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "release-candidate",
+      "status": "pass",
+      "evidence": "release-candidate-audit.json",
+      "note": "required gate report is in an accepted state"
+    },
+    {
+      "id": "goal-completion",
+      "status": "pass",
+      "evidence": "goal-completion-audit.json",
+      "note": "required gate report is in an accepted state"
+    }
+  ],
+  "packageRows": [
+    {
+      "id": "tokens",
+      "packageName": "@taliya/tokens",
+      "status": "pass",
+      "version": "0.0.0",
+      "missingExports": [],
+      "missingFiles": [],
+      "missingPeers": [],
+      "missingReadmeSnippets": [],
+      "note": "package metadata supports official consumer installation"
+    },
+    {
+      "id": "ui",
+      "packageName": "@taliya/ui",
+      "status": "pass",
+      "version": "0.0.0",
+      "missingExports": [],
+      "missingFiles": [],
+      "missingPeers": [],
+      "missingReadmeSnippets": [],
+      "note": "package metadata supports official consumer installation"
+    },
+    {
+      "id": "crm",
+      "packageName": "@taliya/crm",
+      "status": "pass",
+      "version": "0.0.0",
+      "missingExports": [],
+      "missingFiles": [],
+      "missingPeers": [],
+      "missingReadmeSnippets": [],
+      "note": "package metadata supports official consumer installation"
+    }
+  ]
+}

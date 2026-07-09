@@ -1,0 +1,1909 @@
+{
+  "generatedAt": "2026-07-07T11:41:41.754Z",
+  "reportLabel": "default",
+  "scanRoot": "C:\\Users\\lucas",
+  "scanRootExists": true,
+  "status": "pass",
+  "errors": [],
+  "futureCrmCandidateCount": 0,
+  "futureCrmCandidates": [],
+  "scannedCount": 70,
+  "candidates": [
+    {
+      "path": "C:\\Users\\lucas\\taliya-internal",
+      "name": "taliya-internal",
+      "packageName": "taliya-internal",
+      "hasPackageJson": true,
+      "hasReadinessConfig": true,
+      "hasPageKitConfig": true,
+      "hasCrmRoute": false,
+      "taliyaDeps": [
+        "@taliya/crm",
+        "@taliya/tokens",
+        "@taliya/ui"
+      ],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [],
+      "score": 4,
+      "excludedReasons": [
+        "current Internal consumer, not future CRM"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\agentes-landing-system-taliya-prod",
+      "name": "agentes-landing-system-taliya-prod",
+      "packageName": "agentes-landing-system",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 1,
+      "excludedReasons": [
+        "landing project"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\taliya-product-ui",
+      "name": "taliya-product-ui",
+      "packageName": "taliya-product-ui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 1,
+      "excludedReasons": [
+        "library repo"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.aws",
+      "name": ".aws",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.azure",
+      "name": ".azure",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.browserstack",
+      "name": ".browserstack",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.cache",
+      "name": ".cache",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.chocolatey",
+      "name": ".chocolatey",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.claude",
+      "name": ".claude",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.codeium",
+      "name": ".codeium",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.codex",
+      "name": ".codex",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.config",
+      "name": ".config",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.console-ninja",
+      "name": ".console-ninja",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.copilot",
+      "name": ".copilot",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.dbus-keyrings",
+      "name": ".dbus-keyrings",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.docker",
+      "name": ".docker",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.gemini",
+      "name": ".gemini",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.ghcp-appmod",
+      "name": ".ghcp-appmod",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.ghcp-appmod-java",
+      "name": ".ghcp-appmod-java",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.gk",
+      "name": ".gk",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.gnupg",
+      "name": ".gnupg",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.local",
+      "name": ".local",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.railway",
+      "name": ".railway",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.rest-client",
+      "name": ".rest-client",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.storybook",
+      "name": ".storybook",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.vscode",
+      "name": ".vscode",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.vscode-shared",
+      "name": ".vscode-shared",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\.wallaby",
+      "name": ".wallaby",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\3D Objects",
+      "name": "3D Objects",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\agentes-landing-system",
+      "name": "agentes-landing-system",
+      "packageName": "agentes-landing-system",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "landing project"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\agentes-landing-system-hotfix-dualhook",
+      "name": "agentes-landing-system-hotfix-dualhook",
+      "packageName": "agentes-landing-system",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "landing project"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\agentes-landing-system-master-merge",
+      "name": "agentes-landing-system-master-merge",
+      "packageName": "agentes-landing-system",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "landing project"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\aiui",
+      "name": "aiui",
+      "packageName": "aiui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (aiui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\amsui",
+      "name": "amsui",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\amsuiold",
+      "name": "amsuiold",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\ansel",
+      "name": "ansel",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\AppData",
+      "name": "AppData",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Contacts",
+      "name": "Contacts",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Documents",
+      "name": "Documents",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Downloads",
+      "name": "Downloads",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Favorites",
+      "name": "Favorites",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Intel",
+      "name": "Intel",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Links",
+      "name": "Links",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Logs",
+      "name": "Logs",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Music",
+      "name": "Music",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\node_modules",
+      "name": "node_modules",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Postman",
+      "name": "Postman",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Postman Agent",
+      "name": "Postman Agent",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\radar",
+      "name": "radar",
+      "packageName": "radar-da-torcida",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (radar-da-torcida)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\radar-design-skills-setup",
+      "name": "radar-design-skills-setup",
+      "packageName": "radar-da-torcida",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (radar-da-torcida)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\radar-portal-editorial-redesign-plan",
+      "name": "radar-portal-editorial-redesign-plan",
+      "packageName": "radar-da-torcida",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (radar-da-torcida)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\radar-product-redesign-v2",
+      "name": "radar-product-redesign-v2",
+      "packageName": "radar-da-torcida",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (radar-da-torcida)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\radar-redesign-with-skills",
+      "name": "radar-redesign-with-skills",
+      "packageName": "radar-da-torcida",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (radar-da-torcida)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui",
+      "name": "react-ui",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-builds",
+      "name": "react-ui-builds",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-fix-calendar-postauth",
+      "name": "react-ui-fix-calendar-postauth",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr-477",
+      "name": "react-ui-pr-477",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr205",
+      "name": "react-ui-pr205",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr425",
+      "name": "react-ui-pr425",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr482",
+      "name": "react-ui-pr482",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr509-review",
+      "name": "react-ui-pr509-review",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr612",
+      "name": "react-ui-pr612",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr889-review",
+      "name": "react-ui-pr889-review",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr933-review",
+      "name": "react-ui-pr933-review",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\react-ui-pr965-review",
+      "name": "react-ui-pr965-review",
+      "packageName": "amsui",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (amsui)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Saved Games",
+      "name": "Saved Games",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\scoop",
+      "name": "scoop",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Searches",
+      "name": "Searches",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\url-shortening-service",
+      "name": "url-shortening-service",
+      "packageName": "url-shortening-service",
+      "hasPackageJson": true,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [],
+      "nonCandidateReasons": [
+        "missing taliya-readiness.config.json",
+        "missing taliya-page-kit.config.json",
+        "missing app/crm or src/app/crm route",
+        "missing @taliya/* package dependencies",
+        "name/packageName do not identify a Taliya CRM app (url-shortening-service)"
+      ],
+      "isFutureCrmCandidate": false
+    },
+    {
+      "path": "C:\\Users\\lucas\\Videos",
+      "name": "Videos",
+      "packageName": "",
+      "hasPackageJson": false,
+      "hasReadinessConfig": false,
+      "hasPageKitConfig": false,
+      "hasCrmRoute": false,
+      "taliyaDeps": [],
+      "requiredTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "missingTaliyaDeps": [
+        "@taliya/tokens",
+        "@taliya/ui",
+        "@taliya/crm"
+      ],
+      "score": 0,
+      "excludedReasons": [
+        "missing package.json"
+      ],
+      "nonCandidateReasons": [],
+      "isFutureCrmCandidate": false
+    }
+  ]
+}

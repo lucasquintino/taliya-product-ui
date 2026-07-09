@@ -1,0 +1,149 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-page-kit-wrapper-contract-probe-LQ5CNV",
+  "reportLabel": "wrapper-contract-probe",
+  "configSource": "../AppData/Local/Temp/taliya-page-kit-wrapper-contract-probe-LQ5CNV/taliya-page-kit.config.json",
+  "configValidation": {
+    "pass": true,
+    "errors": []
+  },
+  "generatedAt": "2026-07-07T11:41:49.490Z",
+  "surfaceRows": [
+    {
+      "id": "leads",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "required": [
+        {
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanBoard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanColumn",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanCard",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "PageQuickFilters",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "KanbanBoard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "KanbanColumn",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "KanbanCard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    }
+  ],
+  "routeRows": [],
+  "componentContractRows": [
+    {
+      "id": "leads-kanban-wrapper",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "component": "LeadKanban",
+      "required": [
+        {
+          "name": "KanbanBoard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanColumn",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanCard",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "KanbanBoard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": false,
+          "jsxUsedInComponent": false
+        },
+        {
+          "componentName": "KanbanColumn",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": false,
+          "jsxUsedInComponent": false
+        },
+        {
+          "componentName": "KanbanCard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": false,
+          "jsxUsedInComponent": false
+        }
+      ],
+      "pass": false
+    }
+  ],
+  "routeComponentContractRows": [],
+  "routeCoverage": {
+    "enabled": false,
+    "root": "",
+    "baseRoute": "",
+    "rootExists": false,
+    "discoveredRoutes": [],
+    "configuredRoutes": [],
+    "uncoveredRoutes": [],
+    "pass": true
+  },
+  "standardPageKit": {
+    "pass": true,
+    "manifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "manifestCount": 52,
+    "requiredCount": 4,
+    "outsideManifest": []
+  },
+  "summary": {
+    "pass": false,
+    "failedConfig": [],
+    "failedSurfaces": [],
+    "failedRoutes": [],
+    "failedComponentContracts": [
+      "leads-kanban-wrapper"
+    ],
+    "failedRouteComponentContracts": [],
+    "uncoveredRoutes": [],
+    "outsideStandardPageKit": []
+  }
+}

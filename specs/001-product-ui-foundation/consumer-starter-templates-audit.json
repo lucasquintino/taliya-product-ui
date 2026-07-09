@@ -1,0 +1,212 @@
+{
+  "generatedAt": "2026-07-07T11:41:41.112Z",
+  "config": "specs/001-product-ui-foundation/contracts/consumer-page-kit-config.example.json",
+  "starterRoot": "specs/001-product-ui-foundation/contracts/consumer-starter-files",
+  "status": "pass",
+  "configValidation": {
+    "pass": true,
+    "errors": []
+  },
+  "routeLocalContractRows": [
+    {
+      "route": "/crm",
+      "componentName": "CrmShellClient",
+      "importFrom": "../../components/crm-shell-client",
+      "componentContractId": "crm-shell-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "CrmShellClient",
+      "linkedContractComponent": "CrmShellClient",
+      "linkedContractComponentMatches": true,
+      "contractExists": true,
+      "pass": true
+    },
+    {
+      "route": "/crm",
+      "componentName": "WorkListPage",
+      "importFrom": "../../features/crm/work-list/work-list-page",
+      "componentContractId": "crm-work-list-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "WorkListPage",
+      "linkedContractComponent": "WorkListPage",
+      "linkedContractComponentMatches": true,
+      "contractExists": true,
+      "pass": true
+    },
+    {
+      "route": "/crm/kanban",
+      "componentName": "CrmShellClient",
+      "importFrom": "../../../components/crm-shell-client",
+      "componentContractId": "crm-shell-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "CrmShellClient",
+      "linkedContractComponent": "CrmShellClient",
+      "linkedContractComponentMatches": true,
+      "contractExists": true,
+      "pass": true
+    },
+    {
+      "route": "/crm/kanban",
+      "componentName": "KanbanPage",
+      "importFrom": "../../../features/crm/kanban/kanban-page",
+      "componentContractId": "crm-kanban-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "KanbanPage",
+      "linkedContractComponent": "KanbanPage",
+      "linkedContractComponentMatches": true,
+      "contractExists": true,
+      "pass": true
+    }
+  ],
+  "rows": [
+    {
+      "file": "components/crm-shell-client.tsx",
+      "template": "specs/001-product-ui-foundation/contracts/consumer-starter-files/components/crm-shell-client.tsx",
+      "exists": true,
+      "requirements": [
+        {
+          "file": "components/crm-shell-client.tsx",
+          "name": "CrmProductShell",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "components/crm-shell-client.tsx",
+          "name": "Toolbar",
+          "package": "@taliya/ui",
+          "kind": "package",
+          "source": "componentContracts"
+        }
+      ],
+      "missingRequirements": [],
+      "pass": true
+    },
+    {
+      "file": "features/crm/work-list/work-list-page.tsx",
+      "template": "specs/001-product-ui-foundation/contracts/consumer-starter-files/features/crm/work-list/work-list-page.tsx",
+      "exists": true,
+      "requirements": [
+        {
+          "file": "features/crm/work-list/work-list-page.tsx",
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "features/crm/work-list/work-list-page.tsx",
+          "name": "PageFilterBar",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "features/crm/work-list/work-list-page.tsx",
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "features/crm/work-list/work-list-page.tsx",
+          "name": "DataTable",
+          "package": "@taliya/ui",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "features/crm/work-list/work-list-page.tsx",
+          "name": "CrmRecordDrawer",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        }
+      ],
+      "missingRequirements": [],
+      "pass": true
+    },
+    {
+      "file": "features/crm/kanban/kanban-page.tsx",
+      "template": "specs/001-product-ui-foundation/contracts/consumer-starter-files/features/crm/kanban/kanban-page.tsx",
+      "exists": true,
+      "requirements": [
+        {
+          "file": "features/crm/kanban/kanban-page.tsx",
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "features/crm/kanban/kanban-page.tsx",
+          "name": "KanbanBoard",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "features/crm/kanban/kanban-page.tsx",
+          "name": "KanbanColumn",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        },
+        {
+          "file": "features/crm/kanban/kanban-page.tsx",
+          "name": "KanbanCard",
+          "package": "@taliya/crm",
+          "kind": "package",
+          "source": "componentContracts"
+        }
+      ],
+      "missingRequirements": [],
+      "pass": true
+    },
+    {
+      "file": "app/crm/page.tsx",
+      "template": "specs/001-product-ui-foundation/contracts/consumer-starter-files/app/crm/page.tsx",
+      "exists": true,
+      "requirements": [
+        {
+          "file": "app/crm/page.tsx",
+          "name": "CrmShellClient",
+          "importFrom": "../../components/crm-shell-client",
+          "kind": "local",
+          "source": "routes"
+        },
+        {
+          "file": "app/crm/page.tsx",
+          "name": "WorkListPage",
+          "importFrom": "../../features/crm/work-list/work-list-page",
+          "kind": "local",
+          "source": "routes"
+        }
+      ],
+      "missingRequirements": [],
+      "pass": true
+    },
+    {
+      "file": "app/crm/kanban/page.tsx",
+      "template": "specs/001-product-ui-foundation/contracts/consumer-starter-files/app/crm/kanban/page.tsx",
+      "exists": true,
+      "requirements": [
+        {
+          "file": "app/crm/kanban/page.tsx",
+          "name": "CrmShellClient",
+          "importFrom": "../../../components/crm-shell-client",
+          "kind": "local",
+          "source": "routes"
+        },
+        {
+          "file": "app/crm/kanban/page.tsx",
+          "name": "KanbanPage",
+          "importFrom": "../../../features/crm/kanban/kanban-page",
+          "kind": "local",
+          "source": "routes"
+        }
+      ],
+      "missingRequirements": [],
+      "pass": true
+    }
+  ]
+}

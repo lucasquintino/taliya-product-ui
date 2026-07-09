@@ -1,0 +1,109 @@
+{
+  "surfaces": [
+    {
+      "id": "crm-shell",
+      "file": "components/crm-shell-client.tsx",
+      "required": [
+        { "name": "CrmProductShell", "package": "@taliya/crm" },
+        { "name": "Toolbar", "package": "@taliya/ui" }
+      ],
+      "forbiddenFragments": ["app-shell", "shell-sidebar", "shell-topbar"]
+    },
+    {
+      "id": "crm-work-list",
+      "file": "features/crm/work-list/work-list-page.tsx",
+      "required": [
+        { "name": "WorkListDetailPage", "package": "@taliya/crm" },
+        { "name": "PageFilterBar", "package": "@taliya/crm" },
+        { "name": "PageQuickFilters", "package": "@taliya/crm" },
+        { "name": "DataTable", "package": "@taliya/ui" },
+        { "name": "CrmRecordDrawer", "package": "@taliya/crm" }
+      ],
+      "forbiddenFragments": ["filter-bar", "quick-queues", "drawer-shell", "table-shell"],
+      "forbiddenTextPatterns": ["\\}\\s*\\?\\s+CTA\\s+\\{", "\\}\\s*\\?\\s+\\{fitLabel"]
+    },
+    {
+      "id": "crm-kanban",
+      "file": "features/crm/kanban/kanban-page.tsx",
+      "required": [
+        { "name": "PageQuickFilters", "package": "@taliya/crm" },
+        { "name": "KanbanBoard", "package": "@taliya/crm" },
+        { "name": "KanbanColumn", "package": "@taliya/crm" },
+        { "name": "KanbanCard", "package": "@taliya/crm" }
+      ],
+      "forbiddenFragments": ["kanban-shell", "kanban-column", "kanban-card"]
+    }
+  ],
+  "componentContracts": [
+    {
+      "id": "crm-shell-wrapper",
+      "file": "components/crm-shell-client.tsx",
+      "component": "CrmShellClient",
+      "required": [
+        { "name": "CrmProductShell", "package": "@taliya/crm" },
+        { "name": "Toolbar", "package": "@taliya/ui" }
+      ]
+    },
+    {
+      "id": "crm-work-list-wrapper",
+      "file": "features/crm/work-list/work-list-page.tsx",
+      "component": "WorkListPage",
+      "required": [
+        { "name": "WorkListDetailPage", "package": "@taliya/crm" },
+        { "name": "PageFilterBar", "package": "@taliya/crm" },
+        { "name": "PageQuickFilters", "package": "@taliya/crm" },
+        { "name": "DataTable", "package": "@taliya/ui" },
+        { "name": "CrmRecordDrawer", "package": "@taliya/crm" }
+      ]
+    },
+    {
+      "id": "crm-kanban-wrapper",
+      "file": "features/crm/kanban/kanban-page.tsx",
+      "component": "KanbanPage",
+      "required": [
+        { "name": "PageQuickFilters", "package": "@taliya/crm" },
+        { "name": "KanbanBoard", "package": "@taliya/crm" },
+        { "name": "KanbanColumn", "package": "@taliya/crm" },
+        { "name": "KanbanCard", "package": "@taliya/crm" }
+      ]
+    }
+  ],
+  "routeCoverage": {
+    "root": "app/crm",
+    "baseRoute": "/crm"
+  },
+  "routes": [
+    {
+      "route": "/crm",
+      "file": "app/crm/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "CrmShellClient",
+          "importFrom": "../../components/crm-shell-client",
+          "componentContractId": "crm-shell-wrapper"
+        },
+        {
+          "name": "WorkListPage",
+          "importFrom": "../../features/crm/work-list/work-list-page",
+          "componentContractId": "crm-work-list-wrapper"
+        }
+      ]
+    },
+    {
+      "route": "/crm/kanban",
+      "file": "app/crm/kanban/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "CrmShellClient",
+          "importFrom": "../../../components/crm-shell-client",
+          "componentContractId": "crm-shell-wrapper"
+        },
+        {
+          "name": "KanbanPage",
+          "importFrom": "../../../features/crm/kanban/kanban-page",
+          "componentContractId": "crm-kanban-wrapper"
+        }
+      ]
+    }
+  ]
+}

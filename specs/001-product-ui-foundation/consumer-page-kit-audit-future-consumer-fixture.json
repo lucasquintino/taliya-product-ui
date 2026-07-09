@@ -1,0 +1,534 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+  "reportLabel": "future-consumer-fixture",
+  "configSource": "tmp/future-consumer-readiness-fixture-28920/taliya-page-kit.config.json",
+  "configValidation": {
+    "pass": true,
+    "errors": []
+  },
+  "generatedAt": "2026-07-07T11:40:58.231Z",
+  "surfaceRows": [
+    {
+      "id": "crm-shell",
+      "file": "components/crm-shell-client.tsx",
+      "required": [
+        {
+          "name": "CrmProductShell",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "Toolbar",
+          "package": "@taliya/ui"
+        }
+      ],
+      "forbiddenFragments": [
+        "app-shell",
+        "shell-sidebar",
+        "shell-topbar"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmProductShell",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "Toolbar",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "crm-work-list",
+      "file": "features/crm/work-list/work-list-page.tsx",
+      "required": [
+        {
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageFilterBar",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DataTable",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "CrmRecordDrawer",
+          "package": "@taliya/crm"
+        }
+      ],
+      "forbiddenFragments": [
+        "filter-bar",
+        "quick-queues",
+        "drawer-shell",
+        "table-shell"
+      ],
+      "forbiddenTextPatterns": [
+        "\\}\\s*\\?\\s+CTA\\s+\\{",
+        "\\}\\s*\\?\\s+\\{fitLabel"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListDetailPage",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "PageFilterBar",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "PageQuickFilters",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "DataTable",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "CrmRecordDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "crm-kanban",
+      "file": "features/crm/kanban/kanban-page.tsx",
+      "required": [
+        {
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanBoard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanColumn",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanCard",
+          "package": "@taliya/crm"
+        }
+      ],
+      "forbiddenFragments": [
+        "kanban-shell",
+        "kanban-column",
+        "kanban-card"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "PageQuickFilters",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "KanbanBoard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "KanbanColumn",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "KanbanCard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    }
+  ],
+  "routeRows": [
+    {
+      "route": "/crm",
+      "file": "app/crm/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "CrmShellClient",
+          "importFrom": "../../components/crm-shell-client",
+          "componentContractId": "crm-shell-wrapper"
+        },
+        {
+          "name": "WorkListPage",
+          "importFrom": "../../features/crm/work-list/work-list-page",
+          "componentContractId": "crm-work-list-wrapper"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "CrmShellClient",
+          "importFrom": "../../components/crm-shell-client",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        },
+        {
+          "componentName": "WorkListPage",
+          "importFrom": "../../features/crm/work-list/work-list-page",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "route": "/crm/kanban",
+      "file": "app/crm/kanban/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "CrmShellClient",
+          "importFrom": "../../../components/crm-shell-client",
+          "componentContractId": "crm-shell-wrapper"
+        },
+        {
+          "name": "KanbanPage",
+          "importFrom": "../../../features/crm/kanban/kanban-page",
+          "componentContractId": "crm-kanban-wrapper"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "CrmShellClient",
+          "importFrom": "../../../components/crm-shell-client",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        },
+        {
+          "componentName": "KanbanPage",
+          "importFrom": "../../../features/crm/kanban/kanban-page",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "componentContractRows": [
+    {
+      "id": "crm-shell-wrapper",
+      "file": "components/crm-shell-client.tsx",
+      "component": "CrmShellClient",
+      "required": [
+        {
+          "name": "CrmProductShell",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "Toolbar",
+          "package": "@taliya/ui"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmProductShell",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "Toolbar",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "crm-work-list-wrapper",
+      "file": "features/crm/work-list/work-list-page.tsx",
+      "component": "WorkListPage",
+      "required": [
+        {
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageFilterBar",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DataTable",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "CrmRecordDrawer",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListDetailPage",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "PageFilterBar",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "PageQuickFilters",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "DataTable",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "CrmRecordDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "crm-kanban-wrapper",
+      "file": "features/crm/kanban/kanban-page.tsx",
+      "component": "KanbanPage",
+      "required": [
+        {
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanBoard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanColumn",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanCard",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "PageQuickFilters",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "KanbanBoard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "KanbanColumn",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "KanbanCard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "routeComponentContractRows": [
+    {
+      "route": "/crm",
+      "routeFile": "app/crm/page.tsx",
+      "componentName": "CrmShellClient",
+      "importFrom": "../../components/crm-shell-client",
+      "componentContractId": "crm-shell-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "CrmShellClient",
+      "linkedContractId": "crm-shell-wrapper",
+      "linkedContractComponent": "CrmShellClient",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/crm",
+      "routeFile": "app/crm/page.tsx",
+      "componentName": "WorkListPage",
+      "importFrom": "../../features/crm/work-list/work-list-page",
+      "componentContractId": "crm-work-list-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "WorkListPage",
+      "linkedContractId": "crm-work-list-wrapper",
+      "linkedContractComponent": "WorkListPage",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/crm/kanban",
+      "routeFile": "app/crm/kanban/page.tsx",
+      "componentName": "CrmShellClient",
+      "importFrom": "../../../components/crm-shell-client",
+      "componentContractId": "crm-shell-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "CrmShellClient",
+      "linkedContractId": "crm-shell-wrapper",
+      "linkedContractComponent": "CrmShellClient",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/crm/kanban",
+      "routeFile": "app/crm/kanban/page.tsx",
+      "componentName": "KanbanPage",
+      "importFrom": "../../../features/crm/kanban/kanban-page",
+      "componentContractId": "crm-kanban-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "KanbanPage",
+      "linkedContractId": "crm-kanban-wrapper",
+      "linkedContractComponent": "KanbanPage",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    }
+  ],
+  "routeCoverage": {
+    "enabled": true,
+    "root": "app/crm",
+    "baseRoute": "/crm",
+    "rootExists": true,
+    "discoveredRoutes": [
+      "/crm",
+      "/crm/kanban"
+    ],
+    "configuredRoutes": [
+      "/crm",
+      "/crm/kanban"
+    ],
+    "uncoveredRoutes": [],
+    "pass": true
+  },
+  "standardPageKit": {
+    "pass": true,
+    "manifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "manifestCount": 52,
+    "requiredCount": 10,
+    "outsideManifest": []
+  },
+  "summary": {
+    "pass": true,
+    "failedConfig": [],
+    "failedSurfaces": [],
+    "failedRoutes": [],
+    "failedComponentContracts": [],
+    "failedRouteComponentContracts": [],
+    "uncoveredRoutes": [],
+    "outsideStandardPageKit": []
+  }
+}

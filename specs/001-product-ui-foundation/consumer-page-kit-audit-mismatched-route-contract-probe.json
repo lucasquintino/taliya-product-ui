@@ -1,0 +1,160 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-page-kit-mismatched-route-contract-probe-8zdZq7",
+  "reportLabel": "mismatched-route-contract-probe",
+  "configSource": "../AppData/Local/Temp/taliya-page-kit-mismatched-route-contract-probe-8zdZq7/taliya-page-kit.config.json",
+  "configValidation": {
+    "pass": true,
+    "errors": []
+  },
+  "generatedAt": "2026-07-07T11:41:50.747Z",
+  "surfaceRows": [
+    {
+      "id": "landing",
+      "file": "features/internal/landing/landing-workspace.tsx",
+      "required": [
+        {
+          "name": "PageFilterBar",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "PageFilterBar",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "leads",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "required": [
+        {
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListDetailPage",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    }
+  ],
+  "routeRows": [
+    {
+      "route": "/internal/landing",
+      "file": "app/internal/landing/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "LandingWorkspace",
+          "importFrom": "@/features/internal/landing/landing-workspace",
+          "componentContractId": "leads-workspace-wrapper"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "LandingWorkspace",
+          "importFrom": "@/features/internal/landing/landing-workspace",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "componentContractRows": [
+    {
+      "id": "leads-workspace-wrapper",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "component": "LeadsWorkspace",
+      "required": [
+        {
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListDetailPage",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "routeComponentContractRows": [
+    {
+      "route": "/internal/landing",
+      "routeFile": "app/internal/landing/page.tsx",
+      "componentName": "LandingWorkspace",
+      "importFrom": "@/features/internal/landing/landing-workspace",
+      "componentContractId": "leads-workspace-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "LandingWorkspace",
+      "linkedContractId": "leads-workspace-wrapper",
+      "linkedContractComponent": "LeadsWorkspace",
+      "linkedContractComponentMatches": false,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": false
+    }
+  ],
+  "routeCoverage": {
+    "enabled": false,
+    "root": "",
+    "baseRoute": "",
+    "rootExists": false,
+    "discoveredRoutes": [],
+    "configuredRoutes": [
+      "/internal/landing"
+    ],
+    "uncoveredRoutes": [],
+    "pass": true
+  },
+  "standardPageKit": {
+    "pass": true,
+    "manifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "manifestCount": 52,
+    "requiredCount": 2,
+    "outsideManifest": []
+  },
+  "summary": {
+    "pass": false,
+    "failedConfig": [],
+    "failedSurfaces": [],
+    "failedRoutes": [],
+    "failedComponentContracts": [],
+    "failedRouteComponentContracts": [
+      "/internal/landing:LandingWorkspace"
+    ],
+    "uncoveredRoutes": [],
+    "outsideStandardPageKit": []
+  }
+}

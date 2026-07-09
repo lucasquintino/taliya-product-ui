@@ -1,0 +1,1543 @@
+{
+  "date": "2026-07-07",
+  "status": "pass",
+  "storyCount": 54,
+  "checkedStoryCount": 54,
+  "failedStories": [],
+  "remainingStoryRemoved": true,
+  "sourceMarkerRows": [
+    {
+      "marker": "CrmDashboardPage",
+      "present": true
+    },
+    {
+      "marker": "CrmRightPanelPage",
+      "present": true
+    },
+    {
+      "marker": "CrmKanbanPage",
+      "present": true
+    },
+    {
+      "marker": "CrmThreePanePage",
+      "present": true
+    },
+    {
+      "marker": "SetupShellGlobalPage",
+      "present": true
+    },
+    {
+      "marker": "SetupContentGrid",
+      "present": true
+    },
+    {
+      "marker": "SetupAgentChatPage",
+      "present": true
+    },
+    {
+      "marker": "SetupWorkspaceConfigPage",
+      "present": true
+    },
+    {
+      "marker": "SetupStudioPage",
+      "present": true
+    },
+    {
+      "marker": "SetupTeamPage",
+      "present": true
+    },
+    {
+      "marker": "SetupChannelsPage",
+      "present": true
+    },
+    {
+      "marker": "SetupPlansPage",
+      "present": true
+    },
+    {
+      "marker": "SetupPaymentPage",
+      "present": true
+    },
+    {
+      "marker": "SetupStudentsImportPage",
+      "present": true
+    },
+    {
+      "marker": "SetupClassesPage",
+      "present": true
+    },
+    {
+      "marker": "SetupAgendaPage",
+      "present": true
+    },
+    {
+      "marker": "SetupReviewPage",
+      "present": true
+    },
+    {
+      "marker": "SetupWelcomePage",
+      "present": true
+    },
+    {
+      "marker": "PageFilterBar",
+      "present": true
+    },
+    {
+      "marker": "PageQuickFilters",
+      "present": true
+    },
+    {
+      "marker": "CrmWorklistPage",
+      "present": true
+    },
+    {
+      "marker": "InternalWorklistPage",
+      "present": true
+    },
+    {
+      "marker": "InboxConversationPage",
+      "present": true
+    },
+    {
+      "marker": "AgendaCalendarPage",
+      "present": true
+    },
+    {
+      "marker": "AgendaClassDetailPage",
+      "present": true
+    },
+    {
+      "marker": "AgendaClassesPage",
+      "present": true
+    },
+    {
+      "marker": "AgendaGradePage",
+      "present": true
+    },
+    {
+      "marker": "StudentProfilePage",
+      "present": true
+    },
+    {
+      "marker": "AgentsCatalogPage",
+      "present": true
+    },
+    {
+      "marker": "AgentAgendaRoutinesPage",
+      "present": true
+    },
+    {
+      "marker": "AgentPresenceRoutinePage",
+      "present": true
+    },
+    {
+      "marker": "AgentAbsenceFlowPage",
+      "present": true
+    },
+    {
+      "marker": "AgentAbsenceFlowTestPage",
+      "present": true
+    },
+    {
+      "marker": "AgentPublishRoutinePage",
+      "present": true
+    },
+    {
+      "marker": "AgentExecutionReceiptPage",
+      "present": true
+    },
+    {
+      "marker": "SettingsHubPage",
+      "present": true
+    },
+    {
+      "marker": "SettingsPermissionsPage",
+      "present": true
+    },
+    {
+      "marker": "SettingsPaymentsPage",
+      "present": true
+    },
+    {
+      "marker": "SettingsAgendaPage",
+      "present": true
+    },
+    {
+      "marker": "SettingsNotificationsPage",
+      "present": true
+    },
+    {
+      "marker": "SalesPipelinePage",
+      "present": true
+    },
+    {
+      "marker": "FinanceKanbanCard",
+      "present": true
+    }
+  ],
+  "forbiddenMarkerRows": [
+    {
+      "marker": "function GenericTable",
+      "reason": "Remaining page stories must use page-specific official table compositions, not one generic operational table.",
+      "present": false
+    },
+    {
+      "marker": "<GenericTable",
+      "reason": "Remaining page stories must not render a generic table placeholder.",
+      "present": false
+    },
+    {
+      "marker": "function MetricsRow",
+      "reason": "Remaining page stories must use page-specific metric compositions.",
+      "present": false
+    },
+    {
+      "marker": "<MetricsRow",
+      "reason": "Remaining page stories must not render generic metric placeholders.",
+      "present": false
+    },
+    {
+      "marker": "function GenericBoard",
+      "reason": "Remaining page stories must use page-specific kanban board compositions.",
+      "present": false
+    },
+    {
+      "marker": "<GenericBoard",
+      "reason": "Remaining page stories must not render a generic kanban placeholder.",
+      "present": false
+    }
+  ],
+  "forbiddenCorpusMarkerRows": [
+    {
+      "marker": "CrmPageFamilyShell",
+      "reason": "Image coverage pages must consume official page-family wrappers instead of assembling the shell/layout directly.",
+      "present": false
+    },
+    {
+      "marker": "DashboardGrid",
+      "reason": "Image coverage pages must consume CrmDashboardPage, CrmRightPanelPage, SetupContentGrid, or another official family wrapper instead of rendering DashboardGrid directly.",
+      "present": false
+    }
+  ],
+  "officialSourceMapMarkerRows": [
+    {
+      "marker": "CrmPageFamilyShell",
+      "reason": "The remaining-pages source map must document current page-family wrappers instead of the deprecated direct shell assembly.",
+      "present": false
+    },
+    {
+      "marker": "DashboardGrid",
+      "reason": "The remaining-pages source map must point dashboard/profile pages at current family wrappers instead of direct dashboard layout primitives.",
+      "present": false
+    },
+    {
+      "marker": "ShellPage",
+      "reason": "The remaining-pages source map must not describe local ShellPage composition as an accepted remaining-page route.",
+      "present": false
+    },
+    {
+      "marker": "WorkPage",
+      "reason": "The remaining-pages source map must not describe local WorkPage composition as an accepted remaining-page route.",
+      "present": false
+    }
+  ],
+  "specificCompositionRows": [
+    {
+      "marker": "TodayShell",
+      "present": true
+    },
+    {
+      "marker": "FinanceOverviewDashboard",
+      "present": true
+    },
+    {
+      "marker": "FinanceBillingDrawerPage",
+      "present": true
+    },
+    {
+      "marker": "FinanceKanbanPage",
+      "present": true
+    },
+    {
+      "marker": "FinanceMovementsPage",
+      "present": true
+    },
+    {
+      "marker": "SetupContentGrid",
+      "present": true
+    },
+    {
+      "marker": "ReportsManagementPage",
+      "present": true
+    },
+    {
+      "marker": "MoneyOnTheTablePage",
+      "present": true
+    },
+    {
+      "marker": "PaymentCaseCard",
+      "present": true
+    },
+    {
+      "marker": "OpportunityGroupCard",
+      "present": true
+    },
+    {
+      "marker": "SetupTeamPage",
+      "present": true
+    }
+  ],
+  "renderTargetRows": [
+    {
+      "exportName": "Image19HojeEstadoCritico",
+      "target": "TodayShell",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image24DInboxConversaAberta",
+      "target": "InboxConversationPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image26AgendaCalendarioOperacional",
+      "target": "AgendaCalendarPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image28AlunoPerfilResumoOperacional",
+      "target": "StudentProfilePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image29AulaDetalheComChamada",
+      "target": "AgendaClassDetailPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image32FinanceiroDrawerCobranca",
+      "target": "FinanceBillingDrawerPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image33FinanceiroKanban",
+      "target": "FinanceKanbanPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image34MovimentacoesFiltrosDrawer",
+      "target": "FinanceMovementsPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image35TurmasListaDetalhe",
+      "target": "AgendaClassesPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image36GradeSemanaModeloBloqueio",
+      "target": "AgendaGradePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image37VendasPipelineKanban",
+      "target": "SalesPipelinePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image38ListaInteressados",
+      "target": "SalesInterestedListPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image39ExperimentalLista",
+      "target": "SalesExperimentalListPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image40MatriculasChecklistConversao",
+      "target": "SalesEnrollmentChecklistPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image41RetencaoRiscos",
+      "target": "RetentionRiskListPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image42CancelamentosFila",
+      "target": "RetentionCancellationQueuePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image43ReativacoesExAlunos",
+      "target": "RetentionReactivationListPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image44ReclamacoesCasoSensivel",
+      "target": "RetentionComplaintQueuePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "ReportsManagement",
+      "target": "ReportsManagementPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "MoneyOnTheTable",
+      "target": "MoneyOnTheTablePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "SupportCentral",
+      "target": "SupportCentralPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image48InternalVisaoOperacional",
+      "target": "InternalOverviewPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image49InternalTenantsListaDetalhe",
+      "target": "InternalTenantsListDetailPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image50InternalTenantDetalheUsuariosGrants",
+      "target": "InternalTenantSecurityPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image52AgentesCatalogo",
+      "target": "AgentsCatalogPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image53AgenteAgendaRotinas",
+      "target": "AgentAgendaRoutinesPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image54RotinaPresencaFaltas",
+      "target": "AgentPresenceRoutinePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image56FluxoFaltaComAviso",
+      "target": "AgentAbsenceFlowPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image58TesteFluxoFaltaComAviso",
+      "target": "AgentAbsenceFlowTestPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image59PublicarRotina",
+      "target": "AgentPublishRoutinePage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image70ExecucoesFluxo",
+      "target": "AgentExecutionReceiptPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image60ConfiguracoesHub",
+      "target": "SettingsHubPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image61ConfiguracoesPermissoes",
+      "target": "SettingsPermissionsPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image62ConfiguracoesPagamentos",
+      "target": "SettingsPaymentsPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image63ConfiguracoesAgenda",
+      "target": "SettingsAgendaPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image64ConfiguracoesNotificacoes",
+      "target": "SettingsNotificationsPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image65BillingAssinatura",
+      "target": "BillingSubscriptionPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image66BillingFaturas",
+      "target": "BillingInvoicesPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image67BillingAddOns",
+      "target": "BillingAddOnsPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image68UsoVisaoGeral",
+      "target": "UsageOverviewPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image69UsoExtrato",
+      "target": "UsageLedgerPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51AOnboardingShellGlobal",
+      "target": "SetupShellGlobalPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51BOnboardingAgenteConfiguracaoChat",
+      "target": "SetupAgentChatPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51COnboardingWorkspaceConfiguracao",
+      "target": "SetupWorkspaceConfigPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51DOnboardingStudio",
+      "target": "SetupStudioPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51EOnboardingEquipe",
+      "target": "SetupTeamPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51FOnboardingCanais",
+      "target": "SetupChannelsPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51GOnboardingPlanos",
+      "target": "SetupPlansPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51KOnboardingPagamento",
+      "target": "SetupPaymentPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51HOnboardingAlunos",
+      "target": "SetupStudentsImportPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51IOnboardingTurmas",
+      "target": "SetupClassesPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51JOnboardingAgenda",
+      "target": "SetupAgendaPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51LOnboardingRevisao",
+      "target": "SetupReviewPage",
+      "present": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image78OnboardingBemVindo",
+      "target": "SetupWelcomePage",
+      "present": true,
+      "status": "pass"
+    }
+  ],
+  "pageFamilyContractRows": [
+    {
+      "page": "TodayShell",
+      "file": "ImageCoverageToday.stories.tsx",
+      "family": "dashboard",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "InboxConversationPage",
+      "file": "ImageCoverageInbox.stories.tsx",
+      "family": "three-pane/inbox",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaCalendarPage",
+      "file": "ImageCoverageAgenda.stories.tsx",
+      "family": "dashboard/calendar",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaClassDetailPage",
+      "file": "ImageCoverageAgenda.stories.tsx",
+      "family": "right-panel/detail",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaClassesPage",
+      "file": "ImageCoverageAgenda.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaGradePage",
+      "file": "ImageCoverageAgenda.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "FinanceBillingDrawerPage",
+      "file": "ImageCoverageFinance.stories.tsx",
+      "family": "dashboard/drawer",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "FinanceKanbanPage",
+      "file": "ImageCoverageFinance.stories.tsx",
+      "family": "kanban",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "FinanceMovementsPage",
+      "file": "ImageCoverageFinance.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesPipelinePage",
+      "file": "ImageCoverageSales.stories.tsx",
+      "family": "kanban",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesInterestedListPage",
+      "file": "ImageCoverageSales.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesExperimentalListPage",
+      "file": "ImageCoverageSales.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesEnrollmentChecklistPage",
+      "file": "ImageCoverageSales.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionRiskListPage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionCancellationQueuePage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionReactivationListPage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionComplaintQueuePage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "family": "table/worklist",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "ReportsManagementPage",
+      "file": "ImageCoverageReports.stories.tsx",
+      "family": "dashboard/reports",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "MoneyOnTheTablePage",
+      "file": "ImageCoverageReports.stories.tsx",
+      "family": "dashboard/reports",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SupportCentralPage",
+      "file": "ImageCoverageSupport.stories.tsx",
+      "family": "dashboard/support",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "InternalOverviewPage",
+      "file": "ImageCoverageInternal.stories.tsx",
+      "family": "internal/dashboard",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "InternalTenantsListDetailPage",
+      "file": "ImageCoverageInternal.stories.tsx",
+      "family": "internal/table",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "InternalTenantSecurityPage",
+      "file": "ImageCoverageInternal.stories.tsx",
+      "family": "internal/detail",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentsCatalogPage",
+      "file": "ImageCoverageAgents.stories.tsx",
+      "family": "dashboard/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAgendaRoutinesPage",
+      "file": "ImageCoverageAgents.stories.tsx",
+      "family": "dashboard/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentPresenceRoutinePage",
+      "file": "ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAbsenceFlowPage",
+      "file": "ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAbsenceFlowTestPage",
+      "file": "ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentPublishRoutinePage",
+      "file": "ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentExecutionReceiptPage",
+      "file": "ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsHubPage",
+      "file": "ImageCoverageSettings.stories.tsx",
+      "family": "dashboard/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsPermissionsPage",
+      "file": "ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsPaymentsPage",
+      "file": "ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsAgendaPage",
+      "file": "ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsNotificationsPage",
+      "file": "ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingSubscriptionPage",
+      "file": "ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingInvoicesPage",
+      "file": "ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingAddOnsPage",
+      "file": "ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "UsageOverviewPage",
+      "file": "ImageCoverageUsage.stories.tsx",
+      "family": "right-panel/usage",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "UsageLedgerPage",
+      "file": "ImageCoverageUsage.stories.tsx",
+      "family": "right-panel/usage",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "StudentProfilePage",
+      "file": "ImageCoverageStudents.stories.tsx",
+      "family": "right-panel/profile",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupShellGlobalPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupAgentChatPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupWorkspaceConfigPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupStudioPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupTeamPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupChannelsPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupPlansPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupPaymentPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupStudentsImportPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupClassesPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupAgendaPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupReviewPage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupWelcomePage",
+      "file": "ImageCoverageSetup.stories.tsx",
+      "family": "setup/welcome",
+      "missingSnippets": [],
+      "status": "pass"
+    }
+  ],
+  "tableFamilyDetailRows": [
+    {
+      "page": "SalesExperimentalListPage",
+      "file": "ImageCoverageSales.stories.tsx",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesEnrollmentChecklistPage",
+      "file": "ImageCoverageSales.stories.tsx",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionRiskListPage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionCancellationQueuePage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionReactivationListPage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionComplaintQueuePage",
+      "file": "ImageCoverageRetention.stories.tsx",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    }
+  ],
+  "ledgerRows": [
+    {
+      "marker": "remaining page coverage update",
+      "present": true
+    },
+    {
+      "marker": "54 individual Storybook exports",
+      "present": true
+    },
+    {
+      "marker": "Status: `Aprovado`",
+      "present": true
+    }
+  ],
+  "exportRows": [
+    {
+      "exportName": "Image19HojeEstadoCritico",
+      "storyId": "crm-image-coverage-hoje--image-19-hoje-estado-critico",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image24DInboxConversaAberta",
+      "storyId": "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image26AgendaCalendarioOperacional",
+      "storyId": "crm-image-coverage-agenda--image-26-agenda-calendario-operacional",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image28AlunoPerfilResumoOperacional",
+      "storyId": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image29AulaDetalheComChamada",
+      "storyId": "crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image32FinanceiroDrawerCobranca",
+      "storyId": "crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image33FinanceiroKanban",
+      "storyId": "crm-image-coverage-financeiro--image-33-financeiro-kanban",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image34MovimentacoesFiltrosDrawer",
+      "storyId": "crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image35TurmasListaDetalhe",
+      "storyId": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image36GradeSemanaModeloBloqueio",
+      "storyId": "crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image37VendasPipelineKanban",
+      "storyId": "crm-image-coverage-vendas--image-37-vendas-pipeline-kanban",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image38ListaInteressados",
+      "storyId": "crm-image-coverage-vendas--image-38-lista-interessados",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image39ExperimentalLista",
+      "storyId": "crm-image-coverage-vendas--image-39-experimental-lista",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image40MatriculasChecklistConversao",
+      "storyId": "crm-image-coverage-vendas--image-40-matriculas-checklist-conversao",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image41RetencaoRiscos",
+      "storyId": "crm-image-coverage-retencao--image-41-retencao-riscos",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image42CancelamentosFila",
+      "storyId": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image43ReativacoesExAlunos",
+      "storyId": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image44ReclamacoesCasoSensivel",
+      "storyId": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "ReportsManagement",
+      "storyId": "crm-image-coverage-relatorios--reports-management",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "MoneyOnTheTable",
+      "storyId": "crm-image-coverage-relatorios--money-on-the-table",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "SupportCentral",
+      "storyId": "crm-image-coverage-suporte--support-central",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image48InternalVisaoOperacional",
+      "storyId": "crm-image-coverage-internal--image-48-internal-visao-operacional",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image49InternalTenantsListaDetalhe",
+      "storyId": "crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image50InternalTenantDetalheUsuariosGrants",
+      "storyId": "crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image52AgentesCatalogo",
+      "storyId": "crm-image-coverage-agentes--image-52-agentes-catalogo",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image53AgenteAgendaRotinas",
+      "storyId": "crm-image-coverage-agentes--image-53-agente-agenda-rotinas",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image54RotinaPresencaFaltas",
+      "storyId": "crm-image-coverage-agentes--image-54-rotina-presenca-faltas",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image56FluxoFaltaComAviso",
+      "storyId": "crm-image-coverage-agentes--image-56-fluxo-falta-com-aviso",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image58TesteFluxoFaltaComAviso",
+      "storyId": "crm-image-coverage-agentes--image-58-teste-fluxo-falta-com-aviso",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image59PublicarRotina",
+      "storyId": "crm-image-coverage-agentes--image-59-publicar-rotina",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image70ExecucoesFluxo",
+      "storyId": "crm-image-coverage-agentes--image-70-execucoes-fluxo",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image60ConfiguracoesHub",
+      "storyId": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image61ConfiguracoesPermissoes",
+      "storyId": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image62ConfiguracoesPagamentos",
+      "storyId": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image63ConfiguracoesAgenda",
+      "storyId": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image64ConfiguracoesNotificacoes",
+      "storyId": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image65BillingAssinatura",
+      "storyId": "crm-image-coverage-billing--image-65-billing-assinatura",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image66BillingFaturas",
+      "storyId": "crm-image-coverage-billing--image-66-billing-faturas",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image67BillingAddOns",
+      "storyId": "crm-image-coverage-billing--image-67-billing-add-ons",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image68UsoVisaoGeral",
+      "storyId": "crm-image-coverage-usage--image-68-uso-visao-geral",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image69UsoExtrato",
+      "storyId": "crm-image-coverage-usage--image-69-uso-extrato",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51AOnboardingShellGlobal",
+      "storyId": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51BOnboardingAgenteConfiguracaoChat",
+      "storyId": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51COnboardingWorkspaceConfiguracao",
+      "storyId": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51DOnboardingStudio",
+      "storyId": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51EOnboardingEquipe",
+      "storyId": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51FOnboardingCanais",
+      "storyId": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51GOnboardingPlanos",
+      "storyId": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51KOnboardingPagamento",
+      "storyId": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51HOnboardingAlunos",
+      "storyId": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51IOnboardingTurmas",
+      "storyId": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51JOnboardingAgenda",
+      "storyId": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image51LOnboardingRevisao",
+      "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    },
+    {
+      "exportName": "Image78OnboardingBemVindo",
+      "storyId": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+      "hasExport": true,
+      "hasStaticIndexEntry": true,
+      "titleMatches": true,
+      "notRemainingStory": true,
+      "status": "pass"
+    }
+  ],
+  "note": "This audit proves the former Remaining Pages targets were migrated into official family Storybook stories, the duplicate Remaining Pages story file is absent, and the coverage is accepted for the current 99% visual scope. It does not certify pixel-perfect 1:1 visual parity."
+}

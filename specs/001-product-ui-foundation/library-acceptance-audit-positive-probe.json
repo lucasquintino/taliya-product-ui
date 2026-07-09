@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-07-07T11:42:00.228Z",
+  "status": "pass-current-internal-library",
+  "checkMode": true,
+  "reportLabel": "positive-probe",
+  "evidenceSources": {
+    "goalCompletion": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-library-acceptance-valid-probe-Hu9KU0\\goal-completion-audit.json",
+    "readiness": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-library-acceptance-valid-probe-Hu9KU0\\library-readiness-gate.json",
+    "futureConsumerAdoption": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-library-acceptance-valid-probe-Hu9KU0\\future-consumer-adoption-audit.json",
+    "certificationScope": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-library-acceptance-valid-probe-Hu9KU0\\certification-scope-decision-audit.json",
+    "visualBacklog": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-library-acceptance-valid-probe-Hu9KU0\\visual-certification-backlog-audit.json"
+  },
+  "currentInternalLibraryAccepted": true,
+  "globalGoalComplete": false,
+  "globalGoalStatus": "not-complete-globally",
+  "futureCrmAdoptionExecuted": false,
+  "visualParityGloballyComplete": false,
+  "scopedVisualAcceptance": false,
+  "summary": {
+    "readiness": "pass",
+    "goalVerdict": "not-complete-globally",
+    "currentInternalReadiness": "proven",
+    "futureCrmAdoption": "not-executed",
+    "globalSourceImageParity": "not-proven",
+    "visualBacklogIncompleteRows": 17,
+    "futureCrmCandidateCount": 0,
+    "adoptedFutureCrmCandidateCount": 0
+  },
+  "acceptanceRows": [
+    {
+      "gate": "current-readiness",
+      "status": "pass",
+      "proves": "aggregate readiness gate passed for the current Internal/library scope"
+    },
+    {
+      "gate": "current-internal-library-readiness",
+      "status": "pass",
+      "proves": "current taliya-internal can consume official packages/page-kit without local visual clones"
+    },
+    {
+      "gate": "future-crm-adoption-executed",
+      "status": "not-executed",
+      "proves": "future CRM adoption is process-proven only until a real candidate exists and runs labeled gates"
+    },
+    {
+      "gate": "source-image-visual-parity",
+      "status": "not-proven-globally",
+      "proves": "remaining source-image parity stays in the visual certification backlog"
+    }
+  ],
+  "internalRows": [
+    {
+      "requirement": "Standalone package structure for tokens, primitives, and CRM compositions",
+      "status": "proven",
+      "pass": true
+    },
+    {
+      "requirement": "Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts",
+      "status": "proven",
+      "pass": true
+    },
+    {
+      "requirement": "Public page kit exported, story-covered, and documented",
+      "status": "proven-for-current-kit",
+      "pass": true
+    },
+    {
+      "requirement": "Runtime standard page-kit manifest is available to consumers",
+      "status": "proven-for-current-internal-and-fixtures",
+      "pass": true
+    },
+    {
+      "requirement": "Component architecture supports reuse",
+      "status": "proven-for-current-scope",
+      "pass": true
+    },
+    {
+      "requirement": "Token governance and no new visual debt",
+      "status": "proven-for-current-token-css-surface",
+      "pass": true
+    },
+    {
+      "requirement": "Taliya Internal declares and installs official packages",
+      "status": "proven-for-current-internal",
+      "pass": true
+    },
+    {
+      "requirement": "Taliya Internal avoids active local visual clones",
+      "status": "proven-for-current-internal",
+      "pass": true
+    },
+    {
+      "requirement": "Taliya Internal uses official shell, filters, tables, kanban, drawers, panels, and state primitives",
+      "status": "proven-for-current-internal",
+      "pass": true
+    },
+    {
+      "requirement": "Taliya Internal route pages are fully covered by the official page-kit adoption map",
+      "status": "proven-for-current-internal",
+      "pass": true
+    },
+    {
+      "requirement": "Taliya Internal owns the same consumer readiness config model future CRM will use",
+      "status": "proven-for-current-internal",
+      "pass": true
+    },
+    {
+      "requirement": "Taliya Internal consumer readiness configs are versioned in the consumer repository",
+      "status": "proven-for-current-internal",
+      "pass": true
+    },
+    {
+      "requirement": "Internal runtime still works after migration",
+      "status": "proven-for-current-internal",
+      "pass": true
+    }
+  ],
+  "nextActions": [
+    "Run adoption gates against the real future CRM app when it exists or is connected locally.",
+    "Finish full source-image 1:1 visual certification, or keep an explicit scoped product acceptance decision on file.",
+    "Use this audit as the current Internal/library acceptance gate, not as proof that the full persistent goal is complete."
+  ]
+}

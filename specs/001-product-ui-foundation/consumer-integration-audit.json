@@ -1,0 +1,1001 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
+  "vendorDir": "vendor/taliya-product-ui",
+  "reportLabel": "default",
+  "vendorManifest": {
+    "path": "vendor/taliya-product-ui/taliya-product-ui-local-manifest.json",
+    "present": true,
+    "packageCount": 3
+  },
+  "generatedAt": "2026-07-07T11:41:47.835Z",
+  "packageStatus": {
+    "pass": true,
+    "missing": [],
+    "sourceRows": [
+      {
+        "packageName": "@taliya/tokens",
+        "actual": "file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+        "expected": "file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/ui",
+        "actual": "file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+        "expected": "file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/crm",
+        "actual": "file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+        "expected": "file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+        "pass": true
+      }
+    ],
+    "sourceMismatches": [],
+    "details": [
+      "@taliya/tokens: file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+      "@taliya/ui: file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+      "@taliya/crm: file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+      "@taliya/tokens source: pass",
+      "@taliya/ui source: pass",
+      "@taliya/crm source: pass"
+    ]
+  },
+  "installedPackageStatus": {
+    "pass": true,
+    "rows": [
+      {
+        "packageName": "@taliya/tokens",
+        "packageRoot": "node_modules/@taliya/tokens",
+        "packageJsonExists": true,
+        "nameMatches": true,
+        "version": "0.0.0",
+        "versionPresent": true,
+        "requiredFiles": [
+          "package.json",
+          "dist/index.js",
+          "dist/index.d.ts",
+          "src/tokens.css"
+        ],
+        "missingFiles": [],
+        "requiredExports": [
+          ".",
+          "./tokens.css"
+        ],
+        "exportsPresent": [
+          ".",
+          "./tokens.css"
+        ],
+        "missingExports": [],
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/ui",
+        "packageRoot": "node_modules/@taliya/ui",
+        "packageJsonExists": true,
+        "nameMatches": true,
+        "version": "0.0.0",
+        "versionPresent": true,
+        "requiredFiles": [
+          "package.json",
+          "dist/index.js",
+          "dist/index.d.ts",
+          "src/styles.css"
+        ],
+        "missingFiles": [],
+        "requiredExports": [
+          ".",
+          "./styles.css"
+        ],
+        "exportsPresent": [
+          ".",
+          "./styles.css"
+        ],
+        "missingExports": [],
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/crm",
+        "packageRoot": "node_modules/@taliya/crm",
+        "packageJsonExists": true,
+        "nameMatches": true,
+        "version": "0.0.0",
+        "versionPresent": true,
+        "requiredFiles": [
+          "package.json",
+          "dist/index.js",
+          "dist/index.d.ts",
+          "dist/standard-page-kit.js",
+          "dist/standard-page-kit.d.ts",
+          "src/styles.css"
+        ],
+        "missingFiles": [],
+        "requiredExports": [
+          ".",
+          "./standard-page-kit",
+          "./styles.css"
+        ],
+        "exportsPresent": [
+          ".",
+          "./standard-page-kit",
+          "./styles.css"
+        ],
+        "missingExports": [],
+        "pass": true
+      }
+    ],
+    "details": [
+      "@taliya/tokens: installed entrypoints ok",
+      "@taliya/tokens version: 0.0.0",
+      "@taliya/tokens missing files: none",
+      "@taliya/tokens missing exports: none",
+      "@taliya/ui: installed entrypoints ok",
+      "@taliya/ui version: 0.0.0",
+      "@taliya/ui missing files: none",
+      "@taliya/ui missing exports: none",
+      "@taliya/crm: installed entrypoints ok",
+      "@taliya/crm version: 0.0.0",
+      "@taliya/crm missing files: none",
+      "@taliya/crm missing exports: none"
+    ]
+  },
+  "installedPackageContractStatus": {
+    "pass": true,
+    "rows": [
+      {
+        "id": "crm-product-shell-drawer-size-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type CrmProductShellDrawerSize = \"default\" | \"compact\";",
+          "drawerSize?: CrmProductShellDrawerSize;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-compact-drawer-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-product-shell-window--drawer-compact",
+          "var(--taliya-layout-crm-product-shell-drawer-compact-width)",
+          "var(--taliya-layout-crm-checklist-drawer-width)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-task-drawer-compact-size-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type TaskDrawerSize = \"default\" | \"compact\";",
+          "size?: TaskDrawerSize;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-task-drawer-compact-size-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-task-drawer.tcrm-drawer-frame.tcrm-task-drawer--compact",
+          "var(--taliya-layout-crm-task-drawer-compact-width)",
+          "var(--taliya-control-crm-work-list-detail-filter-icon-size)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-task-drawer-activity-order-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type TaskDrawerActivityOrder = \"history-comments\" | \"comments-history\";",
+          "activityOrder?: TaskDrawerActivityOrder;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-task-drawer-compact-density-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-control-crm-task-drawer-fact-row-height: var(--taliya-control-crm-task-drawer-compact-fact-row-height);",
+          "--taliya-control-crm-task-drawer-header-min-height: var(--taliya-control-crm-task-drawer-compact-header-min-height);",
+          "--taliya-control-crm-task-drawer-section-gap: var(--taliya-control-crm-task-drawer-compact-section-gap);",
+          ".tcrm-task-drawer--compact .tcrm-task-drawer__copilot"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-task-drawer-compact-work-list-density",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-task-drawer-compact-width: var(--taliya-layout-crm-checklist-drawer-width);",
+          "--taliya-control-crm-work-list-detail-filter-padding-x: 8px;",
+          "--taliya-control-crm-work-list-detail-filter-gap: 6px;",
+          "--taliya-control-crm-work-list-detail-filter-icon-size: 14px;",
+          "--taliya-control-crm-work-list-detail-filter-count-size: 18px;",
+          "--taliya-control-crm-work-list-detail-filter-count-padding-x: 0px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-task-drawer-compact-inner-density",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-control-crm-task-drawer-compact-header-min-height: 122px;",
+          "--taliya-control-crm-task-drawer-compact-fact-row-height: 28px;",
+          "--taliya-control-crm-task-drawer-compact-section-gap: 10px;",
+          "--taliya-control-crm-task-drawer-compact-copilot-icon-size: 18px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-page-header-rhythm-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type CrmProductShellPageHeaderRhythm = \"default\" | \"spacious\" | \"compact-stacked\" | \"dashboard\" | \"stacked\" | \"overview\";",
+          "pageHeaderRhythm?: CrmProductShellPageHeaderRhythm;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-content-layout-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type CrmProductShellContentLayout = \"default\" | \"work-list\" | \"main-priority\" | \"kanban\";",
+          "contentLayout?: CrmProductShellContentLayout;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-content-layout-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-product-shell-stage--content-work-list .tcrm-product-shell-content",
+          "var(--taliya-layout-crm-product-shell-content-work-list-padding)",
+          ".tcrm-product-shell-stage--content-main-priority .tcrm-product-shell-content",
+          "var(--taliya-layout-crm-product-shell-content-main-priority-padding)",
+          ".tcrm-product-shell-stage--content-kanban .tcrm-product-shell-content",
+          "var(--taliya-layout-crm-product-shell-content-kanban-padding)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-product-shell-content-layout",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-product-shell-content-work-list-padding: 0 28px 28px 27px;",
+          "--taliya-layout-crm-product-shell-content-main-priority-padding: 0 28px 28px 16px;",
+          "--taliya-layout-crm-product-shell-content-kanban-padding: 0 28px 28px 24px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-replacement-floating-drawer-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-product-shell-stage--drawer-floating > .tcrm-replacement-drawer",
+          "var(--taliya-layout-crm-product-shell-replacement-floating-drawer-top)",
+          ".tcrm-replacement-drawer__fact[data-fact=\"credit\"]",
+          "var(--taliya-control-crm-replacement-drawer-credit-fact-row-height)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-replacement-floating-drawer",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-product-shell-replacement-floating-drawer-top: 104px;",
+          "--taliya-control-crm-replacement-drawer-title-offset-top: 28px;",
+          "--taliya-control-crm-replacement-drawer-credit-fact-row-height: 45px;",
+          "--taliya-control-crm-replacement-drawer-footer-gap: 5px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-activity-feed-source-density",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-control-crm-activity-feed-padding: 24px 30px 28px 28px;",
+          "--taliya-control-crm-activity-feed-header-height: 64px;",
+          "--taliya-control-crm-activity-feed-row-height: 64px;",
+          "--taliya-control-crm-activity-feed-row-gap: 8px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-page-header-rhythm-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-product-shell-stage--page-header-spacious .tcrm-product-shell-page-header",
+          "var(--taliya-layout-crm-product-shell-main-header-spacious-height)",
+          ".tcrm-product-shell-stage--page-header-compact-stacked .tcrm-product-shell-page-header",
+          "var(--taliya-layout-crm-product-shell-main-header-compact-stacked-height)",
+          ".tcrm-product-shell-stage--page-header-dashboard .tcrm-product-shell-page-header",
+          "var(--taliya-layout-crm-product-shell-main-header-dashboard-height)",
+          "var(--taliya-layout-crm-product-shell-header-dashboard-copy-offset-y)",
+          "var(--taliya-layout-crm-product-shell-content-dashboard-padding)",
+          ".tcrm-product-shell-stage--page-header-stacked .tcrm-product-shell-page-header",
+          "var(--taliya-layout-crm-product-shell-main-header-stacked-height)",
+          "var(--taliya-layout-crm-product-shell-header-stacked-copy-offset-y)",
+          "var(--taliya-layout-crm-product-shell-header-stacked-copy-gap)",
+          "var(--taliya-layout-crm-product-shell-header-stacked-actions-offset-y)",
+          ".tcrm-product-shell-stage--page-header-overview .tcrm-product-shell-page-header",
+          "var(--taliya-layout-crm-product-shell-main-header-overview-height)",
+          "var(--taliya-control-crm-page-filter-bar-overview-padding)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-product-shell-page-header-rhythm",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-product-shell-main-header-spacious-height: 72px;",
+          "--taliya-layout-crm-product-shell-main-header-compact-stacked-height: 72px;",
+          "--taliya-layout-crm-product-shell-main-header-dashboard-height: 74px;",
+          "--taliya-layout-crm-product-shell-main-header-overview-height: 90px;",
+          "--taliya-layout-crm-product-shell-header-dashboard-copy-offset-y: 18px;",
+          "--taliya-layout-crm-product-shell-content-dashboard-padding: 0 41px 28px 52px;",
+          "--taliya-layout-crm-product-shell-main-header-stacked-height: 96px;",
+          "--taliya-layout-crm-product-shell-header-stacked-copy-offset-y: 14px;",
+          "--taliya-layout-crm-product-shell-header-stacked-copy-gap: 8px;",
+          "--taliya-layout-crm-product-shell-header-stacked-actions-offset-y: 26px;",
+          "--taliya-control-crm-page-filter-bar-overview-padding: 10px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-product-shell-topnav-rhythm",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-product-shell-topbar-nav-left: 458px;",
+          "--taliya-control-segmented-shell-gap: 16px;",
+          "--taliya-control-segmented-shell-item-height: 42px;",
+          "--taliya-control-segmented-shell-item-padding-x: 22px;",
+          "--taliya-color-crm-product-shell-segmented-bg: transparent;",
+          "--taliya-color-crm-product-shell-segmented-border: transparent;",
+          "--taliya-shadow-crm-product-shell-segmented: none;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-product-shell-surface-rhythm",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-surface-product-page: #F9F9FB;",
+          "--taliya-shadow-crm-product-shell-panel: 0 10px 20px rgba(20, 22, 28, 0.012), 0 1px 0 rgba(255, 255, 255, 0.74) inset;",
+          "--taliya-shadow-crm-product-shell-control: 0 6px 14px rgba(20, 22, 28, 0.018), 0 1px 0 rgba(255, 255, 255, 0.72) inset;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "ui-segmented-shell-topnav-css",
+        "packageName": "@taliya/ui",
+        "file": "node_modules/@taliya/ui/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tl-segmented--shell",
+          "var(--taliya-color-crm-product-shell-segmented-bg)",
+          "var(--taliya-color-crm-product-shell-segmented-border)",
+          "var(--taliya-shadow-crm-product-shell-segmented)",
+          "var(--taliya-control-segmented-shell-gap)",
+          "var(--taliya-control-segmented-shell-padding)",
+          ".tl-segmented--shell .tl-segmented__item",
+          "var(--taliya-control-segmented-shell-item-height)",
+          "var(--taliya-control-segmented-shell-item-padding-x)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-shell-topnav-nav-pill-rendering",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.js",
+        "fileExists": true,
+        "requiredText": [
+          "export function CrmShellTopNav",
+          "return (_jsx(\"nav\", { className: cn(\"tcrm-empty-shell-nav\", className)",
+          "return (_jsx(CrmTopbarNavChip",
+          "onChange?.(item.id)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "ui-official-icon-sizing-css",
+        "packageName": "@taliya/ui",
+        "file": "node_modules/@taliya/ui/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tl-icon-button--md > .tl-icon",
+          "var(--taliya-control-icon-button-md-icon)",
+          ".tl-filter-select > .tl-icon",
+          "var(--taliya-control-select-item-icon-size)",
+          ".tl-filter-select__option-icon > .tl-icon",
+          ".tl-filter-select__option-check > .tl-icon"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "ui-official-base-icon-sizing-css",
+        "packageName": "@taliya/ui",
+        "file": "node_modules/@taliya/ui/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tl-icon",
+          "--tl-icon-size",
+          "var(--taliya-control-icon-size-md)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "ui-official-base-icon-sizing-runtime",
+        "packageName": "@taliya/ui",
+        "file": "node_modules/@taliya/ui/dist/index.js",
+        "fileExists": true,
+        "requiredText": [
+          "\"--tl-icon-size\"",
+          "const iconStyle",
+          "style: iconStyle"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-floating-drawer-reserve-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main",
+          ".tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main .tcrm-empty-shell-topbar",
+          ".tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main .tcrm-empty-shell-topbar {\n  right: 0;",
+          "var(--taliya-layout-crm-product-shell-floating-drawer-reserved-width)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-content-drawer-topbar-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-product-shell-window--drawer-content .tcrm-product-shell-main .tcrm-empty-shell-topbar",
+          "right: 0;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-product-shell-floating-drawer-reserve",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-product-shell-floating-drawer-reserved-width: var(--taliya-control-drawer-width-sm);"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-page-filter-bar-search-flow",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-page-filter-bar-search-min-width: 224px;",
+          "--taliya-layout-crm-page-filter-bar-search-basis: 320px;",
+          "--taliya-layout-crm-page-filter-bar-search-max-width: 360px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-page-filter-bar-compact-flow",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-page-filter-bar-compact-search-min-width: 188px;",
+          "--taliya-layout-crm-page-filter-bar-compact-search-basis: 220px;",
+          "--taliya-layout-crm-page-filter-bar-compact-search-max-width: 260px;",
+          "--taliya-layout-crm-page-filter-bar-compact-filter-width: 84px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-page-filter-bar-tight-flow",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-page-filter-bar-tight-search-min-width: 252px;",
+          "--taliya-layout-crm-page-filter-bar-tight-search-basis: 264px;",
+          "--taliya-layout-crm-page-filter-bar-tight-search-max-width: 276px;",
+          "--taliya-layout-crm-page-filter-bar-tight-filter-width: 78px;",
+          "--taliya-control-crm-page-filter-bar-tight-action-padding-x: 12px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-page-quick-filter-soft-selection",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-color-crm-page-quick-filter-selected-soft-bg: var(--taliya-color-crm-kanban-manual-bg);",
+          "--taliya-color-crm-page-quick-filter-selected-soft-border: rgba(94, 142, 232, 0.18);",
+          "--taliya-color-crm-page-quick-filter-selected-soft-fg: var(--taliya-color-crm-kanban-manual-fg);"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-approval-panel-history-rhythm",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-control-crm-approval-panel-timeline-item-height: 16px;",
+          "--taliya-control-crm-approval-panel-timeline-time-width: 36px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-finance-priority-panel-density",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-control-crm-finance-priority-panel-padding: 16px;",
+          "--taliya-control-crm-finance-priority-panel-gap: 12px;",
+          "--taliya-control-crm-finance-priority-panel-row-height: 50px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-page-filter-bar-flex-flow-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-page-filter-bar.tl-filter-bar",
+          "display: flex;",
+          "var(--taliya-layout-crm-page-filter-bar-search-basis)",
+          "var(--taliya-layout-crm-page-filter-bar-search-max-width)",
+          "var(--taliya-layout-crm-page-filter-bar-search-min-width)",
+          ".tcrm-page-filter-bar__actions",
+          "margin-left: auto;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-page-filter-bar-density-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "density?: \"standard\" | \"compact\" | \"tight\";",
+          "export declare function PageFilterBar"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-page-filter-bar-compact-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-page-filter-bar--compact",
+          "var(--taliya-layout-crm-page-filter-bar-compact-search-basis)",
+          "var(--taliya-layout-crm-page-filter-bar-compact-search-max-width)",
+          "var(--taliya-layout-crm-page-filter-bar-compact-search-min-width)",
+          "var(--taliya-layout-crm-page-filter-bar-compact-filter-width)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-page-filter-bar-tight-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-page-filter-bar--tight",
+          "var(--taliya-layout-crm-page-filter-bar-tight-search-basis)",
+          "var(--taliya-layout-crm-page-filter-bar-tight-search-max-width)",
+          "var(--taliya-layout-crm-page-filter-bar-tight-search-min-width)",
+          "var(--taliya-layout-crm-page-filter-bar-tight-filter-width)",
+          "var(--taliya-control-crm-page-filter-bar-tight-action-padding-x)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-page-quick-filters-selection-tone-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type PageQuickFiltersSelectionTone = \"strong\" | \"soft\";",
+          "selectionTone?: PageQuickFiltersSelectionTone;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-page-quick-filters-soft-selection-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-page-quick-filters__item--selection-soft[aria-pressed=\"true\"]",
+          "var(--taliya-color-crm-page-quick-filter-selected-soft-bg)",
+          "var(--taliya-color-crm-page-quick-filter-selected-soft-border)",
+          "var(--taliya-color-crm-page-quick-filter-selected-soft-fg)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-approval-panel-history-rhythm-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-approval-panel__history li",
+          "var(--taliya-control-crm-approval-panel-timeline-time-width)",
+          "var(--taliya-control-crm-approval-panel-timeline-item-height)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-finance-priority-panel-density-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-finance-priority-panel.tl-panel",
+          "var(--taliya-control-crm-finance-priority-panel-padding)",
+          "var(--taliya-control-crm-finance-priority-panel-gap)",
+          "var(--taliya-control-crm-finance-priority-panel-row-height)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-work-list-detail-main-priority-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type WorkListDetailPageLayoutMode = \"standard\" | \"main-priority\";",
+          "layoutMode?: WorkListDetailPageLayoutMode;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-work-list-detail-main-priority-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-work-list-detail-page--main-priority .tcrm-work-list-detail-page__layout",
+          "var(--taliya-layout-crm-work-list-detail-main-priority-rail-width)",
+          ".tcrm-work-list-detail-page--main-priority .tcrm-page-quick-filters",
+          "var(--taliya-control-crm-work-list-detail-main-priority-rail-padding)",
+          "var(--taliya-control-crm-work-list-detail-main-priority-filter-padding-x)",
+          "var(--taliya-control-crm-work-list-detail-main-priority-filter-gap)",
+          "var(--taliya-control-crm-work-list-detail-main-priority-filter-icon-size)",
+          "var(--taliya-control-crm-work-list-detail-main-priority-filter-count-size)",
+          "var(--taliya-control-crm-work-list-detail-main-priority-filter-count-padding-x)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-work-list-detail-main-priority",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-work-list-detail-main-priority-rail-width: 176px;",
+          "--taliya-control-crm-work-list-detail-main-priority-rail-padding: 18px 8px 14px;",
+          "--taliya-control-crm-work-list-detail-main-priority-filter-padding-x: 4px;",
+          "--taliya-control-crm-work-list-detail-main-priority-filter-gap: 4px;",
+          "--taliya-control-crm-work-list-detail-main-priority-filter-icon-size: 13px;",
+          "--taliya-control-crm-work-list-detail-main-priority-filter-count-size: 18px;",
+          "--taliya-control-crm-work-list-detail-main-priority-filter-count-padding-x: 0px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "ui-filter-select-value-trigger-api",
+        "packageName": "@taliya/ui",
+        "file": "node_modules/@taliya/ui/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "clearable?: boolean;",
+          "icon?: IconName;",
+          "triggerDisplay?: \"label-value\" |",
+          "\"value\";"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "ui-search-input-embedded-filter-api-css",
+        "packageName": "@taliya/ui",
+        "file": "node_modules/@taliya/ui/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "filterPlacement?: \"separate\" | \"embedded\";"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "ui-search-input-embedded-filter-css",
+        "packageName": "@taliya/ui",
+        "file": "node_modules/@taliya/ui/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tl-search-input--filter-embedded",
+          ".tl-search-input--filter-embedded .tl-search-input__field .tl-input-shell",
+          ".tl-search-input--filter-embedded .tl-search-input__filter"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-page-filter-bar-embedded-search-filter-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "searchFilterPlacement?: \"separate\" | \"embedded\";"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-compact-checklist-drawer",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-checklist-drawer-width: 342px;",
+          "--taliya-layout-crm-product-shell-drawer-compact-width: var(--taliya-layout-crm-checklist-drawer-width);",
+          "--taliya-control-crm-checklist-drawer-section-header-height: 32px;",
+          "--taliya-control-crm-checklist-drawer-step-row-height: 35px;",
+          "--taliya-control-crm-checklist-drawer-step-row-padding-y: 5px;",
+          "--taliya-control-crm-checklist-drawer-step-index-width: 16px;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-checklist-table-dot-selection",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-color-crm-checklist-row-bg-selected: rgba(94, 142, 232, 0.06);",
+          "--taliya-shadow-crm-checklist-table-row-selected: none;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-checklist-drawer-rhythm-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-checklist-drawer.tcrm-drawer-frame .tcrm-drawer-frame__meta",
+          ".tcrm-checklist-drawer.tcrm-drawer-frame .tcrm-drawer-frame__header h2",
+          "var(--taliya-control-crm-checklist-drawer-section-header-height)",
+          "var(--taliya-control-crm-checklist-drawer-step-row-height)",
+          "var(--taliya-control-crm-checklist-drawer-step-row-padding-y)",
+          "var(--taliya-control-crm-checklist-drawer-step-index-width)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-checklist-table-dot-selection-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-checklist-table__data .tl-table__row--selected",
+          "var(--taliya-color-crm-checklist-row-bg-selected)",
+          "var(--taliya-shadow-crm-checklist-table-row-selected)",
+          ".tcrm-checklist-table__title-cell.is-selected::before"
+        ],
+        "missingText": [],
+        "pass": true
+      }
+    ],
+    "details": [
+      "crm-product-shell-drawer-size-api: installed contract markers ok",
+      "crm-product-shell-compact-drawer-css: installed contract markers ok",
+      "crm-task-drawer-compact-size-api: installed contract markers ok",
+      "crm-task-drawer-compact-size-css: installed contract markers ok",
+      "crm-task-drawer-activity-order-api: installed contract markers ok",
+      "crm-task-drawer-compact-density-css: installed contract markers ok",
+      "tokens-task-drawer-compact-work-list-density: installed contract markers ok",
+      "tokens-task-drawer-compact-inner-density: installed contract markers ok",
+      "crm-product-shell-page-header-rhythm-api: installed contract markers ok",
+      "crm-product-shell-content-layout-api: installed contract markers ok",
+      "crm-product-shell-content-layout-css: installed contract markers ok",
+      "tokens-product-shell-content-layout: installed contract markers ok",
+      "crm-replacement-floating-drawer-css: installed contract markers ok",
+      "tokens-replacement-floating-drawer: installed contract markers ok",
+      "tokens-activity-feed-source-density: installed contract markers ok",
+      "crm-product-shell-page-header-rhythm-css: installed contract markers ok",
+      "tokens-product-shell-page-header-rhythm: installed contract markers ok",
+      "tokens-product-shell-topnav-rhythm: installed contract markers ok",
+      "tokens-product-shell-surface-rhythm: installed contract markers ok",
+      "ui-segmented-shell-topnav-css: installed contract markers ok",
+      "crm-shell-topnav-nav-pill-rendering: installed contract markers ok",
+      "ui-official-icon-sizing-css: installed contract markers ok",
+      "ui-official-base-icon-sizing-css: installed contract markers ok",
+      "ui-official-base-icon-sizing-runtime: installed contract markers ok",
+      "crm-product-shell-floating-drawer-reserve-css: installed contract markers ok",
+      "crm-product-shell-content-drawer-topbar-css: installed contract markers ok",
+      "tokens-product-shell-floating-drawer-reserve: installed contract markers ok",
+      "tokens-page-filter-bar-search-flow: installed contract markers ok",
+      "tokens-page-filter-bar-compact-flow: installed contract markers ok",
+      "tokens-page-filter-bar-tight-flow: installed contract markers ok",
+      "tokens-page-quick-filter-soft-selection: installed contract markers ok",
+      "tokens-approval-panel-history-rhythm: installed contract markers ok",
+      "tokens-finance-priority-panel-density: installed contract markers ok",
+      "crm-page-filter-bar-flex-flow-css: installed contract markers ok",
+      "crm-page-filter-bar-density-api: installed contract markers ok",
+      "crm-page-filter-bar-compact-css: installed contract markers ok",
+      "crm-page-filter-bar-tight-css: installed contract markers ok",
+      "crm-page-quick-filters-selection-tone-api: installed contract markers ok",
+      "crm-page-quick-filters-soft-selection-css: installed contract markers ok",
+      "crm-approval-panel-history-rhythm-css: installed contract markers ok",
+      "crm-finance-priority-panel-density-css: installed contract markers ok",
+      "crm-work-list-detail-main-priority-api: installed contract markers ok",
+      "crm-work-list-detail-main-priority-css: installed contract markers ok",
+      "tokens-work-list-detail-main-priority: installed contract markers ok",
+      "ui-filter-select-value-trigger-api: installed contract markers ok",
+      "ui-search-input-embedded-filter-api-css: installed contract markers ok",
+      "ui-search-input-embedded-filter-css: installed contract markers ok",
+      "crm-page-filter-bar-embedded-search-filter-api: installed contract markers ok",
+      "tokens-compact-checklist-drawer: installed contract markers ok",
+      "tokens-checklist-table-dot-selection: installed contract markers ok",
+      "crm-checklist-drawer-rhythm-css: installed contract markers ok",
+      "crm-checklist-table-dot-selection-css: installed contract markers ok"
+    ]
+  },
+  "standardPageKitRuntimeStatus": {
+    "pass": true,
+    "expectedCount": 52,
+    "status": 0,
+    "hasManifest": true,
+    "version": 1,
+    "count": 52,
+    "missingNames": [],
+    "exactParity": true,
+    "orderOrFieldDrift": false,
+    "missingRows": [],
+    "extraRows": [],
+    "stdout": "{\"hasManifest\":true,\"version\":1,\"count\":52,\"components\":[{\"name\":\"CrmProductShell\",\"package\":\"@taliya/crm\",\"story\":\"CrmShellComponents.stories.tsx\",\"category\":\"shell\"},{\"name\":\"PageFilterBar\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9PageFilterBar.stories.tsx\",\"category\":\"filters\"},{\"name\":\"PageQuickFilters\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9PageQuickFilters.stories.tsx\",\"category\":\"filters\"},{\"name\":\"ListDetailLayout\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9ListDetailLayout.stories.tsx\",\"category\":\"layout\"},{\"name\":\"WorkListDetailPage\",\"package\":\"@taliya/crm\",\"story\":\"CrmWorkListDetailPage.stories.tsx\",\"category\":\"layout\"},{\"name\":\"CrmPageFamilyShell\",\"package\":\"@taliya/crm\",\"story\":\"CrmPageFamilyComponents.stories.tsx\",\"category\":\"page-family\"},{\"name\":\"CrmWorklistPage\",\"package\":\"@taliya/crm\",\"story\":\"CrmPageFamilyComponents.stories.tsx\",\"category\":\"page-family\"},{\"name\":\"CrmKanbanPage\",\"package\":\"@taliya/crm\",\"story\":\"CrmPageFamilyComponents.stories.tsx\",\"category\":\"page-family\"},{\"name\":\"CrmDashboardPage\",\"package\":\"@taliya/crm\",\"story\":\"CrmPageFamilyComponents.stories.tsx\",\"category\":\"page-family\"},{\"name\":\"CrmThreePanePage\",\"package\":\"@taliya/crm\",\"story\":\"CrmPageFamilyComponents.stories.tsx\",\"category\":\"page-family\"},{\"name\":\"CrmRightPanelPage\",\"package\":\"@taliya/crm\",\"story\":\"CrmPageFamilyComponents.stories.tsx\",\"category\":\"page-family\"},{\"name\":\"DashboardGrid\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9DashboardGrid.stories.tsx\",\"category\":\"dashboard\"},{\"name\":\"MetricCard\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9MetricCard.stories.tsx\",\"category\":\"dashboard\"},{\"name\":\"InternalOverviewDashboard\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch10InternalShell.stories.tsx\",\"category\":\"dashboard\"},{\"name\":\"Button\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveButton.stories.tsx\",\"category\":\"control\"},{\"name\":\"Chip\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveChip.stories.tsx\",\"category\":\"control\"},{\"name\":\"Modal\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveModal.stories.tsx\",\"category\":\"overlay\"},{\"name\":\"Stack\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveStack.stories.tsx\",\"category\":\"layout\"},{\"name\":\"Toolbar\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveToolbar.stories.tsx\",\"category\":\"layout\"},{\"name\":\"ButtonGroup\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveButtonGroup.stories.tsx\",\"category\":\"layout\"},{\"name\":\"InlineGroup\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveInlineGroup.stories.tsx\",\"category\":\"layout\"},{\"name\":\"Panel\",\"package\":\"@taliya/ui\",\"story\":\"PrimitivePanel.stories.tsx\",\"category\":\"surface\"},{\"name\":\"PanelHeader\",\"package\":\"@taliya/ui\",\"story\":\"PrimitivePanelHeader.stories.tsx\",\"category\":\"surface\"},{\"name\":\"PanelBody\",\"package\":\"@taliya/ui\",\"story\":\"PrimitivePanelBody.stories.tsx\",\"category\":\"surface\"},{\"name\":\"FieldGrid\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveFieldGrid.stories.tsx\",\"category\":\"form\"},{\"name\":\"ContentGrid\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveContentGrid.stories.tsx\",\"category\":\"layout\"},{\"name\":\"StatePage\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveStatePage.stories.tsx\",\"category\":\"state\"},{\"name\":\"LoadingState\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveLoadingState.stories.tsx\",\"category\":\"state\"},{\"name\":\"ErrorState\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveErrorState.stories.tsx\",\"category\":\"state\"},{\"name\":\"EmptyState\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveEmptyState.stories.tsx\",\"category\":\"state\"},{\"name\":\"DataTable\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveDataTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"TablePagination\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveTablePagination.stories.tsx\",\"category\":\"table\"},{\"name\":\"CrmWorklistTable\",\"package\":\"@taliya/crm\",\"story\":\"CrmWorklistTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"CrmDrawer\",\"package\":\"@taliya/crm\",\"story\":\"CrmDrawer.stories.tsx\",\"category\":\"drawer\"},{\"name\":\"LeadTable\",\"package\":\"@taliya/crm\",\"story\":\"CrmLeadTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"TaskTable\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9TaskTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"ChecklistTable\",\"package\":\"@taliya/crm\",\"story\":\"CrmChecklistTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"ChecklistDrawer\",\"package\":\"@taliya/crm\",\"story\":\"CrmChecklistDrawer.stories.tsx\",\"category\":\"drawer\"},{\"name\":\"ApprovalTable\",\"package\":\"@taliya/crm\",\"story\":\"CrmApprovalTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"StudentTable\",\"package\":\"@taliya/crm\",\"story\":\"CrmStudentTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"ReplacementTable\",\"package\":\"@taliya/crm\",\"story\":\"CrmReplacementTable.stories.tsx\",\"category\":\"table\"},{\"name\":\"KanbanBoard\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9KanbanBoard.stories.tsx\",\"category\":\"kanban\"},{\"name\":\"KanbanColumn\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9KanbanColumn.stories.tsx\",\"category\":\"kanban\"},{\"name\":\"KanbanCard\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch9KanbanCard.stories.tsx\",\"category\":\"kanban\"},{\"name\":\"CrmRecordDrawer\",\"package\":\"@taliya/crm\",\"story\":\"CrmRecordDrawer.stories.tsx\",\"category\":\"drawer\"},{\"name\":\"FinancePriorityPanel\",\"package\":\"@taliya/crm\",\"story\":\"CrmBatch10FinancePriorityPanel.stories.tsx\",\"category\":\"finance\"},{\"name\":\"CrmOperationalPanel\",\"package\":\"@taliya/crm\",\"story\":\"CrmOperationalComponents.stories.tsx\",\"category\":\"list\"},{\"name\":\"CrmOperationalRows\",\"package\":\"@taliya/crm\",\"story\":\"CrmOperationalComponents.stories.tsx\",\"category\":\"list\"},{\"name\":\"CrmOperationalRow\",\"package\":\"@taliya/crm\",\"story\":\"CrmOperationalComponents.stories.tsx\",\"category\":\"list\"},{\"name\":\"List\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveList.stories.tsx\",\"category\":\"list\"},{\"name\":\"ListItem\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveListItem.stories.tsx\",\"category\":\"list\"},{\"name\":\"KeyValueRow\",\"package\":\"@taliya/ui\",\"story\":\"PrimitiveKeyValueRow.stories.tsx\",\"category\":\"list\"}]}",
+    "stderr": ""
+  },
+  "cssImportStatus": {
+    "pass": true,
+    "imports": [
+      "import \"@taliya/tokens/tokens.css\";",
+      "import \"@taliya/ui/styles.css\";",
+      "import \"@taliya/crm/styles.css\";",
+      "import \"./globals.css\";"
+    ],
+    "details": [
+      "Required CSS imports are present.",
+      "Required CSS imports are ordered tokens -> ui -> crm."
+    ]
+  },
+  "globalsStatus": {
+    "pass": true,
+    "details": [
+      "No legacy local visual root variables.",
+      "Root body uses official token variables."
+    ],
+    "legacyVariables": [],
+    "missingTokenUsages": []
+  },
+  "forbiddenImportStatus": {
+    "pass": true,
+    "matches": []
+  },
+  "forbiddenTaliyaSubpathImportStatus": {
+    "pass": true,
+    "allowedSubpaths": [
+      "@taliya/tokens/tokens.css",
+      "@taliya/ui/styles.css",
+      "@taliya/crm/styles.css"
+    ],
+    "matches": []
+  },
+  "activeClassNameStatus": {
+    "pass": true,
+    "matches": []
+  },
+  "activeCssStatus": {
+    "pass": true,
+    "extraCssFiles": []
+  },
+  "summary": {
+    "pass": true,
+    "failedChecks": []
+  }
+}

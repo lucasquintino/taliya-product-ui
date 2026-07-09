@@ -1,0 +1,540 @@
+{
+  "generatedAt": "2026-07-07T11:40:44.563Z",
+  "manifest": "specs\\001-product-ui-foundation\\contracts\\standard-page-kit.manifest.json",
+  "manifestVersion": 1,
+  "requiredCount": 52,
+  "passCount": 52,
+  "failCount": 0,
+  "rows": [
+    {
+      "name": "CrmProductShell",
+      "package": "@taliya/crm",
+      "story": "CrmShellComponents.stories.tsx",
+      "category": "shell",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "PageFilterBar",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9PageFilterBar.stories.tsx",
+      "category": "filters",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "PageQuickFilters",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9PageQuickFilters.stories.tsx",
+      "category": "filters",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ListDetailLayout",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9ListDetailLayout.stories.tsx",
+      "category": "layout",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "WorkListDetailPage",
+      "package": "@taliya/crm",
+      "story": "CrmWorkListDetailPage.stories.tsx",
+      "category": "layout",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmPageFamilyShell",
+      "package": "@taliya/crm",
+      "story": "CrmPageFamilyComponents.stories.tsx",
+      "category": "page-family",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmWorklistPage",
+      "package": "@taliya/crm",
+      "story": "CrmPageFamilyComponents.stories.tsx",
+      "category": "page-family",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmKanbanPage",
+      "package": "@taliya/crm",
+      "story": "CrmPageFamilyComponents.stories.tsx",
+      "category": "page-family",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmDashboardPage",
+      "package": "@taliya/crm",
+      "story": "CrmPageFamilyComponents.stories.tsx",
+      "category": "page-family",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmThreePanePage",
+      "package": "@taliya/crm",
+      "story": "CrmPageFamilyComponents.stories.tsx",
+      "category": "page-family",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmRightPanelPage",
+      "package": "@taliya/crm",
+      "story": "CrmPageFamilyComponents.stories.tsx",
+      "category": "page-family",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "DashboardGrid",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9DashboardGrid.stories.tsx",
+      "category": "dashboard",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "MetricCard",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9MetricCard.stories.tsx",
+      "category": "dashboard",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "InternalOverviewDashboard",
+      "package": "@taliya/crm",
+      "story": "CrmBatch10InternalShell.stories.tsx",
+      "category": "dashboard",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "Button",
+      "package": "@taliya/ui",
+      "story": "PrimitiveButton.stories.tsx",
+      "category": "control",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "Chip",
+      "package": "@taliya/ui",
+      "story": "PrimitiveChip.stories.tsx",
+      "category": "control",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "Modal",
+      "package": "@taliya/ui",
+      "story": "PrimitiveModal.stories.tsx",
+      "category": "overlay",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "Stack",
+      "package": "@taliya/ui",
+      "story": "PrimitiveStack.stories.tsx",
+      "category": "layout",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "Toolbar",
+      "package": "@taliya/ui",
+      "story": "PrimitiveToolbar.stories.tsx",
+      "category": "layout",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ButtonGroup",
+      "package": "@taliya/ui",
+      "story": "PrimitiveButtonGroup.stories.tsx",
+      "category": "layout",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "InlineGroup",
+      "package": "@taliya/ui",
+      "story": "PrimitiveInlineGroup.stories.tsx",
+      "category": "layout",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "Panel",
+      "package": "@taliya/ui",
+      "story": "PrimitivePanel.stories.tsx",
+      "category": "surface",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "PanelHeader",
+      "package": "@taliya/ui",
+      "story": "PrimitivePanelHeader.stories.tsx",
+      "category": "surface",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "PanelBody",
+      "package": "@taliya/ui",
+      "story": "PrimitivePanelBody.stories.tsx",
+      "category": "surface",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "FieldGrid",
+      "package": "@taliya/ui",
+      "story": "PrimitiveFieldGrid.stories.tsx",
+      "category": "form",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ContentGrid",
+      "package": "@taliya/ui",
+      "story": "PrimitiveContentGrid.stories.tsx",
+      "category": "layout",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "StatePage",
+      "package": "@taliya/ui",
+      "story": "PrimitiveStatePage.stories.tsx",
+      "category": "state",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "LoadingState",
+      "package": "@taliya/ui",
+      "story": "PrimitiveLoadingState.stories.tsx",
+      "category": "state",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ErrorState",
+      "package": "@taliya/ui",
+      "story": "PrimitiveErrorState.stories.tsx",
+      "category": "state",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "EmptyState",
+      "package": "@taliya/ui",
+      "story": "PrimitiveEmptyState.stories.tsx",
+      "category": "state",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "DataTable",
+      "package": "@taliya/ui",
+      "story": "PrimitiveDataTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "TablePagination",
+      "package": "@taliya/ui",
+      "story": "PrimitiveTablePagination.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmWorklistTable",
+      "package": "@taliya/crm",
+      "story": "CrmWorklistTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmDrawer",
+      "package": "@taliya/crm",
+      "story": "CrmDrawer.stories.tsx",
+      "category": "drawer",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "LeadTable",
+      "package": "@taliya/crm",
+      "story": "CrmLeadTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "TaskTable",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9TaskTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ChecklistTable",
+      "package": "@taliya/crm",
+      "story": "CrmChecklistTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ChecklistDrawer",
+      "package": "@taliya/crm",
+      "story": "CrmChecklistDrawer.stories.tsx",
+      "category": "drawer",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ApprovalTable",
+      "package": "@taliya/crm",
+      "story": "CrmApprovalTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "StudentTable",
+      "package": "@taliya/crm",
+      "story": "CrmStudentTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ReplacementTable",
+      "package": "@taliya/crm",
+      "story": "CrmReplacementTable.stories.tsx",
+      "category": "table",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "KanbanBoard",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9KanbanBoard.stories.tsx",
+      "category": "kanban",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "KanbanColumn",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9KanbanColumn.stories.tsx",
+      "category": "kanban",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "KanbanCard",
+      "package": "@taliya/crm",
+      "story": "CrmBatch9KanbanCard.stories.tsx",
+      "category": "kanban",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmRecordDrawer",
+      "package": "@taliya/crm",
+      "story": "CrmRecordDrawer.stories.tsx",
+      "category": "drawer",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "FinancePriorityPanel",
+      "package": "@taliya/crm",
+      "story": "CrmBatch10FinancePriorityPanel.stories.tsx",
+      "category": "finance",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmOperationalPanel",
+      "package": "@taliya/crm",
+      "story": "CrmOperationalComponents.stories.tsx",
+      "category": "list",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmOperationalRows",
+      "package": "@taliya/crm",
+      "story": "CrmOperationalComponents.stories.tsx",
+      "category": "list",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "CrmOperationalRow",
+      "package": "@taliya/crm",
+      "story": "CrmOperationalComponents.stories.tsx",
+      "category": "list",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "List",
+      "package": "@taliya/ui",
+      "story": "PrimitiveList.stories.tsx",
+      "category": "list",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "ListItem",
+      "package": "@taliya/ui",
+      "story": "PrimitiveListItem.stories.tsx",
+      "category": "list",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    },
+    {
+      "name": "KeyValueRow",
+      "package": "@taliya/ui",
+      "story": "PrimitiveKeyValueRow.stories.tsx",
+      "category": "list",
+      "exportPresent": true,
+      "storyPresent": true,
+      "readmePresent": true,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "pass": true,
+    "runtimeManifestExportPresent": true,
+    "runtimeManifestExactParity": true,
+    "runtimeManifestCount": 52,
+    "runtimeManifestCountMatches": true,
+    "runtimeManifestMissingRows": [],
+    "runtimeManifestExtraRows": [],
+    "failed": []
+  }
+}

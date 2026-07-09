@@ -1,0 +1,165 @@
+{
+  "date": "2026-06-25",
+  "objective": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
+  "status": "integration-readiness-proven-for-current-internal-scope",
+  "notClaimed": [
+    "source-image-1-to-1-certification-for-every-approved-image",
+    "future-consumer-app-compliance-before-that-app-runs-consumer-audit"
+  ],
+  "gates": {
+    "currentReadinessPass": [
+      "corepack pnpm readiness:audit",
+      "corepack pnpm public-api:audit",
+      "corepack pnpm package-boundaries:audit",
+      "corepack pnpm consumer:audit",
+      "corepack pnpm consumer-package-sync:audit",
+      "corepack pnpm consumer-vendor-versioning:audit",
+      "corepack pnpm consumer-page-kit:audit",
+      "corepack pnpm consumer-runtime:audit",
+      "corepack pnpm consumer-config-versioning:audit",
+      "corepack pnpm consumer-bootstrap:audit",
+      "corepack pnpm future-consumer-fixture:audit",
+      "corepack pnpm future-consumer-discovery:audit",
+      "corepack pnpm package-artifacts:audit",
+      "corepack pnpm tokens:audit",
+      "corepack pnpm components:audit"
+    ],
+    "previousInternalPassRecordedInLedgers": [
+      "npm run typecheck",
+      "npm run lint",
+      "npm run test",
+      "npm run build",
+      "npx playwright test tests/e2e/leads.spec.ts --project=chromium"
+    ]
+  },
+  "evidence": {
+    "publicApiAudit": "specs/001-product-ui-foundation/public-api-audit.md",
+    "standardPageKitManifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "packageBoundariesAudit": "specs/001-product-ui-foundation/package-boundaries-audit.md",
+    "packageArtifactsAudit": "specs/001-product-ui-foundation/package-artifacts-audit.md",
+    "componentArchitectureAudit": "specs/001-product-ui-foundation/component-architecture-audit.md",
+    "consumerIntegrationAudit": "specs/001-product-ui-foundation/consumer-integration-audit.md",
+    "consumerPackageSyncAudit": "specs/001-product-ui-foundation/consumer-package-sync-audit.md",
+    "consumerVendorVersioningAudit": "specs/001-product-ui-foundation/consumer-vendor-versioning-audit.md",
+    "consumerPageKitAudit": "specs/001-product-ui-foundation/consumer-page-kit-audit.md",
+    "consumerRuntimeAudit": "specs/001-product-ui-foundation/consumer-runtime-audit.md",
+    "consumerConfigVersioningAudit": "specs/001-product-ui-foundation/consumer-config-versioning-audit.md",
+    "consumerAdoptionPlaybook": "specs/001-product-ui-foundation/consumer-adoption-playbook.md",
+    "goalCompletionAudit": "specs/001-product-ui-foundation/goal-completion-audit.md",
+    "libraryReadinessGate": "specs/001-product-ui-foundation/library-readiness-gate.md",
+    "localReadinessRunbook": "specs/001-product-ui-foundation/local-readiness-runbook.md",
+    "consumerConfigBootstrap": "scripts/bootstrap-consumer-configs.mjs",
+    "consumerBootstrapAudit": "specs/001-product-ui-foundation/consumer-bootstrap-audit.md",
+    "futureConsumerFixtureAudit": "specs/001-product-ui-foundation/future-consumer-fixture-audit.md",
+    "futureConsumerDiscoveryAudit": "specs/001-product-ui-foundation/future-consumer-discovery-audit.md",
+    "consumerReadinessConfigExample": "specs/001-product-ui-foundation/contracts/consumer-readiness-config.example.json",
+    "internalReadinessConfig": "C:/Users/lucas/taliya-internal/taliya-readiness.config.json",
+    "consumerContract": "specs/001-product-ui-foundation/contracts/consumer-integration-contract.md",
+    "packageBoundaryContract": "specs/001-product-ui-foundation/contracts/package-boundaries.md",
+    "batch9Ledger": "specs/001-product-ui-foundation/batch-9-status-ledger.md",
+    "batch11Ledger": "specs/001-product-ui-foundation/batch-11-status-ledger.md"
+  },
+  "requirements": [
+    {
+      "requirement": "Reusable packages for tokens, primitives, and CRM compositions",
+      "result": "proven",
+      "evidence": [
+        "packages/tokens/package.json",
+        "packages/ui/package.json",
+        "packages/crm/package.json",
+        "corepack pnpm package-boundaries:audit",
+        "corepack pnpm package-artifacts:audit",
+        "specs/001-product-ui-foundation/package-artifacts-audit.md",
+        "specs/001-product-ui-foundation/package-boundaries-audit.md"
+      ]
+    },
+    {
+      "requirement": "Standard Internal/CRM page kit is exported, story-covered, and documented",
+      "result": "proven",
+      "evidence": [
+        "corepack pnpm public-api:audit",
+        "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+        "specs/001-product-ui-foundation/public-api-audit.md"
+      ]
+    },
+    {
+      "requirement": "Runtime standard page-kit manifest is importable by consumers",
+      "result": "proven",
+      "evidence": [
+        "corepack pnpm consumer:audit",
+        "consumer-integration-audit.md Standard page-kit runtime count: 37/37",
+        "corepack pnpm future-consumer-fixture:audit",
+        "packages/crm/src/standard-page-kit.ts"
+      ]
+    },
+    {
+      "requirement": "CRM component architecture has no unresolved primitive reuse rows",
+      "result": "proven-for-current-scope",
+      "evidence": [
+        "corepack pnpm components:audit",
+        "specs/001-product-ui-foundation/component-architecture-audit.md",
+        "component-architecture-audit.json primitiveReuseClassification: justified=29, refactor=0, missingPrimitive=0"
+      ]
+    },
+    {
+      "requirement": "Taliya Internal consumes official packages and avoids active local visual clones",
+      "result": "proven-for-current-scope",
+      "evidence": [
+        "corepack pnpm consumer:audit",
+        "specs/001-product-ui-foundation/consumer-integration-audit.md",
+        "consumer-integration-audit.json packageStatus sourceRows pass=true for vendor/taliya-product-ui tarball dependencies",
+        "consumer-integration-audit.json installedPackageStatus: pass=true for @taliya/tokens, @taliya/ui, @taliya/crm"
+      ]
+    },
+    {
+      "requirement": "Internal shell, filters, table, drawer, and page primitives are official package components",
+      "result": "proven-for-current-scope",
+      "evidence": [
+        "corepack pnpm consumer-page-kit:audit",
+        "specs/001-product-ui-foundation/consumer-page-kit-audit.md",
+        "C:/Users/lucas/taliya-internal/taliya-page-kit.config.json",
+        "consumer-page-kit-audit.json requiredStatus: imported=true and jsxUsed=true for required page-kit components",
+        "consumer-page-kit-audit.json componentContractRows prove LeadListTable -> LeadTable and LeadKanban -> KanbanBoard/KanbanColumn/KanbanCard",
+        "public-api-audit.md",
+        "consumer-integration-audit.md",
+        "batch ledgers"
+      ]
+    },
+    {
+      "requirement": "Internal consumer-owned configs are versioned in the consumer repository",
+      "result": "proven-for-current-scope",
+      "evidence": [
+        "corepack pnpm consumer-config-versioning:audit",
+        "specs/001-product-ui-foundation/consumer-config-versioning-audit.md",
+        "consumer-config-versioning-audit.json reports both configs exist, parse as JSON, and are tracked in C:/Users/lucas/taliya-internal"
+      ]
+    },
+    {
+      "requirement": "Future consumers can provide their own page-kit adoption map",
+      "result": "process-proven-with-bootstrap",
+      "evidence": [
+        "scripts/audit-consumer-page-kit.mjs supports --consumer, --page-kit-config, and componentContracts for wrapper-level official render roots",
+        "scripts/bootstrap-consumer-configs.mjs dry-run is checked by readiness:audit",
+        "corepack pnpm consumer-bootstrap:audit validates generated configs plus a minimal page-kit fixture",
+        "corepack pnpm future-consumer-fixture:audit validates an installed synthetic future CRM consumer",
+        "specs/001-product-ui-foundation/contracts/consumer-page-kit-config.example.json",
+        "specs/001-product-ui-foundation/contracts/consumer-integration-contract.md",
+        "specs/001-product-ui-foundation/consumer-adoption-playbook.md"
+      ]
+    },
+    {
+      "requirement": "Token governance has no CSS literal visual debt or mandatory CRM aliases",
+      "result": "proven-for-current-scope",
+      "evidence": [
+        "corepack pnpm tokens:audit",
+        "specs/001-product-ui-foundation/token-governance-audit.md",
+        "token-governance-baseline.json css literalSizing=0 and no alias obrigatorio rows"
+      ]
+    },
+    {
+      "requirement": "Visual parity for every approved source image",
+      "result": "not-claimed-by-this-audit",
+      "evidence": ["batch ledgers and visual parity contract remain authoritative"]
+    }
+  ]
+}

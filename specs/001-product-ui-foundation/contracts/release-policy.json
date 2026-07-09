@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "currentChannel": "local-tarball",
+  "localTarball": {
+    "manifestPath": "dist-packages/taliya-product-ui-local-manifest.json",
+    "consumerVendorDir": "vendor/taliya-product-ui",
+    "refreshCommand": "corepack pnpm consumer-refresh:apply",
+    "auditCommand": "corepack pnpm consumer-refresh:audit"
+  },
+  "versioning": {
+    "packagesMustShareVersion": true,
+    "registryPublishRequiresNonPlaceholderVersion": true,
+    "placeholderVersion": "0.0.0",
+    "sourcePackageJsons": [
+      "packages/tokens/package.json",
+      "packages/ui/package.json",
+      "packages/crm/package.json"
+    ]
+  },
+  "registry": {
+    "status": "not-configured",
+    "target": "not-decided",
+    "access": "not-decided",
+    "publishWorkflow": "not-decided",
+    "provenance": "required-before-publish",
+    "requiredBeforePublish": [
+      "semver-version",
+      "registry-target-and-access",
+      "controlled-publish-workflow",
+      "consumer-dependency-migration"
+    ]
+  },
+  "consumerMigration": {
+    "currentMode": "vendor-local-tarballs",
+    "registryMode": "not-decided",
+    "registryRangePolicy": "not-decided",
+    "mustKeepLocalAuditUntilRegistryAdoptionPasses": true
+  }
+}

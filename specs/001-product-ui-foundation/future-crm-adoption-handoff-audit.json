@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-07-07T11:41:46.599Z",
+  "status": "pass",
+  "handoff": {
+    "path": "C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\future-crm-adoption-handoff.md",
+    "exists": true,
+    "missingSnippets": []
+  },
+  "linkRows": [
+    {
+      "path": "README.md",
+      "exists": true,
+      "requiredSnippets": [
+        "specs/001-product-ui-foundation/future-crm-adoption-handoff.md"
+      ],
+      "missingSnippets": [],
+      "pass": true
+    },
+    {
+      "path": "specs/001-product-ui-foundation/contracts/consumer-integration-contract.md",
+      "exists": true,
+      "requiredSnippets": [
+        "specs/001-product-ui-foundation/future-crm-adoption-handoff.md"
+      ],
+      "missingSnippets": [],
+      "pass": true
+    },
+    {
+      "path": "specs/001-product-ui-foundation/consumer-adoption-playbook.md",
+      "exists": true,
+      "requiredSnippets": [
+        "specs/001-product-ui-foundation/future-crm-adoption-handoff.md"
+      ],
+      "missingSnippets": [],
+      "pass": true
+    },
+    {
+      "path": "specs/001-product-ui-foundation/local-readiness-runbook.md",
+      "exists": true,
+      "requiredSnippets": [
+        "specs/001-product-ui-foundation/future-crm-adoption-handoff.md",
+        "corepack pnpm future-crm-adoption-handoff:audit"
+      ],
+      "missingSnippets": [],
+      "pass": true
+    },
+    {
+      "path": "specs/001-product-ui-foundation/library-readiness-audit.md",
+      "exists": true,
+      "requiredSnippets": [
+        "specs/001-product-ui-foundation/future-crm-adoption-handoff.md"
+      ],
+      "missingSnippets": [],
+      "pass": true
+    }
+  ]
+}

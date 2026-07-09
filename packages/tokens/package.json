@@ -1,0 +1,24 @@
+{
+  "name": "@taliya/tokens",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": ["**/*.css"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tokens.css": "./src/tokens.css"
+  },
+  "files": ["dist", "src/tokens.css"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "lint": "eslint src --ext .ts"
+  },
+  "devDependencies": {}
+}

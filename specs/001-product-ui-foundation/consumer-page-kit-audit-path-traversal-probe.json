@@ -1,0 +1,49 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-page-kit-path-traversal-probe-P5zaK4",
+  "reportLabel": "path-traversal-probe",
+  "configSource": "../AppData/Local/Temp/taliya-page-kit-path-traversal-probe-P5zaK4/taliya-page-kit.config.json",
+  "configValidation": {
+    "pass": false,
+    "errors": [
+      "surfaces[0].file must not traverse outside the consumer root",
+      "componentContracts[0].file must be consumer-relative, not absolute",
+      "routeCoverage.root must not traverse outside the consumer root"
+    ]
+  },
+  "generatedAt": "2026-07-07T11:41:52.598Z",
+  "surfaceRows": [],
+  "routeRows": [],
+  "componentContractRows": [],
+  "routeComponentContractRows": [],
+  "routeCoverage": {
+    "enabled": false,
+    "root": "",
+    "baseRoute": "",
+    "rootExists": false,
+    "discoveredRoutes": [],
+    "configuredRoutes": [],
+    "uncoveredRoutes": [],
+    "pass": true
+  },
+  "standardPageKit": {
+    "pass": false,
+    "manifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "manifestCount": 0,
+    "requiredCount": 0,
+    "outsideManifest": []
+  },
+  "summary": {
+    "pass": false,
+    "failedConfig": [
+      "surfaces[0].file must not traverse outside the consumer root",
+      "componentContracts[0].file must be consumer-relative, not absolute",
+      "routeCoverage.root must not traverse outside the consumer root"
+    ],
+    "failedSurfaces": [],
+    "failedRoutes": [],
+    "failedComponentContracts": [],
+    "failedRouteComponentContracts": [],
+    "uncoveredRoutes": [],
+    "outsideStandardPageKit": []
+  }
+}

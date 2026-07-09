@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-07-07T11:41:46.055Z",
+  "status": "fail",
+  "checkMode": true,
+  "discoveryStatus": "pass",
+  "discoveryGeneratedAt": "2026-07-07T11:41:46.000Z",
+  "discoveryErrors": [],
+  "futureCrmCandidateCount": 1,
+  "adoptedCandidateCount": 0,
+  "rows": [
+    {
+      "path": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-adoption-negative-probe\\future-crm-missing-readiness",
+      "name": "future-crm-missing-readiness",
+      "readinessConfigPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-adoption-negative-probe\\future-crm-missing-readiness\\taliya-readiness.config.json",
+      "readinessConfigExists": true,
+      "readinessConfigValid": true,
+      "readinessConfigErrors": [],
+      "reportLabel": "future-crm-missing-readiness",
+      "readinessReportPath": "C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\library-readiness-gate-future-crm-missing-readiness.json",
+      "readinessReportExists": false,
+      "readinessReportStatus": "missing",
+      "readinessReportConsumerRoot": "",
+      "pass": false
+    }
+  ],
+  "summary": {
+    "missingAdoptionEvidence": [
+      "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-adoption-negative-probe\\future-crm-missing-readiness"
+    ]
+  }
+}

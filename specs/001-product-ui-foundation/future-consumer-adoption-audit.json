@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-07-07T11:41:44.239Z",
+  "status": "pass",
+  "checkMode": true,
+  "discoveryStatus": "pass",
+  "discoveryGeneratedAt": "2026-07-07T11:41:41.754Z",
+  "discoveryErrors": [],
+  "futureCrmCandidateCount": 0,
+  "adoptedCandidateCount": 0,
+  "rows": [],
+  "summary": {
+    "missingAdoptionEvidence": []
+  }
+}

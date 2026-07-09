@@ -1,0 +1,23 @@
+{
+  "date": "2026-07-07",
+  "status": "pass",
+  "summary": {
+    "pendingCount": 0,
+    "actionableCount": 0,
+    "blockedByMissingPlanDataCount": 0,
+    "technicalCertificationCycleCount": 0,
+    "productReviewDecisionCount": 0,
+    "currentEvidenceAssertionCount": 17,
+    "currentEvidenceAssertionCoverageCount": 0,
+    "currentEvidenceMissingAssertionCount": 0,
+    "evidenceArtifactCount": 0,
+    "missingEvidenceArtifactCount": 0,
+    "nextTechnicalImage": null,
+    "nextProductReviewImage": null
+  },
+  "nextActions": {
+    "technicalCertification": null,
+    "productReviewDecision": null
+  },
+  "pendingRows": []
+}

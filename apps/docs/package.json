@@ -1,0 +1,25 @@
+{
+  "name": "@taliya/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build": "storybook build",
+    "build-storybook": "storybook build",
+    "test:smoke": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint src .storybook --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@taliya/crm": "workspace:*",
+    "@taliya/tokens": "workspace:*",
+    "@taliya/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.4.1",
+    "@storybook/addon-docs": "^10.4.1",
+    "@storybook/react-vite": "^10.4.1",
+    "storybook": "^10.4.1"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-07-07T11:41:35.835Z",
+  "status": "pass",
+  "checkMode": true,
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
+  "reportLabel": "default",
+  "git": {
+    "isGitRepo": true,
+    "gitRoot": "C:/Users/lucas/taliya-internal",
+    "error": ""
+  },
+  "configRows": [
+    {
+      "path": "taliya-readiness.config.json",
+      "absolutePath": "C:\\Users\\lucas\\taliya-internal\\taliya-readiness.config.json",
+      "exists": true,
+      "jsonValid": true,
+      "jsonError": "",
+      "gitPath": "taliya-readiness.config.json",
+      "tracked": true,
+      "gitStatus": "",
+      "pass": true
+    },
+    {
+      "path": "taliya-page-kit.config.json",
+      "absolutePath": "C:\\Users\\lucas\\taliya-internal\\taliya-page-kit.config.json",
+      "exists": true,
+      "jsonValid": true,
+      "jsonError": "",
+      "gitPath": "taliya-page-kit.config.json",
+      "tracked": true,
+      "gitStatus": "M taliya-page-kit.config.json",
+      "pass": true
+    }
+  ],
+  "summary": {
+    "failedConfigs": [],
+    "untrackedConfigs": [],
+    "missingConfigs": [],
+    "invalidJsonConfigs": []
+  }
+}

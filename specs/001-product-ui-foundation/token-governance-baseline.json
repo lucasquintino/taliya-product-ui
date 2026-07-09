@@ -1,0 +1,29 @@
+{
+  "cssScans": {
+    "packages/ui/src/styles.css": {
+      "hex": 0,
+      "rgba": 0,
+      "gradient": 0,
+      "literalSizing": 0,
+      "literalShadow": 0
+    },
+    "packages/crm/src/styles.css": {
+      "hex": 0,
+      "rgba": 0,
+      "gradient": 0,
+      "literalSizing": 0,
+      "literalShadow": 0
+    }
+  },
+  "storyScan": {
+    "hex": 0,
+    "rgba": 0,
+    "gradient": 0,
+    "literalSizing": 0,
+    "literalShadow": 0
+  },
+  "tokenSummary": {
+    "token especifico justificado": 2094,
+    "alias resolvido": 297
+  }
+}

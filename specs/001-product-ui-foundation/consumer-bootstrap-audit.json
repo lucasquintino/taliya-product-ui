@@ -1,0 +1,147 @@
+{
+  "generatedAt": "2026-07-07T11:40:46.800Z",
+  "fixtureRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture",
+  "status": "pass",
+  "steps": [
+    {
+      "commandText": "git init",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 87,
+      "stdout": "Initialized empty Git repository in C:/Users/lucas/taliya-product-ui/tmp/consumer-bootstrap-fixture/.git/",
+      "stderr": ""
+    },
+    {
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/bootstrap-consumer-configs.mjs --consumer tmp\\consumer-bootstrap-fixture --write --starter-files --report-label bootstrap-fixture",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 100,
+      "stdout": "Consumer config bootstrap write for C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture\ncreated: tmp/consumer-bootstrap-fixture/taliya-readiness.config.json\ncreated: tmp/consumer-bootstrap-fixture/taliya-page-kit.config.json\ncreated: tmp/consumer-bootstrap-fixture/components/crm-shell-client.tsx\ncreated: tmp/consumer-bootstrap-fixture/features/crm/work-list/work-list-page.tsx\ncreated: tmp/consumer-bootstrap-fixture/features/crm/kanban/kanban-page.tsx\ncreated: tmp/consumer-bootstrap-fixture/app/crm/page.tsx\ncreated: tmp/consumer-bootstrap-fixture/app/crm/kanban/page.tsx\nNext: run node scripts/audit-library-readiness.mjs --check --consumer <path> after packages and routes exist.",
+      "stderr": ""
+    },
+    {
+      "commandText": "verify generated future CRM page-kit starter files",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 0,
+      "stdout": "Checked shell, work-list, kanban, list route, and kanban route starter files",
+      "stderr": ""
+    },
+    {
+      "commandText": "git add taliya-readiness.config.json taliya-page-kit.config.json",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 69,
+      "stdout": "",
+      "stderr": "warning: in the working copy of 'taliya-page-kit.config.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'taliya-readiness.config.json', LF will be replaced by CRLF the next time Git touches it"
+    },
+    {
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-config-versioning.mjs --check --consumer tmp\\consumer-bootstrap-fixture --report-label bootstrap-fixture",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 534,
+      "stdout": "Consumer config versioning audit: pass\nWrote specs/001-product-ui-foundation/consumer-config-versioning-audit-bootstrap-fixture.md\nWrote specs/001-product-ui-foundation/consumer-config-versioning-audit-bootstrap-fixture.json",
+      "stderr": ""
+    },
+    {
+      "commandText": "C:\\Program Files\\nodejs\\node.exe scripts/audit-consumer-page-kit.mjs --check --consumer tmp\\consumer-bootstrap-fixture --page-kit-config C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture\\taliya-page-kit.config.json --report-label bootstrap-fixture",
+      "cwd": "C:\\Users\\lucas\\taliya-product-ui",
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 93,
+      "stdout": "Consumer page kit audit written to specs\\001-product-ui-foundation\\consumer-page-kit-audit-bootstrap-fixture.json and specs\\001-product-ui-foundation\\consumer-page-kit-audit-bootstrap-fixture.md\nConsumer page kit: pass",
+      "stderr": ""
+    }
+  ],
+  "starterFiles": {
+    "pass": true,
+    "rows": [
+      {
+        "file": "components/crm-shell-client.tsx",
+        "exists": true,
+        "requiredFragments": [
+          "CrmProductShell",
+          "Toolbar"
+        ],
+        "missingFragments": [],
+        "pass": true
+      },
+      {
+        "file": "features/crm/work-list/work-list-page.tsx",
+        "exists": true,
+        "requiredFragments": [
+          "WorkListDetailPage",
+          "PageFilterBar",
+          "PageQuickFilters",
+          "DataTable",
+          "CrmRecordDrawer"
+        ],
+        "missingFragments": [],
+        "pass": true
+      },
+      {
+        "file": "features/crm/kanban/kanban-page.tsx",
+        "exists": true,
+        "requiredFragments": [
+          "PageQuickFilters",
+          "KanbanBoard",
+          "KanbanColumn",
+          "KanbanCard"
+        ],
+        "missingFragments": [],
+        "pass": true
+      },
+      {
+        "file": "app/crm/page.tsx",
+        "exists": true,
+        "requiredFragments": [
+          "CrmShellClient",
+          "../../components/crm-shell-client",
+          "WorkListPage",
+          "../../features/crm/work-list/work-list-page"
+        ],
+        "missingFragments": [],
+        "pass": true
+      },
+      {
+        "file": "app/crm/kanban/page.tsx",
+        "exists": true,
+        "requiredFragments": [
+          "CrmShellClient",
+          "../../../components/crm-shell-client",
+          "KanbanPage",
+          "../../../features/crm/kanban/kanban-page"
+        ],
+        "missingFragments": [],
+        "pass": true
+      }
+    ]
+  },
+  "generatedConfigs": {
+    "readiness": {
+      "exists": true,
+      "reportLabel": "bootstrap-fixture",
+      "pageKitConfig": "taliya-page-kit.config.json",
+      "commands": [
+        "typecheck",
+        "lint",
+        "test",
+        "build"
+      ]
+    },
+    "pageKit": {
+      "exists": true,
+      "routeCoverage": {
+        "root": "app/crm",
+        "baseRoute": "/crm"
+      },
+      "surfaceCount": 3,
+      "routeCount": 2
+    }
+  }
+}

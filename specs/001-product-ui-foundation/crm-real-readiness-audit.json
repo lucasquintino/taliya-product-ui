@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-07-07T11:42:02.630Z",
+  "status": "pass-ready-to-start-crm-real",
+  "currentInternalReady": true,
+  "crmRealCanStart": true,
+  "realFutureCrmAdoptionExecuted": false,
+  "globalGoalComplete": false,
+  "counts": {
+    "standardPageKitComponents": 52,
+    "requiredCorePageKitComponents": 24,
+    "remainingPageStories": 54,
+    "remainingPageStoriesChecked": 54,
+    "domainDrawerFamilies": 13,
+    "internalCoveredRoutes": 4,
+    "futureCrmCandidates": 0,
+    "adoptedFutureCrmCandidates": 0
+  },
+  "rows": [
+    {
+      "id": "official-packages-and-release",
+      "status": "pass",
+      "evidence": "release-candidate-audit.json and library-consumption-status.json",
+      "meaning": "Packages are buildable, installable, audited, and release-candidate gates are green."
+    },
+    {
+      "id": "current-internal-fully-consuming",
+      "status": "pass",
+      "evidence": "library-consumption-status.json and consumer-page-kit-audit.json",
+      "meaning": "Internal consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones."
+    },
+    {
+      "id": "standard-page-kit-complete",
+      "status": "pass",
+      "evidence": "public-api-audit.json and standard-page-kit.manifest.json",
+      "meaning": "The standard page kit exposes the core components needed to start CRM pages."
+    },
+    {
+      "id": "remaining-page-story-coverage",
+      "status": "pass",
+      "evidence": "remaining-page-coverage-audit.json and static Storybook index",
+      "meaning": "Every remaining page/image has an individual static Storybook entry using official page compositions, with generic table/metric/kanban placeholders rejected."
+    },
+    {
+      "id": "dynamic-page-contracts",
+      "status": "pass",
+      "evidence": "component-api-contract.md and package public interfaces",
+      "meaning": "Pages are composed through official shell/filter/quick-filter/table slots, rows, state props, and callbacks."
+    },
+    {
+      "id": "dynamic-drawer-contracts",
+      "status": "pass",
+      "evidence": "drawer-lifecycle-contract.md and package drawer interfaces",
+      "meaning": "Drawers have one reusable record drawer contract plus domain drawers with explicit states, props, actions, facts, sections, tabs, and callbacks."
+    },
+    {
+      "id": "new-consumer-bootstrap",
+      "status": "pass",
+      "evidence": "consumer-bootstrap-audit.json",
+      "meaning": "A new CRM consumer can bootstrap configs and starter files using official shell, work-list, filter, table, kanban/card, and drawer roots."
+    },
+    {
+      "id": "installed-future-consumer-fixture",
+      "status": "pass",
+      "evidence": "future-consumer-fixture-audit.json",
+      "meaning": "A synthetic installed future CRM consumer resolves package exports, CSS entrypoints, runtime manifest, starter files, and SSR smoke markers."
+    },
+    {
+      "id": "future-crm-adoption-process",
+      "status": "pass",
+      "evidence": "future-consumer-discovery/adoption audits and library-consumption-status.json",
+      "meaning": "The future CRM discovery/adoption process is guarded by positive, negative, partial, and mismatch probes."
+    },
+    {
+      "id": "real-future-crm-adoption",
+      "status": "not-executed",
+      "evidence": "future-consumer-discovery-audit.json and future-consumer-adoption-audit.json",
+      "meaning": "The real future CRM app has been connected and has matching labeled readiness evidence."
+    },
+    {
+      "id": "visual-scope",
+      "status": "pass",
+      "evidence": "goal-completion-audit.json and certification-scope-decision-audit.json",
+      "meaning": "Current Internal/library acceptance has an explicit product-scoped visual decision; visual queue remains tracked separately."
+    }
+  ],
+  "dynamicApiRows": [
+    {
+      "component": "CrmProductShell",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "PageFilterBar",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "PageQuickFilters",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "CrmRecordDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "DataTable",
+      "pass": true,
+      "missing": []
+    }
+  ],
+  "drawerApiRows": [
+    {
+      "component": "TaskDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "ChecklistDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "ApprovalDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "CaseDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "StudentDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "ClassDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "PaymentDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "ReplacementDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "LeadDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "AgentFlowDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "UsageDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "SupportTicketDrawer",
+      "pass": true,
+      "missing": []
+    },
+    {
+      "component": "TenantSecurityDrawer",
+      "pass": true,
+      "missing": []
+    }
+  ],
+  "missingPublicComponents": [],
+  "missingStarterFiles": [],
+  "nextActions": [
+    "Create or connect the real CRM app.",
+    "Install @taliya/tokens, @taliya/ui, and @taliya/crm and import CSS in token/ui/crm order.",
+    "Bootstrap or version taliya-readiness.config.json and taliya-page-kit.config.json in the CRM app.",
+    "Compose CRM pages only from official page-kit roots; promote missing variants back into @taliya/ui or @taliya/crm.",
+    "Run labeled readiness and future-consumer adoption gates for the real CRM app."
+  ]
+}

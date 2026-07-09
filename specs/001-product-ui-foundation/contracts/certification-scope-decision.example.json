@@ -1,0 +1,12 @@
+{
+  "scope": "current-internal-library-readiness-accepted",
+  "accepted": true,
+  "acceptedBy": "Product owner name",
+  "acceptedAt": "2026-06-29",
+  "acceptanceStatements": [
+    "I understand this does not certify every approved CRM image as 1:1.",
+    "I accept current Internal/library readiness as the scoped completion bar.",
+    "Remaining source-image parity work stays tracked in the visual certification backlog."
+  ],
+  "notes": "Copy this file to specs/001-product-ui-foundation/certification-scope-decision.json only after product explicitly accepts scoped completion. Do not edit this example into an active decision."
+}

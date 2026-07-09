@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node", "react", "react-dom", "vitest/globals"],
+    "noEmit": true
+  },
+  "include": [".storybook", "src"]
+}

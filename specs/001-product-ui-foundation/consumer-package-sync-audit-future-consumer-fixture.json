@@ -1,0 +1,205 @@
+{
+  "generatedAt": "2026-07-07T11:40:58.148Z",
+  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920",
+  "sourceDir": "C:\\Users\\lucas\\taliya-product-ui\\dist-packages",
+  "vendorDir": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\vendor\\taliya-product-ui",
+  "status": "pass",
+  "rows": [
+    {
+      "fileName": "taliya-tokens-0.0.0.tgz",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\dist-packages\\taliya-tokens-0.0.0.tgz",
+      "vendorPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\vendor\\taliya-product-ui\\taliya-tokens-0.0.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "sourceSha256": "7e3a61f67cb36a209cc0a70fe092c29a42af2ea694fe5fe1d6eca92d791d8eb4",
+      "vendorSha256": "7e3a61f67cb36a209cc0a70fe092c29a42af2ea694fe5fe1d6eca92d791d8eb4",
+      "pass": true
+    },
+    {
+      "fileName": "taliya-ui-0.0.0.tgz",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\dist-packages\\taliya-ui-0.0.0.tgz",
+      "vendorPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\vendor\\taliya-product-ui\\taliya-ui-0.0.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "sourceSha256": "2e34f0f0b8dabab8c463e5b55c0950369d55051e0c929b37a13f14baa10d2f0d",
+      "vendorSha256": "2e34f0f0b8dabab8c463e5b55c0950369d55051e0c929b37a13f14baa10d2f0d",
+      "pass": true
+    },
+    {
+      "fileName": "taliya-crm-0.0.0.tgz",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\dist-packages\\taliya-crm-0.0.0.tgz",
+      "vendorPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\vendor\\taliya-product-ui\\taliya-crm-0.0.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "sourceSha256": "ab927112f3fee15cd252c12769d193ba3532b8a6852324148a90f0849a5732d4",
+      "vendorSha256": "ab927112f3fee15cd252c12769d193ba3532b8a6852324148a90f0849a5732d4",
+      "pass": true
+    },
+    {
+      "fileName": "taliya-product-ui-local-manifest.json",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\dist-packages\\taliya-product-ui-local-manifest.json",
+      "vendorPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\vendor\\taliya-product-ui\\taliya-product-ui-local-manifest.json",
+      "sourceExists": true,
+      "vendorExists": true,
+      "sourceSha256": "a5cf85339d6b96a4a96afb400ec84c59541e20686a0285cb55b5f5105289c75b",
+      "vendorSha256": "a5cf85339d6b96a4a96afb400ec84c59541e20686a0285cb55b5f5105289c75b",
+      "pass": true
+    }
+  ],
+  "installedRows": [
+    {
+      "packageName": "@taliya/tokens",
+      "relativeFile": "README.md",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\tokens\\README.md",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\tokens\\README.md",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "7a57824476ad81a3dd328b5a4efbe208fc063b39bc475eb71b66f457f69bc751",
+      "installedSha256": "7a57824476ad81a3dd328b5a4efbe208fc063b39bc475eb71b66f457f69bc751",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/tokens",
+      "relativeFile": "dist/index.d.ts",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\tokens\\dist\\index.d.ts",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\tokens\\dist\\index.d.ts",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "0ac15806f1616f86c49154fa5f0e2e52ce400ac4af298b11ec2b1e4b24893b5c",
+      "installedSha256": "0ac15806f1616f86c49154fa5f0e2e52ce400ac4af298b11ec2b1e4b24893b5c",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/tokens",
+      "relativeFile": "dist/index.js",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\tokens\\dist\\index.js",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\tokens\\dist\\index.js",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "8e77b10921352da180602f98063088d181fc83e150636bcb6c25672d591df33c",
+      "installedSha256": "8e77b10921352da180602f98063088d181fc83e150636bcb6c25672d591df33c",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/tokens",
+      "relativeFile": "src/tokens.css",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\tokens\\src\\tokens.css",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\tokens\\src\\tokens.css",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "832c0a3283c1c73f8c7e19b08a4556a0abb2b0b1a4a5581a776316526cd52e38",
+      "installedSha256": "832c0a3283c1c73f8c7e19b08a4556a0abb2b0b1a4a5581a776316526cd52e38",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/ui",
+      "relativeFile": "README.md",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\ui\\README.md",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\ui\\README.md",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "bea1ba76face73b73d4e4d75d066517f53ef44379c5253efca81a84cdc37b5b3",
+      "installedSha256": "bea1ba76face73b73d4e4d75d066517f53ef44379c5253efca81a84cdc37b5b3",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/ui",
+      "relativeFile": "dist/index.d.ts",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\ui\\dist\\index.d.ts",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\ui\\dist\\index.d.ts",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "ce2d6fcabd7e62cea4bbdf50efc223c8b6b24624c2777a060e775034fe0ef3fc",
+      "installedSha256": "ce2d6fcabd7e62cea4bbdf50efc223c8b6b24624c2777a060e775034fe0ef3fc",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/ui",
+      "relativeFile": "dist/index.js",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\ui\\dist\\index.js",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\ui\\dist\\index.js",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "25f34d7f4c68f90138cd8ba9cbdc6b0cc2e038f031f1f6b48cad62cbe72463f6",
+      "installedSha256": "25f34d7f4c68f90138cd8ba9cbdc6b0cc2e038f031f1f6b48cad62cbe72463f6",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/ui",
+      "relativeFile": "src/styles.css",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\ui\\src\\styles.css",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\ui\\src\\styles.css",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "8c2e4a394e7bdef3471dccdd4e59c3ad721541c47247d24b47b554283497d095",
+      "installedSha256": "8c2e4a394e7bdef3471dccdd4e59c3ad721541c47247d24b47b554283497d095",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/crm",
+      "relativeFile": "README.md",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\crm\\README.md",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\crm\\README.md",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "180712aa6b5a95e44c2f3a7072cdc01cc362d12fa2b78862541a04bb9b53e236",
+      "installedSha256": "180712aa6b5a95e44c2f3a7072cdc01cc362d12fa2b78862541a04bb9b53e236",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/crm",
+      "relativeFile": "dist/index.d.ts",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\crm\\dist\\index.d.ts",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\crm\\dist\\index.d.ts",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "2d2e3d5108fbc12fbc4627d4eb33d625fd79626009caeb0d2a04b35293afd5c0",
+      "installedSha256": "2d2e3d5108fbc12fbc4627d4eb33d625fd79626009caeb0d2a04b35293afd5c0",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/crm",
+      "relativeFile": "dist/index.js",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\crm\\dist\\index.js",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\crm\\dist\\index.js",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "6fb40af9700f5716deee716f28e8984f39b48415158338c0d683099cb30a9370",
+      "installedSha256": "6fb40af9700f5716deee716f28e8984f39b48415158338c0d683099cb30a9370",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/crm",
+      "relativeFile": "dist/standard-page-kit.d.ts",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\crm\\dist\\standard-page-kit.d.ts",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\crm\\dist\\standard-page-kit.d.ts",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "b7bd31564e6ad261c77905ebd4308b1372e1fbd45d5267da2e1305e6e68bbf08",
+      "installedSha256": "b7bd31564e6ad261c77905ebd4308b1372e1fbd45d5267da2e1305e6e68bbf08",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/crm",
+      "relativeFile": "dist/standard-page-kit.js",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\crm\\dist\\standard-page-kit.js",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\crm\\dist\\standard-page-kit.js",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "58a68f8c5f4777cdad0113c97e5fe7e6971187e9d4b7dba029b68e555f36b084",
+      "installedSha256": "58a68f8c5f4777cdad0113c97e5fe7e6971187e9d4b7dba029b68e555f36b084",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/crm",
+      "relativeFile": "src/styles.css",
+      "sourcePath": "C:\\Users\\lucas\\taliya-product-ui\\packages\\crm\\src\\styles.css",
+      "installedPath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-28920\\node_modules\\@taliya\\crm\\src\\styles.css",
+      "sourceExists": true,
+      "installedExists": true,
+      "sourceSha256": "3300fe2301730b21fb34698c4793c19e01a0718c5c36f1dc9cc30b7d00e667d4",
+      "installedSha256": "3300fe2301730b21fb34698c4793c19e01a0718c5c36f1dc9cc30b7d00e667d4",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-07-07T11:42:05.370Z",
+  "status": "pass-current-local-policy",
+  "contractPass": true,
+  "currentChannel": "local-tarball",
+  "currentVersion": "0.0.0",
+  "placeholderVersion": "0.0.0",
+  "registryReady": false,
+  "registryVersionReady": false,
+  "registryDecisionReady": false,
+  "registryBlockers": [
+    "packages still use placeholder version 0.0.0; choose a real semver release version",
+    "registry target and access model are not configured in release policy",
+    "controlled publish/provenance workflow is not configured in release policy",
+    "consumer dependency migration policy from local tarballs to registry ranges is not configured in release policy"
+  ],
+  "packageVersions": [
+    {
+      "filePath": "packages/tokens/package.json",
+      "version": "0.0.0"
+    },
+    {
+      "filePath": "packages/ui/package.json",
+      "version": "0.0.0"
+    },
+    {
+      "filePath": "packages/crm/package.json",
+      "version": "0.0.0"
+    }
+  ],
+  "rows": [
+    {
+      "id": "contract-present",
+      "status": "pass",
+      "evidence": "contracts/release-policy.json",
+      "note": "release policy JSON contract exists"
+    },
+    {
+      "id": "contract-doc-present",
+      "status": "pass",
+      "evidence": "contracts/release-policy.md",
+      "note": "release policy markdown contract exists"
+    },
+    {
+      "id": "schema-version",
+      "status": "pass",
+      "evidence": "contracts/release-policy.json",
+      "note": "schemaVersion must be 1"
+    },
+    {
+      "id": "current-channel",
+      "status": "pass",
+      "evidence": "local-tarball",
+      "note": "current channel must be local-tarball or registry"
+    },
+    {
+      "id": "local-manifest",
+      "status": "pass",
+      "evidence": "dist-packages/taliya-product-ui-local-manifest.json",
+      "note": "current local channel must point at the generated local release manifest"
+    },
+    {
+      "id": "consumer-refresh-commands",
+      "status": "pass",
+      "evidence": "contracts/release-policy.json",
+      "note": "local channel must name the official consumer refresh commands"
+    },
+    {
+      "id": "source-package-jsons",
+      "status": "pass",
+      "evidence": "packages/tokens/package.json, packages/ui/package.json, packages/crm/package.json",
+      "note": "release policy must cover tokens, ui, and crm package manifests"
+    },
+    {
+      "id": "package-versions-aligned",
+      "status": "pass",
+      "evidence": "packages/tokens/package.json=0.0.0, packages/ui/package.json=0.0.0, packages/crm/package.json=0.0.0",
+      "note": "all public packages must share the same release version"
+    },
+    {
+      "id": "registry-required-items",
+      "status": "pass",
+      "evidence": "semver-version, registry-target-and-access, controlled-publish-workflow, consumer-dependency-migration",
+      "note": "registry gate must explicitly require semver, registry/access, controlled publish, and consumer migration decisions"
+    },
+    {
+      "id": "registry-status",
+      "status": "pass",
+      "evidence": "not-configured",
+      "note": "registry status must be explicit"
+    },
+    {
+      "id": "consumer-migration-policy",
+      "status": "pass",
+      "evidence": "contracts/release-policy.json",
+      "note": "consumer migration policy must preserve local audits until registry adoption passes"
+    }
+  ]
+}

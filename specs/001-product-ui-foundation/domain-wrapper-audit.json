@@ -1,0 +1,451 @@
+{
+  "date": "2026-07-07",
+  "status": "pass",
+  "contractCount": 24,
+  "failedCount": 0,
+  "legacyDirectDrawerCount": 0,
+  "rows": [
+    {
+      "name": "InvoiceTable",
+      "kind": "table",
+      "value": "maps invoice rows into the official DataTable with billing-specific status, amount, due-date and sort behavior",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "invoiceStatusLabelByStatus",
+        "invoiceRowPeriod",
+        "invoiceRowDue",
+        "tcrm-invoice-table__actions"
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "UsageLedgerTable",
+      "kind": "table",
+      "value": "maps usage ledger rows into the official DataTable with usage-specific type, quota, status and sorting behavior",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "UsageLedgerOriginCell",
+        "usageLedgerStatusTone",
+        "usageLedgerStatusLabel",
+        "data-component=\"UsageLedgerTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "TaskTable",
+      "kind": "table",
+      "value": "maps task rows into the official CrmWorklistTable with task-specific labels, chips, selected-row and disabled-row behavior",
+      "present": true,
+      "globalRoots": [
+        "<CrmWorklistTable"
+      ],
+      "requiredSnippets": [
+        "taskTableStatusLabel",
+        "taskTablePriorityLabel",
+        "taskTableModeLabel",
+        "taskTableSortValue",
+        "data-component=\"TaskTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "LeadTable",
+      "kind": "table",
+      "value": "maps sales lead rows into the official DataTable with lead identity cells, quality/next-action tones and lead sorting",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "leadTableSortValue",
+        "tcrm-lead-table__lead-cell",
+        "qualityTone",
+        "nextActionTone",
+        "data-component=\"LeadTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ChecklistTable",
+      "kind": "table",
+      "value": "maps checklist rows into the official DataTable with progress cells, status tone and checklist sorting",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "ChecklistTableProgressCell",
+        "checklistTableStatusLabel",
+        "checklistTableStatusTone",
+        "checklistTableSortValue",
+        "data-component=\"ChecklistTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ApprovalTable",
+      "kind": "table",
+      "value": "maps approval rows into the official DataTable with requester cells, type icon, risk label and status tone",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "ApprovalTableRequesterCell",
+        "approvalTableTypeIcon",
+        "approvalTableRiskLabel",
+        "approvalTableStatusTone",
+        "data-component=\"ApprovalTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "StudentTable",
+      "kind": "table",
+      "value": "maps student rows into the official DataTable with person cells, status/finance labels and risk tone",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "StudentTablePersonCell",
+        "studentTableStatusLabel",
+        "studentTableFinanceLabel",
+        "studentTableRiskTone",
+        "data-component=\"StudentTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ReplacementTable",
+      "kind": "table",
+      "value": "maps replacement rows into the official DataTable with student cells, status/mode labels and replacement sorting",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "ReplacementTableStudentCell",
+        "replacementTableStatusLabel",
+        "replacementTableModeLabel",
+        "replacementTableSortValue",
+        "data-component=\"ReplacementTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "OperationActivityTable",
+      "kind": "table",
+      "value": "renders the operation activity list with operation-specific actor/action/object/status row anatomy and source/empty/loading/blocked states",
+      "present": true,
+      "globalRoots": [
+        "<section"
+      ],
+      "requiredSnippets": [
+        "operationActivityStatusIcon",
+        "operationActivityTone",
+        "tcrm-operation-activity-table__row",
+        "data-component=\"OperationActivityTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "FieldMappingTable",
+      "kind": "table",
+      "value": "maps imported fields to Taliya fields with select controls, validation state labels and row actions",
+      "present": true,
+      "globalRoots": [
+        "<DataTable"
+      ],
+      "requiredSnippets": [
+        "targetOptions",
+        "statusByState",
+        "tcrm-field-mapping-panel__select",
+        "tcrm-field-mapping-panel__status"
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "TaskDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with task-specific facts, checklist rows, comments, activity and footer actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "tcrm-task-drawer__check-row",
+        "tcrm-task-drawer__comment",
+        "historySection",
+        "component=\"TaskDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ApprovalDrawer",
+      "kind": "drawer",
+      "value": "keeps the certified approval drawer wrapper around ApprovalPanel with open=false lifecycle and complementary landmark semantics",
+      "present": true,
+      "globalRoots": [
+        "<ApprovalPanel"
+      ],
+      "requiredSnippets": [
+        "open = true",
+        "role=\"complementary\"",
+        "data-component=\"ApprovalDrawer\"",
+        "className={cn(\"tcrm-approval-drawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "CaseDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with case-specific facts, history and case footer actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "facts",
+        "history",
+        "footerActions",
+        "component=\"CaseDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "PaymentDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with payment-specific summary, history, copilot context and finance actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "tcrm-payment-drawer__summary",
+        "tcrm-payment-drawer__history",
+        "tcrm-payment-drawer__footer",
+        "component=\"PaymentDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ReplacementDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with replacement options, scheduling notes and replacement actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "options",
+        "tcrm-replacement-drawer__option",
+        "tcrm-replacement-drawer__footer",
+        "component=\"ReplacementDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "LeadDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with lead-specific checklist, timeline, sales facts and footer actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "checklist",
+        "history",
+        "drawerActions",
+        "component=\"LeadDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ChecklistDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with checklist progress, step toggles, activity and footer actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "ProgressBar",
+        "tcrm-checklist-drawer__step-button",
+        "tcrm-checklist-drawer__activity",
+        "component=\"ChecklistDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "StudentDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with student facts, classes, finance, presence and pending-action sections",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "tcrm-student-drawer__facts",
+        "tcrm-student-drawer__classes",
+        "tcrm-student-drawer__finance",
+        "component=\"StudentDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ClassDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with roster status controls, attendance summary and class footer actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "Roster",
+        "tcrm-class-drawer__summary",
+        "tcrm-class-drawer__roster",
+        "component=\"ClassDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "AgentFlowDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with suggested agent questions, chat composer and agent help actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "tcrm-agent-flow-drawer__questions",
+        "tcrm-agent-flow-drawer__composer",
+        "emitAgentFlowDrawerAction",
+        "component=\"AgentFlowDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "UsageDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with contextual usage-support copy, suggested questions and support composer",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "usageDrawerCopy",
+        "tcrm-usage-drawer__questions",
+        "tcrm-usage-drawer__composer",
+        "component=\"UsageDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "SupportTicketDrawer",
+      "kind": "drawer",
+      "value": "wraps the support ticket panel with ticket drawer lifecycle, state normalization and complementary landmark semantics",
+      "present": true,
+      "globalRoots": [
+        "<SupportTicketPanel"
+      ],
+      "requiredSnippets": [
+        "stateKey",
+        "data-component=\"SupportTicketDrawer\"",
+        "tcrm-support-ticket-drawer__panel",
+        "role=\"complementary\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "TenantSecurityDrawer",
+      "kind": "drawer",
+      "value": "wraps the tenant security panel with tenant-specific state normalization, close handling and disabled behavior",
+      "present": true,
+      "globalRoots": [
+        "<SecurityRulePanel"
+      ],
+      "requiredSnippets": [
+        "tenantSecurityPanelState",
+        "data-component=\"TenantSecurityDrawer\"",
+        "tcrm-tenant-security-drawer__panel",
+        "role=\"complementary\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "CrmRecordDrawer",
+      "kind": "drawer",
+      "value": "composes the official Drawer primitive into a generic CRM record drawer with facts, sections, tabs and actions",
+      "present": true,
+      "globalRoots": [
+        "<Drawer"
+      ],
+      "requiredSnippets": [
+        "DrawerSection",
+        "Tabs",
+        "tcrm-record-drawer__facts",
+        "data-component=\"CrmRecordDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    }
+  ],
+  "legacyDirectDrawerRows": [],
+  "unmanagedDomainWrappers": [],
+  "unexpectedUnmanagedDomainWrappers": [],
+  "note": "This audit proves retained domain wrappers add explicit domain mapping/anatomy instead of staying empty pass-through wrappers. It does not certify pixel-level visual parity. Drawer wrappers may use CrmDrawer or another documented official drawer/panel root, but direct <aside> drawer contracts fail this audit."
+}

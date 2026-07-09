@@ -1,0 +1,169 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-page-kit-uncovered-route-probe-GKO76O",
+  "reportLabel": "uncovered-route-probe",
+  "configSource": "../AppData/Local/Temp/taliya-page-kit-uncovered-route-probe-GKO76O/taliya-page-kit.config.json",
+  "configValidation": {
+    "pass": true,
+    "errors": []
+  },
+  "generatedAt": "2026-07-07T11:41:51.968Z",
+  "surfaceRows": [
+    {
+      "id": "shell",
+      "file": "components/internal-shell.tsx",
+      "required": [
+        {
+          "name": "CrmProductShell",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmProductShell",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "cockpit",
+      "file": "features/internal/cockpit/cockpit-workspace.tsx",
+      "required": [
+        {
+          "name": "DashboardGrid",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "DashboardGrid",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    }
+  ],
+  "routeRows": [
+    {
+      "route": "/internal",
+      "file": "app/internal/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "InternalShell",
+          "importFrom": "@/components/internal-shell"
+        },
+        {
+          "name": "CockpitWorkspace",
+          "importFrom": "@/features/internal/cockpit/cockpit-workspace"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        },
+        {
+          "componentName": "CockpitWorkspace",
+          "importFrom": "@/features/internal/cockpit/cockpit-workspace",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "componentContractRows": [],
+  "routeComponentContractRows": [
+    {
+      "route": "/internal",
+      "routeFile": "app/internal/page.tsx",
+      "componentName": "InternalShell",
+      "importFrom": "@/components/internal-shell",
+      "componentContractId": null,
+      "componentContractComponent": null,
+      "expectedContractComponent": "InternalShell",
+      "linkedContractId": null,
+      "linkedContractComponent": null,
+      "linkedContractComponentMatches": false,
+      "linkedContractPass": false,
+      "reason": "missing-component-contract",
+      "pass": false
+    },
+    {
+      "route": "/internal",
+      "routeFile": "app/internal/page.tsx",
+      "componentName": "CockpitWorkspace",
+      "importFrom": "@/features/internal/cockpit/cockpit-workspace",
+      "componentContractId": null,
+      "componentContractComponent": null,
+      "expectedContractComponent": "CockpitWorkspace",
+      "linkedContractId": null,
+      "linkedContractComponent": null,
+      "linkedContractComponentMatches": false,
+      "linkedContractPass": false,
+      "reason": "missing-component-contract",
+      "pass": false
+    }
+  ],
+  "routeCoverage": {
+    "enabled": true,
+    "root": "app/internal",
+    "baseRoute": "/internal",
+    "rootExists": true,
+    "discoveredRoutes": [
+      "/internal",
+      "/internal/unconfigured"
+    ],
+    "configuredRoutes": [
+      "/internal"
+    ],
+    "uncoveredRoutes": [
+      "/internal/unconfigured"
+    ],
+    "pass": false
+  },
+  "standardPageKit": {
+    "pass": true,
+    "manifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "manifestCount": 52,
+    "requiredCount": 2,
+    "outsideManifest": []
+  },
+  "summary": {
+    "pass": false,
+    "failedConfig": [],
+    "failedSurfaces": [],
+    "failedRoutes": [],
+    "failedComponentContracts": [],
+    "failedRouteComponentContracts": [
+      "/internal:InternalShell",
+      "/internal:CockpitWorkspace"
+    ],
+    "uncoveredRoutes": [
+      "/internal/unconfigured"
+    ],
+    "outsideStandardPageKit": []
+  }
+}

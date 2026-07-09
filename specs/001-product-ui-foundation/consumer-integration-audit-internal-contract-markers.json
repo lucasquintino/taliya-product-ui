@@ -1,0 +1,240 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
+  "vendorDir": "vendor/taliya-product-ui",
+  "reportLabel": "internal-contract-markers",
+  "generatedAt": "2026-06-26T12:37:36.053Z",
+  "packageStatus": {
+    "pass": true,
+    "missing": [],
+    "sourceRows": [
+      {
+        "packageName": "@taliya/tokens",
+        "actual": "file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+        "expected": "file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/ui",
+        "actual": "file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+        "expected": "file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/crm",
+        "actual": "file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+        "expected": "file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+        "pass": true
+      }
+    ],
+    "sourceMismatches": [],
+    "details": [
+      "@taliya/tokens: file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+      "@taliya/ui: file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+      "@taliya/crm: file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+      "@taliya/tokens source: pass",
+      "@taliya/ui source: pass",
+      "@taliya/crm source: pass"
+    ]
+  },
+  "installedPackageStatus": {
+    "pass": true,
+    "rows": [
+      {
+        "packageName": "@taliya/tokens",
+        "packageRoot": "node_modules/@taliya/tokens",
+        "packageJsonExists": true,
+        "nameMatches": true,
+        "version": "0.0.0",
+        "versionPresent": true,
+        "requiredFiles": [
+          "package.json",
+          "dist/index.js",
+          "dist/index.d.ts",
+          "src/tokens.css"
+        ],
+        "missingFiles": [],
+        "requiredExports": [
+          ".",
+          "./tokens.css"
+        ],
+        "exportsPresent": [
+          ".",
+          "./tokens.css"
+        ],
+        "missingExports": [],
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/ui",
+        "packageRoot": "node_modules/@taliya/ui",
+        "packageJsonExists": true,
+        "nameMatches": true,
+        "version": "0.0.0",
+        "versionPresent": true,
+        "requiredFiles": [
+          "package.json",
+          "dist/index.js",
+          "dist/index.d.ts",
+          "src/styles.css"
+        ],
+        "missingFiles": [],
+        "requiredExports": [
+          ".",
+          "./styles.css"
+        ],
+        "exportsPresent": [
+          ".",
+          "./styles.css"
+        ],
+        "missingExports": [],
+        "pass": true
+      },
+      {
+        "packageName": "@taliya/crm",
+        "packageRoot": "node_modules/@taliya/crm",
+        "packageJsonExists": true,
+        "nameMatches": true,
+        "version": "0.0.0",
+        "versionPresent": true,
+        "requiredFiles": [
+          "package.json",
+          "dist/index.js",
+          "dist/index.d.ts",
+          "dist/standard-page-kit.js",
+          "dist/standard-page-kit.d.ts",
+          "src/styles.css"
+        ],
+        "missingFiles": [],
+        "requiredExports": [
+          ".",
+          "./styles.css"
+        ],
+        "exportsPresent": [
+          ".",
+          "./styles.css"
+        ],
+        "missingExports": [],
+        "pass": true
+      }
+    ],
+    "details": [
+      "@taliya/tokens: installed entrypoints ok",
+      "@taliya/tokens version: 0.0.0",
+      "@taliya/tokens missing files: none",
+      "@taliya/tokens missing exports: none",
+      "@taliya/ui: installed entrypoints ok",
+      "@taliya/ui version: 0.0.0",
+      "@taliya/ui missing files: none",
+      "@taliya/ui missing exports: none",
+      "@taliya/crm: installed entrypoints ok",
+      "@taliya/crm version: 0.0.0",
+      "@taliya/crm missing files: none",
+      "@taliya/crm missing exports: none"
+    ]
+  },
+  "installedPackageContractStatus": {
+    "pass": true,
+    "rows": [
+      {
+        "id": "crm-product-shell-drawer-size-api",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/dist/index.d.ts",
+        "fileExists": true,
+        "requiredText": [
+          "export type CrmProductShellDrawerSize = \"default\" | \"compact\";",
+          "drawerSize?: CrmProductShellDrawerSize;"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "crm-product-shell-compact-drawer-css",
+        "packageName": "@taliya/crm",
+        "file": "node_modules/@taliya/crm/src/styles.css",
+        "fileExists": true,
+        "requiredText": [
+          ".tcrm-product-shell-window--drawer-compact",
+          "var(--taliya-layout-crm-product-shell-drawer-compact-width)",
+          "var(--taliya-layout-crm-checklist-drawer-width)"
+        ],
+        "missingText": [],
+        "pass": true
+      },
+      {
+        "id": "tokens-compact-checklist-drawer",
+        "packageName": "@taliya/tokens",
+        "file": "node_modules/@taliya/tokens/src/tokens.css",
+        "fileExists": true,
+        "requiredText": [
+          "--taliya-layout-crm-checklist-drawer-width: 342px;",
+          "--taliya-layout-crm-product-shell-drawer-compact-width: var(--taliya-layout-crm-checklist-drawer-width);"
+        ],
+        "missingText": [],
+        "pass": true
+      }
+    ],
+    "details": [
+      "crm-product-shell-drawer-size-api: installed contract markers ok",
+      "crm-product-shell-compact-drawer-css: installed contract markers ok",
+      "tokens-compact-checklist-drawer: installed contract markers ok"
+    ]
+  },
+  "standardPageKitRuntimeStatus": {
+    "pass": true,
+    "expectedCount": 37,
+    "status": 0,
+    "hasManifest": true,
+    "version": 1,
+    "count": 37,
+    "missingNames": [],
+    "stdout": "{\"hasManifest\":true,\"version\":1,\"count\":37,\"names\":[\"CrmProductShell\",\"PageFilterBar\",\"PageQuickFilters\",\"DashboardGrid\",\"MetricCard\",\"InternalOverviewDashboard\",\"Button\",\"Chip\",\"Modal\",\"Stack\",\"Toolbar\",\"ButtonGroup\",\"InlineGroup\",\"Panel\",\"PanelHeader\",\"PanelBody\",\"FieldGrid\",\"ContentGrid\",\"StatePage\",\"LoadingState\",\"ErrorState\",\"EmptyState\",\"DataTable\",\"TablePagination\",\"LeadTable\",\"TaskTable\",\"ChecklistTable\",\"ChecklistDrawer\",\"ApprovalTable\",\"StudentTable\",\"KanbanBoard\",\"KanbanColumn\",\"KanbanCard\",\"CrmRecordDrawer\",\"CrmOperationalRow\",\"List\",\"ListItem\"]}",
+    "stderr": ""
+  },
+  "cssImportStatus": {
+    "pass": true,
+    "imports": [
+      "import \"@taliya/tokens/tokens.css\";",
+      "import \"@taliya/ui/styles.css\";",
+      "import \"@taliya/crm/styles.css\";",
+      "import \"./globals.css\";"
+    ],
+    "details": [
+      "Required CSS imports are present.",
+      "Required CSS imports are ordered tokens -> ui -> crm."
+    ]
+  },
+  "globalsStatus": {
+    "pass": true,
+    "details": [
+      "No legacy local visual root variables.",
+      "Root body uses official token variables."
+    ],
+    "legacyVariables": [],
+    "missingTokenUsages": []
+  },
+  "forbiddenImportStatus": {
+    "pass": true,
+    "matches": []
+  },
+  "forbiddenTaliyaSubpathImportStatus": {
+    "pass": true,
+    "allowedSubpaths": [
+      "@taliya/tokens/tokens.css",
+      "@taliya/ui/styles.css",
+      "@taliya/crm/styles.css"
+    ],
+    "matches": []
+  },
+  "activeClassNameStatus": {
+    "pass": true,
+    "matches": []
+  },
+  "activeCssStatus": {
+    "pass": true,
+    "extraCssFiles": []
+  },
+  "summary": {
+    "pass": true,
+    "failedChecks": []
+  }
+}

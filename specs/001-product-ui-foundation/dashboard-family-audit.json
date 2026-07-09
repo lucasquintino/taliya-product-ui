@@ -1,0 +1,327 @@
+{
+  "date": "2026-07-07",
+  "status": "pass",
+  "rowCount": 37,
+  "failedCount": 0,
+  "fileCount": 11,
+  "failedFileCount": 0,
+  "rows": [
+    {
+      "page": "TodayShell",
+      "file": "apps/docs/src/stories/ImageCoverageToday.stories.tsx",
+      "family": "dashboard/today",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "ReportsManagementPage",
+      "file": "apps/docs/src/stories/ImageCoverageReports.stories.tsx",
+      "family": "dashboard/reports",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "MoneyOnTheTablePage",
+      "file": "apps/docs/src/stories/ImageCoverageReports.stories.tsx",
+      "family": "dashboard/reports",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SupportCentralPage",
+      "file": "apps/docs/src/stories/ImageCoverageSupport.stories.tsx",
+      "family": "dashboard/support",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentsCatalogPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "dashboard/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAgendaRoutinesPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "dashboard/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsHubPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "dashboard/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "FinanceBillingDrawerPage",
+      "file": "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
+      "family": "dashboard/finance",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaCalendarPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
+      "family": "dashboard/calendar",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaClassDetailPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
+      "family": "right-panel/detail",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "StudentProfilePage",
+      "file": "apps/docs/src/stories/ImageCoverageStudents.stories.tsx",
+      "family": "right-panel/profile",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingSubscriptionPage",
+      "file": "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingInvoicesPage",
+      "file": "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingAddOnsPage",
+      "file": "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "UsageOverviewPage",
+      "file": "apps/docs/src/stories/ImageCoverageUsage.stories.tsx",
+      "family": "right-panel/usage",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "UsageLedgerPage",
+      "file": "apps/docs/src/stories/ImageCoverageUsage.stories.tsx",
+      "family": "right-panel/usage",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentPresenceRoutinePage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAbsenceFlowPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAbsenceFlowTestPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentPublishRoutinePage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentExecutionReceiptPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agent",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsPermissionsPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsPaymentsPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsAgendaPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsNotificationsPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupShellGlobalPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupWorkspaceConfigPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupStudioPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupTeamPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupChannelsPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupPlansPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupPaymentPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupStudentsImportPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupClassesPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupAgendaPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupReviewPage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SetupWelcomePage",
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "family": "setup/welcome",
+      "missingSnippets": [],
+      "status": "pass"
+    }
+  ],
+  "fileRows": [
+    {
+      "file": "apps/docs/src/stories/ImageCoverageToday.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageReports.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageSupport.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageStudents.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageUsage.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "file": "apps/docs/src/stories/ImageCoverageSetup.stories.tsx",
+      "forbiddenPresent": [],
+      "status": "pass"
+    }
+  ],
+  "note": "This audit proves official dashboard, right-panel, and setup image-coverage pages use reusable family wrappers instead of story-local shell/grid anatomy. It does not certify 1:1 visual acceptance."
+}

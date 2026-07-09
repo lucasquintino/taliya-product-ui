@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-07-07T11:42:03.060Z",
+  "status": "pass",
+  "manifestPath": "dist-packages/taliya-product-ui-local-manifest.json",
+  "manifestShapePass": true,
+  "packageCount": 3,
+  "rows": [
+    {
+      "name": "@taliya/tokens",
+      "expectedVersion": "0.0.0",
+      "manifestVersion": "0.0.0",
+      "expectedTarball": "taliya-tokens-0.0.0.tgz",
+      "manifestTarball": "taliya-tokens-0.0.0.tgz",
+      "expectedSha256": "7e3a61f67cb36a209cc0a70fe092c29a42af2ea694fe5fe1d6eca92d791d8eb4",
+      "manifestSha256": "7e3a61f67cb36a209cc0a70fe092c29a42af2ea694fe5fe1d6eca92d791d8eb4",
+      "expectedBytes": 176771,
+      "manifestBytes": 176771,
+      "expectedInstallOrder": 1,
+      "manifestInstallOrder": 1,
+      "tarballExists": true,
+      "pass": true
+    },
+    {
+      "name": "@taliya/ui",
+      "expectedVersion": "0.0.0",
+      "manifestVersion": "0.0.0",
+      "expectedTarball": "taliya-ui-0.0.0.tgz",
+      "manifestTarball": "taliya-ui-0.0.0.tgz",
+      "expectedSha256": "2e34f0f0b8dabab8c463e5b55c0950369d55051e0c929b37a13f14baa10d2f0d",
+      "manifestSha256": "2e34f0f0b8dabab8c463e5b55c0950369d55051e0c929b37a13f14baa10d2f0d",
+      "expectedBytes": 79163,
+      "manifestBytes": 79163,
+      "expectedInstallOrder": 2,
+      "manifestInstallOrder": 2,
+      "tarballExists": true,
+      "pass": true
+    },
+    {
+      "name": "@taliya/crm",
+      "expectedVersion": "0.0.0",
+      "manifestVersion": "0.0.0",
+      "expectedTarball": "taliya-crm-0.0.0.tgz",
+      "manifestTarball": "taliya-crm-0.0.0.tgz",
+      "expectedSha256": "ab927112f3fee15cd252c12769d193ba3532b8a6852324148a90f0849a5732d4",
+      "manifestSha256": "ab927112f3fee15cd252c12769d193ba3532b8a6852324148a90f0849a5732d4",
+      "expectedBytes": 293091,
+      "manifestBytes": 293091,
+      "expectedInstallOrder": 3,
+      "manifestInstallOrder": 3,
+      "tarballExists": true,
+      "pass": true
+    }
+  ]
+}

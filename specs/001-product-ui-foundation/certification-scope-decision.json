@@ -1,0 +1,12 @@
+{
+  "scope": "current-internal-library-readiness-accepted",
+  "accepted": true,
+  "acceptedBy": "Lucas / product owner",
+  "acceptedAt": "2026-07-01",
+  "acceptanceStatements": [
+    "I understand this does not certify every approved CRM image as 1:1.",
+    "I accept current Internal/library readiness as the scoped completion bar.",
+    "Remaining source-image parity work stays tracked in the visual certification backlog."
+  ],
+  "notes": "Product accepted that full pixel-perfect certification for all remaining approved CRM images is not a blocker for current library readiness. Remaining 1:1 visual work stays in the visual backlog as continuous refinement/product-review scope. This does not claim real future CRM adoption has executed."
+}

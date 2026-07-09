@@ -1,0 +1,33 @@
+{
+  "date": "2026-07-07",
+  "status": "pass",
+  "rowCount": 3,
+  "failedCount": 0,
+  "rows": [
+    {
+      "page": "OperationShell",
+      "file": "apps/docs/src/stories/ImageCoverageOperation.stories.tsx",
+      "family": "operation-kanban",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesPipelinePage",
+      "file": "apps/docs/src/stories/ImageCoverageSales.stories.tsx",
+      "family": "sales-kanban",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    },
+    {
+      "page": "FinanceKanbanPage",
+      "file": "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
+      "family": "finance-kanban",
+      "missingSnippets": [],
+      "forbiddenPresent": [],
+      "status": "pass"
+    }
+  ],
+  "note": "This audit proves official Kanban image-coverage pages use the reusable CrmKanbanPage/KanbanColumn/card family instead of story-local board anatomy. It does not certify 1:1 visual acceptance."
+}

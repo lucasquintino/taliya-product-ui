@@ -1,0 +1,264 @@
+{
+  "generatedAt": "2026-07-07T11:40:45.174Z",
+  "packageRows": [
+    {
+      "packageName": "@taliya/tokens",
+      "sourcePackage": "packages/tokens/package.json",
+      "tarball": "dist-packages/taliya-tokens-0.0.0.tgz",
+      "tarballExists": true,
+      "tarballSize": 176771,
+      "requiredFiles": [
+        "package/package.json",
+        "package/README.md",
+        "package/dist/index.js",
+        "package/dist/index.d.ts",
+        "package/src/tokens.css"
+      ],
+      "missingFiles": [],
+      "requiredExports": [
+        ".",
+        "./tokens.css"
+      ],
+      "sourceExports": [
+        ".",
+        "./tokens.css"
+      ],
+      "packedExports": [
+        ".",
+        "./tokens.css"
+      ],
+      "missingExports": [],
+      "sourceExportMismatch": [],
+      "packageNameMatches": true,
+      "versionMatches": true,
+      "mainMatches": true,
+      "moduleMatches": true,
+      "typesMatches": true,
+      "expectedFilesField": [
+        "dist",
+        "src/tokens.css"
+      ],
+      "sourceFilesFieldMatches": true,
+      "packedFilesFieldMatches": true,
+      "forbiddenFiles": [],
+      "sourcePublishable": true,
+      "packedPublishable": true,
+      "sourceCssSideEffects": true,
+      "packedCssSideEffects": true,
+      "requiredPeerDependencies": [],
+      "sourcePeerDependencies": true,
+      "packedPeerDependencies": true,
+      "sourceMisplacedPeerDependencies": [],
+      "packedMisplacedPeerDependencies": [],
+      "sourceWorkspaceDependencies": [],
+      "packedWorkspaceDependencies": [],
+      "requiredPackedLocalDependencies": [],
+      "requiredReadmeSnippets": [
+        "import \"@taliya/tokens/tokens.css\"",
+        "@taliya/tokens"
+      ],
+      "sourceReadmeExists": true,
+      "packedReadmeReadable": true,
+      "sourceReadmeMissingSnippets": [],
+      "packedReadmeMissingSnippets": [],
+      "tarListError": "",
+      "packageJsonError": "",
+      "readmeError": "",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/ui",
+      "sourcePackage": "packages/ui/package.json",
+      "tarball": "dist-packages/taliya-ui-0.0.0.tgz",
+      "tarballExists": true,
+      "tarballSize": 79163,
+      "requiredFiles": [
+        "package/package.json",
+        "package/README.md",
+        "package/dist/index.js",
+        "package/dist/index.d.ts",
+        "package/src/styles.css"
+      ],
+      "missingFiles": [],
+      "requiredExports": [
+        ".",
+        "./styles.css"
+      ],
+      "sourceExports": [
+        ".",
+        "./styles.css"
+      ],
+      "packedExports": [
+        ".",
+        "./styles.css"
+      ],
+      "missingExports": [],
+      "sourceExportMismatch": [],
+      "packageNameMatches": true,
+      "versionMatches": true,
+      "mainMatches": true,
+      "moduleMatches": true,
+      "typesMatches": true,
+      "expectedFilesField": [
+        "dist",
+        "src/styles.css"
+      ],
+      "sourceFilesFieldMatches": true,
+      "packedFilesFieldMatches": true,
+      "forbiddenFiles": [],
+      "sourcePublishable": true,
+      "packedPublishable": true,
+      "sourceCssSideEffects": true,
+      "packedCssSideEffects": true,
+      "requiredPeerDependencies": [
+        "react",
+        "react-dom"
+      ],
+      "sourcePeerDependencies": true,
+      "packedPeerDependencies": true,
+      "sourceMisplacedPeerDependencies": [],
+      "packedMisplacedPeerDependencies": [],
+      "sourceWorkspaceDependencies": [
+        {
+          "group": "dependencies",
+          "name": "@taliya/tokens",
+          "version": "workspace:*"
+        }
+      ],
+      "packedWorkspaceDependencies": [],
+      "requiredPackedLocalDependencies": [
+        {
+          "dependencyName": "@taliya/tokens",
+          "packageName": "@taliya/tokens",
+          "expectedVersion": "0.0.0",
+          "actualVersion": "0.0.0",
+          "pass": true
+        }
+      ],
+      "requiredReadmeSnippets": [
+        "import \"@taliya/tokens/tokens.css\"",
+        "import \"@taliya/ui/styles.css\"",
+        "react",
+        "react-dom"
+      ],
+      "sourceReadmeExists": true,
+      "packedReadmeReadable": true,
+      "sourceReadmeMissingSnippets": [],
+      "packedReadmeMissingSnippets": [],
+      "tarListError": "",
+      "packageJsonError": "",
+      "readmeError": "",
+      "pass": true
+    },
+    {
+      "packageName": "@taliya/crm",
+      "sourcePackage": "packages/crm/package.json",
+      "tarball": "dist-packages/taliya-crm-0.0.0.tgz",
+      "tarballExists": true,
+      "tarballSize": 293091,
+      "requiredFiles": [
+        "package/package.json",
+        "package/README.md",
+        "package/dist/index.js",
+        "package/dist/index.d.ts",
+        "package/dist/standard-page-kit.js",
+        "package/dist/standard-page-kit.d.ts",
+        "package/src/styles.css"
+      ],
+      "missingFiles": [],
+      "requiredExports": [
+        ".",
+        "./standard-page-kit",
+        "./styles.css"
+      ],
+      "sourceExports": [
+        ".",
+        "./standard-page-kit",
+        "./styles.css"
+      ],
+      "packedExports": [
+        ".",
+        "./standard-page-kit",
+        "./styles.css"
+      ],
+      "missingExports": [],
+      "sourceExportMismatch": [],
+      "packageNameMatches": true,
+      "versionMatches": true,
+      "mainMatches": true,
+      "moduleMatches": true,
+      "typesMatches": true,
+      "expectedFilesField": [
+        "dist",
+        "src/styles.css"
+      ],
+      "sourceFilesFieldMatches": true,
+      "packedFilesFieldMatches": true,
+      "forbiddenFiles": [],
+      "sourcePublishable": true,
+      "packedPublishable": true,
+      "sourceCssSideEffects": true,
+      "packedCssSideEffects": true,
+      "requiredPeerDependencies": [
+        "react",
+        "react-dom"
+      ],
+      "sourcePeerDependencies": true,
+      "packedPeerDependencies": true,
+      "sourceMisplacedPeerDependencies": [],
+      "packedMisplacedPeerDependencies": [],
+      "sourceWorkspaceDependencies": [
+        {
+          "group": "dependencies",
+          "name": "@taliya/tokens",
+          "version": "workspace:*"
+        },
+        {
+          "group": "dependencies",
+          "name": "@taliya/ui",
+          "version": "workspace:*"
+        }
+      ],
+      "packedWorkspaceDependencies": [],
+      "requiredPackedLocalDependencies": [
+        {
+          "dependencyName": "@taliya/tokens",
+          "packageName": "@taliya/tokens",
+          "expectedVersion": "0.0.0",
+          "actualVersion": "0.0.0",
+          "pass": true
+        },
+        {
+          "dependencyName": "@taliya/ui",
+          "packageName": "@taliya/ui",
+          "expectedVersion": "0.0.0",
+          "actualVersion": "0.0.0",
+          "pass": true
+        }
+      ],
+      "requiredReadmeSnippets": [
+        "import \"@taliya/tokens/tokens.css\"",
+        "import \"@taliya/ui/styles.css\"",
+        "import \"@taliya/crm/styles.css\"",
+        "standardPageKitManifest",
+        "import { standardPageKitManifest } from \"@taliya/crm/standard-page-kit\"",
+        "drawerPlacement=\"fixed\" | \"content\" | \"floating\"",
+        "pageHeaderRhythm=\"default\" | \"spacious\" | \"dashboard\" | \"stacked\" | \"overview\"",
+        "react",
+        "react-dom"
+      ],
+      "sourceReadmeExists": true,
+      "packedReadmeReadable": true,
+      "sourceReadmeMissingSnippets": [],
+      "packedReadmeMissingSnippets": [],
+      "tarListError": "",
+      "packageJsonError": "",
+      "readmeError": "",
+      "pass": true
+    }
+  ],
+  "summary": {
+    "pass": true,
+    "failedPackages": []
+  }
+}

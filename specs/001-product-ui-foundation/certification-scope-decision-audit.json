@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-07-07T11:41:53.817Z",
+  "status": "pass",
+  "checkMode": true,
+  "decisionPath": "specs/001-product-ui-foundation/certification-scope-decision.json",
+  "decisionExists": true,
+  "examplePath": "specs/001-product-ui-foundation/contracts/certification-scope-decision.example.json",
+  "exampleExists": true,
+  "exampleValidationErrors": [],
+  "scope": "current-internal-library-readiness-accepted",
+  "scopedCompletionAccepted": true,
+  "requiredAcceptanceStatements": [
+    "I understand this does not certify every approved CRM image as 1:1.",
+    "I accept current Internal/library readiness as the scoped completion bar.",
+    "Remaining source-image parity work stays tracked in the visual certification backlog."
+  ],
+  "validationErrors": []
+}

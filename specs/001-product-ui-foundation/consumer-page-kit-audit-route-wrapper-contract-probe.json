@@ -1,0 +1,111 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\AppData\\Local\\Temp\\taliya-page-kit-route-wrapper-contract-probe-QTGSp1",
+  "reportLabel": "route-wrapper-contract-probe",
+  "configSource": "../AppData/Local/Temp/taliya-page-kit-route-wrapper-contract-probe-QTGSp1/taliya-page-kit.config.json",
+  "configValidation": {
+    "pass": true,
+    "errors": []
+  },
+  "generatedAt": "2026-07-07T11:41:50.130Z",
+  "surfaceRows": [
+    {
+      "id": "crm-work-list",
+      "file": "features/crm/work-list/work-list-page.tsx",
+      "required": [
+        {
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListDetailPage",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    }
+  ],
+  "routeRows": [
+    {
+      "route": "/crm",
+      "file": "app/crm/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "WorkListPage",
+          "importFrom": "@/features/crm/work-list/work-list-page"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListPage",
+          "importFrom": "@/features/crm/work-list/work-list-page",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "componentContractRows": [],
+  "routeComponentContractRows": [
+    {
+      "route": "/crm",
+      "routeFile": "app/crm/page.tsx",
+      "componentName": "WorkListPage",
+      "importFrom": "@/features/crm/work-list/work-list-page",
+      "componentContractId": null,
+      "componentContractComponent": null,
+      "expectedContractComponent": "WorkListPage",
+      "linkedContractId": null,
+      "linkedContractComponent": null,
+      "linkedContractComponentMatches": false,
+      "linkedContractPass": false,
+      "reason": "missing-component-contract",
+      "pass": false
+    }
+  ],
+  "routeCoverage": {
+    "enabled": false,
+    "root": "",
+    "baseRoute": "",
+    "rootExists": false,
+    "discoveredRoutes": [],
+    "configuredRoutes": [
+      "/crm"
+    ],
+    "uncoveredRoutes": [],
+    "pass": true
+  },
+  "standardPageKit": {
+    "pass": true,
+    "manifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "manifestCount": 52,
+    "requiredCount": 1,
+    "outsideManifest": []
+  },
+  "summary": {
+    "pass": false,
+    "failedConfig": [],
+    "failedSurfaces": [],
+    "failedRoutes": [],
+    "failedComponentContracts": [],
+    "failedRouteComponentContracts": [
+      "/crm:WorkListPage"
+    ],
+    "uncoveredRoutes": [],
+    "outsideStandardPageKit": []
+  }
+}

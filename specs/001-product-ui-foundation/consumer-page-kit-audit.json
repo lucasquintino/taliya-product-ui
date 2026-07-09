@@ -1,0 +1,1233 @@
+{
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
+  "reportLabel": "default",
+  "configSource": "../taliya-internal/taliya-page-kit.config.json",
+  "configValidation": {
+    "pass": true,
+    "errors": []
+  },
+  "generatedAt": "2026-07-07T11:41:06.250Z",
+  "surfaceRows": [
+    {
+      "id": "shell",
+      "file": "components/internal-shell-client.tsx",
+      "required": [
+        {
+          "name": "CrmProductShell",
+          "package": "@taliya/crm"
+        }
+      ],
+      "forbiddenFragments": [
+        "app-shell",
+        "internal-workspace",
+        "shell-sidebar",
+        "shell-topbar"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmProductShell",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "cockpit",
+      "file": "features/internal/cockpit/cockpit-workspace.tsx",
+      "required": [
+        {
+          "name": "InternalOverviewDashboard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DashboardGrid",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmOperationalPanel",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmOperationalRows",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmRecordDrawer",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "Chip",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "InlineGroup",
+          "package": "@taliya/ui"
+        }
+      ],
+      "forbiddenFragments": [
+        "cockpit-panel",
+        "attention-list",
+        "attention-item",
+        "panel-body"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "InternalOverviewDashboard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "DashboardGrid",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "CrmOperationalPanel",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "CrmOperationalRows",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "CrmRecordDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "Chip",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "InlineGroup",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "landing",
+      "file": "features/internal/landing/landing-workspace.tsx",
+      "required": [
+        {
+          "name": "PageFilterBar",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DashboardGrid",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmRecordDrawer",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DataTable",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "Panel",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "PanelBody",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "PanelHeader",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "List",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "ListItem",
+          "package": "@taliya/ui"
+        }
+      ],
+      "forbiddenFragments": [
+        "landing-filter-bar",
+        "table-shell",
+        "landing-table",
+        "example-list",
+        "example-item",
+        "funnel-list"
+      ],
+      "forbiddenTextPatterns": [
+        "\\}\\s*\\?\\s+CTA\\s+\\{",
+        "\\}\\s*\\?\\s+\\{fitLabel"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "PageFilterBar",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "DashboardGrid",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "CrmRecordDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "DataTable",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "Panel",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "PanelBody",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "PanelHeader",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "List",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "ListItem",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "leads",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "required": [
+        {
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageFilterBar",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmWorklistTable",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanBoard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmDrawer",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "Button",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "Modal",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "FieldGrid",
+          "package": "@taliya/ui"
+        }
+      ],
+      "forbiddenFragments": [
+        "filter-bar",
+        "quick-queues",
+        "lead-table",
+        "lead-drawer",
+        "lead-open-button",
+        "kanban-alerts",
+        "internal-lead-kanban-board"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListDetailPage",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "PageFilterBar",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "PageQuickFilters",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "CrmWorklistTable",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "KanbanBoard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "CrmDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "Button",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "Modal",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "FieldGrid",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "route-states",
+      "file": "app/internal/loading.tsx",
+      "required": [
+        {
+          "name": "StatePage",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "LoadingState",
+          "package": "@taliya/ui"
+        }
+      ],
+      "forbiddenFragments": [
+        "internal-state-page",
+        "loading-shell"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "StatePage",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "LoadingState",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    },
+    {
+      "id": "route-errors",
+      "file": "app/internal/error.tsx",
+      "required": [
+        {
+          "name": "StatePage",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "ErrorState",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "Button",
+          "package": "@taliya/ui"
+        }
+      ],
+      "forbiddenFragments": [
+        "internal-state-page",
+        "error-text"
+      ],
+      "exists": true,
+      "requiredStatus": [
+        {
+          "componentName": "StatePage",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "ErrorState",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        },
+        {
+          "componentName": "Button",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true
+        }
+      ],
+      "forbiddenMatches": [],
+      "forbiddenTextMatches": [],
+      "pass": true
+    }
+  ],
+  "routeRows": [
+    {
+      "route": "/internal",
+      "file": "app/internal/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "componentContractId": "internal-shell-client-wrapper",
+          "componentContractComponent": "InternalShellClient"
+        },
+        {
+          "name": "CockpitWorkspace",
+          "importFrom": "@/features/internal/cockpit/cockpit-workspace",
+          "componentContractId": "cockpit-workspace-wrapper"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        },
+        {
+          "componentName": "CockpitWorkspace",
+          "importFrom": "@/features/internal/cockpit/cockpit-workspace",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "route": "/internal/landing",
+      "file": "app/internal/landing/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "componentContractId": "internal-shell-client-wrapper",
+          "componentContractComponent": "InternalShellClient"
+        },
+        {
+          "name": "LandingWorkspace",
+          "importFrom": "@/features/internal/landing/landing-workspace",
+          "componentContractId": "landing-workspace-wrapper"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        },
+        {
+          "componentName": "LandingWorkspace",
+          "importFrom": "@/features/internal/landing/landing-workspace",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "route": "/internal/leads",
+      "file": "app/internal/leads/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "componentContractId": "internal-shell-client-wrapper",
+          "componentContractComponent": "InternalShellClient"
+        },
+        {
+          "name": "LeadsWorkspace",
+          "importFrom": "@/features/internal/leads/leads-workspace",
+          "componentContractId": "leads-workspace-wrapper"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        },
+        {
+          "componentName": "LeadsWorkspace",
+          "importFrom": "@/features/internal/leads/leads-workspace",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "route": "/internal/leads/kanban",
+      "file": "app/internal/leads/kanban/page.tsx",
+      "requiredLocalComponents": [
+        {
+          "name": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "componentContractId": "internal-shell-client-wrapper",
+          "componentContractComponent": "InternalShellClient"
+        },
+        {
+          "name": "LeadsWorkspace",
+          "importFrom": "@/features/internal/leads/leads-workspace",
+          "componentContractId": "leads-workspace-wrapper"
+        }
+      ],
+      "exists": true,
+      "routeComponentFound": true,
+      "routeRenderKind": "default-function",
+      "routeRenderComponent": null,
+      "requiredStatus": [
+        {
+          "componentName": "InternalShell",
+          "importFrom": "@/components/internal-shell",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        },
+        {
+          "componentName": "LeadsWorkspace",
+          "importFrom": "@/features/internal/leads/leads-workspace",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInRoute": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "componentContractRows": [
+    {
+      "id": "internal-shell-client-wrapper",
+      "file": "components/internal-shell-client.tsx",
+      "component": "InternalShellClient",
+      "required": [
+        {
+          "name": "CrmProductShell",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmProductShell",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "cockpit-workspace-wrapper",
+      "file": "features/internal/cockpit/cockpit-workspace.tsx",
+      "component": "CockpitWorkspace",
+      "required": [
+        {
+          "name": "InternalOverviewDashboard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DashboardGrid",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmOperationalPanel",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmOperationalRows",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "Chip",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "InlineGroup",
+          "package": "@taliya/ui"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "InternalOverviewDashboard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "DashboardGrid",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "CrmOperationalPanel",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "CrmOperationalRows",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "Chip",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "InlineGroup",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "cockpit-attention-row-wrapper",
+      "file": "features/internal/cockpit/cockpit-workspace.tsx",
+      "component": "CockpitWorkspace",
+      "required": [
+        {
+          "name": "CrmOperationalRows",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmOperationalRows",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "cockpit-drawer-wrapper",
+      "file": "features/internal/cockpit/cockpit-workspace.tsx",
+      "component": "CockpitDrawer",
+      "required": [
+        {
+          "name": "CrmRecordDrawer",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmRecordDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "landing-workspace-wrapper",
+      "file": "features/internal/landing/landing-workspace.tsx",
+      "component": "LandingWorkspace",
+      "required": [
+        {
+          "name": "PageFilterBar",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DashboardGrid",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "MetricCard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmOperationalRow",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "DataTable",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "Panel",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "PanelBody",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "PanelHeader",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "List",
+          "package": "@taliya/ui"
+        },
+        {
+          "name": "ListItem",
+          "package": "@taliya/ui"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "PageFilterBar",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "DashboardGrid",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "MetricCard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "CrmOperationalRow",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "DataTable",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "Panel",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "PanelBody",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "PanelHeader",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "List",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "ListItem",
+          "packageName": "@taliya/ui",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "landing-drawer-wrapper",
+      "file": "features/internal/landing/landing-workspace.tsx",
+      "component": "LandingDrawer",
+      "required": [
+        {
+          "name": "CrmRecordDrawer",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmRecordDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "leads-workspace-wrapper",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "component": "LeadsWorkspace",
+      "required": [
+        {
+          "name": "WorkListDetailPage",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageFilterBar",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "PageQuickFilters",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "CrmDrawer",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "WorkListDetailPage",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "PageFilterBar",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "PageQuickFilters",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "CrmDrawer",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "leads-list-wrapper",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "component": "LeadListTable",
+      "required": [
+        {
+          "name": "CrmWorklistTable",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "CrmWorklistTable",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "leads-kanban-wrapper",
+      "file": "features/internal/leads/leads-workspace.tsx",
+      "component": "LeadKanban",
+      "required": [
+        {
+          "name": "KanbanBoard",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanColumn",
+          "package": "@taliya/crm"
+        },
+        {
+          "name": "KanbanCard",
+          "package": "@taliya/crm"
+        }
+      ],
+      "exists": true,
+      "componentFound": true,
+      "requiredStatus": [
+        {
+          "componentName": "KanbanBoard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "KanbanColumn",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        },
+        {
+          "componentName": "KanbanCard",
+          "packageName": "@taliya/crm",
+          "imported": true,
+          "jsxUsed": true,
+          "pass": true,
+          "jsxUsedInComponent": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "routeComponentContractRows": [
+    {
+      "route": "/internal",
+      "routeFile": "app/internal/page.tsx",
+      "componentName": "InternalShell",
+      "importFrom": "@/components/internal-shell",
+      "componentContractId": "internal-shell-client-wrapper",
+      "componentContractComponent": "InternalShellClient",
+      "expectedContractComponent": "InternalShellClient",
+      "linkedContractId": "internal-shell-client-wrapper",
+      "linkedContractComponent": "InternalShellClient",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/internal",
+      "routeFile": "app/internal/page.tsx",
+      "componentName": "CockpitWorkspace",
+      "importFrom": "@/features/internal/cockpit/cockpit-workspace",
+      "componentContractId": "cockpit-workspace-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "CockpitWorkspace",
+      "linkedContractId": "cockpit-workspace-wrapper",
+      "linkedContractComponent": "CockpitWorkspace",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/internal/landing",
+      "routeFile": "app/internal/landing/page.tsx",
+      "componentName": "InternalShell",
+      "importFrom": "@/components/internal-shell",
+      "componentContractId": "internal-shell-client-wrapper",
+      "componentContractComponent": "InternalShellClient",
+      "expectedContractComponent": "InternalShellClient",
+      "linkedContractId": "internal-shell-client-wrapper",
+      "linkedContractComponent": "InternalShellClient",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/internal/landing",
+      "routeFile": "app/internal/landing/page.tsx",
+      "componentName": "LandingWorkspace",
+      "importFrom": "@/features/internal/landing/landing-workspace",
+      "componentContractId": "landing-workspace-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "LandingWorkspace",
+      "linkedContractId": "landing-workspace-wrapper",
+      "linkedContractComponent": "LandingWorkspace",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/internal/leads",
+      "routeFile": "app/internal/leads/page.tsx",
+      "componentName": "InternalShell",
+      "importFrom": "@/components/internal-shell",
+      "componentContractId": "internal-shell-client-wrapper",
+      "componentContractComponent": "InternalShellClient",
+      "expectedContractComponent": "InternalShellClient",
+      "linkedContractId": "internal-shell-client-wrapper",
+      "linkedContractComponent": "InternalShellClient",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/internal/leads",
+      "routeFile": "app/internal/leads/page.tsx",
+      "componentName": "LeadsWorkspace",
+      "importFrom": "@/features/internal/leads/leads-workspace",
+      "componentContractId": "leads-workspace-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "LeadsWorkspace",
+      "linkedContractId": "leads-workspace-wrapper",
+      "linkedContractComponent": "LeadsWorkspace",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/internal/leads/kanban",
+      "routeFile": "app/internal/leads/kanban/page.tsx",
+      "componentName": "InternalShell",
+      "importFrom": "@/components/internal-shell",
+      "componentContractId": "internal-shell-client-wrapper",
+      "componentContractComponent": "InternalShellClient",
+      "expectedContractComponent": "InternalShellClient",
+      "linkedContractId": "internal-shell-client-wrapper",
+      "linkedContractComponent": "InternalShellClient",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    },
+    {
+      "route": "/internal/leads/kanban",
+      "routeFile": "app/internal/leads/kanban/page.tsx",
+      "componentName": "LeadsWorkspace",
+      "importFrom": "@/features/internal/leads/leads-workspace",
+      "componentContractId": "leads-workspace-wrapper",
+      "componentContractComponent": null,
+      "expectedContractComponent": "LeadsWorkspace",
+      "linkedContractId": "leads-workspace-wrapper",
+      "linkedContractComponent": "LeadsWorkspace",
+      "linkedContractComponentMatches": true,
+      "linkedContractPass": true,
+      "reason": "linked-by-id",
+      "pass": true
+    }
+  ],
+  "routeCoverage": {
+    "enabled": true,
+    "root": "app/internal",
+    "baseRoute": "/internal",
+    "rootExists": true,
+    "discoveredRoutes": [
+      "/internal",
+      "/internal/landing",
+      "/internal/leads",
+      "/internal/leads/kanban"
+    ],
+    "configuredRoutes": [
+      "/internal",
+      "/internal/landing",
+      "/internal/leads",
+      "/internal/leads/kanban"
+    ],
+    "uncoveredRoutes": [],
+    "pass": true
+  },
+  "standardPageKit": {
+    "pass": true,
+    "manifest": "specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json",
+    "manifestCount": 52,
+    "requiredCount": 30,
+    "outsideManifest": []
+  },
+  "summary": {
+    "pass": true,
+    "failedConfig": [],
+    "failedSurfaces": [],
+    "failedRoutes": [],
+    "failedComponentContracts": [],
+    "failedRouteComponentContracts": [],
+    "uncoveredRoutes": [],
+    "outsideStandardPageKit": []
+  }
+}

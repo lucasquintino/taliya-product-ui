@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-07-07T11:42:04.854Z",
+  "status": "pass",
+  "mode": "check",
+  "checkMode": true,
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
+  "vendor": "vendor/taliya-product-ui",
+  "manifest": "dist-packages/taliya-product-ui-local-manifest.json",
+  "reportLabel": "default",
+  "steps": [
+    {
+      "id": "vendor-sync",
+      "commandText": "node scripts/sync-consumer-vendor.mjs --check --consumer C:\\Users\\lucas\\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 79,
+      "stdoutTail": [
+        "Consumer vendor sync dry-run for C:\\Users\\lucas\\taliya-internal",
+        "unchanged: vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+        "unchanged: vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+        "unchanged: vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+        "unchanged: vendor/taliya-product-ui/taliya-product-ui-local-manifest.json"
+      ],
+      "stderrTail": []
+    },
+    {
+      "id": "dependency-sync",
+      "commandText": "node scripts/sync-consumer-dependencies.mjs --check --consumer C:\\Users\\lucas\\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 69,
+      "stdoutTail": [
+        "Consumer dependency sync dry-run for C:\\Users\\lucas\\taliya-internal",
+        "unchanged: @taliya/tokens -> file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
+        "unchanged: @taliya/ui -> file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
+        "unchanged: @taliya/crm -> file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz"
+      ],
+      "stderrTail": []
+    },
+    {
+      "id": "install-plan",
+      "commandText": "node scripts/install-consumer-packages.mjs --check --consumer C:\\Users\\lucas\\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 64,
+      "stdoutTail": [
+        "Consumer package install plan for C:\\Users\\lucas\\taliya-internal",
+        "ready: @taliya/tokens dependency-ok tarball-ok",
+        "ready: @taliya/ui dependency-ok tarball-ok",
+        "ready: @taliya/crm dependency-ok tarball-ok",
+        "Install command: npm install --force --no-audit --no-fund file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz",
+        "Consumer package install plan check: pass"
+      ],
+      "stderrTail": []
+    },
+    {
+      "id": "lockfile",
+      "commandText": "node scripts/audit-consumer-lockfile.mjs --check --consumer C:\\Users\\lucas\\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 67,
+      "stdoutTail": [
+        "Consumer lockfile audit: pass",
+        "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit.md",
+        "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit.json"
+      ],
+      "stderrTail": []
+    },
+    {
+      "id": "package-sync",
+      "commandText": "node scripts/audit-consumer-package-sync.mjs --check --consumer C:\\Users\\lucas\\taliya-internal --vendor vendor/taliya-product-ui",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 84,
+      "stdoutTail": [
+        "Consumer package sync audit: pass",
+        "Wrote C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\consumer-package-sync-audit.md",
+        "Wrote C:\\Users\\lucas\\taliya-product-ui\\specs\\001-product-ui-foundation\\consumer-package-sync-audit.json"
+      ],
+      "stderrTail": []
+    }
+  ]
+}

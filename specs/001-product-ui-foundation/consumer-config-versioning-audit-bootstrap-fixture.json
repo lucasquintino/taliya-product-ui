@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-07-07T11:40:46.700Z",
+  "status": "pass",
+  "checkMode": true,
+  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture",
+  "reportLabel": "bootstrap-fixture",
+  "git": {
+    "isGitRepo": true,
+    "gitRoot": "C:/Users/lucas/taliya-product-ui/tmp/consumer-bootstrap-fixture",
+    "error": ""
+  },
+  "configRows": [
+    {
+      "path": "taliya-readiness.config.json",
+      "absolutePath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture\\taliya-readiness.config.json",
+      "exists": true,
+      "jsonValid": true,
+      "jsonError": "",
+      "gitPath": "taliya-readiness.config.json",
+      "tracked": true,
+      "gitStatus": "A  taliya-readiness.config.json",
+      "pass": true
+    },
+    {
+      "path": "taliya-page-kit.config.json",
+      "absolutePath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\consumer-bootstrap-fixture\\taliya-page-kit.config.json",
+      "exists": true,
+      "jsonValid": true,
+      "jsonError": "",
+      "gitPath": "taliya-page-kit.config.json",
+      "tracked": true,
+      "gitStatus": "A  taliya-page-kit.config.json",
+      "pass": true
+    }
+  ],
+  "summary": {
+    "failedConfigs": [],
+    "untrackedConfigs": [],
+    "missingConfigs": [],
+    "invalidJsonConfigs": []
+  }
+}

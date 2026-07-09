@@ -1,0 +1,451 @@
+{
+  "storyArchitecture": {
+    "total": 276,
+    "invalidTitleCount": 0,
+    "legacyBatchTitleCount": 0,
+    "invalidTitles": [],
+    "legacyBatchTitles": []
+  },
+  "crmPrimitiveReuse": {
+    "scannedComponents": 192,
+    "componentsWithNativeControls": 30,
+    "nativeControlTotals": {
+      "button": 34,
+      "anchor": 1
+    },
+    "primitiveReuseClassification": {
+      "justified": 30,
+      "refactor": 0,
+      "missingPrimitive": 0
+    },
+    "nativeControlDebt": [
+      {
+        "component": "CrmBrowserToolbarButton",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Toolbar browser control: native button is the component root; icon rendering is delegated to `Icon`."
+        }
+      },
+      {
+        "component": "CrmShellAvatar",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Account/avatar trigger: native button is the component root; avatar visual is delegated to `Avatar`."
+        }
+      },
+      {
+        "component": "CrmOperationalRow",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Chip",
+          "Icon",
+          "StatusDot"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Operational row: native button is the full compound row root; icon, status, and chip visuals are delegated to official primitives."
+        }
+      },
+      {
+        "component": "ActivityFeed",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon",
+          "IconButton"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Timeline event root/action: native button represents an interactive event row, not a standalone button primitive."
+        }
+      },
+      {
+        "component": "OperationActivityTable",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar",
+          "Button",
+          "Chip"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Operation activity table row: native button is the full row root for row-open behavior; header/action controls use official primitives."
+        }
+      },
+      {
+        "component": "KanbanCard",
+        "nativeControls": {
+          "button": 2
+        },
+        "primitiveUses": [
+          "Card",
+          "Chip",
+          "Icon",
+          "IconButton"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Interactive kanban card anatomy: native buttons are card-level roots for draggable/selectable card affordances."
+        }
+      },
+      {
+        "component": "MiniCalendar",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "IconButton"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Calendar day cell anatomy: native button is the semantic day cell root."
+        }
+      },
+      {
+        "component": "SetupShell",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar",
+          "Button",
+          "Chip",
+          "IconButton",
+          "ProgressBar",
+          "TaliyaLogo"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Shell account selector root: native button wraps an avatar/account compound control."
+        }
+      },
+      {
+        "component": "SetupChoiceCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Selectable setup option card: native button is the full card root."
+        }
+      },
+      {
+        "component": "SetupImportSourceCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Selectable import-source card: native button is the full card root."
+        }
+      },
+      {
+        "component": "SetupReviewPanel",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Button",
+          "Checkbox",
+          "Chip",
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Review-area selector: native button is the compound published-area root; checkbox state uses `Checkbox`."
+        }
+      },
+      {
+        "component": "AccessFooterLinks",
+        "nativeControls": {
+          "anchor": 1
+        },
+        "primitiveUses": [],
+        "classification": {
+          "status": "Justificado",
+          "action": "Footer legal/navigation link: native anchor is required semantic navigation."
+        }
+      },
+      {
+        "component": "IntegrationStatusRow",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Provider row action: native button is the interactive status row root."
+        }
+      },
+      {
+        "component": "CommentThread",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar",
+          "Button",
+          "Card"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Comment row action: native button is the interactive comment/root affordance."
+        }
+      },
+      {
+        "component": "TaskDrawer",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar",
+          "Badge",
+          "Button",
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Checklist row action: native button is a row-level task completion root."
+        }
+      },
+      {
+        "component": "ReplacementDrawer",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Button",
+          "Chip",
+          "Icon",
+          "IconButton"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Replacement option row: native button is the selectable option-card root."
+        }
+      },
+      {
+        "component": "WeeklyHoursGrid",
+        "nativeControls": {
+          "button": 3
+        },
+        "primitiveUses": [
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Schedule grid controls: native buttons are day/slot cells with domain-specific grid anatomy."
+        }
+      },
+      {
+        "component": "RoleCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar",
+          "Chip"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Selectable role card: native button is the compound card root."
+        }
+      },
+      {
+        "component": "PaymentMethodRow",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Selectable payment method row: native button is the compound row root."
+        }
+      },
+      {
+        "component": "UsageOriginRow",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [],
+        "classification": {
+          "status": "Justificado",
+          "action": "Usage origin row: native button is the expandable/inspectable row root."
+        }
+      },
+      {
+        "component": "ModeCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Chip",
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Selectable agent mode card: native button is the compound card root."
+        }
+      },
+      {
+        "component": "PreflightChecklist",
+        "nativeControls": {
+          "button": 2
+        },
+        "primitiveUses": [
+          "Panel"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Preflight checklist item/action: native buttons are checklist-row roots where the whole row is interactive."
+        }
+      },
+      {
+        "component": "ScenarioList",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon",
+          "Panel"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Scenario list item: native button is the selectable row root."
+        }
+      },
+      {
+        "component": "FinancePriorityPanel",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon",
+          "Panel"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Finance priority row: native button is the full source-derived row root; icon and panel visuals are delegated to official primitives."
+        }
+      },
+      {
+        "component": "PaymentCaseCard",
+        "nativeControls": {
+          "button": 2
+        },
+        "primitiveUses": [
+          "Badge",
+          "Card",
+          "Icon",
+          "IconButton"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Payment case card: native buttons are card-level domain roots; icon actions use `IconButton`."
+        }
+      },
+      {
+        "component": "PipelineCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Card",
+          "Chip",
+          "Icon",
+          "IconButton"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Pipeline card: native button is the selectable card root; icon actions use `IconButton`."
+        }
+      },
+      {
+        "component": "TrialClassCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar",
+          "Chip",
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Trial class card: native button is the selectable row/card root."
+        }
+      },
+      {
+        "component": "EnrollmentChecklist",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Icon",
+          "List"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Enrollment checklist row: native button is the completion/selection row root."
+        }
+      },
+      {
+        "component": "RiskCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Avatar",
+          "Card",
+          "Chip",
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Retention risk card: native button is the card-level action root."
+        }
+      },
+      {
+        "component": "PageQuickFilters",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Badge",
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Quick filter row: native button is the full selectable filter row root; icon and count visuals are delegated to official primitives."
+        }
+      }
+    ]
+  }
+}
