@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T10:59:52.863Z",
+  "generatedAt": "2026-07-15T17:26:11.851Z",
   "date": "2026-07-15",
   "goal": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   "trueGoal": {
@@ -133,7 +133,7 @@
     },
     {
       "requirement": "Taliya Internal owns the same consumer readiness config model future CRM will use",
-      "status": "failed",
+      "status": "proven-for-current-internal",
       "evidence": [
         "C:/Users/lucas/taliya-internal/taliya-readiness.config.json",
         "library-readiness-gate.json readinessConfig",

@@ -1,6 +1,6 @@
 # Library Consumption Status
 
-Generated: 2026-07-15T10:59:52.910Z
+Generated: 2026-07-15T17:26:11.898Z
 
 Status: fail
 
@@ -14,7 +14,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 - Public page-kit runtime manifest works: `true`
 - Technical release candidate passed: `true`
 - Aggregate readiness passed: `false`
-- Missing readiness gates: `consumer-integration`, `consumer-package-sync`, `consumer-vendor-versioning`, `consumer-page-kit`, `consumer-runtime`, `consumer-config-versioning`, `goal-completion`
+- Missing readiness gates: `goal-completion`
 - Future CRM process passed: `true`
 - Future CRM real adoption executed: `false`
 - Global goal complete: `false`
@@ -38,7 +38,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 | `current-internal-routes-render-workspaces` | pass | consumer-page-kit-audit.json route requiredLocalComponents | Every discovered Internal route renders InternalShell plus its local workspace wrapper, so shell-only route regressions fail. |
 | `public-page-kit-runtime` | pass | @taliya/crm and @taliya/crm/standard-page-kit runtime manifest audits | Consumers can discover the standard page kit from the installed package. |
 | `technical-release-candidate` | pass | release-candidate-audit.json | The current package/readiness/release gate bundle is green and includes compact consumption-status and future CRM process gates. |
-| `aggregate-readiness` | fail | library-readiness-gate.json | Readiness is missing required gates: consumer-integration, consumer-package-sync, consumer-vendor-versioning, consumer-page-kit, consumer-runtime, consumer-config-versioning, goal-completion. |
+| `aggregate-readiness` | fail | library-readiness-gate.json | Readiness is missing required gates: goal-completion. |
 | `future-crm-process` | pass | future-consumer-discovery-audit.json and future-consumer-adoption-audit.json | Future CRM discovery/adoption process is executable and guarded. |
 | `future-crm-real-adoption` | not-executed | matching labeled readiness report for a discovered future CRM candidate | A real future CRM app has adopted the library. |
 | `global-goal` | not-complete-globally | goal-completion-audit.json and library-acceptance-audit.json | The persistent goal is fully complete, including future CRM adoption. |

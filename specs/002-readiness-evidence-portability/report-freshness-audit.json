@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-15T10:41:44.316Z",
+  "generatedAt": "2026-07-15T17:26:32.783Z",
   "readiness": {
-    "generatedAt": "2026-07-15T10:41:26.195Z",
+    "generatedAt": "2026-07-15T17:25:30.494Z",
     "status": "fail"
   },
-  "status": "fail",
+  "status": "pass",
   "rows": [
     {
       "file": "release-candidate-audit.json",
-      "generatedAt": "2026-07-15T10:40:13.726Z",
+      "generatedAt": "2026-07-15T17:26:13.930Z",
       "acceptanceClaim": false,
-      "staleByTime": true,
+      "staleByTime": false,
       "contradictsReadiness": false,
-      "status": "fail"
+      "status": "pass"
     },
     {
       "file": "official-library-readiness-audit.json",
-      "generatedAt": "2026-07-15T10:41:29.646Z",
+      "generatedAt": "2026-07-15T17:26:13.831Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -25,7 +25,7 @@
     },
     {
       "file": "library-consumption-status.json",
-      "generatedAt": "2026-07-15T10:41:27.677Z",
+      "generatedAt": "2026-07-15T17:26:11.898Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -33,7 +33,7 @@
     },
     {
       "file": "crm-real-readiness-audit.json",
-      "generatedAt": "2026-07-15T10:41:28.456Z",
+      "generatedAt": "2026-07-15T17:26:12.443Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -41,7 +41,7 @@
     },
     {
       "file": "library-acceptance-audit.json",
-      "generatedAt": "2026-07-15T10:41:26.737Z",
+      "generatedAt": "2026-07-15T17:26:11.585Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -49,7 +49,7 @@
     },
     {
       "file": "goal-completion-audit.json",
-      "generatedAt": "2026-07-15T10:41:27.187Z",
+      "generatedAt": "2026-07-15T17:26:11.851Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,

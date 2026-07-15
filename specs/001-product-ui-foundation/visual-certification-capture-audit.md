@@ -1,6 +1,6 @@
 # Visual Certification Capture Audit
 
-Generated: 2026-07-15T10:34:02.639Z
+Generated: 2026-07-15T17:18:30.764Z
 
 Status: pass-captured-not-certified
 
@@ -21,7 +21,7 @@ This report records reproducible source-sized Storybook screenshots and raw pixe
 | `67_round-4.1N_billing_03_add-ons-taliya-aprovado.png` | `crm-image-coverage-billing--image-67-billing-add-ons` | captured | valid | 1448x1086 | 9.63 | 5.85% |
 | `66_round-4.1N_billing_02_faturas-taliya-aprovado.png` | `crm-image-coverage-billing--image-66-billing-faturas` | captured | valid | 1448x1086 | 9.38 | 5.76% |
 | `21_round-4.1B_operacao_01_kanban-geral.png.png` | `crm-image-coverage-operação--image-21-kanban-geral` | captured | valid | 1448x1086 | 13.08 | 9.12% |
-| `22_round-4.1B_operacao_02_kanban-com-drawer.png` | `crm-image-coverage-operação--image-22-kanban-com-drawer` | captured | valid | 1448x1086 | 19.11 | 11.76% |
+| `22_round-4.1B_operacao_02_kanban-com-drawer.png` | `crm-image-coverage-operação--image-22-kanban-com-drawer` | captured | valid | 1448x1086 | 19.16 | 11.77% |
 | `23_round-4.1C_tarefas_01_lista-detalhe.png.png` | `crm-image-coverage-tarefas--image-23-lista-detalhe` | captured | valid | 1448x1086 | 12.25 | 11.54% |
 | `24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png` | `crm-image-coverage-checklists--image-24-lista-execucao-detalhe` | captured | valid | 1491x1055 | 11.98 | 7.26% |
 | `24_round-4.1D_inbox_01_conversa-aberta.png.png` | `crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta` | captured | valid | 1448x1086 | 12.68 | 8.88% |
@@ -33,7 +33,7 @@ This report records reproducible source-sized Storybook screenshots and raw pixe
 | `30_round-4.1F_financeiro_01_visao-geral-filas.png.png` | `crm-image-coverage-financeiro--image-30-visao-geral-filas` | captured | valid | 1672x941 | 11.56 | 7.15% |
 | `31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png` | `crm-image-coverage-reposições--image-31-fluxo-encaixe` | captured | valid | 1448x1086 | 11.90 | 7.32% |
 | `32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png` | `crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca` | captured | valid | 1672x941 | 15.53 | 9.44% |
-| `33_round-4.1F_financeiro_03_kanban-financeiro.png.png` | `crm-image-coverage-financeiro--image-33-financeiro-kanban` | captured | valid | 1672x941 | 11.04 | 7.50% |
+| `33_round-4.1F_financeiro_03_kanban-financeiro.png.png` | `crm-image-coverage-financeiro--image-33-financeiro-kanban` | captured | valid | 1672x941 | 11.06 | 7.50% |
 | `34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png` | `crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer` | captured | valid | 1448x1086 | 13.23 | 8.30% |
 | `35_round-4.1F_turmas_01_lista-detalhe.png.png` | `crm-image-coverage-agenda--image-35-turmas-lista-detalhe` | captured | valid | 1448x1086 | 12.49 | 7.35% |
 | `36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png` | `crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio` | captured | valid | 1448x1086 | 12.76 | 6.96% |

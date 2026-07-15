@@ -76,7 +76,7 @@ const storybookUrl = optionValue("--storybook-url", "http://127.0.0.1:6006").rep
 const captureMode = optionValue("--storybook-mode", "static");
 const chromePath = optionValue("--chrome", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
 const outputDir = resolve(root, optionValue("--output-dir", "tmp/visual-certification-current-batch"));
-const concurrency = Math.max(1, Number.parseInt(optionValue("--concurrency", "3"), 10) || 3);
+const concurrency = Math.max(1, Number.parseInt(optionValue("--concurrency", "1"), 10) || 1);
 const limit = Math.max(0, Number.parseInt(optionValue("--limit", "0"), 10) || 0);
 const imageFilter = optionValue("--image", "");
 

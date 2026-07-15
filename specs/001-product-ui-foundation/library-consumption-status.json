@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T10:59:52.910Z",
+  "generatedAt": "2026-07-15T17:26:11.898Z",
   "status": "fail",
   "currentInternalLibraryAccepted": false,
   "currentInternalConsumptionPass": true,
@@ -89,12 +89,6 @@
     "goal-completion"
   ],
   "missingReadinessGateIds": [
-    "consumer-integration",
-    "consumer-package-sync",
-    "consumer-vendor-versioning",
-    "consumer-page-kit",
-    "consumer-runtime",
-    "consumer-config-versioning",
     "goal-completion"
   ],
   "rows": [
@@ -132,7 +126,7 @@
       "id": "aggregate-readiness",
       "status": "fail",
       "evidence": "library-readiness-gate.json",
-      "meaning": "Readiness is missing required gates: consumer-integration, consumer-package-sync, consumer-vendor-versioning, consumer-page-kit, consumer-runtime, consumer-config-versioning, goal-completion."
+      "meaning": "Readiness is missing required gates: goal-completion."
     },
     {
       "id": "future-crm-process",

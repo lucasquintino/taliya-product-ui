@@ -1,6 +1,6 @@
 # Library Acceptance Audit
 
-Generated: 2026-07-15T10:59:52.591Z
+Generated: 2026-07-15T17:26:11.585Z
 
 Status: fail
 
@@ -37,7 +37,7 @@ Global goal status: `not-complete-globally`
 | Taliya Internal avoids active local visual clones | proven-for-current-internal | pass |
 | Taliya Internal uses official shell, filters, tables, kanban, drawers, panels, and state primitives | proven-for-current-internal | pass |
 | Taliya Internal route pages are fully covered by the official page-kit adoption map | proven-for-current-internal | pass |
-| Taliya Internal owns the same consumer readiness config model future CRM will use | failed | fail |
+| Taliya Internal owns the same consumer readiness config model future CRM will use | proven-for-current-internal | pass |
 | Taliya Internal consumer readiness configs are versioned in the consumer repository | proven-for-current-internal | pass |
 | Internal runtime still works after migration | proven-for-current-internal | pass |
 
