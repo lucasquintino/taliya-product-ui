@@ -124,7 +124,7 @@
     "library-acceptance:audit:negative-probe": "node scripts/probe-library-acceptance-false-positive.mjs",
     "test": "corepack pnpm -r test && corepack pnpm --filter @taliya/docs test:smoke",
     "lint": "corepack pnpm -r lint",
-    "typecheck": "corepack pnpm -r typecheck",
+    "typecheck": "corepack pnpm -r --filter \"./packages/**\" build && corepack pnpm -r typecheck",
     "tokens:audit": "node scripts/audit-design-tokens.mjs --check",
     "tokens:audit:update": "node scripts/audit-design-tokens.mjs",
     "storybook-anatomy:audit": "node scripts/audit-storybook-anatomy.mjs --check",
