@@ -29,6 +29,25 @@ if (process.platform === "win32" && !corepackScript) {
   process.exit(1);
 }
 
+for (const packageName of packages) {
+  const packageDir = resolve(rootDir, "packages", packageName);
+  rmSync(resolve(packageDir, "dist"), { recursive: true, force: true });
+  rmSync(resolve(packageDir, "tsconfig.tsbuildinfo"), { force: true });
+}
+
+const buildResult = spawnSync(
+  corepackScript ? process.execPath : "corepack",
+  [...(corepackScript ? [corepackScript] : []), "pnpm", "-r", "--filter", "./packages/**", "build"],
+  {
+    cwd: rootDir,
+    stdio: "inherit"
+  }
+);
+
+if (buildResult.status !== 0) {
+  process.exit(buildResult.status ?? 1);
+}
+
 mkdirSync(outputDir, { recursive: true });
 for (const entry of readdirSync(outputDir)) {
   if (/^taliya-(?:tokens|ui|crm)-.+\.tgz$/.test(entry)) rmSync(resolve(outputDir, entry));
