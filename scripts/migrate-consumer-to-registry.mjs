@@ -72,6 +72,12 @@ if (write) {
   const originalPackageJson = readFileSync(packageJsonPath, "utf8");
   const originalReadinessConfig = readFileSync(readinessConfigPath, "utf8");
   const originalPackageLock = existsSync(packageLockPath) ? readFileSync(packageLockPath, "utf8") : null;
+  const restoreConsumerManifests = () => {
+    writeFileSync(packageJsonPath, originalPackageJson);
+    writeFileSync(readinessConfigPath, originalReadinessConfig);
+    if (originalPackageLock === null) rmSync(packageLockPath, { force: true });
+    else writeFileSync(packageLockPath, originalPackageLock);
+  };
 
   packageJson.dependencies = packageJson.dependencies ?? {};
   for (const row of rows) packageJson.dependencies[row.name] = row.expected;
@@ -81,12 +87,31 @@ if (write) {
 
   const install = spawnSync("npm", ["install"], { cwd: consumerRoot, stdio: "inherit" });
   if (install.status !== 0 || install.error) {
-    writeFileSync(packageJsonPath, originalPackageJson);
-    writeFileSync(readinessConfigPath, originalReadinessConfig);
-    if (originalPackageLock === null) rmSync(packageLockPath, { force: true });
-    else writeFileSync(packageLockPath, originalPackageLock);
+    restoreConsumerManifests();
     console.error("Registry migration failed during npm install; consumer manifests were restored.");
     process.exit(install.status ?? 1);
+  }
+
+  const installedLockfile = existsSync(packageLockPath)
+    ? JSON.parse(readFileSync(packageLockPath, "utf8"))
+    : null;
+  const installationPass = packageSpecs.every((packageSpec) => {
+    const rootRange = installedLockfile?.packages?.[""]?.dependencies?.[packageSpec.name];
+    const lockEntry = installedLockfile?.packages?.[`node_modules/${packageSpec.name}`];
+    const installedPath = resolve(consumerRoot, "node_modules", ...packageSpec.name.split("/"), "package.json");
+    const installedPackage = existsSync(installedPath) ? JSON.parse(readFileSync(installedPath, "utf8")) : null;
+    return (
+      rootRange === expectedRange &&
+      lockEntry?.version === version &&
+      typeof lockEntry?.resolved === "string" &&
+      lockEntry.resolved.startsWith("https://registry.npmjs.org/") &&
+      installedPackage?.version === version
+    );
+  });
+  if (!installationPass) {
+    restoreConsumerManifests();
+    console.error("Registry migration produced incomplete registry adoption; consumer manifests were restored.");
+    process.exit(1);
   }
 }
 

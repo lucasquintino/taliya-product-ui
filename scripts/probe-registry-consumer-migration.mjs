@@ -29,7 +29,7 @@ function publicationReport(complete) {
   };
 }
 
-function createFixture(name, npmExitCode) {
+function createFixture(name, npmMode) {
   const consumerRoot = resolve(fixtureRoot, name, "consumer");
   const binRoot = resolve(fixtureRoot, name, "bin");
   const registryReportPath = resolve(fixtureRoot, name, "registry.json");
@@ -51,9 +51,42 @@ function createFixture(name, npmExitCode) {
   writeJson(registryReportPath, publicationReport(true));
   mkdirSync(binRoot, { recursive: true });
   const npmPath = resolve(binRoot, "npm");
+  const expectedRange = `^${version}`;
+  const registryDependencies = Object.fromEntries(packageSpecs.map((packageSpec) => [packageSpec.name, expectedRange]));
+  const registryLock = {
+    name: packageJson.name,
+    lockfileVersion: 3,
+    packages: {
+      "": { dependencies: registryDependencies },
+      ...Object.fromEntries(packageSpecs.map((packageSpec) => [
+        `node_modules/${packageSpec.name}`,
+        {
+          version,
+          resolved: `https://registry.npmjs.org/${packageSpec.name}/-/${packageSpec.name.split("/")[1]}-${version}.tgz`
+        }
+      ]))
+    }
+  };
+  const installedWrites = packageSpecs.map((packageSpec) => ({
+    directory: resolve(consumerRoot, "node_modules", ...packageSpec.name.split("/")),
+    packageJson: { name: packageSpec.name, version }
+  }));
+  const successBody = `
+writeFileSync(${JSON.stringify(resolve(consumerRoot, "package-lock.json"))}, ${JSON.stringify(`${JSON.stringify(registryLock, null, 2)}\n`)});
+for (const item of ${JSON.stringify(installedWrites)}) {
+  mkdirSync(item.directory, { recursive: true });
+  writeFileSync(resolve(item.directory, "package.json"), JSON.stringify(item.packageJson));
+}
+`;
   writeFileSync(
     npmPath,
-    `#!/bin/sh\nprintf 'called\\n' > "${resolve(consumerRoot, "npm-called.txt")}"\nprintf '{"mutated":true}\\n' > "${resolve(consumerRoot, "package-lock.json")}"\nexit ${npmExitCode}\n`
+    `#!/usr/bin/env node
+import { mkdirSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+writeFileSync(${JSON.stringify(resolve(consumerRoot, "npm-called.txt"))}, "called\\n");
+${npmMode === "success" ? successBody : `writeFileSync(${JSON.stringify(resolve(consumerRoot, "package-lock.json"))}, '{"mutated":true}\\n');`}
+process.exit(${npmMode === "failure" ? 23 : 0});
+`
   );
   chmodSync(npmPath, 0o755);
 
@@ -96,7 +129,7 @@ function assert(condition, message, result) {
 rmSync(fixtureRoot, { recursive: true, force: true });
 
 try {
-  const incomplete = createFixture("incomplete-publication", 0);
+  const incomplete = createFixture("incomplete-publication", "success");
   writeJson(incomplete.registryReportPath, publicationReport(false));
   const incompleteResult = runMigration(incomplete);
   assert(incompleteResult.status !== 0, "Migration accepted incomplete per-package publication evidence.", incompleteResult);
@@ -106,7 +139,7 @@ try {
     incompleteResult
   );
 
-  const success = createFixture("success", 0);
+  const success = createFixture("success", "success");
   const successResult = runMigration(success);
   assert(successResult.status === 0, "Migration failed with complete publication evidence.", successResult);
   const migratedPackage = JSON.parse(readFileSync(resolve(success.consumerRoot, "package.json"), "utf8"));
@@ -122,7 +155,17 @@ try {
     successResult
   );
 
-  const rollback = createFixture("rollback", 23);
+  const incompleteInstall = createFixture("incomplete-install", "incomplete");
+  const incompleteInstallResult = runMigration(incompleteInstall);
+  assert(incompleteInstallResult.status !== 0, "Migration accepted an incomplete install with a zero npm exit code.", incompleteInstallResult);
+  assert(
+    readFileSync(resolve(incompleteInstall.consumerRoot, "package.json"), "utf8") === `${JSON.stringify(incompleteInstall.packageJson, null, 2)}\n` &&
+      readFileSync(resolve(incompleteInstall.consumerRoot, "package-lock.json"), "utf8") === `${JSON.stringify(incompleteInstall.packageLock, null, 2)}\n`,
+    "Incomplete registry adoption did not restore consumer manifests.",
+    incompleteInstallResult
+  );
+
+  const rollback = createFixture("rollback", "failure");
   const rollbackResult = runMigration(rollback);
   assert(rollbackResult.status !== 0, "Migration unexpectedly passed after npm install failed.", rollbackResult);
   assert(
