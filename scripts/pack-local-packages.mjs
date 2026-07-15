@@ -1,6 +1,5 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
-import { delimiter } from "node:path";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
@@ -17,17 +16,7 @@ function optionValue(name, fallback) {
 
 const outputDir = resolve(rootDir, optionValue("--output-dir", "dist-packages"));
 const packages = ["tokens", "ui", "crm"];
-const corepackScript =
-  process.platform === "win32"
-    ? process.env.PATH?.split(delimiter)
-        .map((entry) => join(entry, "node_modules", "corepack", "dist", "corepack.js"))
-        .find((candidate) => existsSync(candidate))
-    : undefined;
-
-if (process.platform === "win32" && !corepackScript) {
-  console.error("Unable to locate corepack.js from PATH.");
-  process.exit(1);
-}
+const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
 
 for (const packageName of packages) {
   const packageDir = resolve(rootDir, "packages", packageName);
@@ -36,8 +25,8 @@ for (const packageName of packages) {
 }
 
 const buildResult = spawnSync(
-  corepackScript ? process.execPath : "corepack",
-  [...(corepackScript ? [corepackScript] : []), "pnpm", "-r", "--filter", "./packages/**", "build"],
+  pnpmCommand,
+  ["-r", "--filter", "./packages/**", "build"],
   {
     cwd: rootDir,
     stdio: "inherit"
@@ -56,8 +45,8 @@ for (const entry of readdirSync(outputDir)) {
 for (const packageName of packages) {
   const packageDir = resolve(rootDir, "packages", packageName);
   const result = spawnSync(
-    corepackScript ? process.execPath : "corepack",
-    [...(corepackScript ? [corepackScript] : []), "pnpm", "pack", "--pack-destination", outputDir],
+    pnpmCommand,
+    ["pack", "--pack-destination", outputDir],
     {
       cwd: packageDir,
       stdio: "inherit"
