@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T17:26:11.851Z",
+  "generatedAt": "2026-07-15T18:16:36.909Z",
   "date": "2026-07-15",
   "goal": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   "trueGoal": {
@@ -38,7 +38,7 @@
     },
     {
       "requirement": "Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts",
-      "status": "failed",
+      "status": "proven",
       "evidence": [
         "package-artifacts:audit sourcePublishable/packedPublishable",
         "package-artifacts:audit sourceCssSideEffects/packedCssSideEffects",
@@ -162,13 +162,13 @@
     },
     {
       "requirement": "Technical release candidate gate passes",
-      "status": "proven-for-current-scope",
+      "status": "not-run",
       "evidence": [
         "release-candidate:audit",
         "release-candidate-audit.md",
         "required gates pass: typecheck, lint, test, build, readiness, storybook-anatomy, storybook-anatomy-override-probe, domain-wrappers, domain-wrappers-direct-drawer-probe, future-consumer-discovery, future-consumer-discovery-negative-probe, future-consumer-discovery-partial-probe, future-consumer-discovery-positive-probe, future-consumer-adoption, future-consumer-adoption-positive-probe, future-consumer-adoption-mismatch-probe, future-consumer-adoption-negative-probe, future-crm-adoption-handoff, consumer-starter-templates-route-contract-probe, consumer-package-sync-negative-probe, consumer-installed-contract-markers, consumer-page-kit-shell-only-route-probe, consumer-page-kit-wrapper-contract-probe, consumer-page-kit-route-wrapper-contract-probe, consumer-page-kit-mismatched-route-contract-probe, consumer-page-kit-default-identifier-route-probe, consumer-page-kit-uncovered-route-probe, consumer-page-kit-path-traversal-probe, consumer-readiness-config-path-traversal-probe, certification-scope, certification-scope-positive-probe, certification-scope-negative-probe, visual-certification-backlog-update, visual-certification-backlog, remaining-page-coverage-update, remaining-page-coverage, remaining-page-coverage-family-contract-probe, kanban-family-update, kanban-family, kanban-family-negative-probe, dashboard-family-update, dashboard-family, dashboard-family-negative-probe, source-assets-update, source-assets, source-assets-reconciliation-update, source-assets-reconciliation, source-assets-reconciliation-nested-exclusion-probe, full-image-page-coverage-update, full-image-page-coverage, full-image-page-coverage-missing-story-probe, full-image-page-coverage-missing-source-marker-probe, full-image-page-coverage-misplaced-source-marker-probe, full-image-page-coverage-nonofficial-import-probe, full-image-page-coverage-unmapped-map-target-probe, reference-sheet-coverage-update, reference-sheet-coverage, reference-sheet-coverage-missing-story-probe, visual-certification-plan, visual-certification-plan-negative-probe, visual-certification-plan-missing-artifact-probe, visual-product-review-update, visual-product-review, visual-certification-capture, visual-certification-capture-source-contract-probe, audit-checks-read-only-probe, readiness-refresh-update, readiness-refresh, goal-completion-update, library-acceptance-update, library-acceptance, library-acceptance-positive-probe, library-acceptance-negative-probe, goal-completion-refresh, library-consumption-status-update, library-consumption-status, library-consumption-status-positive-probe, library-consumption-status-global-complete-probe, library-consumption-status-stale-release-probe, library-consumption-status-stale-readiness-probe, library-consumption-status-negative-probe, crm-real-readiness-update, crm-real-readiness, crm-real-readiness-stale-remaining-page-coverage-probe, local-release-manifest-update, local-release-manifest, consumer-dependencies-sync-check, consumer-dependencies-sync-stale-manifest-probe, consumer-package-install-plan, consumer-package-install-missing-vendor-probe, consumer-lockfile, consumer-lockfile-stale-probe, consumer-refresh, consumer-vendor-sync-check, consumer-vendor-sync-stale-manifest-probe, release-policy-update, release-policy, release-policy-negative-probe, release-channel-update, release-channel, official-library-readiness-update, official-library-readiness, goal-completion",
-        "release-candidate self-report check deferred while aggregate gate is in progress",
-        "missing/failing release gates: none"
+        "release-candidate self-report check active",
+        "missing/failing release gates: readiness, source-assets-update, source-assets, source-assets-reconciliation-update, source-assets-reconciliation, readiness-refresh, library-acceptance, library-consumption-status, crm-real-readiness, official-library-readiness-update, official-library-readiness"
       ]
     },
     {
@@ -185,7 +185,7 @@
     },
     {
       "requirement": "Library consumption status handoff is current and coherent",
-      "status": "proven-for-current-internal",
+      "status": "failed",
       "evidence": [
         "library-consumption-status:audit",
         "library-consumption-status.md",
@@ -202,7 +202,7 @@
     },
     {
       "requirement": "CRM real readiness handoff proves the library can start the real CRM",
-      "status": "proven-for-current-scope",
+      "status": "failed",
       "evidence": [
         "crm-real-readiness:audit",
         "crm-real-readiness-audit.md",
@@ -217,7 +217,7 @@
     },
     {
       "requirement": "Official library readiness handoff proves the packages can be consumed as the reusable UI source",
-      "status": "proven-for-current-scope",
+      "status": "failed",
       "evidence": [
         "official-library-readiness:audit",
         "official-library-readiness-audit.md",
@@ -251,15 +251,15 @@
       "evidence": [
         "release-channel:audit",
         "release-channel-audit.md",
-        "status=fail",
-        "localTarballChannelReady=false",
-        "registryReady=true",
+        "status=pass-local-release-channel",
+        "localTarballChannelReady=true",
+        "registryReady=false",
         "releasePolicyStatus=pass-registry-policy",
         "currentVersion=0.1.0",
         "consumerPackageSyncStatus=pass",
         "consumerVendorVersioningStatus=pass",
         "consumerConfigVersioningStatus=pass",
-        "registryBlockers=0"
+        "registryBlockers=2"
       ]
     },
     {

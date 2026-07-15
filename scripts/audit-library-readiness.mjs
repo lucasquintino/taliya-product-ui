@@ -110,6 +110,8 @@ function rootRelativeFromConsumer(value) {
 
 const readinessConfig = readReadinessConfig();
 const configValues = readinessConfig.values;
+const distributionChannel = configValues.distribution?.channel ?? "vendor-local-tarballs";
+const usesRegistryDistribution = distributionChannel === "npm-registry";
 const reportLabel = hasOption("--report-label") ? optionValue("--report-label", "") : configValues.reportLabel ?? "";
 const isDefaultInternalScope = consumerRoot === defaultConsumerRoot && !reportLabel;
 const consumerArgs = optionalArg("--consumer");
@@ -301,72 +303,78 @@ const gates = [
     commandText: "corepack pnpm future-crm-adoption-handoff:audit",
     proves: "future CRM adoption has a single audited handoff for candidate discovery, bootstrap, labeled evidence, and non-completion rules"
   },
-  {
+  ...(!usesRegistryDistribution ? [{
     id: "consumer-dependencies-sync",
     command: withConsumerArgs("scripts/sync-consumer-dependencies.mjs", vendorArgs),
     commandText: reportLabel ? `consumer dependency sync check (${reportLabel})` : "corepack pnpm consumer-dependencies:sync:check",
     proves: "target consumer package.json @taliya/* dependencies match the local release manifest tarball names"
-  },
-  ...(isDefaultInternalScope ? [{
+  }] : []),
+  ...(isDefaultInternalScope && !usesRegistryDistribution ? [{
     id: "consumer-dependencies-sync-stale-manifest-probe",
     command: [process.execPath, "scripts/probe-consumer-dependencies-stale-manifest.mjs"],
     commandText: "corepack pnpm consumer-dependencies:sync:stale-manifest-probe",
     proves: "stale consumer package.json tarball dependencies fail the manifest-driven dependency sync check"
   }] : []),
-  {
+  ...(!usesRegistryDistribution ? [{
     id: "consumer-package-install-plan",
     command: withConsumerArgs("scripts/install-consumer-packages.mjs", vendorArgs),
     commandText: reportLabel ? `consumer package install plan (${reportLabel})` : "corepack pnpm consumer-packages:install-plan",
     proves: "target consumer can reinstall the manifest-derived local package tarballs from its vendor directory"
-  },
-  ...(isDefaultInternalScope ? [{
+  }] : []),
+  ...(isDefaultInternalScope && !usesRegistryDistribution ? [{
     id: "consumer-package-install-missing-vendor-probe",
     command: [process.execPath, "scripts/probe-consumer-package-install-missing-vendor.mjs"],
     commandText: "corepack pnpm consumer-packages:install:missing-vendor-probe",
     proves: "a consumer package install plan fails when manifest-derived vendor tarballs are missing"
   }] : []),
-  {
+  ...(!usesRegistryDistribution ? [{
     id: "consumer-lockfile",
     command: withConsumerArgs("scripts/audit-consumer-lockfile.mjs", vendorArgs),
     commandText: reportLabel ? `consumer lockfile audit (${reportLabel})` : "corepack pnpm consumer-lockfile:audit",
     proves: "target consumer package-lock.json local Taliya package entries match the local release manifest"
-  },
-  ...(isDefaultInternalScope ? [{
+  }] : []),
+  ...(isDefaultInternalScope && !usesRegistryDistribution ? [{
     id: "consumer-lockfile-stale-probe",
     command: [process.execPath, "scripts/probe-consumer-lockfile-stale.mjs"],
     commandText: "corepack pnpm consumer-lockfile:audit:stale-probe",
     proves: "stale package-lock resolved tarballs fail the consumer lockfile audit"
   }] : []),
-  {
+  ...(!usesRegistryDistribution ? [{
     id: "consumer-refresh",
     command: withConsumerArgs("scripts/refresh-consumer-packages.mjs", vendorArgs),
     commandText: reportLabel ? `consumer refresh audit (${reportLabel})` : "corepack pnpm consumer-refresh:audit",
     proves: "target consumer can run the manifest-driven package refresh flow end-to-end in check mode"
-  },
+  }] : []),
   {
     id: "consumer-integration",
     command: withConsumerArgs("scripts/audit-consumer-integration.mjs", vendorArgs),
     commandText: reportLabel ? `consumer integration audit (${reportLabel})` : "corepack pnpm consumer:audit",
     proves: "target consumer installs public packages and avoids local visual clones"
   },
-  {
+  ...(!usesRegistryDistribution ? [{
     id: "consumer-package-sync",
     command: withConsumerArgs("scripts/audit-consumer-package-sync.mjs", vendorArgs),
     commandText: reportLabel ? `consumer package sync audit (${reportLabel})` : "corepack pnpm consumer-package-sync:audit",
     proves: "target consumer vendor tarballs and installed public package files match the latest local package artifacts"
-  },
-  ...(isDefaultInternalScope ? [{
+  }] : []),
+  ...(isDefaultInternalScope && !usesRegistryDistribution ? [{
     id: "consumer-package-sync-negative-probe",
     command: [process.execPath, "scripts/probe-consumer-package-sync-stale-installed.mjs"],
     commandText: "corepack pnpm consumer-package-sync:audit:negative-probe",
     proves: "a consumer with fresh vendor tarballs but stale installed package files fails package sync"
   }] : []),
-  {
+  ...(!usesRegistryDistribution ? [{
     id: "consumer-vendor-versioning",
     command: withConsumerArgs("scripts/audit-consumer-vendor-versioning.mjs", vendorArgs),
     commandText: reportLabel ? `consumer vendor versioning audit (${reportLabel})` : "corepack pnpm consumer-vendor-versioning:audit",
     proves: "target consumer vendor tarballs are synced and tracked in the consumer repository"
-  },
+  }] : []),
+  ...(usesRegistryDistribution ? [{
+    id: "registry-consumer-adoption",
+    command: withConsumerArgs("scripts/audit-registry-consumer-adoption.mjs"),
+    commandText: reportLabel ? `registry consumer adoption audit (${reportLabel})` : "corepack pnpm registry-consumer-adoption:audit",
+    proves: "target consumer dependencies, lockfile, installed packages, and readiness config use the published npm release"
+  }] : []),
   {
     id: "consumer-page-kit",
     command: withConsumerArgs("scripts/audit-consumer-page-kit.mjs", pageKitArgs),
@@ -971,6 +979,7 @@ const report = {
   checkMode,
   consumerRoot,
   reportLabel: reportLabel || "default",
+  distributionChannel,
   readinessConfig: readinessConfig.source || "none",
   rows: rows.map(({ command, ...row }) => row),
   skipped: gates.slice(rows.length).map((gate) => ({ id: gate.id, commandText: gate.commandText, proves: gate.proves }))
@@ -998,6 +1007,8 @@ This gate aggregates the executable checks that prove current reusable-library r
 Consumer: \`${report.consumerRoot}\`
 
 Report label: \`${report.reportLabel}\`
+
+Distribution channel: \`${report.distributionChannel}\`
 
 Readiness config: \`${report.readinessConfig}\`
 

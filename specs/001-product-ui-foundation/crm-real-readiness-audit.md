@@ -1,6 +1,6 @@
 # CRM Real Readiness Audit
 
-Generated: 2026-07-15T17:26:12.443Z
+Generated: 2026-07-15T18:16:06.706Z
 
 Status: fail
 

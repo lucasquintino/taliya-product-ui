@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T17:26:13.831Z",
+  "generatedAt": "2026-07-15T18:16:08.127Z",
   "status": "fail",
   "officialConsumerReady": false,
   "globalGoalComplete": false,
@@ -10,10 +10,10 @@
   "realFutureCrmAdoptionExecuted": false,
   "releaseCandidateStatus": "fail",
   "releaseCandidateGateCount": 103,
-  "releaseChannelStatus": "fail",
+  "releaseChannelStatus": "pass-local-release-channel",
   "releasePolicyStatus": "pass-registry-policy",
-  "localTarballChannelReady": false,
-  "registryReady": true,
+  "localTarballChannelReady": true,
+  "registryReady": false,
   "registryManualItems": [
     "Choose the target registry and access model before publishing.",
     "Run npm provenance/publish steps from CI or a controlled release machine.",
@@ -28,9 +28,9 @@
     },
     {
       "id": "package-artifacts",
-      "status": "fail",
+      "status": "pass",
       "evidence": "package-artifacts-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "package-boundaries",
@@ -82,9 +82,9 @@
     },
     {
       "id": "release-channel",
-      "status": "fail",
+      "status": "pass",
       "evidence": "release-channel-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "release-candidate",
@@ -94,9 +94,9 @@
     },
     {
       "id": "goal-completion",
-      "status": "fail",
+      "status": "pass",
       "evidence": "goal-completion-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     }
   ],
   "packageRows": [

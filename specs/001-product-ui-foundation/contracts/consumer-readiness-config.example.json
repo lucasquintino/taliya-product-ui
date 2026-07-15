@@ -1,5 +1,9 @@
 {
   "reportLabel": "future-crm",
+  "distribution": {
+    "channel": "vendor-local-tarballs",
+    "version": "0.1.0"
+  },
   "vendor": "vendor/taliya-product-ui",
   "pageKitConfig": "taliya-page-kit.config.json",
   "commands": ["typecheck", "lint", "test", "build"]

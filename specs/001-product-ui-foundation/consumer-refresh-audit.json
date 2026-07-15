@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-15T17:44:55.099Z",
+  "generatedAt": "2026-07-15T18:16:07.640Z",
   "status": "pass",
   "mode": "check",
-  "checkMode": false,
+  "checkMode": true,
   "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
   "vendor": "vendor/taliya-product-ui",
   "manifest": "dist-packages/taliya-product-ui-local-manifest.json",
@@ -14,7 +14,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 60,
+      "durationMs": 50,
       "stdoutTail": [
         "Consumer vendor sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "unchanged: vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
@@ -30,7 +30,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 40,
+      "durationMs": 39,
       "stdoutTail": [
         "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "unchanged: @taliya/tokens -> file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
@@ -45,7 +45,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 40,
+      "durationMs": 39,
       "stdoutTail": [
         "Consumer package install plan for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "ready: @taliya/tokens dependency-ok tarball-ok",
@@ -76,7 +76,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 73,
+      "durationMs": 81,
       "stdoutTail": [
         "Consumer package sync audit: pass",
         "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/001-product-ui-foundation/consumer-package-sync-audit.md",

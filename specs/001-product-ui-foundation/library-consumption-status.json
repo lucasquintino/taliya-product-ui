@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T17:26:11.898Z",
+  "generatedAt": "2026-07-15T18:16:06.164Z",
   "status": "fail",
   "currentInternalLibraryAccepted": false,
   "currentInternalConsumptionPass": true,
@@ -88,9 +88,7 @@
     "visual-certification-plan-negative-probe",
     "goal-completion"
   ],
-  "missingReadinessGateIds": [
-    "goal-completion"
-  ],
+  "missingReadinessGateIds": [],
   "rows": [
     {
       "id": "current-internal-accepted",
@@ -126,7 +124,7 @@
       "id": "aggregate-readiness",
       "status": "fail",
       "evidence": "library-readiness-gate.json",
-      "meaning": "Readiness is missing required gates: goal-completion."
+      "meaning": "Readiness is missing required gates: ."
     },
     {
       "id": "future-crm-process",

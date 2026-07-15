@@ -1,6 +1,6 @@
 # Library Acceptance Audit
 
-Generated: 2026-07-15T17:26:11.585Z
+Generated: 2026-07-15T18:16:05.851Z
 
 Status: fail
 
@@ -19,7 +19,7 @@ Global goal status: `not-complete-globally`
 | Gate | Status | Proves |
 | --- | --- | --- |
 | `current-readiness` | fail | aggregate readiness gate passed for the current Internal/library scope |
-| `current-internal-library-readiness` | fail | current taliya-internal can consume official packages/page-kit without local visual clones |
+| `current-internal-library-readiness` | pass | current taliya-internal can consume official packages/page-kit without local visual clones |
 | `future-crm-adoption-executed` | not-executed | future CRM adoption is process-proven only until a real candidate exists and runs labeled gates |
 | `source-image-visual-parity` | scoped-out-by-product-acceptance | product explicitly accepted current Internal/library readiness as the scoped completion bar |
 
@@ -28,7 +28,7 @@ Global goal status: `not-complete-globally`
 | Requirement | Evidence status | Result |
 | --- | --- | --- |
 | Standalone package structure for tokens, primitives, and CRM compositions | proven | pass |
-| Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts | failed | fail |
+| Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts | proven | pass |
 | Public page kit exported, story-covered, and documented | proven-for-current-kit | pass |
 | Runtime standard page-kit manifest is available to consumers | proven-for-current-internal-and-fixtures | pass |
 | Component architecture supports reuse | proven-for-current-scope | pass |
@@ -44,8 +44,8 @@ Global goal status: `not-complete-globally`
 ## Summary
 
 - Readiness: `fail`
-- Goal verdict: `readiness-regression`
-- Current Internal readiness: `regressed`
+- Goal verdict: `not-complete-globally`
+- Current Internal readiness: `proven`
 - Future CRM adoption: `not-executed`
 - Global source-image parity: `scoped-out-by-product-acceptance`
 - Future CRM candidates adopted: 0/0

@@ -1,6 +1,6 @@
 # Official Library Readiness Audit
 
-Generated: 2026-07-15T17:26:13.831Z
+Generated: 2026-07-15T18:16:08.127Z
 
 Status: fail
 
@@ -15,17 +15,17 @@ This report answers whether `taliya-product-ui` is ready to act as the official 
 - Global goal complete: `false`
 - Package version: `0.1.0`
 - Release-candidate gates: `103`
-- Release channel: `fail`
+- Release channel: `pass-local-release-channel`
 - Release policy: `pass-registry-policy`
-- Local tarball channel ready: `false`
-- Registry ready: `true`
+- Local tarball channel ready: `true`
+- Registry ready: `false`
 
 ## Gate Rows
 
 | Area | Status | Evidence | Note |
 | --- | --- | --- | --- |
 | `aggregate-readiness` | fail | library-readiness-gate.json | required gate report is not in an accepted state |
-| `package-artifacts` | fail | package-artifacts-audit.json | required gate report is not in an accepted state |
+| `package-artifacts` | pass | package-artifacts-audit.json | required gate report is in an accepted state |
 | `package-boundaries` | pass | package-boundaries-audit.json | required gate report is in an accepted state |
 | `public-api` | pass | public-api-audit.json | required gate report is in an accepted state |
 | `public-api-surface` | pass | public-api-surface-audit.json | required gate report is in an accepted state |
@@ -34,9 +34,9 @@ This report answers whether `taliya-product-ui` is ready to act as the official 
 | `library-consumption` | fail | library-consumption-status.json | required gate report is not in an accepted state |
 | `crm-real-readiness` | fail | crm-real-readiness-audit.json | required gate report is not in an accepted state |
 | `release-policy` | pass | release-policy-audit.json | required gate report is in an accepted state |
-| `release-channel` | fail | release-channel-audit.json | required gate report is not in an accepted state |
+| `release-channel` | pass | release-channel-audit.json | required gate report is in an accepted state |
 | `release-candidate` | pass | release-candidate-audit.json | required gate report is in an accepted state |
-| `goal-completion` | fail | goal-completion-audit.json | required gate report is not in an accepted state |
+| `goal-completion` | pass | goal-completion-audit.json | required gate report is in an accepted state |
 | `@taliya/tokens` | pass | 0.1.0 | package metadata supports official consumer installation |
 | `@taliya/ui` | pass | 0.1.0 | package metadata supports official consumer installation |
 | `@taliya/crm` | pass | 0.1.0 | package metadata supports official consumer installation |
