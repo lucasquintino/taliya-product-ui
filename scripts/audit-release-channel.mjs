@@ -46,6 +46,9 @@ const packageRows = packages.map((item) => {
 const packageArtifacts = readJson("specs/001-product-ui-foundation/package-artifacts-audit.json");
 const localReleaseManifest = readJson("specs/001-product-ui-foundation/local-release-manifest-audit.json");
 const releasePolicy = readJson("specs/001-product-ui-foundation/release-policy-audit.json");
+const registryPublication = fileExists("specs/001-product-ui-foundation/registry-publication-audit.json")
+  ? readJson("specs/001-product-ui-foundation/registry-publication-audit.json")
+  : null;
 const consumerPackageSync = readJson("specs/001-product-ui-foundation/consumer-package-sync-audit.json");
 const consumerVendorVersioning = readJson("specs/001-product-ui-foundation/consumer-vendor-versioning-audit.json");
 const consumerConfigVersioning = readJson("specs/001-product-ui-foundation/consumer-config-versioning-audit.json");
@@ -72,10 +75,16 @@ const localTarballChannelReady =
 
 const registryBlockers = [
   ...(releasePolicy.registryBlockers ?? []),
-  releasePolicy.status === "fail" ? "release policy contract is failing" : null
+  releasePolicy.status === "fail" ? "release policy contract is failing" : null,
+  registryPublication?.status !== "pass-published"
+    ? `npm registry publication is not proven for ${packageRows[0]?.version ?? "the current version"}`
+    : null
 ].filter(Boolean);
 
-const registryReady = releasePolicy.registryReady === true && registryBlockers.length === 0;
+const registryReady =
+  releasePolicy.registryReady === true &&
+  registryPublication?.status === "pass-published" &&
+  registryBlockers.length === 0;
 const status = localTarballChannelReady
   ? registryReady
     ? "pass-registry-release-channel"
@@ -96,6 +105,7 @@ const report = {
   currentVersion: packageRows[0]?.version ?? "",
   releasePolicyStatus: releasePolicy.status,
   releasePolicyPath: "specs/001-product-ui-foundation/contracts/release-policy.json",
+  registryPublicationStatus: registryPublication?.status ?? "missing",
   consumerPackageSyncStatus: consumerPackageSync.status,
   consumerVendorVersioningStatus: consumerVendorVersioning.status,
   consumerConfigVersioningStatus: consumerConfigVersioning.status,
@@ -126,6 +136,7 @@ This report separates the current local install channel from a future registry p
 - Local release manifest pass: \`${localReleaseManifestPass}\`
 - Local release manifest: \`${localReleaseManifest.manifestPath ?? "missing"}\`
 - Release policy: \`${releasePolicy.status}\`
+- Registry publication: \`${report.registryPublicationStatus}\`
 - Consumer package sync: \`${consumerPackageSync.status}\`
 - Consumer vendor versioning: \`${consumerVendorVersioning.status}\`
 - Consumer config versioning: \`${consumerConfigVersioning.status}\`

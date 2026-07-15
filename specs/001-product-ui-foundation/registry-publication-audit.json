@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-07-15T17:43:17.751Z",
+  "status": "not-published",
+  "registry": "https://registry.npmjs.org/",
+  "currentVersion": "0.1.0",
+  "versionsAligned": true,
+  "publishedPackageCount": 0,
+  "expectedPackageCount": 3,
+  "rows": [
+    {
+      "directory": "tokens",
+      "name": "@taliya/tokens",
+      "version": "0.1.0",
+      "metadataUrl": "https://registry.npmjs.org/%40taliya%2Ftokens/0.1.0",
+      "httpStatus": 404,
+      "published": false,
+      "metadataPass": false,
+      "tarball": null,
+      "integrity": null,
+      "reason": "package version is not published"
+    },
+    {
+      "directory": "ui",
+      "name": "@taliya/ui",
+      "version": "0.1.0",
+      "metadataUrl": "https://registry.npmjs.org/%40taliya%2Fui/0.1.0",
+      "httpStatus": 404,
+      "published": false,
+      "metadataPass": false,
+      "tarball": null,
+      "integrity": null,
+      "reason": "package version is not published"
+    },
+    {
+      "directory": "crm",
+      "name": "@taliya/crm",
+      "version": "0.1.0",
+      "metadataUrl": "https://registry.npmjs.org/%40taliya%2Fcrm/0.1.0",
+      "httpStatus": 404,
+      "published": false,
+      "metadataPass": false,
+      "tarball": null,
+      "integrity": null,
+      "reason": "package version is not published"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-07-15T17:26:13.742Z",
-  "status": "fail",
-  "localTarballChannelReady": false,
-  "registryReady": true,
-  "packageArtifactsPass": false,
+  "generatedAt": "2026-07-15T17:44:55.449Z",
+  "status": "pass-local-release-channel",
+  "localTarballChannelReady": true,
+  "registryReady": false,
+  "packageArtifactsPass": true,
   "localReleaseManifestPass": true,
   "localReleaseManifestPath": "dist-packages/taliya-product-ui-local-manifest.json",
   "sourceTarballsExist": true,
@@ -12,12 +12,15 @@
   "currentVersion": "0.1.0",
   "releasePolicyStatus": "pass-registry-policy",
   "releasePolicyPath": "specs/001-product-ui-foundation/contracts/release-policy.json",
+  "registryPublicationStatus": "not-published",
   "consumerPackageSyncStatus": "pass",
   "consumerVendorVersioningStatus": "pass",
   "consumerConfigVersioningStatus": "pass",
   "consumerInstalledPackageStatus": true,
   "consumerInstalledContractStatus": true,
-  "registryBlockers": [],
+  "registryBlockers": [
+    "npm registry publication is not proven for 0.1.0"
+  ],
   "packageRows": [
     {
       "name": "@taliya/tokens",

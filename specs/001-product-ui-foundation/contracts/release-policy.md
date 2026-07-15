@@ -31,7 +31,8 @@ Run:
 
 ```bash
 corepack pnpm release-policy:audit
+corepack pnpm registry-publication:audit:update
 corepack pnpm release-channel:audit
 ```
 
-`release-policy:audit` validates the contract shape and records whether the policy is current-local or registry-ready. It does not publish packages.
+`release-policy:audit` validates the configured policy and does not publish packages. `registry-publication:audit:update` verifies public npm metadata for the exact shared version; a dry run or configured workflow is not publication evidence. `release-channel:audit` keeps the local channel separate and cannot report registry readiness until all three public metadata rows pass.

@@ -366,10 +366,11 @@ Esse comando escreve `release-policy-audit.md/json` e valida `specs/001-product-
 Para separar canal local instalavel de publicacao em registry, rode:
 
 ```text
+corepack pnpm registry-publication:audit:update
 corepack pnpm release-channel:audit
 ```
 
-Esse comando escreve `release-channel-audit.md/json`; ele continua distinguindo tarballs locais sincronizados de publicacao real. A politica de registry pode estar pronta sem afirmar que o pacote foi publicado ou que consumidores ja migraram.
+O primeiro comando consulta os metadados publicos da versao compartilhada no npm e escreve `registry-publication-audit.md/json`; enquanto qualquer pacote responder `404`, ele termina com falha e registra `not-published`. O segundo escreve `release-channel-audit.md/json` e so marca `registryReady=true` quando os tres pacotes da versao exata possuem nome, versao, tarball e integrity validos no registry. A politica pode estar configurada sem afirmar publicacao ou migracao de consumidores.
 
 Fluxo de versao e publicacao:
 
