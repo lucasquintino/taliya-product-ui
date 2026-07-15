@@ -367,10 +367,12 @@ Para separar canal local instalavel de publicacao em registry, rode:
 
 ```text
 corepack pnpm registry-publication:audit:update
+corepack pnpm registry-consumer:migrate:check
+corepack pnpm registry-consumer-adoption:audit:update
 corepack pnpm release-channel:audit
 ```
 
-O primeiro comando consulta os metadados publicos da versao compartilhada no npm e escreve `registry-publication-audit.md/json`; enquanto qualquer pacote responder `404`, ele termina com falha e registra `not-published`. O segundo escreve `release-channel-audit.md/json` e so marca `registryReady=true` quando os tres pacotes da versao exata possuem nome, versao, tarball e integrity validos no registry. A politica pode estar configurada sem afirmar publicacao ou migracao de consumidores.
+O primeiro comando consulta os metadados publicos da versao compartilhada no npm e escreve `registry-publication-audit.md/json`; enquanto qualquer pacote responder `404`, ele termina com falha e registra `not-published`. Depois da publicacao, `registry-consumer:migrate` troca o Internal para o range compartilhado, instala e atualiza o lockfile; o modo `:check` nunca escreve. `registry-consumer-adoption:audit:update` exige package.json, lockfile, resolucao npm, instalacao e config do canal coerentes. `release-channel:audit` so marca `registryReady=true` quando publicacao e adocao real passam. A politica pode estar configurada sem afirmar esses fatos.
 
 Fluxo de versao e publicacao:
 

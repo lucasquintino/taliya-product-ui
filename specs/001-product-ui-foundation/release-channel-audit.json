@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T17:44:55.449Z",
+  "generatedAt": "2026-07-15T17:47:45.283Z",
   "status": "pass-local-release-channel",
   "localTarballChannelReady": true,
   "registryReady": false,
@@ -13,13 +13,15 @@
   "releasePolicyStatus": "pass-registry-policy",
   "releasePolicyPath": "specs/001-product-ui-foundation/contracts/release-policy.json",
   "registryPublicationStatus": "not-published",
+  "registryConsumerAdoptionStatus": "not-adopted",
   "consumerPackageSyncStatus": "pass",
   "consumerVendorVersioningStatus": "pass",
   "consumerConfigVersioningStatus": "pass",
   "consumerInstalledPackageStatus": true,
   "consumerInstalledContractStatus": true,
   "registryBlockers": [
-    "npm registry publication is not proven for 0.1.0"
+    "npm registry publication is not proven for 0.1.0",
+    "taliya-internal registry adoption is not proven"
   ],
   "packageRows": [
     {

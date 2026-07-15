@@ -32,7 +32,9 @@ Run:
 ```bash
 corepack pnpm release-policy:audit
 corepack pnpm registry-publication:audit:update
+corepack pnpm registry-consumer:migrate:check
+corepack pnpm registry-consumer-adoption:audit:update
 corepack pnpm release-channel:audit
 ```
 
-`release-policy:audit` validates the configured policy and does not publish packages. `registry-publication:audit:update` verifies public npm metadata for the exact shared version; a dry run or configured workflow is not publication evidence. `release-channel:audit` keeps the local channel separate and cannot report registry readiness until all three public metadata rows pass.
+`release-policy:audit` validates the configured policy and does not publish packages. `registry-publication:audit:update` verifies public npm metadata for the exact shared version; a dry run or configured workflow is not publication evidence. `registry-consumer:migrate:check` is the read-only migration preflight, and the write command refuses to run before publication evidence passes. `registry-consumer-adoption:audit:update` verifies registry ranges, lockfile URLs, installed versions, and the consumer distribution config. `release-channel:audit` keeps the local channel separate and cannot report registry readiness until publication and real Internal adoption both pass.

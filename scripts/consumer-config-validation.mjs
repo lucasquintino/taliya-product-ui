@@ -48,6 +48,19 @@ export function validateReadinessConfig(parsed) {
     if (!validCommands) errors.push("commands must be a comma-separated string or an array of non-empty strings");
   }
 
+  if (parsed.distribution !== undefined) {
+    if (!parsed.distribution || typeof parsed.distribution !== "object" || Array.isArray(parsed.distribution)) {
+      errors.push("distribution must be an object when present");
+    } else {
+      if (!["vendor-local-tarballs", "npm-registry"].includes(parsed.distribution.channel)) {
+        errors.push("distribution.channel must be vendor-local-tarballs or npm-registry");
+      }
+      if (!isNonEmptyString(parsed.distribution.version)) {
+        errors.push("distribution.version must be a non-empty string");
+      }
+    }
+  }
+
   return errors;
 }
 

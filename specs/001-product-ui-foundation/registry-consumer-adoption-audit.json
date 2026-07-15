@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-07-15T17:47:12.046Z",
+  "status": "not-adopted",
+  "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
+  "currentVersion": "0.1.0",
+  "registryPublicationPass": false,
+  "distributionConfigPass": false,
+  "noEffectiveVendorDependencies": false,
+  "adoptedPackageCount": 0,
+  "expectedPackageCount": 3,
+  "rows": [
+    {
+      "name": "@taliya/tokens",
+      "version": "0.1.0",
+      "expectedRange": "^0.1.0",
+      "dependency": "file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
+      "rootLockDependency": "file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
+      "lockVersion": "0.1.0",
+      "lockResolved": "file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
+      "installedVersion": "0.1.0",
+      "registryResolved": false,
+      "pass": false
+    },
+    {
+      "name": "@taliya/ui",
+      "version": "0.1.0",
+      "expectedRange": "^0.1.0",
+      "dependency": "file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
+      "rootLockDependency": "file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
+      "lockVersion": "0.1.0",
+      "lockResolved": "file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
+      "installedVersion": "0.1.0",
+      "registryResolved": false,
+      "pass": false
+    },
+    {
+      "name": "@taliya/crm",
+      "version": "0.1.0",
+      "expectedRange": "^0.1.0",
+      "dependency": "file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
+      "rootLockDependency": "file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
+      "lockVersion": "0.1.0",
+      "lockResolved": "file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
+      "installedVersion": "0.1.0",
+      "registryResolved": false,
+      "pass": false
+    }
+  ]
+}

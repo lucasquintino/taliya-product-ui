@@ -1,6 +1,6 @@
 # Release Channel Audit
 
-Generated: 2026-07-15T17:44:55.449Z
+Generated: 2026-07-15T17:47:45.283Z
 
 Status: pass-local-release-channel
 
@@ -16,6 +16,7 @@ This report separates the current local install channel from a future registry p
 - Local release manifest: `dist-packages/taliya-product-ui-local-manifest.json`
 - Release policy: `pass-registry-policy`
 - Registry publication: `not-published`
+- Registry consumer adoption: `not-adopted`
 - Consumer package sync: `pass`
 - Consumer vendor versioning: `pass`
 - Consumer config versioning: `pass`
@@ -33,6 +34,7 @@ This report separates the current local install channel from a future registry p
 ## Registry Blockers
 
 - npm registry publication is not proven for 0.1.0
+- taliya-internal registry adoption is not proven
 
 ## Meaning
 

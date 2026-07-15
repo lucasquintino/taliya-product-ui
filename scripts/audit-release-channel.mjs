@@ -49,6 +49,9 @@ const releasePolicy = readJson("specs/001-product-ui-foundation/release-policy-a
 const registryPublication = fileExists("specs/001-product-ui-foundation/registry-publication-audit.json")
   ? readJson("specs/001-product-ui-foundation/registry-publication-audit.json")
   : null;
+const registryConsumerAdoption = fileExists("specs/001-product-ui-foundation/registry-consumer-adoption-audit.json")
+  ? readJson("specs/001-product-ui-foundation/registry-consumer-adoption-audit.json")
+  : null;
 const consumerPackageSync = readJson("specs/001-product-ui-foundation/consumer-package-sync-audit.json");
 const consumerVendorVersioning = readJson("specs/001-product-ui-foundation/consumer-vendor-versioning-audit.json");
 const consumerConfigVersioning = readJson("specs/001-product-ui-foundation/consumer-config-versioning-audit.json");
@@ -78,12 +81,16 @@ const registryBlockers = [
   releasePolicy.status === "fail" ? "release policy contract is failing" : null,
   registryPublication?.status !== "pass-published"
     ? `npm registry publication is not proven for ${packageRows[0]?.version ?? "the current version"}`
+    : null,
+  registryConsumerAdoption?.status !== "pass-registry-adoption"
+    ? "taliya-internal registry adoption is not proven"
     : null
 ].filter(Boolean);
 
 const registryReady =
   releasePolicy.registryReady === true &&
   registryPublication?.status === "pass-published" &&
+  registryConsumerAdoption?.status === "pass-registry-adoption" &&
   registryBlockers.length === 0;
 const status = localTarballChannelReady
   ? registryReady
@@ -106,6 +113,7 @@ const report = {
   releasePolicyStatus: releasePolicy.status,
   releasePolicyPath: "specs/001-product-ui-foundation/contracts/release-policy.json",
   registryPublicationStatus: registryPublication?.status ?? "missing",
+  registryConsumerAdoptionStatus: registryConsumerAdoption?.status ?? "missing",
   consumerPackageSyncStatus: consumerPackageSync.status,
   consumerVendorVersioningStatus: consumerVendorVersioning.status,
   consumerConfigVersioningStatus: consumerConfigVersioning.status,
@@ -137,6 +145,7 @@ This report separates the current local install channel from a future registry p
 - Local release manifest: \`${localReleaseManifest.manifestPath ?? "missing"}\`
 - Release policy: \`${releasePolicy.status}\`
 - Registry publication: \`${report.registryPublicationStatus}\`
+- Registry consumer adoption: \`${report.registryConsumerAdoptionStatus}\`
 - Consumer package sync: \`${consumerPackageSync.status}\`
 - Consumer vendor versioning: \`${consumerVendorVersioning.status}\`
 - Consumer config versioning: \`${consumerConfigVersioning.status}\`
