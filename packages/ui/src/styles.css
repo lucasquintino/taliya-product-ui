@@ -578,7 +578,13 @@
   min-height: var(--taliya-control-crm-product-shell-nav-active-height);
 }
 
-.tl-filter-chip--selected,
+.tl-filter-chip--selected {
+  background: var(--taliya-status-info-bg);
+  border-color: var(--taliya-status-info-bg);
+  box-shadow: none;
+  color: var(--taliya-status-info-fg);
+}
+
 .tl-filter-select--selected,
 .tl-filter-select--open {
   background: var(--taliya-color-crm-product-shell-control-bg);
@@ -617,6 +623,13 @@
   border-color: var(--taliya-border-color-active);
 }
 
+.tl-filter-chip--selected:hover:not(:disabled),
+.tl-filter-chip--selected.is-hover:not(:disabled) {
+  background: var(--taliya-status-info-bg);
+  border-color: var(--taliya-status-info-bg);
+  color: var(--taliya-status-info-fg);
+}
+
 .tl-filter-select--selected:hover:not(:disabled),
 .tl-filter-select--open:hover:not(:disabled) {
   background: var(--taliya-color-crm-product-shell-control-hover-bg);
@@ -636,9 +649,9 @@
 .tl-nav-pill__count,
 .tl-filter-chip__count {
   align-items: center;
-  background: currentColor;
+  background: var(--taliya-surface-selection);
   border-radius: var(--taliya-radius-full);
-  color: var(--taliya-surface-button);
+  color: var(--taliya-color-white);
   display: inline-flex;
   font-size: var(--taliya-type-caption-size);
   height: var(--taliya-control-badge-count-size);
@@ -783,11 +796,14 @@
 }
 
 .tl-badge {
-  background: var(--taliya-status-neutral-bg);
-  color: var(--taliya-status-neutral-fg);
   min-height: var(--taliya-control-badge-height);
   min-width: var(--taliya-control-badge-height);
   padding: 0 var(--taliya-space-2);
+}
+
+.tl-badge--neutral {
+  background: var(--taliya-status-neutral-bg);
+  color: var(--taliya-status-neutral-fg);
 }
 
 .tl-badge--dot {
@@ -2016,6 +2032,20 @@
   }
 }
 
+.tl-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.tl-calendar-grid--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.tl-calendar-grid > .tl-calendar-cell + .tl-calendar-cell {
+  margin-left: calc(var(--taliya-border-width-default) * -1);
+}
+
 .tl-calendar-cell {
   align-items: center;
   background: var(--taliya-color-crm-auth-card-primary-fg);
@@ -2557,6 +2587,18 @@
 
 .tl-inline-group--wrap {
   flex-wrap: wrap;
+}
+
+.tl-inline-group--justify-center {
+  justify-content: center;
+}
+
+.tl-inline-group--justify-end {
+  justify-content: flex-end;
+}
+
+.tl-inline-group--justify-between {
+  justify-content: space-between;
 }
 
 .tl-connector-line {
@@ -4953,6 +4995,10 @@ button.tl-metric-tile {
   align-self: start;
   grid-column: 2;
   justify-content: flex-start;
+}
+
+.tl-status-summary--hero .tl-status-summary__body {
+  grid-column: 2;
 }
 
 .tl-status-summary--ok .tl-status-summary__icon {

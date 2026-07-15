@@ -43,6 +43,7 @@ import {
   FileDown,
   FileText,
   Filter,
+  Fingerprint,
   Folder,
   Hand,
   HelpCircle,
@@ -64,14 +65,17 @@ import {
   MoreHorizontal,
   MoreVertical,
   Paperclip,
+  Package,
   Pause,
   Percent,
   Phone,
   Play,
   Plus,
   Search,
+  Scan,
   Send,
   Settings,
+  ShoppingCart,
   Shield,
   ShieldAlert,
   ShieldCheck,
@@ -224,6 +228,7 @@ export const iconRegistry = {
   fileDown: FileDown,
   fileText: FileText,
   filter: Filter,
+  fingerprint: Fingerprint,
   folder: Folder,
   hand: Hand,
   help: HelpCircle,
@@ -245,14 +250,17 @@ export const iconRegistry = {
   more: MoreHorizontal,
   moreVertical: MoreVertical,
   paperclip: Paperclip,
+  package: Package,
   pause: Pause,
   percent: Percent,
   phone: Phone,
   play: Play,
   plus: Plus,
   search: Search,
+  scan: Scan,
   send: Send,
   settings: Settings,
+  shoppingCart: ShoppingCart,
   shield: Shield,
   shieldAlert: ShieldAlert,
   shieldCheck: ShieldCheck,
@@ -2056,11 +2064,12 @@ export function Toolbar({ align = "center", justify = "between", wrap = false, c
 
 export interface InlineGroupProps extends React.HTMLAttributes<HTMLSpanElement> {
   compact?: boolean;
+  justify?: "start" | "center" | "end" | "between";
   wrap?: boolean;
 }
 
-export function InlineGroup({ compact = false, wrap = false, className, ...props }: InlineGroupProps) {
-  return <span className={cn("tl-inline-group", compact && "tl-inline-group--compact", wrap && "tl-inline-group--wrap", className)} {...props} />;
+export function InlineGroup({ compact = false, justify = "start", wrap = false, className, ...props }: InlineGroupProps) {
+  return <span className={cn("tl-inline-group", compact && "tl-inline-group--compact", `tl-inline-group--justify-${justify}`, wrap && "tl-inline-group--wrap", className)} {...props} />;
 }
 
 export interface ConnectorLineProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -3515,8 +3524,7 @@ export function StatusSummaryCard({
       {children ? <div className="tl-status-summary__body">{children}</div> : null}
       {primaryAction || secondaryAction ? (
         <footer className="tl-status-summary__actions">
-          {secondaryAction}
-          {primaryAction}
+          {layout === "hero" ? <>{primaryAction}{secondaryAction}</> : <>{secondaryAction}{primaryAction}</>}
         </footer>
       ) : null}
     </Card>
@@ -4612,6 +4620,14 @@ export interface CalendarCellEvent {
   id?: string;
   tone?: "info" | "success" | "warning" | "danger" | "neutral";
   label?: string;
+}
+
+export interface CalendarGridProps extends React.HTMLAttributes<HTMLDivElement> {
+  columns?: 5 | 7;
+}
+
+export function CalendarGrid({ columns = 7, className, ...props }: CalendarGridProps) {
+  return <div className={cn("tl-calendar-grid", `tl-calendar-grid--${columns}`, className)} {...props} />;
 }
 
 export interface CalendarCellProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {

@@ -1,6 +1,18 @@
 {
   "name": "@taliya/tokens",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Official design tokens for Taliya products.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasquintino/taliya-product-ui.git",
+    "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

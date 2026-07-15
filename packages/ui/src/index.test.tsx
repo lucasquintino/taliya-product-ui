@@ -9,6 +9,7 @@ import {
   Button,
   Chip,
   CalendarCell,
+  CalendarGrid,
   CalendarEventBlock,
   ChartPanelPrimitive,
   Checkbox,
@@ -42,6 +43,7 @@ import {
   IconButton,
   ImportProgressCard,
   InlineAlert,
+  InlineGroup,
   Input,
   KeyValueRow,
   LoadingState,
@@ -80,6 +82,30 @@ import {
 afterEach(() => cleanup());
 
 describe("@taliya/ui primitives", () => {
+  it("emits distinct badge tone classes", () => {
+    render(
+      <div>
+        <Badge>Neutral</Badge>
+        <Badge tone="success">Success</Badge>
+        <Badge tone="info">Info</Badge>
+        <Badge tone="warning">Warning</Badge>
+        <Badge tone="danger">Danger</Badge>
+      </div>
+    );
+
+    expect(screen.getByText("Neutral")).toHaveClass("tl-badge--neutral");
+    expect(screen.getByText("Success")).toHaveClass("tl-badge--success");
+    expect(screen.getByText("Info")).toHaveClass("tl-badge--info");
+    expect(screen.getByText("Warning")).toHaveClass("tl-badge--warning");
+    expect(screen.getByText("Danger")).toHaveClass("tl-badge--danger");
+  });
+
+  it("renders official inline alignment variants", () => {
+    render(<InlineGroup data-testid="inline-group" justify="between"><span>Inicio</span><span>Fim</span></InlineGroup>);
+
+    expect(screen.getByTestId("inline-group")).toHaveClass("tl-inline-group--justify-between");
+  });
+
   it("renders stack with tokenized gap variants", () => {
     render(
       <Stack gap="lg" data-testid="stack">
@@ -242,6 +268,7 @@ describe("@taliya/ui primitives", () => {
     render(
       <div>
         <Icon data-testid="standalone-icon" name="chevronRight" size="sm" />
+        <Icon data-testid="shopping-cart-icon" name="shoppingCart" />
         <Button data-testid="small-button" leadingIcon="plus" size="sm">
           Pequeno
         </Button>
@@ -251,6 +278,7 @@ describe("@taliya/ui primitives", () => {
     expect(screen.getByTestId("standalone-icon")).toHaveStyle({
       "--tl-icon-size": "var(--taliya-control-icon-size-sm)"
     });
+    expect(screen.getByTestId("shopping-cart-icon")).toHaveClass("tl-icon");
     expect(screen.getByTestId("small-button").querySelector(".tl-icon")).toHaveClass("tl-icon");
   });
 
@@ -566,6 +594,20 @@ describe("@taliya/ui primitives", () => {
 
     expect(remove).toHaveBeenCalledTimes(1);
     expect(screen.getByRole("button", { name: "Alta prioridade" })).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("renders selected, count, and inline removable filter-chip anatomy", () => {
+    render(
+      <div>
+        <FilterChip selected>Ativos</FilterChip>
+        <FilterChip count="12">Pendentes</FilterChip>
+        <FilterChip removable>Cliente VIP</FilterChip>
+      </div>
+    );
+
+    expect(screen.getByRole("button", { name: "Ativos" })).toHaveClass("tl-filter-chip--selected");
+    expect(screen.getByText("12")).toHaveClass("tl-filter-chip__count");
+    expect(screen.getByRole("button", { name: "Cliente VIP" }).querySelector(".tl-icon")).not.toBeNull();
   });
 
   it("supports filter select and filter multi select states and behavior", async () => {
@@ -901,7 +943,10 @@ describe("@taliya/ui primitives", () => {
 
     render(
       <div>
-        <CalendarCell day="21" events={[{ label: "Mat", tone: "info" }]} today />
+        <CalendarGrid data-testid="calendar-grid">
+          <CalendarCell day="21" events={[{ label: "Mat", tone: "info" }]} today />
+          <CalendarCell day="22" />
+        </CalendarGrid>
         <CalendarEventBlock capacity="9/10" meta="Joao Silva" time="08:00" title="Mat Pilates" />
         <ConnectorLine startNode variant="curved" />
         <FlowNode onClick={selectNode} onMenu={openMenu} status={<Chip>Evento</Chip>} title="Gatilho" variant="trigger" />
@@ -914,6 +959,7 @@ describe("@taliya/ui primitives", () => {
     fireEvent.click(screen.getByRole("button", { name: /abrir opcoes do no/i }));
 
     expect(screen.getByRole("button", { name: /21/i })).toHaveAttribute("aria-current", "date");
+    expect(screen.getByTestId("calendar-grid")).toHaveClass("tl-calendar-grid--7");
     expect(screen.getByText("Mat Pilates")).toBeInTheDocument();
     expect(screen.getByText("Grafico de linha")).toBeInTheDocument();
     expect(screen.getByText("Receber mensagem")).toBeInTheDocument();

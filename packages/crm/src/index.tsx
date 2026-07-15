@@ -14,17 +14,22 @@ import {
   Chip,
   ConfirmDialog,
   ConnectorLine,
+  ConflictCard,
   DataTable,
   DiffTable,
   Drawer,
   DrawerSection,
+  DocumentPreview,
   EmptyState,
   ErrorState,
   ExecutionRow,
+  FileUpload,
   FilterBar,
   FilterChip,
   FilterMultiSelect,
   FilterSelect,
+  FieldGrid,
+  FieldStack,
   Icon,
   IconButton,
   InlineAlert,
@@ -37,6 +42,7 @@ import {
   LoadingState,
   MessageBubble,
   MetricTile,
+  MoneyInput,
   Modal,
   NavPill,
   Panel,
@@ -48,16 +54,21 @@ import {
   RelationshipCard,
   SearchInput,
   Select,
+  SegmentedControl,
   SocialAuthButton,
   StatusDot,
   StatusSummaryCard,
+  TagInput,
   Stepper,
   Tabs,
   TablePagination,
+  Timeline,
   ComposerInput,
   DropdownMenu,
   TaliyaLogo,
   Toggle,
+  TimeInput,
+  Textarea,
   cn
 } from "@taliya/ui";
 import type { AuditTableRow, AvatarProps, ButtonVariant, ComponentTone, DiffTableRow, DropdownAction, IconName, SelectOption, StatusDotStatus, StepperStep, TabItem } from "@taliya/ui";
@@ -77,6 +88,7 @@ export interface CrmComponentDefinition {
 
 export const crmComponentRegistry = [
   { name: "CrmProductShell", family: "Shell", priority: "P0" },
+  { name: "JourneyShellCanvas", family: "Shell", priority: "P1" },
   { name: "CrmBrowserTrafficLights", family: "Shell / Browser Chrome", priority: "P0" },
   { name: "CrmBrowserToolbarButton", family: "Shell / Browser Chrome", priority: "P0" },
   { name: "CrmBrowserToolbar", family: "Shell / Browser Chrome", priority: "P0" },
@@ -110,6 +122,7 @@ export const crmComponentRegistry = [
   { name: "MetricCard", family: "Surface", priority: "P0" },
   { name: "StatusCard", family: "Surface", priority: "P0" },
   { name: "AgentPanel", family: "Agent", priority: "P0" },
+  { name: "SettingsAgentPanel", family: "Agent", priority: "P1" },
   { name: "CopilotSuggestion", family: "Agent", priority: "P0" },
   { name: "AgentStatus", family: "Agent", priority: "P0" },
   { name: "ProductWindowFrame", family: "Layout", priority: "P0" },
@@ -134,6 +147,25 @@ export const crmComponentRegistry = [
   { name: "ApprovalTable", family: "Approvals", priority: "P1" },
   { name: "StudentTable", family: "Students", priority: "P1" },
   { name: "ReplacementTable", family: "Agenda", priority: "P1" },
+  { name: "ClassSummaryCard", family: "Agenda", priority: "P1" },
+  { name: "ReplacementMatcherPanel", family: "Agenda", priority: "P1" },
+  { name: "WaitlistPanel", family: "Agenda", priority: "P1" },
+  { name: "ResourceConflictPanel", family: "Agenda", priority: "P1" },
+  { name: "DocumentViewerPanel", family: "Documents", priority: "P1" },
+  { name: "UploadReceiptPanel", family: "Documents", priority: "P1" },
+  { name: "ReconciliationSummaryTable", family: "Finance", priority: "P1" },
+  { name: "MoneyInputGroup", family: "Finance", priority: "P1" },
+  { name: "FinancialSimulationPanel", family: "Finance", priority: "P1" },
+  { name: "FlowSimulationPanel", family: "Agents", priority: "P1" },
+  { name: "PublicationPreflightPanel", family: "Agents", priority: "P1" },
+  { name: "ExecutionTraceTable", family: "Agents", priority: "P1" },
+  { name: "AgentIncidentPanel", family: "Agents", priority: "P1" },
+  { name: "EvaluationQualityPanel", family: "Agents", priority: "P1" },
+  { name: "PrivacyRequestTable", family: "Governance", priority: "P1" },
+  { name: "SupportGrantPanel", family: "Governance", priority: "P1" },
+  { name: "AdvancedReportsPanel", family: "Reports", priority: "P1" },
+  { name: "ExportQueuePanel", family: "Reports", priority: "P1" },
+  { name: "SegmentCommunicationPanel", family: "Reports", priority: "P1" },
   { name: "ThreePaneLayout", family: "Layout", priority: "P1" },
   { name: "ContextPanel", family: "Layout", priority: "P1" },
   { name: "RightPanelLayout", family: "Layout", priority: "P1" },
@@ -147,15 +179,28 @@ export const crmComponentRegistry = [
   { name: "KanbanCard", family: "Kanban", priority: "P1" },
   { name: "WeeklyCalendar", family: "Agenda", priority: "P1" },
   { name: "MiniCalendar", family: "Agenda", priority: "P1" },
+  { name: "CompactCalendar", family: "Agenda", priority: "P1" },
   { name: "ClassCard", family: "Agenda", priority: "P1" },
   { name: "Roster", family: "Agenda", priority: "P1" },
   { name: "SetupShell", family: "Setup", priority: "P1" },
+  { name: "SetupPage", family: "Setup", priority: "P1" },
   { name: "SetupStepper", family: "Setup", priority: "P1" },
   { name: "SetupBlockHeader", family: "Setup", priority: "P1" },
   { name: "SetupContentGrid", family: "Setup", priority: "P1" },
   { name: "SetupBottomBar", family: "Setup", priority: "P1" },
   { name: "SetupWelcome", family: "Setup", priority: "P1" },
+  { name: "SetupWelcomeWorkspace", family: "Setup", priority: "P1" },
   { name: "SetupChoiceCard", family: "Setup", priority: "P1" },
+  { name: "SetupConsumptionWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupStudioWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupTeamWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupChannelsWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupPlansWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupPaymentWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupStudentsWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupClassesWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupAgendaWorkspace", family: "Setup", priority: "P1" },
+  { name: "SetupReviewWorkspace", family: "Setup", priority: "P1" },
   { name: "SetupImportSourceCard", family: "Setup", priority: "P1" },
   { name: "SetupReviewPanel", family: "Setup", priority: "P1" },
   { name: "SetupAgentChat", family: "Setup", priority: "P1" },
@@ -171,25 +216,38 @@ export const crmComponentRegistry = [
   { name: "SubscriptionResultHeader", family: "Subscription", priority: "P1" },
   { name: "ConfirmedSetupHandoff", family: "Subscription", priority: "P1" },
   { name: "PlanSummaryCard", family: "Billing", priority: "P1" },
+  { name: "BillingAddOnsWorkspace", family: "Billing", priority: "P1" },
+  { name: "BillingInvoicesWorkspace", family: "Billing", priority: "P1" },
+  { name: "BillingSubscriptionWorkspace", family: "Billing", priority: "P1" },
   { name: "InvoiceTable", family: "Billing", priority: "P1" },
   { name: "AddOnCard", family: "Billing", priority: "P1" },
   { name: "QuotaProgress", family: "Usage", priority: "P1" },
+  { name: "UsageOverviewWorkspace", family: "Usage", priority: "P1" },
+  { name: "CrmHeaderSummary", family: "Shell", priority: "P1" },
   { name: "UsageLedgerTable", family: "Usage", priority: "P1" },
   { name: "ApprovalPanel", family: "Approvals", priority: "P1" },
   { name: "ImpactSummary", family: "Approvals", priority: "P1" },
   { name: "BeforeAfterDiff", family: "Approvals", priority: "P1" },
   { name: "SettingsSection", family: "Forms", priority: "P1" },
   { name: "PermissionMatrix", family: "Forms", priority: "P1" },
+  { name: "PermissionRoleCard", family: "Forms", priority: "P1" },
   { name: "RuleRow", family: "Forms", priority: "P1" },
   { name: "SettingsHubCard", family: "Config", priority: "P1" },
   { name: "IntegrationStatusRow", family: "Config", priority: "P1" },
   { name: "UnsavedChangesBar", family: "Config", priority: "P1" },
   { name: "ConfigImpactPreview", family: "Config", priority: "P1" },
+  { name: "SettingsPermissionsWorkspace", family: "Config", priority: "P1" },
+  { name: "SettingsPaymentsWorkspace", family: "Config", priority: "P1" },
+  { name: "SettingsAgendaWorkspace", family: "Config", priority: "P1" },
+  { name: "SettingsNotificationsWorkspace", family: "Config", priority: "P1" },
   { name: "ConversationList", family: "Inbox", priority: "P1" },
   { name: "ConversationThread", family: "Inbox", priority: "P1" },
   { name: "MessageBubble", family: "Inbox", priority: "P1" },
   { name: "Composer", family: "Inbox", priority: "P1" },
+  { name: "ComposerPanel", family: "Inbox", priority: "P1" },
   { name: "ChannelStatus", family: "Inbox", priority: "P1" },
+  { name: "ChannelStatusPanel", family: "Inbox", priority: "P1" },
+  { name: "CopilotPanel", family: "Inbox", priority: "P1" },
   { name: "HandoffBanner", family: "Inbox", priority: "P1" },
   { name: "QuickReplyChips", family: "Inbox", priority: "P1" },
   { name: "ChecklistRow", family: "Operational", priority: "P1" },
@@ -199,13 +257,18 @@ export const crmComponentRegistry = [
   { name: "CaseDrawer", family: "Operational", priority: "P1" },
   { name: "StudentDrawer", family: "Operational", priority: "P1" },
   { name: "ClassDrawer", family: "Operational", priority: "P1" },
+  { name: "ClassOperationalDetail", family: "Operational", priority: "P1" },
   { name: "PaymentDrawer", family: "Operational", priority: "P1" },
   { name: "ReplacementDrawer", family: "Operational", priority: "P1" },
   { name: "LeadDrawer", family: "Operational", priority: "P1" },
   { name: "AgentFlowDrawer", family: "Operational", priority: "P1" },
   { name: "UsageDrawer", family: "Operational", priority: "P1" },
+  { name: "SupportStatusSidebar", family: "Support", priority: "P1" },
+  { name: "SupportAgentPanel", family: "Support", priority: "P1" },
+  { name: "SupportCentralWorkspace", family: "Support", priority: "P1" },
   { name: "SupportTicketDrawer", family: "Operational", priority: "P1" },
   { name: "TenantSecurityDrawer", family: "Operational", priority: "P1" },
+  { name: "TenantSummaryDrawer", family: "Operational", priority: "P1" },
   { name: "WeeklyHoursGrid", family: "Setup", priority: "P1" },
   { name: "RoleCard", family: "Setup", priority: "P1" },
   { name: "InviteRow", family: "Setup", priority: "P1" },
@@ -215,9 +278,16 @@ export const crmComponentRegistry = [
   { name: "ExportAction", family: "Reports", priority: "P1" },
   { name: "AgentCatalog", family: "Agents", priority: "P2" },
   { name: "AgentCard", family: "Agents", priority: "P2" },
+  { name: "AgentRoutineIntro", family: "Agents", priority: "P2" },
   { name: "AgentRoutineCard", family: "Agents", priority: "P2" },
+  { name: "AgentRoutineWorkspace", family: "Agents", priority: "P2" },
+  { name: "AgentFlowWorkspace", family: "Agents", priority: "P2" },
   { name: "AgentFlowSectionPanel", family: "Agents", priority: "P2" },
+  { name: "AgentFlowSettingsPanel", family: "Agents", priority: "P2" },
+  { name: "AgentFlowActionBar", family: "Agents", priority: "P2" },
   { name: "AgentRoutineFlowCard", family: "Agents", priority: "P2" },
+  { name: "AgentPublishRoutineWorkspace", family: "Agents", priority: "P2" },
+  { name: "AgentPublishFlowCard", family: "Agents", priority: "P2" },
   { name: "ModeSelector", family: "Agents", priority: "P2" },
   { name: "FlowBuilder", family: "Agents", priority: "P2" },
   { name: "PreflightChecklist", family: "Agents", priority: "P2" },
@@ -248,6 +318,7 @@ export const crmComponentRegistry = [
   { name: "GrantAccessPanel", family: "Support", priority: "P2" },
   { name: "TenantCard", family: "Internal", priority: "P2" },
   { name: "InternalOverviewDashboard", family: "Internal", priority: "P2" },
+  { name: "InternalShell", family: "Internal", priority: "P2" },
   { name: "InternalWorklistPage", family: "Internal", priority: "P2" },
   { name: "TenantDetailLayout", family: "Internal", priority: "P2" },
   { name: "SecurityRulePanel", family: "Internal", priority: "P2" },
@@ -261,7 +332,19 @@ export const crmComponentRegistry = [
   { name: "PermissionState", family: "Advanced States", priority: "P2" },
   { name: "PlanBlockedState", family: "Advanced States", priority: "P2" },
   { name: "QuotaBlockedState", family: "Advanced States", priority: "P2" },
-  { name: "IntegrationFailedState", family: "Advanced States", priority: "P2" }
+  { name: "IntegrationFailedState", family: "Advanced States", priority: "P2" },
+  { name: "PlanAgentsPanel", family: "Governance", priority: "P2" },
+  { name: "FallbackControlCard", family: "Governance", priority: "P2" },
+  { name: "BillingGovernancePanel", family: "Governance", priority: "P2" },
+  { name: "GovernanceAuditPanel", family: "Governance", priority: "P2" },
+  { name: "GuardrailPolicyPanel", family: "Governance", priority: "P2" },
+  { name: "GeneralSettingsPanel", family: "Governance", priority: "P2" },
+  { name: "SetupWizardPanel", family: "Setup", priority: "P2" },
+  { name: "ActivationChecklistPanel", family: "Setup", priority: "P2" },
+  { name: "DataConflictQueue", family: "Data Quality", priority: "P2" },
+  { name: "ProfileTabsPanel", family: "Students", priority: "P2" },
+  { name: "ConsentPreferencesPanel", family: "Students", priority: "P2" },
+  { name: "SensitiveTimelinePanel", family: "Students", priority: "P2" }
 ] as const satisfies readonly CrmComponentDefinition[];
 
 export const crmComponentNames = crmComponentRegistry.map((component) => component.name);
@@ -337,6 +420,16 @@ export const crmEmptyShellNavItems: CrmShellNavItem[] = [
   { id: "relatorios", label: "Relatórios" }
 ];
 
+export const crmOperationalNavItems: CrmShellNavItem[] = [
+  { id: "today", label: "Hoje" },
+  { id: "tasks", label: "Tarefas" },
+  { id: "approvals", label: "Aprovações" },
+  { id: "incidents", label: "Incidentes" },
+  { id: "agents", label: "Agentes" },
+  { id: "audit", label: "Auditoria" },
+  { id: "reports", label: "Relatórios" }
+];
+
 export const crmEmptyShellSidebarItems: CrmShellSidebarItem[] = [
   { id: "expand", label: "Expandir navegação", icon: "chevronsRight" },
   { id: "agenda", label: "Agenda", icon: "calendar" },
@@ -351,7 +444,8 @@ export const crmEmptyShellSidebarItems: CrmShellSidebarItem[] = [
 ];
 
 export const crmEmptyShellSidebarUtilityItems: CrmShellSidebarItem[] = [
-  { id: "configuracoes", label: "Configurações", icon: "settings" }
+  { id: "modo-noite", label: "Modo noite", icon: "moon" },
+  { id: "modo-dia", label: "Modo dia", icon: "sun" }
 ];
 
 export const crmBrowserToolbarItems: CrmBrowserToolbarItem[] = [
@@ -674,16 +768,18 @@ export function CrmBrowserAddressBar({
 
 export function CrmBrowserChrome({
   className,
-  toolbarItems = crmBrowserToolbarItems
+  toolbarItems = crmBrowserToolbarItems,
+  url
 }: {
   className?: string;
   toolbarItems?: CrmBrowserToolbarItem[];
+  url?: string;
 }) {
   return (
     <header className={cn("tcrm-browser-chrome", className)}>
       <CrmBrowserTrafficLights />
       <CrmBrowserToolbar items={toolbarItems} />
-      <CrmBrowserAddressBar />
+      <CrmBrowserAddressBar url={url} />
     </header>
   );
 }
@@ -865,13 +961,17 @@ export function CrmShellTopNavItem(props: CrmTopbarNavChipProps) {
 export function CrmShellTopNav({
   items = crmEmptyShellNavItems,
   className,
-  onChange
+  onChange,
+  selectionMode = "auto"
 }: {
   items?: CrmShellNavItem[];
   className?: string;
   onChange?: (id: string) => void;
+  selectionMode?: "auto" | "none";
 }) {
-  const activeItem = items.find((item) => item.active && !item.disabled) ?? items.find((item) => !item.disabled) ?? items[0];
+  const activeItem = selectionMode === "none"
+    ? undefined
+    : items.find((item) => item.active && !item.disabled) ?? items.find((item) => !item.disabled) ?? items[0];
 
   return (
     <nav className={cn("tcrm-empty-shell-nav", className)} aria-label="Seções">
@@ -1010,7 +1110,7 @@ export function CrmEmptyShell({
   onSidebarUtilitySelect?: (item: CrmShellSidebarItem) => void;
 }) {
   return (
-    <div className={cn("tcrm-empty-shell-stage", className)}>
+    <div className={cn("tcrm-empty-shell-stage", "tcrm-empty-shell-stage--image-79", className)}>
       <CrmEmptyShellWindow>
         <CrmShellSidebar items={sidebarItems} onSelect={onSidebarSelect} onUtilitySelect={onSidebarUtilitySelect} utilityItems={utilityItems} />
         <main className="tcrm-empty-shell-main">
@@ -1024,11 +1124,11 @@ export function CrmEmptyShell({
 }
 
 export type CrmProductShellVariant = "crm" | "internal";
-export type CrmProductShellFrame = "fullscreen" | "window";
-export type CrmProductShellDrawerPlacement = "fixed" | "content" | "floating" | "viewport";
+export type CrmProductShellFrame = "fullscreen" | "window" | "window-inset" | "reference";
+export type CrmProductShellDrawerPlacement = "fixed" | "content" | "floating" | "chrome" | "viewport";
 export type CrmProductShellDrawerSize = "default" | "compact";
-export type CrmProductShellPageHeaderRhythm = "default" | "spacious" | "compact-stacked" | "dashboard" | "stacked" | "overview";
-export type CrmProductShellContentLayout = "default" | "work-list" | "work-list-compact" | "work-list-wide" | "main-priority" | "kanban";
+export type CrmProductShellPageHeaderRhythm = "default" | "spacious" | "compact-stacked" | "dashboard" | "reports" | "support" | "internal-overview" | "internal-tenants" | "stacked" | "agents" | "agents-routines" | "agents-routine-detail" | "agents-flow-detail" | "agents-publish" | "settings-hub" | "overview" | "operation" | "inbox" | "usage" | "usage-overview" | "billing" | "billing-invoices";
+export type CrmProductShellContentLayout = "default" | "work-list" | "work-list-compact" | "work-list-wide" | "main-priority" | "kanban" | "three-pane" | "student-profile" | "class-operation" | "settings" | "settings-permissions" | "settings-payments" | "settings-agenda" | "settings-notifications" | "settings-hub" | "billing-subscription" | "agent-routine" | "agent-flow" | "agent-test" | "agent-publish" | "opportunity" | "support" | "internal-overview" | "internal-tenants" | "internal-tenant-detail";
 
 export interface CrmProductShellRegions {
   browserChrome?: boolean;
@@ -1055,6 +1155,7 @@ export interface CrmProductShellProps extends React.PropsWithChildren<{
   sidebarItems?: CrmShellSidebarItem[];
   utilityItems?: CrmShellSidebarItem[];
   avatarSrc?: string;
+  browserUrl?: string;
   className?: string;
   contentClassName?: string;
   contentLayout?: CrmProductShellContentLayout;
@@ -1066,6 +1167,7 @@ export interface CrmProductShellProps extends React.PropsWithChildren<{
   topbarStart?: React.ReactNode;
   topbarCenter?: React.ReactNode;
   topbarEnd?: React.ReactNode;
+  topNavSelection?: "auto" | "none";
   pageHeaderMeta?: React.ReactNode;
   pageHeaderBreadcrumb?: React.ReactNode;
   pageHeaderActions?: React.ReactNode;
@@ -1085,6 +1187,7 @@ export function CrmProductShell({
   sidebarItems = crmEmptyShellSidebarItems,
   utilityItems = crmEmptyShellSidebarUtilityItems,
   avatarSrc,
+  browserUrl,
   children,
   className,
   contentClassName,
@@ -1097,6 +1200,7 @@ export function CrmProductShell({
   topbarStart,
   topbarCenter,
   topbarEnd,
+  topNavSelection = "auto",
   pageHeaderMeta,
   pageHeaderBreadcrumb,
   pageHeaderActions,
@@ -1151,7 +1255,7 @@ export function CrmProductShell({
 
   return (
     <div className={shellClassName} data-component="CrmProductShell" data-shell-variant={variant}>
-      <CrmEmptyShellWindow chrome={resolvedRegions.browserChrome ? undefined : false} className={windowClassName}>
+      <CrmEmptyShellWindow chrome={resolvedRegions.browserChrome ? (browserUrl ? <CrmBrowserChrome url={browserUrl} /> : undefined) : false} className={windowClassName}>
         {resolvedRegions.sidebar ? (
           <CrmShellSidebar items={sidebarItems} onSelect={onSidebarSelect} onUtilitySelect={onSidebarUtilitySelect} utilityItems={utilityItems} />
         ) : null}
@@ -1160,7 +1264,7 @@ export function CrmProductShell({
             <div className="tcrm-empty-shell-topbar tcrm-product-shell-topbar">
               {topbarStart ? <div className="tcrm-product-shell-topbar__start">{topbarStart}</div> : null}
               {resolvedRegions.backButton ? <CrmShellBackButton onClick={onBack} /> : null}
-              {resolvedRegions.topNav ? <CrmShellTopNav items={navItems} onChange={onNavChange} /> : null}
+              {resolvedRegions.topNav ? <CrmShellTopNav items={navItems} onChange={onNavChange} selectionMode={topNavSelection} /> : null}
               {topbarCenter ? <div className="tcrm-product-shell-topbar__center">{topbarCenter}</div> : null}
               {resolvedRegions.globalActions ? <CrmShellGlobalActions avatarSrc={avatarSrc} /> : null}
               {topbarEnd ? <div className="tcrm-product-shell-topbar__end">{topbarEnd}</div> : null}
@@ -1188,6 +1292,41 @@ export function CrmProductShell({
   );
 }
 
+export type JourneyShellAction = "add" | "share" | "calendar";
+
+export interface JourneyShellCanvasProps extends React.HTMLAttributes<HTMLDivElement> {
+  onAction?: (surface: "primary" | "secondary-left" | "secondary-right", action: JourneyShellAction) => void;
+}
+
+const journeyParticipantCounts = [2, 3, 2, 1, 0, 1, 0, 0];
+
+function JourneyShellActions({ surface, onAction }: Pick<JourneyShellCanvasProps, "onAction"> & { surface: "primary" | "secondary-left" | "secondary-right" }) {
+  return <div className="tcrm-journey-shell-canvas__actions">
+    <IconButton icon="plus" label="Adicionar" onClick={() => onAction?.(surface, "add")} variant="subtle" />
+    <IconButton icon="upload" label="Compartilhar" onClick={() => onAction?.(surface, "share")} variant="subtle" />
+    <IconButton icon="calendar" label="Abrir calendario" onClick={() => onAction?.(surface, "calendar")} variant="subtle" />
+  </div>;
+}
+
+export function JourneyShellCanvas({ onAction, className, ...props }: JourneyShellCanvasProps) {
+  return <div className={cn("tcrm-journey-shell-canvas", className)} data-component="JourneyShellCanvas" {...props}>
+    <Panel className="tcrm-journey-shell-canvas__surface tcrm-journey-shell-canvas__surface--primary" variant="crm">
+      <h2>Area principal</h2>
+      <div aria-label="Participantes" className="tcrm-journey-shell-canvas__participants">
+        {journeyParticipantCounts.map((count, index) => <span className="tcrm-journey-shell-canvas__participant" key={index}>
+          <Icon name="user" size="md" tone="neutral" />
+          <small className={count > 0 ? (index < 2 ? "is-info" : "is-danger") : undefined}>{count}</small>
+        </span>)}
+      </div>
+      <JourneyShellActions onAction={onAction} surface="primary" />
+    </Panel>
+    <div className="tcrm-journey-shell-canvas__lower">
+      <Panel className="tcrm-journey-shell-canvas__surface" variant="crm"><JourneyShellActions onAction={onAction} surface="secondary-left" /></Panel>
+      <Panel className="tcrm-journey-shell-canvas__surface" variant="crm"><JourneyShellActions onAction={onAction} surface="secondary-right" /></Panel>
+    </div>
+  </div>;
+}
+
 export type CrmOperationalRowKind = "default" | "checklist" | "schedule" | "money";
 
 export interface CrmOperationalRowData {
@@ -1199,6 +1338,7 @@ export interface CrmOperationalRowData {
   status?: string;
   statusTone?: ComponentTone;
   selected?: boolean;
+  completed?: boolean;
   disabled?: boolean;
 }
 
@@ -1207,6 +1347,7 @@ export interface CrmOperationalPanelProps extends React.HTMLAttributes<HTMLEleme
   icon: IconName;
   badge?: React.ReactNode;
   compact?: boolean;
+  footer?: React.ReactNode;
 }
 
 export function CrmOperationalPanel({
@@ -1214,6 +1355,7 @@ export function CrmOperationalPanel({
   icon,
   badge,
   compact = false,
+  footer,
   className,
   children,
   ...props
@@ -1228,6 +1370,7 @@ export function CrmOperationalPanel({
         {badge}
       </header>
       {children}
+      {footer ? <footer className="tcrm-operational-panel__footer">{footer}</footer> : null}
     </Panel>
   );
 }
@@ -1266,15 +1409,19 @@ export function CrmOperationalRow({
         dense && "tcrm-operational-row--dense",
         compact && "tcrm-operational-row--compact",
         row.selected && "is-selected",
+        row.completed && "is-complete",
         className
       )}
       data-component="CrmOperationalRow"
+      data-completed={row.completed || undefined}
       {...props}
       disabled={row.disabled || props.disabled}
       type={type}
     >
       <span className="tcrm-operational-row__leading">
-        {row.icon ? <ListIcon icon={row.icon} tone={row.tone ?? "neutral"} /> : <StatusDot status={statusForOperationalTone(row.tone)} />}
+        {row.completed && kind === "checklist" ? (
+          <span aria-label="Concluido" className="tcrm-operational-row__completed-mark"><Icon name="check" size={12} /></span>
+        ) : row.icon ? <ListIcon icon={row.icon} tone={row.tone ?? "neutral"} /> : <StatusDot status={statusForOperationalTone(row.tone)} />}
       </span>
       <span className="tcrm-operational-row__content">
         <strong>{row.title}</strong>
@@ -1416,26 +1563,219 @@ export function AgentPanel({
   );
 }
 
+export interface SettingsAgentPanelInsight {
+  id: string;
+  content: React.ReactNode;
+}
+
+export interface SettingsAgentPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "role" | "title"> {
+  title?: React.ReactNode;
+  role?: React.ReactNode;
+  introduction?: React.ReactNode;
+  insights?: SettingsAgentPanelInsight[];
+  questions?: string[];
+  placeholder?: string;
+  helpLabel?: React.ReactNode;
+  onQuestionSelect?: (question: string) => void;
+  onSend?: (message: string) => void;
+  onHelp?: () => void;
+}
+
+const settingsAgentPanelDefaultInsights: SettingsAgentPanelInsight[] = [
+  { id: "owner", content: "O Dono/Admin mantém acesso total a todas as áreas do CRM, incluindo configurações e relatórios." },
+  { id: "roles", content: "Recepção e Professor têm limites diferentes para proteger dados dos alunos e garantir processos corretos." }
+];
+
+const settingsAgentPanelDefaultQuestions = [
+  "O que a Recepção pode fazer?",
+  "Professor deve ver WhatsApp?",
+  "Quando precisa aprovação?",
+  "O que muda ao salvar?"
+];
+
+export function SettingsAgentPanel({
+  title = "Agente de Configuração",
+  role = "Ajudando em permissões",
+  introduction = "Permissões definem o que cada pessoa pode fazer. Limites de agentes e fluxos ficam em Agentes/Fluxos.",
+  insights = settingsAgentPanelDefaultInsights,
+  questions = settingsAgentPanelDefaultQuestions,
+  placeholder = "Pergunte sobre permissões...",
+  helpLabel = "Agendar ajuda",
+  onQuestionSelect,
+  onSend,
+  onHelp,
+  className,
+  ...props
+}: SettingsAgentPanelProps) {
+  const [message, setMessage] = React.useState("");
+
+  return (
+    <Panel className={cn("tcrm-settings-agent-panel", className)} data-component="SettingsAgentPanel" variant="elevated" {...props}>
+      <header className="tcrm-settings-agent-panel__header">
+        <Avatar name="Taliya" size="md" status="online" />
+        <span>
+          <h3>{title}</h3>
+          <AgentStatus label={role?.toString()} state="active" />
+        </span>
+      </header>
+      <div className="tcrm-settings-agent-panel__body">
+        <InlineAlert className="tcrm-settings-agent-panel__intro" tone="info">
+          {introduction}
+        </InlineAlert>
+        <div className="tcrm-settings-agent-panel__insights">
+          {insights.map((insight) => <Card key={insight.id}>{insight.content}</Card>)}
+        </div>
+        <div aria-label="Perguntas sugeridas" className="tcrm-settings-agent-panel__questions" role="list">
+          {questions.map((question) => (
+            <Button key={question} leadingIcon="help" onClick={() => onQuestionSelect?.(question)} variant="secondary">
+              {question}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <footer className="tcrm-settings-agent-panel__footer">
+        <div className="tcrm-settings-agent-panel__composer">
+          <Input
+            aria-label="Pergunte ao agente de configuração"
+            onChange={(event) => setMessage(event.currentTarget.value)}
+            placeholder={placeholder}
+            value={message}
+          />
+          <IconButton
+            disabled={!message.trim()}
+            icon="send"
+            label="Enviar"
+            onClick={() => {
+              if (!message.trim()) return;
+              onSend?.(message);
+              setMessage("");
+            }}
+            variant="selected"
+          />
+        </div>
+        <p>Precisa de ajuda humana? <Button onClick={onHelp} variant="ghost">{helpLabel}</Button></p>
+      </footer>
+    </Panel>
+  );
+}
+
+export interface CopilotSuggestionProps extends CrmSurfaceProps {
+  showState?: boolean;
+}
+
 export function CopilotSuggestion({
   title = "Sugestão do copiloto",
   description,
   state = "suggestion",
+  showState = true,
   action,
   children,
   className
-}: CrmSurfaceProps) {
+}: CopilotSuggestionProps) {
   return (
     <CrmSurface
       className={cn("tcrm-copilot-suggestion", className)}
       component="CopilotSuggestion"
       description={description}
       icon={state === "approval-needed" ? "shield" : "sparkles"}
-      state={state}
+      state={showState ? state : undefined}
       title={title}
       action={action}
     >
       {children}
     </CrmSurface>
+  );
+}
+
+export type CopilotPanelState = "source" | "loading" | "empty" | "blocked";
+export type CopilotPanelCopyTarget = "summary" | "next-action" | "suggestion";
+
+export interface CopilotPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+  state?: CopilotPanelState;
+  summaryTitle?: React.ReactNode;
+  summary?: React.ReactNode;
+  nextActionTitle?: React.ReactNode;
+  nextAction?: React.ReactNode;
+  suggestionTitle?: React.ReactNode;
+  suggestion?: React.ReactNode;
+  createTaskLabel?: React.ReactNode;
+  insertLabel?: React.ReactNode;
+  blockedReason?: React.ReactNode;
+  disabled?: boolean;
+  onCopyTarget?: (target: CopilotPanelCopyTarget) => void;
+  onCreateTask?: () => void;
+  onInsert?: () => void;
+  onInsertMenu?: () => void;
+}
+
+export function CopilotPanel({
+  state = "source",
+  summaryTitle = "Resumo da conversa",
+  summary = "Cliente solicitou reagendar a visita tecnica para quinta-feira pela manha. Aguardando confirmacao de horario e endereco.",
+  nextActionTitle = "Proxima melhor acao",
+  nextAction = "Confirmar o horario sugerido e validar endereco. Informar duracao prevista da visita tecnica.",
+  suggestionTitle = "Sugestao do agente",
+  suggestion = "Ola Ana Paula! Confirmo sua visita tecnica para quinta-feira as 09h. Pode me confirmar seu endereco completo para registro?",
+  createTaskLabel = "Criar tarefa",
+  insertLabel = "Inserir mensagem",
+  blockedReason = "Copiloto indisponivel ate a conversa ser revisada.",
+  disabled = false,
+  onCopyTarget,
+  onCreateTask,
+  onInsert,
+  onInsertMenu,
+  className,
+  ...props
+}: CopilotPanelProps) {
+  const controlsDisabled = disabled || state === "loading" || state === "blocked";
+
+  return (
+    <section
+      aria-busy={state === "loading" || undefined}
+      aria-label="Painel de copiloto"
+      className={cn("tcrm-copilot-panel", className)}
+      data-component="CopilotPanel"
+      data-state={state}
+      {...props}
+    >
+      {state === "loading" ? (
+        <LoadingState className="tcrm-copilot-panel__state" title="Carregando copiloto" variant="panel" />
+      ) : state === "empty" ? (
+        <EmptyState className="tcrm-copilot-panel__state" description="O copiloto ainda nao preparou recomendacoes para esta conversa." title="Sem recomendacoes" />
+      ) : state === "blocked" ? (
+        <InlineAlert className="tcrm-copilot-panel__state" tone="warning" title="Copiloto bloqueado">{blockedReason}</InlineAlert>
+      ) : (
+        <>
+          <Card className="tcrm-copilot-panel__card tcrm-copilot-panel__card--summary">
+            <header className="tcrm-copilot-panel__card-header">
+              <ListIcon icon="sparkles" tone="info" />
+              <h3>{summaryTitle}</h3>
+              <IconButton disabled={controlsDisabled} icon="copy" label="Copiar resumo" onClick={() => onCopyTarget?.("summary")} size="sm" variant="subtle" />
+            </header>
+            <p>{summary}</p>
+          </Card>
+
+          <Card className="tcrm-copilot-panel__card tcrm-copilot-panel__card--next-action">
+            <header className="tcrm-copilot-panel__card-header">
+              <ListIcon icon="checkCircle" tone="info" />
+              <h3>{nextActionTitle}</h3>
+              <IconButton disabled={controlsDisabled} icon="copy" label="Copiar proxima acao" onClick={() => onCopyTarget?.("next-action")} size="sm" variant="subtle" />
+            </header>
+            <p>{nextAction}</p>
+            <footer><Button disabled={controlsDisabled} onClick={onCreateTask} size="sm" variant="secondary">{createTaskLabel}</Button></footer>
+          </Card>
+
+          <CopilotSuggestion className="tcrm-copilot-panel__suggestion" showState={false} title={suggestionTitle}>
+            <IconButton className="tcrm-copilot-panel__copy-suggestion" disabled={controlsDisabled} icon="copy" label="Copiar sugestao" onClick={() => onCopyTarget?.("suggestion")} size="sm" variant="subtle" />
+            <p className="tcrm-copilot-panel__message">{suggestion}</p>
+            <div className="tcrm-copilot-panel__suggestion-actions">
+              <Button disabled={controlsDisabled} onClick={onInsert} size="sm" variant="secondary">{insertLabel}</Button>
+              <IconButton disabled={controlsDisabled} icon="chevronDown" label="Mais opcoes de insercao" onClick={onInsertMenu} size="sm" variant="subtle" />
+            </div>
+          </CopilotSuggestion>
+        </>
+      )}
+    </section>
   );
 }
 
@@ -1509,7 +1849,9 @@ export function ListDetailLayout({
 }
 
 export type WorkListDetailPageState = "source" | "loading" | "empty" | "blocked";
-export type WorkListDetailPageLayoutMode = "standard" | "main-priority" | "compact-rail" | "wide-main" | "wide-rail";
+export type WorkListDetailPageLayoutMode = "standard" | "main-priority" | "compact-rail" | "balanced-rail" | "wide-main" | "wide-rail";
+export type WorkListDetailPageHeightMode = "standard" | "tall";
+export type WorkListDetailPageFilterRhythm = "default" | "spacious";
 
 export interface WorkListDetailPageProps extends React.HTMLAttributes<HTMLElement> {
   filterBar: React.ReactNode;
@@ -1524,7 +1866,9 @@ export interface WorkListDetailPageProps extends React.HTMLAttributes<HTMLElemen
   listLabel?: string;
   mainLabel?: string;
   detailLabel?: string;
+  filterRhythm?: WorkListDetailPageFilterRhythm;
   layoutMode?: WorkListDetailPageLayoutMode;
+  heightMode?: WorkListDetailPageHeightMode;
 }
 
 export function WorkListDetailPage({
@@ -1540,7 +1884,9 @@ export function WorkListDetailPage({
   listLabel = "Filtros rápidos",
   mainLabel = "Lista de trabalho",
   detailLabel = "Detalhe",
+  filterRhythm = "default",
   layoutMode = "standard",
+  heightMode = "standard",
   className,
   ...props
 }: WorkListDetailPageProps) {
@@ -1550,12 +1896,16 @@ export function WorkListDetailPage({
       aria-label={pageLabel}
       className={cn(
         "tcrm-work-list-detail-page",
+        filterRhythm !== "default" && `tcrm-work-list-detail-page--filter-${filterRhythm}`,
         layoutMode !== "standard" && `tcrm-work-list-detail-page--${layoutMode}`,
+        heightMode !== "standard" && `tcrm-work-list-detail-page--height-${heightMode}`,
         Boolean(after) && "tcrm-work-list-detail-page--with-after",
         className
       )}
       data-component="WorkListDetailPage"
+      data-filter-rhythm={filterRhythm}
       data-layout-mode={layoutMode}
+      data-height-mode={heightMode}
       data-state={state}
       {...props}
     >
@@ -1817,6 +2167,8 @@ function ContextPanelSectionHeader({ title, actionLabel, onAction }: { title: Re
 }
 
 export function RightPanelLayout({
+  contentHeader,
+  contentHeaderLabel,
   main,
   panel,
   state = "fixed",
@@ -1825,6 +2177,8 @@ export function RightPanelLayout({
   className,
   ...props
 }: {
+  contentHeader?: React.ReactNode;
+  contentHeaderLabel?: string;
   main: React.ReactNode;
   panel: React.ReactNode;
   state?: "fixed" | "compact" | "collapsed";
@@ -1835,6 +2189,11 @@ export function RightPanelLayout({
   const isCollapsed = state === "collapsed";
   return (
     <div className={cn("tcrm-right-panel-layout", className)} data-component="RightPanelLayout" data-state={state} {...props}>
+      {contentHeader ? (
+        <div aria-label={contentHeaderLabel} className="tcrm-right-panel-layout__content-header" data-region="content-header">
+          {contentHeader}
+        </div>
+      ) : null}
       <section aria-label={mainLabel} className="tcrm-right-panel-layout__main" data-region="main">{main}</section>
       {isCollapsed ? null : <aside aria-label={panelLabel} className="tcrm-right-panel-layout__panel" data-region="panel">{panel}</aside>}
     </div>
@@ -1846,7 +2205,7 @@ export function DashboardGrid({
   density = "default",
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement> & { columns?: 1 | 2 | 3 | 4 | "agenda" | "asymmetrical" | "today" | "reports"; density?: "default" | "compact" }) {
+}: React.HTMLAttributes<HTMLDivElement> & { columns?: 1 | 2 | 3 | 4 | "agenda" | "asymmetrical" | "support" | "today" | "todayCritical" | "reports"; density?: "default" | "compact" }) {
   return (
     <div
       className={cn("tcrm-dashboard-grid", `tcrm-dashboard-grid--${columns}`, density !== "default" && `tcrm-dashboard-grid--${density}`, className)}
@@ -1872,7 +2231,8 @@ export function ProfileTabs({
   value,
   onValueChange,
   state = "source",
-  showPanel = false
+  showPanel = false,
+  density = "standard"
 }: {
   items?: TabItem[];
   className?: string;
@@ -1881,6 +2241,7 @@ export function ProfileTabs({
   onValueChange?: (value: string) => void;
   state?: "source" | "loading" | "blocked";
   showPanel?: boolean;
+  density?: "standard" | "compact";
 }) {
   const isUnavailable = state === "loading" || state === "blocked";
   const resolvedItems = (items ?? defaultProfileTabItems).map((item) => ({
@@ -1891,7 +2252,7 @@ export function ProfileTabs({
   return (
     <Tabs
       aria-label="Abas do perfil do aluno"
-      className={cn("tcrm-profile-tabs", state !== "source" && `tcrm-profile-tabs--${state}`, className)}
+      className={cn("tcrm-profile-tabs", density === "compact" && "tcrm-profile-tabs--compact", state !== "source" && `tcrm-profile-tabs--${state}`, className)}
       defaultValue={defaultValue ?? "resumo"}
       idBase="tcrm-profile-tabs"
       items={resolvedItems}
@@ -1914,7 +2275,13 @@ export interface ActivityFeedItem {
   description: React.ReactNode;
   icon: IconName;
   tone: ActivityFeedTone;
+  avatarSrc?: string;
   disabled?: boolean;
+}
+
+export interface ActivityFeedPanelTab {
+  value: string;
+  label: string;
 }
 
 const sourceActivityFeedItems: ActivityFeedItem[] = [
@@ -1929,37 +2296,56 @@ const sourceActivityFeedItems: ActivityFeedItem[] = [
 ];
 
 export function ActivityFeed({
-  items = sourceActivityFeedItems,
+  items,
   compact = false,
+  fluid = false,
+  variant = "history",
   className,
   title = "Histórico de hoje",
   description = "O que já foi resolvido, alterado ou executado hoje.",
   dateFilterLabel = "Hoje",
   typeFilterLabel = "Todos os tipos",
   state = "source",
+  panelTabs = [
+    { value: "all", label: "Todas" },
+    { value: "cases", label: "Casos" },
+    { value: "updates", label: "Atualizacoes" },
+    { value: "mentions", label: "Mencoes" }
+  ],
+  panelTab,
   onDateFilter,
   onTypeFilter,
   onExport,
+  onPanelFilter,
+  onPanelTabChange,
   onItemOpen
 }: {
   items?: ActivityFeedItem[];
   compact?: boolean;
+  fluid?: boolean;
+  variant?: "history" | "panel";
   className?: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
   dateFilterLabel?: React.ReactNode;
   typeFilterLabel?: React.ReactNode;
   state?: "source" | "loading" | "empty" | "blocked";
+  panelTabs?: ActivityFeedPanelTab[];
+  panelTab?: string;
   onDateFilter?: () => void;
   onTypeFilter?: () => void;
   onExport?: () => void;
+  onPanelFilter?: () => void;
+  onPanelTabChange?: (value: string) => void;
   onItemOpen?: (item: ActivityFeedItem) => void;
 }) {
   const isUnavailable = state === "loading" || state === "blocked";
-  const visibleItems = state === "empty" ? [] : items;
+  const resolvedItems = items ?? sourceActivityFeedItems;
+  const visibleItems = state === "empty" ? [] : resolvedItems;
   const [internalDateFilter, setInternalDateFilter] = React.useState(String(dateFilterLabel));
   const [internalTypeFilter, setInternalTypeFilter] = React.useState(String(typeFilterLabel));
   const [activeFilter, setActiveFilter] = React.useState<"date" | "type" | "">("");
+  const [internalPanelTab, setInternalPanelTab] = React.useState(panelTabs[0]?.value ?? "all");
   const dateOptions = [
     { value: "hoje", label: "Hoje", count: 8 },
     { value: "semana", label: "Esta semana", count: 31 },
@@ -1998,14 +2384,71 @@ export function ActivityFeed({
     setInternalTypeFilter(typeLabelByValue.get(normalized) ?? "Todos os tipos");
     setActiveFilter("type");
   };
+  const currentPanelTab = panelTab ?? internalPanelTab;
+  const handlePanelTabChange = (value: string) => {
+    if (panelTab === undefined) setInternalPanelTab(value);
+    onPanelTabChange?.(value);
+  };
+
+  if (variant === "panel") {
+    return (
+      <section
+        aria-busy={state === "loading" ? true : undefined}
+        aria-label={typeof title === "string" ? title : "Painel de atividade"}
+        className={cn("tcrm-activity-feed", "tcrm-activity-feed--panel", compact && "tcrm-activity-feed--compact", fluid && "tcrm-activity-feed--fluid", state !== "source" && `tcrm-activity-feed--${state}`, className)}
+        data-component="ActivityFeed"
+        data-state={state}
+        data-variant="panel"
+      >
+        <header className="tcrm-activity-feed__panel-header">
+          <SegmentedControl
+            compact
+            label="Filtrar atividades"
+            onChange={handlePanelTabChange}
+            options={panelTabs.map((option) => ({ ...option, disabled: isUnavailable }))}
+            value={currentPanelTab}
+          />
+          <IconButton disabled={isUnavailable} icon="sliders" label="Filtrar painel de atividade" onClick={onPanelFilter} size="sm" variant="subtle" />
+        </header>
+        {state === "empty" ? <EmptyState className="tcrm-activity-feed__state" icon="clock" title="Nenhuma atividade" /> : null}
+        {state === "loading" ? <LoadingState className="tcrm-activity-feed__state" title="Carregando atividades" variant="spinner" /> : null}
+        {state === "blocked" ? <InlineAlert className="tcrm-activity-feed__state" tone="blocked" title="Atividades bloqueadas">Sem permissao para visualizar este painel.</InlineAlert> : null}
+        {state === "source" ? (
+          <List className="tcrm-activity-feed__panel-list" dense divided>
+            {visibleItems.map((item) => (
+              <ListItem
+                action={
+                  <button
+                    aria-label={`Abrir atividade ${String(item.title)}`}
+                    className="tcrm-activity-feed__panel-action"
+                    disabled={item.disabled || isUnavailable}
+                    onClick={() => onItemOpen?.(item)}
+                    type="button"
+                  >
+                    <span>{item.time}</span>
+                    <Icon name={item.icon} size="sm" />
+                  </button>
+                }
+                leading={<Avatar name={String(item.actor)} size="sm" src={item.avatarSrc} />}
+                key={item.id}
+                meta={item.description}
+                title={item.title}
+              />
+            ))}
+          </List>
+        ) : null}
+      </section>
+    );
+  }
 
   return (
     <section
       aria-busy={state === "loading" ? true : undefined}
       aria-label={typeof title === "string" ? title : "Histórico de hoje"}
-      className={cn("tcrm-activity-feed", compact && "tcrm-activity-feed--compact", state !== "source" && `tcrm-activity-feed--${state}`, className)}
+      className={cn("tcrm-activity-feed", compact && "tcrm-activity-feed--compact", fluid && "tcrm-activity-feed--fluid", state !== "source" && `tcrm-activity-feed--${state}`, className)}
       data-component="ActivityFeed"
       data-state={state}
+      data-variant="history"
     >
       <header className="tcrm-activity-feed__header">
         <span className="tcrm-activity-feed__header-icon"><Icon name="clock" size={22} /></span>
@@ -2336,14 +2779,37 @@ function kanbanTagMeta(tag: React.ReactNode | KanbanCardTag): KanbanCardTag {
 }
 
 export interface KanbanBoardProps extends React.HTMLAttributes<HTMLDivElement> {
+  density?: "standard" | "comfortable" | "compact";
+  laneWidth?: "default" | "commercial" | "finance";
+  laneSurface?: "shared" | "separate";
   rail?: React.ReactNode;
+  railDensity?: "standard" | "compact";
 }
 
-export function KanbanBoard({ className, children, rail, ...props }: KanbanBoardProps) {
+export function KanbanBoard({ className, children, density = "standard", laneSurface = "shared", laneWidth = "default", rail, railDensity = "standard", ...props }: KanbanBoardProps) {
   const hasRail = Boolean(rail);
 
   return (
-    <div className={cn("tcrm-kanban-board", !hasRail && "tcrm-kanban-board--without-rail", className)} data-component="KanbanBoard" role="list" {...props}>
+    <div
+      className={cn(
+        "tcrm-kanban-board",
+        !hasRail && "tcrm-kanban-board--without-rail",
+        hasRail && railDensity === "compact" && "tcrm-kanban-board--compact-rail",
+        density === "comfortable" && "tcrm-kanban-board--comfortable",
+        density === "compact" && "tcrm-kanban-board--compact",
+        laneWidth === "commercial" && "tcrm-kanban-board--commercial-lanes",
+        laneWidth === "finance" && "tcrm-kanban-board--finance-lanes",
+        laneSurface === "separate" && "tcrm-kanban-board--separate-lanes",
+        className
+      )}
+      data-component="KanbanBoard"
+      data-density={density}
+      data-lane-surface={laneSurface}
+      data-lane-width={laneWidth}
+      data-rail-density={hasRail ? railDensity : undefined}
+      role="list"
+      {...props}
+    >
       {hasRail ? <aside className="tcrm-kanban-board__rail">{rail}</aside> : null}
       <div className="tcrm-kanban-board__lanes">{children}</div>
     </div>
@@ -2353,6 +2819,9 @@ export function KanbanBoard({ className, children, rail, ...props }: KanbanBoard
 export interface KanbanColumnProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   title: React.ReactNode;
   count?: number;
+  meta?: React.ReactNode;
+  footer?: React.ReactNode;
+  onMenu?: () => void;
   state?: "default" | "waiting" | "blocked" | "resolved";
   emptyLabel?: React.ReactNode;
   loading?: boolean;
@@ -2362,6 +2831,9 @@ export interface KanbanColumnProps extends Omit<React.HTMLAttributes<HTMLElement
 export function KanbanColumn({
   title,
   count,
+  meta,
+  footer,
+  onMenu,
   children,
   state = "default",
   className,
@@ -2387,12 +2859,17 @@ export function KanbanColumn({
       {...props}
     >
       <header className="tcrm-kanban-column__header">
-        <h3>{title}</h3>
-        {typeof count === "number" ? <Badge className="tcrm-kanban-column__count">{count}</Badge> : null}
+        <div className="tcrm-kanban-column__header-main">
+          <h3>{title}</h3>
+          {typeof count === "number" ? <Badge className="tcrm-kanban-column__count">{count}</Badge> : null}
+          {onMenu ? <IconButton className="tcrm-kanban-column__menu" icon="moreVertical" label={`Abrir opcoes de ${String(title)}`} onClick={onMenu} size="sm" variant="ghost" /> : null}
+        </div>
+        {meta ? <div className="tcrm-kanban-column__meta">{meta}</div> : null}
       </header>
       <div className="tcrm-kanban-column__stack">
         {hasChildren ? children : <div className="tcrm-kanban-column__empty">{emptyLabel ?? "Sem pendencias"}</div>}
       </div>
+      {footer ? <footer className="tcrm-kanban-column__footer">{footer}</footer> : null}
     </section>
   );
 }
@@ -2409,6 +2886,7 @@ export function KanbanCard({
   nextAction,
   tags = [],
   layout = "default",
+  footer,
   onSelect,
   onMenu,
   menuIcon = "moreVertical",
@@ -2422,7 +2900,8 @@ export function KanbanCard({
   nextAction?: React.ReactNode;
   tags?: Array<React.ReactNode | KanbanCardTag>;
   stateLabel?: React.ReactNode;
-  layout?: "default" | "finance";
+  layout?: "default" | "finance" | "compact";
+  footer?: React.ReactNode;
   menuIcon?: IconName;
   onSelect?: () => void;
   onMenu?: () => void;
@@ -2465,6 +2944,15 @@ export function KanbanCard({
         {owner ? <small className="tcrm-kanban-card__owner">{owner}</small> : null}
         {state ? <Chip className="tcrm-kanban-card__status" showDot={false} tone={toneForState(state)}>{stateLabel ?? state}</Chip> : null}
         {children}
+      </>
+    ) : layout === "compact" ? (
+      <>
+        <header className="tcrm-kanban-card__header">
+          <strong>{title ?? "Caso operacional"}</strong>
+          {!onSelect ? menuAction : null}
+        </header>
+        {meta ? <small className="tcrm-kanban-card__compact-meta">{meta}</small> : null}
+        {footer ? <footer className="tcrm-kanban-card__compact-footer">{footer}</footer> : null}
       </>
     ) : (
       <>
@@ -2634,7 +3122,9 @@ export interface CrmWorklistPageProps extends Omit<CrmPageFamilyShellProps, "chi
   quickFilters: React.ReactNode;
   state?: WorkListDetailPageState;
   worklistClassName?: string;
+  worklistFilterRhythm?: WorkListDetailPageFilterRhythm;
   worklistLayoutMode?: WorkListDetailPageLayoutMode;
+  worklistHeightMode?: WorkListDetailPageHeightMode;
 }
 
 export function CrmWorklistPage({
@@ -2652,7 +3142,9 @@ export function CrmWorklistPage({
   quickFilters,
   state,
   worklistClassName,
+  worklistFilterRhythm,
   worklistLayoutMode,
+  worklistHeightMode,
   ...shellProps
 }: CrmWorklistPageProps) {
   return (
@@ -2664,8 +3156,10 @@ export function CrmWorklistPage({
         detailState={detailState}
         filterBar={filterBar}
         filterBarLabel={filterBarLabel}
+        filterRhythm={worklistFilterRhythm}
         after={after}
         layoutMode={worklistLayoutMode}
+        heightMode={worklistHeightMode}
         listLabel={listLabel}
         mainLabel={mainLabel}
         pageLabel={pageLabel}
@@ -2682,18 +3176,26 @@ export interface CrmKanbanPageProps extends Omit<CrmPageFamilyShellProps, "child
   after?: React.ReactNode;
   children: React.ReactNode;
   filterBar?: React.ReactNode;
+  kanbanDensity?: KanbanBoardProps["density"];
   kanbanClassName?: string;
+  laneSurface?: KanbanBoardProps["laneSurface"];
+  laneWidth?: KanbanBoardProps["laneWidth"];
+  layoutVariant?: "default" | "finance" | "commercial";
   quickFilters?: React.ReactNode;
+  railDensity?: KanbanBoardProps["railDensity"];
 }
 
-export function CrmKanbanPage({ after, children, filterBar, kanbanClassName, quickFilters, ...shellProps }: CrmKanbanPageProps) {
+export function CrmKanbanPage({ after, children, filterBar, kanbanClassName, kanbanDensity, laneSurface, laneWidth, layoutVariant = "default", quickFilters, railDensity, ...shellProps }: CrmKanbanPageProps) {
+  const commercialLayout = layoutVariant === "commercial";
   return (
     <CrmPageFamilyShell {...shellProps} contentLayout="kanban">
-      {filterBar}
-      <KanbanBoard className={cn("tcrm-kanban-page-board", kanbanClassName)} rail={quickFilters}>
-        {children}
-      </KanbanBoard>
-      {after}
+      <div className={cn("tcrm-page-family-stack", "tcrm-kanban-page-stack", layoutVariant === "finance" && "tcrm-kanban-page-stack--finance", commercialLayout && "tcrm-kanban-page-stack--commercial")}>
+        {filterBar}
+        <KanbanBoard className={cn("tcrm-kanban-page-board", kanbanClassName)} density={kanbanDensity} laneSurface={commercialLayout ? "separate" : laneSurface} laneWidth={layoutVariant === "finance" ? "finance" : commercialLayout ? "commercial" : laneWidth} rail={quickFilters} railDensity={railDensity}>
+          {children}
+        </KanbanBoard>
+        {after}
+      </div>
     </CrmPageFamilyShell>
   );
 }
@@ -2706,6 +3208,7 @@ export interface CrmDashboardPageProps extends Omit<CrmPageFamilyShellProps, "ch
   dashboardClassName?: string;
   dashboardStackClassName?: string;
   density?: React.ComponentProps<typeof DashboardGrid>["density"];
+  layoutVariant?: "default" | "opportunity" | "support" | "settings-hub";
 }
 
 export function CrmDashboardPage({
@@ -2716,6 +3219,7 @@ export function CrmDashboardPage({
   dashboardClassName,
   dashboardStackClassName,
   density,
+  layoutVariant = "default",
   ...shellProps
 }: CrmDashboardPageProps) {
   const dashboard = (
@@ -2729,8 +3233,8 @@ export function CrmDashboardPage({
   );
 
   return (
-    <CrmPageFamilyShell {...shellProps}>
-      {after || dashboardStackClassName ? <div className={cn("tcrm-dashboard-page-stack", dashboardStackClassName)}>{dashboard}</div> : dashboard}
+    <CrmPageFamilyShell {...shellProps} contentLayout={layoutVariant === "default" ? undefined : layoutVariant}>
+      {before || after || dashboardStackClassName ? <div className={cn("tcrm-dashboard-page-stack", layoutVariant === "opportunity" && "tcrm-dashboard-page-stack--opportunity", dashboardStackClassName)}>{dashboard}</div> : dashboard}
     </CrmPageFamilyShell>
   );
 }
@@ -2760,23 +3264,27 @@ export function CrmThreePanePage({
   ...shellProps
 }: CrmThreePanePageProps) {
   return (
-    <CrmPageFamilyShell {...shellProps}>
-      {filterBar}
-      <ThreePaneLayout
-        activePane={activePane}
-        center={center}
-        centerLabel={centerLabel}
-        className={threePaneClassName}
-        left={left}
-        leftLabel={leftLabel}
-        right={right}
-        rightLabel={rightLabel}
-      />
+    <CrmPageFamilyShell {...shellProps} contentLayout="three-pane">
+      <div className="tcrm-page-family-stack tcrm-three-pane-page-stack">
+        {filterBar}
+        <ThreePaneLayout
+          activePane={activePane}
+          center={center}
+          centerLabel={centerLabel}
+          className={cn("tcrm-three-pane-page-layout", threePaneClassName)}
+          left={left}
+          leftLabel={leftLabel}
+          right={right}
+          rightLabel={rightLabel}
+        />
+      </div>
     </CrmPageFamilyShell>
   );
 }
 
 export interface CrmRightPanelPageProps extends Omit<CrmPageFamilyShellProps, "children" | "contentLayout"> {
+  contentHeader?: React.ReactNode;
+  contentHeaderLabel?: string;
   main: React.ReactNode;
   mainGridColumns?: React.ComponentProps<typeof DashboardGrid>["columns"];
   mainGridDensity?: React.ComponentProps<typeof DashboardGrid>["density"];
@@ -2786,10 +3294,12 @@ export interface CrmRightPanelPageProps extends Omit<CrmPageFamilyShellProps, "c
   panelPlacement?: "inline" | "drawer";
   rightPanelClassName?: string;
   rightPanelState?: React.ComponentProps<typeof RightPanelLayout>["state"];
-  rightPanelVariant?: "default" | "simulation";
+  rightPanelVariant?: "default" | "simulation" | "student-profile" | "class-operation" | "settings" | "settings-permissions" | "settings-payments" | "settings-agenda" | "settings-notifications" | "billing-subscription" | "agent-routine" | "agent-flow" | "agent-test" | "agent-publish" | "agent-execution" | "billing-invoices" | "billing-addons" | "usage-overview" | "usage-ledger";
 }
 
 export function CrmRightPanelPage({
+  contentHeader,
+  contentHeaderLabel,
   drawer,
   drawerPlacement,
   main,
@@ -2814,6 +3324,7 @@ export function CrmRightPanelPage({
   return (
     <CrmPageFamilyShell
       {...shellProps}
+      contentLayout={rightPanelVariant === "student-profile" ? "student-profile" : rightPanelVariant === "class-operation" ? "class-operation" : rightPanelVariant === "settings" ? "settings" : rightPanelVariant === "settings-permissions" ? "settings-permissions" : rightPanelVariant === "settings-payments" ? "settings-payments" : rightPanelVariant === "settings-agenda" ? "settings-agenda" : rightPanelVariant === "settings-notifications" ? "settings-notifications" : rightPanelVariant === "billing-subscription" ? "billing-subscription" : rightPanelVariant === "agent-routine" ? "agent-routine" : rightPanelVariant === "agent-flow" ? "agent-flow" : rightPanelVariant === "agent-test" ? "agent-test" : rightPanelVariant === "agent-publish" ? "agent-publish" : undefined}
       drawer={usesDrawerPanel ? panel : drawer}
       drawerPlacement={usesDrawerPanel ? drawerPlacement ?? "floating" : drawerPlacement}
     >
@@ -2823,6 +3334,8 @@ export function CrmRightPanelPage({
           rightPanelVariant !== "default" && `tcrm-right-panel-layout--${rightPanelVariant}`,
           rightPanelClassName
         )}
+        contentHeader={contentHeader}
+        contentHeaderLabel={contentHeaderLabel}
         main={mainContent}
         mainLabel={mainLabel}
         panel={usesDrawerPanel ? <span aria-hidden="true" className="tcrm-right-panel-layout__drawer-reserve" /> : panel}
@@ -2887,6 +3400,132 @@ const weeklyCalendarSourceEvents: WeeklyCalendarEvent[] = [
   { id: "sex-1900-reformer", dayIndex: 4, top: 686, time: "19:00", title: "Reformer Intermediario", teacher: "Joao Silva", capacity: "4/6", status: "scheduled", statusLabel: "confirmada" }
 ];
 
+export interface WeeklyCalendarReferenceEvent {
+  id: string;
+  dayIndex: number;
+  rowIndex: number;
+  title: React.ReactNode;
+  teacher?: React.ReactNode;
+  capacity?: React.ReactNode;
+  status?: "scheduled" | "available" | "conflict";
+  note?: React.ReactNode;
+  span?: number;
+}
+
+const weeklyCalendarReferenceTimes = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+
+const weeklyCalendarReferenceEvents: WeeklyCalendarReferenceEvent[] = [
+  { id: "seg-08", dayIndex: 0, rowIndex: 0, title: "Mat Pilates", teacher: "Joao Silva", capacity: "8/10" },
+  { id: "seg-09", dayIndex: 0, rowIndex: 1, title: "Reformer", teacher: "Maria Clara", capacity: "6/8" },
+  { id: "seg-10", dayIndex: 0, rowIndex: 2, title: "Pilates Solo", teacher: "Ana Paula", capacity: "4/6" },
+  { id: "seg-12", dayIndex: 0, rowIndex: 4, title: "Reformer", teacher: "Maria Clara", capacity: "5/6" },
+  { id: "seg-14", dayIndex: 0, rowIndex: 6, title: "Funcional", teacher: "Carla Lima", capacity: "6/12" },
+  { id: "seg-16", dayIndex: 0, rowIndex: 8, title: "Mat Pilates", teacher: "Joao Silva", capacity: "6/10" },
+  { id: "seg-18", dayIndex: 0, rowIndex: 10, title: "Reformer", teacher: "Maria Clara", capacity: "7/8" },
+  { id: "seg-19", dayIndex: 0, rowIndex: 11, title: "Funcional", teacher: "Carlos Lima", capacity: "7/12" },
+  { id: "ter-08", dayIndex: 1, rowIndex: 0, title: "Mat Pilates", teacher: "Joao Silva", capacity: "9/10" },
+  { id: "ter-09", dayIndex: 1, rowIndex: 1, title: "Funcional", teacher: "Carla Lima", capacity: "9/12" },
+  { id: "ter-10", dayIndex: 1, rowIndex: 2, title: "Mat Pilates", teacher: "Joao Silva", capacity: "10/10" },
+  { id: "ter-12", dayIndex: 1, rowIndex: 4, title: "Pilates Gestante", teacher: "Ana Paula", capacity: "4/6" },
+  { id: "ter-14", dayIndex: 1, rowIndex: 6, title: "Reformer", teacher: "Maria Clara", capacity: "7/8" },
+  { id: "ter-16", dayIndex: 1, rowIndex: 8, title: "Pilates Solo", teacher: "Ana Paula", capacity: "4/6" },
+  { id: "ter-18", dayIndex: 1, rowIndex: 10, title: "Mat Pilates", teacher: "Joao Silva", capacity: "10/10" },
+  { id: "ter-19", dayIndex: 1, rowIndex: 11, title: "Reformer", teacher: "Maria Clara", capacity: "7/8" },
+  { id: "qua-08", dayIndex: 2, rowIndex: 0, title: "Reformer", teacher: "Maria Clara", capacity: "7/8" },
+  { id: "qua-09", dayIndex: 2, rowIndex: 1, title: "Reformer", teacher: "Maria Clara", capacity: "8/8" },
+  { id: "qua-10", dayIndex: 2, rowIndex: 2, title: "Pilates Gestante", teacher: "Ana Paula", capacity: "5/6" },
+  { id: "qua-12", dayIndex: 2, rowIndex: 4, title: "Mat Pilates", teacher: "Joao Silva", capacity: "8/10" },
+  { id: "qua-conflict", dayIndex: 2, rowIndex: 5, title: "Conflito", note: "Sala 2 ocupada", status: "conflict", span: 2 },
+  { id: "qua-16", dayIndex: 2, rowIndex: 8, title: "Reformer", teacher: "Maria Clara", capacity: "8/8" },
+  { id: "qua-18", dayIndex: 2, rowIndex: 10, title: "Funcional", teacher: "Carla Lima", capacity: "8/12" },
+  { id: "qua-19", dayIndex: 2, rowIndex: 11, title: "Mat Pilates", teacher: "Joao Silva", capacity: "8/10" },
+  { id: "qui-08", dayIndex: 3, rowIndex: 0, title: "Mat Pilates", teacher: "Joao Silva", capacity: "10/10" },
+  { id: "qui-09", dayIndex: 3, rowIndex: 1, title: "Funcional", teacher: "Carla Lima", capacity: "7/12" },
+  { id: "qui-10", dayIndex: 3, rowIndex: 2, title: "Mat Pilates", teacher: "Joao Silva", capacity: "9/10" },
+  { id: "qui-12", dayIndex: 3, rowIndex: 4, title: "Reformer", teacher: "Maria Clara", capacity: "7/8" },
+  { id: "qui-14", dayIndex: 3, rowIndex: 6, title: "Mat Pilates", teacher: "Joao Silva", capacity: "9/10" },
+  { id: "qui-16", dayIndex: 3, rowIndex: 8, title: "Pilates Gestante", teacher: "Ana Paula", capacity: "5/6" },
+  { id: "qui-18", dayIndex: 3, rowIndex: 10, title: "Reformer", teacher: "Maria Clara", capacity: "6/8" },
+  { id: "qui-19", dayIndex: 3, rowIndex: 11, title: "Pilates Solo", teacher: "Ana Paula", capacity: "5/6" },
+  { id: "sex-08", dayIndex: 4, rowIndex: 0, title: "Reformer", teacher: "Maria Clara", capacity: "6/8" },
+  { id: "sex-09", dayIndex: 4, rowIndex: 1, title: "Mat Pilates", teacher: "Joao Silva", capacity: "8/10" },
+  { id: "sex-10", dayIndex: 4, rowIndex: 2, title: "Funcional", teacher: "Carla Lima", capacity: "6/12" },
+  { id: "sex-12", dayIndex: 4, rowIndex: 4, title: "Pilates Solo", teacher: "Ana Paula", capacity: "5/6" },
+  { id: "sex-14", dayIndex: 4, rowIndex: 6, title: "Reformer", teacher: "Maria Clara", capacity: "6/8" },
+  { id: "sex-16", dayIndex: 4, rowIndex: 8, title: "Mat Pilates", teacher: "Joao Silva", capacity: "7/10" },
+  { id: "sex-18", dayIndex: 4, rowIndex: 10, title: "Mat Pilates", teacher: "Joao Silva", capacity: "9/10" },
+  { id: "sex-19", dayIndex: 4, rowIndex: 11, title: "Reformer", teacher: "Maria Clara", capacity: "7/8" },
+  { id: "sab-08", dayIndex: 5, rowIndex: 0, title: "Mat Pilates", teacher: "Joao Silva", capacity: "7/10" },
+  { id: "sab-09", dayIndex: 5, rowIndex: 1, title: "Reformer", teacher: "Maria Clara", capacity: "7/8" },
+  { id: "sab-12", dayIndex: 5, rowIndex: 4, title: "Funcional", teacher: "Carla Lima", capacity: "5/12" },
+  { id: "sab-18", dayIndex: 5, rowIndex: 10, title: "Pilates Solo", teacher: "Ana Paula", capacity: "4/6" },
+  { id: "dom-08", dayIndex: 6, rowIndex: 0, title: "Vaga aberta", note: "08:00 - 09:00", status: "available", span: 2 },
+  { id: "dom-12", dayIndex: 6, rowIndex: 4, title: "Vaga aberta", note: "11:00 - 12:00", status: "available", span: 2 },
+  { id: "dom-16", dayIndex: 6, rowIndex: 8, title: "Vaga aberta", note: "15:00 - 16:00", status: "available", span: 2 }
+];
+
+function WeeklyCalendarReference({
+  days,
+  events,
+  onEventSelect,
+  onPreviousWeek,
+  onNextWeek,
+  onToday,
+  onFilter,
+  className
+}: {
+  days: string[];
+  events: WeeklyCalendarReferenceEvent[];
+  onEventSelect?: (eventId: string, event: WeeklyCalendarReferenceEvent) => void;
+  onPreviousWeek?: () => void;
+  onNextWeek?: () => void;
+  onToday?: () => void;
+  onFilter?: () => void;
+  className?: string;
+}) {
+  return (
+    <section className={cn("tcrm-weekly-calendar-reference", className)} data-component="WeeklyCalendar" data-variant="reference">
+      <header className="tcrm-weekly-calendar-reference__toolbar">
+        <ButtonGroup aria-label="Navegacao da semana">
+          <IconButton icon="chevronLeft" label="Semana anterior" onClick={onPreviousWeek} size="sm" variant="ghost" />
+          <Button onClick={onToday} size="sm" variant="secondary">Hoje</Button>
+          <IconButton icon="chevronRight" label="Proxima semana" onClick={onNextWeek} size="sm" variant="ghost" />
+        </ButtonGroup>
+        <span>20 - 26 de Maio, 2024</span>
+        <div className="tcrm-weekly-calendar-reference__toolbar-actions">
+          <SegmentedControl compact label="Visualizacao" options={[{ value: "day", label: "Dia" }, { value: "week", label: "Semana" }, { value: "month", label: "Mes" }]} value="week" />
+          <Button leadingIcon="filter" onClick={onFilter} size="sm" variant="secondary">Filtros</Button>
+        </div>
+      </header>
+      <div className="tcrm-weekly-calendar-reference__grid" role="grid" aria-label="Calendario semanal completo">
+        <span className="tcrm-weekly-calendar-reference__corner">Hora</span>
+        {days.map((day) => <strong key={day} role="columnheader">{day}</strong>)}
+        <div className="tcrm-weekly-calendar-reference__times">
+          {weeklyCalendarReferenceTimes.map((time) => <span key={time}>{time}</span>)}
+        </div>
+        <div className="tcrm-weekly-calendar-reference__cells" aria-hidden="true">
+          {Array.from({ length: 84 }, (_, index) => <span key={index} />)}
+        </div>
+        <div className="tcrm-weekly-calendar-reference__events">
+          {events.map((event) => (
+            <button
+              className={cn("tcrm-weekly-calendar-reference__event", `tcrm-weekly-calendar-reference__event--${event.status ?? "scheduled"}`)}
+              key={event.id}
+              onClick={() => onEventSelect?.(event.id, event)}
+              style={{ "--tcrm-reference-event-column": event.dayIndex + 1, "--tcrm-reference-event-row": event.rowIndex + 1, "--tcrm-reference-event-span": event.span ?? 1 } as React.CSSProperties}
+              type="button"
+            >
+              <strong>{event.title}</strong>
+              {event.teacher ? <small>{event.teacher}</small> : null}
+              <span>{event.note ?? event.capacity}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function WeeklyCalendar({
   days = ["Seg 12/05", "Ter 13/05", "Qua 14/05", "Qui 15/05", "Sex 16/05"],
   times = weeklyCalendarTimes,
@@ -2895,6 +3534,12 @@ export function WeeklyCalendar({
   onEventSelect,
   compact = false,
   density = "default",
+  variant = "agenda",
+  referenceEvents = weeklyCalendarReferenceEvents,
+  onPreviousWeek,
+  onNextWeek,
+  onToday,
+  onFilter,
   className
 }: {
   days?: string[];
@@ -2904,8 +3549,28 @@ export function WeeklyCalendar({
   onEventSelect?: (eventId: string, event: WeeklyCalendarEvent) => void;
   compact?: boolean;
   density?: "default" | "short";
+  variant?: "agenda" | "reference";
+  referenceEvents?: WeeklyCalendarReferenceEvent[];
+  onPreviousWeek?: () => void;
+  onNextWeek?: () => void;
+  onToday?: () => void;
+  onFilter?: () => void;
   className?: string;
 }) {
+  if (variant === "reference") {
+    return (
+      <WeeklyCalendarReference
+        className={className}
+        days={days.length === 7 ? days : ["Seg 20/05", "Ter 21/05", "Qua 22/05", "Qui 23/05", "Sex 24/05", "Sab 25/05", "Dom 26/05"]}
+        events={referenceEvents}
+        onEventSelect={onEventSelect as ((eventId: string, event: WeeklyCalendarReferenceEvent) => void) | undefined}
+        onFilter={onFilter}
+        onNextWeek={onNextWeek}
+        onPreviousWeek={onPreviousWeek}
+        onToday={onToday}
+      />
+    );
+  }
   return (
     <div className={cn("tcrm-weekly-calendar", compact && "tcrm-weekly-calendar--compact", density === "short" && "tcrm-weekly-calendar--short", className)} role="grid" aria-label="Agenda semanal">
       <div className="tcrm-weekly-calendar__corner" />
@@ -3002,6 +3667,7 @@ export function MiniCalendar({
   disabledDays = [],
   loading = false,
   blocked = false,
+  showHeader = true,
   onPreviousMonth,
   onNextMonth,
   onSelect,
@@ -3016,6 +3682,7 @@ export function MiniCalendar({
   disabledDays?: string[];
   loading?: boolean;
   blocked?: boolean;
+  showHeader?: boolean;
   onPreviousMonth?: () => void;
   onNextMonth?: () => void;
   onSelect?: (day: string) => void;
@@ -3025,17 +3692,19 @@ export function MiniCalendar({
     <div
       aria-busy={loading || undefined}
       aria-disabled={blocked || undefined}
-      className={cn("tcrm-mini-calendar", loading && "tcrm-mini-calendar--loading", blocked && "tcrm-mini-calendar--blocked", className)}
+      className={cn("tcrm-mini-calendar", !showHeader && "tcrm-mini-calendar--headerless", loading && "tcrm-mini-calendar--loading", blocked && "tcrm-mini-calendar--blocked", className)}
       role="group"
       {...props}
     >
-      <header className="tcrm-mini-calendar__header">
-        <strong>{monthLabel}</strong>
-        <div className="tcrm-mini-calendar__nav" aria-label={`Navegacao de ${monthLabel}`}>
-          <IconButton className="tcrm-mini-calendar__nav-button" disabled={isDisabled} icon="chevronLeft" label="Mes anterior" onClick={onPreviousMonth} size="sm" variant="ghost" />
-          <IconButton className="tcrm-mini-calendar__nav-button" disabled={isDisabled} icon="chevronRight" label="Proximo mes" onClick={onNextMonth} size="sm" variant="ghost" />
-        </div>
-      </header>
+      {showHeader ? (
+        <header className="tcrm-mini-calendar__header">
+          <strong>{monthLabel}</strong>
+          <div className="tcrm-mini-calendar__nav" aria-label={`Navegacao de ${monthLabel}`}>
+            <IconButton className="tcrm-mini-calendar__nav-button" disabled={isDisabled} icon="chevronLeft" label="Mes anterior" onClick={onPreviousMonth} size="sm" variant="ghost" />
+            <IconButton className="tcrm-mini-calendar__nav-button" disabled={isDisabled} icon="chevronRight" label="Proximo mes" onClick={onNextMonth} size="sm" variant="ghost" />
+          </div>
+        </header>
+      ) : null}
       <div className="tcrm-mini-calendar__grid" role="grid" aria-label={monthLabel}>
         {weekdays.map((weekday, index) => (
           <span className="tcrm-mini-calendar__weekday" key={`${weekday}-${index}`} role="columnheader">
@@ -3070,6 +3739,96 @@ export function MiniCalendar({
   );
 }
 
+export interface CompactCalendarItem {
+  id: string;
+  time: React.ReactNode;
+  title: React.ReactNode;
+  meta: React.ReactNode;
+  tone?: ComponentTone;
+}
+
+const compactCalendarSourceItems: CompactCalendarItem[] = [
+  { id: "restriction", time: "10:30", title: "Restricao de conta", meta: "Joao Silva", tone: "info" },
+  { id: "email", time: "11:30", title: "Falha no envio de e-mail", meta: "Maria Claro", tone: "danger" },
+  { id: "report", time: "15:00", title: "Revisao de relatorio", meta: "Sam Frank", tone: "warning" }
+];
+
+export function CompactCalendar({
+  monthLabel = "Abril 2024",
+  selected = "9",
+  today = "18",
+  selectedDateLabel = "Terca, 9 de Abril",
+  items = compactCalendarSourceItems,
+  view = "month",
+  disabled = false,
+  onPreviousMonth,
+  onNextMonth,
+  onToday,
+  onViewChange,
+  onSelect,
+  onEventOpen,
+  onCreate,
+  className,
+  ...props
+}: Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> & {
+  monthLabel?: React.ReactNode;
+  selected?: string;
+  today?: string;
+  selectedDateLabel?: React.ReactNode;
+  items?: CompactCalendarItem[];
+  view?: "month" | "week" | "day";
+  disabled?: boolean;
+  onPreviousMonth?: () => void;
+  onNextMonth?: () => void;
+  onToday?: () => void;
+  onViewChange?: (value: "month" | "week" | "day") => void;
+  onSelect?: (day: string) => void;
+  onEventOpen?: (item: CompactCalendarItem) => void;
+  onCreate?: () => void;
+}) {
+  return (
+    <section aria-label="Calendario compacto" className={cn("tcrm-compact-calendar", className)} data-component="CompactCalendar" {...props}>
+      <header className="tcrm-compact-calendar__header">
+        <strong>{monthLabel}</strong>
+        <div className="tcrm-compact-calendar__navigation">
+          <IconButton disabled={disabled} icon="chevronLeft" label="Mes anterior" onClick={onPreviousMonth} size="sm" variant="ghost" />
+          <IconButton disabled={disabled} icon="chevronRight" label="Proximo mes" onClick={onNextMonth} size="sm" variant="ghost" />
+          <Button disabled={disabled} onClick={onToday} size="sm" variant="secondary">Hoje</Button>
+        </div>
+        <SegmentedControl
+          compact
+          label="Visualizacao do calendario"
+          onChange={(value: string) => onViewChange?.(value as "month" | "week" | "day")}
+          options={[
+            { value: "month", label: "Mes", disabled },
+            { value: "week", label: "Semana", disabled },
+            { value: "day", label: "Dia", disabled }
+          ]}
+          value={view}
+        />
+      </header>
+      <div className="tcrm-compact-calendar__body">
+        <MiniCalendar blocked={disabled} monthLabel={String(monthLabel)} onSelect={onSelect} selected={selected} showHeader={false} today={today} />
+        <section className="tcrm-compact-calendar__agenda" aria-label={String(selectedDateLabel)}>
+          <strong>{selectedDateLabel}</strong>
+          <List dense divided>
+            {items.map((item) => (
+              <ListItem
+                action={<IconButton disabled={disabled} icon="chevronRight" label={`Abrir ${String(item.title)}`} onClick={() => onEventOpen?.(item)} size="sm" variant="ghost" />}
+                key={item.id}
+                leading={<ListIcon icon="circle" tone={item.tone ?? "neutral"} />}
+                meta={item.meta}
+                title={<><span>{item.time}</span> {item.title}</>}
+              />
+            ))}
+          </List>
+          <Button disabled={disabled} leadingIcon="plus" onClick={onCreate} size="sm" variant="secondary">Novo compromisso</Button>
+        </section>
+      </div>
+    </section>
+  );
+}
+
 export function ClassCard({
   title = "Pilates Solo",
   meta = "Mariana Lopes",
@@ -3080,6 +3839,16 @@ export function ClassCard({
   selected = false,
   onSelect,
   action,
+  variant = "event",
+  endTime,
+  room = "Sala 1",
+  attendance,
+  avatarSrc,
+  openSlot = false,
+  onCalendar,
+  onRoster,
+  onMenu,
+  onReserve,
   className,
   ...props
 }: Omit<React.HTMLAttributes<HTMLDivElement>, "title"> & {
@@ -3092,8 +3861,47 @@ export function ClassCard({
   time?: React.ReactNode;
   capacity?: React.ReactNode;
   onSelect?: () => void;
+  variant?: "event" | "reference";
+  endTime?: React.ReactNode;
+  room?: React.ReactNode;
+  attendance?: React.ReactNode;
+  avatarSrc?: string;
+  openSlot?: boolean;
+  onCalendar?: () => void;
+  onRoster?: () => void;
+  onMenu?: () => void;
+  onReserve?: () => void;
 }) {
   const status = state === "full" ? "full" : state === "available" ? "available" : state === "conflict" || state === "teacher-unavailable" || state === "room-adjustment" ? "conflict" : "scheduled";
+
+  if (variant === "reference") {
+    return (
+      <article className={cn("tcrm-class-card-reference", openSlot && "tcrm-class-card-reference--open", state && `tcrm-class-card-reference--${stateKey(state)}`, className)} data-component="ClassCard" data-variant="reference" {...props}>
+        <header>
+          <span className="tcrm-class-card-reference__time"><StatusDot status={openSlot ? "info" : state === "conflict" ? "danger" : "success"} /> {time}{endTime ? <> - {endTime}</> : null}</span>
+          <IconButton icon="moreVertical" label={`Opcoes de ${String(title)}`} onClick={onMenu} size="sm" variant="ghost" />
+        </header>
+        {openSlot ? <small className="tcrm-class-card-reference__eyebrow">Vaga aberta</small> : null}
+        <strong>{title}</strong>
+        <small>{meta}</small>
+        {!openSlot ? <span className="tcrm-class-card-reference__teacher"><Avatar name={String(meta)} size="xs" src={avatarSrc} /> {meta}</span> : null}
+        <dl>
+          <div><dt>Sala</dt><dd>{room}</dd></div>
+          <div><dt>Capacidade</dt><dd>{capacity}</dd></div>
+          <div><dt>Chamada</dt><dd>{attendance ?? statusLabel ?? "-"}</dd></div>
+        </dl>
+        {openSlot ? (
+          <Button leadingIcon="plus" onClick={onReserve} size="sm" variant="secondary">Reservar aula</Button>
+        ) : (
+          <footer>
+            <IconButton icon="calendar" label="Abrir calendario" onClick={onCalendar} size="sm" variant="default" />
+            <IconButton icon="users" label="Abrir chamada" onClick={onRoster} size="sm" variant="default" />
+            <IconButton icon="moreVertical" label="Mais acoes" onClick={onMenu} size="sm" variant="default" />
+          </footer>
+        )}
+      </article>
+    );
+  }
 
   return (
     <CalendarEventBlock
@@ -3131,6 +3939,8 @@ export interface RosterStudent {
   status?: RosterAttendanceStatus;
   meta?: React.ReactNode;
   helper?: React.ReactNode;
+  observation?: React.ReactNode;
+  credit?: React.ReactNode;
 }
 
 const rosterStatusCopy: Record<RosterAttendanceStatus, { label: string; className: string }> = {
@@ -3174,9 +3984,43 @@ export function Roster({
   onStudentAction?: (studentId: string) => void;
   onStudentStatus?: (student: RosterStudent) => void;
   disabled?: boolean;
-  variant?: "attendance" | "expected";
+  variant?: "attendance" | "expected" | "reference";
   className?: string;
 }) {
+  if (variant === "reference") {
+    return (
+      <div className={cn("tcrm-roster-reference", className)} data-component="Roster" data-variant="reference" role="table" aria-label="Roster de chamada">
+        <div className="tcrm-roster-reference__header" role="row">
+          <span role="columnheader" />
+          <span role="columnheader">Esperado</span>
+          <span role="columnheader">Presente</span>
+          <span role="columnheader">Falta</span>
+          <span role="columnheader">No-show</span>
+          <span role="columnheader">Observacao</span>
+          <span role="columnheader">Credito reposicao</span>
+        </div>
+        {students.map((sourceStudent, index) => {
+          const student = normalizeRosterStudent(sourceStudent, index);
+          const status = student.status ?? student.state ?? "pending";
+          const emit = () => {
+            onStudentAction?.(student.id);
+            onStudentStatus?.(student);
+          };
+          return (
+            <div className="tcrm-roster-reference__row" key={student.id} role="row">
+              <span className="tcrm-roster-reference__student" role="cell"><Avatar name={student.name} size="xs" src={student.avatarSrc} /> {student.name}</span>
+              <span role="cell"><Checkbox aria-label={`${student.name}: esperado`} checked={status === "pending"} disabled={disabled} onChange={emit} /></span>
+              <span role="cell"><Checkbox aria-label={`${student.name}: presente`} checked={status === "present"} disabled={disabled} onChange={emit} /></span>
+              <span role="cell"><Checkbox aria-label={`${student.name}: falta`} checked={status === "warned" || status === "absent"} disabled={disabled} onChange={emit} /></span>
+              <span role="cell"><Checkbox aria-label={`${student.name}: no-show`} checked={status === "no-show"} disabled={disabled} onChange={emit} /></span>
+              <span role="cell">{student.observation ?? student.helper ?? "-"}</span>
+              <span role="cell">{student.credit ?? (status === "warned" || status === "no-show" ? "1" : "0")}</span>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
   return (
     <List className={cn("tcrm-roster", `tcrm-roster--${variant}`, className)} divided>
       {students.map((sourceStudent, index) => {
@@ -3221,7 +4065,7 @@ function SetupShellDefaultStage() {
   return (
     <div className="tcrm-setup-shell__stage">
       <div className="tcrm-setup-shell__stage-icon" aria-hidden="true">
-        <Icon name="layout" size="38px" />
+        <Icon name="scan" size="38px" />
       </div>
       <h2>Área da etapa atual</h2>
       <p>Conteúdo da página entra aqui.</p>
@@ -3419,6 +4263,7 @@ export function SetupBlockHeader({
   description = "Defina o nomr e os hor\u00e1rios gerais de funcionamento, isso ajuda o Taliya a montar a grade inicial com seguran\u00e7a.",
   step = 1,
   totalSteps = 8,
+  badgeLabel,
   state = "current",
   action,
   actionLabel = state === "blocked" ? "Resolver pendência" : state === "warning" ? "Revisar" : undefined,
@@ -3431,6 +4276,7 @@ export function SetupBlockHeader({
   description?: React.ReactNode;
   step?: number;
   totalSteps?: number;
+  badgeLabel?: React.ReactNode;
   state?: "current" | "complete" | "warning" | "blocked" | "loading";
   action?: React.ReactNode;
   actionLabel?: string;
@@ -3440,7 +4286,7 @@ export function SetupBlockHeader({
   className?: string;
 }) {
   const isDisabled = disabled || loading || state === "loading";
-  const label = loading || state === "loading" ? "Carregando bloco" : `Bloco ${step} de ${totalSteps}`;
+  const label = loading || state === "loading" ? "Carregando bloco" : badgeLabel ?? `Bloco ${step} de ${totalSteps}`;
   const actionNode = action ?? (actionLabel ? (
     <Button
       className="tcrm-setup-block-header__action"
@@ -3646,6 +4492,676 @@ export function SetupChoiceCard({
   );
 }
 
+export type SetupConsumptionModel = "membership" | "class-pack" | "hybrid";
+
+export interface SetupConsumptionWorkspaceProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  model?: SetupConsumptionModel;
+  onModelSelect?: (model: SetupConsumptionModel) => void;
+  onAction?: (action: "save" | "continue" | "later") => void;
+  onSettingChange?: (setting: string, enabled: boolean) => void;
+}
+
+export function SetupConsumptionWorkspace({
+  model = "class-pack",
+  onModelSelect,
+  onAction,
+  onSettingChange,
+  className,
+  ...props
+}: SetupConsumptionWorkspaceProps) {
+  const models: Array<{ id: SetupConsumptionModel; title: string; description: string }> = [
+    { id: "membership", title: "Mensalidade", description: "Cobranca recorrente por periodo." },
+    { id: "class-pack", title: "Pacote de aulas", description: "Pacote com quantidade de aulas por ciclo." },
+    { id: "hybrid", title: "Hibrido", description: "Combina mensalidade e pacotes." }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-consumption-workspace", className)} data-component="SetupConsumptionWorkspace" {...props}>
+      <SetupBlockHeader
+        badgeLabel="Rascunho"
+        description="Defina como mensalidades, pacotes e reposicoes funcionam no setup inicial. Ajustes finos podem ficar para depois do go-live."
+        title="Consumo de aulas"
+      />
+
+      <Panel className="tcrm-setup-consumption-workspace__models" compact>
+        <h3>Modelo principal</h3>
+        <SetupContentGrid>
+          {models.map((item) => (
+            <SetupChoiceCard
+              description={item.description}
+              key={item.id}
+              onSelect={() => onModelSelect?.(item.id)}
+              selected={model === item.id}
+              title={item.title}
+            />
+          ))}
+        </SetupContentGrid>
+      </Panel>
+
+      <div className="tcrm-setup-consumption-workspace__settings">
+        <Panel compact>
+          <h3>Pacote base</h3>
+          <div className="tcrm-setup-consumption-workspace__field-row">
+            <Input defaultValue="8" fieldSize="sm" label="Aulas por mes" type="number" />
+            <Select fieldSize="sm" label="Validade" options={[{ value: "monthly", label: "Mensal" }]} value="monthly" />
+          </div>
+          <Toggle compact defaultPressed label="Renova automaticamente" onPressedChange={(checked) => onSettingChange?.("auto-renew", checked)} />
+          <Toggle compact defaultPressed label="Saldo expira no fim do ciclo" onPressedChange={(checked) => onSettingChange?.("balance-expires", checked)} />
+        </Panel>
+        <Panel compact>
+          <h3>Reposicoes</h3>
+          <Toggle compact defaultPressed label="Permitir reposicao" onPressedChange={(checked) => onSettingChange?.("allow-replacement", checked)} />
+          <Input defaultValue="7" fieldSize="sm" label="Prazo para usar reposicao" trailingText="dias" />
+          <Select fieldSize="sm" label="Aviso minimo para gerar reposicao" options={[{ value: "12h", label: "12h" }]} value="12h" />
+          <Toggle compact defaultPressed label="Reposicao consome vaga da turma" onPressedChange={(checked) => onSettingChange?.("replacement-uses-slot", checked)} />
+        </Panel>
+        <Panel compact>
+          <h3>Excecoes simples</h3>
+          <List divided>
+            <ListItem action={<Chip tone="warning">Pode ficar para depois</Chip>} leading={<Icon name="calendar" tone="warning" />} title="Feriados" />
+            <ListItem action={<Chip tone="warning">Revisar depois</Chip>} leading={<Icon name="calendar" tone="warning" />} title="Contratos antigos" />
+            <ListItem action={<Chip tone="neutral">Nao gera reposicao</Chip>} leading={<Icon name="x" />} title="Faltas sem aviso" />
+          </List>
+        </Panel>
+        <InlineAlert className="tcrm-setup-consumption-workspace__validation" tone="info" title="Validacao da configuracao">
+          Esta regra base pode ser salva como rascunho. Feriados e contratos antigos podem ficar como pendencia segura.
+        </InlineAlert>
+      </div>
+
+      <footer className="tcrm-setup-consumption-workspace__footer">
+        <div>
+          <h3>Acoes da etapa</h3>
+          <ButtonGroup>
+            <Button leadingIcon="check" onClick={() => onAction?.("save")} size="sm" variant="primary">Salvar rascunho</Button>
+            <Button onClick={() => onAction?.("continue")} size="sm" trailingIcon="arrowRight" variant="secondary">Continuar</Button>
+            <Button leadingIcon="clock" onClick={() => onAction?.("later")} size="sm" variant="secondary">Configurar depois</Button>
+          </ButtonGroup>
+        </div>
+        <Panel compact>
+          <InlineGroup><Icon name="barChart" size="24px" /><strong>Previa de impacto entra aqui</strong></InlineGroup>
+          <p>Espaco reservado para a previa de impacto apos salvar as configuracoes.</p>
+        </Panel>
+      </footer>
+    </SetupPagePanel>
+  );
+}
+
+export interface SetupStudioWorkspaceProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+  activeDays?: string[];
+  scheduleMode?: "continuous" | "break";
+  onActiveDaysChange?: (days: string[]) => void;
+  onScheduleModeChange?: (mode: "continuous" | "break") => void;
+  onAdjustDay?: () => void;
+  onAction?: (action: "save" | "continue") => void;
+}
+
+export function SetupStudioWorkspace({
+  activeDays = ["Seg", "Ter", "Qua", "Qui", "Sex"],
+  scheduleMode = "continuous",
+  onActiveDaysChange,
+  onScheduleModeChange,
+  onAdjustDay,
+  onAction,
+  className,
+  ...props
+}: SetupStudioWorkspaceProps) {
+  const days = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"];
+  const toggleDay = (day: string) => {
+    const next = activeDays.includes(day) ? activeDays.filter((item) => item !== day) : [...activeDays, day];
+    onActiveDaysChange?.(next);
+  };
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-studio-workspace", className)} data-component="SetupStudioWorkspace" {...props}>
+      <SetupBlockHeader title="Studio" />
+      <div className="tcrm-setup-studio-workspace__grid">
+        <Panel className="tcrm-setup-studio-workspace__form" compact>
+          <section>
+            <h3>1. Dias de funcionamento</h3>
+            <p>Em quais dias o studio funciona?</p>
+            <div className="tcrm-setup-studio-workspace__days">
+              {days.map((day) => (
+                <Checkbox checked={activeDays.includes(day)} key={day} label={day} onChange={() => toggleDay(day)} />
+              ))}
+            </div>
+          </section>
+          <section>
+            <h3>2. Horario geral</h3>
+            <div className="tcrm-setup-studio-workspace__time-row">
+              <TimeInput defaultValue="07:00" fieldSize="sm" label="Abre as" />
+              <TimeInput defaultValue="21:00" fieldSize="sm" label="Fecha as" />
+            </div>
+            <p>O studio fecha em algum intervalo do dia?</p>
+            <SegmentedControl
+              label="Intervalo do studio"
+              onChange={(value) => onScheduleModeChange?.(value as "continuous" | "break")}
+              options={[{ value: "continuous", label: "Funciona direto" }, { value: "break", label: "Tem pausa" }]}
+              value={scheduleMode}
+            />
+            <div className="tcrm-setup-studio-workspace__time-row">
+              <TimeInput defaultValue="12:00" fieldSize="sm" label="Pausa comeca" />
+              <TimeInput defaultValue="13:00" fieldSize="sm" label="Pausa termina" />
+            </div>
+          </section>
+        </Panel>
+        <Panel className="tcrm-setup-studio-workspace__preview" compact>
+          <WeeklyHoursGrid onAdjustDay={onAdjustDay} />
+        </Panel>
+      </div>
+      <ButtonGroup className="tcrm-setup-studio-workspace__actions">
+        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+      </ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
+export interface SetupTeamWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  ownerAvatarSrc?: string;
+  onAddPerson?: () => void;
+  onInviteOpen?: (invite: InviteRowData, state: InviteRowState) => void;
+  onInviteEdit?: (invite: InviteRowData, state: InviteRowState) => void;
+  onInviteRemove?: (invite: InviteRowData, state: InviteRowState) => void;
+  onAction?: (action: "save" | "later" | "continue") => void;
+}
+
+export function SetupTeamWorkspace({
+  ownerAvatarSrc,
+  onAddPerson,
+  onInviteOpen,
+  onInviteEdit,
+  onInviteRemove,
+  onAction,
+  className,
+  ...props
+}: SetupTeamWorkspaceProps) {
+  const invites: Array<{ state: InviteRowState; invite?: Partial<InviteRowData> }> = [
+    { state: "prepared" },
+    { state: "prepared", invite: { id: "carla-souza", initials: "CS", name: "Carla Souza", role: "Recepcao", email: "carla@studio.com", phone: "(11) 97777-2222" } },
+    { state: "incomplete" }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-team-workspace", className)} data-component="SetupTeamWorkspace" {...props}>
+      <SetupBlockHeader
+        description="Adicione as pessoas que vao usar o Taliya no comeco. Os convites serao enviados automaticamente quando o setup for publicado."
+        step={2}
+        title="Equipe"
+      />
+      <Panel className="tcrm-setup-team-workspace__content" compact>
+        <section>
+          <h3>1. Dono do studio</h3>
+          <RoleCard avatarSrc={ownerAvatarSrc} selected />
+        </section>
+        <section className="tcrm-setup-team-workspace__add-person">
+          <h3>2. Adicionar pessoa</h3>
+          <div className="tcrm-setup-team-workspace__fields">
+            <Input defaultValue="Ana Martins" fieldSize="sm" label="Nome" />
+            <Input defaultValue="ana@studio.com" fieldSize="sm" label="E-mail" type="email" />
+            <Input defaultValue="(11) 98888-1111" fieldSize="sm" label="WhatsApp" />
+            <Select fieldSize="sm" label="Papel" options={[{ value: "teacher", label: "Professor" }, { value: "reception", label: "Recepcao" }, { value: "finance", label: "Financeiro" }]} value="teacher" />
+          </div>
+          <Button onClick={onAddPerson} variant="secondary">Adicionar pessoa</Button>
+        </section>
+        <section>
+          <h3>3. Equipe preparada</h3>
+          <List>
+            {invites.map((item) => (
+              <InviteRow
+                invite={item.invite}
+                key={item.invite?.id ?? item.state}
+                onEdit={onInviteEdit}
+                onOpen={onInviteOpen}
+                onRemove={onInviteRemove}
+                state={item.state}
+              />
+            ))}
+          </List>
+          <InlineAlert tone="info">Os convites ficam preparados agora e serao enviados automaticamente quando o setup inicial for publicado.</InlineAlert>
+        </section>
+      </Panel>
+      <ButtonGroup className="tcrm-setup-team-workspace__actions">
+        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button onClick={() => onAction?.("later")} variant="secondary">Configurar equipe depois</Button>
+        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+      </ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
+export type SetupWhatsAppState = "business" | "personal" | "unknown" | "missing";
+
+export interface SetupChannelsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  whatsAppState?: SetupWhatsAppState;
+  onWhatsAppStateChange?: (state: SetupWhatsAppState) => void;
+  onConnectWhatsApp?: () => void;
+  onAction?: (action: "save" | "later" | "continue") => void;
+}
+
+export function SetupChannelsWorkspace({
+  whatsAppState = "business",
+  onWhatsAppStateChange,
+  onConnectWhatsApp,
+  onAction,
+  className,
+  ...props
+}: SetupChannelsWorkspaceProps) {
+  const whatsAppOptions: Array<{ id: SetupWhatsAppState; title: string }> = [
+    { id: "business", title: "Sim, ja esta no WhatsApp Business" },
+    { id: "personal", title: "Ainda esta no WhatsApp pessoal" },
+    { id: "unknown", title: "Nao sei" },
+    { id: "missing", title: "Ainda nao tenho numero do studio" }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-channels-workspace", className)} data-component="SetupChannelsWorkspace" {...props}>
+      <SetupBlockHeader
+        description="Informe os canais oficiais do studio. O WhatsApp Business podera ser conectado oficialmente agora ou ficar como pendencia antes de ativar agentes e mensagens."
+        step={3}
+        title="Canais"
+      />
+      <div className="tcrm-setup-channels-workspace__grid">
+        <div className="tcrm-setup-channels-workspace__column">
+          <Panel className="tcrm-setup-channels-workspace__whatsapp" compact>
+            <h3>1. WhatsApp Business</h3>
+            <Input defaultValue="(11) 99999-0000" fieldSize="sm" label="WhatsApp Business do studio" />
+            <p>Esse numero esta no WhatsApp Business?</p>
+            <div className="tcrm-setup-channels-workspace__choices">
+              {whatsAppOptions.map((option) => (
+                <SetupChoiceCard
+                  description=""
+                  key={option.id}
+                  onSelect={() => onWhatsAppStateChange?.(option.id)}
+                  selected={whatsAppState === option.id}
+                  title={option.title}
+                />
+              ))}
+            </div>
+            <InlineGroup className="tcrm-setup-channels-workspace__connect" justify="between">
+              <Chip icon="checkCircle" tone="success">Pronto para conexao oficial</Chip>
+              <Button leadingIcon="link" onClick={onConnectWhatsApp} variant="secondary">Conectar WhatsApp Business</Button>
+            </InlineGroup>
+            <p>Voce continuara usando o WhatsApp Business no celular. A conexao oficial libera atendimento pelo CRM e agentes quando tudo for publicado.</p>
+          </Panel>
+          <Panel className="tcrm-setup-channels-workspace__public" compact>
+            <h3>3. Canais publicos opcionais</h3>
+            <p>Adicione redes sociais se quiser. Elas ajudam a registrar onde o studio aparece, mas nao ativam automacoes neste setup inicial.</p>
+            <div className="tcrm-setup-channels-workspace__public-fields">
+              <Input defaultValue="@studioleticia" fieldSize="sm" label="Instagram" />
+              <Input defaultValue="facebook.com/studioleticia" fieldSize="sm" label="Facebook" />
+              <Input defaultValue="@studioleticia" fieldSize="sm" label="TikTok" />
+              <Input defaultValue="@studioleticia" fieldSize="sm" label="X" />
+              <Input defaultValue="studioleticia.com.br" fieldSize="sm" label="Site" />
+            </div>
+          </Panel>
+        </div>
+        <div className="tcrm-setup-channels-workspace__column">
+          <Panel className="tcrm-setup-channels-workspace__email" compact>
+            <h3>2. E-mail do studio</h3>
+            <Input defaultValue="contato@studioleticia.com" fieldSize="sm" label="E-mail do studio" type="email" />
+            <p>Usado para avisos, convites e comunicacao administrativa. Pode ser o e-mail do dono no comeco.</p>
+            <Chip icon="checkCircle" tone="success">Pronto</Chip>
+          </Panel>
+          <Panel className="tcrm-setup-channels-workspace__status" compact>
+            <h3>4. Status dos canais</h3>
+            <List divided>
+              <ListItem action={<StatusDot label="Pendente de conexao oficial" status="warning" />} title="WhatsApp Business" />
+              <ListItem action={<StatusDot label="Pronto" status="success" />} title="E-mail" />
+              <ListItem action={<StatusDot label="4 adicionados" status="info" />} title="Canais publicos" />
+            </List>
+            <InlineAlert tone="info">O CRM pode seguir. Mensagens e agentes pelo WhatsApp so serao ativados apos a conexao oficial.</InlineAlert>
+          </Panel>
+        </div>
+      </div>
+      <ButtonGroup className="tcrm-setup-channels-workspace__actions">
+        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button onClick={() => onAction?.("later")} variant="secondary">Configurar canais depois</Button>
+        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+      </ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
+export type SetupPlanId = "weekly" | "pack" | "trial";
+export type SetupPlanField = "name" | "type" | "value" | "quantity" | "recurrence" | "validity" | "replacement" | "replacementDeadline" | "replacementNotice";
+
+export interface SetupPlansWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  selectedPlanId?: SetupPlanId;
+  onPlanSelect?: (planId: SetupPlanId) => void;
+  onNewPlan?: () => void;
+  onPlanAction?: (planId: SetupPlanId, action: "edit" | "duplicate" | "remove") => void;
+  onFieldChange?: (field: SetupPlanField, value: string) => void;
+  onAction?: (action: "save" | "later" | "continue") => void;
+}
+
+export function SetupPlansWorkspace({
+  selectedPlanId = "pack",
+  onPlanSelect,
+  onNewPlan,
+  onPlanAction,
+  onFieldChange,
+  onAction,
+  className,
+  ...props
+}: SetupPlansWorkspaceProps) {
+  const plans: Array<{ id: SetupPlanId; title: string; type: string; value: string; replacement: string; tone: ComponentTone }> = [
+    { id: "weekly", title: "Pilates 2x por semana", type: "Mensalidade por frequencia semanal", value: "R$ 360/mes · 2x por semana", replacement: "Permite reposicao", tone: "success" },
+    { id: "pack", title: "Pacote 8 aulas", type: "Pacote de aulas", value: "R$ 420 · 8 aulas", replacement: "Permite reposicao", tone: "success" },
+    { id: "trial", title: "Aula experimental", type: "Experimental/Avaliacao", value: "R$ 0 · 1 aula", replacement: "Nao gera reposicao", tone: "danger" }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-plans-workspace", className)} data-component="SetupPlansWorkspace" {...props}>
+      <SetupBlockHeader
+        description="Cadastre os planos que o studio oferece aos alunos. Voce pode comecar pelos principais e ajustar detalhes depois."
+        step={4}
+        title="Planos"
+      />
+      <div className="tcrm-setup-plans-workspace__grid">
+        <Panel className="tcrm-setup-plans-workspace__list" compact>
+          <InlineGroup justify="between"><h3>Planos criados</h3><Button leadingIcon="plus" onClick={onNewPlan} size="sm" variant="secondary">Novo plano</Button></InlineGroup>
+          {plans.map((plan) => (
+            <Panel className={cn("tcrm-setup-plans-workspace__plan", selectedPlanId === plan.id && "tcrm-setup-plans-workspace__plan--selected")} compact key={plan.id}>
+              <Button className="tcrm-setup-plans-workspace__plan-select" onClick={() => onPlanSelect?.(plan.id)} variant="ghost">
+                <strong>{plan.title}</strong><span>{plan.type}</span><b>{plan.value}</b><Chip icon={plan.tone === "success" ? "checkCircle" : "x"} tone={plan.tone}>{plan.replacement}</Chip>
+              </Button>
+              <ButtonGroup>
+                <Button leadingIcon="edit" onClick={() => onPlanAction?.(plan.id, "edit")} size="sm" variant="ghost">Editar</Button>
+                <Button leadingIcon="copy" onClick={() => onPlanAction?.(plan.id, "duplicate")} size="sm" variant="ghost">Duplicar</Button>
+                <Button leadingIcon="trash" onClick={() => onPlanAction?.(plan.id, "remove")} size="sm" tone="danger" variant="ghost">Remover</Button>
+              </ButtonGroup>
+            </Panel>
+          ))}
+        </Panel>
+        <Panel className="tcrm-setup-plans-workspace__editor" compact>
+          <InlineGroup justify="between"><div><h3>Editar plano selecionado</h3><p>Voce pode ajustar este plano depois do go-live.</p></div><Chip>Rascunho</Chip></InlineGroup>
+          <Input defaultValue="Pacote 8 aulas" fieldSize="sm" label="1. Nome do plano" onChange={(event) => onFieldChange?.("name", event.currentTarget.value)} />
+          <div className="tcrm-setup-plans-workspace__field"><strong>2. Tipo do plano</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--type" compact label="2. Tipo do plano" onChange={(value) => onFieldChange?.("type", value)} options={[{ value: "weekly", label: "Mensalidade por frequencia semanal" }, { value: "quantity", label: "Mensalidade por quantidade mensal" }, { value: "pack", label: "Pacote de aulas" }, { value: "single", label: "Aula avulsa" }, { value: "trial", label: "Experimental/Avaliacao" }, { value: "other", label: "Outro" }]} value="pack" /></div>
+          <Input defaultValue="420,00" fieldSize="sm" label="3. Valor" leadingText="R$" onChange={(event) => onFieldChange?.("value", event.currentTarget.value)} />
+          <div className="tcrm-setup-plans-workspace__field"><strong>4. Quantidade de aulas</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--quantity" compact label="4. Quantidade de aulas" onChange={(value) => onFieldChange?.("quantity", value)} options={[{ value: "1", label: "1 aula" }, { value: "5", label: "5 aulas" }, { value: "8", label: "8 aulas" }, { value: "10", label: "10 aulas" }, { value: "12", label: "12 aulas" }, { value: "20", label: "20 aulas" }, { value: "custom", label: "Personalizado" }]} value="8" /></div>
+          <div className="tcrm-setup-plans-workspace__field"><strong>5. Recorrencia</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--three" compact label="5. Recorrencia" onChange={(value) => onFieldChange?.("recurrence", value)} options={[{ value: "none", label: "Sem recorrencia" }, { value: "renew", label: "Renova automaticamente" }, { value: "later", label: "Decidir depois" }]} value="none" /></div>
+          <div className="tcrm-setup-plans-workspace__field"><strong>6. Validade</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--validity" compact label="6. Validade" onChange={(value) => onFieldChange?.("validity", value)} options={[{ value: "30", label: "30 dias" }, { value: "60", label: "60 dias" }, { value: "90", label: "90 dias" }, { value: "none", label: "Sem validade" }, { value: "custom", label: "Personalizado" }, { value: "later", label: "Decidir depois" }]} value="30" /></div>
+          <div className="tcrm-setup-plans-workspace__field"><strong>7. Reposicao</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--three" compact label="7. Reposicao" onChange={(value) => onFieldChange?.("replacement", value)} options={[{ value: "yes", label: "Sim" }, { value: "no", label: "Nao" }, { value: "later", label: "Decidir depois" }]} value="yes" /></div>
+          <div className="tcrm-setup-plans-workspace__field"><span>Prazo para usar a reposicao</span><SegmentedControl className="tcrm-setup-plans-workspace__segments--deadline" compact label="Prazo para usar a reposicao" onChange={(value) => onFieldChange?.("replacementDeadline", value)} options={[{ value: "7", label: "7 dias" }, { value: "15", label: "15 dias" }, { value: "30", label: "30 dias" }, { value: "cycle", label: "Ate o fim do ciclo" }, { value: "custom", label: "Personalizado" }]} value="7" /></div>
+          <div className="tcrm-setup-plans-workspace__field"><span>Aviso minimo para gerar reposicao</span><SegmentedControl className="tcrm-setup-plans-workspace__segments--notice" compact label="Aviso minimo para gerar reposicao" onChange={(value) => onFieldChange?.("replacementNotice", value)} options={[{ value: "none", label: "Sem aviso minimo" }, { value: "2", label: "2h antes" }, { value: "6", label: "6h antes" }, { value: "12", label: "12h antes" }, { value: "24", label: "24h antes" }, { value: "custom", label: "Personalizado" }]} value="12" /></div>
+          <InlineAlert tone="info">A aula prevista consome saldo normalmente. Quando a regra permitir, o sistema gera uma reposicao para compensar a falta.</InlineAlert>
+        </Panel>
+        <Panel className="tcrm-setup-plans-workspace__understanding" compact>
+          <h3>Como o Taliya vai entender este plano</h3>
+          <p>Este e um pacote de 8 aulas por R$ 420. O aluno tem 8 aulas no total, independentemente do tamanho do mes. Se esse aluno tiver horario fixo depois, cada aula prevista continua consumindo saldo do pacote. Reposicoes podem ser geradas quando o aluno avisa com 12h de antecedencia e ficam validas por 7 dias.</p>
+          <List divided>
+            <ListItem action="8 aulas" title="Saldo" />
+            <ListItem action="30 dias" title="Validade" />
+            <ListItem action="Sim, com aviso de 12h" title="Reposicao" />
+            <ListItem action="Definido depois" title="Horario fixo" />
+          </List>
+        </Panel>
+      </div>
+      <ButtonGroup className="tcrm-setup-plans-workspace__actions">
+        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button onClick={() => onAction?.("later")} variant="secondary">Configurar planos depois</Button>
+        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+      </ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
+export type SetupPaymentMethod = "pix" | "cash" | "card";
+
+export interface SetupPaymentWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  selectedMethods?: SetupPaymentMethod[];
+  onSelectedMethodsChange?: (methods: SetupPaymentMethod[]) => void;
+  onLearnMore?: () => void;
+  onAction?: (action: "save" | "later" | "continue") => void;
+}
+
+export function SetupPaymentWorkspace({
+  selectedMethods = ["pix", "cash", "card"],
+  onSelectedMethodsChange,
+  onLearnMore,
+  onAction,
+  className,
+  ...props
+}: SetupPaymentWorkspaceProps) {
+  const methods: Array<{ id: SetupPaymentMethod; title: string; description: string; icon: IconName }> = [
+    { id: "pix", title: "Pix", description: "Pagamento por Pix", icon: "banknote" },
+    { id: "cash", title: "Dinheiro", description: "Recebido presencialmente", icon: "banknote" },
+    { id: "card", title: "Cartao", description: "Cartao presencial", icon: "creditCard" }
+  ];
+  const toggleMethod = (method: SetupPaymentMethod) => {
+    const next = selectedMethods.includes(method) ? selectedMethods.filter((item) => item !== method) : [...selectedMethods, method];
+    onSelectedMethodsChange?.(next);
+  };
+  const flow = [
+    { icon: "document" as IconName, label: "Plano gera cobranca" },
+    { icon: "user" as IconName, label: "Aluno paga por um meio aceito" },
+    { icon: "users" as IconName, label: "Equipe registra a baixa no Taliya" },
+    { icon: "checkCircle" as IconName, label: "Cobranca fica paga" },
+    { icon: "unlock" as IconName, label: "Aulas ou saldo sao liberados" }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-payment-workspace", className)} data-component="SetupPaymentWorkspace" {...props}>
+      <SetupBlockHeader description="Defina os meios aceitos no inicio e veja como o Taliya vai registrar pagamentos na operacao." step={5} totalSteps={9} title="Pagamento" />
+      <Panel className="tcrm-setup-payment-workspace__methods" compact>
+        <h3>1. Meios de pagamento</h3>
+        <p>Selecione os meios que o studio aceita hoje. Os detalhes tecnicos e automacoes ficam para depois.</p>
+        <div className="tcrm-setup-payment-workspace__method-grid">
+          {methods.map((method) => (
+            <SetupChoiceCard
+              description={method.description}
+              icon={method.icon}
+              key={method.id}
+              onSelect={() => toggleMethod(method.id)}
+              selected={selectedMethods.includes(method.id)}
+              title={method.title}
+            />
+          ))}
+        </div>
+      </Panel>
+      <Panel className="tcrm-setup-payment-workspace__flow" compact>
+        <h3>2. Exemplo da operacao</h3>
+        <div className="tcrm-setup-payment-workspace__flow-steps">
+          {flow.map((item, index) => (
+            <React.Fragment key={item.label}>
+              <div><Chip>{index + 1}</Chip><Icon name={item.icon} size="28px" /><strong>{item.label}</strong></div>
+              {index < flow.length - 1 ? <Icon name="arrowRight" /> : null}
+            </React.Fragment>
+          ))}
+        </div>
+        <p><Icon name="info" /> Funciona para Pix, dinheiro ou cartao. No inicio, a confirmacao e feita pela equipe dentro do Taliya.</p>
+      </Panel>
+      <Panel className="tcrm-setup-payment-workspace__future" compact>
+        <InlineGroup justify="between"><div><h3>3. Pagamentos Taliya</h3><p>Depois que o studio estiver operando, voce podera automatizar cobrancas e confirmacoes sem refazer este setup.</p></div><Chip>Pos-go-live</Chip></InlineGroup>
+        <div className="tcrm-setup-payment-workspace__future-grid">
+          <IntegrationStatusRow description="Identifica pagamentos e baixa cobrancas" provider="pix" showDivider={false} state="connected" title="Pix automatico" />
+          <IntegrationStatusRow description="Permite cobranca digital pelo Taliya" provider="card" showDivider={false} state="connected" title="Cartao online" />
+          <IntegrationStatusRow description="Cobra mensalidades recorrentes" provider="recurrence" showDivider={false} state="connected" title="Recorrencia automatica" />
+          <IntegrationStatusRow description="Ajuda a conferir pagamentos recebidos" provider="reconciliation" showDivider={false} state="connected" title="Conciliacao" />
+        </div>
+        <InlineGroup justify="between"><InlineAlert tone="info">Agora: registro e baixa manual no Taliya. Depois: automacao financeira em Pagamentos Taliya.</InlineAlert><Button onClick={onLearnMore} variant="secondary">Entender Pagamentos Taliya</Button></InlineGroup>
+      </Panel>
+      <ButtonGroup className="tcrm-setup-payment-workspace__actions">
+        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button onClick={() => onAction?.("later")} variant="secondary">Configurar pagamento depois</Button>
+        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+      </ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
+export type SetupStudentSource = "files" | "photo" | "paste" | "manual";
+
+export interface SetupStudentsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  onSourceSelect?: (source: SetupStudentSource) => void;
+  onStudentSelect?: (studentId: string) => void;
+  onStudentAction?: (studentId: string, action: "edit" | "remove" | "view") => void;
+  onAction?: (action: "save" | "later" | "continue") => void;
+}
+
+export function SetupStudentsWorkspace({ onSourceSelect, onStudentSelect, onStudentAction, onAction, className, ...props }: SetupStudentsWorkspaceProps) {
+  const sources: Array<{ id: SetupStudentSource; title: string; description: string; icon: IconName }> = [
+    { id: "files", title: "Importar arquivos", description: "Planilhas ou exportacoes", icon: "fileDown" },
+    { id: "photo", title: "Enviar foto/anotacao", description: "Caderno, ficha ou print", icon: "camera" },
+    { id: "paste", title: "Colar lista", description: "Nomes e telefones", icon: "menu" },
+    { id: "manual", title: "Adicionar manualmente", description: "Um aluno por vez", icon: "users" }
+  ];
+  const students = [
+    { id: "ana", name: "Ana Martins", initials: "AM", phone: "(11) 98888-1111", plan: "Pacote 8 aulas", origin: "planilha", status: "Pronto", tone: "success" as ComponentTone },
+    { id: "carla", name: "Carla Souza", initials: "CS", phone: "(11) 97777-2222", plan: "Pilates 2x por semana", origin: "manual", status: "Pronto", tone: "success" as ComponentTone },
+    { id: "roberto", name: "Roberto Lima", initials: "RL", phone: "Falta telefone", plan: "Plano nao informado", origin: "foto", status: "Revisar", tone: "warning" as ComponentTone },
+    { id: "mariana", name: "Mariana Alves", initials: "MA", phone: "Possivel duplicidade", plan: "Pacote 8 aulas", origin: "lista", status: "Revisar", tone: "warning" as ComponentTone },
+    { id: "beatriz", name: "Beatriz Nunes", initials: "BN", phone: "(11) 96666-3333", plan: "Sem plano ainda", origin: "planilha", status: "Pode seguir", tone: "info" as ComponentTone }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-students-workspace", className)} data-component="SetupStudentsWorkspace" {...props}>
+      <SetupBlockHeader description="Adicione os alunos ativos do studio. Voce pode misturar planilhas, fotos, listas e cadastros manuais." step={6} title="Alunos" totalSteps={9} />
+      <div className="tcrm-setup-students-workspace__summary-grid">
+        <Panel compact><h3>Adicionar alunos</h3><div className="tcrm-setup-students-workspace__sources">{sources.map((source) => <SetupImportSourceCard description={source.description} icon={source.icon} key={source.id} onSelect={() => onSourceSelect?.(source.id)} title={source.title} />)}</div></Panel>
+        <Panel compact><h3>Fontes adicionadas</h3><List divided>
+          <ListItem action={<Chip tone="success">Processado</Chip>} leading={<Icon name="fileDown" tone="success" />} meta="42 alunos encontrados · 3 pendencias" title="alunos_maio.xlsx" />
+          <ListItem action={<Chip tone="warning">Revisar</Chip>} leading={<Icon name="camera" tone="info" />} meta="8 alunos encontrados · aguardando revisao" title="foto_caderno_01.png" />
+          <ListItem action={<Chip tone="success">Processado</Chip>} leading={<Icon name="menu" tone="info" />} meta="5 alunos encontrados" title="lista colada" />
+          <ListItem action={<Chip>Rascunho</Chip>} leading={<Icon name="users" />} meta="2 alunos adicionados" title="manual" />
+        </List><p>Voce pode adicionar mais fontes antes de continuar.</p></Panel>
+        <Panel compact><h3>Resumo da base</h3><List>
+          <ListItem leading={<Icon name="clipboard" tone="info" />} title="57 alunos preparados" />
+          <ListItem leading={<Icon name="checkCircle" tone="success" />} title="49 prontos" />
+          <ListItem leading={<Icon name="alert" tone="warning" />} title="6 precisam revisao" />
+          <ListItem leading={<Icon name="users" tone="info" />} title="2 possiveis duplicidades" />
+        </List><p>Obrigatorio: nome + WhatsApp/telefone.</p></Panel>
+      </div>
+      <CrmWorklistTable
+        actionColumnWidth="104px"
+        ariaLabel="Alunos preparados"
+        caption="Para publicar, cada aluno precisa ter nome e WhatsApp/telefone."
+        columns={[
+          { key: "name", header: "Aluno", render: (row) => <InlineGroup><Avatar name={row.name} size="xs" /><strong>{row.name}</strong></InlineGroup>, width: "18%" },
+          { key: "phone", header: "WhatsApp", width: "20%" },
+          { key: "plan", header: "Plano", width: "24%" },
+          { key: "origin", header: "Origem", render: (row) => <Chip>{row.origin}</Chip>, width: "14%" },
+          { key: "status", header: "Status", render: (row) => <Chip tone={row.tone}>{row.status}</Chip>, width: "14%" }
+        ]}
+        density="compact"
+        heading={<InlineGroup><h3>Alunos preparados</h3><Chip tone="info">Todos entram como Ativo</Chip></InlineGroup>}
+        onRowSelect={(row) => onStudentSelect?.(row.id)}
+        rowActions={(row) => <InlineGroup compact><IconButton icon="edit" label={`Editar ${row.name}`} onClick={() => onStudentAction?.(row.id, "edit")} size="sm" variant="ghost" /><IconButton icon="trash" label={`Remover ${row.name}`} onClick={() => onStudentAction?.(row.id, "remove")} size="sm" variant="ghost" /><IconButton icon="eye" label={`Ver ${row.name}`} onClick={() => onStudentAction?.(row.id, "view")} size="sm" variant="ghost" /></InlineGroup>}
+        rows={students}
+      />
+      <ButtonGroup className="tcrm-setup-students-workspace__actions"><Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button><Button onClick={() => onAction?.("later")} variant="secondary">Configurar alunos depois</Button><Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button></ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
+export type SetupClassSource = "files" | "photo" | "paste" | "manual" | "later";
+
+export interface SetupClassesWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  onSourceSelect?: (source: SetupClassSource) => void;
+  onClassSelect?: (classId: string) => void;
+  onClassAction?: (classId: string, action: "edit" | "remove" | "view") => void;
+  onAction?: (action: "save" | "later" | "continue") => void;
+}
+
+export function SetupClassesWorkspace({ onSourceSelect, onClassSelect, onClassAction, onAction, className, ...props }: SetupClassesWorkspaceProps) {
+  const sources: Array<{ id: SetupClassSource; title: string; description: string; icon: IconName }> = [
+    { id: "files", title: "Importar arquivos", description: "Planilhas ou exportacoes", icon: "fileDown" },
+    { id: "photo", title: "Enviar foto/anotacao", description: "Caderno, grade ou print", icon: "camera" },
+    { id: "paste", title: "Colar lista", description: "Dias e horarios", icon: "menu" },
+    { id: "manual", title: "Criar manualmente", description: "Uma turma por vez", icon: "users" },
+    { id: "later", title: "Nao tenho turmas prontas", description: "Montar a partir da agenda no proximo bloco", icon: "clock" }
+  ];
+  const classes = [
+    { id: "ter-qui-18", name: "Ter/Qui 18h", days: "Ter, Qui", schedule: "18:00-19:00", capacity: "6 vagas", teacher: "Ana Martins", students: "5 alunos", status: "Pronto", tone: "success" as ComponentTone },
+    { id: "seg-qua-07", name: "Seg/Qua 07h", days: "Seg, Qua", schedule: "07:00-08:00", capacity: "6 vagas", teacher: "Sem professor", students: "4 alunos", status: "Pode seguir", tone: "info" as ComponentTone },
+    { id: "sexta-09", name: "Sexta 09h", days: "Sex", schedule: "09:30-10:00", capacity: "Falta capacidade", teacher: "Carla Souza", students: "2 alunos", status: "Revisar", tone: "warning" as ComponentTone },
+    { id: "ter-qui-19", name: "Ter/Qui 19h", days: "Ter, Qui", schedule: "19:00-20:00", capacity: "6 vagas", teacher: "Ana Martins", students: "Aluno nao encontrado", status: "Revisar", tone: "warning" as ComponentTone },
+    { id: "sabado-08", name: "Sabado 08h", days: "Sab", schedule: "08:00-09:00", capacity: "4 vagas", teacher: "Sem professor", students: "0 alunos", status: "Pode seguir", tone: "info" as ComponentTone }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-classes-workspace", className)} data-component="SetupClassesWorkspace" {...props}>
+      <SetupBlockHeader description="Organize horarios fixos recorrentes, capacidade e vinculos simples com alunos." step={7} title="Turmas" totalSteps={9} />
+      <div className="tcrm-setup-classes-workspace__summary-grid">
+        <Panel compact><h3>Adicionar turmas</h3><div className="tcrm-setup-classes-workspace__sources">{sources.map((source) => <SetupImportSourceCard description={source.description} icon={source.icon} key={source.id} onSelect={() => onSourceSelect?.(source.id)} title={source.title} />)}</div></Panel>
+        <Panel compact><h3>Fontes adicionadas</h3><List divided>
+          <ListItem action={<Chip tone="success">Processado</Chip>} leading={<Icon name="fileDown" tone="success" />} meta="8 turmas encontradas · 2 pendencias" title="grade_turmas.xlsx" />
+          <ListItem action={<Chip tone="warning">Revisar</Chip>} leading={<Icon name="camera" tone="info" />} meta="3 turmas encontradas" title="foto_grade_horarios.png" />
+          <ListItem action={<Chip tone="success">Processado</Chip>} leading={<Icon name="menu" tone="info" />} meta="3 turmas encontradas" title="lista colada" />
+        </List><p>Voce pode adicionar mais fontes antes de continuar.</p></Panel>
+        <Panel compact><h3>Resumo das turmas</h3><List>
+          <ListItem leading={<Icon name="users" tone="info" />} title="10 turmas preparadas" />
+          <ListItem leading={<Icon name="checkCircle" tone="success" />} title="8 prontas" />
+          <ListItem leading={<Icon name="alert" tone="warning" />} title="2 precisam revisao" />
+          <ListItem leading={<Icon name="users" tone="info" />} title="34 alunos vinculados" />
+        </List><p>A agenda sera montada no proximo bloco.</p></Panel>
+      </div>
+      <CrmWorklistTable
+        actionColumnWidth="104px"
+        ariaLabel="Turmas preparadas"
+        caption="Para publicar uma turma, informe dias, horario e capacidade."
+        columns={[
+          { key: "name", header: "Turma", width: "14%" }, { key: "days", header: "Dias", width: "12%" }, { key: "schedule", header: "Horario", width: "14%" },
+          { key: "capacity", header: "Capacidade", width: "14%" }, { key: "teacher", header: "Professor", width: "16%" }, { key: "students", header: "Alunos", width: "16%" },
+          { key: "status", header: "Status", render: (row) => <Chip tone={row.tone}>{row.status}</Chip>, width: "14%" }
+        ]}
+        density="compact"
+        heading={<InlineGroup><h3>Turmas preparadas</h3><Chip tone="info">Agenda sera montada depois</Chip></InlineGroup>}
+        onRowSelect={(row) => onClassSelect?.(row.id)}
+        rowActions={(row) => <InlineGroup compact><IconButton icon="edit" label={`Editar ${row.name}`} onClick={() => onClassAction?.(row.id, "edit")} size="sm" variant="ghost" /><IconButton icon="trash" label={`Remover ${row.name}`} onClick={() => onClassAction?.(row.id, "remove")} size="sm" variant="ghost" /><IconButton icon="eye" label={`Ver ${row.name}`} onClick={() => onClassAction?.(row.id, "view")} size="sm" variant="ghost" /></InlineGroup>}
+        rows={classes}
+      />
+      <ButtonGroup className="tcrm-setup-classes-workspace__actions"><Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button><Button onClick={() => onAction?.("later")} variant="secondary">Configurar turmas depois</Button><Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button></ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
+export interface SetupAgendaWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  selectedClassId?: string;
+  onClassSelect?: (classId: string) => void;
+  onSlotSelect?: (slot: WeeklyHoursGridSlot) => void;
+  onBackToClasses?: () => void;
+  onAction?: (action: "save" | "continue") => void;
+}
+
+export function SetupAgendaWorkspace({ selectedClassId = "ter-qui-18", onClassSelect, onSlotSelect, onBackToClasses, onAction, className, ...props }: SetupAgendaWorkspaceProps) {
+  const classControls = [
+    { id: "ter-qui-18", title: "Ter/Qui 18h", meta: "2 aulas geradas · Ter e Qui", detail: "5 alunos · Pronto", tone: "info" as ComponentTone },
+    { id: "seg-qua-07", title: "Seg/Qua 07h", meta: "2 aulas geradas · Seg e Qua", detail: "4 alunos · Pronto", tone: "success" as ComponentTone },
+    { id: "sexta-09", title: "Sexta 09h", meta: "1 aula gerada · Sex", detail: "Falta capacidade · Revisar", tone: "warning" as ComponentTone },
+    { id: "sabado-08", title: "Sabado 08h", meta: "1 aula gerada · Sab", detail: "Fora da janela · Aviso", tone: "warning" as ComponentTone },
+    { id: "ter-qui-19", title: "Ter/Qui 19h", meta: "2 aulas geradas · Ter e Qui", detail: "Aluno pendente · Revisar", tone: "warning" as ComponentTone }
+  ];
+  const slots: WeeklyHoursGridSlot[] = [
+    { id: "Seg-07", day: "Seg", start: "07:00", end: "08:00", label: "Seg/Qua 07h", meta: "4 alunos", tone: "success" },
+    { id: "Qua-07", day: "Qua", start: "07:00", end: "08:00", label: "Seg/Qua 07h", meta: "4 alunos", tone: "success" },
+    { id: "Sab-08", day: "Sab", start: "08:00", end: "09:00", label: "Sabado 08h", meta: "Fora da janela", tone: "warning" },
+    { id: "Sex-09", day: "Sex", start: "09:00", end: "10:00", label: "Sexta 09h", meta: "Revisar capacidade", tone: "warning" },
+    { id: "Ter-18", day: "Ter", start: "18:00", end: "19:00", label: "Ter/Qui 18h", meta: "5 alunos", tone: "info" },
+    { id: "Qui-18", day: "Qui", start: "18:00", end: "19:00", label: "Ter/Qui 18h", meta: "5 alunos", tone: "info" },
+    { id: "Ter-19", day: "Ter", start: "19:00", end: "20:00", label: "Ter/Qui 19h", meta: "Aluno pendente", tone: "warning" },
+    { id: "Qui-19", day: "Qui", start: "19:00", end: "20:00", label: "Ter/Qui 19h", meta: "Aluno pendente", tone: "warning" }
+  ];
+
+  return (
+    <SetupPagePanel className={cn("tcrm-setup-agenda-workspace", className)} data-component="SetupAgendaWorkspace" {...props}>
+      <SetupBlockHeader description="Revise a semana base gerada a partir das turmas antes de publicar." step={8} title="Agenda" totalSteps={9} />
+      <div className="tcrm-setup-agenda-workspace__summary">
+        <Panel compact><Icon name="calendar" tone="success" /><h3>Agenda gerada</h3><strong>24 aulas semanais</strong><span>10 turmas usadas</span><p>Criada a partir das turmas preparadas.</p></Panel>
+        <Panel compact><Icon name="barChart" tone="success" /><h3>Cobertura</h3><strong>6 dias com aulas</strong><span>4 horarios principais</span><p>Dentro da janela de funcionamento.</p></Panel>
+        <Panel compact><Icon name="alert" tone="warning" /><h3>Revisao</h3><strong>7 turmas prontas</strong><span>3 precisam atencao</span><p>Pendencias aparecem na semana e no controle.</p></Panel>
+      </div>
+      <div className="tcrm-setup-agenda-workspace__body">
+        <Panel className="tcrm-setup-agenda-workspace__control" compact><h3>Controle da semana</h3><p>Veja como cada turma apareceu na agenda.</p><InlineGroup><Chip tone="info">Todas</Chip><Chip tone="warning">Revisar</Chip><Chip tone="warning">Avisos</Chip></InlineGroup><List>
+          {classControls.map((item) => <ListItem action={<Icon name="chevronRight" />} key={item.id} meta={<><span>{item.meta}</span><small>{item.detail}</small></>} onClick={() => onClassSelect?.(item.id)} selected={selectedClassId === item.id} title={item.title} warning={item.tone === "warning"} />)}
+        </List></Panel>
+        <Panel className="tcrm-setup-agenda-workspace__calendar" compact><InlineGroup><h3>Agenda semanal completa</h3><Chip tone="info">Previa antes da publicacao</Chip></InlineGroup><WeeklyHoursGrid axis={["07h", "08h", "09h", "12h", "18h", "19h"]} days={["Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]} onSlotClick={onSlotSelect} slots={slots} variant="schedule" /><InlineGroup className="tcrm-setup-agenda-workspace__legend"><span><StatusDot status="success" />Pronto</span><span><StatusDot status="info" />Selecionado</span><span><StatusDot status="warning" />Revisar</span><span><StatusDot status="paused" />Aviso</span></InlineGroup></Panel>
+      </div>
+      <ButtonGroup className="tcrm-setup-agenda-workspace__actions"><Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button><Button leadingIcon="arrowLeft" onClick={onBackToClasses} variant="secondary">Voltar para turmas</Button><Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button></ButtonGroup>
+    </SetupPagePanel>
+  );
+}
+
 export interface SetupContentGridProps extends React.HTMLAttributes<HTMLDivElement> {
   columns?: React.ComponentProps<typeof DashboardGrid>["columns"];
   density?: React.ComponentProps<typeof DashboardGrid>["density"];
@@ -3668,6 +5184,45 @@ export function SetupContentGrid({
     >
       {children}
     </DashboardGrid>
+  );
+}
+
+export interface SetupPageProps extends Omit<SetupShellProps, "step"> {
+  step: number;
+  frameVariant?: "default" | "guided" | "guided-block" | "guided-main" | "guided-wide" | "guided-review" | "shell-global";
+}
+
+export function SetupPage({ step, className, children, frameVariant = "default", layout = "guided", progress, ...props }: SetupPageProps) {
+  return (
+    <div className={cn("tcrm-setup-page", `tcrm-setup-page--${layout}`, `tcrm-setup-page--frame-${frameVariant}`)}>
+      <SetupShell
+        className={cn("tcrm-setup-page__shell", className)}
+        layout={layout}
+        progress={progress ?? Math.min(96, step * 11)}
+        step={step}
+        {...props}
+      >
+        {children}
+      </SetupShell>
+    </div>
+  );
+}
+
+export function SetupPagePanel({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("tcrm-setup-page-panel", className)} {...props} />;
+}
+
+export function SetupWelcomeMain({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("tcrm-setup-welcome-main", className)} {...props} />;
+}
+
+export interface SetupWelcomeWorkspaceProps extends SetupWelcomeProps {}
+
+export function SetupWelcomeWorkspace(props: SetupWelcomeWorkspaceProps) {
+  return (
+    <SetupWelcomeMain className="tcrm-setup-welcome-workspace" data-component="SetupWelcomeWorkspace">
+      <SetupWelcome {...props} />
+    </SetupWelcomeMain>
   );
 }
 
@@ -3905,10 +5460,21 @@ export function SetupReviewPanel({
   );
 }
 
+export interface SetupReviewWorkspaceProps extends SetupReviewPanelProps {}
+
+export function SetupReviewWorkspace({ className, ...props }: SetupReviewWorkspaceProps) {
+  return (
+    <SetupPagePanel className="tcrm-setup-review-workspace" data-component="SetupReviewWorkspace">
+      <SetupReviewPanel className={className} {...props} />
+    </SetupPagePanel>
+  );
+}
+
 export type SetupAgentChatState = "guide" | "human-help" | "blocked";
 
 export interface SetupAgentChatProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSubmit"> {
   state?: SetupAgentChatState;
+  variant?: "step" | "welcome";
   defaultValue?: string;
   onClose?: () => void;
   onMenu?: () => void;
@@ -3919,6 +5485,7 @@ export interface SetupAgentChatProps extends Omit<React.HTMLAttributes<HTMLEleme
 
 export function SetupAgentChat({
   state = "guide",
+  variant = "step",
   defaultValue = "",
   onClose,
   onMenu,
@@ -3931,6 +5498,7 @@ export function SetupAgentChat({
   const [value, setValue] = React.useState(defaultValue);
   const isBlocked = state === "blocked";
   const isHumanHelp = state === "human-help";
+  const isWelcome = variant === "welcome";
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -3941,9 +5509,10 @@ export function SetupAgentChat({
   return (
     <section
       aria-label="Agente de configuração"
-      className={cn("tcrm-setup-agent-chat", `tcrm-setup-agent-chat--${state}`, className)}
+      className={cn("tcrm-setup-agent-chat", `tcrm-setup-agent-chat--${state}`, `tcrm-setup-agent-chat--${variant}`, className)}
       data-component="SetupAgentChat"
       data-state={state}
+      data-variant={variant}
       {...props}
     >
       <header className="tcrm-setup-agent-chat__header">
@@ -3960,27 +5529,42 @@ export function SetupAgentChat({
 
       <div className="tcrm-setup-agent-chat__rule" />
 
-      <section className="tcrm-setup-agent-chat__info" aria-label="Impacto desta etapa">
-        <Icon name="info" />
-        <p>Esta etapa afeta agenda, cobrança e comunicação inicial.</p>
-      </section>
+      {isWelcome ? (
+        <MessageBubble className="tcrm-setup-agent-chat__message tcrm-setup-agent-chat__message--welcome" variant="inbound">
+          <p>Oi, eu vou te guiar nessa configuração.</p>
+          <p>Primeiro vamos identificar seu studio. Depois seguimos juntos pelos dados principais, equipe, canais, planos, alunos, turmas e agenda.</p>
+        </MessageBubble>
+      ) : (
+        <>
+          <section className="tcrm-setup-agent-chat__info" aria-label="Impacto desta etapa">
+            <Icon name="info" />
+            <p>Esta etapa afeta agenda, cobrança e comunicação inicial.</p>
+          </section>
 
-      <MessageBubble className="tcrm-setup-agent-chat__message tcrm-setup-agent-chat__message--one" variant="inbound">
-        Estamos na etapa Dados do studio.<br />
-        Vou te avisar o que é obrigatório e<br />
-        o que pode ficar para depois.
-      </MessageBubble>
+          <MessageBubble className="tcrm-setup-agent-chat__message tcrm-setup-agent-chat__message--one" variant="inbound">
+            Estamos na etapa Dados do studio.<br />
+            Vou te avisar o que é obrigatório e<br />
+            o que pode ficar para depois.
+          </MessageBubble>
 
-      <MessageBubble className="tcrm-setup-agent-chat__message tcrm-setup-agent-chat__message--two" variant="inbound">
-        Use a área central para preencher,<br />
-        importar ou revisar dados. Eu<br />
-        acompanho daqui e explico<br />
-        qualquer dúvida.
-      </MessageBubble>
+          <MessageBubble className="tcrm-setup-agent-chat__message tcrm-setup-agent-chat__message--two" variant="inbound">
+            Use a área central para preencher,<br />
+            importar ou revisar dados. Eu<br />
+            acompanho daqui e explico<br />
+            qualquer dúvida.
+          </MessageBubble>
+        </>
+      )}
+
+      {isWelcome ? <p className="tcrm-setup-agent-chat__quick-title">Perguntas rápidas</p> : null}
 
       <QuickReplyChips
         className="tcrm-setup-agent-chat__quick-replies"
-        items={[
+        items={isWelcome ? [
+          { id: "configurar", label: "O que vou configurar?", disabled: isBlocked },
+          { id: "ajuda", label: "Posso pedir ajuda humana?", selected: isHumanHelp, disabled: isBlocked },
+          { id: "liberacao", label: "Quando o CRM será liberado?", disabled: isBlocked }
+        ] : [
           { id: "obrigatorio", label: "O que é obrigatório?", disabled: isBlocked },
           { id: "depois", label: "Posso deixar para depois?", selected: isHumanHelp, disabled: isBlocked },
           { id: "agenda", label: "Como isso afeta a agenda?", disabled: isBlocked }
@@ -3988,21 +5572,23 @@ export function SetupAgentChat({
         onSelect={onQuickReply}
       />
 
-      <form className="tcrm-setup-agent-chat__composer" onSubmit={submit}>
-        <Input
-          aria-label="Perguntar sobre esta etapa"
-          className="tcrm-setup-agent-chat__composer-input"
-          disabled={isBlocked}
-          fieldSize="sm"
-          onChange={(event) => setValue(event.currentTarget.value)}
-          placeholder="Pergunte sobre esta etapa..."
-          value={value}
-        />
-        <IconButton aria-label="Enviar pergunta" className="tcrm-setup-agent-chat__send" disabled={isBlocked} icon="send" label="Enviar pergunta" size="sm" type="submit" variant="selected" />
-      </form>
+      {!isWelcome ? (
+        <form className="tcrm-setup-agent-chat__composer" onSubmit={submit}>
+          <Input
+            aria-label="Perguntar sobre esta etapa"
+            className="tcrm-setup-agent-chat__composer-input"
+            disabled={isBlocked}
+            fieldSize="sm"
+            onChange={(event) => setValue(event.currentTarget.value)}
+            placeholder="Pergunte sobre esta etapa..."
+            value={value}
+          />
+          <IconButton aria-label="Enviar pergunta" className="tcrm-setup-agent-chat__send" disabled={isBlocked} icon="send" label="Enviar pergunta" size="sm" type="submit" variant="selected" />
+        </form>
+      ) : null}
 
       <footer className="tcrm-setup-agent-chat__footer">
-        <span>Precisa de ajuda humana?</span>
+        {!isWelcome ? <span>Precisa de ajuda humana?</span> : null}
         <Button className="tcrm-setup-agent-chat__help-action" disabled={isBlocked} onClick={onHumanHelp} size="sm" type="button" variant="ghost">Agendar ajuda</Button>
       </footer>
     </section>
@@ -4421,6 +6007,273 @@ export function CheckoutReviewPanel({
               onCouponChange={onCouponChange ?? paymentCardProps?.onCouponChange}
             />
           )}
+        </>
+      )}
+    </div>
+  );
+}
+
+export interface SubscriptionReviewPageProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  panel?: React.ReactNode;
+}
+
+export function SubscriptionReviewPage({
+  title = "Revisar assinatura",
+  description = "Confira seu plano antes de ir para o pagamento seguro.",
+  panel,
+  children,
+  className,
+  ...props
+}: SubscriptionReviewPageProps) {
+  return (
+    <section aria-label="Revisar assinatura" className={cn("tcrm-subscription-review-page", className)} {...props}>
+      <header className="tcrm-subscription-review-page__header">
+        <h1>{title}</h1>
+        {description ? <p>{description}</p> : null}
+      </header>
+      {children ?? panel ?? <CheckoutReviewPanel />}
+    </section>
+  );
+}
+
+export interface ConfirmedSubscriptionPageProps extends React.HTMLAttributes<HTMLElement> {
+  header?: React.ReactNode;
+  summary?: React.ReactNode;
+  handoff?: React.ReactNode;
+}
+
+export function ConfirmedSubscriptionPage({
+  header,
+  summary,
+  handoff,
+  children,
+  className,
+  ...props
+}: ConfirmedSubscriptionPageProps) {
+  return (
+    <section aria-label="Assinatura confirmada" className={cn("tcrm-confirmed-subscription-page", className)} {...props}>
+      {header ?? <SubscriptionResultHeader />}
+      <div className="tcrm-confirmed-subscription-page__content">
+        {children ?? (
+          <>
+            {summary ?? <PlanSummaryCard state="confirmed" />}
+            {handoff ?? <ConfirmedSetupHandoff />}
+          </>
+        )}
+      </div>
+    </section>
+  );
+}
+
+export interface FinanceQueueGridProps extends React.HTMLAttributes<HTMLElement> {
+  density?: "default" | "compact";
+}
+
+export function FinanceQueueGrid({ className, density = "default", ...props }: FinanceQueueGridProps) {
+  return <section aria-label="Filas financeiras" className={cn("tcrm-finance-queue-grid", `tcrm-finance-queue-grid--${density}`, className)} {...props} />;
+}
+
+export interface AgentRoutineIntroProps extends React.HTMLAttributes<HTMLDivElement> {
+  status?: React.ReactNode;
+  description?: React.ReactNode;
+}
+
+export function AgentRoutineIntro({
+  status = <Chip tone="success">Contratado</Chip>,
+  description = "Escolha uma rotina para ajustar, simular ou publicar.",
+  children,
+  className,
+  ...props
+}: AgentRoutineIntroProps) {
+  return (
+    <div className={cn("tcrm-agent-routine-intro", className)} {...props}>
+      {children ?? (
+        <>
+          {status}
+          {description ? <p>{description}</p> : null}
+        </>
+      )}
+    </div>
+  );
+}
+
+export type StudentProfileAction = "open-schedule" | "open-finance" | "open-pending" | "open-notes" | "open-timeline" | "message" | "create-task" | "change-plan" | "pause-student";
+
+export interface StudentProfileCompositionProps extends React.HTMLAttributes<HTMLDivElement> {
+  density?: "standard" | "compact";
+  onAction?: (action: StudentProfileAction) => void;
+}
+
+interface StudentProfileListItemProps extends React.ComponentProps<typeof ListItem> {
+  badge: React.ReactNode;
+  compact: boolean;
+}
+
+function StudentProfileListItem({ badge, compact, ...props }: StudentProfileListItemProps) {
+  return <ListItem action={compact ? badge : undefined} {...props}>{compact ? null : badge}</ListItem>;
+}
+
+export function StudentProfileOverviewGrid({ children, className, density = "standard", onAction, ...props }: StudentProfileCompositionProps) {
+  const compact = density === "compact";
+  return (
+    <div className={cn("tcrm-student-profile-overview-grid", compact && "tcrm-student-profile-overview-grid--compact", className)} data-density={density} {...props}>
+      {children ?? (
+        <>
+          <StudentSummary />
+          <Panel className="tcrm-student-profile-overview-grid__panel" compact={compact} title="2. Agenda próxima">
+            <h3>2. Agenda próxima</h3>
+            <List dense={compact} divided={compact}>
+              <StudentProfileListItem badge={<Chip tone="info">Marcada</Chip>} compact={compact} leading={<Icon name="calendar" tone="info" />} meta="Qui 15/05 · 07:00" title="Reformer Iniciante" />
+              <StudentProfileListItem badge={<Chip tone="info">Marcada</Chip>} compact={compact} leading={<Icon name="calendar" tone="info" />} meta="Sex 17/05 · 07:00" title="Reformer Iniciante" />
+              <StudentProfileListItem badge={<Chip tone="info">Marcada</Chip>} compact={compact} leading={<Icon name="calendar" tone="info" />} meta="Seg 20/05 · 08:00" title="Pilates Solo" />
+              <StudentProfileListItem badge={<Chip tone="warning">Pendente</Chip>} compact={compact} leading={<Icon name="clipboard" tone="warning" />} meta="1 aula disponível" title="Reposição pendente" />
+            </List>
+            <Button onClick={() => onAction?.("open-schedule")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver agenda</Button>
+          </Panel>
+          <Panel className="tcrm-student-profile-overview-grid__panel" compact={compact} title="3. Plano e financeiro">
+            <h3>3. Plano e financeiro</h3>
+            <List dense={compact} divided={compact}>
+              <StudentProfileListItem badge={<Chip tone="success">Ativo</Chip>} compact={compact} leading={<Icon name="creditCard" />} meta="Plano Mensal" title="Plano atual" />
+              <ListItem leading={<Icon name="coins" />} meta="10/06/2024 · R$ 199,00" title="Próxima mensalidade" />
+              <ListItem leading={<Icon name="coins" />} meta="05/04/2024 · R$ 199,00" title="Último pagamento" />
+              <StudentProfileListItem badge={<Chip tone="warning">pagamento pendente</Chip>} compact={compact} leading={<Icon name="alert" tone="warning" />} meta="Pagamento pendente desde 05/04" title="Status financeiro" />
+            </List>
+            <Button onClick={() => onAction?.("open-finance")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver financeiro</Button>
+          </Panel>
+          <Panel className="tcrm-student-profile-overview-grid__panel" compact={compact} title="4. Pendências">
+            <h3>4. Pendências</h3>
+            <List dense={compact} divided={compact}>
+              <ListItem leading={<Icon name="user" />} meta="Dados cadastrais" title="Atualizar contato de emergência" />
+              <ListItem leading={<Icon name="calendar" />} meta="Agenda" title="Confirmar disponibilidade para aula extra" />
+              <ListItem leading={<Icon name="coins" tone="warning" />} meta="Financeiro" title="Pagamento pendente" />
+            </List>
+            <Button onClick={() => onAction?.("open-pending")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas pendências</Button>
+          </Panel>
+          <Panel className="tcrm-student-profile-overview-grid__panel" compact={compact} title="5. Notas recentes">
+            <h3>5. Notas recentes</h3>
+            <List dense={compact} divided={compact}>
+              <ListItem leading={<Icon name="clipboard" tone="info" />} meta="Sam Frank · 12/05/2024 14:32" title="Aluna pediu opção de reposição para próxima semana." />
+              <ListItem leading={<Icon name="message" tone="info" />} meta="Nikki Olaw · 09/05/2024 10:15" title="Relatou leve desconforto no ombro direito." />
+            </List>
+            <Button onClick={() => onAction?.("open-notes")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas notas</Button>
+          </Panel>
+          <Panel className="tcrm-student-profile-overview-grid__panel" compact={compact} title="6. Linha do tempo curta">
+            <h3>6. Linha do tempo curta</h3>
+            <List dense={compact} divided={compact}>
+              <ListItem leading={<Icon name="whatsapp" tone="success" />} meta="12/05/2024 14:32 · Por Sam Frank" title="Mensagem via WhatsApp">Enviou lembrete da aula de quinta.</ListItem>
+              <ListItem leading={<Icon name="checkCircle" tone="info" />} meta="10/05/2024 07:00 · Reformer Iniciante" title="Aula realizada">Presença registrada.</ListItem>
+              <ListItem leading={<Icon name="coins" tone="success" />} meta="05/04/2024 10:32 · R$ 199,00" title="Pagamento recebido">Plano Mensal.</ListItem>
+            </List>
+            <Button onClick={() => onAction?.("open-timeline")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver linha do tempo completa</Button>
+          </Panel>
+        </>
+      )}
+    </div>
+  );
+}
+
+export function StudentProfileActionRail({ children, className, density = "standard", onAction, ...props }: StudentProfileCompositionProps) {
+  const compact = density === "compact";
+  return (
+    <div className={cn("tcrm-student-profile-action-rail", compact && "tcrm-student-profile-action-rail--compact", className)} data-density={density} {...props}>
+      {children ?? (
+        <>
+          <Panel className="tcrm-student-profile-action-rail__section" compact={compact} title="Próximas ações">
+            <h3>Próximas ações</h3>
+            <List dense={compact} divided={compact}>
+              <StudentProfileListItem badge={<Chip tone="info">Reformer Iniciante</Chip>} compact={compact} leading={<Icon name="calendar" tone="info" />} meta="Qui, 15/05 · 07:00" title="Aula marcada" />
+              <StudentProfileListItem badge={<Chip tone="warning">Pendente</Chip>} compact={compact} leading={<Icon name="refresh" tone="warning" />} meta="1 aula disponível" title="Repor aula pendente" />
+              <StudentProfileListItem badge={<Chip tone="warning">Atenção</Chip>} compact={compact} leading={<Icon name="coins" tone="success" />} meta="R$ 199,00" title="Pagamento pendente" />
+            </List>
+          </Panel>
+          <Panel className="tcrm-student-profile-action-rail__section" compact={compact} title="Riscos / alertas">
+            <h3>Riscos / alertas</h3>
+            <List dense={compact} divided={compact}>
+              <StudentProfileListItem badge={<Chip tone="warning">Atenção</Chip>} compact={compact} leading={<Icon name="shield" tone="warning" />} meta="Pagamento pendente desde 05/04" title="Financeiro em atraso" />
+              <StudentProfileListItem badge={<Chip tone="success">Bom</Chip>} compact={compact} leading={<Icon name="checkCircle" tone="success" />} meta="8 de 10 aulas (80%)" title="Frequência estável" />
+            </List>
+          </Panel>
+          <Panel className="tcrm-student-profile-action-rail__section" compact={compact} title="Tarefas abertas">
+            <h3>Tarefas abertas</h3>
+            <List dense={compact} divided={compact}>
+              <StudentProfileListItem badge={<Chip tone="info">Pendente</Chip>} compact={compact} leading={<Icon name="checkCircle" />} meta="Criada por Nikki Olaw · 02/05" title="Confirmar disponibilidade para aula extra" />
+              <StudentProfileListItem badge={<Chip tone="info">Pendente</Chip>} compact={compact} leading={<Icon name="checkCircle" />} meta="Criada por Sam Frank · 28/04" title="Atualizar contato de emergência" />
+            </List>
+          </Panel>
+          <Panel className="tcrm-student-profile-action-rail__section" compact={compact} title="Última conversa">
+            <h3>Última conversa</h3>
+            <List dense={compact} divided={compact}>
+              <ListItem leading={<Icon name="whatsapp" tone="success" />} meta="Você: Oi Ana Paula! Lembrando da sua aula..." title="WhatsApp · 12/05/2024 14:32">Ana Paula: Perfeito, obrigada pelo lembrete!</ListItem>
+            </List>
+          </Panel>
+          <Panel className="tcrm-student-profile-action-rail__quick-actions" compact={compact} title="Ações rápidas">
+            <h3>Ações rápidas</h3>
+            <ButtonGroup>
+              <Button leadingIcon="message" onClick={() => onAction?.("message")} variant="secondary">Enviar mensagem</Button>
+              <Button leadingIcon="calendar" onClick={() => onAction?.("create-task")} variant="secondary">Criar tarefa</Button>
+              <Button leadingIcon="creditCard" onClick={() => onAction?.("change-plan")} variant="secondary">Alterar plano</Button>
+              <Button leadingIcon="pause" onClick={() => onAction?.("pause-student")} variant="secondary">Pausar aluno</Button>
+            </ButtonGroup>
+          </Panel>
+        </>
+      )}
+    </div>
+  );
+}
+
+export type ClassOperationalDetailAction = "view-students" | "open-vacancy" | "open-credit" | "open-enrollment" | "edit-notes";
+
+export interface ClassOperationalDetailProps extends React.HTMLAttributes<HTMLDivElement> {
+  onAction?: (action: ClassOperationalDetailAction) => void;
+  students?: Array<RosterStudent | string>;
+}
+
+export function ClassOperationalDetail({ children, className, onAction, students, ...props }: ClassOperationalDetailProps) {
+  return (
+    <div className={cn("tcrm-class-operational-detail", className)} data-component="ClassOperationalDetail" {...props}>
+      {children ?? (
+        <>
+          <Panel className="tcrm-class-operational-detail__summary" compact>
+            <dl>
+              <div><Icon name="user" /><dt>Professor da aula</dt><dd>João Silva</dd></div>
+              <div><Icon name="calendar" /><dt>Equipamento / recurso</dt><dd>Reformer 2</dd></div>
+              <div><Icon name="users" /><dt>Capacidade</dt><dd>5/6</dd></div>
+              <div><Icon name="clock" /><dt>Status</dt><dd><Chip tone="warning">Chamada em andamento</Chip></dd></div>
+              <div><Icon name="calendar" /><dt>Origem</dt><dd>Agenda</dd></div>
+            </dl>
+            <p><Icon name="info" tone="info" /> Aula criada pela grade recorrente.</p>
+          </Panel>
+          <Panel className="tcrm-class-operational-detail__students" compact>
+            <ButtonGroup align="between">
+              <div><h3>Alunos esperados</h3><p>Clique no aluno para ver detalhes</p></div>
+              <Button leadingIcon="eye" onClick={() => onAction?.("view-students")} size="sm" variant="secondary">Ver detalhes</Button>
+            </ButtonGroup>
+            <Roster students={students} variant="expected" />
+          </Panel>
+          <div className="tcrm-class-operational-detail__side">
+            <Panel compact>
+              <h3>Reposições e vagas</h3>
+              <List divided>
+                <ListItem action={<Icon name="chevronRight" />} leading={<Icon name="users" tone="success" />} onClick={() => onAction?.("open-vacancy")} title="1 vaga aberta">Disponível para encaixe</ListItem>
+                <ListItem action={<Icon name="chevronRight" />} leading={<Icon name="sparkles" tone="info" />} onClick={() => onAction?.("open-credit")} title="1 crédito compatível">Elegível para uso nesta aula</ListItem>
+                <ListItem action={<Icon name="chevronRight" />} leading={<Icon name="user" tone="info" />} onClick={() => onAction?.("open-enrollment")} title="1 aluno encaixado">Entrou por reposição</ListItem>
+              </List>
+            </Panel>
+            <Panel compact>
+              <ButtonGroup align="between"><h3>Observações da aula</h3><Button leadingIcon="edit" onClick={() => onAction?.("edit-notes")} size="sm" variant="secondary">Editar</Button></ButtonGroup>
+              <p>Gabriela costuma avisar em cima da hora.<br />Verificar encaixe se Ana não vier.</p>
+            </Panel>
+          </div>
+          <Panel className="tcrm-class-operational-detail__history" compact>
+            <h3>Histórico da aula</h3>
+            <List divided>
+              <ListItem action={<Chip tone="neutral">Sistema</Chip>} leading={<Icon name="calendar" tone="info" />} meta="12/05 · 10:12" title="Aula criada pela grade">Recorrência: terça 17h</ListItem>
+              <ListItem action={<Chip tone="info">Ana Carolina</Chip>} leading={<Icon name="user" tone="success" />} meta="12/05 · 15:47" title="Ana pediu reposição">Motivo: compromissos pessoais</ListItem>
+              <ListItem action={<Chip tone="neutral">Recepção</Chip>} leading={<Icon name="user" tone="warning" />} meta="Hoje · 16:45" title="Chamada iniciada pela recepção">Execução da aula iniciada</ListItem>
+            </List>
+          </Panel>
         </>
       )}
     </div>
@@ -5206,6 +7059,105 @@ export function InvoiceTable({
   );
 }
 
+export interface BillingInvoiceEntitlement {
+  id: string;
+  icon: IconName;
+  label: React.ReactNode;
+}
+
+export interface BillingInvoicesWorkspaceProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+  currentTitle?: React.ReactNode;
+  amount?: React.ReactNode;
+  statusLabel?: React.ReactNode;
+  dueLabel?: React.ReactNode;
+  periodLabel?: React.ReactNode;
+  methodLabel?: React.ReactNode;
+  entitlements?: BillingInvoiceEntitlement[];
+  rows?: InvoiceRow[];
+  loading?: boolean;
+  error?: React.ReactNode;
+  blockedReason?: string;
+  onPayCurrent?: () => void;
+  onOpenCurrent?: () => void;
+  onDownloadCurrent?: () => void;
+  onRowClick?: (row: InvoiceRow) => void;
+  onOpenInvoice?: (row: InvoiceRow) => void;
+  onDownloadInvoice?: (row: InvoiceRow) => void;
+  onRetryInvoice?: (row: InvoiceRow) => void;
+}
+
+const billingInvoiceEntitlements: BillingInvoiceEntitlement[] = [
+  { id: "plan", icon: "users", label: "Plano 7 agentes" },
+  { id: "messages", icon: "message", label: "15.000 mensagens/mês" },
+  { id: "support", icon: "headphones", label: "Suporte Taliya" }
+];
+
+export function BillingInvoicesWorkspace({
+  currentTitle = "Fatura atual",
+  amount = "R$ 799,00",
+  statusLabel = "Em aberto",
+  dueLabel = "Vence em 12/06",
+  periodLabel = "Período: Junho/2026",
+  methodLabel = "Método: Cartão final 4242",
+  entitlements = billingInvoiceEntitlements,
+  rows,
+  loading = false,
+  error,
+  blockedReason,
+  onPayCurrent,
+  onOpenCurrent,
+  onDownloadCurrent,
+  onRowClick,
+  onOpenInvoice,
+  onDownloadInvoice,
+  onRetryInvoice,
+  className,
+  ...props
+}: BillingInvoicesWorkspaceProps) {
+  return (
+    <section className={cn("tcrm-billing-invoices-workspace", className)} data-component="BillingInvoicesWorkspace" {...props}>
+      <Card className="tcrm-billing-invoices-workspace__current">
+        <header>
+          <small>{currentTitle}</small>
+          <div><strong>{amount}</strong><Chip showDot={false} tone="warning">{statusLabel}</Chip></div>
+        </header>
+
+        <div className="tcrm-billing-invoices-workspace__facts">
+          <span><Icon name="calendar" />{dueLabel}</span>
+          <span><Icon name="calendar" />{periodLabel}</span>
+          <span><Icon name="creditCard" />{methodLabel}</span>
+        </div>
+
+        <div className="tcrm-billing-invoices-workspace__entitlements" role="list">
+          {entitlements.map((entitlement) => (
+            <div key={entitlement.id} role="listitem">
+              <ListIcon icon={entitlement.icon} tone="info" />
+              <span>{entitlement.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <footer>
+          <Button blockedReason={blockedReason} loading={loading} onClick={onPayCurrent} variant="primary">Pagar agora</Button>
+          <Button blockedReason={blockedReason} leadingIcon="fileText" onClick={onOpenCurrent} variant="secondary">Abrir fatura</Button>
+          <Button blockedReason={blockedReason} leadingIcon="download" onClick={onDownloadCurrent} variant="secondary">Baixar PDF</Button>
+        </footer>
+      </Card>
+
+      <InvoiceTable
+        blockedReason={blockedReason}
+        error={error}
+        loading={loading}
+        onDownload={onDownloadInvoice}
+        onOpen={onOpenInvoice}
+        onRetry={onRetryInvoice}
+        onRowClick={onRowClick}
+        rows={rows}
+      />
+    </section>
+  );
+}
+
 export type AddOnCardState = "available" | "active" | "plan-max" | "consult" | "unavailable";
 
 interface AddOnCardStateDefaults {
@@ -5353,6 +7305,112 @@ export function AddOnCard({
   );
 }
 
+export interface BillingAddOnOption {
+  id: string;
+  state: AddOnCardState;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  meta?: React.ReactNode;
+  statusLabel?: React.ReactNode;
+  icon?: IconName;
+  actionLabel?: React.ReactNode;
+  actionVariant?: ButtonVariant;
+}
+
+export interface BillingAddOnsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  activeTitle?: React.ReactNode;
+  activeEmptyTitle?: React.ReactNode;
+  activeEmptyDescription?: React.ReactNode;
+  availableTitle?: React.ReactNode;
+  activeAddOns?: BillingAddOnOption[];
+  availableAddOns?: BillingAddOnOption[];
+  loading?: boolean;
+  error?: React.ReactNode;
+  blockedReason?: string;
+  onAddOnAction?: (option: BillingAddOnOption) => void;
+}
+
+const billingAvailableAddOns: BillingAddOnOption[] = [
+  { id: "messages", state: "available" },
+  { id: "agents", state: "plan-max" },
+  { id: "quota", state: "consult" }
+];
+
+function BillingAddOnGrid({
+  addOns,
+  blockedReason,
+  loading,
+  onAddOnAction
+}: {
+  addOns: BillingAddOnOption[];
+  blockedReason?: string;
+  loading?: boolean;
+  onAddOnAction?: (option: BillingAddOnOption) => void;
+}) {
+  return (
+    <div className="tcrm-billing-addons-workspace__grid">
+      {addOns.map((option) => (
+        <AddOnCard
+          actionLabel={option.actionLabel}
+          actionVariant={option.actionVariant}
+          blockedReason={blockedReason}
+          description={option.description}
+          icon={option.icon}
+          key={option.id}
+          loading={loading}
+          meta={option.meta}
+          onAction={() => onAddOnAction?.(option)}
+          state={option.state}
+          statusLabel={option.statusLabel}
+          title={option.title}
+        />
+      ))}
+    </div>
+  );
+}
+
+export function BillingAddOnsWorkspace({
+  activeTitle = "Add-ons ativos",
+  activeEmptyTitle = "Nenhum add-on ativo",
+  activeEmptyDescription = "Quando um pacote extra for contratado, ele aparece aqui.",
+  availableTitle = "Disponíveis",
+  activeAddOns = [],
+  availableAddOns = billingAvailableAddOns,
+  loading = false,
+  error,
+  blockedReason,
+  onAddOnAction,
+  className,
+  ...props
+}: BillingAddOnsWorkspaceProps) {
+  return (
+    <section className={cn("tcrm-billing-addons-workspace", className)} data-component="BillingAddOnsWorkspace" {...props}>
+      <Card className="tcrm-billing-addons-workspace__active">
+        <h2>{activeTitle}</h2>
+        {error ? (
+          <ErrorState description={error} title="Não foi possível carregar os add-ons" />
+        ) : loading && activeAddOns.length === 0 ? (
+          <LoadingState title="Carregando add-ons ativos" />
+        ) : activeAddOns.length > 0 ? (
+          <BillingAddOnGrid addOns={activeAddOns} blockedReason={blockedReason} loading={loading} onAddOnAction={onAddOnAction} />
+        ) : (
+          <EmptyState
+            className="tcrm-billing-addons-workspace__empty"
+            description={activeEmptyDescription}
+            icon="package"
+            title={String(activeEmptyTitle)}
+          />
+        )}
+      </Card>
+
+      <Card className="tcrm-billing-addons-workspace__available">
+        <h2>{availableTitle}</h2>
+        <BillingAddOnGrid addOns={availableAddOns} blockedReason={blockedReason} loading={loading} onAddOnAction={onAddOnAction} />
+      </Card>
+    </section>
+  );
+}
+
 export type QuotaProgressState = "normal" | 70 | 90 | 100;
 export type QuotaProgressAction = "ledger" | "add-ons";
 
@@ -5486,6 +7544,243 @@ export function QuotaProgress({
   );
 }
 
+export interface UsageOverviewOrigin {
+  id: string;
+  origin: UsageOriginRowOrigin;
+  title?: React.ReactNode;
+  amount?: React.ReactNode;
+  percent?: number;
+  visualPercent?: number;
+  icon?: IconName;
+}
+
+export interface UsageOverviewStatusItem {
+  id: string;
+  title: React.ReactNode;
+  icon?: IconName;
+  tone?: ComponentTone;
+}
+
+export interface UsageOverviewWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  quota?: Omit<QuotaProgressProps, "onAction" | "onViewLedger" | "onViewAddOns">;
+  origins?: UsageOverviewOrigin[];
+  alerts?: UsageOverviewStatusItem[];
+  affected?: UsageOverviewStatusItem[];
+  originFooter?: React.ReactNode;
+  flowsLabel?: React.ReactNode;
+  loading?: boolean;
+  error?: string;
+  blockedReason?: string;
+  onViewLedger?: () => void;
+  onViewAddOns?: () => void;
+  onOriginSelect?: (origin: UsageOriginRowOrigin, state: UsageOriginRowState) => void;
+  onViewFlows?: () => void;
+}
+
+const usageOverviewOrigins: UsageOverviewOrigin[] = [
+  { id: "attendance", origin: "attendance" },
+  { id: "agenda", origin: "agenda" },
+  { id: "sales", origin: "sales" },
+  { id: "finance", origin: "finance" },
+  { id: "other", origin: "other" }
+];
+
+const usageOverviewAlerts: UsageOverviewStatusItem[] = [
+  { id: "clear", title: "Nenhum alerta crítico", icon: "checkCircle", tone: "success" },
+  { id: "economy", title: "Economia entra automaticamente em 90%.", icon: "percent", tone: "info" },
+  { id: "pause", title: <>Automação paga pausa em 100%;<br />CRM manual continua.</>, icon: "pause", tone: "info" }
+];
+
+const usageOverviewAffected: UsageOverviewStatusItem[] = [
+  { id: "flows", title: "Nenhum fluxo pausado por cota", icon: "checkCircle", tone: "success" },
+  { id: "downgrade", title: "Nenhum downgrade ativo", icon: "checkCircle", tone: "success" }
+];
+
+function UsageOverviewStatusRows({ items }: { items: UsageOverviewStatusItem[] }) {
+  return (
+    <div className="tcrm-usage-overview-workspace__status-rows" role="list">
+      {items.map((item) => (
+        <div key={item.id} role="listitem">
+          <ListIcon icon={item.icon ?? "checkCircle"} tone={item.tone ?? "info"} />
+          <span>{item.title}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function UsageOverviewWorkspace({
+  quota,
+  origins = usageOverviewOrigins,
+  alerts = usageOverviewAlerts,
+  affected = usageOverviewAffected,
+  originFooter = "Distribuição do uso no ciclo atual.",
+  flowsLabel = "Ver fluxos",
+  loading = false,
+  error,
+  blockedReason,
+  onViewLedger,
+  onViewAddOns,
+  onOriginSelect,
+  onViewFlows,
+  className,
+  ...props
+}: UsageOverviewWorkspaceProps) {
+  const blocked = Boolean(blockedReason);
+
+  if (error) {
+    return (
+      <section className={cn("tcrm-usage-overview-workspace", className)} data-component="UsageOverviewWorkspace" {...props}>
+        <ErrorState className="tcrm-usage-overview-workspace__state" description={error} title="Não foi possível carregar o uso" />
+      </section>
+    );
+  }
+
+  return (
+    <section
+      aria-busy={loading || undefined}
+      className={cn("tcrm-usage-overview-workspace", className)}
+      data-component="UsageOverviewWorkspace"
+      data-state={blocked ? "blocked" : loading ? "loading" : "source"}
+      {...props}
+    >
+      <QuotaProgress
+        {...quota}
+        blockedReason={blockedReason ?? quota?.blockedReason}
+        disabled={blocked || quota?.disabled}
+        loading={loading ? true : quota?.loading}
+        onViewAddOns={onViewAddOns}
+        onViewLedger={onViewLedger}
+      />
+
+      <div className="tcrm-usage-overview-workspace__lower">
+        <Card className="tcrm-usage-overview-workspace__origins">
+          <h2>Origem do consumo</h2>
+          {loading ? (
+            <LoadingState title="Carregando origens" />
+          ) : (
+            <div className="tcrm-usage-overview-workspace__origin-rows">
+              {origins.map((item) => (
+                <UsageOriginRow
+                  key={item.id}
+                  amount={item.amount}
+                  icon={item.icon}
+                  onSelect={onOriginSelect}
+                  origin={item.origin}
+                  percent={item.percent}
+                  state={blocked ? "blocked" : "source"}
+                  title={item.title}
+                  visualPercent={item.visualPercent}
+                />
+              ))}
+            </div>
+          )}
+          <p>{originFooter}</p>
+        </Card>
+
+        <div className="tcrm-usage-overview-workspace__status-stack">
+          <Card className="tcrm-usage-overview-workspace__alerts">
+            <h2>Alertas e economia</h2>
+            {loading ? <LoadingState title="Carregando alertas" /> : <UsageOverviewStatusRows items={alerts} />}
+          </Card>
+          <Card className="tcrm-usage-overview-workspace__affected">
+            <h2>O que foi afetado</h2>
+            {loading ? <LoadingState title="Carregando impactos" /> : <UsageOverviewStatusRows items={affected} />}
+            <Button blockedReason={blockedReason} disabled={blocked || loading} onClick={onViewFlows} variant="secondary">{flowsLabel}</Button>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export interface BillingSubscriptionAgent {
+  id: string;
+  label: React.ReactNode;
+  icon: IconName;
+}
+
+export interface BillingSubscriptionWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  agents?: BillingSubscriptionAgent[];
+  onChangePlan?: () => void;
+  onViewPlanDetails?: () => void;
+  onOpenAgents?: () => void;
+  onViewUsage?: () => void;
+  onViewInvoices?: () => void;
+  onUpdatePayment?: () => void;
+  onViewAddOns?: () => void;
+  onSupport?: () => void;
+}
+
+const billingSubscriptionAgents: BillingSubscriptionAgent[] = [
+  { id: "support", label: "Atendimento", icon: "message" },
+  { id: "agenda", label: "Agenda", icon: "calendar" },
+  { id: "sales", label: "Vendas", icon: "trendingUp" },
+  { id: "finance", label: "Financeiro", icon: "wallet" },
+  { id: "retention", label: "Retenção", icon: "shield" },
+  { id: "management", label: "Gestão/Governança", icon: "shieldStar" },
+  { id: "history", label: "Histórico/Evolução", icon: "book" }
+];
+
+export function BillingSubscriptionWorkspace({
+  agents = billingSubscriptionAgents,
+  onChangePlan,
+  onViewPlanDetails,
+  onOpenAgents,
+  onViewUsage,
+  onViewInvoices,
+  onUpdatePayment,
+  onViewAddOns,
+  onSupport,
+  className,
+  ...props
+}: BillingSubscriptionWorkspaceProps) {
+  return (
+    <section className={cn("tcrm-billing-subscription-workspace", className)} data-component="BillingSubscriptionWorkspace" {...props}>
+      <div className="tcrm-billing-subscription-workspace__main">
+        <PlanSummaryCard className="tcrm-billing-subscription-workspace__plan" onChangePlan={onChangePlan} onViewDetails={onViewPlanDetails} />
+
+        <Card className="tcrm-billing-subscription-workspace__agents">
+          <header><small>Agentes inclusos</small><h3>7 de 7 agentes inclusos</h3></header>
+          <div role="list">
+            {agents.map((agent) => <div key={agent.id} role="listitem"><ListIcon icon={agent.icon} tone="info" /><span>{agent.label}</span></div>)}
+          </div>
+          <Button onClick={onOpenAgents} variant="secondary">Abrir Agentes</Button>
+        </Card>
+
+        <div className="tcrm-billing-subscription-workspace__billing">
+          <QuotaProgress
+            addOnsLabel=""
+            alertLabel="Uso detalhado fica em Uso e cotas."
+            className="tcrm-billing-subscription-workspace__quota"
+            ledgerLabel="Ver uso e cotas"
+            onViewLedger={onViewUsage}
+          />
+          <Card className="tcrm-billing-subscription-workspace__invoice">
+            <small>Próxima fatura</small>
+            <h3>R$ 799,00</h3>
+            <div><span>Vence em 12/06</span><Chip showDot={false} tone="warning">Em aberto</Chip></div>
+            <p><Icon name="creditCard" /> Cartão final 4242</p>
+            <footer><Button onClick={onViewInvoices} size="sm" variant="secondary">Ver faturas</Button><Button onClick={onUpdatePayment} size="sm" variant="secondary">Atualizar pagamento</Button></footer>
+          </Card>
+        </div>
+      </div>
+
+      <Card className="tcrm-billing-subscription-workspace__addons">
+        <small>Add-ons ativos</small>
+        <div><ListIcon icon="shoppingCart" tone="info" /><span><strong>Nenhum add-on ativo</strong><small>Pacotes extras aparecem aqui quando contratados.</small></span></div>
+        <Button onClick={onViewAddOns} variant="secondary">Ver add-ons</Button>
+      </Card>
+
+      <Card className="tcrm-billing-subscription-workspace__actions">
+        <Button onClick={onViewInvoices} variant="primary">Ver faturas</Button>
+        <Button onClick={onViewUsage} variant="secondary">Ver uso e cotas</Button>
+        <Button onClick={onSupport} variant="secondary">Falar com suporte</Button>
+      </Card>
+    </section>
+  );
+}
+
 export type UsageLedgerStatus = "consumed" | "estimated" | "reprocessed";
 export type UsageLedgerOrigin = "whatsapp" | "ai" | "automation" | "import" | "adjustment";
 export type UsageLedgerAction = "row" | "action" | "filter" | "load-more";
@@ -5513,6 +7808,57 @@ export interface UsageLedgerFilter {
   value: React.ReactNode;
   disabled?: boolean;
 }
+
+export interface CrmHeaderSummaryItem {
+  id: string;
+  icon: IconName;
+  label: React.ReactNode;
+  tone?: ComponentTone;
+}
+
+export interface CrmHeaderSummaryProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
+  items?: CrmHeaderSummaryItem[];
+  onSelect?: (item: CrmHeaderSummaryItem) => void;
+  variant?: "ledger" | "overview" | "billing" | "billing-invoices";
+}
+
+const defaultCrmHeaderSummaryItems: CrmHeaderSummaryItem[] = [
+  { id: "cycle", icon: "calendar", label: "Ciclo atual" },
+  { id: "used", icon: "pieChart", label: "42% usado", tone: "info" },
+  { id: "messages", icon: "message", label: "15.000 mensagens/mês" }
+];
+
+export function CrmHeaderSummary({ items = defaultCrmHeaderSummaryItems, onSelect, variant = "ledger", className, ...props }: CrmHeaderSummaryProps) {
+  return (
+    <ButtonGroup
+      className={cn("tcrm-header-summary", "tcrm-usage-header-summary", `tcrm-header-summary--${variant}`, `tcrm-usage-header-summary--${variant}`, className)}
+      data-component="CrmHeaderSummary"
+      {...props}
+    >
+      {items.map((item) => (
+        <Button
+          className="tcrm-usage-header-summary__item"
+          data-tone={item.tone ?? "neutral"}
+          key={item.id}
+          leadingIcon={item.icon}
+          onClick={() => onSelect?.(item)}
+          size="sm"
+          type="button"
+          variant="secondary"
+        >
+          {item.label}
+        </Button>
+      ))}
+    </ButtonGroup>
+  );
+}
+
+/** @deprecated Use CrmHeaderSummary. */
+export const UsageHeaderSummary = CrmHeaderSummary;
+/** @deprecated Use CrmHeaderSummaryItem. */
+export type UsageHeaderSummaryItem = CrmHeaderSummaryItem;
+/** @deprecated Use CrmHeaderSummaryProps. */
+export type UsageHeaderSummaryProps = CrmHeaderSummaryProps;
 
 export interface UsageLedgerTableProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title" | "onSelect"> {
   title?: React.ReactNode;
@@ -5789,6 +8135,7 @@ export function UsageLedgerTable({
 
 export type ApprovalPanelState = "pending" | "approved" | "rejected" | "expired" | "loading" | "blocked";
 export type ApprovalPanelAction = "approve" | "edit" | "reject" | "request-data" | "open-origin" | "close";
+export type ApprovalPanelLayout = "detail" | "compact";
 
 export interface ApprovalPanelFact {
   id: string;
@@ -5823,6 +8170,7 @@ export interface ApprovalPanelRecentComment {
 
 export interface ApprovalPanelProps extends Omit<CrmSurfaceProps, "state" | "title" | "children"> {
   state?: ApprovalPanelState;
+  layout?: ApprovalPanelLayout;
   title?: React.ReactNode;
   eyebrow?: React.ReactNode;
   facts?: ApprovalPanelFact[];
@@ -5838,6 +8186,12 @@ export interface ApprovalPanelProps extends Omit<CrmSurfaceProps, "state" | "tit
   onClose?: () => void;
   disabled?: boolean;
   blockedReason?: string;
+  proposalLabel?: React.ReactNode;
+  proposal?: React.ReactNode;
+  channelLabel?: React.ReactNode;
+  channel?: React.ReactNode;
+  scheduledLabel?: React.ReactNode;
+  scheduledFor?: React.ReactNode;
 }
 
 const approvalPanelDefaultSections: ApprovalPanelSection[] = [
@@ -5926,6 +8280,7 @@ function emitApprovalAction(action: ApprovalPanelAction, onAction?: (action: App
 
 export function ApprovalPanel({
   state = "pending",
+  layout = "detail",
   title,
   eyebrow = "Aprovação",
   facts,
@@ -5941,6 +8296,12 @@ export function ApprovalPanel({
   onClose,
   blockedReason,
   disabled,
+  proposalLabel = "Ação proposta pelo agente",
+  proposal = "Enviar mensagem de confirmação de visita técnica para Ana Paula Santos.",
+  channelLabel = "Canal:",
+  channel = "WhatsApp",
+  scheduledLabel = "Programado para:",
+  scheduledFor = "Hoje, 09:30",
   className,
   ...props
 }: ApprovalPanelProps) {
@@ -5948,6 +8309,52 @@ export function ApprovalPanel({
   const approvalFacts = facts ?? approvalPanelFacts(state);
   const locked = disabled || Boolean(blockedReason) || ["approved", "rejected", "expired", "blocked"].includes(state);
   const loading = state === "loading";
+
+  if (layout === "compact") {
+    return (
+      <Card
+        aria-busy={loading || undefined}
+        aria-label="Aprovação da ação"
+        className={cn("tcrm-approval-panel", "tcrm-approval-panel--compact", `tcrm-approval-panel--${stateKey(state)}`, className)}
+        data-component="ApprovalPanel"
+        data-layout="compact"
+        data-state={state}
+        role="region"
+        {...props}
+      >
+        {loading ? (
+          <LoadingState className="tcrm-approval-panel__compact-state" title="Carregando aprovação" variant="panel" />
+        ) : state === "blocked" ? (
+          <InlineAlert className="tcrm-approval-panel__compact-state" tone="warning" title="Aprovação bloqueada">
+            {blockedReason ?? "Esta ação exige uma revisão antes da decisão."}
+          </InlineAlert>
+        ) : (
+          <>
+            <header className="tcrm-approval-panel__compact-header">
+              <Icon name="fingerprint" size="var(--taliya-control-crm-approval-panel-compact-icon-size)" />
+              <h2>{proposalLabel}</h2>
+            </header>
+            <p className="tcrm-approval-panel__compact-proposal">{proposal}</p>
+            <dl className="tcrm-approval-panel__compact-facts">
+              <div>
+                <dt>{channelLabel}</dt>
+                <dd>{channel}<Icon name="whatsapp" size="var(--taliya-control-crm-approval-panel-compact-icon-size)" /></dd>
+              </div>
+              <div>
+                <dt>{scheduledLabel}</dt>
+                <dd>{scheduledFor}</dd>
+              </div>
+            </dl>
+            <footer className="tcrm-approval-panel__compact-actions">
+              <Button disabled={locked} onClick={() => emitApprovalAction("approve", onAction, onApprove)} size="sm" variant="primary">Aprovar</Button>
+              <Button disabled={locked} onClick={() => emitApprovalAction("edit", onAction, onEdit)} size="sm" variant="secondary">Editar</Button>
+              <Button className="tcrm-approval-panel__compact-reject" disabled={locked} onClick={() => emitApprovalAction("reject", onAction, onReject)} size="sm" variant="secondary">Rejeitar</Button>
+            </footer>
+          </>
+        )}
+      </Card>
+    );
+  }
 
   return (
     <Card
@@ -7075,6 +9482,450 @@ export function ConfigImpactPreview({
   );
 }
 
+export type PermissionRoleCardTone = "success" | "warning" | "info";
+
+export interface PermissionRoleCardData {
+  id: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  icon: IconName;
+  status: React.ReactNode;
+  tone?: PermissionRoleCardTone;
+  permissions: React.ReactNode[];
+}
+
+export interface PermissionRoleCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "id" | "onSelect" | "title">, PermissionRoleCardData {
+  selected?: boolean;
+  onSelect?: (roleId: string) => void;
+}
+
+export function PermissionRoleCard({
+  id,
+  title,
+  description,
+  icon,
+  status,
+  tone = "info",
+  permissions,
+  selected = false,
+  onSelect,
+  className,
+  ...props
+}: PermissionRoleCardProps) {
+  return (
+    <Card
+      className={cn("tcrm-permission-role-card", selected && "tcrm-permission-role-card--selected", className)}
+      data-component="PermissionRoleCard"
+      data-state={selected ? "selected" : "source"}
+      data-tone={tone}
+      {...props}
+    >
+      <button aria-pressed={selected} className="tcrm-permission-role-card__select" onClick={() => onSelect?.(id)} type="button">
+        <span className="tcrm-permission-role-card__icon"><Icon name={icon} /></span>
+        <span className="tcrm-permission-role-card__copy">
+          <strong>{title}</strong>
+          <small>{description}</small>
+          <Chip tone={tone === "success" ? "success" : tone === "warning" ? "warning" : "info"}>{status}</Chip>
+        </span>
+        <span className="tcrm-permission-role-card__permissions">
+          {permissions.map((permission, index) => <span key={index}><Icon name="check" />{permission}</span>)}
+        </span>
+      </button>
+    </Card>
+  );
+}
+
+const settingsPermissionsDefaultRoles: PermissionRoleCardData[] = [
+  {
+    id: "owner",
+    title: "Dono/Admin",
+    description: "Acesso completo ao CRM.",
+    icon: "shieldCheck",
+    status: "Completo",
+    tone: "success",
+    permissions: ["Configurações", "Financeiro", "Equipe", "Agentes e fluxos"]
+  },
+  {
+    id: "frontdesk",
+    title: "Recepção",
+    description: "Operação diária, alunos, agenda e cobranças permitidas.",
+    icon: "user",
+    status: "Revisar",
+    tone: "warning",
+    permissions: ["Agenda completa", "Cadastro de alunos", "Presença e faltas", "Baixa manual, se permitido"]
+  },
+  {
+    id: "teacher",
+    title: "Professor",
+    description: "Aulas, turmas vinculadas e alunos das próprias turmas.",
+    icon: "graduation",
+    status: "Pronto",
+    tone: "info",
+    permissions: ["Própria agenda", "Turmas vinculadas", "Chamada", "Observações permitidas"]
+  }
+];
+
+export interface SettingsPermissionsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  roles?: PermissionRoleCardData[];
+  selectedRoleId?: string;
+  permissionRows?: PermissionMatrixRow[];
+  saveState?: UnsavedChangesBarState;
+  onRoleSelect?: (roleId: string) => void;
+  onPermissionToggle?: PermissionMatrixProps["onToggleChange"];
+  onPermissionSelect?: PermissionMatrixProps["onSelectChange"];
+  onSave?: () => void;
+  onCancel?: () => void;
+}
+
+export function SettingsPermissionsWorkspace({
+  roles = settingsPermissionsDefaultRoles,
+  selectedRoleId,
+  permissionRows,
+  saveState = "dirty",
+  onRoleSelect,
+  onPermissionToggle,
+  onPermissionSelect,
+  onSave,
+  onCancel,
+  className,
+  ...props
+}: SettingsPermissionsWorkspaceProps) {
+  return (
+    <section className={cn("tcrm-settings-permissions-workspace", className)} data-component="SettingsPermissionsWorkspace" {...props}>
+      <section className="tcrm-settings-permissions-workspace__roles">
+        <header>
+          <h3>1. Papéis do CRM</h3>
+          <p>Escolha o papel para entender o nível de acesso.</p>
+        </header>
+        <div className="tcrm-settings-permissions-workspace__role-grid">
+          {roles.map((role) => (
+            <PermissionRoleCard
+              {...role}
+              key={role.id}
+              onSelect={onRoleSelect}
+              selected={role.id === selectedRoleId}
+            />
+          ))}
+        </div>
+      </section>
+      <PermissionMatrix onSelectChange={onPermissionSelect} onToggleChange={onPermissionToggle} rows={permissionRows} />
+      <ConfigImpactPreview />
+      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+    </section>
+  );
+}
+
+export interface SettingsPaymentsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  saveState?: UnsavedChangesBarState;
+  onMethodSelect?: (method: PaymentMethodRowMethod) => void;
+  onRuleAction?: (row: SettingsSectionRow) => void;
+  onRuleToggle?: (row: SettingsSectionRow, checked: boolean) => void;
+  onActivate?: () => void;
+  onTechnicalIntegration?: () => void;
+  onSave?: () => void;
+  onCancel?: () => void;
+}
+
+const settingsPaymentMethods: Array<{
+  method: PaymentMethodRowMethod;
+  title: string;
+  description: string;
+}> = [
+  { method: "pix", title: "Pix manual", description: "Baixa pela equipe ou comprovante." },
+  { method: "cash", title: "Dinheiro", description: "Recebido presencialmente." },
+  { method: "card", title: "Cartão presencial", description: "Registrado pela equipe." }
+];
+
+const settingsPaymentIntegrations: Array<{
+  provider: IntegrationProvider;
+  title: string;
+}> = [
+  { provider: "pix", title: "Pix Taliya" },
+  { provider: "card", title: "Cartão online" },
+  { provider: "recurrence", title: "Recorrência online" },
+  { provider: "reconciliation", title: "Baixa automática e conciliação" }
+];
+
+export function SettingsPaymentsWorkspace({
+  saveState = "dirty",
+  onMethodSelect,
+  onRuleAction,
+  onRuleToggle,
+  onActivate,
+  onTechnicalIntegration,
+  onSave,
+  onCancel,
+  className,
+  ...props
+}: SettingsPaymentsWorkspaceProps) {
+  return (
+    <section className={cn("tcrm-settings-payments-workspace", className)} data-component="SettingsPaymentsWorkspace" {...props}>
+      <Card className="tcrm-settings-payments-workspace__methods">
+        <header>
+          <h3>1. Meios e baixa manual</h3>
+          <p>Meios que a equipe pode registrar no Taliya.</p>
+        </header>
+        <div className="tcrm-settings-payments-workspace__method-grid">
+          {settingsPaymentMethods.map((method) => (
+            <PaymentMethodRow
+              description={method.description}
+              key={method.method}
+              method={method.method}
+              onSelect={(selectedMethod) => onMethodSelect?.(selectedMethod)}
+              state="connected"
+              title={method.title}
+            />
+          ))}
+        </div>
+      </Card>
+
+      <SettingsSection onRowAction={onRuleAction} onToggleChange={onRuleToggle} />
+
+      <Card className="tcrm-settings-payments-workspace__taliya">
+        <header>
+          <span>
+            <h3>3. Pagamentos Taliya</h3>
+            <p>Ative pagamentos online quando quiser automatizar baixa e recorrência.</p>
+          </span>
+          <Chip tone="warning">Aguardando ativação</Chip>
+        </header>
+        <div className="tcrm-settings-payments-workspace__integration-grid">
+          {settingsPaymentIntegrations.map((integration, index) => (
+            <IntegrationStatusRow
+              key={integration.provider}
+              provider={integration.provider}
+              showDivider={index < settingsPaymentIntegrations.length - 1}
+              state="blocked"
+              title={integration.title}
+            />
+          ))}
+        </div>
+        <footer>
+          <Button onClick={onActivate} variant="primary">Ativar Pagamentos Taliya</Button>
+          <p>Dados legais e bancários são preenchidos no provedor seguro, fora da Taliya.</p>
+          <Button onClick={onTechnicalIntegration} trailingIcon="externalLink" variant="ghost">Ver integração técnica</Button>
+        </footer>
+      </Card>
+
+      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+    </section>
+  );
+}
+
+export interface SettingsAgendaRow {
+  id: string;
+  title: React.ReactNode;
+  schedule: React.ReactNode;
+  scope?: React.ReactNode;
+  status: React.ReactNode;
+  statusTone?: ComponentTone;
+}
+
+export interface SettingsAgendaWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  closedDays?: SettingsAgendaRow[];
+  temporaryBlocks?: SettingsAgendaRow[];
+  saveState?: UnsavedChangesBarState;
+  onAddException?: () => void;
+  onAddBlock?: () => void;
+  onRowAction?: (rowId: string, action: "edit" | "open") => void;
+  onRuleChange?: (ruleId: string, value: string | boolean) => void;
+  onSave?: () => void;
+  onCancel?: () => void;
+}
+
+const settingsAgendaClosedDays: SettingsAgendaRow[] = [
+  { id: "christmas", title: "Natal", schedule: "25/12", scope: "Todas as unidades", status: "Fechado", statusTone: "danger" },
+  { id: "year-break", title: "Recesso de fim de ano", schedule: "23/12 a 02/01", scope: "Unidade Jardins", status: "Revisar aulas futuras", statusTone: "warning" },
+  { id: "special-saturday", title: "Sábado especial", schedule: "Sábados até 12h", scope: "Horário reduzido", status: "Horário reduzido", statusTone: "info" }
+];
+
+const settingsAgendaTemporaryBlocks: SettingsAgendaRow[] = [
+  { id: "room-maintenance", title: "Manutenção Sala 2", schedule: "28/05, 14h às 18h", status: "Afeta 3 aulas", statusTone: "warning" },
+  { id: "internal-workshop", title: "Workshop interno", schedule: "01/06, manhã", status: "Bloqueia novas marcações", statusTone: "info" }
+];
+
+export function SettingsAgendaWorkspace({
+  closedDays = settingsAgendaClosedDays,
+  temporaryBlocks = settingsAgendaTemporaryBlocks,
+  saveState = "dirty",
+  onAddException,
+  onAddBlock,
+  onRowAction,
+  onRuleChange,
+  onSave,
+  onCancel,
+  className,
+  ...props
+}: SettingsAgendaWorkspaceProps) {
+  const renderRows = (rows: SettingsAgendaRow[], icon: IconName) => (
+    <div className="tcrm-settings-agenda-workspace__rows" role="list">
+      {rows.map((row) => (
+        <div className="tcrm-settings-agenda-workspace__row" key={row.id} role="listitem">
+          <Icon name={icon} />
+          <strong>{row.title}</strong>
+          <span>{row.schedule}</span>
+          {row.scope ? <span>{row.scope}</span> : <span />}
+          <Chip tone={row.statusTone ?? "neutral"}>{row.status}</Chip>
+          <IconButton icon="edit" label={`Editar ${String(row.title)}`} onClick={() => onRowAction?.(row.id, "edit")} size="sm" variant="ghost" />
+          <IconButton icon="chevronRight" label={`Abrir ${String(row.title)}`} onClick={() => onRowAction?.(row.id, "open")} size="sm" variant="ghost" />
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <section className={cn("tcrm-settings-agenda-workspace", className)} data-component="SettingsAgendaWorkspace" {...props}>
+      <Card className="tcrm-settings-agenda-workspace__section">
+        <header>
+          <span><h3>1. Dias fechados e exceções</h3><p>Defina feriados, recessos e horários especiais sem mudar a agenda fixa do studio.</p></span>
+          <Button onClick={onAddException} trailingIcon="plus" variant="secondary">Adicionar exceção</Button>
+        </header>
+        {renderRows(closedDays, "calendar")}
+      </Card>
+
+      <Card className="tcrm-settings-agenda-workspace__section">
+        <header>
+          <span><h3>2. Bloqueios temporários</h3><p>Bloqueie sala, turma ou período quando algo não puder receber marcações.</p></span>
+          <Button onClick={onAddBlock} trailingIcon="plus" variant="secondary">Adicionar bloqueio</Button>
+        </header>
+        {renderRows(temporaryBlocks, "lock")}
+      </Card>
+
+      <Card className="tcrm-settings-agenda-workspace__section tcrm-settings-agenda-workspace__rules">
+        <header><span><h3>3. Regras simples da agenda</h3><p>Ajustes globais que mudam como a agenda aceita vagas e encaixes.</p></span></header>
+        <div>
+          <RuleRow control="none" icon="users" onToggle={(checked) => onRuleChange?.("waitlist", checked)} statusLabel="Ligada" title="Lista de espera" />
+          <RuleRow
+            icon="slidersRound"
+            onSelectChange={(value) => onRuleChange?.("fit-ins", value)}
+            selectOptions={[{ value: "approval", label: "Exigem aprovação" }, { value: "free", label: "Livres" }]}
+            selectValue="approval"
+            showToggle={false}
+            statusLabel={null}
+            title="Encaixes"
+          />
+          <RuleRow
+            icon="clock"
+            onSelectChange={(value) => onRuleChange?.("call-tolerance", value)}
+            selectOptions={[{ value: "10", label: "10 min" }, { value: "15", label: "15 min" }]}
+            selectValue="10"
+            showToggle={false}
+            statusLabel={null}
+            title="Tolerância de chamada"
+          />
+        </div>
+      </Card>
+
+      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+    </section>
+  );
+}
+
+export interface SettingsNotificationAlert {
+  id: string;
+  label: React.ReactNode;
+  icon: IconName;
+}
+
+export interface SettingsNotificationRole {
+  id: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  icon: IconName;
+  tone: "danger" | "info" | "success";
+  alerts: SettingsNotificationAlert[];
+}
+
+export interface SettingsNotificationsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+  roles?: SettingsNotificationRole[];
+  saveState?: UnsavedChangesBarState;
+  onRoleSelect?: (roleId: string) => void;
+  onFrequencyChange?: (alertId: string, value: string | boolean) => void;
+  onChannelChange?: (channelId: string, value: string | boolean) => void;
+  onSave?: () => void;
+  onCancel?: () => void;
+}
+
+const settingsNotificationRoles: SettingsNotificationRole[] = [
+  {
+    id: "owner", title: "Dono/Admin", description: "Falhas críticas, aprovações sensíveis e financeiro.", icon: "shieldStar", tone: "danger",
+    alerts: [
+      { id: "integration-failure", label: "Integração com falha", icon: "alert" },
+      { id: "critical-payment", label: "Pagamento crítico", icon: "play" },
+      { id: "pending-approval", label: "Aprovação pendente", icon: "shield" },
+      { id: "config-pending", label: "Pendência de configuração", icon: "alertCircle" }
+    ]
+  },
+  {
+    id: "frontdesk", title: "Recepção", description: "Operação diária, agenda, alunos e cobranças manuais.", icon: "user", tone: "info",
+    alerts: [
+      { id: "class-problem", label: "Aula com problema", icon: "inbox" },
+      { id: "student-no-contact", label: "Aluno sem contato", icon: "users" },
+      { id: "manual-charge", label: "Cobrança manual", icon: "coins" },
+      { id: "pending-invite", label: "Convite pendente", icon: "fileText" }
+    ]
+  },
+  {
+    id: "teacher", title: "Professor", description: "Aulas, turmas vinculadas e pendências das próprias turmas.", icon: "graduation", tone: "success",
+    alerts: [
+      { id: "own-class", label: "Aula da própria turma", icon: "calendar" },
+      { id: "pending-roll-call", label: "Chamada pendente", icon: "alertCircle" },
+      { id: "student-no-contact", label: "Aluno sem contato", icon: "user" },
+      { id: "important-note", label: "Observação importante", icon: "graduation" }
+    ]
+  }
+];
+
+export function SettingsNotificationsWorkspace({
+  roles = settingsNotificationRoles,
+  saveState = "dirty",
+  onRoleSelect,
+  onFrequencyChange,
+  onChannelChange,
+  onSave,
+  onCancel,
+  className,
+  ...props
+}: SettingsNotificationsWorkspaceProps) {
+  return (
+    <section className={cn("tcrm-settings-notifications-workspace", className)} data-component="SettingsNotificationsWorkspace" {...props}>
+      <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__roles">
+        <header><h3>1. Alertas por papel</h3><p>Escolha quais alertas cada papel da equipe deve receber.</p></header>
+        <div className="tcrm-settings-notifications-workspace__role-grid">
+          {roles.map((role) => (
+            <Button className="tcrm-settings-notifications-workspace__role" key={role.id} onClick={() => onRoleSelect?.(role.id)} variant="ghost">
+              <span className="tcrm-settings-notifications-workspace__role-icon" data-tone={role.tone}><Icon name={role.icon} /></span>
+              <span className="tcrm-settings-notifications-workspace__role-copy"><strong>{role.title}</strong><small>{role.description}</small></span>
+              <span className="tcrm-settings-notifications-workspace__alerts">
+                {role.alerts.map((alert) => <Chip icon={alert.icon} key={alert.id} showDot={false} tone={role.tone}>{alert.label}</Chip>)}
+              </span>
+            </Button>
+          ))}
+        </div>
+      </Card>
+
+      <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__rules">
+        <header><h3>2. Frequência dos alertas</h3><p>Defina quando o Taliya avisa a equipe.</p></header>
+        <div className="tcrm-settings-notifications-workspace__rule-head"><span>Nível de alerta</span><span>Frequência</span><span>Status</span></div>
+        <RuleRow icon="alert" iconTone="danger" onSelectChange={(value) => onFrequencyChange?.("critical", value)} onToggle={(value) => onFrequencyChange?.("critical", value)} rowId="critical" title="Crítico" />
+        <RuleRow defaultSelectValue="daily" icon="alertCircle" iconTone="warning" onSelectChange={(value) => onFrequencyChange?.("operational", value)} onToggle={(value) => onFrequencyChange?.("operational", value)} rowId="operational" title="Operacional" />
+        <RuleRow defaultSelectValue="weekly" icon="info" iconTone="info" onSelectChange={(value) => onFrequencyChange?.("informative", value)} onToggle={(value) => onFrequencyChange?.("informative", value)} rowId="informative" title="Informativo" />
+        <RuleRow defaultSelectValue="silent-after-hours" icon="minus" onSelectChange={(value) => onFrequencyChange?.("non-critical", value)} onToggle={(value) => onFrequencyChange?.("non-critical", value)} rowId="non-critical" title="Não crítico" />
+      </Card>
+
+      <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__channels">
+        <header><h3>3. Canais internos</h3><p>Escolha onde a equipe recebe avisos internos do CRM.</p></header>
+        <RuleRow control="none" icon="layout" onToggle={(value) => onChannelChange?.("taliya", value)} rowId="taliya" title="Dentro do Taliya" />
+        <RuleRow icon="mail" onSelectChange={(value) => onChannelChange?.("email", value)} rowId="email" selectOptions={[{ value: "owner", label: "Ligado para Dono/Admin" }, { value: "all", label: "Ligado para todos" }]} selectValue="owner" showToggle={false} statusLabel={null} title="E-mail interno" />
+        <RuleRow icon="whatsapp" iconTone="success" onSelectChange={(value) => onChannelChange?.("whatsapp", value)} rowId="whatsapp" selectOptions={[{ value: "critical", label: "Ligado para alertas críticos" }, { value: "all", label: "Ligado para todos" }]} selectValue="critical" showToggle={false} statusLabel={null} title="WhatsApp interno" />
+        <RuleRow icon="clock" onSelectChange={(value) => onChannelChange?.("after-hours", value)} rowId="after-hours" selectOptions={[{ value: "critical", label: "Somente crítico" }, { value: "silent", label: "Silenciado" }]} selectValue="critical" showToggle={false} statusLabel={null} title="Fora do horário" />
+      </Card>
+
+      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+    </section>
+  );
+}
+
 export type ConversationListState = "source" | "loading" | "empty" | "blocked";
 export type ConversationListRowState = "default" | "selected" | "unread" | "waiting-human" | "agent-paused" | "failed" | "opt-out";
 export type ConversationListStatusTone = "neutral" | "waiting" | "progress" | "copilot" | "failed" | "optout";
@@ -7083,6 +9934,7 @@ export type ConversationListChannel = "whatsapp" | "instagram" | "system";
 export interface ConversationListFilter {
   id: string;
   label: React.ReactNode;
+  count?: React.ReactNode;
   selected?: boolean;
   disabled?: boolean;
 }
@@ -7104,17 +9956,24 @@ export interface ConversationListRow {
   state?: ConversationListRowState;
   selected?: boolean;
   unread?: boolean;
+  unreadCount?: React.ReactNode;
   disabled?: boolean;
 }
 
 export interface ConversationListProps extends React.HTMLAttributes<HTMLDivElement> {
   state?: ConversationListState;
+  layout?: "default" | "compact";
   filters?: ConversationListFilter[];
   rows?: ConversationListRow[];
+  searchPlaceholder?: string;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  onSearchFilter?: () => void;
   activeFilterId?: string;
   selectedId?: string;
   pageSizeLabel?: React.ReactNode;
   rangeLabel?: React.ReactNode;
+  summaryLabel?: React.ReactNode;
   currentPageLabel?: React.ReactNode;
   previousLabel?: string;
   nextLabel?: string;
@@ -7209,6 +10068,23 @@ const defaultConversationListRows: ConversationListRow[] = [
   }
 ];
 
+const compactConversationListFilters: ConversationListFilter[] = [
+  { id: "all", label: "Todos", count: 24, selected: true },
+  { id: "whatsapp", label: "WhatsApp", count: 18 },
+  { id: "email", label: "E-mail", count: 3 },
+  { id: "internal", label: "Interno", count: 2 },
+  { id: "archived", label: "Arquivados" }
+];
+
+const compactConversationListRows: ConversationListRow[] = [
+  { id: "joao-silva", name: "Joao Silva", subject: "Orcamento", preview: "Obrigada! Pode me enviar o orcamento, por favor?", time: "09:42", metaLabel: "WhatsApp", statusLabel: "", channel: "whatsapp", unread: true, unreadCount: 2 },
+  { id: "ana-paula", name: "Ana Paula Santos", subject: "Visita tecnica", preview: "Preciso reagendar a visita tecnica.", time: "09:15", metaLabel: "WhatsApp", statusLabel: "", channel: "whatsapp", selected: true, state: "selected" },
+  { id: "carlos-menezes", name: "Carlos Menezes", subject: "Proposta", preview: "Ainda nao recebi o retorno da proposta.", time: "08:51", metaLabel: "WhatsApp", statusLabel: "", channel: "whatsapp", unread: true, unreadCount: 1, state: "failed" },
+  { id: "mariana-oliveira", name: "Mariana Oliveira", subject: "Plano anual", preview: "Duvida sobre o plano anual.", time: "Ontem", metaLabel: "E-mail", statusLabel: "", channel: "system", unreadCount: 2 },
+  { id: "rafael-torres", name: "Rafael Torres", subject: "Suporte", preview: "Otimo, obrigado pelo suporte!", time: "Ontem", metaLabel: "WhatsApp", statusLabel: "", channel: "whatsapp" },
+  { id: "juliana-costa", name: "Juliana Costa", subject: "Retorno", preview: "Voltaremos a falar na proxima semana.", time: "Ter", metaLabel: "WhatsApp", statusLabel: "Aguardando resposta", channel: "whatsapp", unreadCount: 1 }
+];
+
 function conversationListRowLabel(row: ConversationListRow) {
   return `Abrir conversa de ${row.name}`;
 }
@@ -7226,12 +10102,18 @@ function conversationListRowKey(row: ConversationListRow, selectedId?: string) {
 
 export function ConversationList({
   state = "source",
-  filters = defaultConversationListFilters,
-  rows = defaultConversationListRows,
+  layout = "default",
+  filters,
+  rows,
+  searchPlaceholder = "Buscar conversas, clientes, assuntos...",
+  searchValue,
+  onSearchChange,
+  onSearchFilter,
   activeFilterId,
   selectedId,
   pageSizeLabel = "10",
-  rangeLabel = "1–5 de 5",
+  rangeLabel,
+  summaryLabel = "Exibindo 6 de 24 conversas",
   currentPageLabel = "1",
   previousLabel = "Página anterior",
   nextLabel = "Próxima página",
@@ -7247,6 +10129,10 @@ export function ConversationList({
   const isLoading = state === "loading";
   const isEmpty = state === "empty";
   const isBlocked = state === "blocked";
+  const isCompact = layout === "compact";
+  const effectiveFilters = filters ?? (isCompact ? compactConversationListFilters : defaultConversationListFilters);
+  const effectiveRows = rows ?? (isCompact ? compactConversationListRows : defaultConversationListRows);
+  const effectiveRangeLabel = rangeLabel ?? (isCompact ? "1–6 de 24" : "1–5 de 5");
 
   const handleRowKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, row: ConversationListRow) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -7261,13 +10147,24 @@ export function ConversationList({
     <section
       aria-busy={isLoading || undefined}
       aria-label="Lista de conversas"
-      className={cn("tcrm-conversation-list", className)}
+      className={cn("tcrm-conversation-list", isCompact && "tcrm-conversation-list--compact", className)}
       data-component="ConversationList"
+      data-layout={layout}
       data-state={state}
       {...props}
     >
+      {isCompact ? (
+        <SearchInput
+          aria-label="Buscar conversas"
+          className="tcrm-conversation-list__search"
+          onChange={(event) => onSearchChange?.(event.currentTarget.value)}
+          onFilter={onSearchFilter}
+          placeholder={searchPlaceholder}
+          value={searchValue}
+        />
+      ) : null}
       <div aria-label="Filtros de conversas" className="tcrm-conversation-list__filters" role="toolbar">
-        {filters.map((filter) => {
+        {effectiveFilters.map((filter) => {
           const selected = activeFilterId ? filter.id === activeFilterId : Boolean(filter.selected);
           return (
             <FilterChip
@@ -7276,7 +10173,8 @@ export function ConversationList({
               onClick={() => onFilterChange?.(filter)}
               selected={selected}
             >
-              {filter.label}
+              <span>{filter.label}</span>
+              {filter.count !== undefined ? <Badge>{filter.count}</Badge> : null}
             </FilterChip>
           );
         })}
@@ -7292,7 +10190,7 @@ export function ConversationList({
         />
       ) : (
         <List className="tcrm-conversation-list__rows">
-          {rows.map((row) => {
+          {effectiveRows.map((row) => {
             const selected = conversationListRowKey(row, selectedId);
             const disabled = row.disabled || isBlocked;
             return (
@@ -7333,18 +10231,27 @@ export function ConversationList({
                     {row.detail ? <span className="tcrm-conversation-list__subject">· {row.detail}</span> : null}
                   </span>
                 }
-                trailing={<time className="tcrm-conversation-list__time">{row.time}</time>}
+                trailing={
+                  <span className="tcrm-conversation-list__trailing">
+                    <time className="tcrm-conversation-list__time">{row.time}</time>
+                    {row.unreadCount !== undefined ? <Badge className="tcrm-conversation-list__unread-count">{row.unreadCount}</Badge> : null}
+                  </span>
+                }
                 unread={row.unread || row.state === "unread"}
               >
                 <span className="tcrm-conversation-list__preview">{row.preview}</span>
-                <ChannelStatus
-                  className="tcrm-conversation-list__badges"
-                  sourceIcon={row.metaIcon}
-                  sourceLabel={row.metaLabel}
-                  statusIcon={row.statusIcon}
-                  statusLabel={row.statusLabel}
-                  state={row.statusTone ?? "neutral"}
-                />
+                {isCompact ? (
+                  row.statusLabel ? <Chip className="tcrm-conversation-list__compact-status" tone="danger">{row.statusLabel}</Chip> : null
+                ) : (
+                  <ChannelStatus
+                    className="tcrm-conversation-list__badges"
+                    sourceIcon={row.metaIcon}
+                    sourceLabel={row.metaLabel}
+                    statusIcon={row.statusIcon}
+                    statusLabel={row.statusLabel}
+                    state={row.statusTone ?? "neutral"}
+                  />
+                )}
               </ListItem>
             );
           })}
@@ -7356,11 +10263,12 @@ export function ConversationList({
         </InlineAlert>
       ) : null}
       <footer className="tcrm-conversation-list__footer">
+        {isCompact ? <span className="tcrm-conversation-list__summary">{summaryLabel}</span> : null}
         <span className="tcrm-conversation-list__page-size-label">Itens por página:</span>
         <Button className="tcrm-conversation-list__page-size" disabled={isLoading || isBlocked} onClick={onPageSizeClick} trailingIcon="chevronDown" variant="secondary">
           {pageSizeLabel}
         </Button>
-        <span className="tcrm-conversation-list__range">{rangeLabel}</span>
+        <span className="tcrm-conversation-list__range">{effectiveRangeLabel}</span>
         <span className="tcrm-conversation-list__pager">
           <IconButton
             className="tcrm-conversation-list__pager-button"
@@ -7394,7 +10302,8 @@ export interface ConversationThreadMessage {
   time: React.ReactNode;
   avatarSrc?: string;
   compact?: boolean;
-  variant?: "inbound" | "outbound" | "agent" | "human";
+  variant?: "inbound" | "outbound" | "internal" | "failed" | "suggestion" | "agent" | "human";
+  status?: "sent" | "delivered" | "read" | "pending" | "failed" | "locked";
 }
 
 export interface ConversationThreadSystemEvent {
@@ -7436,11 +10345,40 @@ const defaultConversationThreadEvents: ConversationThreadSystemEvent[] = [
   { id: "system-1", time: "10:21", actor: "Sistema", body: "Ana vinculada a turma terca 17h" }
 ];
 
+const compactConversationThreadMessages: ConversationThreadMessage[] = [
+  {
+    id: "ana-paula-inbound",
+    sender: "Ana Paula Santos",
+    body: "Oi! Preciso reagendar a visita tecnica para quinta-feira pela manha.",
+    time: "09:15",
+    variant: "inbound"
+  },
+  {
+    id: "attendance-outbound",
+    sender: "Atendimento",
+    body: "Claro, Ana Paula! Posso encaixar para quinta as 9:00h. Esta tudo certo?",
+    time: "09:16",
+    variant: "outbound",
+    status: "read"
+  },
+  {
+    id: "internal-note",
+    sender: "Nota interna · Sam Frank",
+    body: "Cliente prefere periodo da manha. Verificar disponibilidade do tecnico.",
+    time: "09:17",
+    variant: "internal",
+    status: "locked"
+  }
+];
+
 export interface ConversationThreadProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  layout?: "default" | "compact";
   avatarSrc?: string;
   contactName?: React.ReactNode;
   subject?: React.ReactNode;
   channelLabel?: string;
+  statusLabel?: React.ReactNode;
+  dateLabel?: React.ReactNode;
   messages?: ConversationThreadMessage[];
   events?: ConversationThreadSystemEvent[];
   actions?: ConversationThreadAction[];
@@ -7451,22 +10389,23 @@ export interface ConversationThreadProps extends Omit<React.HTMLAttributes<HTMLE
   composerPlaceholder?: string;
   state?: "source" | "loading" | "blocked";
   onAction?: (actionId: string) => void;
+  onChannelClick?: () => void;
+  onStatusClick?: () => void;
   onUseSuggestion?: () => void;
   onSend?: (value: string) => void;
 }
 
 export function ConversationThread({
+  layout = "default",
   avatarSrc,
-  contactName = "Ana Silva",
-  subject = "Assunto: Reposicao de aula",
+  contactName,
+  subject,
   channelLabel = "WhatsApp",
-  messages = defaultConversationThreadMessages,
-  events = defaultConversationThreadEvents,
-  actions = [
-    { id: "assume", label: "Assumir", icon: "user" },
-    { id: "pause-agent", label: "Pausar agente", icon: "pause" },
-    { id: "create-task", label: "Criar tarefa", icon: "plus" }
-  ],
+  statusLabel = "Em atendimento",
+  dateLabel = "Hoje",
+  messages,
+  events,
+  actions,
   handoffLabel = "Agente pausado · aguardando revisão humana",
   suggestionTitle = "Copiloto sugeriu uma resposta",
   suggestionDescription = "Sugestao abaixo. Voce pode editar e enviar quando quiser.",
@@ -7474,6 +10413,8 @@ export function ConversationThread({
   composerPlaceholder = "Responder pelo WhatsApp...",
   state = "source",
   onAction,
+  onChannelClick,
+  onStatusClick,
   onUseSuggestion,
   onSend,
   className,
@@ -7482,46 +10423,69 @@ export function ConversationThread({
 }: ConversationThreadProps) {
   const isBlocked = state === "blocked";
   const isLoading = state === "loading";
+  const isCompact = layout === "compact";
+  const effectiveContactName = contactName ?? (isCompact ? "Ana Paula Santos" : "Ana Silva");
+  const effectiveSubject = subject ?? (isCompact ? "Conversa selecionada" : "Assunto: Reposicao de aula");
+  const effectiveMessages = messages ?? (isCompact ? compactConversationThreadMessages : defaultConversationThreadMessages);
+  const effectiveEvents = events ?? (isCompact ? [] : defaultConversationThreadEvents);
+  const effectiveActions = actions ?? (isCompact
+    ? [
+        { id: "search", label: "Buscar na conversa", icon: "search" as IconName },
+        { id: "contact", label: "Abrir contato", icon: "user" as IconName },
+        { id: "tag", label: "Gerenciar etiquetas", icon: "tag" as IconName },
+        { id: "more", label: "Mais acoes", icon: "more" as IconName }
+      ]
+    : [
+        { id: "assume", label: "Assumir", icon: "user" as IconName },
+        { id: "pause-agent", label: "Pausar agente", icon: "pause" as IconName },
+        { id: "create-task", label: "Criar tarefa", icon: "plus" as IconName }
+      ]);
 
   return (
-    <section aria-busy={isLoading || undefined} className={cn("tcrm-conversation-thread", className)} {...props}>
+    <section
+      aria-busy={isLoading || undefined}
+      aria-label="Conversa selecionada"
+      className={cn("tcrm-conversation-thread", isCompact && "tcrm-conversation-thread--compact", className)}
+      data-component="ConversationThread"
+      data-layout={layout}
+      {...props}
+    >
       <header className="tcrm-conversation-thread__header">
         <span className="tcrm-conversation-thread__avatar-wrap">
-          <Avatar className="tcrm-conversation-thread__avatar" name={contactName?.toString() ?? "Contato"} src={avatarSrc} />
+          <Avatar className="tcrm-conversation-thread__avatar" name={effectiveContactName?.toString() ?? "Contato"} src={avatarSrc} />
           <span aria-label={channelLabel} className="tcrm-conversation-thread__channel" role="img">
             <Icon name="whatsapp" />
           </span>
         </span>
         <span className="tcrm-conversation-thread__identity">
-          <strong>{contactName}</strong>
-          <small>{subject}</small>
+          <strong>{effectiveContactName}</strong>
+          <small>{effectiveSubject}</small>
         </span>
+        {isCompact ? (
+          <span className="tcrm-conversation-thread__channel-controls">
+            <Button disabled={isBlocked || isLoading} leadingIcon="whatsapp" onClick={onChannelClick} size="sm" variant="secondary">{channelLabel}</Button>
+            <Button disabled={isBlocked || isLoading} onClick={onStatusClick} size="sm" trailingIcon="chevronDown" variant="secondary">{statusLabel}</Button>
+          </span>
+        ) : null}
         <span aria-label="Acoes da conversa" className="tcrm-conversation-thread__actions" role="toolbar">
-          {actions.map((action) => (
-            <Button
-              className="tcrm-conversation-thread__action"
-              disabled={isBlocked || isLoading}
-              key={action.id}
-              leadingIcon={action.icon}
-              onClick={() => onAction?.(action.id)}
-              size="sm"
-              variant="secondary"
-            >
-              {action.label}
-            </Button>
+          {effectiveActions.map((action) => isCompact ? (
+            <IconButton className="tcrm-conversation-thread__icon-action" disabled={isBlocked || isLoading} icon={action.icon ?? "more"} key={action.id} label={action.label?.toString() ?? action.id} onClick={() => onAction?.(action.id)} size="sm" variant="subtle" />
+          ) : (
+            <Button className="tcrm-conversation-thread__action" disabled={isBlocked || isLoading} key={action.id} leadingIcon={action.icon} onClick={() => onAction?.(action.id)} size="sm" variant="secondary">{action.label}</Button>
           ))}
         </span>
       </header>
-      <HandoffBanner className="tcrm-conversation-thread__handoff" description={handoffLabel} state="human needed" />
+      {!isCompact ? <HandoffBanner className="tcrm-conversation-thread__handoff" description={handoffLabel} state="human needed" /> : null}
       <div className="tcrm-conversation-thread__stream">
         {isLoading ? (
           <LoadingState className="tcrm-conversation-thread__state" title="Carregando conversa" variant="skeleton" />
         ) : children ?? (
           <>
-            {messages.slice(0, 1).map((message) => (
-              <ConversationThreadMessageRow avatarSrc={message.avatarSrc ?? avatarSrc} key={message.id} message={message} />
+            {isCompact ? <span className="tcrm-conversation-thread__date-divider">{dateLabel}</span> : null}
+            {effectiveMessages.slice(0, 1).map((message) => (
+              <ConversationThreadMessageRow avatarSrc={message.avatarSrc ?? avatarSrc} compactLayout={isCompact} key={message.id} message={message} />
             ))}
-            {events.map((event) => (
+            {effectiveEvents.map((event) => (
               <div className="tcrm-conversation-thread__system-row" key={event.id}>
                 <span aria-hidden="true" className="tcrm-conversation-thread__system-line" />
                 <time>{event.time}</time>
@@ -7529,8 +10493,8 @@ export function ConversationThread({
                 <span>{event.body}</span>
               </div>
             ))}
-            {messages.slice(1).map((message) => (
-              <ConversationThreadMessageRow avatarSrc={message.avatarSrc ?? avatarSrc} key={message.id} message={message} />
+            {effectiveMessages.slice(1).map((message) => (
+              <ConversationThreadMessageRow avatarSrc={message.avatarSrc ?? avatarSrc} compactLayout={isCompact} key={message.id} message={message} />
             ))}
           </>
         )}
@@ -7556,11 +10520,14 @@ export function ConversationThread({
   );
 }
 
-function ConversationThreadMessageRow({ avatarSrc, message }: { avatarSrc?: string; message: ConversationThreadMessage }) {
+function ConversationThreadMessageRow({ avatarSrc, compactLayout = false, message }: { avatarSrc?: string; compactLayout?: boolean; message: ConversationThreadMessage }) {
+  const messageVariant = message.variant === "agent" ? "suggestion" : message.variant === "human" ? "inbound" : message.variant ?? "inbound";
+  const showAvatar = !compactLayout || messageVariant === "inbound";
+  const visibleSender = compactLayout && (messageVariant === "inbound" || messageVariant === "outbound") ? undefined : message.sender;
   return (
-    <div className={cn("tcrm-conversation-thread__message-row", message.compact && "tcrm-conversation-thread__message-row--compact")}>
-      <Avatar className="tcrm-conversation-thread__message-avatar" name={message.sender?.toString() ?? "Pessoa"} src={avatarSrc} />
-      <MessageBubble className="tcrm-conversation-thread__bubble" sender={message.sender} timestamp={message.time} variant="inbound">
+    <div className={cn("tcrm-conversation-thread__message-row", `tcrm-conversation-thread__message-row--${messageVariant}`, message.compact && "tcrm-conversation-thread__message-row--compact")}>
+      {showAvatar ? <Avatar className="tcrm-conversation-thread__message-avatar" name={message.sender?.toString() ?? "Pessoa"} src={avatarSrc} /> : <span aria-hidden="true" />}
+      <MessageBubble className="tcrm-conversation-thread__bubble" sender={visibleSender} status={message.status} timestamp={message.time} variant={messageVariant}>
         {message.body}
       </MessageBubble>
     </div>
@@ -7627,6 +10594,52 @@ export function Composer({
   );
 }
 
+export interface ComposerPanelAction {
+  id: string;
+  label: string;
+  icon: IconName;
+  disabled?: boolean;
+}
+
+const composerPanelSourceActions: ComposerPanelAction[] = [
+  { id: "attach", label: "Anexar arquivo", icon: "paperclip" },
+  { id: "media", label: "Abrir midia interna", icon: "camera" },
+  { id: "templates", label: "Modelos / Respostas rapidas", icon: "layout" },
+  { id: "send", label: "Enviar mensagens", icon: "send" },
+  { id: "note", label: "Inserir nota interna", icon: "messageSquareText" }
+];
+
+export function ComposerPanel({
+  actions = composerPanelSourceActions,
+  disabled = false,
+  onAction,
+  className,
+  ...composerProps
+}: ComposerProps & {
+  actions?: ComposerPanelAction[];
+  onAction?: (action: ComposerPanelAction) => void;
+}) {
+  return (
+    <section className={cn("tcrm-composer-panel", className)} data-component="ComposerPanel">
+      <Composer {...composerProps} disabled={disabled} />
+      <div aria-label="Acoes do composer" className="tcrm-composer-panel__actions" role="group">
+        {actions.map((action) => (
+          <Button
+            disabled={disabled || action.disabled}
+            key={action.id}
+            leadingIcon={action.icon}
+            onClick={() => onAction?.(action)}
+            size="sm"
+            variant="ghost"
+          >
+            {action.label}
+          </Button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function LegacyComposer({ disabled = false, className }: { disabled?: boolean; className?: string }) {
   return <ComposerInput className={className} disabled={disabled} placeholder={disabled ? "Atendimento pausado" : "Responder"} />;
 }
@@ -7686,19 +10699,152 @@ export function ChannelStatus({
   );
 }
 
+export interface ChannelStatusPanelQueueItem {
+  id: string;
+  label: string;
+  count: React.ReactNode;
+}
+
+export interface ChannelStatusPanelItem {
+  id: string;
+  label: string;
+  status: StatusDotStatus;
+}
+
+const channelStatusPanelSourceQueue: ChannelStatusPanelQueueItem[] = [
+  { id: "empty", label: "Sem espera", count: "0" },
+  { id: "small", label: "Fila pequena", count: "3+" },
+  { id: "medium", label: "Fila media", count: "12" },
+  { id: "high", label: "Fila alta", count: "99+" }
+];
+
+const channelStatusPanelSourceItems: ChannelStatusPanelItem[] = [
+  { id: "connected", label: "Conectado", status: "success" },
+  { id: "pending", label: "Pendente", status: "warning" },
+  { id: "failed", label: "Falha na conexao", status: "danger" }
+];
+
+export function ChannelStatusPanel({
+  queueLabel = "Na fila (s)",
+  queueItems = channelStatusPanelSourceQueue,
+  statusLabel = "Status WhatsApp",
+  items = channelStatusPanelSourceItems,
+  disabled = false,
+  onQueueSelect,
+  onStatusSelect,
+  className,
+  ...props
+}: Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> & {
+  queueLabel?: React.ReactNode;
+  queueItems?: ChannelStatusPanelQueueItem[];
+  statusLabel?: React.ReactNode;
+  items?: ChannelStatusPanelItem[];
+  disabled?: boolean;
+  onQueueSelect?: (item: ChannelStatusPanelQueueItem) => void;
+  onStatusSelect?: (item: ChannelStatusPanelItem) => void;
+}) {
+  return (
+    <section className={cn("tcrm-channel-status-panel", className)} data-component="ChannelStatusPanel" {...props}>
+      <small>{queueLabel}</small>
+      <div aria-label={String(queueLabel)} className="tcrm-channel-status-panel__queue" role="group">
+        {queueItems.map((item) => (
+          <Button
+            aria-label={`${item.label}: ${String(item.count)}`}
+            disabled={disabled}
+            key={item.id}
+            onClick={() => onQueueSelect?.(item)}
+            size="sm"
+            variant="secondary"
+          >
+            {item.count}
+          </Button>
+        ))}
+      </div>
+      <small>{statusLabel}</small>
+      <div className="tcrm-channel-status-panel__items">
+        {items.map((item) => (
+          <Button
+            disabled={disabled}
+            key={item.id}
+            onClick={() => onStatusSelect?.(item)}
+            size="sm"
+            variant="secondary"
+          >
+            <StatusDot status={item.status} />
+            <span>{item.label}</span>
+          </Button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export type HandoffBannerState = "human needed" | "human active" | "resumed";
+export type HandoffBannerLayout = "banner" | "compact";
+
+export interface HandoffBannerProps extends Omit<CrmSurfaceProps, "state"> {
+  state?: HandoffBannerState;
+  layout?: HandoffBannerLayout;
+  ownerName?: React.ReactNode;
+  ownerAvatarSrc?: string;
+  transferredLabel?: React.ReactNode;
+  transferredAt?: React.ReactNode;
+  statusLabel?: React.ReactNode;
+}
+
 export function HandoffBanner({
   title,
   description = "Agente pausado · aguardando revisão humana",
   state = "human active",
+  layout = "banner",
+  ownerName = "Sam Frank",
+  ownerAvatarSrc,
+  transferredLabel = "Transferido em:",
+  transferredAt = "Hoje, 09:32",
+  statusLabel = "Em atendimento humano",
   action,
   className,
   ...props
-}: CrmSurfaceProps) {
+}: HandoffBannerProps) {
   const iconName: IconName = state === "resumed" ? "checkCircle" : "info";
   const stateClass = String(state).replace(/\s+/g, "-");
 
+  if (layout === "compact") {
+    const compactTitle = title ?? "Transferência para agente humano";
+    const compactDescription = description === "Agente pausado · aguardando revisão humana"
+      ? "Conversa transferida para atendimento humano."
+      : description;
+
+    return (
+      <Card
+        aria-label={String(compactTitle)}
+        className={cn("tcrm-handoff-banner", "tcrm-handoff-banner--compact", `tcrm-handoff-banner--${stateClass}`, className)}
+        data-component="HandoffBanner"
+        data-layout="compact"
+        data-state={state}
+        role="status"
+        {...props}
+      >
+        <header className="tcrm-handoff-banner__compact-header">
+          <Icon name="messageMore" size="var(--taliya-control-crm-handoff-banner-compact-icon-size)" />
+          <h2>{compactTitle}</h2>
+        </header>
+        <p className="tcrm-handoff-banner__compact-description">{compactDescription}</p>
+        <div className="tcrm-handoff-banner__compact-owner">
+          <Avatar name={String(ownerName)} size="sm" src={ownerAvatarSrc} />
+          <strong>{ownerName}</strong>
+        </div>
+        <dl className="tcrm-handoff-banner__compact-fact">
+          <dt>{transferredLabel}</dt>
+          <dd>{transferredAt}</dd>
+        </dl>
+        <Chip className="tcrm-handoff-banner__compact-status" showDot={false} tone="info">{statusLabel}</Chip>
+      </Card>
+    );
+  }
+
   return (
-    <div className={cn("tcrm-handoff-banner", `tcrm-handoff-banner--${stateClass}`, className)} role="status" {...props}>
+    <div className={cn("tcrm-handoff-banner", `tcrm-handoff-banner--${stateClass}`, className)} data-component="HandoffBanner" data-layout="banner" data-state={state} role="status" {...props}>
       <Icon name={iconName} size={14} />
       <span className="tcrm-handoff-banner__content">
         {title ? <strong>{title}</strong> : null}
@@ -7985,6 +11131,7 @@ void LifecycleDrawer;
 export type TaskDrawerState = "open" | "blocked" | "completed" | "sensitive" | "loading";
 export type TaskDrawerSize = "default" | "compact";
 export type TaskDrawerActivityOrder = "history-comments" | "comments-history";
+export type TaskDrawerActivityDensity = "compact" | "comfortable";
 
 export interface TaskDrawerFact {
   id: string;
@@ -7992,6 +11139,7 @@ export interface TaskDrawerFact {
   label: string;
   value: React.ReactNode;
   tone?: "default" | "danger";
+  showToneIcon?: boolean;
 }
 
 export interface TaskDrawerChecklistItem {
@@ -8033,6 +11181,7 @@ export interface TaskDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>,
   history?: TaskDrawerHistoryItem[];
   historyTitle?: React.ReactNode;
   activityOrder?: TaskDrawerActivityOrder;
+  activityDensity?: TaskDrawerActivityDensity;
   copilotSuggestion?: React.ReactNode | null;
   footerLayout?: "default" | "conversation";
   onClose?: () => void;
@@ -8083,6 +11232,7 @@ export interface CrmDrawerFact {
   label: React.ReactNode;
   value: React.ReactNode;
   tone?: "default" | "danger" | "warning" | "success" | "info";
+  showToneIcon?: boolean;
 }
 
 export interface CrmDrawerSection {
@@ -8185,7 +11335,12 @@ export function CrmDrawer({
       {...props}
     >
       {header ?? (
-        <header className={cn("tcrm-drawer-frame__header", headerOrder === "label-title-status" && "tcrm-drawer-frame__header--label-title-status", headerClassName)}>
+        <header className={cn(
+          "tcrm-drawer-frame__header",
+          headerOrder === "label-title-status" && "tcrm-drawer-frame__header--label-title-status",
+          headerOrder === "label-title-status" && !eyebrow && "tcrm-drawer-frame__header--without-label",
+          headerClassName
+        )}>
           <IconButton className="tcrm-drawer-frame__close" disabled={loading} icon="x" label={closeLabel} onClick={onClose} size="sm" type="button" variant="default" />
           {headerOrder === "label-title-status" ? (
             <>
@@ -8214,7 +11369,7 @@ export function CrmDrawer({
                     <div className={cn("tcrm-drawer-frame__fact", fact.tone && fact.tone !== "default" && `tcrm-drawer-frame__fact--${fact.tone}`)} key={fact.id}>
                       {fact.icon ? <Icon name={fact.icon} size="sm" /> : <span aria-hidden="true" />}
                       <dt>{fact.label}</dt>
-                      <dd>{fact.tone === "danger" ? <Icon name="alert" size={13} /> : null}{fact.value}</dd>
+                      <dd>{fact.tone === "danger" && fact.showToneIcon !== false ? <Icon name="alert" size={13} /> : null}{fact.value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -8265,6 +11420,7 @@ export function TaskDrawer({
   history = sourceTaskDrawerHistory,
   historyTitle = "Histórico",
   activityOrder = "history-comments",
+  activityDensity = "compact",
   copilotSuggestion = <>quinta 08h tem vaga e respeita<br />o prazo do crédito.</>,
   footerLayout = "default",
   onClose,
@@ -8373,6 +11529,7 @@ export function TaskDrawer({
         "tcrm-task-drawer",
         `tcrm-task-drawer--${state}`,
         size !== "default" && `tcrm-task-drawer--${size}`,
+        activityDensity === "comfortable" && "tcrm-task-drawer--activity-comfortable",
         `tcrm-task-drawer--footer-${footerLayout}`,
         className
       )}
@@ -8383,6 +11540,7 @@ export function TaskDrawer({
         icon: fact.icon,
         label: fact.label,
         tone: fact.tone,
+        showToneIcon: fact.showToneIcon,
         value: fact.value
       }))}
       footer={
@@ -8756,6 +11914,7 @@ export interface CaseDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>,
   history?: CaseDrawerHistoryItem[];
   sections?: CaseDrawerSection[];
   footerActions?: CaseDrawerFooterAction[];
+  widthVariant?: "default" | "wide";
   onAction?: (action: CaseDrawerAction) => void;
   onClose?: () => void;
 }
@@ -8817,6 +11976,7 @@ export function CaseDrawer({
   history = sourceCaseDrawerHistory,
   sections,
   footerActions = sourceCaseDrawerFooterActions,
+  widthVariant = "default",
   onAction,
   onClose,
   className,
@@ -8827,11 +11987,8 @@ export function CaseDrawer({
   const isLoading = state === "loading";
   const isBlocked = state === "blocked" || isLoading;
   const resolved = state === "resolved";
-  let caseDrawerSectionIndex = 1;
-  const sectionTitle = (label: React.ReactNode) => {
+  const sectionTitle = (label: React.ReactNode, index: number) => {
     if (!numberedSections) return label;
-    const index = caseDrawerSectionIndex;
-    caseDrawerSectionIndex += 1;
     return `${index}. ${String(label)}`;
   };
   const renderSectionItems = (items: CaseDrawerSectionItem[] | undefined, kind: CaseDrawerSectionKind) => {
@@ -8859,7 +12016,7 @@ export function CaseDrawer({
       </ul>
     );
   };
-  const renderCustomSection = (section: CaseDrawerSection) => {
+  const renderCustomSection = (section: CaseDrawerSection, index: number) => {
     const kind = section.kind ?? "list";
     return (
       <section
@@ -8867,7 +12024,7 @@ export function CaseDrawer({
         className={cn("tcrm-case-drawer__section", `tcrm-case-drawer__section--${kind}`, section.tone && `tcrm-case-drawer__section--${section.tone}`)}
         key={section.id}
       >
-        <h3>{sectionTitle(section.title)}</h3>
+        <h3>{sectionTitle(section.title, index + 2)}</h3>
         {section.description ? (
           <p>
             {section.icon ? <Icon name={section.icon} size="var(--taliya-space-6)" /> : null}
@@ -8885,7 +12042,7 @@ export function CaseDrawer({
       aria-label="Detalhes do caso operacional"
       body={
         <>
-        {numberedSections ? <h3 className="tcrm-case-drawer__section-title">{sectionTitle("Resumo")}</h3> : null}
+        {numberedSections ? <h3 className="tcrm-case-drawer__section-title">{sectionTitle("Resumo", 1)}</h3> : null}
         <dl className={cn("tcrm-case-drawer__facts", factsLayout === "grid" && "tcrm-case-drawer__facts--grid")}>
           {facts.map((fact) => (
             <div className={cn("tcrm-case-drawer__fact", fact.tone === "danger" && "tcrm-case-drawer__fact--danger")} key={fact.id}>
@@ -8899,7 +12056,7 @@ export function CaseDrawer({
         {sections?.length ? sections.map(renderCustomSection) : (
         <>
           <section className={cn("tcrm-case-drawer__card tcrm-case-drawer__alternatives", alternativesVariant === "steps" && "tcrm-case-drawer__alternatives--steps")} aria-label={String(alternativesTitle)}>
-          <h3>{sectionTitle(alternativesTitle)}</h3>
+          <h3>{sectionTitle(alternativesTitle, 2)}</h3>
           {alternativesVariant === "steps" ? (
             <ol>
               {alternatives.map((alternative) => (
@@ -8928,7 +12085,7 @@ export function CaseDrawer({
 
           {restrictions.length > 0 ? (
             <section className="tcrm-case-drawer__restrictions" aria-label={String(restrictionsTitle)}>
-              <h3>{sectionTitle(restrictionsTitle)}</h3>
+              <h3>{sectionTitle(restrictionsTitle, 3)}</h3>
               <ul>
                 {restrictions.map((restriction) => (
                   <li key={restriction.id}>{restriction.label}</li>
@@ -8939,13 +12096,13 @@ export function CaseDrawer({
 
           {showMessageSuggestion ? (
             <section className="tcrm-case-drawer__card tcrm-case-drawer__message" aria-label="Sugestão de mensagem">
-              <h3>{sectionTitle("Sugestão de mensagem")} <Chip showDot={false}>{messageQuotaLabel}</Chip><Chip className="tcrm-case-drawer__review-chip" showDot={false}>revisão humana</Chip></h3>
+              <h3>{sectionTitle("Sugestão de mensagem", 3 + (restrictions.length > 0 ? 1 : 0))} <Chip showDot={false}>{messageQuotaLabel}</Chip><Chip className="tcrm-case-drawer__review-chip" showDot={false}>revisão humana</Chip></h3>
               <p>Mensagens sugeridas pelo sistema com revisão humana.</p>
             </section>
           ) : null}
 
           <section className="tcrm-case-drawer__history" aria-label="Histórico curto">
-            <h3>{sectionTitle("Histórico curto")}</h3>
+            <h3>{sectionTitle("Histórico curto", 3 + (restrictions.length > 0 ? 1 : 0) + (showMessageSuggestion ? 1 : 0))}</h3>
             <ol>
               {history.map((item) => (
                 <li className={cn(item.tone && `tcrm-case-drawer__history-item--${item.tone}`)} key={item.id}>
@@ -8963,11 +12120,13 @@ export function CaseDrawer({
       className={cn(
         "tcrm-case-drawer",
         `tcrm-case-drawer--${state}`,
+        widthVariant === "wide" && "tcrm-case-drawer--wide",
         numberedSections && "tcrm-case-drawer--numbered",
         className
       )}
       closeLabel="Fechar caso"
       component="CaseDrawer"
+      data-width-variant={widthVariant}
       footer={
         <>
         {footerActions.map((action) => (
@@ -9226,11 +12385,25 @@ export interface ClassDrawerTimelineItem {
   tone?: "success" | "warning" | "danger" | "info";
 }
 
+export interface ClassDrawerImpactItem {
+  id: string;
+  icon: IconName;
+  label: React.ReactNode;
+}
+
+export interface ClassDrawerBlockNotice {
+  title: React.ReactNode;
+  description: React.ReactNode;
+  types?: React.ReactNode;
+  actionLabel?: React.ReactNode;
+  action?: ClassDrawerAction;
+}
+
 export interface ClassDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title" | "onSelect"> {
   open?: boolean;
   state?: ClassDrawerState;
   compact?: boolean;
-  variant?: "attendance" | "class-detail";
+  variant?: "attendance" | "class-detail" | "recurring-block";
   ariaLabel?: string;
   closeLabel?: string;
   eyebrow?: React.ReactNode;
@@ -9239,15 +12412,22 @@ export interface ClassDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>
   summary?: React.ReactNode;
   facts?: ClassDrawerFact[];
   availabilityNotice?: React.ReactNode;
+  availabilityTone?: "success" | "warning" | "info";
   upcomingClasses?: ClassDrawerTimelineItem[];
   historyItems?: ClassDrawerTimelineItem[];
+  impactItems?: ClassDrawerImpactItem[];
+  blockNotice?: ClassDrawerBlockNotice;
   warning?: React.ReactNode;
   rosterHeading?: React.ReactNode;
+  rosterStatus?: { label: React.ReactNode; tone?: ComponentTone };
+  showStudentStatus?: boolean;
   students?: ClassDrawerStudent[];
   copilot?: React.ReactNode;
   audit?: React.ReactNode;
   primaryAction?: { label: React.ReactNode; action: ClassDrawerAction; icon?: IconName };
   secondaryActions?: Array<{ label: React.ReactNode; action: ClassDrawerAction; icon?: IconName }>;
+  actionPlacement?: "footer" | "content";
+  actionHeading?: React.ReactNode;
   onClose?: () => void;
   onAction?: (action: ClassDrawerAction) => void;
   onStudentStatus?: (student: ClassDrawerStudent) => void;
@@ -9260,6 +12440,14 @@ const sourceClassDrawerStudents: ClassDrawerStudent[] = [
   { id: "gabriela", name: "Gabriela Martins", initials: "GM", status: "no-show", helper: "não gera crédito" },
   { id: "juliana", name: "Juliana Costa", status: "replacement", helper: "reposição usada" }
 ];
+
+const classDrawerStudentStatus: Record<AttendanceStatus, { label: string; tone?: ComponentTone }> = {
+  pending: { label: "Pendente" },
+  present: { label: "Presente", tone: "success" },
+  warned: { label: "Falta avisada", tone: "warning" },
+  "no-show": { label: "No-show", tone: "danger" },
+  replacement: { label: "Reposição", tone: "info" }
+};
 
 function emitClassDrawerAction(action: ClassDrawerAction, onAction?: (action: ClassDrawerAction) => void, handler?: () => void) {
   handler?.();
@@ -9279,10 +12467,15 @@ export function ClassDrawer({
   summary,
   facts,
   availabilityNotice,
+  availabilityTone = "success",
   upcomingClasses,
   historyItems,
+  impactItems,
+  blockNotice,
   warning,
   rosterHeading,
+  rosterStatus,
+  showStudentStatus = false,
   students = sourceClassDrawerStudents,
   copilot = <><strong>Copiloto: Felipe avisou falta dentro da política.</strong><span>Crédito pode ser gerado.</span></>,
   audit = <><Icon name="info" size="15px" /> Chamada é auditável e salva por humano.</>,
@@ -9292,6 +12485,8 @@ export function ClassDrawer({
     { label: "Criar tarefa", action: "create-task" },
     { label: "Corrigir depois", action: "correct-later" }
   ],
+  actionPlacement = "footer",
+  actionHeading,
   onClose,
   onAction,
   onStudentStatus,
@@ -9315,7 +12510,8 @@ export function ClassDrawer({
   );
 
   const drawerFooter = (
-    <div className="tcrm-class-drawer__footer">
+    <div className={cn("tcrm-class-drawer__footer", variant === "class-detail" && actionPlacement === "content" && "tcrm-class-drawer__footer--content")}>
+      {actionHeading ? <h3 className="tcrm-class-drawer__action-heading">{actionHeading}</h3> : null}
       <Button className="tcrm-class-drawer__save" disabled={isBlocked} leadingIcon={primaryAction.icon} onClick={() => emitClassDrawerAction(primaryAction.action, onAction)} size="sm" variant="primary">{primaryAction.label}</Button>
       {secondaryActions.map((item) => (
         <Button className="tcrm-class-drawer__action" disabled={isBlocked} key={item.action} leadingIcon={item.icon} onClick={() => emitClassDrawerAction(item.action, onAction)} size="sm" variant="secondary">{item.label}</Button>
@@ -9335,14 +12531,14 @@ export function ClassDrawer({
         className
       )}
       component="ClassDrawer"
-      footer={drawerFooter}
+      footer={variant === "recurring-block" || (variant === "class-detail" && actionPlacement === "content") ? undefined : drawerFooter}
       header={drawerHeader}
       loading={isLoading}
       state={state}
       title={title}
       {...props}
     >
-      {variant === "class-detail" ? (
+      {variant === "recurring-block" ? (
         <>
           {facts?.length ? (
             <dl className="tcrm-class-drawer__facts">
@@ -9356,18 +12552,71 @@ export function ClassDrawer({
             </dl>
           ) : null}
 
-          {rosterHeading ? <h3 className="tcrm-class-drawer__section-title">{rosterHeading}</h3> : null}
-          <ul className="tcrm-class-drawer__fixed-students" aria-label={String(rosterHeading ?? "Alunos fixos")}>
+          {upcomingClasses?.length ? (
+            <section className="tcrm-class-drawer__recurring-section" aria-label="Próximas aulas geradas">
+              <h3>Próximas aulas geradas</h3>
+              <ul>
+                {upcomingClasses.map((item) => <li key={item.id}><Icon name="calendar" size="14px" /><span>{item.label}</span></li>)}
+              </ul>
+            </section>
+          ) : null}
+
+          {impactItems?.length ? (
+            <section className="tcrm-class-drawer__recurring-section" aria-label="Impacto de alteração">
+              <h3>Impacto de alteração</h3>
+              <ul>
+                {impactItems.map((item) => <li key={item.id}><Icon name={item.icon} size="14px" /><span>{item.label}</span></li>)}
+              </ul>
+            </section>
+          ) : null}
+
+          {drawerFooter}
+
+          {blockNotice ? (
+            <section className="tcrm-class-drawer__block-notice" aria-label={String(blockNotice.title)}>
+              <h3>{blockNotice.title}</h3>
+              {blockNotice.types ? <p>{blockNotice.types}</p> : null}
+              <p>{blockNotice.description}</p>
+              <Button onClick={() => emitClassDrawerAction(blockNotice.action ?? "create-task", onAction)} size="sm" variant="ghost">{blockNotice.actionLabel ?? "Criar bloqueio"}</Button>
+            </section>
+          ) : null}
+        </>
+      ) : variant === "class-detail" ? (
+        <>
+          {facts?.length ? (
+            <dl className="tcrm-class-drawer__facts">
+              {facts.map((fact) => (
+                <div className={cn("tcrm-class-drawer__fact", fact.tone && `tcrm-class-drawer__fact--${fact.tone}`)} key={fact.id}>
+                  <Icon name={fact.icon} size="14px" />
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
+
+          {(rosterHeading || rosterStatus) ? (
+            <div className="tcrm-class-drawer__section-heading">
+              {rosterHeading ? <h3 className="tcrm-class-drawer__section-title">{rosterHeading}</h3> : null}
+              {rosterStatus ? <Chip className="tcrm-class-drawer__roster-status" showDot={false} tone={rosterStatus.tone}>{rosterStatus.label}</Chip> : null}
+            </div>
+          ) : null}
+          <ul className={cn("tcrm-class-drawer__fixed-students", showStudentStatus && "tcrm-class-drawer__fixed-students--with-status")} aria-label={String(rosterHeading ?? "Alunos fixos")}>
             {students.map((student) => (
-              <li key={student.id}>
+              <li data-attendance={student.status} key={student.id}>
                 <Avatar name={student.name} size="xs" src={student.avatarSrc}>{student.initials}</Avatar>
                 <span>{student.name}</span>
+                {showStudentStatus ? (
+                  <Chip className="tcrm-class-drawer__student-status" showDot={false} tone={classDrawerStudentStatus[student.status].tone}>
+                    {classDrawerStudentStatus[student.status].label}
+                  </Chip>
+                ) : null}
               </li>
             ))}
           </ul>
 
           {availabilityNotice ? (
-            <p className="tcrm-class-drawer__availability">
+            <p className={cn("tcrm-class-drawer__availability", `tcrm-class-drawer__availability--${availabilityTone}`)}>
               <Icon name="info" size="14px" />
               {availabilityNotice}
             </p>
@@ -9410,6 +12659,8 @@ export function ClassDrawer({
               {warning}
             </p>
           ) : null}
+
+          {actionPlacement === "content" ? drawerFooter : null}
         </>
       ) : (
         <>
@@ -9445,8 +12696,8 @@ export function ClassDrawer({
   );
 }
 
-export type PaymentDrawerState = "overdue" | "promise" | "paid" | "failed" | "loading" | "blocked";
-export type PaymentDrawerAction = "close" | "send-reminder" | "open-charge" | "register-promise" | "mark-paid" | "create-task" | "open-student";
+export type PaymentDrawerState = "due" | "overdue" | "promise" | "paid" | "failed" | "loading" | "blocked";
+export type PaymentDrawerAction = "close" | "send-reminder" | "open-charge" | "register-promise" | "copy-pix-link" | "open-conversation" | "mark-paid" | "create-task" | "open-student";
 
 export interface PaymentDrawerFact {
   id: string;
@@ -9464,6 +12715,7 @@ export interface PaymentDrawerHistoryItem {
 export interface PaymentDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title" | "onSelect"> {
   open?: boolean;
   state?: PaymentDrawerState;
+  variant?: "collection" | "movement";
   compact?: boolean;
   name?: React.ReactNode;
   amount?: React.ReactNode;
@@ -9506,6 +12758,7 @@ function emitPaymentDrawerAction(action: PaymentDrawerAction, onAction?: (action
 export function PaymentDrawer({
   open = true,
   state = "overdue",
+  variant = "collection",
   compact = false,
   name = "Gabriela Lima",
   amount = "R$ 420,00",
@@ -9525,26 +12778,37 @@ export function PaymentDrawer({
   const isBlocked = state === "blocked" || isLoading;
   const isPaid = state === "paid";
   const isFailed = state === "failed";
+  const isDue = state === "due";
+  const isMovement = variant === "movement";
   const effectiveStatus = isPaid ? "Pago" : isFailed ? "Falha" : statusLabel;
 
   return (
     <CrmDrawer
       aria-label="Detalhes da cobrança"
-      className={cn("tcrm-payment-drawer", `tcrm-payment-drawer--${state}`, compact && "tcrm-payment-drawer--compact", className)}
+      className={cn("tcrm-payment-drawer", `tcrm-payment-drawer--${state}`, `tcrm-payment-drawer--${variant}`, compact && "tcrm-payment-drawer--compact", className)}
       closeLabel="Fechar cobrança"
       component="PaymentDrawer"
-      eyebrow="Cobrança"
+      eyebrow={isMovement ? "Mensalidade" : "Cobrança"}
       footer={(
         <div className="tcrm-payment-drawer__footer">
-          <h3>Ações principais</h3>
+          <h3>{isMovement ? "Ações" : "Ações principais"}</h3>
           <Button className="tcrm-payment-drawer__primary" disabled={isBlocked} leadingIcon="tag" onClick={() => emitPaymentDrawerAction("send-reminder", onAction)} size="sm" variant="primary">Enviar lembrete</Button>
           <div className="tcrm-payment-drawer__actions">
-            <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="whatsapp" onClick={() => emitPaymentDrawerAction("open-charge", onAction)} size="sm" variant="secondary">Abrir cobrança</Button>
-            <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitPaymentDrawerAction("register-promise", onAction)} size="sm" variant="secondary">Registrar promessa</Button>
+            {isMovement ? (
+              <>
+                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="link" onClick={() => emitPaymentDrawerAction("copy-pix-link", onAction)} size="sm" variant="secondary">Copiar link Pix</Button>
+                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="whatsapp" onClick={() => emitPaymentDrawerAction("open-conversation", onAction)} size="sm" variant="secondary">Abrir conversa</Button>
+              </>
+            ) : (
+              <>
+                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="whatsapp" onClick={() => emitPaymentDrawerAction("open-charge", onAction)} size="sm" variant="secondary">Abrir cobrança</Button>
+                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitPaymentDrawerAction("register-promise", onAction)} size="sm" variant="secondary">Registrar promessa</Button>
+              </>
+            )}
             <Button className="tcrm-payment-drawer__action" disabled={isBlocked || isPaid} leadingIcon="checkCircle" onClick={() => emitPaymentDrawerAction("mark-paid", onAction)} size="sm" variant="secondary">Marcar como pago</Button>
             <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitPaymentDrawerAction("create-task", onAction)} size="sm" variant="secondary">Criar tarefa</Button>
           </div>
-          <h3>Ação secundária</h3>
+          {!isMovement ? <h3>Ação secundária</h3> : null}
           <Button className="tcrm-payment-drawer__student" disabled={isBlocked} leadingIcon="user" onClick={() => emitPaymentDrawerAction("open-student", onAction)} size="sm" trailingIcon="arrowRight" variant="secondary">Abrir aluno</Button>
         </div>
       )}
@@ -9554,7 +12818,7 @@ export function PaymentDrawer({
       onClose={() => emitPaymentDrawerAction("close", onAction, onClose)}
       state={state}
       status={(
-        <span className={cn("tcrm-payment-drawer__status-label", isPaid && "tcrm-payment-drawer__status-label--paid", isFailed && "tcrm-payment-drawer__status-label--failed")}>
+          <span className={cn("tcrm-payment-drawer__status-label", isDue && "tcrm-payment-drawer__status-label--due", isPaid && "tcrm-payment-drawer__status-label--paid", isFailed && "tcrm-payment-drawer__status-label--failed")}>
           {effectiveStatus}
         </span>
       )}
@@ -9990,7 +13254,7 @@ export function LeadDrawer({
   );
 }
 
-export type AgentFlowDrawerState = "flow" | "test" | "publish" | "execution" | "loading" | "blocked";
+export type AgentFlowDrawerState = "flow" | "routine" | "test" | "publish" | "execution" | "loading" | "blocked";
 export type AgentFlowDrawerAction = "close" | "menu" | "select-question" | "send-question" | "schedule-help";
 
 export interface AgentFlowDrawerQuestion {
@@ -10027,6 +13291,17 @@ const agentFlowCopy: Record<AgentFlowDrawerState, { role: React.ReactNode; messa
     message: <>Este fluxo está em Autônomo com exceções.<br />A Taliya trata a falta avisada quando aluno, aula, prazo e mensagem estão claros. Se algo não fechar, chama a equipe definida.</>,
     placeholder: "Pergunte sobre este fluxo...",
     questions: sourceAgentFlowQuestions
+  },
+  routine: {
+    role: <>Guiando rotina <span aria-hidden="true">●</span></>,
+    message: <>Essa rotina está em Mais autônomo.<br />Cada fluxo mostra o que a Taliya faz, quando chama a equipe e onde exige aprovação.</>,
+    placeholder: "Pergunte sobre esta rotina...",
+    questions: [
+      { id: "balanced-change", label: "O que muda no Equilibrado?" },
+      { id: "approval-needed", label: "Por que correção pede aprovação?" },
+      { id: "team-called", label: "Onde a equipe é chamada?" },
+      { id: "simulate-absence", label: "Simular falta com aviso" }
+    ]
   },
   test: {
     role: <>Explicando o teste <span aria-hidden="true">●</span></>,
@@ -10389,11 +13664,118 @@ export function UsageDrawer({
     </CrmDrawer>
   );
 }
+
+export interface SupportStatusItem {
+  id: string;
+  label: React.ReactNode;
+  icon: IconName;
+  status?: React.ReactNode;
+  tone?: ComponentTone;
+}
+
+export interface SupportStatusSidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+  services?: SupportStatusItem[];
+  accessItems?: SupportStatusItem[];
+  planTitle?: React.ReactNode;
+  planDescription?: React.ReactNode;
+  onViewAll?: () => void;
+}
+
+const defaultSupportServices: SupportStatusItem[] = [
+  { id: "whatsapp", label: "WhatsApp", icon: "message", status: "operando", tone: "success" },
+  { id: "payments", label: "Pagamentos", icon: "coins", status: "operando", tone: "success" },
+  { id: "imports", label: "Importação", icon: "upload", status: "atenção", tone: "warning" },
+  { id: "agents", label: "Agentes", icon: "users", status: "normal", tone: "success" }
+];
+
+const defaultSupportAccessItems: SupportStatusItem[] = [
+  { id: "pending", label: "1 pendente", icon: "clock" },
+  { id: "active", label: "2 ativos", icon: "checkCircle", tone: "success" },
+  { id: "expiring", label: "0 expirando hoje", icon: "clock", tone: "warning" }
+];
+
+export function SupportStatusSidebar({
+  services = defaultSupportServices,
+  accessItems = defaultSupportAccessItems,
+  planTitle = "Suporte padrão",
+  planDescription = "Resposta estimada: hoje",
+  onViewAll,
+  className,
+  ...props
+}: SupportStatusSidebarProps) {
+  return (
+    <aside className={cn("tcrm-support-status-sidebar", className)} data-component="SupportStatusSidebar" {...props}>
+      <Panel className="tcrm-support-status-sidebar__card tcrm-support-status-sidebar__card--services">
+        <List className="tcrm-support-status-sidebar__header"><ListItem leading={<Icon name="barChart" />} title="Status dos serviços" /></List>
+        <List className="tcrm-support-status-sidebar__rows" divided>
+          {services.map((item) => <ListItem action={item.status ? <Chip tone={item.tone ?? "neutral"}>{item.status}</Chip> : undefined} key={item.id} leading={<Icon name={item.icon} tone={item.tone} />} title={item.label} />)}
+        </List>
+      </Panel>
+      <Panel className="tcrm-support-status-sidebar__card tcrm-support-status-sidebar__card--access">
+        <List className="tcrm-support-status-sidebar__header"><ListItem leading={<Icon name="users" />} title="Acessos temporários" /></List>
+        <List className="tcrm-support-status-sidebar__rows" divided>
+          {accessItems.map((item) => <ListItem key={item.id} leading={<Icon name={item.icon} tone={item.tone} />} title={item.label} />)}
+        </List>
+      </Panel>
+      <Panel className="tcrm-support-status-sidebar__card tcrm-support-status-sidebar__card--plan">
+        <List className="tcrm-support-status-sidebar__header"><ListItem leading={<Icon name="star" />} title="Prioridade do plano" /></List>
+        <div className="tcrm-support-status-sidebar__plan"><strong>{planTitle}</strong><span>{planDescription}</span></div>
+      </Panel>
+      <Button className="tcrm-support-status-sidebar__view-all" onClick={onViewAll} trailingIcon="chevronRight" variant="ghost">Ver todos os status</Button>
+    </aside>
+  );
+}
+
+export interface SupportAgentPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+  title?: React.ReactNode;
+  placeholder?: React.ReactNode;
+  introduction?: React.ReactNode;
+  questions?: string[];
+  notice?: React.ReactNode;
+  onAction?: (actionId: string) => void;
+}
+
+export interface SupportCentralWorkspaceProps extends React.HTMLAttributes<HTMLDivElement> {
+  agent: React.ReactNode;
+  tickets: React.ReactNode;
+}
+
+export function SupportCentralWorkspace({ agent, tickets, className, ...props }: SupportCentralWorkspaceProps) {
+  return <div className={cn("tcrm-support-central-workspace", className)} data-component="SupportCentralWorkspace" {...props}>{agent}{tickets}</div>;
+}
+
+const defaultSupportQuestions = ["WhatsApp desconectou", "Erro na importação", "Dúvida sobre cobrança", "Agente não respondeu", "Configurar Pix"];
+
+export function SupportAgentPanel({
+  title = "Agente de suporte 24/7",
+  placeholder = "Pergunte ao suporte da Taliya...",
+  introduction = "Posso ajudar a diagnosticar integrações, explicar configurações ou abrir um ticket com contexto.",
+  questions = defaultSupportQuestions,
+  notice = "Para ações sensíveis, o suporte escala para humano e pode pedir autorização.",
+  onAction,
+  className,
+  ...props
+}: SupportAgentPanelProps) {
+  return (
+    <Panel className={cn("tcrm-support-agent-panel", className)} data-component="SupportAgentPanel" {...props}>
+      <header className="tcrm-support-agent-panel__header"><Icon name="sparkles" tone="info" /><h2>{title}</h2></header>
+      <Button className="tcrm-support-agent-panel__search" leadingIcon="search" onClick={() => onAction?.("compose")} trailingIcon="send" variant="secondary">{placeholder}</Button>
+      <p className="tcrm-support-agent-panel__introduction">{introduction}</p>
+      <ButtonGroup className="tcrm-support-agent-panel__questions">
+        {questions.map((question) => <Button key={question} onClick={() => onAction?.(`question:${question}`)} size="sm" variant="secondary">{question}</Button>)}
+      </ButtonGroup>
+      <Button className="tcrm-support-agent-panel__ask" leadingIcon="sparkles" onClick={() => onAction?.("ask-support")} size="sm" variant="primary">Perguntar ao suporte 24/7</Button>
+      <p className="tcrm-support-agent-panel__notice"><Icon name="lock" />{notice}</p>
+    </Panel>
+  );
+}
+
 export type SupportTicketDrawerState = "open" | "answered" | "access active" | "loading" | "blocked";
 
 export interface SupportTicketDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   open?: boolean;
   state?: SupportTicketDrawerState;
+  variant?: "support" | "internal";
   title?: React.ReactNode;
   onClose?: () => void;
   onAction?: (actionId: string) => void;
@@ -10402,6 +13784,7 @@ export interface SupportTicketDrawerProps extends Omit<React.HTMLAttributes<HTML
 export function SupportTicketDrawer({
   open = true,
   state = "open",
+  variant = "support",
   title = "Importação duplicou alunos",
   onClose,
   onAction,
@@ -10416,7 +13799,7 @@ export function SupportTicketDrawer({
     <aside
       aria-busy={key === "loading" || undefined}
       aria-label="Detalhes do ticket de suporte"
-      className={cn("tcrm-support-ticket-drawer", className)}
+      className={cn("tcrm-support-ticket-drawer", `tcrm-support-ticket-drawer--${variant}`, className)}
       data-component="SupportTicketDrawer"
       data-state={key}
       role="complementary"
@@ -10428,12 +13811,136 @@ export function SupportTicketDrawer({
         onClose={onClose}
         state={state}
         title={title}
+        variant={variant}
       />
     </aside>
   );
 }
 
 export type TenantSecurityDrawerState = "security review" | "grant access" | "revoked" | "allowed" | "denied" | "warning" | "loading" | "blocked" | "closed";
+
+export type TenantSummaryDrawerState = "active" | "risk" | "loading" | "blocked" | "closed";
+
+export interface TenantSummaryDrawerFact {
+  id: string;
+  label: React.ReactNode;
+  value: React.ReactNode;
+  icon: IconName;
+  tone?: ComponentTone;
+}
+
+export interface TenantSummaryDrawerActivity {
+  id: string;
+  label: React.ReactNode;
+  time: React.ReactNode;
+}
+
+export interface TenantSummaryDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+  open?: boolean;
+  state?: TenantSummaryDrawerState;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  facts?: TenantSummaryDrawerFact[];
+  activities?: TenantSummaryDrawerActivity[];
+  onClose?: () => void;
+  onAction?: (actionId: string) => void;
+}
+
+const defaultTenantSummaryFacts: TenantSummaryDrawerFact[] = [
+  { id: "status", label: "Status", value: <span className="tcrm-tenant-summary-drawer__status"><span />Ativo</span>, icon: "calendar", tone: "success" },
+  { id: "plan", label: "Plano", value: "Growth", icon: "layout" },
+  { id: "agents", label: "Agentes", value: "3 de 3 ativos", icon: "users" },
+  { id: "quota", label: "Cota", value: "68% usada", icon: "clock" },
+  { id: "billing", label: "Billing", value: "Em dia", icon: "clock" },
+  { id: "tickets", label: "Tickets", value: "1 aberto", icon: "inbox" },
+  { id: "grant", label: "Grant", value: "Ativo até hoje 18:00", icon: "shield" },
+  { id: "incidents", label: "Incidentes", value: "0 críticos", icon: "alert" },
+  { id: "owner", label: <>Responsável<br />interno</>, value: "Marina - CS", icon: "user" },
+  { id: "activity", label: "Última atividade", value: "hoje 10:24", icon: "clock" }
+];
+
+const defaultTenantSummaryActivities: TenantSummaryDrawerActivity[] = [
+  { id: "ticket", label: "Ticket de importação atualizado", time: "hoje 10:24" },
+  { id: "grant", label: "Grant aprovado pelo dono", time: "hoje 09:18" },
+  { id: "quota", label: "Cota chegou a 68%", time: "ontem 18:20" },
+  { id: "plan", label: "Plano Growth renovado", time: "12/05" }
+];
+
+export function TenantSummaryDrawer({
+  open = true,
+  state = "active",
+  title = "Studio Vila Mariana",
+  subtitle = "Cliente ativo da Taliya",
+  facts = defaultTenantSummaryFacts,
+  activities = defaultTenantSummaryActivities,
+  onClose,
+  onAction,
+  className,
+  ...props
+}: TenantSummaryDrawerProps) {
+  if (!open || state === "closed") return null;
+  const disabled = state === "loading" || state === "blocked";
+
+  const footer = (
+    <div className="tcrm-tenant-summary-drawer__actions">
+      <Button disabled={disabled} leadingIcon="externalLink" onClick={() => onAction?.("open-tenant")} size="sm" variant="primary">Abrir tenant</Button>
+      <div>
+        {([
+          ["support", "Ver suporte"], ["grants", "Ver grants"], ["billing", "Ver billing"],
+          ["request-grant", "Solicitar grant"], ["audit", "Ver auditoria"], ["note", "Adicionar nota interna"]
+        ] as Array<[string, string]>).map(([id, label]) => <Button disabled={disabled} key={id} onClick={() => onAction?.(id)} size="sm" variant="secondary">{label}</Button>)}
+      </div>
+    </div>
+  );
+
+  return (
+    <CrmDrawer
+      aria-label="Resumo do tenant selecionado"
+      className={cn("tcrm-tenant-summary-drawer", className)}
+      component="TenantSummaryDrawer"
+      footer={footer}
+      header={(
+        <header className="tcrm-tenant-summary-drawer__header">
+          <Chip showDot={false} tone="info">Tenant selecionado</Chip>
+          <IconButton disabled={disabled} icon="x" label="Fechar resumo do tenant" onClick={onClose} size="sm" variant="subtle" />
+          <h2>{title}</h2>
+          <p>{subtitle}</p>
+        </header>
+      )}
+      loading={state === "loading"}
+      state={state}
+      title={title}
+      {...props}
+    >
+      <dl className="tcrm-tenant-summary-drawer__facts">
+        {facts.map((fact) => (
+          <div data-tone={fact.tone} key={fact.id}>
+            <Icon name={fact.icon} size="13px" tone={fact.tone} />
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <section className="tcrm-tenant-summary-drawer__health">
+        <h3>Saúde da conta <Chip tone="success">estável</Chip></h3>
+        <p><Icon name="shieldCheck" size="18px" tone="success" />Uso regular, billing em dia e suporte ativo em importação.</p>
+      </section>
+      <section className="tcrm-tenant-summary-drawer__security">
+        <h3>Acesso e segurança</h3>
+        <p><Icon name="lock" size="17px" tone="warning" />Dados operacionais exigem grant escopado.</p>
+        <small>Alunos, conversas e financeiro do studio não aparecem por padrão.</small>
+      </section>
+      <section className="tcrm-tenant-summary-drawer__activity">
+        <h3>Atividade recente</h3>
+        {activities.map((activity) => <p key={activity.id}><span />{activity.label}<time>{activity.time}</time></p>)}
+      </section>
+      <section className="tcrm-tenant-summary-drawer__copilot">
+        <Icon name="sparkles" size="22px" tone="info" />
+        <div><h3>Copiloto interno</h3><p>Resumo: acompanhar o ticket de importação antes do grant expirar. Não há incidente crítico neste tenant.</p><small><Icon name="info" size="14px" />Apenas resume e prioriza. Não concede grant, não altera billing e não bloqueia tenant.</small></div>
+      </section>
+    </CrmDrawer>
+  );
+}
 
 export interface TenantSecurityDrawerProps extends React.HTMLAttributes<HTMLElement> {
   open?: boolean;
@@ -10495,12 +14002,16 @@ export interface WeeklyHoursGridSlot {
   start: string;
   end: string;
   label: string;
+  meta?: React.ReactNode;
+  tone?: ComponentTone;
 }
 
 export interface WeeklyHoursGridProps extends React.HTMLAttributes<HTMLElement> {
+  axis?: string[];
   state?: WeeklyHoursGridState;
   days?: string[];
   slots?: WeeklyHoursGridSlot[];
+  variant?: "availability" | "schedule";
   onAdjustDay?: () => void;
   onSlotClick?: (slot: WeeklyHoursGridSlot) => void;
 }
@@ -10516,9 +14027,11 @@ function defaultWeeklyHoursGridSlots(days = weeklyHoursGridDays): WeeklyHoursGri
 }
 
 export function WeeklyHoursGrid({
+  axis = weeklyHoursGridAxis,
   state = "editable",
   days = weeklyHoursGridDays,
   slots = defaultWeeklyHoursGridSlots(days),
+  variant = "availability",
   onAdjustDay,
   onSlotClick,
   className,
@@ -10535,20 +14048,53 @@ export function WeeklyHoursGrid({
       className={cn("tcrm-weekly-hours-grid", className)}
       data-component="WeeklyHoursGrid"
       data-state={key}
+      data-variant={variant}
       {...props}
     >
-      <header className="tcrm-weekly-hours-grid__header">
+      {variant === "availability" ? <header className="tcrm-weekly-hours-grid__header">
         <h3><span>3.</span> Prévia da grade semanal</h3>
         <button disabled={key === "loading" || key === "blocked"} onClick={() => onAdjustDay?.()} type="button">
           <Icon name="calendar" size="14px" />
           Ajustar horários por dia
         </button>
-      </header>
-      <div className="tcrm-weekly-hours-grid__matrix" role="grid" aria-readonly={disabled || undefined}>
+      </header> : null}
+      {variant === "schedule" ? (
+        <div className="tcrm-weekly-hours-grid__schedule" role="grid" aria-readonly={disabled || undefined}>
+          <div className="tcrm-weekly-hours-grid__corner" />
+          {days.map((day) => <div className="tcrm-weekly-hours-grid__day" key={day} role="columnheader">{day}</div>)}
+          <div className="tcrm-weekly-hours-grid__schedule-axis" aria-hidden="true">
+            {axis.map((item) => <span key={item}>{item}</span>)}
+          </div>
+          {days.map((day, dayIndex) => (
+            <div className="tcrm-weekly-hours-grid__schedule-column" key={day} role="row" style={{ gridColumn: dayIndex + 2 }}>
+              {axis.map((item) => <span className="tcrm-weekly-hours-grid__schedule-cell" key={item} />)}
+              {slots.filter((slot) => slot.day === day && slot.label).map((slot) => {
+                const hour = `${slot.start.slice(0, 2)}h`;
+                const row = Math.max(0, axis.findIndex((item) => item === hour));
+                return (
+                  <button
+                    aria-label={`${day} das ${slot.start} às ${slot.end}: ${slot.label}`}
+                    data-tone={slot.tone ?? "neutral"}
+                    disabled={disabled}
+                    key={slot.id}
+                    onClick={() => onSlotClick?.(slot)}
+                    role="gridcell"
+                    style={{ gridRow: row + 1 }}
+                    type="button"
+                  >
+                    <span>{slot.label}</span>
+                    {slot.meta ? <small>{slot.meta}</small> : null}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      ) : <div className="tcrm-weekly-hours-grid__matrix" role="grid" aria-readonly={disabled || undefined}>
         <div className="tcrm-weekly-hours-grid__corner" />
         {days.map((day) => <div className="tcrm-weekly-hours-grid__day" key={day} role="columnheader">{day}</div>)}
         <div className="tcrm-weekly-hours-grid__axis" aria-hidden="true">
-          {weeklyHoursGridAxis.map((item) => <span key={item}>{item}</span>)}
+          {axis.map((item) => <span key={item}>{item}</span>)}
         </div>
         {days.map((day) => {
           const morning = slotByDay.get(`${day}-morning`) ?? { id: `${day}-morning`, day, start: "07:00", end: "12:00", label: "07:00" };
@@ -10567,8 +14113,8 @@ export function WeeklyHoursGrid({
             </div>
           );
         })}
-      </div>
-      <p>Essa grade define quando o studio pode ter aulas. As turmas e horários específicos serão configurados nos próximos blocos.</p>
+      </div>}
+      {variant === "availability" ? <p>Essa grade define quando o studio pode ter aulas. As turmas e horários específicos serão configurados nos próximos blocos.</p> : null}
     </section>
   );
 }
@@ -10949,7 +14495,7 @@ export function PaymentMethodRow({
   ...props
 }: PaymentMethodRowProps) {
   const copy = paymentMethodRowCopy[method];
-  const isSelected = selected ?? (state === "selected" || state === "connected");
+  const isSelected = selected ?? state === "selected";
   const isDisabled = disabled || state === "disabled" || state === "loading";
   const resolvedTitle = title ?? copy.title;
   const resolvedDescription = description ?? (state === "failed" ? "Precisa revisar" : copy.description);
@@ -10982,6 +14528,7 @@ export function PaymentMethodRow({
       </span>
       <span className="tcrm-payment-method-row__body">
         <strong>{resolvedTitle}</strong>
+        {state === "connected" ? <Chip showDot={false} tone="success">Ativo</Chip> : null}
         <span>{resolvedDescription}</span>
       </span>
       {isSelected ? (
@@ -11468,6 +15015,8 @@ export interface AgentFlowSectionPanelProps extends Omit<React.HTMLAttributes<HT
   description?: React.ReactNode;
   kind?: "mode" | "content";
   density?: "default" | "compact";
+  columns?: 1 | 2 | 3 | 4;
+  gridDensity?: "default" | "compact";
 }
 
 export function AgentFlowSectionPanel({
@@ -11475,6 +15024,8 @@ export function AgentFlowSectionPanel({
   description,
   kind = "content",
   density = "default",
+  columns,
+  gridDensity = "default",
   children,
   className,
   ...props
@@ -11496,7 +15047,9 @@ export function AgentFlowSectionPanel({
         <h3>{title}</h3>
         {description ? <p>{description}</p> : null}
       </div>
-      <div className="tcrm-agent-flow-section-panel__body">{children}</div>
+      <div className="tcrm-agent-flow-section-panel__body">
+        {columns ? <DashboardGrid columns={columns} density={gridDensity}>{children}</DashboardGrid> : children}
+      </div>
     </Panel>
   );
 }
@@ -11646,7 +15199,7 @@ export interface ModeCardProps extends Omit<React.ButtonHTMLAttributes<HTMLButto
   title: React.ReactNode;
   description?: React.ReactNode;
   icon?: IconName;
-  density?: "flow" | "routine";
+  density?: "flow" | "routine" | "reference";
   selected?: boolean;
   recommended?: boolean;
   locked?: boolean;
@@ -11711,7 +15264,7 @@ export function ModeSelector({
   className
 }: {
   value?: string;
-  variant?: "flow" | "routine";
+  variant?: "flow" | "routine" | "reference";
   modes?: ModeCardProps[];
   onChange?: (mode: string) => void;
   className?: string;
@@ -11728,13 +15281,68 @@ export function ModeSelector({
     { mode: "autonomo-excecoes", title: <>Autônomo<br />com exceções</>, icon: "rocket", density: "flow" },
     { mode: "autonomo", title: "Autônomo", icon: "lock", density: "flow", locked: true }
   ];
-  const options = modes ?? (variant === "routine" ? routineOptions : flowOptions);
+  const referenceOptions: ModeCardProps[] = [
+    { mode: "manual", title: "Manual", description: "Executa apenas com acao humana.", density: "reference" },
+    { mode: "copiloto", title: "Copiloto", description: "Sugere e aguarda aprovacao.", density: "reference", recommended: true },
+    { mode: "autonomo", title: "Autonomo", description: "Executa end-to-end.", density: "reference" },
+    { mode: "politica", title: "Bloqueado por politica", description: "Proibido por politica da empresa.", density: "reference", locked: true },
+    { mode: "plano", title: "Bloqueado por plano/cota", description: "Recurso indisponivel no plano.", density: "reference", locked: true }
+  ];
+  const options = modes ?? (variant === "routine" ? routineOptions : variant === "reference" ? referenceOptions : flowOptions);
+
+  if (variant === "reference") {
+    return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-mode-selector-reference", className)} data-component="ModeSelector">
+      <Reference15Header number={2} title="Configuracao de modo por fluxo" />
+      <div aria-label="Modo do agente" className="tcrm-mode-selector tcrm-mode-selector--reference" role="group">
+        {options.map((mode) => <ModeCard key={mode.mode} {...mode} onSelect={onChange} selected={mode.mode === value} />)}
+      </div>
+    </Panel>;
+  }
 
   return (
     <div aria-label="Modo do agente" className={cn("tcrm-mode-selector", `tcrm-mode-selector--${variant}`, className)} role="group">
       {options.map((mode) => (
         <ModeCard key={mode.mode} density={variant} {...mode} onSelect={onChange} selected={mode.mode === value} />
       ))}
+    </div>
+  );
+}
+
+export type AgentRoutineWorkspaceAction = "simulate" | "adjust-flows" | "review-approvals" | "prepare-publication";
+
+export interface AgentRoutineWorkspaceFlow extends Omit<AgentRoutineFlowCardProps, "onOpen"> {
+  id: string;
+}
+
+export interface AgentRoutineWorkspaceProps extends React.HTMLAttributes<HTMLDivElement> {
+  mode?: string;
+  flows?: AgentRoutineWorkspaceFlow[];
+  onModeChange?: (mode: string) => void;
+  onFlowOpen?: (flowId: string) => void;
+  onAction?: (action: AgentRoutineWorkspaceAction) => void;
+}
+
+const defaultAgentRoutineWorkspaceFlows: AgentRoutineWorkspaceFlow[] = [
+  { id: "confirmacao", title: "Confirmação de presença", icon: "calendar", badge: "Autônomo", badgeTone: "success", description: "Antes da aula, a Taliya envia confirmação para os alunos, registra quem confirmou e deixa pendente quem não respondeu.", facts: [{ icon: "clock", label: "Gatilho:", value: "Antes, durante ou após a aula" }, { icon: "clipboard", label: "Ação:", value: "enviar confirmação e registrar resposta" }, { icon: "alert", label: "Chama equipe:", value: "falha de envio ou conflito" }] },
+  { id: "falta-aviso", title: "Falta com aviso", icon: "bell", badge: "Autônomo com exceções", description: "Quando o aluno avisa que vai faltar, a Taliya verifica a regra de reposição. Se estiver tudo dentro da regra, organiza o próximo passo.", facts: [{ icon: "clock", label: "Gatilho:", value: "Antes, durante ou após a aula" }, { icon: "clipboard", label: "Ação:", value: "organizar reposição ou próxima tarefa" }, { icon: "alert", label: "Chama equipe:", value: "fora da regra ou sem vaga" }] },
+  { id: "no-show", title: "No-show", icon: "user", badge: "Autônomo com exceções", description: "Depois da aula, a Taliya identifica quem faltou sem avisar, tenta recuperar o contato e chama a equipe se houver risco ou recorrência.", facts: [{ icon: "clock", label: "Gatilho:", value: "Antes, durante ou após a aula" }, { icon: "clipboard", label: "Ação:", value: "tentar contato e marcar acompanhamento" }, { icon: "alert", label: "Chama equipe:", value: "risco, recorrência ou resposta sensível" }] },
+  { id: "correcao", title: "Correção de presença", icon: "edit", iconTone: "warning", badge: "Autônomo com aprovação", badgeTone: "warning", description: "Quando alguém pede correção depois da chamada, a Taliya prepara a alteração, mostra o impacto e só muda o histórico depois de aprovação.", status: "Precisa aprovação", statusTone: "warning", facts: [{ icon: "clock", label: "Gatilho:", value: "Antes, durante ou após a aula" }, { icon: "clipboard", label: "Ação:", value: "preparar alteração e impacto" }, { icon: "alert", label: "Chama equipe:", value: "aprovação obrigatória antes de alterar histórico" }] }
+];
+
+export function AgentRoutineWorkspace({ mode = "autonomo", flows = defaultAgentRoutineWorkspaceFlows, onModeChange, onFlowOpen, onAction, className, ...props }: AgentRoutineWorkspaceProps) {
+  return (
+    <div className={cn("tcrm-agent-routine-workspace", "tcrm-page-family-stack", className)} data-component="AgentRoutineWorkspace" {...props}>
+      <AgentFlowSectionPanel description="Escolha um comportamento para a rotina inteira. A Taliya aplica isso aos fluxos abaixo, e você pode ajustar qualquer fluxo individualmente." kind="mode" title="Como essa rotina deve trabalhar?">
+        <ModeSelector onChange={onModeChange} value={mode} variant="routine" />
+      </AgentFlowSectionPanel>
+      <AgentFlowSectionPanel columns={2} gridDensity="compact" title="Fluxos desta rotina">
+        {flows.map((flow) => <AgentRoutineFlowCard key={flow.id} {...flow} onOpen={onFlowOpen} />)}
+      </AgentFlowSectionPanel>
+      <AgentFlowActionBar>
+        <Button leadingIcon="play" onClick={() => onAction?.("simulate")} variant="primary">Simular rotina</Button>
+        <Button leadingIcon="slidersRound" onClick={() => onAction?.("adjust-flows")} variant="secondary">Ajustar fluxos</Button>
+        <Button leadingIcon="checkCircle" onClick={() => onAction?.("prepare-publication")} variant="secondary">Revisar para publicar</Button>
+      </AgentFlowActionBar>
     </div>
   );
 }
@@ -11846,7 +15454,8 @@ export function FlowBuilder({
   onStepMenu,
   className,
   title = "Como funciona neste modo",
-  density = "default"
+  density = "default",
+  variant = "default"
 }: {
   steps?: FlowStepCardProps[];
   onStepOpen?: (stepId: string) => void;
@@ -11854,7 +15463,31 @@ export function FlowBuilder({
   className?: string;
   title?: React.ReactNode;
   density?: "default" | "compact";
+  variant?: "default" | "reference";
 }) {
+  if (variant === "reference") {
+    const referenceSteps = [
+      { id: "trigger", icon: "bolt" as IconName, eyebrow: "Gatilho / Entrada", title: "Nova mensagem em WhatsApp", chip: "Evento" },
+      { id: "condition", icon: "filter" as IconName, eyebrow: "Condicao", title: "Cliente elegivel e consentimento ativo", chip: "Sim 63% / Nao 37%" },
+      { id: "action", icon: "play" as IconName, eyebrow: "Acao", title: "Enviar mensagem de apresentacao", chip: "WhatsApp" },
+      { id: "approval", icon: "userCheck" as IconName, eyebrow: "Aprovacao", title: "Revisao humana obrigatoria", chip: "Copiloto" },
+      { id: "fallback", icon: "shield" as IconName, eyebrow: "Fallback manual", title: "Criar tarefa para atendimento", chip: "Manual" }
+    ];
+    return (
+      <Panel compact className={cn("tcrm-flow-builder-reference", className)} data-component="FlowBuilder">
+        <header className="tcrm-reference15-header"><span>1</span><h3>Builder de fluxo</h3></header>
+        <div className="tcrm-flow-builder-reference__lane" role="list">
+          {referenceSteps.map((step, index) => <React.Fragment key={step.id}>
+            <div className="tcrm-flow-builder-reference__node" onClick={() => onStepOpen?.(step.id)} role="listitem">
+              <header><Icon name={step.icon} size="sm" /><strong>{step.eyebrow}</strong><IconButton icon="moreVertical" label={`Opcoes de ${step.eyebrow}`} onClick={() => onStepMenu?.(step.id)} size="sm" variant="ghost" /></header>
+              <p>{step.title}</p><Chip showDot={false} tone={step.id === "condition" ? "success" : step.id === "approval" ? "info" : "neutral"}>{step.chip}</Chip>
+            </div>
+            {index < referenceSteps.length - 1 ? <span className="tcrm-flow-builder-reference__connector"><ConnectorLine arrow tone={index === 1 ? "success" : "neutral"} /></span> : null}
+          </React.Fragment>)}
+        </div>
+      </Panel>
+    );
+  }
   const flowSteps = steps ?? [
     {
       id: "entrada",
@@ -11930,6 +15563,117 @@ export function FlowBuilder({
   );
 }
 
+export type AgentFlowWorkspaceAction = "test" | "save" | "back";
+
+export interface AgentFlowWorkspaceSettings {
+  noticeDeadline?: string;
+  nextStep?: string;
+  exceptionOwners?: string[];
+  messageTone?: string;
+  messageTemplate?: string;
+}
+
+export interface AgentFlowWorkspaceProps extends React.HTMLAttributes<HTMLDivElement> {
+  mode?: string;
+  settings?: AgentFlowWorkspaceSettings;
+  onModeChange?: (mode: string) => void;
+  onSettingChange?: (field: keyof AgentFlowWorkspaceSettings, value: string | string[]) => void;
+  onStepOpen?: (stepId: string) => void;
+  onStepMenu?: (stepId: string) => void;
+  onAction?: (action: AgentFlowWorkspaceAction) => void;
+}
+
+const defaultAgentFlowWorkspaceSettings = {
+  noticeDeadline: "2h",
+  nextStep: "reposicao",
+  exceptionOwners: ["Recepção", "Coordenadora", "Dono/admin"],
+  messageTone: "acolhedor",
+  messageTemplate: "Oi, {{nome}}. Vi aqui que você não vai conseguir vir à aula de {{horário}}. Vou registrar sua falta e verificar o melhor próximo passo."
+} satisfies Required<AgentFlowWorkspaceSettings>;
+
+export function AgentFlowWorkspace({
+  mode = "autonomo-excecoes",
+  settings,
+  onModeChange,
+  onSettingChange,
+  onStepOpen,
+  onStepMenu,
+  onAction,
+  className,
+  ...props
+}: AgentFlowWorkspaceProps) {
+  const resolvedSettings = { ...defaultAgentFlowWorkspaceSettings, ...settings };
+
+  return (
+    <div className={cn("tcrm-agent-flow-workspace", "tcrm-page-family-stack", className)} data-component="AgentFlowWorkspace" {...props}>
+      <AgentFlowSectionPanel
+        description="Este fluxo herdou o perfil Mais autônomo da rotina, mas você pode mudar só este fluxo."
+        density="compact"
+        kind="mode"
+        title="Como este fluxo deve trabalhar?"
+      >
+        <ModeSelector onChange={onModeChange} value={mode} />
+      </AgentFlowSectionPanel>
+      <FlowBuilder density="compact" onStepMenu={onStepMenu} onStepOpen={onStepOpen} />
+      <AgentFlowSettingsPanel>
+        <FieldGrid columns={4}>
+          <Select
+            helperText="Depois desse prazo, chama a equipe."
+            label="Prazo para aviso"
+            onValueChange={(value) => onSettingChange?.("noticeDeadline", value)}
+            options={[
+              { value: "2h", label: "Até 2 horas antes da aula" },
+              { value: "1h", label: "Até 1 hora antes da aula" },
+              { value: "dia-anterior", label: "Até o dia anterior" }
+            ]}
+            value={resolvedSettings.noticeDeadline}
+          />
+          <Select
+            helperText="A reposição segue pelas próprias regras."
+            label="Próximo passo após falta"
+            onValueChange={(value) => onSettingChange?.("nextStep", value)}
+            options={[
+              { value: "reposicao", label: "Criar tarefa de reposição" },
+              { value: "mensagem", label: "Enviar mensagem ao aluno" },
+              { value: "equipe", label: "Chamar equipe" }
+            ]}
+            value={resolvedSettings.nextStep}
+          />
+          <TagInput
+            helperText="Quem recebe o caso quando a Taliya não pode seguir."
+            items={resolvedSettings.exceptionOwners}
+            label="Responsáveis por exceção"
+            onRemove={(_, index) => onSettingChange?.("exceptionOwners", resolvedSettings.exceptionOwners.filter((__, itemIndex) => itemIndex !== index))}
+            removable
+          />
+          <FieldStack>
+            <Select
+              label="Tom/template da mensagem"
+              onValueChange={(value) => onSettingChange?.("messageTone", value)}
+              options={[
+                { value: "acolhedor", label: "Acolhedor" },
+                { value: "direto", label: "Direto" },
+                { value: "formal", label: "Formal" }
+              ]}
+              value={resolvedSettings.messageTone}
+            />
+            <Textarea
+              density="compact"
+              onChange={(event) => onSettingChange?.("messageTemplate", event.currentTarget.value)}
+              value={resolvedSettings.messageTemplate}
+            />
+          </FieldStack>
+        </FieldGrid>
+      </AgentFlowSettingsPanel>
+      <AgentFlowActionBar>
+        <Button leadingIcon="play" onClick={() => onAction?.("test")} variant="primary">Testar este fluxo</Button>
+        <Button leadingIcon="clipboard" onClick={() => onAction?.("save")} variant="secondary">Salvar ajuste</Button>
+        <Button leadingIcon="arrowLeft" onClick={() => onAction?.("back")} variant="secondary">Voltar para rotina</Button>
+      </AgentFlowActionBar>
+    </div>
+  );
+}
+
 export interface PreflightChecklistItem {
   id: string;
   title: React.ReactNode;
@@ -11991,6 +15735,178 @@ export function PreflightChecklist({
         ))}
       </div>
     </Panel>
+  );
+}
+
+export type AgentPublishFlowAction = "view" | "simulate";
+export type AgentPublishRoutineAction = "publish" | "simulate-again" | "back";
+
+export interface AgentPublishFlowFact {
+  label: React.ReactNode;
+  value: React.ReactNode;
+}
+
+export interface AgentPublishFlowCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  id: string;
+  title: React.ReactNode;
+  icon?: IconName;
+  mode: React.ReactNode;
+  modeTone?: ComponentTone;
+  status: React.ReactNode;
+  statusTone?: ComponentTone;
+  facts: AgentPublishFlowFact[];
+  onAction?: (flowId: string, action: AgentPublishFlowAction) => void;
+}
+
+export function AgentPublishFlowCard({
+  id,
+  title,
+  icon = "calendar",
+  mode,
+  modeTone = "info",
+  status,
+  statusTone = "success",
+  facts,
+  onAction,
+  className,
+  ...props
+}: AgentPublishFlowCardProps) {
+  return (
+    <Card className={cn("tcrm-agent-publish-flow-card", className)} data-component="AgentPublishFlowCard" {...props}>
+      <header>
+        <span className="tcrm-agent-publish-flow-card__icon"><Icon name={icon} size="lg" tone="info" /></span>
+        <h4>{title}</h4>
+        <Chip showDot={false} tone={modeTone}>{mode}</Chip>
+        <Chip showDot={false} tone={statusTone}>{status}</Chip>
+      </header>
+      <dl>
+        {facts.map((fact, index) => (
+          <div key={index}>
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <ButtonGroup>
+        <Button leadingIcon="eye" onClick={() => onAction?.(id, "view")} size="sm" variant="secondary">Ver fluxo</Button>
+        <Button leadingIcon="play" onClick={() => onAction?.(id, "simulate")} size="sm" variant="secondary">Simular</Button>
+      </ButtonGroup>
+    </Card>
+  );
+}
+
+export interface AgentPublishRoutineWorkspaceProps extends React.HTMLAttributes<HTMLDivElement> {
+  flows?: AgentPublishFlowCardProps[];
+  checklistItems?: PreflightChecklistItem[];
+  onChecklistReview?: (itemId: string) => void;
+  onChecklistToggle?: (itemId: string, checked: boolean) => void;
+  onFlowAction?: (flowId: string, action: AgentPublishFlowAction) => void;
+  onAction?: (action: AgentPublishRoutineAction) => void;
+}
+
+const defaultAgentPublishFlows: AgentPublishFlowCardProps[] = [
+  {
+    id: "confirmacao",
+    title: "Confirmação de presença",
+    icon: "calendar",
+    mode: "Autônomo",
+    modeTone: "success",
+    status: "Pronto",
+    facts: [
+      { label: "Início", value: "Antes da aula, quando chega o horário de confirmar presença." },
+      { label: "Faz", value: "Confere aula, aluno, horário e template. Envia confirmação, registra respostas e deixa pendente quem não respondeu." },
+      { label: "Para se", value: "Aula mudou, aluno não confere, resposta conflita ou WhatsApp falha." },
+      { label: "Ajustes", value: "Template: confirmação padrão · Canal: WhatsApp · Tom: direto" },
+      { label: "Continua em", value: "Aula / Tarefas" }
+    ]
+  },
+  {
+    id: "falta-aviso",
+    title: "Falta com aviso",
+    icon: "bell",
+    mode: "Autônomo com exceções",
+    status: "Pronto",
+    facts: [
+      { label: "Início", value: "Quando o aluno avisa que não vai comparecer." },
+      { label: "Faz", value: "Confere aluno, aula, prazo e falta anterior. Registra a falta, envia mensagem aprovada e cria tarefa em Reposições." },
+      { label: "Chama equipe se", value: "Aviso fora do prazo, aluno pede crédito/cancelamento, aula não encontrada ou WhatsApp falha." },
+      { label: "Ajustes", value: "Prazo: até 2h antes · Responsáveis: Recepção, Coordenação · Tom: acolhedor" },
+      { label: "Continua em", value: "Reposições / Tarefas" }
+    ]
+  },
+  {
+    id: "no-show",
+    title: "Falta sem aviso",
+    icon: "user",
+    mode: "Autônomo com exceções",
+    status: "Pronto",
+    facts: [
+      { label: "Início", value: "Depois da aula, quando o aluno previsto não apareceu nem avisou." },
+      { label: "Faz", value: "Confere chamada, janela de tolerância e histórico. Marca ausência e abre acompanhamento." },
+      { label: "Chama equipe se", value: "Chamada não foi fechada, aviso apareceu em outro canal, recorrência alta ou risco de cancelamento." },
+      { label: "Ajustes", value: "Tolerância: após aula · Responsáveis: Recepção, Retenção · Tom: cuidadoso" },
+      { label: "Continua em", value: "Aula / Retenção / Tarefas" }
+    ]
+  },
+  {
+    id: "correcao",
+    title: "Correção de presença",
+    icon: "edit",
+    mode: "Autônomo com aprovação",
+    status: "Aprovação ao executar",
+    statusTone: "warning",
+    facts: [
+      { label: "Início", value: "Quando alguém solicita corrigir presença depois da aula." },
+      { label: "Faz", value: "Confere aula, aluno, motivo e impacto. Prepara a alteração e cria pedido de aprovação." },
+      { label: "Não faz sozinha", value: "Não altera histórico de presença antes da aprovação." },
+      { label: "Ajustes", value: "Aprovadores: Coordenação, Dono/admin · Motivo obrigatório · Auditoria ativa" },
+      { label: "Continua em", value: "Aprovações / Auditoria" }
+    ]
+  }
+];
+
+export function AgentPublishRoutineWorkspace({
+  flows = defaultAgentPublishFlows,
+  checklistItems,
+  onChecklistReview,
+  onChecklistToggle,
+  onFlowAction,
+  onAction,
+  className,
+  ...props
+}: AgentPublishRoutineWorkspaceProps) {
+  return (
+    <div className={cn("tcrm-agent-publish-workspace", "tcrm-page-family-stack", className)} data-component="AgentPublishRoutineWorkspace" {...props}>
+      <ButtonGroup>
+        <Chip icon="rocket" tone="info">Mais autonomo</Chip>
+        <Chip icon="clock" tone="info">4 fluxos</Chip>
+        <Chip icon="checkCircle" tone="success">Simulação concluída</Chip>
+        <Chip icon="shieldCheck" tone="success">Pronta para publicar</Chip>
+      </ButtonGroup>
+      <PreflightChecklist items={checklistItems} onItemAction={onChecklistReview} onToggle={onChecklistToggle} />
+      <Panel compact className="tcrm-agent-publish-workspace__flows">
+        <h3>Fluxos que serão publicados</h3>
+        <DashboardGrid columns={2} density="compact">
+          {flows.map((flow) => <AgentPublishFlowCard key={flow.id} {...flow} onAction={onFlowAction} />)}
+        </DashboardGrid>
+      </Panel>
+      <Panel compact className="tcrm-agent-publish-workspace__activation">
+        <h3>O que será ativado</h3>
+        <div>
+          {[
+            "Envio automático de confirmações de presença.",
+            "Criação de tarefas de reposição e acompanhamento.",
+            "Registro automático de faltas quando as regras fecharem.",
+            "Aprovação obrigatória para corrigir presença."
+          ].map((item) => <span key={item}><Icon name="checkCircle" size="sm" tone="success" />{item}</span>)}
+        </div>
+      </Panel>
+      <AgentFlowActionBar>
+        <Button leadingIcon="upload" onClick={() => onAction?.("publish")} variant="primary">Publicar rotina</Button>
+        <Button leadingIcon="refresh" onClick={() => onAction?.("simulate-again")} variant="secondary">Simular novamente</Button>
+        <Button leadingIcon="arrowLeft" onClick={() => onAction?.("back")} variant="secondary">Voltar para ajustes</Button>
+      </AgentFlowActionBar>
+    </div>
   );
 }
 
@@ -12178,22 +16094,30 @@ export function ExecutionTimeline({
   );
 }
 
+export type SimulationRunnerAction = "run" | "change-scenario" | "back";
+
+export interface SimulationRunnerProps extends CrmSurfaceProps {
+  state?: "running" | "success" | "blocked";
+  avatarSrc?: string;
+  selectedScenarioId?: string;
+  onRun?: () => void;
+  onScenarioSelect?: (scenarioId: string) => void;
+  onAction?: (action: SimulationRunnerAction) => void;
+}
+
 export function SimulationRunner({
   state = "success",
   avatarSrc,
+  selectedScenarioId = "prazo",
   onRun,
   onScenarioSelect,
+  onAction,
   className
-}: CrmSurfaceProps & {
-  state?: "running" | "success" | "blocked";
-  avatarSrc?: string;
-  onRun?: () => void;
-  onScenarioSelect?: (scenarioId: string) => void;
-}) {
+}: SimulationRunnerProps) {
   return (
     <div className={cn("tcrm-simulation-runner", className)}>
       <div className="tcrm-simulation-runner__grid">
-        <ScenarioList onSelect={onScenarioSelect} />
+        <ScenarioList onSelect={onScenarioSelect} selectedId={selectedScenarioId} />
         <Panel compact className="tcrm-simulation-runner__phone-panel">
           <PhonePreview avatarSrc={avatarSrc} state={state === "running" ? "loading" : state === "blocked" ? "blocked" : "conversation"} />
         </Panel>
@@ -12203,22 +16127,101 @@ export function SimulationRunner({
         </Panel>
       </div>
       <div className="tcrm-simulation-runner__actions">
-        <Button leadingIcon="play" onClick={() => onRun?.()} variant="primary">Rodar teste novamente</Button>
-        <Button leadingIcon="refresh" onClick={() => onRun?.()} variant="secondary">Trocar cenário</Button>
-        <Button leadingIcon="arrowLeft" variant="secondary">Voltar ao fluxo</Button>
+        <Button leadingIcon="play" onClick={() => { onRun?.(); onAction?.("run"); }} variant="primary">Rodar teste novamente</Button>
+        <Button leadingIcon="refresh" onClick={() => onAction?.("change-scenario")} variant="secondary">Trocar cenário</Button>
+        <Button leadingIcon="arrowLeft" onClick={() => onAction?.("back")} variant="secondary">Voltar ao fluxo</Button>
       </div>
     </div>
   );
 }
 
+export type ExecutionReceiptState = "success" | "exception" | "failed";
+export type ExecutionReceiptLayout = "detail" | "compact";
+
+export interface ExecutionReceiptProps extends Omit<CrmSurfaceProps, "state"> {
+  state?: ExecutionReceiptState;
+  layout?: ExecutionReceiptLayout;
+  successTitle?: React.ReactNode;
+  failureTitle?: React.ReactNode;
+  exceptionTitle?: React.ReactNode;
+  description?: React.ReactNode;
+  channelLabel?: React.ReactNode;
+  channel?: React.ReactNode;
+  occurredLabel?: React.ReactNode;
+  occurredAt?: React.ReactNode;
+  reasonLabel?: React.ReactNode;
+  reason?: React.ReactNode;
+  statusLabel?: React.ReactNode;
+  onAction?: (actionId: string) => void;
+}
+
 export function ExecutionReceipt({
   state = "success",
+  layout = "detail",
+  successTitle = "Ação executada com sucesso",
+  failureTitle = "Ação falhou",
+  exceptionTitle = "Ação requer revisão",
+  description,
+  channelLabel = "Canal:",
+  channel = "WhatsApp",
+  occurredLabel,
+  occurredAt = "Hoje, 09:30",
+  reasonLabel = "Motivo:",
+  reason = "Número não ativo no WhatsApp.",
+  statusLabel,
   onAction,
   className
-}: CrmSurfaceProps & {
-  state?: "success" | "exception" | "failed";
-  onAction?: (actionId: string) => void;
-}) {
+}: ExecutionReceiptProps) {
+  const isSuccess = state === "success";
+  const isFailed = state === "failed";
+  const compactTitle = isSuccess ? successTitle : isFailed ? failureTitle : exceptionTitle;
+  const compactDescription = description ?? (isSuccess
+    ? "Mensagem de confirmação enviada para Ana Paula Santos."
+    : isFailed
+      ? "Não foi possível enviar a mensagem para Ana Paula Santos."
+      : "A execução foi interrompida para revisão humana.");
+  const compactOccurredLabel = occurredLabel ?? (isSuccess ? "Executado em:" : "Tentativas em:");
+  const compactStatusLabel = statusLabel ?? (isSuccess ? "Concluído" : isFailed ? "Falha" : "Revisão");
+
+  if (layout === "compact") {
+    return (
+      <Card
+        aria-label={String(compactTitle)}
+        className={cn("tcrm-execution-receipt", "tcrm-execution-receipt--compact", `tcrm-execution-receipt--compact-${state}`, className)}
+        data-component="ExecutionReceipt"
+        data-layout="compact"
+        data-state={state}
+        role="region"
+      >
+        <header className="tcrm-execution-receipt__compact-header">
+          <Icon name={isSuccess ? "checkCircle" : "alert"} size="var(--taliya-control-crm-execution-receipt-compact-icon-size)" />
+          <h2>{compactTitle}</h2>
+        </header>
+        <p className="tcrm-execution-receipt__compact-description">{compactDescription}</p>
+        <dl className="tcrm-execution-receipt__compact-facts">
+          {isSuccess ? (
+            <div>
+              <dt>{channelLabel}</dt>
+              <dd>{channel}<Icon name="whatsapp" size="var(--taliya-control-crm-execution-receipt-compact-icon-size)" /></dd>
+            </div>
+          ) : (
+            <div>
+              <dt>{reasonLabel}</dt>
+              <dd>{reason}</dd>
+            </div>
+          )}
+          <div>
+            <dt>{compactOccurredLabel}</dt>
+            <dd>{occurredAt}</dd>
+          </div>
+        </dl>
+        <Chip className="tcrm-execution-receipt__compact-status" showDot={false} tone={isSuccess ? "success" : isFailed ? "danger" : "warning"}>
+          {compactStatusLabel}
+        </Chip>
+      </Card>
+    );
+  }
+
   const receiptRows = [
     { id: "aviso", step: 1, status: "success" as const, statusLabel: "Concluído", title: "1. Aluna avisou falta", tool: "Júlia avisou pelo WhatsApp que não vai conseguir ir à aula de hoje 18h30." },
     { id: "regras", step: 2, status: "success" as const, statusLabel: "Concluído", title: "2. Taliya conferiu as regras", tool: "Aluno identificado, aula encontrada, aviso dentro do prazo e mensagem aprovada." },
@@ -12230,10 +16233,7 @@ export function ExecutionReceipt({
     <div className={cn("tcrm-execution-receipt", className)}>
       <Panel compact className="tcrm-execution-receipt__summary">
       <header>
-        <span>
-          <h3>Resumo da execução</h3>
-          <p>Falta com aviso - Júlia Martins - Pilates Solo hoje 18h30</p>
-        </span>
+        <h3>Resumo da execução</h3>
         <Chip tone={toneForState(state)}>{state === "success" ? "Concluída" : state}</Chip>
       </header>
       <DomainFactList
@@ -12286,12 +16286,18 @@ export function ExecutionReceipt({
 }
 
 export function StudentHeader({
-  name = "Ana Paula Martins",
+  name,
   state = "active",
   tags,
   avatarSrc,
-  phone = "(11) 98765-4321",
-  email = "ana.paula@email.com",
+  phone,
+  email,
+  variant = "default",
+  studentId = "ID: 456871",
+  responsible = "Nikki Olaw",
+  nextAction = "Confirmar documentos",
+  nextActionDate = "28/04/2024",
+  onNextAction,
   onAction,
   className
 }: CrmSurfaceProps & {
@@ -12300,16 +16306,48 @@ export function StudentHeader({
   avatarSrc?: string;
   phone?: React.ReactNode;
   email?: React.ReactNode;
+  variant?: "default" | "reference";
+  studentId?: React.ReactNode;
+  responsible?: React.ReactNode;
+  nextAction?: React.ReactNode;
+  nextActionDate?: React.ReactNode;
+  onNextAction?: () => void;
   onAction?: (actionId: string) => void;
 }) {
-  const studentTags = tags ?? ["Plano Mensal", "Reformer Iniciante"];
+  const resolvedName = name ?? (variant === "reference" ? "João Pedro Silva" : "Ana Paula Martins");
+  const resolvedPhone = phone ?? (variant === "reference" ? "(11) 93456-7890" : "(11) 98765-4321");
+  const resolvedEmail = email ?? (variant === "reference" ? "joao.silva@email.com" : "ana.paula@email.com");
+  const studentTags = tags ?? (variant === "reference" ? ["Aluno", "VIP"] : ["Plano Mensal", "Reformer Iniciante"]);
   const statusTags = ["pagamento pendente", "boa frequencia", "proxima aula marcada"];
+
+  if (variant === "reference") {
+    return (
+      <Card className={cn("tcrm-student-header", "tcrm-student-header--reference", className)} data-component="StudentHeader" data-variant="reference">
+        <Avatar name={resolvedName} size="lg" src={avatarSrc} />
+        <div className="tcrm-student-header__body">
+          <div className="tcrm-student-header__identity"><h2>{resolvedName}</h2><Chip showDot={false} tone={toneForState(state)}>{state === "active" ? "Ativo" : state}</Chip></div>
+          <InlineGroup className="tcrm-student-header__tags" compact wrap>
+            {studentTags.map((tag, index) => <Chip key={index} showDot={false}>{tag}</Chip>)}
+            <Chip showDot={false}>Responsável principal: <strong>{responsible}</strong></Chip>
+          </InlineGroup>
+          <InlineGroup className="tcrm-student-header__contacts" compact wrap>
+            <span><Icon name="phone" size="var(--taliya-control-crm-student-header-contact-icon-size)" />{resolvedPhone}</span>
+            <span><Icon name="mail" size="var(--taliya-control-crm-student-header-contact-icon-size)" />{resolvedEmail}</span>
+            <span><Icon name="info" size="var(--taliya-control-crm-student-header-contact-icon-size)" />{studentId}</span>
+          </InlineGroup>
+        </div>
+        <Button className="tcrm-student-header__next-action" onClick={onNextAction} trailingIcon="chevronRight" variant="ghost">
+          <><small>Próxima ação</small><strong>{nextAction}</strong><small>{nextActionDate}</small></>
+        </Button>
+      </Card>
+    );
+  }
 
   return (
     <Card className={cn("tcrm-student-header", className)}>
-      <Avatar name={name} size="2xl" src={avatarSrc} />
+      <Avatar name={resolvedName} size="2xl" src={avatarSrc} />
       <div className="tcrm-student-header__body">
-        <h2>{name}</h2>
+        <h2>{resolvedName}</h2>
         <InlineGroup className="tcrm-student-header__tags" compact wrap>
           <Chip showDot={false} tone={toneForState(state)}>{state === "active" ? "Ativa" : state}</Chip>
           {studentTags.map((tag, index) => (
@@ -12320,8 +16358,8 @@ export function StudentHeader({
           ))}
         </InlineGroup>
         <InlineGroup className="tcrm-student-header__contacts" compact wrap>
-          <span><Icon name="whatsapp" size="var(--taliya-control-crm-student-header-contact-icon-size)" tone="success" />{phone}</span>
-          <span><Icon name="mail" size="var(--taliya-control-crm-student-header-contact-icon-size)" tone="info" />{email}</span>
+          <span><Icon name="whatsapp" size="var(--taliya-control-crm-student-header-contact-icon-size)" tone="success" />{resolvedPhone}</span>
+          <span><Icon name="mail" size="var(--taliya-control-crm-student-header-contact-icon-size)" tone="info" />{resolvedEmail}</span>
         </InlineGroup>
         <InlineGroup className="tcrm-student-header__status-tags" compact wrap>
           {statusTags.map((tag, index) => (
@@ -12984,6 +17022,7 @@ function salesChipClass(value: React.ReactNode, prefix: string): string {
 export function PipelineCard({
   title = "Ana Souza",
   source,
+  sourceIcon = "whatsapp",
   interest,
   nextAction,
   meta,
@@ -12995,6 +17034,7 @@ export function PipelineCard({
   className
 }: CrmSurfaceProps & {
   source?: React.ReactNode;
+  sourceIcon?: IconName;
   interest?: React.ReactNode;
   nextAction?: React.ReactNode;
   onSelect?: () => void;
@@ -13009,7 +17049,7 @@ export function PipelineCard({
       <header className="tcrm-pipeline-card__header">
         <strong>{title}</strong>
         <span className="tcrm-pipeline-card__channel">
-          <Icon name="whatsapp" size="12px" />
+          <Icon name={sourceIcon} size="12px" />
           <span>{source ?? defaults.source}</span>
         </span>
       </header>
@@ -13897,6 +17937,7 @@ export interface InternalOverviewDashboardRow {
   label: React.ReactNode;
   value: React.ReactNode;
   tone?: ComponentTone | "risk" | "grant";
+  cells?: React.ReactNode[];
 }
 
 export interface InternalOverviewDashboardCard {
@@ -13907,6 +17948,7 @@ export interface InternalOverviewDashboardCard {
   secondary?: React.ReactNode;
   actionLabel?: React.ReactNode;
   icon?: IconName;
+  columns?: React.ReactNode[];
   rows?: InternalOverviewDashboardRow[];
 }
 
@@ -13978,7 +18020,12 @@ const defaultInternalShellCards: InternalOverviewDashboardCard[] = [
     label: "novos",
     secondary: "4 demos hoje",
     actionLabel: "Abrir leads",
-    icon: "user"
+    icon: "user",
+    columns: ["Studio", "Origem", "Etapa"],
+    rows: [
+      { label: "Studio Corpo Vivo", value: "Demo marcada", tone: "info", cells: ["Studio Corpo Vivo", "Landing Pilates", <Chip key="demo" showDot={false} tone="info">Demo marcada</Chip>] },
+      { label: "Studio Equilíbrio", value: "Qualificar", tone: "info", cells: ["Studio Equilíbrio", "Indicação", <Chip key="qualify" showDot={false} tone="info">Qualificar</Chip>] }
+    ]
   },
   {
     id: "tenants",
@@ -13987,7 +18034,12 @@ const defaultInternalShellCards: InternalOverviewDashboardCard[] = [
     label: "ativos",
     secondary: "3 em risco",
     actionLabel: "Abrir clientes",
-    icon: "user"
+    icon: "user",
+    columns: ["Studio", "Plano", "Status"],
+    rows: [
+      { label: "Studio Vila Mariana", value: "ativo", tone: "grant", cells: ["Studio Vila Mariana", "Growth", <Chip key="active" tone="success">ativo</Chip>] },
+      { label: "Studio Reformer Sul", value: "risco", tone: "risk", cells: ["Studio Reformer Sul", "Base", <Chip key="risk" tone="warning">risco</Chip>] }
+    ]
   },
   {
     id: "support",
@@ -13996,7 +18048,12 @@ const defaultInternalShellCards: InternalOverviewDashboardCard[] = [
     label: "abertos",
     secondary: "2 aguardando Taliya",
     actionLabel: "Abrir suporte",
-    icon: "sparkles"
+    icon: "sparkles",
+    columns: ["Assunto", "Studio", "Status"],
+    rows: [
+      { label: "Importação duplicou alunos", value: "em análise", tone: "info", cells: ["Importação duplicou alunos", "Vila Mariana", <Chip key="analysis" showDot={false} tone="info">em análise</Chip>] },
+      { label: "WhatsApp desconectou", value: "aguardando studio", tone: "risk", cells: ["WhatsApp desconectou", "Reformer Sul", <Chip key="waiting" showDot={false} tone="warning">aguardando studio</Chip>] }
+    ]
   },
   {
     id: "grants",
@@ -14005,7 +18062,12 @@ const defaultInternalShellCards: InternalOverviewDashboardCard[] = [
     label: "ativos",
     secondary: "1 pendente",
     actionLabel: "Revisar grants",
-    icon: "shield"
+    icon: "shield",
+    columns: ["Studio", "Escopo", "Expira / Status"],
+    rows: [
+      { label: "Vila Mariana", value: "hoje 18:00", tone: "grant", cells: ["Vila Mariana", "Importação", <Chip key="expires" showDot={false} tone="success">hoje 18:00</Chip>] },
+      { label: "Pilates Norte", value: "pendente", tone: "risk", cells: ["Pilates Norte", "Integração WhatsApp", <Chip key="pending" showDot={false} tone="warning">pendente</Chip>] }
+    ]
   },
   {
     id: "incidents",
@@ -14014,7 +18076,12 @@ const defaultInternalShellCards: InternalOverviewDashboardCard[] = [
     label: "S2",
     secondary: "3 S3",
     actionLabel: "Abrir incidentes",
-    icon: "shieldAlert"
+    icon: "shieldAlert",
+    columns: ["Assunto", "Severidade", "Status"],
+    rows: [
+      { label: "Webhook de pagamento com atraso", value: "mitigando", tone: "info", cells: ["Webhook de pagamento com atraso", <Chip key="s2" showDot={false} tone="danger">S2</Chip>, <Chip key="mitigating" showDot={false} tone="info">mitigando</Chip>] },
+      { label: "Falha intermitente de importação", value: "investigando", tone: "info", cells: ["Falha intermitente de importação", <Chip key="s3" showDot={false} tone="warning">S3</Chip>, <Chip key="investigating" showDot={false} tone="info">investigando</Chip>] }
+    ]
   },
   {
     id: "billing",
@@ -14023,7 +18090,12 @@ const defaultInternalShellCards: InternalOverviewDashboardCard[] = [
     label: "faturas com falha",
     secondary: "5 cotas em 90%",
     actionLabel: "Abrir billing",
-    icon: "coins"
+    icon: "coins",
+    columns: ["Studio", "Alerta"],
+    rows: [
+      { label: "Studio Reformer Sul", value: "pagamento falhou", tone: "risk", cells: ["Studio Reformer Sul", <Chip key="failed" showDot={false} tone="danger">pagamento falhou</Chip>] },
+      { label: "Studio Ana Pilates", value: "cota 90%", tone: "risk", cells: ["Studio Ana Pilates", <Chip key="quota" showDot={false} tone="warning">cota 90%</Chip>] }
+    ]
   }
 ];
 
@@ -14062,26 +18134,33 @@ function InternalShellCard({
     { label: "Studio Vila Mariana", value: "ativo", tone: "grant" },
     { label: "Studio Reformer Sul", value: "risco", tone: "risk" }
   ];
+  const columns = card.columns ?? ["Studio", "Status"];
+  const columnTemplate = `repeat(${columns.length}, minmax(0, 1fr))`;
 
   return (
     <Panel className="tcrm-internal-shell__card">
       <header><Icon name={card.icon ?? "user"} size="20px" /><h3>{card.title}</h3></header>
       <p><strong>{card.value}</strong> {card.label} {card.secondary ? <span>{card.secondary}</span> : null}</p>
       <div className="tcrm-internal-shell__table">
-        <span>Studio</span><span>Status</span>
+        <div className="tcrm-internal-shell__table-head" style={{ gridTemplateColumns: columnTemplate }}>
+          {columns.map((column, index) => <span key={index}>{column}</span>)}
+        </div>
         {rows.map((row, index) => (
-          <React.Fragment key={`${card.id}-${index}`}>
-            <b>{row.label}</b>
-            <Chip
-              className={cn(
-                "tcrm-internal-status-chip",
-                row.tone === "risk" ? "tcrm-internal-status-chip--risk" : "tcrm-internal-status-chip--grant"
-              )}
-              tone={row.tone === "risk" ? "warning" : row.tone === "grant" ? "success" : row.tone}
-            >
-              {row.value}
-            </Chip>
-          </React.Fragment>
+          <div className="tcrm-internal-shell__table-row" key={`${card.id}-${index}`} style={{ gridTemplateColumns: columnTemplate }}>
+            {(row.cells ?? [
+              <b key="label">{row.label}</b>,
+              <Chip
+                className={cn(
+                  "tcrm-internal-status-chip",
+                  row.tone === "risk" ? "tcrm-internal-status-chip--risk" : "tcrm-internal-status-chip--grant"
+                )}
+                key="value"
+                tone={row.tone === "risk" ? "warning" : row.tone === "grant" ? "success" : row.tone}
+              >
+                {row.value}
+              </Chip>
+            ]).map((cell, cellIndex) => <span key={cellIndex}>{cell}</span>)}
+          </div>
         ))}
       </div>
       {card.actionLabel ? <Button onClick={() => onCardAction?.(card)} size="sm" variant="ghost">{card.actionLabel}</Button> : null}
@@ -14158,7 +18237,15 @@ export function InternalOverviewDashboard({
   );
 }
 
-export function TenantDetailLayout({ children, className }: React.HTMLAttributes<HTMLDivElement>) {
+export interface TenantDetailLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+  footerNote?: React.ReactNode;
+}
+
+export function TenantDetailLayout({
+  children,
+  className,
+  footerNote = "Visão interna e segura da Taliya. Acesso e ações sensíveis são auditados. Grants são obrigatórios para diagnóstico em dados operacionais."
+}: TenantDetailLayoutProps) {
   return (
     <section className={cn("tcrm-tenant-detail-layout", className)} aria-label="Detalhe do tenant">
       <main className="tcrm-tenant-detail-layout__main">
@@ -14200,6 +18287,7 @@ export function TenantDetailLayout({ children, className }: React.HTMLAttributes
                 </Panel>
                 <Panel className="tcrm-tenant-detail-layout__users">
                   <h3><span>2.</span> Usuários do tenant <Button size="sm" variant="ghost">Ver usuários</Button></h3>
+                  <div className="tcrm-tenant-detail-layout__user-columns"><span>Usuário</span><span>Perfil</span><span>Status</span><span>Último acesso</span></div>
                   {["Ana Souza", "Marina Lopes", "Sam Frank", "João Silva"].map((name, index) => <p key={name}><Avatar name={name} size="xs" />{name}<span>{index === 0 ? "Dona" : index === 1 ? "Admin" : index === 2 ? "Recepção" : "Professor"}</span><Chip tone="success">ativo</Chip><time>{index < 2 ? "hoje" : "2 dias"}</time></p>)}
                 </Panel>
                 <Panel className="tcrm-tenant-detail-layout__entitlements">
@@ -14220,6 +18308,7 @@ export function TenantDetailLayout({ children, className }: React.HTMLAttributes
         )}
       </main>
       <SecurityRulePanel />
+      {footerNote ? <footer className="tcrm-tenant-detail-layout__footer"><Icon name="lock" size="12px" />{footerNote}</footer> : null}
     </section>
   );
 }
@@ -14236,6 +18325,7 @@ export function ChartPanel({
   impact = "impacta caixa e conciliação",
   stats,
   icon = "alert",
+  layout = "metric",
   onOpen,
   className
 }: CrmSurfaceProps & {
@@ -14246,7 +18336,8 @@ export function ChartPanel({
   metricTone?: ComponentTone;
   actionLabel?: React.ReactNode;
   impact?: React.ReactNode;
-  stats?: Array<{ id: string; label: React.ReactNode; value: React.ReactNode; icon: IconName; tone?: ComponentTone }>;
+  stats?: Array<{ id: string; label: React.ReactNode; value: React.ReactNode; icon: IconName; tone?: ComponentTone; detail?: React.ReactNode }>;
+  layout?: "metric" | "summary" | "exports" | "recommendation";
   variant?: React.ComponentProps<typeof ChartPanelPrimitive>["variant"];
   onOpen?: () => void;
 }) {
@@ -14258,17 +18349,32 @@ export function ChartPanel({
   ];
 
   return (
-    <Panel className={cn("tcrm-report-card", `tcrm-report-card--metric-${metricTone}`, className)} data-state={key} aria-label={String(title)}>
+    <Panel className={cn("tcrm-report-card", `tcrm-report-card--metric-${metricTone}`, `tcrm-report-card--layout-${layout}`, className)} data-layout={layout} data-state={key} aria-label={String(title)}>
       <header className="tcrm-report-card__header">
         <Icon name={icon} size="20px" tone={toneForState(key === "ready" ? "warning" : key)} />
         <h3>{title}</h3>
       </header>
-      <div className="tcrm-report-card__meta">
-        <p className="tcrm-report-card__origin">Origem: <strong>{source}</strong></p>
-        <span>Período: {period}</span>
-      </div>
+      {layout === "recommendation" ? null : (
+        <div className={cn("tcrm-report-card__meta", layout !== "metric" && "tcrm-report-card__meta--digest")}>
+          {layout === "metric" ? <p className="tcrm-report-card__origin">Origem: <strong>{source}</strong></p> : null}
+          <span>Período: {period}</span>
+        </div>
+      )}
       {key === "loading" || key === "empty" ? (
         <ChartPanelPrimitive className="tcrm-report-card__primitive" empty={key === "empty"} loading={key === "loading"} title={String(title)} variant="bar" />
+      ) : layout === "summary" || layout === "exports" ? (
+        <div className="tcrm-report-card__digest">
+          {metricStats.map((item) => (
+            <span key={item.id}>
+              <Icon name={item.icon} size="16px" tone={item.tone ?? "current"} />
+              <span>{item.label}</span>
+              <b>{item.value}</b>
+              {item.detail ? <small>{item.detail}</small> : null}
+            </span>
+          ))}
+        </div>
+      ) : layout === "recommendation" ? (
+        <p className="tcrm-report-card__recommendation">{impact}</p>
       ) : (
         <>
           <div className="tcrm-report-card__value"><strong>{value}</strong><span>{valueSuffix}</span></div>
@@ -14387,6 +18493,7 @@ export function InternalShell({
   sidebarItems = crmEmptyShellSidebarItems,
   utilityItems = crmEmptyShellSidebarUtilityItems,
   avatarSrc,
+  browserUrl,
   children,
   className,
   contentClassName,
@@ -14399,11 +18506,14 @@ export function InternalShell({
   onBack,
   onNavChange,
   onSidebarSelect,
-  onSidebarUtilitySelect
+  onSidebarUtilitySelect,
+  ...shellProps
 }: InternalShellProps) {
   return (
     <CrmProductShell
+      {...shellProps}
       avatarSrc={avatarSrc}
+      browserUrl={browserUrl}
       brand={brand}
       className={cn("tcrm-internal-product-shell", className)}
       contentClassName={contentClassName}
@@ -14441,6 +18551,7 @@ export interface InternalWorklistPageProps extends Omit<InternalShellProps, "chi
   state?: WorkListDetailPageState;
   worklistClassName?: string;
   worklistLayoutMode?: WorkListDetailPageLayoutMode;
+  worklistHeightMode?: WorkListDetailPageHeightMode;
 }
 
 export function InternalWorklistPage({
@@ -14458,6 +18569,7 @@ export function InternalWorklistPage({
   state,
   worklistClassName,
   worklistLayoutMode,
+  worklistHeightMode,
   ...shellProps
 }: InternalWorklistPageProps) {
   return (
@@ -14465,7 +18577,7 @@ export function InternalWorklistPage({
       {...shellProps}
       className={cn("tcrm-internal-product-shell", shellProps.className)}
       contentClassName={shellProps.contentClassName}
-      contentLayout="work-list"
+      contentLayout={shellProps.contentLayout ?? "work-list"}
       navItems={navItems}
       sidebarItems={sidebarItems}
       utilityItems={utilityItems}
@@ -14476,6 +18588,7 @@ export function InternalWorklistPage({
         filterBar={filterBar}
         filterBarLabel={filterBarLabel}
         layoutMode={worklistLayoutMode}
+        heightMode={worklistHeightMode}
         listLabel={listLabel}
         mainLabel={mainLabel}
         pageLabel={pageLabel}
@@ -14505,8 +18618,8 @@ export interface PageFilterBarFilter {
 
 export interface PageFilterBarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   state?: PageFilterBarState;
-  density?: "standard" | "compact" | "tight";
-  layout?: "standard" | "stacked";
+  density?: "standard" | "comfortable" | "compact" | "tight";
+  layout?: "standard" | "stacked" | "stacked-filters";
   query?: string;
   searchVisible?: boolean;
   searchPlaceholder?: string;
@@ -14522,6 +18635,7 @@ export interface PageFilterBarProps extends Omit<React.HTMLAttributes<HTMLDivEle
   advancedFiltersSurface?: "popover" | "modal";
   advancedFiltersTriggerVariant?: "icon" | "button";
   advancedFilterGroupLabel?: string;
+  leadingActions?: React.ReactNode;
   actions?: React.ReactNode;
   onSearchChange?: (value: string) => void;
   onSearchFilter?: () => void;
@@ -14595,6 +18709,7 @@ export function PageFilterBar({
   advancedFiltersSurface = "popover",
   advancedFiltersTriggerVariant = "icon",
   advancedFilterGroupLabel = "Filtros avançados",
+  leadingActions,
   actions,
   onSearchChange,
   onSearchFilter,
@@ -14608,8 +18723,9 @@ export function PageFilterBar({
   const controlsDisabled = isLoading || state === "disabled" || state === "blocked";
   const primaryFilters = filters?.filter((filter) => filter.placement !== "advanced") ?? [];
   const advancedFilters = filters?.filter((filter) => filter.placement === "advanced") ?? [];
+  const isStacked = layout === "stacked" || layout === "stacked-filters";
   const primaryQuickFilters = layout === "stacked" ? primaryFilters.filter((filter) => filter.kind === "quick") : [];
-  const primaryControlFilters = layout === "stacked" ? primaryFilters.filter((filter) => filter.kind !== "quick") : primaryFilters;
+  const primaryControlFilters = isStacked ? (layout === "stacked-filters" ? primaryFilters : primaryFilters.filter((filter) => filter.kind !== "quick")) : primaryFilters;
   const selectedAdvancedCount = advancedFilters.filter((filter) => filter.selected || filter.value || (filter.values?.length ?? 0) > 0).length;
   const hasAdvancedFilters = advancedFilters.length > 0;
   const advancedFiltersContent = (
@@ -14644,9 +18760,10 @@ export function PageFilterBar({
       aria-label={ariaLabel}
       className={cn(
         "tcrm-page-filter-bar",
+        density === "comfortable" && "tcrm-page-filter-bar--comfortable",
         density === "compact" && "tcrm-page-filter-bar--compact",
         density === "tight" && "tcrm-page-filter-bar--tight",
-        layout === "stacked" && "tcrm-page-filter-bar--stacked",
+        isStacked && "tcrm-page-filter-bar--stacked",
         !searchVisible && "tcrm-page-filter-bar--without-search",
         className
       )}
@@ -14656,9 +18773,10 @@ export function PageFilterBar({
       data-state={state}
       {...props}
     >
-      {layout === "stacked" ? (
+      {isStacked ? (
         <>
           <div className="tcrm-page-filter-bar__row tcrm-page-filter-bar__row--top">
+            {leadingActions ? <div className="tcrm-page-filter-bar__leading-actions">{leadingActions}</div> : null}
             {searchVisible ? (
               <SearchInput
                 aria-label={searchAriaLabel}
@@ -14716,6 +18834,7 @@ export function PageFilterBar({
         </>
       ) : (
         <>
+          {leadingActions ? <div className="tcrm-page-filter-bar__leading-actions">{leadingActions}</div> : null}
           {searchVisible ? (
             <SearchInput
               aria-label={searchAriaLabel}
@@ -15002,6 +19121,7 @@ export interface CrmWorklistTableProps<T extends { id: string }> extends Omit<Re
   ariaLabel: string;
   blockedDescription?: React.ReactNode;
   blockedTitle?: string;
+  caption?: React.ReactNode;
   columns: Array<CrmWorklistTableColumn<T>>;
   emptyDescription?: string;
   emptyTitle?: string;
@@ -15035,6 +19155,7 @@ export function CrmWorklistTable<T extends { id: string }>({
   ariaLabel,
   blockedDescription = "A lista esta indisponivel.",
   blockedTitle = "Lista bloqueada",
+  caption,
   className,
   columns,
   density = "default",
@@ -15117,6 +19238,7 @@ export function CrmWorklistTable<T extends { id: string }>({
             sort={activeSort}
             onSortChange={handleSortChange}
           />
+          {caption ? <p className="tcrm-worklist-table__caption">{caption}</p> : null}
           {pagination ? (
             <TablePagination
               className="tcrm-worklist-table__pagination"
@@ -16395,6 +20517,8 @@ export interface StudentTableRow {
 
 export interface StudentTableProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
   state?: StudentTableState;
+  density?: "standard" | "compact";
+  selectionTone?: "marker" | "soft";
   rows?: StudentTableRow[];
   pageLabel?: React.ReactNode;
   itemsPerPage?: React.ReactNode;
@@ -16588,6 +20712,8 @@ function StudentTablePersonCell({ person }: { person: StudentTablePerson }) {
 export function StudentTable({
   className,
   state = "source",
+  density = "standard",
+  selectionTone = "marker",
   rows = sourceStudentTableRows,
   pageLabel = "1-10 de 154",
   itemsPerPage = "10",
@@ -16616,8 +20742,10 @@ export function StudentTable({
     <Panel
       aria-busy={isLoading || undefined}
       aria-label="Tabela de alunos"
-      className={cn("tcrm-student-table", className)}
+      className={cn("tcrm-student-table", density === "compact" && "tcrm-student-table--compact", selectionTone === "soft" && "tcrm-student-table--selection-soft", className)}
       data-component="StudentTable"
+      data-density={density}
+      data-selection-tone={selectionTone}
       data-state={state}
       {...props}
     >
@@ -17480,3 +21608,939 @@ export function IntegrationFailedState({ state = "retry", onAction, className, .
   );
 }
 
+export type GovernanceAction = (action: string) => void;
+
+export interface PlanAgentsPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  baseAgents?: number;
+  professionalAgents?: number;
+  usedAgents?: number;
+  totalAgents?: number;
+  onAction?: GovernanceAction;
+}
+
+export function PlanAgentsPanel({
+  baseAgents = 0,
+  professionalAgents = 7,
+  usedAgents = 7,
+  totalAgents = 20,
+  onAction,
+  className,
+  ...props
+}: PlanAgentsPanelProps) {
+  const availableAgents = Math.max(0, totalAgents - usedAgents);
+  const progress = totalAgents > 0 ? Math.round((usedAgents / totalAgents) * 100) : 0;
+
+  return (
+    <Panel compact className={cn("tcrm-governance-panel", "tcrm-plan-agents-panel", className)} data-component="PlanAgentsPanel" {...props}>
+      <header className="tcrm-governance-panel__header"><h3>1. Plano e agentes</h3><Icon name="info" /></header>
+      <div className="tcrm-plan-agents-panel__grid">
+        <Card className="tcrm-plan-agents-panel__plan">
+          <header><strong>Base</strong><Chip showDot={false}>Plano base</Chip></header>
+          <span className="tcrm-plan-agents-panel__plan-icon"><Icon name="user" /></span>
+          <p><strong>{baseAgents}</strong> agentes</p>
+          <small>CRM ativo</small>
+          <Chip showDot={false} tone="success">Ativo</Chip>
+          <Button onClick={() => onAction?.("view-base")} size="sm" variant="secondary">Ver detalhes</Button>
+        </Card>
+        <Card className="tcrm-plan-agents-panel__plan">
+          <header><strong>Profissional</strong><Chip showDot={false}>CRM Ativo</Chip></header>
+          <span className="tcrm-plan-agents-panel__plan-icon"><Icon name="users" /></span>
+          <p><strong>{professionalAgents}</strong> agentes</p>
+          <small>Incluídos no plano</small>
+          <Chip showDot={false} tone="success">Ativo</Chip>
+          <Button onClick={() => onAction?.("upgrade")} size="sm" variant="primary">Fazer upgrade</Button>
+        </Card>
+        <Card className="tcrm-plan-agents-panel__capacity">
+          <span>Agentes</span>
+          <span aria-label={`${progress}% dos agentes usados`} className="tcrm-plan-agents-panel__ring" role="progressbar" style={{ "--tcrm-plan-agents-progress": `${progress}%` } as React.CSSProperties} aria-valuemax={100} aria-valuemin={0} aria-valuenow={progress}>
+            <strong>{usedAgents} / {totalAgents}</strong><small>usados</small>
+          </span>
+          <strong>{availableAgents} <small>disponíveis</small></strong>
+          <Button onClick={() => onAction?.("view-agents")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver agentes</Button>
+        </Card>
+      </div>
+    </Panel>
+  );
+}
+
+export interface FallbackControlCardProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+  enabled?: boolean;
+  defaultEnabled?: boolean;
+  onEnabledChange?: (enabled: boolean) => void;
+}
+
+export function FallbackControlCard({ enabled, defaultEnabled = true, onEnabledChange, className, ...props }: FallbackControlCardProps) {
+  return (
+    <Panel compact className={cn("tcrm-governance-panel", "tcrm-fallback-control", className)} data-component="FallbackControlCard" {...props}>
+      <header className="tcrm-governance-panel__header"><h3>4. Fallback manual</h3><Icon name="info" /></header>
+      <Card className="tcrm-fallback-control__card">
+        <span className="tcrm-fallback-control__icon"><Icon name="refresh" /></span>
+        <span className="tcrm-fallback-control__body"><strong>Fallback manual</strong><p>Quando a automação não pode atuar, o CRM continua ativo para que a equipe execute a ação manualmente.</p></span>
+        <span className="tcrm-fallback-control__status"><Chip showDot={false} tone="success">Habilitado</Chip><Toggle aria-label="Alternar fallback manual" compact defaultPressed={enabled === undefined ? defaultEnabled : undefined} onPressedChange={onEnabledChange} pressed={enabled} /></span>
+      </Card>
+    </Panel>
+  );
+}
+
+export interface BillingGovernancePanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  cardLabel?: React.ReactNode;
+  cardEnding?: React.ReactNode;
+  cardExpiry?: React.ReactNode;
+  nextChargeDate?: React.ReactNode;
+  nextChargeAmount?: React.ReactNode;
+  invoiceId?: React.ReactNode;
+  invoiceDate?: React.ReactNode;
+  invoiceAmount?: React.ReactNode;
+  onAction?: GovernanceAction;
+}
+
+export function BillingGovernancePanel({
+  cardLabel = "Visa",
+  cardEnding = "•••• 4242",
+  cardExpiry = "Vence em 12/2026",
+  nextChargeDate = "28/05/2024",
+  nextChargeAmount = "R$ 1.890,00",
+  invoiceId = "FAT-2024-0452",
+  invoiceDate = "28/04/2024",
+  invoiceAmount = "R$ 1.890,00",
+  onAction,
+  className,
+  ...props
+}: BillingGovernancePanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-governance-panel", "tcrm-billing-governance", className)} data-component="BillingGovernancePanel" {...props}>
+      <header className="tcrm-governance-panel__header"><h3>7. Billing e pagamento</h3><Icon name="info" /></header>
+      <div className="tcrm-billing-governance__grid">
+        <Card><small>Método de pagamento</small><span className="tcrm-billing-governance__payment"><Icon name="creditCard" /><strong>{cardLabel} {cardEnding}</strong></span><span>{cardExpiry}</span><Button onClick={() => onAction?.("update-payment")} size="sm" variant="secondary">Atualizar pagamento</Button></Card>
+        <Card><small>Próxima cobrança</small><strong>{nextChargeDate}</strong><span>{nextChargeAmount}</span><small>Em 28 dias</small><Chip showDot={false} tone="success">Pago</Chip></Card>
+        <Card><small>Última fatura</small><strong>{invoiceId}</strong><span>{invoiceDate}</span><span>{invoiceAmount}</span><Button onClick={() => onAction?.("view-invoice")} size="sm" trailingIcon="download" variant="secondary">Ver fatura</Button></Card>
+      </div>
+      <Button className="tcrm-governance-panel__link" onClick={() => onAction?.("invoice-history")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver histórico de faturas</Button>
+    </Panel>
+  );
+}
+
+export type GovernanceAuditStatus = "success" | "pending" | "alert";
+
+export interface GovernanceAuditRow {
+  id: string;
+  action: React.ReactNode;
+  user: React.ReactNode;
+  dateTime: React.ReactNode;
+  origin: React.ReactNode;
+  status: GovernanceAuditStatus;
+}
+
+const defaultGovernanceAuditRows: GovernanceAuditRow[] = [
+  { id: "login", action: "Login realizado", user: "Sam Frank", dateTime: "28/04/2024 10:32", origin: "Web", status: "success" },
+  { id: "automation", action: "Regra de automação editada", user: "Nikki Olaw", dateTime: "28/04/2024 09:18", origin: "Web", status: "success" },
+  { id: "integration", action: "Integração reconectada", user: "Maria Lopes", dateTime: "27/04/2024 16:41", origin: "API", status: "success" },
+  { id: "permission", action: "Permissão solicitada", user: "João Silva", dateTime: "27/04/2024 14:12", origin: "Web", status: "pending" },
+  { id: "quota", action: "Cota próxima do limite", user: "Sistema", dateTime: "27/04/2024 11:02", origin: "Sistema", status: "alert" }
+];
+
+const governanceAuditTone: Record<GovernanceAuditStatus, ComponentTone> = { success: "success", pending: "info", alert: "warning" };
+const governanceAuditLabel: Record<GovernanceAuditStatus, string> = { success: "Sucesso", pending: "Pendente", alert: "Alerta" };
+
+export interface GovernanceAuditPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  rows?: GovernanceAuditRow[];
+  onAction?: GovernanceAction;
+  onRowClick?: (row: GovernanceAuditRow) => void;
+}
+
+export function GovernanceAuditPanel({ rows = defaultGovernanceAuditRows, onAction, onRowClick, className, ...props }: GovernanceAuditPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-governance-panel", "tcrm-governance-audit", className)} data-component="GovernanceAuditPanel" {...props}>
+      <header className="tcrm-governance-panel__header"><h3>8. Auditoria e logs</h3><Icon name="info" /></header>
+      <div className="tcrm-governance-audit__table-wrap">
+        <table><thead><tr><th>Ação</th><th>Usuário</th><th>Data / Hora</th><th>Origem</th><th>Status</th></tr></thead><tbody>{rows.map((row) => <tr className={onRowClick ? "is-interactive" : undefined} key={row.id} onClick={() => onRowClick?.(row)}><td>{row.action}</td><td>{row.user}</td><td>{row.dateTime}</td><td>{row.origin}</td><td><Chip showDot={false} tone={governanceAuditTone[row.status]}>{governanceAuditLabel[row.status]}</Chip></td></tr>)}</tbody></table>
+      </div>
+      <Button className="tcrm-governance-panel__link" onClick={() => onAction?.("view-all-logs")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver todos os logs</Button>
+    </Panel>
+  );
+}
+
+export interface GuardrailPolicy {
+  id: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  icon: IconName;
+  enabled: boolean;
+}
+
+const defaultGuardrailPolicies: GuardrailPolicy[] = [
+  { id: "automatic", title: "Permitir ação automática", description: "Ações podem ser executadas automaticamente pelos agentes", icon: "shield", enabled: true },
+  { id: "review", title: "Exigir revisão humana", description: "Ações sensíveis exigem aprovação manual antes da execução", icon: "lock", enabled: true },
+  { id: "quota", title: "Limitar uso ao atingir cota", description: "Bloqueia novas execuções quando a cota é atingida", icon: "alert", enabled: true },
+  { id: "schedule", title: "Bloquear envio fora do horário", description: "Mensagem não enviada fora do horário comercial", icon: "clock", enabled: false }
+];
+
+export interface GuardrailPolicyPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+  policies?: GuardrailPolicy[];
+  onPolicyChange?: (policyId: string, enabled: boolean) => void;
+  onAction?: GovernanceAction;
+}
+
+export function GuardrailPolicyPanel({ policies = defaultGuardrailPolicies, onPolicyChange, onAction, className, ...props }: GuardrailPolicyPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-governance-panel", "tcrm-guardrail-policy", className)} data-component="GuardrailPolicyPanel" {...props}>
+      <header className="tcrm-governance-panel__header"><h3>9. Política e guardrails</h3><Icon name="info" /></header>
+      <div className="tcrm-guardrail-policy__rows">{policies.map((policy) => <RuleRow checked={policy.enabled} control="none" description={policy.description} icon={policy.icon} iconTone="neutral" key={policy.id} onToggle={(enabled) => onPolicyChange?.(policy.id, enabled)} rowId={policy.id} showToggle title={policy.title} />)}</div>
+      <Button className="tcrm-governance-panel__link" onClick={() => onAction?.("view-all-policies")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas as políticas</Button>
+    </Panel>
+  );
+}
+
+export interface GeneralSettingsPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+  workspaceName?: string;
+  defaultPlan?: string;
+  automaticFallback?: string;
+  limitNotifications?: string;
+  emailAlerts?: boolean;
+  onFieldChange?: (field: string, value: string | boolean) => void;
+  onAction?: GovernanceAction;
+}
+
+export function GeneralSettingsPanel({
+  workspaceName = "Taliya CRM",
+  defaultPlan = "professional",
+  automaticFallback = "manual",
+  limitNotifications = "admins",
+  emailAlerts = true,
+  onFieldChange,
+  onAction,
+  className,
+  ...props
+}: GeneralSettingsPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-governance-panel", "tcrm-general-settings", className)} data-component="GeneralSettingsPanel" {...props}>
+      <header className="tcrm-governance-panel__header"><h3>10. Configurações gerais</h3><Icon name="info" /></header>
+      <div className="tcrm-general-settings__rows">
+        <label><span>Nome do workspace</span><Input aria-label="Nome do workspace" onChange={(event) => onFieldChange?.("workspaceName", event.currentTarget.value)} value={workspaceName} /></label>
+        <label><span>Plano padrão</span><Select aria-label="Plano padrão" onValueChange={(value) => onFieldChange?.("defaultPlan", value)} options={[{ value: "base", label: "Base" }, { value: "professional", label: "Profissional" }]} value={defaultPlan} /></label>
+        <label><span>Fallback automático</span><Select aria-label="Fallback automático" onValueChange={(value) => onFieldChange?.("automaticFallback", value)} options={[{ value: "manual", label: "Manual" }, { value: "paused", label: "Pausado" }]} value={automaticFallback} /></label>
+        <label><span>Notificações de limite</span><Select aria-label="Notificações de limite" onValueChange={(value) => onFieldChange?.("limitNotifications", value)} options={[{ value: "admins", label: "Administrador e Gestores" }, { value: "owner", label: "Somente owner" }]} value={limitNotifications} /></label>
+        <label className="tcrm-general-settings__toggle"><span>Ativar alertas por e-mail</span><Toggle aria-label="Ativar alertas por e-mail" compact onPressedChange={(value) => onFieldChange?.("emailAlerts", value)} pressed={emailAlerts} /></label>
+      </div>
+      <Button className="tcrm-governance-panel__link" onClick={() => onAction?.("view-all-settings")} size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas as configurações</Button>
+    </Panel>
+  );
+}
+
+const image13SetupSteps: StepperStep[] = [
+  { id: "source", label: "Fonte de dados", description: "Concluído", state: "complete" },
+  { id: "import", label: "Importação", description: "Concluído", state: "complete" },
+  { id: "mapping", label: "Mapeamento", description: "Em andamento", state: "current" },
+  { id: "duplicates", label: "Duplicidades", description: "Bloqueado", state: "blocked" },
+  { id: "activation", label: "Ativação", description: "Pendente", state: "pending" }
+];
+
+export interface SetupWizardPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  steps?: StepperStep[];
+  currentStepId?: string;
+  progress?: number;
+  onStepSelect?: (stepId: string) => void;
+}
+
+export function SetupWizardPanel({
+  steps = image13SetupSteps,
+  currentStepId = "mapping",
+  progress = 60,
+  onStepSelect,
+  className,
+  ...props
+}: SetupWizardPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-reference-panel", "tcrm-setup-wizard-panel", className)} data-component="SetupWizardPanel" {...props}>
+      <header className="tcrm-reference-panel__header"><span>1</span><h3>Wizard / stepper de setup</h3></header>
+      <Stepper compact currentStepId={currentStepId} onStepSelect={onStepSelect} progress={progress} steps={steps} />
+    </Panel>
+  );
+}
+
+export interface ActivationChecklistItem {
+  id: string;
+  title: React.ReactNode;
+  owner: React.ReactNode;
+  ownerAvatarSrc?: string;
+  actionLabel: string;
+  state: "complete" | "incomplete" | "warning" | "blocked";
+  disabled?: boolean;
+}
+
+const image13ActivationItems: ActivationChecklistItem[] = [
+  { id: "source", title: "Conectar fonte de dados", owner: "Sam Frank", actionLabel: "Revisar", state: "complete" },
+  { id: "consent", title: "Revisar consentimento", owner: "Nikki Olaw", actionLabel: "Abrir", state: "incomplete" },
+  { id: "owners", title: "Validar responsáveis", owner: "João Silva", actionLabel: "Validar", state: "warning" },
+  { id: "publish", title: "Publicar perfis", owner: "Sara Alves", actionLabel: "Bloqueado", state: "blocked", disabled: true }
+];
+
+export interface ActivationChecklistPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onToggle"> {
+  items?: ActivationChecklistItem[];
+  onItemAction?: (item: ActivationChecklistItem) => void;
+  onItemToggle?: (item: ActivationChecklistItem, checked: boolean) => void;
+  onItemMenu?: (item: ActivationChecklistItem) => void;
+}
+
+export function ActivationChecklistPanel({
+  items = image13ActivationItems,
+  onItemAction,
+  onItemToggle,
+  onItemMenu,
+  className,
+  ...props
+}: ActivationChecklistPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-reference-panel", "tcrm-activation-checklist", className)} data-component="ActivationChecklistPanel" {...props}>
+      <header className="tcrm-reference-panel__header"><span>2</span><h3>Checklist de ativação</h3></header>
+      <div aria-hidden="true" className="tcrm-activation-checklist__columns"><span>Item</span><span>Responsável</span><span>Ação rápida</span><span /></div>
+      <div className="tcrm-activation-checklist__rows" role="list">
+        {items.map((item) => (
+          <ChecklistItem
+            actionDisabled={item.disabled}
+            actionLabel={item.actionLabel}
+            disabled={item.disabled}
+            key={item.id}
+            menu={<IconButton icon="more" label={`Abrir opções de ${String(item.title)}`} onClick={() => onItemMenu?.(item)} size="sm" variant="ghost" />}
+            onAction={() => onItemAction?.(item)}
+            onToggle={(checked) => onItemToggle?.(item, checked)}
+            owner={item.owner}
+            ownerAvatarSrc={item.ownerAvatarSrc}
+            state={item.state}
+            title={item.title}
+          />
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+export interface DataConflictRow {
+  id: string;
+  severity: "high" | "medium" | "low";
+  object: React.ReactNode;
+  description: React.ReactNode;
+  suggestion: React.ReactNode;
+  owner: React.ReactNode;
+  ownerAvatarSrc?: string;
+}
+
+const image13ConflictRows: DataConflictRow[] = [
+  { id: "cpf", severity: "high", object: "Aluno", description: "CPF duplicado em 2 registros", suggestion: "Revisar e mesclar", owner: "Sam Frank" },
+  { id: "phone", severity: "medium", object: "Contato", description: "Telefone em formato inválido", suggestion: "Corrigir formato", owner: "Nikki Olaw" },
+  { id: "email", severity: "medium", object: "Responsável", description: "E-mail já associado a outro", suggestion: "Confirmar vínculo", owner: "João Silva" },
+  { id: "birth", severity: "low", object: "Aluno", description: "Data de nascimento ausente", suggestion: "Complementar", owner: "Sara Alves" }
+];
+
+export interface DataConflictQueueProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  rows?: DataConflictRow[];
+  onRowSelect?: (row: DataConflictRow) => void;
+  onViewAll?: () => void;
+}
+
+export function DataConflictQueue({ rows = image13ConflictRows, onRowSelect, onViewAll, className, ...props }: DataConflictQueueProps) {
+  const severityLabels = { high: "Alta", medium: "Média", low: "Baixa" } as const;
+  const severityTones = { high: "danger", medium: "warning", low: "info" } as const;
+  return (
+    <Panel compact className={cn("tcrm-reference-panel", "tcrm-data-conflict-queue", className)} data-component="DataConflictQueue" {...props}>
+      <header className="tcrm-reference-panel__header"><span>6</span><h3>Fila de conflitos de dados</h3></header>
+      <DataTable
+        compact
+        columns={[
+          { key: "severity", header: "Severidade", width: "15%", render: (row) => <Chip showDot={false} tone={severityTones[row.severity]}>{severityLabels[row.severity]}</Chip> },
+          { key: "object", header: "Objeto", width: "15%" },
+          { key: "description", header: "Descrição do conflito", width: "30%" },
+          { key: "suggestion", header: "Ação sugerida", width: "23%" },
+          { key: "owner", header: "Responsável", width: "17%", render: (row) => <span className="tcrm-data-conflict-queue__owner"><Avatar name={String(row.owner)} size="xs" src={row.ownerAvatarSrc} />{row.owner}</span> }
+        ]}
+        onRowClick={onRowSelect}
+        rows={rows}
+      />
+      <Button className="tcrm-reference-panel__link" onClick={onViewAll} size="sm" variant="ghost">Ver todos os conflitos</Button>
+    </Panel>
+  );
+}
+
+const image13ProfileTabs: TabItem[] = [
+  { value: "summary", label: "Resumo", content: null },
+  { value: "agenda", label: "Agenda", content: null },
+  { value: "finance", label: "Financeiro", content: null },
+  { value: "history", label: "Histórico", content: null },
+  { value: "documents", label: <span className="tcrm-profile-tabs-panel__count">Documentos <Badge tone="info">3</Badge></span>, content: null },
+  { value: "permissions", label: "Permissões", content: null }
+];
+
+export interface ProfileTabsPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+  items?: TabItem[];
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+}
+
+export function ProfileTabsPanel({ items = image13ProfileTabs, value, defaultValue = "summary", onValueChange, className, ...props }: ProfileTabsPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-reference-panel", "tcrm-profile-tabs-panel", className)} data-component="ProfileTabsPanel" {...props}>
+      <header className="tcrm-reference-panel__header"><span>8</span><h3>Abas internas de perfil</h3></header>
+      <ProfileTabs defaultValue={defaultValue} density="compact" items={items} onValueChange={onValueChange} value={value} />
+    </Panel>
+  );
+}
+
+export interface ConsentHistoryRow {
+  id: string;
+  date: React.ReactNode;
+  consent: React.ReactNode;
+  origin: React.ReactNode;
+  actor: React.ReactNode;
+}
+
+const image13ConsentHistory: ConsentHistoryRow[] = [
+  { id: "whatsapp", date: "28/04/2024 14:32", consent: "WhatsApp permitido", origin: "Web", actor: "Sam Frank" },
+  { id: "marketing", date: "10/03/2024 09:11", consent: "Opt-out marketing", origin: "App", actor: "Nikki Olaw" },
+  { id: "email", date: "05/12/2023 16:45", consent: "E-mail permitido", origin: "Web", actor: "João Silva" }
+];
+
+export interface ConsentPreferencesPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+  whatsappAllowed?: boolean;
+  marketingAllowed?: boolean;
+  preferredChannel?: string;
+  preferredTime?: string;
+  history?: ConsentHistoryRow[];
+  onPreferenceChange?: (field: string, value: string | boolean) => void;
+  onViewHistory?: () => void;
+}
+
+export function ConsentPreferencesPanel({
+  whatsappAllowed = true,
+  marketingAllowed = false,
+  preferredChannel = "whatsapp",
+  preferredTime = "morning",
+  history = image13ConsentHistory,
+  onPreferenceChange,
+  onViewHistory,
+  className,
+  ...props
+}: ConsentPreferencesPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-reference-panel", "tcrm-consent-preferences", className)} data-component="ConsentPreferencesPanel" {...props}>
+      <header className="tcrm-reference-panel__header"><span>10</span><h3>Consentimento e preferências</h3></header>
+      <div className="tcrm-consent-preferences__controls">
+        <label><span>WhatsApp permitido</span><Toggle aria-label="WhatsApp permitido" compact onPressedChange={(value) => onPreferenceChange?.("whatsappAllowed", value)} pressed={whatsappAllowed} /></label>
+        <label><span>Opt-out de marketing</span><Toggle aria-label="Opt-out de marketing" compact onPressedChange={(value) => onPreferenceChange?.("marketingAllowed", value)} pressed={marketingAllowed} /></label>
+        <label><span>Canal preferido</span><Select aria-label="Canal preferido" onValueChange={(value) => onPreferenceChange?.("preferredChannel", value)} options={[{ value: "whatsapp", label: "WhatsApp" }, { value: "email", label: "E-mail" }]} value={preferredChannel} /></label>
+        <label><span>Preferência de horário</span><Select aria-label="Preferência de horário" onValueChange={(value) => onPreferenceChange?.("preferredTime", value)} options={[{ value: "morning", label: "Manhã (08h–12h)" }, { value: "afternoon", label: "Tarde (12h–18h)" }]} value={preferredTime} /></label>
+      </div>
+      <div className="tcrm-consent-preferences__history">
+        <strong>Histórico de consentimento</strong>
+        <DataTable compact columns={[{ key: "date", header: "Data", width: "30%" }, { key: "consent", header: "Consentimento", width: "30%" }, { key: "origin", header: "Origem", width: "15%" }, { key: "actor", header: "Responsável", width: "25%" }]} rows={history} />
+      </div>
+      <Button className="tcrm-reference-panel__link" onClick={onViewHistory} size="sm" variant="ghost">Ver histórico completo</Button>
+    </Panel>
+  );
+}
+
+export interface SensitiveTimelineEvent {
+  id: string;
+  group: React.ReactNode;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  actor?: React.ReactNode;
+  icon: IconName;
+  tone: ComponentTone;
+  actionLabel?: string;
+  status?: React.ReactNode;
+}
+
+const image13SensitiveEvents: SensitiveTimelineEvent[] = [
+  { id: "profile", group: "Hoje, 14:32", title: "Atualização de cadastro", description: "Endereço atualizado", actor: "Sam Frank", icon: "checkCircle", tone: "success" },
+  { id: "document", group: "Hoje, 10:15", title: "Documento restrito", description: "Verificação de renda", icon: "lock", tone: "warning", actionLabel: "Pedir acesso" },
+  { id: "email", group: "Ontem, 16:40", title: "E-mail mascarado", description: "joao.***@gmail.com", icon: "lock", tone: "neutral" },
+  { id: "access", group: "25/04/2024 11:22", title: "Acesso solicitado", description: "Histórico de pagamentos", icon: "info", tone: "info", status: "Pendente" },
+  { id: "note", group: "20/04/2024 09:08", title: "Nota interna", description: "Aluno participativo nas aulas", actor: "Nikki Olaw", icon: "clipboard", tone: "success" }
+];
+
+export interface SensitiveTimelinePanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSelect"> {
+  events?: SensitiveTimelineEvent[];
+  onEventAction?: (event: SensitiveTimelineEvent) => void;
+}
+
+export function SensitiveTimelinePanel({ events = image13SensitiveEvents, onEventAction, className, ...props }: SensitiveTimelinePanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-reference-panel", "tcrm-sensitive-timeline", className)} data-component="SensitiveTimelinePanel" {...props}>
+      <header className="tcrm-reference-panel__header"><span>11</span><h3>Timeline sensível</h3></header>
+      <Timeline
+        compact
+        items={events.map((event) => ({
+          id: event.id,
+          title: event.title,
+          time: event.group,
+          description: event.description,
+          actor: event.actor,
+          icon: event.icon,
+          tone: event.tone,
+          action: event.actionLabel ? <Button onClick={() => onEventAction?.(event)} size="sm" variant="secondary">{event.actionLabel}</Button> : event.status ? <Chip showDot={false}>{event.status}</Chip> : undefined
+        }))}
+        variant="sensitive"
+      />
+    </Panel>
+  );
+}
+
+export interface ClassSummaryCardProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
+  title?: React.ReactNode;
+  status?: React.ReactNode;
+  students?: React.ReactNode;
+  capacity?: React.ReactNode;
+  openings?: React.ReactNode;
+  waitlist?: React.ReactNode;
+  nextClass?: React.ReactNode;
+  teacher?: React.ReactNode;
+  onViewDetails?: () => void;
+}
+
+export function ClassSummaryCard({
+  title = "Reformer Iniciante - R01",
+  status = "Ativa",
+  students = 8,
+  capacity = 8,
+  openings = 0,
+  waitlist = 3,
+  nextClass = "Quarta, 22/05 · 09:00 - 10:00 · Sala 2",
+  teacher = "Maria Clara",
+  onViewDetails,
+  className,
+  ...props
+}: ClassSummaryCardProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-class-summary-card", className)} data-component="ClassSummaryCard" {...props}>
+      <header>
+        <span className="tcrm-class-summary-card__icon"><Icon name="book" /></span>
+        <strong>{title}</strong>
+        <Chip showDot={false} tone="success">{status}</Chip>
+      </header>
+      <dl className="tcrm-class-summary-card__metrics">
+        <div><dt>Alunos</dt><dd>{students}</dd></div>
+        <div><dt>Capacidade</dt><dd>{capacity}</dd></div>
+        <div><dt>Vagas</dt><dd>{openings}</dd></div>
+        <div><dt>Lista de espera</dt><dd className="tcrm-image14-danger">{waitlist}</dd></div>
+      </dl>
+      <dl className="tcrm-class-summary-card__details">
+        <div><dt>Proxima aula</dt><dd>{nextClass}</dd></div>
+        <div><dt>Professor</dt><dd>{teacher}</dd></div>
+      </dl>
+      <Button className="tcrm-image14-panel__link" onClick={onViewDetails} size="sm" trailingIcon="arrowRight" variant="ghost">Ver detalhes</Button>
+    </Panel>
+  );
+}
+
+export interface ReplacementMatcherCandidate {
+  id: string;
+  name: React.ReactNode;
+  initials?: string;
+  avatarSrc?: string;
+  priority: React.ReactNode;
+  schedule: React.ReactNode;
+  actionLabel: React.ReactNode;
+}
+
+const image14MatcherCandidates: ReplacementMatcherCandidate[] = [
+  { id: "ana", name: "Ana Beatriz", initials: "AB", priority: "Alta", schedule: "Qua 29/05 · 09:00", actionLabel: "Convidar" },
+  { id: "bruno", name: "Bruno Lima", initials: "BL", priority: "Media", schedule: "Qua 29/05 · 11:00", actionLabel: "Reservar" },
+  { id: "carla", name: "Carla Mendes", initials: "CM", priority: "Baixa", schedule: "Qui 30/05 · 10:00", actionLabel: "Convidar" }
+];
+
+export interface ReplacementMatcherPanelProps extends React.HTMLAttributes<HTMLElement> {
+  candidates?: ReplacementMatcherCandidate[];
+  onCandidateAction?: (candidate: ReplacementMatcherCandidate) => void;
+  onViewAlternatives?: () => void;
+}
+
+export function ReplacementMatcherPanel({ candidates = image14MatcherCandidates, onCandidateAction, onViewAlternatives, className, ...props }: ReplacementMatcherPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-replacement-matcher", className)} data-component="ReplacementMatcherPanel" {...props}>
+      <header className="tcrm-image14-panel__header"><span>5</span><h3>Matcher de reposicao</h3></header>
+      <dl className="tcrm-replacement-matcher__summary">
+        <div><dt>Credito disponivel</dt><dd>1 aula</dd><small>Vence em 15/06/2024</small></div>
+        <div><dt>Vagas compativeis</dt><dd>3 vagas</dd><small>Prox. 7 dias</small></div>
+        <div><dt>Melhor encaixe</dt><dd>Qua, 29/05 · 09:00</dd><small>Reformer · Sala 2</small></div>
+      </dl>
+      <div className="tcrm-replacement-matcher__table" role="table" aria-label="Candidatos para reposicao">
+        <div role="row"><span role="columnheader">Candidato (3)</span><span role="columnheader">Prioridade</span><span role="columnheader">Horario</span><span role="columnheader">Status</span></div>
+        {candidates.map((candidate) => (
+          <div key={candidate.id} role="row">
+            <span role="cell"><Avatar name={candidate.initials ?? String(candidate.name)} size="xs" src={candidate.avatarSrc} /> {candidate.name}</span>
+            <span role="cell">{candidate.priority}</span>
+            <span role="cell">{candidate.schedule}</span>
+            <Button onClick={() => onCandidateAction?.(candidate)} size="sm" variant="ghost">{candidate.actionLabel}</Button>
+          </div>
+        ))}
+      </div>
+      <footer><InlineAlert tone="danger">Conflito: Sala 2 indisponivel em 28/05 as 09:00.</InlineAlert><Button onClick={onViewAlternatives} size="sm" variant="secondary">Ver alternativas</Button></footer>
+    </Panel>
+  );
+}
+
+export interface WaitlistRow {
+  id: string;
+  name: React.ReactNode;
+  priority: React.ReactNode;
+  availability: React.ReactNode;
+  origin: React.ReactNode;
+  status: React.ReactNode;
+  tone?: ComponentTone;
+}
+
+const image14WaitlistRows: WaitlistRow[] = [
+  { id: "juliana", name: "Juliana Costa", priority: "Alta", availability: "Ter/Qui 09-11h", origin: "Website", status: "Aguardando", tone: "warning" },
+  { id: "rafaela", name: "Rafaela Dias", priority: "Media", availability: "Qua/Sex 08-10h", origin: "Indicacao", status: "Convidado", tone: "info" },
+  { id: "lucas", name: "Lucas Martins", priority: "Media", availability: "Seg/Qua 18-20h", origin: "Instagram", status: "Enviado", tone: "success" },
+  { id: "patricia", name: "Patricia Nunes", priority: "Baixa", availability: "Sab 08-12h", origin: "Anterior", status: "Nao recebeu", tone: "neutral" },
+  { id: "camila", name: "Camila Rocha", priority: "Baixa", availability: "Ter/Sex 17-19h", origin: "Website", status: "Aguardando", tone: "warning" }
+];
+
+export interface WaitlistPanelProps extends React.HTMLAttributes<HTMLElement> {
+  rows?: WaitlistRow[];
+  onRowSelect?: (row: WaitlistRow) => void;
+}
+
+export function WaitlistPanel({ rows = image14WaitlistRows, onRowSelect, className, ...props }: WaitlistPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-waitlist-panel", className)} data-component="WaitlistPanel" {...props}>
+      <header className="tcrm-image14-panel__header"><span>6</span><h3>Lista de espera</h3></header>
+      <div className="tcrm-waitlist-panel__table" role="table" aria-label="Lista de espera">
+        <div role="row"><span role="columnheader">Interessado</span><span role="columnheader">Prioridade</span><span role="columnheader">Disponibilidade</span><span role="columnheader">Origem</span><span role="columnheader">Status convite</span></div>
+        {rows.map((row) => (
+          <button key={row.id} onClick={() => onRowSelect?.(row)} role="row" type="button">
+            <span role="cell">{row.name}</span><span role="cell"><Chip showDot={false} tone={row.priority === "Alta" ? "warning" : row.priority === "Media" ? "info" : "success"}>{row.priority}</Chip></span><span role="cell">{row.availability}</span><span role="cell">{row.origin}</span><span role="cell"><Chip showDot={false} tone={row.tone}>{row.status}</Chip></span>
+          </button>
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+export interface ResourceConflictPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onApply?: () => void;
+  onView?: () => void;
+}
+
+export function ResourceConflictPanel({ onApply, onView, className, ...props }: ResourceConflictPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-resource-conflict-panel", className)} data-component="ResourceConflictPanel" {...props}>
+      <header className="tcrm-image14-panel__header"><span>7</span><h3>Conflito de recurso</h3></header>
+      <ConflictCard
+        compact
+        description="Terca, 21/05 · 13:00 - 14:00"
+        facts={[{ label: "Aulas afetadas", value: "2 aulas" }, { label: "Impacto", value: "12 alunos" }, { label: "Recurso", value: "Sala 2" }]}
+        onApply={() => onApply?.()}
+        onView={() => onView?.()}
+        state="danger"
+        suggestion="Mover para Sala 3"
+        title="Sala ou professor indisponivel"
+      />
+    </Panel>
+  );
+}
+
+export interface DocumentViewerPanelProps extends React.HTMLAttributes<HTMLElement> {
+  selectedPageId?: string;
+  onPageSelect?: (pageId: string) => void;
+  onDownload?: () => void;
+  onSend?: () => void;
+}
+
+export function DocumentViewerPanel({ selectedPageId = "1", onPageSelect, onDownload, onSend, className, ...props }: DocumentViewerPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-document-viewer-panel", className)} data-component="DocumentViewerPanel" {...props}>
+      <header className="tcrm-image14-panel__header"><span>8</span><h3>Viewer de documento/contrato</h3></header>
+      <DocumentPreview
+        client="Cliente: Ana Beatriz Souza"
+        compact
+        date="Data: 15/04/2024"
+        history={[{ id: "h1", label: "Assinado por Ana Beatriz", time: "16/04/2024 10:32" }, { id: "h2", label: "Enviado para assinatura", time: "15/04/2024 09:15" }]}
+        onDownload={() => onDownload?.()}
+        onPageSelect={onPageSelect}
+        onSend={() => onSend?.()}
+        pages={[{ id: "1", label: "1" }, { id: "2", label: "2" }]}
+        selectedPageId={selectedPageId}
+        state="signed"
+        title="Contrato de Prestacao de Servicos"
+      />
+    </Panel>
+  );
+}
+
+export type UploadReceiptState = "attached" | "pending" | "approved" | "error";
+
+export interface UploadReceiptItem {
+  id: string;
+  title: React.ReactNode;
+  meta: React.ReactNode;
+  state: UploadReceiptState;
+  detail?: React.ReactNode;
+}
+
+const image14UploadReceipts: UploadReceiptItem[] = [
+  { id: "attached", title: "recibo_abril_2024.pdf", meta: "245 KB · PDF", state: "attached" },
+  { id: "pending", title: "comprovante_(1).jpg", meta: "1.2 MB · JPG", state: "pending", detail: "Enviado em 20/05 14:32" },
+  { id: "approved", title: "recibo_maio_2024.pdf", meta: "231 KB · PDF", state: "approved", detail: "Aprovado em 21/05 09:10" },
+  { id: "error", title: "comprovante_(1).jpg", meta: "1.2 MB · JPG", state: "error", detail: "Falha na conexao" }
+];
+
+export interface UploadReceiptPanelProps extends React.HTMLAttributes<HTMLElement> {
+  items?: UploadReceiptItem[];
+  onUpload?: () => void;
+  onItemAction?: (item: UploadReceiptItem) => void;
+}
+
+export function UploadReceiptPanel({ items = image14UploadReceipts, onUpload, onItemAction, className, ...props }: UploadReceiptPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-upload-receipt-panel", className)} data-component="UploadReceiptPanel" {...props}>
+      <header className="tcrm-image14-panel__header"><span>9</span><h3>Upload / anexo / comprovante</h3></header>
+      <div className="tcrm-upload-receipt-panel__content">
+        <FileUpload actionLabel="Selecionar" className="tcrm-upload-receipt-panel__dropzone" description="PDF, JPG, PNG ate 10MB" onClick={onUpload} title="Arraste o arquivo aqui ou clique para selecionar" />
+        {items.map((item) => (
+          <article className={cn("tcrm-upload-receipt-panel__item", `tcrm-upload-receipt-panel__item--${item.state}`)} key={item.id}>
+            <small>{item.state === "attached" ? "Arquivo anexado" : item.state === "pending" ? "Comprovante pendente" : item.state === "approved" ? "Comprovante aprovado" : "Erro de upload"}</small>
+            <div><Icon name={item.state === "error" ? "alertCircle" : "fileText"} /><span><strong>{item.title}</strong><small>{item.meta}</small></span><IconButton icon="moreVertical" label={`Opcoes de ${String(item.title)}`} onClick={() => onItemAction?.(item)} size="sm" variant="ghost" /></div>
+            {item.detail ? <footer>{item.detail}</footer> : null}
+            {item.state !== "attached" ? <Chip showDot={false} tone={item.state === "approved" ? "success" : item.state === "pending" ? "warning" : "danger"}>{item.state === "approved" ? "Aprovado" : item.state === "pending" ? "Pendente" : "Tentar novamente"}</Chip> : <Icon name="checkCircle" />}
+          </article>
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+export interface ReconciliationSummaryRow {
+  id: string;
+  description: React.ReactNode;
+  dueDate: React.ReactNode;
+  expected: React.ReactNode;
+  received: React.ReactNode;
+  difference: React.ReactNode;
+  status: React.ReactNode;
+  tone?: ComponentTone;
+}
+
+const image14ReconciliationRows: ReconciliationSummaryRow[] = [
+  { id: "mp", description: "Mensalidade · Maio/2024 · MP", dueDate: "10/05/2024", expected: "R$ 320,00", received: "R$ 320,00", difference: "R$ 0,00", status: "Conciliado", tone: "success" },
+  { id: "ref", description: "Mensalidade · Maio/2024 · REF", dueDate: "10/05/2024", expected: "R$ 420,00", received: "R$ 400,00", difference: "- R$ 20,00", status: "Pendente", tone: "warning" }
+];
+
+export interface ReconciliationSummaryTableProps extends React.HTMLAttributes<HTMLElement> {
+  rows?: ReconciliationSummaryRow[];
+  onReconcile?: (row: ReconciliationSummaryRow) => void;
+}
+
+export function ReconciliationSummaryTable({ rows = image14ReconciliationRows, onReconcile, className, ...props }: ReconciliationSummaryTableProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-reconciliation-summary", className)} data-component="ReconciliationSummaryTable" {...props}>
+      <header className="tcrm-image14-panel__header"><span>10</span><h3>Linha de conciliacao</h3></header>
+      <div className="tcrm-reconciliation-summary__table" role="table" aria-label="Linha de conciliacao">
+        <div role="row"><span role="columnheader">Descricao</span><span role="columnheader">Vencimento</span><span role="columnheader">Pagamento esperado</span><span role="columnheader">Pagamento recebido</span><span role="columnheader">Diferenca</span><span role="columnheader">Status</span><span role="columnheader">Acao</span></div>
+        {rows.map((row) => <div key={row.id} role="row"><strong role="cell">{row.description}</strong><span role="cell">{row.dueDate}</span><span role="cell">{row.expected}</span><span role="cell">{row.received}</span><span className={row.id === "ref" ? "tcrm-image14-danger" : undefined} role="cell">{row.difference}</span><span role="cell"><Chip showDot={false} tone={row.tone}>{row.status}</Chip></span><span role="cell"><IconButton icon={row.id === "ref" ? "check" : "link"} label={`Conciliar ${String(row.description)}`} onClick={() => onReconcile?.(row)} size="sm" variant={row.id === "ref" ? "selected" : "ghost"} /></span></div>)}
+      </div>
+    </Panel>
+  );
+}
+
+export interface MoneyInputGroupProps extends React.HTMLAttributes<HTMLElement> {
+  values?: { value: string; discount: string; fine: string; installment: string; invalid: string };
+  onInstallmentChange?: (value: string) => void;
+}
+
+export function MoneyInputGroup({ values = { value: "320,00", discount: "32,00", fine: "9,60", installment: "3", invalid: "0,00" }, onInstallmentChange, className, ...props }: MoneyInputGroupProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-money-input-group", className)} data-component="MoneyInputGroup" {...props}>
+      <header className="tcrm-image14-panel__header"><span>11</span><h3>Input de valor / moeda</h3></header>
+      <div className="tcrm-money-input-group__fields">
+        <label><span>Valor</span><MoneyInput aria-label="Valor" defaultValue={values.value} fieldSize="sm" fieldState="success" /></label>
+        <label><span>Desconto</span><MoneyInput aria-label="Desconto" defaultValue={values.discount} fieldSize="sm" fieldState="success" /></label>
+        <label><span>Multa</span><MoneyInput aria-label="Multa" defaultValue={values.fine} fieldSize="sm" fieldState="success" /></label>
+        <label><span>Parcela</span><Select aria-label="Parcela" fieldSize="sm" onValueChange={onInstallmentChange} options={[{ value: "1", label: "1 / 12" }, { value: "2", label: "2 / 12" }, { value: "3", label: "3 / 12" }]} value={values.installment} /></label>
+        <label><span className="tcrm-image14-danger">Valor (erro)</span><MoneyInput aria-label="Valor com erro" defaultValue={values.invalid} error="Valor deve ser maior que zero." fieldSize="sm" /></label>
+      </div>
+    </Panel>
+  );
+}
+
+export interface FinancialSimulationPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onApprove?: () => void;
+  onReject?: () => void;
+}
+
+export function FinancialSimulationPanel({ onApprove, onReject, className, ...props }: FinancialSimulationPanelProps) {
+  return (
+    <Panel compact className={cn("tcrm-image14-panel", "tcrm-financial-simulation", className)} data-component="FinancialSimulationPanel" {...props}>
+      <header className="tcrm-image14-panel__header"><span>12</span><h3>Simulador financeiro antes/depois</h3></header>
+      <div className="tcrm-financial-simulation__body">
+        <dl><strong>Situacao atual</strong><div><dt>Plano atual</dt><dd>Plano Mensal · Reformer</dd></div><div><dt>Valor mensal</dt><dd>R$ 420,00</dd></div><div><dt>Vencimento</dt><dd>10 de cada mes</dd></div><div><dt>Prox. cobranca</dt><dd>10/06/2024</dd></div></dl>
+        <dl><strong>Alteracao proposta</strong><div><dt>Novo plano</dt><dd>Plano Semestral · Reformer</dd></div><div><dt>Novo mensal</dt><dd>R$ 360,00</dd></div><div><dt>Vencimento</dt><dd>10 de cada mes</dd></div><div><dt>Inicio da mudanca</dt><dd>10/06/2024</dd></div></dl>
+        <dl className="tcrm-financial-simulation__impact"><strong>Impacto da mudanca</strong><div><dt>Economia mensal</dt><dd>- R$ 60,00</dd></div><div><dt>Economia total (6 meses)</dt><dd>- R$ 360,00</dd></div><div><dt>Saldo creditos</dt><dd>R$ 20,00</dd></div><div><dt>Valor total no periodo</dt><dd>R$ 2.160,00</dd></div></dl>
+        <aside><strong>Risco / atencao</strong><p>Contrato atual nao preve cancelamento antecipado.</p><p>Ha 1 parcela em aberto.</p></aside>
+      </div>
+      <footer><Button onClick={onReject} size="sm" variant="secondary">Rejeitar</Button><Button onClick={onApprove} size="sm" variant="primary">Aprovar</Button></footer>
+    </Panel>
+  );
+}
+
+function Reference15Header({ number, title }: { number: number; title: React.ReactNode }) {
+  return <header className="tcrm-reference15-header"><span>{number}</span><h3>{title}</h3></header>;
+}
+
+export interface FlowSimulationPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onApprove?: () => void;
+}
+
+export function FlowSimulationPanel({ onApprove, className, ...props }: FlowSimulationPanelProps) {
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-flow-simulation-panel", className)} data-component="FlowSimulationPanel" {...props}>
+    <Reference15Header number={3} title="Simulador de fluxo" />
+    <label>Entrada de teste<Input aria-label="Entrada de teste" defaultValue={'Cliente envia: "Quero saber sobre precos."'} fieldSize="sm" /></label>
+    <label>Resultado esperado<Input aria-label="Resultado esperado" defaultValue="Enviar apresentacao de plano e agendar follow-up." fieldSize="sm" /></label>
+    <dl><div><dt>Risco</dt><dd><StatusDot status="warning" /> Medio</dd></div><div><dt>Custo/cota estimada</dt><dd>0,024 creditos</dd></div><div><dt>Tempo estimado</dt><dd>8,2 s</dd></div></dl>
+    <Button leadingIcon="send" onClick={onApprove} size="sm" variant="primary">Aprovar publicacao</Button>
+  </Panel>;
+}
+
+export interface PublicationPreflightPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onPublish?: () => void;
+  onSaveDraft?: () => void;
+}
+
+export function PublicationPreflightPanel({ onPublish, onSaveDraft, className, ...props }: PublicationPreflightPanelProps) {
+  const rows = [
+    ["Dados necessarios", "Concluido", "success"], ["Permissoes", "Concluido", "success"],
+    ["Cota disponivel", "Atencao", "warning"], ["Politica", "Concluido", "success"], ["Status geral", "Pronto para revisao", "info"]
+  ] as const;
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-publication-preflight", className)} data-component="PublicationPreflightPanel" {...props}>
+    <Reference15Header number={4} title="Preflight antes de publicar" />
+    <div className="tcrm-publication-preflight__rows">{rows.map(([label, status, tone]) => <div key={label}><Icon name={tone === "warning" ? "alert" : "checkCircle"} size="sm" tone={tone} /><span>{label}</span><Icon name={tone === "warning" ? "alert" : "check"} size="sm" tone={tone} /><Chip tone={tone}>{status}</Chip></div>)}</div>
+    <footer><Button leadingIcon="send" onClick={onPublish} size="sm" variant="primary">Publicar</Button><Button onClick={onSaveDraft} size="sm" variant="secondary">Salvar rascunho</Button></footer>
+  </Panel>;
+}
+
+export interface ExecutionTraceTableProps extends React.HTMLAttributes<HTMLElement> {
+  onViewAll?: () => void;
+}
+
+export function ExecutionTraceTable({ onViewAll, className, ...props }: ExecutionTraceTableProps) {
+  const rows = [
+    ["1", "Receber mensagem", "WhatsApp Webhook", "Sucesso", "0,45 s", "0,001", "-"],
+    ["2", "Verificar elegibilidade", "Regra de negocio", "Sucesso", "0,32 s", "0,002", "-"],
+    ["3", "Buscar dados do cliente", "Taliya CRM API", "Sucesso", "0,78 s", "0,006", "-"],
+    ["4", "Gerar resposta (LLM)", "Assistente de texto", "Em andamento", "2,31 s", "0,013", "-"],
+    ["5", "Enviar mensagem", "WhatsApp API", "Falhou", "0,21 s", "0,002", "Timeout"],
+    ["6", "Registrar interacao", "Taliya CRM API", "Pendente", "-", "-", "-"]
+  ];
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-execution-trace", className)} data-component="ExecutionTraceTable" {...props}>
+    <Reference15Header number={5} title="Trace de execucao" />
+    <div className="tcrm-execution-trace__table" role="table"><div role="row"><span>Etapa executada</span><span>Ferramenta usada</span><span>Status</span><span>Duracao</span><span>Custo</span><span>Erro</span></div>{rows.map((row) => <div key={row[0]} role="row"><span><b>{row[0]}</b> {row[1]}</span><span>{row[2]}</span><span><Chip tone={row[3] === "Falhou" ? "danger" : row[3] === "Em andamento" ? "info" : row[3] === "Pendente" ? "neutral" : "success"}>{row[3]}</Chip></span><span>{row[4]}</span><span>{row[5]}</span><span className={row[6] !== "-" ? "tcrm-reference15-danger" : undefined}>{row[6]}</span></div>)}</div>
+    <Button className="tcrm-reference15-link" onClick={onViewAll} size="sm" trailingIcon="arrowRight" variant="ghost">Ver trace completo</Button>
+  </Panel>;
+}
+
+export interface AgentIncidentPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onReprocess?: () => void;
+  onCreateTask?: () => void;
+  onViewDetails?: () => void;
+}
+
+export function AgentIncidentPanel({ onReprocess, onCreateTask, onViewDetails, className, ...props }: AgentIncidentPanelProps) {
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-agent-incident", className)} data-component="AgentIncidentPanel" {...props}>
+    <Reference15Header number={6} title="Incidente de agente" />
+    <dl><div><dt>Causa</dt><dd><Chip tone="danger">Falha de execucao</Chip></dd></div><div><dt>Impacto</dt><dd>Cliente nao recebeu resposta.</dd></div><div><dt>Objeto afetado</dt><dd>#CS-1043 · Joao Silva</dd></div><div><dt>Fallback manual</dt><dd className="tcrm-reference15-success"><Icon name="check" size="sm" /> Tarefa criada automaticamente</dd></div></dl>
+    <footer><Button leadingIcon="refresh" onClick={onReprocess} size="sm" variant="primary">Reprocessar com seguranca</Button><Button leadingIcon="clipboard" onClick={onCreateTask} size="sm" variant="secondary">Criar tarefa</Button></footer>
+    <Button className="tcrm-reference15-link" onClick={onViewDetails} size="sm" trailingIcon="arrowRight" variant="ghost">Ver mais detalhes</Button>
+  </Panel>;
+}
+
+export interface EvaluationQualityPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onViewReport?: () => void;
+}
+
+export function EvaluationQualityPanel({ onViewReport, className, ...props }: EvaluationQualityPanelProps) {
+  const metrics = [["Taxa de sucesso", "94,2%", "↑ 3,1 pp", "success"], ["Falhas", "5,8%", "↓ 1,2 pp", "danger"], ["Revisao humana", "18,6%", "↓ 2,4 pp", "info"], ["Confianca media", "82%", "↑ 4 pp", "success"], ["Casos problematicos", "128", "↑ 18 hoje", "warning"], ["SLA atendido", "98,7%", "↑ 1,5 pp", "success"]] as const;
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-evaluation-quality", className)} data-component="EvaluationQualityPanel" {...props}>
+    <Reference15Header number={7} title="Painel de qualidade / evals" />
+    <div>{metrics.map(([label, value, delta, tone]) => <section key={label}><span>{label}</span><strong>{value}</strong><small className={`tcrm-reference15-${tone}`}>{delta}</small></section>)}</div>
+    <Button className="tcrm-reference15-link" onClick={onViewReport} size="sm" trailingIcon="arrowRight" variant="ghost">Ver relatorio completo</Button>
+  </Panel>;
+}
+
+export interface PrivacyRequestTableProps extends React.HTMLAttributes<HTMLElement> {
+  onOpenRequest?: (requestId: string) => void;
+  onViewAll?: () => void;
+}
+
+export function PrivacyRequestTable({ onOpenRequest, onViewAll, className, ...props }: PrivacyRequestTableProps) {
+  const rows = [["REQ-1287", "Joao Silva", "Concluida", "success"], ["REQ-1286", "Ana Costa", "Em andamento", "info"], ["REQ-1285", "Mariana A.", "Aguardando dados", "warning"], ["REQ-1284", "Pedro L.", "Negada", "danger"]] as const;
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-privacy-request", className)} data-component="PrivacyRequestTable" {...props}>
+    <Reference15Header number={10} title="Privacidade / LGPD" />
+    <div className="tcrm-privacy-request__table" role="table"><div role="row"><span>Solicitacao</span><span>Validar identidade</span><span>Exportar</span><span>Anonimizar</span><span>Negar</span><span>Status</span></div>{rows.map(([id, person, status, tone]) => <div key={id} role="row" onClick={() => onOpenRequest?.(id)}><span>{id}<small>{person}</small></span><Icon name="check" size="sm" tone="success" /><Icon name="download" size="sm" /><Icon name="lock" size="sm" /><Icon name="x" size="sm" /><Chip tone={tone}>{status}</Chip></div>)}</div>
+    <Button className="tcrm-reference15-link" onClick={onViewAll} size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas as solicitacoes</Button>
+  </Panel>;
+}
+
+export interface SupportGrantPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onTemporaryAccessChange?: (enabled: boolean) => void;
+  onRevoke?: () => void;
+}
+
+export function SupportGrantPanel({ onTemporaryAccessChange, onRevoke, className, ...props }: SupportGrantPanelProps) {
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-support-grant", className)} data-component="SupportGrantPanel" {...props}>
+    <Reference15Header number={11} title="Grant de suporte" />
+    <div className="tcrm-support-grant__field"><span>Acesso temporario</span><Toggle aria-label="Acesso temporario" compact defaultPressed onPressedChange={onTemporaryAccessChange} /></div>
+    <div className="tcrm-support-grant__field"><span>Expiracao</span><Input aria-label="Expiracao" defaultValue="30/04/2024 18:00" fieldSize="sm" trailingIcon="calendar" /></div>
+    <div className="tcrm-support-grant__field"><span>Escopo</span><Select aria-label="Escopo" defaultValue="contas" fieldSize="sm" options={[{ value: "contas", label: "Contas e Casos" }]} /></div>
+    <div className="tcrm-support-grant__field"><span>Motivo</span><Input aria-label="Motivo" defaultValue="Suporte a incidente" fieldSize="sm" /></div>
+    <Button leadingIcon="trash" onClick={onRevoke} size="sm" variant="destructive">Revogar acesso</Button>
+  </Panel>;
+}
+
+export interface AdvancedReportsPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onViewAll?: () => void;
+}
+
+export function AdvancedReportsPanel({ onViewAll, className, ...props }: AdvancedReportsPanelProps) {
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-advanced-reports", className)} data-component="AdvancedReportsPanel" {...props}>
+    <Reference15Header number={12} title="Relatorios avancados" />
+    <div className="tcrm-advanced-reports__charts">
+      <section><strong>Grafico de linha</strong><small>Conversas · Conversoes</small><svg aria-hidden="true" className="tcrm-reference15-line-chart" viewBox="0 0 120 56"><polyline points="0,42 18,33 36,37 54,19 72,29 90,14 108,21 120,8" /><polyline points="0,50 18,44 36,48 54,38 72,42 90,29 108,35 120,24" /></svg></section>
+      <section><strong>Grafico de barras</strong><small>Novos clientes</small><div className="tcrm-reference15-bar-chart">{[5,8,6,11,7,13,9,12,6,4].map((height, index) => <i key={index} style={{ height: `${height * 4}px` }} />)}</div></section>
+      <section><strong>Funil</strong><div className="tcrm-reference15-funnel"><i>Visitantes 24.890</i><i>Leads 6.152</i><i>Oportunidades 2.489</i><i>Clientes 1.102</i></div></section>
+      <section><strong>Ranking de agentes</strong>{["Sam Frank 428", "Nikki Olaw 352", "Maria Lopes 301", "Joao Silva 287", "Carlos Lima 241"].map((row) => <span key={row}>{row}</span>)}</section>
+      <section><strong>Heatmap de ocupacao</strong><small>Seg · Ter · Qua · Qui · Sex</small><div className="tcrm-reference15-heatmap">{Array.from({ length: 25 }, (_, index) => <i key={index} style={{ opacity: 0.2 + (index % 5) * 0.15 }} />)}</div></section>
+    </div>
+    <Button className="tcrm-reference15-link" onClick={onViewAll} size="sm" trailingIcon="arrowRight" variant="ghost">Ver painel completo</Button>
+  </Panel>;
+}
+
+export interface ExportQueuePanelProps extends React.HTMLAttributes<HTMLElement> {
+  onAction?: (exportId: string) => void;
+  onViewAll?: () => void;
+}
+
+export function ExportQueuePanel({ onAction, onViewAll, className, ...props }: ExportQueuePanelProps) {
+  const rows = [["conversas", "Relatorio de conversas", "CSV", "Agendada", "-", "info"], ["clientes", "Base de clientes", "XLSX", "Exportando", "62%", "info"], ["financeiro", "Relatorio financeiro", "PDF", "Pronto", "100%", "success"], ["auditoria", "Logs de auditoria", "CSV", "Falhou", "-", "danger"]] as const;
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-export-queue", className)} data-component="ExportQueuePanel" {...props}>
+    <Reference15Header number={13} title="Exportacoes" />
+    <div className="tcrm-export-queue__table" role="table"><div role="row"><span>Exportacao</span><span>Formato</span><span>Agendada para</span><span>Status</span><span>Progresso</span><span>Acoes</span></div>{rows.map(([id, label, format, status, progress, tone], index) => <div key={id} role="row"><span>{label}</span><span>{format}</span><span>28/04/2024 {10 - index}:0{index}</span><Chip tone={tone}>{status}</Chip><span>{progress}</span><IconButton icon={status === "Pronto" ? "download" : status === "Falhou" ? "refresh" : "more"} label={`Acao de ${label}`} onClick={() => onAction?.(id)} size="sm" variant="ghost" /></div>)}</div>
+    <Button className="tcrm-reference15-link" onClick={onViewAll} size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas as exportacoes</Button>
+  </Panel>;
+}
+
+export interface SegmentCommunicationPanelProps extends React.HTMLAttributes<HTMLElement> {
+  onEdit?: () => void;
+  onViewAudience?: () => void;
+  onApprove?: () => void;
+  onSchedule?: () => void;
+}
+
+export function SegmentCommunicationPanel({ onEdit, onViewAudience, onApprove, onSchedule, className, ...props }: SegmentCommunicationPanelProps) {
+  return <Panel compact className={cn("tcrm-reference15-panel", "tcrm-segment-communication", className)} data-component="SegmentCommunicationPanel" {...props}>
+    <Reference15Header number={14} title="Segmentos e comunicados" />
+    <div className="tcrm-segment-communication__body"><section><span>Construtor do segmento</span><strong>Clientes inativos &gt; 60 dias</strong><Button onClick={onEdit} size="sm" variant="ghost">Editar</Button><span>Publico elegivel</span><strong>12.843 contatos</strong><Button onClick={onViewAudience} size="sm" variant="ghost">Ver lista</Button><span>Consentimento</span><strong className="tcrm-reference15-success">98,6% com consentimento</strong></section><section><span>Preview da mensagem</span><p>Ola {'{nome}'}, sentimos sua falta! Temos novidades que podem te interessar.</p><footer><span>Custo estimado<br /><strong>0,86 creditos</strong></span><span>Canais<br /><Icon name="whatsapp" size="sm" /> <Icon name="mail" size="sm" /> <Icon name="message" size="sm" /></span></footer></section></div>
+    <footer><Button leadingIcon="send" onClick={onApprove} size="sm" variant="primary">Aprovar envio</Button><Button leadingIcon="calendar" onClick={onSchedule} size="sm" variant="secondary">Agendar</Button></footer>
+  </Panel>;
+}
