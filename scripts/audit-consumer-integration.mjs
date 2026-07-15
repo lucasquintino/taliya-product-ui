@@ -20,6 +20,8 @@ function optionValue(name, fallback) {
 const consumerRoot = path.resolve(root, optionValue("--consumer", "../taliya-internal"));
 const vendorDir = optionValue("--vendor", "vendor/taliya-product-ui").replaceAll("\\", "/").replace(/\/$/, "");
 const reportLabel = optionValue("--report-label", "");
+const outputDir = path.resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !check || outputDir !== specDir;
 
 function reportBasename(baseName) {
   if (!reportLabel) return baseName;
@@ -33,8 +35,8 @@ function reportBasename(baseName) {
   return `${baseName}-${normalized}`;
 }
 
-const reportJsonPath = path.join(specDir, `${reportBasename("consumer-integration-audit")}.json`);
-const reportMdPath = path.join(specDir, `${reportBasename("consumer-integration-audit")}.md`);
+const reportJsonPath = path.join(outputDir, `${reportBasename("consumer-integration-audit")}.json`);
+const reportMdPath = path.join(outputDir, `${reportBasename("consumer-integration-audit")}.md`);
 const standardPageKitManifestPath = path.join(specDir, "contracts/standard-page-kit.manifest.json");
 
 const activeDirs = ["app", "components", "features"];
@@ -169,8 +171,431 @@ const installedPackageContractMarkers = [
     packagePath: ["@taliya", "crm"],
     file: "dist/index.d.ts",
     requiredText: [
-      "export type CrmProductShellPageHeaderRhythm = \"default\" | \"spacious\" | \"compact-stacked\" | \"dashboard\" | \"stacked\" | \"overview\";",
+      "export type CrmProductShellFrame = \"fullscreen\" | \"window\" | \"window-inset\" | \"reference\";",
+      "export type CrmProductShellPageHeaderRhythm = \"default\" | \"spacious\" | \"compact-stacked\" | \"dashboard\" | \"reports\" | \"support\" | \"internal-overview\" | \"internal-tenants\" | \"stacked\" | \"agents\" | \"agents-routines\" | \"agents-routine-detail\" | \"agents-flow-detail\" | \"agents-publish\" | \"settings-hub\" | \"overview\" | \"operation\" | \"inbox\" | \"usage\" | \"usage-overview\" | \"billing\" | \"billing-invoices\";",
       "pageHeaderRhythm?: CrmProductShellPageHeaderRhythm;"
+    ]
+  },
+  {
+    id: "crm-agent-catalog-source-frame-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-product-shell-stage--frame-window-inset.tcrm-empty-shell-stage",
+      ".tcrm-product-shell-stage--page-header-agents .tcrm-product-shell-page-header",
+      "grid-template-columns: var(--taliya-layout-crm-agent-catalog-columns);"
+    ]
+  },
+  {
+    id: "tokens-agent-catalog-source-frame",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-agent-catalog-columns: repeat(3, minmax(280px, 445px));",
+      "--taliya-layout-crm-agent-catalog-card-width: 445px;",
+      "--taliya-layout-crm-product-shell-main-header-agents-height: 123px;",
+      "--taliya-layout-crm-product-shell-header-agents-copy-offset-y: 31px;"
+    ]
+  },
+  {
+    id: "crm-agent-routines-source-frame-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-product-shell-stage--page-header-agents-routines .tcrm-product-shell-page-header",
+      ".tcrm-dashboard-page-stack:has(.tcrm-agent-routine-intro)",
+      "var(--taliya-layout-crm-agent-routines-intro-grid-gap)",
+      "var(--taliya-control-crm-agent-routine-card-min-height)"
+    ]
+  },
+  {
+    id: "tokens-agent-routines-source-frame",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-product-shell-main-header-agents-routines-height: 175px;",
+      "--taliya-layout-crm-agent-routines-max-width: 1224px;",
+      "--taliya-layout-crm-agent-routines-intro-grid-gap: 25px;",
+      "--taliya-control-crm-agent-routine-card-min-height: 265px;",
+      "--taliya-control-crm-agent-routine-intro-gap: 27px;"
+    ]
+  },
+  {
+    id: "crm-agent-publish-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"agent-publish\"",
+      "rightPanelVariant?",
+      "AgentPublishRoutineWorkspace"
+    ]
+  },
+  {
+    id: "crm-agent-publish-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-product-shell-stage--page-header-agents-publish .tcrm-product-shell-page-header",
+      ".tcrm-product-shell-stage--content-agent-publish .tcrm-page-family-content.tcrm-product-shell-content",
+      "var(--taliya-layout-crm-product-shell-content-agent-publish-padding)"
+    ]
+  },
+  {
+    id: "tokens-agent-publish-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-product-shell-main-header-agents-publish-height: 85px;",
+      "--taliya-layout-crm-product-shell-header-agents-publish-copy-offset-y: 0px;",
+      "--taliya-layout-crm-product-shell-header-agents-publish-margin-left: 86px;",
+      "--taliya-layout-crm-product-shell-content-agent-publish-padding: 0 6px 18px 82px;"
+    ]
+  },
+  {
+    id: "crm-agent-execution-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"agent-execution\"",
+      "AgentFlowDrawerState = \"flow\" | \"routine\" | \"test\" | \"publish\" | \"execution\"",
+      "ExecutionReceipt"
+    ]
+  },
+  {
+    id: "crm-agent-routine-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"agent-routine\"",
+      "\"agents-routine-detail\"",
+      "AgentRoutineWorkspace",
+      "AgentFlowDrawerState = \"flow\" | \"routine\""
+    ]
+  },
+  {
+    id: "crm-agent-routine-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--agent-routine",
+      ".tcrm-product-shell-stage--page-header-agents-routine-detail",
+      ".tcrm-product-shell-stage--content-agent-routine",
+      ".tcrm-agent-flow-drawer--routine"
+    ]
+  },
+  {
+    id: "tokens-agent-routine-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-product-shell-main-header-agents-routine-detail-height: 141px;",
+      "--taliya-layout-crm-agent-flow-drawer-routine-width: 388px;",
+      "--taliya-layout-crm-product-shell-agent-routine-drawer-top: 143px;",
+      "--taliya-control-crm-agent-routine-flow-card-routine-detail-height: 198px;"
+    ]
+  },
+  {
+    id: "crm-agent-flow-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"agent-flow\"",
+      "\"agents-flow-detail\"",
+      "AgentFlowWorkspace",
+      "AgentFlowDrawerState = \"flow\" | \"routine\""
+    ]
+  },
+  {
+    id: "crm-agent-flow-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--agent-flow",
+      ".tcrm-product-shell-stage--page-header-agents-flow-detail",
+      ".tcrm-product-shell-stage--content-agent-flow",
+      "var(--taliya-layout-crm-product-shell-agent-flow-drawer-right)"
+    ]
+  },
+  {
+    id: "tokens-agent-flow-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-product-shell-main-header-agents-flow-detail-height: 140px;",
+      "--taliya-layout-crm-product-shell-agent-flow-drawer-width: 395px;",
+      "--taliya-layout-crm-product-shell-agent-flow-drawer-top: 139px;",
+      "--taliya-control-crm-agent-flow-section-panel-mode-flow-detail-height: 148px;"
+    ]
+  },
+  {
+    id: "crm-agent-test-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"agent-test\"",
+      "SimulationRunner",
+      "AgentFlowDrawerState = \"flow\" | \"routine\" | \"test\""
+    ]
+  },
+  {
+    id: "crm-agent-test-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--agent-test .tcrm-simulation-runner",
+      ".tcrm-product-shell-stage--content-agent-test",
+      "var(--taliya-layout-crm-product-shell-agent-test-drawer-width)"
+    ]
+  },
+  {
+    id: "tokens-agent-test-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-product-shell-agent-test-drawer-width: 382px;",
+      "--taliya-layout-crm-product-shell-agent-test-drawer-top: 139px;",
+      "--taliya-control-crm-simulation-runner-test-panel-height: 572px;",
+      "--taliya-control-crm-simulation-runner-test-action-height: 51px;"
+    ]
+  },
+  {
+    id: "crm-agent-execution-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--drawer-panel.tcrm-right-panel-layout--agent-execution",
+      "var(--taliya-layout-crm-right-panel-agent-execution-columns)",
+      "var(--taliya-layout-crm-right-panel-agent-execution-offset-x)"
+    ]
+  },
+  {
+    id: "tokens-agent-execution-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-right-panel-agent-execution-main-width: 1007px;",
+      "--taliya-layout-crm-right-panel-agent-execution-rail-width: 368px;",
+      "--taliya-layout-crm-right-panel-agent-execution-offset-x: -5px;",
+      "--taliya-layout-crm-right-panel-agent-execution-columns: var(--taliya-layout-crm-right-panel-agent-execution-main-width) var(--taliya-layout-crm-right-panel-agent-execution-rail-width);"
+    ]
+  },
+  {
+    id: "crm-settings-hub-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "layoutVariant?: \"default\" | \"opportunity\" | \"support\" | \"settings-hub\";",
+      "SettingsHubCard",
+      "topNavSelection?: \"auto\" | \"none\";"
+    ]
+  },
+  {
+    id: "crm-settings-hub-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-product-shell-stage--page-header-settings-hub .tcrm-product-shell-page-header",
+      ".tcrm-product-shell-stage--content-settings-hub .tcrm-page-family-content.tcrm-product-shell-content",
+      "var(--taliya-layout-crm-product-shell-content-settings-hub-padding)"
+    ]
+  },
+  {
+    id: "tokens-settings-hub-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-product-shell-main-header-settings-hub-height: 161px;",
+      "--taliya-layout-crm-product-shell-header-settings-hub-copy-offset-y: 36px;",
+      "--taliya-layout-crm-product-shell-header-settings-hub-margin-left: 96px;",
+      "--taliya-layout-crm-product-shell-content-settings-hub-padding: 0 67px 28px 94px;"
+    ]
+  },
+  {
+    id: "crm-settings-permissions-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"settings-permissions\"",
+      "SettingsPermissionsWorkspace",
+      "SettingsAgentPanel"
+    ]
+  },
+  {
+    id: "crm-settings-permissions-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--settings-permissions",
+      ".tcrm-product-shell-stage--content-settings-permissions .tcrm-product-shell-main::before",
+      "var(--taliya-layout-crm-right-panel-settings-permissions-columns)"
+    ]
+  },
+  {
+    id: "tokens-settings-permissions-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-right-panel-settings-permissions-main-width: 887px;",
+      "--taliya-layout-crm-right-panel-settings-permissions-rail-width: 440px;",
+      "--taliya-layout-crm-settings-permissions-source-width: 847px;",
+      "--taliya-control-crm-permission-matrix-settings-permissions-height: 256px;"
+    ]
+  },
+  {
+    id: "crm-settings-payments-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"settings-payments\"",
+      "SettingsPaymentsWorkspace",
+      "PaymentMethodRowState"
+    ]
+  },
+  {
+    id: "crm-settings-payments-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--settings-payments",
+      ".tcrm-product-shell-stage--content-settings-payments",
+      "var(--taliya-layout-crm-right-panel-settings-payments-columns)"
+    ]
+  },
+  {
+    id: "tokens-settings-payments-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-right-panel-settings-payments-main-width: 940px;",
+      "--taliya-layout-crm-right-panel-settings-payments-rail-width: 352px;",
+      "--taliya-control-crm-settings-payments-method-row-height: 144px;"
+    ]
+  },
+  {
+    id: "crm-settings-agenda-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"settings-agenda\"",
+      "SettingsAgendaWorkspace",
+      "SettingsAgendaWorkspaceProps"
+    ]
+  },
+  {
+    id: "crm-settings-agenda-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--settings-agenda",
+      ".tcrm-product-shell-stage--content-settings-agenda",
+      "var(--taliya-layout-crm-right-panel-settings-agenda-columns)"
+    ]
+  },
+  {
+    id: "tokens-settings-agenda-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-right-panel-settings-agenda-main-width: 884px;",
+      "--taliya-layout-crm-right-panel-settings-agenda-rail-width: 382px;",
+      "--taliya-control-crm-settings-agenda-first-section-height: 266px;"
+    ]
+  },
+  {
+    id: "crm-settings-notifications-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"settings-notifications\"",
+      "SettingsNotificationsWorkspace",
+      "SettingsNotificationsWorkspaceProps"
+    ]
+  },
+  {
+    id: "crm-settings-notifications-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--settings-notifications",
+      ".tcrm-product-shell-stage--content-settings-notifications",
+      "var(--taliya-layout-crm-right-panel-settings-notifications-columns)"
+    ]
+  },
+  {
+    id: "tokens-settings-notifications-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-right-panel-settings-notifications-main-width: 890px;",
+      "--taliya-layout-crm-right-panel-settings-notifications-rail-width: 386px;",
+      "--taliya-control-crm-settings-notifications-first-section-height: 293px;"
+    ]
+  },
+  {
+    id: "crm-billing-subscription-layout-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "\"billing-subscription\"",
+      "BillingSubscriptionWorkspace",
+      "BillingSubscriptionWorkspaceProps"
+    ]
+  },
+  {
+    id: "crm-billing-subscription-layout-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-right-panel-layout--billing-subscription",
+      ".tcrm-product-shell-stage--content-billing-subscription",
+      "var(--taliya-layout-crm-right-panel-billing-subscription-columns)"
+    ]
+  },
+  {
+    id: "tokens-billing-subscription-layout",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-right-panel-billing-subscription-main-width: 934px;",
+      "--taliya-layout-crm-right-panel-billing-subscription-rail-width: 334px;",
+      "--taliya-type-crm-billing-subscription-drawer-title-size: 14px;"
     ]
   },
   {
@@ -179,7 +604,16 @@ const installedPackageContractMarkers = [
     packagePath: ["@taliya", "crm"],
     file: "dist/index.d.ts",
     requiredText: [
-      "export type CrmProductShellContentLayout = \"default\" | \"work-list\" | \"main-priority\" | \"kanban\";",
+      "export type CrmProductShellContentLayout =",
+      "\"work-list-compact\"",
+      "\"main-priority\"",
+      "\"kanban\"",
+      "\"agent-publish\"",
+      "\"settings-hub\"",
+      "\"support\"",
+      "\"internal-overview\"",
+      "\"internal-tenants\"",
+      "\"internal-tenant-detail\"",
       "contentLayout?: CrmProductShellContentLayout;"
     ]
   },
@@ -198,13 +632,263 @@ const installedPackageContractMarkers = [
     ]
   },
   {
+    id: "crm-internal-overview-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "browserUrl?: string;",
+      "export interface SupportTicketDrawerProps",
+      "variant?: \"support\" | \"internal\";",
+      "export interface InternalShellProps extends Omit<CrmProductShellProps, \"variant\">"
+    ]
+  },
+  {
+    id: "crm-internal-overview-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-support-ticket-drawer--internal",
+      ".tcrm-product-shell-stage--content-internal-overview .tcrm-product-shell-content",
+      ".tcrm-product-shell-stage--page-header-internal-overview .tcrm-product-shell-page-header",
+      ".tcrm-product-shell-stage--content-internal-overview.tcrm-product-shell-stage--drawer-floating > .tcrm-support-ticket-drawer--internal"
+    ]
+  },
+  {
+    id: "crm-internal-tenants-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "export type TenantSummaryDrawerState = \"active\" | \"risk\" | \"loading\" | \"blocked\" | \"closed\";",
+      "export interface TenantSummaryDrawerProps",
+      "export declare function TenantSummaryDrawer"
+    ]
+  },
+  {
+    id: "crm-internal-tenants-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-tenant-summary-drawer.tcrm-drawer-frame",
+      ".tcrm-product-shell-stage--content-internal-tenants",
+      ".tcrm-product-shell-stage--page-header-internal-tenants .tcrm-product-shell-page-header",
+      ".tcrm-product-shell-stage--drawer-floating > .tcrm-tenant-summary-drawer"
+    ]
+  },
+  {
+    id: "crm-internal-tenant-detail-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "export interface TenantDetailLayoutProps",
+      "footerNote?: React.ReactNode;",
+      "export declare function TenantDetailLayout"
+    ]
+  },
+  {
+    id: "crm-internal-tenant-detail-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout",
+      ".tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-security-rule-panel",
+      ".tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__footer",
+      ".tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-product-shell-content"
+    ]
+  },
+  {
+    id: "crm-setup-shell-global-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "export interface SetupPageProps",
+      "frameVariant?: \"default\" | \"guided\" | \"guided-block\" | \"guided-main\" | \"guided-wide\" | \"guided-review\" | \"shell-global\";",
+      "export declare function SetupPage"
+    ]
+  },
+  {
+    id: "crm-setup-shell-global-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-setup-page--frame-shell-global",
+      ".tcrm-setup-page--frame-guided",
+      ".tcrm-setup-page--frame-guided-block",
+      ".tcrm-setup-page--frame-guided-main",
+      ".tcrm-setup-page--frame-guided-wide",
+      ".tcrm-setup-page--frame-guided-review",
+      ".tcrm-setup-page--frame-shell-global .tcrm-setup-page__shell.tcrm-setup-shell",
+      "--taliya-layout-crm-setup-shell-columns: var(--taliya-layout-crm-setup-shell-global-columns)",
+      "--taliya-layout-crm-setup-bottom-bar-height: var(--taliya-layout-crm-setup-shell-global-bottom-bar-height)"
+    ]
+  },
+  {
+    id: "crm-setup-students-worklist-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "export interface CrmWorklistTableProps",
+      "caption?: React.ReactNode;",
+      "export interface SetupStudentsWorkspaceProps",
+      "export declare function SetupStudentsWorkspace"
+    ]
+  },
+  {
+    id: "crm-setup-students-worklist-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-setup-students-workspace__summary-grid",
+      ".tcrm-setup-students-workspace .tcrm-worklist-table__caption",
+      "var(--taliya-layout-crm-setup-students-summary-height)",
+      "var(--taliya-layout-crm-setup-students-worklist-height)"
+    ]
+  },
+  {
+    id: "tokens-setup-students-worklist",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-setup-students-summary-height: 285px;",
+      "--taliya-layout-crm-setup-students-worklist-height: 315px;",
+      "--taliya-control-crm-setup-students-list-row-height: 44px;",
+      "--taliya-control-crm-setup-students-worklist-row-height: 39px;"
+    ]
+  },
+  {
+    id: "crm-setup-classes-worklist-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-setup-classes-workspace__summary-grid",
+      ".tcrm-setup-classes-workspace .tcrm-worklist-table__caption",
+      "var(--taliya-layout-crm-setup-classes-source-card-height)",
+      "var(--taliya-layout-crm-setup-classes-worklist-height)"
+    ]
+  },
+  {
+    id: "tokens-setup-classes-worklist",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-setup-classes-summary-height: 285px;",
+      "--taliya-layout-crm-setup-classes-worklist-height: 315px;",
+      "--taliya-layout-crm-setup-classes-source-card-height: 66px;",
+      "--taliya-control-crm-setup-classes-worklist-row-height: 39px;"
+    ]
+  },
+  {
+    id: "crm-weekly-hours-schedule-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "export interface WeeklyHoursGridSlot",
+      "meta?: React.ReactNode;",
+      "tone?: ComponentTone;",
+      "axis?: string[];",
+      "variant?: \"availability\" | \"schedule\";",
+      "export declare function WeeklyHoursGrid"
+    ]
+  },
+  {
+    id: "crm-setup-agenda-schedule-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-setup-agenda-workspace__calendar .tcrm-weekly-hours-grid[data-variant=\"schedule\"]",
+      ".tcrm-weekly-hours-grid__schedule-column button[data-tone=\"warning\"]",
+      ".tcrm-setup-agenda-workspace__legend",
+      "var(--taliya-layout-crm-setup-agenda-schedule-axis-rows)",
+      "var(--taliya-control-crm-setup-agenda-schedule-event-height)"
+    ]
+  },
+  {
+    id: "tokens-setup-guided-wide-agenda",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-setup-shell-guided-wide-columns: 207px 1062px 338px;",
+      "--taliya-layout-crm-setup-shell-guided-wide-column-gap: 15px;",
+      "--taliya-layout-crm-setup-agenda-summary-height: 150px;",
+      "--taliya-layout-crm-setup-agenda-body-height: 460px;",
+      "--taliya-layout-crm-setup-agenda-schedule-axis-rows: repeat(6, 50px);",
+      "--taliya-control-crm-setup-agenda-schedule-event-height: 44px;"
+    ]
+  },
+  {
+    id: "tokens-setup-guided-review",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-setup-shell-guided-review-columns: 210px 1064px 344px;",
+      "--taliya-layout-crm-setup-shell-guided-review-topbar-height: 74px;",
+      "--taliya-layout-crm-setup-shell-guided-review-body-height: 807px;",
+      "--taliya-layout-crm-setup-shell-guided-review-bottom-bar-height: 52px;",
+      "--taliya-control-crm-setup-shell-guided-review-step-row-height: 60px;",
+      "--taliya-control-crm-setup-shell-guided-review-step-marker-size: 24px;"
+    ]
+  },
+  {
+    id: "crm-setup-welcome-agent-api",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "dist/index.d.ts",
+    requiredText: [
+      "export interface SetupAgentChatProps",
+      "variant?: \"step\" | \"welcome\";",
+      "export declare function SetupAgentChat"
+    ]
+  },
+  {
+    id: "crm-setup-welcome-agent-css",
+    packageName: "@taliya/crm",
+    packagePath: ["@taliya", "crm"],
+    file: "src/styles.css",
+    requiredText: [
+      ".tcrm-setup-agent-chat--welcome",
+      ".tcrm-setup-agent-chat__message--welcome",
+      ".tcrm-setup-agent-chat--welcome .tcrm-setup-agent-chat__quick-replies",
+      "var(--taliya-layout-crm-setup-shell-welcome-topbar-height)",
+      "var(--taliya-control-crm-setup-agent-chat-welcome-message-height)"
+    ]
+  },
+  {
+    id: "tokens-setup-welcome-agent",
+    packageName: "@taliya/tokens",
+    packagePath: ["@taliya", "tokens"],
+    file: "src/tokens.css",
+    requiredText: [
+      "--taliya-layout-crm-setup-shell-welcome-topbar-height: 95px;",
+      "--taliya-layout-crm-setup-shell-welcome-padding: 8px 16px 16px 32px;",
+      "--taliya-layout-crm-setup-agent-chat-welcome-message-width: 342px;",
+      "--taliya-control-crm-setup-agent-chat-welcome-message-height: 302px;",
+      "--taliya-control-crm-setup-agent-chat-welcome-quick-height: 45px;"
+    ]
+  },
+  {
     id: "tokens-product-shell-content-layout",
     packageName: "@taliya/tokens",
     packagePath: ["@taliya", "tokens"],
     file: "src/tokens.css",
     requiredText: [
       "--taliya-layout-crm-product-shell-content-work-list-padding: 0 28px 28px 27px;",
-      "--taliya-layout-crm-product-shell-content-main-priority-padding: 0 28px 28px 16px;",
+      "--taliya-layout-crm-product-shell-content-main-priority-padding: 0 28px 27px 16px;",
       "--taliya-layout-crm-product-shell-content-kanban-padding: 0 28px 28px 24px;"
     ]
   },
@@ -498,7 +1182,7 @@ const installedPackageContractMarkers = [
     packagePath: ["@taliya", "crm"],
     file: "dist/index.d.ts",
     requiredText: [
-      "density?: \"standard\" | \"compact\" | \"tight\";",
+      "density?: \"standard\" | \"comfortable\" | \"compact\" | \"tight\";",
       "export declare function PageFilterBar"
     ]
   },
@@ -580,7 +1264,10 @@ const installedPackageContractMarkers = [
     packagePath: ["@taliya", "crm"],
     file: "dist/index.d.ts",
     requiredText: [
-      "export type WorkListDetailPageLayoutMode = \"standard\" | \"main-priority\";",
+      "export type WorkListDetailPageLayoutMode =",
+      "\"main-priority\"",
+      "\"compact-rail\"",
+      "\"wide-main\"",
       "layoutMode?: WorkListDetailPageLayoutMode;"
     ]
   },
@@ -1127,7 +1814,10 @@ report.summary = {
   failedChecks
 };
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) {
+  fs.mkdirSync(outputDir, { recursive: true });
+  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+}
 
 const markdown = [
   "# Consumer Integration Audit",
@@ -1160,9 +1850,9 @@ const markdown = [
   `- Extra active CSS files: ${report.activeCssStatus.extraCssFiles.length}`,
   ""
 ].join("\n");
-fs.writeFileSync(reportMdPath, markdown);
+if (persistReports) fs.writeFileSync(reportMdPath, markdown);
 
-console.log(`Consumer integration audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
+if (persistReports) console.log(`Consumer integration audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
 console.log(`Consumer integration: ${report.summary.pass ? "pass" : "fail"}`);
 
 if (check && !report.summary.pass) {

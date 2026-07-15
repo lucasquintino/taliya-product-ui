@@ -21,6 +21,8 @@ const configArg = optionValue("--page-kit-config", "");
 const defaultConfigPath = path.join(consumerRoot, "taliya-page-kit.config.json");
 const pageKitConfigPath = configArg ? path.resolve(root, configArg) : defaultConfigPath;
 const reportLabel = optionValue("--report-label", "");
+const outputDir = path.resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !check || outputDir !== specDir;
 
 function reportBasename(baseName) {
   if (!reportLabel) return baseName;
@@ -34,8 +36,8 @@ function reportBasename(baseName) {
   return `${baseName}-${normalized}`;
 }
 
-const reportJsonPath = path.join(specDir, `${reportBasename("consumer-page-kit-audit")}.json`);
-const reportMdPath = path.join(specDir, `${reportBasename("consumer-page-kit-audit")}.md`);
+const reportJsonPath = path.join(outputDir, `${reportBasename("consumer-page-kit-audit")}.json`);
+const reportMdPath = path.join(outputDir, `${reportBasename("consumer-page-kit-audit")}.md`);
 const standardPageKitManifestPath = path.join(specDir, "contracts/standard-page-kit.manifest.json");
 
 const defaultSurfaces = [
@@ -180,7 +182,9 @@ function readPageKitConfig() {
       source: "default-internal",
       validation: { pass: true, errors: [] },
       surfaces: defaultSurfaces,
-      routePages: defaultRoutePages
+      routePages: defaultRoutePages,
+      componentContracts: defaultComponentContracts,
+      routeCoverage: null
     };
   }
 
@@ -192,7 +196,9 @@ function readPageKitConfig() {
       source: path.relative(root, pageKitConfigPath).replaceAll("\\", "/"),
       validation: { pass: false, errors: [`Invalid JSON: ${error.message}`] },
       surfaces: [],
-      routePages: []
+      routePages: [],
+      componentContracts: [],
+      routeCoverage: null
     };
   }
 
@@ -642,7 +648,10 @@ const report = {
   }
 };
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) {
+  fs.mkdirSync(outputDir, { recursive: true });
+  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+}
 
 const markdown = [
   "# Consumer Page Kit Audit",
@@ -736,9 +745,9 @@ const markdown = [
   routeCoverage.enabled ? `Uncovered routes: ${routeCoverage.uncoveredRoutes.map((route) => `\`${route}\``).join(", ") || "None"}` : "",
   ""
 ].join("\n");
-fs.writeFileSync(reportMdPath, markdown);
+if (persistReports) fs.writeFileSync(reportMdPath, markdown);
 
-console.log(`Consumer page kit audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
+if (persistReports) console.log(`Consumer page kit audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
 console.log(`Consumer page kit: ${report.summary.pass ? "pass" : "fail"}`);
 
 if (check && !report.summary.pass) {

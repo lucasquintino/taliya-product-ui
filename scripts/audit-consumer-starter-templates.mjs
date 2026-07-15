@@ -115,8 +115,10 @@ const report = {
   rows
 };
 
-mkdirSync(dirname(reportJsonPath), { recursive: true });
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) {
+  mkdirSync(dirname(reportJsonPath), { recursive: true });
+  writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+}
 
 const rowMarkdown = rows
   .map((row) => {
@@ -147,7 +149,7 @@ const routeLocalContractMarkdown = routeLocalContractRows
   )
   .join("\n");
 
-writeFileSync(
+if (!checkMode) writeFileSync(
   reportMdPath,
   `# Consumer Starter Templates Audit
 

@@ -14,7 +14,7 @@ const contracts = [
     family: "operation-kanban",
     requiredPageSnippets: [
       "<CrmKanbanPage",
-      "filterBar={<OperationFilters />}",
+      "filterBar={<OperationFilters",
       "quickFilters={<OperationQuickFilters />}",
       "<OperationActivityTable",
       "<OperationKanban",
@@ -157,8 +157,10 @@ It does **not** certify 1:1 visual approval.
 ${table}
 `;
 
-writeFileSync(jsonPath, `${JSON.stringify(audit, null, 2)}\n`);
-writeFileSync(mdPath, md);
+if (!checkMode) {
+  writeFileSync(jsonPath, `${JSON.stringify(audit, null, 2)}\n`);
+  writeFileSync(mdPath, md);
+}
 
 if (checkMode && audit.status !== "pass") {
   console.error(`Kanban family audit failed: failedRows=${audit.failedCount}`);

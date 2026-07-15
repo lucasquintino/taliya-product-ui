@@ -180,9 +180,11 @@ try {
 }
 
 const reportBaseName = reportBasename("library-acceptance-audit", optionValue("--report-label", ""));
-const jsonPath = resolve(specDir, `${reportBaseName}.json`);
-const mdPath = resolve(specDir, `${reportBaseName}.md`);
-writeFileSync(jsonPath, `${JSON.stringify(report, null, 2)}\n`);
+const outputDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outputDir !== specDir;
+const jsonPath = resolve(outputDir, `${reportBaseName}.json`);
+const mdPath = resolve(outputDir, `${reportBaseName}.md`);
+if (persistReports) writeFileSync(jsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const acceptanceRows = (report.acceptanceRows ?? [])
   .map((row) => `| \`${row.gate}\` | ${row.status} | ${row.proves} |`)
@@ -197,7 +199,7 @@ const evidenceSources = report.evidenceSources
   ? Object.entries(report.evidenceSources).map(([name, path]) => `- ${name}: \`${path}\``).join("\n")
   : "- None";
 
-writeFileSync(
+if (persistReports) writeFileSync(
   mdPath,
   `# Library Acceptance Audit
 

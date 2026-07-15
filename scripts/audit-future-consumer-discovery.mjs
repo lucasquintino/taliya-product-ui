@@ -102,6 +102,7 @@ function inspectCandidate(candidateRoot) {
 const scanRoot = resolve(root, optionValue("--scan-root", ".."));
 const reportLabel = optionValue("--report-label", "");
 const outDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outDir !== specDir;
 
 function normalizedReportLabel() {
   if (!reportLabel) return "";
@@ -145,7 +146,7 @@ const report = {
   candidates
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const rows = candidates
   .filter((candidate) => candidate.score > 0 || candidate.hasPackageJson)
@@ -156,7 +157,7 @@ const rows = candidates
   })
   .join("\n");
 
-writeFileSync(
+if (persistReports) writeFileSync(
   reportMdPath,
   `# Future Consumer Discovery Audit
 

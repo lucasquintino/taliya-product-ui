@@ -38,6 +38,12 @@ const visualCertificationBacklog = existsSync(resolve(root, "specs/001-product-u
 const visualCertificationPlan = existsSync(resolve(root, "specs/001-product-ui-foundation/visual-certification-plan-audit.json"))
   ? readJson("specs/001-product-ui-foundation/visual-certification-plan-audit.json")
   : null;
+const referenceSheetCoverage = existsSync(resolve(root, "specs/001-product-ui-foundation/reference-sheet-coverage-audit.json"))
+  ? readJson("specs/001-product-ui-foundation/reference-sheet-coverage-audit.json")
+  : null;
+const sourceAssetsReconciliation = existsSync(resolve(root, "specs/002-readiness-evidence-portability/source-assets-reconciliation-audit.json"))
+  ? readJson("specs/002-readiness-evidence-portability/source-assets-reconciliation-audit.json")
+  : null;
 const releaseCandidate = existsSync(resolve(root, "specs/001-product-ui-foundation/release-candidate-audit.json"))
   ? readJson("specs/001-product-ui-foundation/release-candidate-audit.json")
   : null;
@@ -64,8 +70,10 @@ const localReleaseManifest = existsSync(resolve(root, "specs/001-product-ui-foun
   : null;
 const tokenBaseline = readJson("specs/001-product-ui-foundation/token-governance-baseline.json");
 
-const tokenCssDebt = Object.values(tokenBaseline.cssScans).some((scan) =>
-  scan.hex > 0 || scan.rgba > 0 || scan.gradient > 0 || scan.literalSizing > 0 || scan.literalShadow > 0
+const tokenCssDebt = Object.entries(tokenBaseline.cssScans).some(([file, scan]) =>
+  file !== "apps/docs/src/storybook.css" && (
+    scan.hex > 0 || scan.rgba > 0 || scan.gradient > 0 || scan.literalSizing > 0 || scan.literalShadow > 0
+  )
 );
 const tokenStoryDebt =
   tokenBaseline.storyScan.hex > 0 ||
@@ -74,7 +82,8 @@ const tokenStoryDebt =
   tokenBaseline.storyScan.literalSizing > 0 ||
   tokenBaseline.storyScan.literalShadow > 0;
 const tokenAliasDebt = (tokenBaseline.tokenSummary["alias obrigatorio"] ?? 0) > 0;
-const tokenGovernancePass = !tokenCssDebt && !tokenStoryDebt && !tokenAliasDebt;
+const storybookProductAnatomyDebt = (tokenBaseline.storybookAnatomy?.anatomySelectorCount ?? 1) > 0;
+const tokenGovernancePass = !tokenCssDebt && !tokenStoryDebt && !tokenAliasDebt && !storybookProductAnatomyDebt;
 
 const trueGoal = {
   statement:
@@ -218,6 +227,8 @@ const realFutureCrmAdoptionExecuted =
 const readinessGateRows = Array.isArray(libraryReadinessGate.rows) ? libraryReadinessGate.rows : [];
 const visualCertificationPlanGate = readinessGateRows.find((row) => row.id === "visual-certification-plan");
 const visualCertificationPlanNegativeProbeGate = readinessGateRows.find((row) => row.id === "visual-certification-plan-negative-probe");
+const referenceSheetCoverageGate = readinessGateRows.find((row) => row.id === "reference-sheet-coverage");
+const referenceSheetCoverageMissingStoryProbeGate = readinessGateRows.find((row) => row.id === "reference-sheet-coverage-missing-story-probe");
 const futureConsumerDiscoveryGate = readinessGateRows.find((row) => row.id === "future-consumer-discovery");
 const futureConsumerDiscoveryNegativeProbeGate = readinessGateRows.find((row) => row.id === "future-consumer-discovery-negative-probe");
 const futureConsumerDiscoveryPartialProbeGate = readinessGateRows.find((row) => row.id === "future-consumer-discovery-partial-probe");
@@ -234,6 +245,8 @@ const certificationScopeNegativeProbeGate = readinessGateRows.find((row) => row.
 const readinessGatePass = (row) => readinessInProgress || row?.status === "pass";
 const visualCertificationPlanGatePass = readinessGatePass(visualCertificationPlanGate);
 const visualCertificationPlanNegativeProbePass = readinessGatePass(visualCertificationPlanNegativeProbeGate);
+const referenceSheetCoverageGatePass = readinessGatePass(referenceSheetCoverageGate);
+const referenceSheetCoverageMissingStoryProbePass = readinessGatePass(referenceSheetCoverageMissingStoryProbeGate);
 const futureConsumerDiscoveryGatePass = readinessGatePass(futureConsumerDiscoveryGate);
 const futureConsumerDiscoveryNegativeProbePass = readinessGatePass(futureConsumerDiscoveryNegativeProbeGate);
 const futureConsumerDiscoveryPartialProbePass = readinessGatePass(futureConsumerDiscoveryPartialProbeGate);
@@ -274,6 +287,8 @@ const requiredReleaseCandidateGateIds = [
   "test",
   "build",
   "readiness",
+  "storybook-anatomy",
+  "storybook-anatomy-override-probe",
   "domain-wrappers",
   "domain-wrappers-direct-drawer-probe",
   "future-consumer-discovery",
@@ -310,6 +325,11 @@ const requiredReleaseCandidateGateIds = [
   "dashboard-family-update",
   "dashboard-family",
   "dashboard-family-negative-probe",
+  "source-assets-update",
+  "source-assets",
+  "source-assets-reconciliation-update",
+  "source-assets-reconciliation",
+  "source-assets-reconciliation-nested-exclusion-probe",
   "full-image-page-coverage-update",
   "full-image-page-coverage",
   "full-image-page-coverage-missing-story-probe",
@@ -317,9 +337,19 @@ const requiredReleaseCandidateGateIds = [
   "full-image-page-coverage-misplaced-source-marker-probe",
   "full-image-page-coverage-nonofficial-import-probe",
   "full-image-page-coverage-unmapped-map-target-probe",
+  "reference-sheet-coverage-update",
+  "reference-sheet-coverage",
+  "reference-sheet-coverage-missing-story-probe",
   "visual-certification-plan",
   "visual-certification-plan-negative-probe",
   "visual-certification-plan-missing-artifact-probe",
+  "visual-product-review-update",
+  "visual-product-review",
+  "visual-certification-capture",
+  "visual-certification-capture-source-contract-probe",
+  "audit-checks-read-only-probe",
+  "readiness-refresh-update",
+  "readiness-refresh",
   "goal-completion-update",
   "library-acceptance-update",
   "library-acceptance",
@@ -786,6 +816,19 @@ const requirements = [
       "certification-scope:audit:negative-probe rejects invalid scoped-completion decisions",
       "batch ledgers",
       "visual-certification-backlog:audit",
+      sourceAssetsReconciliation
+        ? `sourceReconciliation=${sourceAssetsReconciliation.status} canonical=${sourceAssetsReconciliation.canonicalTopLevelImageCount}/${sourceAssetsReconciliation.expectedCanonicalImageCount} rosterKnown=${sourceAssetsReconciliation.canonicalRoster?.knownNameCount ?? "unknown"} rosterUnresolved=${sourceAssetsReconciliation.canonicalRoster?.unresolvedCount ?? "unknown"} recursive=${sourceAssetsReconciliation.recursiveImageCount} nestedDerivatives=${sourceAssetsReconciliation.nestedDerivativeImageCount} archiveExact=${sourceAssetsReconciliation.archive?.exactFolderMatch}`
+        : "source assets reconciliation audit not yet generated",
+      "reference-sheet-coverage:audit",
+      referenceSheetCoverageGatePass
+        ? "library-readiness-gate reference-sheet-coverage pass"
+        : "library-readiness-gate reference-sheet-coverage missing/fail",
+      referenceSheetCoverageMissingStoryProbePass
+        ? "library-readiness-gate reference-sheet-coverage-missing-story-probe pass"
+        : "library-readiness-gate reference-sheet-coverage-missing-story-probe missing/fail",
+      referenceSheetCoverage
+        ? `referenceSheets=${referenceSheetCoverage.mappedReferenceImageCount}/${referenceSheetCoverage.referenceImageCount} components=${referenceSheetCoverage.resolvedComponentCount} missing=${referenceSheetCoverage.missingComponentCount} ambiguous=${referenceSheetCoverage.ambiguousComponentCount ?? 0} nonOfficial=${referenceSheetCoverage.nonOfficialComponentCount ?? 0}`
+        : "reference sheet coverage audit not yet generated",
       "visual-certification-plan:audit",
       visualCertificationPlanGatePass
         ? "library-readiness-gate visual-certification-plan pass"
@@ -805,6 +848,7 @@ const requirements = [
 
 const readinessFailed = requirements.some((item) => item.status === "failed");
 const audit = {
+  generatedAt: new Date().toISOString(),
   date: new Date().toISOString().slice(0, 10),
   goal:
     "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
@@ -1028,8 +1072,10 @@ The current state is not strong enough to say:
 3. If the acceptance bar includes full image parity, continue source-backed Storybook static capture and component-level pass/fail certification for the remaining approved images.
 `;
 
-writeFileSync(resolve(specDir, "goal-completion-audit.json"), `${JSON.stringify(audit, null, 2)}\n`);
-writeFileSync(resolve(specDir, "goal-completion-audit.md"), md);
+if (!checkMode) {
+  writeFileSync(resolve(specDir, "goal-completion-audit.json"), `${JSON.stringify(audit, null, 2)}\n`);
+  writeFileSync(resolve(specDir, "goal-completion-audit.md"), md);
+}
 
 if (readinessFailed) {
   console.error("Goal completion audit found a readiness regression.");

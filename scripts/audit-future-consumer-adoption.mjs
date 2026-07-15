@@ -32,6 +32,7 @@ function reportBasename(baseName, label) {
 const discoveryPath = resolve(root, optionValue("--discovery", "specs/001-product-ui-foundation/future-consumer-discovery-audit.json"));
 const reportLabel = optionValue("--report-label", "");
 const outDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outDir !== specDir;
 const readinessReportDir = resolve(root, optionValue("--readiness-report-dir", specDir));
 const reportBaseName = reportBasename("future-consumer-adoption-audit", reportLabel);
 const reportJsonPath = resolve(outDir, `${reportBaseName}.json`);
@@ -127,7 +128,7 @@ const report = {
   }
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const tableRows = rows
   .map((row) => {
@@ -137,7 +138,7 @@ const tableRows = rows
   })
   .join("\n");
 
-writeFileSync(
+if (persistReports) writeFileSync(
   reportMdPath,
   `# Future Consumer Adoption Audit
 

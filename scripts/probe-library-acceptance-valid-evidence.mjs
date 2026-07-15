@@ -59,6 +59,8 @@ const result = spawnSync(process.execPath, [
   "--check",
   "--report-label",
   "positive-probe",
+  "--out-dir",
+  tempDir,
   "--goal-completion",
   goalCompletionPath,
   "--readiness",
@@ -87,7 +89,7 @@ if (!output.includes("Library acceptance audit: pass-current-internal-library"))
   process.exit(1);
 }
 
-const labeledReportPath = join(root, "specs/001-product-ui-foundation/library-acceptance-audit-positive-probe.json");
+const labeledReportPath = join(tempDir, "library-acceptance-audit-positive-probe.json");
 if (!existsSync(labeledReportPath)) {
   console.error("Expected positive probe to write its own labeled report.");
   process.exit(1);

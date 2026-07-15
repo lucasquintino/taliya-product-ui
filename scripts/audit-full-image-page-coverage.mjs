@@ -1,14 +1,17 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
+import { resolveSourceAssetsDir } from "./source-assets-config.mjs";
 
 const root = process.cwd();
 const checkMode = process.argv.includes("--check");
 const specDir = resolve(root, "specs/001-product-ui-foundation");
-const imageDir = "D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508";
+const imageDir = resolveSourceAssetsDir({ root, args: process.argv.slice(2), requireExisting: false }).path;
 const imageCoverageMapPath = resolve(specDir, "image-coverage-map.md");
 const storybookIndexPath = resolve(root, "apps/docs/storybook-static/index.json");
 const jsonPath = resolve(specDir, "full-image-page-coverage-audit.json");
 const mdPath = resolve(specDir, "full-image-page-coverage-audit.md");
+const storybookBuildAvailable = existsSync(storybookIndexPath);
+const sourceAssetsAvailable = Boolean(imageDir && existsSync(imageDir));
 
 const targetPages = [
   ["17_round-4.1A_hoje_01_acima-da-dobra.png.png", "crm-image-coverage-hoje--image-17-hoje-base"],
@@ -92,7 +95,9 @@ function readRequired(filePath, label) {
 }
 
 const mapSource = readRequired(imageCoverageMapPath, "image coverage map");
-const storybookIndex = JSON.parse(readRequired(storybookIndexPath, "static Storybook index"));
+const storybookIndex = storybookBuildAvailable
+  ? JSON.parse(readFileSync(storybookIndexPath, "utf8"))
+  : { entries: {} };
 const targetPageMap = new Map(targetPages.map(([image, storyId]) => [image, storyId]));
 const pageCoverageSections = new Set([
   "CRM Logged-In Screens",
@@ -234,13 +239,22 @@ const unmappedCoveredTargetRows = coveredPageTargets.filter((row) => !row.mapped
 
 const audit = {
   date: new Date().toISOString().slice(0, 10),
-  status:
-    rows.every((row) => row.status === "pass") &&
-    duplicateImages.length === 0 &&
-    duplicateStoryIds.length === 0 &&
-    unmappedCoveredTargetRows.length === 0
+  status: !storybookBuildAvailable
+    ? "blocked-missing-storybook-build"
+    : !sourceAssetsAvailable
+      ? "blocked-missing-source-assets"
+    : rows.every((row) => row.status === "pass") &&
+        duplicateImages.length === 0 &&
+        duplicateStoryIds.length === 0 &&
+        unmappedCoveredTargetRows.length === 0
       ? "pass"
       : "fail",
+  storybookBuildAvailable,
+  sourceAssetsAvailable,
+  blockingReasons: [
+    ...(!storybookBuildAvailable ? ["apps/docs/storybook-static/index.json is missing"] : []),
+    ...(!sourceAssetsAvailable ? ["canonical source image directory is missing"] : [])
+  ],
   targetPageCount: targetPages.length,
   coveredPageTargetCount: coveredPageTargets.length,
   failedCount: rows.filter((row) => row.status !== "pass").length,
@@ -272,6 +286,10 @@ Date: ${audit.date}
 
 Status: ${audit.status}
 
+Storybook static build available: ${audit.storybookBuildAvailable ? "yes" : "no"}
+
+Source assets available: ${audit.sourceAssetsAvailable ? "yes" : "no"}
+
 This audit verifies that every product page/source image target has a dedicated static Storybook image-coverage story, the story source references the exact approved source image filename, and the story source imports official \`@taliya/crm\` or \`@taliya/ui\` package components.
 
 It does **not** certify 1:1 visual approval. Visual acceptance remains governed by the component/page certification ledgers.
@@ -298,11 +316,19 @@ ${unmappedTable}
 ${table}
 `;
 
-writeFileSync(jsonPath, `${JSON.stringify(audit, null, 2)}\n`);
-writeFileSync(mdPath, md);
+if (!checkMode) {
+  writeFileSync(jsonPath, `${JSON.stringify(audit, null, 2)}\n`);
+  writeFileSync(mdPath, md);
+}
 
 if (checkMode && audit.status !== "pass") {
-  console.error(`Full image page coverage audit failed: failedRows=${audit.failedCount}`);
+  if (audit.status === "blocked-missing-storybook-build") {
+    console.error("Full image page coverage audit blocked: build Storybook before checking static coverage");
+  } else if (audit.status === "blocked-missing-source-assets") {
+    console.error("Full image page coverage audit blocked: configure the canonical source image directory");
+  } else {
+    console.error(`Full image page coverage audit failed: failedRows=${audit.failedCount}`);
+  }
   process.exit(1);
 }
 

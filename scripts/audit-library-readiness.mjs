@@ -158,6 +158,18 @@ const gates = [
     proves: "official token governance has no new visual debt"
   },
   {
+    id: "storybook-anatomy",
+    command: [process.execPath, "scripts/audit-storybook-anatomy.mjs", "--check", "--strict"],
+    commandText: "corepack pnpm storybook-anatomy:audit:strict",
+    proves: "Storybook owns no product anatomy or official component appearance while fixture geometry remains explicitly classified"
+  },
+  {
+    id: "storybook-anatomy-override-probe",
+    command: [process.execPath, "scripts/probe-storybook-anatomy-official-override.mjs"],
+    commandText: "corepack pnpm storybook-anatomy:audit:override-probe",
+    proves: "an official component appearance or anatomy override in Storybook CSS fails strict ownership"
+  },
+  {
     id: "components",
     command: [process.execPath, "scripts/audit-component-architecture.mjs", "--check"],
     commandText: "corepack pnpm components:audit",
@@ -460,8 +472,13 @@ const gates = [
         "corepack pnpm certification-scope:audit:positive-probe",
         "corepack pnpm certification-scope:audit:negative-probe",
         "corepack pnpm visual-certification-backlog:audit",
+        "corepack pnpm source-assets:reconcile",
+        "corepack pnpm source-assets:reconcile:nested-exclusion-probe",
+        "corepack pnpm reference-sheet-coverage:audit",
+        "corepack pnpm reference-sheet-coverage:audit:missing-story-probe",
         "corepack pnpm visual-certification-plan:audit:negative-probe",
         "corepack pnpm visual-certification-plan:audit:missing-artifact-probe",
+        "corepack pnpm visual-product-review:audit",
         "corepack pnpm library-acceptance:audit",
         "corepack pnpm library-acceptance:audit:positive-probe",
         "corepack pnpm library-acceptance:audit:negative-probe",
@@ -564,7 +581,10 @@ const gates = [
             "Certification Evidence Rule",
             "crop/component evidence",
             "full-image evidence",
-            "The current full-image status is the ledger status"
+            "The current full-image status is the ledger status",
+            "Corpus Reconciliation Rule",
+            "corepack pnpm source-assets:reconcile",
+            "corepack pnpm source-assets:reconcile:nested-exclusion-probe"
           ]
         }
       ];
@@ -619,7 +639,11 @@ const gates = [
         throw new Error(`Library readiness audit has stale future CRM kit map count; expected ${publicApi.requiredCount}`);
       }
       const storyCount = componentArchitecture.storyArchitecture?.total;
-      if (typeof storyCount === "number" && !libraryReadiness.includes(`${storyCount} stories`)) {
+      if (
+        typeof storyCount === "number" &&
+        !libraryReadiness.includes(`${storyCount} stories`) &&
+        !libraryReadiness.includes(`${storyCount} component stories`)
+      ) {
         throw new Error(`Library readiness audit is missing current component story count ${storyCount}`);
       }
       const visualBacklogSnippet = `${certificationCounts.approved ?? 0} approved component/image rows, ${certificationCounts.semiApproved ?? 0} semi-approved image rows, ${certificationCounts.visualReview ?? 0} image rows in visual review, ${certificationCounts.ignored ?? 0} ignored image row, and ${backlogSummary.globallyIncompleteCount ?? 0} incomplete component/image certification rows`;
@@ -767,6 +791,24 @@ const gates = [
     proves: "dashboard family audit rejects owner pages that stop using CrmRightPanelPage"
   },
   {
+    id: "source-assets",
+    command: [process.execPath, "scripts/audit-source-assets.mjs", "--check"],
+    commandText: "corepack pnpm source-assets:audit",
+    proves: "the configured canonical source corpus matches the versioned 101-image filename, hash, dimension, and coverage manifest"
+  },
+  {
+    id: "source-assets-reconciliation",
+    command: [process.execPath, "scripts/audit-source-assets-reconciliation.mjs", "--check"],
+    commandText: "corepack pnpm source-assets:reconcile",
+    proves: "folder, ZIP, image map, canonical top-level count, hashes, duplicates, and nested derivative classifications reconcile without promoting auxiliary images"
+  },
+  {
+    id: "source-assets-reconciliation-nested-exclusion-probe",
+    command: [process.execPath, "scripts/probe-source-assets-reconciliation-nested-exclusion.mjs"],
+    commandText: "corepack pnpm source-assets:reconcile:nested-exclusion-probe",
+    proves: "recursive demo/review/onboarding derivatives cannot satisfy the canonical source-image count"
+  },
+  {
     id: "full-image-page-coverage",
     command: [process.execPath, "scripts/audit-full-image-page-coverage.mjs", "--check"],
     commandText: "corepack pnpm full-image-page-coverage:audit",
@@ -803,6 +845,18 @@ const gates = [
     proves: "a Covered product page/source image added to the image coverage map without a Storybook mapping fails full image/page coverage"
   },
   {
+    id: "reference-sheet-coverage",
+    command: [process.execPath, "scripts/audit-reference-sheet-coverage.mjs", "--check"],
+    commandText: "corepack pnpm reference-sheet-coverage:audit",
+    proves: "all 11 active component reference sheets map every named component uniquely to an official isolated Storybook story with matching canonical source hashes"
+  },
+  {
+    id: "reference-sheet-coverage-missing-story-probe",
+    command: [process.execPath, "scripts/probe-reference-sheet-coverage-missing-story.mjs"],
+    commandText: "corepack pnpm reference-sheet-coverage:audit:missing-story-probe",
+    proves: "reference-sheet coverage rejects a missing required official component story"
+  },
+  {
     id: "visual-certification-plan",
     command: [process.execPath, "scripts/audit-visual-certification-plan.mjs", "--check"],
     commandText: "corepack pnpm visual-certification-plan:audit",
@@ -819,6 +873,30 @@ const gates = [
     command: [process.execPath, "scripts/probe-visual-certification-plan-missing-artifact.mjs"],
     commandText: "corepack pnpm visual-certification-plan:audit:missing-artifact-probe",
     proves: "ledger evidence paths that no longer exist fail the visual certification plan audit"
+  },
+  {
+    id: "visual-product-review",
+    command: [process.execPath, "scripts/audit-visual-product-review.mjs", "--check"],
+    commandText: "corepack pnpm visual-product-review:audit",
+    proves: "every product-review decision row has current source, render, diff, metrics, blocker, and next-action evidence without automatic approval"
+  },
+  {
+    id: "visual-certification-capture",
+    command: [process.execPath, "scripts/capture-visual-certification-batch.mjs", "--check"],
+    commandText: "corepack pnpm visual-certification-capture:check",
+    proves: "every pending image with a Storybook target has current source-sized screenshot and pixel-diff evidence without automatic visual approval"
+  },
+  {
+    id: "visual-certification-capture-source-contract-probe",
+    command: [process.execPath, "scripts/probe-visual-certification-capture-source-contract.mjs"],
+    commandText: "corepack pnpm visual-certification-capture:source-contract-probe",
+    proves: "visual capture evidence ignores volatile manifest metadata but fails when an official source image hash changes"
+  },
+  {
+    id: "audit-checks-read-only-probe",
+    command: [process.execPath, "scripts/probe-audit-checks-read-only.mjs"],
+    commandText: "corepack pnpm audit-checks:read-only-probe",
+    proves: "all audit --check entrypoints leave tracked and untracked repository state unchanged"
   },
   ...(isDefaultInternalScope ? [{
     id: "goal-completion",
@@ -898,7 +976,7 @@ const report = {
   skipped: gates.slice(rows.length).map((gate) => ({ id: gate.id, commandText: gate.commandText, proves: gate.proves }))
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const markdownRows = report.rows
   .map((row) => `| \`${row.id}\` | \`${row.commandText}\` | ${row.status} | ${row.exitCode ?? "n/a"} | ${row.durationMs} | ${row.proves} |`)
@@ -907,7 +985,7 @@ const skippedRows = report.skipped.length
   ? report.skipped.map((row) => `| \`${row.id}\` | \`${row.commandText}\` | ${row.proves} |`).join("\n")
   : "| None | None | None |";
 
-writeFileSync(
+if (!checkMode) writeFileSync(
   reportMdPath,
   `# Library Readiness Gate
 
@@ -938,8 +1016,10 @@ ${skippedRows}
 );
 
 console.log(`Library readiness gate: ${report.status}`);
-console.log(`Wrote specs/001-product-ui-foundation/${reportBaseName}.md`);
-console.log(`Wrote specs/001-product-ui-foundation/${reportBaseName}.json`);
+if (!checkMode) {
+  console.log(`Wrote specs/001-product-ui-foundation/${reportBaseName}.md`);
+  console.log(`Wrote specs/001-product-ui-foundation/${reportBaseName}.json`);
+}
 
 if (checkMode && report.status !== "pass") {
   const failedIds = failed.map((row) => row.id).join(", ") || "incomplete gate run";

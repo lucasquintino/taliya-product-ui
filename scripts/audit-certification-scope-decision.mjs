@@ -38,8 +38,10 @@ function reportBasename(baseName, label) {
 const decisionPath = resolve(root, optionValue("--decision", "specs/001-product-ui-foundation/certification-scope-decision.json"));
 const reportLabel = optionValue("--report-label", "");
 const reportBaseName = reportBasename("certification-scope-decision-audit", reportLabel);
-const reportJsonPath = resolve(specDir, `${reportBaseName}.json`);
-const reportMdPath = resolve(specDir, `${reportBaseName}.md`);
+const outputDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outputDir !== specDir;
+const reportJsonPath = resolve(outputDir, `${reportBaseName}.json`);
+const reportMdPath = resolve(outputDir, `${reportBaseName}.md`);
 const examplePath = resolve(specDir, "contracts/certification-scope-decision.example.json");
 
 const allowedScopes = ["full-image-1:1-required", "current-internal-library-readiness-accepted"];
@@ -133,9 +135,9 @@ const report = {
   validationErrors
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
-writeFileSync(
+if (persistReports) writeFileSync(
   reportMdPath,
   `# Certification Scope Decision Audit
 

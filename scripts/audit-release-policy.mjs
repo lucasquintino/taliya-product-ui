@@ -71,11 +71,33 @@ const packageVersions = sourcePackageJsons.map((filePath) => ({
   filePath,
   version: relativeExists(filePath) ? packageVersion(filePath) : ""
 }));
+const packageMetadata = sourcePackageJsons.map((filePath) => {
+  const packageJson = relativeExists(filePath) ? readJson(path.join(root, filePath)) : {};
+  return {
+    filePath,
+    access: packageJson.publishConfig?.access ?? "",
+    registry: packageJson.publishConfig?.registry ?? "",
+    provenance: packageJson.publishConfig?.provenance === true,
+    license: packageJson.license ?? "",
+    repository: packageJson.repository?.url ?? "",
+    pass:
+      packageJson.publishConfig?.access === "public" &&
+      packageJson.publishConfig?.registry === "https://registry.npmjs.org/" &&
+      packageJson.publishConfig?.provenance === true &&
+      typeof packageJson.license === "string" &&
+      typeof packageJson.repository?.url === "string"
+  };
+});
 const versionSet = new Set(packageVersions.map((item) => item.version).filter(Boolean));
 const currentVersion = [...versionSet][0] ?? "";
 const placeholderVersion = policy?.versioning?.placeholderVersion ?? "0.0.0";
 const registryRequiredItems = policy?.registry?.requiredBeforePublish ?? [];
 const missingRegistryItems = requiredRegistryItems.filter((item) => !registryRequiredItems.includes(item));
+const publishWorkflowPath = policy?.registry?.publishWorkflow ?? "";
+const publishWorkflowSource = publishWorkflowPath && relativeExists(publishWorkflowPath)
+  ? fs.readFileSync(path.join(root, publishWorkflowPath), "utf8")
+  : "";
+const changesetsConfigured = relativeExists(".changeset/config.json") && relativeExists(".github/workflows/version-packages.yml");
 
 const rows = [
   row("contract-present", policy !== null, "contracts/release-policy.json", "release policy JSON contract exists"),
@@ -118,6 +140,28 @@ const rows = [
     ["not-configured", "configured"].includes(policy?.registry?.status),
     policy?.registry?.status ?? "missing",
     "registry status must be explicit"
+  ),
+  row(
+    "registry-package-metadata",
+    packageMetadata.length === 3 && packageMetadata.every((item) => item.pass),
+    packageMetadata.map((item) => `${item.filePath}:${item.pass ? "ready" : "incomplete"}`).join(", "),
+    "all public packages must declare npm access, registry, provenance, license, and repository metadata"
+  ),
+  row(
+    "controlled-publish-workflow",
+    Boolean(publishWorkflowSource) &&
+      publishWorkflowSource.includes("environment: npm") &&
+      publishWorkflowSource.includes("NPM_TOKEN") &&
+      publishWorkflowSource.includes("NPM_CONFIG_PROVENANCE") &&
+      publishWorkflowSource.includes("workflow_dispatch"),
+    publishWorkflowPath || "missing",
+    "publishing must be manual, environment-protected, authenticated, and provenance-enabled"
+  ),
+  row(
+    "changesets-versioning",
+    changesetsConfigured,
+    ".changeset/config.json, .github/workflows/version-packages.yml",
+    "Changesets must own shared semver version preparation before publishing"
   ),
   row(
     "consumer-migration-policy",
@@ -167,6 +211,7 @@ const report = {
   registryDecisionReady,
   registryBlockers,
   packageVersions,
+  packageMetadata,
   rows
 };
 
@@ -211,8 +256,10 @@ if (check) {
   }
 }
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
-fs.writeFileSync(reportMdPath, markdown);
+if (!check) {
+  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(reportMdPath, markdown);
+}
 
 if (status === "fail") {
   console.error("Release policy audit: fail");

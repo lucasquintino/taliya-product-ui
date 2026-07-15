@@ -422,8 +422,10 @@ ${drawerApiRows.map((item) => `| \`${item.component}\` | ${item.pass ? "pass" : 
 ${report.nextActions.map((item) => `- ${item}`).join("\n")}
 `;
 
-writeFileSync(resolve(specDir, "crm-real-readiness-audit.json"), `${JSON.stringify(report, null, 2)}\n`);
-writeFileSync(resolve(specDir, "crm-real-readiness-audit.md"), md);
+if (!checkMode) {
+  writeFileSync(resolve(specDir, "crm-real-readiness-audit.json"), `${JSON.stringify(report, null, 2)}\n`);
+  writeFileSync(resolve(specDir, "crm-real-readiness-audit.md"), md);
+}
 
 console.log(`CRM real readiness audit: ${report.status}`);
 console.log("Wrote specs/001-product-ui-foundation/crm-real-readiness-audit.md");

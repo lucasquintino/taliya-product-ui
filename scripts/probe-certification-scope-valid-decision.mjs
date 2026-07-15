@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 const root = process.cwd();
 const probeRoot = resolve(root, "tmp/certification-scope-valid-probe");
 const decisionPath = resolve(probeRoot, "certification-scope-decision.valid.json");
-const reportPath = resolve(root, "specs/001-product-ui-foundation/certification-scope-decision-audit-certification-scope-valid-probe.json");
+const reportPath = resolve(probeRoot, "certification-scope-decision-audit-certification-scope-valid-probe.json");
 const templatePath = resolve(root, "specs/001-product-ui-foundation/contracts/certification-scope-decision.example.json");
 
 rmSync(probeRoot, { recursive: true, force: true });
@@ -25,7 +25,9 @@ const result = spawnSync(
     "--decision",
     decisionPath,
     "--report-label",
-    "certification-scope-valid-probe"
+    "certification-scope-valid-probe",
+    "--out-dir",
+    probeRoot
   ],
   {
     cwd: root,

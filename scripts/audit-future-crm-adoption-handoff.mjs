@@ -91,13 +91,13 @@ const report = {
   linkRows
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const linkTable = linkRows
   .map((row) => `| \`${row.path}\` | ${row.exists ? "yes" : "no"} | ${row.pass ? "Pass" : "Fail"} | ${row.missingSnippets.join("; ") || "none"} |`)
   .join("\n");
 
-writeFileSync(
+if (!checkMode) writeFileSync(
   reportMdPath,
   `# Future CRM Adoption Handoff Audit
 

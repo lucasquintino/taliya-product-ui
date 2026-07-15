@@ -43,6 +43,7 @@ const vendorRelative = optionValue("--vendor", "vendor/taliya-product-ui").repla
 const manifestPath = resolve(root, optionValue("--manifest", "dist-packages/taliya-product-ui-local-manifest.json"));
 const lockfilePath = resolve(consumerRoot, optionValue("--lockfile", "package-lock.json"));
 const outputDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outputDir !== specDir;
 const reportJsonPath = resolve(outputDir, `${reportBasename("consumer-lockfile-audit")}.json`);
 const reportMdPath = resolve(outputDir, `${reportBasename("consumer-lockfile-audit")}.md`);
 
@@ -95,14 +96,16 @@ const report = {
   rows
 };
 
-mkdirSync(outputDir, { recursive: true });
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) {
+  mkdirSync(outputDir, { recursive: true });
+  writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+}
 
 const rowsMd = rows
   .map((row) => `| \`${row.name}\` | ${row.entryExists ? "yes" : "no"} | \`${row.expectedVersion}\` | \`${row.lockVersion || "missing"}\` | ${row.dependencyPass ? "pass" : "fail"} | ${row.resolvedPass ? "pass" : "fail"} | ${row.pass ? "pass" : "fail"} |`)
   .join("\n");
 
-writeFileSync(
+if (persistReports) writeFileSync(
   reportMdPath,
   `# Consumer Lockfile Audit
 

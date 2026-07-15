@@ -1,0 +1,69 @@
+name: Library portability
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  clean-clone:
+    name: Clean clone (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: pnpm
+
+      - name: Install frozen workspace
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test official packages
+        run: pnpm --filter @taliya/tokens test && pnpm --filter @taliya/ui test && pnpm --filter @taliya/crm test
+
+      - name: Build packages and static Storybook
+        run: pnpm build
+
+      - name: Pack current packages
+        run: pnpm pack:local
+
+      - name: Audit package artifacts
+        run: pnpm package-artifacts:audit
+
+      - name: Install synthetic future consumer
+        run: pnpm future-consumer-fixture:audit
+
+      - name: Reject stale artifacts and reports
+        run: pnpm pack:local:stale-artifact-probe && pnpm report-freshness:audit:stale-probe
+
+      - name: Prove checks are read-only
+        run: pnpm audit-checks:read-only-probe
+
+      - name: Upload Storybook build
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-static
+          path: apps/docs/storybook-static
+          if-no-files-found: error

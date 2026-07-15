@@ -8,7 +8,7 @@ const auditJsonPath = resolve(root, "specs/001-product-ui-foundation/remaining-p
 const auditMdPath = resolve(root, "specs/001-product-ui-foundation/remaining-page-coverage-audit.md");
 
 const targetPage = "SalesExperimentalListPage";
-const requiredSnippet = 'worklistLayoutMode="main-priority"';
+const requiredSnippet = 'worklistLayoutMode="compact-rail"';
 
 const originalStory = readFileSync(storyPath, "utf8");
 const originalAuditJson = readFileSync(auditJsonPath, "utf8");
@@ -24,24 +24,25 @@ try {
   if (!originalStory.includes(requiredSnippet)) {
     fail(`Probe setup failed: ${storyPath} does not contain ${requiredSnippet}.`);
   } else {
-    const modifiedStory = originalStory.replace(
-      /(\n\s*)worklistLayoutMode="main-priority"(\n\s*>\s*\n\s*<ExperimentalTable \/>)/,
-      '$1data-probe-worklist-layout="removed"$2'
-    );
+    const pageStart = originalStory.indexOf(`export function ${targetPage}()`);
+    const pageEnd = originalStory.indexOf("\nexport function ", pageStart + 1);
+    const pageSource = originalStory.slice(pageStart, pageEnd);
+    const modifiedPage = pageSource.replace(requiredSnippet, 'data-probe-worklist-layout="removed"');
+    const modifiedStory = originalStory.slice(0, pageStart) + modifiedPage + originalStory.slice(pageEnd);
 
     if (modifiedStory === originalStory) {
       fail(`Probe setup failed: could not remove ${requiredSnippet} from ${targetPage}.`);
     } else {
       writeFileSync(storyPath, modifiedStory);
 
-      const result = spawnSync(process.execPath, ["scripts/audit-remaining-page-coverage.mjs", "--check"], {
+      const result = spawnSync(process.execPath, ["scripts/audit-remaining-page-coverage.mjs"], {
         cwd: root,
         encoding: "utf8",
         maxBuffer: 1024 * 1024 * 20
       });
 
-      if (result.status === 0) {
-        fail("Probe failed: remaining-page coverage audit passed after a family contract regression.", [
+      if (result.status !== 0) {
+        fail("Probe failed: remaining-page coverage audit crashed while computing a family contract regression.", [
           result.stdout,
           result.stderr
         ]);

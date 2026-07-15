@@ -68,9 +68,8 @@ function classifyRow(filePath, subject) {
 function extractStatus(cells) {
   for (const cell of cells) {
     const cleaned = cell.replace(/`/g, "").trim();
-    if (statusLabels.some((label) => cleaned === label)) {
-      return cleaned;
-    }
+    const status = statusLabels.find((label) => cleaned === label || cleaned.startsWith(`${label} /`));
+    if (status) return status;
   }
   return null;
 }
@@ -116,7 +115,7 @@ function parseLedger(filePath) {
   return { rows, blockerMentions };
 }
 
-function parseCertifiedImageMap(filePath) {
+function parseImageMap(filePath) {
   if (!existsSync(filePath)) return [];
 
   const rows = [];
@@ -133,11 +132,13 @@ function parseCertifiedImageMap(filePath) {
     const image = (cells[0] ?? "").replace(/`/g, "");
     const status = cells[1] ?? "";
 
-    if (/\.png/.test(image) && /certified/i.test(status)) {
+    if (/\.(?:png|jpe?g|webp)$/i.test(image)) {
       rows.push({
         line: index + 1,
         image,
         status,
+        active: !/(?:historical|duplicate|rejected|superseded)/i.test(status),
+        certified: /certified/i.test(status),
         excerpt: trimmed.length > 260 ? `${trimmed.slice(0, 257)}...` : trimmed
       });
     }
@@ -155,8 +156,21 @@ if (missingLedgers.length > 0) {
 const parsedLedgers = ledgerPaths.map(parseLedger);
 const rows = parsedLedgers.flatMap((ledger) => ledger.rows);
 const blockerMentions = parsedLedgers.flatMap((ledger) => ledger.blockerMentions);
-const certifiedMapRows = parseCertifiedImageMap(imageCoverageMapPath);
+const imageMapRows = parseImageMap(imageCoverageMapPath);
+const activeImageMapRows = imageMapRows.filter((row) => row.active);
+const certifiedMapRows = imageMapRows.filter((row) => row.certified);
 const imageLedgerRows = rows.filter((row) => row.scope === "image");
+const missingImageCertificationRows = activeImageMapRows
+  .filter((mapRow) => !imageLedgerRows.some((row) => row.subject.replace(/`/g, "").includes(mapRow.image)))
+  .map((mapRow) => ({
+    ledger: "image-coverage-map.md",
+    line: mapRow.line,
+    subject: mapRow.image,
+    status: "Nao iniciado",
+    statusBucket: "notStarted",
+    scope: "image",
+    excerpt: mapRow.excerpt
+  }));
 const imageMapCertificationConflicts = certifiedMapRows
   .map((mapRow) => {
     const ledgerRow = imageLedgerRows.find((row) => row.subject.replace(/`/g, "").includes(mapRow.image));
@@ -223,6 +237,19 @@ const certificationCounts = certificationRows.reduce(
     unknown: 0
   }
 );
+certificationCounts.notStarted += missingImageCertificationRows.length;
+
+countsByScope.image ??= {
+  approved: 0,
+  semiApproved: 0,
+  visualReview: 0,
+  adjusting: 0,
+  implementedUncertified: 0,
+  notStarted: 0,
+  ignored: 0,
+  unknown: 0
+};
+countsByScope.image.notStarted += missingImageCertificationRows.length;
 
 const globallyIncompleteCount =
   certificationCounts.semiApproved +
@@ -233,22 +260,29 @@ const globallyIncompleteCount =
   certificationCounts.unknown;
 
 const audit = {
+  generatedAt: new Date().toISOString(),
   date: new Date().toISOString().slice(0, 10),
-  status: imageMapCertificationConflicts.length === 0 ? "pass" : "fail",
-  visualCertificationStatus: globallyIncompleteCount === 0 && blockerMentions.length === 0 ? "complete" : "not-complete",
+  status: imageMapCertificationConflicts.length === 0 && missingImageCertificationRows.length === 0 ? "pass" : "fail",
+  visualCertificationStatus: globallyIncompleteCount === 0 && blockerMentions.length === 0 && missingImageCertificationRows.length === 0 ? "complete" : "not-complete",
   imageMapCertificationStatus: imageMapCertificationConflicts.length === 0 ? "pass" : "conflict",
+  imageCertificationCoverageStatus: missingImageCertificationRows.length === 0 ? "pass" : "incomplete",
   summary: {
     ledgers: ledgerPaths.map((filePath) => basename(filePath)),
     rowCount: rows.length,
-    certificationRowCount: certificationRows.length,
+    certificationRowCount: certificationRows.length + missingImageCertificationRows.length,
     blockerMentionCount: blockerMentions.length,
     globallyIncompleteCount,
     imageMapCertificationConflictCount: imageMapCertificationConflicts.length,
+    imageMapRowCount: imageMapRows.length,
+    activeImageTargetCount: activeImageMapRows.length,
+    imageCertificationCoverageCount: activeImageMapRows.length - missingImageCertificationRows.length,
+    missingImageCertificationCount: missingImageCertificationRows.length,
     counts,
     certificationCounts,
     countsByScope
   },
   rows,
+  missingImageCertificationRows,
   imageMapCertificationConflicts,
   blockerMentions
 };
@@ -272,8 +306,10 @@ const certificationCountRows = Object.entries(certificationCounts)
   .map(([bucket, count]) => `| ${bucketLabel[bucket] ?? bucket} | ${count} |`)
   .join("\n");
 
-const incompleteRows = certificationRows
-  .filter((row) => !["approved", "ignored"].includes(row.statusBucket))
+const incompleteRows = [
+  ...certificationRows.filter((row) => !["approved", "ignored"].includes(row.statusBucket)),
+  ...missingImageCertificationRows
+]
   .slice(0, 80)
   .map((row) => `| ${row.ledger}:${row.line} | ${row.scope} | ${row.subject} | ${row.status} |`)
   .join("\n");
@@ -296,6 +332,8 @@ const md = `# Visual Certification Backlog Audit
 Date: ${audit.date}
 
 Status: ${audit.visualCertificationStatus}. Integrity gate: ${audit.imageMapCertificationStatus}. This audit reads the Batch 9 and Batch 11 ledgers and makes the remaining visual-certification scope explicit. It does not certify pixels by itself. Component/image rows drive the global visual backlog; process follow-up rows are counted separately as operational history.
+
+Active image certification coverage: ${audit.summary.imageCertificationCoverageCount}/${audit.summary.activeImageTargetCount}. Missing certification rows: ${audit.summary.missingImageCertificationCount}.
 
 ## Component/Image Certification Counts
 
@@ -330,12 +368,14 @@ ${imageMapConflictRows || "| None | None | None | None | None |"}
 ${blockerRows || "| None | None |"}
 `;
 
-writeFileSync(resolve(specDir, "visual-certification-backlog-audit.json"), `${JSON.stringify(audit, null, 2)}\n`);
-writeFileSync(resolve(specDir, "visual-certification-backlog-audit.md"), md);
+if (!checkMode) {
+  writeFileSync(resolve(specDir, "visual-certification-backlog-audit.json"), `${JSON.stringify(audit, null, 2)}\n`);
+  writeFileSync(resolve(specDir, "visual-certification-backlog-audit.md"), md);
+}
 
 if (checkMode && audit.status !== "pass") {
   console.error(
-    `Visual certification backlog audit failed: imageMapCertificationConflicts=${imageMapCertificationConflicts.length}`
+    `Visual certification backlog audit failed: imageMapCertificationConflicts=${imageMapCertificationConflicts.length}, missingImageCertificationRows=${missingImageCertificationRows.length}`
   );
   process.exit(1);
 }

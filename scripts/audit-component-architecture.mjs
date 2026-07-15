@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const checkMode = process.argv.includes("--check");
 const storiesDir = path.join(root, "apps/docs/src/stories");
 const crmSourcePath = path.join(root, "packages/crm/src/index.tsx");
 
@@ -9,6 +10,7 @@ const allowedStoryPrefixes = [
   "Foundations / Tokens",
   "Primitives / UI",
   "CRM / Shell / Components",
+  "CRM / Shell / JourneyShellCanvas",
   "CRM / Image Coverage",
   "CRM / Layout",
   "CRM / Tasks",
@@ -31,6 +33,7 @@ const allowedStoryPrefixes = [
   "CRM / Surface",
   "CRM / Internal",
   "CRM / Students",
+  "CRM / Documents",
   "CRM / Finance",
   "CRM / Sales",
   "CRM / Retention",
@@ -159,6 +162,7 @@ const justifiedRootComponents = new Set([
   "ReplacementDrawer",
   "WeeklyHoursGrid",
   "RoleCard",
+  "PermissionRoleCard",
   "PaymentMethodRow",
   "UsageOriginRow",
   "ModeCard",
@@ -171,6 +175,7 @@ const justifiedRootComponents = new Set([
   "EnrollmentChecklist",
   "RiskCard",
   "PageQuickFilters",
+  "WaitlistPanel",
   "TaskQueueList",
   "TaskTable"
 ]);
@@ -194,6 +199,7 @@ const justifiedRootContracts = {
   ReplacementDrawer: "Replacement option row: native button is the selectable option-card root.",
   WeeklyHoursGrid: "Schedule grid controls: native buttons are day/slot cells with domain-specific grid anatomy.",
   RoleCard: "Selectable role card: native button is the compound card root.",
+  PermissionRoleCard: "Selectable permission-role summary: native button is the complete compound card root; icon, status, and checklist visuals use official primitives.",
   PaymentMethodRow: "Selectable payment method row: native button is the compound row root.",
   UsageOriginRow: "Usage origin row: native button is the expandable/inspectable row root.",
   ModeCard: "Selectable agent mode card: native button is the compound card root.",
@@ -206,6 +212,7 @@ const justifiedRootContracts = {
   EnrollmentChecklist: "Enrollment checklist row: native button is the completion/selection row root.",
   RiskCard: "Retention risk card: native button is the card-level action root.",
   PageQuickFilters: "Quick filter row: native button is the full selectable filter row root; icon and count visuals are delegated to official primitives.",
+  WaitlistPanel: "Waitlist row: native button is the full selectable domain-row root; status visuals are delegated to `Chip` and the container to `Panel`.",
   TaskQueueList: "Task queue row: native button is the selectable task row root.",
   TaskTable: "Task table row/action anatomy: native button is the row-level domain action, while generic actions use primitives."
 };
@@ -261,7 +268,7 @@ const report = {
 };
 
 const reportPath = path.join(root, "specs/001-product-ui-foundation/component-architecture-audit.json");
-fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
 
 function markdownTableCell(value) {
   return String(value).replaceAll("|", "\\|");
@@ -320,13 +327,13 @@ function writeMarkdownReport(reportValue) {
   ].join("\n");
 
   const markdownPath = path.join(root, "specs/001-product-ui-foundation/component-architecture-audit.md");
-  fs.writeFileSync(markdownPath, `${markdown}\n`);
+  if (!checkMode) fs.writeFileSync(markdownPath, `${markdown}\n`);
   return markdownPath;
 }
 
 const markdownPath = writeMarkdownReport(report);
 
-if (process.argv.includes("--check")) {
+if (checkMode) {
   const hasStoryFailure = report.storyArchitecture.invalidTitleCount > 0 || report.storyArchitecture.legacyBatchTitleCount > 0;
   const hasPrimitiveReuseFailure =
     report.crmPrimitiveReuse.primitiveReuseClassification.refactor > 0 ||
@@ -342,7 +349,7 @@ if (process.argv.includes("--check")) {
   }
 }
 
-console.log(`Component architecture audit written to ${path.relative(root, reportPath)} and ${path.relative(root, markdownPath)}`);
+console.log(checkMode ? "Component architecture check passed." : `Component architecture audit written to ${path.relative(root, reportPath)} and ${path.relative(root, markdownPath)}`);
 console.log(`Story titles: ${report.storyArchitecture.total} scanned, ${report.storyArchitecture.invalidTitleCount} invalid, ${report.storyArchitecture.legacyBatchTitleCount} legacy batch titles.`);
 console.log(`CRM primitive reuse: ${report.crmPrimitiveReuse.scannedComponents} components scanned, ${report.crmPrimitiveReuse.componentsWithNativeControls} components contain native compound roots.`);
 console.log(`CRM primitive reuse classification: ${JSON.stringify(report.crmPrimitiveReuse.primitiveReuseClassification)}`);

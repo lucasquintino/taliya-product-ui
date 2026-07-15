@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { relative, resolve } from "node:path";
 
 const root = process.cwd();
@@ -82,9 +82,11 @@ const consumerRoot = resolve(root, optionValue("--consumer", "../taliya-internal
 const readinessConfig = optionValue("--readiness-config", "taliya-readiness.config.json");
 const pageKitConfig = optionValue("--page-kit-config", "taliya-page-kit.config.json");
 const reportLabel = optionValue("--report-label", "");
+const outputDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outputDir !== specDir;
 const reportBaseName = reportBasename("consumer-config-versioning-audit", reportLabel);
-const reportJsonPath = resolve(specDir, `${reportBaseName}.json`);
-const reportMdPath = resolve(specDir, `${reportBaseName}.md`);
+const reportJsonPath = resolve(outputDir, `${reportBaseName}.json`);
+const reportMdPath = resolve(outputDir, `${reportBaseName}.md`);
 
 const rootStatus = existsSync(consumerRoot)
   ? gitRootStatus(consumerRoot)
@@ -111,7 +113,10 @@ const report = {
   }
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) {
+  mkdirSync(outputDir, { recursive: true });
+  writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+}
 
 const rows = configRows
   .map((row) => {
@@ -122,7 +127,7 @@ const rows = configRows
   })
   .join("\n");
 
-writeFileSync(
+if (persistReports) writeFileSync(
   reportMdPath,
   `# Consumer Config Versioning Audit
 
@@ -155,8 +160,10 @@ ${rows}
 );
 
 console.log(`Consumer config versioning audit: ${report.status}`);
-console.log(`Wrote ${relative(root, reportMdPath).replaceAll("\\", "/")}`);
-console.log(`Wrote ${relative(root, reportJsonPath).replaceAll("\\", "/")}`);
+if (persistReports) {
+  console.log(`Wrote ${relative(root, reportMdPath).replaceAll("\\", "/")}`);
+  console.log(`Wrote ${relative(root, reportJsonPath).replaceAll("\\", "/")}`);
+}
 
 if (checkMode && report.status !== "pass") {
   console.error(`Consumer config files are not versioning-clean: ${report.summary.failedConfigs.join(", ") || "unknown"}`);

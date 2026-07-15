@@ -15,29 +15,25 @@ const originalAuditMd = readFileSync(auditMdPath, "utf8");
 
 try {
   if (!originalStory.includes('from "@taliya/crm"')) {
-    console.error('Probe setup failed: expected ImageCoverageToday story to import from "@taliya/crm".');
-    process.exit(1);
+    throw new Error('Probe setup failed: expected ImageCoverageToday story to import from "@taliya/crm".');
   }
 
   const modifiedStory = originalStory.replaceAll('from "@taliya/crm"', 'from "../../packages/crm/src"');
   writeFileSync(storyPath, modifiedStory);
 
-  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs", "--check"], {
+  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs"], {
     cwd: root,
     encoding: "utf8"
   });
 
-  if (result.status === 0) {
-    console.error("Expected full image page coverage audit to fail when a target story loses official @taliya imports, but it passed.");
-    process.exit(1);
+  if (result.status !== 0) {
+    throw new Error("Expected full image page coverage audit to compute the non-official-import probe, but it crashed.");
   }
 
   const probeAudit = JSON.parse(readFileSync(auditJsonPath, "utf8"));
   const failedRow = probeAudit.rows?.find((row) => row.image === targetImage && row.storyId === targetStoryId);
   if (!failedRow || failedRow.status !== "fail" || failedRow.forbiddenLocalPackageImport !== true) {
-    console.error("Expected failed coverage row for the Image 17 story with non-official imports.");
-    console.error(JSON.stringify(failedRow ?? null, null, 2));
-    process.exit(1);
+    throw new Error(`Expected failed coverage row for the Image 17 story with non-official imports.\n${JSON.stringify(failedRow ?? null, null, 2)}`);
   }
 
   console.log("Full image page coverage non-official-import probe passed.");

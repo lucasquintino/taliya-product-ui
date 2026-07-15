@@ -12,6 +12,7 @@ const existingReport = fs.existsSync(reportJsonPath)
   : null;
 
 const requiredReports = [
+  { id: "aggregate-readiness", file: "library-readiness-gate.json", pass: (report) => report.status === "pass" },
   { id: "package-artifacts", file: "package-artifacts-audit.json", pass: (report) => report.summary?.pass === true },
   { id: "package-boundaries", file: "package-boundaries-audit.json", pass: (report) => report.summary?.pass === true },
   { id: "public-api", file: "public-api-audit.json", pass: (report) => report.summary?.pass === true },
@@ -269,8 +270,10 @@ if (check) {
   }
 }
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
-fs.writeFileSync(reportMdPath, markdown);
+if (!check) {
+  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(reportMdPath, markdown);
+}
 
 if (status === "fail") {
   console.error("Official library readiness audit: fail");

@@ -61,6 +61,7 @@ const consumerRoot = resolve(root, optionValue("--consumer", "../taliya-internal
 const sourceDir = resolve(root, optionValue("--source", "dist-packages"));
 const vendorDir = resolve(consumerRoot, optionValue("--vendor", "vendor/taliya-product-ui"));
 const outputDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outputDir !== specDir;
 const reportJsonPath = resolve(outputDir, `${reportBasename("consumer-package-sync-audit")}.json`);
 const reportMdPath = resolve(outputDir, `${reportBasename("consumer-package-sync-audit")}.md`);
 const localReleaseManifest = JSON.parse(readFileSync(resolve(sourceDir, "taliya-product-ui-local-manifest.json"), "utf8"));
@@ -93,7 +94,7 @@ const rows = packageFiles.map((fileName) => {
   };
 });
 
-mkdirSync(outputDir, { recursive: true });
+if (persistReports) mkdirSync(outputDir, { recursive: true });
 
 const installedRows = installedPackages.flatMap((packageInfo) =>
   packageInfo.files.map((relativeFile) => {
@@ -128,7 +129,7 @@ const report = {
   installedRows
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const rowsMd = rows
   .map((row) => {
@@ -146,7 +147,7 @@ const installedRowsMd = installedRows
   })
   .join("\n");
 
-writeFileSync(
+if (persistReports) writeFileSync(
   reportMdPath,
   `# Consumer Package Sync Audit
 

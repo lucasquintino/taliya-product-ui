@@ -181,7 +181,7 @@ const report = {
   packageRows
 };
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!check) fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const markdown = [
   "# Package Boundaries Audit",
@@ -211,9 +211,9 @@ const markdown = [
   ),
   ""
 ].join("\n");
-fs.writeFileSync(reportMdPath, markdown);
+if (!check) fs.writeFileSync(reportMdPath, markdown);
 
-console.log(`Package boundaries audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
+if (!check) console.log(`Package boundaries audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
 console.log(`Package boundaries: ${report.summary.pass ? "pass" : "fail"}`);
 
 if (check && !report.summary.pass) {

@@ -16,29 +16,25 @@ const originalAuditMd = readFileSync(auditMdPath, "utf8");
 
 try {
   if (!originalMap.includes(insertionMarker)) {
-    console.error("Probe setup failed: could not find CRM logged-in insertion marker in image-coverage-map.md.");
-    process.exit(1);
+    throw new Error("Probe setup failed: could not find CRM logged-in insertion marker in image-coverage-map.md.");
   }
 
   const modifiedMap = originalMap.replace(insertionMarker, `${syntheticRow}\n${insertionMarker}`);
   writeFileSync(mapPath, modifiedMap);
 
-  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs", "--check"], {
+  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs"], {
     cwd: root,
     encoding: "utf8"
   });
 
-  if (result.status === 0) {
-    console.error("Expected full image page coverage audit to fail when a Covered page map row has no story mapping, but it passed.");
-    process.exit(1);
+  if (result.status !== 0) {
+    throw new Error("Expected full image page coverage audit to compute the unmapped-target probe, but it crashed.");
   }
 
   const probeAudit = JSON.parse(readFileSync(auditJsonPath, "utf8"));
   const failedRow = probeAudit.unmappedCoveredTargetRows?.find((row) => row.image === syntheticImage);
   if (!failedRow || failedRow.mapped !== false || failedRow.section !== "CRM Logged-In Screens") {
-    console.error("Expected unmapped covered target row for the synthetic image.");
-    console.error(JSON.stringify(failedRow ?? null, null, 2));
-    process.exit(1);
+    throw new Error(`Expected unmapped covered target row for the synthetic image.\n${JSON.stringify(failedRow ?? null, null, 2)}`);
   }
 
   console.log("Full image page coverage unmapped-map-target probe passed.");

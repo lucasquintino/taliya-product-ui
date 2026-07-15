@@ -159,8 +159,10 @@ if (check) {
   }
 }
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
-fs.writeFileSync(reportMdPath, markdown);
+if (!check) {
+  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(reportMdPath, markdown);
+}
 
 if (status === "fail") {
   console.error("Release channel audit: fail");

@@ -1,4 +1,4 @@
-import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, relative, resolve } from "node:path";
 
 const root = process.cwd();
@@ -6,10 +6,12 @@ const specDir = resolve(root, "specs/001-product-ui-foundation");
 const auditPath = resolve(specDir, "token-governance-audit.md");
 const baselinePath = resolve(specDir, "token-governance-baseline.json");
 const tokenSourcePath = resolve(root, "packages/tokens/src/index.ts");
+const storybookAnatomyPath = resolve(root, "specs/002-readiness-evidence-portability/storybook-anatomy-baseline.json");
 
 const sourceFiles = [
   "packages/ui/src/styles.css",
-  "packages/crm/src/styles.css"
+  "packages/crm/src/styles.css",
+  "apps/docs/src/storybook.css"
 ].map((file) => resolve(root, file));
 
 const storyDir = resolve(root, "apps/docs/src/stories");
@@ -207,6 +209,13 @@ function buildAudit() {
   const tokenClassifications = classifyTokens(parseTokenRecords());
   const storyScan = scanCssTree(storyDir);
   const actionableCss = cssScans.flatMap((scan) => scan.actionable);
+  const productActionableCss = cssScans
+    .filter((scan) => scan.file !== "apps/docs/src/storybook.css")
+    .flatMap((scan) => scan.actionable);
+  const storybookFixtureInventory = cssScans.find((scan) => scan.file === "apps/docs/src/storybook.css")?.actionable ?? [];
+  const storybookAnatomy = existsSync(storybookAnatomyPath)
+    ? JSON.parse(read(storybookAnatomyPath))
+    : { anatomySelectorCount: null, officialComponentOverrideCount: null, fixtureGeometrySelectors: [], harnessSelectors: [] };
   const tokenSummary = summarize(tokenClassifications, "classification");
   const highPriorityTokens = tokenClassifications.filter((token) => token.classification === "alias obrigatorio" || token.classification === "duplicado");
 
@@ -217,7 +226,10 @@ function buildAudit() {
     tokenSummary,
     tokenClassifications,
     highPriorityTokens,
-    actionableCss
+    actionableCss,
+    productActionableCss,
+    storybookFixtureInventory,
+    storybookAnatomy
   };
 }
 
@@ -259,11 +271,12 @@ function scanArbitraryText(text) {
 }
 
 function renderMarkdown(audit) {
-  const actionableCssCount = audit.actionableCss.length;
+  const actionableCssCount = audit.productActionableCss.length;
   const mandatoryAliasCount = audit.highPriorityTokens.filter((token) => token.classification === "alias obrigatorio").length;
+  const storybookProductAnatomyDebtCount = audit.storybookAnatomy.anatomySelectorCount ?? 1;
   const verdict =
-    actionableCssCount === 0 && mandatoryAliasCount === 0
-      ? "Token governance is clean for the current component surface: package and story CSS contain no actionable literal visual debt, and no high-priority mandatory alias rows remain."
+    actionableCssCount === 0 && mandatoryAliasCount === 0 && storybookProductAnatomyDebtCount === 0
+      ? "Token governance is clean for the shipped component surface: package and inline story CSS contain no actionable literal visual debt, Storybook owns no product anatomy, and no high-priority mandatory alias rows remain."
       : "Token governance still has actionable visual debt. Components can be official only when their visual decisions resolve through official tokens or documented domain-specific exceptions.";
   const cssRows = audit.cssScans
     .map((scan) => `| \`${scan.file}\` | ${scan.counts.hex} | ${scan.counts.rgba} | ${scan.counts.gradient} | ${scan.counts.literalSizing} | ${scan.counts.literalShadow} | ${scan.actionable.length} |`)
@@ -278,7 +291,7 @@ function renderMarkdown(audit) {
         `| \`${token.name}\` | \`${token.value}\` | ${token.classification} | ${token.reason} | ${token.suggestedAlias ? `\`${token.suggestedAlias}\`` : ""} |`
     )
     .join("\n");
-  const cssRowsActionable = audit.actionableCss
+  const cssRowsActionable = audit.productActionableCss
     .slice(0, 160)
     .map((item) => `| \`${item.file}:${item.line}\` | ${item.kind} | \`${item.text.replaceAll("|", "\\|")}\` |`)
     .join("\n");
@@ -310,6 +323,14 @@ Story files inventory:
 ${JSON.stringify(audit.storyScan, null, 2)}
 \`\`\`
 
+Storybook CSS ownership is enforced by the strict anatomy audit rather than by treating fixture dimensions as shipped product tokens:
+
+- Product-anatomy debt selectors: ${audit.storybookAnatomy.anatomySelectorCount ?? "missing audit"}
+- Official appearance/anatomy overrides: ${audit.storybookAnatomy.officialComponentOverrideCount ?? "missing audit"}
+- Allowed fixture-geometry overrides: ${audit.storybookAnatomy.fixtureGeometrySelectors?.length ?? 0}
+- Capture harness selectors: ${audit.storybookAnatomy.harnessSelectors?.length ?? 0}
+- Inventoried Storybook fixture literal lines: ${audit.storybookFixtureInventory.length}
+
 ## CRM Token Classification Summary
 
 | Classification | Count |
@@ -326,7 +347,7 @@ ${priorityRows}
 
 ## High-Priority CSS Literals
 
-These component CSS lines need either token replacement or a local justification comment. The list is capped.
+These shipped package CSS lines need either token replacement or a documented domain exception. Storybook fixture dimensions remain inventoried above and are rejected separately if they own product anatomy.
 
 | Location | Kind | Line |
 | --- | --- | --- |
@@ -346,7 +367,14 @@ function comparableBaseline(audit) {
   return {
     cssScans: Object.fromEntries(audit.cssScans.map((scan) => [scan.file, scan.counts])),
     storyScan: audit.storyScan,
-    tokenSummary: audit.tokenSummary
+    tokenSummary: audit.tokenSummary,
+    storybookAnatomy: {
+      anatomySelectorCount: audit.storybookAnatomy.anatomySelectorCount,
+      officialComponentOverrideCount: audit.storybookAnatomy.officialComponentOverrideCount,
+      fixtureGeometryOverrideCount: audit.storybookAnatomy.fixtureGeometrySelectors?.length ?? 0,
+      harnessSelectorCount: audit.storybookAnatomy.harnessSelectors?.length ?? 0,
+      fixtureLiteralInventoryCount: audit.storybookFixtureInventory.length
+    }
   };
 }
 

@@ -30,7 +30,9 @@ const result = spawnSync(
     "--decision",
     decisionPath,
     "--report-label",
-    "certification-scope-negative-probe"
+    "certification-scope-negative-probe",
+    "--out-dir",
+    probeRoot
   ],
   {
     cwd: root,

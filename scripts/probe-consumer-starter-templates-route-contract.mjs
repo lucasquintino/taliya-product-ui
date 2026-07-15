@@ -7,7 +7,11 @@ const root = process.cwd();
 const specDir = resolve(root, "specs/001-product-ui-foundation");
 const tempDir = mkdtempSync(join(tmpdir(), "taliya-starter-route-contract-probe-"));
 const originalConfigPath = resolve(specDir, "contracts/consumer-page-kit-config.example.json");
+const reportJsonPath = resolve(specDir, "consumer-starter-templates-audit.json");
+const reportMdPath = resolve(specDir, "consumer-starter-templates-audit.md");
 const backupConfigPath = join(tempDir, "consumer-page-kit-config.example.json");
+const originalReportJson = readFileSync(reportJsonPath, "utf8");
+const originalReportMd = readFileSync(reportMdPath, "utf8");
 
 copyFileSync(originalConfigPath, backupConfigPath);
 
@@ -17,8 +21,7 @@ function loadProbeConfig() {
   const workListShell = workListRoute?.requiredLocalComponents?.find((requirement) => requirement.name === "CrmShellClient");
 
   if (!workListShell) {
-    console.error("Expected the official starter config to contain /crm CrmShellClient as a route-local component.");
-    process.exit(1);
+    throw new Error("Expected the official starter config to contain /crm CrmShellClient as a route-local component.");
   }
 
   return { config, workListShell };
@@ -29,30 +32,20 @@ function runInvalidCase({ label, mutate, expectedContractId, expectedContractExi
   mutate(workListShell);
   writeFileSync(originalConfigPath, `${JSON.stringify(config, null, 2)}\n`);
 
-  const result = spawnSync(process.execPath, ["scripts/audit-consumer-starter-templates.mjs", "--check"], {
+  const result = spawnSync(process.execPath, ["scripts/audit-consumer-starter-templates.mjs"], {
     cwd: root,
     encoding: "utf8"
   });
 
-  if (result.status === 0) {
-    console.error(`Expected consumer-starter-templates audit to reject ${label}, but it passed.`);
-    process.exit(1);
+  if (result.status !== 0) {
+    throw new Error(`Expected consumer-starter-templates audit to compute ${label}, but it crashed.`);
   }
 
-  const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
-  if (!output.includes("/crm:CrmShellClient")) {
-    console.error(`Expected failure output to name the route-local shell wrapper for ${label}.`);
-    console.error(output.trim());
-    process.exit(1);
+  if (!existsSync(reportJsonPath)) {
+    throw new Error("Expected consumer-starter-templates audit to write its probe report.");
   }
 
-  const reportPath = resolve(specDir, "consumer-starter-templates-audit.json");
-  if (!existsSync(reportPath)) {
-    console.error("Expected consumer-starter-templates audit to write its probe report.");
-    process.exit(1);
-  }
-
-  const report = JSON.parse(readFileSync(reportPath, "utf8"));
+  const report = JSON.parse(readFileSync(reportJsonPath, "utf8"));
   const failedRow = report.routeLocalContractRows?.find(
     (row) => row.route === "/crm" && row.componentName === "CrmShellClient"
   );
@@ -64,9 +57,7 @@ function runInvalidCase({ label, mutate, expectedContractId, expectedContractExi
     (expectedLinkedComponentMatches !== undefined && failedRow?.linkedContractComponentMatches !== expectedLinkedComponentMatches) ||
     failedRow?.pass !== false
   ) {
-    console.error(`Expected starter templates probe report to fail for ${label}.`);
-    console.error(JSON.stringify(report, null, 2));
-    process.exit(1);
+    throw new Error(`Expected starter templates probe report to fail for ${label}.\n${JSON.stringify(report, null, 2)}`);
   }
 }
 
@@ -98,6 +89,8 @@ try {
   });
 } finally {
   copyFileSync(backupConfigPath, originalConfigPath);
+  writeFileSync(reportJsonPath, originalReportJson);
+  writeFileSync(reportMdPath, originalReportMd);
 }
 
 const restoreCheck = spawnSync(process.execPath, ["scripts/audit-consumer-starter-templates.mjs", "--check"], {

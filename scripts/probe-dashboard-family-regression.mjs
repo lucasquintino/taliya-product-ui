@@ -34,14 +34,14 @@ try {
     } else {
       writeFileSync(storyPath, modifiedStory);
 
-      const result = spawnSync(process.execPath, ["scripts/audit-dashboard-family.mjs", "--check"], {
+      const result = spawnSync(process.execPath, ["scripts/audit-dashboard-family.mjs"], {
         cwd: root,
         encoding: "utf8",
         maxBuffer: 1024 * 1024 * 20
       });
 
-      if (result.status === 0) {
-        fail("Probe failed: dashboard family audit passed after a CrmRightPanelPage regression.", [
+      if (result.status !== 0) {
+        fail("Probe failed: dashboard family audit crashed while computing a CrmRightPanelPage regression.", [
           result.stdout,
           result.stderr
         ]);

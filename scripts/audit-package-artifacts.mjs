@@ -87,7 +87,22 @@ const packageSpecs = [
       "standardPageKitManifest",
       'import { standardPageKitManifest } from "@taliya/crm/standard-page-kit"',
       'drawerPlacement="fixed" | "content" | "floating"',
-      'pageHeaderRhythm="default" | "spacious" | "dashboard" | "stacked" | "overview"',
+      'pageHeaderRhythm="dashboard" | "reports" | "support" | "internal-overview" | "internal-tenants" | "stacked" | "agents" | "agents-routines" | "agents-routine-detail" | "agents-flow-detail" | "agents-publish" | "settings-hub" | "overview"',
+      'CrmDashboardPage layoutVariant="settings-hub"',
+      'rightPanelVariant="settings-permissions"',
+      'rightPanelVariant="settings-payments"',
+      'rightPanelVariant="agent-routine"',
+      'rightPanelVariant="agent-flow"',
+      'rightPanelVariant="agent-test"',
+      'rightPanelVariant="agent-publish"',
+      'rightPanelVariant="agent-execution"',
+      'frame="window" | "window-inset"',
+      'contentLayout="internal-tenant-detail"',
+      "TenantDetailLayout footerNote",
+      'SetupPage frameVariant="default" | "guided" | "guided-block" | "guided-main" | "guided-wide" | "guided-review" | "shell-global"',
+      'WeeklyHoursGrid variant="availability" | "schedule"',
+      'SetupAgentChat variant="step" | "welcome"',
+      "observacoes operacionais apos as linhas",
       "react",
       "react-dom"
     ]
@@ -377,7 +392,7 @@ const report = {
   }
 };
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!check) fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const markdown = [
   "# Package Artifacts Audit",
@@ -425,9 +440,9 @@ const markdown = [
   }),
   ""
 ].join("\n");
-fs.writeFileSync(reportMdPath, markdown);
+if (!check) fs.writeFileSync(reportMdPath, markdown);
 
-console.log(`Package artifacts audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
+if (!check) console.log(`Package artifacts audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
 console.log(`Package artifacts: ${report.summary.pass ? "pass" : "fail"}`);
 
 if (check && !report.summary.pass) {

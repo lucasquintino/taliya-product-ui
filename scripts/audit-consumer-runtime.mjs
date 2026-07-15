@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const root = process.cwd();
@@ -35,8 +35,10 @@ const commandList = optionValue("--commands", "typecheck,lint,test,build")
   .split(",")
   .map((command) => command.trim())
   .filter(Boolean);
-const reportJsonPath = resolve(specDir, `${reportBasename("consumer-runtime-audit")}.json`);
-const reportMdPath = resolve(specDir, `${reportBasename("consumer-runtime-audit")}.md`);
+const outputDir = resolve(root, optionValue("--out-dir", specDir));
+const persistReports = !checkMode || outputDir !== specDir;
+const reportJsonPath = resolve(outputDir, `${reportBasename("consumer-runtime-audit")}.json`);
+const reportMdPath = resolve(outputDir, `${reportBasename("consumer-runtime-audit")}.md`);
 
 function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, "utf8"));
@@ -92,14 +94,17 @@ const report = {
   rows
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (persistReports) {
+  mkdirSync(outputDir, { recursive: true });
+  writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+}
 
 const rowsMd = rows.length
   ? rows.map((row) => `| \`${row.script}\` | \`${row.commandText}\` | ${row.status} | ${row.exitCode ?? "n/a"} | ${row.durationMs} |`).join("\n")
   : "| None | None | n/a | n/a | n/a |";
 const missingMd = missingScripts.length ? missingScripts.map((scriptName) => `- \`${scriptName}\``).join("\n") : "- None";
 
-writeFileSync(
+if (persistReports) writeFileSync(
   reportMdPath,
   `# Consumer Runtime Audit
 
@@ -124,8 +129,10 @@ ${missingMd}
 );
 
 console.log(`Consumer runtime audit: ${report.status}`);
-console.log(`Wrote specs/001-product-ui-foundation/${reportBasename("consumer-runtime-audit")}.md`);
-console.log(`Wrote specs/001-product-ui-foundation/${reportBasename("consumer-runtime-audit")}.json`);
+if (persistReports) {
+  console.log(`Wrote ${reportMdPath}`);
+  console.log(`Wrote ${reportJsonPath}`);
+}
 
 if (checkMode && report.status !== "pass") {
   const failedScripts = failed.map((row) => row.script).join(", ") || "none";

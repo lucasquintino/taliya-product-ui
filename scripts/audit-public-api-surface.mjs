@@ -153,7 +153,7 @@ const report = {
   }
 };
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!check) fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const markdown = [
   "# Public API Surface Audit",
@@ -192,9 +192,9 @@ const markdown = [
   ""
 ].join("\n");
 
-fs.writeFileSync(reportMdPath, markdown);
+if (!check) fs.writeFileSync(reportMdPath, markdown);
 
-console.log(`Public API surface audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
+if (!check) console.log(`Public API surface audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
 console.log(`Public API surface: ${report.status}`);
 
 if (check && !pass) {

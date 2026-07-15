@@ -61,7 +61,7 @@ const generatedManifest = {
   packages: generatedManifestPackages
 };
 
-if (updateManifest || !fs.existsSync(manifestPath)) {
+if (updateManifest) {
   fs.writeFileSync(manifestPath, `${JSON.stringify(generatedManifest, null, 2)}\n`);
 }
 
@@ -144,8 +144,10 @@ if (check) {
   }
 }
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
-fs.writeFileSync(reportMdPath, markdown);
+if (!check) {
+  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+  fs.writeFileSync(reportMdPath, markdown);
+}
 
 if (status === "fail") {
   console.error("Local release manifest audit: fail");

@@ -1,12 +1,21 @@
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { delimiter } from "node:path";
-import { dirname, join, resolve } from "node:path";
+import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const outputDir = resolve(rootDir, "dist-packages");
+const args = process.argv.slice(2);
+
+function optionValue(name, fallback) {
+  const equalsArg = args.find((arg) => arg.startsWith(`${name}=`));
+  if (equalsArg) return equalsArg.split("=").slice(1).join("=");
+  const index = args.indexOf(name);
+  return index >= 0 && args[index + 1] && !args[index + 1].startsWith("--") ? args[index + 1] : fallback;
+}
+
+const outputDir = resolve(rootDir, optionValue("--output-dir", "dist-packages"));
 const packages = ["tokens", "ui", "crm"];
 const corepackScript =
   process.platform === "win32"
@@ -21,6 +30,9 @@ if (process.platform === "win32" && !corepackScript) {
 }
 
 mkdirSync(outputDir, { recursive: true });
+for (const entry of readdirSync(outputDir)) {
+  if (/^taliya-(?:tokens|ui|crm)-.+\.tgz$/.test(entry)) rmSync(resolve(outputDir, entry));
+}
 
 for (const packageName of packages) {
   const packageDir = resolve(rootDir, "packages", packageName);
@@ -56,7 +68,7 @@ const packageInfos = packages.map((packageName, index) => {
     name: packageJson.name,
     version: packageJson.version,
     tarball: tarballName,
-    file: `dist-packages/${tarballName}`,
+    file: relative(rootDir, tarballPath).replaceAll("\\", "/"),
     sha256,
     bytes,
     installOrder: index + 1

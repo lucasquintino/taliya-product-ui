@@ -1,8 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, resolve } from "node:path";
+import { resolveSourceAssetsDir } from "./source-assets-config.mjs";
 
 const root = process.cwd();
-const sourceDir = "D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508";
+const sourceDir = resolveSourceAssetsDir({ root, args: process.argv.slice(2), requireExisting: false }).path;
 const checkMode = process.argv.includes("--check");
 
 function optionValue(name, fallback) {
@@ -18,6 +19,12 @@ function optionValue(name, fallback) {
 
 const ledgerPath = resolve(root, optionValue("--ledger", "specs/001-product-ui-foundation/batch-11-status-ledger.md"));
 const outputDir = resolve(root, optionValue("--out-dir", "specs/001-product-ui-foundation"));
+const persistReports = !checkMode || outputDir !== resolve(root, "specs/001-product-ui-foundation");
+const backlogPath = resolve(root, "specs/001-product-ui-foundation/visual-certification-backlog-audit.json");
+const fullCoveragePath = resolve(root, "specs/001-product-ui-foundation/full-image-page-coverage-audit.json");
+const imageMapPath = resolve(root, "specs/001-product-ui-foundation/image-coverage-map.md");
+const captureReportPath = resolve(root, "specs/001-product-ui-foundation/visual-certification-capture-audit.json");
+const referenceCoveragePath = resolve(root, "specs/001-product-ui-foundation/reference-sheet-coverage-audit.json");
 
 const statusLabels = [
   "Aprovado",
@@ -86,7 +93,10 @@ function extractTableRows(markdown) {
       .slice(1, -1)
       .map((cell) => cell.trim());
 
-    const status = cells.find((cell) => statusLabels.includes(stripCode(cell)));
+    const status = cells.find((cell) => {
+      const cleaned = stripCode(cell);
+      return statusLabels.some((label) => cleaned === label || cleaned.startsWith(`${label} /`));
+    });
     const subject = stripCode(cells[0] ?? "");
     if (!status || !/\.png/.test(subject)) return;
 
@@ -106,16 +116,45 @@ function extractTableRows(markdown) {
   return rows;
 }
 
+function dedupeImageRows(rows) {
+  const byImage = new Map();
+  for (const row of rows) {
+    const current = byImage.get(row.image);
+    const score = [row.story, row.components, row.evidence, row.blocker, row.nextAction]
+      .reduce((sum, value) => sum + value.length, 0);
+    const currentScore = current
+      ? [current.story, current.components, current.evidence, current.blocker, current.nextAction]
+        .reduce((sum, value) => sum + value.length, 0)
+      : -1;
+    if (!current || score > currentScore) byImage.set(row.image, row);
+  }
+  return [...byImage.values()];
+}
+
+function mappedComponents(markdown, image) {
+  const escaped = image.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const line = markdown.split(/\r?\n/).find((row) => new RegExp(`^\\|\\s*\`${escaped}\``).test(row));
+  if (!line) return "";
+  return line.split("|").slice(1, -1).map((cell) => stripCode(cell))[3] ?? "";
+}
+
 function rowContextText(markdown, row) {
-  const rowStart = markdown.indexOf(`| \`${row.image}\``);
-  if (rowStart === -1) {
+  const lines = markdown.split(/\r?\n/);
+  const rowIndexes = lines.flatMap((line, index) =>
+    line.trimStart().startsWith(`| \`${row.image}\``) ? [index] : []
+  );
+  if (rowIndexes.length === 0) {
     return clean([row.components, row.evidence, row.blocker, row.nextAction].join(" "));
   }
 
-  const afterRowStart = rowStart + 1;
-  const nextImageRow = markdown.slice(afterRowStart).match(/\n\| `[^`]*\.png(?:\.png)?` \|/);
-  const rowEnd = nextImageRow ? afterRowStart + nextImageRow.index : markdown.length;
-  return clean(stripCode(markdown.slice(rowStart, rowEnd)));
+  const blocks = rowIndexes.map((rowIndex) => {
+    const nextImageOffset = lines
+      .slice(rowIndex + 1)
+      .findIndex((line) => /^\|\s*`[^`]*\.png(?:\.png)?`\s*\|/.test(line.trim()));
+    const rowEnd = nextImageOffset === -1 ? lines.length : rowIndex + 1 + nextImageOffset;
+    return lines.slice(rowIndex, rowEnd).join("\n");
+  });
+  return clean(stripCode(blocks.join("\n")));
 }
 
 function sourceCandidates(image) {
@@ -152,6 +191,10 @@ function certificationMode(row, missingFields) {
     (
       nextAction.includes("product review rejects") ||
       nextAction.includes("product review") ||
+      nextAction.includes("revisão visual de produto") ||
+      nextAction.includes("revisao visual de produto") ||
+      nextAction.includes("revisão de produto") ||
+      nextAction.includes("revisao de produto") ||
       nextAction.includes("use as composition baseline") ||
       blocker.includes("semi-approved")
     )
@@ -896,14 +939,62 @@ if (!existsSync(ledgerPath)) {
 mkdirSync(outputDir, { recursive: true });
 
 const ledgerText = readFileSync(ledgerPath, "utf8");
-const rows = extractTableRows(ledgerText);
+const backlog = JSON.parse(readFileSync(backlogPath, "utf8"));
+const fullCoverage = JSON.parse(readFileSync(fullCoveragePath, "utf8"));
+const captureReport = existsSync(captureReportPath) ? JSON.parse(readFileSync(captureReportPath, "utf8")) : { rows: [] };
+const captureByImage = new Map((captureReport.rows ?? []).map((row) => [row.image, row]));
+const referenceCoverage = existsSync(referenceCoveragePath) ? JSON.parse(readFileSync(referenceCoveragePath, "utf8")) : { rows: [] };
+const referenceByImage = new Map((referenceCoverage.rows ?? []).map((row) => [row.image, row]));
+const imageMapText = readFileSync(imageMapPath, "utf8");
+const ledgerRows = dedupeImageRows(extractTableRows(ledgerText));
+const ledgerImages = new Set(ledgerRows.map((row) => row.image));
+const missingCertificationRows = (backlog.missingImageCertificationRows ?? [])
+  .filter((row) => !ledgerImages.has(row.subject))
+  .map((row) => {
+    const coverage = (fullCoverage.rows ?? []).find((item) => item.image === row.subject);
+    const capture = captureByImage.get(row.subject);
+    const reference = referenceByImage.get(row.subject);
+    return {
+      source: `${row.ledger}:${row.line}`,
+      image: row.subject,
+      status: "Nao iniciado",
+      statusBucket: "notStarted",
+      story: coverage?.storyId ?? reference?.storyIds?.join(", ") ?? "",
+      referenceStoryIds: reference?.storyIds ?? [],
+      components: mappedComponents(imageMapText, row.subject),
+      evidence: capture?.status === "captured"
+        ? `visual-certification-capture-audit.json: currentSha256=${capture.currentSha256}; diffSha256=${capture.diffSha256}; meanAbsoluteRgbDelta=${capture.meanAbsoluteRgbDelta}; differentPixelRatio=${capture.differentPixelRatio}`
+        : reference?.status === "pass"
+          ? `reference-sheet-coverage-audit.json: ${reference.componentRows.length}/${reference.componentRows.length} required components resolve to ${reference.storyIds.length} official Storybook targets.`
+          : "",
+      blocker: capture?.status === "captured"
+        ? "Current source-sized screenshot and pixel diff exist, but no explicit 1:1 visual verdict is recorded in the ledger."
+        : reference?.status === "pass"
+          ? "All named components map to official stories, but no explicit reference-sheet visual verdict is recorded in the ledger."
+        : "No explicit 1:1 image certification row or current capture evidence exists in the visual ledger.",
+      nextAction: capture?.status === "captured"
+        ? "Review the current source/current/diff evidence and record regional/full-image pass-fail findings in the visual ledger."
+        : reference?.status === "pass"
+          ? "Review the source reference sheet against its mapped official component stories and record component-level pass-fail findings plus a sheet verdict in the visual ledger."
+        : coverage?.storyId
+          ? "Capture the current static Storybook story against the canonical source and record regional/full-image pass-fail evidence in the visual ledger."
+          : "Map this source image to an official isolated component/story target, then capture and record 1:1 pass-fail evidence in the visual ledger."
+    };
+  });
+const rows = [...ledgerRows, ...missingCertificationRows];
 const currentEvidenceAssertionImages = new Set(currentEvidenceAssertions.map((assertion) => assertion.image));
 const pendingRows = rows
   .filter((row) => !["approved", "ignored"].includes(row.statusBucket))
   .map((row) => {
     const source = sourceStatus(row.image);
-    const hasCurrentEvidenceAssertion = currentEvidenceAssertionImages.has(row.image);
-    const evidenceFindings = currentEvidenceFindings(row, rowContextText(ledgerText, row));
+    const captureEvidence = captureByImage.get(row.image);
+    const referenceEvidence = referenceByImage.get(row.image);
+    const hasCurrentCaptureEvidence = captureEvidence?.status === "captured";
+    const hasCurrentReferenceEvidence = referenceEvidence?.status === "pass";
+    const hasCurrentEvidenceAssertion = currentEvidenceAssertionImages.has(row.image) || hasCurrentCaptureEvidence || hasCurrentReferenceEvidence;
+    const evidenceFindings = hasCurrentCaptureEvidence && row.source.startsWith("image-coverage-map.md:")
+      ? []
+      : currentEvidenceFindings(row, rowContextText(ledgerText, row));
     const evidenceArtifacts = evidenceArtifactRefs(row).map((ref) => ({
       ref,
       exists: existsSync(resolve(root, ref))
@@ -923,24 +1014,31 @@ const pendingRows = rows
     return {
       ...row,
       hasCurrentEvidenceAssertion,
+      hasCurrentCaptureEvidence,
+      hasCurrentReferenceEvidence,
+      captureEvidence: captureEvidence ?? null,
+      referenceEvidence: referenceEvidence ?? null,
       sourceImageExists: source.exists,
       sourceImagePath: source.path,
       evidenceArtifacts,
       missingEvidenceArtifacts: evidenceArtifacts.filter((artifact) => !artifact.exists),
       missingFields,
-      certificationMode: certificationMode(row, missingFields),
+      certificationMode: row.referenceStoryIds?.length > 0 ? "component-reference-sheet-review" : certificationMode(row, missingFields),
       actionable: missingFields.length === 0
     };
   });
 
 const technicalRows = pendingRows.filter((row) => row.certificationMode === "technical-certification-cycle");
 const productReviewRows = pendingRows.filter((row) => row.certificationMode === "product-review-decision");
+const referenceRows = pendingRows.filter((row) => row.certificationMode === "component-reference-sheet-review");
 const nextTechnicalRow = technicalRows.find((row) => row.actionable) ?? null;
 const nextProductReviewRow = productReviewRows.find((row) => row.actionable) ?? null;
+const nextReferenceRow = referenceRows.find((row) => row.actionable) ?? null;
 const evidenceArtifactCount = pendingRows.reduce((sum, row) => sum + row.evidenceArtifacts.length, 0);
 const missingEvidenceArtifactCount = pendingRows.reduce((sum, row) => sum + row.missingEvidenceArtifacts.length, 0);
 
 const audit = {
+  generatedAt: new Date().toISOString(),
   date: new Date().toISOString().slice(0, 10),
   status: pendingRows.every((row) => row.actionable) ? "pass" : "fail",
   summary: {
@@ -949,13 +1047,17 @@ const audit = {
     blockedByMissingPlanDataCount: pendingRows.filter((row) => !row.actionable).length,
     technicalCertificationCycleCount: technicalRows.length,
     productReviewDecisionCount: productReviewRows.length,
+    componentReferenceSheetReviewCount: referenceRows.length,
     currentEvidenceAssertionCount: currentEvidenceAssertions.length,
     currentEvidenceAssertionCoverageCount: pendingRows.filter((row) => row.hasCurrentEvidenceAssertion).length,
     currentEvidenceMissingAssertionCount: pendingRows.filter((row) => !row.hasCurrentEvidenceAssertion).length,
+    currentCaptureEvidenceCount: pendingRows.filter((row) => row.hasCurrentCaptureEvidence).length,
+    currentReferenceCoverageCount: pendingRows.filter((row) => row.hasCurrentReferenceEvidence).length,
     evidenceArtifactCount,
     missingEvidenceArtifactCount,
     nextTechnicalImage: nextTechnicalRow?.image ?? null,
-    nextProductReviewImage: nextProductReviewRow?.image ?? null
+    nextProductReviewImage: nextProductReviewRow?.image ?? null,
+    nextReferenceImage: nextReferenceRow?.image ?? null
   },
   nextActions: {
     technicalCertification: nextTechnicalRow
@@ -976,6 +1078,16 @@ const audit = {
           sourceImagePath: nextProductReviewRow.sourceImagePath,
           currentBlocker: nextProductReviewRow.blocker,
           nextAction: nextProductReviewRow.nextAction
+        }
+      : null,
+    componentReferenceSheetReview: nextReferenceRow
+      ? {
+          image: nextReferenceRow.image,
+          stories: nextReferenceRow.referenceStoryIds,
+          source: nextReferenceRow.source,
+          sourceImagePath: nextReferenceRow.sourceImagePath,
+          currentBlocker: nextReferenceRow.blocker,
+          nextAction: nextReferenceRow.nextAction
         }
       : null
   },
@@ -1059,8 +1171,10 @@ ${evidenceArtifactRows || "| None | 0 | None |"}
 const outputJsonPath = resolve(outputDir, "visual-certification-plan-audit.json");
 const outputMarkdownPath = resolve(outputDir, "visual-certification-plan-audit.md");
 
-writeFileSync(outputJsonPath, `${JSON.stringify(audit, null, 2)}\n`);
-writeFileSync(outputMarkdownPath, md);
+if (persistReports) {
+  writeFileSync(outputJsonPath, `${JSON.stringify(audit, null, 2)}\n`);
+  writeFileSync(outputMarkdownPath, md);
+}
 
 if (checkMode && audit.status !== "pass") {
   console.error(`Visual certification plan audit failed: ${audit.summary.blockedByMissingPlanDataCount} pending row(s) missing plan data`);

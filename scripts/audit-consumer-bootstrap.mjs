@@ -166,13 +166,13 @@ const report = {
   }
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const stepRows = steps
   .map((step) => `| \`${step.commandText}\` | ${step.status} | ${step.exitCode ?? "n/a"} | ${step.durationMs} |`)
   .join("\n");
 
-writeFileSync(
+if (!checkMode) writeFileSync(
   reportMdPath,
   `# Consumer Bootstrap Audit
 

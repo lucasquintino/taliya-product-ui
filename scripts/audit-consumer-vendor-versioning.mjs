@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { relative, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -32,9 +32,9 @@ function fileHash(filePath) {
   return createHash("sha256").update(readFileSync(filePath)).digest("hex");
 }
 
-const consumerRoot = resolve(root, optionValue("--consumer", "../taliya-internal"));
-const sourceDir = resolve(root, optionValue("--source", "dist-packages"));
-const vendorDir = resolve(consumerRoot, optionValue("--vendor", "vendor/taliya-product-ui"));
+const consumerRoot = realpathSync(resolve(root, optionValue("--consumer", "../taliya-internal")));
+const sourceDir = realpathSync(resolve(root, optionValue("--source", "dist-packages")));
+const vendorDir = realpathSync(resolve(consumerRoot, optionValue("--vendor", "vendor/taliya-product-ui")));
 const reportLabel = optionValue("--report-label", "");
 const reportJsonPath = resolve(specDir, `${reportBasename("consumer-vendor-versioning-audit", reportLabel)}.json`);
 const reportMdPath = resolve(specDir, `${reportBasename("consumer-vendor-versioning-audit", reportLabel)}.md`);
@@ -44,7 +44,8 @@ const packageFiles = [
   "taliya-product-ui-local-manifest.json"
 ];
 const gitRootResult = runGit(consumerRoot, ["rev-parse", "--show-toplevel"]);
-const gitRoot = (gitRootResult.stdout ?? "").trim();
+const gitRootOutput = (gitRootResult.stdout ?? "").trim();
+const gitRoot = gitRootOutput ? realpathSync(gitRootOutput) : "";
 const isGitRepo = gitRootResult.status === 0 && gitRoot.length > 0;
 
 const rows = packageFiles.map((fileName) => {
@@ -80,8 +81,8 @@ const report = {
   rows
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
-writeFileSync(
+if (!checkMode) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) writeFileSync(
   reportMdPath,
   `# Consumer Vendor Versioning Audit
 
@@ -100,8 +101,10 @@ ${rows.map((row) => `| \`${row.fileName}\` | ${row.sourceExists ? "yes" : "no"} 
 );
 
 console.log(`Consumer vendor versioning audit: ${report.status}`);
-console.log(`Wrote ${relative(root, reportMdPath).replaceAll("\\", "/")}`);
-console.log(`Wrote ${relative(root, reportJsonPath).replaceAll("\\", "/")}`);
+if (!checkMode) {
+  console.log(`Wrote ${relative(root, reportMdPath).replaceAll("\\", "/")}`);
+  console.log(`Wrote ${relative(root, reportJsonPath).replaceAll("\\", "/")}`);
+}
 
 if (checkMode && report.status !== "pass") {
   console.error(`Vendor versioning failed: ${rows.filter((row) => !row.pass).map((row) => row.fileName).join(", ")}`);

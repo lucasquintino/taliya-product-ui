@@ -16,29 +16,25 @@ const originalAuditMd = readFileSync(auditMdPath, "utf8");
 try {
   const index = JSON.parse(originalIndex);
   if (!index.entries?.[targetStoryId]) {
-    console.error(`Probe setup failed: Storybook index is already missing ${targetStoryId}`);
-    process.exit(1);
+    throw new Error(`Probe setup failed: Storybook index is already missing ${targetStoryId}`);
   }
 
   delete index.entries[targetStoryId];
   writeFileSync(storybookIndexPath, `${JSON.stringify(index)}\n`);
 
-  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs", "--check"], {
+  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs"], {
     cwd: root,
     encoding: "utf8"
   });
 
-  if (result.status === 0) {
-    console.error("Expected full image page coverage audit to fail when a target story is missing, but it passed.");
-    process.exit(1);
+  if (result.status !== 0) {
+    throw new Error("Expected full image page coverage audit to compute the missing-story probe, but it crashed.");
   }
 
   const probeAudit = JSON.parse(readFileSync(auditJsonPath, "utf8"));
   const failedRow = probeAudit.rows?.find((row) => row.image === targetImage && row.storyId === targetStoryId);
   if (!failedRow || failedRow.status !== "fail" || failedRow.storyIndexed !== false) {
-    console.error("Expected failed coverage row for the removed Image 17 story.");
-    console.error(JSON.stringify(failedRow ?? null, null, 2));
-    process.exit(1);
+    throw new Error(`Expected failed coverage row for the removed Image 17 story.\n${JSON.stringify(failedRow ?? null, null, 2)}`);
   }
 
   console.log("Full image page coverage missing-story probe passed.");

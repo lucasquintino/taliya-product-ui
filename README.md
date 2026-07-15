@@ -109,6 +109,8 @@ Nao inclui:
 
 O produto consumidor injeta dados e comportamento. A biblioteca renderiza componentes e estados visuais de forma reutilizavel.
 
+Por exemplo, a assinatura Taliya usa `CrmRightPanelPage rightPanelVariant="billing-subscription"` com `BillingSubscriptionWorkspace` e `UsageDrawer`. A biblioteca possui shell, URL/layout, tracks `934px 334px`, gap, offsets, cards, acoes e rail; o consumidor fornece somente breadcrumb, dados e callbacks. Evidencia visual atual: `tmp/65-billing-subscription-title-probe-20260715/report.json` (semi-aprovada, com falha 1:1 explicita).
+
 ## Uso Em Apps Consumidores
 
 Checklist completo:
@@ -134,9 +136,9 @@ import "@taliya/crm/styles.css";
 Durante o desenvolvimento local, `taliya-internal` consome os tarballs gerados em `dist-packages`:
 
 ```text
-@taliya/tokens -> dist-packages/taliya-tokens-0.0.0.tgz
-@taliya/ui     -> dist-packages/taliya-ui-0.0.0.tgz
-@taliya/crm    -> dist-packages/taliya-crm-0.0.0.tgz
+@taliya/tokens -> dist-packages/taliya-tokens-0.1.0.tgz
+@taliya/ui     -> dist-packages/taliya-ui-0.1.0.tgz
+@taliya/crm    -> dist-packages/taliya-crm-0.1.0.tgz
 ```
 
 Fluxo local recomendado apos alterar tokens/componentes:
@@ -209,6 +211,15 @@ Auditoria do backlog de certificacao visual por ledger:
 ```text
 corepack pnpm visual-certification-backlog:audit
 ```
+
+Painel local para revisar, lado a lado, as imagens ainda pendentes, seus renders atuais, diffs, metricas e proximas acoes:
+
+```text
+corepack pnpm visual-product-review:audit:update
+corepack pnpm visual-product-review:audit
+```
+
+O painel e gerado em `tmp/visual-product-review/index.html`. Ele organiza a decisao de produto, mas nao aprova imagens automaticamente.
 
 Auditoria global de cobertura das imagens/paginas de produto no Storybook:
 
@@ -350,7 +361,7 @@ corepack pnpm release-policy:audit
 corepack pnpm release-policy:audit:negative-probe
 ```
 
-Esse comando escreve `release-policy-audit.md/json` e valida `specs/001-product-ui-foundation/contracts/release-policy.md`. O estado esperado agora e `pass-current-local-policy`: tarball local e o canal oficial atual, enquanto versionamento semver real, registry/access model, workflow de publish e migracao de consumidores continuam como decisoes explicitas antes de qualquer registry. O negative probe prova que um contrato de release incompleto falha.
+Esse comando escreve `release-policy-audit.md/json` e valida `specs/001-product-ui-foundation/contracts/release-policy.md`. O estado esperado e `pass-registry-policy`: os tres pacotes compartilham semver, Changesets, metadados npm e workflow manual protegido com provenance. O canal local continua ativo ate uma publicacao e migracao reais serem comprovadas. O negative probe prova que um contrato de release incompleto falha.
 
 Para separar canal local instalavel de publicacao em registry, rode:
 
@@ -358,7 +369,17 @@ Para separar canal local instalavel de publicacao em registry, rode:
 corepack pnpm release-channel:audit
 ```
 
-Esse comando escreve `release-channel-audit.md/json`; ele deve passar como `pass-local-release-channel` enquanto os consumidores usam tarballs versionados em `vendor/taliya-product-ui`, e so vira registry-ready depois de versionamento semver real, registry/access model, workflow de publish e politica de migracao de dependencias.
+Esse comando escreve `release-channel-audit.md/json`; ele continua distinguindo tarballs locais sincronizados de publicacao real. A politica de registry pode estar pronta sem afirmar que o pacote foi publicado ou que consumidores ja migraram.
+
+Fluxo de versao e publicacao:
+
+```text
+corepack pnpm changeset
+corepack pnpm version-packages
+corepack pnpm release:npm:dry-run
+```
+
+A publicacao efetiva ocorre apenas pelo workflow manual `.github/workflows/publish-packages.yml`, protegido pelo environment `npm` e pelo segredo `NPM_TOKEN`.
 
 O canal local tambem publica um manifesto consumivel:
 

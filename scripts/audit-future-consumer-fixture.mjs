@@ -6,16 +6,11 @@ const root = process.cwd();
 const specDir = resolve(root, "specs/001-product-ui-foundation");
 const checkMode = process.argv.includes("--check");
 const fixtureRoot = resolve(root, `tmp/future-consumer-readiness-fixture-${process.pid}`);
-const reportJsonPath = resolve(specDir, "future-consumer-fixture-audit.json");
-const reportMdPath = resolve(specDir, "future-consumer-fixture-audit.md");
-const localReleaseManifest = JSON.parse(readFileSync(resolve(root, "dist-packages/taliya-product-ui-local-manifest.json"), "utf8"));
-const packageNames = localReleaseManifest.packages.map((packageInfo) => packageInfo.tarball);
-const taliyaDependencies = Object.fromEntries(
-  localReleaseManifest.packages.map((packageInfo) => [
-    packageInfo.name,
-    `file:vendor/taliya-product-ui/${packageInfo.tarball}`
-  ])
-);
+const packageSourceDir = resolve(root, `tmp/future-consumer-package-artifacts-${process.pid}`);
+const fixtureReportDir = resolve(root, `tmp/future-consumer-readiness-reports-${process.pid}`);
+const reportOutputDir = checkMode ? fixtureReportDir : specDir;
+const reportJsonPath = resolve(reportOutputDir, "future-consumer-fixture-audit.json");
+const reportMdPath = resolve(reportOutputDir, "future-consumer-fixture-audit.md");
 
 function run(commandArgs, cwd = root, options = {}) {
   const startedAt = Date.now();
@@ -56,10 +51,10 @@ function copyTarballs() {
   const vendorRoot = resolve(fixtureRoot, "vendor/taliya-product-ui");
   mkdirSync(vendorRoot, { recursive: true });
   for (const packageName of packageNames) {
-    copyFileSync(resolve(root, "dist-packages", packageName), resolve(vendorRoot, packageName));
+    copyFileSync(resolve(packageSourceDir, packageName), resolve(vendorRoot, packageName));
   }
   copyFileSync(
-    resolve(root, "dist-packages/taliya-product-ui-local-manifest.json"),
+    resolve(packageSourceDir, "taliya-product-ui-local-manifest.json"),
     resolve(vendorRoot, "taliya-product-ui-local-manifest.json")
   );
 }
@@ -80,6 +75,21 @@ function removeFixtureRoot() {
 }
 
 removeFixtureRoot();
+rmSync(packageSourceDir, { recursive: true, force: true });
+const steps = [];
+steps.push(run([process.execPath, "scripts/pack-local-packages.mjs", "--output-dir", relative(root, packageSourceDir)], root, { timeoutMs: 300000 }));
+if (steps[0].status !== "pass") {
+  console.error(`Fresh package generation failed: ${steps[0].stderr || steps[0].stdout}`);
+  process.exit(1);
+}
+const localReleaseManifest = readJson(resolve(packageSourceDir, "taliya-product-ui-local-manifest.json"));
+const packageNames = localReleaseManifest.packages.map((packageInfo) => packageInfo.tarball);
+const taliyaDependencies = Object.fromEntries(
+  localReleaseManifest.packages.map((packageInfo) => [
+    packageInfo.name,
+    `file:vendor/taliya-product-ui/${packageInfo.tarball}`
+  ])
+);
 mkdirSync(fixtureRoot, { recursive: true });
 copyTarballs();
 
@@ -136,7 +146,6 @@ body {
 `
 );
 
-const steps = [];
 steps.push(run(["git", "init"], fixtureRoot));
 steps.push(
   runNpm(
@@ -153,7 +162,9 @@ steps.push(run([
   "--write",
   "--starter-files",
   "--report-label",
-  "future-consumer-fixture"
+  "future-consumer-fixture",
+  "--out-dir",
+  relative(root, fixtureReportDir)
 ]));
 const starterFileContracts = [
   {
@@ -441,7 +452,9 @@ steps.push(run([
   "--vendor",
   "vendor/taliya-product-ui",
   "--report-label",
-  "future-consumer-fixture"
+  "future-consumer-fixture",
+  "--out-dir",
+  relative(root, fixtureReportDir)
 ]));
 steps.push(run([
   process.execPath,
@@ -451,8 +464,12 @@ steps.push(run([
   relative(root, fixtureRoot),
   "--vendor",
   "vendor/taliya-product-ui",
+  "--source",
+  relative(root, packageSourceDir),
   "--report-label",
-  "future-consumer-fixture"
+  "future-consumer-fixture",
+  "--out-dir",
+  relative(root, fixtureReportDir)
 ]));
 steps.push(run([
   process.execPath,
@@ -463,7 +480,9 @@ steps.push(run([
   "--page-kit-config",
   resolve(fixtureRoot, "taliya-page-kit.config.json"),
   "--report-label",
-  "future-consumer-fixture"
+  "future-consumer-fixture",
+  "--out-dir",
+  relative(root, fixtureReportDir)
 ]));
 steps.push(run([
   process.execPath,
@@ -472,7 +491,9 @@ steps.push(run([
   "--consumer",
   relative(root, fixtureRoot),
   "--report-label",
-  "future-consumer-fixture"
+  "future-consumer-fixture",
+  "--out-dir",
+  relative(root, fixtureReportDir)
 ]));
 steps.push(run([
   process.execPath,
@@ -481,12 +502,14 @@ steps.push(run([
   "--consumer",
   relative(root, fixtureRoot),
   "--report-label",
-  "future-consumer-fixture"
+  "future-consumer-fixture",
+  "--out-dir",
+  relative(root, fixtureReportDir)
 ]));
 
 const readinessConfig = readJson(resolve(fixtureRoot, "taliya-readiness.config.json"));
 const pageKitConfig = readJson(resolve(fixtureRoot, "taliya-page-kit.config.json"));
-const consumerIntegrationFixtureReportPath = resolve(specDir, "consumer-integration-audit-future-consumer-fixture.json");
+const consumerIntegrationFixtureReportPath = resolve(fixtureReportDir, "consumer-integration-audit-future-consumer-fixture.json");
 const consumerIntegrationFixture = existsSync(consumerIntegrationFixtureReportPath)
   ? readJson(consumerIntegrationFixtureReportPath)
   : null;

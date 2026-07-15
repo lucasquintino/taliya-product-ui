@@ -11,6 +11,7 @@ const ledgerPath = resolve(specDir, "batch-11-status-ledger.md");
 const officialSourceMapPath = resolve(specDir, "remaining-pages-official-source-map.md");
 const jsonPath = resolve(specDir, "remaining-page-coverage-audit.json");
 const mdPath = resolve(specDir, "remaining-page-coverage-audit.md");
+const storybookBuildAvailable = existsSync(storybookIndexPath);
 
 const expectedStories = [
   ["Image19HojeEstadoCritico", "crm-image-coverage-hoje--image-19-hoje-estado-critico"],
@@ -131,7 +132,7 @@ const pageFamilyContracts = [
     page: "TodayShell",
     file: "ImageCoverageToday.stories.tsx",
     family: "dashboard",
-    requiredSnippets: ["<CrmDashboardPage", 'columns={historyOnly ? 1 : "today"}', "<TodayDashboard", "<TaskDrawer"]
+    requiredSnippets: ["<CrmDashboardPage", 'variant === "critical" ? "todayCritical" : "today"', "<TodayDashboard", "<TaskDrawer"]
   },
   {
     page: "InboxConversationPage",
@@ -143,13 +144,13 @@ const pageFamilyContracts = [
     page: "AgendaCalendarPage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "dashboard/calendar",
-    requiredSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact />", "drawer={<ClassDrawer />}"]
+    requiredSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact />", "drawer={<AgendaSelectedClassDrawer />}"]
   },
   {
     page: "AgendaClassDetailPage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "right-panel/detail",
-    requiredSnippets: ["<CrmRightPanelPage", "main={<ClassOperationalDetail />}", "panel={", "<ClassDrawer"]
+    requiredSnippets: ["<CrmRightPanelPage", "main={<ClassOperationalDetail", "panel={", "<ClassDrawer"]
   },
   {
     page: "AgendaClassesPage",
@@ -179,7 +180,7 @@ const pageFamilyContracts = [
     page: "FinanceMovementsPage",
     file: "ImageCoverageFinance.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="main-priority"', "filterBar={<MovementsFilters />}", "quickFilters={<MovementsQuickFilters />}", "<MovementTable />", "<PaymentDrawer"]
+    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="wide-main"', "filterBar={<MovementsFilters />}", "quickFilters={<MovementsQuickFilters />}", "<MovementTable />", "<PaymentDrawer"]
   },
   {
     page: "SalesPipelinePage",
@@ -191,7 +192,7 @@ const pageFamilyContracts = [
     page: "SalesInterestedListPage",
     file: "ImageCoverageSales.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="main-priority"', "filterBar={<SalesInterestedFilters />}", "quickFilters={<SalesLeadQuickRail />}", "<SalesLeadTable />", "drawer={<LeadDrawer compact />}"]
+    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="compact-rail"', "filterBar={<SalesInterestedFilters />}", "quickFilters={<SalesLeadQuickRail />}", "<SalesLeadTable", "setSelectedLeadId(row.id)", "drawer={<LeadDrawer compact", "onAction={setDrawerAction}"]
   },
   {
     page: "SalesExperimentalListPage",
@@ -199,11 +200,13 @@ const pageFamilyContracts = [
     family: "table/worklist",
     requiredSnippets: [
       "<CrmWorklistPage",
-      'worklistLayoutMode="main-priority"',
+      'worklistLayoutMode="compact-rail"',
       "filterBar={<ExperimentalFilters />}",
       "quickFilters={<ExperimentalQuickRail />}",
-      "<ExperimentalTable />",
-      "drawer={<ExperimentalDrawer />}"
+      "<ExperimentalTable",
+      "setSelectedExperimentalId(row.id)",
+      "drawer={<ExperimentalDrawer",
+      "onAction={setDrawerAction}"
     ]
   },
   {
@@ -212,11 +215,13 @@ const pageFamilyContracts = [
     family: "table/worklist",
     requiredSnippets: [
       "<CrmWorklistPage",
-      'worklistLayoutMode="main-priority"',
+      'worklistLayoutMode="compact-rail"',
       "filterBar={<EnrollmentFilters />}",
       "quickFilters={<EnrollmentQuickRail />}",
-      "<EnrollmentTable />",
-      "drawer={<EnrollmentDrawer />}"
+      "<EnrollmentTable",
+      "setSelectedEnrollmentId(row.id)",
+      "drawer={<EnrollmentDrawer",
+      "onAction={setDrawerAction}"
     ]
   },
   {
@@ -225,11 +230,13 @@ const pageFamilyContracts = [
     family: "table/worklist",
     requiredSnippets: [
       "<CrmWorklistPage",
-      'worklistLayoutMode="main-priority"',
+      'worklistLayoutMode="wide-rail"',
       "filterBar={<RetentionRiskFilters />}",
       "quickFilters={<RetentionRiskQuickRail />}",
-      "<RetentionRiskTable />",
-      "drawer={<RetentionRiskDrawer />}"
+      "<RetentionRiskTable",
+      "setSelectedRowId(row.id)",
+      "drawer={<RetentionRiskDrawer",
+      "onAction={setDrawerAction}"
     ]
   },
   {
@@ -238,11 +245,13 @@ const pageFamilyContracts = [
     family: "table/worklist",
     requiredSnippets: [
       "<CrmWorklistPage",
-      'worklistLayoutMode="main-priority"',
+      'worklistLayoutMode="wide-rail"',
       "filterBar={<CancellationFilters />}",
       "quickFilters={<CancellationQuickRail />}",
-      "<CancellationTable />",
-      "drawer={<CancellationDrawer />}"
+      "<CancellationTable",
+      "setSelectedRowId(row.id)",
+      "drawer={<CancellationDrawer",
+      "onAction={setDrawerAction}"
     ]
   },
   {
@@ -251,11 +260,13 @@ const pageFamilyContracts = [
     family: "table/worklist",
     requiredSnippets: [
       "<CrmWorklistPage",
-      'worklistLayoutMode="main-priority"',
+      'worklistLayoutMode="wide-rail"',
       "filterBar={<ReactivationFilters />}",
       "quickFilters={<ReactivationQuickRail />}",
-      "<ReactivationTable />",
-      "drawer={<ReactivationDrawer />}"
+      "<ReactivationTable",
+      "setSelectedRowId(row.id)",
+      "drawer={<ReactivationDrawer",
+      "onAction={setDrawerAction}"
     ]
   },
   {
@@ -264,30 +275,32 @@ const pageFamilyContracts = [
     family: "table/worklist",
     requiredSnippets: [
       "<CrmWorklistPage",
-      'worklistLayoutMode="main-priority"',
+      'worklistLayoutMode="wide-rail"',
       "filterBar={<ComplaintFilters />}",
       "quickFilters={<ComplaintQuickRail />}",
-      "<ComplaintTable />",
-      "drawer={<ComplaintDrawer />}"
+      "<ComplaintTable",
+      "setSelectedRowId(row.id)",
+      "drawer={<ComplaintDrawer",
+      "onAction={setDrawerAction}"
     ]
   },
   {
     page: "ReportsManagementPage",
     file: "ImageCoverageReports.stories.tsx",
     family: "dashboard/reports",
-    requiredSnippets: ["<CrmDashboardPage", "before={<ReportFilterBar />}", "<ReportsManagementContent />", "<ExportAction"]
+    requiredSnippets: ["<CrmDashboardPage", "before={<ReportFilterBar", "onExport=", "<ReportsManagementContent", "onOpen={setAction}", "<ExportAction"]
   },
   {
     page: "MoneyOnTheTablePage",
     file: "ImageCoverageReports.stories.tsx",
     family: "dashboard/reports",
-    requiredSnippets: ["<CrmDashboardPage", "before={<MoneyTableFilters />}", "<OpportunityGroupCard", "drawer={<OpportunityPanel />}"]
+    requiredSnippets: ["<CrmDashboardPage", "before={<MoneyTableFilters />}", "<OpportunityGroupCard", "drawer={<OpportunityPanel", "onItemOpen="]
   },
   {
     page: "SupportCentralPage",
     file: "ImageCoverageSupport.stories.tsx",
     family: "dashboard/support",
-    requiredSnippets: ["<CrmDashboardPage", "<SupportStatusSidebar />", "<SupportCentralContent />", "drawer={<SupportTicketDrawer />}"]
+    requiredSnippets: ["<CrmDashboardPage", "layoutVariant=\"support\"", "<SupportStatusSidebar", "<SupportCentralWorkspace", "onTicketSelect=", "drawer={<SupportTicketDrawer", "onAction="]
   },
   {
     page: "InternalOverviewPage",
@@ -299,13 +312,13 @@ const pageFamilyContracts = [
     page: "InternalTenantsListDetailPage",
     file: "ImageCoverageInternal.stories.tsx",
     family: "internal/table",
-    requiredSnippets: ["<InternalWorklistPage", 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters />}", "quickFilters={<InternalTenantQuickFilters />}", "<InternalTenantsTable />", "<TenantSecurityDrawer"]
+    requiredSnippets: ["<InternalWorklistPage", 'contentLayout="internal-tenants"', 'pageHeaderRhythm="internal-tenants"', 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters", "quickFilters={<InternalTenantQuickFilters />}", "<InternalTenantsTable", "onRowSelect={setSelectedTenantId}", "<TenantSummaryDrawer"]
   },
   {
     page: "InternalTenantSecurityPage",
     file: "ImageCoverageInternal.stories.tsx",
     family: "internal/detail",
-    requiredSnippets: ["<InternalShell", "<TenantDetailLayout />", "<TenantSecurityDrawer"]
+    requiredSnippets: ["<InternalShell", 'browserUrl="https://app.taliya.com/internal/tenants/tenant_vila_mariana"', 'contentLayout="internal-tenant-detail"', "<TenantDetailLayout />", 'regions={{ pageHeader: false }}']
   },
   {
     page: "AgentsCatalogPage",
@@ -323,175 +336,175 @@ const pageFamilyContracts = [
     page: "AgentPresenceRoutinePage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "PresenceRoutineFlowCards"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentRoutineWorkspace"]
   },
   {
     page: "AgentAbsenceFlowPage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<FlowBuilder"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentFlowWorkspace"]
   },
   {
     page: "AgentAbsenceFlowTestPage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<ScenarioList", "<PhonePreview", "<ExecutionTimeline"]
+    requiredSnippets: ["<CrmRightPanelPage", 'panel={<AgentFlowDrawer state="test" />}', "<SimulationRunner", 'rightPanelVariant="agent-test"', 'browserUrl: "https://app.taliya.com/app/agentes/agenda/rotinas/presenca-e-faltas/fluxos/falta-com-aviso/teste"']
   },
   {
     page: "AgentPublishRoutinePage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<PreflightChecklist", "<PublishRoutineFlowSummary"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentPublishRoutineWorkspace"]
   },
   {
     page: "AgentExecutionReceiptPage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<ExecutionReceipt", "<ExecutionTimeline"]
+    requiredSnippets: ["<CrmRightPanelPage", "main={<ExecutionReceipt", "panel={<AgentFlowDrawer"]
   },
   {
     page: "SettingsHubPage",
     file: "ImageCoverageSettings.stories.tsx",
     family: "dashboard/settings",
-    requiredSnippets: ["<CrmDashboardPage", "columns={4}", "<SettingsHubCard"]
+    requiredSnippets: ["<CrmDashboardPage", "columns={4}", "settingsHubItems.map", "<SettingsHubCard", "onOpen={() => setOpenedSettingId"]
   },
   {
     page: "SettingsPermissionsPage",
     file: "ImageCoverageSettings.stories.tsx",
     family: "right-panel/settings",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<SettingsAgentPanel", "<PermissionMatrix", "<ConfigImpactPreview"]
+    requiredSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsPermissionsWorkspace", "onRoleSelect={setSelectedRoleId}", "onSave={() => setLastAction"]
   },
   {
     page: "SettingsPaymentsPage",
     file: "ImageCoverageSettings.stories.tsx",
     family: "right-panel/settings",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<SettingsAgentPanel", "<SettingsSection", "<IntegrationStatusRow", "<RuleRow"]
+    requiredSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsPaymentsWorkspace", "rightPanelVariant=\"settings-payments\"", "browserUrl=\"https://app.taliya.com/app/configuracoes/financeiro/pagamentos\"", "topNavSelection=\"none\""]
   },
   {
     page: "SettingsAgendaPage",
     file: "ImageCoverageSettings.stories.tsx",
     family: "right-panel/settings",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<SettingsAgentPanel", "<SettingsSection", "<WeeklyCalendar"]
+    requiredSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsAgendaWorkspace", "rightPanelVariant=\"settings-agenda\"", "browserUrl=\"https://app.taliya.com/app/configuracoes/agenda\"", "topNavSelection=\"none\""]
   },
   {
     page: "SettingsNotificationsPage",
     file: "ImageCoverageSettings.stories.tsx",
     family: "right-panel/settings",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<SettingsAgentPanel", "<SettingsSection", "<RuleRow"]
+    requiredSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsNotificationsWorkspace", "onChannelChange=", "onFrequencyChange=", "rightPanelVariant=\"settings-notifications\"", "browserUrl=\"https://app.taliya.com/app/configuracoes/notificacoes\"", "topNavSelection=\"none\""]
   },
   {
     page: "BillingSubscriptionPage",
     file: "ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "PlanSummaryCard"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingSubscriptionWorkspace", "onViewInvoices=", "onViewUsage=", "rightPanelVariant=\"billing-subscription\"", "browserUrl=\"https://app.taliya.com/app/billing\"", "topNavSelection: \"none\"", "navItems: crmOperationalNavItems"]
   },
   {
     page: "BillingInvoicesPage",
     file: "ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "InvoiceTable"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingInvoicesWorkspace", "rightPanelVariant=\"billing-invoices\"", "onPayCurrent=", "onOpenInvoice="]
   },
   {
     page: "BillingAddOnsPage",
     file: "ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "AddOnCard"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingAddOnsWorkspace", "rightPanelVariant=\"billing-addons\"", "onAddOnAction="]
   },
   {
     page: "UsageOverviewPage",
     file: "ImageCoverageUsage.stories.tsx",
     family: "right-panel/usage",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<QuotaProgress"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<UsageOverviewWorkspace", "rightPanelVariant=\"usage-overview\"", "onViewLedger=", "onViewFlows="]
   },
   {
     page: "UsageLedgerPage",
     file: "ImageCoverageUsage.stories.tsx",
     family: "right-panel/usage",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<UsageLedgerTable"]
+    requiredSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<UsageLedgerTable", "rightPanelVariant=\"usage-ledger\"", "onAction=", "onFilterClick=", "onLoadMore="]
   },
   {
     page: "StudentProfilePage",
     file: "ImageCoverageStudents.stories.tsx",
     family: "right-panel/profile",
-    requiredSnippets: ["<CrmRightPanelPage", "<StudentHeader", "<ProfileTabs", "<StudentProfileMain", "panel={<StudentProfileRail"]
+    requiredSnippets: ["<CrmRightPanelPage", "<StudentHeader", "<ProfileTabs", "<StudentProfileOverviewGrid", "panel={<StudentProfileActionRail"]
   },
   {
     page: "SetupShellGlobalPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", "<SetupBlockHeader", "<SetupContentGrid"]
+    requiredSnippets: ["<SetupPage", 'frameVariant="shell-global"', "onAgentQuickReply=", "onStepSelect=", "progress={32}", "step={2}"]
   },
   {
     page: "SetupAgentChatPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", "agent={<SetupAgentChat />}", "<SetupAgentChat"]
+    requiredSnippets: ["sb-image-coverage-setup-agent-stage", "<SetupAgentChat", "onHumanHelp=", "onQuickReply=", "onSend="]
   },
   {
     page: "SetupWorkspaceConfigPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", "<SetupContentGrid", "<SetupChoiceCard", "<ConfigImpactPreview"]
+    requiredSnippets: ["<SetupPage", "<SetupConsumptionWorkspace", "progress={32}", "step={2}"]
   },
   {
     page: "SetupStudioPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", '<SetupBlockHeader title="Studio" />', "<WeeklyHoursGrid", "<ConfigImpactPreview"]
+    requiredSnippets: ["<SetupPage", "<SetupStudioWorkspace", "progress={12}", "step={1}"]
   },
   {
     page: "SetupTeamPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", '<SetupBlockHeader title="Equipe" />', "<RoleCard", "<SetupTeamPreparedList"]
+    requiredSnippets: ["<SetupPage", "<SetupTeamWorkspace", "progress={24}", "step={2}"]
   },
   {
     page: "SetupChannelsPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", '<SetupBlockHeader title="Canais" />', "<SetupContentGrid", "<IntegrationStatusRow"]
+    requiredSnippets: ["<SetupPage", "<SetupChannelsWorkspace", "progress={36}", "step={3}"]
   },
   {
     page: "SetupPlansPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", '<SetupBlockHeader title="Planos" />', "<SetupContentGrid", "<PlanSummaryCard"]
+    requiredSnippets: ["<SetupPage", "<SetupPlansWorkspace", "progress={48}", "step={4}"]
   },
   {
     page: "SetupPaymentPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", '<SetupBlockHeader title="Pagamento" />', "<SetupContentGrid", "<IntegrationStatusRow"]
+    requiredSnippets: ["<SetupPage", "<SetupPaymentWorkspace", "progress={55}", "step={5}"]
   },
   {
     page: "SetupStudentsImportPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", '<SetupBlockHeader title="Alunos" />', "<SetupContentGrid", "<SetupImportSourceCard", "<ImportProgress"]
+    requiredSnippets: ["<SetupPage", "<SetupStudentsWorkspace", "progress={66}", "step={6}"]
   },
   {
     page: "SetupClassesPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", '<SetupBlockHeader title="Turmas" />', "<SetupContentGrid", "<ClassCard", "<ClassesTable"]
+    requiredSnippets: ["<SetupPage", "<SetupClassesWorkspace", "progress={77}", "step={7}"]
   },
   {
     page: "SetupAgendaPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", "bottomBar={<SetupBottomBar />}", '<SetupBlockHeader title="Agenda" />', "<WeeklyCalendar"]
+    requiredSnippets: ["<SetupPage", "<SetupAgendaWorkspace", "progress={88}", "step={8}"]
   },
   {
     page: "SetupReviewPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", "bottomBar={<SetupBottomBar />}", "<SetupReviewPanel"]
+    requiredSnippets: ["<SetupPage", "<SetupReviewWorkspace", "progress={98}", "step={9}"]
   },
   {
     page: "SetupWelcomePage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup/welcome",
-    requiredSnippets: ["<SetupShell", 'layout="welcome"', "<SetupWelcome"]
+    requiredSnippets: ["<SetupPage", "<SetupWelcomeWorkspace", "<SetupAgentChat", 'layout="welcome"']
   }
 ];
 
@@ -501,7 +514,7 @@ const requiredSourceMarkers = [
   "CrmKanbanPage",
   "CrmThreePanePage",
   "SetupShellGlobalPage",
-  "SetupContentGrid",
+  "SetupPage",
   "SetupAgentChatPage",
   "SetupWorkspaceConfigPage",
   "SetupStudioPage",
@@ -586,7 +599,7 @@ const requiredSpecificCompositionMarkers = [
   "FinanceBillingDrawerPage",
   "FinanceKanbanPage",
   "FinanceMovementsPage",
-  "SetupContentGrid",
+  "SetupConsumptionWorkspace",
   "ReportsManagementPage",
   "MoneyOnTheTablePage",
   "PaymentCaseCard",
@@ -701,7 +714,7 @@ const specificCompositionRows = requiredSpecificCompositionMarkers.map((marker) 
 
 const renderTargetRows = expectedRenderTargets.map(([exportName, target]) => {
   const pattern = new RegExp(
-    `export\\s+const\\s+${exportName}\\s*:[\\s\\S]*?render\\s*:\\s*\\(\\)\\s*=>\\s*<${target}\\s*/>`,
+    `export\\s+const\\s+${exportName}\\s*:[\\s\\S]*?render\\s*:\\s*\\(\\)\\s*=>\\s*<${target}(?:\\s+[^<>]*?)?\\s*/>`,
     "m"
   );
 
@@ -765,7 +778,8 @@ const tableFamilyDetailContracts = [
     quickFilters: "ExperimentalQuickRail",
     table: "ExperimentalTable",
     drawer: "ExperimentalDrawer",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "rowActions={()", 'selectedRowId="ana"'],
+    layoutMode: "compact-rail",
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
     requiredDrawerSnippets: ["<LeadDrawer", "compact", "facts={experimentalDrawerFacts}", "history={experimentalDrawerHistory}"]
   },
   {
@@ -775,7 +789,8 @@ const tableFamilyDetailContracts = [
     quickFilters: "EnrollmentQuickRail",
     table: "EnrollmentTable",
     drawer: "EnrollmentDrawer",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "rowActions={()", 'selectedRowId="ana"'],
+    layoutMode: "compact-rail",
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
     requiredDrawerSnippets: ["<LeadDrawer", "compact", "checklistItems={enrollmentChecklist}", "history={enrollmentDrawerHistory}"]
   },
   {
@@ -785,7 +800,8 @@ const tableFamilyDetailContracts = [
     quickFilters: "RetentionRiskQuickRail",
     table: "RetentionRiskTable",
     drawer: "RetentionRiskDrawer",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "rowActions={()", 'selectedRowId="ana"'],
+    layoutMode: "wide-rail",
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
     requiredDrawerSnippets: ["<CaseDrawer", "facts={retentionRiskDrawerFacts}", "history={["]
   },
   {
@@ -795,7 +811,8 @@ const tableFamilyDetailContracts = [
     quickFilters: "CancellationQuickRail",
     table: "CancellationTable",
     drawer: "CancellationDrawer",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "rowActions={()", 'selectedRowId="ana"'],
+    layoutMode: "wide-rail",
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
     requiredDrawerSnippets: ["<CaseDrawer", "alternativesVariant=\"steps\"", "footerActions={["]
   },
   {
@@ -805,7 +822,8 @@ const tableFamilyDetailContracts = [
     quickFilters: "ReactivationQuickRail",
     table: "ReactivationTable",
     drawer: "ReactivationDrawer",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "rowActions={()", 'selectedRowId="ana"'],
+    layoutMode: "wide-rail",
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
     requiredDrawerSnippets: ["<CaseDrawer", 'factsLayout="grid"', "restrictions={["]
   },
   {
@@ -815,8 +833,9 @@ const tableFamilyDetailContracts = [
     quickFilters: "ComplaintQuickRail",
     table: "ComplaintTable",
     drawer: "ComplaintDrawer",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "rowActions={()", 'selectedRowId="ana"'],
-    requiredDrawerSnippets: ["<CaseDrawer", 'factsLayout="grid"', "alternativesVariant=\"steps\"", "footerActions={["]
+    layoutMode: "wide-rail",
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
+    requiredDrawerSnippets: ["<CaseDrawer", 'factsLayout="grid"', "sections={[", "numberedSections", "footerActions={["]
   }
 ];
 
@@ -846,7 +865,7 @@ const tableFamilyDetailRows = tableFamilyDetailContracts.map((contract) => {
   const tableSource = sourceWindowForNamedFunction(source, contract.table);
   const drawerSource = sourceWindowForNamedFunction(source, contract.drawer);
   const missingSnippets = [
-    ...["<CrmWorklistPage", 'worklistLayoutMode="main-priority"', "filterBar={<", "quickFilters={<", "drawer={<"]
+    ...["<CrmWorklistPage", `worklistLayoutMode="${contract.layoutMode}"`, "filterBar={<", "quickFilters={<", "drawer={<"]
       .filter((snippet) => !pageSource.includes(snippet))
       .map((snippet) => `${contract.page}: ${snippet}`),
     ...["<PageFilterBar", 'advancedFiltersSurface="modal"', "searchFilterPlacement=\"embedded\""]
@@ -892,22 +911,39 @@ const ledgerRows = ledgerMarkers.map((marker) => ({
   present: ledgerSource.includes(marker)
 }));
 
+const failureReasons = [
+  ...exportRows.filter((row) => row.status !== "pass").map((row) => `story:${row.exportName}`),
+  ...(!remainingStoryRemoved ? ["remaining-story-file-present"] : []),
+  ...sourceMarkerRows.filter((row) => !row.present).map((row) => `source-marker:${row.marker}`),
+  ...forbiddenMarkerRows.filter((row) => row.present).map((row) => `forbidden-marker:${row.marker}`),
+  ...forbiddenCorpusMarkerRows.filter((row) => row.present).map((row) => `forbidden-corpus-marker:${row.marker}`),
+  ...officialSourceMapMarkerRows.filter((row) => row.present).map((row) => `official-source-map-marker:${row.marker}`),
+  ...specificCompositionRows.filter((row) => !row.present).map((row) => `specific-composition:${row.marker}`),
+  ...renderTargetRows.filter((row) => row.status !== "pass").map((row) => `render-target:${row.exportName}`),
+  ...pageFamilyContractRows.filter((row) => row.status !== "pass").map((row) => `page-family:${row.page}`),
+  ...tableFamilyDetailRows.filter((row) => row.status !== "pass").map((row) => `table-family:${row.page}`),
+  ...ledgerRows.filter((row) => !row.present).map((row) => `ledger-marker:${row.marker}`)
+];
+
 const audit = {
   date: new Date().toISOString().slice(0, 10),
-  status:
-    exportRows.every((row) => row.status === "pass") &&
-    remainingStoryRemoved &&
-    sourceMarkerRows.every((row) => row.present) &&
-    forbiddenMarkerRows.every((row) => !row.present) &&
-    forbiddenCorpusMarkerRows.every((row) => !row.present) &&
-    officialSourceMapMarkerRows.every((row) => !row.present) &&
-    specificCompositionRows.every((row) => row.present) &&
-    renderTargetRows.every((row) => row.status === "pass") &&
-    pageFamilyContractRows.every((row) => row.status === "pass") &&
-    tableFamilyDetailRows.every((row) => row.status === "pass") &&
-    ledgerRows.every((row) => row.present)
+  status: !storybookBuildAvailable
+    ? "blocked-missing-storybook-build"
+    : exportRows.every((row) => row.status === "pass") &&
+        remainingStoryRemoved &&
+        sourceMarkerRows.every((row) => row.present) &&
+        forbiddenMarkerRows.every((row) => !row.present) &&
+        forbiddenCorpusMarkerRows.every((row) => !row.present) &&
+        officialSourceMapMarkerRows.every((row) => !row.present) &&
+        specificCompositionRows.every((row) => row.present) &&
+        renderTargetRows.every((row) => row.status === "pass") &&
+        pageFamilyContractRows.every((row) => row.status === "pass") &&
+        tableFamilyDetailRows.every((row) => row.status === "pass") &&
+        ledgerRows.every((row) => row.present)
       ? "pass"
       : "fail",
+  storybookBuildAvailable,
+  blockingReasons: storybookBuildAvailable ? failureReasons : ["apps/docs/storybook-static/index.json is missing"],
   storyCount: expectedStories.length,
   checkedStoryCount: exportRows.length,
   failedStories: exportRows.filter((row) => row.status !== "pass"),
@@ -974,6 +1010,8 @@ const md = `# Remaining Page Coverage Audit
 Date: ${audit.date}
 
 Status: ${audit.status}
+
+Storybook static build available: ${audit.storybookBuildAvailable ? "yes" : "no"}
 
 This audit verifies that every former Remaining Pages target in the current Batch 11 execution scope now has an individual Storybook export in its official family, is present in the static Storybook index, and is documented as accepted for the current 99% visual scope rather than pixel-perfect 1:1 approval.
 It also verifies that the duplicate \`CRM / Image Coverage / Remaining Pages\` story file is absent and that owner pages preserve their official structural family contracts.
@@ -1049,11 +1087,17 @@ ${ledgerTable}
 ${storyTable}
 `;
 
-writeFileSync(jsonPath, `${JSON.stringify(audit, null, 2)}\n`);
-writeFileSync(mdPath, md);
+if (!checkMode) {
+  writeFileSync(jsonPath, `${JSON.stringify(audit, null, 2)}\n`);
+  writeFileSync(mdPath, md);
+}
 
 if (checkMode && audit.status !== "pass") {
-  console.error(`Remaining page coverage audit failed: failedStories=${audit.failedStories.length}`);
+  if (audit.status === "blocked-missing-storybook-build") {
+    console.error("Remaining page coverage audit blocked: build Storybook before checking static coverage");
+  } else {
+    console.error(`Remaining page coverage audit failed: failedStories=${audit.failedStories.length}; reasons=${audit.blockingReasons.join(", ") || "unknown"}`);
+  }
   process.exit(1);
 }
 

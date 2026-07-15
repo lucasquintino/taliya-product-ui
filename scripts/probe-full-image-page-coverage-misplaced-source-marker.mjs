@@ -16,8 +16,7 @@ const originalAuditMd = readFileSync(auditMdPath, "utf8");
 
 try {
   if (!originalStory.includes(targetImage)) {
-    console.error(`Probe setup failed: expected ImageCoverageToday story to reference ${targetImage}.`);
-    process.exit(1);
+    throw new Error(`Probe setup failed: expected ImageCoverageToday story to reference ${targetImage}.`);
   }
 
   let modifiedStory = originalStory.replaceAll(targetImage, "17_round-4.1A_hoje_01_source-marker-probe-removed.png.png");
@@ -27,22 +26,19 @@ try {
   );
   writeFileSync(storyPath, modifiedStory);
 
-  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs", "--check"], {
+  const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs"], {
     cwd: root,
     encoding: "utf8"
   });
 
-  if (result.status === 0) {
-    console.error("Expected full image page coverage audit to fail when a source image marker is only present in a different export, but it passed.");
-    process.exit(1);
+  if (result.status !== 0) {
+    throw new Error("Expected full image page coverage audit to compute the misplaced-marker probe, but it crashed.");
   }
 
   const probeAudit = JSON.parse(readFileSync(auditJsonPath, "utf8"));
   const failedRow = probeAudit.rows?.find((row) => row.image === targetImage && row.storyId === targetStoryId);
   if (!failedRow || failedRow.status !== "fail" || failedRow.storyExportFound !== true || failedRow.sourceImageReferenced !== false) {
-    console.error("Expected failed coverage row for the Image 17 story with its marker misplaced into another story export.");
-    console.error(JSON.stringify(failedRow ?? null, null, 2));
-    process.exit(1);
+    throw new Error(`Expected failed coverage row for the Image 17 story with its marker misplaced into another story export.\n${JSON.stringify(failedRow ?? null, null, 2)}`);
   }
 
   console.log("Full image page coverage misplaced-source-marker probe passed.");

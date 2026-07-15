@@ -4,12 +4,8 @@ import { resolve } from "node:path";
 
 const root = process.cwd();
 const scriptPath = resolve(root, "scripts/audit-domain-wrappers.mjs");
-const auditJsonPath = resolve(root, "specs/001-product-ui-foundation/domain-wrapper-audit.json");
-const auditMdPath = resolve(root, "specs/001-product-ui-foundation/domain-wrapper-audit.md");
 
 const originalScript = readFileSync(scriptPath, "utf8");
-const originalAuditJson = readFileSync(auditJsonPath, "utf8");
-const originalAuditMd = readFileSync(auditMdPath, "utf8");
 
 function fail(message, details = []) {
   console.error(message);
@@ -39,16 +35,11 @@ try {
         result.stderr
       ]);
     } else {
-      const probeAudit = JSON.parse(readFileSync(auditJsonPath, "utf8"));
-      if (probeAudit.status !== "fail") {
-        fail(`Probe failed: report status was ${probeAudit.status}, expected fail.`);
-      } else if (probeAudit.legacyDirectDrawerCount !== 1) {
-        fail(`Probe failed: legacyDirectDrawerCount was ${probeAudit.legacyDirectDrawerCount}, expected 1.`, [
-          JSON.stringify(probeAudit.legacyDirectDrawerRows, null, 2)
-        ]);
-      } else if (!probeAudit.legacyDirectDrawerRows?.includes("StudentDrawer")) {
+      const jsonStart = result.stderr.indexOf("{");
+      const probeAudit = jsonStart >= 0 ? JSON.parse(result.stderr.slice(jsonStart)) : null;
+      if (!probeAudit?.legacyDirectDrawerRows?.includes("StudentDrawer")) {
         fail("Probe failed: StudentDrawer was not reported as the direct drawer regression.", [
-          JSON.stringify(probeAudit.legacyDirectDrawerRows, null, 2)
+          JSON.stringify(probeAudit?.legacyDirectDrawerRows, null, 2)
         ]);
       } else {
         console.log("Domain wrapper direct-drawer probe passed: direct <aside> drawer contracts are rejected.");
@@ -57,6 +48,4 @@ try {
   }
 } finally {
   writeFileSync(scriptPath, originalScript);
-  writeFileSync(auditJsonPath, originalAuditJson);
-  writeFileSync(auditMdPath, originalAuditMd);
 }

@@ -366,9 +366,12 @@ ${report.evidenceFiles.map((item) => `- \`${item}\``).join("\n")}
 `;
 
 const outputDir = resolve(root, optionValue("--out-dir", "specs/001-product-ui-foundation"));
+const persistReports = !checkMode || outputDir !== resolve(root, "specs/001-product-ui-foundation");
 const reportBaseName = reportBasename("library-consumption-status");
-writeFileSync(resolve(outputDir, `${reportBaseName}.json`), `${JSON.stringify({ ...report, evidenceSources }, null, 2)}\n`);
-writeFileSync(resolve(outputDir, `${reportBaseName}.md`), md);
+if (persistReports) {
+  writeFileSync(resolve(outputDir, `${reportBaseName}.json`), `${JSON.stringify({ ...report, evidenceSources }, null, 2)}\n`);
+  writeFileSync(resolve(outputDir, `${reportBaseName}.md`), md);
+}
 
 console.log(`Library consumption status: ${report.status}`);
 console.log(`Wrote ${reportBaseName}.md`);

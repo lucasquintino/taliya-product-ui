@@ -37,14 +37,14 @@ try {
     } else {
       writeFileSync(storyPath, modifiedStory);
 
-      const result = spawnSync(process.execPath, ["scripts/audit-kanban-family.mjs", "--check"], {
+      const result = spawnSync(process.execPath, ["scripts/audit-kanban-family.mjs"], {
         cwd: root,
         encoding: "utf8",
         maxBuffer: 1024 * 1024 * 20
       });
 
-      if (result.status === 0) {
-        fail("Probe failed: kanban family audit passed after a CrmKanbanPage regression.", [
+      if (result.status !== 0) {
+        fail("Probe failed: kanban family audit crashed while computing a CrmKanbanPage regression.", [
           result.stdout,
           result.stderr
         ]);

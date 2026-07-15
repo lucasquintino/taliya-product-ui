@@ -11,7 +11,7 @@ const reportMdPath = resolve(specDir, "release-candidate-audit.md");
 function runCommand(commandText, timeoutMs = 300000) {
   const startedAt = Date.now();
   const command = process.platform === "win32" ? process.env.ComSpec || "cmd.exe" : "sh";
-  const args = process.platform === "win32" ? ["/d", "/s", "/c", commandText] : ["-lc", commandText];
+  const args = process.platform === "win32" ? ["/d", "/s", "/c", commandText] : ["-c", commandText];
   const result = spawnSync(command, args, {
     cwd: root,
     encoding: "utf8",
@@ -38,7 +38,7 @@ function runCommand(commandText, timeoutMs = 300000) {
   };
 }
 
-const gates = [
+const gateDefinitions = [
   {
     id: "typecheck",
     commandText: "corepack pnpm typecheck",
@@ -68,6 +68,18 @@ const gates = [
     commandText: "corepack pnpm readiness:audit",
     timeoutMs: 360000,
     proves: "library, Internal consumer, and synthetic future consumer readiness gates pass"
+  },
+  {
+    id: "storybook-anatomy",
+    commandText: "corepack pnpm storybook-anatomy:audit:strict",
+    timeoutMs: 60000,
+    proves: "Storybook owns no product anatomy or official component appearance while fixture geometry remains explicitly classified"
+  },
+  {
+    id: "storybook-anatomy-override-probe",
+    commandText: "corepack pnpm storybook-anatomy:audit:override-probe",
+    timeoutMs: 60000,
+    proves: "Storybook strict ownership rejects an injected official component appearance override"
   },
   {
     id: "domain-wrappers",
@@ -286,6 +298,36 @@ const gates = [
     proves: "dashboard family audit rejects CrmRightPanelPage regressions"
   },
   {
+    id: "source-assets-update",
+    commandText: "node scripts/audit-source-assets.mjs --update",
+    timeoutMs: 60000,
+    proves: "the canonical source-image manifest is regenerated from configured files, hashes, dimensions, and coverage mapping"
+  },
+  {
+    id: "source-assets",
+    commandText: "node scripts/audit-source-assets.mjs --check",
+    timeoutMs: 60000,
+    proves: "the configured canonical source corpus matches the versioned 101-image manifest"
+  },
+  {
+    id: "source-assets-reconciliation-update",
+    commandText: "node scripts/audit-source-assets-reconciliation.mjs --update",
+    timeoutMs: 60000,
+    proves: "folder/ZIP/hash/count/derivative reconciliation evidence is regenerated from the delivered source package"
+  },
+  {
+    id: "source-assets-reconciliation",
+    commandText: "node scripts/audit-source-assets-reconciliation.mjs --check",
+    timeoutMs: 60000,
+    proves: "the delivered source package reconciles with the configured canonical count without counting nested derivatives"
+  },
+  {
+    id: "source-assets-reconciliation-nested-exclusion-probe",
+    commandText: "node scripts/probe-source-assets-reconciliation-nested-exclusion.mjs",
+    timeoutMs: 60000,
+    proves: "recursive derivative images are rejected as substitutes for canonical source images"
+  },
+  {
     id: "full-image-page-coverage-update",
     commandText: "node scripts/audit-full-image-page-coverage.mjs",
     timeoutMs: 60000,
@@ -328,6 +370,24 @@ const gates = [
     proves: "full product page/source-image coverage rejects Covered map rows that have no Storybook mapping"
   },
   {
+    id: "reference-sheet-coverage-update",
+    commandText: "node scripts/audit-reference-sheet-coverage.mjs",
+    timeoutMs: 60000,
+    proves: "component reference-sheet coverage is regenerated from current source hashes and static Storybook index"
+  },
+  {
+    id: "reference-sheet-coverage",
+    commandText: "node scripts/audit-reference-sheet-coverage.mjs --check",
+    timeoutMs: 60000,
+    proves: "all 11 active reference sheets map every named component uniquely to an official isolated story"
+  },
+  {
+    id: "reference-sheet-coverage-missing-story-probe",
+    commandText: "node scripts/probe-reference-sheet-coverage-missing-story.mjs",
+    timeoutMs: 60000,
+    proves: "reference-sheet coverage rejects a missing required official component story"
+  },
+  {
     id: "visual-certification-plan",
     commandText: "node scripts/audit-visual-certification-plan.mjs --check",
     timeoutMs: 60000,
@@ -344,6 +404,48 @@ const gates = [
     commandText: "node scripts/probe-visual-certification-plan-missing-artifact.mjs",
     timeoutMs: 60000,
     proves: "visual certification plan rejects ledger evidence that points at missing screenshot or metrics artifacts"
+  },
+  {
+    id: "visual-product-review-update",
+    commandText: "node scripts/audit-visual-product-review.mjs",
+    timeoutMs: 60000,
+    proves: "the local product-review board and review contract are regenerated from current capture evidence"
+  },
+  {
+    id: "visual-product-review",
+    commandText: "node scripts/audit-visual-product-review.mjs --check",
+    timeoutMs: 60000,
+    proves: "all product-review rows expose current source, render, diff, metrics, blocker, and next-action evidence without automatic approval"
+  },
+  {
+    id: "visual-certification-capture",
+    commandText: "node scripts/capture-visual-certification-batch.mjs --check",
+    timeoutMs: 60000,
+    proves: "every pending image with a Storybook target has current source-sized screenshot and raw pixel-diff evidence without threshold-based approval"
+  },
+  {
+    id: "visual-certification-capture-source-contract-probe",
+    commandText: "node scripts/probe-visual-certification-capture-source-contract.mjs",
+    timeoutMs: 60000,
+    proves: "visual capture currency ignores volatile manifest metadata and rejects changed official source image hashes"
+  },
+  {
+    id: "audit-checks-read-only-probe",
+    commandText: "node scripts/probe-audit-checks-read-only.mjs",
+    timeoutMs: 180000,
+    proves: "audit check commands do not mutate tracked or untracked repository state"
+  },
+  {
+    id: "readiness-refresh-update",
+    commandText: "node scripts/audit-library-readiness.mjs",
+    timeoutMs: 360000,
+    proves: "aggregate readiness evidence is regenerated after all package, family, source-image, and visual-certification reports"
+  },
+  {
+    id: "readiness-refresh",
+    commandText: "node scripts/audit-library-readiness.mjs --check",
+    timeoutMs: 360000,
+    proves: "the final aggregate readiness state matches every lower-level gate updated in this release-candidate run"
   },
   {
     id: "goal-completion-update",
@@ -556,6 +658,9 @@ const gates = [
     proves: "goal-level readiness has no current-scope regression"
   }
 ];
+const gates = checkMode
+  ? gateDefinitions.filter((gate) => !gate.id.endsWith("-update"))
+  : gateDefinitions;
 
 const rows = [];
 for (const gate of gates) {
@@ -581,7 +686,7 @@ const report = {
   note: "This is technical release-candidate evidence. It is not global source-image 1:1 certification."
 };
 
-writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 const rowMarkdown = rows
   .map((row) => `| \`${row.id}\` | \`${row.commandText}\` | ${row.status} | ${row.exitCode ?? "n/a"} | ${row.durationMs} | ${row.proves} |`)
@@ -590,7 +695,7 @@ const skippedMarkdown = report.skipped.length
   ? report.skipped.map((row) => `| \`${row.id}\` | \`${row.commandText}\` | ${row.proves} |`).join("\n")
   : "| None | None | None |";
 
-writeFileSync(
+if (!checkMode) writeFileSync(
   reportMdPath,
   `# Release Candidate Audit
 
@@ -615,8 +720,10 @@ ${skippedMarkdown}
 );
 
 console.log(`Release candidate audit: ${report.status}`);
-console.log("Wrote specs/001-product-ui-foundation/release-candidate-audit.md");
-console.log("Wrote specs/001-product-ui-foundation/release-candidate-audit.json");
+if (!checkMode) {
+  console.log("Wrote specs/001-product-ui-foundation/release-candidate-audit.md");
+  console.log("Wrote specs/001-product-ui-foundation/release-candidate-audit.json");
+}
 
 if (checkMode && report.status !== "pass") {
   console.error(`Failed release candidate gates: ${failedRows.map((row) => row.id).join(", ") || "incomplete"}`);

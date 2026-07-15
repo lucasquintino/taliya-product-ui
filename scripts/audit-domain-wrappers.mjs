@@ -79,6 +79,27 @@ const wrapperContracts = [
     value: "maps imported fields to Taliya fields with select controls, validation state labels and row actions"
   },
   {
+    name: "ReconciliationSummaryTable",
+    kind: "table",
+    globalRoots: ["<Panel"],
+    requiredSnippets: ["rows.map", "role=\"table\"", "onReconcile?.(row)", "data-component=\"ReconciliationSummaryTable\""],
+    value: "renders the source-derived reconciliation summary in an official Panel with finance-specific cells, status tones and row reconciliation actions"
+  },
+  {
+    name: "ExecutionTraceTable",
+    kind: "table",
+    globalRoots: ["<Panel"],
+    requiredSnippets: ["tcrm-execution-trace__table", "role=\"table\"", "onViewAll", "data-component=\"ExecutionTraceTable\""],
+    value: "renders the source-derived agent execution trace in an official Panel with step, tool, status, duration, cost and error mapping"
+  },
+  {
+    name: "PrivacyRequestTable",
+    kind: "table",
+    globalRoots: ["<Panel"],
+    requiredSnippets: ["tcrm-privacy-request__table", "role=\"table\"", "onOpenRequest?.(id)", "data-component=\"PrivacyRequestTable\""],
+    value: "renders the source-derived privacy request workflow in an official Panel with LGPD actions, status mapping and request callbacks"
+  },
+  {
     name: "TaskDrawer",
     kind: "drawer",
     globalRoots: ["<CrmDrawer"],
@@ -168,6 +189,13 @@ const wrapperContracts = [
     globalRoots: ["<SecurityRulePanel"],
     requiredSnippets: ["tenantSecurityPanelState", "data-component=\"TenantSecurityDrawer\"", "tcrm-tenant-security-drawer__panel", "role=\"complementary\""],
     value: "wraps the tenant security panel with tenant-specific state normalization, close handling and disabled behavior"
+  },
+  {
+    name: "TenantSummaryDrawer",
+    kind: "drawer",
+    globalRoots: ["<CrmDrawer"],
+    requiredSnippets: ["defaultTenantSummaryFacts", "defaultTenantSummaryActivities", "tcrm-tenant-summary-drawer__actions", "component=\"TenantSummaryDrawer\""],
+    value: "wraps the official CrmDrawer with selected-tenant facts, health, security, activity, copilot and governed actions"
   },
   {
     name: "CrmRecordDrawer",
@@ -278,7 +306,7 @@ const report = {
   note: "This audit proves retained domain wrappers add explicit domain mapping/anatomy instead of staying empty pass-through wrappers. It does not certify pixel-level visual parity. Drawer wrappers may use CrmDrawer or another documented official drawer/panel root, but direct <aside> drawer contracts fail this audit."
 };
 
-fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+if (!checkMode) fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
 function markdownCell(value) {
   return String(value).replaceAll("|", "\\|");
@@ -292,7 +320,7 @@ const unmanagedRows = report.unmanagedDomainWrappers.length
   ? report.unmanagedDomainWrappers.map((row) => `| \`${markdownCell(row.name)}\` | ${row.status} |`).join("\n")
   : "| None | - |";
 
-fs.writeFileSync(
+if (!checkMode) fs.writeFileSync(
   reportMdPath,
   `# Domain Wrapper Audit
 
@@ -322,7 +350,7 @@ ${unmanagedRows}
 `
 );
 
-console.log(`Domain wrapper audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
+if (!checkMode) console.log(`Domain wrapper audit written to ${path.relative(root, reportJsonPath)} and ${path.relative(root, reportMdPath)}`);
 console.log(`Domain wrapper contracts: ${rows.length} scanned, ${failedRows.length} failed.`);
 
 if (checkMode && report.status !== "pass") {
