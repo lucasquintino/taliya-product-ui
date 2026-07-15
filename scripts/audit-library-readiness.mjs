@@ -303,6 +303,12 @@ const gates = [
     commandText: "corepack pnpm future-crm-adoption-handoff:audit",
     proves: "future CRM adoption has a single audited handoff for candidate discovery, bootstrap, labeled evidence, and non-completion rules"
   },
+  {
+    id: "registry-consumer-migration-probe",
+    command: [process.execPath, "scripts/probe-registry-consumer-migration.mjs"],
+    commandText: "corepack pnpm registry-consumer:migrate:probe",
+    proves: "registry migration requires per-package publication evidence, applies official ranges, and restores consumer manifests when npm install fails"
+  },
   ...(!usesRegistryDistribution ? [{
     id: "consumer-dependencies-sync",
     command: withConsumerArgs("scripts/sync-consumer-dependencies.mjs", vendorArgs),

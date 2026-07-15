@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -18,6 +18,7 @@ const consumerRoot = resolve(root, optionValue("--consumer", "../taliya-internal
 const registryReportPath = resolve(root, optionValue("--registry-report", "specs/001-product-ui-foundation/registry-publication-audit.json"));
 const packageJsonPath = resolve(consumerRoot, "package.json");
 const readinessConfigPath = resolve(consumerRoot, "taliya-readiness.config.json");
+const packageLockPath = resolve(consumerRoot, "package-lock.json");
 
 for (const filePath of [registryReportPath, packageJsonPath, readinessConfigPath]) {
   if (!existsSync(filePath)) {
@@ -35,7 +36,15 @@ const version = packageSpecs[0]?.version ?? "";
 const registryProven =
   registryReport.status === "pass-published" &&
   registryReport.currentVersion === version &&
-  registryReport.publishedPackageCount === packageSpecs.length;
+  registryReport.publishedPackageCount === packageSpecs.length &&
+  packageSpecs.every((packageSpec) =>
+    registryReport.rows?.some((row) =>
+      row.name === packageSpec.name &&
+      row.version === packageSpec.version &&
+      row.published === true &&
+      row.metadataPass === true
+    )
+  );
 
 if (versions.size !== 1 || !version) {
   console.error("Official package versions are not aligned.");
@@ -60,6 +69,10 @@ const distributionPass =
 const dependenciesPass = rows.every((row) => row.actual === row.expected);
 
 if (write) {
+  const originalPackageJson = readFileSync(packageJsonPath, "utf8");
+  const originalReadinessConfig = readFileSync(readinessConfigPath, "utf8");
+  const originalPackageLock = existsSync(packageLockPath) ? readFileSync(packageLockPath, "utf8") : null;
+
   packageJson.dependencies = packageJson.dependencies ?? {};
   for (const row of rows) packageJson.dependencies[row.name] = row.expected;
   readinessConfig.distribution = { channel: "npm-registry", version };
@@ -67,7 +80,14 @@ if (write) {
   writeFileSync(readinessConfigPath, `${JSON.stringify(readinessConfig, null, 2)}\n`);
 
   const install = spawnSync("npm", ["install"], { cwd: consumerRoot, stdio: "inherit" });
-  if (install.status !== 0) process.exit(install.status ?? 1);
+  if (install.status !== 0 || install.error) {
+    writeFileSync(packageJsonPath, originalPackageJson);
+    writeFileSync(readinessConfigPath, originalReadinessConfig);
+    if (originalPackageLock === null) rmSync(packageLockPath, { force: true });
+    else writeFileSync(packageLockPath, originalPackageLock);
+    console.error("Registry migration failed during npm install; consumer manifests were restored.");
+    process.exit(install.status ?? 1);
+  }
 }
 
 console.log(`Consumer registry migration ${write ? "applied" : "checked"}: ${consumerRoot}`);

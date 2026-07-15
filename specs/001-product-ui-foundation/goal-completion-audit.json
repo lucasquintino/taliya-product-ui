@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T18:16:36.909Z",
+  "generatedAt": "2026-07-15T18:35:43.205Z",
   "date": "2026-07-15",
   "goal": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   "trueGoal": {

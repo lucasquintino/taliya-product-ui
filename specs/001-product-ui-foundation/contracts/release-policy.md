@@ -33,8 +33,9 @@ Run:
 corepack pnpm release-policy:audit
 corepack pnpm registry-publication:audit:update
 corepack pnpm registry-consumer:migrate:check
+corepack pnpm registry-consumer:migrate:probe
 corepack pnpm registry-consumer-adoption:audit:update
 corepack pnpm release-channel:audit
 ```
 
-`release-policy:audit` validates the configured policy and does not publish packages. `registry-publication:audit:update` verifies public npm metadata for the exact shared version; a dry run or configured workflow is not publication evidence. `registry-consumer:migrate:check` is the read-only migration preflight, and the write command refuses to run before publication evidence passes. `registry-consumer-adoption:audit:update` verifies registry ranges, lockfile URLs, installed versions, and the consumer distribution config. `release-channel:audit` keeps the local channel separate and cannot report registry readiness until publication and real Internal adoption both pass.
+`release-policy:audit` validates the configured policy and does not publish packages. `registry-publication:audit:update` verifies public npm metadata for the exact shared version; a dry run or configured workflow is not publication evidence. `registry-consumer:migrate:check` is the read-only migration preflight, and the write command requires matching per-package publication evidence. If `npm install` fails, the migration restores the consumer package manifest, readiness config, and lockfile. `registry-consumer:migrate:probe` proves the rejection, success, and rollback paths without touching the real consumer or npm registry. `registry-consumer-adoption:audit:update` verifies registry ranges, lockfile URLs, installed versions, and the consumer distribution config. `release-channel:audit` keeps the local channel separate and cannot report registry readiness until publication and real Internal adoption both pass.

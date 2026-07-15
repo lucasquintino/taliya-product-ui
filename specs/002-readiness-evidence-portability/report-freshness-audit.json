@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-15T18:16:37.295Z",
+  "generatedAt": "2026-07-15T18:35:43.583Z",
   "readiness": {
-    "generatedAt": "2026-07-15T18:15:15.031Z",
+    "generatedAt": "2026-07-15T18:34:35.074Z",
     "status": "fail"
   },
   "status": "pass",
   "rows": [
     {
       "file": "release-candidate-audit.json",
-      "generatedAt": "2026-07-15T18:16:08.224Z",
+      "generatedAt": "2026-07-15T18:35:35.059Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -17,7 +17,7 @@
     },
     {
       "file": "official-library-readiness-audit.json",
-      "generatedAt": "2026-07-15T18:16:08.127Z",
+      "generatedAt": "2026-07-15T18:35:34.960Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -25,7 +25,7 @@
     },
     {
       "file": "library-consumption-status.json",
-      "generatedAt": "2026-07-15T18:16:06.164Z",
+      "generatedAt": "2026-07-15T18:35:33.004Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -33,7 +33,7 @@
     },
     {
       "file": "crm-real-readiness-audit.json",
-      "generatedAt": "2026-07-15T18:16:06.706Z",
+      "generatedAt": "2026-07-15T18:35:33.566Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -41,7 +41,7 @@
     },
     {
       "file": "library-acceptance-audit.json",
-      "generatedAt": "2026-07-15T18:16:05.851Z",
+      "generatedAt": "2026-07-15T18:35:32.685Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
@@ -49,7 +49,7 @@
     },
     {
       "file": "goal-completion-audit.json",
-      "generatedAt": "2026-07-15T18:16:36.909Z",
+      "generatedAt": "2026-07-15T18:35:43.205Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,
