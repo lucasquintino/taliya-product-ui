@@ -2,10 +2,12 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+import { resolveSourceAssetsDir } from "../../../../scripts/source-assets-config.mjs";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const specDir = resolve(rootDir, "specs/001-product-ui-foundation");
-const imageDir = "D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508";
+const imageDir = resolveSourceAssetsDir({ root: rootDir, requireExisting: false }).path;
+const sourceImagesAvailable = existsSync(imageDir);
 
 function readSpec(name: string) {
   return readFileSync(resolve(specDir, name), "utf8");
@@ -28,10 +30,8 @@ describe("Spec Kit coverage contracts", () => {
     expect(sourceNames).toEqual(matrixNames);
   });
 
-  it("maps every approved image file and only existing image files", () => {
+  (sourceImagesAvailable ? it : it.skip)("maps every approved image file and only existing image files", () => {
     const mappedImages = tableRows(readSpec("image-coverage-map.md")).map((row) => row[0]).filter(Boolean);
-
-    expect(existsSync(imageDir)).toBe(true);
 
     const diskImages = readdirSync(imageDir)
       .filter((name) => /\.(png|jpe?g|webp)$/i.test(name))

@@ -622,6 +622,25 @@ function KanbanBoardStory() {
 
   return (
     <StoryPage className="sb-crm-batch9-kanban-board-story">
+      <SourceFrame>
+        <KanbanBoard aria-label="Kanban compacto" density="compact">
+          <KanbanColumn count={5} footer={<Button leadingIcon="plus" size="sm" variant="ghost">Adicionar caso</Button>} title="Entrada">
+            <KanbanCard footer={<><Chip showDot={false} tone="info">Conta</Chip><span>23/04</span></>} layout="compact" meta="Joao Silva" title="Solicitacao de acesso" />
+            <KanbanCard footer={<><Chip showDot={false} tone="success">Acesso</Chip><span>23/04</span></>} layout="compact" meta="Maria Claro" title="Falha no envio de e-mail" />
+            <KanbanCard footer={<><Chip showDot={false} tone="warning">Processo</Chip><span>23/04</span></>} layout="compact" meta="Carlos Lima" title="Envio de documentos" />
+          </KanbanColumn>
+          <KanbanColumn count={4} footer={<Button leadingIcon="plus" size="sm" variant="ghost">Adicionar caso</Button>} title="Em andamento">
+            <KanbanCard footer={<><Chip showDot={false} tone="info">Integracao</Chip><span>23/04</span></>} layout="compact" meta="Nikol Clev" title="Integracao com ERP" />
+            <KanbanCard footer={<><Chip showDot={false} tone="info">Relatorio</Chip><span>27/04</span></>} layout="compact" meta="Sam Frank" title="Relatorio mensal" />
+            <KanbanCard footer={<><Chip showDot={false} tone="danger">Sistema</Chip><span>27/04</span></>} layout="compact" meta="Joao Silva" title="Configuracao de alerta" />
+          </KanbanColumn>
+          <KanbanColumn count={3} footer={<Button leadingIcon="plus" size="sm" variant="ghost">Adicionar caso</Button>} state="resolved" title="Concluidas">
+            <KanbanCard footer={<><Chip showDot={false} tone="success">Acesso</Chip><span>26/04</span></>} layout="compact" meta="Sam Frank" title="Acesso negado" />
+            <KanbanCard footer={<><Chip showDot={false} tone="info">Conta</Chip><span>26/04</span></>} layout="compact" meta="Nikol Clev" title="Senha redefinida" />
+            <KanbanCard footer={<><Chip showDot={false} tone="danger">Sistema</Chip><span>25/04</span></>} layout="compact" meta="Joao Silva" title="E-mail configurado" />
+          </KanbanColumn>
+        </KanbanBoard>
+      </SourceFrame>
       <KanbanBoard rail={rail}>
         <KanbanColumn count={3} title="Novo">
           <KanbanCard
@@ -1658,7 +1677,17 @@ const storyRenderers = {
   ActivityFeed: () => (
     <StoryPage>
       <SourceFrame className="sb-crm-batch9-activity-feed-source">
-        <ActivityFeed />
+        <ActivityFeed
+          items={[
+            { id: "status", time: "10:24", title: "Sam Frank atualizou o status do caso #CS-1041 para Em andamento", category: "Caso", actor: "Sam Frank", avatarSrc: source25SamFrank, description: "Caso #CS-1041", icon: "info", tone: "blue" },
+            { id: "comment", time: "10:15", title: "Nikol Clev comentou no caso #CS-1040", category: "Caso", actor: "Nikol Clev", avatarSrc: source24JuliaRamos, description: "Caso #CS-1040", icon: "circle", tone: "red" },
+            { id: "attachment", time: "14:32", title: "Joao Silva anexou um arquivo no caso #CS-1036", category: "Atualizacao", actor: "Joao Silva", avatarSrc: source23CommentJoaoSilva, description: "Caso #CS-1036", icon: "paperclip", tone: "green" },
+            { id: "priority", time: "11:03", title: "Maria Claro alterou a prioridade do caso #CS-1039 para Alta", category: "Atualizacao", actor: "Maria Claro", avatarSrc: source24MarinaLopes, description: "Caso #CS-1039", icon: "alert", tone: "red" },
+            { id: "closed", time: "Ontem", title: "Sam Frank fechou o caso #CS-1037", category: "Caso", actor: "Sam Frank", avatarSrc: source25SamFrank, description: "Caso #CS-1037", icon: "check", tone: "green" }
+          ]}
+          title="Painel de atividade"
+          variant="panel"
+        />
       </SourceFrame>
       <PrimitiveMatrix>
         <PrimitiveState label="source"><ActivityFeed /></PrimitiveState>

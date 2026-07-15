@@ -11,12 +11,14 @@ import {
   PageQuickFilters,
   SupportTicketDrawer,
   TenantDetailLayout,
-  TenantSecurityDrawer,
+  TenantSummaryDrawer,
   internalShellNavItems,
 } from "@taliya/crm";
 import type { CrmShellNavItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
 import { Avatar, Button, ButtonGroup, Chip, IconButton, InlineGroup, ProgressBar } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
+
+import image79Avatar from "../assets/image79-avatar.png";
 
 const meta = {
   title: "CRM / Image Coverage / Internal",
@@ -39,7 +41,7 @@ function internalNav(activeId: string): CrmShellNavItem[] {
   return internalShellNavItems.map((item) => ({ ...item, active: item.id === activeId }));
 }
 
-function InternalTenantFilters() {
+function InternalTenantFilters({ onAction }: { onAction?: (action: string) => void }) {
   const [query, setQuery] = useState("");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
@@ -55,8 +57,8 @@ function InternalTenantFilters() {
     <PageFilterBar
       actions={
         <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Novo tenant</Button>
-          <IconButton icon="download" label="Exportar tenants" size="sm" variant="default" />
+          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onAction?.("new-tenant")} size="sm" variant="primary">Novo tenant</Button>
+          <IconButton icon="download" label="Exportar tenants" onClick={() => onAction?.("export-tenants")} size="sm" variant="default" />
         </ButtonGroup>
       }
       filters={filters}
@@ -86,7 +88,7 @@ function InternalTenantQuickFilters() {
   return <PageQuickFilters heading="Filtros rapidos" items={items} onSelect={(item) => setSelectedId(item.id)} />;
 }
 
-function InternalTenantsTable() {
+function InternalTenantsTable({ onRowSelect, selectedRowId }: { onRowSelect?: (id: string) => void; selectedRowId?: string }) {
   const rows: Array<{ id: string; studio: string; initials: string; status: string; statusTone: ComponentTone; plan: string; agents: string; quota: number; tickets: string; ticketsTone: ComponentTone; grant: string; grantTone: ComponentTone; billing: string; billingTone: ComponentTone; owner: string; activity: string }> = [
     { id: "studio-vila", studio: "Studio Vila Mariana", initials: "VM", status: "Ativo", statusTone: "success", plan: "Growth", agents: "3/3", quota: 68, tickets: "1 aberto", ticketsTone: "info", grant: "ativo", grantTone: "success", billing: "em dia", billingTone: "success", owner: "Marina", activity: "hoje 10:24" },
     { id: "reformer-sul", studio: "Studio Reformer Sul", initials: "RS", status: "Risco", statusTone: "warning", plan: "Base", agents: "0/0", quota: 12, tickets: "2 abertos", ticketsTone: "danger", grant: "nenhum", grantTone: "neutral", billing: "pagamento falhou", billingTone: "danger", owner: "Lucas", activity: "hoje 09:18" },
@@ -114,11 +116,12 @@ function InternalTenantsTable() {
         { key: "activity", header: "Ultima atividade", width: "10%" }
       ]}
       pagination={{ itemsPerPage: "10", label: "1-6 de 6", page: 1, pageCount: 1 }}
+      onRowSelect={(row) => onRowSelect?.(row.id)}
       rowActions={() => <IconButton icon="more" label="Mais acoes do tenant" size="sm" variant="ghost" />}
       rows={rows}
       selectable
-      selectedRowIds={["studio-vila"]}
-      selectedRowId="studio-vila"
+      selectedRowIds={selectedRowId ? [selectedRowId] : []}
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -128,37 +131,60 @@ function InternalSecurityNotice() {
 }
 
 export function InternalOverviewPage() {
+  const [, setAction] = useState("");
+
   return (
     <InternalShell
-      drawer={<SupportTicketDrawer state="access active" />}
+      avatarSrc={image79Avatar}
+      browserUrl="https://app.taliya.com/internal"
+      contentLayout="internal-overview"
+      drawer={<SupportTicketDrawer onAction={setAction} onClose={() => setAction("close-ticket")} state="access active" variant="internal" />}
+      drawerPlacement="floating"
       navItems={internalNav("overview")}
+      pageHeaderRhythm="internal-overview"
       pageHeaderActions={
         <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Novo lead</Button>
-          <Button leadingIcon="shield" size="sm" variant="secondary">Abrir ticket interno</Button>
+          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => setAction("new-lead")} size="sm" variant="primary">Novo lead</Button>
+          <Button leadingIcon="shield" onClick={() => setAction("open-internal-ticket")} size="sm" variant="secondary">Abrir ticket interno</Button>
         </ButtonGroup>
       }
       subtitle="Operacao interna de leads, clientes, suporte e plataforma"
       title="Taliya Interno"
     >
-      <InternalOverviewDashboard fluid showHeader={false} />
+      <InternalOverviewDashboard
+        fluid
+        onActivityAction={() => setAction("open-activity")}
+        onCardAction={(card) => setAction(`open-card:${card.id}`)}
+        onCopilotAction={() => setAction("open-recommendations")}
+        onFilterSelect={(filter) => setAction(`filter:${filter.id}`)}
+        onSearchChange={() => setAction("search")}
+        showHeader={false}
+      />
     </InternalShell>
   );
 }
 
 export function InternalTenantsListDetailPage() {
+  const [selectedTenantId, setSelectedTenantId] = useState("studio-vila");
+  const [, setAction] = useState("");
+
   return (
     <InternalWorklistPage
       after={<InternalSecurityNotice />}
-      drawer={<TenantSecurityDrawer state="allowed" />}
-      filterBar={<InternalTenantFilters />}
+      avatarSrc={image79Avatar}
+      browserUrl="https://app.taliya.com/internal/tenants"
+      contentLayout="internal-tenants"
+      drawer={<TenantSummaryDrawer onAction={setAction} onClose={() => setAction("close-tenant")} />}
+      drawerPlacement="floating"
+      filterBar={<InternalTenantFilters onAction={setAction} />}
       navItems={internalNav("clients")}
+      pageHeaderRhythm="internal-tenants"
       quickFilters={<InternalTenantQuickFilters />}
       subtitle="Studios clientes, trials, riscos, grants e billing da Taliya"
       title="Clientes"
       worklistLayoutMode="main-priority"
     >
-      <InternalTenantsTable />
+      <InternalTenantsTable onRowSelect={setSelectedTenantId} selectedRowId={selectedTenantId} />
     </InternalWorklistPage>
   );
 }
@@ -166,7 +192,9 @@ export function InternalTenantsListDetailPage() {
 export function InternalTenantSecurityPage() {
   return (
     <InternalShell
-      drawer={<TenantSecurityDrawer />}
+      avatarSrc={image79Avatar}
+      browserUrl="https://app.taliya.com/internal/tenants/tenant_vila_mariana"
+      contentLayout="internal-tenant-detail"
       navItems={internalNav("clients")}
       regions={{ pageHeader: false }}
       subtitle="Usuarios, grants e seguranca"

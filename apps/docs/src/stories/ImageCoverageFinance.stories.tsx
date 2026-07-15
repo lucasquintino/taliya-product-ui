@@ -7,6 +7,7 @@ import {
   CrmWorklistTable,
   CrmKanbanPage,
   CrmWorklistPage,
+  FinanceQueueGrid,
   FinancePriorityPanel,
   FinanceKanbanCard,
   KanbanColumn,
@@ -153,14 +154,16 @@ function FinanceFilters({
 }
 
 function FinanceQueues({
+  compact = false,
   onOpenCase,
   onViewAll
 }: {
+  compact?: boolean;
   onOpenCase: (caseId: string) => void;
   onViewAll: (state: string) => void;
 }) {
   return (
-    <section className="sb-image-coverage-finance-queues" aria-label="Filas financeiras">
+    <FinanceQueueGrid density={compact ? "compact" : "default"}>
       {financeCaseStates.map((state) => (
         <PaymentCaseCard
           key={state}
@@ -169,7 +172,7 @@ function FinanceQueues({
           state={state}
         />
       ))}
-    </section>
+    </FinanceQueueGrid>
   );
 }
 
@@ -183,7 +186,7 @@ function FinanceHeaderActions() {
   );
 }
 
-function FinanceOverviewMain() {
+function FinanceOverviewMain({ compactQueues = false }: { compactQueues?: boolean } = {}) {
   const [selectedPriorityId, setSelectedPriorityId] = useState("");
   const [event, setEvent] = useState("sem acao");
 
@@ -198,6 +201,7 @@ function FinanceOverviewMain() {
         }}
       />
       <FinanceQueues
+        compact={compactQueues}
         onOpenCase={(caseId) => {
           setEvent(`cobranca:${caseId}`);
         }}
@@ -227,10 +231,8 @@ function FinanceOverviewDashboard({ drawer }: { drawer?: React.ReactNode } = {})
       }
       className="sb-image-coverage-finance-shell"
       columns={1}
-      contentClassName="sb-image-coverage-finance-content"
-      dashboardClassName="sb-image-coverage-finance-page"
       drawer={drawer}
-      drawerPlacement={drawer ? "fixed" : undefined}
+      drawerPlacement={drawer ? "viewport" : undefined}
       navItems={financeNavItems}
       pageHeaderActions={<FinanceHeaderActions />}
       pageHeaderRhythm="overview"
@@ -240,7 +242,7 @@ function FinanceOverviewDashboard({ drawer }: { drawer?: React.ReactNode } = {})
       title="Financeiro"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
-      <FinanceOverviewMain />
+      <FinanceOverviewMain compactQueues={Boolean(drawer)} />
     </CrmDashboardPage>
   );
 }
@@ -271,22 +273,26 @@ function FinanceiroKanbanFilters() {
 }
 
 function FinanceKanbanColumns() {
+  const [selectedCard, setSelectedCard] = useState("");
   const columns = [
-    { title: "A vencer", count: 12, state: "default" as const, cards: [{ title: "Fernanda Lima", amount: "R$ 420,00", state: "scheduled", due: "vence 14/05", method: "mensalidade" }, { title: "Rafael Martins", amount: "R$ 980,00", state: "scheduled", due: "vence 15/05", method: "plano trimestral" }, { title: "Bianca Oliveira", amount: "R$ 290,00", state: "scheduled", due: "vence 16/05", method: "aula avulsa" }] },
-    { title: "Vence hoje", count: 8, state: "waiting" as const, cards: [{ title: "Lucas Ferreira", amount: "R$ 980,00", state: "today", due: "vence hoje 20:00", method: "plano trimestral" }, { title: "Marina Costa", amount: "R$ 210,00", state: "today", due: "vence hoje 21:00", method: "mensalidade" }, { title: "Camila Souza", amount: "R$ 420,00", state: "today", due: "vence hoje 18:00", method: "Pix" }] },
-    { title: "Em atraso", count: 14, state: "blocked" as const, cards: [{ title: "Gabriela Lima", amount: "R$ 420,00", state: "overdue", due: "2 dias em atraso", method: "mensalidade" }, { title: "Eduardo Santos", amount: "R$ 210,00", state: "overdue", due: "5 dias em atraso", method: "Pix" }, { title: "Isabela Prado", amount: "R$ 980,00", state: "overdue", due: "7 dias em atraso", method: "plano trimestral" }] },
-    { title: "Promessa", count: 9, state: "waiting" as const, cards: [{ title: "Felipe Costa", amount: "R$ 420,00", state: "promise", due: "prometido para 15/05", method: "WhatsApp" }, { title: "Renata Alves", amount: "R$ 980,00", state: "promise", due: "prometido para 16/05", method: "WhatsApp" }, { title: "Diego Ramos", amount: "R$ 210,00", state: "promise", due: "prometido para 17/05", method: "mensalidade" }] },
-    { title: "Comprovante", count: 11, state: "default" as const, cards: [{ title: "Ana Paula Martins", amount: "R$ 420,00", state: "validation", due: "comprovante enviado 09/05", method: "Pix", owner: "Mariana" }, { title: "Gustavo Lima", amount: "R$ 980,00", state: "validation", due: "comprovante enviado 10/05", method: "Pix", owner: "Mariana" }, { title: "Marina Beatriz", amount: "R$ 210,00", state: "validation", due: "comprovante enviado 11/05", method: "cartao" }] },
-    { title: "Conciliacao", count: 6, state: "default" as const, cards: [{ title: "Bruno Mendes", amount: "R$ 420,00", state: "reconciliation", due: "cartao recusado", method: "cartao", owner: "Sistema" }, { title: "Carolina Dias", amount: "R$ 980,00", state: "reconciliation", due: "limite insuficiente", method: "cartao", owner: "Sistema" }, { title: "Joao Victor", amount: "R$ 210,00", state: "reconciliation", due: "Pix duvidoso", method: "WhatsApp", owner: "Sistema" }] },
-    { title: "Resolvido", count: 15, state: "resolved" as const, cards: [{ title: "Pedro Henrique", amount: "R$ 420,00", state: "resolved", due: "pago em 09/05", method: "Pix" }, { title: "Juliana Rocha", amount: "R$ 980,00", state: "resolved", due: "pago em 10/05", method: "cartao" }, { title: "Thiago Alves", amount: "R$ 210,00", state: "resolved", due: "pago em 11/05", method: "WhatsApp" }] }
+    { title: "A vencer", count: 12, total: "R$ 6.730,00", state: "default" as const, cards: [{ title: "Fernanda Lima", amount: "R$ 420,00", state: "scheduled", due: "vence 14/05", method: "mensalidade" }, { title: "Rafael Martins", amount: "R$ 980,00", state: "scheduled", due: "vence 15/05", method: "plano trimestral" }, { title: "Bianca Oliveira", amount: "R$ 290,00", state: "scheduled", due: "vence 16/05", method: "aula avulsa" }] },
+    { title: "Vence hoje", count: 8, total: "R$ 3.850,00", state: "waiting" as const, cards: [{ title: "Lucas Ferreira", amount: "R$ 980,00", state: "today", due: "vence hoje 20:00", method: "plano trimestral" }, { title: "Marina Costa", amount: "R$ 210,00", state: "today", due: "vence hoje 21:00", method: "mensalidade" }, { title: "Camila Souza", amount: "R$ 420,00", state: "today", due: "vence hoje 18:00", method: "Pix" }] },
+    { title: "Em atraso", count: 14, total: "R$ 5.430,00", state: "blocked" as const, cards: [{ title: "Gabriela Lima", amount: "R$ 420,00", state: "overdue", due: "2 dias em atraso", method: "mensalidade" }, { title: "Eduardo Santos", amount: "R$ 210,00", state: "overdue", due: "5 dias em atraso", method: "Pix" }, { title: "Isabela Prado", amount: "R$ 980,00", state: "overdue", due: "7 dias em atraso", method: "plano trimestral" }] },
+    { title: "Promessa", count: 9, total: "R$ 3.100,00", state: "waiting" as const, cards: [{ title: "Felipe Costa", amount: "R$ 420,00", state: "promise", due: "prometido para 15/05", method: "WhatsApp" }, { title: "Renata Alves", amount: "R$ 980,00", state: "promise", due: "prometido para 16/05", method: "WhatsApp" }, { title: "Diego Ramos", amount: "R$ 210,00", state: "promise", due: "prometido para 17/05", method: "mensalidade" }] },
+    { title: "Comprovante", count: 11, total: "R$ 4.620,00", state: "default" as const, cards: [{ title: "Ana Paula Martins", amount: "R$ 420,00", state: "validation", due: "comprovante enviado 09/05", method: "Pix", owner: "Mariana" }, { title: "Gustavo Lima", amount: "R$ 980,00", state: "validation", due: "comprovante enviado 10/05", method: "Pix", owner: "Mariana" }, { title: "Marina Beatriz", amount: "R$ 210,00", state: "validation", due: "comprovante enviado 11/05", method: "cartao" }] },
+    { title: "Conciliacao", count: 6, total: "R$ 2.390,00", state: "default" as const, cards: [{ title: "Bruno Mendes", amount: "R$ 420,00", state: "reconciliation", due: "cartao recusado", method: "cartao", owner: "Sistema" }, { title: "Carolina Dias", amount: "R$ 980,00", state: "reconciliation", due: "limite insuficiente", method: "cartao", owner: "Sistema" }, { title: "Joao Victor", amount: "R$ 210,00", state: "reconciliation", due: "Pix duvidoso", method: "WhatsApp", owner: "Sistema" }] },
+    { title: "Resolvido", count: 15, total: "R$ 8.740,00", state: "resolved" as const, cards: [{ title: "Pedro Henrique", amount: "R$ 420,00", state: "resolved", due: "pago em 09/05", method: "Pix" }, { title: "Juliana Rocha", amount: "R$ 980,00", state: "resolved", due: "pago em 10/05", method: "cartao" }, { title: "Thiago Alves", amount: "R$ 210,00", state: "resolved", due: "pago em 11/05", method: "WhatsApp" }] }
   ];
 
   return (
     <>
       {columns.map((column) => (
-        <KanbanColumn count={column.count} key={column.title} state={column.state} title={column.title}>
-          {column.cards.map((card) => <FinanceKanbanCard key={`${column.title}-${card.title}`} {...card} />)}
-          <Button leadingIcon="plus" size="sm" variant="secondary">Adicionar</Button>
+        <KanbanColumn count={column.count} key={column.title} meta={column.total} onMenu={() => setSelectedCard(`menu-coluna:${column.title}`)} state={column.state} title={column.title}>
+          {column.cards.map((card) => {
+            const cardId = `${column.title}:${card.title}`;
+            return <FinanceKanbanCard key={cardId} {...card} onMenu={() => setSelectedCard(`menu-card:${cardId}`)} onSelect={() => setSelectedCard(cardId)} selected={selectedCard === cardId} />;
+          })}
+          <Button leadingIcon="plus" onClick={() => setSelectedCard(`adicionar:${column.title}`)} size="sm" variant="secondary">Adicionar</Button>
         </KanbanColumn>
       ))}
     </>
@@ -415,10 +421,11 @@ export function FinanceKanbanPage() {
       activeSidebarId="financeiro"
       avatarSrc={image79Avatar}
       className="sb-image-coverage-finance-shell"
-      contentClassName="sb-image-coverage-finance-content"
       filterBar={<FinanceiroKanbanFilters />}
+      layoutVariant="finance"
       navItems={financeNavItems}
       pageHeaderActions={<ButtonGroup><Button leadingIcon="plus" size="sm" variant="secondary">Nova cobranca</Button><Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button><Button leadingIcon="calendar" size="sm" variant="secondary">Criar tarefa</Button></ButtonGroup>}
+      pageHeaderRhythm="overview"
       sidebarItems={crmEmptyShellSidebarItems}
       stageClassName="sb-image-coverage-finance-stage"
       subtitle="Cobrancas e pendencias por etapa"
@@ -431,6 +438,7 @@ export function FinanceKanbanPage() {
 }
 
 export function FinanceMovementsPage() {
+  const [, setDrawerAction] = useState("");
   return (
     <CrmWorklistPage
       activeNavId="movements"
@@ -459,12 +467,15 @@ export function FinanceMovementsPage() {
             { id: "none", label: "Nenhum lembrete enviado" }
           ]}
           name="Fernanda Lima"
-          state="overdue"
+          onAction={setDrawerAction}
+          state="due"
           statusLabel="A vencer"
+          variant="movement"
         />
       }
       filterBar={<MovementsFilters />}
       navItems={financeNavItems}
+      pageHeaderRhythm="overview"
       quickFilters={<MovementsQuickFilters />}
       sidebarItems={crmEmptyShellSidebarItems}
       stageClassName="sb-image-coverage-finance-stage"

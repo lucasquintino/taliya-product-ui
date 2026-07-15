@@ -39,6 +39,7 @@ export function AllStates() {
         </PrimitiveState>
         <PrimitiveState label="crm mode glyphs">
           <PrimitiveRow>
+            <Icon name="fingerprint" tone="info" />
             <Icon name="hand" tone="info" />
             <Icon name="scale" tone="info" />
             <Icon name="rocket" tone="info" />
@@ -57,6 +58,7 @@ export function AllStates() {
             <Icon name="slidersRound" tone="info" />
             <Icon name="settings" tone="info" />
             <Icon name="shield" tone="info" />
+            <Icon name="shoppingCart" tone="info" />
           </PrimitiveRow>
         </PrimitiveState>
       </PrimitiveMatrix>

@@ -12,7 +12,8 @@ import {
   type OperationActivityTableRow,
   type PageFilterBarFilter,
   type PageQuickFilterItem,
-  crmEmptyShellSidebarItems
+  crmEmptyShellSidebarItems,
+  crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
 import type { CrmShellNavItem, CrmShellSidebarItem } from "@taliya/crm";
 import {
@@ -33,11 +34,10 @@ const operationNavItems: CrmShellNavItem[] = [
   { id: "historico", label: "Histórico" }
 ];
 
-const operationUtilityItems: CrmShellSidebarItem[] = [
+const operationSidebarItems: CrmShellSidebarItem[] = [
+  ...crmEmptyShellSidebarItems,
   { id: "configuracoes", label: "Configurações", icon: "settings" },
-  { id: "operacao", label: "Operação", icon: "trendingUp" },
-  { id: "tema-escuro", label: "Tema escuro", icon: "moon" },
-  { id: "tema-claro", label: "Tema claro", icon: "sun" }
+  { id: "operacao", label: "Operação", icon: "trendingUp" }
 ];
 
 const meta = {
@@ -68,7 +68,7 @@ type OperationCard = {
   tags: string[];
 };
 
-function OperationFilters() {
+function OperationFilters({ showActions = true }: { showActions?: boolean }) {
   const [query, setQuery] = useState("");
   const [values, setValues] = useState<Record<string, string | string[]>>({
     origem: "",
@@ -88,20 +88,21 @@ function OperationFilters() {
 
   return (
     <PageFilterBar
-      actions={
+      actions={showActions ? (
         <>
           <IconButton icon="sliders" label="Ajustar filtros da operação" size="md" variant="default" />
           <IconButton icon="upload" label="Exportar pendências" size="md" variant="default" />
         </>
-      }
+      ) : undefined}
       aria-label="Filtros da operação"
-      className="sb-image-coverage-operation-filters"
+      density="compact"
       filterGroupLabel="Filtros rápidos da busca"
       filters={filters}
       onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
       onSearchChange={setQuery}
       query={query}
       searchAriaLabel="Buscar pendências"
+      searchFilterPlacement="embedded"
       searchPlaceholder="Buscar pendências..."
     />
   );
@@ -447,7 +448,6 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
       activeUtilityId="operacao"
       after={(
         <OperationActivityTable
-          className="sb-image-coverage-operation-activity-table"
           onRowOpen={(row) => {
             setSelectedActivityId(row.id);
             if (row.id === "marina-proof") setSelectedCardId("proof");
@@ -468,16 +468,20 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
           title={selectedCardTitle}
         />
       ) : null}
-      filterBar={<OperationFilters />}
-      kanbanClassName="sb-image-coverage-operation-board"
+      drawerPlacement="viewport"
+      filterBar={<OperationFilters showActions={!drawer} />}
+      kanbanDensity="comfortable"
+      laneSurface="separate"
       navItems={operationNavItems}
+      pageHeaderRhythm="operation"
       quickFilters={<OperationQuickFilters />}
+      railDensity="compact"
       regions={drawer ? { globalActions: false } : undefined}
-      sidebarItems={crmEmptyShellSidebarItems}
+      sidebarItems={operationSidebarItems}
       stageClassName="sb-image-coverage-operation-stage"
       subtitle="Studio Vila Mariana · Pendências em acompanhamento"
       title="Operação"
-      utilityItems={operationUtilityItems}
+      utilityItems={crmEmptyShellSidebarUtilityItems}
     >
       <OperationKanban
         columns={columns}

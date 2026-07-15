@@ -25,6 +25,7 @@ export function AllStates() {
           <FilterChip count="12">Pendentes</FilterChip>
         </PrimitiveState>
         <PrimitiveState label="removable">
+          <FilterChip removable>Cliente VIP</FilterChip>
           {removed ? (
             <FilterChip onClick={() => setRemoved(false)}>Restaurar filtro</FilterChip>
           ) : (

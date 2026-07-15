@@ -17,6 +17,8 @@ import { Button, ButtonGroup } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
+import source24JuliaRamos from "../assets/source24-julia-ramos.png";
+import source24PedroSantos from "../assets/source24-pedro-santos.png";
 
 const meta = {
   title: "CRM / Image Coverage / Relatorios",
@@ -35,24 +37,32 @@ export default meta;
 
 type Story = StoryObj;
 const reportsNav: CrmShellNavItem[] = [
-  { id: "reports", label: "Relatorios" },
-  { id: "money", label: "Dinheiro na Mesa" }
+  { id: "overview", label: "Visao geral" },
+  { id: "week", label: "Semana" },
+  { id: "finance", label: "Financeiro" },
+  { id: "sales", label: "Vendas" },
+  { id: "occupancy", label: "Ocupacao" },
+  { id: "risk", label: "Risco" },
+  { id: "exports", label: "Exportacoes" }
 ];
 
 export function ReportsManagementPage() {
+  const [, setAction] = useState("");
+
   return (
     <CrmDashboardPage
-      activeNavId="reports"
+      activeNavId="overview"
       activeSidebarId="relatorios"
       avatarSrc={image79Avatar}
-      before={<ReportFilterBar />}
+      before={<ReportFilterBar onExport={() => setAction("export")} />}
       columns="reports"
       density="compact"
       navItems={reportsNav}
+      pageHeaderRhythm="reports"
       pageHeaderActions={
         <ButtonGroup>
-          <ExportAction />
-          <Button leadingIcon="calendar" size="sm" variant="secondary">Agendar relatorio</Button>
+          <ExportAction onExport={() => setAction("export")} />
+          <Button leadingIcon="calendar" onClick={() => setAction("schedule")} size="sm" variant="secondary">Agendar relatorio</Button>
         </ButtonGroup>
       }
       sidebarItems={crmEmptyShellSidebarItems}
@@ -60,23 +70,28 @@ export function ReportsManagementPage() {
       title="Relatorios"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
-      <ReportsManagementContent />
+      <ReportsManagementContent onOpen={setAction} />
     </CrmDashboardPage>
   );
 }
 
 export function MoneyOnTheTablePage() {
+  const [, setSelectedOpportunityId] = useState("ana");
+  const [, setAction] = useState("");
+
   return (
     <CrmDashboardPage
-      activeNavId="money"
+      activeNavId="overview"
       activeSidebarId="relatorios"
       avatarSrc={image79Avatar}
       before={<MoneyTableFilters />}
       columns={2}
       density="compact"
-      drawer={<OpportunityPanel />}
-      drawerPlacement="fixed"
+      drawer={<OpportunityPanel onAction={setAction} onClose={() => setAction("close")} />}
+      drawerPlacement="floating"
+      layoutVariant="opportunity"
       navItems={reportsNav}
+      pageHeaderRhythm="reports"
       sidebarItems={crmEmptyShellSidebarItems}
       subtitle="Oportunidades acionaveis que podem virar caixa, conversao ou retencao"
       title="Dinheiro na mesa"
@@ -87,6 +102,8 @@ export function MoneyOnTheTablePage() {
           icon={group.icon}
           items={group.rows}
           key={group.id}
+          onItemOpen={(item) => setSelectedOpportunityId(item.id)}
+          onOpen={() => setAction(`open-group:${group.id}`)}
           summary={group.summary}
           title={group.title}
           tone={group.tone}
@@ -96,13 +113,14 @@ export function MoneyOnTheTablePage() {
   );
 }
 
-function ReportsManagementContent() {
+function ReportsManagementContent({ onOpen }: { onOpen?: (action: string) => void }) {
   return (
     <>
         <ChartPanel
           actionLabel="Abrir financeiro"
           icon="alert"
           impact="impacta caixa e conciliacao"
+          onOpen={() => onOpen?.("open-finance")}
           source="Financeiro"
           stats={[
             { id: "charges", label: "cobrancas", value: "14", icon: "fileText", tone: "danger" },
@@ -118,6 +136,7 @@ function ReportsManagementContent() {
           icon="trendingUp"
           impact="gargalos afetam conversao"
           metricTone="info"
+          onOpen={() => onOpen?.("open-sales")}
           source="Vendas / Experimental / Matriculas"
           stats={[
             { id: "no-answer", label: "sem resposta", value: "5", icon: "message", tone: "info" },
@@ -133,6 +152,7 @@ function ReportsManagementContent() {
           icon="users"
           impact="oportunidades de encaixe e limite de capacidade"
           metricTone="success"
+          onOpen={() => onOpen?.("open-occupancy")}
           source="Agenda / Turmas / Reposicoes"
           stats={[
             { id: "slots", label: "vagas uteis", value: "12", icon: "book", tone: "success" },
@@ -148,6 +168,7 @@ function ReportsManagementContent() {
           icon="clock"
           impact="pendencias travam execucao diaria"
           metricTone="warning"
+          onOpen={() => onOpen?.("open-bottlenecks")}
           source="Operacao / Tarefas / Aprovacoes / Inbox"
           stats={[
             { id: "ownerless", label: "sem dono", value: "4", icon: "user", tone: "warning" },
@@ -162,6 +183,7 @@ function ReportsManagementContent() {
           actionLabel="Abrir retencao"
           icon="shield"
           impact="prioridade de retencao"
+          onOpen={() => onOpen?.("open-retention")}
           source="Retencao / Alunos / Financeiro"
           stats={[
             { id: "frequency", label: "queda freq.", value: "3", icon: "trendingUp", tone: "danger" },
@@ -175,8 +197,9 @@ function ReportsManagementContent() {
         <ChartPanel
           actionLabel="Ver semana"
           icon="calendar"
-          impact="tendencia semanal"
+          layout="summary"
           metricTone="success"
+          onOpen={() => onOpen?.("open-week")}
           period="Esta semana"
           source="Resumo"
           stats={[
@@ -191,14 +214,15 @@ function ReportsManagementContent() {
         <ChartPanel
           actionLabel="Abrir exportacoes"
           icon="download"
-          impact="arquivos recentes"
+          layout="exports"
           metricTone="neutral"
+          onOpen={() => onOpen?.("open-exports")}
           period="Recentes"
           source="Relatorios"
           stats={[
-            { id: "finance", label: "financ.", value: "pronto", icon: "fileText", tone: "success" },
-            { id: "students", label: "alunos", value: "proc.", icon: "fileText", tone: "info" },
-            { id: "backup", label: "backup", value: "ontem", icon: "fileText", tone: "neutral" }
+            { id: "finance", label: "Financeiro mensal", value: "pronto", detail: "Hoje 08:12", icon: "fileText", tone: "success" },
+            { id: "students", label: "Alunos ativos", value: "processando", detail: "Hoje 07:45", icon: "fileText", tone: "info" },
+            { id: "backup", label: "Backup CRM", value: "ontem", detail: "Ontem 22:30", icon: "fileText", tone: "neutral" }
           ]}
           title="Exportacoes"
           value="3"
@@ -208,7 +232,9 @@ function ReportsManagementContent() {
           actionLabel="Ver recomendacao"
           icon="sparkles"
           impact="priorize dinheiro em aberto e pre-matriculas bloqueadas"
+          layout="recommendation"
           metricTone="info"
+          onOpen={() => onOpen?.("open-recommendation")}
           period="Agora"
           source="Copiloto"
           stats={[
@@ -226,6 +252,7 @@ function ReportsManagementContent() {
 type MoneyOpportunityRow = {
   id: string;
   name: string;
+  avatarSrc?: string;
   subtitle: string;
   detail: string;
   amount?: string;
@@ -252,7 +279,8 @@ function MoneyTableFilters() {
     { id: "month", kind: "quick", label: "Este mes" },
     { id: "origin", label: "Origem", value: String(values.origin ?? ""), options: [{ value: "matriculas", label: "Matriculas" }, { value: "financeiro", label: "Financeiro" }, { value: "turmas", label: "Turmas" }] },
     { id: "owner", label: "Dono", value: String(values.owner ?? ""), options: [{ value: "recepcao", label: "Recepcao" }, { value: "financeiro", label: "Financeiro" }] },
-    { id: "impact", label: "Impacto", value: String(values.impact ?? ""), options: [{ value: "cash", label: "Caixa" }, { value: "conversion", label: "Conversao" }, { value: "retention", label: "Retencao" }] }
+    { id: "impact", label: "Impacto", value: String(values.impact ?? ""), options: [{ value: "cash", label: "Caixa" }, { value: "conversion", label: "Conversao" }, { value: "retention", label: "Retencao" }] },
+    { id: "status", label: "Status", placement: "advanced", value: String(values.status ?? ""), options: [{ value: "hot", label: "Quente" }, { value: "today", label: "Hoje" }, { value: "blocked", label: "Bloqueada" }] }
   ];
 
   return (
@@ -264,9 +292,12 @@ function MoneyTableFilters() {
         </ButtonGroup>
       }
       advancedFiltersLabel="Mais filtros"
+      advancedFiltersSurface="modal"
       advancedFiltersTitle="Filtros de dinheiro na mesa"
+      advancedFiltersTriggerVariant="button"
       density="tight"
       filters={filters}
+      layout="stacked-filters"
       onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
       onSearchChange={setQuery}
       onSearchFilter={() => undefined}
@@ -297,8 +328,8 @@ const moneyOpportunityGroups: MoneyOpportunityGroup[] = [
     tone: "info",
     summary: "5 interessados prontos",
     rows: [
-      { id: "julia", name: "Julia Ramos", subtitle: "Experimental", detail: "Compareceu hoje - quer plano 2x/semana", action: "Fazer pos-aula", badge: "quente", badgeTone: "warning" },
-      { id: "pedro", name: "Pedro Santos", subtitle: "Vendas / Experimental", detail: "Perguntou valores", action: "Responder hoje", badge: "hoje", badgeTone: "danger" }
+      { id: "julia", name: "Julia Ramos", subtitle: "Experimental", detail: "Compareceu hoje - quer plano 2x/semana", action: "Fazer pos-aula", badge: "quente", badgeTone: "warning", avatarSrc: source24JuliaRamos },
+      { id: "pedro", name: "Pedro Santos", subtitle: "Vendas / Experimental", detail: "Perguntou valores", action: "Responder hoje", badge: "hoje", badgeTone: "danger", avatarSrc: source24PedroSantos }
     ]
   },
   {

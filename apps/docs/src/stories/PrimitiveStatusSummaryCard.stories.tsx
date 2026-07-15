@@ -26,7 +26,9 @@ export function AllStates() {
             secondaryAction={<Button disabled size="sm" variant="secondary">Fazer upgrade</Button>}
             state="ok"
             title="CRM ativo, 0 agentes configurados"
-          />
+          >
+            <Button size="sm" variant="ghost">Ou explore o CRM manualmente</Button>
+          </StatusSummaryCard>
         </SourcePanel>
         <SourcePanel className="sb-source-panel--batch8-source sb-source-panel--batch8-states" number="1/6/7" title="Estados de sistema e governanca">
           <div className="sb-batch8-card-grid">

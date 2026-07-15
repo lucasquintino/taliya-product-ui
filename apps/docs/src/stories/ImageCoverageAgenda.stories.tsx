@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 
 import {
   ClassDrawer,
+  ClassOperationalDetail,
   CrmDashboardPage,
   CrmRightPanelPage,
   CrmWorklistPage,
@@ -10,7 +11,6 @@ import {
   MiniCalendar,
   PageFilterBar,
   PageQuickFilters,
-  Roster,
   WeeklyCalendar,
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
@@ -21,6 +21,8 @@ import { Button, ButtonGroup, Chip, Icon, IconButton, List, ListItem, Panel, Per
 import type { ComponentTone } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
+import source29FelipeAndrade from "../assets/source29-felipe-andrade.png";
+import source29JulianaCosta from "../assets/source29-juliana-costa.png";
 
 const meta = {
   title: "CRM / Image Coverage / Agenda",
@@ -43,8 +45,31 @@ const agendaNavItems: CrmShellNavItem[] = [
   { id: "agenda", label: "Agenda" },
   { id: "turmas", label: "Turmas" },
   { id: "grade", label: "Grade" },
-  { id: "reposicoes", label: "Reposicoes" },
-  { id: "historico", label: "Historico" }
+  { id: "reposicoes", label: "Reposições" },
+  { id: "historico", label: "Histórico" }
+];
+
+const agendaCalendarNavItems: CrmShellNavItem[] = [
+  { id: "agenda", label: "Agenda" },
+  { id: "turmas", label: "Turmas" },
+  { id: "chamada", label: "Chamada" },
+  { id: "reposicoes", label: "Reposições" },
+  { id: "historico", label: "Histórico" }
+];
+
+const agendaClassNavItems: CrmShellNavItem[] = [
+  { id: "agenda", label: "Agenda" },
+  { id: "turmas", label: "Turmas" },
+  { id: "reposicoes", label: "Reposições" },
+  { id: "historico", label: "Histórico" }
+];
+
+const agendaClassStudents: ClassDrawerStudent[] = [
+  { id: "ana-carolina", name: "Ana Carolina Souza", initials: "AS", status: "pending" },
+  { id: "beatriz", name: "Beatriz Lima", initials: "BL", status: "present" },
+  { id: "felipe", name: "Felipe Andrade", avatarSrc: source29FelipeAndrade, status: "warned", helper: "gera crédito" },
+  { id: "gabriela", name: "Gabriela Martins", initials: "GM", status: "no-show", helper: "não gera crédito" },
+  { id: "juliana", name: "Juliana Costa", avatarSrc: source29JulianaCosta, status: "replacement", helper: "reposição usada" }
 ];
 
 export function AgendaCalendarPage() {
@@ -55,12 +80,13 @@ export function AgendaCalendarPage() {
       avatarSrc={image79Avatar}
       before={<AgendaFilters />}
       columns="agenda"
-      drawer={<ClassDrawer />}
+      drawer={<AgendaSelectedClassDrawer />}
       drawerPlacement="floating"
       drawerSize="compact"
-      navItems={agendaNavItems}
+      navItems={agendaCalendarNavItems}
+      pageHeaderRhythm="compact-stacked"
       sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Aulas, chamada e reposicoes"
+      subtitle="Studio Vila Mariana · Aulas, chamada e reposições"
       title="Agenda"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
@@ -70,16 +96,62 @@ export function AgendaCalendarPage() {
   );
 }
 
+function AgendaSelectedClassDrawer() {
+  const facts: ClassDrawerFact[] = [
+    { id: "teacher", icon: "calendar", label: "Professor", value: "João Silva" },
+    { id: "resource", icon: "user", label: "Sala / recurso", value: "Reformer 2" },
+    { id: "capacity", icon: "users", label: "Capacidade", value: "3/4" },
+    { id: "status", icon: "clock", label: "Status", value: <Chip tone="warning">Chamada pendente</Chip>, tone: "warning" },
+    { id: "attendance", icon: "user", label: "Presença", value: "Pendente" },
+    { id: "vacancy", icon: "calendar", label: "Vaga / encaixe", value: <Chip tone="success">1 vaga aberta</Chip>, tone: "success" }
+  ];
+  const students: ClassDrawerStudent[] = [
+    { id: "ana", initials: "1", name: "Ana Carolina Souza", status: "pending" },
+    { id: "beatriz", initials: "2", name: "Beatriz Lima", status: "pending" },
+    { id: "felipe", initials: "3", name: "Felipe Andrade", status: "pending" },
+    { id: "gabriela", initials: "4", name: "Gabriela Martins", status: "pending" }
+  ];
+
+  return (
+    <ClassDrawer
+      actionPlacement="content"
+      actionHeading="Próximas ações"
+      ariaLabel="Detalhes da aula selecionada"
+      audit="Convite seguro: permitido apenas se política, consentimento, cota e risco estiverem OK."
+      availabilityNotice="Há 1 crédito de reposição compatível para esta vaga."
+      availabilityTone="warning"
+      closeLabel="Fechar aula selecionada"
+      compact
+      copilot={<><strong>Copiloto: há 1 crédito de reposição compatível para esta vaga.</strong></>}
+      eyebrow="Aula selecionada"
+      facts={facts}
+      primaryAction={{ label: "Abrir aula", action: "open-schedule" }}
+      rosterHeading="Alunos previstos (4)"
+      rosterStatus={{ label: "Pendente", tone: "warning" }}
+      secondaryActions={[
+        { label: "Fazer chamada", action: "save-call" },
+        { label: "Encontrar encaixe", action: "move-student" },
+        { label: "Avisar envolvidos", action: "notify-class" }
+      ]}
+      showStudentStatus
+      students={students}
+      subtitle={null}
+      title="Terça 17h · Reformer Intermediário"
+      variant="class-detail"
+    />
+  );
+}
+
 export function AgendaClassDetailPage() {
   return (
     <CrmRightPanelPage
       activeNavId="agenda"
       activeSidebarId="agenda"
       avatarSrc={image79Avatar}
-      main={<ClassOperationalDetail />}
-      mainGridColumns={1}
+      main={<ClassOperationalDetail students={agendaClassStudents} />}
       mainLabel="Detalhe operacional da aula"
-      navItems={agendaNavItems}
+      navItems={agendaClassNavItems}
+      pageHeaderBreadcrumb={<Button leadingIcon="arrowLeft" size="sm" variant="secondary">Voltar para Agenda</Button>}
       pageHeaderActions={
         <ButtonGroup>
           <Button size="sm" variant="secondary">Salvar aula</Button>
@@ -88,116 +160,32 @@ export function AgendaClassDetailPage() {
           <Button leadingIcon="users" size="sm" variant="primary">Fazer chamada</Button>
         </ButtonGroup>
       }
+      pageHeaderRhythm="stacked"
+      rightPanelVariant="class-operation"
       sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="terca, 13 maio"
+      subtitle="terça, 13 maio"
       panel={
         <ClassDrawer
           ariaLabel="Chamada da aula"
           closeLabel="Fechar chamada"
-          compact
           copilot={<><strong>Copiloto: Felipe avisou falta dentro da politica.</strong> Credito pode ser gerado.</>}
-          eyebrow="Chamada"
           primaryAction={{ label: "Salvar chamada", action: "save-call" }}
-          rosterHeading="Alunos da chamada"
           secondaryActions={[
             { label: "Adicionar observacao", action: "add-note" },
             { label: "Criar tarefa", action: "create-task" },
             { label: "Corrigir depois", action: "correct-later" }
           ]}
           state="calling"
-          subtitle="Terca 17h - Reformer Intermediario"
-          summary={
-            <>
-              <span>1 pendente</span>
-              <span className="tcrm-class-drawer__summary--present">1 presente</span>
-              <span className="tcrm-class-drawer__summary--no-show">1 no-show</span>
-              <span>1 reposicao</span>
-            </>
-          }
+          students={agendaClassStudents}
+          subtitle="Terça 17h · Reformer Intermediário"
           title="Chamada"
         />
       }
       panelLabel="Painel de chamada"
-      title="Terca 17h - Reformer Intermediario"
+      title="Terça 17h · Reformer Intermediário"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
     </CrmRightPanelPage>
-  );
-}
-
-function ClassOperationalDetail() {
-  return (
-    <div className="tcrm-page-family-stack">
-      <Button leadingIcon="arrowLeft" size="sm" variant="secondary">Voltar para Agenda</Button>
-      <Panel compact>
-        <List divided>
-          <ListItem leading={<Icon name="user" />} title="Professor da aula">
-            Joao Silva
-          </ListItem>
-          <ListItem leading={<Icon name="calendar" />} title="Equipamento / recurso">
-            Reformer 2
-          </ListItem>
-          <ListItem action={<Chip tone="info">5/6</Chip>} leading={<Icon name="users" />} title="Capacidade">
-            1 vaga disponivel
-          </ListItem>
-          <ListItem action={<Chip tone="warning">Em andamento</Chip>} leading={<Icon name="clock" />} title="Status">
-            Origem: Agenda
-          </ListItem>
-          <ListItem leading={<Icon name="info" tone="info" />} title="Aula criada pela grade recorrente.">
-            Terca 17h - Reformer Intermediario
-          </ListItem>
-        </List>
-      </Panel>
-      <Panel compact>
-        <ButtonGroup align="between">
-          <div>
-            <h3>Alunos esperados</h3>
-            <p>Clique no aluno para ver detalhes</p>
-          </div>
-          <Button leadingIcon="eye" size="sm" variant="secondary">Ver detalhes</Button>
-        </ButtonGroup>
-        <Roster variant="expected" />
-      </Panel>
-      <Panel compact>
-        <h3>Reposicoes e vagas</h3>
-        <List divided>
-          <ListItem action={<Icon name="chevronRight" />} leading={<Icon name="users" tone="success" />} title="1 vaga aberta">
-            Disponivel para encaixe
-          </ListItem>
-          <ListItem action={<Icon name="chevronRight" />} leading={<Icon name="sparkles" tone="info" />} title="1 credito compativel">
-            Elegivel para uso nesta aula
-          </ListItem>
-          <ListItem action={<Icon name="chevronRight" />} leading={<Icon name="user" tone="info" />} title="1 aluno encaixado">
-            Entrou por reposicao
-          </ListItem>
-        </List>
-      </Panel>
-      <Panel compact>
-        <ButtonGroup align="between">
-          <h3>Observacoes da aula</h3>
-          <Button leadingIcon="edit" size="sm" variant="secondary">Editar</Button>
-        </ButtonGroup>
-        <List>
-          <ListItem title="Gabriela costuma avisar em cima da hora.">
-            Verificar encaixe se Ana nao vier.
-          </ListItem>
-        </List>
-      </Panel>
-      <Panel compact>
-        <h3>Historico da aula</h3>
-        <List divided>
-          <ListItem action={<Chip tone="neutral">Sistema</Chip>} leading={<Icon name="calendar" tone="info" />} meta="12/05 - 10:12" title="Aula criada pela grade">
-            Recorrencia: terca 17h
-          </ListItem>
-          <ListItem action={<Chip tone="info">Ana Carolina</Chip>} leading={<Icon name="user" tone="success" />} meta="12/05 - 15:47" title="Ana pediu reposicao">
-            Motivos: compromissos pessoais
-          </ListItem>
-          <ListItem action={<Chip tone="neutral">Recepcao</Chip>} leading={<Icon name="user" tone="warning" />} meta="Hoje - 16:45" title="Chamada iniciada pela recepcao">
-            Execucao da aula iniciada
-          </ListItem>
-        </List>
-      </Panel>
-    </div>
   );
 }
 
@@ -215,11 +203,13 @@ export function AgendaClassesPage() {
       listLabel="Filas"
       mainLabel="Lista de turmas"
       navItems={agendaNavItems}
+      pageHeaderRhythm="overview"
       quickFilters={<ClassesQuickFilters />}
       sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Turmas recorrentes e vagas fixas"
+      subtitle="Studio Vila Mariana · Turmas recorrentes e vagas fixas"
       title="Turmas"
       utilityItems={crmEmptyShellSidebarUtilityItems}
+      worklistLayoutMode="main-priority"
     >
       <ClassesTable />
     </CrmWorklistPage>
@@ -248,7 +238,7 @@ export function AgendaGradePage() {
     >
       <WeeklyCalendar
         compact
-        days={["Segunda", "Terca", "Quarta", "Quinta", "Sexta"]}
+        days={["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]}
         density="short"
         events={gradeWeeklyEvents}
         selectedEventId="ter-1700-reformer"
@@ -259,16 +249,35 @@ export function AgendaGradePage() {
 }
 
 function AgendaGradeDrawer() {
+  const [, setAction] = useState("");
   return (
     <ClassDrawer
       ariaLabel="Detalhes do bloco recorrente"
-      audit={<><Icon name="info" size="15px" /> Grade funciona com 0 agentes. Automacao so cria tarefas ou avisos seguros se a politica permitir.</>}
+      audit={<><Icon name="info" size="15px" /> Grade funciona com 0 agentes. Impacto é calculado pelo sistema. Copiloto resume impacto e redige aviso. Autônomo só cria tarefas ou avisos seguros se a política permitir.</>}
+      blockNotice={{
+        title: "Bloqueio de agenda",
+        types: "Tipos: feriado, recesso, professor indisponível ou horário bloqueado.",
+        description: "Antes de publicar, o sistema mostra aulas e alunos afetados.",
+        actionLabel: "Ação: Criar bloqueio"
+      }}
       closeLabel="Fechar bloco"
       compact
-      copilot={<><strong>Copiloto: alterar este horario exige aviso para 5 alunos e revisa 3 aulas futuras.</strong></>}
+      copilot={<><strong>Copiloto: alterar este horário exige aviso para 5 alunos e revisa 3 aulas futuras.</strong></>}
       eyebrow="Bloco recorrente"
+      facts={[
+        { id: "capacity", icon: "users", label: "Capacidade padrão", value: "6" },
+        { id: "students", icon: "users", label: "Alunos fixos", value: "5" },
+        { id: "vacancy", icon: "tag", label: "Vaga fixa", value: "1" },
+        { id: "teacher", icon: "user", label: "Professor (opcional)", value: <PersonLabel avatarSrc={image79Avatar} name="João Silva" size="xs" /> },
+        { id: "resource", icon: "calendar", label: "Recurso / equipamento (opcional)", value: "Reformer 2" }
+      ]}
+      impactItems={[
+        { id: "schedule", icon: "users", label: "alterar horário afeta 5 alunos fixos" },
+        { id: "capacity", icon: "graduation", label: "alterar capacidade afeta vagas futuras" },
+        { id: "block", icon: "tag", label: "bloquear este horário afeta 3 aulas futuras" }
+      ]}
+      onAction={setAction}
       primaryAction={{ label: "Editar bloco", action: "edit-class" }}
-      rosterHeading="Proximas aulas geradas"
       secondaryActions={[
         { label: "Abrir turma", action: "open-grid" },
         { label: "Ver aulas geradas", action: "open-schedule" },
@@ -276,21 +285,14 @@ function AgendaGradeDrawer() {
         { label: "Simular impacto", action: "move-student" },
         { label: "Pausar recorrencia", action: "pause-class" }
       ]}
-      students={[
-        { id: "today", initials: "H", name: "hoje", status: "present" },
-        { id: "1905", initials: "19", name: "19/05", status: "pending" },
-        { id: "2605", initials: "26", name: "26/05", status: "replacement" }
+      subtitle="Gera aulas toda terça às 17h."
+      title="Terça 17h · Reformer Intermediário"
+      upcomingClasses={[
+        { id: "today", label: "hoje" },
+        { id: "1905", label: "19/05" },
+        { id: "2605", label: "26/05" }
       ]}
-      subtitle="Gera aulas toda terca as 17h."
-      summary={
-        <>
-          <span>Capacidade padrao 6</span>
-          <span>Alunos fixos 5</span>
-          <span>Vaga fixa 1</span>
-          <span>Reformer 2</span>
-        </>
-      }
-      title="Terca 17h - Reformer Intermediario"
+      variant="recurring-block"
     />
   );
 }
@@ -359,14 +361,15 @@ const gradeWeeklyEvents: WeeklyCalendarEvent[] = [
   { id: "qui-1400-experimental", dayIndex: 3, top: 344, height: 74, time: "14:00", title: "Experimental", teacher: "", capacity: "2/6", status: "replacement", statusLabel: "recorrente" },
   { id: "ter-1700-reformer", dayIndex: 1, top: 474, height: 82, time: "17:00", title: "Reformer Intermediario", teacher: "", capacity: "5/6", status: "scheduled", statusLabel: "ativa" },
   { id: "qua-1800-teacher", dayIndex: 2, top: 566, height: 74, time: "18:00", title: "Professor indisponivel", teacher: "", capacity: "", status: "teacher-unavailable", statusLabel: "bloqueio" },
+  { id: "sex-1400-holiday", dayIndex: 4, top: 380, height: 260, time: "", title: <>Bloqueio<br />• Feriado municipal</>, teacher: "", capacity: "14:00 - 18:00", status: "schedule-block", statusLabel: "" },
   { id: "seg-1900-tower", dayIndex: 0, top: 648, height: 62, time: "19:00", title: "Tower", teacher: "", capacity: "3/5", status: "pending", statusLabel: "a definir" }
 ];
 
 function AgendaClassDrawer() {
   const facts: ClassDrawerFact[] = [
-    { id: "schedule", icon: "calendar", label: "Dia/horario recorrente", value: "Terca 17h" },
+    { id: "schedule", icon: "calendar", label: "Dia/horário recorrente", value: "Terça 17h" },
     { id: "capacity", icon: "users", label: "Capacidade", value: "5/6" },
-    { id: "teacher", icon: "user", label: "Professor da turma", value: <PersonLabel avatarSrc={image79Avatar} name="Joao Silva" size="xs" /> },
+    { id: "teacher", icon: "user", label: "Professor da turma", value: <PersonLabel avatarSrc={image79Avatar} name="João Silva" size="xs" /> },
     { id: "resource", icon: "user", label: "Recurso / equipamento", value: "Reformer 2" },
     { id: "status", icon: "clock", label: "Status", value: <Chip tone="success">Ativa</Chip>, tone: "success" }
   ];
@@ -391,11 +394,11 @@ function AgendaClassDrawer() {
   return (
     <ClassDrawer
       ariaLabel="Detalhes da turma"
-      audit="Operacao manual sempre possivel. O Copiloto apenas sugere impactos, vagas e ideias de mensagem."
+      audit="Operação manual sempre possível. O Copiloto apenas sugere impactos, vagas e ideias de mensagem."
       availabilityNotice="1 vaga fixa disponivel"
       closeLabel="Fechar turma"
       compact
-      copilot={<><strong>Copiloto: Ha 1 vaga fixa e 2 alunos com preferencia por terca a tarde.</strong></>}
+      copilot={<><strong>Copiloto: Há 1 vaga fixa e 2 alunos com preferência por terça à tarde.</strong></>}
       eyebrow="Turma selecionada"
       facts={facts}
       historyItems={historyItems}
@@ -410,10 +413,10 @@ function AgendaClassDrawer() {
       ]}
       students={students}
       subtitle={null}
-      title="Terca 17h - Reformer Intermediario"
+      title="Terça 17h · Reformer Intermediário"
       upcomingClasses={upcomingClasses}
       variant="class-detail"
-      warning="Alteracoes nesta turma podem afetar 3 aulas futuras."
+      warning="Alterações nesta turma podem afetar 3 aulas futuras."
     />
   );
 }
@@ -433,24 +436,24 @@ type ClassRow = {
 };
 
 const classRows: ClassRow[] = [
-  { id: "reformer", name: "Reformer Intermediario", teacher: "Joao Silva", schedule: "Terca 17h", capacity: "5/6", fixed: "5 alunos", vacancies: "1 vaga", next: "Hoje 17h", status: "Ativa", tone: "success", change: "Aluno movido hoje" },
-  { id: "pilates", name: "Pilates Solo", teacher: "Mariana Lopes", schedule: "Quinta 08h", capacity: "6/6", fixed: "6 alunos", vacancies: "Lotada", next: "Quinta 08h", status: "Cheia", tone: "danger", change: "Sem mudancas" },
+  { id: "reformer", name: "Reformer Intermediário", teacher: "João Silva", schedule: "Terça 17h", capacity: "5/6", fixed: "5 alunos", vacancies: "1 vaga", next: "Hoje 17h", status: "Ativa", tone: "success", change: "Aluno movido hoje" },
+  { id: "pilates", name: "Pilates Solo", teacher: "Mariana Lopes", schedule: "Quinta 08h", capacity: "6/6", fixed: "6 alunos", vacancies: "Lotada", next: "Quinta 08h", status: "Cheia", tone: "danger", change: "Sem mudanças" },
   { id: "tower", name: "Tower", teacher: "A definir", schedule: "Segunda 19h", capacity: "3/5", fixed: "3 alunos", vacancies: "2 vagas", next: "Segunda 19h", status: "Com vaga", tone: "success", change: "Professor pendente" },
   { id: "alongamento", name: "Alongamento", teacher: "Camila Rocha", schedule: "Sexta 10h", capacity: "4/6", fixed: "4 alunos", vacancies: "2 vagas", next: "Sexta 10h", status: "Ativa", tone: "success", change: "Capacidade ajustada" },
-  { id: "experimental", name: "Experimental", teacher: "Lucas Peres", schedule: "Quarta 14h", capacity: "2/6", fixed: "2 alunos", vacancies: "4 vagas", next: "Quarta 14h", status: "Temporaria", tone: "info", change: "Evento recorrente" },
-  { id: "inicial", name: "Reformer Inicial", teacher: "A definir", schedule: "Terca 07h", capacity: "0/6", fixed: "0 alunos", vacancies: "6 vagas", next: "Terca 07h", status: "Pausada", tone: "neutral", change: "Pausada esta semana" }
+  { id: "experimental", name: "Experimental", teacher: "Lucas Peres", schedule: "Quarta 14h", capacity: "2/6", fixed: "2 alunos", vacancies: "4 vagas", next: "Quarta 14h", status: "Temporária", tone: "info", change: "Evento recorrente" },
+  { id: "inicial", name: "Reformer Inicial", teacher: "A definir", schedule: "Terça 07h", capacity: "0/6", fixed: "0 alunos", vacancies: "6 vagas", next: "Terça 07h", status: "Pausada", tone: "neutral", change: "Pausada esta semana" }
 ];
 
 const classColumns: Array<CrmWorklistTableColumn<ClassRow>> = [
   { key: "name", header: "Turma", sortable: true, width: "14%" },
-  { key: "schedule", header: "Dia/horario", width: "10%" },
+  { key: "schedule", header: "Dia/horário", width: "10%" },
   { key: "teacher", header: "Professor da turma", render: (row) => <PersonLabel avatarSrc={row.teacher === "A definir" ? undefined : image79Avatar} name={row.teacher} size="xs" />, width: "16%" },
   { key: "capacity", header: "Capacidade", width: "9%" },
   { key: "fixed", header: "Alunos fixos", width: "10%" },
   { key: "vacancies", header: "Vagas", render: (row) => <Chip tone={row.vacancies === "Lotada" ? "danger" : "success"}>{row.vacancies}</Chip>, width: "10%" },
-  { key: "next", header: "Proxima aula", width: "11%" },
+  { key: "next", header: "Próxima aula", width: "11%" },
   { key: "status", header: "Status", render: (row) => <Chip tone={row.tone}>{row.status}</Chip>, sortable: true, width: "9%" },
-  { key: "change", header: "Ultima mudanca", width: "13%" }
+  { key: "change", header: "Última mudança", width: "13%" }
 ];
 
 function ClassesTable() {
@@ -557,13 +560,16 @@ function AgendaFilters() {
   return (
     <PageFilterBar
       actions={
+        <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Criar aula</Button>
+      }
+      leadingActions={
         <ButtonGroup>
           <Button size="sm" variant="secondary">Dia</Button>
           <Button size="sm" variant="primary">Semana</Button>
           <IconButton icon="chevronLeft" label="Semana anterior" size="sm" variant="default" />
           <IconButton icon="chevronRight" label="Proxima semana" size="sm" variant="default" />
           <Button size="sm" variant="secondary">Hoje</Button>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Criar aula</Button>
+          <span aria-label="Intervalo atual">12–18 maio</span>
         </ButtonGroup>
       }
       filters={filters}

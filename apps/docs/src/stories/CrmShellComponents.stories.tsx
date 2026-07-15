@@ -257,8 +257,10 @@ export function SidebarItemStates() {
   return (
     <StorySurface>
       <div className="sb-crm-shell-story__state-row">
+        <SidebarItem icon="search" id="buscar" label="Buscar" />
         <SidebarItem active icon="home" id="hoje" label="Hoje" />
         <SidebarItem alert icon="inbox" id="inbox" label="Inbox" />
+        <SidebarItem icon="moon" id="modo-noite" label="Modo noite" />
         <SidebarItem disabled icon="settings" id="config" label="Configuracoes" />
       </div>
     </StorySurface>

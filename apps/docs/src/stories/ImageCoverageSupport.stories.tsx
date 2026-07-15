@@ -1,14 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
 
 import {
   CrmWorklistTable,
   CrmDashboardPage,
+  SupportAgentPanel,
+  SupportCentralWorkspace,
+  SupportStatusSidebar,
   SupportTicketDrawer,
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
 import type { CrmShellNavItem, CrmShellSidebarItem } from "@taliya/crm";
-import { Button, ButtonGroup, Chip, Icon, IconButton, InlineGroup, List, ListItem, Panel } from "@taliya/ui";
+import { Button, ButtonGroup, Chip, Icon, IconButton, InlineGroup } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
 
@@ -44,20 +48,25 @@ const supportSidebarItems: CrmShellSidebarItem[] = [
 ];
 
 export function SupportCentralPage() {
+  const [selectedTicketId, setSelectedTicketId] = useState("import");
+  const [, setAction] = useState("");
+
   return (
     <CrmDashboardPage
       activeNavId="central"
       activeSidebarId="suporte"
       avatarSrc={image79Avatar}
-      columns="asymmetrical"
+      columns="support"
       density="compact"
-      drawer={<SupportTicketDrawer />}
-      drawerPlacement="fixed"
+      drawer={<SupportTicketDrawer onAction={setAction} onClose={() => setAction("close")} />}
+      drawerPlacement="content"
+      layoutVariant="support"
       navItems={supportNav}
+      pageHeaderRhythm="support"
       pageHeaderActions={
         <ButtonGroup>
-          <Button leadingIcon="plus" size="sm" variant="primary">Abrir ticket</Button>
-          <Button leadingIcon="shield" size="sm" variant="secondary">Ver auditoria</Button>
+          <Button leadingIcon="plus" onClick={() => setAction("open-ticket")} size="sm" variant="primary">Abrir ticket</Button>
+          <Button leadingIcon="shield" onClick={() => setAction("open-audit")} size="sm" variant="secondary">Ver auditoria</Button>
         </ButtonGroup>
       }
       sidebarItems={supportSidebarItems}
@@ -65,113 +74,80 @@ export function SupportCentralPage() {
       title="Suporte"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
-      <SupportStatusSidebar />
-      <SupportCentralContent />
+      <SupportStatusSidebar onViewAll={() => setAction("view-statuses")} />
+      <SupportCentralContent onAction={setAction} onTicketSelect={setSelectedTicketId} selectedTicketId={selectedTicketId} />
     </CrmDashboardPage>
   );
 }
 
-function SupportCentralContent() {
+function SupportCentralContent({
+  onAction,
+  onTicketSelect,
+  selectedTicketId
+}: {
+  onAction?: (action: string) => void;
+  onTicketSelect?: (id: string) => void;
+  selectedTicketId?: string;
+}) {
   return (
-    <div className="tcrm-page-family-stack">
-      <SupportAgentPanel />
-      <SupportTicketTable />
-    </div>
-  );
-}
-
-function SupportAgentPanel() {
-  return (
-    <Panel>
-      <List>
-        <ListItem leading={<Icon name="sparkles" tone="info" />} title="Agente de suporte 24/7" />
-      </List>
-      <List>
-        <ListItem action={<Icon name="send" />} leading={<Icon name="search" />} title="Pergunte ao suporte da Taliya..." />
-        <ListItem title="Posso ajudar a diagnosticar integracoes, explicar configuracoes ou abrir um ticket com contexto." />
-      </List>
-      <ButtonGroup>
-        <Button size="sm" variant="secondary">WhatsApp desconectou</Button>
-        <Button size="sm" variant="secondary">Erro na importacao</Button>
-        <Button size="sm" variant="secondary">Duvida sobre cobranca</Button>
-        <Button size="sm" variant="secondary">Agente nao respondeu</Button>
-        <Button size="sm" variant="secondary">Configurar Pix</Button>
-      </ButtonGroup>
-      <Button leadingIcon="sparkles" size="sm" variant="primary">Perguntar ao suporte 24/7</Button>
-      <List>
-        <ListItem leading={<Icon name="lock" />} title="Para acoes sensiveis, o suporte escala para humano e pode pedir autorizacao." />
-      </List>
-    </Panel>
-  );
-}
-
-function SupportTicketTable() {
-  const rows = [
-    { id: "import", title: "Importacao duplicou alunos", status: "Em analise", statusTone: "info" as const, impact: "Dados", next: "Enviar arquivo" },
-    { id: "whatsapp", title: "WhatsApp desconectou", status: "Aguardando studio", statusTone: "warning" as const, impact: "Atendimento", next: "Reconectar" },
-    { id: "billing", title: "Duvida sobre fatura", status: "Respondido", statusTone: "success" as const, impact: "Assinatura", next: "Ver resposta" },
-    { id: "agent", title: "Agente pausado por falha", status: "Escalado", statusTone: "danger" as const, impact: "Automacao", next: "Autorizar analise" }
-  ];
-
-  return (
-    <CrmWorklistTable
-      actionColumnWidth="44px"
-      ariaLabel="Tabela de tickets recentes"
-      columns={[
-        { key: "title", header: "Titulo", width: "34%" },
-        { key: "status", header: "Status", width: "22%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> },
-        { key: "impact", header: "Impacto", width: "18%" },
-        { key: "next", header: "Proxima acao", width: "26%", render: (row) => <Button size="sm" variant="ghost">{row.next}</Button> }
-      ]}
-      heading={<InlineGroup compact><Icon name="clipboard" size={16} /> Tickets recentes</InlineGroup>}
-      pagination={{ itemsPerPage: "10", label: "1-4 de 4", page: 1, pageCount: 1 }}
-      rowActions={() => <IconButton icon="more" label="Mais acoes do ticket" size="sm" variant="ghost" />}
-      rows={rows}
-      selectedRowId="import"
+    <SupportCentralWorkspace
+      agent={<SupportAgentPanel onAction={onAction} />}
+      tickets={<SupportTicketTable onRowSelect={(row) => onTicketSelect?.(row.id)} selectedRowId={selectedTicketId} />}
     />
   );
 }
 
-function SupportStatusSidebar() {
+function SupportTicketTable({
+  onRowSelect,
+  selectedRowId
+}: {
+  onRowSelect?: (row: SupportTicketRow) => void;
+  selectedRowId?: string;
+}) {
+  const rows: SupportTicketRow[] = [
+    { id: "import", title: "Importacao duplicou alunos", type: "Importacao", typeIcon: "upload", status: "Em analise", statusTone: "info", impact: "Dados", owner: "Taliya", ownerIcon: "bot", response: "hoje 10:04", next: "Enviar arquivo" },
+    { id: "whatsapp", title: "WhatsApp desconectou", type: "Integracao", typeIcon: "link", status: "Aguardando studio", statusTone: "warning", impact: "Atendimento", owner: "Studio", ownerIcon: "user", response: "hoje 09:18", next: "Reconectar" },
+    { id: "billing", title: "Duvida sobre fatura", type: "Billing", typeIcon: "fileText", status: "Respondido", statusTone: "success", impact: "Assinatura", owner: "Taliya", ownerIcon: "bot", response: "ontem 18:42", next: "Ver resposta" },
+    { id: "agent", title: "Agente pausado por falha", type: "Agentes", typeIcon: "bot", status: "Escalado", statusTone: "danger", impact: "Automacao", owner: "Taliya", ownerIcon: "bot", response: "ontem 16:10", next: "Autorizar analise" }
+  ];
+
   return (
-    <div className="tcrm-page-family-stack">
-      <Panel>
-        <List>
-          <ListItem leading={<Icon name="barChart" />} title="Status dos servicos" />
-        </List>
-        <List divided>
-          <ListItem action={<Chip tone="success">operando</Chip>} leading={<Icon name="message" tone="success" />} title="WhatsApp" />
-          <ListItem action={<Chip tone="success">operando</Chip>} leading={<Icon name="coins" tone="success" />} title="Pagamentos" />
-          <ListItem action={<Chip tone="warning">atencao</Chip>} leading={<Icon name="upload" tone="warning" />} title="Importacao" />
-          <ListItem action={<Chip tone="success">normal</Chip>} leading={<Icon name="users" tone="success" />} title="Agentes" />
-        </List>
-      </Panel>
-      <Panel>
-        <List>
-          <ListItem leading={<Icon name="users" />} title="Acessos temporarios" />
-        </List>
-        <List divided>
-          <ListItem leading={<Icon name="clock" />} title="1 pendente" />
-          <ListItem leading={<Icon name="checkCircle" tone="success" />} title="2 ativos" />
-          <ListItem leading={<Icon name="clock" tone="warning" />} title="0 expirando hoje" />
-        </List>
-      </Panel>
-      <Panel>
-        <List>
-          <ListItem leading={<Icon name="star" />} title="Prioridade do plano" />
-        </List>
-        <List>
-          <ListItem title="Suporte padrao">Resposta estimada: hoje</ListItem>
-        </List>
-      </Panel>
-      <Panel compact>
-        <List>
-          <ListItem action={<Icon name="chevronRight" />} title="Ver todos os status" />
-        </List>
-      </Panel>
-    </div>
+    <CrmWorklistTable
+      actionColumnWidth="24px"
+      ariaLabel="Tabela de tickets recentes"
+      density="compact"
+      columns={[
+        { key: "title", header: "Titulo", width: "20%" },
+        { key: "type", header: "Tipo", width: "14%", render: (row) => <InlineGroup compact><Icon name={row.typeIcon} size={14} />{row.type}</InlineGroup> },
+        { key: "status", header: "Status", width: "14%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> },
+        { key: "impact", header: "Impacto", width: "10%" },
+        { key: "owner", header: "Responsavel", width: "13%", render: (row) => <InlineGroup compact><Icon name={row.ownerIcon} size={14} />{row.owner}</InlineGroup> },
+        { key: "response", header: "Ultima resposta", width: "15%" },
+        { key: "next", header: "Proxima acao", width: "14%", render: (row) => <Button size="sm" variant="ghost">{row.next}</Button> }
+      ]}
+      heading={<InlineGroup compact><Icon name="clipboard" size={16} /> Tickets recentes</InlineGroup>}
+      onRowSelect={onRowSelect}
+      pagination={{ itemsPerPage: "10", label: "1-4 de 4", page: 1, pageCount: 1 }}
+      rowActions={() => <IconButton icon="more" label="Mais acoes do ticket" size="sm" variant="ghost" />}
+      rows={rows}
+      selectedRowId={selectedRowId}
+    />
   );
 }
+
+type SupportTicketRow = {
+  id: string;
+  title: string;
+  type: string;
+  typeIcon: "upload" | "link" | "fileText" | "bot";
+  status: string;
+  statusTone: "info" | "warning" | "success" | "danger";
+  impact: string;
+  owner: string;
+  ownerIcon: "bot" | "user";
+  response: string;
+  next: string;
+};
 
 export const SupportCentral: Story = {
   name: "47 suporte central studio taliya",

@@ -265,7 +265,6 @@ function ReplacementsPageContent({
       subtitle="Studio Vila Mariana · Reposição de aulas e encaixes"
       title="Reposições"
       utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistClassName="sb-image-coverage-replacements-page"
       filterBar={
         <PageFilterBar
           aria-label="Filtros de reposições"

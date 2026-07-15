@@ -125,6 +125,14 @@ export const Source: Story = {
   render: () => <InteractiveStudentTable />
 };
 
+export const SoftSelection: Story = {
+  args: {
+    density: "compact",
+    rows,
+    selectionTone: "soft"
+  }
+};
+
 export const States: Story = {
   render: () => (
     <div className="sb-crm-student-table-story sb-crm-student-table-story--states">

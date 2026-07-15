@@ -3,11 +3,9 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   AccessShell,
   AuthCard,
-  CheckoutReviewPanel,
-  ConfirmedSetupHandoff,
-  PlanSummaryCard,
+  ConfirmedSubscriptionPage,
+  SubscriptionReviewPage,
   SubscriptionResolutionPanel,
-  SubscriptionResultHeader,
   SubscriptionStatusCard
 } from "@taliya/crm";
 
@@ -131,13 +129,7 @@ export const Image74ReviewSubscription: Story = {
   render: () => (
     <AccessCoverageStage tone="soft">
       <AccessShell layout="centered" style={accessCoverageFrameStyle({ height: 875 })}>
-        <section className="sb-image-coverage-access-review" aria-label="Revisar assinatura">
-          <header>
-            <h1>Revisar assinatura</h1>
-            <p>Confira seu plano antes de ir para o pagamento seguro.</p>
-          </header>
-          <CheckoutReviewPanel />
-        </section>
+        <SubscriptionReviewPage />
       </AccessShell>
     </AccessCoverageStage>
   )
@@ -191,13 +183,7 @@ export const Image77ConfirmedHandoff: Story = {
   render: () => (
     <AccessCoverageStage tone="soft">
       <AccessShell layout="centered" style={accessCoverageFrameStyle({ width: 1536, height: 890 })}>
-        <section className="sb-image-coverage-access-confirmed" aria-label="Assinatura confirmada">
-          <SubscriptionResultHeader />
-          <div>
-            <PlanSummaryCard state="confirmed" />
-            <ConfirmedSetupHandoff />
-          </div>
-        </section>
+        <ConfirmedSubscriptionPage />
       </AccessShell>
     </AccessCoverageStage>
   )

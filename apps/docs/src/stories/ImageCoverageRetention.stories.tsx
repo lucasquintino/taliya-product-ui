@@ -41,12 +41,15 @@ const retentionNavItems: CrmShellNavItem[] = [
 ];
 
 export function RetentionRiskListPage() {
+  const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [, setDrawerAction] = useState("");
+
   return (
     <CrmWorklistPage
       activeNavId="riscos"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<RetentionRiskDrawer />}
+      drawer={<RetentionRiskDrawer onAction={setDrawerAction} />}
       filterBar={<RetentionRiskFilters />}
       filterBarLabel="Filtros de retencao"
       listLabel="Segmentos"
@@ -59,18 +62,22 @@ export function RetentionRiskListPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <RetentionRiskTable />
+      <RetentionRiskTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
 
 export function RetentionCancellationQueuePage() {
+  const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [, setDrawerAction] = useState("");
+
   return (
     <CrmWorklistPage
       activeNavId="cancelamentos"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<CancellationDrawer />}
+      drawer={<CancellationDrawer onAction={setDrawerAction} />}
+      drawerPlacement="chrome"
       filterBar={<CancellationFilters />}
       filterBarLabel="Filtros de cancelamentos"
       listLabel="Filas"
@@ -83,18 +90,21 @@ export function RetentionCancellationQueuePage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <CancellationTable />
+      <CancellationTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
 
 export function RetentionReactivationListPage() {
+  const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [, setDrawerAction] = useState("");
+
   return (
     <CrmWorklistPage
       activeNavId="reativacoes"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<ReactivationDrawer />}
+      drawer={<ReactivationDrawer onAction={setDrawerAction} />}
       filterBar={<ReactivationFilters />}
       filterBarLabel="Filtros de reativacoes"
       listLabel="Filas"
@@ -107,18 +117,22 @@ export function RetentionReactivationListPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <ReactivationTable />
+      <ReactivationTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
 
 export function RetentionComplaintQueuePage() {
+  const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [, setDrawerAction] = useState("");
+
   return (
     <CrmWorklistPage
       activeNavId="reclamacoes"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<ComplaintDrawer />}
+      drawer={<ComplaintDrawer onAction={setDrawerAction} />}
+      drawerPlacement="chrome"
       filterBar={<ComplaintFilters />}
       filterBarLabel="Filtros de reclamacoes"
       listLabel="Filas"
@@ -131,7 +145,7 @@ export function RetentionComplaintQueuePage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <ComplaintTable />
+      <ComplaintTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
@@ -218,7 +232,7 @@ const retentionRiskRows: RetentionRiskRow[] = [
   { id: "bianca", student: "Bianca Oliveira", status: "Ativa", statusTone: "success", risk: "alto", riskTone: "danger", reason: "sem resposta no WhatsApp", last: "Interacao 01/05", next: "Enviar mensagem pessoal hoje", owner: "Mariana" }
 ];
 
-function RetentionRiskTable() {
+function RetentionRiskTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: RetentionRiskRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
@@ -233,9 +247,10 @@ function RetentionRiskTable() {
         { key: "owner", header: "Resp.", width: "8%" }
       ]}
       pagination={{ itemsPerPage: "10", label: "1-10 de 48", page: 1, pageCount: 5 }}
+      onRowSelect={onRowSelect}
       rowActions={() => <IconButton icon="chevronRight" label="Abrir risco" size="sm" variant="ghost" />}
       rows={retentionRiskRows}
-      selectedRowId="ana"
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -249,7 +264,7 @@ const retentionRiskDrawerFacts = [
   { id: "owner", icon: "user" as const, label: "Responsavel", value: "Mariana" }
 ];
 
-function RetentionRiskDrawer() {
+function RetentionRiskDrawer({ onAction }: { onAction?: (action: string) => void }) {
   return (
     <CaseDrawer
       avatarSrc={image79Avatar}
@@ -262,10 +277,12 @@ function RetentionRiskDrawer() {
       ]}
       messageQuotaLabel="revisao humana"
       numberedSections
+      onAction={onAction}
       showMessageSuggestion={false}
       statusLabel="Risco alto"
       suggestion="Entrar em contato de forma humana, perguntar se houve dificuldade de agenda e oferecer dois horarios de reposicao."
       title="Ana Paula Martins"
+      widthVariant="wide"
     />
   );
 }
@@ -351,7 +368,7 @@ const cancellationRows: CancellationRow[] = [
   { id: "bianca", student: "Bianca Oliveira", type: "Duvida de saida", status: "Novo", statusTone: "info", reason: "dificuldade financeira", impact: "R$ 360/mes", deadline: "amanha 09:00", owner: "Mariana" }
 ];
 
-function CancellationTable() {
+function CancellationTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: CancellationRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
@@ -366,9 +383,10 @@ function CancellationTable() {
         { key: "owner", header: "Resp.", width: "9%" }
       ]}
       pagination={{ itemsPerPage: "10", label: "1-9 de 9", page: 1, pageCount: 1 }}
+      onRowSelect={onRowSelect}
       rowActions={() => <IconButton icon="chevronRight" label="Abrir cancelamento" size="sm" variant="ghost" />}
       rows={cancellationRows}
-      selectedRowId="ana"
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -382,7 +400,7 @@ const cancellationDrawerFacts = [
   { id: "owner", icon: "user" as const, label: "Responsavel", value: "Mariana" }
 ];
 
-function CancellationDrawer() {
+function CancellationDrawer({ onAction }: { onAction?: (action: string) => void }) {
   return (
     <CaseDrawer
       alternatives={[
@@ -411,6 +429,7 @@ function CancellationDrawer() {
       ]}
       showMessageSuggestion={false}
       numberedSections
+      onAction={onAction}
       statusLabel="Em salvamento"
       suggestion="Responder de forma humana, validar a dificuldade de agenda e oferecer uma pausa de 15 dias ou dois horarios alternativos antes de confirmar o cancelamento."
       title="Ana Paula Martins"
@@ -497,7 +516,7 @@ const reactivationRows: ReactivationRow[] = [
   { id: "bianca", student: "Bianca Oliveira", status: "Sem resposta", statusTone: "neutral", reason: "falta de tempo", activity: "ultimo contato em 01/05", opportunity: "vaga aberta no Pilates Solo", nextAction: "enviar lembrete carinhoso", owner: "Mariana" }
 ];
 
-function ReactivationTable() {
+function ReactivationTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: ReactivationRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
@@ -512,9 +531,10 @@ function ReactivationTable() {
         { key: "owner", header: "Resp.", width: "8%" }
       ]}
       pagination={{ itemsPerPage: "10", label: "1-9 de 9", page: 1, pageCount: 1 }}
+      onRowSelect={onRowSelect}
       rowActions={() => <IconButton icon="chevronRight" label="Abrir reativacao" size="sm" variant="ghost" />}
       rows={reactivationRows}
-      selectedRowId="ana"
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -528,7 +548,7 @@ const reactivationDrawerFacts = [
   { id: "channel", icon: "whatsapp" as const, label: "Contato permitido", value: "WhatsApp" }
 ];
 
-function ReactivationDrawer() {
+function ReactivationDrawer({ onAction }: { onAction?: (action: string) => void }) {
   return (
     <CaseDrawer
       alternatives={[{ id: "slot", title: "Quinta, 09:00", capacity: "Reformer", status: "1 vaga disponivel", tone: "success" }]}
@@ -556,8 +576,10 @@ function ReactivationDrawer() {
         { id: "respect", label: "Respeitar 'nao contatar' se marcado" }
       ]}
       restrictionsTitle="Restricoes"
+      widthVariant="wide"
       showMessageSuggestion={false}
       numberedSections
+      onAction={onAction}
       statusLabel="Elegivel"
       suggestion="Enviar mensagem curta oferecendo a vaga de quinta as 09h e perguntando se o horario voltou a servir."
       title="Ana Paula Martins"
@@ -648,7 +670,7 @@ const complaintRows: ComplaintRow[] = [
   { id: "bianca", student: "Bianca Oliveira", severity: "Media", severityTone: "warning", status: "Em andamento", statusTone: "info", origin: "WhatsApp", originIcon: "whatsapp", reason: "remarcar aula", deadline: "13/05 14:00", owner: "Mariana", activity: "msg. enviada ontem" }
 ];
 
-function ComplaintTable() {
+function ComplaintTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: ComplaintRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
@@ -664,9 +686,10 @@ function ComplaintTable() {
         { key: "activity", header: "Ultima atividade", width: "13%" }
       ]}
       pagination={{ itemsPerPage: "10", label: "1-9 de 9", page: 1, pageCount: 1 }}
+      onRowSelect={onRowSelect}
       rowActions={() => <IconButton icon="chevronRight" label="Abrir reclamacao" size="sm" variant="ghost" />}
       rows={complaintRows}
-      selectedRowId="ana"
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -680,7 +703,7 @@ const complaintDrawerFacts = [
   { id: "deadline", icon: "calendar" as const, label: "Prazo", value: "Hoje 14:00", tone: "danger" as const }
 ];
 
-function ComplaintDrawer() {
+function ComplaintDrawer({ onAction }: { onAction?: (action: string) => void }) {
   return (
     <CaseDrawer
       avatarSrc={image79Avatar}
@@ -753,6 +776,7 @@ function ComplaintDrawer() {
       ]}
       showMessageSuggestion={false}
       numberedSections
+      onAction={onAction}
       statusLabel="Alta severidade"
       title="Ana Paula Martins"
     />

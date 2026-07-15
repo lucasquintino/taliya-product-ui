@@ -41,20 +41,23 @@ const salesNavItems: CrmShellNavItem[] = [
   { id: "pipeline", label: "Pipeline" },
   { id: "lista", label: "Lista" },
   { id: "experimental", label: "Experimental" },
-  { id: "matriculas", label: "Matriculas" },
-  { id: "historico", label: "Historico" }
+  { id: "matriculas", label: "Matrículas" },
+  { id: "historico", label: "Histórico" }
 ];
 
 export function SalesPipelinePage() {
   return (
     <CrmKanbanPage
       activeNavId="pipeline"
-      activeSidebarId="equipe"
+      activeSidebarId="vendas"
       avatarSrc={image79Avatar}
       filterBar={<SalesPipelineFilters />}
+      layoutVariant="commercial"
       navItems={salesNavItems}
+      pageHeaderRhythm="overview"
+      pageHeaderActions={<ButtonGroup><Button leadingIcon="plus" size="sm" variant="secondary">Novo interessado</Button><Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button><Button leadingIcon="calendar" size="sm" variant="secondary">Criar tarefa</Button></ButtonGroup>}
       sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Interessados e proximos passos"
+      subtitle="Studio Vila Mariana · Interessados e próximos passos"
       title="Vendas"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
@@ -64,42 +67,50 @@ export function SalesPipelinePage() {
 }
 
 export function SalesInterestedListPage() {
+  const [selectedLeadId, setSelectedLeadId] = useState("ana");
+  const [, setDrawerAction] = useState("");
   return (
     <CrmWorklistPage
       activeNavId="lista"
-      activeSidebarId="equipe"
+      activeSidebarId="vendas"
       avatarSrc={image79Avatar}
-      drawer={<LeadDrawer compact />}
+      drawer={<LeadDrawer compact onAction={setDrawerAction} />}
       filterBar={<SalesInterestedFilters />}
       filterBarLabel="Filtros de interessados"
       listLabel="Filtros rapidos"
       mainLabel="Lista de interessados"
       navItems={salesNavItems}
+      pageHeaderRhythm="compact-stacked"
       quickFilters={<SalesLeadQuickRail />}
       sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Lista de interessados"
+      subtitle="Studio Vila Mariana · Lista de interessados"
       title="Vendas"
       utilityItems={crmEmptyShellSidebarUtilityItems}
       contentLayout="work-list-compact"
       worklistLayoutMode="compact-rail"
+      worklistFilterRhythm="spacious"
     >
-      <SalesLeadTable />
+      <SalesLeadTable onRowSelect={(row) => setSelectedLeadId(row.id)} selectedRowId={selectedLeadId} />
     </CrmWorklistPage>
   );
 }
 
 export function SalesExperimentalListPage() {
+  const [selectedExperimentalId, setSelectedExperimentalId] = useState("ana");
+  const [, setDrawerAction] = useState("");
+
   return (
     <CrmWorklistPage
       activeNavId="experimental"
       activeSidebarId="vendas"
       avatarSrc={image79Avatar}
-      drawer={<ExperimentalDrawer />}
+      drawer={<ExperimentalDrawer onAction={setDrawerAction} />}
       filterBar={<ExperimentalFilters />}
       filterBarLabel="Filtros de experimental"
       listLabel="Filtros rapidos"
       mainLabel="Lista de aulas experimentais"
       navItems={salesNavItems}
+      pageHeaderRhythm="compact-stacked"
       quickFilters={<ExperimentalQuickRail />}
       sidebarItems={crmEmptyShellSidebarItems}
       subtitle="Studio Vila Mariana - Aulas experimentais e proximos passos"
@@ -107,24 +118,29 @@ export function SalesExperimentalListPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       contentLayout="work-list-compact"
       worklistLayoutMode="compact-rail"
+      worklistFilterRhythm="spacious"
     >
-      <ExperimentalTable />
+      <ExperimentalTable onRowSelect={(row) => setSelectedExperimentalId(row.id)} selectedRowId={selectedExperimentalId} />
     </CrmWorklistPage>
   );
 }
 
 export function SalesEnrollmentChecklistPage() {
+  const [selectedEnrollmentId, setSelectedEnrollmentId] = useState("ana");
+  const [, setDrawerAction] = useState("");
+
   return (
     <CrmWorklistPage
       activeNavId="matriculas"
       activeSidebarId="vendas"
       avatarSrc={image79Avatar}
-      drawer={<EnrollmentDrawer />}
+      drawer={<EnrollmentDrawer onAction={setDrawerAction} />}
       filterBar={<EnrollmentFilters />}
       filterBarLabel="Filtros de matriculas"
       listLabel="Filtros rapidos"
       mainLabel="Lista de matriculas"
       navItems={salesNavItems}
+      pageHeaderRhythm="compact-stacked"
       quickFilters={<EnrollmentQuickRail />}
       sidebarItems={crmEmptyShellSidebarItems}
       subtitle="Studio Vila Mariana - Conversao de interessados em alunos"
@@ -132,14 +148,14 @@ export function SalesEnrollmentChecklistPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       contentLayout="work-list-compact"
       worklistLayoutMode="compact-rail"
+      worklistFilterRhythm="spacious"
     >
-      <EnrollmentTable />
+      <EnrollmentTable onRowSelect={(row) => setSelectedEnrollmentId(row.id)} selectedRowId={selectedEnrollmentId} />
     </CrmWorklistPage>
   );
 }
 
 function SalesPipelineFilters() {
-  const [query, setQuery] = useState("");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
     { id: "all", kind: "quick", label: "Todos", selected: true },
@@ -173,7 +189,6 @@ function SalesPipelineFilters() {
     {
       id: "status",
       label: "Status",
-      placement: "advanced",
       value: String(values.status ?? ""),
       options: [
         { value: "manual", label: "Manual" },
@@ -185,7 +200,6 @@ function SalesPipelineFilters() {
     {
       id: "next",
       label: "Proxima acao",
-      placement: "advanced",
       value: String(values.next ?? ""),
       options: [
         { value: "reply", label: "Responder preco" },
@@ -193,50 +207,85 @@ function SalesPipelineFilters() {
         { value: "confirm", label: "Confirmar experimental" },
         { value: "enroll", label: "Iniciar matricula" }
       ]
+    },
+    {
+      id: "channel",
+      label: "Canal",
+      placement: "advanced",
+      value: String(values.channel ?? ""),
+      options: [
+        { value: "whatsapp", label: "WhatsApp" },
+        { value: "instagram", label: "Instagram" },
+        { value: "site", label: "Site" }
+      ]
+    },
+    {
+      id: "interest",
+      label: "Interesse",
+      placement: "advanced",
+      value: String(values.interest ?? ""),
+      options: [
+        { value: "pilates", label: "Pilates" },
+        { value: "experimental", label: "Experimental" },
+        { value: "plans", label: "Planos" }
+      ]
     }
   ];
 
   return (
     <PageFilterBar
       advancedFiltersLabel="Mais filtros"
-      advancedFiltersTitle="Filtros do pipeline"
-      actions={
-        <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Novo interessado</Button>
-          <Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button>
-          <Button leadingIcon="calendar" size="sm" variant="secondary">Criar tarefa</Button>
-        </ButtonGroup>
-      }
       filters={filters}
       onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
-      query={query}
-      searchFilterLabel="Abrir filtros do pipeline"
-      searchFilterPlacement="embedded"
-      searchPlaceholder="Buscar interessados..."
+      searchVisible={false}
     />
   );
 }
 
 function SalesPipelineBoard() {
+  const [selectedCard, setSelectedCard] = useState("");
   const columns = [
-    { title: "Novo", count: 12, cards: [undefined, undefined, undefined] },
-    { title: "Conversando", count: 9, cards: [undefined, undefined, undefined] },
-    { title: "Experimental", count: 8, cards: ["trial" as const, "trial" as const, "trial" as const] },
-    { title: "Pos-aula", count: 7, cards: ["hot" as const, "hot" as const, "hot" as const], state: "waiting" as const },
-    { title: "Matricula", count: 6, cards: ["enrollment" as const, "enrollment" as const, "enrollment" as const], state: "resolved" as const },
-    { title: "Perdidos", count: 4, cards: ["lost" as const, "lost" as const], state: "blocked" as const }
+    { title: "Novo", count: 12, cards: [
+      { title: "Ana Souza", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "começar Pilates", nextAction: "responder preço hoje", meta: "Recepção", state: "lead", statusLabel: "copiloto sugeriu" },
+      { title: "Mariana Oliveira", source: "Instagram", sourceIcon: "camera" as const, interest: "quer informações", nextAction: "enviar valores", meta: "Atendimento", state: "lead", statusLabel: "manual" },
+      { title: "Lucas Ferreira", source: "Site", sourceIcon: "externalLink" as const, interest: "musculação", nextAction: "apresentar planos", meta: "Recepção", state: "lead", statusLabel: "manual" }
+    ] },
+    { title: "Conversando", count: 9, cards: [
+      { title: "Marina Lopes", source: "Instagram", sourceIcon: "camera" as const, interest: "quer experimental", nextAction: "oferecer horários", meta: "Atendimento", state: "lead", statusLabel: "manual" },
+      { title: "Gustavo Almeida", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "treinar à tarde", nextAction: "confirmar horário", meta: "Recepção", state: "lead", statusLabel: "copiloto sugeriu" },
+      { title: "Beatriz Lima", source: "Facebook", sourceIcon: "message" as const, interest: "personal trainer", nextAction: "tirar dúvidas", meta: "Atendimento", state: "lead", statusLabel: "manual" }
+    ] },
+    { title: "Experimental", count: 8, cards: [
+      { title: "Julia Ramos", source: "Indicação", sourceIcon: "users" as const, interest: "dor lombar", nextAction: "confirmar experimental", meta: "Recepção", state: "trial", statusLabel: "experimental hoje" },
+      { title: "Rafael Martins", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "emagrecimento", nextAction: "lembrar do horário", meta: "Atendimento", state: "trial", statusLabel: "experimental hoje" },
+      { title: "Patricia Silva", source: "Instagram", sourceIcon: "camera" as const, interest: "Pilates solo", nextAction: "confirmar presença", meta: "Recepção", state: "trial", statusLabel: "experimental hoje" }
+    ] },
+    { title: "Pós-aula", count: 7, state: "waiting" as const, cards: [
+      { title: "Felipe Andrade", source: "Balcão", sourceIcon: "home" as const, interest: "fortalecimento", nextAction: "iniciar matrícula", meta: "Gestora", state: "hot", statusLabel: "quente" },
+      { title: "Camila Rocha", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "melhorar postura", nextAction: "enviar proposta", meta: "Atendimento", state: "hot", statusLabel: "quente" },
+      { title: "Henrique Costa", source: "Instagram", sourceIcon: "camera" as const, interest: "performance", nextAction: "agendar retorno", meta: "Atendimento", state: "hot", statusLabel: "quente" }
+    ] },
+    { title: "Matrícula", count: 6, state: "resolved" as const, cards: [
+      { title: "Carla Menezes", source: "Instagram", sourceIcon: "camera" as const, interest: "preço", nextAction: "última tentativa", meta: "Atendimento", state: "enrollment", statusLabel: "sem resposta" },
+      { title: "Pedro Santos", source: "Site", sourceIcon: "externalLink" as const, interest: "turma manhã", nextAction: "retornar quando abrir vaga", meta: "Recepção", state: "enrollment", statusLabel: "sem vaga" },
+      { title: "Thiago Oliveira", source: "Balcão", sourceIcon: "home" as const, interest: "musculação", nextAction: "coletar documentos", meta: "Gestora", state: "enrollment", statusLabel: "pronto para matrícula" }
+    ] },
+    { title: "Perdidos", count: 4, state: "blocked" as const, cards: [
+      { title: "Isabela Prado", source: "Site", sourceIcon: "externalLink" as const, interest: "sem retorno", nextAction: "marcar perdido", meta: "Atendimento", state: "lost", statusLabel: "perdido" },
+      { title: "André Lima", source: "Instagram", sourceIcon: "camera" as const, interest: "preço", nextAction: "encerrar contato", meta: "Recepção", state: "lost", statusLabel: "desistiu" },
+      { title: "Sofia Mendes", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "Pilates", nextAction: "arquivar", meta: "Atendimento", state: "lost", statusLabel: "perdido" }
+    ] }
   ];
 
   return (
     <>
       {columns.map((column) => (
-        <KanbanColumn count={column.count} key={column.title} state={column.state} title={column.title}>
-          {column.cards.map((state, index) => (
-            <PipelineCard key={`${column.title}-${index}`} state={state} />
-          ))}
-          <Button leadingIcon="plus" size="sm" variant="secondary">Adicionar interessado</Button>
+        <KanbanColumn count={column.count} key={column.title} onMenu={() => setSelectedCard(`menu:${column.title}`)} state={column.state} title={column.title}>
+          {column.cards.map((card) => {
+            const cardId = `${column.title}:${card.title}`;
+            return <PipelineCard key={cardId} {...card} onMenu={() => setSelectedCard(`menu:${cardId}`)} onSelect={() => setSelectedCard(cardId)} selected={selectedCard === cardId} />;
+          })}
+          <Button leadingIcon="plus" onClick={() => setSelectedCard(`add:${column.title}`)} size="sm" variant="secondary">Adicionar interessado</Button>
         </KanbanColumn>
       ))}
     </>
@@ -299,6 +348,28 @@ function SalesInterestedFilters() {
         { value: "manual", label: "Manual" },
         { value: "lost", label: "Perdido" }
       ]
+    },
+    {
+      id: "channel",
+      label: "Canal",
+      placement: "advanced",
+      value: String(values.channel ?? ""),
+      options: [
+        { value: "whatsapp", label: "WhatsApp" },
+        { value: "instagram", label: "Instagram" },
+        { value: "phone", label: "Telefone" }
+      ]
+    },
+    {
+      id: "interest",
+      label: "Interesse",
+      placement: "advanced",
+      value: String(values.interest ?? ""),
+      options: [
+        { value: "pilates", label: "Pilates" },
+        { value: "personal", label: "Personal trainer" },
+        { value: "functional", label: "Funcional" }
+      ]
     }
   ];
 
@@ -306,6 +377,7 @@ function SalesInterestedFilters() {
     <PageFilterBar
       advancedFiltersLabel="Mais filtros"
       advancedFiltersSurface="modal"
+      advancedFiltersTriggerVariant="button"
       advancedFiltersTitle="Filtros de interessados"
       actions={
         <ButtonGroup>
@@ -384,16 +456,17 @@ const salesLeadColumns: Array<CrmWorklistTableColumn<SalesLeadRow>> = [
   { key: "status", header: "Status", sortable: true, width: "16%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> }
 ];
 
-function SalesLeadTable() {
+function SalesLeadTable({ onRowSelect, selectedRowId }: { onRowSelect: (row: SalesLeadRow) => void; selectedRowId: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
       ariaLabel="Tabela de interessados"
       columns={salesLeadColumns}
       pagination={{ itemsPerPage: "10", label: "1-8 de 128", page: 1, pageCount: 13 }}
+      onRowSelect={onRowSelect}
       rowActions={() => <IconButton icon="more" label="Mais acoes do interessado" size="sm" variant="ghost" />}
       rows={salesLeadRows}
-      selectedRowId="ana"
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -464,6 +537,7 @@ function ExperimentalFilters() {
       advancedFiltersSurface="modal"
       advancedFiltersTriggerVariant="button"
       advancedFiltersTitle="Filtros de experimental"
+      density="comfortable"
       actions={
         <ButtonGroup>
           <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Agendar experimental</Button>
@@ -533,7 +607,13 @@ const experimentalRows: ExperimentalRow[] = [
   { id: "camila", interested: "Camila Rocha", lesson: "Experimental", time: "sexta 14h", status: "Pronta para matricula", statusTone: "success", origin: <><Icon name="users" /> Indicacao</>, owner: "Gestora", last: "feedback positivo", next: "iniciar matricula", nextTone: "success" }
 ];
 
-function ExperimentalTable() {
+function ExperimentalTable({
+  onRowSelect,
+  selectedRowId
+}: {
+  onRowSelect?: (row: ExperimentalRow) => void;
+  selectedRowId?: string;
+}) {
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
@@ -549,9 +629,10 @@ function ExperimentalTable() {
         { key: "next", header: "Proxima acao", width: "14%", render: (row) => <Chip showDot={false} tone={row.nextTone}>{row.next}</Chip> }
       ]}
       pagination={{ itemsPerPage: "10", label: "1-8 de 18", page: 1, pageCount: 2 }}
+      onRowSelect={onRowSelect}
       rowActions={() => <IconButton icon="more" label="Mais acoes do experimental" size="sm" variant="ghost" />}
       rows={experimentalRows}
-      selectedRowId="ana"
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -574,7 +655,7 @@ const experimentalDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "waiting", time: "ontem 18:40", title: "Aguardando confirmacao", description: "Recepcao acompanha manualmente" }
 ];
 
-function ExperimentalDrawer() {
+function ExperimentalDrawer({ onAction }: { onAction?: (action: string) => void }) {
   return (
     <LeadDrawer
       compact
@@ -585,6 +666,7 @@ function ExperimentalDrawer() {
       history={experimentalDrawerHistory}
       name="Ana Souza"
       notice={<><strong>A operacao manual e sempre possivel.</strong><small>O copiloto apenas sugere. A Agenda e a origem do horario da aula.</small></>}
+      onAction={onAction}
       primaryAction={{ label: "Abrir conversa", action: "open-conversation", icon: "whatsapp" }}
       secondaryActions={[
         { label: "Abrir aula na Agenda", action: "open-class", icon: "calendar" },
@@ -737,7 +819,13 @@ const enrollmentRows: EnrollmentRow[] = [
   { id: "lucas", person: "Lucas Ferreira", origin: "Vendas", originTone: "info", plan: "Plano trimestral", checklist: "4/5", status: "Aguardando confirmação", statusTone: "info", owner: "Gestora", next: "confirmar início", last: "amanhã" }
 ];
 
-function EnrollmentTable() {
+function EnrollmentTable({
+  onRowSelect,
+  selectedRowId
+}: {
+  onRowSelect?: (row: EnrollmentRow) => void;
+  selectedRowId?: string;
+}) {
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
@@ -753,9 +841,10 @@ function EnrollmentTable() {
         { key: "last", header: "Última atividade", width: "10%" }
       ]}
       pagination={{ itemsPerPage: "10", label: "1-8 de 128", page: 1, pageCount: 13 }}
+      onRowSelect={onRowSelect}
       rowActions={() => <IconButton icon="more" label="Mais ações da matrícula" size="sm" variant="ghost" />}
       rows={enrollmentRows}
-      selectedRowId="ana"
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -783,7 +872,7 @@ const enrollmentDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "plan", time: "ontem 18:10", title: "Plano 2x/semana escolhido", description: "Primeira aula sugerida" }
 ];
 
-function EnrollmentDrawer() {
+function EnrollmentDrawer({ onAction }: { onAction?: (action: string) => void }) {
   return (
     <LeadDrawer
       compact
@@ -797,6 +886,7 @@ function EnrollmentDrawer() {
       history={enrollmentDrawerHistory}
       name="Ana Souza"
       notice={<><strong>A operação manual é sempre possível.</strong></>}
+      onAction={onAction}
       primaryAction={{ label: "Pedir dado", action: "request-data", icon: "clipboard" }}
       secondaryActions={[
         { label: "Converter em aluno", action: "convert-student", icon: "clipboard", disabled: true },

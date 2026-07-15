@@ -24,6 +24,9 @@ import type {
 import { Button, Chip, cn } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
+import source23CommentAnaSilva from "../assets/source23-comment-ana-silva.png";
+import source23CommentJoaoSilva from "../assets/source23-comment-joao-silva.png";
+import source23CommentSamFrank from "../assets/source23-comment-sam-frank.png";
 
 const tasksNavItems: CrmShellNavItem[] = [
   { id: "pendencias", label: "Pendências" },
@@ -387,7 +390,6 @@ function TasksPageContent({
       subtitle="Studio Vila Mariana · Quem precisa fazer o quê, até quando, e de onde veio essa tarefa?"
       title="Tarefas"
       utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistClassName="sb-image-coverage-tasks-page"
       filterBar={
         <PageFilterBar
           aria-label="Filtros de tarefas"
@@ -462,9 +464,9 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
   const [drawerDeadline, setDrawerDeadline] = useState<React.ReactNode>("Hoje");
   const [drawerDeadlineTone, setDrawerDeadlineTone] = useState<"danger" | undefined>("danger");
   const [comments, setComments] = useState<TaskDrawerComment[]>([
-    { id: "ana", author: "Ana Silva", body: "Pedi reposição quinta 08h.", time: "Hoje, 09:08" },
-    { id: "sam", author: "Sam Frank", body: "Recepção não encontrou vaga ainda.", time: "Hoje, 09:14" },
-    { id: "joao", author: "João Silva", body: "Copiloto sugeriu opção quinta 08h.", time: "Hoje, 09:20" }
+    { id: "ana", author: "Ana Silva", avatarSrc: source23CommentAnaSilva, body: "Pedi reposição quinta 08h.", time: "Hoje, 09:08" },
+    { id: "sam", author: "Sam Frank", avatarSrc: source23CommentSamFrank, body: "Recepção não encontrou vaga ainda.", time: "Hoje, 09:14" },
+    { id: "joao", author: "João Silva", avatarSrc: source23CommentJoaoSilva, body: "Copiloto sugeriu opção quinta 08h.", time: "Hoje, 09:20" }
   ]);
   const [history, setHistory] = useState<TaskDrawerHistoryItem[]>([
     { id: "whatsapp", time: "09:10", body: "Ana pediu reposição pelo WhatsApp" },
@@ -481,7 +483,7 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
     () => [
       { id: "origin", icon: "calendar", label: "Origem canônica", value: "Agenda / Reposições" },
       { id: "owner", icon: "user", label: "Dono / fila", value: drawerOwner },
-      { id: "deadline", icon: "calendar", label: "Prazo", value: drawerDeadline, tone: drawerDeadlineTone },
+      { id: "deadline", icon: "calendar", label: "Prazo", value: drawerDeadline, tone: drawerDeadlineTone, showToneIcon: false },
       { id: "priority", icon: "clock", label: "Prioridade", value: <><span className="tcrm-task-drawer__priority-dot" aria-hidden="true" />Média</> },
       { id: "reason", icon: "clock", label: "Motivo", value: "Ana pediu reposição e precisa confirmar horário" }
     ],
@@ -494,6 +496,7 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
 
   const drawerNode = drawerOpen ? (
     <TaskDrawer
+      activityDensity="comfortable"
       className="sb-image-coverage-tasks-drawer"
       activityOrder="comments-history"
       checklist={checklist}

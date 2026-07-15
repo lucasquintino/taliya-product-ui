@@ -258,14 +258,13 @@ function ApprovalsPageContent({
       drawer={drawer}
       drawerPlacement="floating"
       navItems={approvalsNavItems}
-      pageHeaderRhythm="spacious"
+      pageHeaderRhythm="compact-stacked"
       sidebarItems={crmEmptyShellSidebarItems}
       stageClassName="sb-image-coverage-approvals-stage"
       subtitle="Decisões aguardando revisão humana"
       title="Aprovações"
       utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistClassName="sb-image-coverage-approvals-page"
-      worklistLayoutMode="main-priority"
+      worklistLayoutMode="compact-rail"
       filterBar={
         <PageFilterBar
           aria-label="Filtros de aprovações"
@@ -286,6 +285,7 @@ function ApprovalsPageContent({
           query={query}
           searchAriaLabel="Buscar aprovações"
           searchFilterLabel="Abrir filtros avancados"
+          searchFilterPlacement="embedded"
           searchPlaceholder="Buscar aprovações..."
         />
       }
@@ -299,6 +299,7 @@ function ApprovalsPageContent({
           heading="Filas"
           items={queueItems}
           onSelect={onQueueSelect}
+          selectionTone="soft"
         />
       }
     >

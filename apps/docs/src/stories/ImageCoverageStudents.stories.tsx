@@ -10,7 +10,8 @@ import {
   ProfileTabs,
   StudentDrawer,
   StudentHeader,
-  StudentSummary,
+  StudentProfileActionRail,
+  StudentProfileOverviewGrid,
   StudentTable,
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
@@ -21,7 +22,7 @@ import type {
   PageQuickFilterItem,
   StudentTableRow
 } from "@taliya/crm";
-import { Button, ButtonGroup, Chip, Icon, List, ListItem, Panel } from "@taliya/ui";
+import { Button } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
 import source13JoaoPedro from "../assets/source13-joao-pedro.png";
@@ -305,13 +306,14 @@ function StudentsPageContent({
       drawerPlacement="floating"
       drawerSize="compact"
       navItems={studentsNavItems}
+      pageHeaderRhythm="compact-stacked"
       sidebarItems={crmEmptyShellSidebarItems}
       stageClassName="sb-image-coverage-students-stage"
       subtitle="Base ativa do estudio"
       title="Alunos"
       utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistClassName="sb-image-coverage-students-page"
-      worklistLayoutMode="main-priority"
+      worklistLayoutMode="compact-rail"
+      worklistHeightMode="tall"
       filterBar={
         <PageFilterBar
           aria-label="Filtros de alunos"
@@ -346,12 +348,15 @@ function StudentsPageContent({
           heading="Segmentos"
           items={segmentItems}
           onSelect={onSegmentSelect}
+          selectionTone="soft"
         />
       }
     >
       <StudentTable
+        density="compact"
         pageLabel={pageLabel}
         rows={rows}
+        selectionTone="soft"
         onItemsPerPageClick={onItemsPerPageClick}
         onNextPage={onNextPage}
         onPreviousPage={onPreviousPage}
@@ -406,92 +411,6 @@ export function StudentsShell() {
   );
 }
 
-function StudentProfileMain() {
-  return (
-    <div className="sb-image-coverage-student-profile-main">
-      <StudentSummary />
-      <Panel title="2. Agenda próxima">
-        <List>
-          <ListItem title="Reformer Iniciante" meta="Qui 15/05 · 07:00" leading={<Icon name="calendar" tone="info" />}><Chip tone="info">Marcada</Chip></ListItem>
-          <ListItem title="Reformer Iniciante" meta="Sex 17/05 · 07:00" leading={<Icon name="calendar" tone="info" />}><Chip tone="info">Marcada</Chip></ListItem>
-          <ListItem title="Reposição pendente" meta="1 aula disponível" leading={<Icon name="clipboard" tone="warning" />}><Chip tone="warning">Pendente</Chip></ListItem>
-        </List>
-        <Button size="sm" trailingIcon="arrowRight" variant="ghost">Ver agenda</Button>
-      </Panel>
-      <Panel title="3. Plano e financeiro">
-        <List>
-          <ListItem title="Plano atual" meta="Plano Mensal" leading={<Icon name="creditCard" />}><Chip tone="success">Ativo</Chip></ListItem>
-          <ListItem title="Próxima mensalidade" meta="10/06/2024 · R$ 199,00" leading={<Icon name="coins" />} />
-          <ListItem title="Status financeiro" meta="Pagamento pendente desde 05/04" leading={<Icon name="alert" tone="warning" />}><Chip tone="warning">pagamento pendente</Chip></ListItem>
-        </List>
-        <Button size="sm" trailingIcon="arrowRight" variant="ghost">Ver financeiro</Button>
-      </Panel>
-      <Panel title="4. Pendências">
-        <List>
-          <ListItem title="Atualizar contato de emergência" meta="Dados cadastrais" leading={<Icon name="user" />} />
-          <ListItem title="Confirmar disponibilidade para aula extra" meta="Agenda" leading={<Icon name="calendar" />} />
-          <ListItem title="Pagamento pendente" meta="Financeiro" leading={<Icon name="coins" tone="warning" />} />
-        </List>
-        <Button size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas pendências</Button>
-      </Panel>
-      <Panel title="5. Notas recentes">
-        <List>
-          <ListItem title="Aluna pediu opção de reposição para próxima semana." meta="Sam Frank · 12/05/2024 14:32" leading={<Icon name="clipboard" tone="info" />} />
-          <ListItem title="Relatou leve desconforto no ombro direito." meta="Nikki Olaw · 09/05/2024 10:15" leading={<Icon name="message" tone="info" />} />
-        </List>
-        <Button size="sm" trailingIcon="arrowRight" variant="ghost">Ver todas notas</Button>
-      </Panel>
-      <Panel title="6. Linha do tempo curta">
-        <List>
-          <ListItem title="Mensagem via WhatsApp" meta="12/05/2024 14:32 · Por Sam Frank" leading={<Icon name="whatsapp" tone="success" />}>Enviou lembrete da aula de quinta.</ListItem>
-          <ListItem title="Aula realizada" meta="10/05/2024 07:00 · Reformer Iniciante" leading={<Icon name="checkCircle" tone="info" />}>Presença registrada.</ListItem>
-          <ListItem title="Pagamento recebido" meta="05/04/2024 10:32 · R$ 199,00" leading={<Icon name="coins" tone="success" />}>Plano Mensal.</ListItem>
-        </List>
-        <Button size="sm" trailingIcon="arrowRight" variant="ghost">Ver linha do tempo completa</Button>
-      </Panel>
-    </div>
-  );
-}
-
-function StudentProfileRail() {
-  return (
-    <div className="sb-image-coverage-student-profile-rail">
-      <Panel title="Próximas ações">
-        <List>
-          <ListItem title="Aula marcada" meta="Qui, 15/05 · 07:00" leading={<Icon name="calendar" tone="info" />}><Chip tone="info">Reformer Iniciante</Chip></ListItem>
-          <ListItem title="Repor aula pendente" meta="1 aula disponível" leading={<Icon name="refresh" tone="warning" />}><Chip tone="warning">Pendente</Chip></ListItem>
-          <ListItem title="Pagamento pendente" meta="R$ 199,00" leading={<Icon name="coins" tone="success" />}><Chip tone="warning">Atenção</Chip></ListItem>
-        </List>
-      </Panel>
-      <Panel title="Riscos / alertas">
-        <List>
-          <ListItem title="Financeiro em atraso" meta="Pagamento pendente desde 05/04" leading={<Icon name="shield" tone="warning" />}><Chip tone="warning">Atenção</Chip></ListItem>
-          <ListItem title="Frequência estável" meta="8 de 10 aulas (80%)" leading={<Icon name="checkCircle" tone="success" />}><Chip tone="success">Bom</Chip></ListItem>
-        </List>
-      </Panel>
-      <Panel title="Tarefas abertas">
-        <List>
-          <ListItem title="Confirmar disponibilidade para aula extra" meta="Criada por Nikki Olaw · 02/05" leading={<Icon name="checkCircle" />}><Chip tone="info">Pendente</Chip></ListItem>
-          <ListItem title="Atualizar contato de emergência" meta="Criada por Sam Frank · 28/04" leading={<Icon name="checkCircle" />}><Chip tone="info">Pendente</Chip></ListItem>
-        </List>
-      </Panel>
-      <Panel title="Última conversa">
-        <List>
-          <ListItem title="WhatsApp · 12/05/2024 14:32" meta="Você: Oi Ana Paula! Lembrando da sua aula..." leading={<Icon name="whatsapp" tone="success" />}>Ana Paula: Perfeito, obrigada pelo lembrete!</ListItem>
-        </List>
-      </Panel>
-      <Panel title="Ações rápidas">
-        <ButtonGroup>
-          <Button leadingIcon="message" variant="secondary">Enviar mensagem</Button>
-          <Button leadingIcon="calendar" variant="secondary">Criar tarefa</Button>
-          <Button leadingIcon="creditCard" variant="secondary">Alterar plano</Button>
-          <Button leadingIcon="pause" variant="secondary">Pausar aluno</Button>
-        </ButtonGroup>
-      </Panel>
-    </div>
-  );
-}
-
 export function StudentProfilePage() {
   return (
     <CrmRightPanelPage
@@ -499,12 +418,13 @@ export function StudentProfilePage() {
       activeSidebarId="equipe"
       avatarSrc={image79Avatar}
       className="sb-image-coverage-students-shell"
+      contentHeader={<StudentHeader avatarSrc={source28AnaPaula} />}
+      contentHeaderLabel="Identificacao e acoes do aluno"
       contentClassName="sb-image-coverage-students-content"
       main={
         <PageStack>
-          <StudentHeader avatarSrc={source28AnaPaula} />
-          <ProfileTabs showPanel={false} />
-          <StudentProfileMain />
+          <ProfileTabs density="compact" showPanel={false} />
+          <StudentProfileOverviewGrid density="compact" />
         </PageStack>
       }
       mainGridColumns={1}
@@ -515,11 +435,12 @@ export function StudentProfilePage() {
         { id: "segmentos", label: "Segmentos" },
         { id: "linha", label: "Linha do tempo" }
       ]}
-      panel={<StudentProfileRail />}
+      panel={<StudentProfileActionRail density="compact" />}
       panelLabel="Acoes e relacionamento do aluno"
+      regions={{ pageHeader: false }}
+      rightPanelVariant="student-profile"
       sidebarItems={crmEmptyShellSidebarItems}
       stageClassName="sb-image-coverage-students-stage"
-      subtitle="Resumo operacional do aluno"
       title="Ana Paula Martins"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     />
@@ -553,4 +474,3 @@ export const Image28AlunoPerfilResumoOperacional: Story = {
   },
   render: () => <StudentProfilePage />
 };
-

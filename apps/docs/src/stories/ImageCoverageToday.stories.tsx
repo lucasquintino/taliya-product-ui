@@ -9,11 +9,12 @@ import {
   TaskDrawer,
   crmEmptyShellSidebarItems
 } from "@taliya/crm";
-import type { CrmShellNavItem, CrmShellSidebarItem, TaskDrawerChecklistItem, TaskDrawerComment, TaskDrawerFact, TaskDrawerHistoryItem } from "@taliya/crm";
+import type { CrmOperationalRowData, CrmShellNavItem, CrmShellSidebarItem, TaskDrawerChecklistItem, TaskDrawerComment, TaskDrawerFact, TaskDrawerHistoryItem } from "@taliya/crm";
 import {
   Button,
   Chip,
-  InlineGroup
+  InlineGroup,
+  MetaText
 } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
@@ -86,7 +87,8 @@ const todayTaskDrawerHistory: TaskDrawerHistoryItem[] = [
   { id: "latest", time: "09:12", body: "Sistema encontrou uma vaga compatível." }
 ];
 
-function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
+function TodayDashboard({ selectedTask = false, variant = "base" }: { selectedTask?: boolean; variant?: "base" | "critical" }) {
+  const critical = variant === "critical";
   const [selectedRowId, setSelectedRowId] = useState(selectedTask ? "tasks:replacement" : "");
   const selectRows = (section: string) => ({
     onRowOpen: (row: { id: string }) => setSelectedRowId(`${section}:${row.id}`)
@@ -104,7 +106,7 @@ function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
           kind="checklist"
           {...selectRows("checklist")}
           rows={withSelection("checklist", [
-            { id: "open", title: "Abrir o estúdio" },
+            { id: "open", title: "Abrir o estúdio", completed: critical },
             { id: "agenda", title: "Conferir agenda" },
             { id: "queue", title: "Revisar fila humana" },
             { id: "payments", title: "Checar pagamentos críticos" }
@@ -115,7 +117,35 @@ function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
       <CrmOperationalPanel icon="sparkles" title="Agora">
         <CrmOperationalRows
           {...selectRows("now")}
-          rows={withSelection("now", [
+          rows={withSelection("now", (critical ? [
+            {
+              id: "human",
+              title: "4 conversas aguardando humano",
+              meta: "WhatsApp · maior espera 38 min · responsável Atendimento",
+              icon: "message",
+              tone: "info",
+              status: "Urgente",
+              statusTone: "danger"
+            },
+            {
+              id: "replacement",
+              title: "3 reposições sem encaixe hoje",
+              meta: "Agenda · prazo hoje 16:00 · responsável Mariana",
+              icon: "database",
+              tone: "danger",
+              status: "Hoje",
+              statusTone: "warning"
+            },
+            {
+              id: "quota",
+              title: "Cota em 92% afetando comunicados",
+              meta: "Uso/Cotas · modo economia ativo · responsável Gestor",
+              icon: "pieChart",
+              tone: "warning",
+              status: "Atenção",
+              statusTone: "danger"
+            }
+          ] : [
             {
               id: "human",
               title: "Conversas aguardando humano",
@@ -145,7 +175,7 @@ function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
               status: "Pendente",
               statusTone: "warning"
             }
-          ])}
+          ]) as CrmOperationalRowData[])}
         />
       </CrmOperationalPanel>
 
@@ -155,32 +185,40 @@ function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
           kind="schedule"
           {...selectRows("classes")}
           rows={withSelection("classes", [
-            { id: "0800", title: "08:00", meta: "Pilates Solo · 10/12", tone: "info" },
-            { id: "0900", title: "09:00", meta: "Funcional · 8/10", tone: "success" },
+            { id: "0800", title: "08:00", meta: critical ? "Pilates Solo · 10/12 · ok" : "Pilates Solo · 10/12", tone: "info" },
+            { id: "0900", title: "09:00", meta: critical ? "Funcional · 8/10 · chamada pendente" : "Funcional · 8/10", tone: "success" },
             { id: "1000", title: "10:00", meta: "Reformer · lotada", tone: "danger" },
-            { id: "1400", title: "14:00", meta: "Pilates Solo · professor pendente", tone: "warning" }
+            { id: "1400", title: "14:00", meta: critical ? "Pilates Solo · sala em conflito" : "Pilates Solo · professor pendente", tone: critical ? "danger" : "warning" }
           ])}
         />
       </CrmOperationalPanel>
 
-      <CrmOperationalPanel badge={<Chip showDot={false}>12 aguardando</Chip>} icon="user" title="Fila humana">
+      <CrmOperationalPanel
+        badge={<Chip showDot={false}>{critical ? "18 aguardando" : "12 aguardando"}</Chip>}
+        footer={<Button size="sm" variant="ghost">Ver fila completa</Button>}
+        icon="user"
+        title="Fila humana"
+      >
         <CrmOperationalRows
           dense
           {...selectRows("queue")}
           rows={withSelection("queue", [
-            { id: "whatsapp", title: "WhatsApp · Gustavo Lima", meta: "22 min · Atendimento", icon: "whatsapp", tone: "success" },
-            { id: "agenda", title: "Agenda · Camila Souza", meta: "12 min · Mariana", icon: "calendar", tone: "info" },
-            { id: "finance", title: "Financeiro · Ana Beatriz", meta: "9 min · Lucas", icon: "coins", tone: "warning" }
+            { id: "whatsapp", title: "WhatsApp · Gustavo Lima", meta: critical ? "38 min · Atendimento" : "22 min · Atendimento", icon: "whatsapp", tone: "success" },
+            { id: "agenda", title: "Agenda · Camila Souza", meta: critical ? "24 min · Mariana" : "12 min · Mariana", icon: "calendar", tone: "info" },
+            { id: "finance", title: "Financeiro · Ana Beatriz", meta: critical ? "18 min · Lucas" : "9 min · Lucas", icon: "coins", tone: "warning" }
           ])}
         />
-        <Button className="sb-image-coverage-today-panel__link" size="sm" variant="ghost">Ver fila completa</Button>
       </CrmOperationalPanel>
 
       <CrmOperationalPanel icon="alert" title="Bloqueios de hoje">
         <CrmOperationalRows
           dense
           {...selectRows("blocks")}
-          rows={withSelection("blocks", [
+          rows={withSelection("blocks", critical ? [
+            { id: "room", title: "Sala 2 em conflito", meta: "2 aulas afetadas · 14:00", icon: "alert", tone: "danger" },
+            { id: "contract", title: "Cadastro incompleto", meta: "bloqueia contrato", icon: "alert", tone: "danger" },
+            { id: "quota", title: "Cota em modo economia", meta: "comunicados de baixa prioridade pausados", icon: "alert", tone: "warning" }
+          ] : [
             { id: "teacher", title: "Professor indisponível", meta: "impacta 2 aulas · 14:00", icon: "alert", tone: "danger" },
             { id: "room", title: "Sala 2 em conflito", meta: "4 alunos afetados", icon: "alert", tone: "danger" },
             { id: "contract", title: "Cadastro incompleto", meta: "bloqueia contrato", icon: "alert", tone: "danger" }
@@ -189,14 +227,18 @@ function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
       </CrmOperationalPanel>
 
       <CrmOperationalPanel
-        badge={<InlineGroup compact><Chip showDot={false}>7 pendentes</Chip><Chip showDot={false} tone="danger">2 atrasadas</Chip></InlineGroup>}
+        badge={<InlineGroup compact><Chip showDot={false}>{critical ? "9 pendentes" : "7 pendentes"}</Chip><Chip showDot={false} tone="danger">{critical ? "3 atrasadas" : "2 atrasadas"}</Chip></InlineGroup>}
         icon="calendar"
         title="Tarefas de hoje"
       >
         <CrmOperationalRows
           dense
           {...selectRows("tasks")}
-          rows={withSelection("tasks", [
+          rows={withSelection("tasks", critical ? [
+            { id: "replacement", title: "Confirmar reposição com Ana Paula", meta: "10:30 · Mariana", selected: selectedTask, tone: "info" },
+            { id: "receipt", title: "Validar comprovante pendente", meta: "11:00 · Lucas", tone: "danger" },
+            { id: "risk", title: "Ligar para aluno em risco", meta: "16:00 · Juliana", tone: "info" }
+          ] : [
             { id: "replacement", title: "Confirmar reposição com Ana Paula", meta: "10:30 · Mariana", selected: selectedTask, tone: "info" },
             { id: "contract", title: "Revisar contrato", meta: "14:00 · Lucas", tone: "danger" },
             { id: "risk", title: "Ligar para aluno em risco", meta: "16:00 · Juliana", tone: "info" }
@@ -204,21 +246,21 @@ function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
         />
       </CrmOperationalPanel>
 
-      <CrmOperationalPanel badge={<Chip showDot={false}>3 pendentes</Chip>} compact icon="shield" title="Aprovações de hoje">
+      <CrmOperationalPanel badge={<Chip showDot={false}>{critical ? "5 pendentes" : "3 pendentes"}</Chip>} compact icon="shield" title="Aprovações de hoje">
         <CrmOperationalRows
           compact
           dense
           {...selectRows("approvals")}
           rows={withSelection("approvals", [
-            { id: "agent", title: "Mensagem do agente", meta: "risco baixo · 1 crédito", icon: "message", tone: "success" },
+            { id: "agent", title: "Mensagem do agente", meta: critical ? "risco médio · 1 crédito" : "risco baixo · 1 crédito", icon: "message", tone: critical ? "warning" : "success" },
             { id: "schedule", title: "Alteração de agenda", meta: "impacta 4 alunos", icon: "calendar", tone: "warning" },
-            { id: "replacement", title: "Comunicado de reposição", meta: "cota 82%", icon: "messageMore", tone: "info" }
+            { id: "replacement", title: "Comunicado de reposição", meta: critical ? "cota 92%" : "cota 82%", icon: "messageMore", tone: critical ? "danger" : "info" }
           ])}
         />
       </CrmOperationalPanel>
 
       <CrmOperationalPanel
-        badge={<InlineGroup compact><strong className="sb-image-coverage-today-money">R$ 1.820</strong><span>exigem ação hoje</span></InlineGroup>}
+        badge={<InlineGroup compact><MetaText tone="success">{critical ? "R$ 2.020" : "R$ 1.820"}</MetaText><span>exigem ação hoje</span></InlineGroup>}
         compact
         icon="coins"
         title="Dinheiro hoje"
@@ -228,7 +270,11 @@ function TodayDashboard({ selectedTask = false }: { selectedTask?: boolean }) {
           dense
           kind="money"
           {...selectRows("money")}
-          rows={withSelection("money", [
+          rows={withSelection("money", critical ? [
+            { id: "980", title: "R$ 980", meta: "comprovante aguardando validação", tone: "success" },
+            { id: "420", title: "R$ 420", meta: "mensalidade vencida · aula 18:00", tone: "success" },
+            { id: "620", title: "R$ 620", meta: "promessa vence hoje", tone: "success" }
+          ] : [
             { id: "420a", title: "R$ 420", meta: "mensalidade vencida · aula 18:00", tone: "success" },
             { id: "980", title: "R$ 980", meta: "comprovante aguardando validação", tone: "success" },
             { id: "420b", title: "R$ 420", meta: "promessa vence hoje", tone: "success" }
@@ -248,8 +294,8 @@ function TodayAfterContent({
 }) {
   return (
     <>
-      {showHistory ? <ActivityFeed className="sb-image-coverage-today-history" /> : null}
-      {historyScrollReserve ? <div aria-hidden="true" className="sb-image-coverage-today-scroll-reserve" /> : null}
+      {showHistory ? <ActivityFeed fluid /> : null}
+      {historyScrollReserve ? <div aria-hidden="true" className="sb-image-coverage-today-stage--scroll-reserve" /> : null}
     </>
   );
 }
@@ -257,11 +303,13 @@ function TodayAfterContent({
 export function TodayShell({
   drawer = false,
   historyOnly = false,
-  historyScrollReserve = false
+  historyScrollReserve = false,
+  variant = "base"
 }: {
   drawer?: boolean;
   historyOnly?: boolean;
   historyScrollReserve?: boolean;
+  variant?: "base" | "critical";
 }) {
   return (
     <CrmDashboardPage
@@ -269,10 +317,9 @@ export function TodayShell({
         after={historyOnly ? null : <TodayAfterContent historyScrollReserve={historyScrollReserve} showHistory={historyScrollReserve} />}
         avatarSrc={image79Avatar}
         className="sb-image-coverage-today-shell"
-        columns={historyOnly ? 1 : "today"}
+        columns={historyOnly ? 1 : variant === "critical" ? "todayCritical" : "today"}
         contentClassName="sb-image-coverage-today-content"
-        dashboardClassName={historyOnly ? "sb-image-coverage-today-history-grid" : "sb-image-coverage-today-grid"}
-        dashboardStackClassName="sb-image-coverage-today-page"
+        dashboardClassName={historyOnly ? "sb-image-coverage-today-history-grid" : "sb-image-coverage-today-stage--dashboard-grid"}
         drawerPlacement={drawer ? "viewport" : undefined}
         drawer={
           drawer ? (
@@ -303,7 +350,7 @@ export function TodayShell({
         title="Hoje"
         utilityItems={todaySidebarUtilityItems}
       >
-        {historyOnly ? <ActivityFeed className="sb-image-coverage-today-history" /> : <TodayDashboard selectedTask={drawer} />}
+        {historyOnly ? <ActivityFeed fluid /> : <TodayDashboard selectedTask={drawer} variant={variant} />}
       </CrmDashboardPage>
   );
 }
@@ -342,7 +389,7 @@ export const Image19HojeEstadoCritico: Story = {
     },
     sourceImage: "19_round-4.1A_hoje_03_estado-critico-do-dia.png"
   },
-  render: () => <TodayShell />
+  render: () => <TodayShell variant="critical" />
 };
 
 export const Image20HistoricoDeHoje: Story = {

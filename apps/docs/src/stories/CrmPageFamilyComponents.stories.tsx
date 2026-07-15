@@ -181,3 +181,20 @@ export const RightPanelDashboardGrid: Story = {
     />
   )
 };
+
+export const RightPanelSpanningHeader: Story = {
+  render: () => (
+    <CrmRightPanelPage
+      activeNavId="dashboard"
+      activeSidebarId="settings"
+      contentHeader={<Panel compact><strong>Identificacao e acoes do registro</strong></Panel>}
+      contentHeaderLabel="Cabecalho compartilhado"
+      main={<Panel>Resumo operacional</Panel>}
+      navItems={navItems}
+      panel={<Panel>Acoes contextuais</Panel>}
+      sidebarItems={crmEmptyShellSidebarItems}
+      subtitle="Cabecalho sobre as duas colunas"
+      title="Perfil"
+    />
+  )
+};

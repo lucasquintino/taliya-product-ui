@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react-vite";
 import { useState } from "react";
 
-import { CalendarCell } from "@taliya/ui";
+import { CalendarCell, CalendarGrid } from "@taliya/ui";
 
 import { batch6SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
@@ -31,7 +31,7 @@ function InteractiveCalendarGrid() {
   ];
 
   return (
-    <div className="sb-batch6-calendar-grid">
+    <CalendarGrid>
       {days.map((item) => (
         <CalendarCell
           conflict={item.conflict}
@@ -46,7 +46,7 @@ function InteractiveCalendarGrid() {
           today={item.today}
         />
       ))}
-    </div>
+    </CalendarGrid>
   );
 }
 

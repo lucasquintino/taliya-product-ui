@@ -1,33 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import type { ReactNode } from "react";
+import { useState } from "react";
 
 import {
-  ClassCard,
-  ConfigImpactPreview,
-  CrmWorklistTable,
-  ImportProgress,
-  IntegrationStatusRow,
-  InviteRow,
-  PlanSummaryCard,
-  RoleCard,
-  RuleRow,
   SetupAgentChat,
-  SetupBlockHeader,
-  SetupBottomBar,
-  SetupChoiceCard,
-  SetupContentGrid,
-  SetupImportSourceCard,
-  SetupReviewPanel,
-  SetupShell,
-  SetupWelcome,
-  StatusCard,
-  WeeklyCalendar,
-  WeeklyHoursGrid
+  SetupAgendaWorkspace,
+  SetupChannelsWorkspace,
+  SetupClassesWorkspace,
+  SetupConsumptionWorkspace,
+  SetupPage,
+  SetupPaymentWorkspace,
+  SetupPlansWorkspace,
+  SetupReviewWorkspace,
+  SetupStudioWorkspace,
+  SetupStudentsWorkspace,
+  SetupTeamWorkspace,
+  SetupWelcomeWorkspace
 } from "@taliya/crm";
-import { Chip, IconButton, InlineAlert, List, Panel, PersonLabel } from "@taliya/ui";
-import type { ComponentTone } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
+import source51eLeticiaRamos from "../assets/source51e-leticia-ramos.png";
 
 const meta = {
   title: "CRM / Image Coverage / Setup",
@@ -46,278 +37,268 @@ export default meta;
 
 type Story = StoryObj;
 
-function SetupPage({
-  step,
-  children,
-  agent,
-  bottomBar
-}: {
-  step: number;
-  children: ReactNode;
-  agent?: ReactNode;
-  bottomBar?: ReactNode;
-}) {
-  return (
-    <div className="sb-image-coverage-remaining-setup-stage">
-      <SetupShell
-        agent={agent}
-        bottomBar={bottomBar}
-        className="sb-image-coverage-remaining-setup-shell"
-        progress={Math.min(96, step * 11)}
-        step={step}
-      >
-        {children}
-      </SetupShell>
-    </div>
-  );
-}
-
-function SetupPanel({ children }: { children: ReactNode }) {
-  return <div className="sb-image-coverage-remaining-setup-panel">{children}</div>;
-}
-
-function SetupTeamPreparedList() {
-  return (
-    <Panel>
-      <h3>3. Equipe preparada</h3>
-      <List>
-        <InviteRow state="prepared" />
-        <InviteRow invite={{ id: "carla-souza", initials: "CS", name: "Carla Souza", role: "Recepcao", email: "carla@studio.com", phone: "(11) 97777-2222" }} state="prepared" />
-        <InviteRow state="incomplete" />
-      </List>
-      <InlineAlert tone="info">Os convites ficam preparados agora e serao enviados automaticamente quando o setup inicial for publicado.</InlineAlert>
-    </Panel>
-  );
-}
-
-function ClassesTable() {
-  const rows: Array<{ id: string; name: string; teacher: string; schedule: string; capacity: string; fixed: string; vacancies: string; next: string; status: string; tone: ComponentTone; change: string }> = [
-    { id: "reformer", name: "Reformer Intermediario", teacher: "Joao Silva", schedule: "Terca 17h", capacity: "5/6", fixed: "5 alunos", vacancies: "1 vaga", next: "Hoje 17h", status: "Ativa", tone: "success", change: "Aluno movido hoje" },
-    { id: "pilates", name: "Pilates Solo", teacher: "Mariana Lopes", schedule: "Quinta 08h", capacity: "6/6", fixed: "6 alunos", vacancies: "Lotada", next: "Quinta 08h", status: "Cheia", tone: "danger", change: "Sem mudancas" },
-    { id: "tower", name: "Tower", teacher: "A definir", schedule: "Segunda 19h", capacity: "3/5", fixed: "3 alunos", vacancies: "2 vagas", next: "Segunda 19h", status: "Com vaga", tone: "success", change: "Professor pendente" },
-    { id: "alongamento", name: "Alongamento", teacher: "Camila Rocha", schedule: "Sexta 10h", capacity: "4/6", fixed: "4 alunos", vacancies: "2 vagas", next: "Sexta 10h", status: "Ativa", tone: "success", change: "Capacidade ajustada" },
-    { id: "experimental", name: "Experimental", teacher: "Lucas Peres", schedule: "Quarta 14h", capacity: "2/6", fixed: "2 alunos", vacancies: "4 vagas", next: "Quarta 14h", status: "Temporaria", tone: "info", change: "Evento recorrente" },
-    { id: "inicial", name: "Reformer Inicial", teacher: "A definir", schedule: "Terca 07h", capacity: "0/6", fixed: "0 alunos", vacancies: "6 vagas", next: "Terca 07h", status: "Pausada", tone: "neutral", change: "Pausada esta semana" }
-  ];
+export function SetupShellGlobalPage() {
+  const [, setAction] = useState("");
 
   return (
-    <CrmWorklistTable
-      actionColumnWidth="44px"
-      ariaLabel="Tabela de turmas"
-      columns={[
-        { key: "name", header: "Turma", sortable: true, width: "14%" },
-        { key: "schedule", header: "Dia/horario", width: "10%" },
-        { key: "teacher", header: "Professor da turma", render: (row) => <PersonLabel avatarSrc={row.teacher === "A definir" ? undefined : image79Avatar} name={row.teacher} size="xs" />, width: "16%" },
-        { key: "capacity", header: "Capacidade", width: "9%" },
-        { key: "fixed", header: "Alunos fixos", width: "10%" },
-        { key: "vacancies", header: "Vagas", render: (row) => <Chip tone={row.vacancies === "Lotada" ? "danger" : "success"}>{row.vacancies}</Chip>, width: "10%" },
-        { key: "next", header: "Proxima aula", width: "11%" },
-        { key: "status", header: "Status", render: (row) => <Chip tone={row.tone}>{row.status}</Chip>, sortable: true, width: "9%" },
-        { key: "change", header: "Ultima mudanca", width: "13%" }
-      ]}
-      pagination={{ itemsPerPage: "10", label: "1-6 de 18", page: 1, pageCount: 2 }}
-      rowActions={() => <IconButton icon="more" label="Mais acoes da turma" size="sm" variant="ghost" />}
-      rows={rows}
-      selectedRowId="reformer"
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="shell-global"
+      onAgentQuickReply={(question) => setAction(`quick-reply:${question}`)}
+      onAgentSend={() => setAction("agent-send")}
+      onBottomBarToggle={() => setAction("bottom-bar-toggle")}
+      onHelp={() => setAction("help")}
+      onProfile={() => setAction("profile")}
+      onStepSelect={(stepId) => setAction(`step:${stepId}`)}
+      onStudioSelect={() => setAction("studio")}
+      progress={32}
+      step={2}
     />
   );
 }
 
-export function SetupShellGlobalPage() {
-  return (
-    <SetupPage step={1}>
-      <SetupPanel>
-        <SetupBlockHeader />
-        <SetupContentGrid>
-          <StatusCard title="Studio" description="Dados principais preparados." state="ok" />
-          <StatusCard title="Equipe" description="Convites pendentes." state="warning" />
-          <StatusCard title="Canais" description="WhatsApp conectado." state="ok" />
-        </SetupContentGrid>
-      </SetupPanel>
-    </SetupPage>
-  );
-}
-
 export function SetupAgentChatPage() {
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={1} agent={<SetupAgentChat />}>
-      <SetupPanel>
-        <SetupBlockHeader />
-        <Panel>
-          <h3>Agente de configuracao</h3>
-          <SetupAgentChat />
-        </Panel>
-      </SetupPanel>
-    </SetupPage>
+    <div className="sb-image-coverage-setup-agent-stage">
+      <SetupAgentChat
+        onClose={() => setAction("close")}
+        onHumanHelp={() => setAction("human-help")}
+        onMenu={() => setAction("menu")}
+        onQuickReply={(itemId) => setAction(`quick-reply:${itemId}`)}
+        onSend={(value) => setAction(`send:${value}`)}
+      />
+    </div>
   );
 }
 
 export function SetupWorkspaceConfigPage() {
+  const [model, setModel] = useState<"membership" | "class-pack" | "hybrid">("class-pack");
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={1}>
-      <SetupPanel>
-        <SetupBlockHeader />
-        <SetupContentGrid>
-          <SetupChoiceCard />
-          <SetupChoiceCard state="recommended" />
-          <SetupChoiceCard state="selected" />
-        </SetupContentGrid>
-        <ConfigImpactPreview />
-      </SetupPanel>
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="guided"
+      progress={32}
+      step={2}
+      steps={["Diagnostico", "Configuracoes", "Agenda", "Planos", "Importacao", "Revisao"]}
+    >
+      <SetupConsumptionWorkspace
+        model={model}
+        onAction={setAction}
+        onModelSelect={setModel}
+        onSettingChange={(setting, enabled) => setAction(`${setting}:${enabled}`)}
+      />
     </SetupPage>
   );
 }
 
 export function SetupStudioPage() {
+  const [activeDays, setActiveDays] = useState(["Seg", "Ter", "Qua", "Qui", "Sex"]);
+  const [scheduleMode, setScheduleMode] = useState<"continuous" | "break">("continuous");
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={1}>
-      <SetupPanel>
-        <SetupBlockHeader title="Studio" />
-        <WeeklyHoursGrid />
-        <ConfigImpactPreview />
-      </SetupPanel>
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="guided-block"
+      progress={12}
+      step={1}
+      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+    >
+      <SetupStudioWorkspace
+        activeDays={activeDays}
+        onAction={setAction}
+        onActiveDaysChange={setActiveDays}
+        onAdjustDay={() => setAction("adjust-day")}
+        onScheduleModeChange={setScheduleMode}
+        scheduleMode={scheduleMode}
+      />
     </SetupPage>
   );
 }
 
 export function SetupTeamPage() {
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={2}>
-      <SetupPanel>
-        <SetupBlockHeader title="Equipe" />
-        <Panel>
-          <h3>1. Dono do studio</h3>
-          <RoleCard
-            avatarSrc={image79Avatar}
-            email="leticia@studio.com"
-            name="Leticia Ramos"
-            phone="(11) 99999-0000"
-            roleLabel="Dono/Admin"
-            state="owner"
-            statusLabel="Confirmado"
-            selected
-          />
-        </Panel>
-        <SetupTeamPreparedList />
-      </SetupPanel>
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="guided-block"
+      progress={24}
+      step={2}
+      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+    >
+      <SetupTeamWorkspace
+        onAction={setAction}
+        onAddPerson={() => setAction("add-person")}
+        onInviteEdit={(invite) => setAction(`edit:${invite.id}`)}
+        onInviteOpen={(invite) => setAction(`open:${invite.id}`)}
+        onInviteRemove={(invite) => setAction(`remove:${invite.id}`)}
+        ownerAvatarSrc={source51eLeticiaRamos}
+      />
     </SetupPage>
   );
 }
 
 export function SetupChannelsPage() {
+  const [whatsAppState, setWhatsAppState] = useState<"business" | "personal" | "unknown" | "missing">("business");
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={3}>
-      <SetupPanel>
-        <SetupBlockHeader title="Canais" />
-        <SetupContentGrid>
-          <IntegrationStatusRow />
-          <SetupChoiceCard state="selected" />
-          <SetupChoiceCard state="disabled" />
-        </SetupContentGrid>
-      </SetupPanel>
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="guided-block"
+      progress={36}
+      step={3}
+      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+    >
+      <SetupChannelsWorkspace
+        onAction={setAction}
+        onConnectWhatsApp={() => setAction("connect-whatsapp")}
+        onWhatsAppStateChange={setWhatsAppState}
+        whatsAppState={whatsAppState}
+      />
     </SetupPage>
   );
 }
 
 export function SetupPlansPage() {
+  const [selectedPlanId, setSelectedPlanId] = useState<"weekly" | "pack" | "trial">("pack");
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={4}>
-      <SetupPanel>
-        <SetupBlockHeader title="Planos" />
-        <SetupContentGrid>
-          <SetupChoiceCard />
-          <PlanSummaryCard />
-          <RuleRow />
-        </SetupContentGrid>
-      </SetupPanel>
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="guided-main"
+      progress={48}
+      step={4}
+      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+    >
+      <SetupPlansWorkspace
+        onAction={setAction}
+        onNewPlan={() => setAction("new-plan")}
+        onPlanAction={(planId, action) => setAction(`${action}:${planId}`)}
+        onPlanSelect={setSelectedPlanId}
+        selectedPlanId={selectedPlanId}
+      />
     </SetupPage>
   );
 }
 
 export function SetupPaymentPage() {
+  const [selectedMethods, setSelectedMethods] = useState<Array<"pix" | "cash" | "card">>(["pix", "cash", "card"]);
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={5}>
-      <SetupPanel>
-        <SetupBlockHeader title="Pagamento" />
-        <SetupContentGrid>
-          <SetupChoiceCard state="selected" />
-          <IntegrationStatusRow />
-          <StatusCard title="Pix" description="Metodo principal configurado." state="ok" />
-        </SetupContentGrid>
-      </SetupPanel>
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="guided-main"
+      progress={55}
+      step={5}
+      steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}
+    >
+      <SetupPaymentWorkspace
+        onAction={setAction}
+        onLearnMore={() => setAction("learn-more")}
+        onSelectedMethodsChange={setSelectedMethods}
+        selectedMethods={selectedMethods}
+      />
     </SetupPage>
   );
 }
 
 export function SetupStudentsImportPage() {
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={6}>
-      <SetupPanel>
-        <SetupBlockHeader title="Alunos" />
-        <SetupContentGrid>
-          <SetupImportSourceCard />
-          <ImportProgress />
-          <StatusCard title="Duplicidades" description="8 registros precisam revisao." state="warning" />
-        </SetupContentGrid>
-      </SetupPanel>
+    <SetupPage
+      avatarSrc={source51eLeticiaRamos}
+      frameVariant="guided"
+      progress={66}
+      step={6}
+      steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}
+    >
+      <SetupStudentsWorkspace
+        onAction={setAction}
+        onSourceSelect={(source) => setAction(`source:${source}`)}
+        onStudentAction={(studentId, action) => setAction(`${action}:${studentId}`)}
+        onStudentSelect={(studentId) => setAction(`student:${studentId}`)}
+      />
     </SetupPage>
   );
 }
 
 export function SetupClassesPage() {
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={7}>
-      <SetupPanel>
-        <SetupBlockHeader title="Turmas" />
-        <SetupContentGrid>
-          <ClassCard />
-          <ClassCard state="pending" />
-          <ClassCard state="warning" />
-        </SetupContentGrid>
-        <ClassesTable />
-      </SetupPanel>
+    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-wide" progress={77} step={7} steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}>
+      <SetupClassesWorkspace
+        onAction={setAction}
+        onClassAction={(classId, action) => setAction(`${action}:${classId}`)}
+        onClassSelect={(classId) => setAction(`class:${classId}`)}
+        onSourceSelect={(source) => setAction(`source:${source}`)}
+      />
     </SetupPage>
   );
 }
 
 export function SetupAgendaPage() {
+  const [selectedClassId, setSelectedClassId] = useState("ter-qui-18");
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={8} bottomBar={<SetupBottomBar />}>
-      <SetupPanel>
-        <SetupBlockHeader title="Agenda" />
-        <WeeklyCalendar />
-      </SetupPanel>
+    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-wide" progress={88} step={8} steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}>
+      <SetupAgendaWorkspace
+        onAction={setAction}
+        onBackToClasses={() => setAction("back-to-classes")}
+        onClassSelect={setSelectedClassId}
+        onSlotSelect={(slot) => setAction(`slot:${slot.id}`)}
+        selectedClassId={selectedClassId}
+      />
     </SetupPage>
   );
 }
 
 export function SetupReviewPage() {
+  const [confirmed, setConfirmed] = useState(true);
+  const [, setAction] = useState("");
+
   return (
-    <SetupPage step={9} bottomBar={<SetupBottomBar />}>
-      <SetupPanel>
-        <SetupReviewPanel />
-      </SetupPanel>
+    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-review" progress={98} step={9} steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}>
+      <SetupReviewWorkspace
+        confirmed={confirmed}
+        onBack={() => setAction("back-to-agenda")}
+        onConfirmChange={setConfirmed}
+        onOpenArea={(area) => setAction(`area:${area}`)}
+        onPublish={() => setAction("publish")}
+        onResolveBlocking={() => setAction("resolve-blocking")}
+        onReviewWarnings={() => setAction("review-warnings")}
+        onSaveDraft={() => setAction("save-draft")}
+      />
     </SetupPage>
   );
 }
 
 export function SetupWelcomePage() {
+  const [studioName, setStudioName] = useState("");
+  const [, setAction] = useState("");
+
   return (
-    <div className="sb-image-coverage-remaining-setup-stage">
-      <SetupShell
-        avatarSrc={image79Avatar}
-        className="sb-image-coverage-remaining-setup-shell"
-        layout="welcome"
-        progress={0}
-        status={null}
-        step={1}
-        studioName="Setup inicial"
-      >
-        <div className="sb-image-coverage-setup-welcome-main">
-          <SetupWelcome />
-        </div>
-      </SetupShell>
-    </div>
+    <SetupPage
+      agent={<SetupAgentChat onHumanHelp={() => setAction("human-help")} onQuickReply={(itemId) => setAction(`quick-reply:${itemId}`)} variant="welcome" />}
+      avatarSrc={image79Avatar}
+      layout="welcome"
+      progress={0}
+      status={null}
+      step={1}
+      studioName="Setup inicial"
+    >
+      <SetupWelcomeWorkspace onStart={() => setAction("start")} onStudioNameChange={setStudioName} studioName={studioName} />
+    </SetupPage>
   );
 }
 
@@ -329,7 +310,7 @@ export const Image51AOnboardingShellGlobal: Story = {
 
 export const Image51BOnboardingAgenteConfiguracaoChat: Story = {
   name: "51B onboarding agente configuracao chat",
-  parameters: { sourceImage: "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png" },
+  parameters: { layout: "fullscreen", sourceImage: "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png" },
   render: () => <SetupAgentChatPage />
 };
 

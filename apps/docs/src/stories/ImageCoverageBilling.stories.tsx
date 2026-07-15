@@ -1,18 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ReactNode } from "react";
+import { useState } from "react";
 
 import {
-  AddOnCard,
+  BillingAddOnsWorkspace,
+  BillingInvoicesWorkspace,
+  BillingSubscriptionWorkspace,
+  CrmHeaderSummary,
   CrmRightPanelPage,
-  InvoiceTable,
-  PlanSummaryCard,
-  QuotaProgress,
   UsageDrawer,
   crmEmptyShellSidebarItems,
-  crmEmptyShellSidebarUtilityItems
+  crmEmptyShellSidebarUtilityItems,
+  crmOperationalNavItems
 } from "@taliya/crm";
 import type { CrmShellNavItem } from "@taliya/crm";
-import { ButtonGroup, Chip, Panel } from "@taliya/ui";
+import { Breadcrumb, ButtonGroup, Chip } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
 
@@ -41,30 +43,37 @@ const billingNav: CrmShellNavItem[] = [
   { id: "suporte", label: "Suporte" }
 ];
 
-function PageStack({ children }: { children: ReactNode }) {
-  return <div className="tcrm-page-family-stack">{children}</div>;
-}
-
 function billingShellProps({
   activeNavId,
+  navItems = billingNav,
+  pageHeaderBreadcrumb,
   pageHeaderActions,
+  pageHeaderRhythm,
   subtitle,
-  title
+  title,
+  topNavSelection
 }: {
-  activeNavId: string;
+  activeNavId?: string;
+  navItems?: CrmShellNavItem[];
+  pageHeaderBreadcrumb?: ReactNode;
   pageHeaderActions?: ReactNode;
+  pageHeaderRhythm?: "billing" | "billing-invoices";
   subtitle: string;
   title: string;
+  topNavSelection?: "auto" | "none";
 }) {
   return {
     activeNavId,
     activeSidebarId: "financeiro",
     avatarSrc: image79Avatar,
-    navItems: billingNav,
+    navItems,
     pageHeaderActions,
+    pageHeaderBreadcrumb,
+    pageHeaderRhythm,
     sidebarItems: crmEmptyShellSidebarItems,
     subtitle,
     title,
+    topNavSelection,
     utilityItems: crmEmptyShellSidebarUtilityItems
   };
 }
@@ -109,60 +118,110 @@ function BillingSupportDrawer({ topic }: { topic: "assinatura" | "faturas" | "ad
   return <UsageDrawer state="overview" title="Agente de Suporte Taliya" {...copy} />;
 }
 
-function BillingAddOnsEmpty() {
-  return (
-    <Panel>
-      <h3>Add-ons ativos</h3>
-      <AddOnCard state="unavailable" />
-    </Panel>
-  );
-}
-
 export function BillingSubscriptionPage() {
+  const [, setAction] = useState("");
+
   return (
     <CrmRightPanelPage
-      main={<><PlanSummaryCard /><QuotaProgress /><BillingAddOnsEmpty /></>}
-      mainGridColumns={3}
+      main={(
+        <BillingSubscriptionWorkspace
+          onChangePlan={() => setAction("change-plan")}
+          onOpenAgents={() => setAction("open-agents")}
+          onSupport={() => setAction("support")}
+          onUpdatePayment={() => setAction("update-payment")}
+          onViewAddOns={() => setAction("view-addons")}
+          onViewInvoices={() => setAction("view-invoices")}
+          onViewPlanDetails={() => setAction("view-plan")}
+          onViewUsage={() => setAction("view-usage")}
+        />
+      )}
+      mainGridColumns={1}
       panel={<BillingSupportDrawer topic="assinatura" />}
+      rightPanelVariant="billing-subscription"
+      browserUrl="https://app.taliya.com/app/billing"
       {...billingShellProps({
-        activeNavId: "assinatura",
-        pageHeaderActions: <ButtonGroup><Chip tone="success">Ativo</Chip><Chip tone="neutral">Plano 7 agentes</Chip><Chip tone="neutral">Renova em 12/06</Chip></ButtonGroup>,
+        activeNavId: undefined,
+        navItems: crmOperationalNavItems,
+        pageHeaderActions: <ButtonGroup><Chip icon="checkCircle" showDot={false} tone="success">Ativo</Chip><Chip icon="users" showDot={false} tone="neutral">Plano 7 agentes</Chip><Chip icon="calendar" showDot={false} tone="neutral">Renova em 12/06</Chip></ButtonGroup>,
+        pageHeaderBreadcrumb: <Breadcrumb items={[{ label: "Billing" }, { label: "Assinatura" }]} />,
+        pageHeaderRhythm: "billing",
         subtitle: "Plano, agentes, cotas e faturas da sua conta Taliya",
-        title: "Assinatura Taliya"
+        title: "Assinatura Taliya",
+        topNavSelection: "none"
       })}
     />
   );
 }
 
 export function BillingInvoicesPage() {
+  const [, setAction] = useState("");
+
   return (
     <CrmRightPanelPage
-      main={<PageStack><PlanSummaryCard /><InvoiceTable /></PageStack>}
+      main={(
+        <BillingInvoicesWorkspace
+          onDownloadCurrent={() => setAction("download-current")}
+          onDownloadInvoice={(row) => setAction(`download-${row.id}`)}
+          onOpenCurrent={() => setAction("open-current")}
+          onOpenInvoice={(row) => setAction(`open-${row.id}`)}
+          onPayCurrent={() => setAction("pay-current")}
+          onRetryInvoice={(row) => setAction(`retry-${row.id}`)}
+          onRowClick={(row) => setAction(`row-${row.id}`)}
+        />
+      )}
+      mainGridColumns={1}
       panel={<BillingSupportDrawer topic="faturas" />}
+      rightPanelVariant="billing-invoices"
       {...billingShellProps({
-        activeNavId: "faturas",
-        pageHeaderActions: <ButtonGroup><Chip tone="success">Assinatura ativa</Chip><Chip tone="warning">1 fatura em aberto</Chip><Chip tone="neutral">Cartao final 4242</Chip></ButtonGroup>,
+        navItems: crmOperationalNavItems,
+        pageHeaderActions: (
+          <CrmHeaderSummary
+            items={[
+              { id: "subscription", icon: "checkCircle", label: "Assinatura ativa", tone: "success" },
+              { id: "open", icon: "alertCircle", label: "1 fatura em aberto", tone: "warning" },
+              { id: "card", icon: "creditCard", label: "Cartão final 4242" }
+            ]}
+            onSelect={(item) => setAction(`summary-${item.id}`)}
+            variant="billing-invoices"
+          />
+        ),
+        pageHeaderBreadcrumb: <Breadcrumb items={[{ label: "Billing" }, { label: "Faturas" }]} />,
+        pageHeaderRhythm: "billing-invoices",
         subtitle: "Pagamentos da assinatura do studio com a Taliya",
-        title: "Faturas Taliya"
+        title: "Faturas Taliya",
+        topNavSelection: "none"
       })}
     />
   );
 }
 
 export function BillingAddOnsPage() {
+  const [, setAction] = useState("");
+
   return (
     <CrmRightPanelPage
-      main={<PageStack><BillingAddOnsEmpty /><Panel><h3>Disponiveis</h3><div className="tcrm-page-family-stack">
-        <AddOnCard />
-        <AddOnCard state="plan-max" />
-        <AddOnCard state="consult" />
-      </div></Panel></PageStack>}
+      main={<BillingAddOnsWorkspace onAddOnAction={(option) => setAction(`addon-${option.id}`)} />}
+      mainGridColumns={1}
       panel={<BillingSupportDrawer topic="add-ons" />}
+      rightPanelVariant="billing-addons"
       {...billingShellProps({
-        activeNavId: "addons",
-        pageHeaderActions: <ButtonGroup><Chip tone="neutral">Plano 7 agentes</Chip><Chip tone="neutral">Nenhum add-on ativo</Chip><Chip tone="info">Cota 42% usada</Chip></ButtonGroup>,
+        navItems: crmOperationalNavItems,
+        pageHeaderActions: (
+          <CrmHeaderSummary
+            items={[
+              { id: "plan", icon: "users", label: "Plano 7 agentes" },
+              { id: "active", icon: "package", label: "Nenhum add-on ativo" },
+              { id: "quota", icon: "pieChart", label: <>Cota <strong>42%</strong> usada</>, tone: "info" }
+            ]}
+            onSelect={(item) => setAction(`summary-${item.id}`)}
+            variant="billing"
+          />
+        ),
+        pageHeaderBreadcrumb: <Breadcrumb items={[{ label: "Billing" }, { label: "Add-ons" }]} />,
+        pageHeaderRhythm: "billing",
         subtitle: "Extras para ampliar agentes e cotas da sua assinatura",
-        title: "Add-ons Taliya"
+        title: "Add-ons Taliya",
+        topNavSelection: "none"
       })}
     />
   );

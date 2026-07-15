@@ -30,6 +30,10 @@ export function AllStates() {
               <MetaText>Responsavel</MetaText>
               <strong>Sam Frank</strong>
             </InlineGroup>
+            <InlineGroup justify="between">
+              <MetaText>Distribuido</MetaText>
+              <strong>Entre extremos</strong>
+            </InlineGroup>
             <InlineGroup wrap>
               <IconButton icon="plus" label="Adicionar" size="sm" />
               <IconButton icon="calendar" label="Agendar" size="sm" />

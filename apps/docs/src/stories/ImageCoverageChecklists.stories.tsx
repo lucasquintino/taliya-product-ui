@@ -224,7 +224,7 @@ function ChecklistsPageContent({
       activeNavId="checklists"
       activeSidebarId="clipboardCheck"
       avatarSrc={image79Avatar}
-      contentLayout="main-priority"
+      contentLayout="work-list"
       drawer={drawer}
       drawerPlacement="content"
       drawerSize="compact"
@@ -255,7 +255,7 @@ function ChecklistsPageContent({
       filterBarLabel="Filtros de checklists"
       listLabel="Filas"
       mainLabel="Tabela de checklists"
-      worklistLayoutMode="main-priority"
+      worklistLayoutMode="balanced-rail"
       quickFilters={
         <PageQuickFilters
           aria-label="Filas"

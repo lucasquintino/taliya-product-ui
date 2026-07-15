@@ -60,11 +60,11 @@ export function AllStates() {
                 width="md"
               >
                 <div className="sb-batch5-popover-detail">
-                  <InlineGroup compact><MetaText>Status</MetaText><Badge tone="success">Ativo</Badge></InlineGroup>
-                  <InlineGroup compact><MetaText>Cliente</MetaText><strong>Joao Silva</strong></InlineGroup>
-                  <InlineGroup compact><MetaText>Categoria</MetaText><strong>Suporte</strong></InlineGroup>
-                  <InlineGroup compact><MetaText>Prioridade</MetaText><MetaText tone="warning">Alta</MetaText></InlineGroup>
-                  <InlineGroup compact><MetaText>Responsavel</MetaText><strong>Sara Alves</strong></InlineGroup>
+                  <InlineGroup compact justify="between"><MetaText>Status</MetaText><Badge tone="success">Ativo</Badge></InlineGroup>
+                  <InlineGroup compact justify="between"><MetaText>Cliente</MetaText><strong>Joao Silva</strong></InlineGroup>
+                  <InlineGroup compact justify="between"><MetaText>Categoria</MetaText><strong>Suporte</strong></InlineGroup>
+                  <InlineGroup compact justify="between"><MetaText>Prioridade</MetaText><MetaText tone="warning">Alta</MetaText></InlineGroup>
+                  <InlineGroup compact justify="between"><MetaText>Responsavel</MetaText><strong>Sara Alves</strong></InlineGroup>
                 </div>
               </Popover>
             </SourceItem>

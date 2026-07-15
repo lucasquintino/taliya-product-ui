@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ConversationThread } from "@taliya/crm";
 
 import { Batch9ComponentStory, batch9StoryParameters } from "./CrmBatch9StoryFixtures";
 import type { Batch9StoryComponent } from "./CrmBatch9StoryFixtures";
+import source28AnaPaula from "../assets/source28-ana-paula.png";
 
 const component = "ConversationThread" satisfies Batch9StoryComponent;
 
@@ -16,4 +18,9 @@ type Story = StoryObj;
 export const AllStates: Story = {
   parameters: batch9StoryParameters,
   render: () => <Batch9ComponentStory component={component} />
+};
+
+export const SourceCompact: Story = {
+  parameters: batch9StoryParameters,
+  render: () => <ConversationThread avatarSrc={source28AnaPaula} layout="compact" />
 };
