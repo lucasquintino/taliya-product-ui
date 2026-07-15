@@ -1,0 +1,1350 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-15T10:59:22.512Z",
+  "status": "pass-structural-not-visual",
+  "note": "This maps each active reference-sheet component to an official Storybook target. It does not certify whole-sheet pixel parity.",
+  "inputs": {
+    "imageCoverageMapSha256": "5503e430bbf659b928b6c8f5c3716406134fa7603a6a5edd9b5712f30b20a725",
+    "storybookIndexSha256": "ce848d9cb74fa3ff4a811f8fd2def01e98047574ce00a2d9a0e2a3d48e9087a0",
+    "sourceAssetsManifestSha256": "d21730dd4a34afbdbaaddee47b7ccacd21fa295b68b0018280473fe6657f0c3e"
+  },
+  "referenceImageCount": 11,
+  "mappedReferenceImageCount": 11,
+  "resolvedComponentCount": 111,
+  "missingComponentCount": 0,
+  "ambiguousComponentCount": 0,
+  "nonOfficialComponentCount": 0,
+  "sourceManifestMismatchCount": 0,
+  "missingReferenceRows": [],
+  "rows": [
+    {
+      "line": 26,
+      "image": "01_round-1_visual-dna-tokens_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "token source",
+      "requiredComponents": [
+        "Design tokens",
+        "Typography tokens",
+        "Status semantic tokens",
+        "IconButton",
+        "Card",
+        "Panel",
+        "Avatar",
+        "Badge"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "3343392619b219c75089bcf70e159b39d7d6202ce66e01f9fac97b39b28ef0bd",
+      "sourceManifestSha256": "3343392619b219c75089bcf70e159b39d7d6202ce66e01f9fac97b39b28ef0bd",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "Design tokens",
+          "storyId": "foundations-tokens-overview--default",
+          "candidates": [
+            "foundations-tokens-overview--default"
+          ],
+          "official": true
+        },
+        {
+          "component": "Typography tokens",
+          "storyId": "foundations-tokens-typography--default",
+          "candidates": [
+            "foundations-tokens-typography--default"
+          ],
+          "official": true
+        },
+        {
+          "component": "Status semantic tokens",
+          "storyId": "foundations-tokens-status--default",
+          "candidates": [
+            "foundations-tokens-status--default"
+          ],
+          "official": true
+        },
+        {
+          "component": "IconButton",
+          "storyId": "primitives-ui-iconbutton--all-states",
+          "candidates": [
+            "primitives-ui-iconbutton--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Card",
+          "storyId": "primitives-ui-card--all-states",
+          "candidates": [
+            "primitives-ui-card--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Panel",
+          "storyId": "primitives-ui-panel--all-states",
+          "candidates": [
+            "primitives-ui-panel--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Avatar",
+          "storyId": "primitives-ui-avatar--all-states",
+          "candidates": [
+            "primitives-ui-avatar--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Badge",
+          "storyId": "primitives-ui-badge--all-states",
+          "candidates": [
+            "primitives-ui-badge--all-states"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "foundations-tokens-overview--default",
+        "foundations-tokens-typography--default",
+        "foundations-tokens-status--default",
+        "primitives-ui-iconbutton--all-states",
+        "primitives-ui-card--all-states",
+        "primitives-ui-panel--all-states",
+        "primitives-ui-avatar--all-states",
+        "primitives-ui-badge--all-states"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 32,
+      "image": "07_round-3a_componentes-web-referencia_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "core reference components",
+      "requiredComponents": [
+        "IconButton",
+        "NavPill",
+        "SidebarItem",
+        "Avatar",
+        "Badge",
+        "Card",
+        "Panel",
+        "DataTable"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "9c98afb8ef5c71df402ff20e902d7adc9ea0c8dc2a904f8e03d9f894d591caeb",
+      "sourceManifestSha256": "9c98afb8ef5c71df402ff20e902d7adc9ea0c8dc2a904f8e03d9f894d591caeb",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "IconButton",
+          "storyId": "primitives-ui-iconbutton--all-states",
+          "candidates": [
+            "primitives-ui-iconbutton--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "NavPill",
+          "storyId": "primitives-ui-navpill--all-states",
+          "candidates": [
+            "primitives-ui-navpill--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "SidebarItem",
+          "storyId": "crm-shell-components--sidebar-item-states",
+          "candidates": [
+            "crm-shell-components--sidebar-item-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Avatar",
+          "storyId": "primitives-ui-avatar--all-states",
+          "candidates": [
+            "primitives-ui-avatar--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Badge",
+          "storyId": "primitives-ui-badge--all-states",
+          "candidates": [
+            "primitives-ui-badge--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Card",
+          "storyId": "primitives-ui-card--all-states",
+          "candidates": [
+            "primitives-ui-card--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Panel",
+          "storyId": "primitives-ui-panel--all-states",
+          "candidates": [
+            "primitives-ui-panel--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "DataTable",
+          "storyId": "primitives-ui-datatable--all-states",
+          "candidates": [
+            "primitives-ui-datatable--all-states"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "primitives-ui-iconbutton--all-states",
+        "primitives-ui-navpill--all-states",
+        "crm-shell-components--sidebar-item-states",
+        "primitives-ui-avatar--all-states",
+        "primitives-ui-badge--all-states",
+        "primitives-ui-card--all-states",
+        "primitives-ui-panel--all-states",
+        "primitives-ui-datatable--all-states"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 33,
+      "image": "08_round-3b1_inputs-formularios-filtros_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "forms/filters",
+      "requiredComponents": [
+        "Input",
+        "Textarea",
+        "Select",
+        "Checkbox",
+        "Toggle",
+        "SegmentedControl",
+        "DateInput",
+        "TimeInput",
+        "FilterChip",
+        "SearchInput",
+        "FilterBar",
+        "FieldGroup",
+        "Button"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "6d67d1477ae858e3e76c754574a89de845816b0f26446a3e52116e98de7a8523",
+      "sourceManifestSha256": "6d67d1477ae858e3e76c754574a89de845816b0f26446a3e52116e98de7a8523",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "Input",
+          "storyId": "primitives-ui-input--all-states",
+          "candidates": [
+            "primitives-ui-input--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Textarea",
+          "storyId": "primitives-ui-textarea--all-states",
+          "candidates": [
+            "primitives-ui-textarea--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Select",
+          "storyId": "primitives-ui-select--all-states",
+          "candidates": [
+            "primitives-ui-select--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Checkbox",
+          "storyId": "primitives-ui-checkbox--all-states",
+          "candidates": [
+            "primitives-ui-checkbox--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Toggle",
+          "storyId": "primitives-ui-toggle--all-states",
+          "candidates": [
+            "primitives-ui-toggle--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "SegmentedControl",
+          "storyId": "primitives-ui-segmentedcontrol--all-states",
+          "candidates": [
+            "primitives-ui-segmentedcontrol--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "DateInput",
+          "storyId": "primitives-ui-dateinput--all-states",
+          "candidates": [
+            "primitives-ui-dateinput--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "TimeInput",
+          "storyId": "primitives-ui-timeinput--all-states",
+          "candidates": [
+            "primitives-ui-timeinput--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "FilterChip",
+          "storyId": "primitives-ui-filterchip--all-states",
+          "candidates": [
+            "primitives-ui-filterchip--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "SearchInput",
+          "storyId": "primitives-ui-searchinput--all-states",
+          "candidates": [
+            "primitives-ui-searchinput--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "FilterBar",
+          "storyId": "primitives-ui-filterbar--all-states",
+          "candidates": [
+            "primitives-ui-filterbar--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "FieldGroup",
+          "storyId": "primitives-ui-fieldgroup--all-states",
+          "candidates": [
+            "primitives-ui-fieldgroup--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Button",
+          "storyId": "primitives-ui-button--all-states",
+          "candidates": [
+            "primitives-ui-button--all-states"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "primitives-ui-input--all-states",
+        "primitives-ui-textarea--all-states",
+        "primitives-ui-select--all-states",
+        "primitives-ui-checkbox--all-states",
+        "primitives-ui-toggle--all-states",
+        "primitives-ui-segmentedcontrol--all-states",
+        "primitives-ui-dateinput--all-states",
+        "primitives-ui-timeinput--all-states",
+        "primitives-ui-filterchip--all-states",
+        "primitives-ui-searchinput--all-states",
+        "primitives-ui-filterbar--all-states",
+        "primitives-ui-fieldgroup--all-states",
+        "primitives-ui-button--all-states"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 34,
+      "image": "09_round-3b2_overlays-feedback_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "overlays/states",
+      "requiredComponents": [
+        "Modal",
+        "Drawer",
+        "Popover",
+        "Tooltip",
+        "Toast",
+        "InlineAlert",
+        "ConfirmDialog",
+        "EmptyState",
+        "LoadingState",
+        "ErrorState"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "f1e5c2004b82ae990391f86a40045b1461253d60d9159e5e8af70bb05fa66d2c",
+      "sourceManifestSha256": "f1e5c2004b82ae990391f86a40045b1461253d60d9159e5e8af70bb05fa66d2c",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "Modal",
+          "storyId": "primitives-ui-modal--all-states",
+          "candidates": [
+            "primitives-ui-modal--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Drawer",
+          "storyId": "primitives-ui-drawer--all-states",
+          "candidates": [
+            "primitives-ui-drawer--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Popover",
+          "storyId": "primitives-ui-popover--all-states",
+          "candidates": [
+            "primitives-ui-popover--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Tooltip",
+          "storyId": "primitives-ui-tooltip--all-states",
+          "candidates": [
+            "primitives-ui-tooltip--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Toast",
+          "storyId": "primitives-ui-toast--all-states",
+          "candidates": [
+            "primitives-ui-toast--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "InlineAlert",
+          "storyId": "primitives-ui-inlinealert--all-states",
+          "candidates": [
+            "primitives-ui-inlinealert--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "ConfirmDialog",
+          "storyId": "primitives-ui-confirmdialog--all-states",
+          "candidates": [
+            "primitives-ui-confirmdialog--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "EmptyState",
+          "storyId": "primitives-ui-emptystate--all-states",
+          "candidates": [
+            "primitives-ui-emptystate--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "LoadingState",
+          "storyId": "primitives-ui-loadingstate--all-states",
+          "candidates": [
+            "primitives-ui-loadingstate--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "ErrorState",
+          "storyId": "primitives-ui-errorstate--all-states",
+          "candidates": [
+            "primitives-ui-errorstate--all-states"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "primitives-ui-modal--all-states",
+        "primitives-ui-drawer--all-states",
+        "primitives-ui-popover--all-states",
+        "primitives-ui-tooltip--all-states",
+        "primitives-ui-toast--all-states",
+        "primitives-ui-inlinealert--all-states",
+        "primitives-ui-confirmdialog--all-states",
+        "primitives-ui-emptystate--all-states",
+        "primitives-ui-loadingstate--all-states",
+        "primitives-ui-errorstate--all-states"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 35,
+      "image": "10_round-3b3_visualizacoes-operacionais_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "operational views",
+      "requiredComponents": [
+        "DataTable",
+        "List",
+        "KanbanBoard",
+        "CompactCalendar",
+        "Timeline",
+        "ActivityFeed",
+        "MetricTile"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "de4d271f392821339ebdf4a105b0877658c9620c1c1a5d22426f9c7bda5485de",
+      "sourceManifestSha256": "de4d271f392821339ebdf4a105b0877658c9620c1c1a5d22426f9c7bda5485de",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "DataTable",
+          "storyId": "primitives-ui-datatable--all-states",
+          "candidates": [
+            "primitives-ui-datatable--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "List",
+          "storyId": "primitives-ui-list--all-states",
+          "candidates": [
+            "primitives-ui-list--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "KanbanBoard",
+          "storyId": "crm-kanban-kanbanboard--all-states",
+          "candidates": [
+            "crm-kanban-kanbanboard--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "CompactCalendar",
+          "storyId": "crm-agenda-compactcalendar--source",
+          "candidates": [
+            "crm-agenda-compactcalendar--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "Timeline",
+          "storyId": "primitives-ui-timeline--all-states",
+          "candidates": [
+            "primitives-ui-timeline--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "ActivityFeed",
+          "storyId": "crm-timeline-activityfeed--all-states",
+          "candidates": [
+            "crm-timeline-activityfeed--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "MetricTile",
+          "storyId": "primitives-ui-metrictile--all-states",
+          "candidates": [
+            "primitives-ui-metrictile--all-states"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "primitives-ui-datatable--all-states",
+        "primitives-ui-list--all-states",
+        "crm-kanban-kanbanboard--all-states",
+        "crm-agenda-compactcalendar--source",
+        "primitives-ui-timeline--all-states",
+        "crm-timeline-activityfeed--all-states",
+        "primitives-ui-metrictile--all-states"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 36,
+      "image": "11_round-3b4_comunicacao-agentes_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "inbox/agents",
+      "requiredComponents": [
+        "ConversationList",
+        "ConversationThread",
+        "MessageBubble",
+        "ComposerPanel",
+        "ChannelStatusPanel",
+        "CopilotPanel",
+        "CopilotSuggestion",
+        "ApprovalPanel",
+        "ExecutionReceipt",
+        "HandoffBanner",
+        "ConfidenceMeter"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "50d27f2a1aab96def04cf43c3c408fe1e4ca8eb97d6a433eba0167dec718c5d0",
+      "sourceManifestSha256": "50d27f2a1aab96def04cf43c3c408fe1e4ca8eb97d6a433eba0167dec718c5d0",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "ConversationList",
+          "storyId": "crm-inbox-conversationlist--source-compact",
+          "candidates": [
+            "crm-inbox-conversationlist--source-compact"
+          ],
+          "official": true
+        },
+        {
+          "component": "ConversationThread",
+          "storyId": "crm-inbox-conversationthread--source-compact",
+          "candidates": [
+            "crm-inbox-conversationthread--source-compact"
+          ],
+          "official": true
+        },
+        {
+          "component": "MessageBubble",
+          "storyId": "primitives-ui-messagebubble--all-states",
+          "candidates": [
+            "primitives-ui-messagebubble--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "ComposerPanel",
+          "storyId": "crm-inbox-composerpanel--source",
+          "candidates": [
+            "crm-inbox-composerpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "ChannelStatusPanel",
+          "storyId": "crm-inbox-channelstatuspanel--source",
+          "candidates": [
+            "crm-inbox-channelstatuspanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "CopilotPanel",
+          "storyId": "crm-agent-copilotpanel--source",
+          "candidates": [
+            "crm-agent-copilotpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "CopilotSuggestion",
+          "storyId": "crm-agent-copilotsuggestion--all-states",
+          "candidates": [
+            "crm-agent-copilotsuggestion--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "ApprovalPanel",
+          "storyId": "crm-approvals-approvalpanel--source-compact",
+          "candidates": [
+            "crm-approvals-approvalpanel--source-compact"
+          ],
+          "official": true
+        },
+        {
+          "component": "ExecutionReceipt",
+          "storyId": "crm-agents-executionreceipt--source-compact",
+          "candidates": [
+            "crm-agents-executionreceipt--source-compact"
+          ],
+          "official": true
+        },
+        {
+          "component": "HandoffBanner",
+          "storyId": "crm-inbox-handoffbanner--source-compact",
+          "candidates": [
+            "crm-inbox-handoffbanner--source-compact"
+          ],
+          "official": true
+        },
+        {
+          "component": "ConfidenceMeter",
+          "storyId": "primitives-ui-confidencemeter--all-states",
+          "candidates": [
+            "primitives-ui-confidencemeter--all-states"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "crm-inbox-conversationlist--source-compact",
+        "crm-inbox-conversationthread--source-compact",
+        "primitives-ui-messagebubble--all-states",
+        "crm-inbox-composerpanel--source",
+        "crm-inbox-channelstatuspanel--source",
+        "crm-agent-copilotpanel--source",
+        "crm-agent-copilotsuggestion--all-states",
+        "crm-approvals-approvalpanel--source-compact",
+        "crm-agents-executionreceipt--source-compact",
+        "crm-inbox-handoffbanner--source-compact",
+        "primitives-ui-confidencemeter--all-states"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 37,
+      "image": "12_round-3b5_sistema-plano-governanca_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "system/plan/governance reference sheet",
+      "requiredComponents": [
+        "PlanAgentsPanel",
+        "Card",
+        "ProgressBar",
+        "FallbackControlCard",
+        "PermissionState",
+        "IntegrationFailedState",
+        "BillingGovernancePanel",
+        "GovernanceAuditPanel",
+        "GuardrailPolicyPanel",
+        "GeneralSettingsPanel",
+        "StatusSummaryCard",
+        "Design tokens",
+        "Typography tokens"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "fd3cc9da1e3aae8197fca069551389a160bed5441f5fd1c155a95d75ca250be3",
+      "sourceManifestSha256": "fd3cc9da1e3aae8197fca069551389a160bed5441f5fd1c155a95d75ca250be3",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "PlanAgentsPanel",
+          "storyId": "crm-config-planagentspanel--source",
+          "candidates": [
+            "crm-config-planagentspanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "Card",
+          "storyId": "primitives-ui-card--all-states",
+          "candidates": [
+            "primitives-ui-card--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "ProgressBar",
+          "storyId": "primitives-ui-progressbar--all-states",
+          "candidates": [
+            "primitives-ui-progressbar--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "FallbackControlCard",
+          "storyId": "crm-config-fallbackcontrolcard--source",
+          "candidates": [
+            "crm-config-fallbackcontrolcard--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "PermissionState",
+          "storyId": "crm-advanced-states-permissionstate--all-states",
+          "candidates": [
+            "crm-advanced-states-permissionstate--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "IntegrationFailedState",
+          "storyId": "crm-advanced-states-integrationfailedstate--all-states",
+          "candidates": [
+            "crm-advanced-states-integrationfailedstate--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "BillingGovernancePanel",
+          "storyId": "crm-billing-billinggovernancepanel--source",
+          "candidates": [
+            "crm-billing-billinggovernancepanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "GovernanceAuditPanel",
+          "storyId": "crm-timeline-governanceauditpanel--source",
+          "candidates": [
+            "crm-timeline-governanceauditpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "GuardrailPolicyPanel",
+          "storyId": "crm-config-guardrailpolicypanel--source",
+          "candidates": [
+            "crm-config-guardrailpolicypanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "GeneralSettingsPanel",
+          "storyId": "crm-config-generalsettingspanel--source",
+          "candidates": [
+            "crm-config-generalsettingspanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "StatusSummaryCard",
+          "storyId": "primitives-ui-statussummarycard--all-states",
+          "candidates": [
+            "primitives-ui-statussummarycard--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "Design tokens",
+          "storyId": "foundations-tokens-overview--default",
+          "candidates": [
+            "foundations-tokens-overview--default"
+          ],
+          "official": true
+        },
+        {
+          "component": "Typography tokens",
+          "storyId": "foundations-tokens-typography--default",
+          "candidates": [
+            "foundations-tokens-typography--default"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "crm-config-planagentspanel--source",
+        "primitives-ui-card--all-states",
+        "primitives-ui-progressbar--all-states",
+        "crm-config-fallbackcontrolcard--source",
+        "crm-advanced-states-permissionstate--all-states",
+        "crm-advanced-states-integrationfailedstate--all-states",
+        "crm-billing-billinggovernancepanel--source",
+        "crm-timeline-governanceauditpanel--source",
+        "crm-config-guardrailpolicypanel--source",
+        "crm-config-generalsettingspanel--source",
+        "primitives-ui-statussummarycard--all-states",
+        "foundations-tokens-overview--default",
+        "foundations-tokens-typography--default"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 38,
+      "image": "13_round-3c1_objetos-setup-dados_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "setup/data reference sheet; StudentHeader uses its additive reference variant; regional certification recorded in visual-diagnostics/image-13-reference-sheet-20260714.md",
+      "requiredComponents": [
+        "SetupWizardPanel",
+        "ActivationChecklistPanel",
+        "ImportProgress",
+        "FieldMappingTable",
+        "DuplicateResolver",
+        "DataConflictQueue",
+        "StudentHeader",
+        "ProfileTabsPanel",
+        "RelationshipList",
+        "ConsentPreferencesPanel",
+        "SensitiveTimelinePanel",
+        "Design tokens",
+        "Typography tokens"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "c6c9455c1a3a367828028c3a362235c22e44caeddae5f78c419ef45eb45654ef",
+      "sourceManifestSha256": "c6c9455c1a3a367828028c3a362235c22e44caeddae5f78c419ef45eb45654ef",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "SetupWizardPanel",
+          "storyId": "crm-setup-setupwizardpanel--source",
+          "candidates": [
+            "crm-setup-setupwizardpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "ActivationChecklistPanel",
+          "storyId": "crm-setup-activationchecklistpanel--source",
+          "candidates": [
+            "crm-setup-activationchecklistpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "ImportProgress",
+          "storyId": "crm-data-quality-importprogress--all-states",
+          "candidates": [
+            "crm-data-quality-importprogress--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "FieldMappingTable",
+          "storyId": "crm-data-quality-fieldmappingtable--all-states",
+          "candidates": [
+            "crm-data-quality-fieldmappingtable--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "DuplicateResolver",
+          "storyId": "crm-data-quality-duplicateresolver--all-states",
+          "candidates": [
+            "crm-data-quality-duplicateresolver--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "DataConflictQueue",
+          "storyId": "crm-data-quality-dataconflictqueue--source",
+          "candidates": [
+            "crm-data-quality-dataconflictqueue--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "StudentHeader",
+          "storyId": "crm-students-studentheader--source-reference",
+          "candidates": [
+            "crm-students-studentheader--source-reference"
+          ],
+          "official": true
+        },
+        {
+          "component": "ProfileTabsPanel",
+          "storyId": "crm-students-profiletabspanel--source",
+          "candidates": [
+            "crm-students-profiletabspanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "RelationshipList",
+          "storyId": "crm-students-relationshiplist--all-states",
+          "candidates": [
+            "crm-students-relationshiplist--all-states"
+          ],
+          "official": true
+        },
+        {
+          "component": "ConsentPreferencesPanel",
+          "storyId": "crm-students-consentpreferencespanel--source",
+          "candidates": [
+            "crm-students-consentpreferencespanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "SensitiveTimelinePanel",
+          "storyId": "crm-students-sensitivetimelinepanel--source",
+          "candidates": [
+            "crm-students-sensitivetimelinepanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "Design tokens",
+          "storyId": "foundations-tokens-overview--default",
+          "candidates": [
+            "foundations-tokens-overview--default"
+          ],
+          "official": true
+        },
+        {
+          "component": "Typography tokens",
+          "storyId": "foundations-tokens-typography--default",
+          "candidates": [
+            "foundations-tokens-typography--default"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "crm-setup-setupwizardpanel--source",
+        "crm-setup-activationchecklistpanel--source",
+        "crm-data-quality-importprogress--all-states",
+        "crm-data-quality-fieldmappingtable--all-states",
+        "crm-data-quality-duplicateresolver--all-states",
+        "crm-data-quality-dataconflictqueue--source",
+        "crm-students-studentheader--source-reference",
+        "crm-students-profiletabspanel--source",
+        "crm-students-relationshiplist--all-states",
+        "crm-students-consentpreferencespanel--source",
+        "crm-students-sensitivetimelinepanel--source",
+        "foundations-tokens-overview--default",
+        "foundations-tokens-typography--default"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 39,
+      "image": "14_round-3c2_agenda-financeiro-documentos_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "agenda/finance/docs",
+      "requiredComponents": [
+        "WeeklyCalendar",
+        "ClassCard",
+        "ClassSummaryCard",
+        "Roster",
+        "ReplacementMatcherPanel",
+        "WaitlistPanel",
+        "ResourceConflictPanel",
+        "DocumentViewerPanel",
+        "UploadReceiptPanel",
+        "ReconciliationSummaryTable",
+        "MoneyInputGroup",
+        "FinancialSimulationPanel"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "3229adef1534812589b2bff16b922efb82a7b5b697eb82e8bfa36730cbdc3661",
+      "sourceManifestSha256": "3229adef1534812589b2bff16b922efb82a7b5b697eb82e8bfa36730cbdc3661",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "WeeklyCalendar",
+          "storyId": "crm-agenda-weeklycalendar--source-reference",
+          "candidates": [
+            "crm-agenda-weeklycalendar--source-reference"
+          ],
+          "official": true
+        },
+        {
+          "component": "ClassCard",
+          "storyId": "crm-agenda-classcard--source-reference",
+          "candidates": [
+            "crm-agenda-classcard--source-reference"
+          ],
+          "official": true
+        },
+        {
+          "component": "ClassSummaryCard",
+          "storyId": "crm-agenda-classsummarycard--source",
+          "candidates": [
+            "crm-agenda-classsummarycard--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "Roster",
+          "storyId": "crm-agenda-roster--source-reference",
+          "candidates": [
+            "crm-agenda-roster--source-reference"
+          ],
+          "official": true
+        },
+        {
+          "component": "ReplacementMatcherPanel",
+          "storyId": "crm-agenda-replacementmatcherpanel--source",
+          "candidates": [
+            "crm-agenda-replacementmatcherpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "WaitlistPanel",
+          "storyId": "crm-agenda-waitlistpanel--source",
+          "candidates": [
+            "crm-agenda-waitlistpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "ResourceConflictPanel",
+          "storyId": "crm-agenda-resourceconflictpanel--source",
+          "candidates": [
+            "crm-agenda-resourceconflictpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "DocumentViewerPanel",
+          "storyId": "crm-documents-documentviewerpanel--source",
+          "candidates": [
+            "crm-documents-documentviewerpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "UploadReceiptPanel",
+          "storyId": "crm-documents-uploadreceiptpanel--source",
+          "candidates": [
+            "crm-documents-uploadreceiptpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "ReconciliationSummaryTable",
+          "storyId": "crm-finance-reconciliationsummarytable--source",
+          "candidates": [
+            "crm-finance-reconciliationsummarytable--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "MoneyInputGroup",
+          "storyId": "crm-finance-moneyinputgroup--source",
+          "candidates": [
+            "crm-finance-moneyinputgroup--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "FinancialSimulationPanel",
+          "storyId": "crm-finance-financialsimulationpanel--source",
+          "candidates": [
+            "crm-finance-financialsimulationpanel--source"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "crm-agenda-weeklycalendar--source-reference",
+        "crm-agenda-classcard--source-reference",
+        "crm-agenda-classsummarycard--source",
+        "crm-agenda-roster--source-reference",
+        "crm-agenda-replacementmatcherpanel--source",
+        "crm-agenda-waitlistpanel--source",
+        "crm-agenda-resourceconflictpanel--source",
+        "crm-documents-documentviewerpanel--source",
+        "crm-documents-uploadreceiptpanel--source",
+        "crm-finance-reconciliationsummarytable--source",
+        "crm-finance-moneyinputgroup--source",
+        "crm-finance-financialsimulationpanel--source"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 40,
+      "image": "15_round-3c3_agentes-auditoria-relatorios_aprovada.png",
+      "mapStatus": "Covered",
+      "role": "agents/audit/reports",
+      "requiredComponents": [
+        "FlowBuilder",
+        "ModeSelector",
+        "FlowSimulationPanel",
+        "PublicationPreflightPanel",
+        "ExecutionTraceTable",
+        "AgentIncidentPanel",
+        "EvaluationQualityPanel",
+        "BeforeAfterDiff",
+        "AuditTrail",
+        "PrivacyRequestTable",
+        "SupportGrantPanel",
+        "AdvancedReportsPanel",
+        "ExportQueuePanel",
+        "SegmentCommunicationPanel"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "90b907f423a5b2f6bcfb973adb7d55ef6f33d835b6aa35bc580f1b8f946c8bdb",
+      "sourceManifestSha256": "90b907f423a5b2f6bcfb973adb7d55ef6f33d835b6aa35bc580f1b8f946c8bdb",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "FlowBuilder",
+          "storyId": "crm-agents-flowbuilder--source-reference",
+          "candidates": [
+            "crm-agents-flowbuilder--source-reference"
+          ],
+          "official": true
+        },
+        {
+          "component": "ModeSelector",
+          "storyId": "crm-agents-modeselector--source-reference",
+          "candidates": [
+            "crm-agents-modeselector--source-reference"
+          ],
+          "official": true
+        },
+        {
+          "component": "FlowSimulationPanel",
+          "storyId": "crm-agents-flowsimulationpanel--source",
+          "candidates": [
+            "crm-agents-flowsimulationpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "PublicationPreflightPanel",
+          "storyId": "crm-agents-publicationpreflightpanel--source",
+          "candidates": [
+            "crm-agents-publicationpreflightpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "ExecutionTraceTable",
+          "storyId": "crm-agents-executiontracetable--source",
+          "candidates": [
+            "crm-agents-executiontracetable--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "AgentIncidentPanel",
+          "storyId": "crm-agents-agentincidentpanel--source",
+          "candidates": [
+            "crm-agents-agentincidentpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "EvaluationQualityPanel",
+          "storyId": "crm-agents-evaluationqualitypanel--source",
+          "candidates": [
+            "crm-agents-evaluationqualitypanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "BeforeAfterDiff",
+          "storyId": "crm-approvals-beforeafterdiffreference--source",
+          "candidates": [
+            "crm-approvals-beforeafterdiffreference--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "AuditTrail",
+          "storyId": "crm-timeline-audittrailreference--source",
+          "candidates": [
+            "crm-timeline-audittrailreference--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "PrivacyRequestTable",
+          "storyId": "crm-config-privacyrequesttable--source",
+          "candidates": [
+            "crm-config-privacyrequesttable--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "SupportGrantPanel",
+          "storyId": "crm-config-supportgrantpanel--source",
+          "candidates": [
+            "crm-config-supportgrantpanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "AdvancedReportsPanel",
+          "storyId": "crm-reports-advancedreportspanel--source",
+          "candidates": [
+            "crm-reports-advancedreportspanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "ExportQueuePanel",
+          "storyId": "crm-reports-exportqueuepanel--source",
+          "candidates": [
+            "crm-reports-exportqueuepanel--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "SegmentCommunicationPanel",
+          "storyId": "crm-reports-segmentcommunicationpanel--source",
+          "candidates": [
+            "crm-reports-segmentcommunicationpanel--source"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "crm-agents-flowbuilder--source-reference",
+        "crm-agents-modeselector--source-reference",
+        "crm-agents-flowsimulationpanel--source",
+        "crm-agents-publicationpreflightpanel--source",
+        "crm-agents-executiontracetable--source",
+        "crm-agents-agentincidentpanel--source",
+        "crm-agents-evaluationqualitypanel--source",
+        "crm-approvals-beforeafterdiffreference--source",
+        "crm-timeline-audittrailreference--source",
+        "crm-config-privacyrequesttable--source",
+        "crm-config-supportgrantpanel--source",
+        "crm-reports-advancedreportspanel--source",
+        "crm-reports-exportqueuepanel--source",
+        "crm-reports-segmentcommunicationpanel--source"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    },
+    {
+      "line": 41,
+      "image": "16_round-4.1S_app-shell_01_base-web.png",
+      "mapStatus": "Covered",
+      "role": "canonical app shell",
+      "requiredComponents": [
+        "CrmProductShell",
+        "JourneyShellCanvas"
+      ],
+      "sourceExists": true,
+      "sourceSha256": "f7c0d84210213044b1fb85d2e0f023b3d2089513da08a4c95f3b2bd95d753618",
+      "sourceManifestSha256": "f7c0d84210213044b1fb85d2e0f023b3d2089513da08a4c95f3b2bd95d753618",
+      "sourceManifestMatches": true,
+      "componentRows": [
+        {
+          "component": "CrmProductShell",
+          "storyId": "crm-shell-journeyshellcanvas--source",
+          "candidates": [
+            "crm-shell-journeyshellcanvas--source"
+          ],
+          "official": true
+        },
+        {
+          "component": "JourneyShellCanvas",
+          "storyId": "crm-shell-journeyshellcanvas--source",
+          "candidates": [
+            "crm-shell-journeyshellcanvas--source"
+          ],
+          "official": true
+        }
+      ],
+      "storyIds": [
+        "crm-shell-journeyshellcanvas--source"
+      ],
+      "missingComponents": [],
+      "ambiguousComponents": [],
+      "nonOfficialComponents": [],
+      "status": "pass"
+    }
+  ]
+}

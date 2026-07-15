@@ -1,8 +1,10 @@
 # Remaining Page Coverage Audit
 
-Date: 2026-07-07
+Date: 2026-07-15
 
 Status: pass
+
+Storybook static build available: yes
 
 This audit verifies that every former Remaining Pages target in the current Batch 11 execution scope now has an individual Storybook export in its official family, is present in the static Storybook index, and is documented as accepted for the current 99% visual scope rather than pixel-perfect 1:1 approval.
 It also verifies that the duplicate `CRM / Image Coverage / Remaining Pages` story file is absent and that owner pages preserve their official structural family contracts.
@@ -24,7 +26,7 @@ It also verifies that the duplicate `CRM / Image Coverage / Remaining Pages` sto
 | CrmKanbanPage | present |
 | CrmThreePanePage | present |
 | SetupShellGlobalPage | present |
-| SetupContentGrid | present |
+| SetupPage | present |
 | SetupAgentChatPage | present |
 | SetupWorkspaceConfigPage | present |
 | SetupStudioPage | present |
@@ -71,7 +73,7 @@ It also verifies that the duplicate `CRM / Image Coverage / Remaining Pages` sto
 | FinanceBillingDrawerPage | present |
 | FinanceKanbanPage | present |
 | FinanceMovementsPage | present |
-| SetupContentGrid | present |
+| SetupConsumptionWorkspace | present |
 | ReportsManagementPage | present |
 | MoneyOnTheTablePage | present |
 | PaymentCaseCard | present |

@@ -1,6 +1,6 @@
 # Release Policy Contract
 
-This contract defines how `@taliya/tokens`, `@taliya/ui`, and `@taliya/crm` move from the current local tarball channel to a future registry-backed channel.
+This contract defines how `@taliya/tokens`, `@taliya/ui`, and `@taliya/crm` move from the current local tarball channel to the controlled npm registry channel.
 
 ## Current Channel
 
@@ -14,16 +14,16 @@ The local tarball channel is the official current channel for `taliya-internal` 
 
 ## Registry Gate
 
-Registry publication is not configured yet. Before `release-channel:audit` can report `pass-registry-release-channel`, these decisions must be explicit and versioned:
+Registry publication is configured but remains manual and environment-protected. The three packages share version `0.1.0`, use public access on npm, and publish only through `.github/workflows/publish-packages.yml` with npm provenance.
 
-- `semver-version`: packages must stop using the placeholder `0.0.0` version.
-- `registry-target-and-access`: registry target and package access model must be chosen.
-- `controlled-publish-workflow`: publish/provenance must run from a controlled release machine or CI workflow.
-- `consumer-dependency-migration`: consumers must have a documented migration path from `file:vendor/taliya-product-ui/*.tgz` to registry ranges.
+- `semver-version`: Changesets keeps all three packages in one fixed version group.
+- `registry-target-and-access`: `https://registry.npmjs.org/`, public scoped packages.
+- `controlled-publish-workflow`: the environment-protected manual workflow requires `NPM_TOKEN` and requests OIDC provenance.
+- `consumer-dependency-migration`: consumers move from vendored tarballs to a shared caret range after the first verified publish.
 
 ## Consumer Migration
 
-Current consumers use `vendor-local-tarballs`. The future registry range policy is `not-decided`; local package audits must remain in place until a registry consumer adoption gate passes.
+Current consumers continue to use `vendor-local-tarballs`. After a verified publish they migrate all three dependencies to the same caret range, such as `^0.1.0`. Local package audits remain in place until registry-backed consumer adoption passes.
 
 ## Audit
 

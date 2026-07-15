@@ -1,5 +1,5 @@
 {
-  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
+  "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112",
   "vendorDir": "vendor/taliya-product-ui",
   "reportLabel": "future-consumer-fixture",
   "vendorManifest": {
@@ -7,7 +7,7 @@
     "present": true,
     "packageCount": 3
   },
-  "generatedAt": "2026-07-09T19:44:16.718Z",
+  "generatedAt": "2026-07-09T22:11:24.272Z",
   "packageStatus": {
     "pass": true,
     "missing": [],
@@ -266,7 +266,7 @@
         "file": "node_modules/@taliya/crm/dist/index.d.ts",
         "fileExists": true,
         "requiredText": [
-          "export type CrmProductShellContentLayout = \"default\" | \"work-list\" | \"main-priority\" | \"kanban\";",
+          "export type CrmProductShellContentLayout = \"default\" | \"work-list\" | \"work-list-compact\" | \"work-list-wide\" | \"main-priority\" | \"kanban\";",
           "contentLayout?: CrmProductShellContentLayout;"
         ],
         "missingText": [],
@@ -295,7 +295,7 @@
         "fileExists": true,
         "requiredText": [
           "--taliya-layout-crm-product-shell-content-work-list-padding: 0 28px 28px 27px;",
-          "--taliya-layout-crm-product-shell-content-main-priority-padding: 0 28px 28px 16px;",
+          "--taliya-layout-crm-product-shell-content-main-priority-padding: 0 28px 27px 16px;",
           "--taliya-layout-crm-product-shell-content-kanban-padding: 0 28px 28px 24px;"
         ],
         "missingText": [],
@@ -731,7 +731,7 @@
         "file": "node_modules/@taliya/crm/dist/index.d.ts",
         "fileExists": true,
         "requiredText": [
-          "export type WorkListDetailPageLayoutMode = \"standard\" | \"main-priority\";",
+          "export type WorkListDetailPageLayoutMode = \"standard\" | \"main-priority\" | \"compact-rail\" | \"wide-main\" | \"wide-rail\";",
           "layoutMode?: WorkListDetailPageLayoutMode;"
         ],
         "missingText": [],

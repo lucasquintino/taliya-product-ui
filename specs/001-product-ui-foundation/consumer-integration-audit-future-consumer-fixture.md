@@ -1,6 +1,6 @@
 # Consumer Integration Audit
 
-Consumer: `C:\Users\lucas\taliya-product-ui\tmp\future-consumer-readiness-fixture-115032`
+Consumer: `/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112`
 Vendor: `vendor/taliya-product-ui`
 
 | Check | Status |

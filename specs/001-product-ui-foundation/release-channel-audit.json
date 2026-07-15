@@ -1,55 +1,50 @@
 {
-  "generatedAt": "2026-07-07T11:42:05.883Z",
-  "status": "pass-local-release-channel",
-  "localTarballChannelReady": true,
-  "registryReady": false,
-  "packageArtifactsPass": true,
+  "generatedAt": "2026-07-15T10:59:54.712Z",
+  "status": "fail",
+  "localTarballChannelReady": false,
+  "registryReady": true,
+  "packageArtifactsPass": false,
   "localReleaseManifestPass": true,
   "localReleaseManifestPath": "dist-packages/taliya-product-ui-local-manifest.json",
   "sourceTarballsExist": true,
   "packageMetadataPublishable": true,
   "packageVersionsAligned": true,
-  "currentVersion": "0.0.0",
-  "releasePolicyStatus": "pass-current-local-policy",
+  "currentVersion": "0.1.0",
+  "releasePolicyStatus": "pass-registry-policy",
   "releasePolicyPath": "specs/001-product-ui-foundation/contracts/release-policy.json",
   "consumerPackageSyncStatus": "pass",
   "consumerVendorVersioningStatus": "pass",
   "consumerConfigVersioningStatus": "pass",
   "consumerInstalledPackageStatus": true,
   "consumerInstalledContractStatus": true,
-  "registryBlockers": [
-    "packages still use placeholder version 0.0.0; choose a real semver release version",
-    "registry target and access model are not configured in release policy",
-    "controlled publish/provenance workflow is not configured in release policy",
-    "consumer dependency migration policy from local tarballs to registry ranges is not configured in release policy"
-  ],
+  "registryBlockers": [],
   "packageRows": [
     {
       "name": "@taliya/tokens",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "private": false,
-      "tarball": "dist-packages/taliya-tokens-0.0.0.tgz",
+      "tarball": "dist-packages/taliya-tokens-0.1.0.tgz",
       "tarballExists": true,
       "publishableMetadata": true,
-      "registryVersionReady": false
+      "registryVersionReady": true
     },
     {
       "name": "@taliya/ui",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "private": false,
-      "tarball": "dist-packages/taliya-ui-0.0.0.tgz",
+      "tarball": "dist-packages/taliya-ui-0.1.0.tgz",
       "tarballExists": true,
       "publishableMetadata": true,
-      "registryVersionReady": false
+      "registryVersionReady": true
     },
     {
       "name": "@taliya/crm",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "private": false,
-      "tarball": "dist-packages/taliya-crm-0.0.0.tgz",
+      "tarball": "dist-packages/taliya-crm-0.1.0.tgz",
       "tarballExists": true,
       "publishableMetadata": true,
-      "registryVersionReady": false
+      "registryVersionReady": true
     }
   ]
 }

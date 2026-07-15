@@ -81,6 +81,7 @@ Image 79 shell clone color tokens:
 | Semantic Token | Value | Usage |
 | --- | --- | --- |
 | `color.crm-empty-shell.stage-bg` | radial white glow + gray diagonal gradient | outer desktop screenshot stage behind the browser frame |
+| `color.crm-empty-shell.image-79.stage-bg` | `#A8A9AD` | source-derived Image 79 stage override |
 | `color.crm-empty-shell.frame-bg` | `rgba(246, 245, 249, 0.96)` | browser window background |
 | `color.crm-empty-shell.frame-border` | `rgba(255, 255, 255, 0.34)` | browser window border |
 | `color.crm-browser.chrome-bg` | light vertical chrome gradient | top browser chrome strip |
@@ -93,6 +94,10 @@ Image 79 shell clone color tokens:
 | `color.crm-browser.traffic-gray` | `#9FA1A1` | gray browser traffic light |
 | `color.crm-browser.traffic-green` | `#21C15A` | green browser traffic light |
 | `color.crm-empty-shell.body-bg` | `rgba(242, 241, 247, 0.88)` | body area behind sidebar/main |
+| `color.crm-empty-shell.image-79.body-bg` | `#EBEAEF` | source-derived Image 79 body override |
+| `color.crm-empty-shell.image-79.sidebar-bg` | `#EBEBEF` | source-derived Image 79 sidebar override |
+| `color.crm-empty-shell.image-79.main-bg` | `#ECEBEF` | source-derived Image 79 main override |
+| `color.crm-empty-shell.image-79.canvas-bg` | `#EBEAEF` | source-derived Image 79 canvas override |
 | `color.crm-empty-shell.sidebar-bg` | `rgba(250, 250, 252, 0.58)` | empty-shell sidebar column |
 | `color.crm-empty-shell.main-bg` | `rgba(244, 243, 248, 0.78)` | main empty-shell area |
 | `color.crm-empty-shell.title` | `#0C0D0F` | `Jornadas` page title |
@@ -558,6 +563,8 @@ The type system must support dense CRM screens and token boards.
 | `type.chart-label` | 11 | 14 | 400 | chart labels and legends |
 | `type.overline` | 11 | 14 | 600 | small uppercase-ish labels; letter spacing remains 0 unless source requires otherwise |
 | `type.crm-empty-shell.title` | 27 | 34 | 700 | `Jornadas` title in image 79 empty shell |
+| `type.crm-empty-shell.image-79.title` | 26 | 32 | 700 | source-derived Image 79 fixed-window title override |
+| `type.crm-empty-shell.nav` | 12 | 1 | 400 | source-derived Image 79 top navigation labels |
 
 Rules:
 
@@ -634,7 +641,40 @@ Layout aliases:
 | `layout.crm-setup-shell.columns` | `220px 978px 397px` | Exact image 51A setup shell stepper/main/agent columns |
 | `layout.crm-setup-shell.column-gap` | `16px` | Exact image 51A gutter between setup body panels |
 | `layout.crm-setup-shell.topbar-height` / `body-height` / `bottom-bar-height` | `82px` / `738px` / `73px` | Exact image 51A setup shell vertical grid |
+| `layout.crm-setup-shell.guided-columns` | `207px 986px 415px` | Compact-rail setup stepper/main/agent columns through `SetupPage frameVariant="guided"`; current source-backed blocks are 51C, 51H and 51L |
+| `layout.crm-setup-shell.guided-topbar-height` / `guided-body-height` / `guided-bottom-bar-height` | `79px` / `770px` / `65px` | Shared guided-page vertical grid; isolated from 51A `shell-global` and Image 78 `welcome` |
+| `layout.crm-setup-shell.guided-bottom-bar-width` / `guided-stepper-height` | `1640px` / `770px` | Source-width bottom status bar and full-height guided step rail |
+| `layout.crm-setup-shell.guided-block-columns` | `225px 979px 404px` | Source-backed 51D Studio, 51E Equipe, and 51F Canais rail-wide stepper/main/agent columns; not applied to other blocks without evidence |
+| `layout.crm-setup-shell.guided-block-topbar-height` / `guided-block-body-height` / `guided-block-bottom-bar-height` | `87px` / `762px` / `62px` | Source-backed 51D-51F wide-rail vertical frame rhythm through `frameVariant="guided-block"` |
+| `layout.crm-setup-shell.guided-main-columns` / `guided-main-column-gap` | `207px 1062px 355px` / `12px` | Images 51G/51K wide-center/narrow-agent frame through `frameVariant="guided-main"` |
+| `layout.crm-setup-shell.guided-main-topbar-height` / `body-height` / `bottom-bar-height` | `67px` / `797px` / `64px` | Shared source vertical rhythm proved by complete Planos and Pagamento pages |
+| `layout.crm-setup-shell.guided-wide-columns` / `guided-wide-column-gap` | `207px 1062px 338px` / `15px` | Images 51I/51J wide-center/narrower-agent frame through `frameVariant="guided-wide"` |
+| `layout.crm-setup-shell.guided-wide-padding` | `0 20px 13px 15px` | Source-backed outer inset for the 51I/51J frame without story-local shell CSS |
+| `layout.crm-setup-shell.guided-wide-topbar-height` / `body-height` / `bottom-bar-height` | `79px` / `770px` / `65px` | Shared 51I/51J vertical rhythm, isolated from `guided-main` and `shell-global` |
+| `layout.crm-setup-shell.guided-wide-bottom-bar-width` / `guided-wide-stepper-height` | `1637px` / `770px` | Source width and full-height rail for the 51I/51J frame |
+| `layout.crm-setup-shell.guided-review-columns` / `guided-review-column-gap` | `210px 1064px 344px` / `12px` | Image 51L stepper/exact review-panel/agent columns through `frameVariant="guided-review"` |
+| `layout.crm-setup-shell.guided-review-padding` | `0 15px` | Image 51L outer frame inset with an edge-to-edge central review owner |
+| `layout.crm-setup-shell.guided-review-topbar-height` / `body-height` / `bottom-bar-height` | `74px` / `807px` / `52px` | Image 51L full-height final-review rhythm that keeps publication actions and the global footer visible |
+| `layout.crm-setup-shell.guided-review-bottom-bar-width` / `stepper-height` / `stepper-header-height` | `1642px` / `807px` / `70px` | Image 51L source-width footer and nine-step rail framing |
+| `control.crm-setup-shell-guided-review-step-row-height` / `step-marker-size` | `60px` / `24px` | Image 51L compact nine-step rhythm; does not alter the certified six-step default rail |
+| `control.crm-setup-shell-guided-review-connector-height` / `left` / `top` | `36px` / `12px` / `30px` | Image 51L compact connector geometry for the nine-step rail |
+| `layout.crm-setup-shell.welcome-topbar-height` / `welcome-padding` / `welcome-main-offset-x` | `95px` / `8px 16px 16px 32px` / `13px` | Image 78 welcome-only shell rhythm; keeps the main workspace and native agent rail aligned without changing the guided block variants. |
+| `layout.crm-setup-agent-chat.welcome-message-width` / `control.crm-setup-agent-chat.welcome-message-height` | `342px` / `302px` | Image 78 native welcome message geometry inside the responsive `428px` agent rail. |
+| `control.crm-setup-agent-chat.welcome-padding` / `welcome-header-columns` | `27px 27px 24px` / `44px minmax(0, 1fr) 24px 24px` | Image 78 agent inset and compact identity/actions grid for `SetupAgentChat variant="welcome"`. |
+| `control.crm-setup-agent-chat.welcome-quick-height` / `welcome-quick-width-1/2/3` | `45px` / `242px`, `284px`, `307px` | Source-backed quick-question geometry for the three welcome prompts. |
+| `control.crm-setup-agent-chat.welcome-footer-margin-top` / `welcome-footer-padding-top` | `52px` / `31px` | Image 78 divider and human-help footer rhythm. The welcome agent is native and responsive; no capture scale or nested agent frame is part of the public anatomy. |
+| `layout.crm-setup-plans.*-columns` | source-specific 3/4/5/6/7-column grids | Complete Planos type, quantity, recurrence, validity, replacement, deadline and notice option rows |
+| `layout.crm-setup-plans.header-height` | `74px` | Image 51G compact block header before the three-column content |
+| `control.crm-setup-plans.editor-gap` / `field-height` / `segment-height` | `0px` / `28px` / `24px` | Image 51G source density that keeps every field, alert and footer action visible |
+| `layout.crm-setup-channels.columns` | `minmax(0, 1.7fr) minmax(0, 1fr)` | Image 51F independent WhatsApp/public and e-mail/status columns |
+| `layout.crm-setup-channels.whatsapp-height` / `email-height` | `335px` / `317px` | Image 51F asymmetric first-row panel heights |
+| `layout.crm-setup-channels.public-height` / `status-height` | `218px` / `235px` | Image 51F asymmetric second-row panel heights; keeps footer actions visible |
+| `control.crm-setup-channels.column-gap` / `panel-gap` | `16px` / `8px` | Image 51F column gutter and compact panel content rhythm |
+| `control.crm-setup-channels.status-row-height` / `status-row-padding-x` | `32px` / `0px` | Image 51F compact three-row channel status list |
+| `control.crm-setup-channels.copy-size` / `copy-line-height` | small type aliases | Image 51F helper copy density without component-local literal typography |
 | `layout.crm-setup-shell.bottom-bar-grid-column` | `1 / 4` | Image 51A bottom bar spans all body columns |
+| `layout.crm-setup-consumption.models-height` / `choice-height` | `143px` / `87px` | Image 51C model-selection band and compact source choice controls |
+| `layout.crm-setup-consumption.settings-rows` / `footer-height` | `200px 167px` / `94px` | Image 51C package/replacement, exceptions/validation, and action bands without clipping |
 | `layout.crm-setup-block-header.width` / `height` | `735px` / `84px` | Exact Image 51D v2 setup block header crop |
 | `control.crm-setup-block-header.title-size` / `title-line-height` / `title-weight` | `28px` / `36px` / `600` | Source `Studio` heading typography after 1:1 crop comparison |
 | `control.crm-setup-block-header.title-chip-gap` / `chip-height` / `chip-padding-x` | `16px` / `31px` / `15px` | Source title-to-chip spacing and block chip sizing |
@@ -672,6 +712,17 @@ Layout aliases:
 | `color.crm-setup-import-source-card.selected-border` / `selected-bg` | `#2E75FF` / `#F8FBFF` | Operational selected state for the same source-option geometry |
 | `color.crm-setup-import-source-card.imported-border` / `imported-bg` / `error-border` / `error-bg` | `rgba(34, 197, 94, 0.26)` / `#F7FEFA` / `rgba(239, 68, 68, 0.26)` / `#FFF8F8` | Imported and error state surfaces derived from setup status grammar |
 | `layout.crm-setup-import-source-card.width` / `height` | `166px` / `75px` | Exact Image 51H `Importar arquivos` source option card crop |
+| `layout.crm-setup-students-summary-height` / `worklist-height` | `285px` / `315px` | Image 51H summary and prepared-student worklist bands; keeps all five rows, caption and actions in the canonical viewport |
+| `control.crm-setup-students-list-row-height` / `list-row-padding` | `44px` / `5px 0` | Image 51H compact added-source and base-summary row rhythm |
+| `control.crm-setup-students-worklist-header-height` / `column-height` / `row-height` / `caption-height` | `52px` / `34px` / `39px` / `24px` | Image 51H title, column header, five prepared rows and post-row caption geometry |
+| `layout.crm-setup-classes-summary-height` / `worklist-height` / `source-card-height` | `285px` / `315px` / `66px` | Image 51I summary/worklist bands and compact five-option source-card geometry |
+| `control.crm-setup-classes-list-row-height` / `list-row-padding` | `44px` / `5px 0` | Image 51I compact source/summary row rhythm |
+| `control.crm-setup-classes-worklist-header-height` / `column-height` / `row-height` / `caption-height` | `52px` / `34px` / `39px` / `24px` | Image 51I title, seven-column header, five prepared rows and post-row caption geometry |
+| `layout.crm-setup-agenda-summary-height` / `body-height` | `150px` / `460px` | Image 51J generated-summary and control/schedule bands; keeps legend and publication actions above the global footer |
+| `layout.crm-setup-agenda-body-columns` | `333px minmax(0, 1fr)` | Image 51J class-control rail plus wide schedule preview |
+| `layout.crm-setup-agenda-schedule-axis-rows` | `repeat(6, 50px)` | Six source time bands for `07h`, `08h`, `09h`, `12h`, `18h`, and `19h` in schedule mode |
+| `control.crm-setup-agenda-header-height` / `schedule-min-height` / `schedule-event-height` | `64px` / `326px` / `44px` | Image 51J block header and contained discrete schedule-event geometry |
+| `control.crm-setup-agenda-actions-margin-top` | `8px` | Compact action offset below the schedule body in the canonical viewport |
 | `control.crm-setup-import-source-card.padding` / `gap` / `body-width` / `radius` | `20px 10px 20px 16px` / `14px` / `107px` / `7px` | Source icon/text placement, readable description width and rounded border |
 | `control.crm-setup-import-source-card.icon-size` / `icon-inner-size` / `status-size` / `status-offset` | `24px` / `24px` / `14px` / `8px` | Image 51H source icon geometry plus compact operational status mark placement |
 | `control.crm-setup-import-source-card.title-size` / `title-line-height` / `title-weight` | `11px` / `15px` / `600` | Image 51H source-card title typography |
@@ -717,7 +768,7 @@ Layout aliases:
 | `layout.crm-checkout-review-panel.width` | `1076px` | Image 74 review group crop width, including plan card, 41px gap and payment card |
 | `layout.crm-checkout-review-panel.columns` | `var(--taliya-layout-crm-plan-summary-card-review-width) var(--taliya-layout-crm-checkout-payment-card-width)` | Exact review composition columns from image 74 |
 | `layout.crm-checkout-payment-card.width` | `399px` | Image 74 right payment card crop width |
-| `layout.crm-agent-catalog.columns` | `repeat(3, minmax(280px, 1fr))` | Three-column agent catalog extracted from image 52 |
+| `layout.crm-agent-catalog.columns` / `card-width` / `gap` | `repeat(3, minmax(280px, 445px))` / `445px` / `16px` | Image 52 fixed source tracks with responsive two/one-column fallbacks; cards do not stretch to consume the full dashboard width. |
 | `layout.crm-domain-metrics.columns` | `repeat(3, minmax(0, 1fr))` | Reusable metric strip inside P2 domain cards |
 | `layout.crm-domain-facts.columns` | `repeat(4, minmax(0, 1fr))` | Reusable fact strip inside execution, tenant, support and state panels |
 | `layout.crm-simulation-runner.columns` | `300px 360px minmax(360px, 1fr)` | Scenario, phone preview and execution timeline columns from image 58 |
@@ -747,10 +798,16 @@ Layout aliases:
 | `layout.crm-retention-panel.complaint-width` | `398px` | Complaint drawer crop width from image 44 |
 | `layout.crm-support-ticket-panel.width` | `390px` | Support ticket drawer crop width from image 47 |
 | `layout.crm-internal-ticket-panel.width` | `443px` | Internal selected ticket drawer crop width from image 48 |
+| `layout.crm-tenant-summary-drawer.*` | width `402px`; top/right/bottom `98/12/39px`; facts in 2 columns | Image 49 selected-tenant summary rail and shell boundary |
 | `layout.crm-grant-access-panel.width` | `340px` | Tenant grant card crop width from image 50 |
 | `layout.crm-tenant-row.width` | `955px` | Selected tenant row crop width from image 49 |
 | `layout.crm-tenant-row.columns` | explicit checkbox/avatar/tenant/status/metrics/action columns | Tenant row exact x-position grid from image 49 |
 | `layout.crm-internal-shell.width` | `1080px` | Internal dashboard content crop width from image 48 |
+| `layout.crm-internal-overview.columns` / `card-rows` / `bottom-columns` | `325fr 339fr 367fr`; `198px 212px`; `538fr 503fr` | Image 48 asymmetric six-card dashboard tracks and activity/copilot row; package-owned through `InternalOverviewDashboard` |
+| `layout.crm-internal-overview.content-padding` / `gap` | `0 20px 28px 67px`; `9px` | Source-sized Internal cockpit canvas inset and shared card/panel gap at 1672x941 |
+| `layout.crm-internal-overview.drawer-*` | top `124px`; right `20px`; bottom `57px` | Image 48 floating 443x760 Internal ticket boundary, selected through official shell/drawer variants |
+| `layout.crm-product-shell.main-header-internal-overview-height` / `header-internal-overview-*` | header `71px`; left `71px`; copy offset `-4px`; actions offset `20px`; right padding `16px` | Image 48 title/subtitle and command rhythm without consumer CSS |
+| `layout.crm-internal-tenants.*` | topbar `41px`; header `76px`; content `0 12px 15px 28px`; worklist gap `12px`; rail `164px`; rail gap `10px` | Image 49 exact shell/worklist axes without consumer CSS |
 | `layout.crm-tenant-detail-layout.columns` | `1071px 346px` | Tenant detail main area plus security rail from image 50 |
 | `layout.crm-security-rule-panel.width` | `346px` | Tenant security rail crop width from image 50 |
 | `layout.crm-report-filter-bar.width` | `795px` | Report filter bar crop width from image 45 |
@@ -844,6 +901,15 @@ Layout aliases:
 | `layout.crm-empty-shell.topbar.actions-gap` | 7 | Image 79 global actions gap |
 | `layout.crm-empty-shell.header.margin-left` | 13 | Image 79 page title left inset |
 | `layout.crm-empty-shell.title.offset-y` | -4 | Image 79 page title vertical offset |
+| `layout.crm-empty-shell.image-79.sidebar.padding-bottom` | 28 | Image 79 fixed-window utility reserve override |
+| `layout.crm-empty-shell.image-79.sidebar.nav-offset-y` | 13 | Image 79 fixed-window navigation start override |
+| `layout.crm-empty-shell.image-79.sidebar.nav-gap` | 3 | Image 79 fixed-window navigation gap override |
+| `layout.crm-empty-shell.image-79.sidebar.utility-gap` | 6 | Image 79 fixed-window utility gap override |
+| `layout.crm-empty-shell.image-79.sidebar.utility-offset-y` | 0 | Image 79 fixed-window utility offset override |
+| `layout.crm-empty-shell.image-79.topbar.nav-left` | 211 | Image 79 source-derived top navigation x override |
+| `layout.crm-empty-shell.image-79.topbar.nav-gap` | 3 | Image 79 source-derived top navigation gap override |
+| `layout.crm-empty-shell.topbar.nav-active-width` | 84 | Image 79 active navigation pill width |
+| `layout.crm-empty-shell.image-79.title.offset-y` | -1 | Image 79 source-derived title y override |
 | `layout.crm-browser.traffic.left` | 17 | Image 79 traffic lights x position |
 | `layout.crm-browser.traffic.top` | 18 | Image 79 traffic lights y position |
 | `layout.crm-browser.toolbar.left` | 96 | Image 79 browser toolbar x position |
@@ -958,7 +1024,17 @@ These tokens are the primitive anatomy contract. They are intentionally more det
 | `layout.crm-product-shell.main.header-dashboard-height` / `header-dashboard-copy-offset-y` / `content-dashboard-padding` | height `74px`; copy offset `18px`; content padding `0 41px 28px 52px` | Image 17 dashboard page rhythm. `pageHeaderRhythm="dashboard"` aligns the `Hoje` heading and dashboard canvas to the approved source without story-only CSS and without changing default work-list pages. |
 | `control.crm-operational-row.dense-height` / `schedule-dense-height` / `checklist-*` | dense height `43px`; schedule dense height `41px`; checklist columns `14px minmax(0, 1fr) 20px`; leading `14px`; mark `14px` | Image 17 `Aulas de hoje` and `Checklist do dia` row rhythm. Generic dense rows stay at `43px`; schedule dense rows use the source-like `41px` height plus `control.crm-operational-panel.schedule-dense-rows-margin-top = 4px` so the 4-row `Aulas de hoje` stack fits inside the 230px middle panel without clipping. The checklist variant uses a source-like hollow circular marker and narrower leading track while preserving the shared operational row gap, button semantics, and StatusDot primitive composition. |
 | `layout.crm-product-shell.main.header-stacked-height` / `header-stacked-copy-offset-y` / `header-stacked-copy-gap` / `header-stacked-actions-offset-y` | height `96px`; copy offset `14px`; copy gap `8px`; actions offset `26px` | Image 24 checklist work-list page rhythm plus Image 30 Financeiro header actions. `pageHeaderRhythm="stacked"` renders title/subtitle as a source-like block and lets header actions sit on the source-like title band without story-only CSS, while preserving filter/table/card canvas placement. |
+| `layout.crm-product-shell.main.header-agents-height` / `header-agents-copy-offset-y` / `header-agents-actions-offset-y` | `123px` / `31px` / `43px` | Image 52 catalog-only title and canvas axes through `pageHeaderRhythm="agents"`; the paired `frame="window-inset"` preserves the 20/24px source stage while flush Agents pages remain unchanged. |
+| `layout.crm-product-shell.main.header-agents-routines-*` / `layout.crm-agent-routines.*` / `control.crm-agent-routine-*` | header `175px` (`209px` with meta); copy/actions `57px`/`69px`; canvas `1224px`; grid gap `20px`; intro/grid gap `25px`; intro gap `27px`; card min-height/button `265px`/`37px` | Image 53 routine-catalog rhythm through `pageHeaderRhythm="agents-routines"`, `AgentRoutineIntro` and `AgentRoutineCard`. The contract is scoped to pages containing the official intro and preserves Image 52 plus flush Agents pages. |
+| `layout.crm-product-shell.*agent-routine*` / `control.crm-agent-routine-*.routine-detail-*` / `layout.crm-agent-flow-drawer.routine-width` | header `141px`; copy offset `9px`; content padding `0 28px 28px 49px`; mode `184px`; flow cards `198px`; workspace/grid gaps `12px`/`8px`; drawer `388px`, top/right/bottom `143px`/`23px`/`27px` | Image 54 routine-detail rhythm through `pageHeaderRhythm="agents-routine-detail"`, `rightPanelVariant="agent-routine"`, `AgentRoutineWorkspace` and `AgentFlowDrawer state="routine"`; selectors remain isolated from Images 53/56/58/59/70. |
+| `layout.crm-product-shell.*agent-flow*` / `control.crm-agent-flow-section-panel-mode.flow-detail-height` / `control.crm-agent-flow-workspace.flow-detail-*` | header `140px`; drawer width `395px`, top/right/bottom `139px`/`41px`/`25px`; mode panel `148px`; mode/action offsets `-5px`/`2px` | Image 56 flow-detail rhythm through `pageHeaderRhythm="agents-flow-detail"`, `rightPanelVariant="agent-flow"`, `AgentFlowWorkspace` and `AgentFlowDrawer state="flow"`; selectors remain isolated from Images 54/58/59/70. |
+| `layout.crm-product-shell.*agent-test*` / `layout.crm-simulation-runner.test-*` / `control.crm-simulation-runner.test-*` | drawer width `382px`, top/right/bottom `139px`/`19px`/`22px`; panels `572px`; phone padding `4px 8px`; action gap/height `26px`/`51px` | Image 58 test rhythm through `rightPanelVariant="agent-test"`, `SimulationRunner` and `AgentFlowDrawer state="test"`; horizontal phone scale remains inherited from the stable simulation contract and selectors remain isolated from Images 54/56/59/70. |
+| `layout.crm-product-shell.main.header-agents-publish-height` / `header-agents-publish-*` / `content-agent-publish-padding` | header `85px`; copy offset `0px`; header left `86px`; content padding `0 6px 18px 82px` | Image 59 publication rhythm through `pageHeaderRhythm="agents-publish"` and `CrmRightPanelPage rightPanelVariant="agent-publish"`. The scoped contract aligns breadcrumb/title and the complete publish workspace while preserving Images 53/70 bit-identically. |
+| `layout.crm-right-panel.agent-execution-*` | main `1007px`; rail reserve `368px`; offset `-5px`; columns composed from both tracks | Image 70 receipt/rail allocation through `CrmRightPanelPage rightPanelVariant="agent-execution"`. The scoped variant expands the complete `ExecutionReceipt` to the source axis while preserving Images 53/59 bit-identically. |
+| `layout.crm-product-shell.main.header-settings-hub-height` / `header-settings-hub-*` / `content-settings-hub-padding` | header `161px`; copy offset `36px`; header left `96px`; content padding `0 67px 28px 94px` | Image 60 hub rhythm through `CrmDashboardPage layoutVariant="settings-hub"` and `pageHeaderRhythm="settings-hub"`. The scoped layout aligns the eight certified cards while preserving Image 61 bit-identically. |
 | `layout.crm-product-shell.main.header-overview-height` / `control.crm-page-filter-bar.overview-padding` | header height `90px`; searchless overview filter padding `10px` | Image 30 Financeiro overview rhythm. `pageHeaderRhythm="overview"` keeps the stacked title/action treatment but moves overview content to source-like `filterBar.y=219` and compacts the searchless filter surface to `64px` without changing checklist/approval `stacked` pages. |
+| `layout.crm-product-shell.main.header-reports-height` / `layout.crm-product-shell.header-reports-*` / `layout.crm-dashboard.opportunity-*` / `control.crm-page-filter-bar.opportunity-padding` | reports header `56px`; opportunity rows `208px 196px 191px`; gap `10px`; filter padding `11px 12px` | Images 45-46 reports family. `pageHeaderRhythm="reports"` owns the compact stacked report title; `CrmDashboardPage layoutVariant="opportunity"` and `PageFilterBar layout="stacked-filters"` own Image 46 canvas/filter rhythm without consumer CSS. |
+| `layout.crm-dashboard.*-support` / `layout.crm-product-shell.*-support-*` / `control.crm-support-*` | columns `276px minmax(0, 1fr)`; gap `16px`; header `69px`; content padding `0 10px 28px 38px`; drawer top/right/bottom `198px/74px/35px`; agent panel `361px`; ticket workspace `381px` | Image 47 support family. `CrmDashboardPage layoutVariant="support"`, `pageHeaderRhythm="support"`, `contentLayout="support"`, and the official support components own rail/workspace/drawer geometry and compact table density without story-local CSS. |
 | `layout.crm-page-filter-bar.tight-*` / `control.crm-page-filter-bar.tight-*` | search basis `264px`; filter min `78px`; wide filter `108px`; priority filter `104px`; filter padding `10px`; action padding `12px` | Image 31 Reposições filter-bar rhythm for pages with five inline filters plus a primary action where the source prioritizes a readable search field without moving filters into the advanced modal or changing the existing `compact` density used by Aprovações. |
 | `layout.crm-product-shell.content-main-priority-padding` | `0 28px 27px 16px` | Image 31 Reposicoes floating-drawer work-list rhythm and Image24 checklist source-height fit. `contentLayout="main-priority"` reduces the left content inset so the main table can gain source-like width while preserving drawer reserve; the 27px bottom padding avoids a 1px frame overflow at the Image24 source viewport. |
 | `layout.crm-product-shell.topbar.nav-left` / `layout.crm-product-shell.topbar.drawer-nav-left` / `control.segmented.shell.*` / `color.crm-product-shell.segmented-*` / `shadow.crm-product-shell.segmented` | nav-left `458px`; drawer nav-left `346px`; shell item `42px`; shell gap `16px`; shell item padding-x `22px`; shell container bg/border `transparent`; shell container shadow `none` | Image 30 product-shell top navigation rhythm plus Image 22 fixed-drawer top navigation reserve. Default nav-left moves the finance top navigation to source-like `x=530`; drawer nav-left keeps Operation drawer stories source-like with the full nav ending before the fixed drawer (`Histórico` right `943` before drawer x `1045`); shell segmented tokens restore 42px pill height and remove the incorrect inactive capsule/shadow through official shell tokens, not story-only CSS. |
@@ -1005,9 +1081,12 @@ These tokens are the primitive anatomy contract. They are intentionally more det
 | `control.crm-sensitive-dialog.*` | dialog `166x168`; compact destructive confirmation, icon, title/description and 2-button footer | Sensitive/destructive dialog crop from image 09 |
 | `control.crm-support-ticket-panel.*` | drawer `390x759`; padding `14px`; action `32px`; text `11/15` | Support ticket drawer anatomy from image 47 |
 | `control.crm-internal-ticket-panel.height` | `760px` | Internal selected ticket drawer height from image 48 |
+| `control.crm-tenant-summary-drawer.*` | rail `804px`; header `86px`; close `28px`; body gap `10px`; action `34px`; text `10/14` | Image 49 selected-tenant summary content |
 | `control.crm-grant-access-panel.*` | card `340x175`; padding `16px 14px` | Grant access card from image 50 |
 | `control.crm-tenant-row.*` | row `955x60`; avatar `30px`; text `10px`; progress `58px`; padding `0 12px` | Selected tenant row anatomy from image 49 |
 | `control.crm-internal-shell.*` | content crop `1080x754`; dashboard card height `198px`; card padding `18px` | Internal dashboard content from image 48 |
+| `control.crm-internal-overview.*` | filter padding `6px 6px 7px`; bottom row `184px`; header actions `36px`, x-padding `10px`, gap `12px`, text `12px` | Image 48 filter, activity/copilot and command density; final evidence `tmp/image48-internal-route-final-static-20260714/report.json` |
+| `control.crm-internal-tenants.*` | filter `66px`; security strip `104px` | Image 49 vertical rhythm; final `tmp/image49-tenant-summary-geometry-final-static-20260714/report.json` |
 | `control.crm-tenant-detail-layout.height` | `840px` | Tenant detail composition height from image 50 |
 | `control.crm-security-rule-panel.*` | rail `346x838`; padding `21px 14px 20px`; action `38px` | Tenant security rail from image 50 |
 | `control.crm-role-card.*` / `layout.crm-role-card.*` / `color.crm-role-card.*` | row `862x69`; padding `0 34px 0 17px`; radius `7px`; avatar `44px`; columns `285px 205px 187px 1fr`; chip `24px`; title `15/18`; label `13/18`; blue selected surface and border | Exact image 51E setup team owner role row, including avatar, role label, E-mail, WhatsApp, status label/chip and owner/admin/staff/loading/blocked density |

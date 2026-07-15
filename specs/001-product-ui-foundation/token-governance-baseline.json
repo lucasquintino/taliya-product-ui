@@ -13,6 +13,13 @@
       "gradient": 0,
       "literalSizing": 0,
       "literalShadow": 0
+    },
+    "apps/docs/src/storybook.css": {
+      "hex": 46,
+      "rgba": 27,
+      "gradient": 0,
+      "literalSizing": 464,
+      "literalShadow": 0
     }
   },
   "storyScan": {
@@ -23,7 +30,14 @@
     "literalShadow": 0
   },
   "tokenSummary": {
-    "token especifico justificado": 2094,
-    "alias resolvido": 297
+    "token especifico justificado": 2660,
+    "alias resolvido": 345
+  },
+  "storybookAnatomy": {
+    "anatomySelectorCount": 0,
+    "officialComponentOverrideCount": 0,
+    "fixtureGeometryOverrideCount": 29,
+    "harnessSelectorCount": 26,
+    "fixtureLiteralInventoryCount": 537
   }
 }

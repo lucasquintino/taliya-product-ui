@@ -1,10 +1,10 @@
 # Local Readiness Runbook
 
-Date: 2026-06-25
+Date: 2026-07-10
 
 Purpose: repeatably prove current `taliya-product-ui` package readiness and current `taliya-internal` adoption readiness without mixing it with source-image 1:1 certification.
 
-This runbook is operational evidence for local library consumption. Visual parity status is governed by the visual certification audits; as of the current 99% visual scope, the generated backlog reports 0 incomplete component/image certification rows.
+This runbook is operational evidence for local library consumption. Visual parity status is governed by the visual certification audits; the current full active-image map reports 74 incomplete image-certification rows, all with an actionable capture or reference-sheet review plan but none automatically approved.
 
 ## Standard Current-Scope Check
 
@@ -17,6 +17,7 @@ corepack pnpm readiness:audit
 This runs:
 
 - token governance;
+- strict Storybook product-anatomy ownership and its official-override negative probe;
 - component/story architecture;
 - public page-kit API;
 - package boundaries;
@@ -219,9 +220,18 @@ corepack pnpm full-image-page-coverage:audit:misplaced-source-marker-probe
 corepack pnpm full-image-page-coverage:audit:nonofficial-import-probe
 corepack pnpm full-image-page-coverage:audit:unmapped-map-target-probe
 corepack pnpm visual-certification-backlog:audit
+corepack pnpm source-assets:reconcile
+corepack pnpm source-assets:reconcile:nested-exclusion-probe
+corepack pnpm reference-sheet-coverage:audit
+corepack pnpm reference-sheet-coverage:audit:missing-story-probe
 corepack pnpm visual-certification-plan:audit
 corepack pnpm visual-certification-plan:audit:negative-probe
 corepack pnpm visual-certification-plan:audit:missing-artifact-probe
+corepack pnpm visual-product-review:audit:update
+corepack pnpm visual-product-review:audit
+corepack pnpm visual-certification-capture:check
+corepack pnpm visual-certification-capture:source-contract-probe
+corepack pnpm audit-checks:read-only-probe
 ```
 
 This writes:
@@ -230,8 +240,16 @@ This writes:
 - `specs/001-product-ui-foundation/full-image-page-coverage-audit.json`
 - `specs/001-product-ui-foundation/visual-certification-backlog-audit.md`
 - `specs/001-product-ui-foundation/visual-certification-backlog-audit.json`
+- `specs/001-product-ui-foundation/reference-sheet-coverage-audit.md`
+- `specs/001-product-ui-foundation/reference-sheet-coverage-audit.json`
 - `specs/001-product-ui-foundation/visual-certification-plan-audit.md`
 - `specs/001-product-ui-foundation/visual-certification-plan-audit.json`
+- `specs/001-product-ui-foundation/visual-product-review-audit.md`
+- `specs/001-product-ui-foundation/visual-product-review-audit.json`
+- `tmp/visual-product-review/index.html`
+- `specs/002-readiness-evidence-portability/source-assets-canonical-roster.json`
+
+The HTML board puts each pending source, current capture, diff, metrics, blocker, and next action side by side. It is review assistance only: generating or checking the board never changes an image verdict or grants automatic approval.
 
 ## After Changing Library Code
 
@@ -248,6 +266,16 @@ corepack pnpm --filter @taliya/crm test
 corepack pnpm --filter @taliya/crm lint
 corepack pnpm --filter @taliya/crm build
 ```
+
+For any story, fixture, component, or visual-token change, also run:
+
+```text
+corepack pnpm storybook-anatomy:audit:strict
+corepack pnpm storybook-anatomy:audit:override-probe
+corepack pnpm tokens:audit
+```
+
+The anatomy audit permits only explicitly reported fixture geometry and capture framing in Storybook CSS. Colors, typography, spacing, surface styling, or other appearance/anatomy overrides targeting `.tl-*` or `.tcrm-*` fail the strict gate.
 
 Then pack local artifacts:
 
@@ -413,6 +441,8 @@ Expected report names:
 
 | Failure | Meaning | Usual next action |
 | --- | --- | --- |
+| `storybook-anatomy:audit:strict` | Storybook CSS owns image-coverage anatomy or changes the appearance/anatomy of an official `.tl-*`/`.tcrm-*` component | Remove the override, express capture geometry on a Storybook wrapper, or promote genuinely reusable behavior into `@taliya/ui`/`@taliya/crm` |
+| `storybook-anatomy:audit:override-probe` | The strict anatomy audit accepted an injected official component appearance override | Fix the selector/property ownership classifier before trusting zero-debt evidence |
 | `package-artifacts:audit` | Local tarball is missing package metadata, README, JS, types, CSS, exports, publishable package metadata, CSS side-effect metadata, required React peer dependency metadata, workspace-free packed dependency metadata, concrete packed local Taliya dependency versions, restricted package `files` metadata, clean tarball contents, or required README snippets | Rebuild the affected package, confirm the distributed package is not `private: true`, confirm CSS side effects are declared, confirm React packages use peer dependencies, confirm packed package metadata does not expose `workspace:*`, confirm `files` only publishes `dist` plus the official CSS entrypoint, update the package README, and rerun `pack:local` |
 | `consumer-starter-templates:audit` | Official future CRM starter templates are missing or no longer match `consumer-page-kit-config.example.json` required component roots | Fix `contracts/consumer-starter-files` or the page-kit example so the starter route imports/renders the official roots declared by the config |
 | `consumer-starter-templates:audit:route-contract-probe` | Starter route-local `componentContractId` links can point at missing wrapper contracts without failing | Restore the probe and ensure `audit-consumer-starter-templates.mjs` rejects dangling route-local contract ids |
@@ -439,9 +469,15 @@ Expected report names:
 | `consumer-runtime:audit` | Consumer typecheck/lint/test/build fails | Fix the consumer or package regression before accepting adoption |
 | `consumer-config-versioning:audit` | Consumer config files are missing, invalid JSON, or not tracked by the consumer repo | Add/fix the config files in the consumer repository before accepting adoption |
 | `visual-certification-backlog:audit` | The Batch 9/11 ledgers cannot be parsed into component/image/process certification buckets | Fix ledger formatting or the audit parser before using goal completion evidence |
+| `reference-sheet-coverage:audit` | One of the 11 active reference sheets is missing, has a source hash mismatch, or names a component without one unique official isolated story | Restore the canonical source/story mapping before trusting the reference-sheet certification queue |
+| `reference-sheet-coverage:audit:missing-story-probe` | Reference-sheet coverage accepted removal of a required component story | Fix the audit/probe before treating structural sheet coverage as evidence |
 | `visual-certification-plan:audit` | A pending visual row is missing source/story/components/evidence/blocker/next-action data, current evidence snippets, or a required current evidence assertion | Fix the relevant ledger row or add/update the source-backed current evidence assertion before accepting readiness |
 | `visual-certification-plan:audit:negative-probe` | The plan audit stopped rejecting stale visual evidence or pending rows without current evidence assertions | Fix the plan audit/probe before trusting visual readiness evidence |
 | `visual-certification-plan:audit:missing-artifact-probe` | The plan audit stopped rejecting ledger evidence that points at missing screenshot/metrics artifacts | Fix the artifact existence check/probe before trusting visual readiness evidence |
+| `visual-product-review:audit` | The review board is missing, stale, or no longer matches the current plan and capture evidence | Regenerate the capture if needed, then run `visual-product-review:audit:update`; review decisions remain manual |
+| `source-assets:reconcile` | Folder/ZIP integrity drifted, a known canonical name is absent, or the canonical roster still contains unresolved identities | Restore the named files and update the roster only from an authoritative source list; never fill the gap with nested derivatives or arbitrary images |
+| `visual-certification-capture:check` | Current source/story hashes no longer match the recorded screenshot batch, or one or more expected captures are missing | Regenerate the source-sized visual capture batch; do not convert raw metrics into automatic approval |
+| `visual-certification-capture:source-contract-probe` | Capture currency depends on volatile manifest metadata or accepts an altered official source-image hash | Fix the semantic source contract used by the capture gate before trusting capture evidence |
 | `readiness:audit` | One of the current-scope readiness gates failed | Open `library-readiness-gate.md` and fix the first failed gate |
 
 ## What This Does Not Prove

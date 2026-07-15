@@ -1,20 +1,20 @@
 # Release Channel Audit
 
-Generated: 2026-07-07T11:42:05.883Z
+Generated: 2026-07-15T10:59:54.712Z
 
-Status: pass-local-release-channel
+Status: fail
 
 This report separates the current local install channel from a future registry publish channel. The local channel is enough for `taliya-internal` and for starting a real CRM app from vendored tarballs. Registry publication still needs explicit release decisions.
 
 ## Summary
 
-- Local tarball channel ready: `true`
-- Registry ready: `false`
-- Current package version: `0.0.0`
-- Package artifacts pass: `true`
+- Local tarball channel ready: `false`
+- Registry ready: `true`
+- Current package version: `0.1.0`
+- Package artifacts pass: `false`
 - Local release manifest pass: `true`
 - Local release manifest: `dist-packages/taliya-product-ui-local-manifest.json`
-- Release policy: `pass-current-local-policy`
+- Release policy: `pass-registry-policy`
 - Consumer package sync: `pass`
 - Consumer vendor versioning: `pass`
 - Consumer config versioning: `pass`
@@ -25,16 +25,13 @@ This report separates the current local install channel from a future registry p
 
 | Package | Version | Private | Tarball exists | Registry version ready |
 | --- | --- | --- | --- | --- |
-| `@taliya/tokens` | `0.0.0` | no | yes | no |
-| `@taliya/ui` | `0.0.0` | no | yes | no |
-| `@taliya/crm` | `0.0.0` | no | yes | no |
+| `@taliya/tokens` | `0.1.0` | no | yes | yes |
+| `@taliya/ui` | `0.1.0` | no | yes | yes |
+| `@taliya/crm` | `0.1.0` | no | yes | yes |
 
 ## Registry Blockers
 
-- packages still use placeholder version 0.0.0; choose a real semver release version
-- registry target and access model are not configured in release policy
-- controlled publish/provenance workflow is not configured in release policy
-- consumer dependency migration policy from local tarballs to registry ranges is not configured in release policy
+- None
 
 ## Meaning
 

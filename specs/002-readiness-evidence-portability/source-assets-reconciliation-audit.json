@@ -1,0 +1,1642 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-15T10:59:20.130Z",
+  "status": "blocked-incomplete-canonical-roster",
+  "conclusion": "The delivered folder and ZIP contain 93 known top-level images, while 8 of 101 canonical identities still have no authoritative filename. Count-only evidence cannot prove 101/101.",
+  "expectedCanonicalImageCount": 101,
+  "canonicalTopLevelImageCount": 93,
+  "canonicalCountDelta": 8,
+  "canonicalUniqueHashCount": 92,
+  "recursiveImageCount": 164,
+  "nestedDerivativeImageCount": 71,
+  "mapImageCount": 93,
+  "archive": {
+    "available": true,
+    "imageCount": 164,
+    "exactFolderMatch": true,
+    "mismatchCount": 0,
+    "extraImageCount": 0
+  },
+  "canonicalRoster": {
+    "path": "specs/002-readiness-evidence-portability/source-assets-canonical-roster.json",
+    "authorityStatus": "incomplete-awaiting-authoritative-names",
+    "contractStatus": "pass",
+    "complete": false,
+    "knownNameCount": 93,
+    "unresolvedCount": 8,
+    "unresolvedSlots": [
+      {
+        "id": "unresolved-01",
+        "requiredEvidence": "authoritative filename and matching source image"
+      },
+      {
+        "id": "unresolved-02",
+        "requiredEvidence": "authoritative filename and matching source image"
+      },
+      {
+        "id": "unresolved-03",
+        "requiredEvidence": "authoritative filename and matching source image"
+      },
+      {
+        "id": "unresolved-04",
+        "requiredEvidence": "authoritative filename and matching source image"
+      },
+      {
+        "id": "unresolved-05",
+        "requiredEvidence": "authoritative filename and matching source image"
+      },
+      {
+        "id": "unresolved-06",
+        "requiredEvidence": "authoritative filename and matching source image"
+      },
+      {
+        "id": "unresolved-07",
+        "requiredEvidence": "authoritative filename and matching source image"
+      },
+      {
+        "id": "unresolved-08",
+        "requiredEvidence": "authoritative filename and matching source image"
+      }
+    ],
+    "contractErrors": [],
+    "knownMissing": [],
+    "deliveredOutsideRoster": []
+  },
+  "integrity": {
+    "status": "pass",
+    "mappedMissing": [],
+    "topLevelUnmapped": [],
+    "knownRosterMissing": [],
+    "topLevelOutsideRoster": [],
+    "unclassifiedNested": [],
+    "archiveMismatches": [],
+    "archiveExtraImages": []
+  },
+  "derivativeCounts": {
+    "demo-preview-frame": 39,
+    "demo-contact-sheet": 3,
+    "onboarding-derived-browser-frame": 13,
+    "review-contact-sheet": 3,
+    "onboarding-standardized-unframed": 13
+  },
+  "duplicateTopLevelGroups": [
+    {
+      "sha256": "3343392619b219c75089bcf70e159b39d7d6202ce66e01f9fac97b39b28ef0bd",
+      "files": [
+        "01_round-1_visual-dna-tokens_aprovada.png",
+        "02_round-1_visual-dna-tokens_duplicata.png"
+      ]
+    }
+  ],
+  "topLevelImages": [
+    {
+      "path": "_contact-sheet-analytics-review.jpg",
+      "name": "_contact-sheet-analytics-review.jpg",
+      "bytes": 456793,
+      "sha256": "9e3ca787a757b6917cd340c6a878be3c7bef69faf0d6739ed3134480be478c8d",
+      "width": 1440,
+      "height": 1596,
+      "format": "jpeg"
+    },
+    {
+      "path": "01_round-1_visual-dna-tokens_aprovada.png",
+      "name": "01_round-1_visual-dna-tokens_aprovada.png",
+      "bytes": 1063322,
+      "sha256": "3343392619b219c75089bcf70e159b39d7d6202ce66e01f9fac97b39b28ef0bd",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "02_round-1_visual-dna-tokens_duplicata.png",
+      "name": "02_round-1_visual-dna-tokens_duplicata.png",
+      "bytes": 1063322,
+      "sha256": "3343392619b219c75089bcf70e159b39d7d6202ce66e01f9fac97b39b28ef0bd",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "03_round-2_app-shell_tentativa-1_nao-aprovada.png",
+      "name": "03_round-2_app-shell_tentativa-1_nao-aprovada.png",
+      "bytes": 1096385,
+      "sha256": "e7393449a663944eae70fa1b873ba073161e2159e2f7b2c602d5b526cd845e46",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "04_round-2a_app-shell-tela-base_tentativa-2.png",
+      "name": "04_round-2a_app-shell-tela-base_tentativa-2.png",
+      "bytes": 1206095,
+      "sha256": "188e0263a05f4e9be0eeecffb91eb703b23904dad3f7224b7c55f84dc91ccc8f",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "05_round-2a1_app-shell-tela-base_refino.png",
+      "name": "05_round-2a1_app-shell-tela-base_refino.png",
+      "bytes": 1159878,
+      "sha256": "2381e362c0fcf9e8b413973014961a413c1c9daf3963b12a8d8e344a5f6a9efc",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "06_round-2a2_app-shell-tela-base_aprovada.png",
+      "name": "06_round-2a2_app-shell-tela-base_aprovada.png",
+      "bytes": 1619017,
+      "sha256": "8d95e582474460a10819800392fa21bf2e96939c17f799429b4bc550724c82b3",
+      "width": 1536,
+      "height": 1024,
+      "format": "png"
+    },
+    {
+      "path": "07_round-3a_componentes-web-referencia_aprovada.png",
+      "name": "07_round-3a_componentes-web-referencia_aprovada.png",
+      "bytes": 1358676,
+      "sha256": "9c98afb8ef5c71df402ff20e902d7adc9ea0c8dc2a904f8e03d9f894d591caeb",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "08_round-3b1_inputs-formularios-filtros_aprovada.png",
+      "name": "08_round-3b1_inputs-formularios-filtros_aprovada.png",
+      "bytes": 1150587,
+      "sha256": "6d67d1477ae858e3e76c754574a89de845816b0f26446a3e52116e98de7a8523",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "09_round-3b2_overlays-feedback_aprovada.png",
+      "name": "09_round-3b2_overlays-feedback_aprovada.png",
+      "bytes": 1346284,
+      "sha256": "f1e5c2004b82ae990391f86a40045b1461253d60d9159e5e8af70bb05fa66d2c",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "10_round-3b3_visualizacoes-operacionais_aprovada.png",
+      "name": "10_round-3b3_visualizacoes-operacionais_aprovada.png",
+      "bytes": 1439245,
+      "sha256": "de4d271f392821339ebdf4a105b0877658c9620c1c1a5d22426f9c7bda5485de",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "11_round-3b4_comunicacao-agentes_aprovada.png",
+      "name": "11_round-3b4_comunicacao-agentes_aprovada.png",
+      "bytes": 1358363,
+      "sha256": "50d27f2a1aab96def04cf43c3c408fe1e4ca8eb97d6a433eba0167dec718c5d0",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "12_round-3b5_sistema-plano-governanca_aprovada.png",
+      "name": "12_round-3b5_sistema-plano-governanca_aprovada.png",
+      "bytes": 1320442,
+      "sha256": "fd3cc9da1e3aae8197fca069551389a160bed5441f5fd1c155a95d75ca250be3",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "13_round-3c1_objetos-setup-dados_aprovada.png",
+      "name": "13_round-3c1_objetos-setup-dados_aprovada.png",
+      "bytes": 1432716,
+      "sha256": "c6c9455c1a3a367828028c3a362235c22e44caeddae5f78c419ef45eb45654ef",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "14_round-3c2_agenda-financeiro-documentos_aprovada.png",
+      "name": "14_round-3c2_agenda-financeiro-documentos_aprovada.png",
+      "bytes": 1512173,
+      "sha256": "3229adef1534812589b2bff16b922efb82a7b5b697eb82e8bfa36730cbdc3661",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "15_round-3c3_agentes-auditoria-relatorios_aprovada.png",
+      "name": "15_round-3c3_agentes-auditoria-relatorios_aprovada.png",
+      "bytes": 1420733,
+      "sha256": "90b907f423a5b2f6bcfb973adb7d55ef6f33d835b6aa35bc580f1b8f946c8bdb",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "16_round-4.1S_app-shell_01_base-web.png",
+      "name": "16_round-4.1S_app-shell_01_base-web.png",
+      "bytes": 1063834,
+      "sha256": "f7c0d84210213044b1fb85d2e0f023b3d2089513da08a4c95f3b2bd95d753618",
+      "width": 1450,
+      "height": 1085,
+      "format": "png"
+    },
+    {
+      "path": "17_round-4.1A_hoje_01_acima-da-dobra.png.png",
+      "name": "17_round-4.1A_hoje_01_acima-da-dobra.png.png",
+      "bytes": 1890797,
+      "sha256": "0def0b64ee520c34afcac2723893b939e75df664f5942be247eea5d9c6692397",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "18_round-4.1A_hoje_02_drawer-tarefa.png.png",
+      "name": "18_round-4.1A_hoje_02_drawer-tarefa.png.png",
+      "bytes": 1174293,
+      "sha256": "e4ba6185d7105ada80dc9c53d39cb36f4dbc903afbd88c4ff2247e50370f5066",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "19_round-4.1A_hoje_03_estado-critico-do-dia.png",
+      "name": "19_round-4.1A_hoje_03_estado-critico-do-dia.png",
+      "bytes": 1118947,
+      "sha256": "650d49629ecb7d35372f952743352ce655633fb7833e1e47e639bdd7a413d0fd",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "20_round-4.1A_hoje_04_historico-de-hoje.png.png",
+      "name": "20_round-4.1A_hoje_04_historico-de-hoje.png.png",
+      "bytes": 1007957,
+      "sha256": "e5df0c56a7f828c97bd128f4b6eb2196db7be86753e95117cc5b303cbca254db",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "21_round-4.1B_operacao_01_kanban-geral.png.png",
+      "name": "21_round-4.1B_operacao_01_kanban-geral.png.png",
+      "bytes": 1295413,
+      "sha256": "3a0dc3518a44b2591cbde7725c8bfa1efc90198d20c6828a735f38213293d346",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "22_round-4.1B_operacao_02_kanban-com-drawer.png",
+      "name": "22_round-4.1B_operacao_02_kanban-com-drawer.png",
+      "bytes": 1514805,
+      "sha256": "f6d8ef0595367782f2513d925d6319dba39ce36a3027a435410d7492bca59cb6",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "23_round-4.1C_tarefas_01_lista-detalhe.png.png",
+      "name": "23_round-4.1C_tarefas_01_lista-detalhe.png.png",
+      "bytes": 1152998,
+      "sha256": "33838b8633896675ec55fb1332194d5dcd8825fd3c844682ae28b367f5762921",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png",
+      "name": "24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png",
+      "bytes": 1042405,
+      "sha256": "90c4ef51732512ef24b80e5ac2e6280fc6d1e9953005d0256762c07c0de048f7",
+      "width": 1491,
+      "height": 1055,
+      "format": "png"
+    },
+    {
+      "path": "24_round-4.1D_inbox_01_conversa-aberta.png.png",
+      "name": "24_round-4.1D_inbox_01_conversa-aberta.png.png",
+      "bytes": 1219282,
+      "sha256": "91aafcbe5189d1f254f9c4b0b55d92859cb78876ac6bf91bf5ab92d3c6609800",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "25_round-4.1C_aprovacoes_01_lista-decisao-detalhe.png.png",
+      "name": "25_round-4.1C_aprovacoes_01_lista-decisao-detalhe.png.png",
+      "bytes": 1267135,
+      "sha256": "03deee82fb1d479130ba0dc39a6ba2f4ed2dee72cb2039c6cf3fa8703aac17d7",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "26_round-4.1F_agenda_01_calendario-operacional.png.png",
+      "name": "26_round-4.1F_agenda_01_calendario-operacional.png.png",
+      "bytes": 1398613,
+      "sha256": "2cf8cb2eaaa92f7d6e239f0f6915146070efa745c539bc16e28f4222ae3c9c3e",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "27_round-4.1E_alunos_01_lista-perfil-resumido.png.png",
+      "name": "27_round-4.1E_alunos_01_lista-perfil-resumido.png.png",
+      "bytes": 1342722,
+      "sha256": "9bbd693b99dbcce25fbe7edfb7a7d3c57367c676c77f7ad6a8922d060fb08ef1",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png",
+      "name": "28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png",
+      "bytes": 1194859,
+      "sha256": "173818d18e3aed10478522b7ed9ba31283a0013f8382e51f00b761356fa92f38",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "29_round-4.1F_aula_01_detalhe-com-chamada.png.png",
+      "name": "29_round-4.1F_aula_01_detalhe-com-chamada.png.png",
+      "bytes": 1123614,
+      "sha256": "4d9f027f918ab9a31880760d5e7a5fd00f7791d7b521b05924e99cfca17530e5",
+      "width": 1487,
+      "height": 1058,
+      "format": "png"
+    },
+    {
+      "path": "30_round-4.1F_financeiro_01_visao-geral-filas.png.png",
+      "name": "30_round-4.1F_financeiro_01_visao-geral-filas.png.png",
+      "bytes": 1160817,
+      "sha256": "66665fc729c0533be2a8ee589d11565606c2ae09fdb7809160dce448b54b3260",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png",
+      "name": "31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png",
+      "bytes": 1299999,
+      "sha256": "913e55801ec6da3e7c224169fabf51a7116a5a732c293ae79ee404e9a1122e34",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png",
+      "name": "32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png",
+      "bytes": 1332162,
+      "sha256": "21cfd5d67788d31680031073ed01c5399e10ac7b7e4cd58c4d6cf524f2922d26",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "33_round-4.1F_financeiro_03_kanban-financeiro.png.png",
+      "name": "33_round-4.1F_financeiro_03_kanban-financeiro.png.png",
+      "bytes": 1170422,
+      "sha256": "3d40965fd11f4fd30f884a27399f3daf1a7966db00b0f2d7ed775fc1d65c87f8",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png",
+      "name": "34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png",
+      "bytes": 1149293,
+      "sha256": "33eb45a8e162cc721221272a041f3918828087adcb86a918f165eb7bd7ac8ae8",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "35_round-4.1F_turmas_01_lista-detalhe.png.png",
+      "name": "35_round-4.1F_turmas_01_lista-detalhe.png.png",
+      "bytes": 1074481,
+      "sha256": "ef572f093e09a410a7f21941057db2740f04864abad4dc81053d7c5aaa008bf0",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png",
+      "name": "36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png",
+      "bytes": 1218454,
+      "sha256": "bcf2d8b13856ad5555e7ae0c7b0bb49b19f55b57b223ec09a5c70bb7c1e8e20d",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "37_round-4.1G_vendas_01_pipeline-kanban.png.png",
+      "name": "37_round-4.1G_vendas_01_pipeline-kanban.png.png",
+      "bytes": 1200112,
+      "sha256": "c73489a76d7d7fa4f560fb0e0ccbef01618b0aba218536a9666de64af320d69a",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "38_round-4.1G_vendas_02_lista-interessados.png.png",
+      "name": "38_round-4.1G_vendas_02_lista-interessados.png.png",
+      "bytes": 1136736,
+      "sha256": "c408e7252eb9ddf51937657b1aa2b9316cacd7e7d1a0f0f85ebfce600bc7ee2f",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "39_round-4.1G_experimental_01_lista-acompanhamento.png.png",
+      "name": "39_round-4.1G_experimental_01_lista-acompanhamento.png.png",
+      "bytes": 1188030,
+      "sha256": "ddecd6b81a6914b7ae13bf30354b7b09515b7e5acd5134e172004413eea23963",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "40_round-4.1G_matriculas_01_checklist-conversao.png.png",
+      "name": "40_round-4.1G_matriculas_01_checklist-conversao.png.png",
+      "bytes": 1232600,
+      "sha256": "dfdd32b8868f5a43822de90d0e31942a344a0e3e5da9b26826becd6ebaa26a19",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "41_round-4.1H_retencao_01_riscos-lista-drawer.png.png",
+      "name": "41_round-4.1H_retencao_01_riscos-lista-drawer.png.png",
+      "bytes": 1387263,
+      "sha256": "bbf3da253735d839c95bdff0c234fdbde166d45344b7734f2a0c0dd6cffd1f04",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "42_round-4.1H_cancelamentos_01_fila-salvamento-drawer.png.png",
+      "name": "42_round-4.1H_cancelamentos_01_fila-salvamento-drawer.png.png",
+      "bytes": 1372705,
+      "sha256": "f538b467a17a72deba76c4f8533cf964d12dc1178dbf39e2e48fbd3748815fd0",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "43_round-4.1H_reativacoes_01_ex-alunos-retorno.png.png",
+      "name": "43_round-4.1H_reativacoes_01_ex-alunos-retorno.png.png",
+      "bytes": 1211148,
+      "sha256": "1875b1228eca4ec2d2db5de847b910c9a501f3f02c6f43dba9edba3699b719a2",
+      "width": 1659,
+      "height": 948,
+      "format": "png"
+    },
+    {
+      "path": "44_round-4.1H_reclamacoes_01_fila-caso-sensivel-drawer.png.png",
+      "name": "44_round-4.1H_reclamacoes_01_fila-caso-sensivel-drawer.png.png",
+      "bytes": 1259811,
+      "sha256": "533e6e0b71f4f98002efebb4514ac8d6538d6f55b200c990d38d03a4e907daf7",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "45_round-4.1I_relatorios_01_visao-gestao.png.png",
+      "name": "45_round-4.1I_relatorios_01_visao-gestao.png.png",
+      "bytes": 1273201,
+      "sha256": "d7b580b294b3f1c13c2fca34f81adc1719d71e20231065721910f2efdf05818d",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png",
+      "name": "46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png",
+      "bytes": 1250773,
+      "sha256": "a29cc1d0e0cd06e756e9847bf137c71d81e1a1ee1a21dbedaae64115cdadcd6f",
+      "width": 1586,
+      "height": 992,
+      "format": "png"
+    },
+    {
+      "path": "47_round-4.1J_suporte_01_central-studio-taliya.png.png",
+      "name": "47_round-4.1J_suporte_01_central-studio-taliya.png.png",
+      "bytes": 1105083,
+      "sha256": "13cc2b46063f35367fe641b501755b9a679049ced9ed314bb6c7fb5ff505384f",
+      "width": 1586,
+      "height": 992,
+      "format": "png"
+    },
+    {
+      "path": "48_round-4.1K_internal_01_visao-operacional.png.png",
+      "name": "48_round-4.1K_internal_01_visao-operacional.png.png",
+      "bytes": 1229722,
+      "sha256": "ee19efd23cb1a33315a39c6ec111cd2fdd09017e56903e204de4376abba623d6",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "49_round-4.1K_internal_02_tenants-lista-detalhe.png",
+      "name": "49_round-4.1K_internal_02_tenants-lista-detalhe.png",
+      "bytes": 1343923,
+      "sha256": "c5d54ca258ac5d4718886e3d3b361432c8c8959a079ace8a7001850bf45175ce",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png",
+      "name": "50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png",
+      "bytes": 1422625,
+      "sha256": "7b751bb9975ee136ad13cadf14f85fb2acb52bd439e926bd8c4591432d557d11",
+      "width": 1536,
+      "height": 1024,
+      "format": "png"
+    },
+    {
+      "path": "51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "name": "51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "bytes": 1248623,
+      "sha256": "5448f60632fc32b04d557cb788e5aebe13b02991aa044aa684b461d429a1e0ac",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "name": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "bytes": 1203680,
+      "sha256": "24e1264de2ae7c00e94d591e715785a2427bc3eee2dd964f749288ffdd92e290",
+      "width": 1086,
+      "height": 1448,
+      "format": "png"
+    },
+    {
+      "path": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "name": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "bytes": 1157976,
+      "sha256": "14753f7c39eb1575971845e7344852276cd258548a09679b19741fc8dec67948",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51D_round-4.1J_onboarding_bloco-1-studio-aprovado.png",
+      "name": "51D_round-4.1J_onboarding_bloco-1-studio-aprovado.png",
+      "bytes": 1099206,
+      "sha256": "90050c84d828eeb762d8c01cd7ef5082433b96cd38809d6b255cda18a13961d5",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "name": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "bytes": 1109696,
+      "sha256": "61c07a1b3018cf7590fb138c2cd441bf32303044269e97910f01fb8246378287",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "name": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "bytes": 1153023,
+      "sha256": "27ccd9ffbd7b64aad1fe1d8f0813fda65e68d5aabc67a476b3897faec2e87bb9",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "name": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "bytes": 1205241,
+      "sha256": "5a0a2ad6a2f43b9da1e8f8713675a8a44c9a9859b0e7d7ff21bef85264693d49",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "name": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "bytes": 1204815,
+      "sha256": "754fd6ef8f776d674f31123d2f1fe673e8cb6c734cc50daad0457d3c3f57ad3d",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "name": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "bytes": 1120508,
+      "sha256": "72d416a223672fc79ac7354770e2080857c3d006db86c5dcfa33be8c76690097",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "name": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "bytes": 1159550,
+      "sha256": "bbe9e1d2e34f88562547d64393ddbd1fc435ebdeb9a55e16963b0446edf4a4e7",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "name": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "bytes": 1160591,
+      "sha256": "65a529d6a15aee9d3a1c2aad409d87b9640ef4cc02a141ac38729c403a103f5b",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "name": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "bytes": 1134995,
+      "sha256": "4b0feec902394c3ee4dac2d428d2fb7cd900c0bafbe932ace13996abb2a10a9e",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "name": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "bytes": 1183276,
+      "sha256": "8403f4f28345b43ff8f7a56681a1f69716e3ef1b05558070a6932b89bc67e302",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png",
+      "name": "52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png",
+      "bytes": 1005245,
+      "sha256": "c3951553b6d309a71df2da745aab6ae76074773932f129ac06ff11454185b2f9",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png",
+      "name": "53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png",
+      "bytes": 1109397,
+      "sha256": "2f064a62996e39245ed65e1c23a48d1704a3d8a3abc7ed53a8e354ff3c0bb3ce",
+      "width": 1491,
+      "height": 1055,
+      "format": "png"
+    },
+    {
+      "path": "54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png",
+      "name": "54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png",
+      "bytes": 1377193,
+      "sha256": "0ffca4b32ec68bc05c86628bc9ef761c213894946f4ddc86acb98e46b5fc4e4a",
+      "width": 1536,
+      "height": 1024,
+      "format": "png"
+    },
+    {
+      "path": "55_round-4.1L_agentes_04_fluxo-falta-com-aviso-aprovado.png",
+      "name": "55_round-4.1L_agentes_04_fluxo-falta-com-aviso-aprovado.png",
+      "bytes": 1337310,
+      "sha256": "6056df75c6e6f153f5f762d4c4f32e9d348f4710261535167cd7a426b6aa5967",
+      "width": 1536,
+      "height": 1024,
+      "format": "png"
+    },
+    {
+      "path": "56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png",
+      "name": "56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png",
+      "bytes": 1169340,
+      "sha256": "76225ba37136e8ae90bf2f371104547a5fc2e1f8b8df72028a7cdb1bb7d1442d",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "58_round-4.1L_agentes_05_teste-fluxo-falta-com-aviso-aprovado.png",
+      "name": "58_round-4.1L_agentes_05_teste-fluxo-falta-com-aviso-aprovado.png",
+      "bytes": 1253425,
+      "sha256": "5eaa6b8452e0a47f29cbaf40b577c2c924c19ef569f6f863aecd51c889cd16d9",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png",
+      "name": "59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png",
+      "bytes": 1302085,
+      "sha256": "78b9698465045fafc7d458ebfd4f5f3f9df2a29b0da7893c7ac6a5bfbd46650d",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png",
+      "name": "60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png",
+      "bytes": 1113122,
+      "sha256": "b315f552d098f929a5c1718acd017d1ba3f975d4d17457e9f098e3c3bd40582c",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "61_round-4.1M_configuracoes_02_permissoes-aprovado.png",
+      "name": "61_round-4.1M_configuracoes_02_permissoes-aprovado.png",
+      "bytes": 1126024,
+      "sha256": "845b061d56f9d6474c18cd6db5f7d103ed5aa4eb4c20ecf26beaf28dc5e0284b",
+      "width": 1491,
+      "height": 1055,
+      "format": "png"
+    },
+    {
+      "path": "62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png",
+      "name": "62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png",
+      "bytes": 1186970,
+      "sha256": "04a6977eecddab69e9a4d79c8b4b1633e13d61978403d399ec4344f118ea69d5",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "63_round-4.1M_configuracoes_04_agenda-aprovado.png",
+      "name": "63_round-4.1M_configuracoes_04_agenda-aprovado.png",
+      "bytes": 1138838,
+      "sha256": "ce65e34d73251598f59dad6518bfe425f27f4b8a9b6f311b3b02004ced1fb719",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "64_round-4.1M_configuracoes_05_notificacoes-aprovado.png",
+      "name": "64_round-4.1M_configuracoes_05_notificacoes-aprovado.png",
+      "bytes": 1129599,
+      "sha256": "b48a5328a13b6c1994de5234e65ead9c40cad0593dc2f96ac4e7e2ef97fb3e71",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "65_round-4.1N_billing_01_assinatura-taliya-aprovado.png",
+      "name": "65_round-4.1N_billing_01_assinatura-taliya-aprovado.png",
+      "bytes": 1166878,
+      "sha256": "7a38a53d6966cf78273f38dd4e37f0d7315e7ab0689a52ea208653e0c37d7bb1",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "66_round-4.1N_billing_02_faturas-taliya-aprovado.png",
+      "name": "66_round-4.1N_billing_02_faturas-taliya-aprovado.png",
+      "bytes": 1052705,
+      "sha256": "2a4d7eb753b273c5b28ddfed6cc0c972c9e0af73bbc8a2ffcd5b824ca0e1dae5",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "67_round-4.1N_billing_03_add-ons-taliya-aprovado.png",
+      "name": "67_round-4.1N_billing_03_add-ons-taliya-aprovado.png",
+      "bytes": 1063203,
+      "sha256": "79df61400c5e8708d4e8592d712748ad1582b276fe586daaaf3acd5f33ce43d7",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "68_round-4.1O_uso_01_visao-geral-aprovado.png",
+      "name": "68_round-4.1O_uso_01_visao-geral-aprovado.png",
+      "bytes": 1185218,
+      "sha256": "b06fcb9aafe10cbac6e86dbd7cb87a4962c2dbcb7d9c6b26265dfbc0455e43e6",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "69_round-4.1O_uso_02_extrato-aprovado.png",
+      "name": "69_round-4.1O_uso_02_extrato-aprovado.png",
+      "bytes": 1181815,
+      "sha256": "146f6ab8373997c0a727c8837d57c0ea4cb31f97d00d5e80afb5d6313c5d3053",
+      "width": 1448,
+      "height": 1086,
+      "format": "png"
+    },
+    {
+      "path": "70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png",
+      "name": "70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png",
+      "bytes": 1165535,
+      "sha256": "d49dbebb51f0c6b8d47537f7348d83c2c569ab09294b90c5fe317ee09e49040a",
+      "width": 1586,
+      "height": 992,
+      "format": "png"
+    },
+    {
+      "path": "71_round-4.1Q_acesso-assinatura_shell-base-aprovado.png",
+      "name": "71_round-4.1Q_acesso-assinatura_shell-base-aprovado.png",
+      "bytes": 1074921,
+      "sha256": "57e02bd6ad0c8263ca70543e1b8e533ddf61fc692ee47215eec87b7dba33ad09",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "72_round-4.1Q_acesso-assinatura_signup-criar-conta-salvo-ajustes.png",
+      "name": "72_round-4.1Q_acesso-assinatura_signup-criar-conta-salvo-ajustes.png",
+      "bytes": 910639,
+      "sha256": "7a2ef5ac1d92fcb8647b51b4463eecb9e7868efae8be7758d1e01fc226b0b772",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "73_round-4.1Q_acesso-assinatura_signin-entrar-salvo-ajustes.png",
+      "name": "73_round-4.1Q_acesso-assinatura_signin-entrar-salvo-ajustes.png",
+      "bytes": 1065573,
+      "sha256": "448d1845d868061b3277d45c9c376a9870d1638e6f0b4a679624e651fe8cafc1",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "74_round-4.1Q_acesso-assinatura_revisar-assinatura-aprovado.png",
+      "name": "74_round-4.1Q_acesso-assinatura_revisar-assinatura-aprovado.png",
+      "bytes": 1188955,
+      "sha256": "a90fb8f8ba5c5b2f09e12f8686a93d72908d184b2c74e38a96901ce3657fde6c",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "75_round-4.1Q_acesso-assinatura_aguardando-confirmacao-aprovado.png",
+      "name": "75_round-4.1Q_acesso-assinatura_aguardando-confirmacao-aprovado.png",
+      "bytes": 1265410,
+      "sha256": "471278a4228f69acb10525890bb50481cef392db62c9893a9651ec854f589e3e",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "76_round-4.1Q_acesso-assinatura_resolver-assinatura-aprovado.png",
+      "name": "76_round-4.1Q_acesso-assinatura_resolver-assinatura-aprovado.png",
+      "bytes": 1168215,
+      "sha256": "9871d18136aa07d758acd58bedd8716fc8378cff062344d92503acdea5e04f18",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "77_round-4.1Q_acesso-assinatura_assinatura-confirmada-setup-guiado-aprovado.png",
+      "name": "77_round-4.1Q_acesso-assinatura_assinatura-confirmada-setup-guiado-aprovado.png",
+      "bytes": 1010321,
+      "sha256": "ccd281a678f335623d3af0f247bcc7058b953da20eff68c78af3191b893ed674",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "name": "78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "bytes": 1164699,
+      "sha256": "853f13548e24cca9f54ec9fd74e402c7abc898916f2685da1957dce7fe18772b",
+      "width": 1672,
+      "height": 941,
+      "format": "png"
+    },
+    {
+      "path": "79_round-4.1S_app-shell_01_base-web-sem-conteudo.png",
+      "name": "79_round-4.1S_app-shell_01_base-web-sem-conteudo.png",
+      "bytes": 472397,
+      "sha256": "c0a75d47dd9f5b5e9eeb0c020a79e742533a3cef365b796cbc66e1171a89adfc",
+      "width": 1160,
+      "height": 868,
+      "format": "png"
+    },
+    {
+      "path": "crm_1.webp",
+      "name": "crm_1.webp",
+      "bytes": 69138,
+      "sha256": "98d0f479fc8d96d92db9fb9a66da9cb71841407ca7db915dde4b581bc5d57111",
+      "width": null,
+      "height": null,
+      "format": "unknown"
+    }
+  ],
+  "nestedImages": [
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/01_01_login.jpg",
+      "name": "01_01_login.jpg",
+      "bytes": 181066,
+      "sha256": "5b3022f667934e29203f1b2f05c6418541f6611e8a5178e89694805c7c827cc5",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/02_02_revisar.jpg",
+      "name": "02_02_revisar.jpg",
+      "bytes": 191670,
+      "sha256": "3456c0104f8f5d6c657a80ddf4b1e0c7da96ecdc7fbeefaf38dc785d16f0376d",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/03_03_confirmada.jpg",
+      "name": "03_03_confirmada.jpg",
+      "bytes": 210255,
+      "sha256": "4cfc7ba99a03de5bd336e7d8699495dd0f0e7689fd95a5219d7bfc2ac2b5c9b6",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/04_04_bem_vindo.jpg",
+      "name": "04_04_bem_vindo.jpg",
+      "bytes": 179595,
+      "sha256": "94585d83b4a8b268bf0cd2ca7ea2758965591dd5a4c3cfc35113374366528cbc",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/05_05_studio.jpg",
+      "name": "05_05_studio.jpg",
+      "bytes": 230982,
+      "sha256": "46392a3d2e8a65767211c5c99620951feba354f3ab054afa5883ab8f01aaf4cd",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/06_06_equipe.jpg",
+      "name": "06_06_equipe.jpg",
+      "bytes": 240392,
+      "sha256": "42248215b370e60e6309a45edb655e4e5fabdb8fb35cb0656bbc744390016d6a",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/07_07_canais.jpg",
+      "name": "07_07_canais.jpg",
+      "bytes": 274060,
+      "sha256": "606a1ae01cdac48c10cf5d72d32339e5195089b6f8357ebf2aceb09db4c2d876",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/08_08_planos.jpg",
+      "name": "08_08_planos.jpg",
+      "bytes": 259053,
+      "sha256": "160080fc0849c12f6bf60e576d077a46b5bf5bf910f6027d9041111a5e0f2459",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/09_09_pagamento.jpg",
+      "name": "09_09_pagamento.jpg",
+      "bytes": 253796,
+      "sha256": "0902e77f6d3d5b0ae11b5222b294a030d65a2d45957f026ddb66905dafef4d04",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/10_10_alunos.jpg",
+      "name": "10_10_alunos.jpg",
+      "bytes": 253622,
+      "sha256": "6f7c280b12b3c946362762b4fc0d9ab3c2feb763e996998305ab18486028306a",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/11_11_turmas.jpg",
+      "name": "11_11_turmas.jpg",
+      "bytes": 251518,
+      "sha256": "7527fb96ba0fc26d3b3be21f730d69550259d9dd289399f845a61b7cb6952cfc",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/12_12_agenda.jpg",
+      "name": "12_12_agenda.jpg",
+      "bytes": 253227,
+      "sha256": "f1473593ffcce59fcb99098cbf166a321110fc091cfe3af8ab037e6dcfdc3716",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-frames/13_13_revisao.jpg",
+      "name": "13_13_revisao.jpg",
+      "bytes": 265212,
+      "sha256": "0fe9d459eb27e63cbaa96e288c57e139463fe49052079d862ae766f9a454e461",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v4/preview-grid-demo-01-v4.jpg",
+      "name": "preview-grid-demo-01-v4.jpg",
+      "bytes": 226984,
+      "sha256": "7efffb50bc52a26667170dc5c51f342dd3ee108e22d3d69d00c19f91ed2e7742",
+      "width": 1152,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-contact-sheet"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/01_01_login.jpg",
+      "name": "01_01_login.jpg",
+      "bytes": 132101,
+      "sha256": "8c17db8b218c45f1ee581c2cafc20df6222d8ef389caa82cd74b5e84904ad39e",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/02_02_revisar.jpg",
+      "name": "02_02_revisar.jpg",
+      "bytes": 153368,
+      "sha256": "efa6e8b8ee79762e708033fabcdcab08f6930cc6259f1dbbf2e386d3f542c49b",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/03_03_confirmada.jpg",
+      "name": "03_03_confirmada.jpg",
+      "bytes": 160702,
+      "sha256": "aa10eff483ff28034e815d45bbbece017c865753a06d75f5d81c2605629cc6d7",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/04_04_bem_vindo.jpg",
+      "name": "04_04_bem_vindo.jpg",
+      "bytes": 157489,
+      "sha256": "a21eea68d7f195d236a998415a3b9c560828f97be0e6b1af07b3b2e3d0fa4805",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/05_05_studio.jpg",
+      "name": "05_05_studio.jpg",
+      "bytes": 220088,
+      "sha256": "e0d26e2d27cd58a17ffef5365163c758bb09b8e37aafcd19cfda07b7bb7f4fc1",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/06_06_equipe.jpg",
+      "name": "06_06_equipe.jpg",
+      "bytes": 237690,
+      "sha256": "07d78e04f7a24907b1716a2003e6101b3a8df558e9da2a275dbdded627e8ad89",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/07_07_canais.jpg",
+      "name": "07_07_canais.jpg",
+      "bytes": 271702,
+      "sha256": "9d59d1c665d2a4a0dc8a6f2eca26e3a0ece88dc44dc2a814fb389ffec35b795a",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/08_08_planos.jpg",
+      "name": "08_08_planos.jpg",
+      "bytes": 274180,
+      "sha256": "c59d07cabda6d6954aedbea8d0e9cebd23b5f06e77cf451fbfb0c655dfec8361",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/09_09_pagamento.jpg",
+      "name": "09_09_pagamento.jpg",
+      "bytes": 250993,
+      "sha256": "535a232fc4cc3ffccc939f68fcb3236c8a90e8614a728216a09e0a2f4a9e6113",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/10_10_alunos.jpg",
+      "name": "10_10_alunos.jpg",
+      "bytes": 249360,
+      "sha256": "1152234f912c643caa37f13134646edb8f2f9e482a57f9ce9cf91d706fb15078",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/11_11_turmas.jpg",
+      "name": "11_11_turmas.jpg",
+      "bytes": 253624,
+      "sha256": "c311ec7431ad8f43af9467e689e6a1ca64ab919cca634314a817e8ef74db7922",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/12_12_agenda.jpg",
+      "name": "12_12_agenda.jpg",
+      "bytes": 255787,
+      "sha256": "09550f687fa8ac57daf61767508616c486b977bc004b2e69ac1db76ba99ed075",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-frames/13_13_revisao.jpg",
+      "name": "13_13_revisao.jpg",
+      "bytes": 270239,
+      "sha256": "9b77a33c4153b608411b221a7d0584da667a75a36a8ed3b31db02e5a5022e201",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v5/preview-grid-demo-01-v5.jpg",
+      "name": "preview-grid-demo-01-v5.jpg",
+      "bytes": 351809,
+      "sha256": "7ce10110a7b774fedd1e23f9b309a93ff5dea8794f32a2cbde1d6b63ce94809e",
+      "width": 1350,
+      "height": 1265,
+      "format": "jpeg",
+      "classification": "demo-contact-sheet"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/01_01_login.jpg",
+      "name": "01_01_login.jpg",
+      "bytes": 132101,
+      "sha256": "8c17db8b218c45f1ee581c2cafc20df6222d8ef389caa82cd74b5e84904ad39e",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/02_02_revisar.jpg",
+      "name": "02_02_revisar.jpg",
+      "bytes": 153368,
+      "sha256": "efa6e8b8ee79762e708033fabcdcab08f6930cc6259f1dbbf2e386d3f542c49b",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/03_03_confirmada.jpg",
+      "name": "03_03_confirmada.jpg",
+      "bytes": 160911,
+      "sha256": "6249eb06108063a8c3e77dcd8cb5560dafa26225129328c755d1f87bd9bd8751",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/04_04_bem_vindo.jpg",
+      "name": "04_04_bem_vindo.jpg",
+      "bytes": 157615,
+      "sha256": "ede874af3e8b51cb61760d49be2676c1f71d72208f618cd35e0f44ab88b8856d",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/05_05_studio.jpg",
+      "name": "05_05_studio.jpg",
+      "bytes": 220066,
+      "sha256": "0ef6f9d1b4d5589a1d88af843301ba018a3004f6fc2f03709bb715051b5af387",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/06_06_equipe.jpg",
+      "name": "06_06_equipe.jpg",
+      "bytes": 237799,
+      "sha256": "dd259c1bfa1e57decf449775edd766d792382a642f0b0788e9d222c62e7ffd54",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/07_07_canais.jpg",
+      "name": "07_07_canais.jpg",
+      "bytes": 271895,
+      "sha256": "51fbb84ba4a3d8c353ff0f0ec48e90f29f9228ef0cc23a78a3f0cd6188172169",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/08_08_planos.jpg",
+      "name": "08_08_planos.jpg",
+      "bytes": 274051,
+      "sha256": "3f3a3e08f1322f27f94a9f11c4cb0c9251f90e4ced0c167d4461d99b137f29b6",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/09_09_pagamento.jpg",
+      "name": "09_09_pagamento.jpg",
+      "bytes": 250689,
+      "sha256": "bce60d3954aab47e1968b3dfae17a9ee8e9036d024ddb322bba18c606a0a0444",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/10_10_alunos.jpg",
+      "name": "10_10_alunos.jpg",
+      "bytes": 249339,
+      "sha256": "8199521b6f638b1d1a3ef936697f0692667d500091d5ce09e35a09a476130c77",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/11_11_turmas.jpg",
+      "name": "11_11_turmas.jpg",
+      "bytes": 253695,
+      "sha256": "53ae7920803c807ac2ad36f23e308c61b4b3024e94ed5f94e3706db16f710573",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/12_12_agenda.jpg",
+      "name": "12_12_agenda.jpg",
+      "bytes": 255746,
+      "sha256": "d87f4da8688bb143ee5dacaf6b837d75e41abeb6f08456676784fc748a201dda",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-frames/13_13_revisao.jpg",
+      "name": "13_13_revisao.jpg",
+      "bytes": 270840,
+      "sha256": "59dc3bc19921c626f527ebb2838e6cdf303734c734c8b0bcf3dc133f6b521bd1",
+      "width": 1920,
+      "height": 1080,
+      "format": "jpeg",
+      "classification": "demo-preview-frame"
+    },
+    {
+      "path": "_demo_fluxo_01_assinar_setup_v6/preview-grid-demo-01-v6.jpg",
+      "name": "preview-grid-demo-01-v6.jpg",
+      "bytes": 351774,
+      "sha256": "b040c545e3d02e3a7d2101e8fa2ffbc72e965c525531d4ce4295c7d9ee89e99e",
+      "width": 1350,
+      "height": 1265,
+      "format": "jpeg",
+      "classification": "demo-contact-sheet"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "name": "51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "bytes": 1237282,
+      "sha256": "f7069f88da14785a8bcf563fe79df43f16bcf6853ff307c5d0e0cf52275b5943",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "name": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "bytes": 1222440,
+      "sha256": "fae789f9f17e1b234f8984ebaffcef608e3cb872908156b781ad34c5c1f78f35",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "name": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "bytes": 1174469,
+      "sha256": "968b60b8558eeb9953628ee16b65a758aef65d99e9a0471492cdd795748750f8",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "name": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "bytes": 1139896,
+      "sha256": "8736afe90976624aaa9bd624823dc9f191625dded5c16a91290365997c979029",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "name": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "bytes": 1169075,
+      "sha256": "d4adb5027eb00541c39b321cdeba4a2ce8e3a25165a48550d1e96054e6c3e139",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "name": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "bytes": 1205438,
+      "sha256": "e6c16856e1c48979839a3e3b29ebe78b979e81a1095e56fb1a276dac541ca467",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "name": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "bytes": 1197508,
+      "sha256": "9842d662ce068480670020a79f2fa68d0f609171b23e1c335ecf6fb46a17b0e4",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "name": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "bytes": 1150153,
+      "sha256": "38cb67cc6c73519a914c529b714871939d4982dd2879322af6aa591dbc8f3c71",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "name": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "bytes": 1170013,
+      "sha256": "8c63f2803d6c6ca7245b41ac4a5a06d4b1466018932d4bcddb94723bd248851a",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "name": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "bytes": 1173598,
+      "sha256": "a87aa4971a5af219b028545b7893a589889f82f28ff92152b567ed25a26078ed",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "name": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "bytes": 1154128,
+      "sha256": "8d3162e2ad5284892f6b5caaca410346ad403860d8c1c8c48880636923e12b85",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "name": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "bytes": 1187823,
+      "sha256": "843dd0ea519018ff8909b971b9df0d22260ff8700f033da864e2e1102812938a",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/imagens/78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "name": "78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "bytes": 1151136,
+      "sha256": "dd49f643de99bee54f330bef2af68e1a154a778b524cf93607a7d547a81a174d",
+      "width": 1450,
+      "height": 1085,
+      "format": "png",
+      "classification": "onboarding-derived-browser-frame"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/revisao/grid-com-moldura-guias.jpg",
+      "name": "grid-com-moldura-guias.jpg",
+      "bytes": 611309,
+      "sha256": "1b88e5d34c1e3076e6376a8e1fac3fbf3df347df398856add183c4603806cfe5",
+      "width": 1449,
+      "height": 1810,
+      "format": "jpeg",
+      "classification": "review-contact-sheet"
+    },
+    {
+      "path": "_onboarding_com-moldura_13_51A_FINAL_REVISADO/revisao/grid-com-moldura-limpo.jpg",
+      "name": "grid-com-moldura-limpo.jpg",
+      "bytes": 571708,
+      "sha256": "e833ebd60a5c43c62e371b8a049ee8c3fb725208cf5520d7a0315e0daa9123cc",
+      "width": 1449,
+      "height": 1810,
+      "format": "jpeg",
+      "classification": "review-contact-sheet"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "name": "51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "bytes": 1223296,
+      "sha256": "da2fa20cbee6265661ca32503d08dc523bf1d49a9dabd0d6364e149442b410ff",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "name": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "bytes": 1204323,
+      "sha256": "8c67f4a1274fe5a6fe06d25366015b326c0d812c3128204d92642b8458d31b49",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "name": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "bytes": 1118873,
+      "sha256": "a6ae5045a765a5ee2ffc94d672fc8c0cb45d9720206aaf3157c51015a1a13203",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "name": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "bytes": 1062456,
+      "sha256": "7ba24908f2b94ffba08a76ac0cefeac16655d2ea33d712b77a52a7b223ef3e9a",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "name": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "bytes": 1104896,
+      "sha256": "597828715b832069108de4eb491a9c8e4e1ff8bb6194d0bcae49691c1c0317a9",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "name": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "bytes": 1158791,
+      "sha256": "eeb3c39289e0c1071bd9047209469ec829a1a341ccbb814eb9dbf1e08433fe28",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "name": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "bytes": 1146598,
+      "sha256": "acf7470782927c908c9618ec162468deeef51327a19e38862ca3a8b6e544aeaa",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "name": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "bytes": 1075404,
+      "sha256": "12c120c649a5e98efddfd3c99ac58fe35cfecd5bd470aaa1bd511dc8c14902d0",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "name": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "bytes": 1113105,
+      "sha256": "1e58f121821b6660345a0ffdc2480cce6bfb4693579b7a8cf7b580054ad8f3ba",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "name": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "bytes": 1110137,
+      "sha256": "bcb0ba09f4add4f43442a6ad24992e34478c163d84bf7a03c3438f11376763f0",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "name": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "bytes": 1084880,
+      "sha256": "5c9028cadb28fcf7b09041967bfbaa41424cb4177a603be04a9618ba0fb14c7c",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "name": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "bytes": 1130742,
+      "sha256": "920ab3d45b8854191a9f86c087bb119209dbc4afb9e18da4d444bb8b1ed069da",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/imagens/78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "name": "78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "bytes": 1109435,
+      "sha256": "4463e7cda7c78f1125cdb087cb070562698e785ac6607ab4f7844ba27f770829",
+      "width": 1672,
+      "height": 941,
+      "format": "png",
+      "classification": "onboarding-standardized-unframed"
+    },
+    {
+      "path": "_onboarding_sem-moldura_13_padronizadas_51A_FINAL_REVISADO/revisao/grid-com-guias-v6.jpg",
+      "name": "grid-com-guias-v6.jpg",
+      "bytes": 734628,
+      "sha256": "818cb6e62dc1d4121b679851233117dc72619801318eb9e84218c6b6d1f8342b",
+      "width": 1114,
+      "height": 2198,
+      "format": "jpeg",
+      "classification": "review-contact-sheet"
+    }
+  ]
+}

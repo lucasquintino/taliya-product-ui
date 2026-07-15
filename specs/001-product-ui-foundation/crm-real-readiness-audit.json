@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-07T11:42:02.630Z",
-  "status": "pass-ready-to-start-crm-real",
+  "generatedAt": "2026-07-15T10:59:53.462Z",
+  "status": "fail",
   "currentInternalReady": true,
-  "crmRealCanStart": true,
+  "crmRealCanStart": false,
   "realFutureCrmAdoptionExecuted": false,
   "globalGoalComplete": false,
   "counts": {
@@ -24,7 +24,7 @@
     },
     {
       "id": "current-internal-fully-consuming",
-      "status": "pass",
+      "status": "fail",
       "evidence": "library-consumption-status.json and consumer-page-kit-audit.json",
       "meaning": "Internal consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones."
     },

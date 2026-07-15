@@ -1,8 +1,12 @@
 # Full Image Page Coverage Audit
 
-Date: 2026-07-09
+Date: 2026-07-15
 
 Status: pass
+
+Storybook static build available: yes
+
+Source assets available: yes
 
 This audit verifies that every product page/source image target has a dedicated static Storybook image-coverage story, the story source references the exact approved source image filename, and the story source imports official `@taliya/crm` or `@taliya/ui` package components.
 
@@ -73,7 +77,7 @@ It does **not** certify 1:1 visual approval. Visual acceptance remains governed 
 | `51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png` | `crm-image-coverage-setup--image-51-h-onboarding-alunos` | Covered with 9-block reinterpretation | yes | yes | yes | pass |
 | `51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png` | `crm-image-coverage-setup--image-51-i-onboarding-turmas` | Covered with 9-block reinterpretation | yes | yes | yes | pass |
 | `51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png` | `crm-image-coverage-setup--image-51-j-onboarding-agenda` | Covered with 9-block reinterpretation | yes | yes | yes | pass |
-| `51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png` | `crm-image-coverage-setup--image-51-l-onboarding-revisao` | Covered | yes | yes | yes | pass |
+| `51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png` | `crm-image-coverage-setup--image-51-l-onboarding-revisao` | Covered with 9-block reinterpretation | yes | yes | yes | pass |
 | `52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png` | `crm-image-coverage-agentes--image-52-agentes-catalogo` | Covered | yes | yes | yes | pass |
 | `53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png` | `crm-image-coverage-agentes--image-53-agente-agenda-rotinas` | Covered | yes | yes | yes | pass |
 | `54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png` | `crm-image-coverage-agentes--image-54-rotina-presenca-faltas` | Covered | yes | yes | yes | pass |

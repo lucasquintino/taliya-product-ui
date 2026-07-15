@@ -1,10 +1,10 @@
 # Token Governance Audit
 
-Generated: 2026-07-01T05:18:43.560Z
+Generated: 2026-07-15T06:45:33.465Z
 
 ## Verdict
 
-Token governance is clean for the current component surface: package and story CSS contain no actionable literal visual debt, and no high-priority mandatory alias rows remain.
+Token governance is clean for the shipped component surface: package and inline story CSS contain no actionable literal visual debt, Storybook owns no product anatomy, and no high-priority mandatory alias rows remain.
 
 ## Classification Rules
 
@@ -19,6 +19,7 @@ Token governance is clean for the current component surface: package and story C
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | `packages/ui/src/styles.css` | 0 | 0 | 0 | 0 | 0 | 0 |
 | `packages/crm/src/styles.css` | 0 | 0 | 0 | 0 | 0 | 0 |
+| `apps/docs/src/storybook.css` | 46 | 27 | 0 | 464 | 0 | 537 |
 
 Story files inventory:
 
@@ -32,12 +33,20 @@ Story files inventory:
 }
 ```
 
+Storybook CSS ownership is enforced by the strict anatomy audit rather than by treating fixture dimensions as shipped product tokens:
+
+- Product-anatomy debt selectors: 0
+- Official appearance/anatomy overrides: 0
+- Allowed fixture-geometry overrides: 29
+- Capture harness selectors: 26
+- Inventoried Storybook fixture literal lines: 537
+
 ## CRM Token Classification Summary
 
 | Classification | Count |
 | --- | ---: |
-| token especifico justificado | 2094 |
-| alias resolvido | 297 |
+| token especifico justificado | 2660 |
+| alias resolvido | 345 |
 
 ## High-Priority Token Rows
 
@@ -49,7 +58,7 @@ These are the first rows to normalize. The list is capped to keep this document 
 
 ## High-Priority CSS Literals
 
-These component CSS lines need either token replacement or a local justification comment. The list is capped.
+These shipped package CSS lines need either token replacement or a documented domain exception. Storybook fixture dimensions remain inventoried above and are rejected separately if they own product anatomy.
 
 | Location | Kind | Line |
 | --- | --- | --- |

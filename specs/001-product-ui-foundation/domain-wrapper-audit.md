@@ -1,6 +1,6 @@
 # Domain Wrapper Audit
 
-Generated: 2026-07-09T19:43:31.230Z
+Generated: 2026-07-15T06:45:34.425Z
 
 Status: pass
 
@@ -24,6 +24,9 @@ It is not source-image 1:1 certification.
 | `ReplacementTable` | table | pass | maps replacement rows into the official DataTable with student cells, status/mode labels and replacement sorting | - |
 | `OperationActivityTable` | table | pass | renders the operation activity list with operation-specific actor/action/object/status row anatomy and source/empty/loading/blocked states | - |
 | `FieldMappingTable` | table | pass | maps imported fields to Taliya fields with select controls, validation state labels and row actions | - |
+| `ReconciliationSummaryTable` | table | pass | renders the source-derived reconciliation summary in an official Panel with finance-specific cells, status tones and row reconciliation actions | - |
+| `ExecutionTraceTable` | table | pass | renders the source-derived agent execution trace in an official Panel with step, tool, status, duration, cost and error mapping | - |
+| `PrivacyRequestTable` | table | pass | renders the source-derived privacy request workflow in an official Panel with LGPD actions, status mapping and request callbacks | - |
 | `TaskDrawer` | drawer | pass | wraps the official CrmDrawer with task-specific facts, checklist rows, comments, activity and footer actions | - |
 | `ApprovalDrawer` | drawer | pass | keeps the certified approval drawer wrapper around ApprovalPanel with open=false lifecycle and complementary landmark semantics | - |
 | `CaseDrawer` | drawer | pass | wraps the official CrmDrawer with case-specific facts, history and case footer actions | - |
@@ -37,6 +40,7 @@ It is not source-image 1:1 certification.
 | `UsageDrawer` | drawer | pass | wraps the official CrmDrawer with contextual usage-support copy, suggested questions and support composer | - |
 | `SupportTicketDrawer` | drawer | pass | wraps the support ticket panel with ticket drawer lifecycle, state normalization and complementary landmark semantics | - |
 | `TenantSecurityDrawer` | drawer | pass | wraps the tenant security panel with tenant-specific state normalization, close handling and disabled behavior | - |
+| `TenantSummaryDrawer` | drawer | pass | wraps the official CrmDrawer with selected-tenant facts, health, security, activity, copilot and governed actions | - |
 | `CrmRecordDrawer` | drawer | pass | composes the official Drawer primitive into a generic CRM record drawer with facts, sections, tabs and actions | - |
 
 ## Other Exported Domain Wrappers

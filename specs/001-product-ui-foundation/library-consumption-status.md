@@ -1,20 +1,20 @@
 # Library Consumption Status
 
-Generated: 2026-07-07T11:42:01.026Z
+Generated: 2026-07-15T10:59:52.910Z
 
-Status: pass-current-internal-library
+Status: fail
 
 This report is the quick current-state answer for whether `taliya-product-ui` can be consumed as the official reusable UI library. It does not replace source-image 1:1 visual certification and does not claim real future CRM adoption when no real future CRM app has run labeled gates.
 
 ## Summary
 
-- Current Internal/library accepted: `true`
+- Current Internal/library accepted: `false`
 - Current Internal consumes official kit: `true`
 - Internal routes render shell + workspace: `true`
 - Public page-kit runtime manifest works: `true`
 - Technical release candidate passed: `true`
-- Aggregate readiness passed: `true`
-- Missing readiness gates: `none`
+- Aggregate readiness passed: `false`
+- Missing readiness gates: `consumer-integration`, `consumer-package-sync`, `consumer-vendor-versioning`, `consumer-page-kit`, `consumer-runtime`, `consumer-config-versioning`, `goal-completion`
 - Future CRM process passed: `true`
 - Future CRM real adoption executed: `false`
 - Global goal complete: `false`
@@ -27,18 +27,18 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 - Internal routes with shell + workspace: 4
 - Future CRM candidates discovered: 0
 - Future CRM candidates adopted: 0
-- Visual certification incomplete rows: 0
+- Visual certification incomplete rows: 64
 
 ## Status Rows
 
 | Area | Status | Evidence | Meaning |
 | --- | --- | --- | --- |
-| `current-internal-accepted` | pass | library-acceptance-audit.json | Current Internal can use taliya-product-ui as the official reusable UI library. |
+| `current-internal-accepted` | fail | library-acceptance-audit.json | Current Internal can use taliya-product-ui as the official reusable UI library. |
 | `current-internal-consuming-official-kit` | pass | consumer integration/page-kit/runtime/package-sync/vendor-versioning audits | Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones. |
 | `current-internal-routes-render-workspaces` | pass | consumer-page-kit-audit.json route requiredLocalComponents | Every discovered Internal route renders InternalShell plus its local workspace wrapper, so shell-only route regressions fail. |
 | `public-page-kit-runtime` | pass | @taliya/crm and @taliya/crm/standard-page-kit runtime manifest audits | Consumers can discover the standard page kit from the installed package. |
 | `technical-release-candidate` | pass | release-candidate-audit.json | The current package/readiness/release gate bundle is green and includes compact consumption-status and future CRM process gates. |
-| `aggregate-readiness` | pass | library-readiness-gate.json | The aggregate package, consumer, future-fixture, and governance gates are green. |
+| `aggregate-readiness` | fail | library-readiness-gate.json | Readiness is missing required gates: consumer-integration, consumer-package-sync, consumer-vendor-versioning, consumer-page-kit, consumer-runtime, consumer-config-versioning, goal-completion. |
 | `future-crm-process` | pass | future-consumer-discovery-audit.json and future-consumer-adoption-audit.json | Future CRM discovery/adoption process is executable and guarded. |
 | `future-crm-real-adoption` | not-executed | matching labeled readiness report for a discovered future CRM candidate | A real future CRM app has adopted the library. |
 | `global-goal` | not-complete-globally | goal-completion-audit.json and library-acceptance-audit.json | The persistent goal is fully complete, including future CRM adoption. |

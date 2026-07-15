@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-07-09T19:44:17.863Z",
+  "generatedAt": "2026-07-09T22:11:24.844Z",
   "status": "pass",
   "checkMode": true,
-  "consumerRoot": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032",
+  "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112",
   "reportLabel": "future-consumer-fixture",
   "git": {
     "isGitRepo": true,
-    "gitRoot": "C:/Users/lucas/taliya-product-ui/tmp/future-consumer-readiness-fixture-115032",
+    "gitRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112",
     "error": ""
   },
   "configRows": [
     {
       "path": "taliya-readiness.config.json",
-      "absolutePath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032\\taliya-readiness.config.json",
+      "absolutePath": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112/taliya-readiness.config.json",
       "exists": true,
       "jsonValid": true,
       "jsonError": "",
@@ -23,7 +23,7 @@
     },
     {
       "path": "taliya-page-kit.config.json",
-      "absolutePath": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\future-consumer-readiness-fixture-115032\\taliya-page-kit.config.json",
+      "absolutePath": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112/taliya-page-kit.config.json",
       "exists": true,
       "jsonValid": true,
       "jsonError": "",

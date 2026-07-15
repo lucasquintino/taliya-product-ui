@@ -1,7 +1,7 @@
 {
-  "date": "2026-07-09",
+  "date": "2026-07-15",
   "status": "pass",
-  "contractCount": 24,
+  "contractCount": 28,
   "failedCount": 0,
   "legacyDirectDrawerCount": 0,
   "rows": [
@@ -186,6 +186,60 @@
         "statusByState",
         "tcrm-field-mapping-panel__select",
         "tcrm-field-mapping-panel__status"
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ReconciliationSummaryTable",
+      "kind": "table",
+      "value": "renders the source-derived reconciliation summary in an official Panel with finance-specific cells, status tones and row reconciliation actions",
+      "present": true,
+      "globalRoots": [
+        "<Panel"
+      ],
+      "requiredSnippets": [
+        "rows.map",
+        "role=\"table\"",
+        "onReconcile?.(row)",
+        "data-component=\"ReconciliationSummaryTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ExecutionTraceTable",
+      "kind": "table",
+      "value": "renders the source-derived agent execution trace in an official Panel with step, tool, status, duration, cost and error mapping",
+      "present": true,
+      "globalRoots": [
+        "<Panel"
+      ],
+      "requiredSnippets": [
+        "tcrm-execution-trace__table",
+        "role=\"table\"",
+        "onViewAll",
+        "data-component=\"ExecutionTraceTable\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "PrivacyRequestTable",
+      "kind": "table",
+      "value": "renders the source-derived privacy request workflow in an official Panel with LGPD actions, status mapping and request callbacks",
+      "present": true,
+      "globalRoots": [
+        "<Panel"
+      ],
+      "requiredSnippets": [
+        "tcrm-privacy-request__table",
+        "role=\"table\"",
+        "onOpenRequest?.(id)",
+        "data-component=\"PrivacyRequestTable\""
       ],
       "missingGlobalRoots": [],
       "missingRequiredSnippets": [],
@@ -420,6 +474,24 @@
         "data-component=\"TenantSecurityDrawer\"",
         "tcrm-tenant-security-drawer__panel",
         "role=\"complementary\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "TenantSummaryDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with selected-tenant facts, health, security, activity, copilot and governed actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "defaultTenantSummaryFacts",
+        "defaultTenantSummaryActivities",
+        "tcrm-tenant-summary-drawer__actions",
+        "component=\"TenantSummaryDrawer\""
       ],
       "missingGlobalRoots": [],
       "missingRequiredSnippets": [],

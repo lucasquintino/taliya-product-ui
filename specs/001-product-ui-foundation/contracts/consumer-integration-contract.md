@@ -24,9 +24,9 @@ For local package adoption, the dependency declarations must point to the config
 
 ```json
 {
-  "@taliya/tokens": "file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz",
-  "@taliya/ui": "file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz",
-  "@taliya/crm": "file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz"
+  "@taliya/tokens": "file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
+  "@taliya/ui": "file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
+  "@taliya/crm": "file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz"
 }
 ```
 
@@ -112,7 +112,23 @@ corepack pnpm consumer:audit
 
 This gate checks dependency declarations and expected vendor tarball sources, installed `node_modules/@taliya/*` package entrypoints, required installed package contract markers, runtime import of `@taliya/crm` `standardPageKitManifest`, runtime import of `@taliya/crm/standard-page-kit`, CSS import order, tokenized root styles, forbidden implementation imports, forbidden unapproved `@taliya/*` package subpath imports, active local `className=` hooks, and extra active consumer CSS files.
 
-Installed package contract markers are small API/CSS sentinels for recently standardized reusable behavior. The current marker set proves that a consumer is not validating against stale tarballs that lack `CrmProductShell drawerSize="default" | "compact"`, `CrmProductShell pageHeaderRhythm="default" | "spacious" | "compact-stacked" | "dashboard" | "stacked" | "overview"` including compact-stacked/stacked/overview header-action and compact searchless-filter tokens/CSS, `CrmProductShell contentLayout="default" | "main-priority" | "kanban"`, product-shell page background and shell panel/control shadow tokens, product-shell top-navigation rhythm/surface tokens, shell `SegmentedControl` density/surface CSS, base `Icon` sizing CSS/runtime behavior for standalone SVG icons, `drawerPlacement="content"` full-width topbar behavior, replacement floating-drawer rhythm tokens/CSS, ActivityFeed source-density tokens, `WorkListDetailPage layoutMode="main-priority"`, compact checklist drawer tokens, checklist drawer header/rhythm CSS, main-priority work-list tokens/CSS, and compact drawer shell CSS. When a future reusable contract becomes critical for consumers, add a marker to `scripts/audit-consumer-integration.mjs` instead of relying on manual `node_modules` inspection.
+Installed package contract markers prove that a consumer is not validating against stale tarballs. The current sentinels include `browserUrl`, `internal-overview`, `internal-tenants`, `internal-tenant-detail`, `InternalShell` forwarding, `SupportTicketDrawer variant="internal"`, `TenantSummaryDrawer`, and `TenantDetailLayout.footerNote` plus its scoped CSS/tokens. Image 49 consumers use `InternalWorklistPage` plus `TenantSummaryDrawer`; Image 50 consumers use `InternalShell contentLayout="internal-tenant-detail"` plus `TenantDetailLayout`, which renders the security rail without a duplicate drawer. Consumers pass prepared data/callbacks, and the installed-package audit rejects tarballs that lack these contracts. Add future critical behavior to `scripts/audit-consumer-integration.mjs` rather than relying on manual `node_modules` inspection.
+
+The installed package sentinels also include the complete `SetupPage.frameVariant` union and scoped CSS for `guided`, `guided-block`, `guided-main`, `guided-wide`, `guided-review`, and `shell-global`. Image 51A selects `shell-global`; compact pages select `guided`; Images 51D-51F select `guided-block`; Images 51G and 51K select `guided-main`; Images 51I-51J select `guided-wide`; Image 51L selects `guided-review`; welcome keeps `layout="welcome"`. The review frame also owns the nine-step compact rail and full-height final panel. These distinctions are public contracts because applying one geometry globally regresses other setup pages.
+
+The installed CRM package must also expose `CrmWorklistTable.caption` and the scoped Image 51H/51I `SetupStudentsWorkspace` and `SetupClassesWorkspace` density tokens/CSS. This keeps the prepared-student/class caption and all five rows inside each official owner instead of forcing a consumer to add a local footer or table-density override. The same installed-package gate protects `WeeklyHoursGrid variant="schedule"`, its arbitrary `axis`, slot `meta`/`tone`, scoped schedule CSS, and Image 51J setup-agenda tokens so consumers cannot silently fall back to the availability grid or local event markup.
+
+The installed-package sentinels also protect `SetupAgentChat variant="welcome"` plus its scoped responsive CSS and setup-welcome tokens. Future consumers must use this official Image 78 composition rather than scaling the Image 51B panel, nesting a second frame, or recreating welcome-agent messages and quick questions locally.
+
+Installed-package sentinels protect the additive Image 52 shell contract: `CrmProductShell frame="window-inset"`, `pageHeaderRhythm="agents"`, the fixed `445px` AgentCatalog tracks and their scoped CSS/tokens. Consumers use the inset/rhythm only for source-backed catalog pages; operational Agents pages remain on `frame="window"` plus their own rhythm so drawers and full-bleed canvases are not clipped.
+
+Image 53 extends that contract without replacing it: the agent-routines page selects `frame="window-inset"`, `pageHeaderRhythm="agents-routines"`, the official breadcrumb and `AgentRoutineIntro`/`AgentRoutineCard` composition. Installed-package sentinels protect its header offsets, `1224px` routine canvas, intro/grid spacing and `265px` card floor. Consumers pass routine data and callbacks only; they must not reproduce the page rhythm or routine-card dimensions in local CSS.
+
+Image 59 keeps the flush operational shell and selects `pageHeaderRhythm="agents-publish"` plus `CrmRightPanelPage rightPanelVariant="agent-publish"`. The paired content layout, official breadcrumb/route, `AgentPublishRoutineWorkspace` and `AgentFlowDrawer state="publish"` own the complete publication composition. Installed-package sentinels protect the public unions, `85px` header, zero copy offset, `86px` header inset and `0 6px 18px 82px` canvas padding; consumers pass prepared publication data and callbacks only.
+
+Image 70 selects `CrmRightPanelPage rightPanelVariant="agent-execution"` around the official `ExecutionReceipt` and `AgentFlowDrawer state="execution"`. Installed-package sentinels protect the public variant, scoped CSS and `1007px 368px` track allocation with `-5px` offset. Consumers provide breadcrumb, execution metadata, prepared receipt data and callbacks without local grid or drawer-reserve CSS.
+
+Image 60 selects `CrmDashboardPage layoutVariant="settings-hub"`, `pageHeaderRhythm="settings-hub"` and `topNavSelection="none"`. Installed-package sentinels protect the public unions, `161px` header, header offsets and `0 67px 28px 94px` canvas padding. Consumers map prepared configuration areas to official `SettingsHubCard` instances and must not recreate the hub grid or selected-nav override locally.
 
 Run the consumer page-kit audit to confirm current Internal surfaces use the official shell, filter, table, drawer, grid, panel, and state components:
 

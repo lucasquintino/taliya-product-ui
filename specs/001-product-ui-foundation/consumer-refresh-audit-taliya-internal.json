@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-07-15T12:28:50.266Z",
+  "status": "pass",
+  "mode": "write",
+  "checkMode": false,
+  "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
+  "vendor": "vendor/taliya-product-ui",
+  "manifest": "dist-packages/taliya-product-ui-local-manifest.json",
+  "reportLabel": "taliya-internal",
+  "steps": [
+    {
+      "id": "vendor-sync",
+      "commandText": "node scripts/sync-consumer-vendor.mjs --write --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json --report-label taliya-internal",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 59,
+      "stdoutTail": [
+        "Consumer vendor sync write for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
+        "unchanged: vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
+        "unchanged: vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
+        "copied: vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
+        "copied: vendor/taliya-product-ui/taliya-product-ui-local-manifest.json"
+      ],
+      "stderrTail": []
+    },
+    {
+      "id": "dependency-sync",
+      "commandText": "node scripts/sync-consumer-dependencies.mjs --write --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json --report-label taliya-internal",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 40,
+      "stdoutTail": [
+        "Consumer dependency sync write for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
+        "unchanged: @taliya/tokens -> file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
+        "unchanged: @taliya/ui -> file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
+        "unchanged: @taliya/crm -> file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz"
+      ],
+      "stderrTail": []
+    },
+    {
+      "id": "install-plan",
+      "commandText": "node scripts/install-consumer-packages.mjs --write --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json --report-label taliya-internal",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 1217,
+      "stdoutTail": [
+        "Consumer package install plan for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
+        "ready: @taliya/tokens dependency-ok tarball-ok",
+        "ready: @taliya/ui dependency-ok tarball-ok",
+        "ready: @taliya/crm dependency-ok tarball-ok",
+        "Install command: npm install --force --no-audit --no-fund file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
+        "changed 1 package in 1s",
+        "Installed local Taliya packages in ../taliya-internal"
+      ],
+      "stderrTail": [
+        "npm warn using --force Recommended protections disabled."
+      ]
+    },
+    {
+      "id": "lockfile",
+      "commandText": "node scripts/audit-consumer-lockfile.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json --report-label taliya-internal",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 45,
+      "stdoutTail": [
+        "Consumer lockfile audit: pass",
+        "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit-taliya-internal.md",
+        "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit-taliya-internal.json"
+      ],
+      "stderrTail": []
+    },
+    {
+      "id": "package-sync",
+      "commandText": "node scripts/audit-consumer-package-sync.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --report-label taliya-internal",
+      "required": true,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 63,
+      "stdoutTail": [
+        "Consumer package sync audit: pass",
+        "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/001-product-ui-foundation/consumer-package-sync-audit-taliya-internal.md",
+        "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/001-product-ui-foundation/consumer-package-sync-audit-taliya-internal.json"
+      ],
+      "stderrTail": []
+    }
+  ]
+}

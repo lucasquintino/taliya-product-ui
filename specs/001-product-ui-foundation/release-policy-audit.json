@@ -1,31 +1,55 @@
 {
-  "generatedAt": "2026-07-07T11:42:05.370Z",
-  "status": "pass-current-local-policy",
+  "generatedAt": "2026-07-15T10:59:54.538Z",
+  "status": "pass-registry-policy",
   "contractPass": true,
   "currentChannel": "local-tarball",
-  "currentVersion": "0.0.0",
+  "currentVersion": "0.1.0",
   "placeholderVersion": "0.0.0",
-  "registryReady": false,
-  "registryVersionReady": false,
-  "registryDecisionReady": false,
-  "registryBlockers": [
-    "packages still use placeholder version 0.0.0; choose a real semver release version",
-    "registry target and access model are not configured in release policy",
-    "controlled publish/provenance workflow is not configured in release policy",
-    "consumer dependency migration policy from local tarballs to registry ranges is not configured in release policy"
-  ],
+  "registryReady": true,
+  "registryVersionReady": true,
+  "registryDecisionReady": true,
+  "registryBlockers": [],
   "packageVersions": [
     {
       "filePath": "packages/tokens/package.json",
-      "version": "0.0.0"
+      "version": "0.1.0"
     },
     {
       "filePath": "packages/ui/package.json",
-      "version": "0.0.0"
+      "version": "0.1.0"
     },
     {
       "filePath": "packages/crm/package.json",
-      "version": "0.0.0"
+      "version": "0.1.0"
+    }
+  ],
+  "packageMetadata": [
+    {
+      "filePath": "packages/tokens/package.json",
+      "access": "public",
+      "registry": "https://registry.npmjs.org/",
+      "provenance": true,
+      "license": "UNLICENSED",
+      "repository": "git+https://github.com/lucasquintino/taliya-product-ui.git",
+      "pass": true
+    },
+    {
+      "filePath": "packages/ui/package.json",
+      "access": "public",
+      "registry": "https://registry.npmjs.org/",
+      "provenance": true,
+      "license": "UNLICENSED",
+      "repository": "git+https://github.com/lucasquintino/taliya-product-ui.git",
+      "pass": true
+    },
+    {
+      "filePath": "packages/crm/package.json",
+      "access": "public",
+      "registry": "https://registry.npmjs.org/",
+      "provenance": true,
+      "license": "UNLICENSED",
+      "repository": "git+https://github.com/lucasquintino/taliya-product-ui.git",
+      "pass": true
     }
   ],
   "rows": [
@@ -74,7 +98,7 @@
     {
       "id": "package-versions-aligned",
       "status": "pass",
-      "evidence": "packages/tokens/package.json=0.0.0, packages/ui/package.json=0.0.0, packages/crm/package.json=0.0.0",
+      "evidence": "packages/tokens/package.json=0.1.0, packages/ui/package.json=0.1.0, packages/crm/package.json=0.1.0",
       "note": "all public packages must share the same release version"
     },
     {
@@ -86,8 +110,26 @@
     {
       "id": "registry-status",
       "status": "pass",
-      "evidence": "not-configured",
+      "evidence": "configured",
       "note": "registry status must be explicit"
+    },
+    {
+      "id": "registry-package-metadata",
+      "status": "pass",
+      "evidence": "packages/tokens/package.json:ready, packages/ui/package.json:ready, packages/crm/package.json:ready",
+      "note": "all public packages must declare npm access, registry, provenance, license, and repository metadata"
+    },
+    {
+      "id": "controlled-publish-workflow",
+      "status": "pass",
+      "evidence": ".github/workflows/publish-packages.yml",
+      "note": "publishing must be manual, environment-protected, authenticated, and provenance-enabled"
+    },
+    {
+      "id": "changesets-versioning",
+      "status": "pass",
+      "evidence": ".changeset/config.json, .github/workflows/version-packages.yml",
+      "note": "Changesets must own shared semver version preparation before publishing"
     },
     {
       "id": "consumer-migration-policy",

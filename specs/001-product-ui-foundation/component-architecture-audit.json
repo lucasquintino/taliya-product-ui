@@ -1,20 +1,20 @@
 {
   "storyArchitecture": {
-    "total": 276,
+    "total": 333,
     "invalidTitleCount": 0,
     "legacyBatchTitleCount": 0,
     "invalidTitles": [],
     "legacyBatchTitles": []
   },
   "crmPrimitiveReuse": {
-    "scannedComponents": 192,
-    "componentsWithNativeControls": 30,
+    "scannedComponents": 268,
+    "componentsWithNativeControls": 32,
     "nativeControlTotals": {
-      "button": 34,
+      "button": 38,
       "anchor": 1
     },
     "primitiveReuseClassification": {
-      "justified": 30,
+      "justified": 32,
       "refactor": 0,
       "missingPrimitive": 0
     },
@@ -63,11 +63,14 @@
       {
         "component": "ActivityFeed",
         "nativeControls": {
-          "button": 1
+          "button": 2
         },
         "primitiveUses": [
+          "Avatar",
           "Icon",
-          "IconButton"
+          "IconButton",
+          "List",
+          "ListItem"
         ],
         "classification": {
           "status": "Justificado",
@@ -203,6 +206,21 @@
         }
       },
       {
+        "component": "PermissionRoleCard",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Card",
+          "Chip",
+          "Icon"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Selectable permission-role summary: native button is the complete compound card root; icon, status, and checklist visuals use official primitives."
+        }
+      },
+      {
         "component": "CommentThread",
         "nativeControls": {
           "button": 1
@@ -252,7 +270,7 @@
       {
         "component": "WeeklyHoursGrid",
         "nativeControls": {
-          "button": 3
+          "button": 4
         },
         "primitiveUses": [
           "Icon"
@@ -444,6 +462,20 @@
         "classification": {
           "status": "Justificado",
           "action": "Quick filter row: native button is the full selectable filter row root; icon and count visuals are delegated to official primitives."
+        }
+      },
+      {
+        "component": "WaitlistPanel",
+        "nativeControls": {
+          "button": 1
+        },
+        "primitiveUses": [
+          "Chip",
+          "Panel"
+        ],
+        "classification": {
+          "status": "Justificado",
+          "action": "Waitlist row: native button is the full selectable domain-row root; status visuals are delegated to `Chip` and the container to `Panel`."
         }
       }
     ]

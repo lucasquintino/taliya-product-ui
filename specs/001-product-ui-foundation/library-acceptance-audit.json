@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-07T11:41:59.980Z",
-  "status": "pass-current-internal-library",
-  "checkMode": true,
+  "generatedAt": "2026-07-15T10:59:52.591Z",
+  "status": "fail",
+  "checkMode": false,
   "reportLabel": "default",
   "evidenceSources": {
     "goalCompletion": "specs/001-product-ui-foundation/goal-completion-audit.json",
@@ -10,31 +10,31 @@
     "certificationScope": "specs/001-product-ui-foundation/certification-scope-decision-audit.json",
     "visualBacklog": "specs/001-product-ui-foundation/visual-certification-backlog-audit.json"
   },
-  "currentInternalLibraryAccepted": true,
+  "currentInternalLibraryAccepted": false,
   "globalGoalComplete": false,
   "globalGoalStatus": "not-complete-globally",
   "futureCrmAdoptionExecuted": false,
   "visualParityGloballyComplete": false,
   "scopedVisualAcceptance": true,
   "summary": {
-    "readiness": "pass",
-    "goalVerdict": "not-complete-globally",
-    "currentInternalReadiness": "proven",
+    "readiness": "fail",
+    "goalVerdict": "readiness-regression",
+    "currentInternalReadiness": "regressed",
     "futureCrmAdoption": "not-executed",
     "globalSourceImageParity": "scoped-out-by-product-acceptance",
-    "visualBacklogIncompleteRows": 0,
+    "visualBacklogIncompleteRows": 64,
     "futureCrmCandidateCount": 0,
     "adoptedFutureCrmCandidateCount": 0
   },
   "acceptanceRows": [
     {
       "gate": "current-readiness",
-      "status": "pass",
+      "status": "fail",
       "proves": "aggregate readiness gate passed for the current Internal/library scope"
     },
     {
       "gate": "current-internal-library-readiness",
-      "status": "pass",
+      "status": "fail",
       "proves": "current taliya-internal can consume official packages/page-kit without local visual clones"
     },
     {
@@ -56,8 +56,8 @@
     },
     {
       "requirement": "Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts",
-      "status": "proven",
-      "pass": true
+      "status": "failed",
+      "pass": false
     },
     {
       "requirement": "Public page kit exported, story-covered, and documented",
@@ -101,8 +101,8 @@
     },
     {
       "requirement": "Taliya Internal owns the same consumer readiness config model future CRM will use",
-      "status": "proven-for-current-internal",
-      "pass": true
+      "status": "failed",
+      "pass": false
     },
     {
       "requirement": "Taliya Internal consumer readiness configs are versioned in the consumer repository",

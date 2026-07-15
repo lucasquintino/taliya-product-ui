@@ -6,7 +6,7 @@ Approved CRM images are source assets for component extraction and 1:1 component
 
 ## Canonical Source Directory
 
-The approved generated CRM images are stored at:
+The approved generated CRM images were originally stored at:
 
 ```text
 D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508
@@ -22,6 +22,10 @@ This directory is the canonical source for the image audit used by:
 - `primitive-ui-matrix.md`;
 - `visual-parity-contract.md`;
 - future Storybook component 1:1 clone review.
+
+The machine-local path MUST be resolved through `taliya-source-assets.config.json`. Set
+`TALIYA_CRM_SOURCE_IMAGES_DIR` or pass `--source-images <path>` when the original Windows
+path is unavailable. Scripts and tests MUST NOT add another hardcoded absolute path.
 
 ## Source Asset Rules
 
@@ -52,6 +56,22 @@ If a future implementation task needs an approved image and the file is not pres
 2. report the missing filename;
 3. do not approximate from memory;
 4. resume only after the source image is restored or explicitly superseded.
+
+## Corpus Reconciliation Rule
+
+The canonical image count applies only to image files at the root of the delivered source directory. Nested demo frames, review contact sheets, standardized onboarding copies, and browser-framed derivatives are auxiliary outputs and MUST NOT be counted as additional canonical source images.
+
+The expected count alone is not an authoritative roster. `source-assets-canonical-roster.json` MUST name every known delivered top-level image and retain explicit unresolved slots for canonical identities whose filenames have not been supplied. A 101/101 claim requires zero unresolved slots plus 101 matching names/files; adding arbitrary files or changing only the count cannot satisfy the contract.
+
+Run:
+
+```text
+corepack pnpm source-assets:reconcile:update
+corepack pnpm source-assets:reconcile
+corepack pnpm source-assets:reconcile:nested-exclusion-probe
+```
+
+The reconciliation audit MUST compare the source folder and sibling ZIP by relative path, byte length, and SHA-256; classify every nested image; compare top-level names with `image-coverage-map.md` and the canonical roster; and retain a blocked contract status while canonical identities remain unresolved or named files are absent. Neither scripts nor reviewers may promote nested derivatives to close a count gap without an explicit product decision.
 
 ## Reference Copy Rule
 

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-15T10:41:44.316Z",
+  "readiness": {
+    "generatedAt": "2026-07-15T10:41:26.195Z",
+    "status": "fail"
+  },
+  "status": "fail",
+  "rows": [
+    {
+      "file": "release-candidate-audit.json",
+      "generatedAt": "2026-07-15T10:40:13.726Z",
+      "acceptanceClaim": false,
+      "staleByTime": true,
+      "contradictsReadiness": false,
+      "status": "fail"
+    },
+    {
+      "file": "official-library-readiness-audit.json",
+      "generatedAt": "2026-07-15T10:41:29.646Z",
+      "acceptanceClaim": false,
+      "staleByTime": false,
+      "contradictsReadiness": false,
+      "status": "pass"
+    },
+    {
+      "file": "library-consumption-status.json",
+      "generatedAt": "2026-07-15T10:41:27.677Z",
+      "acceptanceClaim": false,
+      "staleByTime": false,
+      "contradictsReadiness": false,
+      "status": "pass"
+    },
+    {
+      "file": "crm-real-readiness-audit.json",
+      "generatedAt": "2026-07-15T10:41:28.456Z",
+      "acceptanceClaim": false,
+      "staleByTime": false,
+      "contradictsReadiness": false,
+      "status": "pass"
+    },
+    {
+      "file": "library-acceptance-audit.json",
+      "generatedAt": "2026-07-15T10:41:26.737Z",
+      "acceptanceClaim": false,
+      "staleByTime": false,
+      "contradictsReadiness": false,
+      "status": "pass"
+    },
+    {
+      "file": "goal-completion-audit.json",
+      "generatedAt": "2026-07-15T10:41:27.187Z",
+      "acceptanceClaim": false,
+      "staleByTime": false,
+      "contradictsReadiness": false,
+      "status": "pass"
+    }
+  ]
+}

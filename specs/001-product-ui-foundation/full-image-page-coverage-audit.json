@@ -1,6 +1,9 @@
 {
-  "date": "2026-07-09",
+  "date": "2026-07-15",
   "status": "pass",
+  "storybookBuildAvailable": true,
+  "sourceAssetsAvailable": true,
+  "blockingReasons": [],
   "targetPageCount": 73,
   "coveredPageTargetCount": 73,
   "failedCount": 0,
@@ -332,7 +335,7 @@
     },
     {
       "image": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
-      "status": "Covered",
+      "status": "Covered with 9-block reinterpretation",
       "section": "Onboarding / Setup",
       "mappedStoryId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
       "mapped": true
@@ -1400,7 +1403,7 @@
       "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
       "sourceImageExists": true,
       "mapRowPresent": true,
-      "mapStatus": "Covered",
+      "mapStatus": "Covered with 9-block reinterpretation",
       "mapStatusTarget": true,
       "storyIndexed": true,
       "storyTitle": "CRM / Image Coverage / Setup",

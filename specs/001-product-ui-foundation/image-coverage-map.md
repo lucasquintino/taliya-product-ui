@@ -30,15 +30,15 @@ Legend:
 | `05_round-2a1_app-shell-tela-base_refino.png` | Historical | app shell refinement | CrmProductShell only as context |
 | `06_round-2a2_app-shell-tela-base_aprovada.png` | Historical/Covered | early shell direction | ProductWindowFrame, CrmProductShell, Sidebar, Topbar, AvatarStack, Panel, Card |
 | `07_round-3a_componentes-web-referencia_aprovada.png` | Covered | core reference components | IconButton, NavPill, SidebarItem, Avatar, Badge, Card, Panel, DataTable |
-| `08_round-3b1_inputs-formularios-filtros_aprovada.png` | Covered | forms/filters | Input, Textarea, Select, Checkbox, Toggle, SegmentedControl, FilterChip, FilterBar, FieldGroup |
-| `09_round-3b2_overlays-feedback_aprovada.png` | Covered | overlays/states | Modal, Drawer, Popover, Tooltip, EmptyState, LoadingState, ErrorState, ConfirmDialog |
-| `10_round-3b3_visualizacoes-operacionais_aprovada.png` | Covered | operational views | DataTable, List, KanbanBoard, WeeklyCalendar, Timeline, ActivityFeed, MetricCard |
-| `11_round-3b4_comunicacao-agentes_aprovada.png` | Covered | inbox/agents | ConversationList, ConversationThread, MessageBubble, Composer, AgentPanel, CopilotSuggestion, ApprovalPanel |
-| `12_round-3b5_sistema-plano-governanca_aprovada.png` | Covered | system/plan/governance | PlanSummaryCard, QuotaProgress, PermissionMatrix, IntegrationStatusRow, AuditTrail, StatusCard |
-| `13_round-3c1_objetos-setup-dados_aprovada.png` | Covered | setup/data | SetupStepper, SetupChoiceCard, ImportProgress, FieldMappingTable, DuplicateResolver, StudentHeader |
-| `14_round-3c2_agenda-financeiro-documentos_aprovada.png` | Covered | agenda/finance/docs | WeeklyCalendar, ClassCard, Roster, PaymentCaseCard, ReconciliationRow, MoneyInput, FileUpload, AttachmentList |
-| `15_round-3c3_agentes-auditoria-relatorios_aprovada.png` | Covered | agents/audit/reports | FlowBuilder, ModeSelector, SimulationRunner, AuditTrail, ChartPanel, ReportFilterBar, BeforeAfterDiff |
-| `16_round-4.1S_app-shell_01_base-web.png` | Covered | canonical app shell | ProductWindowFrame, CrmProductShell, Sidebar, Topbar, PageHeader, GlobalActions, Panel |
+| `08_round-3b1_inputs-formularios-filtros_aprovada.png` | Covered | forms/filters | Input, Textarea, Select, Checkbox, Toggle, SegmentedControl, DateInput, TimeInput, FilterChip, SearchInput, FilterBar, FieldGroup, Button |
+| `09_round-3b2_overlays-feedback_aprovada.png` | Covered | overlays/states | Modal, Drawer, Popover, Tooltip, Toast, InlineAlert, ConfirmDialog, EmptyState, LoadingState, ErrorState |
+| `10_round-3b3_visualizacoes-operacionais_aprovada.png` | Covered | operational views | DataTable, List, KanbanBoard, CompactCalendar, Timeline, ActivityFeed, MetricTile |
+| `11_round-3b4_comunicacao-agentes_aprovada.png` | Covered | inbox/agents | ConversationList, ConversationThread, MessageBubble, ComposerPanel, ChannelStatusPanel, CopilotPanel, CopilotSuggestion, ApprovalPanel, ExecutionReceipt, HandoffBanner, ConfidenceMeter |
+| `12_round-3b5_sistema-plano-governanca_aprovada.png` | Covered | system/plan/governance reference sheet | PlanAgentsPanel, Card, ProgressBar, FallbackControlCard, PermissionState, IntegrationFailedState, BillingGovernancePanel, GovernanceAuditPanel, GuardrailPolicyPanel, GeneralSettingsPanel, StatusSummaryCard, Design tokens, Typography tokens |
+| `13_round-3c1_objetos-setup-dados_aprovada.png` | Covered | setup/data reference sheet; `StudentHeader` uses its additive reference variant; regional certification recorded in `visual-diagnostics/image-13-reference-sheet-20260714.md` | SetupWizardPanel, ActivationChecklistPanel, ImportProgress, FieldMappingTable, DuplicateResolver, DataConflictQueue, StudentHeader, ProfileTabsPanel, RelationshipList, ConsentPreferencesPanel, SensitiveTimelinePanel, Design tokens, Typography tokens |
+| `14_round-3c2_agenda-financeiro-documentos_aprovada.png` | Covered | agenda/finance/docs | WeeklyCalendar, ClassCard, ClassSummaryCard, Roster, ReplacementMatcherPanel, WaitlistPanel, ResourceConflictPanel, DocumentViewerPanel, UploadReceiptPanel, ReconciliationSummaryTable, MoneyInputGroup, FinancialSimulationPanel |
+| `15_round-3c3_agentes-auditoria-relatorios_aprovada.png` | Covered | agents/audit/reports | FlowBuilder, ModeSelector, FlowSimulationPanel, PublicationPreflightPanel, ExecutionTraceTable, AgentIncidentPanel, EvaluationQualityPanel, BeforeAfterDiff, AuditTrail, PrivacyRequestTable, SupportGrantPanel, AdvancedReportsPanel, ExportQueuePanel, SegmentCommunicationPanel |
+| `16_round-4.1S_app-shell_01_base-web.png` | Covered | canonical app shell | CrmProductShell, JourneyShellCanvas |
 
 ## CRM Logged-In Screens
 
@@ -46,7 +46,7 @@ Legend:
 | --- | --- | --- | --- |
 | `17_round-4.1A_hoje_01_acima-da-dobra.png.png` | Covered / 99% Visual Accepted | Hoje base accepted operational baseline; see `current-implementation-baseline.md` and `tmp/visual-audit/batch11/today-17-visual-acceptance-20260707` | CrmProductShell, Sidebar, Topbar, GlobalActions, DashboardGrid, CrmOperationalPanel, CrmOperationalRows, CrmOperationalRow, Button, Chip |
 | `18_round-4.1A_hoje_02_drawer-tarefa.png.png` | Covered / 99% Visual Accepted | Hoje selected task accepted operational baseline; see `current-implementation-baseline.md` and `tmp/visual-audit/batch11/today-18-visual-acceptance-20260707` | CrmProductShell, Sidebar, Topbar, DashboardGrid, CrmOperationalPanel, CrmOperationalRows, CrmOperationalRow, TaskDrawer, Button, Chip |
-| `19_round-4.1A_hoje_03_estado-critico-do-dia.png` | Covered | Hoje critical | Status semantic tokens, ErrorState, StatusCard, Chip, PlanBlockedState, PermissionState |
+| `19_round-4.1A_hoje_03_estado-critico-do-dia.png` | Covered | Hoje critical data/state variant with completed checklist row; regional diagnostic in `visual-diagnostics/image-19-hoje-critical-20260710.md` | CrmProductShell, DashboardGrid, CrmOperationalPanel, CrmOperationalRows, CrmOperationalRow, Button, Chip |
 | `20_round-4.1A_hoje_04_historico-de-hoje.png.png` | Covered / 99% Visual Accepted | Hoje history accepted as continuation of the Hoje page; 99% evidence in `tmp/visual-audit/batch11/today-20-visual-acceptance-20260707`; see `current-implementation-baseline.md` | CrmProductShell, ActivityFeed, Button, IconButton, Chip |
 | `21_round-4.1B_operacao_01_kanban-geral.png.png` | Covered | Operacao board | CrmProductShell, Sidebar, Topbar, PageHeader, GlobalActions, FilterBar, SearchInput, Button, IconButton, KanbanBoard, KanbanColumn, KanbanCard, OperationActivityTable, Chip |
 | `22_round-4.1B_operacao_02_kanban-com-drawer.png` | Covered | Operacao drawer | CrmProductShell, Sidebar, Topbar, PageHeader, GlobalActions, FilterBar, SearchInput, Button, IconButton, KanbanBoard, KanbanColumn, KanbanCard, OperationActivityTable, CaseDrawer, Chip |
@@ -91,46 +91,46 @@ Legend:
 | --- | --- | --- | --- |
 | `51A_round-4.1J_onboarding_shell-global-aprovado.png` | Covered | setup shell | SetupShell, SetupStepper, SetupBottomBar, AgentPanel, Panel |
 | `51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png` | Covered | setup agent chat | SetupAgentChat, TaliyaLogo, IconButton, MessageBubble, QuickReplyChips |
-| `51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png` | Covered | setup workspace | SetupShell, SetupChoiceCard, FieldGroup, ConfigImpactPreview, AgentPanel |
+| `51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png` | Covered | setup workspace | SetupPage, SetupConsumptionWorkspace, SetupChoiceCard, Input, Select, Toggle, List, InlineAlert |
 | `51D_round-4.1J_onboarding_bloco-1-studio-aprovado.png` | Superseded | old studio block | replaced by v2; keep as context |
-| `51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png` | Covered | Studio block | SetupShell, SetupBlockHeader, FieldGroup, WeeklyHoursGrid, ConfigImpactPreview |
-| `51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png` | Covered | Equipe block | SetupShell, DataTable, List, RoleCard, InviteRow, AgentPanel |
-| `51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png` | Covered | Canais block | IntegrationStatusRow, SetupChoiceCard, ChannelStatus, AgentPanel |
-| `51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png` | Covered | Planos block | SetupChoiceCard, PlanSummaryCard, RuleRow, AgentPanel |
-| `51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png` | Covered | Pagamento block | SetupChoiceCard, IntegrationStatusRow, PaymentMethodRow, AgentPanel |
-| `51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png` | Covered with 9-block reinterpretation | Alunos block | SetupImportSourceCard, ImportProgress, DataTable, DuplicateResolver |
-| `51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png` | Covered with 9-block reinterpretation | Turmas block | DataTable, List, ClassCard, FieldGroup, AgentPanel |
-| `51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png` | Covered with 9-block reinterpretation | Agenda block | WeeklyCalendar, ClassCard, SetupBottomBar, AgentPanel |
-| `51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png` | Covered | Revisao block | SetupReviewPanel, StatusCard, SetupBottomBar, AgentPanel |
-| `78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png` | Covered | setup welcome | SetupWelcome, Input, Button, SetupAgentChat, SetupHumanHelpCTA |
+| `51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png` | Covered | Studio block | SetupPage, SetupStudioWorkspace, SetupBlockHeader, Checkbox, TimeInput, SegmentedControl, WeeklyHoursGrid |
+| `51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png` | Covered | Equipe block | SetupPage, SetupTeamWorkspace, RoleCard, Input, Select, InviteRow, List, InlineAlert |
+| `51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png` | Covered | Canais block | SetupPage, SetupChannelsWorkspace, SetupChoiceCard, Input, List, StatusDot, InlineAlert |
+| `51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png` | Covered | Planos block | SetupPage, SetupPlansWorkspace, Input, SegmentedControl, List, InlineAlert |
+| `51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png` | Covered | Pagamento block | SetupPage, SetupPaymentWorkspace, SetupChoiceCard, IntegrationStatusRow, InlineAlert |
+| `51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png` | Covered with 9-block reinterpretation | Alunos block | SetupPage, SetupStudentsWorkspace, SetupImportSourceCard, CrmWorklistTable, List, InlineAlert |
+| `51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png` | Covered with 9-block reinterpretation | Turmas block | SetupPage, SetupClassesWorkspace, SetupImportSourceCard, CrmWorklistTable, List |
+| `51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png` | Covered with 9-block reinterpretation | Agenda block | SetupPage, SetupAgendaWorkspace, WeeklyHoursGrid, List |
+| `51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png` | Covered with 9-block reinterpretation | Revisao block | SetupPage, SetupReviewWorkspace, SetupReviewPanel |
+| `78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png` | Covered | setup welcome | SetupPage, SetupWelcomeWorkspace, SetupWelcome, SetupAgentChat |
 
 ## Agents / Flows / Executions
 
 | Image | Status | Role | Required Components |
 | --- | --- | --- | --- |
-| `52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png` | Covered | agents catalog | AgentCatalog, AgentCard, CrmProductShell, Topbar |
-| `53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png` | Covered | agent detail | AgentCard, DataTable, List, Card, StatusCard, AgentStatus |
-| `54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png` | Covered | routine detail | ModeSelector, ModeCard, FlowStepCard, AgentPanel |
+| `52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png` | Covered | agents catalog | CrmDashboardPage, AgentCatalog, AgentCard, CrmProductShell |
+| `53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png` | Covered | agent routines | CrmDashboardPage, AgentRoutineIntro, AgentRoutineCard |
+| `54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png` | Covered | routine detail | CrmRightPanelPage, AgentRoutineWorkspace, AgentFlowDrawer |
 | `55_round-4.1L_agentes_04_fluxo-falta-com-aviso-aprovado.png` | Superseded | old flow detail | replaced by 56 |
-| `56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png` | Covered | flow detail v2 | FlowBuilder, FlowStepCard, ModeSelector, PreflightChecklist, FieldGroup |
-| `58_round-4.1L_agentes_05_teste-fluxo-falta-com-aviso-aprovado.png` | Covered | simulate flow | ScenarioList, PhonePreview, ExecutionTimeline, AgentPanel |
-| `59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png` | Covered | publish routine | PreflightChecklist, FlowStepCard, StatusCard, AgentPanel |
-| `70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png` | Covered | execution receipt | ExecutionReceipt, ExecutionTimeline, FlowStepCard, AgentPanel |
+| `56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png` | Covered | flow detail v2 | CrmRightPanelPage, AgentFlowWorkspace, AgentFlowDrawer |
+| `58_round-4.1L_agentes_05_teste-fluxo-falta-com-aviso-aprovado.png` | Covered | simulate flow | CrmRightPanelPage, SimulationRunner, AgentFlowDrawer |
+| `59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png` | Covered | publish routine | CrmRightPanelPage, AgentPublishRoutineWorkspace, AgentPublishFlowCard, AgentFlowDrawer |
+| `70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png` | Covered | execution receipt | CrmRightPanelPage, ExecutionReceipt, AgentFlowDrawer |
 
 ## Config / Billing / Usage
 
 | Image | Status | Role | Required Components |
 | --- | --- | --- | --- |
-| `60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png` | Covered | config hub | SettingsHubCard, DashboardGrid, CrmProductShell |
-| `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | Covered | permissions config | PermissionMatrix, SettingsSection, ImpactSummary, ConfigImpactPreview, AgentPanel |
-| `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | Covered | payments config | SettingsSection, IntegrationStatusRow, RuleRow, ConfigImpactPreview |
-| `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | Covered | agenda config | SettingsSection, RuleRow, WeeklyCalendar, ConfigImpactPreview |
-| `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | Covered | notification config | SettingsSection, RuleRow, Toggle, ChannelStatus |
-| `65_round-4.1N_billing_01_assinatura-taliya-aprovado.png` | Covered | billing active | PlanSummaryCard, QuotaProgress, AddOnCard, AgentPanel |
-| `66_round-4.1N_billing_02_faturas-taliya-aprovado.png` | Covered | invoices | InvoiceTable, PlanSummaryCard, AgentPanel |
-| `67_round-4.1N_billing_03_add-ons-taliya-aprovado.png` | Covered | add-ons | AddOnCard, EmptyState, AgentPanel |
-| `68_round-4.1O_uso_01_visao-geral-aprovado.png` | Covered | usage overview | QuotaProgress, UsageOriginRow, StatusCard, AgentPanel |
-| `69_round-4.1O_uso_02_extrato-aprovado.png` | Covered | usage ledger | UsageLedgerTable, FilterBar, TablePagination, AgentPanel |
+| `60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png` | Covered | config hub | CrmDashboardPage, SettingsHubCard, Icon |
+| `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | Covered | permissions config | CrmRightPanelPage, SettingsPermissionsWorkspace, PermissionRoleCard, PermissionMatrix, ConfigImpactPreview, UnsavedChangesBar, SettingsAgentPanel |
+| `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | Covered | payments config | CrmRightPanelPage, SettingsPaymentsWorkspace, PaymentMethodRow, SettingsSection, IntegrationStatusRow, UnsavedChangesBar, SettingsAgentPanel |
+| `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | Covered | agenda config | CrmRightPanelPage, SettingsAgendaWorkspace, RuleRow, UnsavedChangesBar, SettingsAgentPanel |
+| `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | Covered | notification config | CrmRightPanelPage, SettingsNotificationsWorkspace, RuleRow, UnsavedChangesBar, SettingsAgentPanel |
+| `65_round-4.1N_billing_01_assinatura-taliya-aprovado.png` | Covered | billing active | CrmRightPanelPage, BillingSubscriptionWorkspace, PlanSummaryCard, QuotaProgress, UsageDrawer |
+| `66_round-4.1N_billing_02_faturas-taliya-aprovado.png` | Covered | invoices | BillingInvoicesWorkspace, InvoiceTable, CrmRightPanelPage, AgentPanel |
+| `67_round-4.1N_billing_03_add-ons-taliya-aprovado.png` | Covered | add-ons | CrmRightPanelPage, BillingAddOnsWorkspace, AddOnCard, EmptyState, UsageDrawer |
+| `68_round-4.1O_uso_01_visao-geral-aprovado.png` | Covered | usage overview | CrmRightPanelPage, UsageOverviewWorkspace, QuotaProgress, UsageOriginRow, UsageDrawer |
+| `69_round-4.1O_uso_02_extrato-aprovado.png` | Covered | usage ledger | CrmRightPanelPage, UsageLedgerTable, FilterBar, DataTable, UsageDrawer |
 
 ## Access / Subscription
 
@@ -148,7 +148,7 @@ Legend:
 
 | Image | Status | Role | Required Components |
 | --- | --- | --- | --- |
-| `79_round-4.1S_app-shell_01_base-web-sem-conteudo.png` | Covered | empty app shell | ProductWindowFrame, CrmProductShell, Sidebar, Topbar, PageHeader, EmptyState |
+| `79_round-4.1S_app-shell_01_base-web-sem-conteudo.png` | Covered | empty app shell | CrmEmptyShell, CrmEmptyShellWindow, CrmBrowserChrome, CrmShellSidebar, CrmEmptyShellTopbar, CrmEmptyShellPageHeader, CrmEmptyShellCanvas |
 
 ## Coverage Result
 
@@ -166,4 +166,3 @@ Known visual-adjustment targets:
 - 17, 18, and 20 are accepted as the current operational baseline for shell/sidebar/topbar/dashboard/drawer/history behavior. Images 17 and 18 are accepted as 99% visual baselines; none of these require pixel-perfect 1:1 unless product review reopens them.
 - 72 and 73 are covered structurally but require final visual polish during implementation.
 - 51H/51I/51J are covered structurally and must be implemented with the official 9-block numbering, not old image numbering.
-

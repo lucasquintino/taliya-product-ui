@@ -1,18 +1,18 @@
 # Consumer Config Versioning Audit
 
-Generated: 2026-07-09T19:44:17.863Z
+Generated: 2026-07-09T22:11:24.844Z
 
 Status: pass
 
 This audit checks whether consumer-owned Taliya readiness config files exist, are parseable JSON, and are tracked by the consumer repository. It is part of the aggregate readiness gate for configured consumers.
 
-Consumer: `C:\Users\lucas\taliya-product-ui\tmp\future-consumer-readiness-fixture-115032`
+Consumer: `/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112`
 
 Report label: `future-consumer-fixture`
 
 Git repo: yes
 
-Git root: `C:/Users/lucas/taliya-product-ui/tmp/future-consumer-readiness-fixture-115032`
+Git root: `/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/tmp/future-consumer-readiness-fixture-9112`
 
 ## Config Files
 

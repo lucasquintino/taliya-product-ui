@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-09T19:43:32.078Z",
+  "generatedAt": "2026-07-15T08:18:09.646Z",
   "packageRows": [
     {
       "packageName": "@taliya/tokens",
       "sourcePackage": "packages/tokens/package.json",
-      "tarball": "dist-packages/taliya-tokens-0.0.0.tgz",
+      "tarball": "dist-packages/taliya-tokens-0.1.0.tgz",
       "tarballExists": true,
-      "tarballSize": 176771,
+      "tarballSize": 213880,
       "requiredFiles": [
         "package/package.json",
         "package/README.md",
@@ -69,9 +69,9 @@
     {
       "packageName": "@taliya/ui",
       "sourcePackage": "packages/ui/package.json",
-      "tarball": "dist-packages/taliya-ui-0.0.0.tgz",
+      "tarball": "dist-packages/taliya-ui-0.1.0.tgz",
       "tarballExists": true,
-      "tarballSize": 79163,
+      "tarballSize": 80734,
       "requiredFiles": [
         "package/package.json",
         "package/README.md",
@@ -130,8 +130,8 @@
         {
           "dependencyName": "@taliya/tokens",
           "packageName": "@taliya/tokens",
-          "expectedVersion": "0.0.0",
-          "actualVersion": "0.0.0",
+          "expectedVersion": "0.1.0",
+          "actualVersion": "0.1.0",
           "pass": true
         }
       ],
@@ -153,9 +153,9 @@
     {
       "packageName": "@taliya/crm",
       "sourcePackage": "packages/crm/package.json",
-      "tarball": "dist-packages/taliya-crm-0.0.0.tgz",
+      "tarball": "dist-packages/taliya-crm-0.1.0.tgz",
       "tarballExists": true,
-      "tarballSize": 293091,
+      "tarballSize": 424693,
       "requiredFiles": [
         "package/package.json",
         "package/README.md",
@@ -224,15 +224,15 @@
         {
           "dependencyName": "@taliya/tokens",
           "packageName": "@taliya/tokens",
-          "expectedVersion": "0.0.0",
-          "actualVersion": "0.0.0",
+          "expectedVersion": "0.1.0",
+          "actualVersion": "0.1.0",
           "pass": true
         },
         {
           "dependencyName": "@taliya/ui",
           "packageName": "@taliya/ui",
-          "expectedVersion": "0.0.0",
-          "actualVersion": "0.0.0",
+          "expectedVersion": "0.1.0",
+          "actualVersion": "0.1.0",
           "pass": true
         }
       ],
@@ -243,22 +243,41 @@
         "standardPageKitManifest",
         "import { standardPageKitManifest } from \"@taliya/crm/standard-page-kit\"",
         "drawerPlacement=\"fixed\" | \"content\" | \"floating\"",
-        "pageHeaderRhythm=\"default\" | \"spacious\" | \"dashboard\" | \"stacked\" | \"overview\"",
+        "pageHeaderRhythm=\"dashboard\" | \"reports\" | \"support\" | \"internal-overview\" | \"internal-tenants\" | \"stacked\" | \"agents\" | \"agents-routines\" | \"agents-routine-detail\" | \"agents-flow-detail\" | \"agents-publish\" | \"settings-hub\" | \"overview\"",
+        "CrmDashboardPage layoutVariant=\"settings-hub\"",
+        "rightPanelVariant=\"settings-permissions\"",
+        "rightPanelVariant=\"settings-payments\"",
+        "rightPanelVariant=\"agent-routine\"",
+        "rightPanelVariant=\"agent-flow\"",
+        "rightPanelVariant=\"agent-test\"",
+        "rightPanelVariant=\"agent-publish\"",
+        "rightPanelVariant=\"agent-execution\"",
+        "frame=\"window\" | \"window-inset\"",
+        "contentLayout=\"internal-tenant-detail\"",
+        "TenantDetailLayout footerNote",
+        "SetupPage frameVariant=\"default\" | \"guided\" | \"guided-block\" | \"guided-main\" | \"guided-wide\" | \"guided-review\" | \"shell-global\"",
+        "WeeklyHoursGrid variant=\"availability\" | \"schedule\"",
+        "SetupAgentChat variant=\"step\" | \"welcome\"",
+        "observacoes operacionais apos as linhas",
         "react",
         "react-dom"
       ],
       "sourceReadmeExists": true,
       "packedReadmeReadable": true,
       "sourceReadmeMissingSnippets": [],
-      "packedReadmeMissingSnippets": [],
+      "packedReadmeMissingSnippets": [
+        "rightPanelVariant=\"settings-payments\""
+      ],
       "tarListError": "",
       "packageJsonError": "",
       "readmeError": "",
-      "pass": true
+      "pass": false
     }
   ],
   "summary": {
-    "pass": true,
-    "failedPackages": []
+    "pass": false,
+    "failedPackages": [
+      "@taliya/crm"
+    ]
   }
 }

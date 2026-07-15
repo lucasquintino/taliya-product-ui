@@ -1,31 +1,36 @@
 {
-  "generatedAt": "2026-07-07T11:42:06.201Z",
-  "status": "pass-official-library-current-scope",
-  "officialConsumerReady": true,
+  "generatedAt": "2026-07-15T10:59:54.801Z",
+  "status": "fail",
+  "officialConsumerReady": false,
   "globalGoalComplete": false,
-  "currentVersion": "0.0.0",
+  "currentVersion": "0.1.0",
   "consistentPackageVersion": true,
   "currentInternalReady": true,
-  "crmRealCanStart": true,
+  "crmRealCanStart": false,
   "realFutureCrmAdoptionExecuted": false,
-  "releaseCandidateStatus": "pass",
-  "releaseCandidateGateCount": 86,
-  "releaseChannelStatus": "pass-local-release-channel",
-  "releasePolicyStatus": "pass-current-local-policy",
-  "localTarballChannelReady": true,
-  "registryReady": false,
+  "releaseCandidateStatus": "fail",
+  "releaseCandidateGateCount": 103,
+  "releaseChannelStatus": "fail",
+  "releasePolicyStatus": "pass-registry-policy",
+  "localTarballChannelReady": false,
+  "registryReady": true,
   "registryManualItems": [
-    "Choose a real semver version before publishing to a registry.",
     "Choose the target registry and access model before publishing.",
     "Run npm provenance/publish steps from CI or a controlled release machine.",
     "Tag the release and sync the consumer vendor tarballs or registry ranges intentionally."
   ],
   "reportRows": [
     {
+      "id": "aggregate-readiness",
+      "status": "fail",
+      "evidence": "library-readiness-gate.json",
+      "note": "required gate report is not in an accepted state"
+    },
+    {
       "id": "package-artifacts",
-      "status": "pass",
+      "status": "fail",
       "evidence": "package-artifacts-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "package-boundaries",
@@ -59,15 +64,15 @@
     },
     {
       "id": "library-consumption",
-      "status": "pass",
+      "status": "fail",
       "evidence": "library-consumption-status.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "crm-real-readiness",
-      "status": "pass",
+      "status": "fail",
       "evidence": "crm-real-readiness-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "release-policy",
@@ -77,9 +82,9 @@
     },
     {
       "id": "release-channel",
-      "status": "pass",
+      "status": "fail",
       "evidence": "release-channel-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "release-candidate",
@@ -89,9 +94,9 @@
     },
     {
       "id": "goal-completion",
-      "status": "pass",
+      "status": "fail",
       "evidence": "goal-completion-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     }
   ],
   "packageRows": [
@@ -99,7 +104,7 @@
       "id": "tokens",
       "packageName": "@taliya/tokens",
       "status": "pass",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "missingExports": [],
       "missingFiles": [],
       "missingPeers": [],
@@ -110,7 +115,7 @@
       "id": "ui",
       "packageName": "@taliya/ui",
       "status": "pass",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "missingExports": [],
       "missingFiles": [],
       "missingPeers": [],
@@ -121,7 +126,7 @@
       "id": "crm",
       "packageName": "@taliya/crm",
       "status": "pass",
-      "version": "0.0.0",
+      "version": "0.1.0",
       "missingExports": [],
       "missingFiles": [],
       "missingPeers": [],

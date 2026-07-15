@@ -1,6 +1,8 @@
 {
-  "date": "2026-07-07",
+  "date": "2026-07-15",
   "status": "pass",
+  "storybookBuildAvailable": true,
+  "blockingReasons": [],
   "storyCount": 54,
   "checkedStoryCount": 54,
   "failedStories": [],
@@ -27,7 +29,7 @@
       "present": true
     },
     {
-      "marker": "SetupContentGrid",
+      "marker": "SetupPage",
       "present": true
     },
     {
@@ -263,7 +265,7 @@
       "present": true
     },
     {
-      "marker": "SetupContentGrid",
+      "marker": "SetupConsumptionWorkspace",
       "present": true
     },
     {

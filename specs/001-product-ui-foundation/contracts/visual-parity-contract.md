@@ -108,6 +108,8 @@ Temporary probes are allowed only as measurement tools. A probe may be promoted 
 
 Final approval requires a static Storybook build/capture and source comparison. A dev-server preview can guide iteration but cannot certify 1:1 visual completion.
 
+For product-review rows, run `corepack pnpm visual-product-review:audit:update`. The generated local board at `tmp/visual-product-review/index.html` must show the canonical source, current static render, raw diff, metrics, blocker and next action from current reports. `corepack pnpm visual-product-review:audit` rejects stale or incomplete review evidence. The board is review assistance only: it cannot approve a row automatically or replace an explicit ledger/product decision.
+
 ## Storybook Requirements
 
 Future Storybook stories must:

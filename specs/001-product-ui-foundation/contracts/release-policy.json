@@ -18,10 +18,10 @@
     ]
   },
   "registry": {
-    "status": "not-configured",
-    "target": "not-decided",
-    "access": "not-decided",
-    "publishWorkflow": "not-decided",
+    "status": "configured",
+    "target": "https://registry.npmjs.org/",
+    "access": "public",
+    "publishWorkflow": ".github/workflows/publish-packages.yml",
     "provenance": "required-before-publish",
     "requiredBeforePublish": [
       "semver-version",
@@ -32,8 +32,8 @@
   },
   "consumerMigration": {
     "currentMode": "vendor-local-tarballs",
-    "registryMode": "not-decided",
-    "registryRangePolicy": "not-decided",
+    "registryMode": "npm-registry",
+    "registryRangePolicy": "caret range on the shared package version",
     "mustKeepLocalAuditUntilRegistryAdoptionPasses": true
   }
 }
