@@ -204,6 +204,27 @@ const taskDrawerChecklist: TaskDrawerChecklistItem[] = [
   { id: "update-calendar", title: "Atualizar reposição na agenda" }
 ];
 
+const taskDrawerComments: TaskDrawerComment[] = [
+  { id: "ana", author: "Ana Silva", avatarSrc: source23CommentAnaSilva, body: "Pedi reposição quinta 08h.", time: "Hoje, 09:08" },
+  { id: "sam", author: "Sam Frank", avatarSrc: source23CommentSamFrank, body: "Recepção não encontrou vaga ainda.", time: "Hoje, 09:14" },
+  { id: "joao", author: "João Silva", avatarSrc: source23CommentJoaoSilva, body: "Copiloto sugeriu opção quinta 08h.", time: "Hoje, 09:20" }
+];
+
+const taskDrawerHistory: TaskDrawerHistoryItem[] = [
+  { id: "whatsapp", time: "09:10", body: "Ana pediu reposição pelo WhatsApp" },
+  { id: "no-slot", time: "09:14", body: "sistema não encontrou vaga na turma atual" },
+  { id: "assumed", time: "09:20", body: "recepção assumiu a pendência" }
+];
+
+function contextualChecklist(row: TaskWorklistRow): TaskDrawerChecklistItem[] {
+  if (row.id === "replace-ana") return taskDrawerChecklist;
+  return [
+    { id: `${row.id}-review`, title: "Revisar contexto da tarefa" },
+    { id: `${row.id}-execute`, title: "Executar próxima ação" },
+    { id: `${row.id}-register`, title: "Registrar conclusão" }
+  ];
+}
+
 function TasksPageContent({
   selectedQueueId,
   selectedTaskId,
@@ -218,6 +239,8 @@ function TasksPageContent({
   onItemsPerPageClick,
   onPreviousPage,
   onNextPage,
+  onShellAction,
+  announcement,
   pageLabel,
   drawer
 }: {
@@ -234,6 +257,8 @@ function TasksPageContent({
   onItemsPerPageClick: () => void;
   onPreviousPage: () => void;
   onNextPage: () => void;
+  onShellAction: (message: string) => void;
+  announcement: string;
   pageLabel: string;
   drawer?: React.ReactNode;
 }) {
@@ -383,7 +408,17 @@ function TasksPageContent({
       drawer={drawer}
       drawerPlacement="floating"
       drawerSize="compact"
+      globalActions={{
+        onAvatar: () => onShellAction("Perfil da operadora aberto"),
+        onMessages: () => onShellAction("Mensagens abertas"),
+        onNotifications: () => onShellAction("Notificações abertas"),
+        onSearch: () => onShellAction("Busca global aberta")
+      }}
       navItems={tasksNavItems}
+      onBack={() => onShellAction("Navegação de retorno acionada")}
+      onNavChange={(id) => onShellAction(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => onShellAction(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => onShellAction(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="stacked"
       sidebarItems={crmEmptyShellSidebarItems}
       stageClassName="sb-image-coverage-tasks-stage"
@@ -424,35 +459,39 @@ function TasksPageContent({
         />
       }
     >
-      <CrmWorklistTable
-        ariaLabel="Tabela de tarefas"
-        blockedDescription="A lista de tarefas está indisponível."
-        blockedTitle="Tabela bloqueada"
-        className="tcrm-task-table"
-        columns={taskColumns}
-        emptyDescription="As tarefas da fila aparecem aqui."
-        emptyTitle="Nenhuma tarefa"
-        loadingTitle="Carregando tarefas"
-        pagination={{
-          itemsPerPage: "10",
-          label: pageLabel,
-          onItemsPerPageClick,
-          onNextPage,
-          onPreviousPage
-        }}
-        rows={rows}
-        selectedRowId={selectedTaskId}
-        onRowSelect={(row) => {
-          if (!row.disabled) {
-            onTaskSelect(row);
-          }
-        }}
-      />
+      <>
+        <CrmWorklistTable
+          ariaLabel="Tabela de tarefas"
+          blockedDescription="A lista de tarefas está indisponível."
+          blockedTitle="Tabela bloqueada"
+          className="tcrm-task-table"
+          columns={taskColumns}
+          emptyDescription="As tarefas da fila aparecem aqui."
+          emptyTitle="Nenhuma tarefa"
+          loadingTitle="Carregando tarefas"
+          pagination={{
+            itemsPerPage: "10",
+            label: pageLabel,
+            onItemsPerPageClick,
+            onNextPage,
+            onPreviousPage
+          }}
+          rows={rows}
+          selectedRowId={selectedTaskId}
+          onRowSelect={(row) => {
+            if (!row.disabled) {
+              onTaskSelect(row);
+            }
+          }}
+        />
+        <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+      </>
     </CrmWorklistPage>
   );
 }
 
 export function TasksShell({ drawer = true }: { drawer?: boolean }) {
+  const [announcedAction, setAnnouncedAction] = useState("");
   const [query, setQuery] = useState("");
   const [filterValues, setFilterValues] = useState<Record<string, string | string[]>>({});
   const [selectedQueueId, setSelectedQueueId] = useState("my-tasks");
@@ -460,34 +499,27 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
   const [drawerOpen, setDrawerOpen] = useState(drawer);
   const [drawerState, setDrawerState] = useState<TaskDrawerState>("open");
   const [checklist, setChecklist] = useState<TaskDrawerChecklistItem[]>(taskDrawerChecklist);
-  const [drawerOwner, setDrawerOwner] = useState("Recepção");
+  const [drawerOwner, setDrawerOwner] = useState<React.ReactNode>("Recepção");
   const [drawerDeadline, setDrawerDeadline] = useState<React.ReactNode>("Hoje");
   const [drawerDeadlineTone, setDrawerDeadlineTone] = useState<"danger" | undefined>("danger");
-  const [comments, setComments] = useState<TaskDrawerComment[]>([
-    { id: "ana", author: "Ana Silva", avatarSrc: source23CommentAnaSilva, body: "Pedi reposição quinta 08h.", time: "Hoje, 09:08" },
-    { id: "sam", author: "Sam Frank", avatarSrc: source23CommentSamFrank, body: "Recepção não encontrou vaga ainda.", time: "Hoje, 09:14" },
-    { id: "joao", author: "João Silva", avatarSrc: source23CommentJoaoSilva, body: "Copiloto sugeriu opção quinta 08h.", time: "Hoje, 09:20" }
-  ]);
-  const [history, setHistory] = useState<TaskDrawerHistoryItem[]>([
-    { id: "whatsapp", time: "09:10", body: "Ana pediu reposição pelo WhatsApp" },
-    { id: "no-slot", time: "09:14", body: "sistema não encontrou vaga na turma atual" },
-    { id: "assumed", time: "09:20", body: "recepção assumiu a pendência" }
-  ]);
+  const [comments, setComments] = useState<TaskDrawerComment[]>(taskDrawerComments);
+  const [history, setHistory] = useState<TaskDrawerHistoryItem[]>(taskDrawerHistory);
   const [drawerFeedback, setDrawerFeedback] = useState<React.ReactNode>(
     <>quinta 08h tem vaga e respeita<br />o prazo do crédito.</>
   );
   const [pageLabel, setPageLabel] = useState("1-8 de 8");
   const checkedCount = checklist.filter((item) => item.checked).length;
+  const selectedTask = taskRows.find((row) => row.id === selectedTaskId) ?? taskRows[0]!;
 
   const drawerFacts = useMemo<TaskDrawerFact[]>(
     () => [
-      { id: "origin", icon: "calendar", label: "Origem canônica", value: "Agenda / Reposições" },
+      { id: "origin", icon: "calendar", label: "Origem canônica", value: selectedTask.origin },
       { id: "owner", icon: "user", label: "Dono / fila", value: drawerOwner },
       { id: "deadline", icon: "calendar", label: "Prazo", value: drawerDeadline, tone: drawerDeadlineTone, showToneIcon: false },
-      { id: "priority", icon: "clock", label: "Prioridade", value: <><span className="tcrm-task-drawer__priority-dot" aria-hidden="true" />Média</> },
-      { id: "reason", icon: "clock", label: "Motivo", value: "Ana pediu reposição e precisa confirmar horário" }
+      { id: "priority", icon: "clock", label: "Prioridade", value: <><span className="tcrm-task-drawer__priority-dot" aria-hidden="true" />{taskPriorityLabel[selectedTask.priority]}</> },
+      { id: "reason", icon: "clock", label: "Motivo", value: selectedTask.activity }
     ],
-    [drawerDeadline, drawerDeadlineTone, drawerOwner]
+    [drawerDeadline, drawerDeadlineTone, drawerOwner, selectedTask]
   );
 
   function prependHistory(id: string, body: React.ReactNode) {
@@ -509,6 +541,7 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
         setDrawerOwner("Você");
         setDrawerFeedback("Tarefa assumida por você.");
         prependHistory("assume-local", "você assumiu a pendência");
+        setAnnouncedAction("Tarefa assumida");
       }}
       onChecklistToggle={(item, checked) => {
         setChecklist((current) =>
@@ -516,41 +549,61 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
             checkItem.id === item.id ? { ...checkItem, checked } : checkItem
           )
         );
+        setAnnouncedAction(`${item.title}: ${checked ? "concluído" : "pendente"}`);
       }}
-      onClose={() => setDrawerOpen(false)}
+      onClose={() => {
+        setDrawerOpen(false);
+        setAnnouncedAction("Drawer de tarefa fechado");
+      }}
       onComment={() => {
         setComments((current) => [
           { id: `local-${current.length}`, author: "Você", body: "Comentário registrado para acompanhamento.", time: "Agora" },
           ...current.slice(0, 2)
         ]);
         setDrawerFeedback("Comentário adicionado ao histórico da tarefa.");
+        setAnnouncedAction("Comentário adicionado");
       }}
       onComplete={() => {
         setDrawerState("completed");
         setDrawerFeedback("Tarefa concluída e pronta para acompanhamento.");
         prependHistory("complete-local", "tarefa concluída");
+        setAnnouncedAction("Tarefa concluída");
       }}
       onDelegate={() => {
         setDrawerOwner("Coordenação");
         setDrawerFeedback("Delegada para Coordenação.");
         prependHistory("delegate-local", "pendência delegada para Coordenação");
+        setAnnouncedAction("Tarefa delegada");
       }}
-      onMore={() => setDrawerFeedback("Mais opções disponíveis para esta tarefa.")}
-      onOpenConversation={() => setDrawerFeedback("Conversa aberta no contexto da tarefa.")}
-      onOpenOrigin={() => setDrawerFeedback("Origem aberta: Agenda / Reposições.")}
+      onMore={() => {
+        setDrawerFeedback("Mais opções disponíveis para esta tarefa.");
+        setAnnouncedAction("Mais opções abertas");
+      }}
+      onOpenConversation={() => {
+        setDrawerFeedback("Conversa aberta no contexto da tarefa.");
+        setAnnouncedAction("Conversa aberta");
+      }}
+      onOpenOrigin={() => {
+        setDrawerFeedback("Origem aberta: Agenda / Reposições.");
+        setAnnouncedAction("Origem aberta");
+      }}
       onReschedule={() => {
         setDrawerDeadline("Quinta, 08:00");
         setDrawerDeadlineTone(undefined);
         setDrawerFeedback("Reposição reagendada para quinta, 08:00.");
         prependHistory("reschedule-local", "reposicão reagendada para quinta, 08:00");
+        setAnnouncedAction("Tarefa reagendada");
       }}
       size="compact"
       state={drawerState}
+      statusLabel={drawerState === "completed" ? "Concluída" : taskStatusLabel[selectedTask.status]}
+      title={selectedTask.title}
     />
   ) : null;
 
   return (
     <TasksPageContent
+      announcement={announcedAction}
       drawer={drawerNode}
       query={query}
       filterValues={filterValues}
@@ -565,21 +618,54 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
           status: ["aberta"]
         }));
         setSelectedQueueId("today");
+        setAnnouncedAction("Filtros avançados aplicados");
       }}
       onCreateTask={() => {
         setQuery("nova tarefa");
         setSelectedQueueId("my-tasks");
+        setAnnouncedAction("Criação de tarefa iniciada");
       }}
-      onFilterValueChange={(filter, value) => setFilterValues((current) => ({ ...current, [filter.id]: value }))}
-      onItemsPerPageClick={() => setPageLabel("1-8 de 8")}
-      onNextPage={() => setPageLabel("8 de 8")}
-      onPreviousPage={() => setPageLabel("1-8 de 8")}
-      onQueueSelect={(item) => setSelectedQueueId(item.id)}
-      onSearchChange={setQuery}
+      onFilterValueChange={(filter, value) => {
+        setFilterValues((current) => ({ ...current, [filter.id]: value }));
+        setAnnouncedAction(`Filtro ${filter.label} atualizado`);
+      }}
+      onItemsPerPageClick={() => {
+        setPageLabel("1-8 de 8");
+        setAnnouncedAction("Quantidade por página confirmada: 10");
+      }}
+      onNextPage={() => {
+        setPageLabel("8 de 8");
+        setAnnouncedAction("Próxima página aberta");
+      }}
+      onPreviousPage={() => {
+        setPageLabel("1-8 de 8");
+        setAnnouncedAction("Página anterior aberta");
+      }}
+      onQueueSelect={(item) => {
+        setSelectedQueueId(item.id);
+        setAnnouncedAction(`Fila selecionada: ${item.label}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        setAnnouncedAction(value ? `Busca atualizada: ${value}` : "Busca limpa");
+      }}
+      onShellAction={setAnnouncedAction}
       onTaskSelect={(row) => {
         setSelectedTaskId(row.id);
         setDrawerOpen(true);
         setDrawerState("open");
+        setDrawerOwner(row.owner);
+        setDrawerDeadline(row.deadline);
+        setDrawerDeadlineTone(row.deadlineTone === "danger" ? "danger" : undefined);
+        setChecklist(contextualChecklist(row));
+        setComments(row.id === "replace-ana" ? taskDrawerComments : [
+          { id: `${row.id}-context`, author: "Taliya", body: <>Contexto operacional carregado para <strong>{row.title}</strong>.</>, time: "Agora" }
+        ]);
+        setHistory(row.id === "replace-ana" ? taskDrawerHistory : [
+          { id: `${row.id}-activity`, time: "Agora", body: row.activity }
+        ]);
+        setDrawerFeedback("Contexto carregado para a tarefa selecionada.");
+        setAnnouncedAction(`Tarefa aberta: ${row.id}`);
       }}
     />
   );

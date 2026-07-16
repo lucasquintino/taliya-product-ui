@@ -32643,11 +32643,15 @@ button.tcrm-pipeline-card__select:focus-visible,
     padding-right: 0;
   }
 
-  .tcrm-product-shell-stage > .tcrm-drawer-frame {
+  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-drawer-frame {
+    bottom: 0;
     box-sizing: border-box;
+    height: 100vh;
     left: 0;
+    max-height: 100vh;
     max-width: 100%;
     right: 0;
+    top: 0;
     width: 100%;
     z-index: 70;
   }

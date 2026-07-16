@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T22:01:54.546Z",
+  "generatedAt": "2026-07-16T22:13:45.791Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 6,
+  "completedRouteCount": 7,
   "failedRouteCount": 0,
-  "pendingRouteCount": 67,
+  "pendingRouteCount": 66,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -552,38 +552,59 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:13:44.152Z",
+        "evidence": [
+          "tmp/human-route-review/23-tarefas-worklist/desktop.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:13:44.484Z",
+        "evidence": [
+          "tmp/human-route-review/23-tarefas-worklist/desktop.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:13:44.587Z",
+        "evidence": [
+          "tmp/human-route-review/23-tarefas-worklist/mobile.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:13:45.604Z",
         "evidence": [],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "filter-search",
+          "all-page-filter-menus",
+          "quick-filters",
+          "all-table-sorts",
+          "table-selection-context",
+          "pagination",
+          "drawer-open-close",
+          "drawer-checklist-and-actions"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:13:44.684Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/23_round-4.1C_tarefas_01_lista-detalhe.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Worklist geometry matches the 1448px source; row selection now updates every drawer context field and activity section; mobile drawers use the official full-viewport overlay contract."
+      ]
     },
     {
       "image": "24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png",

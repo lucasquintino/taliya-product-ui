@@ -10,7 +10,8 @@ const mdPath = resolve(specDir, "drawer-lifecycle-audit.md");
 const standardWorklistSnippets = [
   "drawerOpen",
   "drawerOpen ?",
-  "onClose={() => setDrawerOpen(false)}",
+  "onClose={() =>",
+  "setDrawerOpen(false)",
   "setDrawerOpen(true)"
 ];
 
