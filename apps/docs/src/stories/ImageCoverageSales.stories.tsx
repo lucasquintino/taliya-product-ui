@@ -68,13 +68,14 @@ export function SalesPipelinePage() {
 
 export function SalesInterestedListPage() {
   const [selectedLeadId, setSelectedLeadId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
   return (
     <CrmWorklistPage
       activeNavId="lista"
       activeSidebarId="vendas"
       avatarSrc={image79Avatar}
-      drawer={<LeadDrawer compact onAction={setDrawerAction} />}
+      drawer={drawerOpen ? <LeadDrawer compact onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
       filterBar={<SalesInterestedFilters />}
       filterBarLabel="Filtros de interessados"
       listLabel="Filtros rapidos"
@@ -90,13 +91,14 @@ export function SalesInterestedListPage() {
       worklistLayoutMode="compact-rail"
       worklistFilterRhythm="spacious"
     >
-      <SalesLeadTable onRowSelect={(row) => setSelectedLeadId(row.id)} selectedRowId={selectedLeadId} />
+      <SalesLeadTable onRowSelect={(row) => { setSelectedLeadId(row.id); setDrawerOpen(true); }} selectedRowId={selectedLeadId} />
     </CrmWorklistPage>
   );
 }
 
 export function SalesExperimentalListPage() {
   const [selectedExperimentalId, setSelectedExperimentalId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
 
   return (
@@ -104,7 +106,7 @@ export function SalesExperimentalListPage() {
       activeNavId="experimental"
       activeSidebarId="vendas"
       avatarSrc={image79Avatar}
-      drawer={<ExperimentalDrawer onAction={setDrawerAction} />}
+      drawer={drawerOpen ? <ExperimentalDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
       filterBar={<ExperimentalFilters />}
       filterBarLabel="Filtros de experimental"
       listLabel="Filtros rapidos"
@@ -120,13 +122,14 @@ export function SalesExperimentalListPage() {
       worklistLayoutMode="compact-rail"
       worklistFilterRhythm="spacious"
     >
-      <ExperimentalTable onRowSelect={(row) => setSelectedExperimentalId(row.id)} selectedRowId={selectedExperimentalId} />
+      <ExperimentalTable onRowSelect={(row) => { setSelectedExperimentalId(row.id); setDrawerOpen(true); }} selectedRowId={selectedExperimentalId} />
     </CrmWorklistPage>
   );
 }
 
 export function SalesEnrollmentChecklistPage() {
   const [selectedEnrollmentId, setSelectedEnrollmentId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
 
   return (
@@ -134,7 +137,7 @@ export function SalesEnrollmentChecklistPage() {
       activeNavId="matriculas"
       activeSidebarId="vendas"
       avatarSrc={image79Avatar}
-      drawer={<EnrollmentDrawer onAction={setDrawerAction} />}
+      drawer={drawerOpen ? <EnrollmentDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
       filterBar={<EnrollmentFilters />}
       filterBarLabel="Filtros de matriculas"
       listLabel="Filtros rapidos"
@@ -150,7 +153,7 @@ export function SalesEnrollmentChecklistPage() {
       worklistLayoutMode="compact-rail"
       worklistFilterRhythm="spacious"
     >
-      <EnrollmentTable onRowSelect={(row) => setSelectedEnrollmentId(row.id)} selectedRowId={selectedEnrollmentId} />
+      <EnrollmentTable onRowSelect={(row) => { setSelectedEnrollmentId(row.id); setDrawerOpen(true); }} selectedRowId={selectedEnrollmentId} />
     </CrmWorklistPage>
   );
 }
@@ -655,7 +658,7 @@ const experimentalDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "waiting", time: "ontem 18:40", title: "Aguardando confirmacao", description: "Recepcao acompanha manualmente" }
 ];
 
-function ExperimentalDrawer({ onAction }: { onAction?: (action: string) => void }) {
+function ExperimentalDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
   return (
     <LeadDrawer
       compact
@@ -667,6 +670,7 @@ function ExperimentalDrawer({ onAction }: { onAction?: (action: string) => void 
       name="Ana Souza"
       notice={<><strong>A operacao manual e sempre possivel.</strong><small>O copiloto apenas sugere. A Agenda e a origem do horario da aula.</small></>}
       onAction={onAction}
+      onClose={onClose}
       primaryAction={{ label: "Abrir conversa", action: "open-conversation", icon: "whatsapp" }}
       secondaryActions={[
         { label: "Abrir aula na Agenda", action: "open-class", icon: "calendar" },
@@ -872,7 +876,7 @@ const enrollmentDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "plan", time: "ontem 18:10", title: "Plano 2x/semana escolhido", description: "Primeira aula sugerida" }
 ];
 
-function EnrollmentDrawer({ onAction }: { onAction?: (action: string) => void }) {
+function EnrollmentDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
   return (
     <LeadDrawer
       compact
@@ -887,6 +891,7 @@ function EnrollmentDrawer({ onAction }: { onAction?: (action: string) => void })
       name="Ana Souza"
       notice={<><strong>A operação manual é sempre possível.</strong></>}
       onAction={onAction}
+      onClose={onClose}
       primaryAction={{ label: "Pedir dado", action: "request-data", icon: "clipboard" }}
       secondaryActions={[
         { label: "Converter em aluno", action: "convert-student", icon: "clipboard", disabled: true },

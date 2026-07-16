@@ -131,6 +131,7 @@ function InternalSecurityNotice() {
 }
 
 export function InternalOverviewPage() {
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setAction] = useState("");
 
   return (
@@ -138,14 +139,14 @@ export function InternalOverviewPage() {
       avatarSrc={image79Avatar}
       browserUrl="https://app.taliya.com/internal"
       contentLayout="internal-overview"
-      drawer={<SupportTicketDrawer onAction={setAction} onClose={() => setAction("close-ticket")} state="access active" variant="internal" />}
+      drawer={drawerOpen ? <SupportTicketDrawer onAction={setAction} onClose={() => setDrawerOpen(false)} state="access active" variant="internal" /> : null}
       drawerPlacement="floating"
       navItems={internalNav("overview")}
       pageHeaderRhythm="internal-overview"
       pageHeaderActions={
         <ButtonGroup>
           <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => setAction("new-lead")} size="sm" variant="primary">Novo lead</Button>
-          <Button leadingIcon="shield" onClick={() => setAction("open-internal-ticket")} size="sm" variant="secondary">Abrir ticket interno</Button>
+          <Button leadingIcon="shield" onClick={() => { setAction("open-internal-ticket"); setDrawerOpen(true); }} size="sm" variant="secondary">Abrir ticket interno</Button>
         </ButtonGroup>
       }
       subtitle="Operacao interna de leads, clientes, suporte e plataforma"
@@ -166,6 +167,7 @@ export function InternalOverviewPage() {
 
 export function InternalTenantsListDetailPage() {
   const [selectedTenantId, setSelectedTenantId] = useState("studio-vila");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setAction] = useState("");
 
   return (
@@ -174,7 +176,7 @@ export function InternalTenantsListDetailPage() {
       avatarSrc={image79Avatar}
       browserUrl="https://app.taliya.com/internal/tenants"
       contentLayout="internal-tenants"
-      drawer={<TenantSummaryDrawer onAction={setAction} onClose={() => setAction("close-tenant")} />}
+      drawer={drawerOpen ? <TenantSummaryDrawer onAction={setAction} onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="floating"
       filterBar={<InternalTenantFilters onAction={setAction} />}
       navItems={internalNav("clients")}
@@ -184,7 +186,7 @@ export function InternalTenantsListDetailPage() {
       title="Clientes"
       worklistLayoutMode="main-priority"
     >
-      <InternalTenantsTable onRowSelect={setSelectedTenantId} selectedRowId={selectedTenantId} />
+      <InternalTenantsTable onRowSelect={(tenantId) => { setSelectedTenantId(tenantId); setDrawerOpen(true); }} selectedRowId={selectedTenantId} />
     </InternalWorklistPage>
   );
 }

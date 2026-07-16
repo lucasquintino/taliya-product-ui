@@ -1,0 +1,39 @@
+{
+  "date": "2026-07-16",
+  "status": "pass",
+  "rowCount": 6,
+  "failedCount": 0,
+  "metrics": {
+    "indexBytes": 913377,
+    "indexLines": 22546,
+    "registryBytes": 18352,
+    "registryLines": 277
+  },
+  "rows": [
+    {
+      "contract": "component-registry-module",
+      "status": "pass"
+    },
+    {
+      "contract": "component-registry-reexport",
+      "status": "pass"
+    },
+    {
+      "contract": "component-registry-not-inline",
+      "status": "pass"
+    },
+    {
+      "contract": "standard-page-kit-module",
+      "status": "pass"
+    },
+    {
+      "contract": "package-does-not-import-docs",
+      "status": "pass"
+    },
+    {
+      "contract": "package-does-not-import-landing",
+      "status": "pass"
+    }
+  ],
+  "note": "The registry and standard page-kit have explicit module boundaries. The main CRM implementation and stylesheet remain large and require incremental domain extraction; this gate does not claim that modularization is complete."
+}

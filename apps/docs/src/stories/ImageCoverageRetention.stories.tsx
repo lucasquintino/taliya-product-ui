@@ -42,6 +42,7 @@ const retentionNavItems: CrmShellNavItem[] = [
 
 export function RetentionRiskListPage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
 
   return (
@@ -49,7 +50,7 @@ export function RetentionRiskListPage() {
       activeNavId="riscos"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<RetentionRiskDrawer onAction={setDrawerAction} />}
+      drawer={drawerOpen ? <RetentionRiskDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
       filterBar={<RetentionRiskFilters />}
       filterBarLabel="Filtros de retencao"
       listLabel="Segmentos"
@@ -62,13 +63,14 @@ export function RetentionRiskListPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <RetentionRiskTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
+      <RetentionRiskTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
 
 export function RetentionCancellationQueuePage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
 
   return (
@@ -76,7 +78,7 @@ export function RetentionCancellationQueuePage() {
       activeNavId="cancelamentos"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<CancellationDrawer onAction={setDrawerAction} />}
+      drawer={drawerOpen ? <CancellationDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="chrome"
       filterBar={<CancellationFilters />}
       filterBarLabel="Filtros de cancelamentos"
@@ -90,13 +92,14 @@ export function RetentionCancellationQueuePage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <CancellationTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
+      <CancellationTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
 
 export function RetentionReactivationListPage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
 
   return (
@@ -104,7 +107,7 @@ export function RetentionReactivationListPage() {
       activeNavId="reativacoes"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<ReactivationDrawer onAction={setDrawerAction} />}
+      drawer={drawerOpen ? <ReactivationDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
       filterBar={<ReactivationFilters />}
       filterBarLabel="Filtros de reativacoes"
       listLabel="Filas"
@@ -117,13 +120,14 @@ export function RetentionReactivationListPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <ReactivationTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
+      <ReactivationTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
 
 export function RetentionComplaintQueuePage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
 
   return (
@@ -131,7 +135,7 @@ export function RetentionComplaintQueuePage() {
       activeNavId="reclamacoes"
       activeSidebarId="retencao"
       avatarSrc={image79Avatar}
-      drawer={<ComplaintDrawer onAction={setDrawerAction} />}
+      drawer={drawerOpen ? <ComplaintDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="chrome"
       filterBar={<ComplaintFilters />}
       filterBarLabel="Filtros de reclamacoes"
@@ -145,7 +149,7 @@ export function RetentionComplaintQueuePage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-rail"
     >
-      <ComplaintTable onRowSelect={(row) => setSelectedRowId(row.id)} selectedRowId={selectedRowId} />
+      <ComplaintTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
     </CrmWorklistPage>
   );
 }
@@ -264,7 +268,7 @@ const retentionRiskDrawerFacts = [
   { id: "owner", icon: "user" as const, label: "Responsavel", value: "Mariana" }
 ];
 
-function RetentionRiskDrawer({ onAction }: { onAction?: (action: string) => void }) {
+function RetentionRiskDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
   return (
     <CaseDrawer
       avatarSrc={image79Avatar}
@@ -278,6 +282,7 @@ function RetentionRiskDrawer({ onAction }: { onAction?: (action: string) => void
       messageQuotaLabel="revisao humana"
       numberedSections
       onAction={onAction}
+      onClose={onClose}
       showMessageSuggestion={false}
       statusLabel="Risco alto"
       suggestion="Entrar em contato de forma humana, perguntar se houve dificuldade de agenda e oferecer dois horarios de reposicao."
@@ -400,7 +405,7 @@ const cancellationDrawerFacts = [
   { id: "owner", icon: "user" as const, label: "Responsavel", value: "Mariana" }
 ];
 
-function CancellationDrawer({ onAction }: { onAction?: (action: string) => void }) {
+function CancellationDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
   return (
     <CaseDrawer
       alternatives={[
@@ -430,6 +435,7 @@ function CancellationDrawer({ onAction }: { onAction?: (action: string) => void 
       showMessageSuggestion={false}
       numberedSections
       onAction={onAction}
+      onClose={onClose}
       statusLabel="Em salvamento"
       suggestion="Responder de forma humana, validar a dificuldade de agenda e oferecer uma pausa de 15 dias ou dois horarios alternativos antes de confirmar o cancelamento."
       title="Ana Paula Martins"
@@ -548,7 +554,7 @@ const reactivationDrawerFacts = [
   { id: "channel", icon: "whatsapp" as const, label: "Contato permitido", value: "WhatsApp" }
 ];
 
-function ReactivationDrawer({ onAction }: { onAction?: (action: string) => void }) {
+function ReactivationDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
   return (
     <CaseDrawer
       alternatives={[{ id: "slot", title: "Quinta, 09:00", capacity: "Reformer", status: "1 vaga disponivel", tone: "success" }]}
@@ -580,6 +586,7 @@ function ReactivationDrawer({ onAction }: { onAction?: (action: string) => void 
       showMessageSuggestion={false}
       numberedSections
       onAction={onAction}
+      onClose={onClose}
       statusLabel="Elegivel"
       suggestion="Enviar mensagem curta oferecendo a vaga de quinta as 09h e perguntando se o horario voltou a servir."
       title="Ana Paula Martins"
@@ -703,7 +710,7 @@ const complaintDrawerFacts = [
   { id: "deadline", icon: "calendar" as const, label: "Prazo", value: "Hoje 14:00", tone: "danger" as const }
 ];
 
-function ComplaintDrawer({ onAction }: { onAction?: (action: string) => void }) {
+function ComplaintDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
   return (
     <CaseDrawer
       avatarSrc={image79Avatar}
@@ -777,6 +784,7 @@ function ComplaintDrawer({ onAction }: { onAction?: (action: string) => void }) 
       showMessageSuggestion={false}
       numberedSections
       onAction={onAction}
+      onClose={onClose}
       statusLabel="Alta severidade"
       title="Ana Paula Martins"
     />

@@ -49,6 +49,7 @@ const supportSidebarItems: CrmShellSidebarItem[] = [
 
 export function SupportCentralPage() {
   const [selectedTicketId, setSelectedTicketId] = useState("import");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setAction] = useState("");
 
   return (
@@ -58,7 +59,7 @@ export function SupportCentralPage() {
       avatarSrc={image79Avatar}
       columns="support"
       density="compact"
-      drawer={<SupportTicketDrawer onAction={setAction} onClose={() => setAction("close")} />}
+      drawer={drawerOpen ? <SupportTicketDrawer onAction={setAction} onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="content"
       layoutVariant="support"
       navItems={supportNav}
@@ -75,7 +76,7 @@ export function SupportCentralPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
       <SupportStatusSidebar onViewAll={() => setAction("view-statuses")} />
-      <SupportCentralContent onAction={setAction} onTicketSelect={setSelectedTicketId} selectedTicketId={selectedTicketId} />
+      <SupportCentralContent onAction={setAction} onTicketSelect={(ticketId) => { setSelectedTicketId(ticketId); setDrawerOpen(true); }} selectedTicketId={selectedTicketId} />
     </CrmDashboardPage>
   );
 }

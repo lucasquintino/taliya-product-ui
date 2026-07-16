@@ -24,13 +24,13 @@ const contracts = [
     page: "MoneyOnTheTablePage",
     file: "apps/docs/src/stories/ImageCoverageReports.stories.tsx",
     family: "dashboard/reports",
-    requiredPageSnippets: ["<CrmDashboardPage", "before={<MoneyTableFilters", "<OpportunityGroupCard", "drawer={<OpportunityPanel"]
+    requiredPageSnippets: ["<CrmDashboardPage", "before={<MoneyTableFilters", "<OpportunityGroupCard", "drawer={drawerOpen ? <OpportunityPanel", "onClose={() => setDrawerOpen(false)}", "setDrawerOpen(true)"]
   },
   {
     page: "SupportCentralPage",
     file: "apps/docs/src/stories/ImageCoverageSupport.stories.tsx",
     family: "dashboard/support",
-    requiredPageSnippets: ["<CrmDashboardPage", "<SupportStatusSidebar", "<SupportCentralContent", "drawer={<SupportTicketDrawer"]
+    requiredPageSnippets: ["<CrmDashboardPage", "<SupportStatusSidebar", "<SupportCentralContent", "drawer={drawerOpen ? <SupportTicketDrawer", "onClose={() => setDrawerOpen(false)}", "setDrawerOpen(true)"]
   },
   {
     page: "AgentsCatalogPage",
@@ -54,13 +54,13 @@ const contracts = [
     page: "FinanceBillingDrawerPage",
     file: "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
     family: "dashboard/finance",
-    requiredPageSnippets: ["<FinanceOverviewDashboard drawer={<PaymentDrawer />} />"]
+    requiredPageSnippets: ["<FinanceOverviewDashboard", "drawer={drawerOpen ? <PaymentDrawer", "onClose={() => setDrawerOpen(false)}", "onOpenCase={() => setDrawerOpen(true)}"]
   },
   {
     page: "AgendaCalendarPage",
     file: "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
     family: "dashboard/calendar",
-    requiredPageSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact />", "drawer={<AgendaSelectedClassDrawer />}"]
+    requiredPageSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact", "drawer={drawerOpen ? <AgendaSelectedClassDrawer", "onClose={() => setDrawerOpen(false)}", "onEventSelect={() => setDrawerOpen(true)}"]
   },
   {
     page: "AgendaClassDetailPage",
@@ -139,6 +139,30 @@ const contracts = [
     file: "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
     family: "right-panel/settings",
     requiredPageSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsPermissionsWorkspace", "rightPanelVariant=\"settings-permissions\""]
+  },
+  {
+    page: "SettingsStudioPage",
+    file: "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+    family: "right-panel/settings",
+    requiredPageSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsStudioWorkspace", 'browserUrl="https://app.taliya.com/app/configuracoes/studio"', 'rightPanelVariant="settings"']
+  },
+  {
+    page: "SettingsTeamPage",
+    file: "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+    family: "right-panel/settings",
+    requiredPageSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsTeamWorkspace", 'browserUrl="https://app.taliya.com/app/configuracoes/equipe"', 'rightPanelVariant="settings"']
+  },
+  {
+    page: "SettingsChannelsPage",
+    file: "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+    family: "right-panel/settings",
+    requiredPageSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsChannelsWorkspace", 'browserUrl="https://app.taliya.com/app/configuracoes/canais"', 'rightPanelVariant="settings"']
+  },
+  {
+    page: "SettingsPlansPage",
+    file: "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+    family: "right-panel/settings",
+    requiredPageSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsPlansWorkspace", 'browserUrl="https://app.taliya.com/app/configuracoes/financeiro/modelos"', 'rightPanelVariant="settings"']
   },
   {
     page: "SettingsPaymentsPage",

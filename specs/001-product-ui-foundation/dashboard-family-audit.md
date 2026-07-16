@@ -10,7 +10,7 @@ It does **not** certify 1:1 visual approval.
 
 ## Summary
 
-- Checked page rows: 37
+- Checked page rows: 41
 - Failed page rows: 0
 - Checked source files: 11
 - Failed source files: 0
@@ -41,6 +41,10 @@ It does **not** certify 1:1 visual approval.
 | AgentPublishRoutinePage | apps/docs/src/stories/ImageCoverageAgents.stories.tsx | right-panel/agent | pass | None |
 | AgentExecutionReceiptPage | apps/docs/src/stories/ImageCoverageAgents.stories.tsx | right-panel/agent | pass | None |
 | SettingsPermissionsPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |
+| SettingsStudioPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |
+| SettingsTeamPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |
+| SettingsChannelsPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |
+| SettingsPlansPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |
 | SettingsPaymentsPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |
 | SettingsAgendaPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |
 | SettingsNotificationsPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | right-panel/settings | pass | None |

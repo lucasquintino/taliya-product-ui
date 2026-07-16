@@ -1,0 +1,170 @@
+{
+  "date": "2026-07-16",
+  "status": "pass",
+  "rowCount": 23,
+  "failedCount": 0,
+  "rows": [
+    {
+      "page": "TasksShell",
+      "file": "apps/docs/src/stories/ImageCoverageTasks.stories.tsx",
+      "family": "worklist/tasks",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "ChecklistsShell",
+      "file": "apps/docs/src/stories/ImageCoverageChecklists.stories.tsx",
+      "family": "worklist/checklists",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "ApprovalsShell",
+      "file": "apps/docs/src/stories/ImageCoverageApprovals.stories.tsx",
+      "family": "worklist/approvals",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "StudentsShell",
+      "file": "apps/docs/src/stories/ImageCoverageStudents.stories.tsx",
+      "family": "worklist/students",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "ReplacementsShell",
+      "file": "apps/docs/src/stories/ImageCoverageReplacements.stories.tsx",
+      "family": "worklist/replacements",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "TodayShell",
+      "file": "apps/docs/src/stories/ImageCoverageToday.stories.tsx",
+      "family": "dashboard/today",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "OperationShell",
+      "file": "apps/docs/src/stories/ImageCoverageOperation.stories.tsx",
+      "family": "kanban/operation",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesInterestedListPage",
+      "file": "apps/docs/src/stories/ImageCoverageSales.stories.tsx",
+      "family": "worklist/sales",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesExperimentalListPage",
+      "file": "apps/docs/src/stories/ImageCoverageSales.stories.tsx",
+      "family": "worklist/sales",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SalesEnrollmentChecklistPage",
+      "file": "apps/docs/src/stories/ImageCoverageSales.stories.tsx",
+      "family": "worklist/sales",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionRiskListPage",
+      "file": "apps/docs/src/stories/ImageCoverageRetention.stories.tsx",
+      "family": "worklist/retention",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionCancellationQueuePage",
+      "file": "apps/docs/src/stories/ImageCoverageRetention.stories.tsx",
+      "family": "worklist/retention",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionReactivationListPage",
+      "file": "apps/docs/src/stories/ImageCoverageRetention.stories.tsx",
+      "family": "worklist/retention",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "RetentionComplaintQueuePage",
+      "file": "apps/docs/src/stories/ImageCoverageRetention.stories.tsx",
+      "family": "worklist/retention",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaCalendarPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
+      "family": "dashboard/agenda",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaClassesPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
+      "family": "worklist/agenda",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgendaGradePage",
+      "file": "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
+      "family": "worklist/agenda",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "FinanceBillingDrawerPage",
+      "file": "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
+      "family": "dashboard/finance",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "FinanceMovementsPage",
+      "file": "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
+      "family": "worklist/finance",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SupportCentralPage",
+      "file": "apps/docs/src/stories/ImageCoverageSupport.stories.tsx",
+      "family": "dashboard/support",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "InternalOverviewPage",
+      "file": "apps/docs/src/stories/ImageCoverageInternal.stories.tsx",
+      "family": "dashboard/internal",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "InternalTenantsListDetailPage",
+      "file": "apps/docs/src/stories/ImageCoverageInternal.stories.tsx",
+      "family": "worklist/internal",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "MoneyOnTheTablePage",
+      "file": "apps/docs/src/stories/ImageCoverageReports.stories.tsx",
+      "family": "dashboard/reports",
+      "missingSnippets": [],
+      "status": "pass"
+    }
+  ],
+  "note": "This audit proves selected-object drawers can close, unmount, and reopen from their page interaction. It does not certify visual parity or browser behavior."
+}

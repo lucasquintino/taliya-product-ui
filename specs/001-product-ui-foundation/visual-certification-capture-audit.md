@@ -1,6 +1,6 @@
 # Visual Certification Capture Audit
 
-Generated: 2026-07-15T20:11:21.681Z
+Generated: 2026-07-16T00:16:20.019Z
 
 Status: pass-captured-not-certified
 
@@ -51,13 +51,13 @@ This report records reproducible source-sized Storybook screenshots and raw pixe
 | `48_round-4.1K_internal_01_visao-operacional.png.png` | `crm-image-coverage-internal--image-48-internal-visao-operacional` | captured | valid | 1672x941 | 14.67 | 8.86% |
 | `49_round-4.1K_internal_02_tenants-lista-detalhe.png` | `crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe` | captured | valid | 1672x941 | 12.41 | 7.82% |
 | `50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png` | `crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants` | captured | valid | 1536x1024 | 11.38 | 6.97% |
-| `51A_round-4.1J_onboarding_shell-global-aprovado.png` | `crm-image-coverage-setup--image-51-a-onboarding-shell-global` | captured | valid | 1672x941 | 8.07 | 4.73% |
+| `51A_round-4.1J_onboarding_shell-global-aprovado.png` | `crm-image-coverage-setup--image-51-a-onboarding-shell-global` | captured | valid | 1672x941 | 8.15 | 4.81% |
 | `51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png` | `crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat` | captured | valid | 1086x1448 | 8.54 | 3.66% |
-| `51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png` | `crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao` | captured | valid | 1672x941 | 13.75 | 8.75% |
-| `51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png` | `crm-image-coverage-setup--image-51-d-onboarding-studio` | captured | valid | 1672x941 | 13.07 | 8.56% |
-| `51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png` | `crm-image-coverage-setup--image-51-e-onboarding-equipe` | captured | valid | 1672x941 | 12.58 | 8.26% |
-| `51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png` | `crm-image-coverage-setup--image-51-f-onboarding-canais` | captured | valid | 1672x941 | 14.28 | 9.55% |
-| `51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png` | `crm-image-coverage-setup--image-51-g-onboarding-planos` | captured | valid | 1672x941 | 16.86 | 11.01% |
+| `51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png` | `crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao` | captured | valid | 1672x941 | 13.82 | 8.82% |
+| `51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png` | `crm-image-coverage-setup--image-51-d-onboarding-studio` | captured | valid | 1672x941 | 13.08 | 8.57% |
+| `51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png` | `crm-image-coverage-setup--image-51-e-onboarding-equipe` | captured | valid | 1672x941 | 12.59 | 8.28% |
+| `51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png` | `crm-image-coverage-setup--image-51-f-onboarding-canais` | captured | valid | 1672x941 | 14.28 | 9.56% |
+| `51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png` | `crm-image-coverage-setup--image-51-g-onboarding-planos` | captured | valid | 1672x941 | 16.91 | 11.06% |
 | `51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png` | `crm-image-coverage-setup--image-51-k-onboarding-pagamento` | captured | valid | 1672x941 | 15.31 | 10.06% |
 | `51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png` | `crm-image-coverage-setup--image-51-h-onboarding-alunos` | captured | valid | 1672x941 | 14.00 | 9.06% |
 | `51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png` | `crm-image-coverage-setup--image-51-i-onboarding-turmas` | captured | valid | 1672x941 | 13.63 | 9.04% |
@@ -72,8 +72,8 @@ This report records reproducible source-sized Storybook screenshots and raw pixe
 | `59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png` | `crm-image-coverage-agentes--image-59-publicar-rotina` | captured | valid | 1672x941 | 14.29 | 9.93% |
 | `70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png` | `crm-image-coverage-agentes--image-70-execucoes-fluxo` | captured | valid | 1586x992 | 12.71 | 7.95% |
 | `60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png` | `crm-image-coverage-configuracoes--image-60-configuracoes-hub` | captured | valid | 1672x941 | 7.02 | 4.53% |
-| `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | `crm-image-coverage-configuracoes--image-61-configuracoes-permissoes` | captured | valid | 1491x1055 | 10.08 | 6.85% |
-| `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | `crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos` | captured | valid | 1448x1086 | 11.69 | 7.61% |
-| `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | `crm-image-coverage-configuracoes--image-63-configuracoes-agenda` | captured | valid | 1448x1086 | 8.91 | 6.09% |
-| `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | `crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes` | captured | valid | 1448x1086 | 10.52 | 7.14% |
+| `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | `crm-image-coverage-configuracoes--image-61-configuracoes-permissoes` | captured | valid | 1491x1055 | 9.86 | 6.75% |
+| `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | `crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos` | captured | valid | 1448x1086 | 12.76 | 8.07% |
+| `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | `crm-image-coverage-configuracoes--image-63-configuracoes-agenda` | captured | valid | 1448x1086 | 9.25 | 6.23% |
+| `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | `crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes` | captured | valid | 1448x1086 | 10.84 | 7.27% |
 | `65_round-4.1N_billing_01_assinatura-taliya-aprovado.png` | `crm-image-coverage-billing--image-65-billing-assinatura` | captured | valid | 1448x1086 | 11.02 | 6.91% |

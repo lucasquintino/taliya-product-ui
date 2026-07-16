@@ -186,7 +186,7 @@ function FinanceHeaderActions() {
   );
 }
 
-function FinanceOverviewMain({ compactQueues = false }: { compactQueues?: boolean } = {}) {
+function FinanceOverviewMain({ compactQueues = false, onOpenCase }: { compactQueues?: boolean; onOpenCase?: (caseId: string) => void } = {}) {
   const [selectedPriorityId, setSelectedPriorityId] = useState("");
   const [event, setEvent] = useState("sem acao");
 
@@ -204,6 +204,7 @@ function FinanceOverviewMain({ compactQueues = false }: { compactQueues?: boolea
         compact={compactQueues}
         onOpenCase={(caseId) => {
           setEvent(`cobranca:${caseId}`);
+          onOpenCase?.(caseId);
         }}
         onViewAll={(state) => setEvent(`ver-todos:${state}`)}
       />
@@ -212,7 +213,7 @@ function FinanceOverviewMain({ compactQueues = false }: { compactQueues?: boolea
   );
 }
 
-function FinanceOverviewDashboard({ drawer }: { drawer?: React.ReactNode } = {}) {
+function FinanceOverviewDashboard({ drawer, onOpenCase }: { drawer?: React.ReactNode; onOpenCase?: (caseId: string) => void } = {}) {
   const [selectedPeriod, setSelectedPeriod] = useState("today");
   const [filterValues, setFilterValues] = useState<Record<string, string | string[]>>({});
 
@@ -242,7 +243,7 @@ function FinanceOverviewDashboard({ drawer }: { drawer?: React.ReactNode } = {})
       title="Financeiro"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
-      <FinanceOverviewMain compactQueues={Boolean(drawer)} />
+      <FinanceOverviewMain compactQueues={Boolean(drawer)} onOpenCase={onOpenCase} />
     </CrmDashboardPage>
   );
 }
@@ -356,7 +357,7 @@ function MovementsQuickFilters() {
   return <PageQuickFilters aria-label="Filtros rapidos de movimentacoes" heading="Filtros rapidos" items={items} onSelect={(item) => setSelectedId(item.id)} selectionTone="soft" />;
 }
 
-function MovementTable() {
+function MovementTable({ onRowSelect, selectedRowId = "fernanda" }: { onRowSelect?: (row: { id: string }) => void; selectedRowId?: string }) {
   const rows: Array<{ id: string; student: string; avatarSrc: string; type: string; typeTone: ComponentTone; status: string; statusTone: ComponentTone; amount: string; due: string; plan: string; method: string; origin: string; owner: string; activity: string }> = [
     { id: "fernanda", student: "Fernanda Lima", avatarSrc: source34FernandaLima, type: "Mensalidade", typeTone: "info", status: "A vencer", statusTone: "info", amount: "R$ 420,00", due: "14/05", plan: "Mensal", method: "Pix", origin: "Sistema", owner: "Financeiro", activity: "gerada hoje" },
     { id: "juliana", student: "Juliana Rocha", avatarSrc: source34JulianaRocha, type: "Recebido", typeTone: "success", status: "Pago", statusTone: "success", amount: "R$ 420,00", due: "-", plan: "Mensal", method: "Pix", origin: "WhatsApp", owner: "Mariana", activity: "pago 09:12" },
@@ -390,7 +391,8 @@ function MovementTable() {
       pagination={{ itemsPerPage: "10", label: "1-10 de 256", page: 1, pageCount: 26 }}
       rowActions={() => <IconButton icon="more" label="Mais acoes da movimentacao" size="sm" variant="ghost" />}
       rows={rows}
-      selectedRowId="fernanda"
+      onRowSelect={onRowSelect}
+      selectedRowId={selectedRowId}
     />
   );
 }
@@ -409,8 +411,12 @@ export const Image30VisaoGeralFilas: Story = {
 };
 
 export function FinanceBillingDrawerPage() {
+  const [drawerOpen, setDrawerOpen] = useState(true);
   return (
-    <FinanceOverviewDashboard drawer={<PaymentDrawer />} />
+    <FinanceOverviewDashboard
+      drawer={drawerOpen ? <PaymentDrawer onClose={() => setDrawerOpen(false)} /> : null}
+      onOpenCase={() => setDrawerOpen(true)}
+    />
   );
 }
 
@@ -438,6 +444,8 @@ export function FinanceKanbanPage() {
 }
 
 export function FinanceMovementsPage() {
+  const [selectedMovementId, setSelectedMovementId] = useState("fernanda");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setDrawerAction] = useState("");
   return (
     <CrmWorklistPage
@@ -446,7 +454,7 @@ export function FinanceMovementsPage() {
       avatarSrc={image79Avatar}
       className="sb-image-coverage-finance-shell"
       contentLayout="work-list-wide"
-      drawer={
+      drawer={drawerOpen ? (
         <PaymentDrawer
           amount="R$ 420,00"
           compact
@@ -468,11 +476,12 @@ export function FinanceMovementsPage() {
           ]}
           name="Fernanda Lima"
           onAction={setDrawerAction}
+          onClose={() => setDrawerOpen(false)}
           state="due"
           statusLabel="A vencer"
           variant="movement"
         />
-      }
+      ) : null}
       filterBar={<MovementsFilters />}
       navItems={financeNavItems}
       pageHeaderRhythm="overview"
@@ -484,7 +493,7 @@ export function FinanceMovementsPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="wide-main"
     >
-      <MovementTable />
+      <MovementTable onRowSelect={(row) => { setSelectedMovementId(row.id); setDrawerOpen(true); }} selectedRowId={selectedMovementId} />
     </CrmWorklistPage>
   );
 }

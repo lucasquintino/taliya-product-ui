@@ -73,283 +73,14 @@ import {
 } from "@taliya/ui";
 import type { AuditTableRow, AvatarProps, ButtonVariant, ComponentTone, DiffTableRow, DropdownAction, IconName, SelectOption, StatusDotStatus, StepperStep, TabItem } from "@taliya/ui";
 import type { DataTableColumn, DataTableSortState } from "@taliya/ui";
+import type { CrmComponentName } from "./component-registry.js";
 
 export { MessageBubble } from "@taliya/ui";
 export { standardPageKitManifest } from "./standard-page-kit.js";
 export type { StandardPageKitComponent, StandardPageKitManifest } from "./standard-page-kit.js";
 
-export type CrmPriority = "P0" | "P1" | "P2";
-
-export interface CrmComponentDefinition {
-  name: string;
-  family: string;
-  priority: CrmPriority;
-}
-
-export const crmComponentRegistry = [
-  { name: "CrmProductShell", family: "Shell", priority: "P0" },
-  { name: "JourneyShellCanvas", family: "Shell", priority: "P1" },
-  { name: "CrmBrowserTrafficLights", family: "Shell / Browser Chrome", priority: "P0" },
-  { name: "CrmBrowserToolbarButton", family: "Shell / Browser Chrome", priority: "P0" },
-  { name: "CrmBrowserToolbar", family: "Shell / Browser Chrome", priority: "P0" },
-  { name: "CrmBrowserAddressBar", family: "Shell / Browser Chrome", priority: "P0" },
-  { name: "CrmBrowserChrome", family: "Shell / Browser Chrome", priority: "P0" },
-  { name: "CrmShellBrand", family: "Shell / Sidebar", priority: "P0" },
-  { name: "CrmSidebarFloatingButton", family: "Shell / Sidebar", priority: "P0" },
-  { name: "CrmSidebarNavigation", family: "Shell / Sidebar", priority: "P0" },
-  { name: "CrmSidebarUtilityNavigation", family: "Shell / Sidebar", priority: "P0" },
-  { name: "CrmShellSidebar", family: "Shell / Sidebar", priority: "P0" },
-  { name: "CrmShellBackButton", family: "Shell / Controls", priority: "P0" },
-  { name: "CrmTopbarNavChip", family: "Shell / Navigation", priority: "P0" },
-  { name: "CrmShellTopNav", family: "Shell / Navigation", priority: "P0" },
-  { name: "CrmTopbarActionButton", family: "Shell / Controls", priority: "P0" },
-  { name: "CrmShellAvatar", family: "Shell / Controls", priority: "P0" },
-  { name: "CrmShellGlobalActions", family: "Shell / Controls", priority: "P0" },
-  { name: "CrmEmptyShellTopbar", family: "Shell / Layout", priority: "P0" },
-  { name: "CrmEmptyShellPageHeader", family: "Shell / Layout", priority: "P0" },
-  { name: "CrmEmptyShellCanvas", family: "Shell / Layout", priority: "P0" },
-  { name: "CrmEmptyShellWindow", family: "Shell / Layout", priority: "P0" },
-  { name: "CrmEmptyShell", family: "Shell", priority: "P0" },
-  { name: "CrmOperationalPanel", family: "Operational", priority: "P0" },
-  { name: "CrmOperationalRow", family: "Operational", priority: "P0" },
-  { name: "CrmOperationalRows", family: "Operational", priority: "P0" },
-  { name: "Sidebar", family: "Shell", priority: "P0" },
-  { name: "Topbar", family: "Shell", priority: "P0" },
-  { name: "PageHeader", family: "Shell", priority: "P0" },
-  { name: "GlobalActions", family: "Shell", priority: "P0" },
-  { name: "SidebarItem", family: "Navigation", priority: "P0" },
-  { name: "QuotaBadge", family: "Status", priority: "P0" },
-  { name: "MetricCard", family: "Surface", priority: "P0" },
-  { name: "StatusCard", family: "Surface", priority: "P0" },
-  { name: "AgentPanel", family: "Agent", priority: "P0" },
-  { name: "SettingsAgentPanel", family: "Agent", priority: "P1" },
-  { name: "CopilotSuggestion", family: "Agent", priority: "P0" },
-  { name: "AgentStatus", family: "Agent", priority: "P0" },
-  { name: "ProductWindowFrame", family: "Layout", priority: "P0" },
-  { name: "ListDetailLayout", family: "Layout", priority: "P1" },
-  { name: "WorkListDetailPage", family: "Layout", priority: "P1" },
-  { name: "CrmPageFamilyShell", family: "Layout", priority: "P1" },
-  { name: "CrmWorklistPage", family: "Layout", priority: "P1" },
-  { name: "CrmKanbanPage", family: "Layout", priority: "P1" },
-  { name: "CrmDashboardPage", family: "Layout", priority: "P1" },
-  { name: "CrmThreePanePage", family: "Layout", priority: "P1" },
-  { name: "CrmRightPanelPage", family: "Layout", priority: "P1" },
-  { name: "PageFilterBar", family: "Layout", priority: "P1" },
-  { name: "PageQuickFilters", family: "Layout", priority: "P1" },
-  { name: "CrmWorklistTable", family: "Layout", priority: "P1" },
-  { name: "CrmDrawer", family: "Operational", priority: "P1" },
-  { name: "TaskQueueList", family: "Tasks", priority: "P1" },
-  { name: "TaskTable", family: "Tasks", priority: "P1" },
-  { name: "LeadTable", family: "Leads", priority: "P1" },
-  { name: "CrmRecordDrawer", family: "Operational", priority: "P1" },
-  { name: "ChecklistTable", family: "Operational", priority: "P1" },
-  { name: "ChecklistDrawer", family: "Operational", priority: "P1" },
-  { name: "ApprovalTable", family: "Approvals", priority: "P1" },
-  { name: "StudentTable", family: "Students", priority: "P1" },
-  { name: "ReplacementTable", family: "Agenda", priority: "P1" },
-  { name: "ClassSummaryCard", family: "Agenda", priority: "P1" },
-  { name: "ReplacementMatcherPanel", family: "Agenda", priority: "P1" },
-  { name: "WaitlistPanel", family: "Agenda", priority: "P1" },
-  { name: "ResourceConflictPanel", family: "Agenda", priority: "P1" },
-  { name: "DocumentViewerPanel", family: "Documents", priority: "P1" },
-  { name: "UploadReceiptPanel", family: "Documents", priority: "P1" },
-  { name: "ReconciliationSummaryTable", family: "Finance", priority: "P1" },
-  { name: "MoneyInputGroup", family: "Finance", priority: "P1" },
-  { name: "FinancialSimulationPanel", family: "Finance", priority: "P1" },
-  { name: "FlowSimulationPanel", family: "Agents", priority: "P1" },
-  { name: "PublicationPreflightPanel", family: "Agents", priority: "P1" },
-  { name: "ExecutionTraceTable", family: "Agents", priority: "P1" },
-  { name: "AgentIncidentPanel", family: "Agents", priority: "P1" },
-  { name: "EvaluationQualityPanel", family: "Agents", priority: "P1" },
-  { name: "PrivacyRequestTable", family: "Governance", priority: "P1" },
-  { name: "SupportGrantPanel", family: "Governance", priority: "P1" },
-  { name: "AdvancedReportsPanel", family: "Reports", priority: "P1" },
-  { name: "ExportQueuePanel", family: "Reports", priority: "P1" },
-  { name: "SegmentCommunicationPanel", family: "Reports", priority: "P1" },
-  { name: "ThreePaneLayout", family: "Layout", priority: "P1" },
-  { name: "ContextPanel", family: "Layout", priority: "P1" },
-  { name: "RightPanelLayout", family: "Layout", priority: "P1" },
-  { name: "DashboardGrid", family: "Layout", priority: "P1" },
-  { name: "ProfileTabs", family: "Tabs", priority: "P1" },
-  { name: "ActivityFeed", family: "Timeline", priority: "P1" },
-  { name: "OperationActivityTable", family: "Timeline", priority: "P1" },
-  { name: "AuditTrail", family: "Timeline", priority: "P1" },
-  { name: "KanbanBoard", family: "Kanban", priority: "P1" },
-  { name: "KanbanColumn", family: "Kanban", priority: "P1" },
-  { name: "KanbanCard", family: "Kanban", priority: "P1" },
-  { name: "WeeklyCalendar", family: "Agenda", priority: "P1" },
-  { name: "MiniCalendar", family: "Agenda", priority: "P1" },
-  { name: "CompactCalendar", family: "Agenda", priority: "P1" },
-  { name: "ClassCard", family: "Agenda", priority: "P1" },
-  { name: "Roster", family: "Agenda", priority: "P1" },
-  { name: "SetupShell", family: "Setup", priority: "P1" },
-  { name: "SetupPage", family: "Setup", priority: "P1" },
-  { name: "SetupStepper", family: "Setup", priority: "P1" },
-  { name: "SetupBlockHeader", family: "Setup", priority: "P1" },
-  { name: "SetupContentGrid", family: "Setup", priority: "P1" },
-  { name: "SetupBottomBar", family: "Setup", priority: "P1" },
-  { name: "SetupWelcome", family: "Setup", priority: "P1" },
-  { name: "SetupWelcomeWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupChoiceCard", family: "Setup", priority: "P1" },
-  { name: "SetupConsumptionWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupStudioWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupTeamWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupChannelsWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupPlansWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupPaymentWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupStudentsWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupClassesWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupAgendaWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupReviewWorkspace", family: "Setup", priority: "P1" },
-  { name: "SetupImportSourceCard", family: "Setup", priority: "P1" },
-  { name: "SetupReviewPanel", family: "Setup", priority: "P1" },
-  { name: "SetupAgentChat", family: "Setup", priority: "P1" },
-  { name: "SetupHumanHelpCTA", family: "Setup", priority: "P1" },
-  { name: "AccessShell", family: "Access", priority: "P1" },
-  { name: "AuthCard", family: "Access", priority: "P1" },
-  { name: "AccessFooterLinks", family: "Access", priority: "P1" },
-  { name: "CheckoutPaymentCard", family: "Subscription", priority: "P1" },
-  { name: "CheckoutReviewPanel", family: "Subscription", priority: "P1" },
-  { name: "SubscriptionStatusCard", family: "Subscription", priority: "P1" },
-  { name: "SubscriptionProgressStepper", family: "Subscription", priority: "P1" },
-  { name: "SubscriptionResolutionPanel", family: "Subscription", priority: "P1" },
-  { name: "SubscriptionResultHeader", family: "Subscription", priority: "P1" },
-  { name: "ConfirmedSetupHandoff", family: "Subscription", priority: "P1" },
-  { name: "PlanSummaryCard", family: "Billing", priority: "P1" },
-  { name: "BillingAddOnsWorkspace", family: "Billing", priority: "P1" },
-  { name: "BillingInvoicesWorkspace", family: "Billing", priority: "P1" },
-  { name: "BillingSubscriptionWorkspace", family: "Billing", priority: "P1" },
-  { name: "InvoiceTable", family: "Billing", priority: "P1" },
-  { name: "AddOnCard", family: "Billing", priority: "P1" },
-  { name: "QuotaProgress", family: "Usage", priority: "P1" },
-  { name: "UsageOverviewWorkspace", family: "Usage", priority: "P1" },
-  { name: "CrmHeaderSummary", family: "Shell", priority: "P1" },
-  { name: "UsageLedgerTable", family: "Usage", priority: "P1" },
-  { name: "ApprovalPanel", family: "Approvals", priority: "P1" },
-  { name: "ImpactSummary", family: "Approvals", priority: "P1" },
-  { name: "BeforeAfterDiff", family: "Approvals", priority: "P1" },
-  { name: "SettingsSection", family: "Forms", priority: "P1" },
-  { name: "PermissionMatrix", family: "Forms", priority: "P1" },
-  { name: "PermissionRoleCard", family: "Forms", priority: "P1" },
-  { name: "RuleRow", family: "Forms", priority: "P1" },
-  { name: "SettingsHubCard", family: "Config", priority: "P1" },
-  { name: "IntegrationStatusRow", family: "Config", priority: "P1" },
-  { name: "UnsavedChangesBar", family: "Config", priority: "P1" },
-  { name: "ConfigImpactPreview", family: "Config", priority: "P1" },
-  { name: "SettingsPermissionsWorkspace", family: "Config", priority: "P1" },
-  { name: "SettingsPaymentsWorkspace", family: "Config", priority: "P1" },
-  { name: "SettingsAgendaWorkspace", family: "Config", priority: "P1" },
-  { name: "SettingsNotificationsWorkspace", family: "Config", priority: "P1" },
-  { name: "ConversationList", family: "Inbox", priority: "P1" },
-  { name: "ConversationThread", family: "Inbox", priority: "P1" },
-  { name: "MessageBubble", family: "Inbox", priority: "P1" },
-  { name: "Composer", family: "Inbox", priority: "P1" },
-  { name: "ComposerPanel", family: "Inbox", priority: "P1" },
-  { name: "ChannelStatus", family: "Inbox", priority: "P1" },
-  { name: "ChannelStatusPanel", family: "Inbox", priority: "P1" },
-  { name: "CopilotPanel", family: "Inbox", priority: "P1" },
-  { name: "HandoffBanner", family: "Inbox", priority: "P1" },
-  { name: "QuickReplyChips", family: "Inbox", priority: "P1" },
-  { name: "ChecklistRow", family: "Operational", priority: "P1" },
-  { name: "CommentThread", family: "Operational", priority: "P1" },
-  { name: "TaskDrawer", family: "Operational", priority: "P1" },
-  { name: "ApprovalDrawer", family: "Operational", priority: "P1" },
-  { name: "CaseDrawer", family: "Operational", priority: "P1" },
-  { name: "StudentDrawer", family: "Operational", priority: "P1" },
-  { name: "ClassDrawer", family: "Operational", priority: "P1" },
-  { name: "ClassOperationalDetail", family: "Operational", priority: "P1" },
-  { name: "PaymentDrawer", family: "Operational", priority: "P1" },
-  { name: "ReplacementDrawer", family: "Operational", priority: "P1" },
-  { name: "LeadDrawer", family: "Operational", priority: "P1" },
-  { name: "AgentFlowDrawer", family: "Operational", priority: "P1" },
-  { name: "UsageDrawer", family: "Operational", priority: "P1" },
-  { name: "SupportStatusSidebar", family: "Support", priority: "P1" },
-  { name: "SupportAgentPanel", family: "Support", priority: "P1" },
-  { name: "SupportCentralWorkspace", family: "Support", priority: "P1" },
-  { name: "SupportTicketDrawer", family: "Operational", priority: "P1" },
-  { name: "TenantSecurityDrawer", family: "Operational", priority: "P1" },
-  { name: "TenantSummaryDrawer", family: "Operational", priority: "P1" },
-  { name: "WeeklyHoursGrid", family: "Setup", priority: "P1" },
-  { name: "RoleCard", family: "Setup", priority: "P1" },
-  { name: "InviteRow", family: "Setup", priority: "P1" },
-  { name: "PaymentMethodRow", family: "Subscription", priority: "P1" },
-  { name: "SecurePaymentNotice", family: "Subscription", priority: "P1" },
-  { name: "UsageOriginRow", family: "Usage", priority: "P1" },
-  { name: "ExportAction", family: "Reports", priority: "P1" },
-  { name: "AgentCatalog", family: "Agents", priority: "P2" },
-  { name: "AgentCard", family: "Agents", priority: "P2" },
-  { name: "AgentRoutineIntro", family: "Agents", priority: "P2" },
-  { name: "AgentRoutineCard", family: "Agents", priority: "P2" },
-  { name: "AgentRoutineWorkspace", family: "Agents", priority: "P2" },
-  { name: "AgentFlowWorkspace", family: "Agents", priority: "P2" },
-  { name: "AgentFlowSectionPanel", family: "Agents", priority: "P2" },
-  { name: "AgentFlowSettingsPanel", family: "Agents", priority: "P2" },
-  { name: "AgentFlowActionBar", family: "Agents", priority: "P2" },
-  { name: "AgentRoutineFlowCard", family: "Agents", priority: "P2" },
-  { name: "AgentPublishRoutineWorkspace", family: "Agents", priority: "P2" },
-  { name: "AgentPublishFlowCard", family: "Agents", priority: "P2" },
-  { name: "ModeSelector", family: "Agents", priority: "P2" },
-  { name: "FlowBuilder", family: "Agents", priority: "P2" },
-  { name: "PreflightChecklist", family: "Agents", priority: "P2" },
-  { name: "SimulationRunner", family: "Agents", priority: "P2" },
-  { name: "ExecutionReceipt", family: "Agents", priority: "P2" },
-  { name: "ModeCard", family: "Agents", priority: "P2" },
-  { name: "FlowStepCard", family: "Agents", priority: "P2" },
-  { name: "ScenarioList", family: "Agents", priority: "P2" },
-  { name: "PhonePreview", family: "Agents", priority: "P2" },
-  { name: "ExecutionTimeline", family: "Agents", priority: "P2" },
-  { name: "StudentHeader", family: "Students", priority: "P2" },
-  { name: "StudentSummary", family: "Students", priority: "P2" },
-  { name: "RelationshipList", family: "Students", priority: "P2" },
-  { name: "FinancePriorityPanel", family: "Financeiro", priority: "P2" },
-  { name: "PaymentCaseCard", family: "Financeiro", priority: "P2" },
-  { name: "FinanceKanbanCard", family: "Financeiro", priority: "P2" },
-  { name: "ReconciliationRow", family: "Financeiro", priority: "P2" },
-  { name: "PipelineCard", family: "Vendas", priority: "P2" },
-  { name: "LeadSummary", family: "Vendas", priority: "P2" },
-  { name: "TrialClassCard", family: "Vendas", priority: "P2" },
-  { name: "EnrollmentChecklist", family: "Vendas", priority: "P2" },
-  { name: "RiskCard", family: "Retencao", priority: "P2" },
-  { name: "CancellationCase", family: "Retencao", priority: "P2" },
-  { name: "ReactivationCard", family: "Retencao", priority: "P2" },
-  { name: "ComplaintPanel", family: "Retencao", priority: "P2" },
-  { name: "SensitiveActionDialog", family: "Retencao", priority: "P2" },
-  { name: "SupportTicketPanel", family: "Support", priority: "P2" },
-  { name: "GrantAccessPanel", family: "Support", priority: "P2" },
-  { name: "TenantCard", family: "Internal", priority: "P2" },
-  { name: "InternalOverviewDashboard", family: "Internal", priority: "P2" },
-  { name: "InternalShell", family: "Internal", priority: "P2" },
-  { name: "InternalWorklistPage", family: "Internal", priority: "P2" },
-  { name: "TenantDetailLayout", family: "Internal", priority: "P2" },
-  { name: "SecurityRulePanel", family: "Internal", priority: "P2" },
-  { name: "ChartPanel", family: "Reports", priority: "P2" },
-  { name: "ReportFilterBar", family: "Reports", priority: "P2" },
-  { name: "OpportunityGroupCard", family: "Reports", priority: "P2" },
-  { name: "OpportunityPanel", family: "Reports", priority: "P2" },
-  { name: "ImportProgress", family: "Data Quality", priority: "P2" },
-  { name: "FieldMappingTable", family: "Data Quality", priority: "P2" },
-  { name: "DuplicateResolver", family: "Data Quality", priority: "P2" },
-  { name: "PermissionState", family: "Advanced States", priority: "P2" },
-  { name: "PlanBlockedState", family: "Advanced States", priority: "P2" },
-  { name: "QuotaBlockedState", family: "Advanced States", priority: "P2" },
-  { name: "IntegrationFailedState", family: "Advanced States", priority: "P2" },
-  { name: "PlanAgentsPanel", family: "Governance", priority: "P2" },
-  { name: "FallbackControlCard", family: "Governance", priority: "P2" },
-  { name: "BillingGovernancePanel", family: "Governance", priority: "P2" },
-  { name: "GovernanceAuditPanel", family: "Governance", priority: "P2" },
-  { name: "GuardrailPolicyPanel", family: "Governance", priority: "P2" },
-  { name: "GeneralSettingsPanel", family: "Governance", priority: "P2" },
-  { name: "SetupWizardPanel", family: "Setup", priority: "P2" },
-  { name: "ActivationChecklistPanel", family: "Setup", priority: "P2" },
-  { name: "DataConflictQueue", family: "Data Quality", priority: "P2" },
-  { name: "ProfileTabsPanel", family: "Students", priority: "P2" },
-  { name: "ConsentPreferencesPanel", family: "Students", priority: "P2" },
-  { name: "SensitiveTimelinePanel", family: "Students", priority: "P2" }
-] as const satisfies readonly CrmComponentDefinition[];
-
-export const crmComponentNames = crmComponentRegistry.map((component) => component.name);
-
-export type CrmComponentName = (typeof crmComponentRegistry)[number]["name"];
+export { crmComponentNames, crmComponentRegistry } from "./component-registry.js";
+export type { CrmComponentDefinition, CrmComponentName, CrmPriority } from "./component-registry.js";
 
 export interface SidebarItemData {
   id: string;
@@ -4059,7 +3790,8 @@ export function Roster({
   );
 }
 
-export const setupShellSourceSteps = ["Diagnóstico", "Dados", "Agenda", "Planos", "Importação", "Revisão"];
+/** @deprecated Use `defaultSetupSteps`, the current nine-block product contract. */
+export const setupShellSourceSteps = defaultSetupSteps;
 
 function SetupShellDefaultStage() {
   return (
@@ -4264,6 +3996,7 @@ export function SetupBlockHeader({
   step = 1,
   totalSteps = 8,
   badgeLabel,
+  showBadge = true,
   state = "current",
   action,
   actionLabel = state === "blocked" ? "Resolver pendência" : state === "warning" ? "Revisar" : undefined,
@@ -4277,6 +4010,7 @@ export function SetupBlockHeader({
   step?: number;
   totalSteps?: number;
   badgeLabel?: React.ReactNode;
+  showBadge?: boolean;
   state?: "current" | "complete" | "warning" | "blocked" | "loading";
   action?: React.ReactNode;
   actionLabel?: string;
@@ -4309,9 +4043,11 @@ export function SetupBlockHeader({
       <div className="tcrm-setup-block-header__copy">
         <div className="tcrm-setup-block-header__title-row">
           <h1>{title}</h1>
-          <Chip className="tcrm-setup-block-header__chip" showDot={false} tone={toneForState(state)}>
-            {label}
-          </Chip>
+          {showBadge ? (
+            <Chip className="tcrm-setup-block-header__chip" showDot={false} tone={toneForState(state)}>
+              {label}
+            </Chip>
+          ) : null}
         </div>
         <p>{description}</p>
       </div>
@@ -4406,8 +4142,26 @@ export function SetupWelcome({
   className,
   ...props
 }: SetupWelcomeProps) {
+  const [internalStudioName, setInternalStudioName] = React.useState(studioName ?? "");
+  const [showNameError, setShowNameError] = React.useState(false);
   const isDisabled = disabled || state === "blocked" || state === "loading";
+  const resolvedStudioName = studioName ?? internalStudioName;
   const buttonLabel = state === "returning" ? "Continuar setup guiado" : "Começar setup guiado";
+
+  const handleStudioNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextStudioName = event.currentTarget.value;
+    if (studioName === undefined) setInternalStudioName(nextStudioName);
+    if (nextStudioName.trim()) setShowNameError(false);
+    onStudioNameChange?.(nextStudioName);
+  };
+
+  const handleStart = () => {
+    if (!resolvedStudioName.trim()) {
+      setShowNameError(true);
+      return;
+    }
+    onStart?.();
+  };
 
   return (
     <section
@@ -4426,15 +4180,17 @@ export function SetupWelcome({
         aria-label="Nome do studio"
         className="tcrm-setup-welcome__input"
         disabled={isDisabled}
-        onChange={(event) => onStudioNameChange?.(event.currentTarget.value)}
+        error={showNameError ? "Informe o nome do studio para continuar." : undefined}
+        onChange={handleStudioNameChange}
         placeholder={placeholder}
-        value={studioName}
+        required
+        value={resolvedStudioName}
       />
       <Button
         className="tcrm-setup-welcome__button"
         disabled={isDisabled}
         loading={state === "loading"}
-        onClick={onStart}
+        onClick={handleStart}
         size="lg"
         variant="primary"
       >
@@ -4589,6 +4345,9 @@ export function SetupConsumptionWorkspace({
 export interface SetupStudioWorkspaceProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
   activeDays?: string[];
   scheduleMode?: "continuous" | "break";
+  header?: React.ReactNode;
+  details?: React.ReactNode;
+  footer?: React.ReactNode;
   onActiveDaysChange?: (days: string[]) => void;
   onScheduleModeChange?: (mode: "continuous" | "break") => void;
   onAdjustDay?: () => void;
@@ -4598,6 +4357,9 @@ export interface SetupStudioWorkspaceProps extends Omit<React.HTMLAttributes<HTM
 export function SetupStudioWorkspace({
   activeDays = ["Seg", "Ter", "Qua", "Qui", "Sex"],
   scheduleMode = "continuous",
+  header,
+  details,
+  footer,
   onActiveDaysChange,
   onScheduleModeChange,
   onAdjustDay,
@@ -4613,9 +4375,10 @@ export function SetupStudioWorkspace({
 
   return (
     <SetupPagePanel className={cn("tcrm-setup-studio-workspace", className)} data-component="SetupStudioWorkspace" {...props}>
-      <SetupBlockHeader title="Studio" />
+      {header ?? <SetupBlockHeader title="Studio" />}
       <div className="tcrm-setup-studio-workspace__grid">
         <Panel className="tcrm-setup-studio-workspace__form" compact>
+          {details}
           <section>
             <h3>1. Dias de funcionamento</h3>
             <p>Em quais dias o studio funciona?</p>
@@ -4648,10 +4411,10 @@ export function SetupStudioWorkspace({
           <WeeklyHoursGrid onAdjustDay={onAdjustDay} />
         </Panel>
       </div>
-      <ButtonGroup className="tcrm-setup-studio-workspace__actions">
+      {footer ?? <ButtonGroup className="tcrm-setup-studio-workspace__actions">
         <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
         <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
-      </ButtonGroup>
+      </ButtonGroup>}
     </SetupPagePanel>
   );
 }
@@ -4733,6 +4496,9 @@ export type SetupWhatsAppState = "business" | "personal" | "unknown" | "missing"
 
 export interface SetupChannelsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   whatsAppState?: SetupWhatsAppState;
+  connectionStatus?: "connected" | "pending" | "disconnected";
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
   onWhatsAppStateChange?: (state: SetupWhatsAppState) => void;
   onConnectWhatsApp?: () => void;
   onAction?: (action: "save" | "later" | "continue") => void;
@@ -4740,12 +4506,17 @@ export interface SetupChannelsWorkspaceProps extends React.HTMLAttributes<HTMLEl
 
 export function SetupChannelsWorkspace({
   whatsAppState = "business",
+  connectionStatus = "pending",
+  header,
+  footer,
   onWhatsAppStateChange,
   onConnectWhatsApp,
   onAction,
   className,
   ...props
 }: SetupChannelsWorkspaceProps) {
+  const connectionLabel = connectionStatus === "connected" ? "Conectado" : connectionStatus === "disconnected" ? "Desconectado" : "Pendente de conexao oficial";
+  const connectionTone: ComponentTone = connectionStatus === "connected" ? "success" : connectionStatus === "disconnected" ? "danger" : "warning";
   const whatsAppOptions: Array<{ id: SetupWhatsAppState; title: string }> = [
     { id: "business", title: "Sim, ja esta no WhatsApp Business" },
     { id: "personal", title: "Ainda esta no WhatsApp pessoal" },
@@ -4755,11 +4526,11 @@ export function SetupChannelsWorkspace({
 
   return (
     <SetupPagePanel className={cn("tcrm-setup-channels-workspace", className)} data-component="SetupChannelsWorkspace" {...props}>
-      <SetupBlockHeader
+      {header ?? <SetupBlockHeader
         description="Informe os canais oficiais do studio. O WhatsApp Business podera ser conectado oficialmente agora ou ficar como pendencia antes de ativar agentes e mensagens."
         step={3}
         title="Canais"
-      />
+      />}
       <div className="tcrm-setup-channels-workspace__grid">
         <div className="tcrm-setup-channels-workspace__column">
           <Panel className="tcrm-setup-channels-workspace__whatsapp" compact>
@@ -4778,8 +4549,8 @@ export function SetupChannelsWorkspace({
               ))}
             </div>
             <InlineGroup className="tcrm-setup-channels-workspace__connect" justify="between">
-              <Chip icon="checkCircle" tone="success">Pronto para conexao oficial</Chip>
-              <Button leadingIcon="link" onClick={onConnectWhatsApp} variant="secondary">Conectar WhatsApp Business</Button>
+              <Chip icon={connectionStatus === "connected" ? "checkCircle" : "link"} tone={connectionTone}>{connectionLabel}</Chip>
+              <Button leadingIcon="link" onClick={onConnectWhatsApp} variant="secondary">{connectionStatus === "connected" ? "Testar conexao" : "Conectar WhatsApp Business"}</Button>
             </InlineGroup>
             <p>Voce continuara usando o WhatsApp Business no celular. A conexao oficial libera atendimento pelo CRM e agentes quando tudo for publicado.</p>
           </Panel>
@@ -4805,7 +4576,7 @@ export function SetupChannelsWorkspace({
           <Panel className="tcrm-setup-channels-workspace__status" compact>
             <h3>4. Status dos canais</h3>
             <List divided>
-              <ListItem action={<StatusDot label="Pendente de conexao oficial" status="warning" />} title="WhatsApp Business" />
+              <ListItem action={<StatusDot label={connectionLabel} status={connectionStatus === "connected" ? "success" : connectionStatus === "disconnected" ? "danger" : "warning"} />} title="WhatsApp Business" />
               <ListItem action={<StatusDot label="Pronto" status="success" />} title="E-mail" />
               <ListItem action={<StatusDot label="4 adicionados" status="info" />} title="Canais publicos" />
             </List>
@@ -4813,11 +4584,11 @@ export function SetupChannelsWorkspace({
           </Panel>
         </div>
       </div>
-      <ButtonGroup className="tcrm-setup-channels-workspace__actions">
+      {footer ?? <ButtonGroup className="tcrm-setup-channels-workspace__actions">
         <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
         <Button onClick={() => onAction?.("later")} variant="secondary">Configurar canais depois</Button>
         <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
-      </ButtonGroup>
+      </ButtonGroup>}
     </SetupPagePanel>
   );
 }
@@ -4825,17 +4596,39 @@ export function SetupChannelsWorkspace({
 export type SetupPlanId = "weekly" | "pack" | "trial";
 export type SetupPlanField = "name" | "type" | "value" | "quantity" | "recurrence" | "validity" | "replacement" | "replacementDeadline" | "replacementNotice";
 
+export const setupPlansDefaultFieldValues: Record<SetupPlanField, string> = {
+  name: "Pacote 8 aulas",
+  type: "pack",
+  value: "420,00",
+  quantity: "8",
+  recurrence: "none",
+  validity: "30",
+  replacement: "yes",
+  replacementDeadline: "7",
+  replacementNotice: "12"
+};
+
 export interface SetupPlansWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   selectedPlanId?: SetupPlanId;
+  fieldValues?: Partial<Record<SetupPlanField, string>>;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+  planStates?: Partial<Record<SetupPlanId, { label: string; tone: ComponentTone; studentsUsing?: number }>>;
+  destructiveAction?: "remove" | "deactivate";
   onPlanSelect?: (planId: SetupPlanId) => void;
   onNewPlan?: () => void;
-  onPlanAction?: (planId: SetupPlanId, action: "edit" | "duplicate" | "remove") => void;
+  onPlanAction?: (planId: SetupPlanId, action: "edit" | "duplicate" | "remove" | "deactivate") => void;
   onFieldChange?: (field: SetupPlanField, value: string) => void;
   onAction?: (action: "save" | "later" | "continue") => void;
 }
 
 export function SetupPlansWorkspace({
   selectedPlanId = "pack",
+  fieldValues = {},
+  header,
+  footer,
+  planStates,
+  destructiveAction = "remove",
   onPlanSelect,
   onNewPlan,
   onPlanAction,
@@ -4844,6 +4637,7 @@ export function SetupPlansWorkspace({
   className,
   ...props
 }: SetupPlansWorkspaceProps) {
+  const fieldValue = (field: SetupPlanField) => fieldValues[field] ?? setupPlansDefaultFieldValues[field];
   const plans: Array<{ id: SetupPlanId; title: string; type: string; value: string; replacement: string; tone: ComponentTone }> = [
     { id: "weekly", title: "Pilates 2x por semana", type: "Mensalidade por frequencia semanal", value: "R$ 360/mes · 2x por semana", replacement: "Permite reposicao", tone: "success" },
     { id: "pack", title: "Pacote 8 aulas", type: "Pacote de aulas", value: "R$ 420 · 8 aulas", replacement: "Permite reposicao", tone: "success" },
@@ -4852,11 +4646,11 @@ export function SetupPlansWorkspace({
 
   return (
     <SetupPagePanel className={cn("tcrm-setup-plans-workspace", className)} data-component="SetupPlansWorkspace" {...props}>
-      <SetupBlockHeader
+      {header ?? <SetupBlockHeader
         description="Cadastre os planos que o studio oferece aos alunos. Voce pode comecar pelos principais e ajustar detalhes depois."
         step={4}
         title="Planos"
-      />
+      />}
       <div className="tcrm-setup-plans-workspace__grid">
         <Panel className="tcrm-setup-plans-workspace__list" compact>
           <InlineGroup justify="between"><h3>Planos criados</h3><Button leadingIcon="plus" onClick={onNewPlan} size="sm" variant="secondary">Novo plano</Button></InlineGroup>
@@ -4864,26 +4658,28 @@ export function SetupPlansWorkspace({
             <Panel className={cn("tcrm-setup-plans-workspace__plan", selectedPlanId === plan.id && "tcrm-setup-plans-workspace__plan--selected")} compact key={plan.id}>
               <Button className="tcrm-setup-plans-workspace__plan-select" onClick={() => onPlanSelect?.(plan.id)} variant="ghost">
                 <strong>{plan.title}</strong><span>{plan.type}</span><b>{plan.value}</b><Chip icon={plan.tone === "success" ? "checkCircle" : "x"} tone={plan.tone}>{plan.replacement}</Chip>
+                {planStates?.[plan.id] ? <Chip tone={planStates[plan.id]?.tone}>{planStates[plan.id]?.label}</Chip> : null}
+                {planStates?.[plan.id]?.studentsUsing !== undefined ? <span>{planStates[plan.id]?.studentsUsing} alunos usando</span> : null}
               </Button>
               <ButtonGroup>
                 <Button leadingIcon="edit" onClick={() => onPlanAction?.(plan.id, "edit")} size="sm" variant="ghost">Editar</Button>
                 <Button leadingIcon="copy" onClick={() => onPlanAction?.(plan.id, "duplicate")} size="sm" variant="ghost">Duplicar</Button>
-                <Button leadingIcon="trash" onClick={() => onPlanAction?.(plan.id, "remove")} size="sm" tone="danger" variant="ghost">Remover</Button>
+                <Button leadingIcon={destructiveAction === "deactivate" ? "x" : "trash"} onClick={() => onPlanAction?.(plan.id, destructiveAction)} size="sm" tone="danger" variant="ghost">{destructiveAction === "deactivate" ? "Inativar" : "Remover"}</Button>
               </ButtonGroup>
             </Panel>
           ))}
         </Panel>
         <Panel className="tcrm-setup-plans-workspace__editor" compact>
           <InlineGroup justify="between"><div><h3>Editar plano selecionado</h3><p>Voce pode ajustar este plano depois do go-live.</p></div><Chip>Rascunho</Chip></InlineGroup>
-          <Input defaultValue="Pacote 8 aulas" fieldSize="sm" label="1. Nome do plano" onChange={(event) => onFieldChange?.("name", event.currentTarget.value)} />
-          <div className="tcrm-setup-plans-workspace__field"><strong>2. Tipo do plano</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--type" compact label="2. Tipo do plano" onChange={(value) => onFieldChange?.("type", value)} options={[{ value: "weekly", label: "Mensalidade por frequencia semanal" }, { value: "quantity", label: "Mensalidade por quantidade mensal" }, { value: "pack", label: "Pacote de aulas" }, { value: "single", label: "Aula avulsa" }, { value: "trial", label: "Experimental/Avaliacao" }, { value: "other", label: "Outro" }]} value="pack" /></div>
-          <Input defaultValue="420,00" fieldSize="sm" label="3. Valor" leadingText="R$" onChange={(event) => onFieldChange?.("value", event.currentTarget.value)} />
-          <div className="tcrm-setup-plans-workspace__field"><strong>4. Quantidade de aulas</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--quantity" compact label="4. Quantidade de aulas" onChange={(value) => onFieldChange?.("quantity", value)} options={[{ value: "1", label: "1 aula" }, { value: "5", label: "5 aulas" }, { value: "8", label: "8 aulas" }, { value: "10", label: "10 aulas" }, { value: "12", label: "12 aulas" }, { value: "20", label: "20 aulas" }, { value: "custom", label: "Personalizado" }]} value="8" /></div>
-          <div className="tcrm-setup-plans-workspace__field"><strong>5. Recorrencia</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--three" compact label="5. Recorrencia" onChange={(value) => onFieldChange?.("recurrence", value)} options={[{ value: "none", label: "Sem recorrencia" }, { value: "renew", label: "Renova automaticamente" }, { value: "later", label: "Decidir depois" }]} value="none" /></div>
-          <div className="tcrm-setup-plans-workspace__field"><strong>6. Validade</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--validity" compact label="6. Validade" onChange={(value) => onFieldChange?.("validity", value)} options={[{ value: "30", label: "30 dias" }, { value: "60", label: "60 dias" }, { value: "90", label: "90 dias" }, { value: "none", label: "Sem validade" }, { value: "custom", label: "Personalizado" }, { value: "later", label: "Decidir depois" }]} value="30" /></div>
-          <div className="tcrm-setup-plans-workspace__field"><strong>7. Reposicao</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--three" compact label="7. Reposicao" onChange={(value) => onFieldChange?.("replacement", value)} options={[{ value: "yes", label: "Sim" }, { value: "no", label: "Nao" }, { value: "later", label: "Decidir depois" }]} value="yes" /></div>
-          <div className="tcrm-setup-plans-workspace__field"><span>Prazo para usar a reposicao</span><SegmentedControl className="tcrm-setup-plans-workspace__segments--deadline" compact label="Prazo para usar a reposicao" onChange={(value) => onFieldChange?.("replacementDeadline", value)} options={[{ value: "7", label: "7 dias" }, { value: "15", label: "15 dias" }, { value: "30", label: "30 dias" }, { value: "cycle", label: "Ate o fim do ciclo" }, { value: "custom", label: "Personalizado" }]} value="7" /></div>
-          <div className="tcrm-setup-plans-workspace__field"><span>Aviso minimo para gerar reposicao</span><SegmentedControl className="tcrm-setup-plans-workspace__segments--notice" compact label="Aviso minimo para gerar reposicao" onChange={(value) => onFieldChange?.("replacementNotice", value)} options={[{ value: "none", label: "Sem aviso minimo" }, { value: "2", label: "2h antes" }, { value: "6", label: "6h antes" }, { value: "12", label: "12h antes" }, { value: "24", label: "24h antes" }, { value: "custom", label: "Personalizado" }]} value="12" /></div>
+          <Input fieldSize="sm" label="1. Nome do plano" onChange={(event) => onFieldChange?.("name", event.currentTarget.value)} value={fieldValue("name")} />
+          <div className="tcrm-setup-plans-workspace__field"><strong>2. Tipo do plano</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--type" compact label="2. Tipo do plano" onChange={(value) => onFieldChange?.("type", value)} options={[{ value: "weekly", label: "Mensalidade por frequencia semanal" }, { value: "quantity", label: "Mensalidade por quantidade mensal" }, { value: "pack", label: "Pacote de aulas" }, { value: "single", label: "Aula avulsa" }, { value: "trial", label: "Experimental/Avaliacao" }, { value: "other", label: "Outro" }]} value={fieldValue("type")} /></div>
+          <Input fieldSize="sm" label="3. Valor" leadingText="R$" onChange={(event) => onFieldChange?.("value", event.currentTarget.value)} value={fieldValue("value")} />
+          <div className="tcrm-setup-plans-workspace__field"><strong>4. Quantidade de aulas</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--quantity" compact label="4. Quantidade de aulas" onChange={(value) => onFieldChange?.("quantity", value)} options={[{ value: "1", label: "1 aula" }, { value: "5", label: "5 aulas" }, { value: "8", label: "8 aulas" }, { value: "10", label: "10 aulas" }, { value: "12", label: "12 aulas" }, { value: "20", label: "20 aulas" }, { value: "custom", label: "Personalizado" }]} value={fieldValue("quantity")} /></div>
+          <div className="tcrm-setup-plans-workspace__field"><strong>5. Recorrencia</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--three" compact label="5. Recorrencia" onChange={(value) => onFieldChange?.("recurrence", value)} options={[{ value: "none", label: "Sem recorrencia" }, { value: "renew", label: "Renova automaticamente" }, { value: "later", label: "Decidir depois" }]} value={fieldValue("recurrence")} /></div>
+          <div className="tcrm-setup-plans-workspace__field"><strong>6. Validade</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--validity" compact label="6. Validade" onChange={(value) => onFieldChange?.("validity", value)} options={[{ value: "30", label: "30 dias" }, { value: "60", label: "60 dias" }, { value: "90", label: "90 dias" }, { value: "none", label: "Sem validade" }, { value: "custom", label: "Personalizado" }, { value: "later", label: "Decidir depois" }]} value={fieldValue("validity")} /></div>
+          <div className="tcrm-setup-plans-workspace__field"><strong>7. Reposicao</strong><SegmentedControl className="tcrm-setup-plans-workspace__segments--three" compact label="7. Reposicao" onChange={(value) => onFieldChange?.("replacement", value)} options={[{ value: "yes", label: "Sim" }, { value: "no", label: "Nao" }, { value: "later", label: "Decidir depois" }]} value={fieldValue("replacement")} /></div>
+          <div className="tcrm-setup-plans-workspace__field"><span>Prazo para usar a reposicao</span><SegmentedControl className="tcrm-setup-plans-workspace__segments--deadline" compact label="Prazo para usar a reposicao" onChange={(value) => onFieldChange?.("replacementDeadline", value)} options={[{ value: "7", label: "7 dias" }, { value: "15", label: "15 dias" }, { value: "30", label: "30 dias" }, { value: "cycle", label: "Ate o fim do ciclo" }, { value: "custom", label: "Personalizado" }]} value={fieldValue("replacementDeadline")} /></div>
+          <div className="tcrm-setup-plans-workspace__field"><span>Aviso minimo para gerar reposicao</span><SegmentedControl className="tcrm-setup-plans-workspace__segments--notice" compact label="Aviso minimo para gerar reposicao" onChange={(value) => onFieldChange?.("replacementNotice", value)} options={[{ value: "none", label: "Sem aviso minimo" }, { value: "2", label: "2h antes" }, { value: "6", label: "6h antes" }, { value: "12", label: "12h antes" }, { value: "24", label: "24h antes" }, { value: "custom", label: "Personalizado" }]} value={fieldValue("replacementNotice")} /></div>
           <InlineAlert tone="info">A aula prevista consome saldo normalmente. Quando a regra permitir, o sistema gera uma reposicao para compensar a falta.</InlineAlert>
         </Panel>
         <Panel className="tcrm-setup-plans-workspace__understanding" compact>
@@ -4897,11 +4693,11 @@ export function SetupPlansWorkspace({
           </List>
         </Panel>
       </div>
-      <ButtonGroup className="tcrm-setup-plans-workspace__actions">
+      {footer ?? <ButtonGroup className="tcrm-setup-plans-workspace__actions">
         <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
         <Button onClick={() => onAction?.("later")} variant="secondary">Configurar planos depois</Button>
         <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
-      </ButtonGroup>
+      </ButtonGroup>}
     </SetupPagePanel>
   );
 }
@@ -8949,6 +8745,8 @@ const permissionMatrixDefaultRows: PermissionMatrixRow[] = [
   }
 ];
 
+export const settingsPermissionsDefaultRows: PermissionMatrixRow[] = permissionMatrixDefaultRows;
+
 export function PermissionMatrix({
   title = "2. Ajustes sensíveis",
   description = "Defina limites importantes para proteger dados e processos.",
@@ -9464,6 +9262,168 @@ export function UnsavedChangesBar({
   );
 }
 
+export interface SettingsWorkspaceSaveProps {
+  saveState?: UnsavedChangesBarState;
+  onSave?: () => void;
+  onCancel?: () => void;
+}
+
+export type SettingsStudioField = "studioName" | "publicName" | "mainUnit" | "address" | "city" | "state" | "postalCode";
+
+export interface SettingsStudioWorkspaceProps extends Omit<SetupStudioWorkspaceProps, "header" | "details" | "footer" | "onAction">, SettingsWorkspaceSaveProps {
+  values?: Partial<Record<SettingsStudioField, string>>;
+  onFieldChange?: (field: SettingsStudioField, value: string) => void;
+}
+
+export function SettingsStudioWorkspace({
+  values = {},
+  onFieldChange,
+  saveState = "saved",
+  onSave,
+  onCancel,
+  className,
+  ...props
+}: SettingsStudioWorkspaceProps) {
+  const field = (name: SettingsStudioField, fallback: string) => values[name] ?? fallback;
+  return (
+    <SetupStudioWorkspace
+      className={cn("tcrm-settings-inherited-workspace", "tcrm-settings-studio-workspace", className)}
+      data-component="SettingsStudioWorkspace"
+      details={(
+        <section className="tcrm-settings-studio-workspace__identity">
+          <h3>Identidade e unidade principal</h3>
+          <div className="tcrm-settings-studio-workspace__fields">
+            <Input label="Nome do studio" onChange={(event) => onFieldChange?.("studioName", event.currentTarget.value)} value={field("studioName", "Studio Leticia")} />
+            <Input label="Nome publico" onChange={(event) => onFieldChange?.("publicName", event.currentTarget.value)} value={field("publicName", "Studio Leticia")} />
+            <Input label="Unidade principal" onChange={(event) => onFieldChange?.("mainUnit", event.currentTarget.value)} value={field("mainUnit", "Unidade Centro")} />
+            <Input label="Endereco" onChange={(event) => onFieldChange?.("address", event.currentTarget.value)} value={field("address", "Rua das Flores, 120")} />
+            <Input label="Cidade" onChange={(event) => onFieldChange?.("city", event.currentTarget.value)} value={field("city", "Sao Paulo")} />
+            <Select label="Estado" onValueChange={(value) => onFieldChange?.("state", value)} options={[{ value: "SP", label: "SP" }, { value: "RJ", label: "RJ" }, { value: "MG", label: "MG" }]} value={field("state", "SP")} />
+            <Input label="CEP" onChange={(event) => onFieldChange?.("postalCode", event.currentTarget.value)} value={field("postalCode", "01001-000")} />
+          </div>
+        </section>
+      )}
+      footer={<UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />}
+      header={<SetupBlockHeader description="Edite a identidade do studio e a janela institucional de funcionamento." showBadge={false} title="Studio" />}
+      {...props}
+    />
+  );
+}
+
+export type SettingsTeamMemberStatus = "active" | "inactive" | "invitePending";
+
+export interface SettingsTeamMember {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: SettingsTeamMemberStatus;
+  lastAccess: string;
+  avatarSrc?: string;
+}
+
+const defaultSettingsTeamMembers: SettingsTeamMember[] = [
+  { id: "leticia", name: "Leticia Ramos", email: "leticia@studio.com", role: "Dono/Admin", status: "active", lastAccess: "Hoje, 09:42" },
+  { id: "carla", name: "Carla Souza", email: "carla@studio.com", role: "Recepcao", status: "active", lastAccess: "Ontem, 18:15" },
+  { id: "ana", name: "Ana Martins", email: "ana@studio.com", role: "Professor", status: "invitePending", lastAccess: "Convite enviado hoje" }
+];
+
+export interface SettingsTeamWorkspaceProps extends React.HTMLAttributes<HTMLElement>, SettingsWorkspaceSaveProps {
+  members?: SettingsTeamMember[];
+  onInvite?: () => void;
+  onOpenPermissions?: () => void;
+  onMemberAction?: (member: SettingsTeamMember, action: "edit" | "deactivate" | "reactivate" | "resend") => void;
+}
+
+export function SettingsTeamWorkspace({
+  members = defaultSettingsTeamMembers,
+  saveState = "saved",
+  onInvite,
+  onOpenPermissions,
+  onMemberAction,
+  onSave,
+  onCancel,
+  className,
+  ...props
+}: SettingsTeamWorkspaceProps) {
+  const statusContract: Record<SettingsTeamMemberStatus, { label: string; tone: ComponentTone }> = {
+    active: { label: "Ativo", tone: "success" },
+    inactive: { label: "Inativo", tone: "neutral" },
+    invitePending: { label: "Convite pendente", tone: "warning" }
+  };
+  return (
+    <SetupPagePanel className={cn("tcrm-settings-team-workspace", className)} data-component="SettingsTeamWorkspace" {...props}>
+      <SetupBlockHeader description="Gerencie as pessoas que acessam o CRM, seus papeis e o estado dos convites." showBadge={false} title="Equipe" />
+      <Panel className="tcrm-settings-team-workspace__panel" compact>
+        <InlineGroup justify="between">
+          <div><h3>Usuarios do CRM</h3><p>Papeis detalhados continuam em Permissoes.</p></div>
+          <Button leadingIcon="plus" onClick={onInvite} variant="secondary">Convidar pessoa</Button>
+        </InlineGroup>
+        <List divided>
+          {members.map((member) => {
+            const status = statusContract[member.status];
+            const statusAction = member.status === "invitePending" ? "resend" : member.status === "inactive" ? "reactivate" : "deactivate";
+            const statusActionLabel = member.status === "invitePending" ? "Reenviar convite" : member.status === "inactive" ? "Reativar" : "Desativar";
+            return (
+              <ListItem
+                action={(
+                  <InlineGroup>
+                    <Chip tone={status.tone}>{status.label}</Chip>
+                    <Button onClick={() => onMemberAction?.(member, "edit")} size="sm" variant="ghost">Editar</Button>
+                    <Button onClick={() => onMemberAction?.(member, statusAction)} size="sm" variant="secondary">{statusActionLabel}</Button>
+                  </InlineGroup>
+                )}
+                key={member.id}
+                leading={<Avatar name={member.name} size="md" src={member.avatarSrc} />}
+                meta={<>{member.email} · Ultimo acesso: {member.lastAccess}</>}
+                title={<>{member.name} · {member.role}</>}
+              />
+            );
+          })}
+        </List>
+        <Button leadingIcon="shield" onClick={onOpenPermissions} variant="ghost">Abrir Permissoes</Button>
+      </Panel>
+      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+    </SetupPagePanel>
+  );
+}
+
+export interface SettingsChannelsWorkspaceProps extends Omit<SetupChannelsWorkspaceProps, "header" | "footer" | "onAction">, SettingsWorkspaceSaveProps {}
+
+export function SettingsChannelsWorkspace({ saveState = "saved", onSave, onCancel, className, ...props }: SettingsChannelsWorkspaceProps) {
+  return (
+    <SetupChannelsWorkspace
+      className={cn("tcrm-settings-inherited-workspace", className)}
+      data-component="SettingsChannelsWorkspace"
+      footer={<UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />}
+      header={<SetupBlockHeader description="Defina os canais oficiais e acompanhe a conexao tecnica sem configurar mensagens ou automacoes." showBadge={false} title="Canais" />}
+      {...props}
+    />
+  );
+}
+
+export interface SettingsPlansWorkspaceProps extends Omit<SetupPlansWorkspaceProps, "header" | "footer" | "onAction" | "destructiveAction">, SettingsWorkspaceSaveProps {}
+
+const defaultSettingsPlanStates: NonNullable<SetupPlansWorkspaceProps["planStates"]> = {
+  weekly: { label: "Ativo", tone: "success", studentsUsing: 18 },
+  pack: { label: "Ativo", tone: "success", studentsUsing: 7 },
+  trial: { label: "Inativo", tone: "neutral", studentsUsing: 0 }
+};
+
+export function SettingsPlansWorkspace({ planStates = defaultSettingsPlanStates, saveState = "saved", onSave, onCancel, className, ...props }: SettingsPlansWorkspaceProps) {
+  return (
+    <SetupPlansWorkspace
+      className={cn("tcrm-settings-inherited-workspace", className)}
+      data-component="SettingsPlansWorkspace"
+      destructiveAction="deactivate"
+      footer={<UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />}
+      header={<SetupBlockHeader description="Configure o que o aluno compra, o consumo de aulas e as regras simples de reposicao." showBadge={false} title="Planos e modelos" />}
+      planStates={planStates}
+      {...props}
+    />
+  );
+}
+
 export interface ConfigImpactPreviewProps extends ImpactSummaryProps {}
 
 export function ConfigImpactPreview({
@@ -9617,6 +9577,7 @@ export function SettingsPermissionsWorkspace({
 
 export interface SettingsPaymentsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   saveState?: UnsavedChangesBarState;
+  ruleRows?: SettingsSectionRow[];
   onMethodSelect?: (method: PaymentMethodRowMethod) => void;
   onRuleAction?: (row: SettingsSectionRow) => void;
   onRuleToggle?: (row: SettingsSectionRow, checked: boolean) => void;
@@ -9648,6 +9609,7 @@ const settingsPaymentIntegrations: Array<{
 
 export function SettingsPaymentsWorkspace({
   saveState = "dirty",
+  ruleRows,
   onMethodSelect,
   onRuleAction,
   onRuleToggle,
@@ -9679,7 +9641,7 @@ export function SettingsPaymentsWorkspace({
         </div>
       </Card>
 
-      <SettingsSection onRowAction={onRuleAction} onToggleChange={onRuleToggle} />
+      <SettingsSection onRowAction={onRuleAction} onToggleChange={onRuleToggle} rows={ruleRows} />
 
       <Card className="tcrm-settings-payments-workspace__taliya">
         <header>
@@ -9724,6 +9686,7 @@ export interface SettingsAgendaRow {
 export interface SettingsAgendaWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   closedDays?: SettingsAgendaRow[];
   temporaryBlocks?: SettingsAgendaRow[];
+  ruleValues?: Partial<SettingsAgendaRuleValues>;
   saveState?: UnsavedChangesBarState;
   onAddException?: () => void;
   onAddBlock?: () => void;
@@ -9731,6 +9694,12 @@ export interface SettingsAgendaWorkspaceProps extends React.HTMLAttributes<HTMLE
   onRuleChange?: (ruleId: string, value: string | boolean) => void;
   onSave?: () => void;
   onCancel?: () => void;
+}
+
+export interface SettingsAgendaRuleValues {
+  waitlist: boolean;
+  fitIns: string;
+  callTolerance: string;
 }
 
 const settingsAgendaClosedDays: SettingsAgendaRow[] = [
@@ -9747,6 +9716,7 @@ const settingsAgendaTemporaryBlocks: SettingsAgendaRow[] = [
 export function SettingsAgendaWorkspace({
   closedDays = settingsAgendaClosedDays,
   temporaryBlocks = settingsAgendaTemporaryBlocks,
+  ruleValues = {},
   saveState = "dirty",
   onAddException,
   onAddBlock,
@@ -9757,6 +9727,7 @@ export function SettingsAgendaWorkspace({
   className,
   ...props
 }: SettingsAgendaWorkspaceProps) {
+  const resolvedRuleValues: SettingsAgendaRuleValues = { waitlist: true, fitIns: "approval", callTolerance: "10", ...ruleValues };
   const renderRows = (rows: SettingsAgendaRow[], icon: IconName) => (
     <div className="tcrm-settings-agenda-workspace__rows" role="list">
       {rows.map((row) => (
@@ -9794,12 +9765,12 @@ export function SettingsAgendaWorkspace({
       <Card className="tcrm-settings-agenda-workspace__section tcrm-settings-agenda-workspace__rules">
         <header><span><h3>3. Regras simples da agenda</h3><p>Ajustes globais que mudam como a agenda aceita vagas e encaixes.</p></span></header>
         <div>
-          <RuleRow control="none" icon="users" onToggle={(checked) => onRuleChange?.("waitlist", checked)} statusLabel="Ligada" title="Lista de espera" />
+          <RuleRow checked={resolvedRuleValues.waitlist} control="none" icon="users" onToggle={(checked) => onRuleChange?.("waitlist", checked)} statusLabel={resolvedRuleValues.waitlist ? "Ligada" : "Desligada"} title="Lista de espera" />
           <RuleRow
             icon="slidersRound"
             onSelectChange={(value) => onRuleChange?.("fit-ins", value)}
             selectOptions={[{ value: "approval", label: "Exigem aprovação" }, { value: "free", label: "Livres" }]}
-            selectValue="approval"
+            selectValue={resolvedRuleValues.fitIns}
             showToggle={false}
             statusLabel={null}
             title="Encaixes"
@@ -9808,7 +9779,7 @@ export function SettingsAgendaWorkspace({
             icon="clock"
             onSelectChange={(value) => onRuleChange?.("call-tolerance", value)}
             selectOptions={[{ value: "10", label: "10 min" }, { value: "15", label: "15 min" }]}
-            selectValue="10"
+            selectValue={resolvedRuleValues.callTolerance}
             showToggle={false}
             statusLabel={null}
             title="Tolerância de chamada"
@@ -9838,6 +9809,8 @@ export interface SettingsNotificationRole {
 
 export interface SettingsNotificationsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   roles?: SettingsNotificationRole[];
+  frequencyRules?: Partial<Record<SettingsNotificationFrequencyId, SettingsNotificationRuleValue>>;
+  channelRules?: Partial<Record<SettingsNotificationChannelId, SettingsNotificationRuleValue>>;
   saveState?: UnsavedChangesBarState;
   onRoleSelect?: (roleId: string) => void;
   onFrequencyChange?: (alertId: string, value: string | boolean) => void;
@@ -9845,6 +9818,28 @@ export interface SettingsNotificationsWorkspaceProps extends React.HTMLAttribute
   onSave?: () => void;
   onCancel?: () => void;
 }
+
+export type SettingsNotificationFrequencyId = "critical" | "operational" | "informative" | "non-critical";
+export type SettingsNotificationChannelId = "taliya" | "email" | "whatsapp" | "after-hours";
+
+export interface SettingsNotificationRuleValue {
+  value: string;
+  enabled: boolean;
+}
+
+const defaultSettingsNotificationFrequencyRules: Record<SettingsNotificationFrequencyId, SettingsNotificationRuleValue> = {
+  critical: { value: "immediate", enabled: true },
+  operational: { value: "daily", enabled: true },
+  informative: { value: "weekly", enabled: true },
+  "non-critical": { value: "silent-after-hours", enabled: true }
+};
+
+const defaultSettingsNotificationChannelRules: Record<SettingsNotificationChannelId, SettingsNotificationRuleValue> = {
+  taliya: { value: "enabled", enabled: true },
+  email: { value: "owner", enabled: true },
+  whatsapp: { value: "critical", enabled: true },
+  "after-hours": { value: "critical", enabled: true }
+};
 
 const settingsNotificationRoles: SettingsNotificationRole[] = [
   {
@@ -9878,6 +9873,8 @@ const settingsNotificationRoles: SettingsNotificationRole[] = [
 
 export function SettingsNotificationsWorkspace({
   roles = settingsNotificationRoles,
+  frequencyRules = {},
+  channelRules = {},
   saveState = "dirty",
   onRoleSelect,
   onFrequencyChange,
@@ -9887,6 +9884,8 @@ export function SettingsNotificationsWorkspace({
   className,
   ...props
 }: SettingsNotificationsWorkspaceProps) {
+  const frequency = { ...defaultSettingsNotificationFrequencyRules, ...frequencyRules };
+  const channels = { ...defaultSettingsNotificationChannelRules, ...channelRules };
   return (
     <section className={cn("tcrm-settings-notifications-workspace", className)} data-component="SettingsNotificationsWorkspace" {...props}>
       <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__roles">
@@ -9907,18 +9906,18 @@ export function SettingsNotificationsWorkspace({
       <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__rules">
         <header><h3>2. Frequência dos alertas</h3><p>Defina quando o Taliya avisa a equipe.</p></header>
         <div className="tcrm-settings-notifications-workspace__rule-head"><span>Nível de alerta</span><span>Frequência</span><span>Status</span></div>
-        <RuleRow icon="alert" iconTone="danger" onSelectChange={(value) => onFrequencyChange?.("critical", value)} onToggle={(value) => onFrequencyChange?.("critical", value)} rowId="critical" title="Crítico" />
-        <RuleRow defaultSelectValue="daily" icon="alertCircle" iconTone="warning" onSelectChange={(value) => onFrequencyChange?.("operational", value)} onToggle={(value) => onFrequencyChange?.("operational", value)} rowId="operational" title="Operacional" />
-        <RuleRow defaultSelectValue="weekly" icon="info" iconTone="info" onSelectChange={(value) => onFrequencyChange?.("informative", value)} onToggle={(value) => onFrequencyChange?.("informative", value)} rowId="informative" title="Informativo" />
-        <RuleRow defaultSelectValue="silent-after-hours" icon="minus" onSelectChange={(value) => onFrequencyChange?.("non-critical", value)} onToggle={(value) => onFrequencyChange?.("non-critical", value)} rowId="non-critical" title="Não crítico" />
+        <RuleRow checked={frequency.critical.enabled} icon="alert" iconTone="danger" onSelectChange={(value) => onFrequencyChange?.("critical", value)} onToggle={(value) => onFrequencyChange?.("critical", value)} rowId="critical" selectValue={frequency.critical.value} title="Crítico" />
+        <RuleRow checked={frequency.operational.enabled} icon="alertCircle" iconTone="warning" onSelectChange={(value) => onFrequencyChange?.("operational", value)} onToggle={(value) => onFrequencyChange?.("operational", value)} rowId="operational" selectValue={frequency.operational.value} title="Operacional" />
+        <RuleRow checked={frequency.informative.enabled} icon="info" iconTone="info" onSelectChange={(value) => onFrequencyChange?.("informative", value)} onToggle={(value) => onFrequencyChange?.("informative", value)} rowId="informative" selectValue={frequency.informative.value} title="Informativo" />
+        <RuleRow checked={frequency["non-critical"].enabled} icon="minus" onSelectChange={(value) => onFrequencyChange?.("non-critical", value)} onToggle={(value) => onFrequencyChange?.("non-critical", value)} rowId="non-critical" selectValue={frequency["non-critical"].value} title="Não crítico" />
       </Card>
 
       <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__channels">
         <header><h3>3. Canais internos</h3><p>Escolha onde a equipe recebe avisos internos do CRM.</p></header>
-        <RuleRow control="none" icon="layout" onToggle={(value) => onChannelChange?.("taliya", value)} rowId="taliya" title="Dentro do Taliya" />
-        <RuleRow icon="mail" onSelectChange={(value) => onChannelChange?.("email", value)} rowId="email" selectOptions={[{ value: "owner", label: "Ligado para Dono/Admin" }, { value: "all", label: "Ligado para todos" }]} selectValue="owner" showToggle={false} statusLabel={null} title="E-mail interno" />
-        <RuleRow icon="whatsapp" iconTone="success" onSelectChange={(value) => onChannelChange?.("whatsapp", value)} rowId="whatsapp" selectOptions={[{ value: "critical", label: "Ligado para alertas críticos" }, { value: "all", label: "Ligado para todos" }]} selectValue="critical" showToggle={false} statusLabel={null} title="WhatsApp interno" />
-        <RuleRow icon="clock" onSelectChange={(value) => onChannelChange?.("after-hours", value)} rowId="after-hours" selectOptions={[{ value: "critical", label: "Somente crítico" }, { value: "silent", label: "Silenciado" }]} selectValue="critical" showToggle={false} statusLabel={null} title="Fora do horário" />
+        <RuleRow checked={channels.taliya.enabled} control="none" icon="layout" onToggle={(value) => onChannelChange?.("taliya", value)} rowId="taliya" title="Dentro do Taliya" />
+        <RuleRow icon="mail" onSelectChange={(value) => onChannelChange?.("email", value)} rowId="email" selectOptions={[{ value: "owner", label: "Ligado para Dono/Admin" }, { value: "all", label: "Ligado para todos" }]} selectValue={channels.email.value} showToggle={false} statusLabel={null} title="E-mail interno" />
+        <RuleRow icon="whatsapp" iconTone="success" onSelectChange={(value) => onChannelChange?.("whatsapp", value)} rowId="whatsapp" selectOptions={[{ value: "critical", label: "Ligado para alertas críticos" }, { value: "all", label: "Ligado para todos" }]} selectValue={channels.whatsapp.value} showToggle={false} statusLabel={null} title="WhatsApp interno" />
+        <RuleRow icon="clock" onSelectChange={(value) => onChannelChange?.("after-hours", value)} rowId="after-hours" selectOptions={[{ value: "critical", label: "Somente crítico" }, { value: "silent", label: "Silenciado" }]} selectValue={channels["after-hours"].value} showToggle={false} statusLabel={null} title="Fora do horário" />
       </Card>
 
       <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />

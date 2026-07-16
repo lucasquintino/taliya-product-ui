@@ -138,13 +138,13 @@ const pageFamilyContracts = [
     page: "InboxConversationPage",
     file: "ImageCoverageInbox.stories.tsx",
     family: "three-pane/inbox",
-    requiredSnippets: ["<CrmThreePanePage", "<PageFilterBar", "ConversationList", "ConversationThread", "ContextPanel"]
+    requiredSnippets: ["<CrmThreePanePage", "filterBar={<InboxFilters", "ConversationList", "ConversationThread", "ContextPanel"]
   },
   {
     page: "AgendaCalendarPage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "dashboard/calendar",
-    requiredSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact />", "drawer={<AgendaSelectedClassDrawer />}"]
+    requiredSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact", "drawer={drawerOpen ? <AgendaSelectedClassDrawer", "onClose={() => setDrawerOpen(false)}", "onEventSelect={() => setDrawerOpen(true)}"]
   },
   {
     page: "AgendaClassDetailPage",
@@ -156,7 +156,7 @@ const pageFamilyContracts = [
     page: "AgendaClassesPage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", "filterBar={<ClassesFilters />}", "quickFilters={<ClassesQuickFilters />}", "<ClassesTable />"]
+    requiredSnippets: ["<CrmWorklistPage", "filterBar={<ClassesFilters />}", "quickFilters={<ClassesQuickFilters />}", "<ClassesTable", "onClose={() => setDrawerOpen(false)}", "setDrawerOpen(true)"]
   },
   {
     page: "AgendaGradePage",
@@ -168,7 +168,7 @@ const pageFamilyContracts = [
     page: "FinanceBillingDrawerPage",
     file: "ImageCoverageFinance.stories.tsx",
     family: "dashboard/drawer",
-    requiredSnippets: ["<FinanceOverviewDashboard drawer={<PaymentDrawer />} />"]
+    requiredSnippets: ["<FinanceOverviewDashboard", "drawer={drawerOpen ? <PaymentDrawer", "onClose={() => setDrawerOpen(false)}", "onOpenCase={() => setDrawerOpen(true)}"]
   },
   {
     page: "FinanceKanbanPage",
@@ -180,7 +180,7 @@ const pageFamilyContracts = [
     page: "FinanceMovementsPage",
     file: "ImageCoverageFinance.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="wide-main"', "filterBar={<MovementsFilters />}", "quickFilters={<MovementsQuickFilters />}", "<MovementTable />", "<PaymentDrawer"]
+    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="wide-main"', "filterBar={<MovementsFilters />}", "quickFilters={<MovementsQuickFilters />}", "<MovementTable", "drawer={drawerOpen ? (", "onClose={() => setDrawerOpen(false)}", "setDrawerOpen(true)"]
   },
   {
     page: "SalesPipelinePage",
@@ -192,7 +192,7 @@ const pageFamilyContracts = [
     page: "SalesInterestedListPage",
     file: "ImageCoverageSales.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="compact-rail"', "filterBar={<SalesInterestedFilters />}", "quickFilters={<SalesLeadQuickRail />}", "<SalesLeadTable", "setSelectedLeadId(row.id)", "drawer={<LeadDrawer compact", "onAction={setDrawerAction}"]
+    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="compact-rail"', "filterBar={<SalesInterestedFilters />}", "quickFilters={<SalesLeadQuickRail />}", "<SalesLeadTable", "setSelectedLeadId(row.id)", "drawer={drawerOpen ? <LeadDrawer compact", "onClose={() => setDrawerOpen(false)}", "onAction={setDrawerAction}"]
   },
   {
     page: "SalesExperimentalListPage",
@@ -205,7 +205,8 @@ const pageFamilyContracts = [
       "quickFilters={<ExperimentalQuickRail />}",
       "<ExperimentalTable",
       "setSelectedExperimentalId(row.id)",
-      "drawer={<ExperimentalDrawer",
+      "drawer={drawerOpen ? <ExperimentalDrawer",
+      "onClose={() => setDrawerOpen(false)}",
       "onAction={setDrawerAction}"
     ]
   },
@@ -220,7 +221,8 @@ const pageFamilyContracts = [
       "quickFilters={<EnrollmentQuickRail />}",
       "<EnrollmentTable",
       "setSelectedEnrollmentId(row.id)",
-      "drawer={<EnrollmentDrawer",
+      "drawer={drawerOpen ? <EnrollmentDrawer",
+      "onClose={() => setDrawerOpen(false)}",
       "onAction={setDrawerAction}"
     ]
   },
@@ -235,7 +237,8 @@ const pageFamilyContracts = [
       "quickFilters={<RetentionRiskQuickRail />}",
       "<RetentionRiskTable",
       "setSelectedRowId(row.id)",
-      "drawer={<RetentionRiskDrawer",
+      "drawer={drawerOpen ? <RetentionRiskDrawer",
+      "onClose={() => setDrawerOpen(false)}",
       "onAction={setDrawerAction}"
     ]
   },
@@ -250,7 +253,8 @@ const pageFamilyContracts = [
       "quickFilters={<CancellationQuickRail />}",
       "<CancellationTable",
       "setSelectedRowId(row.id)",
-      "drawer={<CancellationDrawer",
+      "drawer={drawerOpen ? <CancellationDrawer",
+      "onClose={() => setDrawerOpen(false)}",
       "onAction={setDrawerAction}"
     ]
   },
@@ -265,7 +269,8 @@ const pageFamilyContracts = [
       "quickFilters={<ReactivationQuickRail />}",
       "<ReactivationTable",
       "setSelectedRowId(row.id)",
-      "drawer={<ReactivationDrawer",
+      "drawer={drawerOpen ? <ReactivationDrawer",
+      "onClose={() => setDrawerOpen(false)}",
       "onAction={setDrawerAction}"
     ]
   },
@@ -280,7 +285,8 @@ const pageFamilyContracts = [
       "quickFilters={<ComplaintQuickRail />}",
       "<ComplaintTable",
       "setSelectedRowId(row.id)",
-      "drawer={<ComplaintDrawer",
+      "drawer={drawerOpen ? <ComplaintDrawer",
+      "onClose={() => setDrawerOpen(false)}",
       "onAction={setDrawerAction}"
     ]
   },
@@ -294,13 +300,13 @@ const pageFamilyContracts = [
     page: "MoneyOnTheTablePage",
     file: "ImageCoverageReports.stories.tsx",
     family: "dashboard/reports",
-    requiredSnippets: ["<CrmDashboardPage", "before={<MoneyTableFilters />}", "<OpportunityGroupCard", "drawer={<OpportunityPanel", "onItemOpen="]
+    requiredSnippets: ["<CrmDashboardPage", "before={<MoneyTableFilters />}", "<OpportunityGroupCard", "drawer={drawerOpen ? <OpportunityPanel", "onClose={() => setDrawerOpen(false)}", "onItemOpen="]
   },
   {
     page: "SupportCentralPage",
     file: "ImageCoverageSupport.stories.tsx",
     family: "dashboard/support",
-    requiredSnippets: ["<CrmDashboardPage", "layoutVariant=\"support\"", "<SupportStatusSidebar", "<SupportCentralWorkspace", "onTicketSelect=", "drawer={<SupportTicketDrawer", "onAction="]
+    requiredSnippets: ["<CrmDashboardPage", "layoutVariant=\"support\"", "<SupportStatusSidebar", "<SupportCentralContent", "onTicketSelect=", "drawer={drawerOpen ? <SupportTicketDrawer", "onClose={() => setDrawerOpen(false)}", "onAction="]
   },
   {
     page: "InternalOverviewPage",
@@ -312,7 +318,7 @@ const pageFamilyContracts = [
     page: "InternalTenantsListDetailPage",
     file: "ImageCoverageInternal.stories.tsx",
     family: "internal/table",
-    requiredSnippets: ["<InternalWorklistPage", 'contentLayout="internal-tenants"', 'pageHeaderRhythm="internal-tenants"', 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters", "quickFilters={<InternalTenantQuickFilters />}", "<InternalTenantsTable", "onRowSelect={setSelectedTenantId}", "<TenantSummaryDrawer"]
+    requiredSnippets: ["<InternalWorklistPage", 'contentLayout="internal-tenants"', 'pageHeaderRhythm="internal-tenants"', 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters", "quickFilters={<InternalTenantQuickFilters />}", "<InternalTenantsTable", "setSelectedTenantId(tenantId)", "drawer={drawerOpen ? <TenantSummaryDrawer", "onClose={() => setDrawerOpen(false)}"]
   },
   {
     page: "InternalTenantSecurityPage",
@@ -372,7 +378,7 @@ const pageFamilyContracts = [
     page: "SettingsPermissionsPage",
     file: "ImageCoverageSettings.stories.tsx",
     family: "right-panel/settings",
-    requiredSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsPermissionsWorkspace", "onRoleSelect={setSelectedRoleId}", "onSave={() => setLastAction"]
+    requiredSnippets: ["<CrmRightPanelPage", "<SettingsAgentPanel", "<SettingsPermissionsWorkspace", "onRoleSelect={setSelectedRoleId}", "onSave={() => { const next = permissionRows"]
   },
   {
     page: "SettingsPaymentsPage",
@@ -734,8 +740,15 @@ function sourceWindowForFunction(source, functionName) {
   if (start < 0) {
     return "";
   }
-  const nextExport = source.indexOf("\nexport function ", start + 1);
-  return source.slice(start, nextExport < 0 ? start + 2500 : nextExport);
+
+  const rest = source.slice(start + 1);
+  const nextFunction = /\n(?:export\s+)?function\s+[A-Za-z0-9_]+\s*\(/.exec(rest);
+  const nextConst = /\n(?:export\s+)?const\s+[A-Za-z0-9_]+\s*(?::|=)/.exec(rest);
+  const next = [nextFunction?.index, nextConst?.index]
+    .filter((index) => typeof index === "number" && index >= 0)
+    .sort((a, b) => a - b)[0];
+
+  return source.slice(start, next === undefined ? source.length : start + 1 + next);
 }
 
 function sourceWindowForNamedFunction(source, functionName) {
@@ -865,7 +878,7 @@ const tableFamilyDetailRows = tableFamilyDetailContracts.map((contract) => {
   const tableSource = sourceWindowForNamedFunction(source, contract.table);
   const drawerSource = sourceWindowForNamedFunction(source, contract.drawer);
   const missingSnippets = [
-    ...["<CrmWorklistPage", `worklistLayoutMode="${contract.layoutMode}"`, "filterBar={<", "quickFilters={<", "drawer={<"]
+    ...["<CrmWorklistPage", `worklistLayoutMode="${contract.layoutMode}"`, "filterBar={<", "quickFilters={<", "drawer={drawerOpen ?"]
       .filter((snippet) => !pageSource.includes(snippet))
       .map((snippet) => `${contract.page}: ${snippet}`),
     ...["<PageFilterBar", 'advancedFiltersSurface="modal"', "searchFilterPlacement=\"embedded\""]

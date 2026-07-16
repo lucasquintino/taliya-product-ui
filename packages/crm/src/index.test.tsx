@@ -4955,6 +4955,36 @@ describe("@taliya/crm component coverage", () => {
     expect(onStart).toHaveBeenCalledOnce();
   });
 
+  it("requires a studio name before starting setup", () => {
+    const onStart = vi.fn();
+
+    render(<crm.SetupWelcomeWorkspace onStart={onStart} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Começar setup guiado" }));
+
+    expect(onStart).not.toHaveBeenCalled();
+    expect(screen.getByText("Informe o nome do studio para continuar.")).toBeInTheDocument();
+  });
+
+  it("uses the current nine-block setup contract by default", () => {
+    render(<crm.SetupPage step={5}><span>Pagamento workspace</span></crm.SetupPage>);
+
+    expect(crm.defaultSetupSteps).toEqual([
+      "Studio",
+      "Equipe",
+      "Canais",
+      "Planos",
+      "Pagamento",
+      "Alunos",
+      "Turmas",
+      "Agenda",
+      "Revisão"
+    ]);
+    expect(screen.getByText("Pagamento workspace")).toBeInTheDocument();
+    expect(screen.getByText("Pagamento")).toBeInTheDocument();
+    expect(screen.getByText("Revisão")).toBeInTheDocument();
+  });
+
   it("renders the source-backed setup welcome agent variant", () => {
     const onHumanHelp = vi.fn();
     const onQuickReply = vi.fn();
@@ -5060,6 +5090,128 @@ describe("@taliya/crm component coverage", () => {
     expect(onChecklistReview).toHaveBeenCalledWith("whatsapp");
     expect(onFlowAction.mock.calls).toEqual([["falta-aviso", "view"], ["falta-aviso", "simulate"]]);
     expect(onAction.mock.calls.map(([action]) => action)).toEqual(["publish", "simulate-again", "back"]);
+  });
+
+  it("owns the post-live studio workspace anatomy and behavior", () => {
+    const onActiveDaysChange = vi.fn();
+    const onCancel = vi.fn();
+    const onFieldChange = vi.fn();
+    const onSave = vi.fn();
+
+    render(
+      <crm.SettingsStudioWorkspace
+        onActiveDaysChange={onActiveDaysChange}
+        onCancel={onCancel}
+        onFieldChange={onFieldChange}
+        onSave={onSave}
+        saveState="dirty"
+        values={{ studioName: "Studio Aurora" }}
+      />
+    );
+
+    expect(screen.getByRole("heading", { name: "Identidade e unidade principal" })).toBeInTheDocument();
+    expect(screen.queryByText("Bloco 1 de 8")).not.toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Nome do studio" })).toHaveValue("Studio Aurora");
+    fireEvent.change(screen.getByRole("textbox", { name: "Nome do studio" }), { target: { value: "Studio Solar" } });
+    fireEvent.click(screen.getByRole("checkbox", { name: "Sab" }));
+    fireEvent.click(screen.getByRole("button", { name: "Cancelar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Salvar alterações" }));
+
+    expect(onFieldChange).toHaveBeenCalledWith("studioName", "Studio Solar");
+    expect(onActiveDaysChange).toHaveBeenCalledWith(["Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]);
+    expect(onCancel).toHaveBeenCalledOnce();
+    expect(onSave).toHaveBeenCalledOnce();
+  });
+
+  it("owns the post-live team workspace anatomy and behavior", () => {
+    const onInvite = vi.fn();
+    const onMemberAction = vi.fn();
+    const onOpenPermissions = vi.fn();
+
+    render(<crm.SettingsTeamWorkspace onInvite={onInvite} onMemberAction={onMemberAction} onOpenPermissions={onOpenPermissions} />);
+
+    expect(screen.getByRole("heading", { name: "Usuarios do CRM" })).toBeInTheDocument();
+    expect(screen.getByText("Convite pendente")).toBeInTheDocument();
+    expect(screen.getByText(/Ultimo acesso: Hoje, 09:42/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Convidar pessoa" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Editar" })[0]);
+    fireEvent.click(screen.getByRole("button", { name: "Reenviar convite" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir Permissoes" }));
+
+    expect(onInvite).toHaveBeenCalledOnce();
+    expect(onMemberAction).toHaveBeenCalledWith(expect.objectContaining({ id: "leticia" }), "edit");
+    expect(onMemberAction).toHaveBeenCalledWith(expect.objectContaining({ id: "ana" }), "resend");
+    expect(onOpenPermissions).toHaveBeenCalledOnce();
+  });
+
+  it("renders controlled post-live team status and exposes the matching action", () => {
+    const onMemberAction = vi.fn();
+    const inactiveMember: crm.SettingsTeamMember = {
+      id: "carla",
+      name: "Carla Souza",
+      email: "carla@studio.com",
+      role: "Recepcao",
+      status: "inactive",
+      lastAccess: "Ontem, 18:15"
+    };
+
+    render(<crm.SettingsTeamWorkspace members={[inactiveMember]} onMemberAction={onMemberAction} />);
+
+    expect(screen.getByText("Inativo")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Reativar" }));
+    expect(onMemberAction).toHaveBeenCalledWith(inactiveMember, "reactivate");
+  });
+
+  it("owns the post-live channels workspace anatomy and behavior", () => {
+    const onCancel = vi.fn();
+    const onConnectWhatsApp = vi.fn();
+    const onSave = vi.fn();
+    const onWhatsAppStateChange = vi.fn();
+
+    render(
+      <crm.SettingsChannelsWorkspace
+        connectionStatus="connected"
+        onCancel={onCancel}
+        onConnectWhatsApp={onConnectWhatsApp}
+        onSave={onSave}
+        onWhatsAppStateChange={onWhatsAppStateChange}
+        saveState="dirty"
+      />
+    );
+
+    expect(screen.getAllByText("Conectado").length).toBeGreaterThan(0);
+    fireEvent.click(screen.getByRole("button", { name: "Testar conexao" }));
+    fireEvent.click(screen.getByRole("button", { name: /Ainda esta no WhatsApp pessoal/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Cancelar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Salvar alterações" }));
+
+    expect(onConnectWhatsApp).toHaveBeenCalledOnce();
+    expect(onWhatsAppStateChange).toHaveBeenCalledWith("personal");
+    expect(onCancel).toHaveBeenCalledOnce();
+    expect(onSave).toHaveBeenCalledOnce();
+  });
+
+  it("owns the post-live plans workspace anatomy and behavior", () => {
+    const onCancel = vi.fn();
+    const onFieldChange = vi.fn();
+    const onPlanAction = vi.fn();
+    const onSave = vi.fn();
+
+    render(<crm.SettingsPlansWorkspace fieldValues={{ name: "Plano Aurora", quantity: "12" }} onCancel={onCancel} onFieldChange={onFieldChange} onPlanAction={onPlanAction} onSave={onSave} saveState="dirty" />);
+
+    expect(screen.getByRole("heading", { name: "Planos e modelos" })).toBeInTheDocument();
+    expect(screen.getByText("18 alunos usando")).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "1. Nome do plano" })).toHaveValue("Plano Aurora");
+    expect(screen.getByRole("button", { name: "12 aulas" })).toHaveAttribute("aria-pressed", "true");
+    fireEvent.change(screen.getByRole("textbox", { name: "1. Nome do plano" }), { target: { value: "Plano Solar" } });
+    fireEvent.click(screen.getAllByRole("button", { name: "Inativar" })[0]);
+    fireEvent.click(screen.getByRole("button", { name: "Cancelar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Salvar alterações" }));
+
+    expect(onPlanAction).toHaveBeenCalledWith("weekly", "deactivate");
+    expect(onFieldChange).toHaveBeenCalledWith("name", "Plano Solar");
+    expect(onCancel).toHaveBeenCalledOnce();
+    expect(onSave).toHaveBeenCalledOnce();
   });
 
   it("owns the settings permissions workspace anatomy and behavior", () => {

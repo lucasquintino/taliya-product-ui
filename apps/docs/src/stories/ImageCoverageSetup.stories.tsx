@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 
 import {
+  defaultSetupSteps,
   SetupAgentChat,
   SetupAgendaWorkspace,
   SetupChannelsWorkspace,
@@ -83,7 +84,7 @@ export function SetupWorkspaceConfigPage() {
       frameVariant="guided"
       progress={32}
       step={2}
-      steps={["Diagnostico", "Configuracoes", "Agenda", "Planos", "Importacao", "Revisao"]}
+      steps={defaultSetupSteps}
     >
       <SetupConsumptionWorkspace
         model={model}
@@ -106,7 +107,7 @@ export function SetupStudioPage() {
       frameVariant="guided-block"
       progress={12}
       step={1}
-      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+      steps={defaultSetupSteps}
     >
       <SetupStudioWorkspace
         activeDays={activeDays}
@@ -129,7 +130,7 @@ export function SetupTeamPage() {
       frameVariant="guided-block"
       progress={24}
       step={2}
-      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+      steps={defaultSetupSteps}
     >
       <SetupTeamWorkspace
         onAction={setAction}
@@ -153,7 +154,7 @@ export function SetupChannelsPage() {
       frameVariant="guided-block"
       progress={36}
       step={3}
-      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+      steps={defaultSetupSteps}
     >
       <SetupChannelsWorkspace
         onAction={setAction}
@@ -175,7 +176,7 @@ export function SetupPlansPage() {
       frameVariant="guided-main"
       progress={48}
       step={4}
-      steps={["Studio", "Equipe", "Canais", "Planos", "Alunos", "Turmas", "Agenda", "Revisao"]}
+      steps={defaultSetupSteps}
     >
       <SetupPlansWorkspace
         onAction={setAction}
@@ -198,7 +199,7 @@ export function SetupPaymentPage() {
       frameVariant="guided-main"
       progress={55}
       step={5}
-      steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}
+      steps={defaultSetupSteps}
     >
       <SetupPaymentWorkspace
         onAction={setAction}
@@ -235,7 +236,7 @@ export function SetupClassesPage() {
   const [, setAction] = useState("");
 
   return (
-    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-wide" progress={77} step={7} steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}>
+    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-wide" progress={77} step={7} steps={defaultSetupSteps}>
       <SetupClassesWorkspace
         onAction={setAction}
         onClassAction={(classId, action) => setAction(`${action}:${classId}`)}
@@ -251,7 +252,7 @@ export function SetupAgendaPage() {
   const [, setAction] = useState("");
 
   return (
-    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-wide" progress={88} step={8} steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}>
+    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-wide" progress={88} step={8} steps={defaultSetupSteps}>
       <SetupAgendaWorkspace
         onAction={setAction}
         onBackToClasses={() => setAction("back-to-classes")}
@@ -268,7 +269,7 @@ export function SetupReviewPage() {
   const [, setAction] = useState("");
 
   return (
-    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-review" progress={98} step={9} steps={["Studio", "Equipe", "Canais", "Planos", "Pagamento", "Alunos", "Turmas", "Agenda", "Revisao"]}>
+    <SetupPage avatarSrc={source51eLeticiaRamos} frameVariant="guided-review" progress={98} step={9} steps={defaultSetupSteps}>
       <SetupReviewWorkspace
         confirmed={confirmed}
         onBack={() => setAction("back-to-agenda")}

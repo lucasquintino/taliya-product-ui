@@ -87,11 +87,14 @@ const todayTaskDrawerHistory: TaskDrawerHistoryItem[] = [
   { id: "latest", time: "09:12", body: "Sistema encontrou uma vaga compatível." }
 ];
 
-function TodayDashboard({ selectedTask = false, variant = "base" }: { selectedTask?: boolean; variant?: "base" | "critical" }) {
+function TodayDashboard({ selectedTask = false, variant = "base", onTaskSelect }: { selectedTask?: boolean; variant?: "base" | "critical"; onTaskSelect?: () => void }) {
   const critical = variant === "critical";
   const [selectedRowId, setSelectedRowId] = useState(selectedTask ? "tasks:replacement" : "");
   const selectRows = (section: string) => ({
-    onRowOpen: (row: { id: string }) => setSelectedRowId(`${section}:${row.id}`)
+    onRowOpen: (row: { id: string }) => {
+      setSelectedRowId(`${section}:${row.id}`);
+      if (section === "tasks") onTaskSelect?.();
+    }
   });
   const withSelection = <T extends { id: string; selected?: boolean }>(section: string, rows: T[]) =>
     rows.map((row) => ({
@@ -311,6 +314,7 @@ export function TodayShell({
   historyScrollReserve?: boolean;
   variant?: "base" | "critical";
 }) {
+  const [drawerOpen, setDrawerOpen] = useState(drawer);
   return (
     <CrmDashboardPage
         activeNavId="hoje"
@@ -320,9 +324,9 @@ export function TodayShell({
         columns={historyOnly ? 1 : variant === "critical" ? "todayCritical" : "today"}
         contentClassName="sb-image-coverage-today-content"
         dashboardClassName={historyOnly ? "sb-image-coverage-today-history-grid" : "sb-image-coverage-today-stage--dashboard-grid"}
-        drawerPlacement={drawer ? "viewport" : undefined}
+        drawerPlacement={drawerOpen ? "viewport" : undefined}
         drawer={
-          drawer ? (
+          drawerOpen ? (
             <TaskDrawer
               checklist={todayTaskDrawerChecklist}
               checklistTitle="Checklist"
@@ -335,6 +339,7 @@ export function TodayShell({
               history={todayTaskDrawerHistory}
               historyTitle="Última atividade"
               label="Tarefa"
+              onClose={() => setDrawerOpen(false)}
               showChecklistProgress={false}
               showCommentsLink={false}
               statusLabel="Pendente"
@@ -350,7 +355,7 @@ export function TodayShell({
         title="Hoje"
         utilityItems={todaySidebarUtilityItems}
       >
-        {historyOnly ? <ActivityFeed fluid /> : <TodayDashboard selectedTask={drawer} variant={variant} />}
+        {historyOnly ? <ActivityFeed fluid /> : <TodayDashboard onTaskSelect={() => setDrawerOpen(true)} selectedTask={drawerOpen} variant={variant} />}
       </CrmDashboardPage>
   );
 }

@@ -1,7 +1,7 @@
 {
   "date": "2026-07-15",
   "status": "pass",
-  "rowCount": 37,
+  "rowCount": 41,
   "failedCount": 0,
   "fileCount": 11,
   "failedFileCount": 0,
@@ -155,6 +155,34 @@
     },
     {
       "page": "SettingsPermissionsPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsStudioPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsTeamPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsChannelsPage",
+      "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
+      "family": "right-panel/settings",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "SettingsPlansPage",
       "file": "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
       "family": "right-panel/settings",
       "missingSnippets": [],

@@ -73,6 +73,7 @@ const agendaClassStudents: ClassDrawerStudent[] = [
 ];
 
 export function AgendaCalendarPage() {
+  const [drawerOpen, setDrawerOpen] = useState(true);
   return (
     <CrmDashboardPage
       activeNavId="agenda"
@@ -80,7 +81,7 @@ export function AgendaCalendarPage() {
       avatarSrc={image79Avatar}
       before={<AgendaFilters />}
       columns="agenda"
-      drawer={<AgendaSelectedClassDrawer />}
+      drawer={drawerOpen ? <AgendaSelectedClassDrawer onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="floating"
       drawerSize="compact"
       navItems={agendaCalendarNavItems}
@@ -91,12 +92,12 @@ export function AgendaCalendarPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
       <AgendaSidePanel />
-      <WeeklyCalendar compact />
+      <WeeklyCalendar compact onEventSelect={() => setDrawerOpen(true)} />
     </CrmDashboardPage>
   );
 }
 
-function AgendaSelectedClassDrawer() {
+function AgendaSelectedClassDrawer({ onClose }: { onClose?: () => void }) {
   const facts: ClassDrawerFact[] = [
     { id: "teacher", icon: "calendar", label: "Professor", value: "João Silva" },
     { id: "resource", icon: "user", label: "Sala / recurso", value: "Reformer 2" },
@@ -125,6 +126,7 @@ function AgendaSelectedClassDrawer() {
       copilot={<><strong>Copiloto: há 1 crédito de reposição compatível para esta vaga.</strong></>}
       eyebrow="Aula selecionada"
       facts={facts}
+      onClose={onClose}
       primaryAction={{ label: "Abrir aula", action: "open-schedule" }}
       rosterHeading="Alunos previstos (4)"
       rosterStatus={{ label: "Pendente", tone: "warning" }}
@@ -190,12 +192,14 @@ export function AgendaClassDetailPage() {
 }
 
 export function AgendaClassesPage() {
+  const [selectedClassId, setSelectedClassId] = useState("reformer");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   return (
     <CrmWorklistPage
       activeNavId="turmas"
       activeSidebarId="agenda"
       avatarSrc={image79Avatar}
-      drawer={<AgendaClassDrawer />}
+      drawer={drawerOpen ? <AgendaClassDrawer onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="floating"
       drawerSize="compact"
       filterBar={<ClassesFilters />}
@@ -211,18 +215,19 @@ export function AgendaClassesPage() {
       utilityItems={crmEmptyShellSidebarUtilityItems}
       worklistLayoutMode="main-priority"
     >
-      <ClassesTable />
+      <ClassesTable onRowSelect={(row) => { setSelectedClassId(row.id); setDrawerOpen(true); }} selectedRowId={selectedClassId} />
     </CrmWorklistPage>
   );
 }
 
 export function AgendaGradePage() {
+  const [drawerOpen, setDrawerOpen] = useState(true);
   return (
     <CrmWorklistPage
       activeNavId="grade"
       activeSidebarId="agenda"
       avatarSrc={image79Avatar}
-      drawer={<AgendaGradeDrawer />}
+      drawer={drawerOpen ? <AgendaGradeDrawer onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="floating"
       drawerSize="compact"
       filterBar={<GradeFilters />}
@@ -241,6 +246,7 @@ export function AgendaGradePage() {
         days={["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]}
         density="short"
         events={gradeWeeklyEvents}
+        onEventSelect={() => setDrawerOpen(true)}
         selectedEventId="ter-1700-reformer"
         times={gradeWeeklyTimes}
       />
@@ -248,7 +254,7 @@ export function AgendaGradePage() {
   );
 }
 
-function AgendaGradeDrawer() {
+function AgendaGradeDrawer({ onClose }: { onClose?: () => void }) {
   const [, setAction] = useState("");
   return (
     <ClassDrawer
@@ -277,6 +283,7 @@ function AgendaGradeDrawer() {
         { id: "block", icon: "tag", label: "bloquear este horário afeta 3 aulas futuras" }
       ]}
       onAction={setAction}
+      onClose={onClose}
       primaryAction={{ label: "Editar bloco", action: "edit-class" }}
       secondaryActions={[
         { label: "Abrir turma", action: "open-grid" },
@@ -365,7 +372,7 @@ const gradeWeeklyEvents: WeeklyCalendarEvent[] = [
   { id: "seg-1900-tower", dayIndex: 0, top: 648, height: 62, time: "19:00", title: "Tower", teacher: "", capacity: "3/5", status: "pending", statusLabel: "a definir" }
 ];
 
-function AgendaClassDrawer() {
+function AgendaClassDrawer({ onClose }: { onClose?: () => void }) {
   const facts: ClassDrawerFact[] = [
     { id: "schedule", icon: "calendar", label: "Dia/horário recorrente", value: "Terça 17h" },
     { id: "capacity", icon: "users", label: "Capacidade", value: "5/6" },
@@ -402,6 +409,7 @@ function AgendaClassDrawer() {
       eyebrow="Turma selecionada"
       facts={facts}
       historyItems={historyItems}
+      onClose={onClose}
       primaryAction={{ label: "Abrir agenda", action: "open-schedule" }}
       rosterHeading="Alunos fixos (5)"
       secondaryActions={[
@@ -456,7 +464,7 @@ const classColumns: Array<CrmWorklistTableColumn<ClassRow>> = [
   { key: "change", header: "Última mudança", width: "13%" }
 ];
 
-function ClassesTable() {
+function ClassesTable({ onRowSelect, selectedRowId = "reformer" }: { onRowSelect?: (row: ClassRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
@@ -465,7 +473,8 @@ function ClassesTable() {
       pagination={{ itemsPerPage: "10", label: "1-6 de 18", page: 1, pageCount: 2 }}
       rowActions={() => <IconButton icon="more" label="Mais acoes da turma" size="sm" variant="ghost" />}
       rows={classRows}
-      selectedRowId="reformer"
+      onRowSelect={onRowSelect}
+      selectedRowId={selectedRowId}
     />
   );
 }

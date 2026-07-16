@@ -77,6 +77,7 @@ export function ReportsManagementPage() {
 
 export function MoneyOnTheTablePage() {
   const [, setSelectedOpportunityId] = useState("ana");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const [, setAction] = useState("");
 
   return (
@@ -87,7 +88,7 @@ export function MoneyOnTheTablePage() {
       before={<MoneyTableFilters />}
       columns={2}
       density="compact"
-      drawer={<OpportunityPanel onAction={setAction} onClose={() => setAction("close")} />}
+      drawer={drawerOpen ? <OpportunityPanel onAction={setAction} onClose={() => setDrawerOpen(false)} /> : null}
       drawerPlacement="floating"
       layoutVariant="opportunity"
       navItems={reportsNav}
@@ -102,7 +103,7 @@ export function MoneyOnTheTablePage() {
           icon={group.icon}
           items={group.rows}
           key={group.id}
-          onItemOpen={(item) => setSelectedOpportunityId(item.id)}
+          onItemOpen={(item) => { setSelectedOpportunityId(item.id); setDrawerOpen(true); }}
           onOpen={() => setAction(`open-group:${group.id}`)}
           summary={group.summary}
           title={group.title}
