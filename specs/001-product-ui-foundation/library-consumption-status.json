@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-15T18:47:20.999Z",
+  "generatedAt": "2026-07-16T00:51:02.549Z",
   "status": "fail",
   "currentInternalLibraryAccepted": false,
   "currentInternalConsumptionPass": true,
   "internalRouteWorkspacePass": true,
   "publicPageKitPass": true,
-  "technicalReleaseCandidatePass": true,
+  "technicalReleaseCandidatePass": false,
   "aggregateReadinessPass": false,
   "futureCrmProcessPass": true,
   "futureCrmRealAdoptionExecuted": false,
@@ -28,7 +28,9 @@
     "library-consumption-status-stale-readiness-probe",
     "library-consumption-status-negative-probe"
   ],
-  "missingReleaseCandidateConsumptionGateIds": [],
+  "missingReleaseCandidateConsumptionGateIds": [
+    "library-consumption-status"
+  ],
   "requiredReleaseCandidateFutureCrmGateIds": [
     "domain-wrappers",
     "domain-wrappers-direct-drawer-probe",
@@ -116,9 +118,9 @@
     },
     {
       "id": "technical-release-candidate",
-      "status": "pass",
+      "status": "fail",
       "evidence": "release-candidate-audit.json",
-      "meaning": "The current package/readiness/release gate bundle is green and includes compact consumption-status and future CRM process gates."
+      "meaning": "Release candidate is missing required gates: library-consumption-status."
     },
     {
       "id": "aggregate-readiness",

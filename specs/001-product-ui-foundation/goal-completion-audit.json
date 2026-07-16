@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-15T18:47:38.871Z",
-  "date": "2026-07-15",
+  "generatedAt": "2026-07-16T00:51:02.918Z",
+  "date": "2026-07-16",
   "goal": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   "trueGoal": {
     "statement": "Transformar taliya-product-ui em uma biblioteca oficial, reutilizavel e instalavel, com @taliya/tokens, @taliya/ui e @taliya/crm, capaz de alimentar os stories/imagens do CRM Taliya, o taliya-internal hoje e o futuro CRM Taliya depois, sem reimplementar shell, filtros, tabela, drawer, kanban, cards ou padroes visuais localmente.",
@@ -193,7 +193,7 @@
         "currentInternalLibraryAccepted=false",
         "currentInternalConsumptionPass=true",
         "publicPageKitPass=true",
-        "technicalReleaseCandidatePass=true",
+        "technicalReleaseCandidatePass=false",
         "aggregateReadinessPass=false",
         "futureCrmProcessPass=true",
         "futureCrmRealAdoptionExecuted=false",

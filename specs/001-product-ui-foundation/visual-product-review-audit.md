@@ -1,6 +1,6 @@
 # Visual Product Review Audit
 
-Generated: 2026-07-15T18:45:17.579Z
+Generated: 2026-07-16T00:44:46.257Z
 
 Status: pass-review-ready-not-approved
 
@@ -13,7 +13,7 @@ This audit prepares source-backed product review. It does not approve any image 
 | Invalid evidence rows | 0 |
 | Product-review decisions | 63 |
 
-Review contract SHA-256: `e956d93a73f8f84f734c386d2c3ac63cce07756abc2363c739085d0278d9610d`
+Review contract SHA-256: `3e4f3214f31d26370acf09cfb94aa812b01f4348c85a422dc7687afa00ea917d`
 
 Generated local board: `tmp/visual-product-review/index.html`
 
@@ -56,18 +56,18 @@ Generated local board: `tmp/visual-product-review/index.html`
 | 35 | `48_round-4.1K_internal_01_visao-operacional.png.png` | 14.6726 | 8.86% | ready |
 | 36 | `49_round-4.1K_internal_02_tenants-lista-detalhe.png` | 12.4078 | 7.82% | ready |
 | 37 | `50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png` | 11.3844 | 6.97% | ready |
-| 38 | `51A_round-4.1J_onboarding_shell-global-aprovado.png` | 8.0722 | 4.73% | ready |
+| 38 | `51A_round-4.1J_onboarding_shell-global-aprovado.png` | 8.1546 | 4.81% | ready |
 | 39 | `51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png` | 8.5357 | 3.66% | ready |
-| 40 | `51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png` | 13.7498 | 8.75% | ready |
-| 41 | `51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png` | 13.0715 | 8.56% | ready |
-| 42 | `51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png` | 12.5803 | 8.26% | ready |
-| 43 | `51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png` | 14.2835 | 9.55% | ready |
-| 44 | `51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png` | 16.8588 | 11.01% | ready |
-| 45 | `51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png` | 15.3080 | 10.06% | ready |
+| 40 | `51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png` | 13.8182 | 8.82% | ready |
+| 41 | `51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png` | 13.0789 | 8.57% | ready |
+| 42 | `51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png` | 12.5932 | 8.28% | ready |
+| 43 | `51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png` | 14.2836 | 9.56% | ready |
+| 44 | `51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png` | 16.9079 | 11.06% | ready |
+| 45 | `51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png` | 15.3086 | 10.06% | ready |
 | 46 | `51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png` | 13.9981 | 9.06% | ready |
-| 47 | `51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png` | 13.6254 | 9.04% | ready |
-| 48 | `51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png` | 13.7969 | 9.17% | ready |
-| 49 | `51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png` | 13.7128 | 9.47% | ready |
+| 47 | `51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png` | 13.6260 | 9.04% | ready |
+| 48 | `51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png` | 13.7976 | 9.17% | ready |
+| 49 | `51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png` | 13.7133 | 9.47% | ready |
 | 50 | `78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png` | 8.4210 | 3.97% | ready |
 | 51 | `52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png` | 9.5950 | 6.84% | ready |
 | 52 | `53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png` | 14.3204 | 12.50% | ready |
@@ -77,8 +77,8 @@ Generated local board: `tmp/visual-product-review/index.html`
 | 56 | `59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png` | 14.2873 | 9.93% | ready |
 | 57 | `70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png` | 12.7119 | 7.95% | ready |
 | 58 | `60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png` | 7.0193 | 4.53% | ready |
-| 59 | `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | 10.0761 | 6.85% | ready |
-| 60 | `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | 11.6941 | 7.61% | ready |
-| 61 | `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | 8.9052 | 6.09% | ready |
-| 62 | `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | 10.5233 | 7.14% | ready |
+| 59 | `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | 9.8579 | 6.75% | ready |
+| 60 | `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | 12.7553 | 8.07% | ready |
+| 61 | `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | 9.2462 | 6.23% | ready |
+| 62 | `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | 10.8418 | 7.27% | ready |
 | 63 | `65_round-4.1N_billing_01_assinatura-taliya-aprovado.png` | 11.0175 | 6.91% | ready |

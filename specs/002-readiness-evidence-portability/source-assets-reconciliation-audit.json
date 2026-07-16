@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-15T18:45:14.702Z",
+  "generatedAt": "2026-07-16T00:44:43.383Z",
   "status": "blocked-incomplete-canonical-roster",
   "conclusion": "The delivered folder and ZIP contain 93 known top-level images, while 8 of 101 canonical identities still have no authoritative filename. Count-only evidence cannot prove 101/101.",
   "expectedCanonicalImageCount": 101,

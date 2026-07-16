@@ -1,6 +1,6 @@
 # Library Consumption Status
 
-Generated: 2026-07-15T18:47:20.999Z
+Generated: 2026-07-16T00:51:02.549Z
 
 Status: fail
 
@@ -12,7 +12,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 - Current Internal consumes official kit: `true`
 - Internal routes render shell + workspace: `true`
 - Public page-kit runtime manifest works: `true`
-- Technical release candidate passed: `true`
+- Technical release candidate passed: `false`
 - Aggregate readiness passed: `false`
 - Missing readiness gates: `none`
 - Future CRM process passed: `true`
@@ -37,7 +37,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 | `current-internal-consuming-official-kit` | pass | consumer integration/page-kit/runtime/package-sync/vendor-versioning audits | Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones. |
 | `current-internal-routes-render-workspaces` | pass | consumer-page-kit-audit.json route requiredLocalComponents | Every discovered Internal route renders InternalShell plus its local workspace wrapper, so shell-only route regressions fail. |
 | `public-page-kit-runtime` | pass | @taliya/crm and @taliya/crm/standard-page-kit runtime manifest audits | Consumers can discover the standard page kit from the installed package. |
-| `technical-release-candidate` | pass | release-candidate-audit.json | The current package/readiness/release gate bundle is green and includes compact consumption-status and future CRM process gates. |
+| `technical-release-candidate` | fail | release-candidate-audit.json | Release candidate is missing required gates: library-consumption-status. |
 | `aggregate-readiness` | fail | library-readiness-gate.json | Readiness is missing required gates: . |
 | `future-crm-process` | pass | future-consumer-discovery-audit.json and future-consumer-adoption-audit.json | Future CRM discovery/adoption process is executable and guarded. |
 | `future-crm-real-adoption` | not-executed | matching labeled readiness report for a discovered future CRM candidate | A real future CRM app has adopted the library. |

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T18:47:21.559Z",
+  "generatedAt": "2026-07-16T00:50:33.436Z",
   "status": "fail",
   "currentInternalReady": true,
   "crmRealCanStart": false,
@@ -12,21 +12,29 @@
     "remainingPageStoriesChecked": 54,
     "domainDrawerFamilies": 13,
     "internalCoveredRoutes": 4,
+    "publishedPackages": 0,
+    "registryAdoptedPackages": 0,
     "futureCrmCandidates": 0,
     "adoptedFutureCrmCandidates": 0
   },
   "rows": [
     {
       "id": "official-packages-and-release",
-      "status": "pass",
-      "evidence": "release-candidate-audit.json and library-consumption-status.json",
-      "meaning": "Packages are buildable, installable, audited, and release-candidate gates are green."
+      "status": "fail",
+      "evidence": "release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json",
+      "meaning": "Official release is incomplete: technicalCandidate=false, registryPublished=0/3."
     },
     {
       "id": "current-internal-fully-consuming",
-      "status": "fail",
+      "status": "pass",
       "evidence": "library-consumption-status.json and consumer-page-kit-audit.json",
-      "meaning": "Internal consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones."
+      "meaning": "Internal functionally consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones."
+    },
+    {
+      "id": "current-internal-registry-adoption",
+      "status": "fail",
+      "evidence": "registry-consumer-adoption-audit.json",
+      "meaning": "Internal still lacks official registry adoption: adopted=0/3, distributionConfig=false."
     },
     {
       "id": "standard-page-kit-complete",
@@ -180,8 +188,9 @@
   "missingPublicComponents": [],
   "missingStarterFiles": [],
   "nextActions": [
+    "Publish @taliya/tokens, @taliya/ui, and @taliya/crm at the exact aligned version through the official npm release workflow.",
+    "Migrate taliya-internal from vendored tarballs to the published npm versions and refresh its manifest, lockfile, installed modules, and distribution config.",
     "Create or connect the real CRM app.",
-    "Install @taliya/tokens, @taliya/ui, and @taliya/crm and import CSS in token/ui/crm order.",
     "Bootstrap or version taliya-readiness.config.json and taliya-page-kit.config.json in the CRM app.",
     "Compose CRM pages only from official page-kit roots; promote missing variants back into @taliya/ui or @taliya/crm.",
     "Run labeled readiness and future-consumer adoption gates for the real CRM app."

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T18:46:25.323Z",
+  "generatedAt": "2026-07-16T00:45:46.705Z",
   "status": "fail",
   "checkMode": false,
   "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
@@ -13,7 +13,7 @@
       "proves": "official token governance has no new visual debt",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 558,
+      "durationMs": 561,
       "stdout": "Token governance check passed.",
       "stderr": ""
     },
@@ -23,7 +23,7 @@
       "proves": "Storybook owns no product anatomy or official component appearance while fixture geometry remains explicitly classified",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 42,
+      "durationMs": 43,
       "stdout": "Storybook anatomy: 0 debt selectors, 26 capture harness selectors.",
       "stderr": ""
     },
@@ -33,7 +33,7 @@
       "proves": "an official component appearance or anatomy override in Storybook CSS fails strict ownership",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 82,
+      "durationMs": 84,
       "stdout": "Storybook anatomy override probe passed: official component appearance/anatomy overrides fail strict ownership.",
       "stderr": ""
     },
@@ -43,8 +43,8 @@
       "proves": "Storybook/component architecture has valid namespaces and no unresolved primitive reuse rows",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 81,
-      "stdout": "Component architecture check passed.\nStory titles: 333 scanned, 0 invalid, 0 legacy batch titles.\nCRM primitive reuse: 268 components scanned, 32 components contain native compound roots.\nCRM primitive reuse classification: {\"justified\":32,\"refactor\":0,\"missingPrimitive\":0}\nNative control totals: {\"button\":38,\"anchor\":1}",
+      "durationMs": 88,
+      "stdout": "Component architecture check passed.\nStory titles: 338 scanned, 0 invalid, 0 legacy batch titles.\nCRM primitive reuse: 272 components scanned, 32 components contain native compound roots.\nCRM primitive reuse classification: {\"justified\":32,\"refactor\":0,\"missingPrimitive\":0}\nNative control totals: {\"button\":38,\"anchor\":1}",
       "stderr": ""
     },
     {
@@ -53,7 +53,7 @@
       "proves": "retained CRM domain wrappers add explicit domain mapping or anatomy instead of empty pass-through wrappers",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 51,
+      "durationMs": 60,
       "stdout": "Domain wrapper contracts: 28 scanned, 0 failed.",
       "stderr": ""
     },
@@ -63,7 +63,7 @@
       "proves": "direct <aside> drawer contracts fail instead of returning as hidden drawer-unification debt",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 94,
+      "durationMs": 112,
       "stdout": "Domain wrapper direct-drawer probe passed: direct <aside> drawer contracts are rejected.",
       "stderr": ""
     },
@@ -73,7 +73,7 @@
       "proves": "standard page kit is exported, story-covered, and documented",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 49,
+      "durationMs": 50,
       "stdout": "Public API: pass",
       "stderr": ""
     },
@@ -83,7 +83,7 @@
       "proves": "public API aliases, canonical page-kit components, and CRM specializations are documented and export-valid",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 47,
+      "durationMs": 48,
       "stdout": "Public API surface: pass",
       "stderr": ""
     },
@@ -93,7 +93,7 @@
       "proves": "standalone package dependency direction remains valid",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 71,
+      "durationMs": 73,
       "stdout": "Package boundaries: pass",
       "stderr": ""
     },
@@ -103,7 +103,7 @@
       "proves": "local tarballs contain installable, publishable, CSS-side-effect-safe, React-peer-safe, workspace-free, locally versioned, package-files-restricted, and README-documented JS, type, CSS, and package metadata entrypoints",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 102,
+      "durationMs": 104,
       "stdout": "Package artifacts: pass",
       "stderr": ""
     },
@@ -113,7 +113,7 @@
       "proves": "local tarball release policy and future registry blockers are versioned and auditable",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 40,
+      "durationMs": 41,
       "stdout": "Release policy audit: pass-registry-policy",
       "stderr": ""
     },
@@ -123,7 +123,7 @@
       "proves": "invalid release policy contracts fail instead of being accepted as release evidence",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 84,
+      "durationMs": 85,
       "stdout": "Negative probe passed: invalid release policy contracts fail the release policy audit.",
       "stderr": ""
     },
@@ -133,7 +133,7 @@
       "proves": "official future CRM starter templates match the consumer page-kit config example",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 41,
+      "durationMs": 42,
       "stdout": "Consumer starter templates audit: pass\nWrote specs/001-product-ui-foundation/consumer-starter-templates-audit.md\nWrote specs/001-product-ui-foundation/consumer-starter-templates-audit.json",
       "stderr": ""
     },
@@ -143,7 +143,7 @@
       "proves": "future CRM starter route-local componentContractId links must reference existing component contracts",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 213,
+      "durationMs": 217,
       "stdout": "Consumer starter templates route contract probe passed; restored specs/001-product-ui-foundation/contracts/consumer-page-kit-config.example.json.",
       "stderr": ""
     },
@@ -153,7 +153,7 @@
       "proves": "future consumer configs and a minimal page-kit route can be bootstrapped and audited from official templates",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 251,
+      "durationMs": 246,
       "stdout": "Consumer bootstrap audit: pass\nWrote specs/001-product-ui-foundation/consumer-bootstrap-audit.md\nWrote specs/001-product-ui-foundation/consumer-bootstrap-audit.json",
       "stderr": ""
     },
@@ -163,8 +163,8 @@
       "proves": "an installed synthetic future CRM consumer can resolve public JS/CSS exports, resolve @taliya/crm/standard-page-kit, server-render official shell/filter/table/drawer components, and pass package, page-kit, config, sync, and runtime audits",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 16051,
-      "stdout": "Future consumer fixture audit: pass\nWrote tmp/future-consumer-readiness-reports-52776/future-consumer-fixture-audit.md\nWrote tmp/future-consumer-readiness-reports-52776/future-consumer-fixture-audit.json",
+      "durationMs": 14850,
+      "stdout": "Future consumer fixture audit: pass\nWrote tmp/future-consumer-readiness-reports-74846/future-consumer-fixture-audit.md\nWrote tmp/future-consumer-readiness-reports-74846/future-consumer-fixture-audit.json",
       "stderr": ""
     },
     {
@@ -173,7 +173,7 @@
       "proves": "local sibling directories are scanned for a real future CRM consumer before goal evidence is evaluated",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 57,
+      "durationMs": 55,
       "stdout": "Future consumer discovery audit: pass; 0 candidate(s)\nWrote specs/001-product-ui-foundation/future-consumer-discovery-audit.md\nWrote specs/001-product-ui-foundation/future-consumer-discovery-audit.json",
       "stderr": ""
     },
@@ -203,7 +203,7 @@
       "proves": "a future CRM directory with the full consumer contract is accepted as a real future CRM candidate",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 85,
+      "durationMs": 84,
       "stdout": "Valid-candidate probe passed: a future CRM app with the full consumer contract is discovered as a real candidate.",
       "stderr": ""
     },
@@ -213,7 +213,7 @@
       "proves": "discovered real future CRM candidates must have matching labeled readiness evidence before adoption is considered executed",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 42,
+      "durationMs": 41,
       "stdout": "Future consumer adoption audit: pass\nWrote specs/001-product-ui-foundation/future-consumer-adoption-audit.md\nWrote specs/001-product-ui-foundation/future-consumer-adoption-audit.json",
       "stderr": ""
     },
@@ -233,7 +233,7 @@
       "proves": "a discovered future CRM candidate cannot be adopted with readiness evidence for a different consumer root",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 86,
+      "durationMs": 85,
       "stdout": "Mismatch probe passed: matching labels with mismatched consumer roots are rejected.",
       "stderr": ""
     },
@@ -253,7 +253,7 @@
       "proves": "future CRM adoption has a single audited handoff for candidate discovery, bootstrap, labeled evidence, and non-completion rules",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 43,
+      "durationMs": 40,
       "stdout": "Future CRM adoption handoff audit: pass\nWrote specs/001-product-ui-foundation/future-crm-adoption-handoff-audit.md\nWrote specs/001-product-ui-foundation/future-crm-adoption-handoff-audit.json",
       "stderr": ""
     },
@@ -263,7 +263,7 @@
       "proves": "registry migration requires per-package publication evidence, applies official ranges, and restores consumer manifests when npm install fails",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 1122,
+      "durationMs": 993,
       "stdout": "Registry consumer migration probe: pass",
       "stderr": ""
     },
@@ -273,7 +273,7 @@
       "proves": "target consumer package.json @taliya/* dependencies match the local release manifest tarball names",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 39,
+      "durationMs": 40,
       "stdout": "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal\nunchanged: @taliya/tokens -> file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz\nunchanged: @taliya/ui -> file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz\nunchanged: @taliya/crm -> file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
       "stderr": ""
     },
@@ -283,7 +283,7 @@
       "proves": "stale consumer package.json tarball dependencies fail the manifest-driven dependency sync check",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 82,
+      "durationMs": 80,
       "stdout": "Consumer dependency sync stale manifest probe: pass",
       "stderr": ""
     },
@@ -303,7 +303,7 @@
       "proves": "a consumer package install plan fails when manifest-derived vendor tarballs are missing",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 82,
+      "durationMs": 81,
       "stdout": "Consumer package install missing-vendor probe: pass",
       "stderr": ""
     },
@@ -313,7 +313,7 @@
       "proves": "target consumer package-lock.json local Taliya package entries match the local release manifest",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 46,
+      "durationMs": 48,
       "stdout": "Consumer lockfile audit: pass\nWrote specs/001-product-ui-foundation/consumer-lockfile-audit.md\nWrote specs/001-product-ui-foundation/consumer-lockfile-audit.json",
       "stderr": ""
     },
@@ -333,7 +333,7 @@
       "proves": "target consumer can run the manifest-driven package refresh flow end-to-end in check mode",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 292,
+      "durationMs": 290,
       "stdout": "Consumer refresh audit: pass\nWrote specs/001-product-ui-foundation/consumer-refresh-audit.md\nWrote specs/001-product-ui-foundation/consumer-refresh-audit.json",
       "stderr": ""
     },
@@ -343,7 +343,7 @@
       "proves": "target consumer installs public packages and avoids local visual clones",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 401,
+      "durationMs": 407,
       "stdout": "Consumer integration: pass",
       "stderr": ""
     },
@@ -363,7 +363,7 @@
       "proves": "a consumer with fresh vendor tarballs but stale installed package files fails package sync",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 135,
+      "durationMs": 138,
       "stdout": "Negative probe passed: stale installed package files fail the consumer package sync audit.",
       "stderr": ""
     },
@@ -373,7 +373,7 @@
       "proves": "target consumer vendor tarballs are synced and tracked in the consumer repository",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 121,
+      "durationMs": 123,
       "stdout": "Consumer vendor versioning audit: pass",
       "stderr": ""
     },
@@ -393,7 +393,7 @@
       "proves": "a route that renders only InternalShell without its workspace fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 132,
+      "durationMs": 131,
       "stdout": "Consumer page-kit shell-only route probe passed.",
       "stderr": ""
     },
@@ -403,7 +403,7 @@
       "proves": "a wrapper that renders official roots only in an unused helper fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 85,
+      "durationMs": 87,
       "stdout": "Consumer page-kit wrapper contract probe passed.",
       "stderr": ""
     },
@@ -413,7 +413,7 @@
       "proves": "a route-local workspace without a component contract fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 86,
+      "durationMs": 84,
       "stdout": "Consumer page-kit route wrapper contract probe passed.",
       "stderr": ""
     },
@@ -423,7 +423,7 @@
       "proves": "a route-local component linked to a component contract for another wrapper fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 86,
+      "durationMs": 87,
       "stdout": "Consumer page-kit mismatched route contract probe passed.",
       "stderr": ""
     },
@@ -433,7 +433,7 @@
       "proves": "a route that exports a named component as default can satisfy the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 88,
+      "durationMs": 87,
       "stdout": "Consumer page-kit default identifier route probe passed.",
       "stderr": ""
     },
@@ -443,7 +443,7 @@
       "proves": "a discovered Internal route that is missing from page-kit config fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 87,
+      "durationMs": 88,
       "stdout": "Consumer page-kit uncovered route probe passed.",
       "stderr": ""
     },
@@ -463,7 +463,7 @@
       "proves": "target consumer runtime scripts pass with installed packages",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 35019,
+      "durationMs": 28939,
       "stdout": "Consumer runtime audit: pass",
       "stderr": ""
     },
@@ -493,7 +493,7 @@
       "proves": "local package refresh, consumer validation procedure, future CRM discovery, config bootstrap dry-run, versioned config check, valid consumer config examples, standard page-kit manifest, and page-kit example public API coverage",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 55,
+      "durationMs": 54,
       "stdout": "Runbook exists and is linked from 5 evidence files. Consumer readiness/page-kit examples, certification-scope contracts, and standard page-kit manifest are valid, bootstrap dry run passes, and manifest/example components are in the public API audit.",
       "stderr": ""
     },
@@ -503,7 +503,7 @@
       "proves": "product-scoped visual certification acceptance is explicit and validated when present",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 41,
+      "durationMs": 42,
       "stdout": "Certification scope decision audit: pass\nWrote specs/001-product-ui-foundation/certification-scope-decision-audit.md\nWrote specs/001-product-ui-foundation/certification-scope-decision-audit.json",
       "stderr": ""
     },
@@ -513,7 +513,7 @@
       "proves": "valid product-scoped visual certification acceptance is recognized as scoped completion",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 84,
+      "durationMs": 83,
       "stdout": "Positive probe passed: a valid scoped-completion decision is accepted by the certification-scope audit.",
       "stderr": ""
     },
@@ -533,7 +533,7 @@
       "proves": "current source-image certification backlog and image-coverage-map certification conflicts are regenerated from Batch 9/11 ledgers before goal evidence is checked",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 67,
+      "durationMs": 66,
       "stdout": "",
       "stderr": ""
     },
@@ -543,7 +543,7 @@
       "proves": "all remaining page/image stories exist as individual static Storybook entries using official library page-composition components",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 90,
+      "durationMs": 92,
       "stdout": "",
       "stderr": ""
     },
@@ -553,7 +553,7 @@
       "proves": "remaining page coverage rejects owner pages that stop using their official page-family contracts",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 133,
+      "durationMs": 137,
       "stdout": "Remaining page family-contract probe passed: SalesExperimentalListPage regression was rejected.",
       "stderr": ""
     },
@@ -563,7 +563,7 @@
       "proves": "Operacao, Vendas, and Financeiro kanban pages use CrmKanbanPage, official filters, columns, card variants, and domain slots instead of story-local board anatomy",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 41,
+      "durationMs": 40,
       "stdout": "",
       "stderr": ""
     },
@@ -583,7 +583,7 @@
       "proves": "Dashboard, right-panel, and setup image coverage pages use official page-family wrappers instead of story-local shell/grid anatomy",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 42,
+      "durationMs": 43,
       "stdout": "",
       "stderr": ""
     },
@@ -593,7 +593,7 @@
       "proves": "dashboard family audit rejects owner pages that stop using CrmRightPanelPage",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 87,
+      "durationMs": 88,
       "stdout": "Dashboard family regression probe passed: BillingSubscriptionPage CrmRightPanelPage regression was rejected.",
       "stderr": ""
     },
@@ -603,7 +603,7 @@
       "proves": "the configured canonical source corpus matches the versioned 101-image filename, hash, dimension, and coverage manifest",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 190,
+      "durationMs": 187,
       "stdout": "Source assets: fail; 93/101 files; 93 mapped.",
       "stderr": ""
     },
@@ -613,7 +613,7 @@
       "proves": "folder, ZIP, image map, canonical top-level count, hashes, duplicates, and nested derivative classifications reconcile without promoting auxiliary images",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 579,
+      "durationMs": 580,
       "stdout": "Source reconciliation: blocked-incomplete-canonical-roster; canonical=93/101, recursive=164, ZIP=164.",
       "stderr": ""
     },
@@ -623,7 +623,7 @@
       "proves": "recursive demo/review/onboarding derivatives cannot satisfy the canonical source-image count",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 587,
+      "durationMs": 580,
       "stdout": "Source reconciliation nested-exclusion probe passed: 71 derivative images cannot satisfy the canonical count.",
       "stderr": ""
     },
@@ -633,7 +633,7 @@
       "proves": "every product page/source image target has a dedicated static Storybook image-coverage story with an exact source-image marker and official package imports",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 73,
+      "durationMs": 71,
       "stdout": "",
       "stderr": ""
     },
@@ -653,7 +653,7 @@
       "proves": "a product page/source image story without its exact source-image marker fails full image/page coverage",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 115,
+      "durationMs": 114,
       "stdout": "Full image page coverage missing-source-marker probe passed.",
       "stderr": ""
     },
@@ -663,7 +663,7 @@
       "proves": "a product page/source image marker placed in the wrong story export fails full image/page coverage",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 115,
+      "durationMs": 118,
       "stdout": "Full image page coverage misplaced-source-marker probe passed.",
       "stderr": ""
     },
@@ -673,7 +673,7 @@
       "proves": "a product page/source image story that stops importing official @taliya packages fails full image/page coverage",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 115,
+      "durationMs": 116,
       "stdout": "Full image page coverage non-official-import probe passed.",
       "stderr": ""
     },
@@ -683,7 +683,7 @@
       "proves": "a Covered product page/source image added to the image coverage map without a Storybook mapping fails full image/page coverage",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 115,
+      "durationMs": 118,
       "stdout": "Full image page coverage unmapped-map-target probe passed.",
       "stderr": ""
     },
@@ -703,7 +703,7 @@
       "proves": "reference-sheet coverage rejects a missing required official component story",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 123,
+      "durationMs": 122,
       "stdout": "Reference-sheet missing-story probe passed: removing a required official story fails coverage.",
       "stderr": ""
     },
@@ -713,7 +713,7 @@
       "proves": "every incomplete image-certification row has source, story, evidence, blocker, next-action, and current evidence assertion data for the next certification cycle",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 112,
+      "durationMs": 119,
       "stdout": "",
       "stderr": ""
     },
@@ -723,7 +723,7 @@
       "proves": "stale visual evidence and pending rows without current evidence assertions fail the visual certification plan audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 283,
+      "durationMs": 332,
       "stdout": "Negative probe passed: stale reopened visual evidence and pending rows without current evidence assertions fail the visual certification plan audit.",
       "stderr": ""
     },
@@ -733,7 +733,7 @@
       "proves": "ledger evidence paths that no longer exist fail the visual certification plan audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 163,
+      "durationMs": 174,
       "stdout": "Visual certification plan missing-artifact probe passed: 72_round-4.1Q_acesso-assinatura_signup-criar-conta-salvo-ajustes.png rejected tmp/visual-audit/batch11/__missing-artifact-probe__/image72-source-current-side-by-side.png.",
       "stderr": ""
     },
@@ -743,7 +743,7 @@
       "proves": "every product-review decision row has current source, render, diff, metrics, blocker, and next-action evidence without automatic approval",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 52,
+      "durationMs": 50,
       "stdout": "Visual product review evidence: current; 63/63 rows review-ready, 0 approved automatically.",
       "stderr": ""
     },
@@ -753,7 +753,7 @@
       "proves": "every pending image with a Storybook target has current source-sized screenshot and pixel-diff evidence without automatic visual approval",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 110,
+      "durationMs": 116,
       "stdout": "Visual capture evidence: current; 63/63 captured rows.",
       "stderr": ""
     },
@@ -763,7 +763,7 @@
       "proves": "visual capture evidence ignores volatile manifest metadata but fails when an official source image hash changes",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 463,
+      "durationMs": 430,
       "stdout": "Visual capture source-contract probe passed: volatile metadata is ignored; source image, render-contract, non-static mode, and visible render errors are rejected.",
       "stderr": ""
     },
@@ -773,8 +773,8 @@
       "proves": "all audit --check entrypoints leave tracked and untracked repository state unchanged",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 2973,
-      "stdout": "Audit check purity probe passed: 28 checks, 22 currently passing, repository unchanged.",
+      "durationMs": 2971,
+      "stdout": "Audit check purity probe passed: 28 checks, 21 currently passing, repository unchanged.",
       "stderr": ""
     },
     {

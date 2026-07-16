@@ -44,6 +44,8 @@ const goalCompletion = readJson("specs/001-product-ui-foundation/goal-completion
 const libraryStatus = readJson("specs/001-product-ui-foundation/library-consumption-status.json");
 const releaseCandidate = readJson("specs/001-product-ui-foundation/release-candidate-audit.json");
 const readiness = readJson("specs/001-product-ui-foundation/library-readiness-gate.json");
+const registryPublication = readJson("specs/001-product-ui-foundation/registry-publication-audit.json");
+const registryConsumerAdoption = readJson("specs/001-product-ui-foundation/registry-consumer-adoption-audit.json");
 const publicApi = readJson("specs/001-product-ui-foundation/public-api-audit.json");
 const consumerPageKit = readJson("specs/001-product-ui-foundation/consumer-page-kit-audit.json");
 const consumerBootstrap = readJson("specs/001-product-ui-foundation/consumer-bootstrap-audit.json");
@@ -229,6 +231,20 @@ const internalPageKitPass =
   consumerPageKit.summary?.pass === true &&
   consumerPageKit.routeCoverage?.pass === true &&
   (consumerPageKit.componentContractRows ?? []).every((item) => item.pass === true);
+const technicalReleaseCandidatePass =
+  releaseCandidateInProgress ||
+  (releaseCandidate.status === "pass" && libraryStatus.technicalReleaseCandidatePass === true);
+const registryPublicationPass =
+  registryPublication.status === "pass-published" &&
+  registryPublication.publishedPackageCount === registryPublication.expectedPackageCount &&
+  registryPublication.expectedPackageCount === 3;
+const registryConsumerAdoptionPass =
+  registryConsumerAdoption.status === "pass-registry-adoption" &&
+  registryConsumerAdoption.registryPublicationPass === true &&
+  registryConsumerAdoption.distributionConfigPass === true &&
+  registryConsumerAdoption.noEffectiveVendorDependencies === true &&
+  registryConsumerAdoption.adoptedPackageCount === registryConsumerAdoption.expectedPackageCount &&
+  registryConsumerAdoption.expectedPackageCount === 3;
 const futureProcessPass =
   futureDiscovery.status === "pass" &&
   futureAdoption.status === "pass" &&
@@ -248,15 +264,25 @@ const remainingPageCoveragePass =
 const rows = [
   row(
     "official-packages-and-release",
-    reportRowStatus(releaseCandidateInProgress || (releaseCandidate.status === "pass" && libraryStatus.technicalReleaseCandidatePass === true)),
-    "release-candidate-audit.json and library-consumption-status.json",
-    "Packages are buildable, installable, audited, and release-candidate gates are green."
+    reportRowStatus(technicalReleaseCandidatePass && registryPublicationPass),
+    "release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json",
+    technicalReleaseCandidatePass && registryPublicationPass
+      ? "Packages are buildable, installable, audited, release-ready, and all three exact versions are public on npm."
+      : `Official release is incomplete: technicalCandidate=${technicalReleaseCandidatePass}, registryPublished=${registryPublication.publishedPackageCount}/${registryPublication.expectedPackageCount}.`
   ),
   row(
     "current-internal-fully-consuming",
-    reportRowStatus(libraryStatus.currentInternalLibraryAccepted === true && libraryStatus.currentInternalConsumptionPass === true && internalPageKitPass),
+    reportRowStatus(libraryStatus.currentInternalConsumptionPass === true && internalPageKitPass),
     "library-consumption-status.json and consumer-page-kit-audit.json",
-    "Internal consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones."
+    "Internal functionally consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones."
+  ),
+  row(
+    "current-internal-registry-adoption",
+    reportRowStatus(registryConsumerAdoptionPass),
+    "registry-consumer-adoption-audit.json",
+    registryConsumerAdoptionPass
+      ? "Internal resolves all three official packages from npm with aligned manifests, lockfile, installed versions, and distribution config."
+      : `Internal still lacks official registry adoption: adopted=${registryConsumerAdoption.adoptedPackageCount}/${registryConsumerAdoption.expectedPackageCount}, distributionConfig=${registryConsumerAdoption.distributionConfigPass}.`
   ),
   row(
     "standard-page-kit-complete",
@@ -336,6 +362,25 @@ const reportStatus = failedRows.length > 0
   : realFutureCrmAdoptionExecuted
     ? "pass-global-crm-ready"
     : "pass-ready-to-start-crm-real";
+const nextActions = [];
+
+if (!registryPublicationPass) {
+  nextActions.push("Publish @taliya/tokens, @taliya/ui, and @taliya/crm at the exact aligned version through the official npm release workflow.");
+}
+if (!registryConsumerAdoptionPass) {
+  nextActions.push("Migrate taliya-internal from vendored tarballs to the published npm versions and refresh its manifest, lockfile, installed modules, and distribution config.");
+}
+if (!realFutureCrmAdoptionExecuted) {
+  nextActions.push(
+    "Create or connect the real CRM app.",
+    "Bootstrap or version taliya-readiness.config.json and taliya-page-kit.config.json in the CRM app.",
+    "Compose CRM pages only from official page-kit roots; promote missing variants back into @taliya/ui or @taliya/crm.",
+    "Run labeled readiness and future-consumer adoption gates for the real CRM app."
+  );
+}
+if (nextActions.length === 0) {
+  nextActions.push("Keep consumer gates green as CRM real pages expand.");
+}
 
 const report = {
   generatedAt: new Date().toISOString(),
@@ -351,6 +396,8 @@ const report = {
     remainingPageStoriesChecked: remainingPageCoverage.checkedStoryCount,
     domainDrawerFamilies: domainDrawerNames.length,
     internalCoveredRoutes: consumerPageKit.routeCoverage?.discoveredRoutes?.length ?? 0,
+    publishedPackages: registryPublication.publishedPackageCount ?? 0,
+    registryAdoptedPackages: registryConsumerAdoption.adoptedPackageCount ?? 0,
     futureCrmCandidates: futureDiscovery.futureCrmCandidateCount ?? 0,
     adoptedFutureCrmCandidates: futureAdoption.adoptedCandidateCount ?? 0
   },
@@ -359,15 +406,7 @@ const report = {
   drawerApiRows,
   missingPublicComponents,
   missingStarterFiles,
-  nextActions: realFutureCrmAdoptionExecuted
-    ? ["Keep consumer gates green as CRM real pages expand."]
-    : [
-        "Create or connect the real CRM app.",
-        "Install @taliya/tokens, @taliya/ui, and @taliya/crm and import CSS in token/ui/crm order.",
-        "Bootstrap or version taliya-readiness.config.json and taliya-page-kit.config.json in the CRM app.",
-        "Compose CRM pages only from official page-kit roots; promote missing variants back into @taliya/ui or @taliya/crm.",
-        "Run labeled readiness and future-consumer adoption gates for the real CRM app."
-      ]
+  nextActions
 };
 
 const markdownRows = rows
@@ -396,6 +435,8 @@ This report answers whether \`taliya-product-ui\` is practically ready to start 
 - Remaining page/image stories checked: ${report.counts.remainingPageStoriesChecked}/${report.counts.remainingPageStories}
 - Domain drawer families checked: ${report.counts.domainDrawerFamilies}
 - Internal covered routes: ${report.counts.internalCoveredRoutes}
+- Published npm packages: ${report.counts.publishedPackages}/3
+- Registry-adopted Internal packages: ${report.counts.registryAdoptedPackages}/3
 - Future CRM candidates discovered: ${report.counts.futureCrmCandidates}
 - Future CRM candidates adopted: ${report.counts.adoptedFutureCrmCandidates}
 

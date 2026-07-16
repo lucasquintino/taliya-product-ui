@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T18:47:23.021Z",
+  "generatedAt": "2026-07-16T00:51:02.164Z",
   "status": "fail",
   "officialConsumerReady": false,
   "globalGoalComplete": false,
@@ -88,15 +88,15 @@
     },
     {
       "id": "release-candidate",
-      "status": "pass",
+      "status": "fail",
       "evidence": "release-candidate-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "goal-completion",
-      "status": "pass",
+      "status": "fail",
       "evidence": "goal-completion-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     }
   ],
   "packageRows": [
