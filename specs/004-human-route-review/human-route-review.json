@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T22:20:06.408Z",
+  "generatedAt": "2026-07-16T22:37:34.040Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 8,
+  "completedRouteCount": 9,
   "failedRouteCount": 0,
-  "pendingRouteCount": 65,
+  "pendingRouteCount": 64,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -725,38 +725,63 @@
         "context-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:37:13.888Z",
+        "evidence": [
+          "tmp/human-route-review/24d-inbox/canonical.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:37:14.242Z",
+        "evidence": [
+          "tmp/human-route-review/24d-inbox/canonical.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:37:14.539Z",
+        "evidence": [
+          "tmp/human-route-review/24d-inbox/mobile-list.jpg",
+          "tmp/human-route-review/24d-inbox/mobile-conversation.jpg",
+          "tmp/human-route-review/24d-inbox/mobile.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:37:15.552Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "page-filters",
+          "conversation-filters",
+          "conversation-selection",
+          "pagination",
+          "thread-actions",
+          "thread-scroll",
+          "composer",
+          "context-panel-actions"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:37:15.774Z",
+        "evidence": [
+          "source:24_round-4.1D_inbox_01_conversa-aberta.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisão humana corrigiu callbacks oficiais do composer, contexto dinâmico por conversa e responsividade/colisões da família ThreePane no mobile."
+      ]
     },
     {
       "image": "25_round-4.1C_aprovacoes_01_lista-decisao-detalhe.png.png",

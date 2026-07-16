@@ -10,7 +10,15 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { ConversationListRow, CrmShellNavItem, PageFilterBarFilter } from "@taliya/crm";
+import type {
+  ContextPanelFact,
+  ContextPanelHistoryItem,
+  ContextPanelTaskItem,
+  ConversationListRow,
+  ConversationThreadMessage,
+  CrmShellNavItem,
+  PageFilterBarFilter
+} from "@taliya/crm";
 import { Button } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
@@ -41,7 +49,7 @@ const inboxNavItems: CrmShellNavItem[] = [
   { id: "conversas", label: "Conversas" },
   { id: "envios", label: "Envios" },
   { id: "contatos", label: "Contatos" },
-  { id: "historico", label: "Historico" }
+  { id: "historico", label: "Histórico" }
 ];
 
 const inboxConversationRows: ConversationListRow[] = [
@@ -53,26 +61,118 @@ const inboxConversationRows: ConversationListRow[] = [
 ];
 
 export function InboxConversationPage() {
+  const [activeFilterId, setActiveFilterId] = useState("all");
+  const [announcement, setAnnouncement] = useState("");
+  const [selectedId, setSelectedId] = useState("ana-silva");
+  const selectedConversation = inboxConversationRows.find((row) => row.id === selectedId) ?? inboxConversationRows[0]!;
+  const selectedMessages = selectedConversation.id === "ana-silva" ? undefined : [{
+    id: `${selectedConversation.id}-inbound`,
+    sender: selectedConversation.name,
+    body: selectedConversation.preview,
+    time: selectedConversation.time,
+    variant: "inbound"
+  }] satisfies ConversationThreadMessage[];
+  const selectedFacts = selectedConversation.id === "ana-silva" ? undefined : [
+    { id: "phone", icon: "clipboard", label: "Contato principal", value: "Disponível no cadastro", actionIcon: "whatsapp", actionLabel: "Abrir WhatsApp" },
+    { id: "email", icon: "mail", label: "E-mail", value: `${selectedConversation.id}@email.com` },
+    { id: "consent", icon: "clock", label: "Consentimento", value: "WhatsApp permitido", actionIcon: "check", actionLabel: "Consentimento confirmado", tone: "link" }
+  ] satisfies ContextPanelFact[];
+  const selectedHistory = selectedConversation.id === "ana-silva" ? undefined : [
+    {
+      id: `${selectedConversation.id}-opened`,
+      time: selectedConversation.time,
+      title: selectedConversation.subject,
+      description: selectedConversation.statusLabel
+    }
+  ] satisfies ContextPanelHistoryItem[];
+  const selectedTasks = selectedConversation.id === "ana-silva" ? undefined : [
+    {
+      id: `${selectedConversation.id}-follow-up`,
+      label: `Acompanhar ${selectedConversation.name}`,
+      status: selectedConversation.statusLabel,
+      statusTone: selectedConversation.statusTone === "failed" ? "danger" : "info",
+      actionIcon: "calendar",
+      actionLabel: "Abrir tarefa"
+    }
+  ] satisfies ContextPanelTaskItem[];
+
   return (
     <CrmThreePanePage
       activeNavId="conversas"
       activeSidebarId="conversas"
       avatarSrc={image79Avatar}
-      center={<ConversationThread avatarSrc={source24AnaSilva} />}
-      filterBar={<InboxFilters />}
-      left={<ConversationList rows={inboxConversationRows} />}
+      center={(
+        <>
+          <ConversationThread
+            avatarSrc={selectedConversation.avatarSrc}
+            contactName={selectedConversation.name}
+            events={selectedConversation.id === "ana-silva" ? undefined : []}
+            messages={selectedMessages}
+            onAction={(action) => setAnnouncement(`Ação da conversa: ${action}`)}
+            onAttach={() => setAnnouncement("Anexo aberto")}
+            onDocument={() => setAnnouncement("Documento aberto")}
+            onSend={(value) => setAnnouncement(value ? `Mensagem enviada: ${value}` : "Envio acionado sem texto")}
+            onSendOptions={() => setAnnouncement("Opções de envio abertas")}
+            onTemplateOpen={() => setAnnouncement("Templates abertos")}
+            onUseSuggestion={() => setAnnouncement("Sugestão do Copiloto aplicada")}
+            subject={<>Assunto: {selectedConversation.subject}</>}
+          />
+          <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+        </>
+      )}
+      filterBar={<InboxFilters onAction={setAnnouncement} />}
+      globalActions={{
+        onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+        onMessages: () => setAnnouncement("Mensagens abertas"),
+        onNotifications: () => setAnnouncement("Notificações abertas"),
+        onSearch: () => setAnnouncement("Busca global aberta")
+      }}
+      left={(
+        <ConversationList
+          activeFilterId={activeFilterId}
+          onConversationSelect={(row) => {
+            setSelectedId(row.id);
+            setAnnouncement(`Conversa aberta: ${row.name}`);
+          }}
+          onFilterChange={(filter) => {
+            setActiveFilterId(filter.id);
+            setAnnouncement(`Filtro de conversa: ${filter.label}`);
+          }}
+          onNextPage={() => setAnnouncement("Próxima página de conversas")}
+          onPageSizeClick={() => setAnnouncement("Quantidade por página confirmada")}
+          onPreviousPage={() => setAnnouncement("Página anterior de conversas")}
+          rows={inboxConversationRows}
+          selectedId={selectedId}
+        />
+      )}
       navItems={inboxNavItems}
+      onBack={() => setAnnouncement("Navegação de retorno acionada")}
+      onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="inbox"
-      right={<ContextPanel avatarSrc={source24AnaSilva} />}
+      right={(
+        <ContextPanel
+          avatarSrc={selectedConversation.avatarSrc}
+          facts={selectedFacts}
+          historyItems={selectedHistory}
+          onAction={(action) => setAnnouncement(`Ação do contexto: ${action}`)}
+          onFactAction={(fact) => setAnnouncement(`Ação do dado: ${fact}`)}
+          onTaskAction={(task) => setAnnouncement(`Tarefa relacionada aberta: ${task}`)}
+          statusLabel={selectedConversation.statusLabel}
+          taskItems={selectedTasks}
+          title={selectedConversation.name}
+        />
+      )}
       sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Atendimento e conversas"
+      subtitle="Studio Vila Mariana · Atendimento e conversas"
       title="Inbox"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     />
   );
 }
 
-function InboxFilters() {
+function InboxFilters({ onAction }: { onAction: (message: string) => void }) {
   const [query, setQuery] = useState("");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters = useMemo<PageFilterBarFilter[]>(
@@ -99,10 +199,10 @@ function InboxFilters() {
       },
       {
         id: "responsavel",
-        label: "Responsavel",
+        label: "Responsável",
         value: typeof values.responsavel === "string" ? values.responsavel : "",
         options: [
-          { value: "recepcao", label: "Recepcao", icon: "user" },
+          { value: "recepcao", label: "Recepção", icon: "user" },
           { value: "atendimento", label: "Atendimento", icon: "headphones" },
           { value: "financeiro", label: "Financeiro", icon: "coins" }
         ]
@@ -110,7 +210,7 @@ function InboxFilters() {
       {
         id: "nao-lidas",
         kind: "quick",
-        label: "Nao lidas",
+        label: "Não lidas",
         selected: Boolean(values["nao-lidas"])
       }
     ],
@@ -119,12 +219,23 @@ function InboxFilters() {
 
   return (
     <PageFilterBar
-      actions={<Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" variant="primary">Nova conversa</Button>}
+      actions={<Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onAction("Nova conversa iniciada")} variant="primary">Nova conversa</Button>}
+      aria-label="Filtros do Inbox"
       filters={filters}
-      onFilterSelect={(filter) => setValues((current) => ({ ...current, [filter.id]: current[filter.id] ? "" : "selected" }))}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
+      onFilterSelect={(filter) => {
+        setValues((current) => ({ ...current, [filter.id]: current[filter.id] ? "" : "selected" }));
+        onAction(`Filtro ${filter.label} alternado`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onAction(`Filtro ${filter.label} atualizado`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        onAction(value ? `Busca atualizada: ${value}` : "Busca limpa");
+      }}
       query={query}
+      searchAriaLabel="Buscar conversas"
       searchFilterPlacement="embedded"
       searchPlaceholder="Buscar conversas..."
     />

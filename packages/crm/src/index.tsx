@@ -10409,6 +10409,10 @@ export interface ConversationThreadProps extends Omit<React.HTMLAttributes<HTMLE
   onStatusClick?: () => void;
   onUseSuggestion?: () => void;
   onSend?: (value: string) => void;
+  onAttach?: () => void;
+  onDocument?: () => void;
+  onTemplateOpen?: () => void;
+  onSendOptions?: () => void;
 }
 
 export function ConversationThread({
@@ -10433,6 +10437,10 @@ export function ConversationThread({
   onStatusClick,
   onUseSuggestion,
   onSend,
+  onAttach,
+  onDocument,
+  onTemplateOpen,
+  onSendOptions,
   className,
   children,
   ...props
@@ -10531,7 +10539,15 @@ export function ConversationThread({
           {suggestionActionLabel}
         </Button>
       </section>
-      <Composer disabled={isBlocked || isLoading} onSend={onSend} placeholder={composerPlaceholder} />
+      <Composer
+        disabled={isBlocked || isLoading}
+        onAttach={onAttach}
+        onDocument={onDocument}
+        onSend={onSend}
+        onSendOptions={onSendOptions}
+        onTemplateOpen={onTemplateOpen}
+        placeholder={composerPlaceholder}
+      />
     </section>
   );
 }
@@ -10559,6 +10575,7 @@ export interface ComposerProps {
   onTemplateOpen?: () => void;
   onAttach?: () => void;
   onDocument?: () => void;
+  onSendOptions?: () => void;
   className?: string;
 }
 
@@ -10571,6 +10588,7 @@ export function Composer({
   onTemplateOpen,
   onAttach,
   onDocument,
+  onSendOptions,
   className
 }: ComposerProps) {
   return (
@@ -10603,7 +10621,7 @@ export function Composer({
       }
       sendLabel="Enviar"
       sending={loading}
-      sendTrailingControl={<IconButton disabled={disabled} icon="chevronDown" label="Mais opcoes de envio" size="sm" variant="selected" />}
+      sendTrailingControl={<IconButton disabled={disabled} icon="chevronDown" label="Mais opcoes de envio" onClick={onSendOptions} size="sm" variant="selected" />}
       showFieldIcon={false}
       showInternalToggle={false}
     />

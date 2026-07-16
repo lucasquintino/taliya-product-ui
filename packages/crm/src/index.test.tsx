@@ -713,6 +713,16 @@ describe("@taliya/crm component coverage", () => {
     expect(styles).toContain("white-space: normal;");
   });
 
+  it("keeps the official three-pane family usable on narrow viewports", () => {
+    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+
+    expect(styles).toMatch(
+      /@media \(max-width: 980px\) \{[\s\S]*?\.tcrm-three-pane-layout \{[\s\S]*?height: auto;[\s\S]*?overflow: visible;[\s\S]*?width: 100%;/,
+    );
+    expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list,\n  .tcrm-three-pane-layout .tcrm-conversation-thread,\n  .tcrm-three-pane-layout .tcrm-context-panel {");
+    expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list__subject {\n    display: none;");
+  });
+
   it("keeps ChecklistTable selected rows as dot-only selection without the task-table rail", () => {
     const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
 
@@ -1022,16 +1032,26 @@ describe("@taliya/crm component coverage", () => {
 
   it("renders the official compact Image 11 conversation thread and preserves message variants", () => {
     const onAction = vi.fn();
+    const onAttach = vi.fn();
     const onChannelClick = vi.fn();
+    const onDocument = vi.fn();
+    const onSend = vi.fn();
+    const onSendOptions = vi.fn();
     const onStatusClick = vi.fn();
+    const onTemplateOpen = vi.fn();
     const onUseSuggestion = vi.fn();
 
     render(
       <crm.ConversationThread
         layout="compact"
         onAction={onAction}
+        onAttach={onAttach}
         onChannelClick={onChannelClick}
+        onDocument={onDocument}
+        onSend={onSend}
+        onSendOptions={onSendOptions}
         onStatusClick={onStatusClick}
+        onTemplateOpen={onTemplateOpen}
         onUseSuggestion={onUseSuggestion}
       />
     );
@@ -1046,10 +1066,21 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Em atendimento" }));
     fireEvent.click(screen.getByRole("button", { name: "Buscar na conversa" }));
     fireEvent.click(screen.getByRole("button", { name: "Usar sugestao" }));
+    fireEvent.click(screen.getByRole("button", { name: "Anexar arquivo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Inserir documento" }));
+    fireEvent.click(screen.getByRole("button", { name: "Templates" }));
+    fireEvent.click(screen.getByRole("button", { name: "Mais opcoes de envio" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Responder pelo WhatsApp" }), { target: { value: "Mensagem de teste" } });
+    fireEvent.click(screen.getByRole("button", { name: "Enviar" }));
 
     expect(onChannelClick).toHaveBeenCalledTimes(1);
     expect(onStatusClick).toHaveBeenCalledTimes(1);
     expect(onAction).toHaveBeenCalledWith("search");
+    expect(onAttach).toHaveBeenCalledTimes(1);
+    expect(onDocument).toHaveBeenCalledTimes(1);
+    expect(onSend).toHaveBeenCalledWith("Mensagem de teste");
+    expect(onSendOptions).toHaveBeenCalledTimes(1);
+    expect(onTemplateOpen).toHaveBeenCalledTimes(1);
     expect(onUseSuggestion).toHaveBeenCalledTimes(1);
   });
 

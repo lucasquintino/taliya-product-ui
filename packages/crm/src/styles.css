@@ -32345,6 +32345,38 @@ button.tcrm-pipeline-card__select:focus-visible,
     grid-template-columns: 1fr;
   }
 
+  .tcrm-three-pane-layout {
+    height: auto;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-three-pane-page-layout {
+    margin-left: 0;
+  }
+
+  .tcrm-three-pane-layout__left,
+  .tcrm-three-pane-layout__center,
+  .tcrm-three-pane-layout__right {
+    overflow: visible;
+  }
+
+  .tcrm-three-pane-layout .tcrm-conversation-list,
+  .tcrm-three-pane-layout .tcrm-conversation-thread,
+  .tcrm-three-pane-layout .tcrm-context-panel {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-three-pane-layout .tcrm-conversation-thread__header {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .tcrm-three-pane-layout .tcrm-conversation-thread__actions {
+    flex-wrap: wrap;
+    grid-column: 1 / -1;
+  }
+
   .tcrm-dashboard-grid--support {
     grid-template-columns: 1fr;
   }
@@ -32791,6 +32823,18 @@ button.tcrm-pipeline-card__select:focus-visible,
 
   .tcrm-kanban-board__lanes {
     min-height: var(--taliya-layout-crm-kanban-board-min-height);
+  }
+
+  .tcrm-three-pane-layout .tcrm-conversation-list__subject {
+    display: none;
+  }
+
+  .tcrm-three-pane-layout .tcrm-conversation-list__footer {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .tcrm-three-pane-layout .tcrm-conversation-list__page-size-label {
+    display: none;
   }
 
   .tcrm-drawer-frame--overlay {
