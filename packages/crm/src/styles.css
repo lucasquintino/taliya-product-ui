@@ -26164,7 +26164,7 @@ button.tcrm-pipeline-card__select:focus-visible,
   border-radius: var(--taliya-radius-md);
   box-shadow: var(--taliya-shadow-crm-product-shell-panel);
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: var(--taliya-space-3);
   min-height: var(--taliya-density-panel-header-height);
   min-width: 0;
@@ -26385,9 +26385,11 @@ button.tcrm-pipeline-card__select:focus-visible,
 
 @media (max-width: 760px) {
   .tcrm-page-filter-bar.tl-filter-bar {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .tcrm-page-filter-bar__leading-actions,
   .tcrm-page-filter-bar__filters,
   .tcrm-page-filter-bar__actions {
     justify-content: flex-start;

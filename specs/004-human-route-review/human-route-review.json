@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T23:08:59.582Z",
+  "generatedAt": "2026-07-16T23:22:36.490Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 10,
+  "completedRouteCount": 11,
   "failedRouteCount": 0,
-  "pendingRouteCount": 63,
+  "pendingRouteCount": 62,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -907,38 +907,60 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:22:32.406Z",
+        "evidence": [
+          "tmp/human-route-review/26-agenda/desktop-final.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:22:32.690Z",
+        "evidence": [
+          "tmp/human-route-review/26-agenda/desktop-final.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:22:33.028Z",
+        "evidence": [
+          "tmp/human-route-review/26-agenda/mobile-drawer-final.jpg",
+          "tmp/human-route-review/26-agenda/mobile-calendar-final.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:22:33.681Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "calendar-navigation",
+          "filter-options",
+          "queue-selection",
+          "calendar-item-actions",
+          "drawer-actions",
+          "drawer-open-close"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:22:35.408Z",
+        "evidence": [
+          "source:26_round-4.1F_agenda_01_calendario-operacional.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisão humana tornou período, filtros, mini calendário, filas, eventos e drawer contextuais; corrigiu superfície opaca do ClassDrawer no mobile e quebra responsiva da PageFilterBar."
+      ]
     },
     {
       "image": "27_round-4.1E_alunos_01_lista-perfil-resumido.png.png",

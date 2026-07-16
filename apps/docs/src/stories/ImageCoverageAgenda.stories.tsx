@@ -15,7 +15,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { ClassDrawerFact, ClassDrawerStudent, ClassDrawerTimelineItem, CrmShellNavItem, PageFilterBarFilter, WeeklyCalendarEvent } from "@taliya/crm";
+import type { ClassDrawerAction, ClassDrawerFact, ClassDrawerStudent, ClassDrawerTimelineItem, CrmShellNavItem, PageFilterBarFilter, WeeklyCalendarEvent } from "@taliya/crm";
 import type { CrmWorklistTableColumn, PageQuickFilterItem } from "@taliya/crm";
 import { Button, ButtonGroup, Chip, Icon, IconButton, List, ListItem, Panel, PersonLabel } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
@@ -74,44 +74,134 @@ const agendaClassStudents: ClassDrawerStudent[] = [
 
 export function AgendaCalendarPage() {
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [announcement, setAnnouncement] = useState("");
+  const [selectedEvent, setSelectedEvent] = useState<WeeklyCalendarEvent | null>(null);
+  const [selectedEventId, setSelectedEventId] = useState("ter-1700-reformer");
+  const [selectedDay, setSelectedDay] = useState("12");
+  const [monthOffset, setMonthOffset] = useState(0);
+  const [weekOffset, setWeekOffset] = useState(0);
+  const [view, setView] = useState<"day" | "week">("week");
+  const announce = (message: string) => setAnnouncement(message);
+  const monthLabels = ["abril 2024", "maio 2024", "junho 2024"];
+  const monthLabel = monthLabels[monthOffset + 1] ?? "maio 2024";
+  const weekLabels = ["5–11 maio", "12–18 maio", "19–25 maio"];
+  const weekLabel = weekLabels[weekOffset + 1] ?? "12–18 maio";
   return (
     <CrmDashboardPage
       activeNavId="agenda"
       activeSidebarId="agenda"
       avatarSrc={image79Avatar}
-      before={<AgendaFilters />}
+      before={(
+        <AgendaFilters
+          onAction={announce}
+          onViewChange={(nextView) => {
+            setView(nextView);
+            announce(`Visualização alterada para ${nextView === "week" ? "semana" : "dia"}`);
+          }}
+          onWeekChange={(nextOffset) => {
+            setWeekOffset(nextOffset);
+            announce(`Período alterado para ${weekLabels[nextOffset + 1] ?? "12–18 maio"}`);
+          }}
+          view={view}
+          weekLabel={weekLabel}
+          weekOffset={weekOffset}
+        />
+      )}
       columns="agenda"
-      drawer={drawerOpen ? <AgendaSelectedClassDrawer onClose={() => setDrawerOpen(false)} /> : null}
+      drawer={drawerOpen ? (
+        <AgendaSelectedClassDrawer
+          event={selectedEvent}
+          onAction={(action) => announce(`Ação da aula: ${agendaDrawerActionLabels[action]}`)}
+          onClose={() => {
+            setDrawerOpen(false);
+            announce("Detalhes da aula fechados");
+          }}
+        />
+      ) : null}
       drawerPlacement="floating"
       drawerSize="compact"
+      globalActions={{
+        onAvatar: () => announce("Perfil da operadora aberto"),
+        onMessages: () => announce("Mensagens abertas"),
+        onNotifications: () => announce("Notificações abertas"),
+        onSearch: () => announce("Busca global aberta")
+      }}
       navItems={agendaCalendarNavItems}
+      onBack={() => announce("Navegação de retorno acionada")}
+      onNavChange={(id) => announce(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => announce(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => announce(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="compact-stacked"
       sidebarItems={crmEmptyShellSidebarItems}
+      showGlobalActionsWithDrawer
       subtitle="Studio Vila Mariana · Aulas, chamada e reposições"
       title="Agenda"
       utilityItems={crmEmptyShellSidebarUtilityItems}
     >
-      <AgendaSidePanel />
-      <WeeklyCalendar compact onEventSelect={() => setDrawerOpen(true)} />
+      <AgendaSidePanel
+        monthLabel={monthLabel}
+        onAction={announce}
+        onMonthChange={(nextOffset) => {
+          setMonthOffset(nextOffset);
+          announce(`Mês alterado para ${monthLabels[nextOffset + 1] ?? "maio 2024"}`);
+        }}
+        onSelectDay={(day) => {
+          setSelectedDay(day);
+          announce(`Dia ${day} selecionado`);
+        }}
+        selectedDay={selectedDay}
+      />
+      <WeeklyCalendar
+        compact
+        onEventSelect={(eventId, event) => {
+          setSelectedEventId(eventId);
+          setSelectedEvent(event);
+          setDrawerOpen(true);
+          announce(`Aula selecionada: ${String(event.title)}, ${String(event.time)}`);
+        }}
+        selectedEventId={selectedEventId}
+      />
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
     </CrmDashboardPage>
   );
 }
 
-function AgendaSelectedClassDrawer({ onClose }: { onClose?: () => void }) {
+const agendaDrawerActionLabels: Record<ClassDrawerAction, string> = {
+  "add-note": "adicionar observação",
+  close: "fechar",
+  "correct-later": "corrigir depois",
+  "create-task": "criar tarefa",
+  "edit-class": "editar aula",
+  "move-student": "encontrar encaixe",
+  "notify-class": "avisar envolvidos",
+  "open-grid": "abrir grade",
+  "open-schedule": "abrir aula",
+  "pause-class": "pausar aula",
+  "save-call": "fazer chamada"
+};
+
+const agendaStudentNames = ["Ana Carolina Souza", "Beatriz Lima", "Felipe Andrade", "Gabriela Martins", "Juliana Costa", "Rafael Nunes"];
+const agendaDayNames = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
+
+function AgendaSelectedClassDrawer({ event, onAction, onClose }: { event?: WeeklyCalendarEvent | null; onAction?: (action: ClassDrawerAction) => void; onClose?: () => void }) {
+  const capacity = String(event?.capacity ?? "3/4");
+  const [occupiedText = "3", totalText = "4"] = capacity.split("/");
+  const occupied = Number(occupiedText) || 0;
+  const total = Number(totalText) || 4;
+  const available = Math.max(total - occupied, 0);
+  const creditLabel = `${available} ${available === 1 ? "crédito de reposição compatível" : "créditos de reposição compatíveis"}`;
+  const statusLabel = String(event?.statusLabel ?? "Chamada pendente");
+  const statusTone: ComponentTone = event?.status === "scheduled" ? "success" : event?.status === "pending" ? "warning" : event?.status === "full" || event?.status === "teacher-unavailable" ? "danger" : "info";
+  const title = event ? `${agendaDayNames[event.dayIndex] ?? "Aula"} ${String(event.time)} · ${String(event.title)}` : "Terça 17h · Reformer Intermediário";
   const facts: ClassDrawerFact[] = [
-    { id: "teacher", icon: "calendar", label: "Professor", value: "João Silva" },
-    { id: "resource", icon: "user", label: "Sala / recurso", value: "Reformer 2" },
-    { id: "capacity", icon: "users", label: "Capacidade", value: "3/4" },
-    { id: "status", icon: "clock", label: "Status", value: <Chip tone="warning">Chamada pendente</Chip>, tone: "warning" },
+    { id: "teacher", icon: "calendar", label: "Professor", value: event?.teacher ?? "João Silva" },
+    { id: "resource", icon: "user", label: "Sala / recurso", value: event ? (String(event.title).includes("Reformer") ? "Reformer 2" : "Sala 1") : "Reformer 2" },
+    { id: "capacity", icon: "users", label: "Capacidade", value: capacity },
+    { id: "status", icon: "clock", label: "Status", value: <Chip tone={statusTone}>{statusLabel}</Chip>, tone: statusTone === "danger" ? "danger" : statusTone === "warning" ? "warning" : statusTone === "success" ? "success" : "info" },
     { id: "attendance", icon: "user", label: "Presença", value: "Pendente" },
-    { id: "vacancy", icon: "calendar", label: "Vaga / encaixe", value: <Chip tone="success">1 vaga aberta</Chip>, tone: "success" }
+    { id: "vacancy", icon: "calendar", label: "Vaga / encaixe", value: <Chip tone={available ? "success" : "danger"}>{available ? `${available} ${available === 1 ? "vaga aberta" : "vagas abertas"}` : "Sem vagas"}</Chip>, tone: available ? "success" : "danger" }
   ];
-  const students: ClassDrawerStudent[] = [
-    { id: "ana", initials: "1", name: "Ana Carolina Souza", status: "pending" },
-    { id: "beatriz", initials: "2", name: "Beatriz Lima", status: "pending" },
-    { id: "felipe", initials: "3", name: "Felipe Andrade", status: "pending" },
-    { id: "gabriela", initials: "4", name: "Gabriela Martins", status: "pending" }
-  ];
+  const students: ClassDrawerStudent[] = agendaStudentNames.slice(0, Math.min(total, agendaStudentNames.length)).map((name, index) => ({ id: `student-${index}`, initials: String(index + 1), name, status: "pending" }));
 
   return (
     <ClassDrawer
@@ -119,16 +209,17 @@ function AgendaSelectedClassDrawer({ onClose }: { onClose?: () => void }) {
       actionHeading="Próximas ações"
       ariaLabel="Detalhes da aula selecionada"
       audit="Convite seguro: permitido apenas se política, consentimento, cota e risco estiverem OK."
-      availabilityNotice="Há 1 crédito de reposição compatível para esta vaga."
+      availabilityNotice={available ? `Há ${creditLabel} para esta vaga.` : "A turma está lotada; avalie a fila de espera."}
       availabilityTone="warning"
       closeLabel="Fechar aula selecionada"
       compact
-      copilot={<><strong>Copiloto: há 1 crédito de reposição compatível para esta vaga.</strong></>}
+      copilot={<><strong>{available ? `Copiloto: há ${creditLabel} para esta vaga.` : "Copiloto: não há vaga disponível nesta aula."}</strong></>}
       eyebrow="Aula selecionada"
       facts={facts}
+      onAction={onAction}
       onClose={onClose}
       primaryAction={{ label: "Abrir aula", action: "open-schedule" }}
-      rosterHeading="Alunos previstos (4)"
+      rosterHeading={`Alunos previstos (${students.length})`}
       rosterStatus={{ label: "Pendente", tone: "warning" }}
       secondaryActions={[
         { label: "Fazer chamada", action: "save-call" },
@@ -138,7 +229,7 @@ function AgendaSelectedClassDrawer({ onClose }: { onClose?: () => void }) {
       showStudentStatus
       students={students}
       subtitle={null}
-      title="Terça 17h · Reformer Intermediário"
+      title={title}
       variant="class-detail"
     />
   );
@@ -518,7 +609,14 @@ function ClassesQuickFilters() {
   return <PageQuickFilters groupLabel="Filas de turmas" heading="Filas" items={items} onSelect={(item) => setSelectedId(item.id)} selectionTone="soft" />;
 }
 
-function AgendaFilters() {
+function AgendaFilters({ onAction, onViewChange, onWeekChange, view, weekLabel, weekOffset }: {
+  onAction: (message: string) => void;
+  onViewChange: (view: "day" | "week") => void;
+  onWeekChange: (offset: number) => void;
+  view: "day" | "week";
+  weekLabel: string;
+  weekOffset: number;
+}) {
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters = useMemo<PageFilterBarFilter[]>(
     () => [
@@ -569,36 +667,78 @@ function AgendaFilters() {
   return (
     <PageFilterBar
       actions={
-        <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Criar aula</Button>
+        <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onAction("Criação de aula aberta")} size="sm" variant="primary">Criar aula</Button>
       }
       leadingActions={
         <ButtonGroup>
-          <Button size="sm" variant="secondary">Dia</Button>
-          <Button size="sm" variant="primary">Semana</Button>
-          <IconButton icon="chevronLeft" label="Semana anterior" size="sm" variant="default" />
-          <IconButton icon="chevronRight" label="Proxima semana" size="sm" variant="default" />
-          <Button size="sm" variant="secondary">Hoje</Button>
-          <span aria-label="Intervalo atual">12–18 maio</span>
+          <Button aria-pressed={view === "day"} onClick={() => onViewChange("day")} size="sm" variant={view === "day" ? "primary" : "secondary"}>Dia</Button>
+          <Button aria-pressed={view === "week"} onClick={() => onViewChange("week")} size="sm" variant={view === "week" ? "primary" : "secondary"}>Semana</Button>
+          <IconButton disabled={weekOffset <= -1} icon="chevronLeft" label="Semana anterior" onClick={() => onWeekChange(weekOffset - 1)} size="sm" variant="default" />
+          <IconButton disabled={weekOffset >= 1} icon="chevronRight" label="Proxima semana" onClick={() => onWeekChange(weekOffset + 1)} size="sm" variant="default" />
+          <Button onClick={() => onWeekChange(0)} size="sm" variant="secondary">Hoje</Button>
+          <span aria-label="Intervalo atual">{weekLabel}</span>
         </ButtonGroup>
       }
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onAction(`Filtro ${filter.label}: ${String(value) || "todos"}`);
+      }}
       searchVisible={false}
     />
   );
 }
 
-function AgendaSidePanel() {
+const agendaSideItems = [
+  { id: "today", label: "Hoje", count: "18", icon: "calendar" as const },
+  { id: "pending", label: "Chamada pendente", count: "6", icon: "clock" as const, tone: "warning" as const },
+  { id: "available", label: "Vagas abertas", count: "4", icon: "checkCircle" as const, tone: "info" as const },
+  { id: "conflicts", label: "Conflitos", count: "2", icon: "alert" as const, tone: "danger" as const },
+  { id: "replacements", label: "Reposicoes", count: "3", icon: "refresh" as const }
+];
+
+function AgendaSidePanel({ monthLabel, onAction, onMonthChange, onSelectDay, selectedDay }: {
+  monthLabel: string;
+  onAction: (message: string) => void;
+  onMonthChange: (offset: number) => void;
+  onSelectDay: (day: string) => void;
+  selectedDay: string;
+}) {
+  const [selectedQueue, setSelectedQueue] = useState("today");
+  const monthOffset = monthLabel === "abril 2024" ? -1 : monthLabel === "junho 2024" ? 1 : 0;
   return (
     <Panel>
-      <MiniCalendar />
+      <MiniCalendar
+        monthLabel={monthLabel}
+        onNextMonth={() => onMonthChange(Math.min(monthOffset + 1, 1))}
+        onPreviousMonth={() => onMonthChange(Math.max(monthOffset - 1, -1))}
+        onSelect={onSelectDay}
+        selected={selectedDay}
+      />
       <h3>Agenda</h3>
       <List divided>
-        <ListItem action={<Chip>18</Chip>} leading={<Icon name="calendar" />} selected title="Hoje" />
-        <ListItem action={<Chip>6</Chip>} leading={<Icon name="clock" tone="warning" />} title="Chamada pendente" />
-        <ListItem action={<Chip>4</Chip>} leading={<Icon name="checkCircle" tone="info" />} title="Vagas abertas" />
-        <ListItem action={<Chip>2</Chip>} leading={<Icon name="alert" tone="danger" />} title="Conflitos" />
-        <ListItem action={<Chip>3</Chip>} leading={<Icon name="refresh" />} title="Reposicoes" />
+        {agendaSideItems.map((item) => (
+          <ListItem
+            action={<Chip>{item.count}</Chip>}
+            key={item.id}
+            leading={<Icon name={item.icon} tone={item.tone} />}
+            onClick={() => {
+              setSelectedQueue(item.id);
+              onAction(`Fila selecionada: ${item.label}`);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                setSelectedQueue(item.id);
+                onAction(`Fila selecionada: ${item.label}`);
+              }
+            }}
+            role="button"
+            selected={selectedQueue === item.id}
+            tabIndex={0}
+            title={item.label}
+          />
+        ))}
       </List>
     </Panel>
   );

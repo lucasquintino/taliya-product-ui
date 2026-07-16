@@ -242,7 +242,7 @@ export const colorTokens = {
   "color.crm-roster-action.border": "var(--taliya-border-subtle)",
   "color.crm-roster-action.fg": "var(--taliya-color-text-primary)",
   "color.crm-roster-action.hover-bg": "var(--taliya-surface-field-disabled)",
-  "color.crm-class-drawer.bg": "var(--taliya-surface-card)",
+  "color.crm-class-drawer.bg": "var(--taliya-surface-product-drawer)",
   "color.crm-class-drawer.edge": "rgba(16, 20, 26, 0.08)",
   "color.crm-class-drawer.rule": "rgba(16, 20, 26, 0.08)",
   "color.crm-class-drawer.text": "var(--taliya-color-text-primary)",

@@ -144,7 +144,7 @@ const pageFamilyContracts = [
     page: "AgendaCalendarPage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "dashboard/calendar",
-    requiredSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact", "drawer={drawerOpen ? <AgendaSelectedClassDrawer", "onClose={() => setDrawerOpen(false)}", "onEventSelect={() => setDrawerOpen(true)}"]
+    requiredSnippets: ["<CrmDashboardPage", "<AgendaFilters", "<AgendaSidePanel", "<WeeklyCalendar", "drawer={drawerOpen ? (", "setDrawerOpen(false)", "onEventSelect={(eventId, event) =>"]
   },
   {
     page: "AgendaClassDetailPage",
