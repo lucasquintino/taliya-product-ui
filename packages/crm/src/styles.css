@@ -32496,7 +32496,7 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 @media (min-width: 761px) and (max-width: 1500px) {
-  .tcrm-product-shell-window--drawer .tcrm-empty-shell-actions {
+  .tcrm-product-shell-window--drawer:not(.tcrm-product-shell-window--drawer-global-actions) .tcrm-empty-shell-actions {
     display: none;
   }
 
@@ -32678,14 +32678,49 @@ button.tcrm-pipeline-card__select:focus-visible,
   .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-drawer-frame {
     bottom: 0;
     box-sizing: border-box;
-    height: 100vh;
+    height: var(--taliya-layout-viewport-height);
     left: 0;
-    max-height: 100vh;
+    max-height: var(--taliya-layout-viewport-height);
     max-width: 100%;
     right: 0;
     top: 0;
     width: 100%;
     z-index: 70;
+  }
+
+  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-approval-drawer {
+    border-radius: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    height: var(--taliya-layout-viewport-height);
+    left: 0;
+    max-height: var(--taliya-layout-viewport-height);
+    max-width: 100%;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 70;
+  }
+
+  .tcrm-product-shell-stage > .tcrm-approval-drawer .tcrm-approval-panel__header,
+  .tcrm-product-shell-stage > .tcrm-approval-drawer .tcrm-approval-panel__facts,
+  .tcrm-product-shell-stage > .tcrm-approval-drawer .tcrm-approval-panel__footer {
+    flex: 0 0 auto;
+  }
+
+  .tcrm-product-shell-stage > .tcrm-approval-drawer .tcrm-approval-panel__sections {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .tcrm-approval-table__data.tl-table-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .tcrm-approval-table__data .tl-table {
+    min-width: var(--taliya-control-table-min-width);
   }
 
   .tcrm-drawer-frame--footer-conversation .tcrm-drawer-frame__action-row {

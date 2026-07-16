@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T22:37:34.040Z",
+  "generatedAt": "2026-07-16T23:08:59.582Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 9,
+  "completedRouteCount": 10,
   "failedRouteCount": 0,
-  "pendingRouteCount": 64,
+  "pendingRouteCount": 63,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -816,38 +816,65 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:08:16.936Z",
+        "evidence": [
+          "tmp/human-route-review/25-approvals/canonical.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:08:17.461Z",
+        "evidence": [
+          "tmp/human-route-review/25-approvals/canonical.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:08:17.645Z",
+        "evidence": [
+          "tmp/human-route-review/25-approvals/mobile-drawer.jpg",
+          "tmp/human-route-review/25-approvals/mobile-worklist.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:08:18.042Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "filter-search",
+          "filter-options",
+          "quick-filters",
+          "table-sorting",
+          "table-selection",
+          "pagination",
+          "approval-actions",
+          "blocked-state",
+          "drawer-open-close",
+          "mobile-drawer-scroll",
+          "mobile-table-horizontal-scroll"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:08:18.367Z",
+        "evidence": [
+          "source:25_round-4.1C_aprovacoes_01_lista-decisao-detalhe.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisão humana corrigiu ações globais com drawer, detalhe dinâmico por decisão, sidebar ativa, superfície/fluxo mobile do ApprovalDrawer e rolagem horizontal da ApprovalTable."
+      ]
     },
     {
       "image": "26_round-4.1F_agenda_01_calendario-operacional.png.png",

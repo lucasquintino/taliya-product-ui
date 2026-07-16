@@ -11,7 +11,10 @@ import {
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
 import type {
+  ApprovalPanelFact,
+  ApprovalPanelSection,
   ApprovalPanelState,
+  ApprovalPanelTimelineItem,
   ApprovalTableRow,
   CrmShellNavItem,
   PageFilterBarFilter,
@@ -135,6 +138,81 @@ const approvalRows: ApprovalTableRow[] = [
   }
 ];
 
+const approvalTitles: Record<string, string> = {
+  "ana-message": "Aprovar mensagem para Ana Paula",
+  "agenda-change": "Aprovar alteração de agenda",
+  "financial-exception": "Aprovar exceção financeira",
+  "replacement-announcement": "Aprovar comunicado de reposição",
+  "agent-action": "Aprovar ação autônoma bloqueada",
+  "data-correction": "Aprovar correção de cadastro"
+};
+
+const approvalOrigins: Record<string, string> = {
+  "ana-message": "WhatsApp / Agente de atendimento",
+  "agenda-change": "Reposição",
+  "financial-exception": "Desconto manual",
+  "replacement-announcement": "Segmento alunos afetados",
+  "agent-action": "Fluxo de agenda",
+  "data-correction": "Telefone do responsável"
+};
+
+const approvalRequesters: Record<string, string> = {
+  "ana-message": "Copiloto de atendimento",
+  "agenda-change": "Recepção",
+  "financial-exception": "Mariana",
+  "replacement-announcement": "Agente de comunicação",
+  "agent-action": "Agente de agenda",
+  "data-correction": "CRM"
+};
+
+const approvalTypeLabels = {
+  message: "Mensagem",
+  agenda: "Agenda",
+  finance: "Financeiro",
+  announcement: "Comunicado",
+  agent: "Agente",
+  data: "Dados"
+} satisfies Record<ApprovalTableRow["type"], string>;
+
+const approvalRiskLabels = {
+  low: "Baixo",
+  medium: "Médio",
+  high: "Alto"
+} satisfies Record<ApprovalTableRow["risk"], string>;
+
+function approvalDrawerFacts(row: ApprovalTableRow, state: ApprovalPanelState): ApprovalPanelFact[] {
+  const status = state === "approved" ? "Aprovada" : state === "rejected" ? "Rejeitada" : row.status === "blocked" ? "Bloqueada" : row.status === "review" ? "Em revisão" : "Pendente";
+  const statusTone = state === "approved" ? "approved" : state === "rejected" ? "rejected" : row.status === "blocked" ? "expired" : "pending";
+
+  return [
+    { id: "status", icon: "clipboard", label: "Status", value: status, dotTone: statusTone },
+    { id: "type", icon: "clipboardCheck", label: "Tipo", value: approvalTypeLabels[row.type], valueIcon: row.type === "message" ? "message" : row.type === "agenda" ? "calendar" : row.type === "finance" ? "wallet" : row.type === "announcement" ? "send" : row.type === "data" ? "database" : "user" },
+    { id: "origin", icon: "clipboard", label: "Origem canônica", value: approvalOrigins[row.id], valueIcon: row.id === "ana-message" ? "whatsapp" : undefined, valueTone: row.id === "ana-message" ? "whatsapp" : "default" },
+    { id: "agent", icon: "clipboard", label: "Solicitante / agente", value: approvalRequesters[row.id], valueIcon: row.requester.icon, valueTone: row.id === "ana-message" ? "copilot" : "default" },
+    { id: "risk", icon: "clock", label: "Risco", value: approvalRiskLabels[row.risk], dotTone: row.risk },
+    { id: "quota", icon: "coins", label: "Custo / cota", value: row.cost },
+    { id: "deadline", icon: "clock", label: "Prazo", value: row.deadline, valueTone: row.deadlineTone === "danger" ? "danger" : "default" }
+  ];
+}
+
+function approvalDrawerSections(row: ApprovalTableRow): ApprovalPanelSection[] {
+  if (row.id === "ana-message") {
+    return [
+      { id: "context", title: "Contexto resumido", body: "Ana Paula pediu reagendamento da visita técnica para quinta-feira pela manhã. O agente preparou uma resposta para confirmar o novo horário e coletar o endereço completo." },
+      { id: "proposal", title: "Proposta principal", badge: "Sugestão do copiloto", variant: "suggestion", body: "Olá Ana Paula! Consigo reagendar sua visita para quinta-feira às 09h. Pode me confirmar seu endereço completo para registro?" },
+      { id: "impact", title: "Impacto esperado", body: "Libera continuidade do atendimento, mantém SLA da conversa e consome 1 crédito." },
+      { id: "policy", title: "Política / guardrail aplicado", body: "Mensagens externas geradas por agente exigem validação humana antes do envio. Agente não aprova sozinho." }
+    ];
+  }
+
+  return [
+    { id: "context", title: "Contexto resumido", body: `${approvalTitles[row.id]} foi encaminhada para revisão humana pela fila de ${approvalTypeLabels[row.type].toLowerCase()}.` },
+    { id: "proposal", title: "Proposta principal", badge: "Revisão necessária", variant: "suggestion", body: <>Confirmar a decisão considerando origem, prazo e impacto informado: {row.activity}.</> },
+    { id: "impact", title: "Impacto esperado", body: <>Custo ou cota estimada: {row.cost}.</> },
+    { id: "policy", title: "Política / guardrail aplicado", body: `A decisão exige validação humana por risco ${approvalRiskLabels[row.risk].toLowerCase()}.` }
+  ];
+}
+
 function ApprovalsPageContent({
   selectedQueueId,
   selectedApprovalId,
@@ -150,6 +228,8 @@ function ApprovalsPageContent({
   onItemsPerPageClick,
   onPreviousPage,
   onNextPage,
+  onInteraction,
+  announcement,
   drawer
 }: {
   selectedQueueId: string;
@@ -166,6 +246,8 @@ function ApprovalsPageContent({
   onItemsPerPageClick: () => void;
   onPreviousPage: () => void;
   onNextPage: () => void;
+  onInteraction: (message: string) => void;
+  announcement: string;
   drawer?: React.ReactNode;
 }) {
   const filters = useMemo<PageFilterBarFilter[]>(
@@ -250,16 +332,27 @@ function ApprovalsPageContent({
   return (
     <CrmWorklistPage
       activeNavId="aprovacoes"
-      activeSidebarId="shield"
+      activeSidebarId="metricas"
       avatarSrc={image79Avatar}
       className="sb-image-coverage-approvals-shell"
       contentClassName="sb-image-coverage-approvals-content"
       contentLayout="main-priority"
       drawer={drawer}
       drawerPlacement="floating"
+      globalActions={{
+        onAvatar: () => onInteraction("Perfil da operadora aberto"),
+        onMessages: () => onInteraction("Mensagens abertas"),
+        onNotifications: () => onInteraction("Notificações abertas"),
+        onSearch: () => onInteraction("Busca global aberta")
+      }}
       navItems={approvalsNavItems}
+      onBack={() => onInteraction("Navegação de retorno acionada")}
+      onNavChange={(id) => onInteraction(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => onInteraction(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => onInteraction(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="compact-stacked"
       sidebarItems={crmEmptyShellSidebarItems}
+      showGlobalActionsWithDrawer
       stageClassName="sb-image-coverage-approvals-stage"
       subtitle="Decisões aguardando revisão humana"
       title="Aprovações"
@@ -303,14 +396,17 @@ function ApprovalsPageContent({
         />
       }
     >
-      <ApprovalTable
-        pageLabel={pageLabel}
-        rows={rows}
-        onItemsPerPageClick={onItemsPerPageClick}
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-        onRowSelect={onApprovalSelect}
-      />
+      <>
+        <ApprovalTable
+          pageLabel={pageLabel}
+          rows={rows}
+          onItemsPerPageClick={onItemsPerPageClick}
+          onNextPage={onNextPage}
+          onPreviousPage={onPreviousPage}
+          onRowSelect={onApprovalSelect}
+        />
+        <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+      </>
     </CrmWorklistPage>
   );
 }
@@ -323,72 +419,96 @@ export function ApprovalsShell() {
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [drawerState, setDrawerState] = useState<ApprovalPanelState>("pending");
   const [pageLabel, setPageLabel] = useState("1-6 de 6");
-
-  const sourceApprovalSections = [
-    {
-      id: "context",
-      title: "Contexto resumido",
-      body: "Ana Paula pediu reagendamento da visita técnica para quinta-feira pela manhã. O agente preparou uma resposta para confirmar o novo horário e coletar o endereço completo."
-    },
-    {
-      id: "proposal",
-      title: "Proposta principal",
-      badge: "Sugestão do copiloto",
-      variant: "suggestion" as const,
-      body: "Olá Ana Paula! Consigo reagendar sua visita para quinta-feira às 09h. Pode me confirmar seu endereço completo para registro?"
-    },
-    {
-      id: "impact",
-      title: "Impacto esperado",
-      body: "Libera continuidade do atendimento, mantém SLA da conversa e consome 1 crédito."
-    },
-    {
-      id: "policy",
-      title: "Política / guardrail aplicado",
-      body: "Mensagens externas geradas por agente exigem validação humana antes do envio. Agente não aprova sozinho."
-    }
+  const [announcement, setAnnouncement] = useState("");
+  const selectedApproval = approvalRows.find((row) => row.id === selectedApprovalId) ?? approvalRows[0]!;
+  const selectedTimeline: ApprovalPanelTimelineItem[] = selectedApproval.id === "ana-message" ? [
+    { id: "requested", time: "09:12", label: "Cliente solicitou reagendamento" },
+    { id: "suggested", time: "09:16", label: "Copiloto sugeriu resposta" },
+    { id: "created", time: "09:18", label: "Aprovação criada" }
+  ] : [
+    { id: "activity", time: "Agora", label: selectedApproval.activity },
+    { id: "review", time: "Agora", label: "Aprovação aberta para revisão" }
   ];
 
   const drawerNode = drawerOpen ? (
     <ApprovalDrawer
       className="sb-image-coverage-approvals-drawer"
+      facts={approvalDrawerFacts(selectedApproval, drawerState)}
       onAction={(action) => {
         if (action === "approve") setDrawerState("approved");
         if (action === "reject") setDrawerState("rejected");
+        setAnnouncement(`Ação da aprovação: ${action}`);
       }}
-      onClose={() => setDrawerOpen(false)}
-      recentComment={{
+      onClose={() => {
+        setDrawerOpen(false);
+        setAnnouncement("Drawer de aprovação fechado");
+      }}
+      recentComment={selectedApproval.id === "ana-message" ? {
         author: "Sam Frank",
         time: "Hoje, 09:20",
         body: "Pode seguir se mantiver o tom cordial e não confirmar sem endereço.",
         avatarSrc: source25SamFrank
+      } : {
+        author: "Sam Frank",
+        time: "Agora",
+        body: "Revisar os dados da solicitação antes de decidir.",
+        avatarSrc: source25SamFrank
       }}
-      sections={sourceApprovalSections}
+      sections={approvalDrawerSections(selectedApproval)}
       state={drawerState}
+      timeline={selectedTimeline}
+      title={approvalTitles[selectedApproval.id]}
     />
   ) : null;
 
   return (
     <ApprovalsPageContent
+      announcement={announcement}
       drawer={drawerNode}
       filterValues={filterValues}
       pageLabel={pageLabel}
       query={query}
       selectedApprovalId={selectedApprovalId}
       selectedQueueId={selectedQueueId}
-      onAdvancedFilters={() => setFilterValues((current) => ({ ...current, type: "mensagem", risk: "baixo", status: "pendente" }))}
+      onAdvancedFilters={() => {
+        setFilterValues((current) => ({ ...current, type: "mensagem", risk: "baixo", status: "pendente" }));
+        setAnnouncement("Filtros avançados aplicados");
+      }}
       onApprovalSelect={(row) => {
         setSelectedApprovalId(row.id);
         setDrawerOpen(true);
-        setDrawerState(row.status === "blocked" ? "blocked" : row.status === "review" ? "pending" : "pending");
+        setDrawerState(row.status === "blocked" ? "blocked" : "pending");
+        setAnnouncement(`Aprovação aberta: ${approvalTitles[row.id]}`);
       }}
-      onCreateApproval={() => setQuery("nova aprovação")}
-      onFilterValueChange={(filter, value) => setFilterValues((current) => ({ ...current, [filter.id]: value }))}
-      onItemsPerPageClick={() => setPageLabel("1-10 de 24")}
-      onNextPage={() => setPageLabel("7-12 de 24")}
-      onPreviousPage={() => setPageLabel("1-6 de 6")}
-      onQueueSelect={(item) => setSelectedQueueId(item.id)}
-      onSearchChange={setQuery}
+      onCreateApproval={() => {
+        setQuery("nova aprovação");
+        setAnnouncement("Nova aprovação iniciada");
+      }}
+      onFilterValueChange={(filter, value) => {
+        setFilterValues((current) => ({ ...current, [filter.id]: value }));
+        setAnnouncement(`Filtro ${filter.label} atualizado`);
+      }}
+      onInteraction={setAnnouncement}
+      onItemsPerPageClick={() => {
+        setPageLabel("1-10 de 24");
+        setAnnouncement("Quantidade por página alterada");
+      }}
+      onNextPage={() => {
+        setPageLabel("7-12 de 24");
+        setAnnouncement("Próxima página aberta");
+      }}
+      onPreviousPage={() => {
+        setPageLabel("1-6 de 6");
+        setAnnouncement("Página anterior aberta");
+      }}
+      onQueueSelect={(item) => {
+        setSelectedQueueId(item.id);
+        setAnnouncement(`Fila selecionada: ${item.label}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        setAnnouncement(value ? `Busca atualizada: ${value}` : "Busca limpa");
+      }}
     />
   );
 }

@@ -909,6 +909,7 @@ export interface CrmProductShellProps extends React.PropsWithChildren<{
   drawer?: React.ReactNode;
   drawerPlacement?: CrmProductShellDrawerPlacement;
   drawerSize?: CrmProductShellDrawerSize;
+  showGlobalActionsWithDrawer?: boolean;
   pageHeaderRhythm?: CrmProductShellPageHeaderRhythm;
   regions?: CrmProductShellRegions;
   topbarStart?: React.ReactNode;
@@ -943,6 +944,7 @@ export function CrmProductShell({
   drawer,
   drawerPlacement = "fixed",
   drawerSize = "default",
+  showGlobalActionsWithDrawer = false,
   pageHeaderRhythm = "default",
   regions,
   topbarStart,
@@ -985,6 +987,7 @@ export function CrmProductShell({
     Boolean(drawer) && "tcrm-product-shell-stage--drawer",
     Boolean(drawer) && `tcrm-product-shell-stage--drawer-${drawerPlacement}`,
     Boolean(drawer) && `tcrm-product-shell-stage--drawer-${drawerSize}`,
+    Boolean(drawer) && showGlobalActionsWithDrawer && "tcrm-product-shell-stage--drawer-global-actions",
     pageHeaderRhythm !== "default" && `tcrm-product-shell-stage--page-header-${pageHeaderRhythm}`,
     Boolean(pageHeaderBreadcrumb) && "tcrm-product-shell-stage--page-header-breadcrumb",
     Boolean(pageHeaderMeta) && "tcrm-product-shell-stage--page-header-meta",
@@ -997,6 +1000,7 @@ export function CrmProductShell({
     Boolean(drawer) && "tcrm-product-shell-window--drawer",
     Boolean(drawer) && `tcrm-product-shell-window--drawer-${drawerPlacement}`,
     Boolean(drawer) && `tcrm-product-shell-window--drawer-${drawerSize}`,
+    Boolean(drawer) && showGlobalActionsWithDrawer && "tcrm-product-shell-window--drawer-global-actions",
     !resolvedRegions.browserChrome && "tcrm-product-shell-window--no-browser-chrome"
   );
   const pageLabel = String(title);

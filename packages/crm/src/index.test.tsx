@@ -112,6 +112,19 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByText("Status do fluxo").closest(".tcrm-product-shell-page-header__meta")).toBeInTheDocument();
   });
 
+  it("can preserve global shell actions when a source drawer is open", () => {
+    render(
+      <CrmProductShell drawer={<crm.ApprovalDrawer />} showGlobalActionsWithDrawer title="Aprovações">
+        <span>Fila de aprovações</span>
+      </CrmProductShell>
+    );
+
+    const shell = screen.getByText("Fila de aprovações").closest("[data-component='CrmProductShell']");
+    expect(shell).toHaveClass("tcrm-product-shell-stage--drawer-global-actions");
+    expect(shell?.querySelector(".tcrm-product-shell-window")).toHaveClass("tcrm-product-shell-window--drawer-global-actions");
+    expect(screen.getByRole("group", { name: "Ações globais" })).toBeInTheDocument();
+  });
+
   it("renders setup and tri-pane compositions", () => {
     render(
       <div>
@@ -721,6 +734,15 @@ describe("@taliya/crm component coverage", () => {
     );
     expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list,\n  .tcrm-three-pane-layout .tcrm-conversation-thread,\n  .tcrm-three-pane-layout .tcrm-context-panel {");
     expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list__subject {\n    display: none;");
+  });
+
+  it("keeps ApprovalDrawer opaque and actionable above a scrollable mobile worklist", () => {
+    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+
+    expect(styles).toContain(".tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-approval-drawer {");
+    expect(styles).toContain(".tcrm-product-shell-stage > .tcrm-approval-drawer .tcrm-approval-panel__sections {\n    flex: 1 1 auto;\n    min-height: 0;\n    overflow-y: auto;");
+    expect(styles).toContain(".tcrm-approval-table__data.tl-table-wrap {\n    overflow-x: auto;");
+    expect(styles).toContain(".tcrm-approval-table__data .tl-table {\n    min-width: var(--taliya-control-table-min-width);");
   });
 
   it("keeps ChecklistTable selected rows as dot-only selection without the task-table rail", () => {

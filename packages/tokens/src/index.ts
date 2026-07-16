@@ -682,7 +682,7 @@ export const colorTokens = {
   "color.crm-usage-header-summary.warning-bg": "var(--taliya-status-warning-bg)",
   "color.crm-usage-header-summary.warning-border": "var(--taliya-status-warning-border)",
   "color.crm-usage-header-summary.warning-text": "var(--taliya-status-warning-fg)",
-  "color.crm-approval-panel.bg": "var(--taliya-surface-card)",
+  "color.crm-approval-panel.bg": "var(--taliya-color-white)",
   "color.crm-approval-panel.title": "var(--taliya-color-text-primary)",
   "color.crm-approval-panel.text": "#1F2B49",
   "color.crm-approval-panel.muted": "#33405E",

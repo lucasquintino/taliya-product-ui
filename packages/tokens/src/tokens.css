@@ -655,7 +655,7 @@
   --taliya-color-crm-usage-header-summary-warning-bg: var(--taliya-status-warning-bg);
   --taliya-color-crm-usage-header-summary-warning-border: var(--taliya-status-warning-border);
   --taliya-color-crm-usage-header-summary-warning-text: var(--taliya-status-warning-fg);
-  --taliya-color-crm-approval-panel-bg: var(--taliya-surface-card);
+  --taliya-color-crm-approval-panel-bg: var(--taliya-color-white);
   --taliya-color-crm-approval-panel-title: var(--taliya-color-text-primary);
   --taliya-color-crm-approval-panel-text: #1F2B49;
   --taliya-color-crm-approval-panel-muted: #33405E;

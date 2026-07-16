@@ -133,6 +133,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-product-shell.tenant-floating-drawer-bottom"]).toBe("4px");
     expect(allTokens["layout.crm-product-shell.floating-drawer-right"]).toBe("14px");
     expect(allTokens["layout.crm-product-shell.floating-drawer-bottom"]).toBe("24px");
+    expect(allTokens["color.crm-approval-panel.bg"]).toBe("var(--taliya-color-white)");
     expect(allTokens["layout.crm-product-shell.opportunity-floating-drawer-top"]).toBe("116px");
     expect(allTokens["layout.crm-product-shell.opportunity-floating-drawer-right"]).toBe("24px");
     expect(allTokens["layout.crm-product-shell.opportunity-floating-drawer-bottom"]).toBe("42px");
