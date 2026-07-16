@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T00:51:02.164Z",
+  "generatedAt": "2026-07-16T13:11:01.044Z",
   "status": "fail",
   "officialConsumerReady": false,
   "globalGoalComplete": false,
@@ -10,10 +10,10 @@
   "realFutureCrmAdoptionExecuted": false,
   "releaseCandidateStatus": "fail",
   "releaseCandidateGateCount": 103,
-  "releaseChannelStatus": "pass-local-release-channel",
+  "releaseChannelStatus": "pass-registry-release-channel",
   "releasePolicyStatus": "pass-registry-policy",
   "localTarballChannelReady": true,
-  "registryReady": false,
+  "registryReady": true,
   "registryManualItems": [
     "Choose the target registry and access model before publishing.",
     "Run npm provenance/publish steps from CI or a controlled release machine.",

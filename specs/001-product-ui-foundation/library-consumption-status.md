@@ -1,6 +1,6 @@
 # Library Consumption Status
 
-Generated: 2026-07-16T00:51:02.549Z
+Generated: 2026-07-16T13:10:59.709Z
 
 Status: fail
 
@@ -14,7 +14,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 - Public page-kit runtime manifest works: `true`
 - Technical release candidate passed: `false`
 - Aggregate readiness passed: `false`
-- Missing readiness gates: `none`
+- Missing readiness gates: `future-consumer-fixture`, `future-consumer-discovery-negative-probe`, `future-consumer-discovery-partial-probe`, `future-consumer-discovery-positive-probe`, `future-consumer-adoption-positive-probe`, `future-consumer-adoption-mismatch-probe`, `future-consumer-adoption-negative-probe`, `consumer-package-sync`, `consumer-package-sync-negative-probe`, `consumer-vendor-versioning`, `consumer-page-kit-shell-only-route-probe`, `consumer-page-kit-wrapper-contract-probe`, `consumer-page-kit-route-wrapper-contract-probe`, `consumer-page-kit-mismatched-route-contract-probe`, `consumer-page-kit-default-identifier-route-probe`, `consumer-page-kit-path-traversal-probe`, `consumer-readiness-config-path-traversal-probe`, `consumer-runtime`, `certification-scope-positive-probe`, `certification-scope-negative-probe`, `visual-certification-plan-negative-probe`
 - Future CRM process passed: `true`
 - Future CRM real adoption executed: `false`
 - Global goal complete: `false`
@@ -38,7 +38,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 | `current-internal-routes-render-workspaces` | pass | consumer-page-kit-audit.json route requiredLocalComponents | Every discovered Internal route renders InternalShell plus its local workspace wrapper, so shell-only route regressions fail. |
 | `public-page-kit-runtime` | pass | @taliya/crm and @taliya/crm/standard-page-kit runtime manifest audits | Consumers can discover the standard page kit from the installed package. |
 | `technical-release-candidate` | fail | release-candidate-audit.json | Release candidate is missing required gates: library-consumption-status. |
-| `aggregate-readiness` | fail | library-readiness-gate.json | Readiness is missing required gates: . |
+| `aggregate-readiness` | fail | library-readiness-gate.json | Readiness is missing required gates: future-consumer-fixture, future-consumer-discovery-negative-probe, future-consumer-discovery-partial-probe, future-consumer-discovery-positive-probe, future-consumer-adoption-positive-probe, future-consumer-adoption-mismatch-probe, future-consumer-adoption-negative-probe, consumer-package-sync, consumer-package-sync-negative-probe, consumer-vendor-versioning, consumer-page-kit-shell-only-route-probe, consumer-page-kit-wrapper-contract-probe, consumer-page-kit-route-wrapper-contract-probe, consumer-page-kit-mismatched-route-contract-probe, consumer-page-kit-default-identifier-route-probe, consumer-page-kit-path-traversal-probe, consumer-readiness-config-path-traversal-probe, consumer-runtime, certification-scope-positive-probe, certification-scope-negative-probe, visual-certification-plan-negative-probe. |
 | `future-crm-process` | pass | future-consumer-discovery-audit.json and future-consumer-adoption-audit.json | Future CRM discovery/adoption process is executable and guarded. |
 | `future-crm-real-adoption` | not-executed | matching labeled readiness report for a discovered future CRM candidate | A real future CRM app has adopted the library. |
 | `global-goal` | not-complete-globally | goal-completion-audit.json and library-acceptance-audit.json | The persistent goal is fully complete, including future CRM adoption. |

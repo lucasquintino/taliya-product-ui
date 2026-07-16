@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T00:46:41.198Z",
+  "generatedAt": "2026-07-16T13:11:57.241Z",
   "status": "pass",
   "mode": "check",
   "checkMode": true,
@@ -14,7 +14,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 54,
+      "durationMs": 85,
       "stdoutTail": [
         "Consumer vendor sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "unchanged: vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
@@ -30,12 +30,12 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 40,
+      "durationMs": 68,
       "stdoutTail": [
-        "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
-        "unchanged: @taliya/tokens -> file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
-        "unchanged: @taliya/ui -> file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
-        "unchanged: @taliya/crm -> file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz"
+        "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal (npm-registry)",
+        "unchanged: @taliya/tokens -> ^0.1.0",
+        "unchanged: @taliya/ui -> ^0.1.0",
+        "unchanged: @taliya/crm -> ^0.1.0"
       ],
       "stderrTail": []
     },
@@ -45,13 +45,13 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 40,
+      "durationMs": 68,
       "stdoutTail": [
         "Consumer package install plan for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
-        "ready: @taliya/tokens dependency-ok tarball-ok",
-        "ready: @taliya/ui dependency-ok tarball-ok",
-        "ready: @taliya/crm dependency-ok tarball-ok",
-        "Install command: npm install --force --no-audit --no-fund file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
+        "ready: @taliya/tokens dependency-ok registry-ok",
+        "ready: @taliya/ui dependency-ok registry-ok",
+        "ready: @taliya/crm dependency-ok registry-ok",
+        "Install command: npm install --force --no-audit --no-fund @taliya/tokens@^0.1.0 @taliya/ui@^0.1.0 @taliya/crm@^0.1.0",
         "Consumer package install plan check: pass"
       ],
       "stderrTail": []
@@ -62,7 +62,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 44,
+      "durationMs": 75,
       "stdoutTail": [
         "Consumer lockfile audit: pass",
         "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit.md",
@@ -76,7 +76,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 70,
+      "durationMs": 101,
       "stdoutTail": [
         "Consumer package sync audit: pass",
         "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/001-product-ui-foundation/consumer-package-sync-audit.md",

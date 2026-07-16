@@ -44,14 +44,19 @@ const extendedDirs = ["app", "components", "features", "tests", "scripts"];
 const requiredPackages = ["@taliya/tokens", "@taliya/ui", "@taliya/crm"];
 const vendorManifestPath = path.join(consumerRoot, vendorDir, "taliya-product-ui-local-manifest.json");
 const localReleaseManifestPath = path.join(root, "dist-packages/taliya-product-ui-local-manifest.json");
+const readinessConfigPath = path.join(consumerRoot, "taliya-readiness.config.json");
 const vendorManifest = fs.existsSync(vendorManifestPath) ? JSON.parse(fs.readFileSync(vendorManifestPath, "utf8")) : null;
 const localReleaseManifest = fs.existsSync(localReleaseManifestPath) ? JSON.parse(fs.readFileSync(localReleaseManifestPath, "utf8")) : null;
+const readinessConfig = fs.existsSync(readinessConfigPath) ? JSON.parse(fs.readFileSync(readinessConfigPath, "utf8")) : {};
+const distributionChannel = readinessConfig.distribution?.channel === "npm-registry" ? "npm-registry" : "local-tarball";
 const requiredPackageSources = Object.fromEntries(
   requiredPackages.map((packageName) => {
     const manifestRow =
       vendorManifest?.packages?.find((row) => row.name === packageName) ??
       localReleaseManifest?.packages?.find((row) => row.name === packageName);
-    return [packageName, manifestRow ? `file:${vendorDir}/${manifestRow.tarball}` : ""];
+    return [packageName, manifestRow
+      ? distributionChannel === "npm-registry" ? `^${manifestRow.version}` : `file:${vendorDir}/${manifestRow.tarball}`
+      : ""];
   })
 );
 const installedPackageSpecs = [

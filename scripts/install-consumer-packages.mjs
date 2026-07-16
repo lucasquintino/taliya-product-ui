@@ -23,6 +23,7 @@ const consumerRoot = resolve(root, optionValue("--consumer", "../taliya-internal
 const manifestPath = resolve(root, optionValue("--manifest", "dist-packages/taliya-product-ui-local-manifest.json"));
 const vendorRelative = optionValue("--vendor", "vendor/taliya-product-ui").replaceAll("\\", "/").replace(/\/$/, "");
 const packageJsonPath = resolve(consumerRoot, "package.json");
+const readinessConfigPath = resolve(consumerRoot, optionValue("--readiness-config", "taliya-readiness.config.json"));
 const write = hasFlag("--write");
 const check = hasFlag("--check");
 
@@ -52,8 +53,12 @@ if (manifest.schemaVersion !== 1 || manifest.channel !== "local-tarball" || !Arr
 }
 
 const packageJson = readJson(packageJsonPath, "consumer package");
+const readinessConfig = existsSync(readinessConfigPath) ? readJson(readinessConfigPath, "consumer readiness config") : {};
+const channel = readinessConfig.distribution?.channel === "npm-registry" ? "npm-registry" : "local-tarball";
 const rows = manifest.packages.map((packageRow) => {
-  const expectedDependency = `file:${vendorRelative}/${packageRow.tarball}`;
+  const expectedDependency = channel === "npm-registry"
+    ? `^${packageRow.version}`
+    : `file:${vendorRelative}/${packageRow.tarball}`;
   const actualDependency = packageJson.dependencies?.[packageRow.name] ?? "";
   const vendorTarballPath = resolve(consumerRoot, vendorRelative, packageRow.tarball);
   const tarballExists = existsSync(vendorTarballPath);
@@ -64,7 +69,7 @@ const rows = manifest.packages.map((packageRow) => {
     actualDependency,
     vendorTarballPath,
     tarballExists,
-    pass: actualDependency === expectedDependency && tarballExists
+    pass: actualDependency === expectedDependency && (channel === "npm-registry" || tarballExists)
   };
 });
 
@@ -72,8 +77,8 @@ console.log(`Consumer package install plan for ${consumerRoot}`);
 for (const row of rows) {
   const status = row.pass ? "ready" : "blocked";
   const dependencyStatus = row.actualDependency === row.expectedDependency ? "dependency-ok" : "dependency-mismatch";
-  const tarballStatus = row.tarballExists ? "tarball-ok" : "tarball-missing";
-  console.log(`${status}: ${row.name} ${dependencyStatus} ${tarballStatus}`);
+  const sourceStatus = channel === "npm-registry" ? "registry-ok" : row.tarballExists ? "tarball-ok" : "tarball-missing";
+  console.log(`${status}: ${row.name} ${dependencyStatus} ${sourceStatus}`);
 }
 
 const failedRows = rows.filter((row) => !row.pass);
@@ -87,7 +92,7 @@ const installArgs = [
   "--force",
   "--no-audit",
   "--no-fund",
-  ...rows.map((row) => row.expectedDependency)
+  ...rows.map((row) => channel === "npm-registry" ? `${row.name}@${row.expectedDependency}` : row.expectedDependency)
 ];
 
 console.log(`Install command: npm ${installArgs.join(" ")}`);
@@ -112,4 +117,4 @@ if (result.status !== 0 || result.error) {
   process.exit(result.status ?? 1);
 }
 
-console.log(`Installed local Taliya packages in ${relative(root, consumerRoot).replaceAll("\\", "/")}`);
+console.log(`Installed Taliya packages from ${channel} in ${relative(root, consumerRoot).replaceAll("\\", "/")}`);

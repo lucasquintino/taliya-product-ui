@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T00:51:02.918Z",
+  "generatedAt": "2026-07-16T13:11:01.628Z",
   "date": "2026-07-16",
   "goal": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   "trueGoal": {
@@ -38,7 +38,7 @@
     },
     {
       "requirement": "Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts",
-      "status": "proven",
+      "status": "failed",
       "evidence": [
         "package-artifacts:audit sourcePublishable/packedPublishable",
         "package-artifacts:audit sourceCssSideEffects/packedCssSideEffects",
@@ -49,7 +49,7 @@
         "package-artifacts:audit required README snippets",
         "consumer-package-sync:audit",
         "consumer-package-sync:audit installed public files match package outputs",
-        "library-readiness-gate consumer-package-sync-negative-probe pass",
+        "library-readiness-gate consumer-package-sync-negative-probe missing/fail",
         "consumer-vendor-versioning:audit",
         "consumer:audit installedPackageStatus"
       ]
@@ -168,7 +168,7 @@
         "release-candidate-audit.md",
         "required gates pass: typecheck, lint, test, build, readiness, storybook-anatomy, storybook-anatomy-override-probe, domain-wrappers, domain-wrappers-direct-drawer-probe, future-consumer-discovery, future-consumer-discovery-negative-probe, future-consumer-discovery-partial-probe, future-consumer-discovery-positive-probe, future-consumer-adoption, future-consumer-adoption-positive-probe, future-consumer-adoption-mismatch-probe, future-consumer-adoption-negative-probe, future-crm-adoption-handoff, consumer-starter-templates-route-contract-probe, consumer-package-sync-negative-probe, consumer-installed-contract-markers, consumer-page-kit-shell-only-route-probe, consumer-page-kit-wrapper-contract-probe, consumer-page-kit-route-wrapper-contract-probe, consumer-page-kit-mismatched-route-contract-probe, consumer-page-kit-default-identifier-route-probe, consumer-page-kit-uncovered-route-probe, consumer-page-kit-path-traversal-probe, consumer-readiness-config-path-traversal-probe, certification-scope, certification-scope-positive-probe, certification-scope-negative-probe, visual-certification-backlog-update, visual-certification-backlog, remaining-page-coverage-update, remaining-page-coverage, remaining-page-coverage-family-contract-probe, kanban-family-update, kanban-family, kanban-family-negative-probe, dashboard-family-update, dashboard-family, dashboard-family-negative-probe, source-assets-update, source-assets, source-assets-reconciliation-update, source-assets-reconciliation, source-assets-reconciliation-nested-exclusion-probe, full-image-page-coverage-update, full-image-page-coverage, full-image-page-coverage-missing-story-probe, full-image-page-coverage-missing-source-marker-probe, full-image-page-coverage-misplaced-source-marker-probe, full-image-page-coverage-nonofficial-import-probe, full-image-page-coverage-unmapped-map-target-probe, reference-sheet-coverage-update, reference-sheet-coverage, reference-sheet-coverage-missing-story-probe, visual-certification-plan, visual-certification-plan-negative-probe, visual-certification-plan-missing-artifact-probe, visual-product-review-update, visual-product-review, visual-certification-capture, visual-certification-capture-source-contract-probe, audit-checks-read-only-probe, readiness-refresh-update, readiness-refresh, goal-completion-update, library-acceptance-update, library-acceptance, library-acceptance-positive-probe, library-acceptance-negative-probe, goal-completion-refresh, library-consumption-status-update, library-consumption-status, library-consumption-status-positive-probe, library-consumption-status-global-complete-probe, library-consumption-status-stale-release-probe, library-consumption-status-stale-readiness-probe, library-consumption-status-negative-probe, crm-real-readiness-update, crm-real-readiness, crm-real-readiness-stale-remaining-page-coverage-probe, local-release-manifest-update, local-release-manifest, consumer-dependencies-sync-check, consumer-dependencies-sync-stale-manifest-probe, consumer-package-install-plan, consumer-package-install-missing-vendor-probe, consumer-lockfile, consumer-lockfile-stale-probe, consumer-refresh, consumer-vendor-sync-check, consumer-vendor-sync-stale-manifest-probe, release-policy-update, release-policy, release-policy-negative-probe, release-channel-update, release-channel, official-library-readiness-update, official-library-readiness, goal-completion",
         "release-candidate self-report check active",
-        "missing/failing release gates: readiness, source-assets-update, source-assets, source-assets-reconciliation-update, source-assets-reconciliation, readiness-refresh, library-acceptance, library-consumption-status, crm-real-readiness, official-library-readiness-update, official-library-readiness"
+        "missing/failing release gates: readiness, source-assets-update, source-assets, source-assets-reconciliation-update, source-assets-reconciliation, readiness-refresh, goal-completion-update, library-acceptance, goal-completion-refresh, library-consumption-status, official-library-readiness-update, official-library-readiness, goal-completion"
       ]
     },
     {
@@ -251,15 +251,15 @@
       "evidence": [
         "release-channel:audit",
         "release-channel-audit.md",
-        "status=pass-local-release-channel",
+        "status=pass-registry-release-channel",
         "localTarballChannelReady=true",
-        "registryReady=false",
+        "registryReady=true",
         "releasePolicyStatus=pass-registry-policy",
         "currentVersion=0.1.0",
         "consumerPackageSyncStatus=pass",
         "consumerVendorVersioningStatus=pass",
         "consumerConfigVersioningStatus=pass",
-        "registryBlockers=2"
+        "registryBlockers=0"
       ]
     },
     {
@@ -276,7 +276,7 @@
     },
     {
       "requirement": "Future CRM can adopt the same library",
-      "status": "process-proven-adoption-not-executed",
+      "status": "failed",
       "evidence": [
         "consumer-integration-contract.md",
         "consumer-adoption-playbook.md",
@@ -286,13 +286,13 @@
         "future-consumer-fixture:audit bootstrap starterFiles pass",
         "future-consumer-fixture:audit installed render/export smoke including @taliya/crm/standard-page-kit",
         "library-readiness-gate future-consumer-discovery pass",
-        "library-readiness-gate future-consumer-discovery-negative-probe pass",
-        "library-readiness-gate future-consumer-discovery-partial-probe pass",
-        "library-readiness-gate future-consumer-discovery-positive-probe pass",
+        "library-readiness-gate future-consumer-discovery-negative-probe missing/fail",
+        "library-readiness-gate future-consumer-discovery-partial-probe missing/fail",
+        "library-readiness-gate future-consumer-discovery-positive-probe missing/fail",
         "library-readiness-gate future-consumer-adoption pass",
-        "library-readiness-gate future-consumer-adoption-positive-probe pass",
-        "library-readiness-gate future-consumer-adoption-mismatch-probe pass",
-        "library-readiness-gate future-consumer-adoption-negative-probe pass",
+        "library-readiness-gate future-consumer-adoption-positive-probe missing/fail",
+        "library-readiness-gate future-consumer-adoption-mismatch-probe missing/fail",
+        "library-readiness-gate future-consumer-adoption-negative-probe missing/fail",
         "library-readiness-gate future-crm-adoption-handoff pass",
         "future-crm-adoption-handoff.md",
         "future-crm-adoption-handoff:audit validates candidate discovery, bootstrap, labeled readiness evidence, and non-completion rule",
@@ -314,8 +314,8 @@
       "evidence": [
         "visual-parity-contract.md",
         "library-readiness-gate certification-scope pass",
-        "library-readiness-gate certification-scope-positive-probe pass",
-        "library-readiness-gate certification-scope-negative-probe pass",
+        "library-readiness-gate certification-scope-positive-probe missing/fail",
+        "library-readiness-gate certification-scope-negative-probe missing/fail",
         "certification-scope:audit scope=current-internal-library-readiness-accepted",
         "certification-scope:audit scopedCompletionAccepted=true",
         "certification-scope:audit exampleValid=true",
@@ -326,11 +326,11 @@
         "sourceReconciliation=blocked-incomplete-canonical-roster canonical=93/101 rosterKnown=93 rosterUnresolved=8 recursive=164 nestedDerivatives=71 archiveExact=true",
         "reference-sheet-coverage:audit",
         "library-readiness-gate reference-sheet-coverage pass",
-        "library-readiness-gate reference-sheet-coverage-missing-story-probe pass",
+        "library-readiness-gate reference-sheet-coverage-missing-story-probe missing/fail",
         "referenceSheets=11/11 components=111 missing=0 ambiguous=0 nonOfficial=0",
         "visual-certification-plan:audit",
         "library-readiness-gate visual-certification-plan pass",
-        "library-readiness-gate visual-certification-plan-negative-probe pass",
+        "library-readiness-gate visual-certification-plan-negative-probe missing/fail",
         "incomplete=64 mapConflicts=0 blockerMentions=91",
         "planActionable=63/63 technicalCycles=0 productReviewDecisions=63 missingPlanData=0 currentEvidenceAssertions=17 assertionCoverage=63/63 missingAssertions=0"
       ]

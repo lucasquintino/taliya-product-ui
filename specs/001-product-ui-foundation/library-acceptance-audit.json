@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T00:46:39.372Z",
+  "generatedAt": "2026-07-16T13:10:59.109Z",
   "status": "fail",
   "checkMode": false,
   "reportLabel": "default",
@@ -18,8 +18,8 @@
   "scopedVisualAcceptance": true,
   "summary": {
     "readiness": "fail",
-    "goalVerdict": "not-complete-globally",
-    "currentInternalReadiness": "proven",
+    "goalVerdict": "readiness-regression",
+    "currentInternalReadiness": "regressed",
     "futureCrmAdoption": "not-executed",
     "globalSourceImageParity": "scoped-out-by-product-acceptance",
     "visualBacklogIncompleteRows": 64,
@@ -34,7 +34,7 @@
     },
     {
       "gate": "current-internal-library-readiness",
-      "status": "pass",
+      "status": "fail",
       "proves": "current taliya-internal can consume official packages/page-kit without local visual clones"
     },
     {
@@ -56,8 +56,8 @@
     },
     {
       "requirement": "Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts",
-      "status": "proven",
-      "pass": true
+      "status": "failed",
+      "pass": false
     },
     {
       "requirement": "Public page kit exported, story-covered, and documented",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T00:46:41.765Z",
+  "generatedAt": "2026-07-16T13:10:34.074Z",
   "status": "fail",
   "checkMode": false,
   "rows": [
@@ -10,7 +10,7 @@
       "proves": "package and docs TypeScript contracts compile",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 19105,
+      "durationMs": 27539,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 typecheck /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -42,7 +42,7 @@
       "proves": "package lint rules pass",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 34980,
+      "durationMs": 53668,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 lint /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -68,7 +68,7 @@
       "proves": "package tests and Storybook smoke pass",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 36744,
+      "durationMs": 56769,
       "timedOut": false,
       "stdoutTail": [
         "packages/ui test: Done",
@@ -76,8 +76,8 @@
         "packages/crm test:  RUN  v4.1.7 /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/packages/crm",
         "packages/crm test:  Test Files  1 passed (1)",
         "packages/crm test:       Tests  157 passed (157)",
-        "packages/crm test:    Start at  21:38:59",
-        "packages/crm test:    Duration  26.81s (transform 1.99s, setup 78ms, import 2.86s, tests 23.20s, environment 491ms)",
+        "packages/crm test:    Start at  09:57:31",
+        "packages/crm test:    Duration  40.28s (transform 2.91s, setup 275ms, import 3.88s, tests 34.38s, environment 1.48s)",
         "packages/crm test: Done",
         "",
         "> @taliya/docs@0.0.0 test:smoke /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/apps/docs",
@@ -89,8 +89,8 @@
         "",
         " Test Files  2 passed (2)",
         "      Tests  5 passed (5)",
-        "   Start at  21:39:27",
-        "   Duration  2.17s (transform 1.53s, setup 0ms, import 1.96s, tests 131ms, environment 0ms)"
+        "   Start at  09:58:13",
+        "   Duration  3.21s (transform 2.22s, setup 0ms, import 2.92s, tests 363ms, environment 0ms)"
       ],
       "stderrTail": []
     },
@@ -101,7 +101,7 @@
       "proves": "packages and static Storybook build",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 244801,
+      "durationMs": 431497,
       "timedOut": false,
       "stdoutTail": [
         "│  Vite storybook-static/assets/DocsRenderer-LL677BLK-BKwGHr3Q.js",
@@ -118,7 +118,7 @@
         "│  \u001b]8;;https://rollupjs.org/configuration-options/#output-manualchunks\u0007https://rollupjs.org/configuration-options/#output-manualchunks\u001b]8;;\u0007",
         "│  - Adjust chunk size limit for this warning via",
         "│  build.chunkSizeWarningLimit.",
-        "│  Vite ✓ built in 3m 57s",
+        "│  Vite ✓ built in 6m 58s",
         "│",
         "◇  Output directory:",
         "│  /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/apps/docs/storybook-static",
@@ -134,7 +134,7 @@
       "proves": "library, Internal consumer, and synthetic future consumer readiness gates pass",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 56246,
+      "durationMs": 101050,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 readiness:audit /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -154,7 +154,7 @@
       "proves": "Storybook owns no product anatomy or official component appearance while fixture geometry remains explicitly classified",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 371,
+      "durationMs": 817,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 storybook-anatomy:audit:strict /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -171,7 +171,7 @@
       "proves": "Storybook strict ownership rejects an injected official component appearance override",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 398,
+      "durationMs": 837,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 storybook-anatomy:audit:override-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -188,7 +188,7 @@
       "proves": "retained CRM table/drawer wrappers add explicit domain mapping or anatomy instead of empty pass-through wrappers",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 368,
+      "durationMs": 682,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 domain-wrappers:audit /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -205,7 +205,7 @@
       "proves": "direct <aside> drawer contracts fail instead of returning as hidden drawer-unification debt",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 413,
+      "durationMs": 790,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 domain-wrappers:audit:direct-drawer-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -222,7 +222,7 @@
       "proves": "future CRM starter route-local componentContractId links fail when missing or dangling",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 529,
+      "durationMs": 916,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-starter-templates:audit:route-contract-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -239,7 +239,7 @@
       "proves": "local sibling directories are scanned for a real future CRM consumer before goal evidence is evaluated",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 371,
+      "durationMs": 641,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-discovery:audit /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -258,7 +258,7 @@
       "proves": "a missing future CRM scan root fails discovery instead of being accepted as zero candidates",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 400,
+      "durationMs": 697,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-discovery:audit:negative-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -275,7 +275,7 @@
       "proves": "partial future CRM evidence is not accepted as a real future CRM candidate",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 399,
+      "durationMs": 705,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-discovery:audit:partial-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -292,7 +292,7 @@
       "proves": "a future CRM directory with the full consumer contract is accepted as a real future CRM candidate",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 401,
+      "durationMs": 699,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-discovery:audit:positive-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -309,7 +309,7 @@
       "proves": "discovered real future CRM candidates must have matching labeled readiness evidence before adoption is considered executed",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 360,
+      "durationMs": 659,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-adoption:audit /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -328,7 +328,7 @@
       "proves": "a discovered future CRM candidate with matching labeled readiness evidence is accepted",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 404,
+      "durationMs": 759,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-adoption:audit:positive-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -345,7 +345,7 @@
       "proves": "a discovered future CRM candidate cannot be adopted with readiness evidence for a different consumer root",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 400,
+      "durationMs": 684,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-adoption:audit:mismatch-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -362,7 +362,7 @@
       "proves": "a discovered future CRM candidate without matching labeled readiness evidence fails the adoption audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 410,
+      "durationMs": 700,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-consumer-adoption:audit:negative-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -379,7 +379,7 @@
       "proves": "future CRM adoption handoff is present, linked, and carries the non-completion rule",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 357,
+      "durationMs": 647,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 future-crm-adoption-handoff:audit /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -398,7 +398,7 @@
       "proves": "fresh consumer vendor tarballs with stale installed package files fail package sync",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 459,
+      "durationMs": 890,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-package-sync:audit:negative-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -415,7 +415,7 @@
       "proves": "installed Internal packages expose current public contract markers, including drawer-size API/CSS, content-drawer full-width topbar CSS, compact checklist drawer tokens, and checklist drawer header/rhythm CSS",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 712,
+      "durationMs": 1227,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer:audit /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -432,7 +432,7 @@
       "proves": "a route that renders only InternalShell without its workspace fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 454,
+      "durationMs": 763,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-page-kit:audit:shell-only-route-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -449,7 +449,7 @@
       "proves": "a wrapper that renders official roots only in an unused helper fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 408,
+      "durationMs": 682,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-page-kit:audit:wrapper-contract-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -466,7 +466,7 @@
       "proves": "a route-local workspace without a component contract fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 407,
+      "durationMs": 703,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-page-kit:audit:route-wrapper-contract-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -483,7 +483,7 @@
       "proves": "a route-local component linked to a component contract for another wrapper fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 407,
+      "durationMs": 711,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-page-kit:audit:mismatched-route-contract-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -500,7 +500,7 @@
       "proves": "a route that exports a named component as default can satisfy the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 411,
+      "durationMs": 738,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-page-kit:audit:default-identifier-route-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -517,7 +517,7 @@
       "proves": "a discovered Internal route that is missing from page-kit config fails the page-kit audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 410,
+      "durationMs": 700,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-page-kit:audit:uncovered-route-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -534,7 +534,7 @@
       "proves": "consumer page-kit config paths outside the consumer root fail schema validation",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 405,
+      "durationMs": 687,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-page-kit:audit:path-traversal-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -551,7 +551,7 @@
       "proves": "consumer readiness config paths outside the consumer root fail schema validation",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 404,
+      "durationMs": 695,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 consumer-readiness-config:audit:path-traversal-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -568,7 +568,7 @@
       "proves": "product-scoped visual certification acceptance is explicit and validated when present",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 362,
+      "durationMs": 665,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 certification-scope:audit /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -587,7 +587,7 @@
       "proves": "valid product-scoped visual certification acceptance is recognized as scoped completion",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 404,
+      "durationMs": 749,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 certification-scope:audit:positive-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -604,7 +604,7 @@
       "proves": "invalid product-scoped visual certification acceptance fails the certification scope audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 405,
+      "durationMs": 847,
       "timedOut": false,
       "stdoutTail": [
         "> taliya-product-ui@0.1.0 certification-scope:audit:negative-probe /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
@@ -621,7 +621,7 @@
       "proves": "visual certification backlog evidence is regenerated from current Batch 9/11 ledgers",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 78,
+      "durationMs": 138,
       "timedOut": false,
       "stdoutTail": [
         "Wrote specs/001-product-ui-foundation/visual-certification-backlog-audit.md",
@@ -636,7 +636,7 @@
       "proves": "visual certification backlog audit is parseable and current",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 67,
+      "durationMs": 188,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -650,7 +650,7 @@
       "proves": "remaining page coverage evidence is regenerated from current Storybook source and static index",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 96,
+      "durationMs": 225,
       "timedOut": false,
       "stdoutTail": [
         "Wrote specs/001-product-ui-foundation/remaining-page-coverage-audit.md",
@@ -665,7 +665,7 @@
       "proves": "all remaining page/image stories are present as individual static Storybook entries",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 91,
+      "durationMs": 136,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -679,7 +679,7 @@
       "proves": "remaining page coverage rejects owner pages that drift away from their official page-family contracts",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 138,
+      "durationMs": 194,
       "timedOut": false,
       "stdoutTail": [
         "Remaining page family-contract probe passed: SalesExperimentalListPage regression was rejected."
@@ -693,7 +693,7 @@
       "proves": "kanban family evidence is regenerated from current Operacao, Vendas, and Financeiro story sources",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 47,
+      "durationMs": 73,
       "timedOut": false,
       "stdoutTail": [
         "Wrote specs/001-product-ui-foundation/kanban-family-audit.md",
@@ -708,7 +708,7 @@
       "proves": "official kanban image coverage pages use reusable page-family, filter, column, card, activity, and drawer components",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 44,
+      "durationMs": 69,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -722,7 +722,7 @@
       "proves": "kanban family audit rejects CrmKanbanPage regressions",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 89,
+      "durationMs": 160,
       "timedOut": false,
       "stdoutTail": [
         "Kanban family regression probe passed: SalesPipelinePage CrmKanbanPage regression was rejected."
@@ -736,7 +736,7 @@
       "proves": "dashboard/right-panel/setup family evidence is regenerated from current story sources",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 55,
+      "durationMs": 85,
       "timedOut": false,
       "stdoutTail": [
         "Wrote specs/001-product-ui-foundation/dashboard-family-audit.md",
@@ -751,7 +751,7 @@
       "proves": "official dashboard, right-panel, and setup image coverage pages use reusable page-family wrappers and domain slots",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 64,
+      "durationMs": 77,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -765,7 +765,7 @@
       "proves": "dashboard family audit rejects CrmRightPanelPage regressions",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 104,
+      "durationMs": 144,
       "timedOut": false,
       "stdoutTail": [
         "Dashboard family regression probe passed: BillingSubscriptionPage CrmRightPanelPage regression was rejected."
@@ -779,7 +779,7 @@
       "proves": "the canonical source-image manifest is regenerated from configured files, hashes, dimensions, and coverage mapping",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 164,
+      "durationMs": 283,
       "timedOut": false,
       "stdoutTail": [
         "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/002-readiness-evidence-portability/source-assets-manifest.json",
@@ -794,7 +794,7 @@
       "proves": "the configured canonical source corpus matches the versioned 101-image manifest",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 147,
+      "durationMs": 250,
       "timedOut": false,
       "stdoutTail": [
         "Source assets: fail; 93/101 files; 93 mapped."
@@ -808,7 +808,7 @@
       "proves": "folder/ZIP/hash/count/derivative reconciliation evidence is regenerated from the delivered source package",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 588,
+      "durationMs": 930,
       "timedOut": false,
       "stdoutTail": [
         "Source reconciliation: blocked-incomplete-canonical-roster; canonical=93/101, recursive=164, ZIP=164."
@@ -822,7 +822,7 @@
       "proves": "the delivered source package reconciles with the configured canonical count without counting nested derivatives",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 547,
+      "durationMs": 943,
       "timedOut": false,
       "stdoutTail": [
         "Source reconciliation: blocked-incomplete-canonical-roster; canonical=93/101, recursive=164, ZIP=164."
@@ -836,7 +836,7 @@
       "proves": "recursive derivative images are rejected as substitutes for canonical source images",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 607,
+      "durationMs": 956,
       "timedOut": false,
       "stdoutTail": [
         "Source reconciliation nested-exclusion probe passed: 71 derivative images cannot satisfy the canonical count."
@@ -850,7 +850,7 @@
       "proves": "full product page/source-image Storybook coverage evidence is regenerated from current image map, source assets, and static index",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 80,
+      "durationMs": 186,
       "timedOut": false,
       "stdoutTail": [
         "Wrote specs/001-product-ui-foundation/full-image-page-coverage-audit.md",
@@ -865,7 +865,7 @@
       "proves": "every product page/source image target has a dedicated static Storybook image-coverage story with an exact source-image marker and official package imports",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 74,
+      "durationMs": 153,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -879,7 +879,7 @@
       "proves": "full product page/source-image coverage rejects missing static Storybook entries",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 124,
+      "durationMs": 215,
       "timedOut": false,
       "stdoutTail": [
         "Full image page coverage missing-story probe passed."
@@ -893,7 +893,7 @@
       "proves": "full product page/source-image coverage rejects stories that lose their exact approved source-image marker",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 120,
+      "durationMs": 209,
       "timedOut": false,
       "stdoutTail": [
         "Full image page coverage missing-source-marker probe passed."
@@ -907,7 +907,7 @@
       "proves": "full product page/source-image coverage rejects source-image markers placed in a different story export",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 120,
+      "durationMs": 205,
       "timedOut": false,
       "stdoutTail": [
         "Full image page coverage misplaced-source-marker probe passed."
@@ -921,7 +921,7 @@
       "proves": "full product page/source-image coverage rejects stories that stop importing official @taliya packages",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 122,
+      "durationMs": 194,
       "timedOut": false,
       "stdoutTail": [
         "Full image page coverage non-official-import probe passed."
@@ -935,7 +935,7 @@
       "proves": "full product page/source-image coverage rejects Covered map rows that have no Storybook mapping",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 119,
+      "durationMs": 212,
       "timedOut": false,
       "stdoutTail": [
         "Full image page coverage unmapped-map-target probe passed."
@@ -949,7 +949,7 @@
       "proves": "component reference-sheet coverage is regenerated from current source hashes and static Storybook index",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 91,
+      "durationMs": 146,
       "timedOut": false,
       "stdoutTail": [
         "Reference sheets: pass-structural-not-visual; 11/11 sheets, 111 components resolved."
@@ -963,7 +963,7 @@
       "proves": "all 11 active reference sheets map every named component uniquely to an official isolated story",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 94,
+      "durationMs": 136,
       "timedOut": false,
       "stdoutTail": [
         "Reference sheets: pass-structural-not-visual; 11/11 sheets, 111 components resolved."
@@ -977,7 +977,7 @@
       "proves": "reference-sheet coverage rejects a missing required official component story",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 140,
+      "durationMs": 218,
       "timedOut": false,
       "stdoutTail": [
         "Reference-sheet missing-story probe passed: removing a required official story fails coverage."
@@ -991,7 +991,7 @@
       "proves": "every incomplete image-certification row has source, story, evidence, blocker, next-action, and current evidence assertion data",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 120,
+      "durationMs": 202,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -1005,7 +1005,7 @@
       "proves": "stale visual evidence and pending rows without current evidence assertions fail the release-candidate gate",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 292,
+      "durationMs": 550,
       "timedOut": false,
       "stdoutTail": [
         "Negative probe passed: stale reopened visual evidence and pending rows without current evidence assertions fail the visual certification plan audit."
@@ -1019,7 +1019,7 @@
       "proves": "visual certification plan rejects ledger evidence that points at missing screenshot or metrics artifacts",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 166,
+      "durationMs": 290,
       "timedOut": false,
       "stdoutTail": [
         "Visual certification plan missing-artifact probe passed: 72_round-4.1Q_acesso-assinatura_signup-criar-conta-salvo-ajustes.png rejected tmp/visual-audit/batch11/__missing-artifact-probe__/image72-source-current-side-by-side.png."
@@ -1033,7 +1033,7 @@
       "proves": "the local product-review board and review contract are regenerated from current capture evidence",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 58,
+      "durationMs": 101,
       "timedOut": false,
       "stdoutTail": [
         "Visual product review: pass-review-ready-not-approved; 63/63 rows.",
@@ -1050,7 +1050,7 @@
       "proves": "all product-review rows expose current source, render, diff, metrics, blocker, and next-action evidence without automatic approval",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 53,
+      "durationMs": 90,
       "timedOut": false,
       "stdoutTail": [
         "Visual product review evidence: current; 63/63 rows review-ready, 0 approved automatically."
@@ -1064,7 +1064,7 @@
       "proves": "every pending image with a Storybook target has current source-sized screenshot and raw pixel-diff evidence without threshold-based approval",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 117,
+      "durationMs": 187,
       "timedOut": false,
       "stdoutTail": [
         "Visual capture evidence: current; 63/63 captured rows."
@@ -1078,7 +1078,7 @@
       "proves": "visual capture currency ignores volatile manifest metadata and rejects changed official source image hashes",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 444,
+      "durationMs": 792,
       "timedOut": false,
       "stdoutTail": [
         "Visual capture source-contract probe passed: volatile metadata is ignored; source image, render-contract, non-static mode, and visible render errors are rejected."
@@ -1092,10 +1092,10 @@
       "proves": "audit check commands do not mutate tracked or untracked repository state",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 2984,
+      "durationMs": 5030,
       "timedOut": false,
       "stdoutTail": [
-        "Audit check purity probe passed: 28 checks, 21 currently passing, repository unchanged."
+        "Audit check purity probe passed: 28 checks, 22 currently passing, repository unchanged."
       ],
       "stderrTail": []
     },
@@ -1106,7 +1106,7 @@
       "proves": "aggregate readiness evidence is regenerated after all package, family, source-image, and visual-certification reports",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 56849,
+      "durationMs": 63988,
       "timedOut": false,
       "stdoutTail": [
         "Library readiness gate: fail",
@@ -1122,7 +1122,7 @@
       "proves": "the final aggregate readiness state matches every lower-level gate updated in this release-candidate run",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 52553,
+      "durationMs": 101397,
       "timedOut": false,
       "stdoutTail": [
         "Library readiness gate: fail"
@@ -1136,15 +1136,16 @@
       "commandText": "node scripts/audit-goal-completion.mjs",
       "timeoutMs": 60000,
       "proves": "goal completion evidence is regenerated from current reports before library acceptance is evaluated",
-      "status": "pass",
-      "exitCode": 0,
-      "durationMs": 64,
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 137,
       "timedOut": false,
       "stdoutTail": [
-        "Wrote specs/001-product-ui-foundation/goal-completion-audit.md",
-        "Wrote specs/001-product-ui-foundation/goal-completion-audit.json"
+        ""
       ],
-      "stderrTail": []
+      "stderrTail": [
+        "Goal completion audit found a readiness regression."
+      ]
     },
     {
       "id": "library-acceptance-update",
@@ -1153,7 +1154,7 @@
       "proves": "current Internal/library acceptance evidence is regenerated from current readiness and goal reports",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 48,
+      "durationMs": 86,
       "timedOut": false,
       "stdoutTail": [
         "Library acceptance audit: fail",
@@ -1169,7 +1170,7 @@
       "proves": "current Internal/library acceptance gate passes while global completion remains separately reported",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 46,
+      "durationMs": 104,
       "timedOut": false,
       "stdoutTail": [
         "Library acceptance audit: fail",
@@ -1187,7 +1188,7 @@
       "proves": "valid Internal/library acceptance evidence is accepted in an isolated probe",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 87,
+      "durationMs": 167,
       "timedOut": false,
       "stdoutTail": [
         "Library acceptance valid-evidence probe passed."
@@ -1201,7 +1202,7 @@
       "proves": "false-positive Internal/library acceptance evidence is rejected",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 87,
+      "durationMs": 183,
       "timedOut": false,
       "stdoutTail": [
         "Library acceptance false-positive probe passed."
@@ -1213,15 +1214,16 @@
       "commandText": "node scripts/audit-goal-completion.mjs",
       "timeoutMs": 60000,
       "proves": "goal completion evidence is refreshed after current Internal/library acceptance is evaluated",
-      "status": "pass",
-      "exitCode": 0,
-      "durationMs": 53,
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 103,
       "timedOut": false,
       "stdoutTail": [
-        "Wrote specs/001-product-ui-foundation/goal-completion-audit.md",
-        "Wrote specs/001-product-ui-foundation/goal-completion-audit.json"
+        ""
       ],
-      "stderrTail": []
+      "stderrTail": [
+        "Goal completion audit found a readiness regression."
+      ]
     },
     {
       "id": "library-consumption-status-update",
@@ -1230,7 +1232,7 @@
       "proves": "compact library consumption status is regenerated from current release/readiness/acceptance/goal reports",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 50,
+      "durationMs": 100,
       "timedOut": false,
       "stdoutTail": [
         "Library consumption status: fail",
@@ -1246,7 +1248,7 @@
       "proves": "compact library consumption status passes while global completion remains separately reported",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 49,
+      "durationMs": 76,
       "timedOut": false,
       "stdoutTail": [
         "Library consumption status: fail",
@@ -1264,7 +1266,7 @@
       "proves": "valid compact library consumption evidence is accepted in an isolated probe",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 88,
+      "durationMs": 164,
       "timedOut": false,
       "stdoutTail": [
         "Library consumption status valid-evidence probe passed."
@@ -1278,7 +1280,7 @@
       "proves": "complete compact library consumption evidence reports pass-global-goal when future CRM adoption is executed",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 88,
+      "durationMs": 165,
       "timedOut": false,
       "stdoutTail": [
         "Library consumption status global-complete probe passed."
@@ -1292,7 +1294,7 @@
       "proves": "compact library consumption evidence rejects stale release candidates that lack consumption-status gates",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 89,
+      "durationMs": 179,
       "timedOut": false,
       "stdoutTail": [
         "Library consumption status stale-release-candidate probe passed."
@@ -1306,7 +1308,7 @@
       "proves": "compact library consumption evidence rejects stale readiness reports that lack required aggregate gates",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 89,
+      "durationMs": 183,
       "timedOut": false,
       "stdoutTail": [
         "Library consumption status stale-readiness probe passed."
@@ -1320,7 +1322,7 @@
       "proves": "false-positive compact library consumption evidence is rejected",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 87,
+      "durationMs": 182,
       "timedOut": false,
       "stdoutTail": [
         "Library consumption status false-positive probe passed."
@@ -1334,10 +1336,10 @@
       "proves": "CRM real readiness handoff is regenerated from current package, Internal, page-kit, dynamic page/drawer, bootstrap, and future-consumer evidence",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 65,
+      "durationMs": 151,
       "timedOut": false,
       "stdoutTail": [
-        "CRM real readiness audit: fail",
+        "CRM real readiness audit: pass-ready-to-start-crm-real",
         "Wrote specs/001-product-ui-foundation/crm-real-readiness-audit.md",
         "Wrote specs/001-product-ui-foundation/crm-real-readiness-audit.json"
       ],
@@ -1348,18 +1350,16 @@
       "commandText": "node scripts/audit-crm-real-readiness.mjs --check",
       "timeoutMs": 60000,
       "proves": "library is practically ready to start the real CRM while global adoption remains separately reported",
-      "status": "fail",
-      "exitCode": 1,
-      "durationMs": 60,
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 140,
       "timedOut": false,
       "stdoutTail": [
-        "CRM real readiness audit: fail",
+        "CRM real readiness audit: pass-ready-to-start-crm-real",
         "Wrote specs/001-product-ui-foundation/crm-real-readiness-audit.md",
         "Wrote specs/001-product-ui-foundation/crm-real-readiness-audit.json"
       ],
-      "stderrTail": [
-        "Failed CRM real readiness rows: current-internal-fully-consuming"
-      ]
+      "stderrTail": []
     },
     {
       "id": "crm-real-readiness-stale-remaining-page-coverage-probe",
@@ -1368,7 +1368,7 @@
       "proves": "CRM real readiness rejects stale remaining-page Storybook coverage evidence",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 104,
+      "durationMs": 192,
       "timedOut": false,
       "stdoutTail": [
         "CRM real readiness stale remaining-page coverage probe passed."
@@ -1382,7 +1382,7 @@
       "proves": "consumer-facing local release manifest is regenerated from current package tarballs",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 51,
+      "durationMs": 91,
       "timedOut": false,
       "stdoutTail": [
         "Local release manifest audit: pass"
@@ -1396,7 +1396,7 @@
       "proves": "local package manifest matches current tarball names, versions, hashes, sizes, and install order",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 47,
+      "durationMs": 87,
       "timedOut": false,
       "stdoutTail": [
         "Local release manifest audit: pass"
@@ -1410,13 +1410,13 @@
       "proves": "the current Internal package.json @taliya/* dependency tarballs match the local release manifest",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 44,
+      "durationMs": 86,
       "timedOut": false,
       "stdoutTail": [
-        "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
-        "unchanged: @taliya/tokens -> file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz",
-        "unchanged: @taliya/ui -> file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz",
-        "unchanged: @taliya/crm -> file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz"
+        "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal (npm-registry)",
+        "unchanged: @taliya/tokens -> ^0.1.0",
+        "unchanged: @taliya/ui -> ^0.1.0",
+        "unchanged: @taliya/crm -> ^0.1.0"
       ],
       "stderrTail": []
     },
@@ -1427,7 +1427,7 @@
       "proves": "stale consumer package.json tarball dependencies fail the manifest-driven dependency sync check",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 84,
+      "durationMs": 184,
       "timedOut": false,
       "stdoutTail": [
         "Consumer dependency sync stale manifest probe: pass"
@@ -1441,14 +1441,14 @@
       "proves": "the current Internal consumer can reinstall manifest-derived local package tarballs from its vendor directory",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 44,
+      "durationMs": 82,
       "timedOut": false,
       "stdoutTail": [
         "Consumer package install plan for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
-        "ready: @taliya/tokens dependency-ok tarball-ok",
-        "ready: @taliya/ui dependency-ok tarball-ok",
-        "ready: @taliya/crm dependency-ok tarball-ok",
-        "Install command: npm install --force --no-audit --no-fund file:vendor/taliya-product-ui/taliya-tokens-0.1.0.tgz file:vendor/taliya-product-ui/taliya-ui-0.1.0.tgz file:vendor/taliya-product-ui/taliya-crm-0.1.0.tgz",
+        "ready: @taliya/tokens dependency-ok registry-ok",
+        "ready: @taliya/ui dependency-ok registry-ok",
+        "ready: @taliya/crm dependency-ok registry-ok",
+        "Install command: npm install --force --no-audit --no-fund @taliya/tokens@^0.1.0 @taliya/ui@^0.1.0 @taliya/crm@^0.1.0",
         "Consumer package install plan check: pass"
       ],
       "stderrTail": []
@@ -1460,7 +1460,7 @@
       "proves": "a consumer package install plan fails when manifest-derived vendor tarballs are missing",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 85,
+      "durationMs": 163,
       "timedOut": false,
       "stdoutTail": [
         "Consumer package install missing-vendor probe: pass"
@@ -1474,7 +1474,7 @@
       "proves": "the current Internal package-lock.json local Taliya package entries match the local release manifest",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 48,
+      "durationMs": 93,
       "timedOut": false,
       "stdoutTail": [
         "Consumer lockfile audit: pass",
@@ -1490,7 +1490,7 @@
       "proves": "stale package-lock resolved tarballs fail the consumer lockfile audit",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 87,
+      "durationMs": 153,
       "timedOut": false,
       "stdoutTail": [
         "Consumer lockfile stale probe: pass"
@@ -1504,7 +1504,7 @@
       "proves": "the current Internal consumer can run the manifest-driven package refresh flow end-to-end in check mode",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 293,
+      "durationMs": 537,
       "timedOut": false,
       "stdoutTail": [
         "Consumer refresh audit: pass",
@@ -1520,7 +1520,7 @@
       "proves": "the current Internal vendor directory matches the local release manifest, including tarballs and manifest",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 49,
+      "durationMs": 100,
       "timedOut": false,
       "stdoutTail": [
         "Consumer vendor sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
@@ -1538,7 +1538,7 @@
       "proves": "a consumer vendor directory with a stale local release manifest fails the manifest-driven sync check",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 95,
+      "durationMs": 183,
       "timedOut": false,
       "stdoutTail": [
         "Consumer vendor sync stale manifest probe: pass"
@@ -1552,7 +1552,7 @@
       "proves": "versioned local/registry release policy evidence is regenerated before release-channel checks",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 50,
+      "durationMs": 86,
       "timedOut": false,
       "stdoutTail": [
         "Release policy audit: pass-registry-policy"
@@ -1566,7 +1566,7 @@
       "proves": "release policy explicitly separates local tarball channel from future registry publication decisions",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 45,
+      "durationMs": 84,
       "timedOut": false,
       "stdoutTail": [
         "Release policy audit: pass-registry-policy"
@@ -1580,7 +1580,7 @@
       "proves": "invalid release policy contracts fail instead of being accepted as release evidence",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 87,
+      "durationMs": 160,
       "timedOut": false,
       "stdoutTail": [
         "Negative probe passed: invalid release policy contracts fail the release policy audit."
@@ -1594,10 +1594,10 @@
       "proves": "local tarball release channel evidence is regenerated before official library readiness is checked",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 48,
+      "durationMs": 85,
       "timedOut": false,
       "stdoutTail": [
-        "Release channel audit: pass-local-release-channel"
+        "Release channel audit: pass-registry-release-channel"
       ],
       "stderrTail": []
     },
@@ -1608,10 +1608,10 @@
       "proves": "the current local package release channel is reliable for consumers, while registry publication remains separately reported",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 44,
+      "durationMs": 94,
       "timedOut": false,
       "stdoutTail": [
-        "Release channel audit: pass-local-release-channel"
+        "Release channel audit: pass-registry-release-channel"
       ],
       "stderrTail": []
     },
@@ -1622,7 +1622,7 @@
       "proves": "official library readiness evidence is regenerated from package metadata, gates, Internal consumption, CRM readiness, and goal caveats",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 48,
+      "durationMs": 107,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -1638,7 +1638,7 @@
       "proves": "the library is ready as the official reusable consumer package set for the current scope",
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 46,
+      "durationMs": 102,
       "timedOut": false,
       "stdoutTail": [
         ""
@@ -1652,14 +1652,16 @@
       "commandText": "node scripts/audit-goal-completion.mjs --check",
       "timeoutMs": 60000,
       "proves": "goal-level readiness has no current-scope regression",
-      "status": "pass",
-      "exitCode": 0,
-      "durationMs": 50,
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 113,
       "timedOut": false,
       "stdoutTail": [
         ""
       ],
-      "stderrTail": []
+      "stderrTail": [
+        "Goal completion audit found a readiness regression."
+      ]
     }
   ],
   "skipped": [],

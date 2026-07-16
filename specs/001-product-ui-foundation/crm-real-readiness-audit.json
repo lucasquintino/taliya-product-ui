@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T00:50:33.436Z",
+  "generatedAt": "2026-07-16T13:11:00.466Z",
   "status": "fail",
   "currentInternalReady": true,
   "crmRealCanStart": false,
@@ -12,8 +12,8 @@
     "remainingPageStoriesChecked": 54,
     "domainDrawerFamilies": 13,
     "internalCoveredRoutes": 4,
-    "publishedPackages": 0,
-    "registryAdoptedPackages": 0,
+    "publishedPackages": 3,
+    "registryAdoptedPackages": 3,
     "futureCrmCandidates": 0,
     "adoptedFutureCrmCandidates": 0
   },
@@ -22,7 +22,7 @@
       "id": "official-packages-and-release",
       "status": "fail",
       "evidence": "release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json",
-      "meaning": "Official release is incomplete: technicalCandidate=false, registryPublished=0/3."
+      "meaning": "Official release is incomplete: technicalCandidate=false, registryPublished=3/3."
     },
     {
       "id": "current-internal-fully-consuming",
@@ -32,9 +32,9 @@
     },
     {
       "id": "current-internal-registry-adoption",
-      "status": "fail",
+      "status": "pass",
       "evidence": "registry-consumer-adoption-audit.json",
-      "meaning": "Internal still lacks official registry adoption: adopted=0/3, distributionConfig=false."
+      "meaning": "Internal resolves all three official packages from npm with aligned manifests, lockfile, installed versions, and distribution config."
     },
     {
       "id": "standard-page-kit-complete",
@@ -188,8 +188,6 @@
   "missingPublicComponents": [],
   "missingStarterFiles": [],
   "nextActions": [
-    "Publish @taliya/tokens, @taliya/ui, and @taliya/crm at the exact aligned version through the official npm release workflow.",
-    "Migrate taliya-internal from vendored tarballs to the published npm versions and refresh its manifest, lockfile, installed modules, and distribution config.",
     "Create or connect the real CRM app.",
     "Bootstrap or version taliya-readiness.config.json and taliya-page-kit.config.json in the CRM app.",
     "Compose CRM pages only from official page-kit roots; promote missing variants back into @taliya/ui or @taliya/crm.",

@@ -85,7 +85,11 @@ if (write) {
   writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`);
   writeFileSync(readinessConfigPath, `${JSON.stringify(readinessConfig, null, 2)}\n`);
 
-  const install = spawnSync("npm", ["install"], { cwd: consumerRoot, stdio: "inherit" });
+  const registrySpecs = packageSpecs.map((packageSpec) => `${packageSpec.name}@${expectedRange}`);
+  const install = spawnSync("npm", ["install", "--save", ...registrySpecs], {
+    cwd: consumerRoot,
+    stdio: "inherit"
+  });
   if (install.status !== 0 || install.error) {
     restoreConsumerManifests();
     console.error("Registry migration failed during npm install; consumer manifests were restored.");

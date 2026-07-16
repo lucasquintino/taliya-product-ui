@@ -22,6 +22,7 @@ const consumerRoot = resolve(root, optionValue("--consumer", "../taliya-internal
 const manifestPath = resolve(root, optionValue("--manifest", "dist-packages/taliya-product-ui-local-manifest.json"));
 const vendorRelative = optionValue("--vendor", "vendor/taliya-product-ui").replaceAll("\\", "/").replace(/\/$/, "");
 const packageJsonPath = resolve(consumerRoot, "package.json");
+const readinessConfigPath = resolve(consumerRoot, optionValue("--readiness-config", "taliya-readiness.config.json"));
 const write = hasFlag("--write");
 const check = hasFlag("--check");
 
@@ -42,11 +43,13 @@ if (manifest.schemaVersion !== 1 || manifest.channel !== "local-tarball" || !Arr
 }
 
 const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));
+const readinessConfig = existsSync(readinessConfigPath) ? JSON.parse(readFileSync(readinessConfigPath, "utf8")) : {};
+const channel = readinessConfig.distribution?.channel === "npm-registry" ? "npm-registry" : "local-tarball";
 const nextPackageJson = JSON.parse(JSON.stringify(packageJson));
 nextPackageJson.dependencies = nextPackageJson.dependencies ?? {};
 
 const rows = manifest.packages.map((packageRow) => {
-  const expected = `file:${vendorRelative}/${packageRow.tarball}`;
+  const expected = channel === "npm-registry" ? `^${packageRow.version}` : `file:${vendorRelative}/${packageRow.tarball}`;
   const actual = nextPackageJson.dependencies[packageRow.name] ?? "";
   if (write && actual !== expected) {
     nextPackageJson.dependencies[packageRow.name] = expected;
@@ -66,7 +69,7 @@ if (write && changed) {
   writeFileSync(packageJsonPath, `${JSON.stringify(nextPackageJson, null, 2)}\n`);
 }
 
-console.log(`Consumer dependency sync ${write ? "write" : "dry-run"} for ${consumerRoot}`);
+console.log(`Consumer dependency sync ${write ? "write" : "dry-run"} for ${consumerRoot} (${channel})`);
 for (const row of rows) {
   console.log(`${row.action}: ${row.name} -> ${row.expected}`);
 }
@@ -77,6 +80,6 @@ if (write && changedAfterWrite) {
 }
 
 if (check && !rows.every((row) => row.pass)) {
-  console.error("Consumer package.json dependencies do not match the local release manifest.");
+  console.error(`Consumer package.json dependencies do not match the ${channel} release channel.`);
   process.exit(1);
 }

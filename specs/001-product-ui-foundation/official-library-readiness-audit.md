@@ -1,6 +1,6 @@
 # Official Library Readiness Audit
 
-Generated: 2026-07-16T00:51:02.164Z
+Generated: 2026-07-16T13:11:01.044Z
 
 Status: fail
 
@@ -15,10 +15,10 @@ This report answers whether `taliya-product-ui` is ready to act as the official 
 - Global goal complete: `false`
 - Package version: `0.1.0`
 - Release-candidate gates: `103`
-- Release channel: `pass-local-release-channel`
+- Release channel: `pass-registry-release-channel`
 - Release policy: `pass-registry-policy`
 - Local tarball channel ready: `true`
-- Registry ready: `false`
+- Registry ready: `true`
 
 ## Gate Rows
 

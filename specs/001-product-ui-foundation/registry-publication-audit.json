@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-07-16T00:34:10.238Z",
-  "status": "not-published",
+  "generatedAt": "2026-07-16T12:28:54.787Z",
+  "status": "pass-published",
   "registry": "https://registry.npmjs.org/",
   "currentVersion": "0.1.0",
   "versionsAligned": true,
-  "publishedPackageCount": 0,
+  "publishedPackageCount": 3,
   "expectedPackageCount": 3,
   "rows": [
     {
@@ -12,36 +12,36 @@
       "name": "@taliya/tokens",
       "version": "0.1.0",
       "metadataUrl": "https://registry.npmjs.org/%40taliya%2Ftokens/0.1.0",
-      "httpStatus": 404,
-      "published": false,
-      "metadataPass": false,
-      "tarball": null,
-      "integrity": null,
-      "reason": "package version is not published"
+      "httpStatus": 200,
+      "published": true,
+      "metadataPass": true,
+      "tarball": "https://registry.npmjs.org/@taliya/tokens/-/tokens-0.1.0.tgz",
+      "integrity": "sha512-M0i+uV3U7nbzwpB+FjXMM3z7VZpf+am857GNqGyG1QCC3yDoFYIy58nFCb2dfcNCzgXGd8G9p0dojKGNdw/4QA==",
+      "reason": null
     },
     {
       "directory": "ui",
       "name": "@taliya/ui",
       "version": "0.1.0",
       "metadataUrl": "https://registry.npmjs.org/%40taliya%2Fui/0.1.0",
-      "httpStatus": 404,
-      "published": false,
-      "metadataPass": false,
-      "tarball": null,
-      "integrity": null,
-      "reason": "package version is not published"
+      "httpStatus": 200,
+      "published": true,
+      "metadataPass": true,
+      "tarball": "https://registry.npmjs.org/@taliya/ui/-/ui-0.1.0.tgz",
+      "integrity": "sha512-JueF8FJBqzg8De2BRyOO4HVZppAf8IvBeOB2urygEhBUozj8orbsX+2L3U3iuIrSQJ0xskyuTlt9abU52cO2pg==",
+      "reason": null
     },
     {
       "directory": "crm",
       "name": "@taliya/crm",
       "version": "0.1.0",
       "metadataUrl": "https://registry.npmjs.org/%40taliya%2Fcrm/0.1.0",
-      "httpStatus": 404,
-      "published": false,
-      "metadataPass": false,
-      "tarball": null,
-      "integrity": null,
-      "reason": "package version is not published"
+      "httpStatus": 200,
+      "published": true,
+      "metadataPass": true,
+      "tarball": "https://registry.npmjs.org/@taliya/crm/-/crm-0.1.0.tgz",
+      "integrity": "sha512-Ame7pef2qKYvWjp/MiJOdh6H02rSFuNCkm5eJXbe8hMNZxO/XuUr/U6iBFqrW6q+48Q/Boskeu4scjwm774jBA==",
+      "reason": null
     }
   ]
 }

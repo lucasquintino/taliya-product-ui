@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T00:51:02.549Z",
+  "generatedAt": "2026-07-16T13:10:59.709Z",
   "status": "fail",
   "currentInternalLibraryAccepted": false,
   "currentInternalConsumptionPass": true,
@@ -90,7 +90,29 @@
     "visual-certification-plan-negative-probe",
     "goal-completion"
   ],
-  "missingReadinessGateIds": [],
+  "missingReadinessGateIds": [
+    "future-consumer-fixture",
+    "future-consumer-discovery-negative-probe",
+    "future-consumer-discovery-partial-probe",
+    "future-consumer-discovery-positive-probe",
+    "future-consumer-adoption-positive-probe",
+    "future-consumer-adoption-mismatch-probe",
+    "future-consumer-adoption-negative-probe",
+    "consumer-package-sync",
+    "consumer-package-sync-negative-probe",
+    "consumer-vendor-versioning",
+    "consumer-page-kit-shell-only-route-probe",
+    "consumer-page-kit-wrapper-contract-probe",
+    "consumer-page-kit-route-wrapper-contract-probe",
+    "consumer-page-kit-mismatched-route-contract-probe",
+    "consumer-page-kit-default-identifier-route-probe",
+    "consumer-page-kit-path-traversal-probe",
+    "consumer-readiness-config-path-traversal-probe",
+    "consumer-runtime",
+    "certification-scope-positive-probe",
+    "certification-scope-negative-probe",
+    "visual-certification-plan-negative-probe"
+  ],
   "rows": [
     {
       "id": "current-internal-accepted",
@@ -126,7 +148,7 @@
       "id": "aggregate-readiness",
       "status": "fail",
       "evidence": "library-readiness-gate.json",
-      "meaning": "Readiness is missing required gates: ."
+      "meaning": "Readiness is missing required gates: future-consumer-fixture, future-consumer-discovery-negative-probe, future-consumer-discovery-partial-probe, future-consumer-discovery-positive-probe, future-consumer-adoption-positive-probe, future-consumer-adoption-mismatch-probe, future-consumer-adoption-negative-probe, consumer-package-sync, consumer-package-sync-negative-probe, consumer-vendor-versioning, consumer-page-kit-shell-only-route-probe, consumer-page-kit-wrapper-contract-probe, consumer-page-kit-route-wrapper-contract-probe, consumer-page-kit-mismatched-route-contract-probe, consumer-page-kit-default-identifier-route-probe, consumer-page-kit-path-traversal-probe, consumer-readiness-config-path-traversal-probe, consumer-runtime, certification-scope-positive-probe, certification-scope-negative-probe, visual-certification-plan-negative-probe."
     },
     {
       "id": "future-crm-process",
