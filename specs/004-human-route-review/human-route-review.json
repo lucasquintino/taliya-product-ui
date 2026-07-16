@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T22:13:45.791Z",
+  "generatedAt": "2026-07-16T22:20:06.408Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 7,
+  "completedRouteCount": 8,
   "failedRouteCount": 0,
-  "pendingRouteCount": 66,
+  "pendingRouteCount": 65,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -639,38 +639,59 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:20:04.774Z",
+        "evidence": [
+          "tmp/human-route-review/24-checklists/canonical.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:20:04.880Z",
+        "evidence": [
+          "tmp/human-route-review/24-checklists/desktop.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:20:04.970Z",
+        "evidence": [
+          "tmp/human-route-review/24-checklists/mobile.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:20:06.048Z",
         "evidence": [],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "filter-search",
+          "all-page-filter-menus",
+          "quick-filters",
+          "all-table-sorts",
+          "table-selection-context",
+          "pagination",
+          "checklist-actions",
+          "drawer-open-close"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:20:05.058Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Checklist selection now updates title, facts, status, progress, steps, activity, and comment; all drawer actions and mobile full-viewport overlay verified."
+      ]
     },
     {
       "image": "24_round-4.1D_inbox_01_conversa-aberta.png.png",

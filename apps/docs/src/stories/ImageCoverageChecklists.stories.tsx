@@ -11,6 +11,7 @@ import {
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
 import type {
+  ChecklistDrawerActivity,
   ChecklistDrawerComment,
   ChecklistDrawerFact,
   ChecklistDrawerStep,
@@ -123,12 +124,29 @@ const checklistDrawerSteps: ChecklistDrawerStep[] = [
   { id: "payments", title: "Revisar pagamentos críticos", state: "pending" }
 ];
 
-const checklistDrawerFacts: ChecklistDrawerFact[] = [
-  { id: "status", icon: "calendar", label: "Status", value: <><span className="tcrm-checklist-drawer__status-dot" aria-hidden="true" />Em andamento</>, tone: "info" },
-  { id: "owner", icon: "user", label: "Responsável", value: "Mariana", avatarSrc: image79Avatar },
-  { id: "deadline", icon: "calendar", label: "Prazo", value: "Hoje 08:00", tone: "danger" },
-  { id: "progress", icon: "clock", label: "Progresso", value: "3/5" }
-];
+const checklistDrawerActivity: ChecklistDrawerActivity = {
+  id: "latest",
+  icon: "clock",
+  time: "07:42",
+  body: <>Mariana marcou "Preparar salas" como concluído</>
+};
+
+const checklistStatusLabel: Record<ChecklistTableRow["status"], string> = {
+  progress: "Em andamento",
+  blocked: "Bloqueado",
+  pending: "Pendente",
+  review: "Em revisão",
+  done: "Concluído"
+};
+
+function contextualChecklistSteps(row: ChecklistTableRow): ChecklistDrawerStep[] {
+  if (row.id === "opening") return checklistDrawerSteps;
+  return Array.from({ length: row.progress.total }, (_, index) => ({
+    id: `${row.id}-step-${index + 1}`,
+    title: index === row.progress.completed ? "Executar próximo passo operacional" : `Etapa ${index + 1}`,
+    state: index < row.progress.completed ? "done" : "pending"
+  }));
+}
 
 function ChecklistsPageContent({
   selectedQueueId,
@@ -145,6 +163,8 @@ function ChecklistsPageContent({
   onItemsPerPageClick,
   onPreviousPage,
   onNextPage,
+  onShellAction,
+  announcement,
   drawer
 }: {
   selectedQueueId: string;
@@ -161,6 +181,8 @@ function ChecklistsPageContent({
   onItemsPerPageClick: () => void;
   onPreviousPage: () => void;
   onNextPage: () => void;
+  onShellAction: (message: string) => void;
+  announcement: string;
   drawer?: React.ReactNode;
 }) {
   const filters = useMemo<PageFilterBarFilter[]>(
@@ -228,7 +250,17 @@ function ChecklistsPageContent({
       drawer={drawer}
       drawerPlacement="content"
       drawerSize="compact"
+      globalActions={{
+        onAvatar: () => onShellAction("Perfil da operadora aberto"),
+        onMessages: () => onShellAction("Mensagens abertas"),
+        onNotifications: () => onShellAction("Notificações abertas"),
+        onSearch: () => onShellAction("Busca global aberta")
+      }}
       navItems={checklistsNavItems}
+      onBack={() => onShellAction("Navegação de retorno acionada")}
+      onNavChange={(id) => onShellAction(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => onShellAction(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => onShellAction(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="stacked"
       sidebarItems={crmEmptyShellSidebarItems}
       subtitle="Rotinas operacionais do estúdio"
@@ -267,19 +299,23 @@ function ChecklistsPageContent({
         />
       }
     >
-      <ChecklistTable
-        pageLabel={pageLabel}
-        rows={rows}
-        onItemsPerPageClick={onItemsPerPageClick}
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-        onRowSelect={onChecklistSelect}
-      />
+      <>
+        <ChecklistTable
+          pageLabel={pageLabel}
+          rows={rows}
+          onItemsPerPageClick={onItemsPerPageClick}
+          onNextPage={onNextPage}
+          onPreviousPage={onPreviousPage}
+          onRowSelect={onChecklistSelect}
+        />
+        <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+      </>
     </CrmWorklistPage>
   );
 }
 
 export function ChecklistsShell() {
+  const [announcedAction, setAnnouncedAction] = useState("");
   const [query, setQuery] = useState("");
   const [filterValues, setFilterValues] = useState<Record<string, string | string[]>>({});
   const [selectedQueueId, setSelectedQueueId] = useState("today");
@@ -291,32 +327,63 @@ export function ChecklistsShell() {
     { id: "mariana", author: "Mariana", body: "Recepção aberta. Sala 2 ainda aguardando confirmação do professor.", time: "07:45", avatarSrc: image79Avatar }
   );
   const checkedCount = steps.filter((item) => item.state === "done").length;
+  const selectedChecklist = checklistRows.find((row) => row.id === selectedChecklistId) ?? checklistRows[0]!;
+  const drawerFacts = useMemo<ChecklistDrawerFact[]>(() => [
+    { id: "status", icon: "calendar", label: "Status", value: <><span className="tcrm-checklist-drawer__status-dot" aria-hidden="true" />{checklistStatusLabel[selectedChecklist.status]}</>, tone: selectedChecklist.status === "blocked" ? "danger" : "info" },
+    { id: "owner", icon: "user", label: "Responsável", value: selectedChecklist.owner.name, avatarSrc: selectedChecklist.owner.avatarSrc },
+    { id: "deadline", icon: "calendar", label: "Prazo", value: selectedChecklist.deadline, tone: selectedChecklist.deadlineTone === "danger" ? "danger" : undefined },
+    { id: "progress", icon: "clock", label: "Progresso", value: `${checkedCount}/${steps.length}` }
+  ], [checkedCount, selectedChecklist, steps.length]);
+  const drawerActivity = useMemo<ChecklistDrawerActivity>(() => selectedChecklist.id === "opening"
+    ? checklistDrawerActivity
+    : {
+        id: `${selectedChecklist.id}-activity`,
+        icon: "clock",
+        time: selectedChecklist.activity,
+        body: <>Última atividade registrada em <strong>{selectedChecklist.title}</strong></>
+      }, [selectedChecklist]);
 
   const drawerNode = drawerOpen ? (
     <ChecklistDrawer
+      activity={drawerActivity}
       className="sb-image-coverage-checklists-drawer"
       comment={comment}
       completedSteps={checkedCount}
-      facts={checklistDrawerFacts}
+      facts={drawerFacts}
       steps={steps}
       totalSteps={steps.length}
       onStepToggle={(item, checked) => {
         setSteps((current) => current.map((step) => (step.id === item.id ? { ...step, state: checked ? "done" : "pending" } : step)));
+        setAnnouncedAction(`${item.title}: ${checked ? "concluído" : "pendente"}`);
       }}
-      onClose={() => setDrawerOpen(false)}
-      onContinue={() => setSelectedQueueId("opening")}
-      onCreateTask={() => setQuery("tarefa criada")}
+      onClose={() => {
+        setDrawerOpen(false);
+        setAnnouncedAction("Drawer de checklist fechado");
+      }}
+      onContinue={() => {
+        setSelectedQueueId("opening");
+        setAnnouncedAction("Execução do checklist continuada");
+      }}
+      onCreateTask={() => {
+        setQuery("tarefa criada");
+        setAnnouncedAction("Tarefa criada a partir do checklist");
+      }}
       onComplete={() => {
         setSteps((current) => current.map((step) => ({ ...step, state: "done" })));
         setComment({ id: "local-complete", author: "Você", body: "Checklist concluído pela story.", time: "Agora" });
+        setAnnouncedAction("Checklist concluído");
       }}
-      onOpenOrigin={() => setSelectedQueueId("opening")}
-      title="Abertura do estúdio"
+      onOpenOrigin={() => {
+        setSelectedQueueId("opening");
+        setAnnouncedAction("Origem do checklist aberta");
+      }}
+      title={selectedChecklist.title}
     />
   ) : null;
 
   return (
     <ChecklistsPageContent
+      announcement={announcedAction}
       drawer={drawerNode}
       filterValues={filterValues}
       pageLabel={pageLabel}
@@ -325,18 +392,46 @@ export function ChecklistsShell() {
       selectedQueueId={selectedQueueId}
       onAdvancedFilters={() => {
         setFilterValues((current) => ({ ...current, type: "abertura", status: ["andamento"], owner: "mariana" }));
+        setAnnouncedAction("Filtros avançados aplicados");
       }}
       onChecklistSelect={(row) => {
         setSelectedChecklistId(row.id);
         setDrawerOpen(true);
+        setSteps(contextualChecklistSteps(row));
+        setComment(row.id === "opening"
+          ? { id: "mariana", author: "Mariana", body: "Recepção aberta. Sala 2 ainda aguardando confirmação do professor.", time: "07:45", avatarSrc: image79Avatar }
+          : { id: `${row.id}-context`, author: "Taliya", body: `Contexto de ${row.title} carregado.`, time: "Agora" });
+        setAnnouncedAction(`Checklist aberto: ${row.title}`);
       }}
-      onCreateChecklist={() => setQuery("novo checklist")}
-      onFilterValueChange={(filter, value) => setFilterValues((current) => ({ ...current, [filter.id]: value }))}
-      onItemsPerPageClick={() => setPageLabel("1-10 de 12")}
-      onNextPage={() => setPageLabel("6-10 de 12")}
-      onPreviousPage={() => setPageLabel("1-5 de 12")}
-      onQueueSelect={(item) => setSelectedQueueId(item.id)}
-      onSearchChange={setQuery}
+      onCreateChecklist={() => {
+        setQuery("novo checklist");
+        setAnnouncedAction("Criação de checklist iniciada");
+      }}
+      onFilterValueChange={(filter, value) => {
+        setFilterValues((current) => ({ ...current, [filter.id]: value }));
+        setAnnouncedAction(`Filtro ${filter.label} atualizado`);
+      }}
+      onItemsPerPageClick={() => {
+        setPageLabel("1-10 de 12");
+        setAnnouncedAction("Quantidade por página atualizada");
+      }}
+      onNextPage={() => {
+        setPageLabel("6-10 de 12");
+        setAnnouncedAction("Próxima página aberta");
+      }}
+      onPreviousPage={() => {
+        setPageLabel("1-5 de 12");
+        setAnnouncedAction("Página anterior aberta");
+      }}
+      onQueueSelect={(item) => {
+        setSelectedQueueId(item.id);
+        setAnnouncedAction(`Fila selecionada: ${item.label}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        setAnnouncedAction(value ? `Busca atualizada: ${value}` : "Busca limpa");
+      }}
+      onShellAction={setAnnouncedAction}
     />
   );
 }
