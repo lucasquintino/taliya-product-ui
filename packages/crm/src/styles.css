@@ -32721,7 +32721,16 @@ button.tcrm-pipeline-card__select:focus-visible,
     overflow-y: hidden;
   }
 
+  .tcrm-student-table__data.tl-table-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
   .tcrm-approval-table__data .tl-table {
+    min-width: var(--taliya-control-table-min-width);
+  }
+
+  .tcrm-student-table__data .tl-table {
     min-width: var(--taliya-control-table-min-width);
   }
 

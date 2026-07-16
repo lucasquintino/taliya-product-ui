@@ -273,7 +273,7 @@
   --taliya-color-crm-payment-drawer-success-fg: var(--taliya-status-success-fg);
   --taliya-color-crm-payment-drawer-copilot-bg: var(--taliya-color-crm-conversation-thread-suggestion-bg);
   --taliya-color-crm-payment-drawer-focus: var(--taliya-color-crm-task-drawer-focus);
-  --taliya-color-crm-student-drawer-bg: var(--taliya-surface-card);
+  --taliya-color-crm-student-drawer-bg: var(--taliya-surface-product-drawer);
   --taliya-color-crm-student-drawer-edge: rgba(16, 20, 26, 0.08);
   --taliya-color-crm-student-drawer-rule: rgba(16, 20, 26, 0.07);
   --taliya-color-crm-student-drawer-text: var(--taliya-color-text-primary);

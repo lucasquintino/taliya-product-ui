@@ -20,6 +20,10 @@ import type {
   CrmShellNavItem,
   PageFilterBarFilter,
   PageQuickFilterItem,
+  StudentDrawerAction,
+  StudentDrawerClassItem,
+  StudentDrawerFact,
+  StudentDrawerPendingItem,
   StudentTableRow
 } from "@taliya/crm";
 import { Button } from "@taliya/ui";
@@ -198,6 +202,7 @@ function StudentsPageContent({
   onItemsPerPageClick,
   onPreviousPage,
   onNextPage,
+  onInteraction,
   drawer
 }: {
   selectedSegmentId: string;
@@ -214,6 +219,7 @@ function StudentsPageContent({
   onItemsPerPageClick: () => void;
   onPreviousPage: () => void;
   onNextPage: () => void;
+  onInteraction: (message: string) => void;
   drawer?: React.ReactNode;
 }) {
   const filters = useMemo<PageFilterBarFilter[]>(
@@ -305,9 +311,20 @@ function StudentsPageContent({
       drawer={drawer}
       drawerPlacement="floating"
       drawerSize="compact"
+      globalActions={{
+        onAvatar: () => onInteraction("Perfil da operadora aberto"),
+        onMessages: () => onInteraction("Mensagens abertas"),
+        onNotifications: () => onInteraction("Notificações abertas"),
+        onSearch: () => onInteraction("Busca global aberta")
+      }}
       navItems={studentsNavItems}
+      onBack={() => onInteraction("Navegação de retorno acionada")}
+      onNavChange={(id) => onInteraction(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => onInteraction(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => onInteraction(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="compact-stacked"
       sidebarItems={crmEmptyShellSidebarItems}
+      showGlobalActionsWithDrawer
       stageClassName="sb-image-coverage-students-stage"
       subtitle="Base ativa do estudio"
       title="Alunos"
@@ -366,6 +383,22 @@ function StudentsPageContent({
   );
 }
 
+const studentStatusLabels: Record<StudentTableRow["status"], string> = {
+  active: "Ativa",
+  inactive: "Inativa",
+  noClass: "Sem turma",
+  risk: "Em risco"
+};
+
+const studentDrawerActionLabels: Record<StudentDrawerAction, string> = {
+  close: "fechar",
+  "open-profile": "abrir perfil",
+  message: "enviar mensagem",
+  "create-task": "criar tarefa",
+  note: "registrar nota",
+  "update-data": "atualizar dados"
+};
+
 export function StudentsShell() {
   const [query, setQuery] = useState("");
   const [filterValues, setFilterValues] = useState<Record<string, string | string[]>>({});
@@ -373,41 +406,91 @@ export function StudentsShell() {
   const [selectedStudentId, setSelectedStudentId] = useState("ana-paula");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [pageLabel, setPageLabel] = useState("1-10 de 154");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedStudent = studentRows.find((row) => row.id === selectedStudentId) ?? studentRows[0]!;
+  const selectedFacts: StudentDrawerFact[] = [
+    { id: "plan", icon: "calendar", label: "Plano atual", value: selectedStudent.plan },
+    { id: "class", icon: "users", label: "Turma atual", value: selectedStudent.currentClass },
+    { id: "owner", icon: "users", label: "Responsável principal", value: selectedStudent.owner },
+    { id: "phone", icon: "phone", label: "WhatsApp / Telefone", value: "(11) 98765-4321" },
+    { id: "consent", icon: "checkCircle", label: "Consentimento", value: selectedStudent.status === "inactive" ? "Revisão necessária" : "WhatsApp permitido / contrato assinado", tone: selectedStudent.status === "inactive" ? "warning" : "success" }
+  ];
+  const selectedClasses: StudentDrawerClassItem[] = selectedStudent.status === "noClass" ? [] : [
+    { id: "next-one", title: "Qui, 15/05 · 07:00", subtitle: selectedStudent.currentClass, badge: "Aula" },
+    { id: "next-two", title: "Sex, 17/05 · 07:00", subtitle: selectedStudent.currentClass, badge: "Aula" }
+  ];
+  const selectedPending: StudentDrawerPendingItem[] = selectedStudent.status === "active"
+    ? [{ id: "emergency", label: "Atualizar contato de emergência" }]
+    : [
+        { id: "review", label: `Revisar situação: ${studentStatusLabels[selectedStudent.status]}` },
+        { id: "follow-up", label: "Criar acompanhamento com responsável" }
+      ];
 
   const drawerNode = drawerOpen ? (
     <StudentDrawer
-      avatarSrc={source28AnaPaula}
+      avatarSrc={selectedStudent.student.avatarSrc}
       className="sb-image-coverage-students-drawer"
-      onAction={(action) => {
-        if (action === "message") setQuery("whatsapp");
-        if (action === "create-task") setFilterValues((current) => ({ ...current, status: "risco" }));
-        if (action === "update-data") setPageLabel("1-10 de 154");
+      classes={selectedClasses}
+      facts={selectedFacts}
+      name={selectedStudent.student.name}
+      onAction={(action) => setAnnouncement(`Ação do aluno: ${studentDrawerActionLabels[action]}`)}
+      onClose={() => {
+        setDrawerOpen(false);
+        setAnnouncement("Resumo do aluno fechado");
       }}
-      onClose={() => setDrawerOpen(false)}
+      pendingItems={selectedPending}
+      state={selectedStudent.status === "risk" ? "risk" : "active"}
+      statusLabel={studentStatusLabels[selectedStudent.status]}
     />
   ) : null;
 
   return (
-    <StudentsPageContent
+    <>
+      <StudentsPageContent
       drawer={drawerNode}
       filterValues={filterValues}
       pageLabel={pageLabel}
       query={query}
       selectedSegmentId={selectedSegmentId}
       selectedStudentId={selectedStudentId}
-      onAdvancedFilters={() => setFilterValues((current) => ({ ...current, risk: "alto", owner: "camila", status: "risco" }))}
-      onCreateStudent={() => setQuery("novo aluno")}
-      onFilterValueChange={(filter, value) => setFilterValues((current) => ({ ...current, [filter.id]: value }))}
-      onItemsPerPageClick={() => setPageLabel("1-25 de 154")}
-      onNextPage={() => setPageLabel("11-20 de 154")}
-      onPreviousPage={() => setPageLabel("1-10 de 154")}
-      onSearchChange={setQuery}
-      onSegmentSelect={(item) => setSelectedSegmentId(item.id)}
+      onAdvancedFilters={() => {
+        setFilterValues((current) => ({ ...current, risk: "alto", owner: "camila", status: "risco" }));
+        setAnnouncement("Filtros avançados aplicados");
+      }}
+      onCreateStudent={() => setAnnouncement("Cadastro de novo aluno aberto")}
+      onFilterValueChange={(filter, value) => {
+        setFilterValues((current) => ({ ...current, [filter.id]: value }));
+        setAnnouncement(`Filtro ${filter.label}: ${String(value) || "todos"}`);
+      }}
+      onInteraction={setAnnouncement}
+      onItemsPerPageClick={() => {
+        setPageLabel("1-25 de 154");
+        setAnnouncement("25 alunos por página");
+      }}
+      onNextPage={() => {
+        setPageLabel("11-20 de 154");
+        setAnnouncement("Próxima página de alunos");
+      }}
+      onPreviousPage={() => {
+        setPageLabel("1-10 de 154");
+        setAnnouncement("Página anterior de alunos");
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        setAnnouncement(value ? `Busca de alunos: ${value}` : "Busca de alunos limpa");
+      }}
+      onSegmentSelect={(item) => {
+        setSelectedSegmentId(item.id);
+        setAnnouncement(`Segmento selecionado: ${item.label}`);
+      }}
       onStudentSelect={(row) => {
         setSelectedStudentId(row.id);
         setDrawerOpen(true);
+        setAnnouncement(`Aluno selecionado: ${row.student.name}`);
       }}
-    />
+      />
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

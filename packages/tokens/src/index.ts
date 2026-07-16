@@ -300,7 +300,7 @@ export const colorTokens = {
   "color.crm-payment-drawer.success-fg": "var(--taliya-status-success-fg)",
   "color.crm-payment-drawer.copilot-bg": "var(--taliya-color-crm-conversation-thread-suggestion-bg)",
   "color.crm-payment-drawer.focus": "var(--taliya-color-crm-task-drawer-focus)",
-  "color.crm-student-drawer.bg": "var(--taliya-surface-card)",
+  "color.crm-student-drawer.bg": "var(--taliya-surface-product-drawer)",
   "color.crm-student-drawer.edge": "rgba(16, 20, 26, 0.08)",
   "color.crm-student-drawer.rule": "rgba(16, 20, 26, 0.07)",
   "color.crm-student-drawer.text": "var(--taliya-color-text-primary)",

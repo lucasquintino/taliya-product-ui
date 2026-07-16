@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T23:22:36.490Z",
+  "generatedAt": "2026-07-16T23:30:11.865Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 11,
+  "completedRouteCount": 12,
   "failedRouteCount": 0,
-  "pendingRouteCount": 62,
+  "pendingRouteCount": 61,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -995,38 +995,63 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:30:06.930Z",
+        "evidence": [
+          "tmp/human-route-review/27-students/desktop-final.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:30:07.289Z",
+        "evidence": [
+          "tmp/human-route-review/27-students/desktop-final.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:30:07.676Z",
+        "evidence": [
+          "tmp/human-route-review/27-students/mobile-drawer.jpg",
+          "tmp/human-route-review/27-students/mobile-table.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:30:08.016Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "filter-search",
+          "filter-options",
+          "quick-filters",
+          "table-sorting",
+          "table-selection",
+          "pagination",
+          "drawer-actions",
+          "drawer-open-close",
+          "mobile-table-horizontal-scroll"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:30:10.675Z",
+        "evidence": [
+          "source:27_round-4.1E_alunos_01_lista-perfil-resumido.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisão humana tornou o StudentDrawer contextual por aluno, ligou shell/filtros/segmentos/tabela/paginação/ações e corrigiu superfície e tabela no mobile."
+      ]
     },
     {
       "image": "28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png",
