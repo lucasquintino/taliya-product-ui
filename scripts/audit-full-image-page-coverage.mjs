@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { resolveSourceAssetsDir } from "./source-assets-config.mjs";
+import { collectRouteTargets, isRouteTargetStatus } from "./source-route-targets.mjs";
 
 const root = process.cwd();
 const checkMode = process.argv.includes("--check");
@@ -99,50 +100,12 @@ const storybookIndex = storybookBuildAvailable
   ? JSON.parse(readFileSync(storybookIndexPath, "utf8"))
   : { entries: {} };
 const targetPageMap = new Map(targetPages.map(([image, storyId]) => [image, storyId]));
-const pageCoverageSections = new Set([
-  "CRM Logged-In Screens",
-  "Internal Backoffice",
-  "Onboarding / Setup",
-  "Agents / Flows / Executions",
-  "Config / Billing / Usage",
-  "Access / Subscription",
-  "Empty Shell"
-]);
-
-function isTargetStatus(status) {
-  return /\bCovered\b/.test(status) && !/\b(Superseded|Rejected|Duplicate|Historical reference)\b/.test(status);
-}
-
 function collectCoveredPageTargets(source) {
-  const targets = [];
-  let currentSection = "";
-
-  for (const line of source.split(/\r?\n/)) {
-    const heading = /^##\s+(.+?)\s*$/.exec(line);
-    if (heading) {
-      currentSection = heading[1];
-      continue;
-    }
-
-    if (!pageCoverageSections.has(currentSection)) continue;
-
-    const row = /^\|\s*`([^`]+)`\s*\|\s*([^|]+?)\s*\|/.exec(line);
-    if (!row) continue;
-
-    const image = row[1].trim();
-    const status = row[2].trim();
-    if (!isTargetStatus(status)) continue;
-
-    targets.push({
-      image,
-      status,
-      section: currentSection,
+  return collectRouteTargets(source).map(({ image, status, section }) => ({
+      image, status, section,
       mappedStoryId: targetPageMap.get(image) ?? "",
       mapped: targetPageMap.has(image)
-    });
-  }
-
-  return targets;
+    }));
 }
 
 function mapRowForImage(image) {
@@ -188,7 +151,7 @@ const rows = targetPages.map(([image, storyId]) => {
   const storyExportSource = exportSourceForStory(storySource, indexEntry?.exportName ?? "");
   const renderedPageModuleSource = importedModuleSourceForRenderedPage(storySource, storyExportSource, importPath);
   const mapStatusCell = mapRow.split("|")[2]?.trim() ?? "";
-  const mapStatusTarget = isTargetStatus(mapStatusCell);
+  const mapStatusTarget = isRouteTargetStatus(mapStatusCell);
   const usesOfficialImports = /from\s+["']@taliya\/(?:crm|ui)["']/.test(storySource)
     || /from\s+["']@taliya\/(?:crm|ui)["']/.test(renderedPageModuleSource);
   const forbiddenLocalPackageImport = /from\s+["'][^"']*(?:packages\/|@\/packages\/|\.\.\/\.\.\/packages\/)/.test(storySource);

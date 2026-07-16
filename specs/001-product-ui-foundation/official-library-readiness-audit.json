@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-07-16T13:11:01.044Z",
-  "status": "fail",
-  "officialConsumerReady": false,
+  "generatedAt": "2026-07-16T16:34:04.542Z",
+  "status": "pass-official-library-current-scope",
+  "officialConsumerReady": true,
   "globalGoalComplete": false,
   "currentVersion": "0.1.0",
   "consistentPackageVersion": true,
   "currentInternalReady": true,
-  "crmRealCanStart": false,
+  "crmRealCanStart": true,
   "realFutureCrmAdoptionExecuted": false,
-  "releaseCandidateStatus": "fail",
+  "releaseCandidateStatus": "pass",
   "releaseCandidateGateCount": 103,
   "releaseChannelStatus": "pass-registry-release-channel",
   "releasePolicyStatus": "pass-registry-policy",
@@ -22,9 +22,9 @@
   "reportRows": [
     {
       "id": "aggregate-readiness",
-      "status": "fail",
+      "status": "pass",
       "evidence": "library-readiness-gate.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "package-artifacts",
@@ -64,15 +64,15 @@
     },
     {
       "id": "library-consumption",
-      "status": "fail",
+      "status": "pass",
       "evidence": "library-consumption-status.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "crm-real-readiness",
-      "status": "fail",
+      "status": "pass",
       "evidence": "crm-real-readiness-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "release-policy",
@@ -88,15 +88,15 @@
     },
     {
       "id": "release-candidate",
-      "status": "fail",
+      "status": "pass",
       "evidence": "release-candidate-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "goal-completion",
-      "status": "fail",
+      "status": "pass",
       "evidence": "goal-completion-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     }
   ],
   "packageRows": [

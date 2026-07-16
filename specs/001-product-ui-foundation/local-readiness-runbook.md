@@ -247,7 +247,7 @@ This writes:
 - `specs/001-product-ui-foundation/visual-product-review-audit.md`
 - `specs/001-product-ui-foundation/visual-product-review-audit.json`
 - `tmp/visual-product-review/index.html`
-- `specs/002-readiness-evidence-portability/source-assets-canonical-roster.json`
+- `specs/001-product-ui-foundation/image-coverage-map.md` (covered route targets)
 
 The HTML board puts each pending source, current capture, diff, metrics, blocker, and next action side by side. It is review assistance only: generating or checking the board never changes an image verdict or grants automatic approval.
 
@@ -475,7 +475,7 @@ Expected report names:
 | `visual-certification-plan:audit:negative-probe` | The plan audit stopped rejecting stale visual evidence or pending rows without current evidence assertions | Fix the plan audit/probe before trusting visual readiness evidence |
 | `visual-certification-plan:audit:missing-artifact-probe` | The plan audit stopped rejecting ledger evidence that points at missing screenshot/metrics artifacts | Fix the artifact existence check/probe before trusting visual readiness evidence |
 | `visual-product-review:audit` | The review board is missing, stale, or no longer matches the current plan and capture evidence | Regenerate the capture if needed, then run `visual-product-review:audit:update`; review decisions remain manual |
-| `source-assets:reconcile` | Folder/ZIP integrity drifted, a known canonical name is absent, or the canonical roster still contains unresolved identities | Restore the named files and update the roster only from an authoritative source list; never fill the gap with nested derivatives or arbitrary images |
+| `source-assets:reconcile` | Folder/ZIP integrity drifted or a covered route source image is absent from the top-level corpus | Restore the named route source file or explicitly update the route coverage map; never fill the gap with nested derivatives or arbitrary images |
 | `visual-certification-capture:check` | Current source/story hashes no longer match the recorded screenshot batch, or one or more expected captures are missing | Regenerate the source-sized visual capture batch; do not convert raw metrics into automatic approval |
 | `visual-certification-capture:source-contract-probe` | Capture currency depends on volatile manifest metadata or accepts an altered official source-image hash | Fix the semantic source contract used by the capture gate before trusting capture evidence |
 | `readiness:audit` | One of the current-scope readiness gates failed | Open `library-readiness-gate.md` and fix the first failed gate |

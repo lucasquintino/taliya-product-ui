@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 
 const root = process.cwd();
@@ -46,7 +46,7 @@ function snapshot() {
   for (const file of files) {
     hash.update(file);
     hash.update("\0");
-    hash.update(readFileSync(file));
+    hash.update(existsSync(file) ? readFileSync(file) : "<deleted>");
     hash.update("\0");
   }
   return {

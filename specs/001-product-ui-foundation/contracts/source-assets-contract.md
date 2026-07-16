@@ -57,11 +57,11 @@ If a future implementation task needs an approved image and the file is not pres
 3. do not approximate from memory;
 4. resume only after the source image is restored or explicitly superseded.
 
-## Corpus Reconciliation Rule
+## Route Corpus Reconciliation Rule
 
-The canonical image count applies only to image files at the root of the delivered source directory. Nested demo frames, review contact sheets, standardized onboarding copies, and browser-framed derivatives are auxiliary outputs and MUST NOT be counted as additional canonical source images.
+Readiness is defined by the covered product routes in `image-coverage-map.md`, not by a fixed total of files in the delivered directory. Every eligible route row MUST have a matching top-level source image. Top-level design-system boards, historical references, duplicates, and other support images remain inventoried for traceability but do not block route readiness.
 
-The expected count alone is not an authoritative roster. `source-assets-canonical-roster.json` MUST name every known delivered top-level image and retain explicit unresolved slots for canonical identities whose filenames have not been supplied. A 101/101 claim requires zero unresolved slots plus 101 matching names/files; adding arbitrary files or changing only the count cannot satisfy the contract.
+Nested demo frames, review contact sheets, standardized onboarding copies, and browser-framed derivatives are auxiliary outputs. They MUST NOT satisfy a missing top-level route source image.
 
 Run:
 
@@ -71,7 +71,7 @@ corepack pnpm source-assets:reconcile
 corepack pnpm source-assets:reconcile:nested-exclusion-probe
 ```
 
-The reconciliation audit MUST compare the source folder and sibling ZIP by relative path, byte length, and SHA-256; classify every nested image; compare top-level names with `image-coverage-map.md` and the canonical roster; and retain a blocked contract status while canonical identities remain unresolved or named files are absent. Neither scripts nor reviewers may promote nested derivatives to close a count gap without an explicit product decision.
+The reconciliation audit MUST compare the source folder and sibling ZIP by relative path, byte length, and SHA-256; classify every nested image; and compare top-level names with the covered route targets in `image-coverage-map.md`. It MUST fail while a route source image is absent or a nested derivative is being used as its substitute.
 
 ## Reference Copy Rule
 

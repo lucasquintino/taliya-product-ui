@@ -1,15 +1,17 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-07-16T13:07:32.723Z",
-  "status": "blocked-incomplete-canonical-roster",
-  "conclusion": "The delivered folder and ZIP contain 93 known top-level images, while 8 of 101 canonical identities still have no authoritative filename. Count-only evidence cannot prove 101/101.",
-  "expectedCanonicalImageCount": 101,
-  "canonicalTopLevelImageCount": 93,
-  "canonicalCountDelta": 8,
-  "canonicalUniqueHashCount": 92,
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-16T16:35:03.103Z",
+  "status": "pass",
+  "contractScope": "covered-route-targets",
+  "conclusion": "All 73 covered route targets have top-level source files, and the delivered folder matches its ZIP archive.",
+  "routeTargetCount": 73,
+  "availableRouteTargetCount": 73,
+  "topLevelImageCount": 93,
+  "supportTopLevelImageCount": 20,
+  "topLevelUniqueHashCount": 92,
   "recursiveImageCount": 164,
   "nestedDerivativeImageCount": 71,
-  "mapImageCount": 93,
+  "duplicateRouteTargets": [],
   "archive": {
     "available": true,
     "imageCount": 164,
@@ -17,57 +19,32 @@
     "mismatchCount": 0,
     "extraImageCount": 0
   },
-  "canonicalRoster": {
-    "path": "specs/002-readiness-evidence-portability/source-assets-canonical-roster.json",
-    "authorityStatus": "incomplete-awaiting-authoritative-names",
-    "contractStatus": "pass",
-    "complete": false,
-    "knownNameCount": 93,
-    "unresolvedCount": 8,
-    "unresolvedSlots": [
-      {
-        "id": "unresolved-01",
-        "requiredEvidence": "authoritative filename and matching source image"
-      },
-      {
-        "id": "unresolved-02",
-        "requiredEvidence": "authoritative filename and matching source image"
-      },
-      {
-        "id": "unresolved-03",
-        "requiredEvidence": "authoritative filename and matching source image"
-      },
-      {
-        "id": "unresolved-04",
-        "requiredEvidence": "authoritative filename and matching source image"
-      },
-      {
-        "id": "unresolved-05",
-        "requiredEvidence": "authoritative filename and matching source image"
-      },
-      {
-        "id": "unresolved-06",
-        "requiredEvidence": "authoritative filename and matching source image"
-      },
-      {
-        "id": "unresolved-07",
-        "requiredEvidence": "authoritative filename and matching source image"
-      },
-      {
-        "id": "unresolved-08",
-        "requiredEvidence": "authoritative filename and matching source image"
-      }
-    ],
-    "contractErrors": [],
-    "knownMissing": [],
-    "deliveredOutsideRoster": []
-  },
   "integrity": {
     "status": "pass",
-    "mappedMissing": [],
-    "topLevelUnmapped": [],
-    "knownRosterMissing": [],
-    "topLevelOutsideRoster": [],
+    "missingRouteFiles": [],
+    "supportTopLevelFiles": [
+      "_contact-sheet-analytics-review.jpg",
+      "01_round-1_visual-dna-tokens_aprovada.png",
+      "02_round-1_visual-dna-tokens_duplicata.png",
+      "03_round-2_app-shell_tentativa-1_nao-aprovada.png",
+      "04_round-2a_app-shell-tela-base_tentativa-2.png",
+      "05_round-2a1_app-shell-tela-base_refino.png",
+      "06_round-2a2_app-shell-tela-base_aprovada.png",
+      "07_round-3a_componentes-web-referencia_aprovada.png",
+      "08_round-3b1_inputs-formularios-filtros_aprovada.png",
+      "09_round-3b2_overlays-feedback_aprovada.png",
+      "10_round-3b3_visualizacoes-operacionais_aprovada.png",
+      "11_round-3b4_comunicacao-agentes_aprovada.png",
+      "12_round-3b5_sistema-plano-governanca_aprovada.png",
+      "13_round-3c1_objetos-setup-dados_aprovada.png",
+      "14_round-3c2_agenda-financeiro-documentos_aprovada.png",
+      "15_round-3c3_agentes-auditoria-relatorios_aprovada.png",
+      "16_round-4.1S_app-shell_01_base-web.png",
+      "51D_round-4.1J_onboarding_bloco-1-studio-aprovado.png",
+      "55_round-4.1L_agentes_04_fluxo-falta-com-aviso-aprovado.png",
+      "crm_1.webp"
+    ],
+    "duplicateRouteTargets": [],
     "unclassifiedNested": [],
     "archiveMismatches": [],
     "archiveExtraImages": []

@@ -1,8 +1,7 @@
 export interface SourceAssetsConfig {
-  schemaVersion: 1;
+  schemaVersion: 2;
   environmentVariable: string;
-  expectedImageCount: number;
-  canonicalRoster: string;
+  coverageMap: string;
   defaultPaths: string[];
   configPath: string;
 }

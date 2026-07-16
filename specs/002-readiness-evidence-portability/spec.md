@@ -9,7 +9,7 @@ Make package, source-image, Storybook, consumer, and readiness evidence reproduc
 ## Requirements
 
 - **FR-001**: Source-image location MUST be configurable without editing source files.
-- **FR-002**: The 101-file source corpus MUST have a versioned manifest containing filename, SHA-256, dimensions, and classification.
+- **FR-002**: Every covered route source image MUST have a versioned manifest entry containing filename, SHA-256, dimensions, and classification; other top-level files MUST remain informational.
 - **FR-003**: Consumer fixture audits MUST package fresh artifacts from the current source/build instead of trusting an existing `dist-packages` directory.
 - **FR-004**: Package evidence MUST trace source, packed, vendored, and installed files.
 - **FR-005**: A failed upstream readiness report MUST invalidate every downstream acceptance, release, consumption, and completion report.
@@ -24,7 +24,7 @@ Make package, source-image, Storybook, consumer, and readiness evidence reproduc
 - A clean clone can build, pack, install a synthetic consumer, and validate public JS/CSS exports.
 - Re-running a check leaves `git status --short` unchanged.
 - Replacing a current report with stale evidence causes downstream checks to fail.
-- The source corpus reports exactly 101 classified files.
+- The source corpus reports every covered route target present, with no duplicate route mapping and no nested derivative accepted as a route source.
 - Storybook-only reusable anatomy is visible as audit debt.
 
 ## Out Of Scope

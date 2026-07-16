@@ -1,20 +1,20 @@
 # Library Consumption Status
 
-Generated: 2026-07-16T13:10:59.709Z
+Generated: 2026-07-16T16:34:04.370Z
 
-Status: fail
+Status: pass-current-internal-library
 
 This report is the quick current-state answer for whether `taliya-product-ui` can be consumed as the official reusable UI library. It does not replace source-image 1:1 visual certification and does not claim real future CRM adoption when no real future CRM app has run labeled gates.
 
 ## Summary
 
-- Current Internal/library accepted: `false`
+- Current Internal/library accepted: `true`
 - Current Internal consumes official kit: `true`
 - Internal routes render shell + workspace: `true`
 - Public page-kit runtime manifest works: `true`
-- Technical release candidate passed: `false`
-- Aggregate readiness passed: `false`
-- Missing readiness gates: `future-consumer-fixture`, `future-consumer-discovery-negative-probe`, `future-consumer-discovery-partial-probe`, `future-consumer-discovery-positive-probe`, `future-consumer-adoption-positive-probe`, `future-consumer-adoption-mismatch-probe`, `future-consumer-adoption-negative-probe`, `consumer-package-sync`, `consumer-package-sync-negative-probe`, `consumer-vendor-versioning`, `consumer-page-kit-shell-only-route-probe`, `consumer-page-kit-wrapper-contract-probe`, `consumer-page-kit-route-wrapper-contract-probe`, `consumer-page-kit-mismatched-route-contract-probe`, `consumer-page-kit-default-identifier-route-probe`, `consumer-page-kit-path-traversal-probe`, `consumer-readiness-config-path-traversal-probe`, `consumer-runtime`, `certification-scope-positive-probe`, `certification-scope-negative-probe`, `visual-certification-plan-negative-probe`
+- Technical release candidate passed: `true`
+- Aggregate readiness passed: `true`
+- Missing readiness gates: `none`
 - Future CRM process passed: `true`
 - Future CRM real adoption executed: `false`
 - Global goal complete: `false`
@@ -33,12 +33,12 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 
 | Area | Status | Evidence | Meaning |
 | --- | --- | --- | --- |
-| `current-internal-accepted` | fail | library-acceptance-audit.json | Current Internal can use taliya-product-ui as the official reusable UI library. |
-| `current-internal-consuming-official-kit` | pass | consumer integration/page-kit/runtime/package-sync/vendor-versioning audits | Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones. |
+| `current-internal-accepted` | pass | library-acceptance-audit.json | Current Internal can use taliya-product-ui as the official reusable UI library. |
+| `current-internal-consuming-official-kit` | pass | consumer integration/page-kit/runtime and registry-consumer-adoption audits | Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones. |
 | `current-internal-routes-render-workspaces` | pass | consumer-page-kit-audit.json route requiredLocalComponents | Every discovered Internal route renders InternalShell plus its local workspace wrapper, so shell-only route regressions fail. |
 | `public-page-kit-runtime` | pass | @taliya/crm and @taliya/crm/standard-page-kit runtime manifest audits | Consumers can discover the standard page kit from the installed package. |
-| `technical-release-candidate` | fail | release-candidate-audit.json | Release candidate is missing required gates: library-consumption-status. |
-| `aggregate-readiness` | fail | library-readiness-gate.json | Readiness is missing required gates: future-consumer-fixture, future-consumer-discovery-negative-probe, future-consumer-discovery-partial-probe, future-consumer-discovery-positive-probe, future-consumer-adoption-positive-probe, future-consumer-adoption-mismatch-probe, future-consumer-adoption-negative-probe, consumer-package-sync, consumer-package-sync-negative-probe, consumer-vendor-versioning, consumer-page-kit-shell-only-route-probe, consumer-page-kit-wrapper-contract-probe, consumer-page-kit-route-wrapper-contract-probe, consumer-page-kit-mismatched-route-contract-probe, consumer-page-kit-default-identifier-route-probe, consumer-page-kit-path-traversal-probe, consumer-readiness-config-path-traversal-probe, consumer-runtime, certification-scope-positive-probe, certification-scope-negative-probe, visual-certification-plan-negative-probe. |
+| `technical-release-candidate` | pass | release-candidate-audit.json | The current package/readiness/release gate bundle is green and includes compact consumption-status and future CRM process gates. |
+| `aggregate-readiness` | pass | library-readiness-gate.json | The aggregate package, consumer, future-fixture, and governance gates are green. |
 | `future-crm-process` | pass | future-consumer-discovery-audit.json and future-consumer-adoption-audit.json | Future CRM discovery/adoption process is executable and guarded. |
 | `future-crm-real-adoption` | not-executed | matching labeled readiness report for a discovered future CRM candidate | A real future CRM app has adopted the library. |
 | `global-goal` | not-complete-globally | goal-completion-audit.json and library-acceptance-audit.json | The persistent goal is fully complete, including future CRM adoption. |

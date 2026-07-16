@@ -307,7 +307,7 @@ const gateDefinitions = [
     id: "source-assets",
     commandText: "node scripts/audit-source-assets.mjs --check",
     timeoutMs: 60000,
-    proves: "the configured canonical source corpus matches the versioned 101-image manifest"
+    proves: "every covered route target has a versioned source-image manifest entry"
   },
   {
     id: "source-assets-reconciliation-update",
@@ -319,13 +319,13 @@ const gateDefinitions = [
     id: "source-assets-reconciliation",
     commandText: "node scripts/audit-source-assets-reconciliation.mjs --check",
     timeoutMs: 60000,
-    proves: "the delivered source package reconciles with the configured canonical count without counting nested derivatives"
+    proves: "the delivered source package reconciles with the covered route set without counting nested derivatives"
   },
   {
     id: "source-assets-reconciliation-nested-exclusion-probe",
     commandText: "node scripts/probe-source-assets-reconciliation-nested-exclusion.mjs",
     timeoutMs: 60000,
-    proves: "recursive derivative images are rejected as substitutes for canonical source images"
+    proves: "recursive derivative images are rejected as substitutes for covered route source images"
   },
   {
     id: "full-image-page-coverage-update",

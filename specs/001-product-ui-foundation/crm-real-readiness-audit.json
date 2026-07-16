@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-16T13:11:00.466Z",
-  "status": "fail",
+  "generatedAt": "2026-07-16T16:34:04.463Z",
+  "status": "pass-ready-to-start-crm-real",
   "currentInternalReady": true,
-  "crmRealCanStart": false,
+  "crmRealCanStart": true,
   "realFutureCrmAdoptionExecuted": false,
   "globalGoalComplete": false,
   "counts": {
@@ -20,9 +20,9 @@
   "rows": [
     {
       "id": "official-packages-and-release",
-      "status": "fail",
+      "status": "pass",
       "evidence": "release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json",
-      "meaning": "Official release is incomplete: technicalCandidate=false, registryPublished=3/3."
+      "meaning": "Packages are buildable, installable, audited, release-ready, and all three exact versions are public on npm."
     },
     {
       "id": "current-internal-fully-consuming",

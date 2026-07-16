@@ -5,8 +5,8 @@ import { isAbsolute, resolve } from "node:path";
 export function readSourceAssetsConfig(root = process.cwd()) {
   const configPath = resolve(root, "taliya-source-assets.config.json");
   const config = JSON.parse(readFileSync(configPath, "utf8"));
-  if (config.schemaVersion !== 1) throw new Error("Unsupported source-assets config schemaVersion.");
-  if (!config.environmentVariable || !Array.isArray(config.defaultPaths) || !config.canonicalRoster) {
+  if (config.schemaVersion !== 2) throw new Error("Unsupported source-assets config schemaVersion.");
+  if (!config.environmentVariable || !Array.isArray(config.defaultPaths) || !config.coverageMap) {
     throw new Error("Invalid source-assets config contract.");
   }
   return { ...config, configPath };

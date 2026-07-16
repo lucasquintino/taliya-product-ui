@@ -6,7 +6,7 @@ Add isolated package output support and make the future-consumer fixture create 
 
 ## Phase 2 - Source asset configuration
 
-Introduce one resolver used by tests and audits, then generate a 101-file manifest when the canonical corpus is available.
+Introduce one resolver used by tests and audits, then generate a route-scoped manifest from the covered targets in the versioned image coverage map.
 
 ## Phase 3 - Read-only and stale-evidence contracts
 

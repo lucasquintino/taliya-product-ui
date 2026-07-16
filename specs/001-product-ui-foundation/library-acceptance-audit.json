@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-16T13:10:59.109Z",
-  "status": "fail",
+  "generatedAt": "2026-07-16T16:34:04.290Z",
+  "status": "pass-current-internal-library",
   "checkMode": false,
   "reportLabel": "default",
   "evidenceSources": {
@@ -10,16 +10,16 @@
     "certificationScope": "specs/001-product-ui-foundation/certification-scope-decision-audit.json",
     "visualBacklog": "specs/001-product-ui-foundation/visual-certification-backlog-audit.json"
   },
-  "currentInternalLibraryAccepted": false,
+  "currentInternalLibraryAccepted": true,
   "globalGoalComplete": false,
   "globalGoalStatus": "not-complete-globally",
   "futureCrmAdoptionExecuted": false,
   "visualParityGloballyComplete": false,
   "scopedVisualAcceptance": true,
   "summary": {
-    "readiness": "fail",
-    "goalVerdict": "readiness-regression",
-    "currentInternalReadiness": "regressed",
+    "readiness": "pass",
+    "goalVerdict": "not-complete-globally",
+    "currentInternalReadiness": "proven",
     "futureCrmAdoption": "not-executed",
     "globalSourceImageParity": "scoped-out-by-product-acceptance",
     "visualBacklogIncompleteRows": 64,
@@ -29,12 +29,12 @@
   "acceptanceRows": [
     {
       "gate": "current-readiness",
-      "status": "fail",
+      "status": "pass",
       "proves": "aggregate readiness gate passed for the current Internal/library scope"
     },
     {
       "gate": "current-internal-library-readiness",
-      "status": "fail",
+      "status": "pass",
       "proves": "current taliya-internal can consume official packages/page-kit without local visual clones"
     },
     {
@@ -56,8 +56,8 @@
     },
     {
       "requirement": "Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts",
-      "status": "failed",
-      "pass": false
+      "status": "proven",
+      "pass": true
     },
     {
       "requirement": "Public page kit exported, story-covered, and documented",

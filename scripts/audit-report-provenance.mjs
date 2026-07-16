@@ -61,7 +61,7 @@ const dependencyMap = {
   ],
   "specs/002-readiness-evidence-portability/source-assets-reconciliation-audit.json": [
     "../002-readiness-evidence-portability/source-assets-manifest.json",
-    "../002-readiness-evidence-portability/source-assets-canonical-roster.json"
+    "../001-product-ui-foundation/image-coverage-map.md"
   ]
 };
 

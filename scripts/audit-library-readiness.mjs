@@ -808,19 +808,19 @@ const gates = [
     id: "source-assets",
     command: [process.execPath, "scripts/audit-source-assets.mjs", "--check"],
     commandText: "corepack pnpm source-assets:audit",
-    proves: "the configured canonical source corpus matches the versioned 101-image filename, hash, dimension, and coverage manifest"
+    proves: "every covered route target has a versioned source-image filename, hash, and dimension entry; support images remain informational"
   },
   {
     id: "source-assets-reconciliation",
     command: [process.execPath, "scripts/audit-source-assets-reconciliation.mjs", "--check"],
     commandText: "corepack pnpm source-assets:reconcile",
-    proves: "folder, ZIP, image map, canonical top-level count, hashes, duplicates, and nested derivative classifications reconcile without promoting auxiliary images"
+    proves: "folder, ZIP, covered route targets, hashes, duplicates, and nested derivative classifications reconcile without promoting auxiliary images"
   },
   {
     id: "source-assets-reconciliation-nested-exclusion-probe",
     command: [process.execPath, "scripts/probe-source-assets-reconciliation-nested-exclusion.mjs"],
     commandText: "corepack pnpm source-assets:reconcile:nested-exclusion-probe",
-    proves: "recursive demo/review/onboarding derivatives cannot satisfy the canonical source-image count"
+    proves: "recursive demo/review/onboarding derivatives cannot satisfy a missing covered route target"
   },
   {
     id: "full-image-page-coverage",

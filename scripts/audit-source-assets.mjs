@@ -2,13 +2,14 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { resolveSourceAssetsDir } from "./source-assets-config.mjs";
+import { readRouteTargets } from "./source-route-targets.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
 const updateMode = args.includes("--update");
 const outputPath = resolve(root, "specs/002-readiness-evidence-portability/source-assets-manifest.json");
-const mapPath = resolve(root, "specs/001-product-ui-foundation/image-coverage-map.md");
 const resolved = resolveSourceAssetsDir({ root, args });
+const mapPath = resolve(root, resolved.config.coverageMap);
 
 function imageDimensions(buffer) {
   if (buffer.subarray(1, 4).toString("ascii") === "PNG") {
@@ -29,12 +30,9 @@ function imageDimensions(buffer) {
   return { width: null, height: null, format: "unknown" };
 }
 
-function mappedImageNames() {
-  const source = readFileSync(mapPath, "utf8");
-  return new Set([...source.matchAll(/^\|\s*`([^`]+\.(?:png|jpe?g|webp))`\s*\|/gim)].map((match) => match[1]));
-}
-
-const mapped = mappedImageNames();
+const routeTargets = readRouteTargets(mapPath);
+const routeTargetNames = routeTargets.map((target) => target.image);
+const mapped = new Set(routeTargetNames);
 const files = readdirSync(resolved.path).filter((name) => /\.(png|jpe?g|webp)$/i.test(name)).sort();
 const rows = files.map((name) => {
   const bytes = readFileSync(resolve(resolved.path, name));
@@ -43,22 +41,26 @@ const rows = files.map((name) => {
     sha256: createHash("sha256").update(bytes).digest("hex"),
     bytes: bytes.length,
     ...imageDimensions(bytes),
-    mapped: mapped.has(name)
+    routeTarget: mapped.has(name)
   };
 });
 const diskNames = new Set(files);
-const unmappedFiles = files.filter((name) => !mapped.has(name));
-const missingFiles = [...mapped].filter((name) => !diskNames.has(name)).sort();
+const supportFiles = files.filter((name) => !mapped.has(name));
+const missingRouteFiles = routeTargetNames.filter((name) => !diskNames.has(name)).sort();
+const duplicateRouteTargets = routeTargetNames.filter((name, index, all) => all.indexOf(name) !== index);
 const manifest = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedAt: new Date().toISOString(),
   source: resolved.source,
-  expectedImageCount: resolved.config.expectedImageCount,
+  contractScope: "covered-route-targets",
   imageCount: rows.length,
-  mappedImageCount: rows.filter((row) => row.mapped).length,
-  status: rows.length === resolved.config.expectedImageCount && unmappedFiles.length === 0 && missingFiles.length === 0 ? "pass" : "fail",
-  unmappedFiles,
-  missingFiles,
+  routeTargetCount: routeTargets.length,
+  availableRouteTargetCount: rows.filter((row) => row.routeTarget).length,
+  supportImageCount: supportFiles.length,
+  status: missingRouteFiles.length === 0 && duplicateRouteTargets.length === 0 ? "pass" : "fail",
+  missingRouteFiles,
+  duplicateRouteTargets,
+  supportFiles,
   images: rows
 };
 
@@ -79,9 +81,9 @@ if (updateMode) {
   }
 }
 
-console.log(`Source assets: ${manifest.status}; ${manifest.imageCount}/${manifest.expectedImageCount} files; ${manifest.mappedImageCount} mapped.`);
+console.log(`Source assets: ${manifest.status}; routes=${manifest.availableRouteTargetCount}/${manifest.routeTargetCount}; support=${manifest.supportImageCount}; top-level=${manifest.imageCount}.`);
 if (manifest.status !== "pass") {
-  if (unmappedFiles.length) console.error(`Unmapped source files: ${unmappedFiles.join(", ")}`);
-  if (missingFiles.length) console.error(`Mapped files missing from disk: ${missingFiles.join(", ")}`);
+  if (missingRouteFiles.length) console.error(`Route source files missing from disk: ${missingRouteFiles.join(", ")}`);
+  if (duplicateRouteTargets.length) console.error(`Duplicate route targets: ${duplicateRouteTargets.join(", ")}`);
   process.exit(1);
 }

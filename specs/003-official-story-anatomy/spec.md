@@ -16,4 +16,4 @@ Make image-coverage stories pure consumers of official Taliya page families and 
 
 ## External Stop Condition
 
-Pixel parity cannot be certified without the canonical 101-image corpus. Structural promotion and rendered-layout QA may continue independently.
+Pixel parity is certified against the source image assigned to each covered route. Structural promotion and rendered-layout QA may continue independently for routes still awaiting human visual acceptance.

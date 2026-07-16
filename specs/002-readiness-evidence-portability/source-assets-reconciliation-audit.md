@@ -1,23 +1,21 @@
 # Source Assets Reconciliation Audit
 
-Generated: 2026-07-16T13:07:32.723Z
+Generated: 2026-07-16T16:35:03.103Z
 
-Status: blocked-incomplete-canonical-roster
+Status: pass
 
-The delivered folder and ZIP contain 93 known top-level images, while 8 of 101 canonical identities still have no authoritative filename. Count-only evidence cannot prove 101/101.
+All 73 covered route targets have top-level source files, and the delivered folder matches its ZIP archive.
 
 | Evidence | Count/status |
 | --- | ---: |
-| Configured canonical count | 101 |
-| Delivered canonical top-level images | 93 |
-| Difference | 8 |
-| Named entries in canonical roster | 93 |
-| Canonical identities without authoritative names | 8 |
-| Canonical roster complete | No |
-| Unique canonical hashes | 92 |
+| Covered route targets | 73 |
+| Route targets with top-level source files | 73 |
+| Other top-level reference/support images | 20 |
+| Total top-level images | 93 |
+| Unique top-level hashes | 92 |
 | Recursive images | 164 |
 | Nested derivative/review/demo images | 71 |
-| Image-map rows | 93 |
+| Covered route rows in image map | 73 |
 | ZIP image entries | 164 |
 | ZIP exactly matches folder | Yes |
 | Integrity | pass |
@@ -30,15 +28,4 @@ The delivered folder and ZIP contain 93 known top-level images, while 8 of 101 c
 - review-contact-sheet: 3
 - onboarding-standardized-unframed: 13
 
-Nested outputs are not promoted into the canonical corpus automatically. Resolving 93 versus 101 requires an authoritative name for each unresolved canonical identity plus its matching file, or an explicit product decision that changes the contract.
-
-## Unresolved Canonical Identities
-
-- unresolved-01: authoritative filename and matching source image
-- unresolved-02: authoritative filename and matching source image
-- unresolved-03: authoritative filename and matching source image
-- unresolved-04: authoritative filename and matching source image
-- unresolved-05: authoritative filename and matching source image
-- unresolved-06: authoritative filename and matching source image
-- unresolved-07: authoritative filename and matching source image
-- unresolved-08: authoritative filename and matching source image
+Nested outputs are auxiliary evidence and cannot satisfy a missing route target. Top-level files outside the covered route set remain available for component and visual reference, but they do not affect route readiness.

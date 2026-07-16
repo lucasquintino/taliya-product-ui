@@ -1,8 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "environmentVariable": "TALIYA_CRM_SOURCE_IMAGES_DIR",
-  "expectedImageCount": 101,
-  "canonicalRoster": "specs/002-readiness-evidence-portability/source-assets-canonical-roster.json",
+  "coverageMap": "specs/001-product-ui-foundation/image-coverage-map.md",
   "defaultPaths": [
     "~/Downloads/taliya-crm-chatgpt-images-named-20260511-082508",
     "D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508"

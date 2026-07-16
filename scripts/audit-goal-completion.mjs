@@ -22,6 +22,7 @@ const packageArtifacts = readJson("specs/001-product-ui-foundation/package-artif
 const packageBoundaries = readJson("specs/001-product-ui-foundation/package-boundaries-audit.json");
 const consumerPackageSync = readJson("specs/001-product-ui-foundation/consumer-package-sync-audit.json");
 const consumerVendorVersioning = readJson("specs/001-product-ui-foundation/consumer-vendor-versioning-audit.json");
+const registryConsumerAdoption = readJson("specs/001-product-ui-foundation/registry-consumer-adoption-audit.json");
 const consumerIntegration = readJson("specs/001-product-ui-foundation/consumer-integration-audit.json");
 const consumerPageKit = readJson("specs/001-product-ui-foundation/consumer-page-kit-audit.json");
 const consumerRuntime = readJson("specs/001-product-ui-foundation/consumer-runtime-audit.json");
@@ -239,6 +240,8 @@ const futureConsumerAdoptionMismatchProbeGate = readinessGateRows.find((row) => 
 const futureConsumerAdoptionNegativeProbeGate = readinessGateRows.find((row) => row.id === "future-consumer-adoption-negative-probe");
 const futureCrmAdoptionHandoffGate = readinessGateRows.find((row) => row.id === "future-crm-adoption-handoff");
 const consumerPackageSyncNegativeProbeGate = readinessGateRows.find((row) => row.id === "consumer-package-sync-negative-probe");
+const registryConsumerMigrationProbeGate = readinessGateRows.find((row) => row.id === "registry-consumer-migration-probe");
+const registryConsumerAdoptionGate = readinessGateRows.find((row) => row.id === "registry-consumer-adoption");
 const certificationScopeGate = readinessGateRows.find((row) => row.id === "certification-scope");
 const certificationScopePositiveProbeGate = readinessGateRows.find((row) => row.id === "certification-scope-positive-probe");
 const certificationScopeNegativeProbeGate = readinessGateRows.find((row) => row.id === "certification-scope-negative-probe");
@@ -257,6 +260,8 @@ const futureConsumerAdoptionMismatchProbePass = readinessGatePass(futureConsumer
 const futureConsumerAdoptionNegativeProbePass = readinessGatePass(futureConsumerAdoptionNegativeProbeGate);
 const futureCrmAdoptionHandoffGatePass = readinessGatePass(futureCrmAdoptionHandoffGate);
 const consumerPackageSyncNegativeProbePass = readinessGatePass(consumerPackageSyncNegativeProbeGate);
+const registryConsumerMigrationProbePass = readinessGatePass(registryConsumerMigrationProbeGate);
+const registryConsumerAdoptionGatePass = readinessGatePass(registryConsumerAdoptionGate);
 const certificationScopeGatePass = readinessGatePass(certificationScopeGate);
 const certificationScopePositiveProbePass = readinessGatePass(certificationScopePositiveProbeGate);
 const certificationScopeNegativeProbePass = readinessGatePass(certificationScopeNegativeProbeGate);
@@ -453,6 +458,17 @@ const consumerPackageInstalledFilesPass =
   Array.isArray(consumerPackageSync.installedRows) &&
   consumerPackageSync.installedRows.length > 0 &&
   consumerPackageSync.installedRows.every((row) => row.pass);
+const registryDistribution = libraryReadinessGate.distributionChannel === "npm-registry";
+const consumerDistributionPass = registryDistribution
+  ? registryConsumerMigrationProbePass &&
+    registryConsumerAdoptionGatePass &&
+    registryConsumerAdoption.status === "pass-registry-adoption" &&
+    registryConsumerAdoption.noEffectiveVendorDependencies === true &&
+    registryConsumerAdoption.adoptedPackageCount === registryConsumerAdoption.expectedPackageCount
+  : consumerPackageSync.status === "pass" &&
+    consumerPackageInstalledFilesPass &&
+    consumerPackageSyncNegativeProbePass &&
+    consumerVendorVersioning.status === "pass";
 const fullFinalGateBundleExecuted = releaseCandidateRequiredGatesPass && releaseCandidate?.status === "pass";
 
 const requirements = [
@@ -472,10 +488,7 @@ const requirements = [
       packageArtifactsWorkspaceDependencyPass &&
       packageArtifactsFilesFieldPass &&
       pass(consumerIntegration.installedPackageStatus.pass) &&
-      consumerPackageSync.status === "pass" &&
-      consumerPackageInstalledFilesPass &&
-      consumerPackageSyncNegativeProbePass &&
-      consumerVendorVersioning.status === "pass"
+      consumerDistributionPass
         ? "proven"
         : "failed",
     evidence: [
@@ -486,12 +499,13 @@ const requirements = [
       "package-artifacts:audit required packed local dependency versions",
       "package-artifacts:audit package files field and forbidden tarball files",
       "package-artifacts:audit required README snippets",
-      "consumer-package-sync:audit",
-      "consumer-package-sync:audit installed public files match package outputs",
-      consumerPackageSyncNegativeProbePass
-        ? "library-readiness-gate consumer-package-sync-negative-probe pass"
-        : "library-readiness-gate consumer-package-sync-negative-probe missing/fail",
-      "consumer-vendor-versioning:audit",
+      registryDistribution
+        ? "registry-consumer-adoption:audit 3/3 packages with no effective vendor dependencies"
+        : "consumer-package-sync:audit installed public files match package outputs",
+      registryDistribution
+        ? `library-readiness-gate registry migration/adoption ${registryConsumerMigrationProbePass && registryConsumerAdoptionGatePass ? "pass" : "missing/fail"}`
+        : `library-readiness-gate consumer-package-sync-negative-probe ${consumerPackageSyncNegativeProbePass ? "pass" : "missing/fail"}`,
+      registryDistribution ? "npm-registry distribution channel" : "consumer-vendor-versioning:audit",
       "consumer:audit installedPackageStatus"
     ]
   },
@@ -817,7 +831,7 @@ const requirements = [
       "batch ledgers",
       "visual-certification-backlog:audit",
       sourceAssetsReconciliation
-        ? `sourceReconciliation=${sourceAssetsReconciliation.status} canonical=${sourceAssetsReconciliation.canonicalTopLevelImageCount}/${sourceAssetsReconciliation.expectedCanonicalImageCount} rosterKnown=${sourceAssetsReconciliation.canonicalRoster?.knownNameCount ?? "unknown"} rosterUnresolved=${sourceAssetsReconciliation.canonicalRoster?.unresolvedCount ?? "unknown"} recursive=${sourceAssetsReconciliation.recursiveImageCount} nestedDerivatives=${sourceAssetsReconciliation.nestedDerivativeImageCount} archiveExact=${sourceAssetsReconciliation.archive?.exactFolderMatch}`
+        ? `sourceReconciliation=${sourceAssetsReconciliation.status} routes=${sourceAssetsReconciliation.availableRouteTargetCount}/${sourceAssetsReconciliation.routeTargetCount} support=${sourceAssetsReconciliation.supportTopLevelImageCount} recursive=${sourceAssetsReconciliation.recursiveImageCount} nestedDerivatives=${sourceAssetsReconciliation.nestedDerivativeImageCount} archiveExact=${sourceAssetsReconciliation.archive?.exactFolderMatch}`
         : "source assets reconciliation audit not yet generated",
       "reference-sheet-coverage:audit",
       referenceSheetCoverageGatePass

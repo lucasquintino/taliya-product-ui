@@ -1,14 +1,14 @@
 # Library Acceptance Audit
 
-Generated: 2026-07-16T13:10:59.109Z
+Generated: 2026-07-16T16:34:04.290Z
 
-Status: fail
+Status: pass-current-internal-library
 
 This audit answers whether `taliya-product-ui` is currently acceptable as the official reusable library for the current `taliya-internal` scope. It deliberately keeps that separate from the larger persistent goal of real future CRM adoption plus full source-image 1:1 certification.
 
 Report label: `default`
 
-Current Internal/library accepted: no
+Current Internal/library accepted: yes
 
 Global goal complete: no
 
@@ -18,8 +18,8 @@ Global goal status: `not-complete-globally`
 
 | Gate | Status | Proves |
 | --- | --- | --- |
-| `current-readiness` | fail | aggregate readiness gate passed for the current Internal/library scope |
-| `current-internal-library-readiness` | fail | current taliya-internal can consume official packages/page-kit without local visual clones |
+| `current-readiness` | pass | aggregate readiness gate passed for the current Internal/library scope |
+| `current-internal-library-readiness` | pass | current taliya-internal can consume official packages/page-kit without local visual clones |
 | `future-crm-adoption-executed` | not-executed | future CRM adoption is process-proven only until a real candidate exists and runs labeled gates |
 | `source-image-visual-parity` | scoped-out-by-product-acceptance | product explicitly accepted current Internal/library readiness as the scoped completion bar |
 
@@ -28,7 +28,7 @@ Global goal status: `not-complete-globally`
 | Requirement | Evidence status | Result |
 | --- | --- | --- |
 | Standalone package structure for tokens, primitives, and CRM compositions | proven | pass |
-| Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts | failed | fail |
+| Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts | proven | pass |
 | Public page kit exported, story-covered, and documented | proven-for-current-kit | pass |
 | Runtime standard page-kit manifest is available to consumers | proven-for-current-internal-and-fixtures | pass |
 | Component architecture supports reuse | proven-for-current-scope | pass |
@@ -43,9 +43,9 @@ Global goal status: `not-complete-globally`
 
 ## Summary
 
-- Readiness: `fail`
-- Goal verdict: `readiness-regression`
-- Current Internal readiness: `regressed`
+- Readiness: `pass`
+- Goal verdict: `not-complete-globally`
+- Current Internal readiness: `proven`
 - Future CRM adoption: `not-executed`
 - Global source-image parity: `scoped-out-by-product-acceptance`
 - Future CRM candidates adopted: 0/0

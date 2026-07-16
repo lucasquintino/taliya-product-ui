@@ -60,6 +60,7 @@ const evidenceSources = {
   consumerRuntime: optionValue("--consumer-runtime", "specs/001-product-ui-foundation/consumer-runtime-audit.json"),
   consumerPackageSync: optionValue("--consumer-package-sync", "specs/001-product-ui-foundation/consumer-package-sync-audit.json"),
   consumerVendorVersioning: optionValue("--consumer-vendor-versioning", "specs/001-product-ui-foundation/consumer-vendor-versioning-audit.json"),
+  registryConsumerAdoption: optionValue("--registry-consumer-adoption", "specs/001-product-ui-foundation/registry-consumer-adoption-audit.json"),
   visualBacklog: optionValue("--visual-backlog", "specs/001-product-ui-foundation/visual-certification-backlog-audit.json")
 };
 
@@ -75,8 +76,14 @@ const consumerPageKit = readJson(evidenceSources.consumerPageKit);
 const consumerRuntime = readJson(evidenceSources.consumerRuntime);
 const consumerPackageSync = readJson(evidenceSources.consumerPackageSync);
 const consumerVendorVersioning = readJson(evidenceSources.consumerVendorVersioning);
+const registryConsumerAdoption = readJson(evidenceSources.registryConsumerAdoption);
 const visualBacklog = readJson(evidenceSources.visualBacklog);
 
+const distributionChannel = readiness.distributionChannel ?? "vendor-tarball";
+const registryDistribution = distributionChannel === "npm-registry";
+const distributionReadinessGateIds = registryDistribution
+  ? ["registry-consumer-migration-probe", "registry-consumer-adoption"]
+  : ["consumer-package-sync", "consumer-package-sync-negative-probe", "consumer-vendor-versioning"];
 const requiredReadinessGateIds = [
   "tokens",
   "components",
@@ -99,9 +106,7 @@ const requiredReadinessGateIds = [
   "future-consumer-adoption-negative-probe",
   "future-crm-adoption-handoff",
   "consumer-integration",
-  "consumer-package-sync",
-  "consumer-package-sync-negative-probe",
-  "consumer-vendor-versioning",
+  ...distributionReadinessGateIds,
   "consumer-page-kit",
   "consumer-page-kit-shell-only-route-probe",
   "consumer-page-kit-wrapper-contract-probe",
@@ -180,8 +185,11 @@ const currentInternalConsumptionPass =
   consumerIntegration.summary?.pass === true &&
   consumerPageKit.summary?.pass === true &&
   consumerRuntime.status === "pass" &&
-  consumerPackageSync.status === "pass" &&
-  consumerVendorVersioning.status === "pass";
+  (registryDistribution
+    ? registryConsumerAdoption.status === "pass-registry-adoption" &&
+      registryConsumerAdoption.noEffectiveVendorDependencies === true &&
+      registryConsumerAdoption.adoptedPackageCount === registryConsumerAdoption.expectedPackageCount
+    : consumerPackageSync.status === "pass" && consumerVendorVersioning.status === "pass");
 const internalRouteWorkspaceRows = (consumerPageKit.routeRows ?? []).map((row) => {
   const localRows = row.requiredStatus?.filter((statusRow) => typeof statusRow.importFrom === "string") ?? [];
   const hasShell = localRows.some((statusRow) => statusRow.componentName === "InternalShell" && statusRow.pass);
@@ -210,7 +218,9 @@ const rows = [
   {
     id: "current-internal-consuming-official-kit",
     status: currentInternalConsumptionPass ? "pass" : "fail",
-    evidence: "consumer integration/page-kit/runtime/package-sync/vendor-versioning audits",
+    evidence: registryDistribution
+      ? "consumer integration/page-kit/runtime and registry-consumer-adoption audits"
+      : "consumer integration/page-kit/runtime/package-sync/vendor-versioning audits",
     meaning: "Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones."
   },
   {
@@ -293,6 +303,7 @@ const report = {
   requiredReleaseCandidateFutureCrmGateIds,
   missingReleaseCandidateFutureCrmGateIds,
   requiredReadinessGateIds,
+  distributionChannel,
   missingReadinessGateIds,
   rows,
   internalRouteWorkspaceRows,

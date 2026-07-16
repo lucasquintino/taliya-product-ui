@@ -1,6 +1,6 @@
 {
   "schemaVersion": 8,
-  "generatedAt": "2026-07-16T00:16:20.019Z",
+  "generatedAt": "2026-07-16T16:05:58.185Z",
   "status": "pass-captured-not-certified",
   "note": "Screenshot and pixel-diff evidence only. No row is visually approved by an automatic threshold.",
   "captureMode": "static",
@@ -9,8 +9,8 @@
   "targetContractSha256": "b8a867efe2e39ff8e1a0624a96b6a96fb17b3e40c064cfb7b970d291ad428f9e",
   "renderContractSha256": "0c1a488f56a759a6a3ee77a432d44b4a918dc988b3c5c51092d985efb511bcc1",
   "storybookStaticIndexContractSha256": "f3f19cd9450ff28001750f4174b83209115708c771af6b95986e2ea11d5b9c09",
-  "sourceManifestContractSha256": "5d66b794fe5f095a5b1baf7b48ea8d12ec423150e52af2193d59e2b788075c8f",
-  "sourceManifestSha256": "be1469faadaf594f27a6aee6b1c598e5a73728b8d2be59d4560100414f886d96",
+  "sourceManifestContractSha256": "e462b4f3d506a459b2a290a3e41354efda6d56e08845615a10e8c451d6d63326",
+  "sourceManifestSha256": "3f4f8f6c3d9358a388307c854829c6c525eddba5a3466b2fd6684a9ca06517e6",
   "eligibleTargetCount": 63,
   "attemptedCount": 63,
   "capturedCount": 63,
