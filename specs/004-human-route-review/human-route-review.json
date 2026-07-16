@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T23:30:11.865Z",
+  "generatedAt": "2026-07-16T23:46:03.791Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 12,
+  "completedRouteCount": 13,
   "failedRouteCount": 0,
-  "pendingRouteCount": 61,
+  "pendingRouteCount": 60,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1086,38 +1086,59 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:45:54.430Z",
+        "evidence": [
+          "tmp/human-route-review/28-student-profile/desktop-final.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:45:55.071Z",
+        "evidence": [
+          "tmp/human-route-review/28-student-profile/desktop-final.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:45:55.549Z",
+        "evidence": [
+          "tmp/human-route-review/28-student-profile/mobile-final.jpg",
+          "tmp/human-route-review/28-student-profile/mobile-rail-final.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:45:55.749Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "profile-tabs",
+          "header-actions",
+          "overview-actions",
+          "rail-actions",
+          "mobile-responsive-flow"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T23:45:57.645Z",
+        "evidence": [
+          "source:28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisão humana ligou todos os callbacks do perfil, corrigiu overflow intrínseco no desktop e tornou cabeçalho, abas, métricas e painel lateral responsivos no mobile."
+      ]
     },
     {
       "image": "29_round-4.1F_aula_01_detalhe-com-chamada.png.png",

@@ -1,20 +1,20 @@
 # Human Route Review
 
-Generated: 2026-07-16T23:30:11.865Z
+Generated: 2026-07-16T23:46:03.791Z
 
 Status: in-progress
 
 - Routes: 73
-- Passed: 12
+- Passed: 13
 - Failed: 0
-- Pending: 61
+- Pending: 60
 
 | Family | Routes | Passed | Failed |
 | --- | ---: | ---: | ---: |
 | Access Subscription | 7 | 0 | 0 |
 | Agenda | 4 | 1 | 0 |
 | Agentes | 7 | 0 | 0 |
-| Alunos | 2 | 1 | 0 |
+| Alunos | 2 | 2 | 0 |
 | Aprovacoes | 1 | 1 | 0 |
 | Billing | 3 | 0 | 0 |
 | Checklists | 1 | 1 | 0 |

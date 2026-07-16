@@ -4796,10 +4796,12 @@ button.tl-stepper__control:disabled {
 .tl-metric-tile {
   align-items: start;
   border: var(--taliya-border-width-default) solid var(--taliya-border-color-subtle);
+  box-sizing: border-box;
   display: grid;
   gap: var(--taliya-control-metric-tile-footer-gap);
   justify-items: start;
   min-height: var(--taliya-control-metric-tile-min-height);
+  min-width: 0;
   padding: var(--taliya-control-card-padding);
   text-align: left;
   width: 100%;

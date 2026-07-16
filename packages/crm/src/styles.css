@@ -2547,6 +2547,7 @@
 .tcrm-right-panel-layout__main,
 .tcrm-right-panel-layout__panel {
   min-height: 0;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -2901,7 +2902,7 @@
 }
 
 .tcrm-dashboard-grid--1 {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .tcrm-dashboard-grid--2 {
@@ -21801,8 +21802,11 @@ button.tcrm-integration-status-row:disabled {
 
 .tcrm-student-summary {
   gap: var(--taliya-control-crm-student-summary-gap);
+  max-width: 100%;
   min-height: var(--taliya-control-crm-student-summary-min-height);
+  min-width: 0;
   padding: var(--taliya-control-crm-student-summary-padding);
+  width: 100%;
 }
 
 .tcrm-student-summary > header h3 {
@@ -21822,6 +21826,9 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   gap: var(--taliya-control-crm-student-summary-metrics-gap);
   grid-template-columns: var(--taliya-layout-crm-student-summary-columns);
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
 }
 
 .tcrm-relationship-list {
@@ -29690,6 +29697,7 @@ button.tcrm-pipeline-card__select:focus-visible,
 .tcrm-page-family-stack {
   display: grid;
   gap: var(--taliya-space-4);
+  grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   width: 100%;
 }
@@ -32345,6 +32353,61 @@ button.tcrm-pipeline-card__select:focus-visible,
   .tcrm-dashboard-grid--4,
   .tcrm-dashboard-grid--asymmetrical {
     grid-template-columns: 1fr;
+  }
+
+  .tcrm-right-panel-layout {
+    height: auto;
+    max-width: 100%;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout__content-header,
+  .tcrm-right-panel-layout__main,
+  .tcrm-right-panel-layout__panel {
+    grid-column: 1;
+    max-width: 100%;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-student-header {
+    gap: var(--taliya-space-4);
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .tcrm-student-header__body {
+    min-width: 0;
+  }
+
+  .tcrm-student-header h2,
+  .tcrm-student-header__contacts span {
+    overflow-wrap: anywhere;
+  }
+
+  .tcrm-student-header__actions {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-width: 0;
+  }
+
+  .tcrm-profile-tabs.tl-tabs {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .tcrm-profile-tabs.tl-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tcrm-profile-tabs .tl-tabs__list {
+    min-width: max-content;
+  }
+
+  .tcrm-student-summary__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .tcrm-three-pane-layout {

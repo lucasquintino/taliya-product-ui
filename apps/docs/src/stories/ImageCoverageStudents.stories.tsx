@@ -24,6 +24,7 @@ import type {
   StudentDrawerClassItem,
   StudentDrawerFact,
   StudentDrawerPendingItem,
+  StudentProfileAction,
   StudentTableRow
 } from "@taliya/crm";
 import { Button } from "@taliya/ui";
@@ -495,38 +496,87 @@ export function StudentsShell() {
 }
 
 export function StudentProfilePage() {
+  const [activeTab, setActiveTab] = useState("resumo");
+  const [announcement, setAnnouncement] = useState("");
+  const profileActionLabels: Record<StudentProfileAction, string> = {
+    "open-schedule": "agenda aberta",
+    "open-finance": "financeiro aberto",
+    "open-pending": "pendências abertas",
+    "open-notes": "notas abertas",
+    "open-timeline": "linha do tempo aberta",
+    message: "mensagem iniciada",
+    "create-task": "criação de tarefa aberta",
+    "change-plan": "alteração de plano aberta",
+    "pause-student": "pausa do aluno aberta"
+  };
+  const headerActionLabels: Record<string, string> = {
+    message: "mensagem iniciada",
+    task: "criação de tarefa aberta",
+    note: "registro de nota aberto",
+    edit: "edição do aluno aberta"
+  };
+  const announceProfileAction = (action: StudentProfileAction) => {
+    setAnnouncement(`Ação do perfil: ${profileActionLabels[action]}`);
+  };
+
   return (
-    <CrmRightPanelPage
-      activeNavId="alunos"
-      activeSidebarId="equipe"
-      avatarSrc={image79Avatar}
-      className="sb-image-coverage-students-shell"
-      contentHeader={<StudentHeader avatarSrc={source28AnaPaula} />}
-      contentHeaderLabel="Identificacao e acoes do aluno"
-      contentClassName="sb-image-coverage-students-content"
-      main={
-        <PageStack>
-          <ProfileTabs density="compact" showPanel={false} />
-          <StudentProfileOverviewGrid density="compact" />
-        </PageStack>
-      }
-      mainGridColumns={1}
-      mainLabel="Resumo operacional do aluno"
-      navItems={[
-        { id: "alunos", label: "Alunos" },
-        { id: "contatos", label: "Contatos" },
-        { id: "segmentos", label: "Segmentos" },
-        { id: "linha", label: "Linha do tempo" }
-      ]}
-      panel={<StudentProfileActionRail density="compact" />}
-      panelLabel="Acoes e relacionamento do aluno"
-      regions={{ pageHeader: false }}
-      rightPanelVariant="student-profile"
-      sidebarItems={crmEmptyShellSidebarItems}
-      stageClassName="sb-image-coverage-students-stage"
-      title="Ana Paula Martins"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    />
+    <>
+      <CrmRightPanelPage
+        activeNavId="alunos"
+        activeSidebarId="equipe"
+        avatarSrc={image79Avatar}
+        className="sb-image-coverage-students-shell"
+        contentHeader={
+          <StudentHeader
+            avatarSrc={source28AnaPaula}
+            onAction={(action) => setAnnouncement(`Ação do cabeçalho: ${headerActionLabels[action] ?? action}`)}
+          />
+        }
+        contentHeaderLabel="Identificacao e acoes do aluno"
+        contentClassName="sb-image-coverage-students-content"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        main={
+          <PageStack>
+            <ProfileTabs
+              density="compact"
+              onValueChange={(value) => {
+                setActiveTab(value);
+                setAnnouncement(`Aba do perfil selecionada: ${value}`);
+              }}
+              showPanel={false}
+              value={activeTab}
+            />
+            <StudentProfileOverviewGrid density="compact" onAction={announceProfileAction} />
+          </PageStack>
+        }
+        mainGridColumns={1}
+        mainLabel="Resumo operacional do aluno"
+        navItems={[
+          { id: "alunos", label: "Alunos" },
+          { id: "contatos", label: "Contatos" },
+          { id: "segmentos", label: "Segmentos" },
+          { id: "linha", label: "Linha do tempo" }
+        ]}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        panel={<StudentProfileActionRail density="compact" onAction={announceProfileAction} />}
+        panelLabel="Acoes e relacionamento do aluno"
+        regions={{ pageHeader: false }}
+        rightPanelVariant="student-profile"
+        sidebarItems={crmEmptyShellSidebarItems}
+        stageClassName="sb-image-coverage-students-stage"
+        title="Ana Paula Martins"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      />
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
