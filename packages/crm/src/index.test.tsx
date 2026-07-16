@@ -3633,6 +3633,43 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("button", { name: "Acao global" })).toBeInTheDocument();
   });
 
+  it("forwards every CrmProductShell global action callback", () => {
+    const onSearch = vi.fn();
+    const onMessages = vi.fn();
+    const onNotifications = vi.fn();
+    const onAvatar = vi.fn();
+
+    render(
+      <crm.CrmProductShell globalActions={{ onAvatar, onMessages, onNotifications, onSearch }} title="Hoje">
+        <p>Conteudo operacional</p>
+      </crm.CrmProductShell>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Mensagens" }));
+    fireEvent.click(screen.getByRole("button", { name: "Notificações" }));
+    fireEvent.click(screen.getByRole("button", { name: "Operadora" }));
+
+    expect(onSearch).toHaveBeenCalledTimes(1);
+    expect(onMessages).toHaveBeenCalledTimes(1);
+    expect(onNotifications).toHaveBeenCalledTimes(1);
+    expect(onAvatar).toHaveBeenCalledTimes(1);
+  });
+
+  it("forwards global action callbacks through CrmDashboardPage", () => {
+    const onSearch = vi.fn();
+
+    render(
+      <crm.CrmDashboardPage globalActions={{ onSearch }} title="Hoje">
+        <p>Conteudo do dashboard</p>
+      </crm.CrmDashboardPage>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+
+    expect(onSearch).toHaveBeenCalledTimes(1);
+  });
+
   it("lets CrmProductShell render inside the official window frame", () => {
     const { rerender } = render(
       <crm.CrmProductShell frame="window" title="Agentes">

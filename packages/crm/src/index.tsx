@@ -755,19 +755,30 @@ export function CrmShellAvatar({
   );
 }
 
+export interface CrmShellGlobalActionsCallbacks {
+  onSearch?: React.MouseEventHandler<HTMLButtonElement>;
+  onMessages?: React.MouseEventHandler<HTMLButtonElement>;
+  onNotifications?: React.MouseEventHandler<HTMLButtonElement>;
+  onAvatar?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
 export function CrmShellGlobalActions({
   avatarSrc,
-  className
+  className,
+  onSearch,
+  onMessages,
+  onNotifications,
+  onAvatar
 }: {
   avatarSrc?: string;
   className?: string;
-}) {
+} & CrmShellGlobalActionsCallbacks) {
   return (
     <div className={cn("tcrm-empty-shell-actions", className)} role="group" aria-label="Ações globais">
-      <CrmTopbarActionButton icon="search" label="Buscar" />
-      <CrmTopbarActionButton alert icon="mail" label="Mensagens" />
-      <CrmTopbarActionButton alert icon="bell" label="Notificações" />
-      <CrmShellAvatar src={avatarSrc} />
+      <CrmTopbarActionButton icon="search" label="Buscar" onClick={onSearch} />
+      <CrmTopbarActionButton alert icon="mail" label="Mensagens" onClick={onMessages} />
+      <CrmTopbarActionButton alert icon="bell" label="Notificações" onClick={onNotifications} />
+      <CrmShellAvatar onClick={onAvatar} src={avatarSrc} />
     </div>
   );
 }
@@ -776,18 +787,20 @@ export function CrmEmptyShellTopbar({
   navItems = crmEmptyShellNavItems,
   avatarSrc,
   className,
+  globalActions,
   onNavChange
 }: {
   navItems?: CrmShellNavItem[];
   avatarSrc?: string;
   className?: string;
+  globalActions?: CrmShellGlobalActionsCallbacks;
   onNavChange?: (id: string) => void;
 }) {
   return (
     <div className={cn("tcrm-empty-shell-topbar", className)}>
       <CrmShellBackButton />
       <CrmShellTopNav items={navItems} onChange={onNavChange} />
-      <CrmShellGlobalActions avatarSrc={avatarSrc} />
+      <CrmShellGlobalActions {...globalActions} avatarSrc={avatarSrc} />
     </div>
   );
 }
@@ -826,6 +839,7 @@ export function CrmEmptyShell({
   utilityItems = crmEmptyShellSidebarUtilityItems,
   avatarSrc,
   className,
+  globalActions,
   onNavChange,
   onSidebarSelect,
   onSidebarUtilitySelect
@@ -836,6 +850,7 @@ export function CrmEmptyShell({
   utilityItems?: CrmShellSidebarItem[];
   avatarSrc?: string;
   className?: string;
+  globalActions?: CrmShellGlobalActionsCallbacks;
   onNavChange?: (id: string) => void;
   onSidebarSelect?: (item: CrmShellSidebarItem) => void;
   onSidebarUtilitySelect?: (item: CrmShellSidebarItem) => void;
@@ -845,7 +860,7 @@ export function CrmEmptyShell({
       <CrmEmptyShellWindow>
         <CrmShellSidebar items={sidebarItems} onSelect={onSidebarSelect} onUtilitySelect={onSidebarUtilitySelect} utilityItems={utilityItems} />
         <main className="tcrm-empty-shell-main">
-          <CrmEmptyShellTopbar avatarSrc={avatarSrc} navItems={navItems} onNavChange={onNavChange} />
+          <CrmEmptyShellTopbar avatarSrc={avatarSrc} globalActions={globalActions} navItems={navItems} onNavChange={onNavChange} />
           <CrmEmptyShellPageHeader title={title} />
           <CrmEmptyShellCanvas />
         </main>
@@ -886,6 +901,7 @@ export interface CrmProductShellProps extends React.PropsWithChildren<{
   sidebarItems?: CrmShellSidebarItem[];
   utilityItems?: CrmShellSidebarItem[];
   avatarSrc?: string;
+  globalActions?: CrmShellGlobalActionsCallbacks;
   browserUrl?: string;
   className?: string;
   contentClassName?: string;
@@ -918,6 +934,7 @@ export function CrmProductShell({
   sidebarItems = crmEmptyShellSidebarItems,
   utilityItems = crmEmptyShellSidebarUtilityItems,
   avatarSrc,
+  globalActions,
   browserUrl,
   children,
   className,
@@ -997,7 +1014,7 @@ export function CrmProductShell({
               {resolvedRegions.backButton ? <CrmShellBackButton onClick={onBack} /> : null}
               {resolvedRegions.topNav ? <CrmShellTopNav items={navItems} onChange={onNavChange} selectionMode={topNavSelection} /> : null}
               {topbarCenter ? <div className="tcrm-product-shell-topbar__center">{topbarCenter}</div> : null}
-              {resolvedRegions.globalActions ? <CrmShellGlobalActions avatarSrc={avatarSrc} /> : null}
+              {resolvedRegions.globalActions ? <CrmShellGlobalActions {...globalActions} avatarSrc={avatarSrc} /> : null}
               {topbarEnd ? <div className="tcrm-product-shell-topbar__end">{topbarEnd}</div> : null}
             </div>
           ) : null}

@@ -1,0 +1,4804 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-16T21:50:23.568Z",
+  "status": "in-progress",
+  "targetRouteCount": 73,
+  "completedRouteCount": 4,
+  "failedRouteCount": 0,
+  "pendingRouteCount": 69,
+  "duplicateImages": [],
+  "staleImages": [],
+  "invalidImages": [],
+  "rows": [
+    {
+      "image": "17_round-4.1A_hoje_01_acima-da-dobra.png.png",
+      "storyId": "crm-image-coverage-hoje--image-17-hoje-base",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "family": "Hoje",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "operational-row-actions",
+        "section-navigation",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:37:34.316Z",
+        "evidence": [
+          "tmp/human-route-review/17-hoje-base/canonical.png",
+          "tmp/human-route-review/17-hoje-base/canonical-final.png"
+        ],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:37:32.682Z",
+        "evidence": [
+          "tmp/human-route-review/17-hoje-base/metrics.json",
+          "tmp/human-route-review/17-hoje-base/desktop-reduced-final.png"
+        ],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:37:33.223Z",
+        "evidence": [
+          "tmp/human-route-review/17-hoje-base/mobile.png",
+          "tmp/human-route-review/17-hoje-base/mobile-final.png"
+        ],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:37:33.980Z",
+        "evidence": [
+          "Browser click changed the selected operational row to aria-pressed=true.",
+          "Browser click moved the pressed section state from Hoje to Prioridades.",
+          "Browser click focused Buscar but produced no state, overlay, navigation, or callback evidence.",
+          "tmp/human-route-review/17-hoje-base/metrics-final.json"
+        ],
+        "issues": [],
+        "tested": [
+          "operational-row-actions",
+          "section-navigation",
+          "global-actions",
+          "shell-navigation",
+          "drawer-open-close"
+        ]
+      },
+      "sourceComparison": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T20:55:48.790Z",
+        "evidence": [
+          "tmp/human-route-review/17-hoje-base/canonical.png"
+        ],
+        "issues": []
+      },
+      "finalStatus": "pass",
+      "notes": [
+        "Canonical browser review compared directly with the assigned source image; no blocking overlap, overflow, broken media, or composition divergence observed.",
+        "Responsive defects and dead global actions were fixed and reverified at 1672x941, 1448x1086, and 390x844."
+      ]
+    },
+    {
+      "image": "18_round-4.1A_hoje_02_drawer-tarefa.png.png",
+      "storyId": "crm-image-coverage-hoje--image-18-hoje-drawer-tarefa",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "family": "Hoje",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "operational-row-actions",
+        "section-navigation",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:34:29.975Z",
+        "evidence": [
+          "tmp/human-route-review/18-hoje-drawer/canonical.png"
+        ],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:34:30.572Z",
+        "evidence": [
+          "tmp/human-route-review/18-hoje-drawer/desktop-reduced.png"
+        ],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:34:30.751Z",
+        "evidence": [
+          "tmp/human-route-review/18-hoje-drawer/mobile.png"
+        ],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:34:32.045Z",
+        "evidence": [
+          "tmp/human-route-review/18-hoje-drawer/metrics.json"
+        ],
+        "issues": [],
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "operational-row-actions",
+          "section-navigation",
+          "drawer-open-close"
+        ]
+      },
+      "sourceComparison": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:34:30.937Z",
+        "evidence": [
+          "tmp/human-route-review/18-hoje-drawer/canonical.png"
+        ],
+        "issues": []
+      },
+      "finalStatus": "pass",
+      "notes": [
+        "Compared directly with the assigned source at 1672x941; drawer, responsive layouts, checklist, footer actions, global actions, and open-close behavior were verified after fixes."
+      ]
+    },
+    {
+      "image": "19_round-4.1A_hoje_03_estado-critico-do-dia.png",
+      "storyId": "crm-image-coverage-hoje--image-19-hoje-estado-critico",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "family": "Hoje",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "operational-row-actions",
+        "section-navigation",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:39:33.668Z",
+        "evidence": [
+          "tmp/human-route-review/19-hoje-critico/canonical.png"
+        ],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:39:34.094Z",
+        "evidence": [
+          "tmp/human-route-review/19-hoje-critico/desktop-reduced.png"
+        ],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:39:34.304Z",
+        "evidence": [
+          "tmp/human-route-review/19-hoje-critico/mobile.png"
+        ],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:39:35.785Z",
+        "evidence": [
+          "tmp/human-route-review/19-hoje-critico/metrics.json"
+        ],
+        "issues": [],
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "operational-row-actions",
+          "section-navigation",
+          "drawer-open-close"
+        ]
+      },
+      "sourceComparison": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:39:34.493Z",
+        "evidence": [
+          "tmp/human-route-review/19-hoje-critico/canonical.png"
+        ],
+        "issues": []
+      },
+      "finalStatus": "pass",
+      "notes": [
+        "Critical state compared directly with the assigned source and verified across canonical, reduced desktop, mobile, navigation, global actions, row selection, and drawer behavior."
+      ]
+    },
+    {
+      "image": "20_round-4.1A_hoje_04_historico-de-hoje.png.png",
+      "storyId": "crm-image-coverage-hoje--image-20-historico-de-hoje",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "family": "Hoje",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "operational-row-actions",
+        "section-navigation",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:48:34.200Z",
+        "evidence": [
+          "tmp/human-route-review/20-hoje-historico/canonical.png"
+        ],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:48:34.401Z",
+        "evidence": [
+          "tmp/human-route-review/20-hoje-historico/desktop-reduced.png"
+        ],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:48:34.672Z",
+        "evidence": [
+          "tmp/human-route-review/20-hoje-historico/mobile.png"
+        ],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:48:36.727Z",
+        "evidence": [
+          "tmp/human-route-review/20-hoje-historico/metrics.json"
+        ],
+        "issues": [],
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "operational-row-actions",
+          "section-navigation",
+          "drawer-open-close",
+          "activity-filters",
+          "activity-export",
+          "activity-item-open"
+        ]
+      },
+      "sourceComparison": {
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:48:34.931Z",
+        "evidence": [
+          "tmp/human-route-review/20-hoje-historico/canonical.png"
+        ],
+        "issues": []
+      },
+      "finalStatus": "pass",
+      "notes": [
+        "The story now renders the full official Today dashboard plus ActivityFeed and starts at the canonical scroll position; filters, export, item open, shell navigation, global actions, and drawer behavior were verified."
+      ]
+    },
+    {
+      "image": "21_round-4.1B_operacao_01_kanban-geral.png.png",
+      "storyId": "crm-image-coverage-operação--image-21-kanban-geral",
+      "storyTitle": "CRM / Image Coverage / Operação",
+      "family": "Operação",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "kanban-card-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "22_round-4.1B_operacao_02_kanban-com-drawer.png",
+      "storyId": "crm-image-coverage-operação--image-22-kanban-com-drawer",
+      "storyTitle": "CRM / Image Coverage / Operação",
+      "family": "Operação",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "kanban-card-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "23_round-4.1C_tarefas_01_lista-detalhe.png.png",
+      "storyId": "crm-image-coverage-tarefas--image-23-lista-detalhe",
+      "storyTitle": "CRM / Image Coverage / Tarefas",
+      "family": "Tarefas",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "table-selection",
+        "pagination",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png",
+      "storyId": "crm-image-coverage-checklists--image-24-lista-execucao-detalhe",
+      "storyTitle": "CRM / Image Coverage / Checklists",
+      "family": "Checklists",
+      "sourceViewport": {
+        "width": 1491,
+        "height": 1055
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1491,
+          "height": 1055
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "table-selection",
+        "checklist-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "24_round-4.1D_inbox_01_conversa-aberta.png.png",
+      "storyId": "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta",
+      "storyTitle": "CRM / Image Coverage / Inbox",
+      "family": "Inbox",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "conversation-selection",
+        "thread-scroll",
+        "composer",
+        "context-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "25_round-4.1C_aprovacoes_01_lista-decisao-detalhe.png.png",
+      "storyId": "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe",
+      "storyTitle": "CRM / Image Coverage / Aprovacoes",
+      "family": "Aprovacoes",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "table-selection",
+        "approval-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "26_round-4.1F_agenda_01_calendario-operacional.png.png",
+      "storyId": "crm-image-coverage-agenda--image-26-agenda-calendario-operacional",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "family": "Agenda",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "calendar-navigation",
+        "calendar-item-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "27_round-4.1E_alunos_01_lista-perfil-resumido.png.png",
+      "storyId": "crm-image-coverage-alunos--image-27-lista-perfil-resumido",
+      "storyTitle": "CRM / Image Coverage / Alunos",
+      "family": "Alunos",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "table-selection",
+        "profile-tabs",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png",
+      "storyId": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+      "storyTitle": "CRM / Image Coverage / Alunos",
+      "family": "Alunos",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "table-selection",
+        "profile-tabs",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "29_round-4.1F_aula_01_detalhe-com-chamada.png.png",
+      "storyId": "crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "family": "Agenda",
+      "sourceViewport": {
+        "width": 1487,
+        "height": 1058
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1487,
+          "height": 1058
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "calendar-navigation",
+        "calendar-item-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "30_round-4.1F_financeiro_01_visao-geral-filas.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-30-visao-geral-filas",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "family": "Financeiro",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "pagination",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png",
+      "storyId": "crm-image-coverage-reposições--image-31-fluxo-encaixe",
+      "storyTitle": "CRM / Image Coverage / Reposições",
+      "family": "Reposições",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "quick-filters",
+        "table-selection",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "family": "Financeiro",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "pagination",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "33_round-4.1F_financeiro_03_kanban-financeiro.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-33-financeiro-kanban",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "family": "Financeiro",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "pagination",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "family": "Financeiro",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "pagination",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "35_round-4.1F_turmas_01_lista-detalhe.png.png",
+      "storyId": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "family": "Agenda",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "calendar-navigation",
+        "calendar-item-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png",
+      "storyId": "crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "family": "Agenda",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "calendar-navigation",
+        "calendar-item-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "37_round-4.1G_vendas_01_pipeline-kanban.png.png",
+      "storyId": "crm-image-coverage-vendas--image-37-vendas-pipeline-kanban",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "family": "Vendas",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "38_round-4.1G_vendas_02_lista-interessados.png.png",
+      "storyId": "crm-image-coverage-vendas--image-38-lista-interessados",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "family": "Vendas",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "39_round-4.1G_experimental_01_lista-acompanhamento.png.png",
+      "storyId": "crm-image-coverage-vendas--image-39-experimental-lista",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "family": "Vendas",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "40_round-4.1G_matriculas_01_checklist-conversao.png.png",
+      "storyId": "crm-image-coverage-vendas--image-40-matriculas-checklist-conversao",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "family": "Vendas",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "table-or-kanban-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "41_round-4.1H_retencao_01_riscos-lista-drawer.png.png",
+      "storyId": "crm-image-coverage-retencao--image-41-retencao-riscos",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "family": "Retencao",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "queue-selection",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "42_round-4.1H_cancelamentos_01_fila-salvamento-drawer.png.png",
+      "storyId": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "family": "Retencao",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "queue-selection",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "43_round-4.1H_reativacoes_01_ex-alunos-retorno.png.png",
+      "storyId": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "family": "Retencao",
+      "sourceViewport": {
+        "width": 1659,
+        "height": 948
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1659,
+          "height": 948
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "queue-selection",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "44_round-4.1H_reclamacoes_01_fila-caso-sensivel-drawer.png.png",
+      "storyId": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "family": "Retencao",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "filter-search",
+        "queue-selection",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "45_round-4.1I_relatorios_01_visao-gestao.png.png",
+      "storyId": "crm-image-coverage-relatorios--reports-management",
+      "storyTitle": "CRM / Image Coverage / Relatorios",
+      "family": "Relatorios",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "date-or-segment-filters",
+        "dashboard-actions",
+        "export-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png",
+      "storyId": "crm-image-coverage-relatorios--money-on-the-table",
+      "storyTitle": "CRM / Image Coverage / Relatorios",
+      "family": "Relatorios",
+      "sourceViewport": {
+        "width": 1586,
+        "height": 992
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1586,
+          "height": 992
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "date-or-segment-filters",
+        "dashboard-actions",
+        "export-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "47_round-4.1J_suporte_01_central-studio-taliya.png.png",
+      "storyId": "crm-image-coverage-suporte--support-central",
+      "storyTitle": "CRM / Image Coverage / Suporte",
+      "family": "Suporte",
+      "sourceViewport": {
+        "width": 1586,
+        "height": 992
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1586,
+          "height": 992
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "support-navigation",
+        "search",
+        "support-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "48_round-4.1K_internal_01_visao-operacional.png.png",
+      "storyId": "crm-image-coverage-internal--image-48-internal-visao-operacional",
+      "storyTitle": "CRM / Image Coverage / Internal",
+      "family": "Internal",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "internal-navigation",
+        "table-selection",
+        "tenant-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "49_round-4.1K_internal_02_tenants-lista-detalhe.png",
+      "storyId": "crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe",
+      "storyTitle": "CRM / Image Coverage / Internal",
+      "family": "Internal",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "internal-navigation",
+        "table-selection",
+        "tenant-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png",
+      "storyId": "crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants",
+      "storyTitle": "CRM / Image Coverage / Internal",
+      "family": "Internal",
+      "sourceViewport": {
+        "width": 1536,
+        "height": 1024
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1536,
+          "height": 1024
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "internal-navigation",
+        "table-selection",
+        "tenant-actions",
+        "drawer-open-close"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1086,
+        "height": 1448
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1086,
+          "height": 1448
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-52-agentes-catalogo",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "family": "Agentes",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "agent-selection",
+        "flow-controls",
+        "test-or-publish-actions",
+        "drawer-or-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-53-agente-agenda-rotinas",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "family": "Agentes",
+      "sourceViewport": {
+        "width": 1491,
+        "height": 1055
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1491,
+          "height": 1055
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "agent-selection",
+        "flow-controls",
+        "test-or-publish-actions",
+        "drawer-or-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-54-rotina-presenca-faltas",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "family": "Agentes",
+      "sourceViewport": {
+        "width": 1536,
+        "height": 1024
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1536,
+          "height": 1024
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "agent-selection",
+        "flow-controls",
+        "test-or-publish-actions",
+        "drawer-or-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-56-fluxo-falta-com-aviso",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "family": "Agentes",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "agent-selection",
+        "flow-controls",
+        "test-or-publish-actions",
+        "drawer-or-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "58_round-4.1L_agentes_05_teste-fluxo-falta-com-aviso-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-58-teste-fluxo-falta-com-aviso",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "family": "Agentes",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "agent-selection",
+        "flow-controls",
+        "test-or-publish-actions",
+        "drawer-or-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-59-publicar-rotina",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "family": "Agentes",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "agent-selection",
+        "flow-controls",
+        "test-or-publish-actions",
+        "drawer-or-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "family": "Configuracoes",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "settings-navigation",
+        "form-controls",
+        "save-actions",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "61_round-4.1M_configuracoes_02_permissoes-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "family": "Configuracoes",
+      "sourceViewport": {
+        "width": 1491,
+        "height": 1055
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1491,
+          "height": 1055
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "settings-navigation",
+        "form-controls",
+        "save-actions",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "family": "Configuracoes",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "settings-navigation",
+        "form-controls",
+        "save-actions",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "63_round-4.1M_configuracoes_04_agenda-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "family": "Configuracoes",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "settings-navigation",
+        "form-controls",
+        "save-actions",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "64_round-4.1M_configuracoes_05_notificacoes-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "family": "Configuracoes",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "settings-navigation",
+        "form-controls",
+        "save-actions",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "65_round-4.1N_billing_01_assinatura-taliya-aprovado.png",
+      "storyId": "crm-image-coverage-billing--image-65-billing-assinatura",
+      "storyTitle": "CRM / Image Coverage / Billing",
+      "family": "Billing",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "billing-navigation",
+        "plan-or-invoice-actions",
+        "confirmation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "66_round-4.1N_billing_02_faturas-taliya-aprovado.png",
+      "storyId": "crm-image-coverage-billing--image-66-billing-faturas",
+      "storyTitle": "CRM / Image Coverage / Billing",
+      "family": "Billing",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "billing-navigation",
+        "plan-or-invoice-actions",
+        "confirmation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "67_round-4.1N_billing_03_add-ons-taliya-aprovado.png",
+      "storyId": "crm-image-coverage-billing--image-67-billing-add-ons",
+      "storyTitle": "CRM / Image Coverage / Billing",
+      "family": "Billing",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "billing-navigation",
+        "plan-or-invoice-actions",
+        "confirmation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "68_round-4.1O_uso_01_visao-geral-aprovado.png",
+      "storyId": "crm-image-coverage-usage--image-68-uso-visao-geral",
+      "storyTitle": "CRM / Image Coverage / Usage",
+      "family": "Usage",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "usage-filters",
+        "table-or-summary-actions",
+        "pagination"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "69_round-4.1O_uso_02_extrato-aprovado.png",
+      "storyId": "crm-image-coverage-usage--image-69-uso-extrato",
+      "storyTitle": "CRM / Image Coverage / Usage",
+      "family": "Usage",
+      "sourceViewport": {
+        "width": 1448,
+        "height": 1086
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1448,
+          "height": 1086
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "usage-filters",
+        "table-or-summary-actions",
+        "pagination"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-70-execucoes-fluxo",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "family": "Agentes",
+      "sourceViewport": {
+        "width": 1586,
+        "height": 992
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1586,
+          "height": 992
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "agent-selection",
+        "flow-controls",
+        "test-or-publish-actions",
+        "drawer-or-panel-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "71_round-4.1Q_acesso-assinatura_shell-base-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-71-shell-base",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "family": "Access Subscription",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "form-controls",
+        "back-continue",
+        "validation-states",
+        "handoff-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "72_round-4.1Q_acesso-assinatura_signup-criar-conta-salvo-ajustes.png",
+      "storyId": "crm-image-coverage-access-subscription--image-72-signup",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "family": "Access Subscription",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "form-controls",
+        "back-continue",
+        "validation-states",
+        "handoff-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "73_round-4.1Q_acesso-assinatura_signin-entrar-salvo-ajustes.png",
+      "storyId": "crm-image-coverage-access-subscription--image-73-signin",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "family": "Access Subscription",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "form-controls",
+        "back-continue",
+        "validation-states",
+        "handoff-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "74_round-4.1Q_acesso-assinatura_revisar-assinatura-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-74-review-subscription",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "family": "Access Subscription",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "form-controls",
+        "back-continue",
+        "validation-states",
+        "handoff-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "75_round-4.1Q_acesso-assinatura_aguardando-confirmacao-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-75-pending-confirmation",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "family": "Access Subscription",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "form-controls",
+        "back-continue",
+        "validation-states",
+        "handoff-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "76_round-4.1Q_acesso-assinatura_resolver-assinatura-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-76-resolve-subscription",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "family": "Access Subscription",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "form-controls",
+        "back-continue",
+        "validation-states",
+        "handoff-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "77_round-4.1Q_acesso-assinatura_assinatura-confirmada-setup-guiado-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-77-confirmed-handoff",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "family": "Access Subscription",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "form-controls",
+        "back-continue",
+        "validation-states",
+        "handoff-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "family": "Setup",
+      "sourceViewport": {
+        "width": 1672,
+        "height": 941
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1672,
+          "height": 941
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "global-actions",
+        "step-navigation",
+        "form-controls",
+        "back-continue",
+        "validation-states"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    },
+    {
+      "image": "79_round-4.1S_app-shell_01_base-web-sem-conteudo.png",
+      "storyId": "crm-image-coverage-image-79-empty-shell--image-79-empty-shell",
+      "storyTitle": "CRM / Image Coverage / Image 79 Empty Shell",
+      "family": "Image 79 Empty Shell",
+      "sourceViewport": {
+        "width": 1160,
+        "height": 868
+      },
+      "reviewViewports": {
+        "canonical": {
+          "width": 1160,
+          "height": 868
+        },
+        "desktopReduced": {
+          "width": 1448,
+          "height": 1086
+        },
+        "mobile": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      "expectedInteractions": [
+        "shell-navigation",
+        "empty-state-actions"
+      ],
+      "canonicalVisual": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "desktopResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "mobileResponsive": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "interactionReview": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": [],
+        "tested": []
+      },
+      "sourceComparison": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "issues": []
+      },
+      "finalStatus": "pending",
+      "notes": []
+    }
+  ]
+}

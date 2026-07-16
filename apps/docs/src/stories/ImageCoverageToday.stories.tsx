@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ActivityFeed,
@@ -290,14 +290,22 @@ function TodayDashboard({ selectedTask = false, variant = "base", onTaskSelect }
 
 function TodayAfterContent({
   showHistory = false,
-  historyScrollReserve = false
+  historyScrollReserve = false,
+  onActivityAction
 }: {
   showHistory?: boolean;
   historyScrollReserve?: boolean;
+  onActivityAction?: (message: string) => void;
 }) {
   return (
     <>
-      {showHistory ? <ActivityFeed fluid /> : null}
+      {showHistory ? (
+        <ActivityFeed
+          fluid
+          onExport={() => onActivityAction?.("Histórico exportado")}
+          onItemOpen={(item) => onActivityAction?.(`Atividade aberta: ${String(item.title)}`)}
+        />
+      ) : null}
       {historyScrollReserve ? <div aria-hidden="true" className="sb-image-coverage-today-stage--scroll-reserve" /> : null}
     </>
   );
@@ -315,20 +323,29 @@ export function TodayShell({
   variant?: "base" | "critical";
 }) {
   const [drawerOpen, setDrawerOpen] = useState(drawer);
+  const [announcedAction, setAnnouncedAction] = useState("");
+  const [taskCompleted, setTaskCompleted] = useState(false);
+  const [taskChecklist, setTaskChecklist] = useState(todayTaskDrawerChecklist);
   return (
     <CrmDashboardPage
         activeNavId="hoje"
-        after={historyOnly ? null : <TodayAfterContent historyScrollReserve={historyScrollReserve} showHistory={historyScrollReserve} />}
+        after={historyOnly ? null : <TodayAfterContent historyScrollReserve={historyScrollReserve} onActivityAction={setAnnouncedAction} showHistory={historyScrollReserve} />}
         avatarSrc={image79Avatar}
         className="sb-image-coverage-today-shell"
         columns={historyOnly ? 1 : variant === "critical" ? "todayCritical" : "today"}
         contentClassName="sb-image-coverage-today-content"
         dashboardClassName={historyOnly ? "sb-image-coverage-today-history-grid" : "sb-image-coverage-today-stage--dashboard-grid"}
         drawerPlacement={drawerOpen ? "viewport" : undefined}
+        globalActions={{
+          onAvatar: () => setAnnouncedAction("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncedAction("Mensagens abertas"),
+          onNotifications: () => setAnnouncedAction("Notificações abertas"),
+          onSearch: () => setAnnouncedAction("Busca global aberta")
+        }}
         drawer={
           drawerOpen ? (
             <TaskDrawer
-              checklist={todayTaskDrawerChecklist}
+              checklist={taskChecklist}
               checklistTitle="Checklist"
               className="sb-image-coverage-today-drawer"
               comments={todayTaskDrawerComments}
@@ -340,8 +357,21 @@ export function TodayShell({
               historyTitle="Última atividade"
               label="Tarefa"
               onClose={() => setDrawerOpen(false)}
+              onComplete={() => {
+                setTaskCompleted(true);
+                setAnnouncedAction("Tarefa concluída");
+              }}
+              onDelegate={() => setAnnouncedAction("Delegação aberta")}
+              onOpenConversation={() => setAnnouncedAction("Conversa aberta")}
+              onOpenOrigin={() => setAnnouncedAction("Origem aberta")}
+              onReschedule={() => setAnnouncedAction("Reagendamento aberto")}
+              onChecklistToggle={(item, checked) => {
+                setTaskChecklist((current) => current.map((entry) => entry.id === item.id ? { ...entry, checked } : entry));
+                setAnnouncedAction(`${item.title}: ${checked ? "concluído" : "pendente"}`);
+              }}
               showChecklistProgress={false}
               showCommentsLink={false}
+              state={taskCompleted ? "completed" : "open"}
               statusLabel="Pendente"
               title="Confirmar reposição com Ana Paula"
             />
@@ -356,8 +386,24 @@ export function TodayShell({
         utilityItems={todaySidebarUtilityItems}
       >
         {historyOnly ? <ActivityFeed fluid /> : <TodayDashboard onTaskSelect={() => setDrawerOpen(true)} selectedTask={drawerOpen} variant={variant} />}
+        <span aria-live="polite" className="tl-sr-only" role="status">{announcedAction}</span>
       </CrmDashboardPage>
   );
+}
+
+function TodayHistoryStory() {
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const history = document.querySelector<HTMLElement>('[data-component="ActivityFeed"]');
+      if (!history) return;
+      const targetTop = history.getBoundingClientRect().top + window.scrollY - 225;
+      window.scrollTo({ top: Math.max(0, targetTop) });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  return <TodayShell historyScrollReserve />;
 }
 
 export const Image17HojeBase: Story = {
@@ -406,5 +452,5 @@ export const Image20HistoricoDeHoje: Story = {
       }
     }
   },
-  render: () => <TodayShell historyOnly />
+  render: () => <TodayHistoryStory />
 };
