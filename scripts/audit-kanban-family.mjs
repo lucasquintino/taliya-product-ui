@@ -15,7 +15,7 @@ const contracts = [
     requiredPageSnippets: [
       "<CrmKanbanPage",
       "filterBar={<OperationFilters",
-      "quickFilters={<OperationQuickFilters />}",
+      "quickFilters={<OperationQuickFilters",
       "<OperationActivityTable",
       "<OperationKanban",
       "<CaseDrawer"

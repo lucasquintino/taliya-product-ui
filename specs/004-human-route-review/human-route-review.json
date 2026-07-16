@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T21:50:23.568Z",
+  "generatedAt": "2026-07-16T22:01:54.546Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 4,
+  "completedRouteCount": 6,
   "failedRouteCount": 0,
-  "pendingRouteCount": 69,
+  "pendingRouteCount": 67,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -380,38 +380,60 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:57.927Z",
+        "evidence": [
+          "tmp/human-route-review/21-operacao-kanban/desktop.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:58.095Z",
+        "evidence": [
+          "tmp/human-route-review/21-operacao-kanban/desktop.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:58.177Z",
+        "evidence": [
+          "tmp/human-route-review/21-operacao-kanban/mobile.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:01:54.112Z",
         "evidence": [],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "filter-search",
+          "filter-select",
+          "quick-filters",
+          "kanban-card-actions",
+          "drawer-open-close",
+          "global-actions",
+          "all-top-navigation",
+          "all-page-filter-menus",
+          "filter-actions",
+          "activity-table-actions"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:58.260Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/21_round-4.1B_operacao_01_kanban-geral.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Canonical DOM geometry contains all five 210px lanes inside the 1448px viewport; mobile horizontal overflow remains confined to official scroll regions."
+      ]
     },
     {
       "image": "22_round-4.1B_operacao_02_kanban-com-drawer.png",
@@ -445,38 +467,57 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:58.929Z",
+        "evidence": [
+          "tmp/human-route-review/22-operacao-drawer/desktop.jpg"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:59.013Z",
+        "evidence": [
+          "tmp/human-route-review/22-operacao-drawer/desktop.jpg"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:59.096Z",
+        "evidence": [
+          "tmp/human-route-review/22-operacao-drawer/mobile.jpg"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
+        "status": "pass",
+        "reviewedAt": "2026-07-16T22:01:54.433Z",
         "evidence": [],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "filter-search",
+          "quick-filters",
+          "kanban-card-actions",
+          "drawer-open-close",
+          "drawer-footer-actions",
+          "global-actions-not-applicable-source-state",
+          "filter-select"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-16T21:59:59.252Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/22_round-4.1B_operacao_02_kanban-com-drawer.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Desktop drawer matches the 403px source placement; mobile drawer is a 375x844 fixed full-viewport surface with all seven footer actions verified."
+      ]
     },
     {
       "image": "23_round-4.1C_tarefas_01_lista-detalhe.png.png",

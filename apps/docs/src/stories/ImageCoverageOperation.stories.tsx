@@ -68,7 +68,7 @@ type OperationCard = {
   tags: string[];
 };
 
-function OperationFilters({ showActions = true }: { showActions?: boolean }) {
+function OperationFilters({ onAction, showActions = true }: { onAction: (message: string) => void; showActions?: boolean }) {
   const [query, setQuery] = useState("");
   const [values, setValues] = useState<Record<string, string | string[]>>({
     origem: "",
@@ -90,16 +90,22 @@ function OperationFilters({ showActions = true }: { showActions?: boolean }) {
     <PageFilterBar
       actions={showActions ? (
         <>
-          <IconButton icon="sliders" label="Ajustar filtros da operação" size="md" variant="default" />
-          <IconButton icon="upload" label="Exportar pendências" size="md" variant="default" />
+          <IconButton icon="sliders" label="Ajustar filtros da operação" onClick={() => onAction("Filtros avançados abertos")} size="md" variant="default" />
+          <IconButton icon="upload" label="Exportar pendências" onClick={() => onAction("Pendências exportadas")} size="md" variant="default" />
         </>
       ) : undefined}
       aria-label="Filtros da operação"
       density="compact"
       filterGroupLabel="Filtros rápidos da busca"
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onAction(`Filtro ${filter.label} atualizado`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        onAction(value ? `Busca atualizada: ${value}` : "Busca limpa");
+      }}
       query={query}
       searchAriaLabel="Buscar pendências"
       searchFilterPlacement="embedded"
@@ -108,7 +114,7 @@ function OperationFilters({ showActions = true }: { showActions?: boolean }) {
   );
 }
 
-function OperationQuickFilters() {
+function OperationQuickFilters({ onAction }: { onAction: (message: string) => void }) {
   const [selectedQuickFilter, setSelectedQuickFilter] = useState("");
   const quickFilterItems: PageQuickFilterItem[] = [
     { id: "mine", icon: "user", label: "Minhas pendências", selected: selectedQuickFilter === "mine" },
@@ -122,7 +128,10 @@ function OperationQuickFilters() {
     <PageQuickFilters
       aria-label="Filtros rápidos da operação"
       items={quickFilterItems}
-      onItemSelect={(item) => setSelectedQuickFilter(item.id)}
+      onItemSelect={(item) => {
+        setSelectedQuickFilter(item.id);
+        onAction(`Filtro rápido selecionado: ${item.label}`);
+      }}
     />
   );
 }
@@ -416,6 +425,7 @@ function OperationKanban({
 }
 
 export function OperationShell({ drawer = false }: { drawer?: boolean }) {
+  const [announcedAction, setAnnouncedAction] = useState("");
   const [selectedCardId, setSelectedCardId] = useState(drawer ? "ana" : "");
   const [selectedActivityId, setSelectedActivityId] = useState("");
   const [columns, setColumns] = useState(operationColumns);
@@ -440,6 +450,7 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
       });
     });
     setSelectedCardId(cardId);
+    setAnnouncedAction(`Pendência movida para ${targetColumnId}`);
   };
 
   return (
@@ -451,8 +462,9 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
           onRowOpen={(row) => {
             setSelectedActivityId(row.id);
             if (row.id === "marina-proof") setSelectedCardId("proof");
+            setAnnouncedAction(`Atividade aberta: ${row.object}`);
           }}
-          onViewAll={() => undefined}
+          onViewAll={() => setAnnouncedAction("Histórico completo aberto")}
           rows={operationActivityRows}
           selectedId={selectedActivityId}
         />
@@ -463,18 +475,28 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
       drawer={selectedCardId ? (
         <CaseDrawer
           className="sb-image-coverage-operation-drawer"
-          onAction={() => undefined}
+          onAction={(action) => setAnnouncedAction(`Ação do caso: ${action}`)}
           onClose={() => setSelectedCardId("")}
           title={selectedCardTitle}
         />
       ) : null}
       drawerPlacement="viewport"
-      filterBar={<OperationFilters showActions={!drawer} />}
+      filterBar={<OperationFilters onAction={setAnnouncedAction} showActions={!drawer} />}
+      globalActions={{
+        onAvatar: () => setAnnouncedAction("Perfil da operadora aberto"),
+        onMessages: () => setAnnouncedAction("Mensagens abertas"),
+        onNotifications: () => setAnnouncedAction("Notificações abertas"),
+        onSearch: () => setAnnouncedAction("Busca global aberta")
+      }}
       kanbanDensity="comfortable"
       laneSurface="separate"
       navItems={operationNavItems}
+      onBack={() => setAnnouncedAction("Navegação de retorno acionada")}
+      onNavChange={(id) => setAnnouncedAction(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => setAnnouncedAction(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => setAnnouncedAction(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="operation"
-      quickFilters={<OperationQuickFilters />}
+      quickFilters={<OperationQuickFilters onAction={setAnnouncedAction} />}
       railDensity="compact"
       regions={drawer ? { globalActions: false } : undefined}
       sidebarItems={operationSidebarItems}
@@ -486,10 +508,17 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
       <OperationKanban
         columns={columns}
         onCardMove={moveCard}
-        onCardMenu={(card) => setSelectedCardId(card.id)}
-        onCardSelect={(card) => setSelectedCardId(card.id)}
+        onCardMenu={(card) => {
+          setSelectedCardId(card.id);
+          setAnnouncedAction(`Opções abertas: ${card.title}`);
+        }}
+        onCardSelect={(card) => {
+          setSelectedCardId(card.id);
+          setAnnouncedAction(`Pendência aberta: ${card.title}`);
+        }}
         selectedCardId={selectedCardId}
       />
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcedAction}</span>
     </CrmKanbanPage>
   );
 }
