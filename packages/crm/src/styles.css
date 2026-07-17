@@ -14640,9 +14640,19 @@ button.tcrm-integration-status-row:disabled {
   padding-bottom: var(--taliya-space-2);
 }
 
+.tcrm-case-drawer--compact.tcrm-drawer-frame .tcrm-drawer-frame__body {
+  gap: var(--taliya-space-1);
+  padding-bottom: var(--taliya-space-1);
+}
+
 .tcrm-case-drawer--numbered.tcrm-drawer-frame .tcrm-drawer-frame__footer {
   gap: calc(var(--taliya-space-2) - var(--taliya-border-width-focus));
   padding: var(--taliya-space-2) var(--taliya-space-5) var(--taliya-space-3);
+}
+
+.tcrm-case-drawer--compact.tcrm-drawer-frame .tcrm-drawer-frame__footer {
+  gap: var(--taliya-space-1);
+  padding: var(--taliya-space-1) var(--taliya-space-5) var(--taliya-space-2);
 }
 
 .tcrm-case-drawer.tcrm-drawer-frame .tcrm-drawer-frame__header h2 {
@@ -14681,6 +14691,11 @@ button.tcrm-integration-status-row:disabled {
   gap: var(--taliya-space-3);
   grid-template-columns: minmax(0, 1fr) var(--taliya-type-numeric-line-height);
   padding: var(--taliya-space-6) var(--taliya-space-5) var(--taliya-space-4);
+}
+
+.tcrm-case-drawer--compact .tcrm-case-drawer__profile-header {
+  gap: var(--taliya-space-2);
+  padding: var(--taliya-space-4) var(--taliya-space-5) var(--taliya-space-2);
 }
 
 .tcrm-case-drawer__profile-header .tcrm-drawer-frame__close {
@@ -14854,6 +14869,10 @@ button.tcrm-integration-status-row:disabled {
   margin-bottom: var(--taliya-space-2);
 }
 
+.tcrm-case-drawer--compact .tcrm-case-drawer__facts {
+  margin-bottom: 0;
+}
+
 .tcrm-case-drawer--numbered .tcrm-case-drawer__section-title {
   margin-bottom: 0;
 }
@@ -14867,6 +14886,11 @@ button.tcrm-integration-status-row:disabled {
   grid-template-columns: minmax(0, 1fr);
   min-height: var(--taliya-space-6);
   padding-bottom: var(--taliya-space-1);
+}
+
+.tcrm-case-drawer--compact.tcrm-case-drawer--numbered .tcrm-case-drawer__facts--grid .tcrm-case-drawer__fact {
+  min-height: var(--taliya-space-5);
+  padding-bottom: 0;
 }
 
 .tcrm-case-drawer--numbered .tcrm-case-drawer__facts--grid .tcrm-case-drawer__fact .tl-icon {
@@ -14887,6 +14911,11 @@ button.tcrm-integration-status-row:disabled {
 .tcrm-case-drawer--numbered .tcrm-case-drawer__section {
   gap: var(--taliya-space-1);
   padding-bottom: var(--taliya-space-2);
+}
+
+.tcrm-case-drawer--compact.tcrm-case-drawer--numbered .tcrm-case-drawer__section {
+  gap: var(--taliya-radius-2xs);
+  padding-bottom: var(--taliya-space-1);
 }
 
 .tcrm-case-drawer__section h3 {
@@ -15024,6 +15053,11 @@ button.tcrm-integration-status-row:disabled {
 .tcrm-case-drawer--numbered .tcrm-case-drawer__action.tl-button {
   height: calc(var(--taliya-control-crm-case-drawer-action-height) - var(--taliya-space-1));
   min-height: calc(var(--taliya-control-crm-case-drawer-action-height) - var(--taliya-space-1));
+}
+
+.tcrm-case-drawer--compact.tcrm-case-drawer--numbered .tcrm-case-drawer__action.tl-button {
+  height: var(--taliya-space-8);
+  min-height: var(--taliya-space-8);
 }
 
 .tcrm-case-drawer__body-actions {

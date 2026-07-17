@@ -94,29 +94,52 @@ export function RetentionRiskListPage() {
 export function RetentionCancellationQueuePage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedCancellation = cancellationRows.find((row) => row.id === selectedRowId) ?? cancellationRows[0]!;
 
   return (
-    <CrmWorklistPage
-      activeNavId="cancelamentos"
-      activeSidebarId="retencao"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <CancellationDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
-      drawerPlacement="chrome"
-      filterBar={<CancellationFilters />}
-      filterBarLabel="Filtros de cancelamentos"
-      listLabel="Filas"
-      mainLabel="Tabela de cancelamentos"
-      navItems={retentionNavItems}
-      quickFilters={<CancellationQuickRail />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Pedidos de saida, pausas e planos de salvamento"
-      title="Cancelamentos"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistLayoutMode="wide-rail"
-    >
-      <CancellationTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="cancelamentos"
+        activeSidebarId="retencao"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <CancellationDrawer cancellation={selectedCancellation} onAction={(action) => setAnnouncement(`Ação de cancelamento: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de cancelamento fechado"); }} /> : null}
+        drawerPlacement="chrome"
+        filterBar={<CancellationFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de cancelamentos"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Filas"
+        mainLabel="Tabela de cancelamentos"
+        navItems={retentionNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        quickFilters={<CancellationQuickRail onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Pedidos de saida, pausas e planos de salvamento"
+        title="Cancelamentos"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        worklistLayoutMode="wide-rail"
+      >
+        <CancellationTable
+          onInteraction={setAnnouncement}
+          onRowSelect={(row) => {
+            setSelectedRowId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Cancelamento selecionado: ${row.student}`);
+          }}
+          selectedRowId={selectedRowId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -369,12 +392,13 @@ function RetentionRiskDrawer({ risk, onAction, onClose }: { risk: RetentionRiskR
   );
 }
 
-function CancellationFilters() {
+function CancellationFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
+  const [selectedQuickId, setSelectedQuickId] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "week", kind: "quick", label: "Esta semana" },
-    { id: "month", kind: "quick", label: "Este mes" },
+    { id: "today", kind: "quick", label: "Hoje", selected: selectedQuickId === "today" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: selectedQuickId === "week" },
+    { id: "month", kind: "quick", label: "Este mes", selected: selectedQuickId === "month" },
     { id: "unit", label: "Unidade", value: String(values.unit ?? ""), options: [{ value: "vila-mariana", label: "Vila Mariana" }, { value: "pinheiros", label: "Pinheiros" }] },
     { id: "status", label: "Status", value: String(values.status ?? ""), options: [{ value: "new", label: "Novo" }, { value: "saving", label: "Em salvamento" }, { value: "waiting", label: "Aguardando aluno" }] },
     { id: "reason", label: "Motivo", value: String(values.reason ?? ""), options: [{ value: "agenda", label: "Dificuldade de agenda" }, { value: "finance", label: "Dificuldade financeira" }] },
@@ -388,9 +412,16 @@ function CancellationFilters() {
       advancedFiltersSurface="modal"
       advancedFiltersTitle="Filtros de cancelamentos"
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Período de cancelamentos selecionado: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de cancelamentos alterado: ${filter.id}`);
+      }}
       onSearchChange={() => undefined}
-      onSearchFilter={() => undefined}
+      onSearchFilter={() => onInteraction("Configuração de filtros de cancelamentos aberta")}
       query=""
       searchFilterLabel="Abrir filtros de cancelamentos"
       searchFilterPlacement="embedded"
@@ -400,7 +431,7 @@ function CancellationFilters() {
   );
 }
 
-function CancellationQuickRail() {
+function CancellationQuickRail({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("all");
   const items: PageQuickFilterItem[] = [
     { id: "all", label: "Todos", icon: "user", count: "34", selected: selectedId === "all" },
@@ -419,7 +450,10 @@ function CancellationQuickRail() {
       groupLabel="Filas de cancelamentos"
       heading="Filas"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => {
+        setSelectedId(item.id);
+        onInteraction(`Fila de cancelamentos selecionada: ${item.label}`);
+      }}
       selectionTone="soft"
     />
   );
@@ -450,11 +484,13 @@ const cancellationRows: CancellationRow[] = [
   { id: "bianca", student: "Bianca Oliveira", type: "Duvida de saida", status: "Novo", statusTone: "info", reason: "dificuldade financeira", impact: "R$ 360/mes", deadline: "amanha 09:00", owner: "Mariana" }
 ];
 
-function CancellationTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: CancellationRow) => void; selectedRowId?: string }) {
+function CancellationTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: CancellationRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
       ariaLabel="Tabela de cancelamentos"
+      density="compact"
+      minTableWidth="880px"
       columns={[
         { key: "student", header: "Aluno", sortable: true, width: "19%", render: (row) => <PersonLabel avatarSrc={image79Avatar} name={row.student} size="xs" /> },
         { key: "type", header: "Tipo", width: "13%" },
@@ -464,58 +500,96 @@ function CancellationTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row:
         { key: "deadline", header: "Prazo", width: "12%", render: (row) => <Chip showDot={false} tone={row.deadlineTone ?? "neutral"}>{row.deadline}</Chip> },
         { key: "owner", header: "Resp.", width: "9%" }
       ]}
-      pagination={{ itemsPerPage: "10", label: "1-9 de 9", page: 1, pageCount: 1 }}
+      onSortChange={(sort) => onInteraction(sort ? `Ordenação: ${sort.key} ${sort.direction}` : "Ordenação removida")}
+      pagination={{
+        itemsPerPage: "10",
+        label: "1-9 de 9",
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => onInteraction("Já está na última página de cancelamentos"),
+        onPageChange: () => onInteraction("Página de cancelamentos: 1"),
+        onPreviousPage: () => onInteraction("Já está na primeira página de cancelamentos"),
+        page: 1,
+        pageCount: 1
+      }}
       onRowSelect={onRowSelect}
-      rowActions={() => <IconButton icon="chevronRight" label="Abrir cancelamento" size="sm" variant="ghost" />}
+      rowActions={(row) => <IconButton icon="chevronRight" label={`Abrir cancelamento de ${row.student}`} onClick={(event) => { event.stopPropagation(); onRowSelect?.(row); }} size="sm" variant="ghost" />}
       rows={cancellationRows}
       selectedRowId={selectedRowId}
     />
   );
 }
 
-const cancellationDrawerFacts = [
-  { id: "plan", icon: "clipboard" as const, label: "Plano", value: "Plano Mensal" },
-  { id: "requested", icon: "clock" as const, label: "Solicitado em", value: "Hoje, 09:20" },
-  { id: "class", icon: "graduation" as const, label: "Turma atual", value: "Reformer iniciante" },
-  { id: "channel", icon: "whatsapp" as const, label: "Canal", value: "WhatsApp" },
-  { id: "value", icon: "wallet" as const, label: "Valor mensal", value: "R$ 420,00" },
-  { id: "owner", icon: "user" as const, label: "Responsavel", value: "Mariana" }
+function cancellationDrawerFacts(cancellation: CancellationRow): CaseDrawerFact[] {
+  return [
+    { id: "plan", icon: "clipboard", label: "Plano", value: cancellation.type === "Pausa" ? "Plano 2x/semana" : "Plano Mensal" },
+    { id: "requested", icon: "clock", label: "Solicitado em", value: cancellation.id === "ana" ? "Hoje, 09:20" : cancellation.deadline },
+    { id: "class", icon: "graduation", label: "Turma atual", value: "Reformer iniciante" },
+    { id: "channel", icon: "whatsapp", label: "Canal", value: "WhatsApp" },
+    { id: "value", icon: "wallet", label: "Valor mensal", value: cancellation.impact.split(" + ")[0]?.replace("/mes", ",00") ?? cancellation.impact },
+    { id: "owner", icon: "user", label: "Responsavel", value: cancellation.owner }
+  ];
+}
+
+const cancellationFooterActions: CaseDrawerFooterAction[] = [
+  { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp" },
+  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+  { id: "pause", label: "Registrar pausa", leadingIcon: "clock" },
+  { id: "cancel", label: "Confirmar cancelamento", leadingIcon: "x" },
+  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+  { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
 ];
 
-function CancellationDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
+function CancellationDrawer({ cancellation, onAction, onClose }: { cancellation: CancellationRow; onAction?: (action: string) => void; onClose?: () => void }) {
+  const plan = [
+    "Oferecer dois horarios alternativos",
+    "Confirmar se pausa temporaria resolve",
+    `Registrar decisao final ate ${cancellation.deadline}`
+  ];
+  const history: CaseDrawerHistoryItem[] = cancellation.id === "ana" ? [
+    { id: "received", time: "09:20", label: "Mensagem recebida hoje 09:20" },
+    { id: "missed", time: "ultimas 2", label: "Aluno faltou nas ultimas 2 aulas" },
+    { id: "replacement", time: "09/05", label: "Reposicao oferecida em 09/05" },
+    { id: "no-answer", time: "convite", label: "Sem resposta ao convite anterior" }
+  ] : [
+    { id: "request", time: cancellation.deadline, label: `${cancellation.type}: ${cancellation.reason}` },
+    { id: "impact", time: "impacto", label: cancellation.impact },
+    { id: "owner", time: "agora", label: `Caso atribuído a ${cancellation.owner}` }
+  ];
+  const sections: CaseDrawerSection[] = [
+    { id: "reason", title: "Motivo declarado", kind: "text", description: cancellation.id === "ana" ? "Aluno informou dificuldade de encaixar horários e pediu cancelamento a partir do próximo mês." : `${cancellation.student} informou ${cancellation.reason} e solicitou ${cancellation.type.toLowerCase()}.` },
+    { id: "impact", title: "Impacto", kind: "list", items: [
+      { id: "revenue", label: `Receita em risco: ${cancellation.impact}`, tone: "danger" },
+      { id: "classes", label: `Aulas futuras afetadas: ${cancellation.type === "Pausa" ? "2" : "4"}`, tone: "danger" },
+      { id: "replacement", label: "Reposições em aberto: 1", tone: "danger" },
+      { id: "contract", label: `Contrato: ${cancellation.status === "Retido" ? "retido" : "ativo"}`, tone: "danger" },
+      { id: "charge", label: "Próxima cobrança: 10/06", tone: "danger" }
+    ] },
+    { id: "plan", title: "Plano de salvamento", kind: "steps", items: plan.map((label, index) => ({ id: `plan-${index}`, label })) },
+    { id: "automation", title: "Automação", kind: "alert", icon: "alert", description: "Automações de cobrança e retenção pausadas até decisão humana." },
+    { id: "copilot", title: "Sugestão do copiloto", kind: "copilot", icon: "sparkles", description: cancellation.id === "ana" ? "Responder de forma humana, validar a dificuldade de agenda e oferecer uma pausa de 15 dias ou dois horários alternativos antes de confirmar o cancelamento." : `Responder de forma humana sobre ${cancellation.reason} e oferecer uma alternativa antes de confirmar ${cancellation.type.toLowerCase()}.` },
+    { id: "history", title: "Histórico curto", kind: "history", items: history.map((item) => ({ id: item.id, label: item.label, meta: item.time })) }
+  ];
+
   return (
     <CaseDrawer
-      alternatives={[
-        { id: "offer", title: "Oferecer dois horarios alternativos", capacity: "", status: "salvamento", tone: "success" },
-        { id: "pause", title: "Confirmar se pausa temporaria resolve", capacity: "", status: "pausa", tone: "warning" },
-        { id: "decision", title: "Registrar decisao final ate hoje 16:00", capacity: "", status: "prazo", tone: "warning" }
-      ]}
+      alternatives={plan.map((title, index) => ({ id: `plan-${index}`, title, capacity: "", status: "salvamento" }))}
       alternativesTitle="Plano de salvamento"
       alternativesVariant="steps"
       avatarSrc={image79Avatar}
+      density="compact"
       eyebrowLabel="Cancelamento"
-      facts={cancellationDrawerFacts}
-      footerActions={[
-        { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp" },
-        { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
-        { id: "pause", label: "Registrar pausa", leadingIcon: "clock" },
-        { id: "cancel", label: "Confirmar cancelamento", leadingIcon: "x" },
-        { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
-        { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
-      ]}
-      history={[
-        { id: "received", time: "09:20", label: "Mensagem recebida hoje 09:20" },
-        { id: "missed", time: "ultimas 2", label: "Aluno faltou nas ultimas 2 aulas" },
-        { id: "replacement", time: "09/05", label: "Reposicao oferecida em 09/05" },
-        { id: "no-answer", time: "convite", label: "Sem resposta ao convite anterior" }
-      ]}
+      facts={cancellationDrawerFacts(cancellation)}
+      factsLayout="grid"
+      footerActions={cancellationFooterActions}
+      history={history}
       showMessageSuggestion={false}
       numberedSections
       onAction={onAction}
       onClose={onClose}
-      statusLabel="Em salvamento"
-      suggestion="Responder de forma humana, validar a dificuldade de agenda e oferecer uma pausa de 15 dias ou dois horarios alternativos antes de confirmar o cancelamento."
-      title="Ana Paula Martins"
+      sections={sections}
+      statusLabel={cancellation.status}
+      title={cancellation.student}
+      widthVariant="wide"
     />
   );
 }

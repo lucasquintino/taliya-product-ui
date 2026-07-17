@@ -318,13 +318,13 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmWorklistPage",
       'worklistLayoutMode="wide-rail"',
-      "filterBar={<CancellationFilters />}",
-      "quickFilters={<CancellationQuickRail />}",
+      "filterBar={<CancellationFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "quickFilters={<CancellationQuickRail onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<CancellationDrawer cancellation={selectedCancellation}",
       "<CancellationTable",
-      "setSelectedRowId(row.id)",
-      "drawer={drawerOpen ? <CancellationDrawer",
-      "onClose={() => setDrawerOpen(false)}",
-      "onAction={setDrawerAction}"
+      "setSelectedRowId(row.id)"
     ]
   },
   {
@@ -894,8 +894,8 @@ const tableFamilyDetailContracts = [
     table: "CancellationTable",
     drawer: "CancellationDrawer",
     layoutMode: "wide-rail",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", "alternativesVariant=\"steps\"", "footerActions={["]
+    requiredTableSnippets: ["<CrmWorklistTable", 'density="compact"', 'minTableWidth="880px"', "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
+    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', "alternativesVariant=\"steps\"", "facts={cancellationDrawerFacts(cancellation)}", "footerActions={cancellationFooterActions}", "sections={sections}", "title={cancellation.student}"]
   },
   {
     page: "RetentionReactivationListPage",

@@ -11953,6 +11953,7 @@ export interface CaseDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>,
   history?: CaseDrawerHistoryItem[];
   sections?: CaseDrawerSection[];
   footerActions?: CaseDrawerFooterAction[];
+  density?: "default" | "compact";
   widthVariant?: "default" | "wide";
   onAction?: (action: CaseDrawerAction) => void;
   onClose?: () => void;
@@ -12015,6 +12016,7 @@ export function CaseDrawer({
   history = sourceCaseDrawerHistory,
   sections,
   footerActions = sourceCaseDrawerFooterActions,
+  density = "default",
   widthVariant = "default",
   onAction,
   onClose,
@@ -12194,6 +12196,7 @@ export function CaseDrawer({
       className={cn(
         "tcrm-case-drawer",
         `tcrm-case-drawer--${state}`,
+        density === "compact" && "tcrm-case-drawer--compact",
         widthVariant === "wide" && "tcrm-case-drawer--wide",
         numberedSections && "tcrm-case-drawer--numbered",
         className
@@ -19208,6 +19211,7 @@ export interface CrmWorklistTableProps<T extends { id: string }> extends Omit<Re
   headingAction?: React.ReactNode;
   headingDescription?: React.ReactNode;
   loadingTitle?: string;
+  minTableWidth?: React.CSSProperties["minWidth"];
   onRowSelect?: (row: T) => void;
   onSelectionChange?: (rowId: string, selected: boolean) => void;
   pageSizeLabel?: string;
@@ -19243,6 +19247,7 @@ export function CrmWorklistTable<T extends { id: string }>({
   headingAction,
   headingDescription,
   loadingTitle = "Carregando lista",
+  minTableWidth,
   onRowSelect,
   onSelectionChange,
   pageSizeLabel,
@@ -19302,6 +19307,7 @@ export function CrmWorklistTable<T extends { id: string }>({
             className="tcrm-worklist-table__data"
             columns={columns}
             density="dense"
+            minWidth={minTableWidth}
             selectable={selectable}
             onRowClick={(row) => {
               if (!controlsDisabled) {

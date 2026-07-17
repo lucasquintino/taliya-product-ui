@@ -2155,6 +2155,7 @@ export interface DataTableProps<T extends { id: string }> {
   rows: T[];
   emptyState?: React.ReactNode;
   loading?: boolean;
+  minWidth?: React.CSSProperties["minWidth"];
   error?: React.ReactNode;
   density?: "default" | "dense";
   compact?: boolean;
@@ -2176,6 +2177,7 @@ export function DataTable<T extends { id: string }>({
   rows,
   emptyState,
   loading = false,
+  minWidth,
   error,
   density = "default",
   compact = false,
@@ -2214,7 +2216,7 @@ export function DataTable<T extends { id: string }>({
 
   return (
     <div className={cn("tl-table-wrap", compact && "tl-table-wrap--compact", className)}>
-      <table className={cn("tl-table", density === "dense" && "tl-table--dense", compact && "tl-table--compact")}>
+      <table className={cn("tl-table", density === "dense" && "tl-table--dense", compact && "tl-table--compact")} style={minWidth ? { minWidth } : undefined}>
         <colgroup>
           {selectable ? <col className="tl-table__select-column" /> : null}
           {columns.map((column) => (

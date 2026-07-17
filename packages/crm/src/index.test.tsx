@@ -1941,6 +1941,7 @@ describe("@taliya/crm component coverage", () => {
         ]}
         density="compact"
         heading="Fila padrao"
+        minTableWidth="760px"
         pagination={{
           itemsPerPage: "10",
           label: "1-2 de 2",
@@ -1966,6 +1967,7 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("heading", { name: "Fila padrao" })).toBeInTheDocument();
     expect(screen.getByText("Legenda operacional")).toHaveClass("tcrm-worklist-table__caption");
     expect(screen.getByRole("row", { name: /Ana/ })).toHaveClass("tl-table__row--selected");
+    expect(screen.getByRole("table")).toHaveStyle({ minWidth: "760px" });
 
     fireEvent.click(screen.getByRole("row", { name: /Marina/ }));
     fireEvent.click(screen.getByRole("button", { name: "Alterar itens por pagina" }));
@@ -3000,6 +3002,7 @@ describe("@taliya/crm component coverage", () => {
     const action = vi.fn();
     render(
       <crm.CaseDrawer
+        density="compact"
         footerActions={[
           { id: "message", label: "Enviar mensagem", variant: "primary" },
           { id: "create-task", label: "Criar tarefa" }
@@ -3028,6 +3031,7 @@ describe("@taliya/crm component coverage", () => {
     expect(within(drawer).getByText("Responder com pedido de desculpas")).toBeInTheDocument();
     expect(within(drawer).queryByText("Alternativas possíveis")).not.toBeInTheDocument();
     expect(within(drawer).getByRole("heading", { name: "7. Proxima acao" })).toBeInTheDocument();
+    expect(drawer).toHaveClass("tcrm-case-drawer--compact");
     expect(drawer.querySelector(".tcrm-drawer-frame__footer")).toBeNull();
     fireEvent.click(within(drawer).getByRole("button", { name: "Enviar mensagem" }));
     expect(action).toHaveBeenCalledWith("message");
