@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T14:17:45.236Z",
+  "generatedAt": "2026-07-17T14:48:15.253Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 31,
+  "completedRouteCount": 32,
   "failedRouteCount": 0,
-  "pendingRouteCount": 42,
+  "pendingRouteCount": 41,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2786,38 +2786,54 @@
         "support-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:47:40.267Z",
+        "evidence": [
+          "tmp/human-route-review/47-support-central/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:47:40.458Z",
+        "evidence": [
+          "tmp/human-route-review/47-support-central/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:47:40.633Z",
+        "evidence": [
+          "tmp/human-route-review/47-support-central/mobile-page.png",
+          "tmp/human-route-review/47-support-central/mobile-content.png",
+          "tmp/human-route-review/47-support-central/mobile-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:47:41.127Z",
+        "evidence": [
+          "browser-observed:route-47-support-central-complete-interaction-review-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "2 page actions; status overview; support composer, 5 suggested questions and ask action; 4 dynamic ticket selections; 4 next actions; 4 row menus; items-per-page and disabled pagination bounds; 7 drawer actions; close/reopen; 5 support tabs; back; 4 global actions; 11 sidebar modules; 2 visual preferences"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:47:41.299Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/47_round-4.1J_suporte_01_central-studio-taliya.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review made the support ticket drawer data-driven, wired all shell, agent, table, pagination and drawer actions, fixed the clipped worklist header, and added collision-free mobile agent and full-screen support drawer behavior without story-local CSS."
+      ]
     },
     {
       "image": "48_round-4.1K_internal_01_visao-operacional.png.png",

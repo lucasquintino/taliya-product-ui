@@ -30,7 +30,7 @@ const contracts = [
     page: "SupportCentralPage",
     file: "apps/docs/src/stories/ImageCoverageSupport.stories.tsx",
     family: "dashboard/support",
-    requiredPageSnippets: ["<CrmDashboardPage", "<SupportStatusSidebar", "<SupportCentralContent", "drawer={drawerOpen ? <SupportTicketDrawer", "onClose={() => setDrawerOpen(false)}", "setDrawerOpen(true)"]
+    requiredPageSnippets: ["<CrmDashboardPage", "selectedTicketId", "supportTicketDrawerModel", "drawer={drawerOpen ? (", "<SupportTicketDrawer", "{...drawerModel}", "<SupportStatusSidebar", "<SupportCentralContent", "setSelectedTicketId(ticketId)", "globalActions={{", "onSidebarSelect="]
   },
   {
     page: "AgentsCatalogPage",

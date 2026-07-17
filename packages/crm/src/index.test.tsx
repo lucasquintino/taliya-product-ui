@@ -3503,6 +3503,21 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("attach");
     expect(action).toHaveBeenCalledWith("resolve");
 
+    rerender(
+      <crm.SupportTicketDrawer
+        facts={[{ id: "type", label: "Tipo", value: "Integracao", icon: "link" }]}
+        messages={[{ id: "studio", icon: "user", text: "Studio: WhatsApp desconectou." }]}
+        subtitle="Canal principal perdeu a conexao"
+        summary="Reconexao segura preparada."
+        title="WhatsApp desconectou"
+      />
+    );
+    expect(screen.getByRole("heading", { name: "WhatsApp desconectou" })).toBeInTheDocument();
+    expect(screen.getByText("Canal principal perdeu a conexao")).toBeInTheDocument();
+    expect(screen.getByText("Integracao")).toBeInTheDocument();
+    expect(screen.getByText("Reconexao segura preparada.")).toBeInTheDocument();
+    expect(screen.getByText("Studio: WhatsApp desconectou.")).toBeInTheDocument();
+
     rerender(<crm.SupportTicketDrawer variant="internal" />);
     expect(screen.getByRole("complementary", { name: "Detalhes do ticket de suporte" })).toHaveClass("tcrm-support-ticket-drawer--internal");
     expect(screen.getByText("Ticket interno selecionado")).toBeInTheDocument();

@@ -379,7 +379,7 @@ const pageFamilyContracts = [
     page: "SupportCentralPage",
     file: "ImageCoverageSupport.stories.tsx",
     family: "dashboard/support",
-    requiredSnippets: ["<CrmDashboardPage", "layoutVariant=\"support\"", "<SupportStatusSidebar", "<SupportCentralContent", "onTicketSelect=", "drawer={drawerOpen ? <SupportTicketDrawer", "onClose={() => setDrawerOpen(false)}", "onAction="]
+    requiredSnippets: ["<CrmDashboardPage", "layoutVariant=\"support\"", "selectedTicketId", "supportTicketDrawerModel", "drawer={drawerOpen ? (", "<SupportTicketDrawer", "{...drawerModel}", "globalActions={{", "onSidebarSelect=", "<SupportStatusSidebar", "<SupportCentralContent", "onTicketSelect=", "setSelectedTicketId(ticketId)", "onAction="]
   },
   {
     page: "InternalOverviewPage",

@@ -13853,11 +13853,30 @@ export function SupportAgentPanel({
 
 export type SupportTicketDrawerState = "open" | "answered" | "access active" | "loading" | "blocked";
 
+export interface SupportTicketPanelFact {
+  id: string;
+  label: React.ReactNode;
+  value: React.ReactNode;
+  icon: IconName;
+  tone?: ComponentTone;
+}
+
+export interface SupportTicketPanelMessage {
+  id: string;
+  icon: IconName;
+  text: React.ReactNode;
+  tone?: ComponentTone;
+}
+
 export interface SupportTicketDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   open?: boolean;
   state?: SupportTicketDrawerState;
   variant?: "support" | "internal";
   title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  facts?: SupportTicketPanelFact[];
+  summary?: React.ReactNode;
+  messages?: SupportTicketPanelMessage[];
   onClose?: () => void;
   onAction?: (actionId: string) => void;
 }
@@ -13867,6 +13886,10 @@ export function SupportTicketDrawer({
   state = "open",
   variant = "support",
   title = "Importação duplicou alunos",
+  subtitle,
+  facts,
+  summary,
+  messages,
   onClose,
   onAction,
   className,
@@ -13890,7 +13913,11 @@ export function SupportTicketDrawer({
         className="tcrm-support-ticket-drawer__panel"
         onAction={onAction}
         onClose={onClose}
+        facts={facts}
+        messages={messages}
         state={state}
+        subtitle={subtitle}
+        summary={summary}
         title={title}
         variant={variant}
       />
@@ -17688,8 +17715,28 @@ export function SensitiveActionDialog({
   );
 }
 
+const defaultSupportTicketFacts: SupportTicketPanelFact[] = [
+  { id: "type", label: "Tipo", value: "Importação", icon: "folder", tone: "info" },
+  { id: "status", label: "Status", value: <Chip className="tcrm-internal-status-chip tcrm-internal-status-chip--analysis" showDot={false} tone="info">Em análise</Chip>, icon: "link" },
+  { id: "impact", label: "Impacto", value: "Dados de alunos", icon: "clipboard" },
+  { id: "owner", label: "Responsável", value: <span className="tcrm-support-ticket-panel__brand-value"><Icon name="bot" size="14px" />Taliya</span>, icon: "user" },
+  { id: "priority", label: "Prioridade", value: <span className="tcrm-support-ticket-panel__dot-value"><span />Média</span>, icon: "star" },
+  { id: "created", label: "Criado", value: "hoje 09:12", icon: "calendar" },
+  { id: "next", label: "Próxima ação", value: <span className="tcrm-support-ticket-panel__next-action"><Icon name="chevronRight" size="12px" />Enviar arquivo original</span>, icon: "send" }
+];
+
+const defaultSupportTicketMessages: SupportTicketPanelMessage[] = [
+  { id: "studio", icon: "user", text: "Studio: Importei a planilha e alguns alunos apareceram duplicados.", tone: "info" },
+  { id: "support", icon: "sparkles", text: "Suporte 24/7: Entendi. Você pode anexar o arquivo original para eu comparar os dados?" },
+  { id: "taliya", icon: "bot", text: "Taliya: Vamos revisar a importação e retornar com os registros afetados." }
+];
+
 export function SupportTicketPanel({
   title = "Importação duplicou alunos",
+  subtitle = "Studio pediu ajuda para revisar dados importados",
+  facts = defaultSupportTicketFacts,
+  summary = "O agente identificou possível duplicidade por telefone e preparou o contexto para o suporte humano.",
+  messages = defaultSupportTicketMessages,
   state = "open",
   variant = "support",
   onClose,
@@ -17697,6 +17744,10 @@ export function SupportTicketPanel({
   className
 }: CrmSurfaceProps & {
   variant?: "support" | "internal";
+  subtitle?: React.ReactNode;
+  facts?: SupportTicketPanelFact[];
+  summary?: React.ReactNode;
+  messages?: SupportTicketPanelMessage[];
   onClose?: () => void;
   onAction?: (actionId: string) => void;
 }) {
@@ -17777,40 +17828,28 @@ export function SupportTicketPanel({
         <Chip className="tcrm-internal-status-chip tcrm-internal-status-chip--selected" showDot={false} tone="info">Ticket selecionado</Chip>
           <IconButton className="tcrm-support-ticket-panel__close" disabled={isDisabled} icon="x" label="Fechar ticket" onClick={onClose} size="sm" variant="subtle" />
         <h3>{title}</h3>
-        <p>Studio pediu ajuda para revisar dados importados</p>
+        <p>{subtitle}</p>
       </header>
       <dl className="tcrm-support-ticket-panel__facts">
-        {[
-          ["Tipo", "Importação", "folder", "category-purple"],
-          ["Status", <Chip className="tcrm-internal-status-chip tcrm-internal-status-chip--analysis" key="status" showDot={false} tone="info">Em análise</Chip>, "link", ""],
-          ["Impacto", "Dados de alunos", "clipboard", ""],
-          ["Responsável", <span className="tcrm-support-ticket-panel__brand-value" key="resp"><Icon name="bot" size="14px" />Taliya</span>, "user", ""],
-          ["Prioridade", <span className="tcrm-support-ticket-panel__dot-value" key="priority"><span />Média</span>, "star", ""],
-          ["Criado", "hoje 09:12", "calendar", ""],
-          ["Próxima ação", <span className="tcrm-support-ticket-panel__next-action" key="next"><Icon name="chevronRight" size="12px" />Enviar arquivo original</span>, "send", ""]
-        ].map(([label, value, icon, tone]) => (
-          <div key={String(label)}>
-            <Icon name={icon as IconName} size="14px" tone={(tone as ComponentTone) || undefined} />
-            <dt>{label}</dt>
-            <dd>{value as React.ReactNode}</dd>
+        {facts.map((fact) => (
+          <div key={fact.id}>
+            <Icon name={fact.icon} size="14px" tone={fact.tone} />
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
           </div>
         ))}
       </dl>
       <h4 className="tcrm-support-ticket-panel__section-title">Resumo do agente 24/7</h4>
       <section className="tcrm-support-ticket-panel__suggestion">
         <Icon name="sparkles" size="18px" tone="info" />
-        <p>O agente identificou possível duplicidade por telefone e preparou o contexto para o suporte humano.</p>
+        <p>{summary}</p>
       </section>
       <section className="tcrm-support-ticket-panel__conversation">
         <h4>Conversa do ticket</h4>
-        {[
-          ["user", "Studio: Importei a planilha e alguns alunos apareceram duplicados."],
-          ["sparkles", "Suporte 24/7: Entendi. Você pode anexar o arquivo original para eu comparar os dados?"],
-          ["bot", "Taliya: Vamos revisar a importação e retornar com os registros afetados."]
-        ].map(([icon, text], index) => (
-          <div className="tcrm-support-ticket-panel__message" key={text}>
-            <span><Icon name={icon as IconName} size="18px" tone={index === 0 ? "info" : undefined} /></span>
-            <p>{text}</p>
+        {messages.map((message) => (
+          <div className="tcrm-support-ticket-panel__message" key={message.id}>
+            <span><Icon name={message.icon} size="18px" tone={message.tone} /></span>
+            <p>{message.text}</p>
           </div>
         ))}
       </section>

@@ -23603,9 +23603,13 @@ button.tcrm-pipeline-card__select:focus-visible,
   min-width: 0;
 }
 
-.tcrm-support-central-workspace > .tcrm-worklist-table {
+.tcrm-support-central-workspace > .tcrm-worklist-table.tl-panel {
   height: var(--taliya-control-crm-support-central-workspace-table-height);
   overflow: hidden;
+}
+
+.tcrm-support-central-workspace > .tcrm-worklist-table > .tl-panel-header {
+  margin: 0;
 }
 
 .tcrm-support-central-workspace .tcrm-worklist-table__data.tl-table-wrap {
@@ -33053,7 +33057,8 @@ button.tcrm-pipeline-card__select:focus-visible,
   }
 
   .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-drawer-frame,
-  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-opportunity-panel {
+  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-opportunity-panel,
+  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-support-ticket-drawer {
     background: var(--taliya-surface-product-drawer);
     border-radius: 0;
     bottom: 0;
@@ -33066,6 +33071,14 @@ button.tcrm-pipeline-card__select:focus-visible,
     top: 0;
     width: 100%;
     z-index: 70;
+  }
+
+  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-support-ticket-drawer > .tcrm-support-ticket-panel {
+    border-radius: 0;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    width: 100%;
   }
 
   .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-approval-drawer {
@@ -33150,6 +33163,7 @@ button.tcrm-pipeline-card__select:focus-visible,
   .tcrm-product-shell-page-header,
   .tcrm-product-shell-stage--page-header-dashboard .tcrm-product-shell-page-header,
   .tcrm-product-shell-stage--page-header-reports .tcrm-product-shell-page-header,
+  .tcrm-product-shell-stage--page-header-support .tcrm-product-shell-page-header,
   .tcrm-product-shell-stage--page-header-overview .tcrm-product-shell-page-header,
   .tcrm-product-shell-stage--page-header-internal-overview .tcrm-product-shell-page-header {
     align-items: flex-start;
@@ -33164,6 +33178,11 @@ button.tcrm-pipeline-card__select:focus-visible,
     align-items: flex-start;
     display: grid;
     gap: var(--taliya-space-1);
+    transform: none;
+  }
+
+  .tcrm-product-shell-stage--page-header-support .tcrm-product-shell-page-header__copy,
+  .tcrm-product-shell-stage--page-header-support .tcrm-product-shell-page-header h1 {
     transform: none;
   }
 
@@ -33208,6 +33227,10 @@ button.tcrm-pipeline-card__select:focus-visible,
 
   .tcrm-dashboard-page-stack--opportunity .tcrm-dashboard-grid {
     grid-template-rows: none;
+    height: auto;
+  }
+
+  .tcrm-support-agent-panel.tl-panel {
     height: auto;
   }
 
