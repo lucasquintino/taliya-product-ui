@@ -351,13 +351,16 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmWorklistPage",
       'worklistLayoutMode="wide-rail"',
-      "filterBar={<ComplaintFilters />}",
-      "quickFilters={<ComplaintQuickRail />}",
+      "filterBar={<ComplaintFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "quickFilters={<ComplaintQuickRail onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
       "<ComplaintTable",
       "setSelectedRowId(row.id)",
       "drawer={drawerOpen ? <ComplaintDrawer",
-      "onClose={() => setDrawerOpen(false)}",
-      "onAction={setDrawerAction}"
+      "complaint={selectedComplaint}",
+      "onClose={() => { setDrawerOpen(false);",
+      "onAction={(action)"
     ]
   },
   {
@@ -918,8 +921,9 @@ const tableFamilyDetailContracts = [
     table: "ComplaintTable",
     drawer: "ComplaintDrawer",
     layoutMode: "wide-rail",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", 'factsLayout="grid"', "sections={[", "numberedSections", "footerActions={["]
+    requiredFilterSnippets: ['placement: "advanced"', 'label: "Prazo"'],
+    requiredTableSnippets: ["<CrmWorklistTable", 'density="compact"', 'minTableWidth="840px"', "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
+    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', 'factsLayout="grid"', "facts={complaintDrawerFacts(complaint)}", "footerActions={complaintFooterActions}", "sections={sections}", "title={complaint.student}"]
   }
 ];
 

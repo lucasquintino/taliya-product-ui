@@ -198,29 +198,52 @@ export function RetentionReactivationListPage() {
 export function RetentionComplaintQueuePage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedComplaint = complaintRows.find((row) => row.id === selectedRowId) ?? complaintRows[0]!;
 
   return (
-    <CrmWorklistPage
-      activeNavId="reclamacoes"
-      activeSidebarId="retencao"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <ComplaintDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
-      drawerPlacement="chrome"
-      filterBar={<ComplaintFilters />}
-      filterBarLabel="Filtros de reclamacoes"
-      listLabel="Filas"
-      mainLabel="Tabela de reclamacoes"
-      navItems={retentionNavItems}
-      quickFilters={<ComplaintQuickRail />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Casos sensiveis, respostas e recuperacao de confianca"
-      title="Reclamacoes"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistLayoutMode="wide-rail"
-    >
-      <ComplaintTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="reclamacoes"
+        activeSidebarId="retencao"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <ComplaintDrawer complaint={selectedComplaint} onAction={(action) => setAnnouncement(`Ação da reclamação: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de reclamação fechado"); }} /> : null}
+        drawerPlacement="chrome"
+        filterBar={<ComplaintFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de reclamacoes"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Filas"
+        mainLabel="Tabela de reclamacoes"
+        navItems={retentionNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        quickFilters={<ComplaintQuickRail onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Casos sensiveis, respostas e recuperacao de confianca"
+        title="Reclamacoes"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        worklistLayoutMode="wide-rail"
+      >
+        <ComplaintTable
+          onInteraction={setAnnouncement}
+          onRowSelect={(row) => {
+            setSelectedRowId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Reclamação selecionada: ${row.student}`);
+          }}
+          selectedRowId={selectedRowId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -806,17 +829,19 @@ function ReactivationDrawer({ onAction, onClose, reactivation }: { onAction?: (a
   );
 }
 
-function ComplaintFilters() {
+function ComplaintFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
+  const [selectedQuickId, setSelectedQuickId] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "week", kind: "quick", label: "Esta semana" },
-    { id: "month", kind: "quick", label: "Este mes" },
+    { id: "today", kind: "quick", label: "Hoje", selected: selectedQuickId === "today" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: selectedQuickId === "week" },
+    { id: "month", kind: "quick", label: "Este mes", selected: selectedQuickId === "month" },
     { id: "unit", label: "Unidade", value: String(values.unit ?? ""), options: [{ value: "vila-mariana", label: "Vila Mariana" }, { value: "pinheiros", label: "Pinheiros" }] },
     { id: "severity", label: "Severidade", value: String(values.severity ?? ""), options: [{ value: "high", label: "Alta" }, { value: "medium", label: "Media" }, { value: "low", label: "Baixa" }] },
     { id: "status", label: "Status", value: String(values.status ?? ""), options: [{ value: "waiting", label: "Aguardando resposta" }, { value: "analysis", label: "Em analise" }, { value: "progress", label: "Em andamento" }] },
     { id: "origin", label: "Origem", placement: "primary", value: String(values.origin ?? ""), options: [{ value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Telefone" }, { value: "email", label: "E-mail" }] },
-    { id: "owner", label: "Responsavel", placement: "primary", value: String(values.owner ?? ""), options: [{ value: "mariana", label: "Mariana" }, { value: "lucas", label: "Lucas" }] }
+    { id: "owner", label: "Responsavel", placement: "primary", value: String(values.owner ?? ""), options: [{ value: "mariana", label: "Mariana" }, { value: "lucas", label: "Lucas" }] },
+    { id: "deadline", label: "Prazo", placement: "advanced", value: String(values.deadline ?? ""), options: [{ value: "today", label: "Hoje" }, { value: "tomorrow", label: "Amanha" }] }
   ];
 
   return (
@@ -825,9 +850,16 @@ function ComplaintFilters() {
       advancedFiltersSurface="modal"
       advancedFiltersTitle="Filtros de reclamacoes"
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro ${filter.label}: ${String(value)}`);
+      }}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Período selecionado: ${filter.label}`);
+      }}
       onSearchChange={() => undefined}
-      onSearchFilter={() => undefined}
+      onSearchFilter={() => onInteraction("Filtros avançados de reclamações abertos")}
       query=""
       searchFilterLabel="Abrir filtros de reclamacoes"
       searchFilterPlacement="embedded"
@@ -837,7 +869,7 @@ function ComplaintFilters() {
   );
 }
 
-function ComplaintQuickRail() {
+function ComplaintQuickRail({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("all");
   const items: PageQuickFilterItem[] = [
     { id: "all", label: "Todos", icon: "user", count: "32", selected: selectedId === "all" },
@@ -855,7 +887,10 @@ function ComplaintQuickRail() {
       groupLabel="Filas de reclamacoes"
       heading="Filas"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => {
+        setSelectedId(item.id);
+        onInteraction(`Fila selecionada: ${item.label}`);
+      }}
       selectionTone="soft"
     />
   );
@@ -878,127 +913,148 @@ type ComplaintRow = {
 };
 
 const complaintRows: ComplaintRow[] = [
-  { id: "ana", student: "Ana Paula Martins", severity: "Alta", severityTone: "danger", status: "Ag. resposta", statusTone: "warning", origin: "WhatsApp", originIcon: "whatsapp", reason: "reposicao nao resolvida", deadline: "hoje 14:00", deadlineTone: "danger", owner: "Mariana", activity: "msg. recebida 09:20" },
+  { id: "ana", student: "Ana Paula Martins", severity: "Alta", severityTone: "danger", status: "Aguardando resposta", statusTone: "warning", origin: "WhatsApp", originIcon: "whatsapp", reason: "reposicao nao resolvida", deadline: "hoje 14:00", deadlineTone: "danger", owner: "Mariana", activity: "msg. recebida 09:20" },
   { id: "joao", student: "Joao Pedro Silva", severity: "Media", severityTone: "warning", status: "Em analise", statusTone: "info", origin: "Telefone", originIcon: "phone", reason: "comunicacao sobre mudanca", deadline: "amanha 11:00", owner: "Mariana", activity: "ligacao ontem 17:45" },
-  { id: "carla", student: "Carla Mendes", severity: "Alta", severityTone: "danger", status: "Ag. resposta", statusTone: "warning", origin: "E-mail", originIcon: "mail", reason: "cobranca indevida apos pausa", deadline: "hoje 16:00", deadlineTone: "danger", owner: "Mariana", activity: "e-mail hoje 08:15" },
-  { id: "marina", student: "Marina Costa", severity: "Media", severityTone: "warning", status: "Ag. responsavel", statusTone: "neutral", origin: "WhatsApp", originIcon: "whatsapp", reason: "dificuldade com agendamento", deadline: "10/05 15:00", owner: "Lucas", activity: "msg. recebida 09:10" },
+  { id: "carla", student: "Carla Mendes", severity: "Alta", severityTone: "danger", status: "Aguardando resposta", statusTone: "warning", origin: "E-mail", originIcon: "mail", reason: "cobranca indevida apos pausa", deadline: "hoje 16:00", deadlineTone: "danger", owner: "Mariana", activity: "e-mail hoje 08:15" },
+  { id: "marina", student: "Marina Costa", severity: "Media", severityTone: "warning", status: "Aguardando responsavel", statusTone: "neutral", origin: "WhatsApp", originIcon: "whatsapp", reason: "dificuldade com agendamento", deadline: "10/05 15:00", owner: "Lucas", activity: "msg. recebida 09:10" },
   { id: "lucas", student: "Lucas Oliveira", severity: "Baixa", severityTone: "success", status: "Em andamento", statusTone: "info", origin: "App Taliya", originIcon: "home", reason: "plano de recuperacao", deadline: "12/05 10:00", owner: "Lucas", activity: "resposta ontem 16:30" },
   { id: "fernanda", student: "Fernanda Souza", severity: "Alta", severityTone: "danger", status: "Reaberta", statusTone: "danger", origin: "WhatsApp", originIcon: "whatsapp", reason: "reclamacao sobre atendimento", deadline: "hoje 12:00", deadlineTone: "danger", owner: "Mariana", activity: "msg. recebida 08:05" },
   { id: "gabriel", student: "Gabriel Santos", severity: "Media", severityTone: "warning", status: "Em analise", statusTone: "info", origin: "Telefone", originIcon: "phone", reason: "aula nao realizada", deadline: "amanha 09:00", owner: "Lucas", activity: "ligacao ontem 18:20" },
-  { id: "juliana", student: "Juliana Rocha", severity: "Baixa", severityTone: "success", status: "Ag. resposta", statusTone: "warning", origin: "E-mail", originIcon: "mail", reason: "acesso ao app", deadline: "11/05 14:00", owner: "Mariana", activity: "e-mail ontem 15:40" },
+  { id: "juliana", student: "Juliana Rocha", severity: "Baixa", severityTone: "success", status: "Aguardando resposta", statusTone: "warning", origin: "E-mail", originIcon: "mail", reason: "acesso ao app", deadline: "11/05 14:00", owner: "Mariana", activity: "e-mail ontem 15:40" },
   { id: "bianca", student: "Bianca Oliveira", severity: "Media", severityTone: "warning", status: "Em andamento", statusTone: "info", origin: "WhatsApp", originIcon: "whatsapp", reason: "remarcar aula", deadline: "13/05 14:00", owner: "Mariana", activity: "msg. enviada ontem" }
 ];
 
-function ComplaintTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: ComplaintRow) => void; selectedRowId?: string }) {
+function ComplaintTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: ComplaintRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
       ariaLabel="Tabela de reclamacoes"
+      density="compact"
+      minTableWidth="840px"
       columns={[
-        { key: "student", header: "Aluno", sortable: true, width: "16%", render: (row) => <PersonLabel avatarSrc={image79Avatar} name={row.student} size="xs" /> },
-        { key: "severity", header: "Severidade", width: "10%", render: (row) => <Chip showDot={false} tone={row.severityTone}>{row.severity}</Chip> },
-        { key: "status", header: "Status", width: "13%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> },
-        { key: "origin", header: "Origem", width: "12%", render: (row) => <InlineGroup compact><Icon name={row.originIcon} size={14} /> {row.origin}</InlineGroup> },
-        { key: "reason", header: "Motivo principal", width: "17%" },
+        { key: "student", header: "Aluno", sortable: true, width: "15%", render: (row) => <PersonLabel avatarSrc={image79Avatar} name={row.student} size="xs" /> },
+        { key: "severity", header: "Severidade", width: "9%", render: (row) => <Chip showDot={false} tone={row.severityTone}>{row.severity}</Chip> },
+        { key: "status", header: "Status", width: "17%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> },
+        { key: "origin", header: "Origem", width: "11%", render: (row) => <InlineGroup compact><Icon name={row.originIcon} size={14} /> {row.origin}</InlineGroup> },
+        { key: "reason", header: "Motivo principal", width: "16%" },
         { key: "deadline", header: "Prazo", width: "11%", render: (row) => <Chip showDot={false} tone={row.deadlineTone ?? "neutral"}>{row.deadline}</Chip> },
         { key: "owner", header: "Resp.", width: "8%" },
         { key: "activity", header: "Ultima atividade", width: "13%" }
       ]}
-      pagination={{ itemsPerPage: "10", label: "1-9 de 9", page: 1, pageCount: 1 }}
+      onSortChange={(sort) => onInteraction(sort ? `Ordenação: ${sort.key} ${sort.direction}` : "Ordenação removida")}
+      pagination={{
+        itemsPerPage: "10",
+        label: "1-9 de 9",
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => onInteraction("Já está na última página de reclamações"),
+        onPageChange: () => onInteraction("Página de reclamações: 1"),
+        onPreviousPage: () => onInteraction("Já está na primeira página de reclamações"),
+        page: 1,
+        pageCount: 1
+      }}
       onRowSelect={onRowSelect}
-      rowActions={() => <IconButton icon="chevronRight" label="Abrir reclamacao" size="sm" variant="ghost" />}
+      rowActions={(row) => <IconButton icon="chevronRight" label={`Abrir reclamação de ${row.student}`} onClick={(event) => { event.stopPropagation(); onRowSelect?.(row); }} size="sm" variant="ghost" />}
       rows={complaintRows}
       selectedRowId={selectedRowId}
     />
   );
 }
 
-const complaintDrawerFacts = [
-  { id: "student", icon: "user" as const, label: "Aluno", value: "Ana Paula Martins" },
-  { id: "status", icon: "clock" as const, label: "Status", value: "Aguardando resposta", tone: "danger" as const },
-  { id: "origin", icon: "whatsapp" as const, label: "Origem", value: "WhatsApp" },
-  { id: "owner", icon: "user" as const, label: "Responsavel", value: "Mariana" },
-  { id: "severity", icon: "alert" as const, label: "Severidade", value: "Alta", tone: "danger" as const },
-  { id: "deadline", icon: "calendar" as const, label: "Prazo", value: "Hoje 14:00", tone: "danger" as const }
+function complaintDrawerFacts(complaint: ComplaintRow): CaseDrawerFact[] {
+  return [
+    { id: "student", icon: "user", label: "Aluno", value: complaint.student },
+    { id: "status", icon: "clock", label: "Status", value: complaint.status, tone: complaint.statusTone === "danger" ? "danger" : "default" },
+    { id: "origin", icon: complaint.originIcon, label: "Origem", value: complaint.origin },
+    { id: "owner", icon: "user", label: "Responsavel", value: complaint.owner },
+    { id: "severity", icon: "alert", label: "Severidade", value: complaint.severity, tone: complaint.severityTone === "danger" ? "danger" : "default" },
+    { id: "deadline", icon: "calendar", label: "Prazo", value: complaint.deadline, tone: complaint.deadlineTone === "danger" ? "danger" : "default" }
+  ];
+}
+
+const complaintFooterActions: CaseDrawerFooterAction[] = [
+  { id: "message", label: "Responder", variant: "primary", leadingIcon: "arrowLeft" },
+  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+  { id: "escalate", label: "Escalar", leadingIcon: "upload" },
+  { id: "resolve", label: "Marcar resolvida", leadingIcon: "checkCircle" },
+  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+  { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
 ];
 
-function ComplaintDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
+function ComplaintDrawer({ complaint, onAction, onClose }: { complaint: ComplaintRow; onAction?: (action: string) => void; onClose?: () => void }) {
+  const firstName = complaint.student.split(" ")[0];
+  const sections: CaseDrawerSection[] = [
+    {
+      id: "declared-reason",
+      title: "Motivo declarado",
+      kind: "text",
+      description: `${complaint.student} registrou ${complaint.reason} e aguarda uma resposta humana.`
+    },
+    {
+      id: "impact",
+      title: "Impacto",
+      kind: "list",
+      items: [
+        { id: "risk", label: complaint.severity === "Alta" ? "Risco de cancelamento" : "Risco de insatisfacao", tone: "danger" },
+        { id: "reason", label: `${complaint.reason} em analise`, tone: "danger" },
+        { id: "channel", label: `Contato por ${complaint.origin} requer resposta`, tone: "danger" },
+        { id: "deadline", label: `Prazo operacional: ${complaint.deadline}`, tone: "danger" }
+      ]
+    },
+    {
+      id: "automation-paused",
+      title: "Automacao pausada",
+      kind: "alert",
+      icon: "alert",
+      description: `Mensagens automaticas e acoes autonomas pausadas enquanto o caso esta ${complaint.status.toLowerCase()}.`
+    },
+    {
+      id: "resolution-plan",
+      title: "Plano de resolucao",
+      kind: "checklist",
+      items: [
+        { id: "history", label: `Revisar historico de ${complaint.reason}`, tone: "success" },
+        { id: "channel", label: `Confirmar retorno por ${complaint.origin}`, tone: "success" },
+        { id: "reply", label: "Responder com pedido de desculpas e solucao objetiva", tone: "success" },
+        { id: "follow-up", label: `Registrar acompanhamento com ${complaint.owner}`, tone: "success" }
+      ]
+    },
+    {
+      id: "copilot",
+      title: "Sugestao do copiloto",
+      kind: "copilot",
+      icon: "sparkles",
+      description: `Oi ${firstName}, sinto muito por ${complaint.reason}. Vou revisar o caso e retornar pelo ${complaint.origin} ate ${complaint.deadline}.`,
+      note: "O copiloto sugere a resposta; a revisao e o envio sao humanos."
+    },
+    {
+      id: "history",
+      title: "Historico curto",
+      kind: "history",
+      items: [
+        { id: "activity", label: complaint.activity, tone: "success" },
+        { id: "status", label: `Caso em ${complaint.status.toLowerCase()}`, tone: complaint.statusTone },
+        { id: "owner", label: `Responsavel atual: ${complaint.owner}`, tone: "success" },
+        { id: "severity", label: `Caso marcado como severidade ${complaint.severity.toLowerCase()}`, tone: complaint.severityTone }
+      ]
+    }
+  ];
+
   return (
     <CaseDrawer
       avatarSrc={image79Avatar}
+      density="compact"
       eyebrowLabel="Reclamacao"
-      facts={complaintDrawerFacts}
+      facts={complaintDrawerFacts(complaint)}
       factsLayout="grid"
-      footerActions={[
-        { id: "message", label: "Responder", variant: "primary", leadingIcon: "arrowLeft" },
-        { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
-        { id: "escalate", label: "Escalar", leadingIcon: "upload" },
-        { id: "resolve", label: "Marcar resolvida", leadingIcon: "checkCircle" },
-        { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
-        { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
-      ]}
-      sections={[
-        {
-          id: "declared-reason",
-          title: "Motivo declarado",
-          kind: "text",
-          description: "Aluna reclamou que pediu reposicao ha 3 dias e ainda nao recebeu opcao de encaixe."
-        },
-        {
-          id: "impact",
-          title: "Impacto",
-          kind: "list",
-          items: [
-            { id: "cancel-risk", label: "Risco de cancelamento", tone: "danger" },
-            { id: "open-replacement", label: "1 reposicao em aberto", tone: "danger" },
-            { id: "no-answer", label: "Conversa sem resposta ha 2h", tone: "danger" },
-            { id: "class", label: "Turma com vaga compativel hoje as 18:00", tone: "danger" }
-          ]
-        },
-        {
-          id: "automation-paused",
-          title: "Automacao pausada",
-          kind: "alert",
-          icon: "alert",
-          description: "Mensagens automaticas e acoes autonomas pausadas ate revisao humana."
-        },
-        {
-          id: "resolution-plan",
-          title: "Plano de resolucao",
-          kind: "checklist",
-          items: [
-            { id: "history", label: "Revisar historico da reposicao", tone: "success" },
-            { id: "options", label: "Oferecer duas opcoes reais de encaixe", tone: "success" },
-            { id: "reply", label: "Responder com pedido de desculpas e solucao objetiva", tone: "success" },
-            { id: "follow-up", label: "Registrar acompanhamento apos resposta", tone: "success" }
-          ]
-        },
-        {
-          id: "copilot",
-          title: "Sugestao do copiloto",
-          kind: "copilot",
-          icon: "sparkles",
-          description: "Oi Ana, sinto muito pela demora. Encontrei duas opcoes para sua reposicao: hoje as 18h ou sexta as 09h.",
-          note: "O copiloto sugere a resposta; a revisao e o envio sao humanos."
-        },
-        {
-          id: "history",
-          title: "Historico curto",
-          kind: "history",
-          items: [
-            { id: "replacement", label: "Pedido de reposicao aberto em 10/05", tone: "success" },
-            { id: "agent", label: "Agente nao encontrou encaixe automatico", tone: "danger" },
-            { id: "received", label: "Mensagem da aluna recebida hoje 09:20", tone: "success" },
-            { id: "severity", label: "Caso marcado como alta severidade", tone: "danger" }
-          ]
-        }
-      ]}
+      footerActions={complaintFooterActions}
+      sections={sections}
       showMessageSuggestion={false}
       numberedSections
       onAction={onAction}
       onClose={onClose}
-      statusLabel="Alta severidade"
-      title="Ana Paula Martins"
+      statusLabel={`${complaint.severity} severidade`}
+      title={complaint.student}
+      widthVariant="wide"
     />
   );
 }
