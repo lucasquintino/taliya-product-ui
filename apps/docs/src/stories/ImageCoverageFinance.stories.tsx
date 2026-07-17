@@ -176,19 +176,18 @@ function FinanceQueues({
   );
 }
 
-function FinanceHeaderActions() {
+function FinanceHeaderActions({ onAction }: { onAction: (action: string) => void }) {
   return (
     <ButtonGroup>
-      <Button leadingIcon="plus" size="sm" variant="secondary">Nova cobranca</Button>
-      <Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button>
-      <Button leadingIcon="calendar" size="sm" variant="secondary">Criar tarefa</Button>
+      <Button leadingIcon="plus" onClick={() => onAction("nova cobrança")} size="sm" variant="secondary">Nova cobranca</Button>
+      <Button leadingIcon="upload" onClick={() => onAction("exportar")} size="sm" variant="secondary">Exportar</Button>
+      <Button leadingIcon="calendar" onClick={() => onAction("criar tarefa")} size="sm" variant="secondary">Criar tarefa</Button>
     </ButtonGroup>
   );
 }
 
-function FinanceOverviewMain({ compactQueues = false, onOpenCase }: { compactQueues?: boolean; onOpenCase?: (caseId: string) => void } = {}) {
+function FinanceOverviewMain({ compactQueues = false, onEvent, onOpenCase }: { compactQueues?: boolean; onEvent: (event: string) => void; onOpenCase?: (caseId: string) => void }) {
   const [selectedPriorityId, setSelectedPriorityId] = useState("");
-  const [event, setEvent] = useState("sem acao");
 
   return (
     <>
@@ -197,18 +196,17 @@ function FinanceOverviewMain({ compactQueues = false, onOpenCase }: { compactQue
         selectedId={selectedPriorityId}
         onSelect={(priority) => {
           setSelectedPriorityId(priority.id);
-          setEvent(`prioridade:${priority.id}`);
+          onEvent(`Prioridade selecionada: ${priority.id}`);
         }}
       />
       <FinanceQueues
         compact={compactQueues}
         onOpenCase={(caseId) => {
-          setEvent(`cobranca:${caseId}`);
+          onEvent(`Cobrança selecionada: ${caseId}`);
           onOpenCase?.(caseId);
         }}
-        onViewAll={(state) => setEvent(`ver-todos:${state}`)}
+        onViewAll={(state) => onEvent(`Fila aberta: ${state}`)}
       />
-      <output aria-live="polite" className="tl-sr-only">{event}</output>
     </>
   );
 }
@@ -216,35 +214,56 @@ function FinanceOverviewMain({ compactQueues = false, onOpenCase }: { compactQue
 function FinanceOverviewDashboard({ drawer, onOpenCase }: { drawer?: React.ReactNode; onOpenCase?: (caseId: string) => void } = {}) {
   const [selectedPeriod, setSelectedPeriod] = useState("today");
   const [filterValues, setFilterValues] = useState<Record<string, string | string[]>>({});
+  const [announcement, setAnnouncement] = useState("");
 
   return (
-    <CrmDashboardPage
-      activeNavId="overview"
-      activeSidebarId="financeiro"
-      avatarSrc={image79Avatar}
-      before={
-        <FinanceFilters
-          filterValues={filterValues}
-          selectedPeriod={selectedPeriod}
-          onFilterValueChange={(filter, value) => setFilterValues((current) => ({ ...current, [filter.id]: value }))}
-          onPeriodSelect={(filter) => setSelectedPeriod(filter.id)}
-        />
-      }
-      className="sb-image-coverage-finance-shell"
-      columns={1}
-      drawer={drawer}
-      drawerPlacement={drawer ? "viewport" : undefined}
-      navItems={financeNavItems}
-      pageHeaderActions={<FinanceHeaderActions />}
-      pageHeaderRhythm="overview"
-      sidebarItems={crmEmptyShellSidebarItems}
-      stageClassName="sb-image-coverage-finance-stage"
-      subtitle="Filas financeiras e pendencias do estudio"
-      title="Financeiro"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    >
-      <FinanceOverviewMain compactQueues={Boolean(drawer)} onOpenCase={onOpenCase} />
-    </CrmDashboardPage>
+    <>
+      <CrmDashboardPage
+        activeNavId="overview"
+        activeSidebarId="financeiro"
+        avatarSrc={image79Avatar}
+        before={
+          <FinanceFilters
+            filterValues={filterValues}
+            selectedPeriod={selectedPeriod}
+            onFilterValueChange={(filter, value) => {
+              setFilterValues((current) => ({ ...current, [filter.id]: value }));
+              setAnnouncement(`Filtro alterado: ${filter.id}`);
+            }}
+            onPeriodSelect={(filter) => {
+              setSelectedPeriod(filter.id);
+              setAnnouncement(`Período selecionado: ${filter.label}`);
+            }}
+          />
+        }
+        className="sb-image-coverage-finance-shell"
+        columns={1}
+        drawer={drawer}
+        drawerPlacement={drawer ? "viewport" : undefined}
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        layoutVariant="finance-overview"
+        navItems={financeNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderActions={<FinanceHeaderActions onAction={(action) => setAnnouncement(`Ação financeira: ${action}`)} />}
+        pageHeaderRhythm="overview"
+        sidebarItems={crmEmptyShellSidebarItems}
+        stageClassName="sb-image-coverage-finance-stage"
+        subtitle="Filas financeiras e pendencias do estudio"
+        title="Financeiro"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      >
+        <FinanceOverviewMain compactQueues={Boolean(drawer)} onEvent={setAnnouncement} onOpenCase={onOpenCase} />
+      </CrmDashboardPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

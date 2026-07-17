@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T00:37:30.022Z",
+  "generatedAt": "2026-07-17T00:57:21.551Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 14,
+  "completedRouteCount": 15,
   "failedRouteCount": 0,
-  "pendingRouteCount": 59,
+  "pendingRouteCount": 58,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1259,38 +1259,60 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:57:17.566Z",
+        "evidence": [
+          "tmp/human-route-review/30-finance-overview/desktop-final.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:57:17.974Z",
+        "evidence": [
+          "tmp/human-route-review/30-finance-overview/desktop-reduced-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:57:18.233Z",
+        "evidence": [
+          "tmp/human-route-review/30-finance-overview/mobile-final.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:57:18.706Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-static-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "header-actions",
+          "period-filters",
+          "select-filters",
+          "priority-actions",
+          "queue-card-actions",
+          "queue-view-all-actions",
+          "mobile-responsive-flow"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:57:18.453Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/30_round-4.1F_financeiro_01_visao-geral-filas.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review connected shell/header/filter/priority/queue actions and promoted the official finance-overview responsive dashboard variant."
+      ]
     },
     {
       "image": "31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png",

@@ -480,6 +480,15 @@ describe("@taliya/crm component coverage", () => {
     );
 
     rerender(
+      <crm.CrmDashboardPage before={<button type="button">Filtrar financeiro</button>} layoutVariant="finance-overview" title="Financeiro">
+        <div>Filas financeiras</div>
+      </crm.CrmDashboardPage>
+    );
+
+    expect(screen.getByText("Filas financeiras").closest(".tcrm-dashboard-page-stack")).toHaveClass("tcrm-dashboard-page-stack--finance-overview");
+    expect(screen.getByText("Filas financeiras").closest(".tcrm-product-shell-stage")).toHaveClass("tcrm-product-shell-stage--content-finance-overview");
+
+    rerender(
       <crm.CrmThreePanePage center={<div>Thread</div>} filterBar={<button type="button">Filtrar inbox</button>} left={<div>Conversas</div>} right={<div>Contexto</div>} subtitle="Inbox oficial" title="Inbox" />
     );
 

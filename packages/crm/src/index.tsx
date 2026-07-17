@@ -874,7 +874,7 @@ export type CrmProductShellFrame = "fullscreen" | "window" | "window-inset" | "r
 export type CrmProductShellDrawerPlacement = "fixed" | "content" | "floating" | "chrome" | "viewport";
 export type CrmProductShellDrawerSize = "default" | "compact";
 export type CrmProductShellPageHeaderRhythm = "default" | "spacious" | "compact-stacked" | "dashboard" | "reports" | "support" | "internal-overview" | "internal-tenants" | "stacked" | "agents" | "agents-routines" | "agents-routine-detail" | "agents-flow-detail" | "agents-publish" | "settings-hub" | "overview" | "operation" | "inbox" | "usage" | "usage-overview" | "billing" | "billing-invoices";
-export type CrmProductShellContentLayout = "default" | "work-list" | "work-list-compact" | "work-list-wide" | "main-priority" | "kanban" | "three-pane" | "student-profile" | "class-operation" | "settings" | "settings-permissions" | "settings-payments" | "settings-agenda" | "settings-notifications" | "settings-hub" | "billing-subscription" | "agent-routine" | "agent-flow" | "agent-test" | "agent-publish" | "opportunity" | "support" | "internal-overview" | "internal-tenants" | "internal-tenant-detail";
+export type CrmProductShellContentLayout = "default" | "work-list" | "work-list-compact" | "work-list-wide" | "main-priority" | "kanban" | "three-pane" | "student-profile" | "class-operation" | "finance-overview" | "settings" | "settings-permissions" | "settings-payments" | "settings-agenda" | "settings-notifications" | "settings-hub" | "billing-subscription" | "agent-routine" | "agent-flow" | "agent-test" | "agent-publish" | "opportunity" | "support" | "internal-overview" | "internal-tenants" | "internal-tenant-detail";
 
 export interface CrmProductShellRegions {
   browserChrome?: boolean;
@@ -2960,7 +2960,7 @@ export interface CrmDashboardPageProps extends Omit<CrmPageFamilyShellProps, "ch
   dashboardClassName?: string;
   dashboardStackClassName?: string;
   density?: React.ComponentProps<typeof DashboardGrid>["density"];
-  layoutVariant?: "default" | "opportunity" | "support" | "settings-hub";
+  layoutVariant?: "default" | "finance-overview" | "opportunity" | "support" | "settings-hub";
 }
 
 export function CrmDashboardPage({
@@ -2986,7 +2986,7 @@ export function CrmDashboardPage({
 
   return (
     <CrmPageFamilyShell {...shellProps} contentLayout={layoutVariant === "default" ? undefined : layoutVariant}>
-      {before || after || dashboardStackClassName ? <div className={cn("tcrm-dashboard-page-stack", layoutVariant === "opportunity" && "tcrm-dashboard-page-stack--opportunity", dashboardStackClassName)}>{dashboard}</div> : dashboard}
+      {before || after || dashboardStackClassName ? <div className={cn("tcrm-dashboard-page-stack", layoutVariant === "finance-overview" && "tcrm-dashboard-page-stack--finance-overview", layoutVariant === "opportunity" && "tcrm-dashboard-page-stack--opportunity", dashboardStackClassName)}>{dashboard}</div> : dashboard}
     </CrmPageFamilyShell>
   );
 }

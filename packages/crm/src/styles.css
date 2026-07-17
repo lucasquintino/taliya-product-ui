@@ -29738,6 +29738,10 @@ button.tcrm-pipeline-card__select:focus-visible,
   gap: var(--taliya-layout-crm-dashboard-opportunity-gap);
 }
 
+.tcrm-dashboard-page-stack--finance-overview {
+  min-width: 0;
+}
+
 .tcrm-dashboard-page-stack--opportunity .tcrm-dashboard-grid {
   gap: var(--taliya-layout-crm-dashboard-opportunity-gap);
   grid-template-rows: var(--taliya-layout-crm-dashboard-opportunity-rows);
@@ -32411,6 +32415,28 @@ button.tcrm-pipeline-card__select:focus-visible,
     width: 100%;
   }
 
+  .tcrm-product-shell-stage--content-finance-overview .tcrm-product-shell-page-header {
+    align-items: stretch;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .tcrm-product-shell-stage--content-finance-overview .tcrm-product-shell-page-header__actions {
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-product-shell-stage--content-finance-overview .tcrm-product-shell-page-header__actions .tl-button-group {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .tcrm-product-shell-stage--content-finance-overview .tcrm-product-shell-page-header__actions .tl-button {
+    min-width: 0;
+    width: 100%;
+  }
+
   .tcrm-right-panel-layout--class-operation {
     gap: var(--taliya-space-4);
   }
@@ -32675,6 +32701,10 @@ button.tcrm-pipeline-card__select:focus-visible,
   }
 
   .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header__actions .tl-button-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-product-shell-stage--content-finance-overview .tcrm-product-shell-page-header__actions .tl-button-group {
     grid-template-columns: minmax(0, 1fr);
   }
 
