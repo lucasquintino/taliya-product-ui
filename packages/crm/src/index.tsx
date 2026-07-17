@@ -12756,6 +12756,7 @@ export interface PaymentDrawerProps extends Omit<React.HTMLAttributes<HTMLElemen
   state?: PaymentDrawerState;
   variant?: "collection" | "movement";
   compact?: boolean;
+  eyebrow?: React.ReactNode;
   name?: React.ReactNode;
   amount?: React.ReactNode;
   statusLabel?: React.ReactNode;
@@ -12763,6 +12764,7 @@ export interface PaymentDrawerProps extends Omit<React.HTMLAttributes<HTMLElemen
   context?: React.ReactNode[];
   history?: PaymentDrawerHistoryItem[];
   copilotSuggestion?: React.ReactNode;
+  markPaidDisabled?: boolean;
   onAction?: (action: PaymentDrawerAction) => void;
   onClose?: () => void;
 }
@@ -12799,6 +12801,7 @@ export function PaymentDrawer({
   state = "overdue",
   variant = "collection",
   compact = false,
+  eyebrow,
   name = "Gabriela Lima",
   amount = "R$ 420,00",
   statusLabel = "Em atraso",
@@ -12806,6 +12809,7 @@ export function PaymentDrawer({
   context = sourcePaymentDrawerContext,
   history = sourcePaymentDrawerHistory,
   copilotSuggestion = <>Copiloto, tudo bem? Identificamos que sua mensalidade de R$ 420,00 venceu há 2 dias. Posso te lembrar o link de pagamento?</>,
+  markPaidDisabled = false,
   onAction,
   onClose,
   className,
@@ -12827,7 +12831,7 @@ export function PaymentDrawer({
       className={cn("tcrm-payment-drawer", `tcrm-payment-drawer--${state}`, `tcrm-payment-drawer--${variant}`, compact && "tcrm-payment-drawer--compact", className)}
       closeLabel="Fechar cobrança"
       component="PaymentDrawer"
-      eyebrow={isMovement ? "Mensalidade" : "Cobrança"}
+      eyebrow={eyebrow ?? (isMovement ? "Mensalidade" : "Cobrança")}
       footer={(
         <div className="tcrm-payment-drawer__footer">
           <h3>{isMovement ? "Ações" : "Ações principais"}</h3>
@@ -12844,7 +12848,7 @@ export function PaymentDrawer({
                 <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitPaymentDrawerAction("register-promise", onAction)} size="sm" variant="secondary">Registrar promessa</Button>
               </>
             )}
-            <Button className="tcrm-payment-drawer__action" disabled={isBlocked || isPaid} leadingIcon="checkCircle" onClick={() => emitPaymentDrawerAction("mark-paid", onAction)} size="sm" variant="secondary">Marcar como pago</Button>
+            <Button className="tcrm-payment-drawer__action" disabled={isBlocked || isPaid || markPaidDisabled} leadingIcon="checkCircle" onClick={() => emitPaymentDrawerAction("mark-paid", onAction)} size="sm" variant="secondary">Marcar como pago</Button>
             <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitPaymentDrawerAction("create-task", onAction)} size="sm" variant="secondary">Criar tarefa</Button>
           </div>
           {!isMovement ? <h3>Ação secundária</h3> : null}

@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T02:38:41.945Z",
+  "generatedAt": "2026-07-17T03:18:32.288Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 18,
+  "completedRouteCount": 19,
   "failedRouteCount": 0,
-  "pendingRouteCount": 55,
+  "pendingRouteCount": 54,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1622,38 +1622,71 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:02:35.000Z",
+        "evidence": [
+          "tmp/human-route-review/34-finance-movements/desktop-final.png",
+          "tmp/human-route-review/34-finance-movements/desktop-finalized-adjustment.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:02:35.000Z",
+        "evidence": [
+          "tmp/human-route-review/34-finance-movements/desktop-canonical.png",
+          "tmp/human-route-review/34-finance-movements/desktop-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:02:35.000Z",
+        "evidence": [
+          "tmp/human-route-review/34-finance-movements/mobile-initial.png",
+          "tmp/human-route-review/34-finance-movements/mobile-table-final.png",
+          "tmp/human-route-review/34-finance-movements/mobile-table-token-scrolled.png",
+          "tmp/human-route-review/34-finance-movements/mobile-drawer-juliana.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:02:35.000Z",
+        "evidence": [
+          "browser-observed:106-worklist-drawer-actions-desktop-and-mobile-static-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "top-navigation",
+          "header-actions",
+          "search-and-period-filters",
+          "select-and-advanced-filters",
+          "quick-filters",
+          "table-sorting",
+          "all-row-selection",
+          "all-row-actions",
+          "pagination",
+          "drawer-actions-and-state",
+          "drawer-open-close",
+          "mobile-horizontal-table-scroll"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:02:35.000Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review connected every finance movement control and made the official PaymentDrawer reflect the selected row, including payment-state transitions and reopen behavior.",
+        "The shared CrmWorklistTable mobile overflow defect was fixed with the official table-min-width token and reverified through a real horizontal browser gesture.",
+        "Paid, reversed, approved, and adjusted movements preserve their domain status and disable only the invalid mark-paid action."
+      ]
     },
     {
       "image": "35_round-4.1F_turmas_01_lista-detalhe.png.png",

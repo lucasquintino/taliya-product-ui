@@ -418,7 +418,7 @@ function FinanceKanbanColumns({ onInteraction }: { onInteraction: (message: stri
   );
 }
 
-function MovementsFilters() {
+function MovementsFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [query, setQuery] = useState("");
   const [selectedPeriod, setSelectedPeriod] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({ type: "", status: "", plan: "", method: "", owner: "" });
@@ -437,17 +437,26 @@ function MovementsFilters() {
 
   return (
     <PageFilterBar
-      actions={<ButtonGroup><Button leadingIcon="plus" size="sm" variant="secondary">Nova cobranca</Button><Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button></ButtonGroup>}
+      actions={<ButtonGroup><Button leadingIcon="plus" onClick={() => onInteraction("Nova cobrança iniciada")} size="sm" variant="secondary">Nova cobranca</Button><Button leadingIcon="upload" onClick={() => onInteraction("Exportação iniciada")} size="sm" variant="secondary">Exportar</Button></ButtonGroup>}
       advancedFiltersLabel="Mais filtros"
       advancedFiltersSurface="modal"
       advancedFiltersTriggerVariant="button"
       density="tight"
       filters={filters}
       layout="stacked"
-      onFilterSelect={(filter) => setSelectedPeriod(filter.id)}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
+      onFilterSelect={(filter) => {
+        setSelectedPeriod(filter.id);
+        onInteraction(`Período das movimentações: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de movimentações alterado: ${filter.id}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        onInteraction(`Busca de movimentações: ${value || "limpa"}`);
+      }}
+      onSearchFilter={() => onInteraction("Filtros de busca abertos")}
       query={query}
       searchFilterLabel="Abrir filtros de movimentacao"
       searchFilterPlacement="embedded"
@@ -456,7 +465,7 @@ function MovementsFilters() {
   );
 }
 
-function MovementsQuickFilters() {
+function MovementsQuickFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("due");
   const items: PageQuickFilterItem[] = [
     { id: "all", label: "Todas", icon: "users", count: "256", selected: selectedId === "all" },
@@ -472,11 +481,27 @@ function MovementsQuickFilters() {
     { id: "discounts", label: "Descontos", icon: "tag", count: "8", selected: selectedId === "discounts" }
   ];
 
-  return <PageQuickFilters aria-label="Filtros rapidos de movimentacoes" heading="Filtros rapidos" items={items} onSelect={(item) => setSelectedId(item.id)} selectionTone="soft" />;
+  return <PageQuickFilters aria-label="Filtros rapidos de movimentacoes" heading="Filtros rapidos" items={items} onSelect={(item) => { setSelectedId(item.id); onInteraction(`Filtro rápido: ${item.label}`); }} selectionTone="soft" />;
 }
 
-function MovementTable({ onRowSelect, selectedRowId = "fernanda" }: { onRowSelect?: (row: { id: string }) => void; selectedRowId?: string }) {
-  const rows: Array<{ id: string; student: string; avatarSrc: string; type: string; typeTone: ComponentTone; status: string; statusTone: ComponentTone; amount: string; due: string; plan: string; method: string; origin: string; owner: string; activity: string }> = [
+interface MovementRow {
+  id: string;
+  student: string;
+  avatarSrc: string;
+  type: string;
+  typeTone: ComponentTone;
+  status: string;
+  statusTone: ComponentTone;
+  amount: string;
+  due: string;
+  plan: string;
+  method: string;
+  origin: string;
+  owner: string;
+  activity: string;
+}
+
+const movementRows: MovementRow[] = [
     { id: "fernanda", student: "Fernanda Lima", avatarSrc: source34FernandaLima, type: "Mensalidade", typeTone: "info", status: "A vencer", statusTone: "info", amount: "R$ 420,00", due: "14/05", plan: "Mensal", method: "Pix", origin: "Sistema", owner: "Financeiro", activity: "gerada hoje" },
     { id: "juliana", student: "Juliana Rocha", avatarSrc: source34JulianaRocha, type: "Recebido", typeTone: "success", status: "Pago", statusTone: "success", amount: "R$ 420,00", due: "-", plan: "Mensal", method: "Pix", origin: "WhatsApp", owner: "Mariana", activity: "pago 09:12" },
     { id: "gabriel", student: "Gabriel Lima", avatarSrc: source34GabrielLima, type: "Atrasada", typeTone: "danger", status: "Em atraso", statusTone: "danger", amount: "R$ 420,00", due: "12/05", plan: "Mensal", method: "Cartao", origin: "Sistema", owner: "Financeiro", activity: "lembrete ontem" },
@@ -487,7 +512,44 @@ function MovementTable({ onRowSelect, selectedRowId = "fernanda" }: { onRowSelec
     { id: "carla", student: "Carla Nunes", avatarSrc: image79Avatar, type: "Estorno", typeTone: "neutral", status: "Estornado", statusTone: "neutral", amount: "R$ 120,00", due: "-", plan: "Avulso", method: "Cartao", origin: "Sistema", owner: "Coordenacao", activity: "processado ontem" },
     { id: "roberto", student: "Roberto Lima", avatarSrc: image79Avatar, type: "Desconto aprovado", typeTone: "success", status: "Aprovado", statusTone: "success", amount: "R$ 180,00", due: "-", plan: "Premium", method: "Manual", origin: "Coordenacao", owner: "Coordenacao", activity: "desconto aprovado" },
     { id: "silvia", student: "Silvia Prado", avatarSrc: image79Avatar, type: "Ajuste manual", typeTone: "info", status: "Ajustado", statusTone: "info", amount: "R$ 75,00", due: "-", plan: "Plano Mensal", method: "Manual", origin: "Financeiro", owner: "Financeiro", activity: "ajuste registrado" }
+];
+
+function movementDrawerState(row: MovementRow): PaymentDrawerState {
+  if (row.status === "Pago") return "paid";
+  if (row.status === "Em atraso") return "overdue";
+  if (row.status === "Falha") return "failed";
+  if (["Prometido", "Pendente", "Em analise"].includes(row.status)) return "promise";
+  return "due";
+}
+
+function movementDrawerFacts(row: MovementRow, state: PaymentDrawerState): PaymentDrawerFact[] {
+  const status = state === "paid" ? "Pago" : row.status;
+  const danger = state === "overdue" || state === "failed";
+  return [
+    { id: "amount", icon: "wallet", label: "Valor", value: row.amount },
+    { id: "due", icon: "calendar", label: "Vencimento", value: row.due, tone: danger ? "danger" : undefined },
+    { id: "plan", icon: "graduation", label: "Plano", value: row.plan },
+    { id: "method", icon: "tag", label: "Metodo", value: row.method, tone: row.method === "Pix" ? "success" : undefined },
+    { id: "origin", icon: "graduation", label: "Origem", value: row.origin },
+    { id: "owner", icon: "user", label: "Responsavel", value: row.owner },
+    { id: "status", icon: "checkCircle", label: "Status", value: status, tone: danger ? "danger" : state === "paid" ? "success" : undefined },
+    { id: "channel", icon: "message", label: "Canal sugerido", value: <><Icon name="whatsapp" size="13px" /> WhatsApp</>, tone: "whatsapp" }
   ];
+}
+
+function MovementTable({
+  onInteraction,
+  onPageChange,
+  onRowSelect,
+  page,
+  selectedRowId = "fernanda"
+}: {
+  onInteraction: (message: string) => void;
+  onPageChange: (page: number) => void;
+  onRowSelect?: (row: MovementRow) => void;
+  page: number;
+  selectedRowId?: string;
+}) {
 
   return (
     <CrmWorklistTable
@@ -506,9 +568,18 @@ function MovementTable({ onRowSelect, selectedRowId = "fernanda" }: { onRowSelec
         { key: "activity", header: "Ultima atividade", width: "12%" }
       ]}
       density="compact"
-      pagination={{ itemsPerPage: "10", label: "1-10 de 256", page: 1, pageCount: 26 }}
-      rowActions={() => <IconButton icon="more" label="Mais acoes da movimentacao" size="sm" variant="ghost" />}
-      rows={rows}
+      pagination={{
+        itemsPerPage: "10",
+        label: `${(page - 1) * 10 + 1}-${Math.min(page * 10, 256)} de 256`,
+        page,
+        pageCount: 26,
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => { const nextPage = Math.min(page + 1, 26); onPageChange(nextPage); onInteraction(`Página selecionada: ${nextPage}`); },
+        onPageChange: (nextPage) => { onPageChange(nextPage); onInteraction(`Página selecionada: ${nextPage}`); },
+        onPreviousPage: () => { const nextPage = Math.max(page - 1, 1); onPageChange(nextPage); onInteraction(`Página selecionada: ${nextPage}`); }
+      }}
+      rowActions={(row) => <IconButton icon="more" label={`Mais acoes de ${row.student}`} onClick={(event) => { event.stopPropagation(); onInteraction(`Menu da movimentação: ${row.id}`); }} size="sm" variant="ghost" />}
+      rows={movementRows}
       onRowSelect={onRowSelect}
       selectedRowId={selectedRowId}
     />
@@ -616,55 +687,86 @@ export function FinanceKanbanPage() {
 export function FinanceMovementsPage() {
   const [selectedMovementId, setSelectedMovementId] = useState("fernanda");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [drawerState, setDrawerState] = useState<PaymentDrawerState>();
+  const [announcement, setAnnouncement] = useState("");
+  const [page, setPage] = useState(1);
+  const selectedMovement = movementRows.find((row) => row.id === selectedMovementId) ?? movementRows[0]!;
+  const effectiveDrawerState = drawerState ?? movementDrawerState(selectedMovement);
+  const effectiveStatus = effectiveDrawerState === "paid" ? "Pago" : selectedMovement.status;
+  const movementIsFinalized = ["Pago", "Estornado", "Aprovado", "Ajustado"].includes(selectedMovement.status);
+
+  function handleMovementAction(action: PaymentDrawerAction) {
+    if (action === "mark-paid") setDrawerState("paid");
+    setAnnouncement(`Ação da movimentação: ${action}`);
+  }
+
   return (
-    <CrmWorklistPage
-      activeNavId="movements"
-      activeSidebarId="financeiro"
-      avatarSrc={image79Avatar}
-      className="sb-image-coverage-finance-shell"
-      contentLayout="work-list-wide"
-      drawer={drawerOpen ? (
-        <PaymentDrawer
-          amount="R$ 420,00"
-          compact
-          context={["Mensalidade gerada automaticamente e ainda dentro do prazo."]}
-          copilotSuggestion="Aguardar ate o vencimento ou enviar lembrete preventivo se a politica permitir."
-          facts={[
-            { id: "amount", icon: "wallet", label: "Valor", value: "R$ 420,00" },
-            { id: "due", icon: "calendar", label: "Vencimento", value: "14/05" },
-            { id: "plan", icon: "graduation", label: "Plano", value: "Plano Mensal" },
-            { id: "method", icon: "tag", label: "Metodo", value: "Pix", tone: "success" },
-            { id: "origin", icon: "graduation", label: "Origem", value: "Sistema / cobranca recorrente" },
-            { id: "owner", icon: "user", label: "Responsavel", value: "Financeiro" },
-            { id: "channel", icon: "message", label: "Canal sugerido", value: <><Icon name="whatsapp" size="13px" /> WhatsApp</>, tone: "whatsapp" }
-          ]}
-          history={[
-            { id: "created", label: "Mensalidade criada automaticamente" },
-            { id: "pix", label: "Link Pix disponivel" },
-            { id: "none", label: "Nenhum lembrete enviado" }
-          ]}
-          name="Fernanda Lima"
-          onAction={setDrawerAction}
-          onClose={() => setDrawerOpen(false)}
-          state="due"
-          statusLabel="A vencer"
-          variant="movement"
+    <>
+      <CrmWorklistPage
+        activeNavId="movements"
+        activeSidebarId="financeiro"
+        avatarSrc={image79Avatar}
+        className="sb-image-coverage-finance-shell"
+        contentLayout="work-list-wide"
+        drawer={drawerOpen ? (
+          <PaymentDrawer
+            amount={selectedMovement.amount}
+            compact
+            context={[`${selectedMovement.type} de ${selectedMovement.amount}.`, `Última atividade: ${selectedMovement.activity}.`]}
+            copilotSuggestion={`Revise ${selectedMovement.type.toLowerCase()} de ${selectedMovement.student} e escolha o próximo passo operacional.`}
+            eyebrow={selectedMovement.type}
+            facts={movementDrawerFacts(selectedMovement, effectiveDrawerState)}
+            history={[
+              { id: "created", label: `${selectedMovement.type} registrada` },
+              { id: "activity", label: selectedMovement.activity },
+              { id: "owner", label: `Responsável: ${selectedMovement.owner}` }
+            ]}
+            markPaidDisabled={movementIsFinalized}
+            name={selectedMovement.student}
+            onAction={handleMovementAction}
+            onClose={() => setDrawerOpen(false)}
+            state={effectiveDrawerState}
+            statusLabel={effectiveStatus}
+            variant="movement"
+          />
+        ) : null}
+        drawerPlacement="fixed"
+        filterBar={<MovementsFilters onInteraction={setAnnouncement} />}
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        navItems={financeNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="overview"
+        quickFilters={<MovementsQuickFilters onInteraction={setAnnouncement} />}
+        sidebarItems={crmEmptyShellSidebarItems}
+        stageClassName="sb-image-coverage-finance-stage"
+        subtitle="Mensalidades, cobrancas, pagamentos e ajustes"
+        title="Movimentacoes"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        worklistLayoutMode="wide-main"
+      >
+        <MovementTable
+          onInteraction={setAnnouncement}
+          onPageChange={setPage}
+          onRowSelect={(row) => {
+            setSelectedMovementId(row.id);
+            setDrawerState(undefined);
+            setDrawerOpen(true);
+            setAnnouncement(`Movimentação selecionada: ${row.id}`);
+          }}
+          page={page}
+          selectedRowId={selectedMovementId}
         />
-      ) : null}
-      filterBar={<MovementsFilters />}
-      navItems={financeNavItems}
-      pageHeaderRhythm="overview"
-      quickFilters={<MovementsQuickFilters />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      stageClassName="sb-image-coverage-finance-stage"
-      subtitle="Mensalidades, cobrancas, pagamentos e ajustes"
-      title="Movimentacoes"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistLayoutMode="wide-main"
-    >
-      <MovementTable onRowSelect={(row) => { setSelectedMovementId(row.id); setDrawerOpen(true); }} selectedRowId={selectedMovementId} />
-    </CrmWorklistPage>
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

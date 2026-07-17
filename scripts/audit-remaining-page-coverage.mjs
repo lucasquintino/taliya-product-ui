@@ -196,7 +196,20 @@ const pageFamilyContracts = [
     page: "FinanceMovementsPage",
     file: "ImageCoverageFinance.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="wide-main"', "filterBar={<MovementsFilters />}", "quickFilters={<MovementsQuickFilters />}", "<MovementTable", "drawer={drawerOpen ? (", "onClose={() => setDrawerOpen(false)}", "setDrawerOpen(true)"]
+    requiredSnippets: [
+      "<CrmWorklistPage",
+      'worklistLayoutMode="wide-main"',
+      'drawerPlacement="fixed"',
+      "filterBar={<MovementsFilters onInteraction={setAnnouncement} />}",
+      "quickFilters={<MovementsQuickFilters onInteraction={setAnnouncement} />}",
+      "<MovementTable",
+      "drawer={drawerOpen ? (",
+      "facts={movementDrawerFacts(selectedMovement, effectiveDrawerState)}",
+      "onAction={handleMovementAction}",
+      "setSelectedMovementId(row.id)",
+      "setDrawerState(undefined)",
+      "setDrawerOpen(true)"
+    ]
   },
   {
     page: "SalesPipelinePage",

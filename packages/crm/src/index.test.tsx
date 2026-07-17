@@ -733,6 +733,11 @@ describe("@taliya/crm component coverage", () => {
     expect(styles).toContain("--taliya-layout-crm-list-detail-list-width: var(--taliya-layout-crm-page-quick-filters-width);");
     expect(styles).toContain("overflow-wrap: anywhere;");
     expect(styles).toContain("white-space: normal;");
+    expect(styles).toContain(".tcrm-worklist-table__data.tl-table-wrap {");
+    expect(styles).toContain("overflow-x: auto;\n  overflow-y: hidden;");
+    expect(styles).toMatch(
+      /@media \(max-width: 760px\) \{[\s\S]*?\.tcrm-worklist-table__data \.tl-table \{[\s\S]*?min-width: var\(--taliya-control-table-min-width\);/,
+    );
   });
 
   it("keeps the official three-pane family usable on narrow viewports", () => {
@@ -3209,13 +3214,14 @@ describe("@taliya/crm component coverage", () => {
 
   it("renders movement-specific payment actions and due state", () => {
     const action = vi.fn();
-    render(<crm.PaymentDrawer onAction={action} state="due" statusLabel="A vencer" variant="movement" />);
+    render(<crm.PaymentDrawer eyebrow="Ajuste manual" markPaidDisabled onAction={action} state="due" statusLabel="A vencer" variant="movement" />);
 
     const drawer = screen.getByRole("complementary", { name: "Detalhes da cobrança" });
-    expect(drawer.querySelector(".tcrm-drawer-frame__label")).toHaveTextContent("Mensalidade");
+    expect(drawer.querySelector(".tcrm-drawer-frame__label")).toHaveTextContent("Ajuste manual");
     expect(within(drawer).getByText("A vencer")).toHaveClass("tcrm-payment-drawer__status-label--due");
     expect(within(drawer).getByRole("heading", { name: "Ações" })).toBeInTheDocument();
     expect(within(drawer).queryByRole("heading", { name: "Ação secundária" })).not.toBeInTheDocument();
+    expect(within(drawer).getByRole("button", { name: "Marcar como pago" })).toBeDisabled();
 
     fireEvent.click(within(drawer).getByRole("button", { name: "Copiar link Pix" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Abrir conversa" }));

@@ -26855,7 +26855,8 @@ button.tcrm-pipeline-card__select:focus-visible,
   border-radius: 0;
   box-shadow: none;
   height: calc(var(--taliya-layout-crm-task-table-height) - var(--taliya-control-crm-task-table-footer-height));
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tcrm-task-table__data .tl-table,
@@ -26865,6 +26866,12 @@ button.tcrm-pipeline-card__select:focus-visible,
   font-size: var(--taliya-control-crm-task-table-text-size);
   min-width: 100%;
   table-layout: fixed;
+}
+
+@media (max-width: 760px) {
+  .tcrm-worklist-table__data .tl-table {
+    min-width: var(--taliya-control-table-min-width);
+  }
 }
 
 .tcrm-task-table__data .tl-table th,
