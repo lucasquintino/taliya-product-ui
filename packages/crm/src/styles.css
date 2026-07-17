@@ -22222,6 +22222,13 @@ button.tcrm-integration-status-row:disabled {
   padding: var(--taliya-control-crm-finance-kanban-card-padding);
 }
 
+.tcrm-kanban-card--finance.tcrm-kanban-card--selected,
+.tcrm-kanban-card--finance.tcrm-kanban-card--selected:has(.tcrm-kanban-card__select-button:focus-visible) {
+  background: var(--taliya-color-crm-product-shell-control-selected-bg);
+  border-color: var(--taliya-color-crm-product-shell-control-selected-bg);
+  color: var(--taliya-color-crm-product-shell-control-selected-fg);
+}
+
 .tcrm-kanban-card--finance .tcrm-kanban-card__select-button {
   gap: var(--taliya-control-crm-finance-kanban-card-gap);
 }
@@ -32982,8 +32989,10 @@ button.tcrm-pipeline-card__select:focus-visible,
 
   .tcrm-product-shell-page-header,
   .tcrm-product-shell-stage--page-header-dashboard .tcrm-product-shell-page-header,
+  .tcrm-product-shell-stage--page-header-overview .tcrm-product-shell-page-header,
   .tcrm-product-shell-stage--page-header-internal-overview .tcrm-product-shell-page-header {
     align-items: flex-start;
+    flex-direction: column;
     height: auto;
     margin-left: 0;
     min-height: var(--taliya-space-20);
@@ -33000,6 +33009,18 @@ button.tcrm-pipeline-card__select:focus-visible,
   .tcrm-product-shell-page-header h1,
   .tcrm-product-shell-page-header p {
     transform: none;
+  }
+
+  .tcrm-product-shell-page-header__actions {
+    align-self: stretch;
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-product-shell-page-header__actions .tl-button-group {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
   }
 
   .tcrm-product-shell-content,

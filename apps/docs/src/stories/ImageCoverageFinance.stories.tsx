@@ -338,7 +338,11 @@ function FinanceOverviewDashboard({
   );
 }
 
-function FinanceiroKanbanFilters() {
+function FinanceiroKanbanFilters({
+  onInteraction
+}: {
+  onInteraction: (message: string) => void;
+}) {
   const [values, setValues] = useState<Record<string, string | string[]>>({ period: "hoje" });
   const filters = useMemo<PageFilterBarFilter[]>(
     () => [
@@ -356,14 +360,20 @@ function FinanceiroKanbanFilters() {
   return (
     <PageFilterBar
       filters={filters}
-      onFilterSelect={(filter) => setValues((current) => ({ ...current, period: filter.id }))}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterSelect={(filter) => {
+        setValues((current) => ({ ...current, period: filter.id }));
+        onInteraction(`Período do kanban: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro do kanban alterado: ${filter.id}`);
+      }}
       searchVisible={false}
     />
   );
 }
 
-function FinanceKanbanColumns() {
+function FinanceKanbanColumns({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedCard, setSelectedCard] = useState("");
   const columns = [
     { title: "A vencer", count: 12, total: "R$ 6.730,00", state: "default" as const, cards: [{ title: "Fernanda Lima", amount: "R$ 420,00", state: "scheduled", due: "vence 14/05", method: "mensalidade" }, { title: "Rafael Martins", amount: "R$ 980,00", state: "scheduled", due: "vence 15/05", method: "plano trimestral" }, { title: "Bianca Oliveira", amount: "R$ 290,00", state: "scheduled", due: "vence 16/05", method: "aula avulsa" }] },
@@ -378,12 +388,30 @@ function FinanceKanbanColumns() {
   return (
     <>
       {columns.map((column) => (
-        <KanbanColumn count={column.count} key={column.title} meta={column.total} onMenu={() => setSelectedCard(`menu-coluna:${column.title}`)} state={column.state} title={column.title}>
+        <KanbanColumn
+          count={column.count}
+          key={column.title}
+          meta={column.total}
+          onMenu={() => onInteraction(`Menu da coluna: ${column.title}`)}
+          state={column.state}
+          title={column.title}
+        >
           {column.cards.map((card) => {
             const cardId = `${column.title}:${card.title}`;
-            return <FinanceKanbanCard key={cardId} {...card} onMenu={() => setSelectedCard(`menu-card:${cardId}`)} onSelect={() => setSelectedCard(cardId)} selected={selectedCard === cardId} />;
+            return (
+              <FinanceKanbanCard
+                key={cardId}
+                {...card}
+                onMenu={() => onInteraction(`Menu da cobrança: ${cardId}`)}
+                onSelect={() => {
+                  setSelectedCard(cardId);
+                  onInteraction(`Cobrança selecionada: ${cardId}`);
+                }}
+                selected={selectedCard === cardId}
+              />
+            );
           })}
-          <Button leadingIcon="plus" onClick={() => setSelectedCard(`adicionar:${column.title}`)} size="sm" variant="secondary">Adicionar</Button>
+          <Button leadingIcon="plus" onClick={() => onInteraction(`Adicionar cobrança em: ${column.title}`)} size="sm" variant="secondary">Adicionar</Button>
         </KanbanColumn>
       ))}
     </>
@@ -542,25 +570,46 @@ export function FinanceBillingDrawerPage() {
 }
 
 export function FinanceKanbanPage() {
+  const [announcement, setAnnouncement] = useState("");
+
   return (
-    <CrmKanbanPage
-      activeNavId="kanban"
-      activeSidebarId="financeiro"
-      avatarSrc={image79Avatar}
-      className="sb-image-coverage-finance-shell"
-      filterBar={<FinanceiroKanbanFilters />}
-      layoutVariant="finance"
-      navItems={financeNavItems}
-      pageHeaderActions={<ButtonGroup><Button leadingIcon="plus" size="sm" variant="secondary">Nova cobranca</Button><Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button><Button leadingIcon="calendar" size="sm" variant="secondary">Criar tarefa</Button></ButtonGroup>}
-      pageHeaderRhythm="overview"
-      sidebarItems={crmEmptyShellSidebarItems}
-      stageClassName="sb-image-coverage-finance-stage"
-      subtitle="Cobrancas e pendencias por etapa"
-      title="Financeiro"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    >
-      <FinanceKanbanColumns />
-    </CrmKanbanPage>
+    <>
+      <CrmKanbanPage
+        activeNavId="kanban"
+        activeSidebarId="financeiro"
+        avatarSrc={image79Avatar}
+        className="sb-image-coverage-finance-shell"
+        filterBar={<FinanceiroKanbanFilters onInteraction={setAnnouncement} />}
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        layoutVariant="finance"
+        navItems={financeNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderActions={(
+          <ButtonGroup>
+            <Button leadingIcon="plus" onClick={() => setAnnouncement("Nova cobrança iniciada")} size="sm" variant="secondary">Nova cobranca</Button>
+            <Button leadingIcon="upload" onClick={() => setAnnouncement("Exportação iniciada")} size="sm" variant="secondary">Exportar</Button>
+            <Button leadingIcon="calendar" onClick={() => setAnnouncement("Criação de tarefa iniciada")} size="sm" variant="secondary">Criar tarefa</Button>
+          </ButtonGroup>
+        )}
+        pageHeaderRhythm="overview"
+        sidebarItems={crmEmptyShellSidebarItems}
+        stageClassName="sb-image-coverage-finance-stage"
+        subtitle="Cobrancas e pendencias por etapa"
+        title="Financeiro"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      >
+        <FinanceKanbanColumns onInteraction={setAnnouncement} />
+      </CrmKanbanPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

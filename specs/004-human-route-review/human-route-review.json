@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T01:56:58.602Z",
+  "generatedAt": "2026-07-17T02:38:41.945Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 17,
+  "completedRouteCount": 18,
   "failedRouteCount": 0,
-  "pendingRouteCount": 56,
+  "pendingRouteCount": 55,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1530,38 +1530,65 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T02:38:08.000Z",
+        "evidence": [
+          "tmp/human-route-review/33-finance-kanban/desktop-final.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T02:38:08.000Z",
+        "evidence": [
+          "tmp/human-route-review/33-finance-kanban/desktop-reduced-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T02:38:08.000Z",
+        "evidence": [
+          "tmp/human-route-review/33-finance-kanban/mobile-final.png",
+          "tmp/human-route-review/33-finance-kanban/mobile-selected-focus-final.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T02:38:08.000Z",
+        "evidence": [
+          "browser-observed:88-kanban-actions-desktop-and-mobile-static-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "top-navigation",
+          "header-actions",
+          "period-filters",
+          "select-filters",
+          "kanban-card-selection",
+          "kanban-card-menus",
+          "kanban-column-menus",
+          "kanban-column-add-actions",
+          "horizontal-board-scroll",
+          "selected-card-focus-contrast",
+          "mobile-responsive-flow"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T02:38:08.000Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/33_round-4.1F_financeiro_03_kanban-financeiro.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review connected every official kanban action, verified all 21 cards and 7 columns, fixed shared mobile header flow, and preserved selected finance card contrast while focused."
+      ]
     },
     {
       "image": "34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png",

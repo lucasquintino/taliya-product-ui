@@ -183,7 +183,14 @@ const pageFamilyContracts = [
     page: "FinanceKanbanPage",
     file: "ImageCoverageFinance.stories.tsx",
     family: "kanban",
-    requiredSnippets: ["<CrmKanbanPage", "filterBar={<FinanceiroKanbanFilters />}", "<FinanceKanbanColumns />"]
+    requiredSnippets: [
+      "<CrmKanbanPage",
+      "filterBar={<FinanceiroKanbanFilters onInteraction={setAnnouncement} />}",
+      "<FinanceKanbanColumns onInteraction={setAnnouncement} />",
+      "globalActions={{",
+      "onNavChange={(id) => setAnnouncement",
+      "role=\"status\""
+    ]
   },
   {
     page: "FinanceMovementsPage",
