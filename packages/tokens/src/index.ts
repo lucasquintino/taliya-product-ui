@@ -4654,6 +4654,7 @@ export const controlTokens = {
   "control.crm-task-table.row-height": "73px",
   "control.crm-student-table.compact-row-height": "63px",
   "control.crm-task-table.footer-height": "92px",
+  "control.crm-worklist-table.compact-footer-height": "54px",
   "control.crm-task-table.cell-padding-x": "5px",
   "control.crm-task-table.header-size": "10px",
   "control.crm-task-table.text-size": "10px",

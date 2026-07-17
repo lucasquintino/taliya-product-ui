@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T07:26:44.946Z",
+  "generatedAt": "2026-07-17T09:08:52.393Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 25,
+  "completedRouteCount": 26,
   "failedRouteCount": 0,
-  "pendingRouteCount": 48,
+  "pendingRouteCount": 47,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2301,38 +2301,56 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T09:07:48.110Z",
+        "evidence": [
+          "tmp/human-route-review/41-retention-risk-list/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T09:07:57.727Z",
+        "evidence": [
+          "tmp/human-route-review/41-retention-risk-list/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T09:08:03.890Z",
+        "evidence": [
+          "tmp/human-route-review/41-retention-risk-list/mobile-page.png",
+          "tmp/human-route-review/41-retention-risk-list/mobile-drawer.png",
+          "tmp/human-route-review/41-retention-risk-list/mobile-reopened-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T09:08:25.724Z",
+        "evidence": [
+          "browser-observed:107-retention-risk-worklist-controls-dynamic-case-drawers-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell navigation, all global actions, period and select filters, all eight queue segments, all ten row selections and row actions, dynamic drawer facts/history, sorting, pages 1-5, previous/next/items-per-page, all four drawer actions, close/reopen regression, mobile contained scrolling"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T09:08:37.023Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/41_round-4.1H_retencao_01_riscos-lista-drawer.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Mobile evidence also includes mobile-drawer.png and mobile-reopened-drawer.png in the same route evidence directory.",
+        "Human review found and fixed the row-action regression that announced a risk without reopening its closed drawer; the row action now delegates to the official row-selection contract.",
+        "Canonical 1672x941 and reduced 1448x1086 evidence preserve ten visible compact rows, a separate pagination band, and the source-aligned numbered CaseDrawer sections without overlap; browser console logs were empty."
+      ]
     },
     {
       "image": "42_round-4.1H_cancelamentos_01_fila-salvamento-drawer.png.png",

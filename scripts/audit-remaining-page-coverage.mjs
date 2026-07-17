@@ -302,13 +302,13 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmWorklistPage",
       'worklistLayoutMode="wide-rail"',
-      "filterBar={<RetentionRiskFilters />}",
-      "quickFilters={<RetentionRiskQuickRail />}",
+      "filterBar={<RetentionRiskFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "quickFilters={<RetentionRiskQuickRail onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<RetentionRiskDrawer risk={selectedRisk}",
       "<RetentionRiskTable",
-      "setSelectedRowId(row.id)",
-      "drawer={drawerOpen ? <RetentionRiskDrawer",
-      "onClose={() => setDrawerOpen(false)}",
-      "onAction={setDrawerAction}"
+      "setSelectedRowId(row.id)"
     ]
   },
   {
@@ -883,8 +883,8 @@ const tableFamilyDetailContracts = [
     table: "RetentionRiskTable",
     drawer: "RetentionRiskDrawer",
     layoutMode: "wide-rail",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", "facts={retentionRiskDrawerFacts}", "history={["]
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
+    requiredDrawerSnippets: ["<CaseDrawer", "facts={retentionRiskDrawerFacts(risk)}", "footerActions={retentionRiskFooterActions}", "history={history}", "title={risk.student}"]
   },
   {
     page: "RetentionCancellationQueuePage",

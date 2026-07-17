@@ -10,7 +10,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { CrmShellNavItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
+import type { CaseDrawerFact, CaseDrawerFooterAction, CaseDrawerHistoryItem, CaseDrawerSection, CrmShellNavItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
 import { Chip, Icon, IconButton, InlineGroup, PersonLabel } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
@@ -43,28 +43,51 @@ const retentionNavItems: CrmShellNavItem[] = [
 export function RetentionRiskListPage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedRisk = retentionRiskRows.find((row) => row.id === selectedRowId) ?? retentionRiskRows[0]!;
 
   return (
-    <CrmWorklistPage
-      activeNavId="riscos"
-      activeSidebarId="retencao"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <RetentionRiskDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
-      filterBar={<RetentionRiskFilters />}
-      filterBarLabel="Filtros de retencao"
-      listLabel="Segmentos"
-      mainLabel="Tabela de riscos"
-      navItems={retentionNavItems}
-      quickFilters={<RetentionRiskQuickRail />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Alunos em risco e proximas acoes"
-      title="Retencao"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistLayoutMode="wide-rail"
-    >
-      <RetentionRiskTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="riscos"
+        activeSidebarId="retencao"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <RetentionRiskDrawer risk={selectedRisk} onAction={(action) => setAnnouncement(`Ação do risco: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de risco fechado"); }} /> : null}
+        filterBar={<RetentionRiskFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de retencao"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Segmentos"
+        mainLabel="Tabela de riscos"
+        navItems={retentionNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        quickFilters={<RetentionRiskQuickRail onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Alunos em risco e proximas acoes"
+        title="Retencao"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        worklistLayoutMode="wide-rail"
+      >
+        <RetentionRiskTable
+          onInteraction={setAnnouncement}
+          onRowSelect={(row) => {
+            setSelectedRowId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Risco selecionado: ${row.student}`);
+          }}
+          selectedRowId={selectedRowId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -154,12 +177,13 @@ export function RetentionComplaintQueuePage() {
   );
 }
 
-function RetentionRiskFilters() {
+function RetentionRiskFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
+  const [selectedQuickId, setSelectedQuickId] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "week", kind: "quick", label: "Esta semana" },
-    { id: "month", kind: "quick", label: "Este mes" },
+    { id: "today", kind: "quick", label: "Hoje", selected: selectedQuickId === "today" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: selectedQuickId === "week" },
+    { id: "month", kind: "quick", label: "Este mes", selected: selectedQuickId === "month" },
     { id: "unit", label: "Unidade", value: String(values.unit ?? ""), options: [{ value: "vila-mariana", label: "Vila Mariana" }, { value: "pinheiros", label: "Pinheiros" }] },
     { id: "risk", label: "Risco", value: String(values.risk ?? ""), options: [{ value: "high", label: "Alto" }, { value: "medium", label: "Medio" }, { value: "low", label: "Baixo" }] },
     { id: "class", label: "Turma", value: String(values.class ?? ""), options: [{ value: "reformer", label: "Reformer iniciante" }, { value: "solo", label: "Pilates solo" }] },
@@ -173,9 +197,16 @@ function RetentionRiskFilters() {
       advancedFiltersSurface="modal"
       advancedFiltersTitle="Filtros de retencao"
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Período de retenção selecionado: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de retenção alterado: ${filter.id}`);
+      }}
       onSearchChange={() => undefined}
-      onSearchFilter={() => undefined}
+      onSearchFilter={() => onInteraction("Configuração de filtros de retenção aberta")}
       query=""
       searchFilterLabel="Abrir filtros de retencao"
       searchFilterPlacement="embedded"
@@ -185,7 +216,7 @@ function RetentionRiskFilters() {
   );
 }
 
-function RetentionRiskQuickRail() {
+function RetentionRiskQuickRail({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("all");
   const items: PageQuickFilterItem[] = [
     { id: "all", label: "Todos", icon: "user", count: "48", selected: selectedId === "all" },
@@ -204,7 +235,10 @@ function RetentionRiskQuickRail() {
       groupLabel="Segmentos de retencao"
       heading="Segmentos"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => {
+        setSelectedId(item.id);
+        onInteraction(`Segmento de retenção selecionado: ${item.label}`);
+      }}
       selectionTone="soft"
     />
   );
@@ -236,11 +270,19 @@ const retentionRiskRows: RetentionRiskRow[] = [
   { id: "bianca", student: "Bianca Oliveira", status: "Ativa", statusTone: "success", risk: "alto", riskTone: "danger", reason: "sem resposta no WhatsApp", last: "Interacao 01/05", next: "Enviar mensagem pessoal hoje", owner: "Mariana" }
 ];
 
-function RetentionRiskTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: RetentionRiskRow) => void; selectedRowId?: string }) {
+function RetentionRiskTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: RetentionRiskRow) => void; selectedRowId?: string }) {
+  const [page, setPage] = useState(1);
+
+  const selectPage = (nextPage: number) => {
+    setPage(nextPage);
+    onInteraction(`Página de riscos: ${nextPage}`);
+  };
+
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
       ariaLabel="Tabela de riscos de retencao"
+      density="compact"
       columns={[
         { key: "student", header: "Aluno", sortable: true, width: "18%", render: (row) => <PersonLabel avatarSrc={image79Avatar} name={row.student} size="xs" /> },
         { key: "status", header: "Status", width: "9%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> },
@@ -250,43 +292,78 @@ function RetentionRiskTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row
         { key: "next", header: "Proxima acao sugerida", width: "20%" },
         { key: "owner", header: "Resp.", width: "8%" }
       ]}
-      pagination={{ itemsPerPage: "10", label: "1-10 de 48", page: 1, pageCount: 5 }}
+      onSortChange={(sort) => onInteraction(sort ? `Ordenação: ${sort.key} ${sort.direction}` : "Ordenação removida")}
+      pagination={{
+        itemsPerPage: "10",
+        label: page === 1 ? "1-10 de 48" : `${(page - 1) * 10 + 1}-${Math.min(page * 10, 48)} de 48`,
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => selectPage(Math.min(5, page + 1)),
+        onPageChange: selectPage,
+        onPreviousPage: () => selectPage(Math.max(1, page - 1)),
+        page,
+        pageCount: 5
+      }}
       onRowSelect={onRowSelect}
-      rowActions={() => <IconButton icon="chevronRight" label="Abrir risco" size="sm" variant="ghost" />}
+      rowActions={(row) => <IconButton icon="chevronRight" label={`Abrir risco de ${row.student}`} onClick={(event) => { event.stopPropagation(); onRowSelect?.(row); }} size="sm" variant="ghost" />}
       rows={retentionRiskRows}
       selectedRowId={selectedRowId}
     />
   );
 }
 
-const retentionRiskDrawerFacts = [
-  { id: "plan", icon: "clipboard" as const, label: "Plano", value: "Plano Mensal" },
-  { id: "presence", icon: "calendar" as const, label: "Presenca recente", value: "4 de 10 aulas" },
-  { id: "class", icon: "graduation" as const, label: "Turma atual", value: "Reformer iniciante" },
-  { id: "finance", icon: "wallet" as const, label: "Financeiro", value: "OK" },
-  { id: "last", icon: "clock" as const, label: "Ultima aula", value: "29/04" },
-  { id: "owner", icon: "user" as const, label: "Responsavel", value: "Mariana" }
+function retentionRiskDrawerFacts(risk: RetentionRiskRow): CaseDrawerFact[] {
+  const recentPresence = risk.risk === "alto" ? "4 de 10 aulas" : risk.risk === "medio" ? "6 de 10 aulas" : "8 de 10 aulas";
+  return [
+    { id: "plan", icon: "clipboard", label: "Plano", value: "Plano Mensal" },
+    { id: "presence", icon: "calendar", label: "Presenca recente", value: recentPresence },
+    { id: "class", icon: "graduation", label: "Turma atual", value: "Reformer iniciante" },
+    { id: "finance", icon: "wallet", label: "Financeiro", value: risk.reason.includes("financeiro") ? "Revisar" : "OK", tone: risk.reason.includes("financeiro") ? "danger" : undefined },
+    { id: "last", icon: "clock", label: "Ultima aula", value: risk.last.replace("Ultima aula ", "").replace("Interacao ", "") },
+    { id: "owner", icon: "user", label: "Responsavel", value: risk.owner }
+  ];
+}
+
+const retentionRiskFooterActions: CaseDrawerFooterAction[] = [
+  { id: "message", label: "Enviar mensagem", leadingIcon: "whatsapp", variant: "primary" },
+  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+  { id: "resolve", label: "Marcar acompanhado", leadingIcon: "checkCircle" }
 ];
 
-function RetentionRiskDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
+function RetentionRiskDrawer({ risk, onAction, onClose }: { risk: RetentionRiskRow; onAction?: (action: string) => void; onClose?: () => void }) {
+  const history: CaseDrawerHistoryItem[] = risk.id === "ana" ? [
+    { id: "missed", time: "08/05", label: "Faltou a aula em 08/05" },
+    { id: "replacement", time: "09/05", label: "Reposicao oferecida em 09/05" },
+    { id: "whatsapp", time: "10/05", label: "Nao respondeu ao WhatsApp em 10/05" }
+  ] : [
+    { id: "latest", time: risk.last, label: risk.reason },
+    { id: "action", time: "hoje", label: risk.next },
+    { id: "owner", time: "agora", label: `Acompanhamento atribuído a ${risk.owner}` }
+  ];
+  const motives = risk.id === "ana"
+    ? ["14 dias sem aula", "2 reposições não usadas", "queda de frequência nas últimas 3 semanas"]
+    : [risk.reason, `Risco ${risk.risk}`, risk.last];
+  const sections: CaseDrawerSection[] = [
+    { id: "motives", title: "Motivos do risco", kind: "list", items: motives.map((label, index) => ({ id: `motive-${index}`, label, tone: "danger" })) },
+    { id: "copilot", title: "Sugestão do copiloto", kind: "copilot", icon: "sparkles", description: risk.id === "ana" ? "Entrar em contato de forma humana, perguntar se houve dificuldade de agenda e oferecer dois horários de reposição." : `${risk.next}. Abordar o motivo: ${risk.reason}.` },
+    { id: "actions", title: "Próxima ação", kind: "actions" },
+    { id: "history", title: "Histórico curto", kind: "history", items: history.map((item) => ({ id: item.id, label: item.label, meta: item.time })) }
+  ];
+
   return (
     <CaseDrawer
       avatarSrc={image79Avatar}
-      eyebrowLabel="Retencao"
-      facts={retentionRiskDrawerFacts}
-      history={[
-        { id: "missed", time: "08/05", label: "Faltou a aula em 08/05" },
-        { id: "replacement", time: "09/05", label: "Reposicao oferecida em 09/05" },
-        { id: "whatsapp", time: "10/05", label: "Nao respondeu ao WhatsApp em 10/05" }
-      ]}
+      facts={retentionRiskDrawerFacts(risk)}
+      footerActions={retentionRiskFooterActions}
+      history={history}
       messageQuotaLabel="revisao humana"
       numberedSections
       onAction={onAction}
       onClose={onClose}
+      sections={sections}
       showMessageSuggestion={false}
-      statusLabel="Risco alto"
-      suggestion="Entrar em contato de forma humana, perguntar se houve dificuldade de agenda e oferecer dois horarios de reposicao."
-      title="Ana Paula Martins"
+      statusLabel={`Risco ${risk.risk}`}
+      title={risk.student}
       widthVariant="wide"
     />
   );

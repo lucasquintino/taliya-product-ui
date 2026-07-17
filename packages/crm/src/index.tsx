@@ -11912,7 +11912,7 @@ export interface CaseDrawerFooterAction {
   fullWidth?: boolean;
 }
 
-export type CaseDrawerSectionKind = "text" | "list" | "alert" | "steps" | "checklist" | "copilot" | "history";
+export type CaseDrawerSectionKind = "text" | "list" | "alert" | "steps" | "checklist" | "copilot" | "actions" | "history";
 
 export interface CaseDrawerSectionItem {
   id: string;
@@ -12030,7 +12030,30 @@ export function CaseDrawer({
     if (!numberedSections) return label;
     return `${index}. ${String(label)}`;
   };
+  const renderActionButtons = () => (
+    <div className="tcrm-case-drawer__body-actions">
+      {footerActions.map((action) => (
+        <Button
+          className={cn(
+            "tcrm-case-drawer__action",
+            action.variant === "primary" && "tcrm-case-drawer__action--primary",
+            action.fullWidth && "tcrm-case-drawer__action--full"
+          )}
+          disabled={isBlocked || action.disabled || (resolved && action.id === "resolve")}
+          key={action.id}
+          leadingIcon={action.leadingIcon}
+          onClick={() => emitCaseDrawerAction(action.id, onAction)}
+          size="sm"
+          trailingIcon={action.trailingIcon}
+          variant={action.variant ?? "secondary"}
+        >
+          {action.label}
+        </Button>
+      ))}
+    </div>
+  );
   const renderSectionItems = (items: CaseDrawerSectionItem[] | undefined, kind: CaseDrawerSectionKind) => {
+    if (kind === "actions") return renderActionButtons();
     if (!items?.length) return null;
     if (kind === "steps") {
       return (
@@ -12042,6 +12065,18 @@ export function CaseDrawer({
             </li>
           ))}
         </ol>
+      );
+    }
+    if (kind === "history") {
+      return (
+        <ul>
+          {items.map((item) => (
+            <li className={cn(item.tone && `tcrm-case-drawer__section-item--${item.tone}`)} key={item.id}>
+              {item.meta ? <em>{item.meta}</em> : null}
+              <span>{item.label}</span>
+            </li>
+          ))}
+        </ul>
       );
     }
     return (
@@ -12166,7 +12201,7 @@ export function CaseDrawer({
       closeLabel="Fechar caso"
       component="CaseDrawer"
       data-width-variant={widthVariant}
-      footer={
+      footer={sections?.some((section) => section.kind === "actions") ? undefined : (
         <>
         {footerActions.map((action) => (
           <Button
@@ -12187,7 +12222,7 @@ export function CaseDrawer({
           </Button>
         ))}
         </>
-      }
+      )}
       loading={isLoading}
       onClose={() => emitCaseDrawerAction("close", onAction, onClose)}
       state={state}

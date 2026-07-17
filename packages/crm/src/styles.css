@@ -2073,6 +2073,10 @@
   height: calc(100% - var(--taliya-control-crm-task-table-footer-height));
 }
 
+.tcrm-work-list-detail-page .tcrm-worklist-table--compact .tcrm-worklist-table__data.tl-table-wrap {
+  height: calc(100% - var(--taliya-control-crm-worklist-table-compact-footer-height));
+}
+
 .tcrm-three-pane-layout {
   display: grid;
   gap: var(--taliya-layout-crm-three-pane-gap);
@@ -15022,11 +15026,21 @@ button.tcrm-integration-status-row:disabled {
   min-height: calc(var(--taliya-control-crm-case-drawer-action-height) - var(--taliya-space-1));
 }
 
+.tcrm-case-drawer__body-actions {
+  display: grid;
+  gap: var(--taliya-control-skeleton-gap);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .tcrm-case-drawer__section--history li {
   align-items: center;
   display: grid;
   gap: var(--taliya-space-2);
   grid-template-columns: var(--taliya-space-4) minmax(0, 1fr);
+}
+
+.tcrm-case-drawer__section--history li:has(em) {
+  grid-template-columns: var(--taliya-space-4) var(--taliya-space-10) minmax(0, 1fr);
 }
 
 .tcrm-case-drawer__section--history li::before {
@@ -26950,6 +26964,10 @@ button.tcrm-pipeline-card__select:focus-visible,
 .tcrm-worklist-table--compact .tcrm-worklist-table__data .tl-table td,
 .tcrm-worklist-table--compact .tcrm-worklist-table__data .tl-table tbody tr {
   height: var(--taliya-control-crm-invoice-table-row-height);
+}
+
+.tcrm-worklist-table--compact .tcrm-worklist-table__pagination.tl-table-pagination {
+  height: var(--taliya-control-crm-worklist-table-compact-footer-height);
 }
 
 .tcrm-task-table__data .tl-table th:nth-child(1),

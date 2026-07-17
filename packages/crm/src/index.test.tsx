@@ -2997,14 +2997,21 @@ describe("@taliya/crm component coverage", () => {
   });
 
   it("renders CaseDrawer operational sections with reusable case grammar", () => {
+    const action = vi.fn();
     render(
       <crm.CaseDrawer
+        footerActions={[
+          { id: "message", label: "Enviar mensagem", variant: "primary" },
+          { id: "create-task", label: "Criar tarefa" }
+        ]}
+        onAction={action}
         sections={[
           { id: "reason", title: "Motivo declarado", kind: "text", description: "Aluna aguardando retorno." },
           { id: "impact", title: "Impacto", kind: "list", items: [{ id: "risk", label: "Risco de cancelamento", tone: "danger" }] },
           { id: "pause", title: "Automacao pausada", kind: "alert", icon: "alert", description: "Acoes autonomas pausadas." },
           { id: "plan", title: "Plano de resolucao", kind: "checklist", items: [{ id: "reply", label: "Responder com pedido de desculpas", tone: "success" }] },
           { id: "copilot", title: "Sugestao do copiloto", kind: "copilot", icon: "sparkles", description: "Enviar resposta humana." },
+          { id: "actions", title: "Proxima acao", kind: "actions" },
           { id: "history", title: "Historico curto", kind: "history", items: [{ id: "opened", label: "Caso aberto", tone: "success" }] }
         ]}
         numberedSections
@@ -3020,6 +3027,10 @@ describe("@taliya/crm component coverage", () => {
     expect(within(drawer).getByRole("heading", { name: "4. Automacao pausada" })).toBeInTheDocument();
     expect(within(drawer).getByText("Responder com pedido de desculpas")).toBeInTheDocument();
     expect(within(drawer).queryByText("Alternativas possíveis")).not.toBeInTheDocument();
+    expect(within(drawer).getByRole("heading", { name: "7. Proxima acao" })).toBeInTheDocument();
+    expect(drawer.querySelector(".tcrm-drawer-frame__footer")).toBeNull();
+    fireEvent.click(within(drawer).getByRole("button", { name: "Enviar mensagem" }));
+    expect(action).toHaveBeenCalledWith("message");
   });
 
   it("keeps the student drawer cloned, prop-driven, and interactive", () => {
