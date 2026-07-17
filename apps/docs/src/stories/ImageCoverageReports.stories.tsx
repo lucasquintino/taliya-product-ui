@@ -12,7 +12,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { ChartPanelStat, CrmShellNavItem, PageFilterBarFilter } from "@taliya/crm";
+import type { ChartPanelStat, CrmShellNavItem, OpportunityPanelFact, OpportunityPanelHistoryItem, PageFilterBarFilter } from "@taliya/crm";
 import { Button, ButtonGroup } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
@@ -100,41 +100,66 @@ export function ReportsManagementPage() {
 }
 
 export function MoneyOnTheTablePage() {
-  const [, setSelectedOpportunityId] = useState("ana");
+  const [selectedOpportunityId, setSelectedOpportunityId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedOpportunity = findMoneyOpportunity(selectedOpportunityId) ?? findMoneyOpportunity("ana")!;
+  const drawerModel = moneyOpportunityPanelModel(selectedOpportunity.group, selectedOpportunity.row);
 
   return (
-    <CrmDashboardPage
-      activeNavId="overview"
-      activeSidebarId="relatorios"
-      avatarSrc={image79Avatar}
-      before={<MoneyTableFilters />}
-      columns={2}
-      density="compact"
-      drawer={drawerOpen ? <OpportunityPanel onAction={setAction} onClose={() => setDrawerOpen(false)} /> : null}
-      drawerPlacement="floating"
-      layoutVariant="opportunity"
-      navItems={reportsNav}
-      pageHeaderRhythm="reports"
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Oportunidades acionaveis que podem virar caixa, conversao ou retencao"
-      title="Dinheiro na mesa"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    >
-      {moneyOpportunityGroups.map((group) => (
-        <OpportunityGroupCard
-          icon={group.icon}
-          items={group.rows}
-          key={group.id}
-          onItemOpen={(item) => { setSelectedOpportunityId(item.id); setDrawerOpen(true); }}
-          onOpen={() => setAction(`open-group:${group.id}`)}
-          summary={group.summary}
-          title={group.title}
-          tone={group.tone}
-        />
-      ))}
-    </CrmDashboardPage>
+    <>
+      <CrmDashboardPage
+        activeNavId="overview"
+        activeSidebarId="relatorios"
+        avatarSrc={image79Avatar}
+        before={<MoneyTableFilters onAction={setAnnouncement} />}
+        columns={2}
+        density="compact"
+        drawer={drawerOpen ? (
+          <OpportunityPanel
+            {...drawerModel}
+            onAction={(action) => setAnnouncement(`Ação da oportunidade: ${action}:${selectedOpportunity.row.id}`)}
+            onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de oportunidade fechado"); }}
+          />
+        ) : null}
+        drawerPlacement="floating"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        layoutVariant="opportunity"
+        navItems={reportsNav}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Relatório selecionado: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="reports"
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Oportunidades acionaveis que podem virar caixa, conversao ou retencao"
+        title="Dinheiro na mesa"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      >
+        {moneyOpportunityGroups.map((group) => (
+          <OpportunityGroupCard
+            icon={group.icon}
+            items={group.rows}
+            key={group.id}
+            onItemOpen={(item) => {
+              setSelectedOpportunityId(item.id);
+              setDrawerOpen(true);
+              setAnnouncement(`Oportunidade selecionada: ${String(item.name)}`);
+            }}
+            onOpen={() => setAnnouncement(`Grupo de oportunidades aberto: ${group.id}`)}
+            summary={group.summary}
+            title={group.title}
+            tone={group.tone}
+          />
+        ))}
+      </CrmDashboardPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -302,13 +327,14 @@ type MoneyOpportunityGroup = {
   rows: MoneyOpportunityRow[];
 };
 
-function MoneyTableFilters() {
+function MoneyTableFilters({ onAction }: { onAction?: (action: string) => void }) {
   const [query, setQuery] = useState("");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
+  const [period, setPeriod] = useState("today");
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "week", kind: "quick", label: "Esta semana" },
-    { id: "month", kind: "quick", label: "Este mes" },
+    { id: "today", kind: "quick", label: "Hoje", selected: period === "today" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: period === "week" },
+    { id: "month", kind: "quick", label: "Este mes", selected: period === "month" },
     { id: "origin", label: "Origem", value: String(values.origin ?? ""), options: [{ value: "matriculas", label: "Matriculas" }, { value: "financeiro", label: "Financeiro" }, { value: "turmas", label: "Turmas" }] },
     { id: "owner", label: "Dono", value: String(values.owner ?? ""), options: [{ value: "recepcao", label: "Recepcao" }, { value: "financeiro", label: "Financeiro" }] },
     { id: "impact", label: "Impacto", value: String(values.impact ?? ""), options: [{ value: "cash", label: "Caixa" }, { value: "conversion", label: "Conversao" }, { value: "retention", label: "Retencao" }] },
@@ -319,8 +345,8 @@ function MoneyTableFilters() {
     <PageFilterBar
       actions={
         <ButtonGroup>
-          <ExportAction />
-          <Button leadingIcon="checkCircle" size="sm" variant="primary">Criar tarefa</Button>
+          <ExportAction onExport={() => onAction?.("Exportação de oportunidades iniciada")} />
+          <Button leadingIcon="checkCircle" onClick={() => onAction?.("Criação de tarefa aberta")} size="sm" variant="primary">Criar tarefa</Button>
         </ButtonGroup>
       }
       advancedFiltersLabel="Mais filtros"
@@ -330,9 +356,16 @@ function MoneyTableFilters() {
       density="tight"
       filters={filters}
       layout="stacked-filters"
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onAction?.(`Filtro selecionado: ${filter.id}:${String(value)}`);
+      }}
+      onFilterSelect={(filter) => {
+        setPeriod(filter.id);
+        onAction?.(`Período selecionado: ${filter.id}`);
+      }}
+      onSearchChange={(value) => { setQuery(value); onAction?.(value ? `Busca: ${value}` : "Busca limpa"); }}
+      onSearchFilter={() => onAction?.("Filtros de oportunidades abertos")}
       query={query}
       searchFilterLabel="Abrir filtros de oportunidades"
       searchFilterPlacement="embedded"
@@ -409,6 +442,70 @@ const moneyOpportunityGroups: MoneyOpportunityGroup[] = [
     ]
   }
 ];
+
+function findMoneyOpportunity(id: string) {
+  for (const group of moneyOpportunityGroups) {
+    const row = group.rows.find((item) => item.id === id);
+    if (row) return { group, row };
+  }
+  return undefined;
+}
+
+function moneyOpportunityPanelModel(group: MoneyOpportunityGroup, row: MoneyOpportunityRow) {
+  const ownerByGroup: Record<string, string> = {
+    enrollments: "Recepcao",
+    trials: "Comercial",
+    finance: "Financeiro",
+    demand: "Agenda",
+    replacement: "Operacao",
+    risk: "Retencao"
+  };
+  const impactByGroup: Record<string, string> = {
+    enrollments: "conversao em aluna",
+    trials: "conversao de interessado",
+    finance: "recuperacao de caixa",
+    demand: "ocupacao de turma",
+    replacement: "prevencao de perda",
+    risk: "retencao de receita"
+  };
+  const methodByGroup: Record<string, string> = {
+    enrollments: "Pix",
+    trials: "Conversa",
+    finance: "WhatsApp",
+    demand: "Agenda",
+    replacement: "Convite",
+    risk: "Conversa"
+  };
+  const deadline = group.id === "enrollments" || row.badge === "hoje" ? "hoje" : "esta semana";
+  const status = group.id === "enrollments" ? "pagamento pendente" : row.badge;
+  const facts: OpportunityPanelFact[] = [
+    { id: "origin", label: "Origem", value: row.subtitle ?? group.title, icon: "folder" },
+    { id: "value", label: "Valor estimado", value: row.amount ?? group.summary, icon: "coins" },
+    { id: "impact", label: "Impacto", value: impactByGroup[group.id], icon: "sparkles" },
+    { id: "owner", label: "Dono / fila", value: ownerByGroup[group.id], icon: "user" },
+    { id: "deadline", label: "Prazo", value: deadline, icon: "clock", tone: deadline === "hoje" ? "danger" : "warning" },
+    { id: "status", label: "Status", value: status, icon: "checkCircle", tone: row.badgeTone, presentation: "chip" },
+    { id: "method", label: "Metodo disponivel", value: methodByGroup[group.id], icon: "coins" },
+    { id: "blocker", label: "Bloqueio", value: row.detail, icon: "calendar" }
+  ];
+  const history: OpportunityPanelHistoryItem[] = [
+    { id: "latest", label: row.detail, time: "hoje 09:20" },
+    { id: "priority", label: `${group.title} priorizado`, time: "hoje 09:10" },
+    { id: "identified", label: "Oportunidade identificada", time: "hoje 09:05" },
+    { id: "updated", label: "Ultima atualizacao registrada", time: "hoje 08:58" }
+  ];
+
+  return {
+    description: row.id === "ana" ? "Pre-matricula bloqueada por pagamento inicial" : `${row.detail} - ${group.title}`,
+    facts,
+    history,
+    manualNotice: "Tudo pode ser feito manualmente. O copiloto apenas sugere. Acoes autonomas seguem a politica do studio.",
+    notice: `${ownerByGroup[group.id]} confirma a proxima etapa antes da conclusao.`,
+    primaryActionLabel: row.action,
+    suggestion: `Copiloto sugere ${row.action.toLowerCase()} e acompanhar esta oportunidade ate a conclusao.`,
+    title: row.name
+  };
+}
 
 export const ReportsManagement: Story = {
   name: "45 relatorios visao gestao",

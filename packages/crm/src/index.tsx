@@ -18601,21 +18601,17 @@ export function OpportunityGroupCard({
       </List>
       <List divided>
         {items.map((item) => (
-          <ListItem
-            action={
-              <InlineGroup compact wrap>
-                {item.amount ? <strong>{item.amount}</strong> : null}
-                <Button onClick={() => onItemOpen?.(item)} size="sm" variant="ghost">{item.action}</Button>
-                {item.badge ? <Chip showDot={false} tone={item.badgeTone ?? "neutral"}>{item.badge}</Chip> : null}
-              </InlineGroup>
-            }
-            key={item.id}
-            leading={<Avatar name={String(item.name)} size="sm" src={item.avatarSrc} />}
-            title={item.name}
-          >
-            <span>{item.detail}</span>
-            {item.subtitle ? <small>{item.subtitle}</small> : null}
-          </ListItem>
+          <div className="tcrm-opportunity-group-card__row" key={item.id} role="listitem">
+            <Avatar name={String(item.name)} size="sm" src={item.avatarSrc} />
+            <span className="tcrm-opportunity-group-card__identity">
+              <strong>{item.name}</strong>
+              {item.subtitle ? <small>{item.subtitle}</small> : null}
+            </span>
+            <span className="tcrm-opportunity-group-card__detail">{item.detail}</span>
+            <strong className="tcrm-opportunity-group-card__amount">{item.amount}</strong>
+            <Button onClick={() => onItemOpen?.(item)} size="sm" variant="ghost">{item.action}</Button>
+            {item.badge ? <Chip showDot={false} tone={item.badgeTone ?? "neutral"}>{item.badge}</Chip> : <span />}
+          </div>
         ))}
       </List>
     </Panel>
@@ -21241,15 +21237,60 @@ export function ReplacementTable({
   );
 }
 
+export interface OpportunityPanelFact {
+  id: string;
+  label: React.ReactNode;
+  value: React.ReactNode;
+  icon: IconName;
+  tone?: ComponentTone;
+  presentation?: "text" | "chip";
+}
+
+export interface OpportunityPanelHistoryItem {
+  id: string;
+  label: React.ReactNode;
+  time: React.ReactNode;
+}
+
+const defaultOpportunityPanelFacts: OpportunityPanelFact[] = [
+  { id: "origin", label: "Origem", value: "Matrículas", icon: "folder" },
+  { id: "value", label: "Valor estimado", value: "R$ 420", icon: "coins" },
+  { id: "impact", label: "Impacto", value: "conversão em aluna", icon: "sparkles" },
+  { id: "owner", label: "Dono / fila", value: "Recepção", icon: "user" },
+  { id: "deadline", label: "Prazo", value: "hoje", icon: "clock", tone: "danger" },
+  { id: "status", label: "Status", value: "pagamento pendente", icon: "checkCircle", tone: "danger", presentation: "chip" },
+  { id: "method", label: "Método disponível", value: "Pix", icon: "coins" },
+  { id: "blocker", label: "Bloqueio", value: <>Pagamento inicial obrigatório<br />para converter</>, icon: "calendar" }
+];
+
+const defaultOpportunityPanelHistory: OpportunityPanelHistoryItem[] = [
+  { id: "trial", label: "Compareceu à experimental", time: "hoje 09:20" },
+  { id: "plan", label: "Plano 2x/semana escolhido", time: "hoje 09:10" },
+  { id: "enrollment", label: "Pré-matrícula iniciada", time: "hoje 09:05" },
+  { id: "payment", label: "Pagamento ainda não enviado", time: "hoje 08:58" }
+];
+
 export function OpportunityPanel({
   title = "Ana Souza",
   state = "open",
-  value = "R$ 420",
+  description = "Pré-matrícula bloqueada por pagamento inicial",
+  facts = defaultOpportunityPanelFacts,
+  history = defaultOpportunityPanelHistory,
+  suggestion = "Copiloto sugere enviar Pix com mensagem curta e abrir matrícula após confirmação.",
+  notice = "Financeiro confirma o pagamento. Matrículas só destrava a conversão.",
+  manualNotice = "Tudo pode ser feito manualmente. O copiloto apenas sugere. Ações autônomas seguem política do studio.",
+  primaryActionLabel = "Enviar Pix",
   onClose,
   onAction,
   className
 }: CrmSurfaceProps & {
-  value?: React.ReactNode;
+  description?: React.ReactNode;
+  facts?: OpportunityPanelFact[];
+  history?: OpportunityPanelHistoryItem[];
+  suggestion?: React.ReactNode;
+  notice?: React.ReactNode;
+  manualNotice?: React.ReactNode;
+  primaryActionLabel?: React.ReactNode;
   onClose?: () => void;
   onAction?: (actionId: string) => void;
 }) {
@@ -21261,51 +21302,39 @@ export function OpportunityPanel({
         <Chip className="tcrm-opportunity-chip tcrm-opportunity-chip--selected" showDot={false} tone="info">Oportunidade selecionada</Chip>
         <IconButton className="tcrm-opportunity-panel__close" icon="x" label="Fechar oportunidade" onClick={onClose} size="sm" variant="subtle" />
         <h3>{title}</h3>
-        <p>Pré-matrícula bloqueada por pagamento inicial</p>
+        <p>{description}</p>
       </header>
       <dl className="tcrm-opportunity-panel__facts">
-        {[
-          ["Origem", "Matrículas", "folder"],
-          ["Valor estimado", value, "coins"],
-          ["Impacto", "conversão em aluna", "sparkles"],
-          ["Dono / fila", "Recepção", "user"],
-          ["Prazo", <span className="tcrm-opportunity-panel__danger-value" key="deadline">hoje</span>, "clock"],
-          ["Status", <Chip className="tcrm-opportunity-chip tcrm-opportunity-chip--pending" key="status" showDot={false} tone="danger">pagamento pendente</Chip>, "checkCircle"],
-          ["Método disponível", "Pix", "coins"],
-          ["Bloqueio", <>Pagamento inicial obrigatório<br />para converter</>, "calendar"]
-        ].map(([label, factValue, factIcon]) => (
-          <div key={String(label)}>
-            <Icon name={factIcon as IconName} size="14px" />
-            <dt>{label}</dt>
-            <dd>{factValue as React.ReactNode}</dd>
+        {facts.map((fact) => (
+          <div key={fact.id}>
+            <Icon name={fact.icon} size="14px" />
+            <dt>{fact.label}</dt>
+            <dd className={cn(fact.tone === "danger" && fact.presentation !== "chip" && "tcrm-opportunity-panel__danger-value")}>
+              {fact.presentation === "chip" ? <Chip className="tcrm-opportunity-chip tcrm-opportunity-chip--pending" showDot={false} tone={fact.tone ?? "neutral"}>{fact.value}</Chip> : fact.value}
+            </dd>
           </div>
         ))}
       </dl>
       <section className="tcrm-opportunity-panel__history">
         <h4>Histórico</h4>
-        {[
-          ["Compareceu à experimental", "hoje 09:20"],
-          ["Plano 2x/semana escolhido", "hoje 09:10"],
-          ["Pré-matrícula iniciada", "hoje 09:05"],
-          ["Pagamento ainda não enviado", "hoje 08:58"]
-        ].map(([item, time]) => (
-          <p key={item}><span />{item}<time>{time}</time></p>
+        {history.map((item) => (
+          <p key={item.id}><span />{item.label}<time>{item.time}</time></p>
         ))}
       </section>
       <section className="tcrm-opportunity-panel__suggestion">
         <Icon name="sparkles" size="24px" tone="info" />
-        <strong>Copiloto sugere enviar Pix com mensagem curta e abrir matrícula após confirmação.</strong>
+        <strong>{suggestion}</strong>
       </section>
       <section className="tcrm-opportunity-panel__notice">
         <Icon name="info" size="18px" tone="warning" />
-        <p>Financeiro confirma o pagamento. Matrículas só destrava a conversão.</p>
+        <p>{notice}</p>
       </section>
       <section className="tcrm-opportunity-panel__manual">
         <Icon name="info" size="15px" tone="info" />
-        <p>Tudo pode ser feito manualmente. O copiloto apenas sugere. Ações autônomas seguem política do studio.</p>
+        <p>{manualNotice}</p>
       </section>
       <div className="tcrm-opportunity-panel__actions">
-        <Button leadingIcon="sliders" onClick={() => onAction?.("send-pix")} size="sm" variant="primary">Enviar Pix</Button>
+        <Button leadingIcon="sliders" onClick={() => onAction?.("primary")} size="sm" variant="primary">{primaryActionLabel}</Button>
         <Button leadingIcon="clipboard" onClick={() => onAction?.("enrollment")} size="sm" variant="secondary">Abrir matrícula</Button>
         <Button leadingIcon="clipboard" onClick={() => onAction?.("charge")} size="sm" variant="secondary">Abrir cobrança</Button>
         <Button leadingIcon="message" onClick={() => onAction?.("conversation")} size="sm" variant="secondary">Abrir conversa</Button>

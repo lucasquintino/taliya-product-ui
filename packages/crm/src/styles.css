@@ -26094,6 +26094,53 @@ button.tcrm-pipeline-card__select:focus-visible,
   min-height: 0;
 }
 
+.tcrm-opportunity-group-card__row {
+  align-items: center;
+  display: grid;
+  font-size: var(--taliya-type-small-size);
+  gap: var(--taliya-space-2);
+  grid-template-columns: var(--taliya-control-avatar-sm) minmax(88px, 0.8fr) minmax(112px, 1.2fr) auto auto auto;
+  min-height: 0;
+  padding: var(--taliya-space-2) var(--taliya-space-3);
+}
+
+.tcrm-opportunity-group-card__identity {
+  display: grid;
+  min-width: 0;
+}
+
+.tcrm-opportunity-group-card__identity strong,
+.tcrm-opportunity-group-card__identity small,
+.tcrm-opportunity-group-card__detail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tcrm-opportunity-group-card__identity small {
+  color: var(--taliya-color-crm-browser-address-icon);
+}
+
+.tcrm-opportunity-group-card__detail {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  line-height: var(--taliya-type-dense-body-line-height);
+  min-width: 0;
+  white-space: normal;
+}
+
+.tcrm-opportunity-group-card__amount,
+.tcrm-opportunity-group-card__row .tl-button,
+.tcrm-opportunity-group-card__row .tl-chip {
+  white-space: nowrap;
+}
+
+.tcrm-opportunity-group-card__row .tl-button {
+  justify-content: flex-start;
+  padding-inline: var(--taliya-space-2);
+}
+
 .tcrm-opportunity-group-card .tl-list-item__content {
   min-width: 0;
 }
@@ -32794,6 +32841,12 @@ button.tcrm-pipeline-card__select:focus-visible,
     min-width: 0;
     width: auto;
   }
+
+  .tcrm-product-shell-stage--content-opportunity .tcrm-dashboard-grid--2 {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    height: auto;
+  }
 }
 
 @media (max-width: 640px) {
@@ -32999,7 +33052,10 @@ button.tcrm-pipeline-card__select:focus-visible,
     padding-right: 0;
   }
 
-  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-drawer-frame {
+  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-drawer-frame,
+  .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-opportunity-panel {
+    background: var(--taliya-surface-product-drawer);
+    border-radius: 0;
     bottom: 0;
     box-sizing: border-box;
     height: var(--taliya-layout-viewport-height);
@@ -33150,6 +33206,11 @@ button.tcrm-pipeline-card__select:focus-visible,
     width: 100%;
   }
 
+  .tcrm-dashboard-page-stack--opportunity .tcrm-dashboard-grid {
+    grid-template-rows: none;
+    height: auto;
+  }
+
   .tcrm-dashboard-grid--today > :nth-child(n),
   .tcrm-dashboard-grid--todayCritical > :nth-child(n),
   .tcrm-dashboard-grid--reports > :nth-child(n) {
@@ -33186,6 +33247,57 @@ button.tcrm-pipeline-card__select:focus-visible,
 
   .tcrm-report-card__stats > span {
     width: 100%;
+  }
+
+  .tcrm-opportunity-group-card > .tl-list:last-child {
+    display: flex;
+    flex-direction: column;
+    grid-template-rows: none;
+  }
+
+  .tcrm-opportunity-group-card.tl-panel {
+    height: auto;
+  }
+
+  .tcrm-opportunity-group-card__row {
+    align-items: start;
+    grid-template-columns: var(--taliya-control-avatar-sm) minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+    min-height: var(--taliya-control-crm-opportunity-group-card-mobile-row-min-height);
+    padding-block: var(--taliya-space-3);
+  }
+
+  .tcrm-opportunity-group-card__row > .tl-avatar {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .tcrm-opportunity-group-card__identity,
+  .tcrm-opportunity-group-card__detail {
+    grid-column: 2;
+  }
+
+  .tcrm-opportunity-group-card__identity {
+    grid-row: 1;
+  }
+
+  .tcrm-opportunity-group-card__detail {
+    grid-row: 2;
+  }
+
+  .tcrm-opportunity-group-card__row > .tl-chip {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .tcrm-opportunity-group-card__amount {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .tcrm-opportunity-group-card__row > .tl-button {
+    grid-column: 3;
+    grid-row: 3;
   }
 
   .tcrm-dashboard-grid--today .tcrm-operational-row__leading,

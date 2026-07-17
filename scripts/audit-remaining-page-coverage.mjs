@@ -373,7 +373,7 @@ const pageFamilyContracts = [
     page: "MoneyOnTheTablePage",
     file: "ImageCoverageReports.stories.tsx",
     family: "dashboard/reports",
-    requiredSnippets: ["<CrmDashboardPage", "before={<MoneyTableFilters />}", "<OpportunityGroupCard", "drawer={drawerOpen ? <OpportunityPanel", "onClose={() => setDrawerOpen(false)}", "onItemOpen="]
+    requiredSnippets: ["<CrmDashboardPage", "<MoneyTableFilters onAction=", "selectedOpportunityId", "moneyOpportunityPanelModel", "<OpportunityGroupCard", "drawer={drawerOpen ? (", "<OpportunityPanel", "{...drawerModel}", "onClose={() => { setDrawerOpen(false);", "setSelectedOpportunityId(item.id)", "globalActions={{", "onSidebarSelect="]
   },
   {
     page: "SupportCentralPage",

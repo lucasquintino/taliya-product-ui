@@ -4492,7 +4492,16 @@ describe("@taliya/crm component coverage", () => {
         <div data-testid="chart-recommendation"><crm.ChartPanel impact="Priorize o caixa" layout="recommendation" /></div>
         <div data-testid="filters"><crm.ReportFilterBar onAdvancedFilters={reportAdvanced} onExport={exportReport} onOwnerChange={reportOwner} onPeriodChange={reportPeriod} onUnitChange={reportUnit} /></div>
         <div data-testid="opportunity-group"><crm.OpportunityGroupCard onItemOpen={opportunityItemOpen} onOpen={opportunityGroupOpen} /></div>
-        <div data-testid="opportunity"><crm.OpportunityPanel onAction={action} /></div>
+        <div data-testid="opportunity">
+          <crm.OpportunityPanel
+            description="Compareceu hoje"
+            facts={[{ id: "origin", label: "Origem", value: "Experimental", icon: "folder" }]}
+            history={[{ id: "visit", label: "Aula concluida", time: "hoje 09:20" }]}
+            onAction={action}
+            primaryActionLabel="Fazer pos-aula"
+            title="Julia Ramos"
+          />
+        </div>
         <div data-testid="import"><crm.ImportProgress onDetails={detailsImport} onPause={pauseImport} /></div>
         <div data-testid="mapping"><crm.FieldMappingTable onRowClick={rowClick} /></div>
         <div data-testid="duplicate"><crm.DuplicateResolver onAction={action} /></div>
@@ -4526,6 +4535,10 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(reportFilters.getByRole("button", { name: "Exportar" }));
     fireEvent.click(within(screen.getByTestId("opportunity-group")).getByRole("button", { name: /R\$ 1\.260/ }));
     fireEvent.click(within(screen.getByTestId("opportunity-group")).getByRole("button", { name: "Enviar Pix" }));
+    expect(within(screen.getByTestId("opportunity")).getByRole("heading", { name: "Julia Ramos" })).toBeInTheDocument();
+    expect(within(screen.getByTestId("opportunity")).getByText("Experimental")).toBeInTheDocument();
+    expect(within(screen.getByTestId("opportunity")).getByText("Aula concluida")).toBeInTheDocument();
+    fireEvent.click(within(screen.getByTestId("opportunity")).getByRole("button", { name: "Fazer pos-aula" }));
     fireEvent.click(within(screen.getByTestId("opportunity")).getByRole("button", { name: "Criar tarefa" }));
     fireEvent.click(within(screen.getByTestId("import")).getByRole("button", { name: "Pausar" }));
     fireEvent.click(within(screen.getByTestId("import")).getByRole("button", { name: "Ver detalhes" }));
@@ -4544,6 +4557,7 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("access");
     expect(action).toHaveBeenCalledWith("revoke");
     expect(action).toHaveBeenCalledWith("audit");
+    expect(action).toHaveBeenCalledWith("primary");
     expect(action).toHaveBeenCalledWith("task");
     expect(action).toHaveBeenCalledWith("merge-a");
     expect(open).toHaveBeenCalledTimes(6);

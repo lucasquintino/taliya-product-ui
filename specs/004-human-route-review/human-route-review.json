@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T13:17:23.651Z",
+  "generatedAt": "2026-07-17T14:17:45.236Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 30,
+  "completedRouteCount": 31,
   "failedRouteCount": 0,
-  "pendingRouteCount": 43,
+  "pendingRouteCount": 42,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2707,38 +2707,53 @@
         "export-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:17:17.736Z",
+        "evidence": [
+          "tmp/human-route-review/46-money-on-the-table/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:17:17.994Z",
+        "evidence": [
+          "tmp/human-route-review/46-money-on-the-table/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:17:18.293Z",
+        "evidence": [
+          "tmp/human-route-review/46-money-on-the-table/mobile-page.png",
+          "tmp/human-route-review/46-money-on-the-table/mobile-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:17:18.490Z",
+        "evidence": [
+          "browser-observed:route-46-money-opportunities-complete-interaction-review-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Search and embedded filter; Export and Create task; 3 periods; 4 select/advanced filters; 6 group summaries; 12 opportunity rows; dynamic drawer selection; 7 drawer actions; close/reopen; 7 report tabs; back; 4 global actions; 10 sidebar modules; 2 visual preferences"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T14:17:18.681Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review promoted opportunity rows and the dynamic OpportunityPanel contract into official CRM components, wired all route callbacks, fixed period selection, removed desktop-reduced collisions, and made mobile rows and the full-screen drawer responsive without story-local CSS."
+      ]
     },
     {
       "image": "47_round-4.1J_suporte_01_central-studio-taliya.png.png",

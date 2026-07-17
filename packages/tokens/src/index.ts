@@ -4686,6 +4686,7 @@ export const controlTokens = {
   "control.crm-opportunity-drawer.text-size": "11px",
   "control.crm-opportunity-drawer.text-line-height": "15px",
   "control.crm-opportunity-group-card.header-height": "56px",
+  "control.crm-opportunity-group-card.mobile-row-min-height": "104px",
   "control.crm-import-progress-panel.height": "254px",
   "control.crm-import-progress-panel.padding": "16px 16px 14px",
   "control.crm-import-progress-panel.main-height": "188px",
