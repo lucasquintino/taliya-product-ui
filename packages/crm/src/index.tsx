@@ -6044,10 +6044,11 @@ export type ClassOperationalDetailAction = "view-students" | "open-vacancy" | "o
 
 export interface ClassOperationalDetailProps extends React.HTMLAttributes<HTMLDivElement> {
   onAction?: (action: ClassOperationalDetailAction) => void;
+  onStudentAction?: (studentId: string) => void;
   students?: Array<RosterStudent | string>;
 }
 
-export function ClassOperationalDetail({ children, className, onAction, students, ...props }: ClassOperationalDetailProps) {
+export function ClassOperationalDetail({ children, className, onAction, onStudentAction, students, ...props }: ClassOperationalDetailProps) {
   return (
     <div className={cn("tcrm-class-operational-detail", className)} data-component="ClassOperationalDetail" {...props}>
       {children ?? (
@@ -6067,7 +6068,7 @@ export function ClassOperationalDetail({ children, className, onAction, students
               <div><h3>Alunos esperados</h3><p>Clique no aluno para ver detalhes</p></div>
               <Button leadingIcon="eye" onClick={() => onAction?.("view-students")} size="sm" variant="secondary">Ver detalhes</Button>
             </ButtonGroup>
-            <Roster students={students} variant="expected" />
+            <Roster onStudentAction={onStudentAction} students={students} variant="expected" />
           </Panel>
           <div className="tcrm-class-operational-detail__side">
             <Panel compact>

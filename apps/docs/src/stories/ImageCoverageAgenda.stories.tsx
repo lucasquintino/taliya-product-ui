@@ -15,7 +15,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { ClassDrawerAction, ClassDrawerFact, ClassDrawerStudent, ClassDrawerTimelineItem, CrmShellNavItem, PageFilterBarFilter, WeeklyCalendarEvent } from "@taliya/crm";
+import type { AttendanceStatus, ClassDrawerAction, ClassDrawerFact, ClassDrawerStudent, ClassDrawerTimelineItem, ClassOperationalDetailAction, CrmShellNavItem, PageFilterBarFilter, WeeklyCalendarEvent } from "@taliya/crm";
 import type { CrmWorklistTableColumn, PageQuickFilterItem } from "@taliya/crm";
 import { Button, ButtonGroup, Chip, Icon, IconButton, List, ListItem, Panel, PersonLabel } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
@@ -236,49 +236,94 @@ function AgendaSelectedClassDrawer({ event, onAction, onClose }: { event?: Weekl
 }
 
 export function AgendaClassDetailPage() {
+  const [announcement, setAnnouncement] = useState("");
+  const [callOpen, setCallOpen] = useState(true);
+  const [callState, setCallState] = useState<"calling" | "saved">("calling");
+  const [students, setStudents] = useState(agendaClassStudents);
+  const detailActionLabels: Record<ClassOperationalDetailAction, string> = {
+    "view-students": "detalhes dos alunos abertos",
+    "open-vacancy": "vaga aberta selecionada",
+    "open-credit": "crédito compatível selecionado",
+    "open-enrollment": "aluno encaixado selecionado",
+    "edit-notes": "edição das observações aberta"
+  };
+  const attendanceOrder: AttendanceStatus[] = ["pending", "present", "warned", "no-show", "replacement"];
+  const handleStudentStatus = (student: ClassDrawerStudent) => {
+    const currentIndex = attendanceOrder.indexOf(student.status);
+    const nextStatus = attendanceOrder[(currentIndex + 1) % attendanceOrder.length] ?? "pending";
+    setStudents((current) => current.map((item) => item.id === student.id ? { ...item, status: nextStatus } : item));
+    setCallState("calling");
+    setAnnouncement(`Presença de ${student.name} alterada para ${nextStatus}`);
+  };
+  const handleDrawerAction = (action: ClassDrawerAction) => {
+    if (action === "close") setCallOpen(false);
+    if (action === "save-call") setCallState("saved");
+    setAnnouncement(`Ação da chamada: ${agendaDrawerActionLabels[action]}`);
+  };
+
   return (
-    <CrmRightPanelPage
-      activeNavId="agenda"
-      activeSidebarId="agenda"
-      avatarSrc={image79Avatar}
-      main={<ClassOperationalDetail students={agendaClassStudents} />}
-      mainLabel="Detalhe operacional da aula"
-      navItems={agendaClassNavItems}
-      pageHeaderBreadcrumb={<Button leadingIcon="arrowLeft" size="sm" variant="secondary">Voltar para Agenda</Button>}
-      pageHeaderActions={
-        <ButtonGroup>
-          <Button size="sm" variant="secondary">Salvar aula</Button>
-          <Button size="sm" variant="secondary">Avisar turma</Button>
-          <Button size="sm" variant="secondary">Abrir agenda</Button>
-          <Button leadingIcon="users" size="sm" variant="primary">Fazer chamada</Button>
-        </ButtonGroup>
-      }
-      pageHeaderRhythm="stacked"
-      rightPanelVariant="class-operation"
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="terça, 13 maio"
-      panel={
-        <ClassDrawer
-          ariaLabel="Chamada da aula"
-          closeLabel="Fechar chamada"
-          copilot={<><strong>Copiloto: Felipe avisou falta dentro da politica.</strong> Credito pode ser gerado.</>}
-          primaryAction={{ label: "Salvar chamada", action: "save-call" }}
-          secondaryActions={[
-            { label: "Adicionar observacao", action: "add-note" },
-            { label: "Criar tarefa", action: "create-task" },
-            { label: "Corrigir depois", action: "correct-later" }
-          ]}
-          state="calling"
-          students={agendaClassStudents}
-          subtitle="Terça 17h · Reformer Intermediário"
-          title="Chamada"
-        />
-      }
-      panelLabel="Painel de chamada"
-      title="Terça 17h · Reformer Intermediário"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    >
-    </CrmRightPanelPage>
+    <>
+      <CrmRightPanelPage
+        activeNavId="agenda"
+        activeSidebarId="agenda"
+        avatarSrc={image79Avatar}
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        main={<ClassOperationalDetail
+            onAction={(action) => setAnnouncement(`Ação do detalhe: ${detailActionLabels[action]}`)}
+            onStudentAction={(studentId) => setAnnouncement(`Opções do aluno abertas: ${studentId}`)}
+            students={students}
+          />}
+        mainLabel="Detalhe operacional da aula"
+        navItems={agendaClassNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderBreadcrumb={<Button leadingIcon="arrowLeft" onClick={() => setAnnouncement("Retorno para Agenda acionado")} size="sm" variant="secondary">Voltar para Agenda</Button>}
+        pageHeaderActions={
+          <ButtonGroup>
+            <Button onClick={() => setAnnouncement("Aula salva")} size="sm" variant="secondary">Salvar aula</Button>
+            <Button onClick={() => setAnnouncement("Aviso para a turma aberto")} size="sm" variant="secondary">Avisar turma</Button>
+            <Button onClick={() => setAnnouncement("Agenda aberta")} size="sm" variant="secondary">Abrir agenda</Button>
+            <Button leadingIcon="users" onClick={() => { setCallOpen(true); setCallState("calling"); setAnnouncement("Chamada aberta"); }} size="sm" variant="primary">Fazer chamada</Button>
+          </ButtonGroup>
+        }
+        pageHeaderRhythm="stacked"
+        panel={callOpen ? (
+          <ClassDrawer
+            ariaLabel="Chamada da aula"
+            closeLabel="Fechar chamada"
+            copilot={<><strong>Copiloto: Felipe avisou falta dentro da politica.</strong> Credito pode ser gerado.</>}
+            onAction={handleDrawerAction}
+            onClose={() => setCallOpen(false)}
+            onStudentStatus={handleStudentStatus}
+            primaryAction={{ label: "Salvar chamada", action: "save-call" }}
+            secondaryActions={[
+              { label: "Adicionar observacao", action: "add-note" },
+              { label: "Criar tarefa", action: "create-task" },
+              { label: "Corrigir depois", action: "correct-later" }
+            ]}
+            state={callState}
+            students={students}
+            subtitle="Terça 17h · Reformer Intermediário"
+            title="Chamada"
+          />
+        ) : null}
+        panelLabel="Painel de chamada"
+        rightPanelState={callOpen ? undefined : "collapsed"}
+        rightPanelVariant="class-operation"
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="terça, 13 maio"
+        title="Terça 17h · Reformer Intermediário"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      />
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

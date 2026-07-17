@@ -839,9 +839,11 @@ describe("@taliya/crm component coverage", () => {
 
   it("renders the official class operational detail with domain actions", () => {
     const onAction = vi.fn();
+    const onStudentAction = vi.fn();
     render(
       <crm.ClassOperationalDetail
         onAction={onAction}
+        onStudentAction={onStudentAction}
         students={[{ id: "felipe", name: "Felipe Andrade", avatarSrc: "/felipe-source.png", status: "warned" }]}
       />
     );
@@ -853,10 +855,12 @@ describe("@taliya/crm component coverage", () => {
     expect(document.querySelector("img[src='/felipe-source.png']")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Ver detalhes" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir opções de Felipe Andrade" }));
     fireEvent.click(screen.getByText("1 vaga aberta"));
 
     expect(onAction).toHaveBeenCalledWith("view-students");
     expect(onAction).toHaveBeenCalledWith("open-vacancy");
+    expect(onStudentAction).toHaveBeenCalledWith("felipe");
   });
 
   it("renders ActivityFeed as the source-shaped history panel with real controls", () => {

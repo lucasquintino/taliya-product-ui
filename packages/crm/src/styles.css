@@ -2127,7 +2127,9 @@
 }
 
 .tcrm-right-panel-layout--class-operation > .tcrm-right-panel-layout__panel {
-  transform: translateY(var(--taliya-layout-crm-right-panel-class-operation-panel-offset-y));
+  position: relative;
+  transform: translateY(calc(var(--taliya-layout-crm-right-panel-class-operation-panel-offset-y) - var(--taliya-space-4)));
+  z-index: var(--taliya-layout-crm-product-shell-viewport-drawer-z-index);
 }
 
 .tcrm-right-panel-layout--class-operation .tcrm-class-drawer {
@@ -29802,7 +29804,12 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header {
+  margin-left: var(--taliya-space-4);
   padding-right: var(--taliya-layout-crm-right-panel-class-operation-header-reserve);
+}
+
+.tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header__actions {
+  transform: translate(var(--taliya-space-4), var(--taliya-layout-crm-product-shell-header-stacked-actions-offset-y));
 }
 
 .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header h1 {
@@ -32371,6 +32378,85 @@ button.tcrm-pipeline-card__select:focus-visible,
     width: 100%;
   }
 
+  .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-content {
+    padding: var(--taliya-space-3);
+  }
+
+  .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header {
+    align-items: stretch;
+    flex-direction: column;
+    height: auto;
+    margin-left: 0;
+    padding: var(--taliya-space-4) var(--taliya-space-3);
+  }
+
+  .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header h1 {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header__actions {
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header__actions .tl-button-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header__actions .tl-button {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--class-operation {
+    gap: var(--taliya-space-4);
+  }
+
+  .tcrm-right-panel-layout--class-operation > .tcrm-right-panel-layout__panel {
+    transform: none;
+  }
+
+  .tcrm-right-panel-layout--class-operation .tcrm-class-drawer {
+    height: auto;
+    max-height: none;
+  }
+
+  .tcrm-class-operational-detail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-class-operational-detail__summary,
+  .tcrm-class-operational-detail__history {
+    grid-column: 1;
+  }
+
+  .tcrm-class-operational-detail__summary dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-class-operational-detail__summary dl > div {
+    border-bottom: var(--taliya-border-width-default) solid var(--taliya-border-color-subtle);
+    border-right: 0;
+  }
+
+  .tcrm-class-operational-detail__summary dl > div:last-child {
+    border-bottom: 0;
+  }
+
+  .tcrm-class-operational-detail__students > .tl-button-group {
+    align-items: stretch;
+    display: grid;
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-class-operational-detail__students > .tl-button-group .tl-button {
+    width: 100%;
+  }
+
   .tcrm-student-header {
     gap: var(--taliya-space-4);
     grid-template-columns: auto minmax(0, 1fr);
@@ -32586,6 +32672,37 @@ button.tcrm-pipeline-card__select:focus-visible,
 @media (max-width: 640px) {
   .tcrm-agent-catalog {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-product-shell-stage--content-class-operation .tcrm-product-shell-page-header__actions .tl-button-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-class-drawer .tcrm-roster.tl-list {
+    width: 100%;
+  }
+
+  .tcrm-class-drawer .tcrm-roster .tcrm-roster__row.tl-list-item {
+    gap: var(--taliya-space-1);
+    grid-template-columns: var(--taliya-space-10) minmax(0, 1fr) auto var(--taliya-control-crm-roster-action-size);
+    padding: var(--taliya-space-2);
+  }
+
+  .tcrm-class-drawer .tcrm-roster__status.tl-chip {
+    padding-inline: var(--taliya-space-2);
+  }
+
+  .tcrm-class-drawer .tcrm-class-drawer__summary {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  .tcrm-class-drawer .tcrm-class-drawer__footer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-class-drawer .tcrm-class-drawer__footer .tl-button {
+    width: 100%;
   }
 }
 

@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T23:46:03.791Z",
+  "generatedAt": "2026-07-17T00:37:30.022Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 13,
+  "completedRouteCount": 14,
   "failedRouteCount": 0,
-  "pendingRouteCount": 60,
+  "pendingRouteCount": 59,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1171,38 +1171,61 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:37:10.277Z",
+        "evidence": [
+          "tmp/human-route-review/29-class-detail/desktop-final.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:37:10.541Z",
+        "evidence": [
+          "tmp/human-route-review/29-class-detail/desktop-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:37:10.793Z",
+        "evidence": [
+          "tmp/human-route-review/29-class-detail/mobile-detail-final.png",
+          "tmp/human-route-review/29-class-detail/mobile-call-final.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:37:11.148Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-static-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "header-actions",
+          "detail-actions",
+          "student-actions",
+          "attendance-status-actions",
+          "drawer-actions",
+          "drawer-open-close",
+          "mobile-responsive-flow"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T00:37:13.455Z",
+        "evidence": [
+          "source:29_round-4.1F_aula_01_detalhe-com-chamada.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao humana ligou shell, cabecalho, detalhe, alunos e chamada; habilitou opcoes de aluno; corrigiu sobreposicao do cabecalho, clipping do painel e a composicao responsiva do detalhe, roster e footer no mobile."
+      ]
     },
     {
       "image": "30_round-4.1F_financeiro_01_visao-geral-filas.png.png",
