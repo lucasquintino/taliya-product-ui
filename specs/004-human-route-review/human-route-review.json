@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T03:36:30.307Z",
+  "generatedAt": "2026-07-17T04:19:47.206Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 20,
+  "completedRouteCount": 21,
   "failedRouteCount": 0,
-  "pendingRouteCount": 53,
+  "pendingRouteCount": 52,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1815,38 +1815,68 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T04:19:01.000Z",
+        "evidence": [
+          "tmp/human-route-review/36-agenda-grade/desktop-final.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T04:19:01.000Z",
+        "evidence": [
+          "tmp/human-route-review/36-agenda-grade/desktop-canonical.png",
+          "tmp/human-route-review/36-agenda-grade/desktop-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T04:19:01.000Z",
+        "evidence": [
+          "tmp/human-route-review/36-agenda-grade/mobile-page-final.png",
+          "tmp/human-route-review/36-agenda-grade/mobile-drawer-final.png",
+          "tmp/human-route-review/36-agenda-grade/mobile-block-final.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T04:19:01.000Z",
+        "evidence": [
+          "browser-observed:70-grade-filter-calendar-drawer-actions-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "top-navigation",
+          "all-select-filters",
+          "all-summary-quick-filters",
+          "create-class-and-block-actions",
+          "all-nine-calendar-events",
+          "normal-lotada-recurring-unassigned-and-block-states",
+          "all-drawer-actions",
+          "drawer-open-close",
+          "mobile-full-height-drawer-scroll",
+          "mobile-calendar-and-filter-overflow"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T04:19:01.000Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review made all nine week-model events drive the official recurring-block drawer with event-specific schedule, capacity, fixed students, vacancies, teacher, equipment, impact, and copilot content.",
+        "Professor, class, status, and block filters; five structural summary filters; create actions; shell and global actions; close-reopen behavior; and all seven drawer actions were exercised.",
+        "The initial select labels no longer render duplicated values, recurring times use compact 17h copy, and the full-height mobile drawer plus horizontally scrollable filters/calendar were verified without incoherent overlap or clipping."
+      ]
     },
     {
       "image": "37_round-4.1G_vendas_01_pipeline-kanban.png.png",

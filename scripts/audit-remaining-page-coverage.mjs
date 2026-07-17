@@ -175,7 +175,18 @@ const pageFamilyContracts = [
     page: "AgendaGradePage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", "filterBar={<GradeFilters />}", "quickFilters={<GradeSummaryFilters />}", "<WeeklyCalendar"]
+    requiredSnippets: [
+      "<CrmWorklistPage",
+      "drawer={drawerOpen ? <AgendaGradeDrawer event={selectedEvent}",
+      "filterBar={<GradeFilters onInteraction={setAnnouncement} />}",
+      "quickFilters={<GradeSummaryFilters onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<WeeklyCalendar",
+      "events={gradeWeeklyEvents}",
+      "setSelectedEventId(eventId)",
+      "selectedEventId={selectedEventId}",
+      "setDrawerOpen(true)"
+    ]
   },
   {
     page: "FinanceBillingDrawerPage",

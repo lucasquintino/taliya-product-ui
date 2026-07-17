@@ -385,40 +385,80 @@ export function AgendaClassesPage() {
 
 export function AgendaGradePage() {
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [selectedEventId, setSelectedEventId] = useState("ter-1700-reformer");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedEvent = gradeWeeklyEvents.find((event) => event.id === selectedEventId) ?? gradeWeeklyEvents[0]!;
   return (
-    <CrmWorklistPage
-      activeNavId="grade"
-      activeSidebarId="agenda"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <AgendaGradeDrawer onClose={() => setDrawerOpen(false)} /> : null}
-      drawerPlacement="floating"
-      drawerSize="compact"
-      filterBar={<GradeFilters />}
-      filterBarLabel="Filtros de grade"
-      listLabel="Resumo estrutural"
-      mainLabel="Semana-modelo"
-      navItems={agendaNavItems}
-      quickFilters={<GradeSummaryFilters />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Semana-modelo e bloqueios recorrentes"
-      title="Grade"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    >
-      <WeeklyCalendar
-        compact
-        days={["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]}
-        density="short"
-        events={gradeWeeklyEvents}
-        onEventSelect={() => setDrawerOpen(true)}
-        selectedEventId="ter-1700-reformer"
-        times={gradeWeeklyTimes}
-      />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="grade"
+        activeSidebarId="agenda"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <AgendaGradeDrawer event={selectedEvent} onAction={(action) => setAnnouncement(`Ação do bloco: ${action}`)} onClose={() => setDrawerOpen(false)} /> : null}
+        drawerPlacement="floating"
+        drawerSize="compact"
+        filterBar={<GradeFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de grade"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Resumo estrutural"
+        mainLabel="Semana-modelo"
+        navItems={agendaNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        quickFilters={<GradeSummaryFilters onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Studio Vila Mariana - Semana-modelo e bloqueios recorrentes"
+        title="Grade"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      >
+        <WeeklyCalendar
+          compact
+          days={["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]}
+          density="short"
+          events={gradeWeeklyEvents}
+          onEventSelect={(eventId) => {
+            setSelectedEventId(eventId);
+            setDrawerOpen(true);
+            setAnnouncement(`Bloco selecionado: ${eventId}`);
+          }}
+          selectedEventId={selectedEventId}
+          times={gradeWeeklyTimes}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
-function AgendaGradeDrawer({ onClose }: { onClose?: () => void }) {
-  const [, setAction] = useState("");
+function gradeEventTitle(event: WeeklyCalendarEvent) {
+  if (typeof event.title === "string") return event.title.replace("Intermediario", "Intermediário");
+  return "Bloqueio · Feriado municipal";
+}
+
+function gradeEventSchedule(event: WeeklyCalendarEvent) {
+  const day = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"][event.dayIndex] ?? "Semana";
+  const eventTime = typeof event.time === "string" ? event.time : "";
+  const time = eventTime ? eventTime.replace(":00", "h") : event.status === "schedule-block" ? "14h" : "";
+  return `${day} ${time}`.trim();
+}
+
+function AgendaGradeDrawer({ event, onAction, onClose }: { event: WeeklyCalendarEvent; onAction?: (action: ClassDrawerAction) => void; onClose?: () => void }) {
+  const title = gradeEventTitle(event);
+  const schedule = gradeEventSchedule(event);
+  const [fixedSource = "0", capacitySource = "0"] = String(event.capacity ?? "0/0").split("/");
+  const fixedStudents = Number.parseInt(fixedSource, 10) || 0;
+  const capacity = Number.parseInt(capacitySource, 10) || 0;
+  const vacancies = Math.max(capacity - fixedStudents, 0);
+  const isBlock = event.status === "schedule-block" || event.status === "teacher-unavailable";
+  const teacher = event.status === "teacher-unavailable" ? "A definir" : title.includes("Reformer") ? "João Silva" : title.includes("Pilates") ? "Mariana Lopes" : title === "Tower" || title === "Experimental" ? "Lucas Peres" : "Camila Rocha";
   return (
     <ClassDrawer
       ariaLabel="Detalhes do bloco recorrente"
@@ -431,21 +471,21 @@ function AgendaGradeDrawer({ onClose }: { onClose?: () => void }) {
       }}
       closeLabel="Fechar bloco"
       compact
-      copilot={<><strong>Copiloto: alterar este horário exige aviso para 5 alunos e revisa 3 aulas futuras.</strong></>}
+      copilot={<><strong>Copiloto: {isBlock ? "este bloqueio exige revisar aulas e alunos afetados." : `alterar este horário exige aviso para ${fixedStudents} alunos e revisa aulas futuras.`}</strong></>}
       eyebrow="Bloco recorrente"
       facts={[
-        { id: "capacity", icon: "users", label: "Capacidade padrão", value: "6" },
-        { id: "students", icon: "users", label: "Alunos fixos", value: "5" },
-        { id: "vacancy", icon: "tag", label: "Vaga fixa", value: "1" },
-        { id: "teacher", icon: "user", label: "Professor (opcional)", value: <PersonLabel avatarSrc={image79Avatar} name="João Silva" size="xs" /> },
-        { id: "resource", icon: "calendar", label: "Recurso / equipamento (opcional)", value: "Reformer 2" }
+        { id: "capacity", icon: "users", label: "Capacidade padrão", value: isBlock ? "-" : String(capacity) },
+        { id: "students", icon: "users", label: "Alunos fixos", value: isBlock ? "-" : String(fixedStudents) },
+        { id: "vacancy", icon: "tag", label: "Vaga fixa", value: isBlock ? "-" : String(vacancies) },
+        { id: "teacher", icon: "user", label: "Professor (opcional)", value: <PersonLabel avatarSrc={teacher === "A definir" ? undefined : image79Avatar} name={teacher} size="xs" /> },
+        { id: "resource", icon: "calendar", label: "Recurso / equipamento (opcional)", value: title.includes("Reformer") ? "Reformer 2" : isBlock ? "Agenda" : title }
       ]}
       impactItems={[
-        { id: "schedule", icon: "users", label: "alterar horário afeta 5 alunos fixos" },
+        { id: "schedule", icon: "users", label: `alterar horário afeta ${fixedStudents} alunos fixos` },
         { id: "capacity", icon: "graduation", label: "alterar capacidade afeta vagas futuras" },
         { id: "block", icon: "tag", label: "bloquear este horário afeta 3 aulas futuras" }
       ]}
-      onAction={setAction}
+      onAction={onAction}
       onClose={onClose}
       primaryAction={{ label: "Editar bloco", action: "edit-class" }}
       secondaryActions={[
@@ -455,8 +495,8 @@ function AgendaGradeDrawer({ onClose }: { onClose?: () => void }) {
         { label: "Simular impacto", action: "move-student" },
         { label: "Pausar recorrencia", action: "pause-class" }
       ]}
-      subtitle="Gera aulas toda terça às 17h."
-      title="Terça 17h · Reformer Intermediário"
+      subtitle={isBlock ? "Bloqueio recorrente da semana-modelo." : `Gera aulas em ${schedule.toLowerCase()}.`}
+      title={`${schedule} · ${title}`}
       upcomingClasses={[
         { id: "today", label: "hoje" },
         { id: "1905", label: "19/05" },
@@ -467,32 +507,36 @@ function AgendaGradeDrawer({ onClose }: { onClose?: () => void }) {
   );
 }
 
-function GradeFilters() {
+function GradeFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
     { id: "week", kind: "quick", label: "Semana-modelo", selected: true },
-    { id: "teacher", label: "Professor", value: String(values.teacher ?? ""), options: [{ value: "", label: "Professor" }, { value: "joao", label: "Joao Silva" }, { value: "mariana", label: "Mariana Lopes" }] },
-    { id: "class", label: "Turma", value: String(values.class ?? ""), options: [{ value: "", label: "Turma" }, { value: "reformer", label: "Reformer" }, { value: "pilates", label: "Pilates" }] },
-    { id: "status", label: "Status", value: String(values.status ?? ""), options: [{ value: "", label: "Status" }, { value: "ativa", label: "Ativa" }, { value: "lotada", label: "Lotada" }] },
-    { id: "blocks", label: "Bloqueios", value: String(values.blocks ?? ""), options: [{ value: "", label: "Bloqueios" }, { value: "active", label: "Ativos" }, { value: "teacher", label: "Professor indisponivel" }] }
+    { id: "teacher", label: "Professor", value: String(values.teacher ?? ""), options: [{ value: "joao", label: "Joao Silva" }, { value: "mariana", label: "Mariana Lopes" }] },
+    { id: "class", label: "Turma", value: String(values.class ?? ""), options: [{ value: "reformer", label: "Reformer" }, { value: "pilates", label: "Pilates" }] },
+    { id: "status", label: "Status", value: String(values.status ?? ""), options: [{ value: "ativa", label: "Ativa" }, { value: "lotada", label: "Lotada" }] },
+    { id: "blocks", label: "Bloqueios", value: String(values.blocks ?? ""), options: [{ value: "active", label: "Ativos" }, { value: "teacher", label: "Professor indisponivel" }] }
   ];
 
   return (
     <PageFilterBar
       actions={
         <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Criar turma</Button>
-          <Button leadingIcon="lock" size="sm" variant="secondary">Criar bloqueio</Button>
+          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onInteraction("Criação de turma iniciada")} size="sm" variant="primary">Criar turma</Button>
+          <Button leadingIcon="lock" onClick={() => onInteraction("Criação de bloqueio iniciada")} size="sm" variant="secondary">Criar bloqueio</Button>
         </ButtonGroup>
       }
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterSelect={(filter) => onInteraction(`Filtro rápido da grade: ${filter.id}`)}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro da grade alterado: ${filter.id}`);
+      }}
       searchVisible={false}
     />
   );
 }
 
-function GradeSummaryFilters() {
+function GradeSummaryFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("active");
   const items: PageQuickFilterItem[] = [
     { id: "active", label: "Turmas ativas", icon: "user", count: "18", tone: "info", selected: selectedId === "active" },
@@ -507,7 +551,7 @@ function GradeSummaryFilters() {
       actions={<ListItem leading={<Icon name="info" />} meta="Os blocos geram aulas futuras conforme a recorrencia." title="Esta e a semana-modelo do studio." />}
       heading="Resumo estrutural"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => { setSelectedId(item.id); onInteraction(`Resumo da grade: ${item.label}`); }}
       selectionTone="soft"
     />
   );
