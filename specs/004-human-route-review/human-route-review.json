@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T03:18:32.288Z",
+  "generatedAt": "2026-07-17T03:36:30.307Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 19,
+  "completedRouteCount": 20,
   "failedRouteCount": 0,
-  "pendingRouteCount": 54,
+  "pendingRouteCount": 53,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1719,38 +1719,70 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:35:37.000Z",
+        "evidence": [
+          "tmp/human-route-review/35-agenda-classes/desktop-final.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:35:37.000Z",
+        "evidence": [
+          "tmp/human-route-review/35-agenda-classes/desktop-canonical.png",
+          "tmp/human-route-review/35-agenda-classes/desktop-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:35:37.000Z",
+        "evidence": [
+          "tmp/human-route-review/35-agenda-classes/mobile-drawer-final.png",
+          "tmp/human-route-review/35-agenda-classes/mobile-table-final.png",
+          "tmp/human-route-review/35-agenda-classes/mobile-table-scrolled.png",
+          "tmp/human-route-review/35-agenda-classes/mobile-drawer-pilates.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:35:37.000Z",
+        "evidence": [
+          "browser-observed:84-class-worklist-drawer-actions-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "top-navigation",
+          "search-and-filter-actions",
+          "all-select-filters",
+          "all-quick-filters",
+          "table-sorting",
+          "all-row-selection-and-detail-data",
+          "all-row-actions",
+          "pagination",
+          "all-drawer-actions",
+          "drawer-open-close",
+          "mobile-horizontal-table-scroll"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T03:35:37.000Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/35_round-4.1F_turmas_01_lista-detalhe.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review made all six class rows drive the official ClassDrawer and verified schedule, teacher, capacity, roster count, vacancy, status, recurrence, and history data.",
+        "Search, five select filters, five quick queues, sorting, row menus, pagination, shell navigation, global actions, all six drawer actions, close-reopen behavior, and mobile horizontal scrolling were verified.",
+        "Global actions were enabled with the drawer to match the source, and the singular vacancy copy was corrected without adding local CSS."
+      ]
     },
     {
       "image": "36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png",

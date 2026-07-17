@@ -330,29 +330,56 @@ export function AgendaClassDetailPage() {
 export function AgendaClassesPage() {
   const [selectedClassId, setSelectedClassId] = useState("reformer");
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [announcement, setAnnouncement] = useState("");
+  const [page, setPage] = useState(1);
+  const selectedClass = classRows.find((row) => row.id === selectedClassId) ?? classRows[0]!;
   return (
-    <CrmWorklistPage
-      activeNavId="turmas"
-      activeSidebarId="agenda"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <AgendaClassDrawer onClose={() => setDrawerOpen(false)} /> : null}
-      drawerPlacement="floating"
-      drawerSize="compact"
-      filterBar={<ClassesFilters />}
-      filterBarLabel="Filtros de turmas"
-      listLabel="Filas"
-      mainLabel="Lista de turmas"
-      navItems={agendaNavItems}
-      pageHeaderRhythm="overview"
-      quickFilters={<ClassesQuickFilters />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana · Turmas recorrentes e vagas fixas"
-      title="Turmas"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistLayoutMode="main-priority"
-    >
-      <ClassesTable onRowSelect={(row) => { setSelectedClassId(row.id); setDrawerOpen(true); }} selectedRowId={selectedClassId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="turmas"
+        activeSidebarId="agenda"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <AgendaClassDrawer classRow={selectedClass} onAction={(action) => setAnnouncement(`Ação da turma: ${action}`)} onClose={() => setDrawerOpen(false)} /> : null}
+        drawerPlacement="floating"
+        drawerSize="compact"
+        filterBar={<ClassesFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de turmas"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Filas"
+        mainLabel="Lista de turmas"
+        navItems={agendaNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="overview"
+        quickFilters={<ClassesQuickFilters onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Studio Vila Mariana · Turmas recorrentes e vagas fixas"
+        title="Turmas"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        worklistLayoutMode="main-priority"
+      >
+        <ClassesTable
+          onInteraction={setAnnouncement}
+          onPageChange={setPage}
+          onRowSelect={(row) => {
+            setSelectedClassId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Turma selecionada: ${row.id}`);
+          }}
+          page={page}
+          selectedRowId={selectedClassId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -508,46 +535,57 @@ const gradeWeeklyEvents: WeeklyCalendarEvent[] = [
   { id: "seg-1900-tower", dayIndex: 0, top: 648, height: 62, time: "19:00", title: "Tower", teacher: "", capacity: "3/5", status: "pending", statusLabel: "a definir" }
 ];
 
-function AgendaClassDrawer({ onClose }: { onClose?: () => void }) {
-  const facts: ClassDrawerFact[] = [
-    { id: "schedule", icon: "calendar", label: "Dia/horário recorrente", value: "Terça 17h" },
-    { id: "capacity", icon: "users", label: "Capacidade", value: "5/6" },
-    { id: "teacher", icon: "user", label: "Professor da turma", value: <PersonLabel avatarSrc={image79Avatar} name="João Silva" size="xs" /> },
-    { id: "resource", icon: "user", label: "Recurso / equipamento", value: "Reformer 2" },
-    { id: "status", icon: "clock", label: "Status", value: <Chip tone="success">Ativa</Chip>, tone: "success" }
+function AgendaClassDrawer({ classRow, onAction, onClose }: { classRow: ClassRow; onAction?: (action: ClassDrawerAction) => void; onClose?: () => void }) {
+  const fixedStudentCount = Number.parseInt(classRow.fixed, 10) || 0;
+  const studentPool: ClassDrawerStudent[] = [
+    ...agendaClassStudents,
+    { id: "rafael", name: "Rafael Santos", initials: "RS", status: "pending" }
   ];
-  const students: ClassDrawerStudent[] = [
-    { id: "ana", initials: "AS", name: "Ana Carolina Souza", status: "pending" },
-    { id: "beatriz", initials: "BL", name: "Beatriz Lima", status: "present" },
-    { id: "felipe", initials: "FA", name: "Felipe Andrade", status: "warned" },
-    { id: "gabriel", initials: "GM", name: "Gabriela Martins", status: "no-show" },
-    { id: "juliana", initials: "JC", name: "Juliana Costa", status: "replacement" }
+  const facts: ClassDrawerFact[] = [
+    { id: "schedule", icon: "calendar", label: "Dia/horário recorrente", value: classRow.schedule },
+    { id: "capacity", icon: "users", label: "Capacidade", value: classRow.capacity },
+    { id: "teacher", icon: "user", label: "Professor da turma", value: <PersonLabel avatarSrc={classRow.teacher === "A definir" ? undefined : image79Avatar} name={classRow.teacher} size="xs" /> },
+    { id: "resource", icon: "user", label: "Recurso / equipamento", value: classRow.name.includes("Reformer") ? "Reformer 2" : classRow.name },
+    { id: "status", icon: "clock", label: "Status", value: <Chip tone={classRow.tone}>{classRow.status}</Chip>, tone: classRow.tone === "danger" ? "danger" : classRow.tone === "info" ? "info" : classRow.tone === "success" ? "success" : undefined }
   ];
   const upcomingClasses: ClassDrawerTimelineItem[] = [
-    { id: "today", label: "Hoje 17h" },
-    { id: "next", label: "Proxima terca 17h" },
-    { id: "following", label: "Terca seguinte 17h" }
+    { id: "next", label: classRow.next },
+    { id: "following", label: `Próxima recorrência · ${classRow.schedule}` },
+    { id: "later", label: `Recorrência seguinte · ${classRow.schedule}` }
   ];
   const historyItems: ClassDrawerTimelineItem[] = [
-    { id: "moved", label: "Aluno movido", meta: "Hoje 10:12", tone: "success" },
-    { id: "capacity", label: "Capacidade ajustada", meta: "Ontem 16:45", tone: "info" },
-    { id: "teacher", label: "Professor alterado", meta: "12/05 11:20", tone: "warning" }
+    { id: "latest", label: classRow.change, meta: "Atualização mais recente", tone: classRow.tone === "danger" ? "danger" : "info" },
+    { id: "capacity", label: `Capacidade ${classRow.capacity}`, meta: "Configuração atual", tone: "info" },
+    { id: "teacher", label: `Professor: ${classRow.teacher}`, meta: "Responsável atual", tone: classRow.teacher === "A definir" ? "warning" : "success" }
   ];
+  const isFull = classRow.vacancies === "Lotada";
+  const availabilityNotice = isFull
+    ? "Turma sem vagas fixas"
+    : classRow.vacancies === "1 vaga"
+      ? "1 vaga disponível"
+      : `${classRow.vacancies} disponíveis`;
+  const copilotAvailability = isFull
+    ? "A turma está lotada; avalie a fila de interesse."
+    : classRow.vacancies === "1 vaga"
+      ? "Há 1 vaga fixa e oportunidades de preenchimento."
+      : `Há ${classRow.vacancies} e oportunidades de preenchimento.`;
 
   return (
     <ClassDrawer
       ariaLabel="Detalhes da turma"
       audit="Operação manual sempre possível. O Copiloto apenas sugere impactos, vagas e ideias de mensagem."
-      availabilityNotice="1 vaga fixa disponivel"
+      availabilityNotice={availabilityNotice}
+      availabilityTone={isFull ? "warning" : "success"}
       closeLabel="Fechar turma"
       compact
-      copilot={<><strong>Copiloto: Há 1 vaga fixa e 2 alunos com preferência por terça à tarde.</strong></>}
+      copilot={<><strong>Copiloto: {copilotAvailability}</strong></>}
       eyebrow="Turma selecionada"
       facts={facts}
       historyItems={historyItems}
+      onAction={onAction}
       onClose={onClose}
       primaryAction={{ label: "Abrir agenda", action: "open-schedule" }}
-      rosterHeading="Alunos fixos (5)"
+      rosterHeading={`Alunos fixos (${fixedStudentCount})`}
       secondaryActions={[
         { label: "Abrir grade", action: "open-grid" },
         { label: "Mover aluno", action: "move-student" },
@@ -555,12 +593,12 @@ function AgendaClassDrawer({ onClose }: { onClose?: () => void }) {
         { label: "Pausar turma", action: "pause-class" },
         { label: "Editar turma", action: "edit-class" }
       ]}
-      students={students}
+      students={studentPool.slice(0, fixedStudentCount)}
       subtitle={null}
-      title="Terça 17h · Reformer Intermediário"
+      title={`${classRow.schedule} · ${classRow.name}`}
       upcomingClasses={upcomingClasses}
       variant="class-detail"
-      warning="Alterações nesta turma podem afetar 3 aulas futuras."
+      warning={`Alterações nesta turma podem afetar as próximas recorrências de ${classRow.schedule}.`}
     />
   );
 }
@@ -600,14 +638,35 @@ const classColumns: Array<CrmWorklistTableColumn<ClassRow>> = [
   { key: "change", header: "Última mudança", width: "13%" }
 ];
 
-function ClassesTable({ onRowSelect, selectedRowId = "reformer" }: { onRowSelect?: (row: ClassRow) => void; selectedRowId?: string }) {
+function ClassesTable({
+  onInteraction,
+  onPageChange,
+  onRowSelect,
+  page,
+  selectedRowId = "reformer"
+}: {
+  onInteraction: (message: string) => void;
+  onPageChange: (page: number) => void;
+  onRowSelect?: (row: ClassRow) => void;
+  page: number;
+  selectedRowId?: string;
+}) {
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
       ariaLabel="Tabela de turmas"
       columns={classColumns}
-      pagination={{ itemsPerPage: "10", label: "1-6 de 18", page: 1, pageCount: 2 }}
-      rowActions={() => <IconButton icon="more" label="Mais acoes da turma" size="sm" variant="ghost" />}
+      pagination={{
+        itemsPerPage: "10",
+        label: page === 1 ? "1-6 de 18" : "7-12 de 18",
+        page,
+        pageCount: 2,
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => { const nextPage = Math.min(page + 1, 2); onPageChange(nextPage); onInteraction(`Página selecionada: ${nextPage}`); },
+        onPageChange: (nextPage) => { onPageChange(nextPage); onInteraction(`Página selecionada: ${nextPage}`); },
+        onPreviousPage: () => { const nextPage = Math.max(page - 1, 1); onPageChange(nextPage); onInteraction(`Página selecionada: ${nextPage}`); }
+      }}
+      rowActions={(row) => <IconButton icon="more" label={`Mais acoes de ${row.name}`} onClick={(event) => { event.stopPropagation(); onInteraction(`Menu da turma: ${row.id}`); }} size="sm" variant="ghost" />}
       rows={classRows}
       onRowSelect={onRowSelect}
       selectedRowId={selectedRowId}
@@ -615,7 +674,7 @@ function ClassesTable({ onRowSelect, selectedRowId = "reformer" }: { onRowSelect
   );
 }
 
-function ClassesFilters() {
+function ClassesFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [query, setQuery] = useState("");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
@@ -628,11 +687,17 @@ function ClassesFilters() {
 
   return (
     <PageFilterBar
-      actions={<Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Criar turma</Button>}
+      actions={<Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onInteraction("Criação de turma iniciada")} size="sm" variant="primary">Criar turma</Button>}
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de turmas alterado: ${filter.id}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        onInteraction(`Busca de turmas: ${value || "limpa"}`);
+      }}
+      onSearchFilter={() => onInteraction("Filtros de busca de turmas abertos")}
       query={query}
       searchFilterLabel="Abrir filtros de turmas"
       searchFilterPlacement="embedded"
@@ -641,7 +706,7 @@ function ClassesFilters() {
   );
 }
 
-function ClassesQuickFilters() {
+function ClassesQuickFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("available");
   const items: PageQuickFilterItem[] = [
     { id: "available", label: "Com vagas", icon: "users", count: "12", selected: selectedId === "available" },
@@ -651,7 +716,7 @@ function ClassesQuickFilters() {
     { id: "changed", label: "Alteradas recentemente", icon: "refresh", count: "8", tone: "info", selected: selectedId === "changed" }
   ];
 
-  return <PageQuickFilters groupLabel="Filas de turmas" heading="Filas" items={items} onSelect={(item) => setSelectedId(item.id)} selectionTone="soft" />;
+  return <PageQuickFilters groupLabel="Filas de turmas" heading="Filas" items={items} onSelect={(item) => { setSelectedId(item.id); onInteraction(`Fila de turmas: ${item.label}`); }} selectionTone="soft" />;
 }
 
 function AgendaFilters({ onAction, onViewChange, onWeekChange, view, weekLabel, weekOffset }: {

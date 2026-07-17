@@ -156,7 +156,20 @@ const pageFamilyContracts = [
     page: "AgendaClassesPage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", "filterBar={<ClassesFilters />}", "quickFilters={<ClassesQuickFilters />}", "<ClassesTable", "onClose={() => setDrawerOpen(false)}", "setDrawerOpen(true)"]
+    requiredSnippets: [
+      "<CrmWorklistPage",
+      "drawer={drawerOpen ? <AgendaClassDrawer classRow={selectedClass}",
+      "filterBar={<ClassesFilters onInteraction={setAnnouncement} />}",
+      "quickFilters={<ClassesQuickFilters onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<ClassesTable",
+      "onInteraction={setAnnouncement}",
+      "onPageChange={setPage}",
+      "page={page}",
+      "setSelectedClassId(row.id)",
+      "onAction={(action) => setAnnouncement(`Ação da turma: ${action}`)}",
+      "setDrawerOpen(true)"
+    ]
   },
   {
     page: "AgendaGradePage",
