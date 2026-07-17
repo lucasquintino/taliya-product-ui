@@ -33056,6 +33056,10 @@ button.tcrm-pipeline-card__select:focus-visible,
     padding-right: 0;
   }
 
+  .tcrm-product-shell-stage--content-internal-overview:has(> .tcrm-support-ticket-drawer--internal) .tcrm-product-shell-main {
+    padding-right: 0;
+  }
+
   .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-drawer-frame,
   .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-opportunity-panel,
   .tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-support-ticket-drawer {
@@ -33210,6 +33214,27 @@ button.tcrm-pipeline-card__select:focus-visible,
   .tcrm-product-shell-stage--content-main-priority .tcrm-product-shell-content,
   .tcrm-product-shell-stage--content-kanban .tcrm-product-shell-content {
     padding: var(--taliya-space-3);
+  }
+
+  .tcrm-product-shell-stage--content-internal-overview .tcrm-internal-shell,
+  .tcrm-product-shell-stage--content-internal-overview .tcrm-internal-shell--fluid {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-product-shell-stage--content-internal-overview .tcrm-internal-shell__cards,
+  .tcrm-product-shell-stage--content-internal-overview .tcrm-internal-shell__bottom {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    height: auto;
+    min-height: 0;
+  }
+
+  .tcrm-product-shell-stage--content-internal-overview .tcrm-internal-shell__card,
+  .tcrm-product-shell-stage--content-internal-overview :is(.tcrm-internal-shell__activity, .tcrm-internal-shell__copilot) {
+    height: auto;
+    min-height: var(--taliya-control-crm-internal-shell-card-height);
+    overflow: visible;
   }
 
   .tcrm-dashboard-grid,

@@ -132,36 +132,58 @@ function InternalSecurityNotice() {
 
 export function InternalOverviewPage() {
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setAction] = useState("");
+  const [activeNavId, setActiveNavId] = useState("overview");
+  const [announcement, setAnnouncement] = useState("");
+  const announce = (message: string) => setAnnouncement(message);
 
   return (
-    <InternalShell
-      avatarSrc={image79Avatar}
-      browserUrl="https://app.taliya.com/internal"
-      contentLayout="internal-overview"
-      drawer={drawerOpen ? <SupportTicketDrawer onAction={setAction} onClose={() => setDrawerOpen(false)} state="access active" variant="internal" /> : null}
-      drawerPlacement="floating"
-      navItems={internalNav("overview")}
-      pageHeaderRhythm="internal-overview"
-      pageHeaderActions={
-        <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => setAction("new-lead")} size="sm" variant="primary">Novo lead</Button>
-          <Button leadingIcon="shield" onClick={() => { setAction("open-internal-ticket"); setDrawerOpen(true); }} size="sm" variant="secondary">Abrir ticket interno</Button>
-        </ButtonGroup>
-      }
-      subtitle="Operacao interna de leads, clientes, suporte e plataforma"
-      title="Taliya Interno"
-    >
-      <InternalOverviewDashboard
-        fluid
-        onActivityAction={() => setAction("open-activity")}
-        onCardAction={(card) => setAction(`open-card:${card.id}`)}
-        onCopilotAction={() => setAction("open-recommendations")}
-        onFilterSelect={(filter) => setAction(`filter:${filter.id}`)}
-        onSearchChange={() => setAction("search")}
-        showHeader={false}
-      />
-    </InternalShell>
+    <>
+      <InternalShell
+        avatarSrc={image79Avatar}
+        browserUrl="https://app.taliya.com/internal"
+        contentLayout="internal-overview"
+        drawer={drawerOpen ? (
+          <SupportTicketDrawer
+            onAction={(action) => announce(`Acao do ticket interno: ${action}`)}
+            onClose={() => { setDrawerOpen(false); announce("Ticket interno fechado"); }}
+            state="access active"
+            variant="internal"
+          />
+        ) : null}
+        drawerPlacement="floating"
+        globalActions={{
+          onAvatar: () => announce("Perfil da operadora aberto"),
+          onMessages: () => announce("Mensagens internas abertas"),
+          onNotifications: () => announce("Notificacoes internas abertas"),
+          onSearch: () => announce("Busca global aberta")
+        }}
+        navItems={internalNav(activeNavId)}
+        onBack={() => announce("Navegacao de retorno acionada")}
+        onNavChange={(id) => { setActiveNavId(id); announce(`Secao interna selecionada: ${id}`); }}
+        onSidebarSelect={(item) => announce(`Modulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => announce(`Preferencia selecionada: ${item.label}`)}
+        pageHeaderRhythm="internal-overview"
+        pageHeaderActions={
+          <ButtonGroup>
+            <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => announce("Criacao de lead aberta")} size="sm" variant="primary">Novo lead</Button>
+            <Button leadingIcon="shield" onClick={() => { announce("Ticket interno aberto"); setDrawerOpen(true); }} size="sm" variant="secondary">Abrir ticket interno</Button>
+          </ButtonGroup>
+        }
+        subtitle="Operacao interna de leads, clientes, suporte e plataforma"
+        title="Taliya Interno"
+      >
+        <InternalOverviewDashboard
+          fluid
+          onActivityAction={() => announce("Atividade interna completa aberta")}
+          onCardAction={(card) => announce(`Area interna aberta: ${card.id}`)}
+          onCopilotAction={() => announce("Recomendacoes do copiloto abertas")}
+          onFilterSelect={(filter) => announce(`Filtro interno selecionado: ${filter.label}`)}
+          onSearchChange={(value) => announce(value ? `Busca interna: ${value}` : "Busca interna limpa")}
+          showHeader={false}
+        />
+      </InternalShell>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

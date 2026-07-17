@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T14:48:15.253Z",
+  "generatedAt": "2026-07-17T15:09:12.617Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 32,
+  "completedRouteCount": 33,
   "failedRouteCount": 0,
-  "pendingRouteCount": 41,
+  "pendingRouteCount": 40,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2867,38 +2867,53 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:08:49.228Z",
+        "evidence": [
+          "tmp/human-route-review/48-internal-overview/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:08:49.320Z",
+        "evidence": [
+          "tmp/human-route-review/48-internal-overview/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:08:49.412Z",
+        "evidence": [
+          "tmp/human-route-review/48-internal-overview/mobile-page.png",
+          "tmp/human-route-review/48-internal-overview/mobile-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:08:49.505Z",
+        "evidence": [
+          "browser-observed:route-48-internal-overview-47-controls-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "47 controls: 2 page actions; search and 5 filters; 6 dashboard cards; activity and copilot; 6 drawer actions plus close/reopen; 7 internal tabs with active-state assertion; back; 4 global actions; 9 sidebar modules; 2 visual preferences"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:08:49.586Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/48_round-4.1K_internal_01_visao-operacional.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review wired every visible internal overview control, made top navigation state observable, preserved the official Internal family composition, stacked dashboard panels on mobile, and removed closed/open drawer horizontal overflow without story-local CSS."
+      ]
     },
     {
       "image": "49_round-4.1K_internal_02_tenants-lista-detalhe.png",
