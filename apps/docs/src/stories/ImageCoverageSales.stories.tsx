@@ -192,31 +192,54 @@ export function SalesExperimentalListPage() {
 export function SalesEnrollmentChecklistPage() {
   const [selectedEnrollmentId, setSelectedEnrollmentId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedEnrollment = enrollmentRows.find((row) => row.id === selectedEnrollmentId) ?? enrollmentRows[0]!;
 
   return (
-    <CrmWorklistPage
-      activeNavId="matriculas"
-      activeSidebarId="vendas"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <EnrollmentDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
-      filterBar={<EnrollmentFilters />}
-      filterBarLabel="Filtros de matriculas"
-      listLabel="Filtros rapidos"
-      mainLabel="Lista de matriculas"
-      navItems={salesNavItems}
-      pageHeaderRhythm="compact-stacked"
-      quickFilters={<EnrollmentQuickRail />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Conversao de interessados em alunos"
-      title="Matriculas"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      contentLayout="work-list-compact"
-      worklistLayoutMode="compact-rail"
-      worklistFilterRhythm="spacious"
-    >
-      <EnrollmentTable onRowSelect={(row) => { setSelectedEnrollmentId(row.id); setDrawerOpen(true); }} selectedRowId={selectedEnrollmentId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="matriculas"
+        activeSidebarId="vendas"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <EnrollmentDrawer enrollment={selectedEnrollment} onAction={(action) => setAnnouncement(`Ação da matrícula: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer da matrícula fechado"); }} /> : null}
+        filterBar={<EnrollmentFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de matriculas"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Filtros rapidos"
+        mainLabel="Lista de matriculas"
+        navItems={salesNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="compact-stacked"
+        quickFilters={<EnrollmentQuickRail onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Studio Vila Mariana - Conversao de interessados em alunos"
+        title="Matriculas"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        contentLayout="work-list-compact"
+        worklistLayoutMode="compact-rail"
+        worklistFilterRhythm="spacious"
+      >
+        <EnrollmentTable
+          onInteraction={setAnnouncement}
+          onRowSelect={(row) => {
+            setSelectedEnrollmentId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Matrícula selecionada: ${row.person}`);
+          }}
+          selectedRowId={selectedEnrollmentId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -873,13 +896,14 @@ function ExperimentalDrawer({ experimental, onAction, onClose }: { experimental:
   );
 }
 
-function EnrollmentFilters() {
+function EnrollmentFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [query, setQuery] = useState("");
+  const [selectedQuickId, setSelectedQuickId] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "week", kind: "quick", label: "Esta semana" },
-    { id: "ready", kind: "quick", label: "Prontas" },
+    { id: "today", kind: "quick", label: "Hoje", selected: selectedQuickId === "today" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: selectedQuickId === "week" },
+    { id: "ready", kind: "quick", label: "Prontas", selected: selectedQuickId === "ready" },
     {
       id: "status",
       label: "Status",
@@ -941,15 +965,25 @@ function EnrollmentFilters() {
       advancedFiltersTitle="Filtros de matrículas"
       actions={
         <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Nova matrícula</Button>
-          <Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button>
+          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onInteraction("Nova matrícula iniciada")} size="sm" variant="primary">Nova matrícula</Button>
+          <Button leadingIcon="upload" onClick={() => onInteraction("Exportação de matrículas iniciada")} size="sm" variant="secondary">Exportar</Button>
         </ButtonGroup>
       }
       filters={filters}
       layout="stacked"
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Período selecionado: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de matrícula alterado: ${filter.id}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        onInteraction(value ? `Busca de matrícula: ${value}` : "Busca de matrícula limpa");
+      }}
+      onSearchFilter={() => onInteraction("Filtros de busca de matrículas abertos")}
       query={query}
       searchFilterLabel="Abrir filtros de matrículas"
       searchFilterPlacement="embedded"
@@ -958,7 +992,7 @@ function EnrollmentFilters() {
   );
 }
 
-function EnrollmentQuickRail() {
+function EnrollmentQuickRail({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("all");
   const items: PageQuickFilterItem[] = [
     { id: "all", label: "Todas", icon: "users", count: "128", selected: selectedId === "all" },
@@ -977,7 +1011,10 @@ function EnrollmentQuickRail() {
       groupLabel="Filas de matrículas"
       heading="Filtros rápidos"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => {
+        setSelectedId(item.id);
+        onInteraction(`Fila de matrícula selecionada: ${item.label}`);
+      }}
       selectionTone="soft"
     />
   );
@@ -1009,12 +1046,21 @@ const enrollmentRows: EnrollmentRow[] = [
 ];
 
 function EnrollmentTable({
+  onInteraction,
   onRowSelect,
   selectedRowId
 }: {
+  onInteraction: (message: string) => void;
   onRowSelect?: (row: EnrollmentRow) => void;
   selectedRowId?: string;
 }) {
+  const [page, setPage] = useState(1);
+
+  const selectPage = (nextPage: number) => {
+    setPage(nextPage);
+    onInteraction(`Página de matrículas: ${nextPage}`);
+  };
+
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
@@ -1029,23 +1075,35 @@ function EnrollmentTable({
         { key: "next", header: "Próxima ação", width: "11%" },
         { key: "last", header: "Última atividade", width: "10%" }
       ]}
-      pagination={{ itemsPerPage: "10", label: "1-8 de 128", page: 1, pageCount: 13 }}
+      onSortChange={(sort) => onInteraction(sort ? `Ordenação: ${sort.key} ${sort.direction}` : "Ordenação removida")}
+      pagination={{
+        itemsPerPage: "10",
+        label: page === 1 ? "1-8 de 128" : `${(page - 1) * 10 + 1}-${Math.min(page * 10, 128)} de 128`,
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => selectPage(Math.min(13, page + 1)),
+        onPageChange: selectPage,
+        onPreviousPage: () => selectPage(Math.max(1, page - 1)),
+        page,
+        pageCount: 13
+      }}
       onRowSelect={onRowSelect}
-      rowActions={() => <IconButton icon="more" label="Mais ações da matrícula" size="sm" variant="ghost" />}
+      rowActions={(row) => <IconButton icon="more" label={`Mais ações de ${row.person}`} onClick={(event) => { event.stopPropagation(); onInteraction(`Mais ações de ${row.person}`); }} size="sm" variant="ghost" />}
       rows={enrollmentRows}
       selectedRowId={selectedRowId}
     />
   );
 }
 
-const enrollmentDrawerFacts: LeadDrawerFact[] = [
-  { id: "origin", icon: "graduation", label: "Origem", value: "Experimental" },
-  { id: "previous", icon: "user", label: "Etapa anterior", value: "Pós-aula" },
-  { id: "owner", icon: "user", label: "Dono / fila", value: "Recepção" },
-  { id: "plan", icon: "clock", label: "Plano escolhido", value: "Plano 2x/semana" },
-  { id: "first", icon: "calendar", label: "Primeira aula", value: "terça 17h - Reformer Intermediário" },
-  { id: "channel", icon: "message", label: "Canal permitido", value: <><Icon name="whatsapp" size="12px" /> WhatsApp permitido</>, tone: "success" }
-];
+function enrollmentDrawerFacts(enrollment: EnrollmentRow): LeadDrawerFact[] {
+  return [
+    { id: "origin", icon: "graduation", label: "Origem", value: enrollment.origin },
+    { id: "previous", icon: "user", label: "Etapa anterior", value: "Pós-aula" },
+    { id: "owner", icon: "user", label: "Dono / fila", value: enrollment.owner },
+    { id: "plan", icon: "clock", label: "Plano escolhido", value: enrollment.plan },
+    { id: "first", icon: "calendar", label: "Primeira aula", value: enrollment.id === "ana" ? "terça 17h - Reformer Intermediário" : enrollment.next },
+    { id: "channel", icon: "message", label: "Canal permitido", value: <><Icon name="whatsapp" size="12px" /> WhatsApp permitido</>, tone: "success" }
+  ];
+}
 
 const enrollmentChecklist: LeadDrawerChecklistItem[] = [
   { id: "basic", label: "Dados básicos", checked: true },
@@ -1061,19 +1119,33 @@ const enrollmentDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "plan", time: "ontem 18:10", title: "Plano 2x/semana escolhido", description: "Primeira aula sugerida" }
 ];
 
-function EnrollmentDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
+function enrollmentChecklistFor(enrollment: EnrollmentRow): LeadDrawerChecklistItem[] {
+  if (enrollment.id === "ana") return enrollmentChecklist;
+  const checkedCount = Number(enrollment.checklist.split("/")[0]);
+  return ["Dados básicos", "Plano escolhido", "Primeira aula definida", "Consentimento registrado", enrollment.status]
+    .map((label, index) => ({ id: `step-${index}`, label, checked: index < checkedCount }));
+}
+
+function EnrollmentDrawer({ enrollment, onAction, onClose }: { enrollment: EnrollmentRow; onAction?: (action: string) => void; onClose?: () => void }) {
+  const checklist = enrollmentChecklistFor(enrollment);
+  const history = enrollment.id === "ana" ? enrollmentDrawerHistory : [
+    { id: "latest", time: enrollment.last, title: `Status: ${enrollment.status}`, description: `Próxima ação: ${enrollment.next}` },
+    { id: "owner", time: "anterior", title: `Acompanhamento por ${enrollment.owner}`, description: `${enrollment.plan} - checklist ${enrollment.checklist}` },
+    { id: "start", time: "início", title: "Pré-matrícula iniciada", description: `Origem: ${enrollment.origin}` }
+  ];
+
   return (
     <LeadDrawer
       compact
-      checklistItems={enrollmentChecklist}
-      checklistProgressLabel="4/5"
+      checklistItems={checklist}
+      checklistProgressLabel={enrollment.checklist}
       checklistTitle="Checklist de matrícula"
-      copilotBody="Pedir CPF de forma curta e explicar que é necessário para concluir o cadastro."
+      copilotBody={enrollment.id === "ana" ? "Pedir CPF de forma curta e explicar que é necessário para concluir o cadastro." : `Acompanhar ${enrollment.person}: ${enrollment.next}.`}
       copilotTitle="Copiloto sugere"
       eyebrow="Pré-matrícula selecionada"
-      facts={enrollmentDrawerFacts}
-      history={enrollmentDrawerHistory}
-      name="Ana Souza"
+      facts={enrollmentDrawerFacts(enrollment)}
+      history={history}
+      name={enrollment.person}
       notice={<><strong>A operação manual é sempre possível.</strong></>}
       onAction={onAction}
       onClose={onClose}
@@ -1088,7 +1160,7 @@ function EnrollmentDrawer({ onAction, onClose }: { onAction?: (action: string) =
         { label: "Mais ações", action: "more-actions", icon: "moreVertical" }
       ]}
       state="enrollment"
-      statusLabel="Faltando CPF"
+      statusLabel={enrollment.status}
       suggestedAction={null}
     />
   );

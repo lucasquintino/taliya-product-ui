@@ -286,13 +286,13 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmWorklistPage",
       'worklistLayoutMode="compact-rail"',
-      "filterBar={<EnrollmentFilters />}",
-      "quickFilters={<EnrollmentQuickRail />}",
+      "filterBar={<EnrollmentFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "quickFilters={<EnrollmentQuickRail onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<EnrollmentDrawer enrollment={selectedEnrollment}",
       "<EnrollmentTable",
-      "setSelectedEnrollmentId(row.id)",
-      "drawer={drawerOpen ? <EnrollmentDrawer",
-      "onClose={() => setDrawerOpen(false)}",
-      "onAction={setDrawerAction}"
+      "setSelectedEnrollmentId(row.id)"
     ]
   },
   {
@@ -872,8 +872,8 @@ const tableFamilyDetailContracts = [
     table: "EnrollmentTable",
     drawer: "EnrollmentDrawer",
     layoutMode: "compact-rail",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<LeadDrawer", "compact", "checklistItems={enrollmentChecklist}", "history={enrollmentDrawerHistory}"]
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "selectedRowId={selectedRowId}"],
+    requiredDrawerSnippets: ["<LeadDrawer", "compact", "checklistItems={checklist}", "history={history}", "name={enrollment.person}"]
   },
   {
     page: "RetentionRiskListPage",

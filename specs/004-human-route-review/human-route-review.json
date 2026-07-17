@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T06:49:38.372Z",
+  "generatedAt": "2026-07-17T07:26:44.946Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 24,
+  "completedRouteCount": 25,
   "failedRouteCount": 0,
-  "pendingRouteCount": 49,
+  "pendingRouteCount": 48,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2201,38 +2201,74 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T07:26:32.600Z",
+        "evidence": [
+          "tmp/human-route-review/40-sales-enrollment-checklist/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T07:26:32.772Z",
+        "evidence": [
+          "tmp/human-route-review/40-sales-enrollment-checklist/desktop-canonical.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T07:26:32.937Z",
+        "evidence": [
+          "tmp/human-route-review/40-sales-enrollment-checklist/mobile-page.png",
+          "tmp/human-route-review/40-sales-enrollment-checklist/mobile-drawer.png",
+          "tmp/human-route-review/40-sales-enrollment-checklist/mobile-reopened-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T07:26:33.430Z",
+        "evidence": [
+          "browser-observed:106-sales-enrollment-checklist-controls-dynamic-drawers-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation-and-all-sidebar-utilities",
+          "all-four-global-actions",
+          "all-five-top-navigation-actions",
+          "search-type-and-keyboard-clear",
+          "search-filter-trigger",
+          "all-three-period-filters",
+          "all-four-primary-select-filters",
+          "advanced-channel-modal-filter",
+          "new-enrollment-and-export-actions",
+          "all-eight-quick-filter-queues",
+          "all-eight-row-selections",
+          "dynamic-name-status-checklist-progress-facts-history-and-copilot-for-all-eight-enrollments",
+          "all-eight-row-action-menus",
+          "person-sort-through-three-states",
+          "items-per-page-visible-pages-and-boundary-pagination-controls",
+          "disabled-convert-action-and-all-eight-enabled-drawer-actions",
+          "drawer-close-and-reopen",
+          "mobile-full-height-scrollable-drawer",
+          "mobile-contained-scrollable-quick-rail-and-table"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T07:26:36.883Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/40_round-4.1G_matriculas_01_checklist-conversao.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review verified every unique enrollment-worklist path: search, periods, primary and advanced filters, queue rail, eight rows and row menus, sorting, pagination, shell actions, and drawer actions.",
+        "Selecting any of the eight enrollments now updates the official LeadDrawer name, status, facts, checklist labels and progress, history, and recommendation instead of retaining Ana Souza content.",
+        "The canonical 1448x1086 composition matches the assigned source with no broken assets or console errors; mobile contains its worklist regions and uses a full-height scrollable checklist drawer."
+      ]
     },
     {
       "image": "41_round-4.1H_retencao_01_riscos-lista-drawer.png.png",
