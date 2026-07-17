@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T01:34:16.107Z",
+  "generatedAt": "2026-07-17T01:56:58.602Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 16,
+  "completedRouteCount": 17,
   "failedRouteCount": 0,
-  "pendingRouteCount": 57,
+  "pendingRouteCount": 56,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1438,38 +1438,65 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:56:12.000Z",
+        "evidence": [
+          "tmp/human-route-review/32-finance-drawer/desktop-final.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:56:12.000Z",
+        "evidence": [
+          "tmp/human-route-review/32-finance-drawer/desktop-reduced-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:56:12.000Z",
+        "evidence": [
+          "tmp/human-route-review/32-finance-drawer/mobile-final.png",
+          "tmp/human-route-review/32-finance-drawer/mobile-drawer-final.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:56:12.000Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-static-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "header-actions",
+          "period-filters",
+          "select-filters",
+          "priority-actions",
+          "queue-card-actions",
+          "queue-view-all-actions",
+          "dynamic-drawer-content",
+          "drawer-state-transitions",
+          "drawer-actions",
+          "drawer-open-close",
+          "mobile-responsive-flow"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:56:12.000Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review made all 24 finance cases drive the official PaymentDrawer, connected shared announcements, and verified promise, paid, close, and reopen transitions across desktop and mobile."
+      ]
     },
     {
       "image": "33_round-4.1F_financeiro_03_kanban-financeiro.png.png",

@@ -168,7 +168,16 @@ const pageFamilyContracts = [
     page: "FinanceBillingDrawerPage",
     file: "ImageCoverageFinance.stories.tsx",
     family: "dashboard/drawer",
-    requiredSnippets: ["<FinanceOverviewDashboard", "drawer={drawerOpen ? <PaymentDrawer", "onClose={() => setDrawerOpen(false)}", "onOpenCase={() => setDrawerOpen(true)}"]
+    requiredSnippets: [
+      "<FinanceOverviewDashboard",
+      "drawer={drawerOpen ? (",
+      "<PaymentDrawer",
+      "facts={paymentFacts(detail, effectiveState)}",
+      "onClose={() => setDrawerOpen(false)}",
+      "onOpenCase={(caseId) =>",
+      "setSelectedCaseId(caseId)",
+      "onAction={handleDrawerAction}"
+    ]
   },
   {
     page: "FinanceKanbanPage",

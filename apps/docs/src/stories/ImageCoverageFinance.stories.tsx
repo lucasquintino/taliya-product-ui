@@ -18,7 +18,15 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { CrmShellNavItem, FinancePriorityItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
+import type {
+  CrmShellNavItem,
+  FinancePriorityItem,
+  PageFilterBarFilter,
+  PageQuickFilterItem,
+  PaymentDrawerAction,
+  PaymentDrawerFact,
+  PaymentDrawerState
+} from "@taliya/crm";
 import { Button, ButtonGroup, Chip, Icon, IconButton, PersonLabel } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
@@ -90,6 +98,57 @@ const financeCaseStates = [
   "promise",
   "exception"
 ] as const;
+
+interface FinanceCaseDetail {
+  name: string;
+  amount: string;
+  due: string;
+  method: string;
+  state: PaymentDrawerState;
+  status: string;
+}
+
+const financeCaseDetails: Record<string, FinanceCaseDetail> = {
+  "due:fernanda": { name: "Fernanda Lima", amount: "R$ 420,00", due: "vence 14/05", method: "mensalidade", state: "due", status: "A vencer" },
+  "due:rafael": { name: "Rafael Martins", amount: "R$ 980,00", due: "vence 15/05", method: "plano trimestral", state: "due", status: "A vencer" },
+  "due:bianca": { name: "Bianca Oliveira", amount: "R$ 210,00", due: "vence 16/05", method: "aula avulsa", state: "due", status: "A vencer" },
+  "today:camila": { name: "Camila Souza", amount: "R$ 420,00", due: "vence hoje 18:00", method: "Pix", state: "due", status: "Vence hoje" },
+  "today:lucas": { name: "Lucas Ferreira", amount: "R$ 980,00", due: "vence hoje 20:00", method: "plano trimestral", state: "due", status: "Vence hoje" },
+  "today:marina": { name: "Marina Costa", amount: "R$ 210,00", due: "vence hoje 21:00", method: "mensalidade", state: "due", status: "Vence hoje" },
+  "paid:juliana": { name: "Juliana Rocha", amount: "R$ 420,00", due: "pago hoje 09:12", method: "Pix", state: "paid", status: "Pago" },
+  "paid:thiago": { name: "Thiago Alves", amount: "R$ 980,00", due: "pago hoje 10:45", method: "cartao", state: "paid", status: "Pago" },
+  "paid:patricia": { name: "Patricia Nunes", amount: "R$ 210,00", due: "pago ontem 16:22", method: "WhatsApp", state: "paid", status: "Pago" },
+  "overdue:gabriela": { name: "Gabriela Lima", amount: "R$ 420,00", due: "2 dias em atraso", method: "mensalidade", state: "overdue", status: "Em atraso" },
+  "overdue:eduardo": { name: "Eduardo Santos", amount: "R$ 210,00", due: "5 dias em atraso", method: "Pix", state: "overdue", status: "Em atraso" },
+  "overdue:isabela": { name: "Isabela Prado", amount: "R$ 980,00", due: "7 dias em atraso", method: "plano trimestral", state: "overdue", status: "Em atraso" },
+  "failed:bruno": { name: "Bruno Mendes", amount: "R$ 420,00", due: "cartao recusado", method: "cartao", state: "failed", status: "Falha" },
+  "failed:carolina": { name: "Carolina Dias", amount: "R$ 980,00", due: "limite insuficiente", method: "cartao", state: "failed", status: "Falha" },
+  "failed:joao": { name: "Joao Victor", amount: "R$ 210,00", due: "Pix expirado", method: "WhatsApp", state: "failed", status: "Falha" },
+  "reconciliation:ana": { name: "Ana Paula Martins", amount: "R$ 420,00", due: "comprovante enviado 09:45", method: "Pix", state: "promise", status: "Conciliação pendente" },
+  "reconciliation:gustavo": { name: "Gustavo Lima", amount: "R$ 980,00", due: "aguardando baixa", method: "importacao", state: "promise", status: "Conciliação pendente" },
+  "reconciliation:beatriz": { name: "Marina Beatriz", amount: "R$ 210,00", due: "envio manual", method: "agente", state: "promise", status: "Conciliação pendente" },
+  "promise:felipe": { name: "Felipe Costa", amount: "R$ 420,00", due: "prometido para 15/05", method: "WhatsApp", state: "promise", status: "Promessa registrada" },
+  "promise:renata": { name: "Renata Alves", amount: "R$ 980,00", due: "prometido para 16/05", method: "agente", state: "promise", status: "Promessa registrada" },
+  "promise:diego": { name: "Diego Ramos", amount: "R$ 210,00", due: "prometido para 17/05", method: "mensalidade", state: "promise", status: "Promessa registrada" },
+  "exception:carla": { name: "Carla Nunes", amount: "R$ 120,00", due: "desconto fora da politica", method: "agente", state: "promise", status: "Exceção financeira" },
+  "exception:roberto": { name: "Roberto Lima", amount: "R$ 2.360,00", due: "renegociacao manual", method: "importacao", state: "promise", status: "Exceção financeira" },
+  "exception:silvia": { name: "Silvia Prado", amount: "R$ 840,00", due: "cancelar cobranca recorrente", method: "WhatsApp", state: "promise", status: "Exceção financeira" }
+};
+
+function paymentFacts(detail: FinanceCaseDetail, state: PaymentDrawerState): PaymentDrawerFact[] {
+  const status = state === "paid" ? "Pago" : state === "promise" ? "Promessa registrada" : detail.status;
+  const danger = state === "overdue" || state === "failed";
+  return [
+    { id: "amount", icon: "wallet", label: "Valor", value: detail.amount },
+    { id: "due", icon: "calendar", label: "Vencimento", value: detail.due, tone: danger ? "danger" : undefined },
+    { id: "status", icon: "checkCircle", label: "Status", value: status, tone: danger ? "danger" : state === "paid" ? "success" : undefined },
+    { id: "type", icon: "folder", label: "Tipo", value: detail.method },
+    { id: "origin", icon: "tag", label: "Origem", value: "Sistema / cobrança recorrente" },
+    { id: "owner", icon: "clipboard", label: "Responsável", value: "Financeiro" },
+    { id: "student", icon: "user", label: "Aluno vinculado", value: detail.name },
+    { id: "channel", icon: "message", label: "Canal sugerido", value: <><Icon name="whatsapp" size="13px" /> WhatsApp</>, tone: "whatsapp" }
+  ];
+}
 
 function FinanceFilters({
   selectedPeriod,
@@ -211,10 +270,22 @@ function FinanceOverviewMain({ compactQueues = false, onEvent, onOpenCase }: { c
   );
 }
 
-function FinanceOverviewDashboard({ drawer, onOpenCase }: { drawer?: React.ReactNode; onOpenCase?: (caseId: string) => void } = {}) {
+function FinanceOverviewDashboard({
+  announcement: controlledAnnouncement,
+  drawer,
+  onInteraction,
+  onOpenCase
+}: {
+  announcement?: string;
+  drawer?: React.ReactNode;
+  onInteraction?: (message: string) => void;
+  onOpenCase?: (caseId: string) => void;
+} = {}) {
   const [selectedPeriod, setSelectedPeriod] = useState("today");
   const [filterValues, setFilterValues] = useState<Record<string, string | string[]>>({});
   const [announcement, setAnnouncement] = useState("");
+  const announce = onInteraction ?? setAnnouncement;
+  const visibleAnnouncement = controlledAnnouncement ?? announcement;
 
   return (
     <>
@@ -228,11 +299,11 @@ function FinanceOverviewDashboard({ drawer, onOpenCase }: { drawer?: React.React
             selectedPeriod={selectedPeriod}
             onFilterValueChange={(filter, value) => {
               setFilterValues((current) => ({ ...current, [filter.id]: value }));
-              setAnnouncement(`Filtro alterado: ${filter.id}`);
+              announce(`Filtro alterado: ${filter.id}`);
             }}
             onPeriodSelect={(filter) => {
               setSelectedPeriod(filter.id);
-              setAnnouncement(`Período selecionado: ${filter.label}`);
+              announce(`Período selecionado: ${filter.label}`);
             }}
           />
         }
@@ -241,18 +312,18 @@ function FinanceOverviewDashboard({ drawer, onOpenCase }: { drawer?: React.React
         drawer={drawer}
         drawerPlacement={drawer ? "viewport" : undefined}
         globalActions={{
-          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
-          onMessages: () => setAnnouncement("Mensagens abertas"),
-          onNotifications: () => setAnnouncement("Notificações abertas"),
-          onSearch: () => setAnnouncement("Busca global aberta")
+          onAvatar: () => announce("Perfil da operadora aberto"),
+          onMessages: () => announce("Mensagens abertas"),
+          onNotifications: () => announce("Notificações abertas"),
+          onSearch: () => announce("Busca global aberta")
         }}
         layoutVariant="finance-overview"
         navItems={financeNavItems}
-        onBack={() => setAnnouncement("Navegação de retorno acionada")}
-        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
-        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
-        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
-        pageHeaderActions={<FinanceHeaderActions onAction={(action) => setAnnouncement(`Ação financeira: ${action}`)} />}
+        onBack={() => announce("Navegação de retorno acionada")}
+        onNavChange={(id) => announce(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => announce(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => announce(`Preferência selecionada: ${item.label}`)}
+        pageHeaderActions={<FinanceHeaderActions onAction={(action) => announce(`Ação financeira: ${action}`)} />}
         pageHeaderRhythm="overview"
         sidebarItems={crmEmptyShellSidebarItems}
         stageClassName="sb-image-coverage-finance-stage"
@@ -260,9 +331,9 @@ function FinanceOverviewDashboard({ drawer, onOpenCase }: { drawer?: React.React
         title="Financeiro"
         utilityItems={crmEmptyShellSidebarUtilityItems}
       >
-        <FinanceOverviewMain compactQueues={Boolean(drawer)} onEvent={setAnnouncement} onOpenCase={onOpenCase} />
+        <FinanceOverviewMain compactQueues={Boolean(drawer)} onEvent={announce} onOpenCase={onOpenCase} />
       </CrmDashboardPage>
-      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+      <span aria-live="polite" className="tl-sr-only" role="status">{visibleAnnouncement}</span>
     </>
   );
 }
@@ -431,10 +502,41 @@ export const Image30VisaoGeralFilas: Story = {
 
 export function FinanceBillingDrawerPage() {
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [selectedCaseId, setSelectedCaseId] = useState("overdue:gabriela");
+  const [drawerState, setDrawerState] = useState<PaymentDrawerState>();
+  const [announcement, setAnnouncement] = useState("");
+  const detail = financeCaseDetails[selectedCaseId] ?? financeCaseDetails["overdue:gabriela"]!;
+  const effectiveState = drawerState ?? detail.state;
+  const effectiveStatus = effectiveState === "paid" ? "Pago" : drawerState === "promise" ? "Promessa registrada" : detail.status;
+
+  function handleDrawerAction(action: PaymentDrawerAction) {
+    if (action === "mark-paid") setDrawerState("paid");
+    if (action === "register-promise") setDrawerState("promise");
+    setAnnouncement(`Ação da cobrança: ${action}`);
+  }
+
   return (
     <FinanceOverviewDashboard
-      drawer={drawerOpen ? <PaymentDrawer onClose={() => setDrawerOpen(false)} /> : null}
-      onOpenCase={() => setDrawerOpen(true)}
+      announcement={announcement}
+      drawer={drawerOpen ? (
+        <PaymentDrawer
+          amount={detail.amount}
+          context={[`${detail.name}: ${detail.due}.`, `Método registrado: ${detail.method}.`]}
+          copilotSuggestion={`Identificamos a cobrança de ${detail.amount} para ${detail.name}. Posso ajudar com o próximo passo?`}
+          facts={paymentFacts(detail, effectiveState)}
+          name={detail.name}
+          onAction={handleDrawerAction}
+          onClose={() => setDrawerOpen(false)}
+          state={effectiveState}
+          statusLabel={effectiveStatus}
+        />
+      ) : null}
+      onInteraction={setAnnouncement}
+      onOpenCase={(caseId) => {
+        setSelectedCaseId(caseId);
+        setDrawerState(undefined);
+        setDrawerOpen(true);
+      }}
     />
   );
 }
