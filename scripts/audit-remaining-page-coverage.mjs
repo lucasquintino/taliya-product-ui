@@ -251,7 +251,17 @@ const pageFamilyContracts = [
     page: "SalesInterestedListPage",
     file: "ImageCoverageSales.stories.tsx",
     family: "table/worklist",
-    requiredSnippets: ["<CrmWorklistPage", 'worklistLayoutMode="compact-rail"', "filterBar={<SalesInterestedFilters />}", "quickFilters={<SalesLeadQuickRail />}", "<SalesLeadTable", "setSelectedLeadId(row.id)", "drawer={drawerOpen ? <LeadDrawer compact", "onClose={() => setDrawerOpen(false)}", "onAction={setDrawerAction}"]
+    requiredSnippets: [
+      "<CrmWorklistPage",
+      'worklistLayoutMode="compact-rail"',
+      "filterBar={<SalesInterestedFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "quickFilters={<SalesLeadQuickRail onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<SalesLeadDrawer lead={selectedLead}",
+      "<SalesLeadTable",
+      "setSelectedLeadId(row.id)"
+    ]
   },
   {
     page: "SalesExperimentalListPage",

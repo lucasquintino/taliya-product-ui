@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T05:22:15.366Z",
+  "generatedAt": "2026-07-17T06:08:27.467Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 22,
+  "completedRouteCount": 23,
   "failedRouteCount": 0,
-  "pendingRouteCount": 51,
+  "pendingRouteCount": 50,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2001,38 +2001,74 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:08:12.965Z",
+        "evidence": [
+          "tmp/human-route-review/38-sales-lead-list/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:08:13.142Z",
+        "evidence": [
+          "tmp/human-route-review/38-sales-lead-list/desktop-canonical.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:08:13.311Z",
+        "evidence": [
+          "tmp/human-route-review/38-sales-lead-list/mobile-page.png",
+          "tmp/human-route-review/38-sales-lead-list/mobile-drawer.png",
+          "tmp/human-route-review/38-sales-lead-list/mobile-reopened-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:08:13.954Z",
+        "evidence": [
+          "browser-observed:104-sales-lead-worklist-controls-dynamic-drawers-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions-visible-with-drawer",
+          "top-navigation",
+          "search-type-and-clear",
+          "search-filter-trigger",
+          "all-three-period-filters",
+          "all-five-primary-filters",
+          "both-advanced-modal-filters",
+          "new-lead-and-export-actions",
+          "all-seven-quick-filter-queues",
+          "all-eight-row-selections",
+          "dynamic-drawer-content-for-all-eight-leads",
+          "all-eight-row-action-menus",
+          "all-seven-sort-controls",
+          "items-per-page-and-all-visible-pagination-controls",
+          "all-nine-drawer-actions",
+          "drawer-close-and-reopen",
+          "mobile-full-height-scrollable-drawer",
+          "mobile-horizontal-filter-and-table-overflow"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:08:13.793Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/38_round-4.1G_vendas_02_lista-interessados.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review verified every unique worklist path: search, all filters, queue rail, eight rows and row menus, seven sort controls, pagination, shell actions, and all lead-drawer actions.",
+        "Selecting any of the eight leads now updates the official LeadDrawer name, stage, facts, history, recommendation, and state instead of retaining Ana Souza content.",
+        "The canonical 1448x1086 composition matches the assigned source, including global actions with the compact floating drawer; mobile uses a full-height scrollable drawer and contained horizontal overflow for filters and table."
+      ]
     },
     {
       "image": "39_round-4.1G_experimental_01_lista-acompanhamento.png.png",

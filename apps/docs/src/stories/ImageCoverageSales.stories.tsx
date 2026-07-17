@@ -84,30 +84,54 @@ export function SalesPipelinePage() {
 export function SalesInterestedListPage() {
   const [selectedLeadId, setSelectedLeadId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedLead = salesLeadRows.find((row) => row.id === selectedLeadId) ?? salesLeadRows[0]!;
+
   return (
-    <CrmWorklistPage
-      activeNavId="lista"
-      activeSidebarId="vendas"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <LeadDrawer compact onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
-      filterBar={<SalesInterestedFilters />}
-      filterBarLabel="Filtros de interessados"
-      listLabel="Filtros rapidos"
-      mainLabel="Lista de interessados"
-      navItems={salesNavItems}
-      pageHeaderRhythm="compact-stacked"
-      quickFilters={<SalesLeadQuickRail />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana · Lista de interessados"
-      title="Vendas"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      contentLayout="work-list-compact"
-      worklistLayoutMode="compact-rail"
-      worklistFilterRhythm="spacious"
-    >
-      <SalesLeadTable onRowSelect={(row) => { setSelectedLeadId(row.id); setDrawerOpen(true); }} selectedRowId={selectedLeadId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="lista"
+        activeSidebarId="vendas"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <SalesLeadDrawer lead={selectedLead} onAction={(action) => setAnnouncement(`Ação do interessado: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer do interessado fechado"); }} /> : null}
+        filterBar={<SalesInterestedFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de interessados"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Filtros rapidos"
+        mainLabel="Lista de interessados"
+        navItems={salesNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="compact-stacked"
+        quickFilters={<SalesLeadQuickRail onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Studio Vila Mariana · Lista de interessados"
+        title="Vendas"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        contentLayout="work-list-compact"
+        worklistLayoutMode="compact-rail"
+        worklistFilterRhythm="spacious"
+      >
+        <SalesLeadTable
+          onInteraction={setAnnouncement}
+          onRowSelect={(row) => {
+            setSelectedLeadId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Interessado selecionado: ${row.lead}`);
+          }}
+          selectedRowId={selectedLeadId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -318,13 +342,14 @@ function SalesPipelineBoard({ onInteraction }: { onInteraction: (message: string
   );
 }
 
-function SalesInterestedFilters() {
+function SalesInterestedFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [query, setQuery] = useState("");
+  const [selectedQuickId, setSelectedQuickId] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "week", kind: "quick", label: "Esta semana" },
-    { id: "no-response", kind: "quick", label: "Sem resposta" },
+    { id: "today", kind: "quick", label: "Hoje", selected: selectedQuickId === "today" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: selectedQuickId === "week" },
+    { id: "no-response", kind: "quick", label: "Sem resposta", selected: selectedQuickId === "no-response" },
     {
       id: "stage",
       label: "Etapa",
@@ -407,15 +432,25 @@ function SalesInterestedFilters() {
       advancedFiltersTitle="Filtros de interessados"
       actions={
         <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Novo interessado</Button>
-          <Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button>
+          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onInteraction("Novo interessado iniciado")} size="sm" variant="primary">Novo interessado</Button>
+          <Button leadingIcon="upload" onClick={() => onInteraction("Exportação de interessados iniciada")} size="sm" variant="secondary">Exportar</Button>
         </ButtonGroup>
       }
       filters={filters}
       layout="stacked"
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Período selecionado: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de interessados alterado: ${filter.id}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        onInteraction(value ? `Busca de interessados: ${value}` : "Busca de interessados limpa");
+      }}
+      onSearchFilter={() => onInteraction("Filtros de busca abertos")}
       query={query}
       searchFilterLabel="Abrir filtros de interessados"
       searchFilterPlacement="embedded"
@@ -424,7 +459,7 @@ function SalesInterestedFilters() {
   );
 }
 
-function SalesLeadQuickRail() {
+function SalesLeadQuickRail({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("all");
   const items: PageQuickFilterItem[] = [
     { id: "all", label: "Todos", icon: "users", count: "128", selected: selectedId === "all" },
@@ -442,7 +477,10 @@ function SalesLeadQuickRail() {
       groupLabel="Filas de vendas"
       heading="Filtros rapidos"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => {
+        setSelectedId(item.id);
+        onInteraction(`Fila de vendas selecionada: ${item.label}`);
+      }}
       selectionTone="soft"
     />
   );
@@ -482,15 +520,73 @@ const salesLeadColumns: Array<CrmWorklistTableColumn<SalesLeadRow>> = [
   { key: "status", header: "Status", sortable: true, width: "16%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> }
 ];
 
-function SalesLeadTable({ onRowSelect, selectedRowId }: { onRowSelect: (row: SalesLeadRow) => void; selectedRowId: string }) {
+function SalesLeadDrawer({ lead, onAction, onClose }: { lead: SalesLeadRow; onAction: (action: string) => void; onClose: () => void }) {
+  const canonicalLead = lead.id === "ana";
+  const facts: LeadDrawerFact[] = [
+    { id: "channel", icon: "calendar", label: "Canal", value: <><Icon name="whatsapp" size="12px" /> WhatsApp permitido</>, tone: "success" },
+    { id: "origin", icon: "users", label: "Origem", value: <><Icon name="whatsapp" size="12px" /> WhatsApp</>, tone: "success" },
+    { id: "owner", icon: "user", label: "Dono / fila", value: lead.owner },
+    { id: "interest", icon: "calendar", label: "Interesse", value: canonicalLead ? "começar Pilates" : `Interesse em ${lead.stage.toLowerCase()}` },
+    { id: "schedule", icon: "clock", label: "Horário desejado", value: lead.desiredTime },
+    { id: "last", icon: "message", label: "Última conversa", value: canonicalLead ? "Perguntou sobre preço e horários" : `Atualização em ${lead.stage}`, helper: lead.lastActivity },
+    { id: "next", icon: "sparkles", label: "Próxima ação recomendada", value: lead.nextAction },
+    { id: "objection", icon: "clock", label: "Objeção / motivo", value: canonicalLead ? "Quer entender valor e disponibilidade" : `Acompanhar status: ${lead.status}` },
+    { id: "trial", icon: "graduation", label: "Experimental vinculada", value: lead.stage.includes("Experimental") ? "Experimental vinculada" : "Nenhuma agendada ainda" },
+    { id: "enrollment", icon: "calendar", label: "Pré-matrícula", value: lead.stage === "Pre-matricula" ? "Em andamento" : "Ainda não iniciada" }
+  ];
+  const history: LeadDrawerHistoryItem[] = canonicalLead ? [
+    { id: "contact", time: "hoje 10:24", title: "Contato via WhatsApp", description: "Perguntou sobre preços e horários" },
+    { id: "triage", time: "ontem 18:40", title: "Triagem concluída pela Recepção", description: "Interesse em começar Pilates" },
+    { id: "start", time: "ontem 09:15", title: "Conversa inicial via WhatsApp", description: "Solicitou informações" }
+  ] : [
+    { id: "latest", time: lead.lastActivity, title: `Atualização: ${lead.stage}`, description: lead.nextAction },
+    { id: "owner", time: "anterior", title: `Responsável: ${lead.owner}`, description: `Status atual: ${lead.status}` },
+    { id: "origin", time: "início", title: "Conversa iniciada via WhatsApp", description: `Horário desejado: ${lead.desiredTime}` }
+  ];
+  const state = lead.status === "perdido" ? "lost" : lead.stage.includes("Experimental") ? "trial" : lead.stage === "Pre-matricula" ? "enrollment" : "interested";
+
+  return (
+    <LeadDrawer
+      compact
+      copilotBody={canonicalLead ? <>Ana demonstrou interesse e pediu valores.<br />Sugestão: responder preço e horários disponíveis.</> : <>{lead.lead} está em {lead.stage}.<br />Sugestão: {lead.nextAction}.</>}
+      facts={facts}
+      history={history}
+      name={lead.lead}
+      onAction={onAction}
+      onClose={onClose}
+      state={state}
+      statusLabel={lead.stage}
+      suggestedAction={`Ação sugerida: ${lead.nextAction}`}
+    />
+  );
+}
+
+function SalesLeadTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect: (row: SalesLeadRow) => void; selectedRowId: string }) {
+  const [page, setPage] = useState(1);
+
+  const selectPage = (nextPage: number) => {
+    setPage(nextPage);
+    onInteraction(`Página de interessados: ${nextPage}`);
+  };
+
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
       ariaLabel="Tabela de interessados"
       columns={salesLeadColumns}
-      pagination={{ itemsPerPage: "10", label: "1-8 de 128", page: 1, pageCount: 13 }}
+      onSortChange={(sort) => onInteraction(sort ? `Ordenação: ${sort.key} ${sort.direction}` : "Ordenação removida")}
+      pagination={{
+        itemsPerPage: "10",
+        label: page === 1 ? "1-8 de 128" : `${(page - 1) * 10 + 1}-${Math.min(page * 10, 128)} de 128`,
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => selectPage(Math.min(13, page + 1)),
+        onPageChange: selectPage,
+        onPreviousPage: () => selectPage(Math.max(1, page - 1)),
+        page,
+        pageCount: 13
+      }}
       onRowSelect={onRowSelect}
-      rowActions={() => <IconButton icon="more" label="Mais acoes do interessado" size="sm" variant="ghost" />}
+      rowActions={(row) => <IconButton icon="more" label={`Mais acoes de ${row.lead}`} onClick={(event) => { event.stopPropagation(); onInteraction(`Mais ações de ${row.lead}`); }} size="sm" variant="ghost" />}
       rows={salesLeadRows}
       selectedRowId={selectedRowId}
     />

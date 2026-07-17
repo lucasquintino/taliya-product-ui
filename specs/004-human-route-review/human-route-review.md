@@ -1,13 +1,13 @@
 # Human Route Review
 
-Generated: 2026-07-17T05:22:15.366Z
+Generated: 2026-07-17T06:08:27.467Z
 
 Status: in-progress
 
 - Routes: 73
-- Passed: 22
+- Passed: 23
 - Failed: 0
-- Pending: 51
+- Pending: 50
 
 | Family | Routes | Passed | Failed |
 | --- | ---: | ---: | ---: |
@@ -32,6 +32,6 @@ Status: in-progress
 | Suporte | 1 | 0 | 0 |
 | Tarefas | 1 | 1 | 0 |
 | Usage | 2 | 0 | 0 |
-| Vendas | 4 | 1 | 0 |
+| Vendas | 4 | 2 | 0 |
 
 This ledger records browser-observed visual and interaction evidence. Automated Storybook coverage alone does not advance a route to pass.
