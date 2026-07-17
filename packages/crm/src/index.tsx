@@ -13988,6 +13988,7 @@ export function TenantSummaryDrawer({
 }: TenantSummaryDrawerProps) {
   if (!open || state === "closed") return null;
   const disabled = state === "loading" || state === "blocked";
+  const isRisk = state === "risk";
 
   const footer = (
     <div className="tcrm-tenant-summary-drawer__actions">
@@ -14030,8 +14031,11 @@ export function TenantSummaryDrawer({
         ))}
       </dl>
       <section className="tcrm-tenant-summary-drawer__health">
-        <h3>Saúde da conta <Chip tone="success">estável</Chip></h3>
-        <p><Icon name="shieldCheck" size="18px" tone="success" />Uso regular, billing em dia e suporte ativo em importação.</p>
+        <h3>Saúde da conta <Chip tone={isRisk ? "warning" : "success"}>{isRisk ? "requer atenção" : "estável"}</Chip></h3>
+        <p>
+          <Icon name={isRisk ? "alert" : "shieldCheck"} size="18px" tone={isRisk ? "warning" : "success"} />
+          {isRisk ? "Há sinais de risco em billing, cota, suporte ou operação." : "Uso regular, billing em dia e suporte ativo em importação."}
+        </p>
       </section>
       <section className="tcrm-tenant-summary-drawer__security">
         <h3>Acesso e segurança</h3>
@@ -14044,7 +14048,7 @@ export function TenantSummaryDrawer({
       </section>
       <section className="tcrm-tenant-summary-drawer__copilot">
         <Icon name="sparkles" size="22px" tone="info" />
-        <div><h3>Copiloto interno</h3><p>Resumo: acompanhar o ticket de importação antes do grant expirar. Não há incidente crítico neste tenant.</p><small><Icon name="info" size="14px" />Apenas resume e prioriza. Não concede grant, não altera billing e não bloqueia tenant.</small></div>
+        <div><h3>Copiloto interno</h3><p>{isRisk ? "Resumo: priorizar a revisão dos sinais de risco antes de executar ações no tenant." : "Resumo: acompanhar o ticket de importação antes do grant expirar. Não há incidente crítico neste tenant."}</p><small><Icon name="info" size="14px" />Apenas resume e prioriza. Não concede grant, não altera billing e não bloqueia tenant.</small></div>
       </section>
     </CrmDrawer>
   );

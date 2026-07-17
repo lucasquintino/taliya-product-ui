@@ -4220,6 +4220,11 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("grants");
     expect(close).toHaveBeenCalledOnce();
 
+    rerender(<crm.TenantSummaryDrawer state="risk" />);
+    expect(screen.getByText("requer atenção")).toBeInTheDocument();
+    expect(screen.getByText(/Há sinais de risco/)).toBeInTheDocument();
+    expect(screen.getByText(/priorizar a revisão dos sinais de risco/)).toBeInTheDocument();
+
     rerender(<crm.TenantSummaryDrawer state="loading" />);
     expect(screen.getByRole("complementary", { name: "Resumo do tenant selecionado" })).toHaveAttribute("aria-busy", "true");
     expect(screen.getByRole("button", { name: "Abrir tenant" })).toBeDisabled();

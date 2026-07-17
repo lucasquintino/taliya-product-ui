@@ -391,7 +391,7 @@ const pageFamilyContracts = [
     page: "InternalTenantsListDetailPage",
     file: "ImageCoverageInternal.stories.tsx",
     family: "internal/table",
-    requiredSnippets: ["<InternalWorklistPage", 'contentLayout="internal-tenants"', 'pageHeaderRhythm="internal-tenants"', 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters", "quickFilters={<InternalTenantQuickFilters />}", "<InternalTenantsTable", "setSelectedTenantId(tenantId)", "drawer={drawerOpen ? <TenantSummaryDrawer", "onClose={() => setDrawerOpen(false)}"]
+    requiredSnippets: ["<InternalWorklistPage", 'contentLayout="internal-tenants"', 'pageHeaderRhythm="internal-tenants"', 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters", "quickFilters={<InternalTenantQuickFilters", "<InternalTenantsTable", "setSelectedTenantId(tenantId)", "drawerModel = tenantSummaryModel(selectedTenant)", "<TenantSummaryDrawer {...drawerModel}", "onClose={() => { setDrawerOpen(false);"]
   },
   {
     page: "InternalTenantSecurityPage",

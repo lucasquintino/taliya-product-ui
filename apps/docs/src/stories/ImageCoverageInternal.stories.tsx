@@ -14,7 +14,7 @@ import {
   TenantSummaryDrawer,
   internalShellNavItems,
 } from "@taliya/crm";
-import type { CrmShellNavItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
+import type { CrmShellNavItem, PageFilterBarFilter, PageQuickFilterItem, TenantSummaryDrawerActivity, TenantSummaryDrawerFact } from "@taliya/crm";
 import { Avatar, Button, ButtonGroup, Chip, IconButton, InlineGroup, ProgressBar } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
@@ -62,9 +62,9 @@ function InternalTenantFilters({ onAction }: { onAction?: (action: string) => vo
         </ButtonGroup>
       }
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
+      onFilterValueChange={(filter, value) => { setValues((current) => ({ ...current, [filter.id]: value })); onAction?.(`Filtro alterado: ${filter.label}`); }}
+      onSearchChange={(value) => { setQuery(value); onAction?.(value ? `Busca de tenants: ${value}` : "Busca de tenants limpa"); }}
+      onSearchFilter={() => onAction?.("Filtros avancados de tenants abertos")}
       query={query}
       searchFilterLabel="Abrir filtros de tenants"
       searchPlaceholder="Buscar studio, tenant, responsavel ou plano"
@@ -72,7 +72,7 @@ function InternalTenantFilters({ onAction }: { onAction?: (action: string) => vo
   );
 }
 
-function InternalTenantQuickFilters() {
+function InternalTenantQuickFilters({ onAction }: { onAction?: (action: string) => void }) {
   const [selectedId, setSelectedId] = useState("active");
   const items: PageQuickFilterItem[] = [
     { id: "active", label: "Ativos", icon: "user", count: "38", selected: selectedId === "active" },
@@ -85,18 +85,47 @@ function InternalTenantQuickFilters() {
     { id: "cancelled", label: "Cancelados", icon: "x", count: "6", selected: selectedId === "cancelled" }
   ];
 
-  return <PageQuickFilters heading="Filtros rapidos" items={items} onSelect={(item) => setSelectedId(item.id)} />;
+  return <PageQuickFilters heading="Filtros rapidos" items={items} onSelect={(item) => { setSelectedId(item.id); onAction?.(`Filtro rapido selecionado: ${item.label}`); }} />;
 }
 
-function InternalTenantsTable({ onRowSelect, selectedRowId }: { onRowSelect?: (id: string) => void; selectedRowId?: string }) {
-  const rows: Array<{ id: string; studio: string; initials: string; status: string; statusTone: ComponentTone; plan: string; agents: string; quota: number; tickets: string; ticketsTone: ComponentTone; grant: string; grantTone: ComponentTone; billing: string; billingTone: ComponentTone; owner: string; activity: string }> = [
-    { id: "studio-vila", studio: "Studio Vila Mariana", initials: "VM", status: "Ativo", statusTone: "success", plan: "Growth", agents: "3/3", quota: 68, tickets: "1 aberto", ticketsTone: "info", grant: "ativo", grantTone: "success", billing: "em dia", billingTone: "success", owner: "Marina", activity: "hoje 10:24" },
-    { id: "reformer-sul", studio: "Studio Reformer Sul", initials: "RS", status: "Risco", statusTone: "warning", plan: "Base", agents: "0/0", quota: 12, tickets: "2 abertos", ticketsTone: "danger", grant: "nenhum", grantTone: "neutral", billing: "pagamento falhou", billingTone: "danger", owner: "Lucas", activity: "hoje 09:18" },
-    { id: "ana-pilates", studio: "Studio Ana Pilates", initials: "AP", status: "Ativo", statusTone: "success", plan: "Growth", agents: "2/3", quota: 90, tickets: "0", ticketsTone: "neutral", grant: "nenhum", grantTone: "neutral", billing: "em dia", billingTone: "success", owner: "Beatriz", activity: "ontem" },
-    { id: "pilates-norte", studio: "Pilates Norte", initials: "PN", status: "Trial", statusTone: "info", plan: "Trial", agents: "1/1", quota: 34, tickets: "1 aberto", ticketsTone: "info", grant: "pendente", grantTone: "warning", billing: "trial", billingTone: "info", owner: "Rafael", activity: "hoje 08:40" },
-    { id: "equilibrio", studio: "Studio Equilibrio", initials: "SE", status: "Bloqueado", statusTone: "danger", plan: "Pro", agents: "1/3", quota: 100, tickets: "3 abertos", ticketsTone: "danger", grant: "nenhum", grantTone: "neutral", billing: "inadimplente", billingTone: "danger", owner: "Marina", activity: "2 dias" },
-    { id: "corpo-vivo", studio: "Corpo Vivo Pilates", initials: "CP", status: "Cancelado", statusTone: "neutral", plan: "Base", agents: "0/0", quota: 0, tickets: "0", ticketsTone: "neutral", grant: "nenhum", grantTone: "neutral", billing: "encerrado", billingTone: "neutral", owner: "Sam", activity: "semana passada" }
-  ];
+type InternalTenantRow = { id: string; studio: string; initials: string; status: string; statusTone: ComponentTone; plan: string; agents: string; quota: number; tickets: string; ticketsTone: ComponentTone; grant: string; grantTone: ComponentTone; billing: string; billingTone: ComponentTone; owner: string; activity: string };
+
+const internalTenantRows: InternalTenantRow[] = [
+  { id: "studio-vila", studio: "Studio Vila Mariana", initials: "VM", status: "Ativo", statusTone: "success", plan: "Growth", agents: "3/3", quota: 68, tickets: "1 aberto", ticketsTone: "info", grant: "ativo", grantTone: "success", billing: "em dia", billingTone: "success", owner: "Marina", activity: "hoje 10:24" },
+  { id: "reformer-sul", studio: "Studio Reformer Sul", initials: "RS", status: "Risco", statusTone: "warning", plan: "Base", agents: "0/0", quota: 12, tickets: "2 abertos", ticketsTone: "danger", grant: "nenhum", grantTone: "neutral", billing: "pagamento falhou", billingTone: "danger", owner: "Lucas", activity: "hoje 09:18" },
+  { id: "ana-pilates", studio: "Studio Ana Pilates", initials: "AP", status: "Ativo", statusTone: "success", plan: "Growth", agents: "2/3", quota: 90, tickets: "0", ticketsTone: "neutral", grant: "nenhum", grantTone: "neutral", billing: "em dia", billingTone: "success", owner: "Beatriz", activity: "ontem" },
+  { id: "pilates-norte", studio: "Pilates Norte", initials: "PN", status: "Trial", statusTone: "info", plan: "Trial", agents: "1/1", quota: 34, tickets: "1 aberto", ticketsTone: "info", grant: "pendente", grantTone: "warning", billing: "trial", billingTone: "info", owner: "Rafael", activity: "hoje 08:40" },
+  { id: "equilibrio", studio: "Studio Equilibrio", initials: "SE", status: "Bloqueado", statusTone: "danger", plan: "Pro", agents: "1/3", quota: 100, tickets: "3 abertos", ticketsTone: "danger", grant: "nenhum", grantTone: "neutral", billing: "inadimplente", billingTone: "danger", owner: "Marina", activity: "2 dias" },
+  { id: "corpo-vivo", studio: "Corpo Vivo Pilates", initials: "CP", status: "Cancelado", statusTone: "neutral", plan: "Base", agents: "0/0", quota: 0, tickets: "0", ticketsTone: "neutral", grant: "nenhum", grantTone: "neutral", billing: "encerrado", billingTone: "neutral", owner: "Sam", activity: "semana passada" }
+];
+
+function tenantSummaryModel(row: InternalTenantRow): { title: string; subtitle: string; state: "active" | "risk"; facts: TenantSummaryDrawerFact[]; activities: TenantSummaryDrawerActivity[] } {
+  return {
+    title: row.studio,
+    subtitle: row.status === "Ativo" ? "Cliente ativo da Taliya" : `${row.status} na operacao interna da Taliya`,
+    state: row.status === "Ativo" || row.status === "Trial" ? "active" : "risk",
+    facts: [
+      { id: "status", label: "Status", value: <Chip tone={row.statusTone}>{row.status}</Chip>, icon: "calendar", tone: row.statusTone },
+      { id: "plan", label: "Plano", value: row.plan, icon: "layout" },
+      { id: "agents", label: "Agentes", value: `${row.agents.replace("/", " de ")} ativos`, icon: "users" },
+      { id: "quota", label: "Cota", value: `${row.quota}% usada`, icon: "clock", tone: row.quota >= 90 ? "danger" : undefined },
+      { id: "billing", label: "Billing", value: row.billing, icon: "creditCard", tone: row.billingTone },
+      { id: "tickets", label: "Tickets", value: row.tickets, icon: "inbox", tone: row.ticketsTone },
+      { id: "grant", label: "Grant", value: row.grant === "ativo" ? "Ativo ate hoje 18:00" : row.grant, icon: "shield", tone: row.grantTone },
+      { id: "incidents", label: "Incidentes", value: row.status === "Bloqueado" ? "1 critico" : "0 criticos", icon: "alert", tone: row.status === "Bloqueado" ? "danger" : undefined },
+      { id: "owner", label: <>Responsavel<br />interno</>, value: `${row.owner} - CS`, icon: "user" },
+      { id: "activity", label: "Ultima atividade", value: row.activity, icon: "clock" }
+    ],
+    activities: [
+      { id: "ticket", label: `${row.tickets} no suporte`, time: row.activity },
+      { id: "billing", label: `Billing ${row.billing}`, time: "hoje 09:18" },
+      { id: "quota", label: `Cota chegou a ${row.quota}%`, time: "ontem 18:20" },
+      { id: "plan", label: `Plano ${row.plan} revisado`, time: "12/05" }
+    ]
+  };
+}
+
+function InternalTenantsTable({ onAction, onRowSelect, selectedRowId }: { onAction?: (action: string) => void; onRowSelect?: (id: string) => void; selectedRowId?: string }) {
 
   return (
     <CrmWorklistTable
@@ -115,10 +144,12 @@ function InternalTenantsTable({ onRowSelect, selectedRowId }: { onRowSelect?: (i
         { key: "owner", header: "Responsavel", width: "9%" },
         { key: "activity", header: "Ultima atividade", width: "10%" }
       ]}
-      pagination={{ itemsPerPage: "10", label: "1-6 de 6", page: 1, pageCount: 1 }}
+      pagination={{ itemsPerPage: "10", label: "1-6 de 6", page: 1, pageCount: 1, previousDisabled: true, nextDisabled: true, onItemsPerPageClick: () => onAction?.("Quantidade por pagina aberta"), onPageChange: (page) => onAction?.(`Pagina selecionada: ${page}`) }}
       onRowSelect={(row) => onRowSelect?.(row.id)}
-      rowActions={() => <IconButton icon="more" label="Mais acoes do tenant" size="sm" variant="ghost" />}
-      rows={rows}
+      onSelectionChange={(rowId, selected) => onAction?.(`Selecao ${selected ? "ativada" : "removida"}: ${rowId}`)}
+      onSortChange={(sort) => onAction?.(`Ordenacao: ${sort?.key ?? "nenhuma"}`)}
+      rowActions={(row) => <IconButton icon="more" label={`Mais acoes de ${row.studio}`} onClick={() => onAction?.(`Menu do tenant aberto: ${row.id}`)} size="sm" variant="ghost" />}
+      rows={internalTenantRows}
       selectable
       selectedRowIds={selectedRowId ? [selectedRowId] : []}
       selectedRowId={selectedRowId}
@@ -190,26 +221,51 @@ export function InternalOverviewPage() {
 export function InternalTenantsListDetailPage() {
   const [selectedTenantId, setSelectedTenantId] = useState("studio-vila");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setAction] = useState("");
+  const [activeNavId, setActiveNavId] = useState("clients");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedTenant = internalTenantRows.find((row) => row.id === selectedTenantId) ?? internalTenantRows[0]!;
+  const drawerModel = tenantSummaryModel(selectedTenant);
 
   return (
-    <InternalWorklistPage
-      after={<InternalSecurityNotice />}
-      avatarSrc={image79Avatar}
-      browserUrl="https://app.taliya.com/internal/tenants"
-      contentLayout="internal-tenants"
-      drawer={drawerOpen ? <TenantSummaryDrawer onAction={setAction} onClose={() => setDrawerOpen(false)} /> : null}
-      drawerPlacement="floating"
-      filterBar={<InternalTenantFilters onAction={setAction} />}
-      navItems={internalNav("clients")}
-      pageHeaderRhythm="internal-tenants"
-      quickFilters={<InternalTenantQuickFilters />}
-      subtitle="Studios clientes, trials, riscos, grants e billing da Taliya"
-      title="Clientes"
-      worklistLayoutMode="main-priority"
-    >
-      <InternalTenantsTable onRowSelect={(tenantId) => { setSelectedTenantId(tenantId); setDrawerOpen(true); }} selectedRowId={selectedTenantId} />
-    </InternalWorklistPage>
+    <>
+      <InternalWorklistPage
+        after={<InternalSecurityNotice />}
+        avatarSrc={image79Avatar}
+        browserUrl="https://app.taliya.com/internal/tenants"
+        contentLayout="internal-tenants"
+        drawer={drawerOpen ? <TenantSummaryDrawer {...drawerModel} onAction={(action) => setAnnouncement(`Acao do tenant ${selectedTenant.id}: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Resumo do tenant fechado"); }} /> : null}
+        drawerPlacement="floating"
+        filterBar={<InternalTenantFilters onAction={setAnnouncement} />}
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens internas abertas"),
+          onNotifications: () => setAnnouncement("Notificacoes internas abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        navItems={internalNav(activeNavId)}
+        onBack={() => setAnnouncement("Navegacao de retorno acionada")}
+        onNavChange={(id) => { setActiveNavId(id); setAnnouncement(`Secao interna selecionada: ${id}`); }}
+        onSidebarSelect={(item) => setAnnouncement(`Modulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferencia selecionada: ${item.label}`)}
+        pageHeaderRhythm="internal-tenants"
+        quickFilters={<InternalTenantQuickFilters onAction={setAnnouncement} />}
+        subtitle="Studios clientes, trials, riscos, grants e billing da Taliya"
+        title="Clientes"
+        worklistLayoutMode="main-priority"
+      >
+        <InternalTenantsTable
+          onAction={setAnnouncement}
+          onRowSelect={(tenantId) => {
+            const tenant = internalTenantRows.find((row) => row.id === tenantId);
+            setSelectedTenantId(tenantId);
+            setDrawerOpen(true);
+            setAnnouncement(`Tenant selecionado: ${tenant?.studio ?? tenantId}`);
+          }}
+          selectedRowId={selectedTenantId}
+        />
+      </InternalWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

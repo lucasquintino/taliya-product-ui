@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T15:09:12.617Z",
+  "generatedAt": "2026-07-17T15:27:40.506Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 33,
+  "completedRouteCount": 34,
   "failedRouteCount": 0,
-  "pendingRouteCount": 40,
+  "pendingRouteCount": 39,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2947,38 +2947,54 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:27:39.232Z",
+        "evidence": [
+          "tmp/human-route-review/49-internal-tenants/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:27:39.336Z",
+        "evidence": [
+          "tmp/human-route-review/49-internal-tenants/desktop-reduced.png",
+          "tmp/human-route-review/49-internal-tenants/desktop-reformer-drawer.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:27:39.644Z",
+        "evidence": [
+          "tmp/human-route-review/49-internal-tenants/mobile-page.png",
+          "tmp/human-route-review/49-internal-tenants/mobile-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:27:40.165Z",
+        "evidence": [
+          "browser-observed:route-49-internal-tenants-74-controls-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "74 controls and assertions: 7 drawer actions; 6 dynamic row selections and reopen; 2 page actions; search, advanced filters and 6 filter selects; 8 quick filters; 3 sorts; 6 checkboxes; 6 row menus; pagination selector/page/bounds; 7 internal tabs; back; 4 global actions; 9 sidebar modules; 2 visual preferences; dynamic active/risk drawer semantics"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T15:27:40.297Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/49_round-4.1K_internal_02_tenants-lista-detalhe.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review made all six tenant rows drive official drawer facts and risk semantics, wired every table/filter/shell action, and fixed the clipped multi-row mobile filter bar without story-local CSS."
+      ]
     },
     {
       "image": "50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png",

@@ -33237,6 +33237,12 @@ button.tcrm-pipeline-card__select:focus-visible,
     overflow: visible;
   }
 
+  .tcrm-product-shell-stage--content-internal-tenants .tcrm-page-filter-bar {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
   .tcrm-dashboard-grid,
   .tcrm-dashboard-grid--today,
   .tcrm-dashboard-grid--todayCritical,
