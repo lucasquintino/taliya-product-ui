@@ -146,28 +146,52 @@ export function RetentionCancellationQueuePage() {
 export function RetentionReactivationListPage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedReactivation = reactivationRows.find((row) => row.id === selectedRowId) ?? reactivationRows[0]!;
 
   return (
-    <CrmWorklistPage
-      activeNavId="reativacoes"
-      activeSidebarId="retencao"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <ReactivationDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
-      filterBar={<ReactivationFilters />}
-      filterBarLabel="Filtros de reativacoes"
-      listLabel="Filas"
-      mainLabel="Tabela de reativacoes"
-      navItems={retentionNavItems}
-      quickFilters={<ReactivationQuickRail />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Ex-alunos e alunos pausados com chance de retorno."
-      title="Reativacoes"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      worklistLayoutMode="wide-rail"
-    >
-      <ReactivationTable onRowSelect={(row) => { setSelectedRowId(row.id); setDrawerOpen(true); }} selectedRowId={selectedRowId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="reativacoes"
+        activeSidebarId="retencao"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <ReactivationDrawer onAction={(action) => setAnnouncement(`Ação de reativação: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de reativação fechado"); }} reactivation={selectedReactivation} /> : null}
+        drawerPlacement="chrome"
+        filterBar={<ReactivationFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de reativacoes"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Filas"
+        mainLabel="Tabela de reativacoes"
+        navItems={retentionNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        quickFilters={<ReactivationQuickRail onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Ex-alunos e alunos pausados com chance de retorno."
+        title="Reativacoes"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        worklistLayoutMode="wide-rail"
+      >
+        <ReactivationTable
+          onInteraction={setAnnouncement}
+          onRowSelect={(row) => {
+            setSelectedRowId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Reativação selecionada: ${row.student}`);
+          }}
+          selectedRowId={selectedRowId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -594,17 +618,19 @@ function CancellationDrawer({ cancellation, onAction, onClose }: { cancellation:
   );
 }
 
-function ReactivationFilters() {
+function ReactivationFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
+  const [selectedQuickId, setSelectedQuickId] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "week", kind: "quick", label: "Esta semana" },
-    { id: "month", kind: "quick", label: "Este mes" },
+    { id: "today", kind: "quick", label: "Hoje", selected: selectedQuickId === "today" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: selectedQuickId === "week" },
+    { id: "month", kind: "quick", label: "Este mes", selected: selectedQuickId === "month" },
     { id: "unit", label: "Unidade", value: String(values.unit ?? ""), options: [{ value: "vila-mariana", label: "Vila Mariana" }, { value: "pinheiros", label: "Pinheiros" }] },
     { id: "status", label: "Status", value: String(values.status ?? ""), options: [{ value: "eligible", label: "Elegivel" }, { value: "paused", label: "Pausado" }, { value: "no-answer", label: "Sem resposta" }, { value: "reactivated", label: "Reativado" }] },
-    { id: "exit-reason", label: "Motivo de saida", value: String(values.exitReason ?? ""), options: [{ value: "agenda", label: "Dificuldade de agenda" }, { value: "finance", label: "Dificuldade financeira" }, { value: "city", label: "Mudanca de cidade" }] },
-    { id: "previous-plan", label: "Plano anterior", placement: "primary", value: String(values.previousPlan ?? ""), options: [{ value: "monthly", label: "Plano Mensal" }, { value: "2x", label: "Plano 2x/semana" }] },
-    { id: "owner", label: "Responsavel", placement: "primary", value: String(values.owner ?? ""), options: [{ value: "mariana", label: "Mariana" }, { value: "coordenacao", label: "Coordenacao" }] }
+    { id: "exit-reason", label: "Motivo de saida", value: String(values["exit-reason"] ?? ""), options: [{ value: "agenda", label: "Dificuldade de agenda" }, { value: "finance", label: "Dificuldade financeira" }, { value: "city", label: "Mudanca de cidade" }] },
+    { id: "previous-plan", label: "Plano anterior", placement: "primary", value: String(values["previous-plan"] ?? ""), options: [{ value: "monthly", label: "Plano Mensal" }, { value: "2x", label: "Plano 2x/semana" }] },
+    { id: "owner", label: "Responsavel", placement: "primary", value: String(values.owner ?? ""), options: [{ value: "mariana", label: "Mariana" }, { value: "coordenacao", label: "Coordenacao" }] },
+    { id: "contact", label: "Contato permitido", placement: "advanced", value: String(values.contact ?? ""), options: [{ value: "whatsapp", label: "WhatsApp" }, { value: "phone", label: "Telefone" }, { value: "blocked", label: "Nao contatar" }] }
   ];
 
   return (
@@ -613,9 +639,16 @@ function ReactivationFilters() {
       advancedFiltersSurface="modal"
       advancedFiltersTitle="Filtros de reativacoes"
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Período de reativações selecionado: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de reativações alterado: ${filter.id}`);
+      }}
       onSearchChange={() => undefined}
-      onSearchFilter={() => undefined}
+      onSearchFilter={() => onInteraction("Configuração de filtros de reativações aberta")}
       query=""
       searchFilterLabel="Abrir filtros de reativacoes"
       searchFilterPlacement="embedded"
@@ -625,7 +658,7 @@ function ReactivationFilters() {
   );
 }
 
-function ReactivationQuickRail() {
+function ReactivationQuickRail({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("all");
   const items: PageQuickFilterItem[] = [
     { id: "all", label: "Todos", icon: "user", count: "27", selected: selectedId === "all" },
@@ -643,7 +676,10 @@ function ReactivationQuickRail() {
       groupLabel="Filas de reativacoes"
       heading="Filas"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => {
+        setSelectedId(item.id);
+        onInteraction(`Fila de reativações selecionada: ${item.label}`);
+      }}
       selectionTone="soft"
     />
   );
@@ -673,11 +709,13 @@ const reactivationRows: ReactivationRow[] = [
   { id: "bianca", student: "Bianca Oliveira", status: "Sem resposta", statusTone: "neutral", reason: "falta de tempo", activity: "ultimo contato em 01/05", opportunity: "vaga aberta no Pilates Solo", nextAction: "enviar lembrete carinhoso", owner: "Mariana" }
 ];
 
-function ReactivationTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row: ReactivationRow) => void; selectedRowId?: string }) {
+function ReactivationTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: ReactivationRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
       actionColumnWidth="42px"
       ariaLabel="Tabela de reativacoes"
+      density="compact"
+      minTableWidth="900px"
       columns={[
         { key: "student", header: "Aluno", sortable: true, width: "18%", render: (row) => <PersonLabel avatarSrc={image79Avatar} name={row.student} size="xs" /> },
         { key: "status", header: "Status", width: "12%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> },
@@ -687,60 +725,83 @@ function ReactivationTable({ onRowSelect, selectedRowId }: { onRowSelect?: (row:
         { key: "nextAction", header: "Proxima acao", width: "15%" },
         { key: "owner", header: "Resp.", width: "8%" }
       ]}
-      pagination={{ itemsPerPage: "10", label: "1-9 de 9", page: 1, pageCount: 1 }}
+      onSortChange={(sort) => onInteraction(sort ? `Ordenação: ${sort.key} ${sort.direction}` : "Ordenação removida")}
+      pagination={{
+        itemsPerPage: "10",
+        label: "1-9 de 9",
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => onInteraction("Já está na última página de reativações"),
+        onPageChange: () => onInteraction("Página de reativações: 1"),
+        onPreviousPage: () => onInteraction("Já está na primeira página de reativações"),
+        page: 1,
+        pageCount: 1
+      }}
       onRowSelect={onRowSelect}
-      rowActions={() => <IconButton icon="chevronRight" label="Abrir reativacao" size="sm" variant="ghost" />}
+      rowActions={(row) => <IconButton icon="chevronRight" label={`Abrir reativação de ${row.student}`} onClick={(event) => { event.stopPropagation(); onRowSelect?.(row); }} size="sm" variant="ghost" />}
       rows={reactivationRows}
       selectedRowId={selectedRowId}
     />
   );
 }
 
-const reactivationDrawerFacts = [
-  { id: "plan", icon: "clipboard" as const, label: "Plano anterior", value: "Plano Mensal" },
-  { id: "reason", icon: "alert" as const, label: "Motivo", value: "dificuldade de agenda" },
-  { id: "class", icon: "graduation" as const, label: "Turma anterior", value: "Reformer Iniciante" },
-  { id: "last", icon: "clock" as const, label: "Ultima conversa", value: "30/04" },
-  { id: "left", icon: "calendar" as const, label: "Saiu em", value: "29/04" },
-  { id: "channel", icon: "whatsapp" as const, label: "Contato permitido", value: "WhatsApp" }
+function reactivationDrawerFacts(reactivation: ReactivationRow): CaseDrawerFact[] {
+  return [
+    { id: "plan", icon: "clipboard", label: "Plano anterior", value: reactivation.status === "Pausado" ? "Plano 2x/semana" : "Plano Mensal" },
+    { id: "reason", icon: "alert", label: "Motivo", value: reactivation.reason },
+    { id: "class", icon: "graduation", label: "Turma anterior", value: "Reformer Iniciante" },
+    { id: "last", icon: "clock", label: "Ultima conversa", value: reactivation.id === "ana" ? "30/04" : reactivation.activity.replace(/^.* em /, "") },
+    { id: "left", icon: "calendar", label: "Saiu em", value: reactivation.activity.replace(/^.* em /, "") },
+    { id: "channel", icon: "whatsapp", label: "Contato permitido", value: reactivation.status === "Nao contatar" ? "Não permitido" : "WhatsApp" }
+  ];
+}
+
+const reactivationFooterActions: CaseDrawerFooterAction[] = [
+  { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp" },
+  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+  { id: "reserve", label: "Reservar vaga", leadingIcon: "calendar" },
+  { id: "do-not-contact", label: "Marcar como nao contatar", leadingIcon: "checkCircle" },
+  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+  { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
 ];
 
-function ReactivationDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
+function ReactivationDrawer({ onAction, onClose, reactivation }: { onAction?: (action: string) => void; onClose?: () => void; reactivation: ReactivationRow }) {
+  const hasOpportunity = reactivation.opportunity !== "-";
+  const sections: CaseDrawerSection[] = [
+    { id: "opportunity", title: "Oportunidade de retorno", kind: "facts", items: hasOpportunity ? [
+      { id: "slot", label: "Vaga aberta", meta: "Quinta, 09:00" },
+      { id: "class", label: "Turma", meta: reactivation.opportunity.replace(/^vaga aberta no /, "") },
+      { id: "availability", label: "Disponibilidade", meta: "1 vaga disponivel", tone: "success" },
+      { id: "plan", label: "Plano sugerido", meta: "Plano Mensal" }
+    ] : [{ id: "unavailable", label: "Sem oportunidade disponível", tone: "neutral" }] },
+    { id: "restrictions", title: "Restricoes", kind: "list", items: [
+      { id: "discount", label: "Nao prometer desconto automatico", tone: "danger" },
+      { id: "availability", label: "Confirmar disponibilidade antes de reservar", tone: "danger" },
+      { id: "respect", label: "Respeitar 'nao contatar' se marcado", tone: "danger" }
+    ] },
+    { id: "copilot", title: "Sugestão do copiloto", kind: "copilot", icon: "sparkles", description: hasOpportunity ? `Enviar uma mensagem curta sobre ${reactivation.opportunity.replace(/^vaga aberta no /, "")} e perguntar se o horário voltou a servir.` : "Respeitar a preferência registrada e não iniciar novo contato." },
+    { id: "history", title: "Histórico curto", kind: "history", items: [
+      { id: "activity", label: reactivation.activity, meta: reactivation.activity.replace(/^.* em /, ""), tone: reactivation.statusTone },
+      { id: "reason", label: `Motivo registrado: ${reactivation.reason}`, meta: "motivo" },
+      { id: "opportunity", label: hasOpportunity ? "Nova vaga compativel detectada hoje" : "Preferência de não contato preservada", meta: "hoje", tone: hasOpportunity ? "success" : "neutral" }
+    ] }
+  ];
+
   return (
     <CaseDrawer
-      alternatives={[{ id: "slot", title: "Quinta, 09:00", capacity: "Reformer", status: "1 vaga disponivel", tone: "success" }]}
-      alternativesTitle="Oportunidade de retorno"
       avatarSrc={image79Avatar}
+      density="compact"
       eyebrowLabel="Reativacao"
-      facts={reactivationDrawerFacts}
+      facts={reactivationDrawerFacts(reactivation)}
       factsLayout="grid"
-      footerActions={[
-        { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp" },
-        { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
-        { id: "reserve", label: "Reservar vaga", leadingIcon: "calendar" },
-        { id: "do-not-contact", label: "Marcar como nao contatar", leadingIcon: "checkCircle" },
-        { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
-        { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
-      ]}
-      history={[
-        { id: "cancelled", time: "29/04", label: "Cancelamento registrado em 29/04" },
-        { id: "refused", time: "29/04", label: "Plano de salvamento recusado em 29/04" },
-        { id: "slot", time: "hoje", label: "Nova vaga compativel detectada hoje" }
-      ]}
-      restrictions={[
-        { id: "discount", label: "Nao prometer desconto automatico" },
-        { id: "availability", label: "Confirmar disponibilidade antes de reservar" },
-        { id: "respect", label: "Respeitar 'nao contatar' se marcado" }
-      ]}
-      restrictionsTitle="Restricoes"
-      widthVariant="wide"
-      showMessageSuggestion={false}
+      footerActions={reactivationFooterActions}
       numberedSections
       onAction={onAction}
       onClose={onClose}
-      statusLabel="Elegivel"
-      suggestion="Enviar mensagem curta oferecendo a vaga de quinta as 09h e perguntando se o horario voltou a servir."
-      title="Ana Paula Martins"
+      sections={sections}
+      showMessageSuggestion={false}
+      statusLabel={reactivation.status}
+      title={reactivation.student}
+      widthVariant="wide"
     />
   );
 }

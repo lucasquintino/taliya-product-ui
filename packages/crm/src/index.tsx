@@ -11912,7 +11912,7 @@ export interface CaseDrawerFooterAction {
   fullWidth?: boolean;
 }
 
-export type CaseDrawerSectionKind = "text" | "list" | "alert" | "steps" | "checklist" | "copilot" | "actions" | "history";
+export type CaseDrawerSectionKind = "text" | "list" | "facts" | "alert" | "steps" | "checklist" | "copilot" | "actions" | "history";
 
 export interface CaseDrawerSectionItem {
   id: string;

@@ -14983,6 +14983,21 @@ button.tcrm-integration-status-row:disabled {
   width: var(--taliya-space-1);
 }
 
+.tcrm-case-drawer__section--facts li {
+  align-items: start;
+  display: grid;
+  gap: var(--taliya-space-3);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.tcrm-case-drawer__section--facts li em {
+  color: var(--taliya-color-crm-case-drawer-text);
+}
+
+.tcrm-case-drawer__section--facts .tcrm-case-drawer__section-item--success em {
+  color: var(--taliya-color-crm-case-drawer-success-fg);
+}
+
 .tcrm-case-drawer__section--steps li {
   align-items: center;
   display: grid;
@@ -32763,6 +32778,17 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 @media (max-width: 640px) {
+  .tcrm-case-drawer--compact.tcrm-drawer-frame .tcrm-case-drawer__action.tl-button {
+    height: auto;
+    white-space: normal;
+  }
+
+  .tcrm-case-drawer--compact.tcrm-drawer-frame .tcrm-case-drawer__action.tl-button span {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
   .tcrm-agent-catalog {
     grid-template-columns: minmax(0, 1fr);
   }

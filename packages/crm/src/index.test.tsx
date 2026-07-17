@@ -3015,7 +3015,8 @@ describe("@taliya/crm component coverage", () => {
           { id: "plan", title: "Plano de resolucao", kind: "checklist", items: [{ id: "reply", label: "Responder com pedido de desculpas", tone: "success" }] },
           { id: "copilot", title: "Sugestao do copiloto", kind: "copilot", icon: "sparkles", description: "Enviar resposta humana." },
           { id: "actions", title: "Proxima acao", kind: "actions" },
-          { id: "history", title: "Historico curto", kind: "history", items: [{ id: "opened", label: "Caso aberto", tone: "success" }] }
+          { id: "history", title: "Historico curto", kind: "history", items: [{ id: "opened", label: "Caso aberto", tone: "success" }] },
+          { id: "opportunity", title: "Oportunidade", kind: "facts", items: [{ id: "slot", label: "Vaga aberta", meta: "Quinta, 09:00", tone: "success" }] }
         ]}
         numberedSections
         widthVariant="wide"
@@ -3029,6 +3030,8 @@ describe("@taliya/crm component coverage", () => {
     expect(within(drawer).getByText("Aluna aguardando retorno.")).toBeInTheDocument();
     expect(within(drawer).getByRole("heading", { name: "4. Automacao pausada" })).toBeInTheDocument();
     expect(within(drawer).getByText("Responder com pedido de desculpas")).toBeInTheDocument();
+    expect(within(drawer).getByRole("region", { name: "Oportunidade" })).toHaveClass("tcrm-case-drawer__section--facts");
+    expect(within(drawer).getByText("Quinta, 09:00")).toBeInTheDocument();
     expect(within(drawer).queryByText("Alternativas possíveis")).not.toBeInTheDocument();
     expect(within(drawer).getByRole("heading", { name: "7. Proxima acao" })).toBeInTheDocument();
     expect(drawer).toHaveClass("tcrm-case-drawer--compact");

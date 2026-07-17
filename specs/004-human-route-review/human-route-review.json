@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T10:13:15.589Z",
+  "generatedAt": "2026-07-17T11:43:42.572Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 27,
+  "completedRouteCount": 28,
   "failedRouteCount": 0,
-  "pendingRouteCount": 46,
+  "pendingRouteCount": 45,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2465,38 +2465,56 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T11:38:01.936Z",
+        "evidence": [
+          "tmp/human-route-review/43-retention-reactivation-list/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T11:38:06.975Z",
+        "evidence": [
+          "tmp/human-route-review/43-retention-reactivation-list/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T11:38:40.976Z",
+        "evidence": [
+          "tmp/human-route-review/43-retention-reactivation-list/mobile-page.png",
+          "tmp/human-route-review/43-retention-reactivation-list/mobile-drawer.png",
+          "tmp/human-route-review/43-retention-reactivation-list/mobile-reopened-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T11:38:49.145Z",
+        "evidence": [
+          "browser-observed:109-retention-reactivation-worklist-controls-dynamic-case-drawers-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell navigation and sidebar utilities, all four global actions, all three periods, five primary and one advanced contact filter, all seven queues, all nine rows and row actions, dynamic five-section drawers, sorting, pagination and items-per-page, all six drawer actions, close/reopen regression, desktop and mobile contained scrolling"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T11:38:55.412Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/43_round-4.1H_reativacoes_01_ex-alunos-retorno.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review exercised every unique reactivation-worklist path across three periods, five primary and one advanced contact filter, seven queues, nine rows and row actions, sorting, pagination, shell controls, and all six drawer actions.",
+        "Selecting any of the nine reactivation cases now updates the official compact CaseDrawer summary, source-aligned opportunity facts, restrictions, copilot suggestion, and history; row actions reopen the selected case.",
+        "Canonical, reduced-desktop, and mobile evidence preserve nine visible rows, the advanced-filter trigger, full-height drawer behavior, and complete mobile footer labels without page overflow."
+      ]
     },
     {
       "image": "44_round-4.1H_reclamacoes_01_fila-caso-sensivel-drawer.png.png",

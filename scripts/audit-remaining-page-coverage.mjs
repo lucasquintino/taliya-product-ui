@@ -334,13 +334,14 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmWorklistPage",
       'worklistLayoutMode="wide-rail"',
-      "filterBar={<ReactivationFilters />}",
-      "quickFilters={<ReactivationQuickRail />}",
+      "filterBar={<ReactivationFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "quickFilters={<ReactivationQuickRail onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<ReactivationDrawer onAction=",
+      "reactivation={selectedReactivation}",
       "<ReactivationTable",
-      "setSelectedRowId(row.id)",
-      "drawer={drawerOpen ? <ReactivationDrawer",
-      "onClose={() => setDrawerOpen(false)}",
-      "onAction={setDrawerAction}"
+      "setSelectedRowId(row.id)"
     ]
   },
   {
@@ -905,8 +906,9 @@ const tableFamilyDetailContracts = [
     table: "ReactivationTable",
     drawer: "ReactivationDrawer",
     layoutMode: "wide-rail",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", 'factsLayout="grid"', "restrictions={["]
+    requiredFilterSnippets: ['placement: "advanced"', 'label: "Contato permitido"'],
+    requiredTableSnippets: ["<CrmWorklistTable", 'density="compact"', 'minTableWidth="900px"', "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
+    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', 'factsLayout="grid"', 'kind: "facts"', "facts={reactivationDrawerFacts(reactivation)}", "footerActions={reactivationFooterActions}", "sections={sections}", "title={reactivation.student}"]
   },
   {
     page: "RetentionComplaintQueuePage",
@@ -951,6 +953,9 @@ const tableFamilyDetailRows = tableFamilyDetailContracts.map((contract) => {
       .filter((snippet) => !pageSource.includes(snippet))
       .map((snippet) => `${contract.page}: ${snippet}`),
     ...["<PageFilterBar", 'advancedFiltersSurface="modal"', "searchFilterPlacement=\"embedded\""]
+      .filter((snippet) => !filterSource.includes(snippet))
+      .map((snippet) => `${contract.filter}: ${snippet}`),
+    ...(contract.requiredFilterSnippets ?? [])
       .filter((snippet) => !filterSource.includes(snippet))
       .map((snippet) => `${contract.filter}: ${snippet}`),
     ...["<PageQuickFilters", 'selectionTone="soft"', "items={items}"]
