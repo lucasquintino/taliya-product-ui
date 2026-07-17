@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T12:16:55.258Z",
+  "generatedAt": "2026-07-17T13:17:23.651Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 29,
+  "completedRouteCount": 30,
   "failedRouteCount": 0,
-  "pendingRouteCount": 44,
+  "pendingRouteCount": 43,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2629,38 +2629,52 @@
         "export-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T13:17:23.146Z",
+        "evidence": [
+          "tmp/human-route-review/45-reports-management/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T13:17:23.243Z",
+        "evidence": [
+          "tmp/human-route-review/45-reports-management/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T13:17:23.324Z",
+        "evidence": [
+          "tmp/human-route-review/45-reports-management/mobile-page.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T13:17:23.405Z",
+        "evidence": [
+          "browser-observed:111-reports-management-filters-dashboard-export-rows-shell-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "3 period filters; unit and owner selects; advanced filters; export and schedule; 8 dashboard actions; 3 export rows; 7 report tabs; back; 4 global actions; sidebar expansion, 9 modules and 2 visual preferences"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T13:17:23.485Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/45_round-4.1I_relatorios_01_visao-gestao.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review fixed the ReportFilterBar row contract, made periods and selects stateful, wired shell and dashboard callbacks, promoted export digest rows to official Button interactions, and added intermediate/mobile report responsiveness without story-local CSS."
+      ]
     },
     {
       "image": "46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png",

@@ -1,8 +1,8 @@
 {
-  "date": "2026-07-16",
-  "status": "pass",
+  "date": "2026-07-17",
+  "status": "fail",
   "rowCount": 41,
-  "failedCount": 0,
+  "failedCount": 2,
   "fileCount": 11,
   "failedFileCount": 0,
   "rows": [
@@ -59,15 +59,25 @@
       "page": "FinanceBillingDrawerPage",
       "file": "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
       "family": "dashboard/finance",
-      "missingSnippets": [],
-      "status": "pass"
+      "missingSnippets": [
+        "FinanceBillingDrawerPage: drawer={drawerOpen ? <PaymentDrawer",
+        "FinanceBillingDrawerPage: onOpenCase={() => setDrawerOpen(true)}"
+      ],
+      "status": "fail"
     },
     {
       "page": "AgendaCalendarPage",
       "file": "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
       "family": "dashboard/calendar",
-      "missingSnippets": [],
-      "status": "pass"
+      "missingSnippets": [
+        "AgendaCalendarPage: before={<AgendaFilters />}",
+        "AgendaCalendarPage: <AgendaSidePanel />",
+        "AgendaCalendarPage: <WeeklyCalendar compact",
+        "AgendaCalendarPage: drawer={drawerOpen ? <AgendaSelectedClassDrawer",
+        "AgendaCalendarPage: onClose={() => setDrawerOpen(false)}",
+        "AgendaCalendarPage: onEventSelect={() => setDrawerOpen(true)}"
+      ],
+      "status": "fail"
     },
     {
       "page": "AgendaClassDetailPage",

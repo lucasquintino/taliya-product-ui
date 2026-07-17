@@ -4466,6 +4466,11 @@ describe("@taliya/crm component coverage", () => {
     const opportunityGroupOpen = vi.fn();
     const opportunityItemOpen = vi.fn();
     const exportReport = vi.fn();
+    const reportAdvanced = vi.fn();
+    const reportOwner = vi.fn();
+    const reportPeriod = vi.fn();
+    const reportUnit = vi.fn();
+    const reportStatOpen = vi.fn();
     const pauseImport = vi.fn();
     const detailsImport = vi.fn();
     const rowClick = vi.fn();
@@ -4483,9 +4488,9 @@ describe("@taliya/crm component coverage", () => {
         <div data-testid="security"><crm.SecurityRulePanel onAction={action} /></div>
         <div data-testid="chart"><crm.ChartPanel onOpen={open} /></div>
         <div data-testid="chart-summary"><crm.ChartPanel layout="summary" stats={[{ id: "cash", label: "Recebimentos", value: "+8%", icon: "arrowRight" }]} /></div>
-        <div data-testid="chart-exports"><crm.ChartPanel layout="exports" stats={[{ id: "file", label: "Financeiro mensal", value: "pronto", detail: "Hoje 08:12", icon: "fileText" }]} /></div>
+        <div data-testid="chart-exports"><crm.ChartPanel layout="exports" onStatOpen={reportStatOpen} stats={[{ id: "file", label: "Financeiro mensal", value: "pronto", detail: "Hoje 08:12", icon: "fileText" }]} /></div>
         <div data-testid="chart-recommendation"><crm.ChartPanel impact="Priorize o caixa" layout="recommendation" /></div>
-        <div data-testid="filters"><crm.ReportFilterBar onExport={exportReport} /></div>
+        <div data-testid="filters"><crm.ReportFilterBar onAdvancedFilters={reportAdvanced} onExport={exportReport} onOwnerChange={reportOwner} onPeriodChange={reportPeriod} onUnitChange={reportUnit} /></div>
         <div data-testid="opportunity-group"><crm.OpportunityGroupCard onItemOpen={opportunityItemOpen} onOpen={opportunityGroupOpen} /></div>
         <div data-testid="opportunity"><crm.OpportunityPanel onAction={action} /></div>
         <div data-testid="import"><crm.ImportProgress onDetails={detailsImport} onPause={pauseImport} /></div>
@@ -4509,8 +4514,16 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(within(screen.getByTestId("chart")).getByRole("button", { name: "Abrir financeiro" }));
     expect(within(screen.getByTestId("chart-summary")).getByText("Recebimentos").closest("[data-layout='summary']")).toBeInTheDocument();
     expect(within(screen.getByTestId("chart-exports")).getByText("Hoje 08:12")).toBeInTheDocument();
+    fireEvent.click(within(screen.getByTestId("chart-exports")).getByRole("button", { name: "Abrir Financeiro mensal" }));
     expect(within(screen.getByTestId("chart-recommendation")).getByText("Priorize o caixa")).toBeInTheDocument();
-    fireEvent.click(within(screen.getByTestId("filters")).getByRole("button", { name: "Exportar" }));
+    const reportFilters = within(screen.getByTestId("filters"));
+    fireEvent.click(reportFilters.getByRole("button", { name: "Hoje" }));
+    fireEvent.click(reportFilters.getByRole("combobox", { name: "Unidade" }));
+    fireEvent.click(screen.getByRole("option", { name: "Vila Mariana" }));
+    fireEvent.click(reportFilters.getByRole("combobox", { name: /Respons/ }));
+    fireEvent.click(screen.getByRole("option", { name: "Mariana" }));
+    fireEvent.click(reportFilters.getByRole("button", { name: "Mais filtros" }));
+    fireEvent.click(reportFilters.getByRole("button", { name: "Exportar" }));
     fireEvent.click(within(screen.getByTestId("opportunity-group")).getByRole("button", { name: /R\$ 1\.260/ }));
     fireEvent.click(within(screen.getByTestId("opportunity-group")).getByRole("button", { name: "Enviar Pix" }));
     fireEvent.click(within(screen.getByTestId("opportunity")).getByRole("button", { name: "Criar tarefa" }));
@@ -4537,6 +4550,11 @@ describe("@taliya/crm component coverage", () => {
     expect(opportunityGroupOpen).toHaveBeenCalledTimes(1);
     expect(opportunityItemOpen).toHaveBeenCalledWith(expect.objectContaining({ id: "ana" }));
     expect(exportReport).toHaveBeenCalledTimes(1);
+    expect(reportAdvanced).toHaveBeenCalledTimes(1);
+    expect(reportOwner).toHaveBeenCalledWith("mariana");
+    expect(reportPeriod).toHaveBeenCalledWith("today");
+    expect(reportStatOpen).toHaveBeenCalledWith(expect.objectContaining({ id: "file" }));
+    expect(reportUnit).toHaveBeenCalledWith("vila-mariana");
     expect(pauseImport).toHaveBeenCalledTimes(1);
     expect(detailsImport).toHaveBeenCalledTimes(1);
     expect(rowClick).toHaveBeenCalledWith("nome");

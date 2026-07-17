@@ -18,7 +18,7 @@ const contracts = [
     page: "ReportsManagementPage",
     file: "apps/docs/src/stories/ImageCoverageReports.stories.tsx",
     family: "dashboard/reports",
-    requiredPageSnippets: ["<CrmDashboardPage", "before={<ReportFilterBar", "<ReportsManagementContent", "<ExportAction"]
+    requiredPageSnippets: ["<CrmDashboardPage", "<ReportFilterBar", "onPeriodChange=", "<ReportsManagementContent", "<ExportAction"]
   },
   {
     page: "MoneyOnTheTablePage",

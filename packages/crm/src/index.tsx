@@ -18394,6 +18394,15 @@ export function TenantDetailLayout({
   );
 }
 
+export interface ChartPanelStat {
+  id: string;
+  label: React.ReactNode;
+  value: React.ReactNode;
+  icon: IconName;
+  tone?: ComponentTone;
+  detail?: React.ReactNode;
+}
+
 export function ChartPanel({
   title = "Dinheiro em aberto",
   state = "ready",
@@ -18408,6 +18417,7 @@ export function ChartPanel({
   icon = "alert",
   layout = "metric",
   onOpen,
+  onStatOpen,
   className
 }: CrmSurfaceProps & {
   source?: React.ReactNode;
@@ -18417,10 +18427,11 @@ export function ChartPanel({
   metricTone?: ComponentTone;
   actionLabel?: React.ReactNode;
   impact?: React.ReactNode;
-  stats?: Array<{ id: string; label: React.ReactNode; value: React.ReactNode; icon: IconName; tone?: ComponentTone; detail?: React.ReactNode }>;
+  stats?: ChartPanelStat[];
   layout?: "metric" | "summary" | "exports" | "recommendation";
   variant?: React.ComponentProps<typeof ChartPanelPrimitive>["variant"];
   onOpen?: () => void;
+  onStatOpen?: (stat: ChartPanelStat) => void;
 }) {
   const key = stateKey(state) || "ready";
   const metricStats = stats ?? [
@@ -18445,14 +18456,19 @@ export function ChartPanel({
         <ChartPanelPrimitive className="tcrm-report-card__primitive" empty={key === "empty"} loading={key === "loading"} title={String(title)} variant="bar" />
       ) : layout === "summary" || layout === "exports" ? (
         <div className="tcrm-report-card__digest">
-          {metricStats.map((item) => (
-            <span key={item.id}>
+          {metricStats.map((item) => {
+            const content = (
+              <>
               <Icon name={item.icon} size="16px" tone={item.tone ?? "current"} />
               <span>{item.label}</span>
               <b>{item.value}</b>
               {item.detail ? <small>{item.detail}</small> : null}
-            </span>
-          ))}
+              </>
+            );
+            return layout === "exports" && onStatOpen ? (
+              <Button aria-label={`Abrir ${String(item.label)}`} key={item.id} onClick={() => onStatOpen(item)} size="sm" type="button" variant="ghost">{content}</Button>
+            ) : <span key={item.id}>{content}</span>;
+          })}
         </div>
       ) : layout === "recommendation" ? (
         <p className="tcrm-report-card__recommendation">{impact}</p>
@@ -18476,21 +18492,61 @@ export function ChartPanel({
   );
 }
 
-export function ReportFilterBar({
-  onExport,
-  className
-}: {
+export type ReportFilterPeriod = "today" | "week" | "month";
+
+export interface ReportFilterBarProps {
+  selectedPeriod?: ReportFilterPeriod;
+  unitValue?: string;
+  ownerValue?: string;
+  onAdvancedFilters?: () => void;
   onExport?: () => void;
+  onOwnerChange?: (value: string) => void;
+  onPeriodChange?: (period: ReportFilterPeriod) => void;
+  onUnitChange?: (value: string) => void;
   className?: string;
-}) {
+}
+
+export function ReportFilterBar({
+  selectedPeriod,
+  unitValue,
+  ownerValue,
+  onAdvancedFilters,
+  onExport,
+  onOwnerChange,
+  onPeriodChange,
+  onUnitChange,
+  className
+}: ReportFilterBarProps) {
+  const [internalPeriod, setInternalPeriod] = React.useState<ReportFilterPeriod>("month");
+  const [internalUnit, setInternalUnit] = React.useState("all");
+  const [internalOwner, setInternalOwner] = React.useState("all");
+  const effectivePeriod = selectedPeriod ?? internalPeriod;
+  const effectiveUnit = unitValue ?? internalUnit;
+  const effectiveOwner = ownerValue ?? internalOwner;
+  const periods: Array<{ id: ReportFilterPeriod; label: string }> = [
+    { id: "today", label: "Hoje" },
+    { id: "week", label: "Esta semana" },
+    { id: "month", label: "Este mês" }
+  ];
+
   return (
     <FilterBar className={cn("tcrm-report-filter-bar", className)} aria-label="Filtros de relatórios">
-      <Button size="sm" variant="secondary">Hoje</Button>
-      <Button size="sm" variant="secondary">Esta semana</Button>
-      <Button size="sm" variant="secondary">Este mês</Button>
-      <Select aria-label="Unidade" fieldSize="sm" options={[{ value: "unit", label: "Unidade" }]} value="unit" />
-      <Select aria-label="Responsável" fieldSize="sm" options={[{ value: "owner", label: "Responsável" }]} value="owner" />
-      <Button size="sm" trailingIcon="filter" variant="secondary">Mais filtros</Button>
+      {periods.map((period) => (
+        <Button
+          aria-pressed={effectivePeriod === period.id}
+          className={cn(effectivePeriod === period.id && "is-selected")}
+          key={period.id}
+          onClick={() => {
+            if (selectedPeriod === undefined) setInternalPeriod(period.id);
+            onPeriodChange?.(period.id);
+          }}
+          size="sm"
+          variant="secondary"
+        >{period.label}</Button>
+      ))}
+      <Select aria-label="Unidade" fieldSize="sm" onValueChange={(value) => { if (unitValue === undefined) setInternalUnit(value); onUnitChange?.(value); }} options={[{ value: "all", label: "Unidade" }, { value: "vila-mariana", label: "Vila Mariana" }, { value: "pinheiros", label: "Pinheiros" }]} value={effectiveUnit} />
+      <Select aria-label="Responsável" fieldSize="sm" onValueChange={(value) => { if (ownerValue === undefined) setInternalOwner(value); onOwnerChange?.(value); }} options={[{ value: "all", label: "Responsável" }, { value: "mariana", label: "Mariana" }, { value: "lucas", label: "Lucas" }]} value={effectiveOwner} />
+      <Button onClick={onAdvancedFilters} size="sm" trailingIcon="filter" variant="secondary">Mais filtros</Button>
       <span className="tcrm-report-filter-bar__export-behavior"><ExportAction onExport={onExport} /></span>
     </FilterBar>
   );

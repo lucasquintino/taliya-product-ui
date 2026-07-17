@@ -1,8 +1,8 @@
 # Dashboard / Right Panel / Setup Family Audit
 
-Date: 2026-07-16
+Date: 2026-07-17
 
-Status: pass
+Status: fail
 
 This audit protects the official Dashboard, Right Panel, and Setup page families used by the CRM image coverage stories. It checks for `CrmDashboardPage`, `CrmRightPanelPage`, `SetupPage`, `SetupContentGrid`, and page-specific domain slots, and rejects stale direct shell/grid assembly.
 
@@ -11,7 +11,7 @@ It does **not** certify 1:1 visual approval.
 ## Summary
 
 - Checked page rows: 41
-- Failed page rows: 0
+- Failed page rows: 2
 - Checked source files: 11
 - Failed source files: 0
 
@@ -26,8 +26,8 @@ It does **not** certify 1:1 visual approval.
 | AgentsCatalogPage | apps/docs/src/stories/ImageCoverageAgents.stories.tsx | dashboard/agents | pass | None |
 | AgentAgendaRoutinesPage | apps/docs/src/stories/ImageCoverageAgents.stories.tsx | dashboard/agents | pass | None |
 | SettingsHubPage | apps/docs/src/stories/ImageCoverageSettings.stories.tsx | dashboard/settings | pass | None |
-| FinanceBillingDrawerPage | apps/docs/src/stories/ImageCoverageFinance.stories.tsx | dashboard/finance | pass | None |
-| AgendaCalendarPage | apps/docs/src/stories/ImageCoverageAgenda.stories.tsx | dashboard/calendar | pass | None |
+| FinanceBillingDrawerPage | apps/docs/src/stories/ImageCoverageFinance.stories.tsx | dashboard/finance | fail | FinanceBillingDrawerPage: drawer={drawerOpen ? <PaymentDrawer<br>FinanceBillingDrawerPage: onOpenCase={() => setDrawerOpen(true)} |
+| AgendaCalendarPage | apps/docs/src/stories/ImageCoverageAgenda.stories.tsx | dashboard/calendar | fail | AgendaCalendarPage: before={<AgendaFilters />}<br>AgendaCalendarPage: <AgendaSidePanel /><br>AgendaCalendarPage: <WeeklyCalendar compact<br>AgendaCalendarPage: drawer={drawerOpen ? <AgendaSelectedClassDrawer<br>AgendaCalendarPage: onClose={() => setDrawerOpen(false)}<br>AgendaCalendarPage: onEventSelect={() => setDrawerOpen(true)} |
 | AgendaClassDetailPage | apps/docs/src/stories/ImageCoverageAgenda.stories.tsx | right-panel/detail | pass | None |
 | StudentProfilePage | apps/docs/src/stories/ImageCoverageStudents.stories.tsx | right-panel/profile | pass | None |
 | BillingSubscriptionPage | apps/docs/src/stories/ImageCoverageBilling.stories.tsx | right-panel/billing | pass | None |

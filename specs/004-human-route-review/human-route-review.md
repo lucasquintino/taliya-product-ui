@@ -1,13 +1,13 @@
 # Human Route Review
 
-Generated: 2026-07-17T12:16:55.258Z
+Generated: 2026-07-17T13:17:23.651Z
 
 Status: in-progress
 
 - Routes: 73
-- Passed: 29
+- Passed: 30
 - Failed: 0
-- Pending: 44
+- Pending: 43
 
 | Family | Routes | Passed | Failed |
 | --- | ---: | ---: | ---: |
@@ -25,7 +25,7 @@ Status: in-progress
 | Inbox | 1 | 1 | 0 |
 | Internal | 3 | 0 | 0 |
 | Operação | 2 | 2 | 0 |
-| Relatorios | 2 | 0 | 0 |
+| Relatorios | 2 | 1 | 0 |
 | Reposições | 1 | 1 | 0 |
 | Retencao | 4 | 4 | 0 |
 | Setup | 13 | 0 | 0 |

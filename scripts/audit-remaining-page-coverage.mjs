@@ -367,7 +367,7 @@ const pageFamilyContracts = [
     page: "ReportsManagementPage",
     file: "ImageCoverageReports.stories.tsx",
     family: "dashboard/reports",
-    requiredSnippets: ["<CrmDashboardPage", "before={<ReportFilterBar", "onExport=", "<ReportsManagementContent", "onOpen={setAction}", "<ExportAction"]
+    requiredSnippets: ["<CrmDashboardPage", "<ReportFilterBar", "onAdvancedFilters=", "onOwnerChange=", "onPeriodChange=", "onUnitChange=", "globalActions={{", "onSidebarSelect=", "<ReportsManagementContent", "onOpen={(action)", "onStatOpen={(stat)", "<ExportAction"]
   },
   {
     page: "MoneyOnTheTablePage",

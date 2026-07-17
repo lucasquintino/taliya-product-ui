@@ -12,7 +12,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { CrmShellNavItem, PageFilterBarFilter } from "@taliya/crm";
+import type { ChartPanelStat, CrmShellNavItem, PageFilterBarFilter } from "@taliya/crm";
 import { Button, ButtonGroup } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
@@ -47,31 +47,55 @@ const reportsNav: CrmShellNavItem[] = [
 ];
 
 export function ReportsManagementPage() {
-  const [, setAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
 
   return (
-    <CrmDashboardPage
-      activeNavId="overview"
-      activeSidebarId="relatorios"
-      avatarSrc={image79Avatar}
-      before={<ReportFilterBar onExport={() => setAction("export")} />}
-      columns="reports"
-      density="compact"
-      navItems={reportsNav}
-      pageHeaderRhythm="reports"
-      pageHeaderActions={
-        <ButtonGroup>
-          <ExportAction onExport={() => setAction("export")} />
-          <Button leadingIcon="calendar" onClick={() => setAction("schedule")} size="sm" variant="secondary">Agendar relatorio</Button>
-        </ButtonGroup>
-      }
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Gestao e decisoes acionaveis"
-      title="Relatorios"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    >
-      <ReportsManagementContent onOpen={setAction} />
-    </CrmDashboardPage>
+    <>
+      <CrmDashboardPage
+        activeNavId="overview"
+        activeSidebarId="relatorios"
+        avatarSrc={image79Avatar}
+        before={
+          <ReportFilterBar
+            onAdvancedFilters={() => setAnnouncement("Filtros avançados de relatórios abertos")}
+            onExport={() => setAnnouncement("Exportação de relatório iniciada")}
+            onOwnerChange={(owner) => setAnnouncement(`Responsável selecionado: ${owner}`)}
+            onPeriodChange={(period) => setAnnouncement(`Período selecionado: ${period}`)}
+            onUnitChange={(unit) => setAnnouncement(`Unidade selecionada: ${unit}`)}
+          />
+        }
+        columns="reports"
+        density="compact"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        navItems={reportsNav}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Relatório selecionado: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="reports"
+        pageHeaderActions={
+          <ButtonGroup>
+            <ExportAction onExport={() => setAnnouncement("Exportação de relatório iniciada")} />
+            <Button leadingIcon="calendar" onClick={() => setAnnouncement("Agendamento de relatório aberto")} size="sm" variant="secondary">Agendar relatorio</Button>
+          </ButtonGroup>
+        }
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Studio Vila Mariana - Gestao e decisoes acionaveis"
+        title="Relatorios"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      >
+        <ReportsManagementContent
+          onOpen={(action) => setAnnouncement(`Ação do relatório: ${action}`)}
+          onStatOpen={(stat) => setAnnouncement(`Exportação selecionada: ${stat.label}`)}
+        />
+      </CrmDashboardPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -114,7 +138,13 @@ export function MoneyOnTheTablePage() {
   );
 }
 
-function ReportsManagementContent({ onOpen }: { onOpen?: (action: string) => void }) {
+function ReportsManagementContent({
+  onOpen,
+  onStatOpen
+}: {
+  onOpen?: (action: string) => void;
+  onStatOpen?: (stat: ChartPanelStat) => void;
+}) {
   return (
     <>
         <ChartPanel
@@ -218,6 +248,7 @@ function ReportsManagementContent({ onOpen }: { onOpen?: (action: string) => voi
           layout="exports"
           metricTone="neutral"
           onOpen={() => onOpen?.("open-exports")}
+          onStatOpen={onStatOpen}
           period="Recentes"
           source="Relatorios"
           stats={[
