@@ -1628,6 +1628,14 @@ describe("@taliya/crm component coverage", () => {
     expect(board).toHaveAttribute("data-lane-width", "commercial");
   });
 
+  it("removes the commercial kanban inset on mobile viewports", () => {
+    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+
+    expect(styles).toMatch(
+      /@media \(max-width: 760px\) \{[\s\S]*?\.tcrm-kanban-page-stack--commercial \{[\s\S]*?padding-inline: 0;/,
+    );
+  });
+
   it("renders LeadTable as a DataTable-backed interactive lead table", () => {
     const onRowSelect = vi.fn();
     const onItemsPerPageClick = vi.fn();

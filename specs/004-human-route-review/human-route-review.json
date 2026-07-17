@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T04:19:47.206Z",
+  "generatedAt": "2026-07-17T05:22:15.366Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 21,
+  "completedRouteCount": 22,
   "failedRouteCount": 0,
-  "pendingRouteCount": 52,
+  "pendingRouteCount": 51,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1909,38 +1909,66 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T05:21:55.046Z",
+        "evidence": [
+          "tmp/human-route-review/37-sales-pipeline/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T05:21:55.193Z",
+        "evidence": [
+          "tmp/human-route-review/37-sales-pipeline/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T05:21:55.351Z",
+        "evidence": [
+          "tmp/human-route-review/37-sales-pipeline/mobile-initial.png",
+          "tmp/human-route-review/37-sales-pipeline/mobile-lost-card-selected.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T05:21:55.827Z",
+        "evidence": [
+          "browser-observed:74-sales-pipeline-controls-stage-representatives-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "top-navigation",
+          "all-seven-quick-filters",
+          "all-primary-and-advanced-filters",
+          "all-eighteen-card-controls-present",
+          "one-card-selection-per-stage",
+          "one-card-menu-per-stage",
+          "all-six-column-menus",
+          "all-six-add-actions",
+          "desktop-and-mobile-horizontal-board-scroll",
+          "drawer-not-applicable-canonical-route-has-no-drawer"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T05:21:55.665Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/37_round-4.1G_vendas_01_pipeline-kanban.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review exercised every unique pipeline control path: shell, global and page actions, all filters, all six column menus and add actions, plus representative card selection and menu behavior in each of the six stages.",
+        "The commercial kanban mobile inset defect was fixed in @taliya/crm and reverified at 390x844; filters and lanes scroll horizontally without incoherent clipping or page-level displacement.",
+        "The canonical pipeline route intentionally has no drawer; drawer open-close is not applicable to this source rather than an omitted interaction."
+      ]
     },
     {
       "image": "38_round-4.1G_vendas_02_lista-interessados.png.png",

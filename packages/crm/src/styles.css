@@ -33106,6 +33106,10 @@ button.tcrm-pipeline-card__select:focus-visible,
     gap: var(--taliya-space-3);
   }
 
+  .tcrm-kanban-page-stack--commercial {
+    padding-inline: 0;
+  }
+
   .tcrm-kanban-board__lanes {
     min-height: var(--taliya-layout-crm-kanban-board-min-height);
   }

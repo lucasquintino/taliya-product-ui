@@ -46,23 +46,38 @@ const salesNavItems: CrmShellNavItem[] = [
 ];
 
 export function SalesPipelinePage() {
+  const [announcement, setAnnouncement] = useState("");
+
   return (
-    <CrmKanbanPage
-      activeNavId="pipeline"
-      activeSidebarId="vendas"
-      avatarSrc={image79Avatar}
-      filterBar={<SalesPipelineFilters />}
-      layoutVariant="commercial"
-      navItems={salesNavItems}
-      pageHeaderRhythm="overview"
-      pageHeaderActions={<ButtonGroup><Button leadingIcon="plus" size="sm" variant="secondary">Novo interessado</Button><Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button><Button leadingIcon="calendar" size="sm" variant="secondary">Criar tarefa</Button></ButtonGroup>}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana · Interessados e próximos passos"
-      title="Vendas"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-    >
-      <SalesPipelineBoard />
-    </CrmKanbanPage>
+    <>
+      <CrmKanbanPage
+        activeNavId="pipeline"
+        activeSidebarId="vendas"
+        avatarSrc={image79Avatar}
+        filterBar={<SalesPipelineFilters onInteraction={setAnnouncement} />}
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        layoutVariant="commercial"
+        navItems={salesNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="overview"
+        pageHeaderActions={<ButtonGroup><Button leadingIcon="plus" onClick={() => setAnnouncement("Novo interessado iniciado")} size="sm" variant="secondary">Novo interessado</Button><Button leadingIcon="upload" onClick={() => setAnnouncement("Exportação iniciada")} size="sm" variant="secondary">Exportar</Button><Button leadingIcon="calendar" onClick={() => setAnnouncement("Criação de tarefa iniciada")} size="sm" variant="secondary">Criar tarefa</Button></ButtonGroup>}
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Studio Vila Mariana · Interessados e próximos passos"
+        title="Vendas"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+      >
+        <SalesPipelineBoard onInteraction={setAnnouncement} />
+      </CrmKanbanPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -158,16 +173,17 @@ export function SalesEnrollmentChecklistPage() {
   );
 }
 
-function SalesPipelineFilters() {
+function SalesPipelineFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
+  const [selectedQuickId, setSelectedQuickId] = useState("all");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "all", kind: "quick", label: "Todos", selected: true },
-    { id: "mine", kind: "quick", label: "Meus interessados" },
-    { id: "no-response", kind: "quick", label: "Sem resposta" },
-    { id: "no-slot", kind: "quick", label: "Sem vaga" },
-    { id: "trial-today", kind: "quick", label: "Experimental hoje" },
-    { id: "ready", kind: "quick", label: "Prontos para matricula" },
-    { id: "lost", kind: "quick", label: "Perdidos" },
+    { id: "all", kind: "quick", label: "Todos", selected: selectedQuickId === "all" },
+    { id: "mine", kind: "quick", label: "Meus interessados", selected: selectedQuickId === "mine" },
+    { id: "no-response", kind: "quick", label: "Sem resposta", selected: selectedQuickId === "no-response" },
+    { id: "no-slot", kind: "quick", label: "Sem vaga", selected: selectedQuickId === "no-slot" },
+    { id: "trial-today", kind: "quick", label: "Experimental hoje", selected: selectedQuickId === "trial-today" },
+    { id: "ready", kind: "quick", label: "Prontos para matricula", selected: selectedQuickId === "ready" },
+    { id: "lost", kind: "quick", label: "Perdidos", selected: selectedQuickId === "lost" },
     {
       id: "owner",
       label: "Dono",
@@ -239,13 +255,20 @@ function SalesPipelineFilters() {
     <PageFilterBar
       advancedFiltersLabel="Mais filtros"
       filters={filters}
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Fila do pipeline: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro do pipeline alterado: ${filter.id}`);
+      }}
       searchVisible={false}
     />
   );
 }
 
-function SalesPipelineBoard() {
+function SalesPipelineBoard({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedCard, setSelectedCard] = useState("");
   const columns = [
     { title: "Novo", count: 12, cards: [
@@ -283,12 +306,12 @@ function SalesPipelineBoard() {
   return (
     <>
       {columns.map((column) => (
-        <KanbanColumn count={column.count} key={column.title} onMenu={() => setSelectedCard(`menu:${column.title}`)} state={column.state} title={column.title}>
+        <KanbanColumn count={column.count} key={column.title} onMenu={() => { setSelectedCard(`menu:${column.title}`); onInteraction(`Menu da etapa: ${column.title}`); }} state={column.state} title={column.title}>
           {column.cards.map((card) => {
             const cardId = `${column.title}:${card.title}`;
-            return <PipelineCard key={cardId} {...card} onMenu={() => setSelectedCard(`menu:${cardId}`)} onSelect={() => setSelectedCard(cardId)} selected={selectedCard === cardId} />;
+            return <PipelineCard key={cardId} {...card} onMenu={() => { setSelectedCard(`menu:${cardId}`); onInteraction(`Menu do interessado: ${cardId}`); }} onSelect={() => { setSelectedCard(cardId); onInteraction(`Interessado selecionado: ${cardId}`); }} selected={selectedCard === cardId} />;
           })}
-          <Button leadingIcon="plus" onClick={() => setSelectedCard(`add:${column.title}`)} size="sm" variant="secondary">Adicionar interessado</Button>
+          <Button leadingIcon="plus" onClick={() => { setSelectedCard(`add:${column.title}`); onInteraction(`Adicionar interessado em ${column.title}`); }} size="sm" variant="secondary">Adicionar interessado</Button>
         </KanbanColumn>
       ))}
     </>

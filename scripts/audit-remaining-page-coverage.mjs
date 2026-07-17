@@ -239,7 +239,13 @@ const pageFamilyContracts = [
     page: "SalesPipelinePage",
     file: "ImageCoverageSales.stories.tsx",
     family: "kanban",
-    requiredSnippets: ["<CrmKanbanPage", "filterBar={<SalesPipelineFilters />}", "<SalesPipelineBoard />"]
+    requiredSnippets: [
+      "<CrmKanbanPage",
+      "filterBar={<SalesPipelineFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "onNavChange={(id)",
+      "<SalesPipelineBoard onInteraction={setAnnouncement} />"
+    ]
   },
   {
     page: "SalesInterestedListPage",
