@@ -270,13 +270,13 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmWorklistPage",
       'worklistLayoutMode="compact-rail"',
-      "filterBar={<ExperimentalFilters />}",
-      "quickFilters={<ExperimentalQuickRail />}",
+      "filterBar={<ExperimentalFilters onInteraction={setAnnouncement} />}",
+      "globalActions={{",
+      "quickFilters={<ExperimentalQuickRail onInteraction={setAnnouncement} />}",
+      "showGlobalActionsWithDrawer",
+      "<ExperimentalDrawer experimental={selectedExperimental}",
       "<ExperimentalTable",
-      "setSelectedExperimentalId(row.id)",
-      "drawer={drawerOpen ? <ExperimentalDrawer",
-      "onClose={() => setDrawerOpen(false)}",
-      "onAction={setDrawerAction}"
+      "setSelectedExperimentalId(row.id)"
     ]
   },
   {
@@ -861,8 +861,8 @@ const tableFamilyDetailContracts = [
     table: "ExperimentalTable",
     drawer: "ExperimentalDrawer",
     layoutMode: "compact-rail",
-    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={()", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<LeadDrawer", "compact", "facts={experimentalDrawerFacts}", "history={experimentalDrawerHistory}"]
+    requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "selectedRowId={selectedRowId}"],
+    requiredDrawerSnippets: ["<LeadDrawer", "compact", "facts={experimentalDrawerFacts(experimental)}", "history={history}", "name={experimental.interested}"]
   },
   {
     page: "SalesEnrollmentChecklistPage",

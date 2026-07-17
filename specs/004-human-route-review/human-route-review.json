@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T06:08:27.467Z",
+  "generatedAt": "2026-07-17T06:49:38.372Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 23,
+  "completedRouteCount": 24,
   "failedRouteCount": 0,
-  "pendingRouteCount": 50,
+  "pendingRouteCount": 49,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -2101,38 +2101,74 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:49:14.543Z",
+        "evidence": [
+          "tmp/human-route-review/39-sales-experimental-list/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:49:14.699Z",
+        "evidence": [
+          "tmp/human-route-review/39-sales-experimental-list/desktop-canonical.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:49:14.861Z",
+        "evidence": [
+          "tmp/human-route-review/39-sales-experimental-list/mobile-page.png",
+          "tmp/human-route-review/39-sales-experimental-list/mobile-drawer.png",
+          "tmp/human-route-review/39-sales-experimental-list/mobile-reopened-drawer.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:49:15.400Z",
+        "evidence": [
+          "browser-observed:105-sales-experimental-worklist-controls-dynamic-drawers-desktop-and-mobile-static-2026-07-17"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation-and-all-sidebar-utilities",
+          "all-four-global-actions",
+          "all-five-top-navigation-actions",
+          "search-type-and-keyboard-clear",
+          "search-filter-trigger",
+          "all-three-period-filters",
+          "all-four-primary-select-filters",
+          "advanced-lesson-type-modal-filter",
+          "schedule-and-export-actions",
+          "all-eight-quick-filter-queues",
+          "all-eight-row-selections",
+          "dynamic-drawer-content-for-all-eight-experimentals",
+          "all-eight-row-action-menus",
+          "both-sort-controls-through-three-states",
+          "items-per-page-and-both-pagination-pages",
+          "all-ten-drawer-actions",
+          "drawer-close-and-reopen",
+          "mobile-full-height-scrollable-drawer",
+          "mobile-contained-scrollable-quick-rail-and-table"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T06:49:18.849Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/39_round-4.1G_experimental_01_lista-acompanhamento.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review verified every unique experimental-worklist path: search, periods, primary and advanced filters, queue rail, eight rows and row menus, sorting, pagination, shell actions, and all drawer actions.",
+        "Selecting any of the eight experimental records now updates the official LeadDrawer name, status, facts, history, recommendation, and state instead of retaining Ana Souza content.",
+        "The canonical 1448x1086 composition matches the assigned source with no broken assets or console errors; mobile contains the quick rail and table in separate scrollable regions and uses a full-height drawer."
+      ]
     },
     {
       "image": "40_round-4.1G_matriculas_01_checklist-conversao.png.png",

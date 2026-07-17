@@ -138,31 +138,54 @@ export function SalesInterestedListPage() {
 export function SalesExperimentalListPage() {
   const [selectedExperimentalId, setSelectedExperimentalId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
-  const [, setDrawerAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const selectedExperimental = experimentalRows.find((row) => row.id === selectedExperimentalId) ?? experimentalRows[0]!;
 
   return (
-    <CrmWorklistPage
-      activeNavId="experimental"
-      activeSidebarId="vendas"
-      avatarSrc={image79Avatar}
-      drawer={drawerOpen ? <ExperimentalDrawer onAction={setDrawerAction} onClose={() => setDrawerOpen(false)} /> : null}
-      filterBar={<ExperimentalFilters />}
-      filterBarLabel="Filtros de experimental"
-      listLabel="Filtros rapidos"
-      mainLabel="Lista de aulas experimentais"
-      navItems={salesNavItems}
-      pageHeaderRhythm="compact-stacked"
-      quickFilters={<ExperimentalQuickRail />}
-      sidebarItems={crmEmptyShellSidebarItems}
-      subtitle="Studio Vila Mariana - Aulas experimentais e proximos passos"
-      title="Experimental"
-      utilityItems={crmEmptyShellSidebarUtilityItems}
-      contentLayout="work-list-compact"
-      worklistLayoutMode="compact-rail"
-      worklistFilterRhythm="spacious"
-    >
-      <ExperimentalTable onRowSelect={(row) => { setSelectedExperimentalId(row.id); setDrawerOpen(true); }} selectedRowId={selectedExperimentalId} />
-    </CrmWorklistPage>
+    <>
+      <CrmWorklistPage
+        activeNavId="experimental"
+        activeSidebarId="vendas"
+        avatarSrc={image79Avatar}
+        drawer={drawerOpen ? <ExperimentalDrawer experimental={selectedExperimental} onAction={(action) => setAnnouncement(`Ação da experimental: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer da experimental fechado"); }} /> : null}
+        filterBar={<ExperimentalFilters onInteraction={setAnnouncement} />}
+        filterBarLabel="Filtros de experimental"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens abertas"),
+          onNotifications: () => setAnnouncement("Notificações abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        listLabel="Filtros rapidos"
+        mainLabel="Lista de aulas experimentais"
+        navItems={salesNavItems}
+        onBack={() => setAnnouncement("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+        pageHeaderRhythm="compact-stacked"
+        quickFilters={<ExperimentalQuickRail onInteraction={setAnnouncement} />}
+        showGlobalActionsWithDrawer
+        sidebarItems={crmEmptyShellSidebarItems}
+        subtitle="Studio Vila Mariana - Aulas experimentais e proximos passos"
+        title="Experimental"
+        utilityItems={crmEmptyShellSidebarUtilityItems}
+        contentLayout="work-list-compact"
+        worklistLayoutMode="compact-rail"
+        worklistFilterRhythm="spacious"
+      >
+        <ExperimentalTable
+          onInteraction={setAnnouncement}
+          onRowSelect={(row) => {
+            setSelectedExperimentalId(row.id);
+            setDrawerOpen(true);
+            setAnnouncement(`Experimental selecionada: ${row.interested}`);
+          }}
+          selectedRowId={selectedExperimentalId}
+        />
+      </CrmWorklistPage>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -593,13 +616,14 @@ function SalesLeadTable({ onInteraction, onRowSelect, selectedRowId }: { onInter
   );
 }
 
-function ExperimentalFilters() {
+function ExperimentalFilters({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [query, setQuery] = useState("");
+  const [selectedQuickId, setSelectedQuickId] = useState("today");
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const filters: PageFilterBarFilter[] = [
-    { id: "today", kind: "quick", label: "Hoje", selected: true },
-    { id: "tomorrow", kind: "quick", label: "Amanha" },
-    { id: "week", kind: "quick", label: "Esta semana" },
+    { id: "today", kind: "quick", label: "Hoje", selected: selectedQuickId === "today" },
+    { id: "tomorrow", kind: "quick", label: "Amanha", selected: selectedQuickId === "tomorrow" },
+    { id: "week", kind: "quick", label: "Esta semana", selected: selectedQuickId === "week" },
     {
       id: "status",
       label: "Status",
@@ -662,15 +686,25 @@ function ExperimentalFilters() {
       density="comfortable"
       actions={
         <ButtonGroup>
-          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" size="sm" variant="primary">Agendar experimental</Button>
-          <Button leadingIcon="upload" size="sm" variant="secondary">Exportar</Button>
+          <Button className="tcrm-page-filter-bar__primary-action" leadingIcon="plus" onClick={() => onInteraction("Agendamento de experimental iniciado")} size="sm" variant="primary">Agendar experimental</Button>
+          <Button leadingIcon="upload" onClick={() => onInteraction("Exportação de experimentais iniciada")} size="sm" variant="secondary">Exportar</Button>
         </ButtonGroup>
       }
       filters={filters}
       layout="stacked"
-      onFilterValueChange={(filter, value) => setValues((current) => ({ ...current, [filter.id]: value }))}
-      onSearchChange={setQuery}
-      onSearchFilter={() => undefined}
+      onFilterSelect={(filter) => {
+        setSelectedQuickId(filter.id);
+        onInteraction(`Período selecionado: ${filter.label}`);
+      }}
+      onFilterValueChange={(filter, value) => {
+        setValues((current) => ({ ...current, [filter.id]: value }));
+        onInteraction(`Filtro de experimental alterado: ${filter.id}`);
+      }}
+      onSearchChange={(value) => {
+        setQuery(value);
+        onInteraction(value ? `Busca de experimental: ${value}` : "Busca de experimental limpa");
+      }}
+      onSearchFilter={() => onInteraction("Filtros de busca de experimental abertos")}
       query={query}
       searchFilterLabel="Abrir filtros de experimental"
       searchFilterPlacement="embedded"
@@ -679,7 +713,7 @@ function ExperimentalFilters() {
   );
 }
 
-function ExperimentalQuickRail() {
+function ExperimentalQuickRail({ onInteraction }: { onInteraction: (message: string) => void }) {
   const [selectedId, setSelectedId] = useState("today");
   const items: PageQuickFilterItem[] = [
     { id: "today", label: "Hoje", icon: "calendar", count: "18", selected: selectedId === "today" },
@@ -698,7 +732,10 @@ function ExperimentalQuickRail() {
       groupLabel="Filas de experimental"
       heading="Filtros rapidos"
       items={items}
-      onSelect={(item) => setSelectedId(item.id)}
+      onSelect={(item) => {
+        setSelectedId(item.id);
+        onInteraction(`Fila de experimental selecionada: ${item.label}`);
+      }}
       selectionTone="soft"
     />
   );
@@ -730,12 +767,21 @@ const experimentalRows: ExperimentalRow[] = [
 ];
 
 function ExperimentalTable({
+  onInteraction,
   onRowSelect,
   selectedRowId
 }: {
+  onInteraction: (message: string) => void;
   onRowSelect?: (row: ExperimentalRow) => void;
   selectedRowId?: string;
 }) {
+  const [page, setPage] = useState(1);
+
+  const selectPage = (nextPage: number) => {
+    setPage(nextPage);
+    onInteraction(`Página de experimentais: ${nextPage}`);
+  };
+
   return (
     <CrmWorklistTable
       actionColumnWidth="44px"
@@ -750,26 +796,38 @@ function ExperimentalTable({
         { key: "last", header: "Ultima conversa", width: "13%" },
         { key: "next", header: "Proxima acao", width: "14%", render: (row) => <Chip showDot={false} tone={row.nextTone}>{row.next}</Chip> }
       ]}
-      pagination={{ itemsPerPage: "10", label: "1-8 de 18", page: 1, pageCount: 2 }}
+      onSortChange={(sort) => onInteraction(sort ? `Ordenação: ${sort.key} ${sort.direction}` : "Ordenação removida")}
+      pagination={{
+        itemsPerPage: "10",
+        label: page === 1 ? "1-8 de 18" : "11-18 de 18",
+        onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
+        onNextPage: () => selectPage(Math.min(2, page + 1)),
+        onPageChange: selectPage,
+        onPreviousPage: () => selectPage(Math.max(1, page - 1)),
+        page,
+        pageCount: 2
+      }}
       onRowSelect={onRowSelect}
-      rowActions={() => <IconButton icon="more" label="Mais acoes do experimental" size="sm" variant="ghost" />}
+      rowActions={(row) => <IconButton icon="more" label={`Mais acoes de ${row.interested}`} onClick={(event) => { event.stopPropagation(); onInteraction(`Mais ações de ${row.interested}`); }} size="sm" variant="ghost" />}
       rows={experimentalRows}
       selectedRowId={selectedRowId}
     />
   );
 }
 
-const experimentalDrawerFacts: LeadDrawerFact[] = [
-  { id: "class", icon: "calendar", label: "Aula vinculada", value: "Hoje 17h - Reformer Intermediario" },
-  { id: "origin", icon: "graduation", label: "Origem comercial", value: <><Icon name="whatsapp" size="12px" /> WhatsApp</>, tone: "success" },
-  { id: "owner", icon: "user", label: "Dono / fila", value: "Recepcao" },
-  { id: "channel", icon: "tag", label: "Canal permitido", value: <><Icon name="whatsapp" size="12px" /> WhatsApp permitido</>, tone: "success" },
-  { id: "interest", icon: "clock", label: "Interesse", value: "comecar Pilates" },
-  { id: "desired", icon: "clock", label: "Horario desejado", value: "terca a noite" },
-  { id: "stage", icon: "tag", label: "Etapa em vendas", value: "Experimental" },
-  { id: "agenda", icon: "calendar", label: "Agenda vinculada", value: "Aula criada na Agenda" },
-  { id: "last", icon: "message", label: "Ultima conversa", value: "Perguntou sobre preco e horarios", helper: "ontem 18:40" }
-];
+function experimentalDrawerFacts(experimental: ExperimentalRow): LeadDrawerFact[] {
+  return [
+    { id: "class", icon: "calendar", label: "Aula vinculada", value: `${experimental.time} - ${experimental.lesson}` },
+    { id: "origin", icon: "graduation", label: "Origem comercial", value: experimental.origin },
+    { id: "owner", icon: "user", label: "Dono / fila", value: experimental.owner },
+    { id: "channel", icon: "tag", label: "Canal permitido", value: <><Icon name="whatsapp" size="12px" /> WhatsApp permitido</>, tone: "success" },
+    { id: "interest", icon: "clock", label: "Interesse", value: "comecar Pilates" },
+    { id: "desired", icon: "clock", label: "Horario desejado", value: experimental.time },
+    { id: "stage", icon: "tag", label: "Etapa em vendas", value: "Experimental" },
+    { id: "agenda", icon: "calendar", label: "Agenda vinculada", value: "Aula criada na Agenda" },
+    { id: "last", icon: "message", label: "Ultima conversa", value: experimental.id === "ana" ? "Perguntou sobre preco e horarios" : experimental.next, helper: experimental.last }
+  ];
+}
 
 const experimentalDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "scheduled", time: "ontem 18:40", title: "Experimental agendada", description: "Aula vinculada a grade de hoje" },
@@ -777,16 +835,23 @@ const experimentalDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "waiting", time: "ontem 18:40", title: "Aguardando confirmacao", description: "Recepcao acompanha manualmente" }
 ];
 
-function ExperimentalDrawer({ onAction, onClose }: { onAction?: (action: string) => void; onClose?: () => void }) {
+function ExperimentalDrawer({ experimental, onAction, onClose }: { experimental: ExperimentalRow; onAction?: (action: string) => void; onClose?: () => void }) {
+  const history = experimental.id === "ana" ? experimentalDrawerHistory : [
+    { id: "latest", time: experimental.last, title: `Status: ${experimental.status}`, description: `Próxima ação: ${experimental.next}` },
+    { id: "owner", time: "anterior", title: `Acompanhamento por ${experimental.owner}`, description: `${experimental.lesson} - ${experimental.time}` },
+    { id: "scheduled", time: "início", title: "Experimental agendada", description: "Aula vinculada à grade" }
+  ];
+  const state = experimental.status === "Faltou" ? "lost" : experimental.status === "Pronta para matricula" ? "enrollment" : "trial";
+
   return (
     <LeadDrawer
       compact
-      copilotBody="Enviar confirmacao curta com horario, endereco e pedido de resposta."
+      copilotBody={experimental.id === "ana" ? "Enviar confirmacao curta com horario, endereco e pedido de resposta." : `Acompanhar ${experimental.interested}: ${experimental.next}.`}
       copilotTitle="Copiloto sugere"
       eyebrow="Experimental selecionada"
-      facts={experimentalDrawerFacts}
-      history={experimentalDrawerHistory}
-      name="Ana Souza"
+      facts={experimentalDrawerFacts(experimental)}
+      history={history}
+      name={experimental.interested}
       notice={<><strong>A operacao manual e sempre possivel.</strong><small>O copiloto apenas sugere. A Agenda e a origem do horario da aula.</small></>}
       onAction={onAction}
       onClose={onClose}
@@ -801,7 +866,8 @@ function ExperimentalDrawer({ onAction, onClose }: { onAction?: (action: string)
         { label: "Iniciar matricula", action: "start-enrollment", icon: "graduation" },
         { label: "Marcar perdido", action: "mark-lost", icon: "lock" }
       ]}
-      statusLabel="Confirmar presenca"
+      state={state}
+      statusLabel={experimental.status}
       suggestedAction={null}
     />
   );
