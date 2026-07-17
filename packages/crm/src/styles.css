@@ -17028,7 +17028,7 @@ button.tcrm-integration-status-row:disabled {
     "icon label"
     "icon value";
   grid-template-columns: var(--taliya-control-timeline-line-top) minmax(0, 1fr);
-  grid-template-rows: var(--taliya-type-quota-title-size) var(--taliya-type-dense-body-line-height);
+  grid-template-rows: min-content min-content;
   min-height: var(--taliya-control-crm-replacement-drawer-fact-row-height);
 }
 
@@ -27834,14 +27834,15 @@ button.tcrm-pipeline-card__select:focus-visible,
   box-shadow: none;
   flex: 1 1 auto;
   min-height: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tcrm-replacement-table__data .tl-table {
   border-collapse: separate;
   border-spacing: 0;
   font-size: var(--taliya-control-crm-task-table-text-size);
-  min-width: 100%;
+  min-width: var(--taliya-control-table-min-width);
   table-layout: fixed;
 }
 

@@ -12904,7 +12904,7 @@ export function PaymentDrawer({
 
 export type ReplacementDrawerState = "requested" | "scheduled" | "blocked" | "loading";
 export type ReplacementFitTone = "compatible" | "confirmation" | "conflict";
-export type ReplacementDrawerAction = "close" | "reserve-slot" | "send-invite" | "create-task" | "open-conversation" | "open-original-class" | "cancel";
+export type ReplacementDrawerAction = "close" | "reserve-slot" | "send-invite" | "create-task" | "open-conversation" | "open-original-class" | "copy-suggestion" | "cancel";
 
 export interface ReplacementDrawerFact {
   id: string;
@@ -13049,7 +13049,7 @@ export function ReplacementDrawer({
           <div>
             <Icon name="message" size="18px" />
             <p>{inviteSuggestion}</p>
-            <IconButton icon="copy" label="Copiar sugestão" size="sm" variant="ghost" />
+            <IconButton icon="copy" label="Copiar sugestão" onClick={() => emitReplacementDrawerAction("copy-suggestion", onAction)} size="sm" variant="ghost" />
           </div>
         </section>
 

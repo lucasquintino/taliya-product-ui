@@ -767,6 +767,8 @@ describe("@taliya/crm component coverage", () => {
 
     expect(styles).toContain(".tcrm-replacement-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-checklist-table-row-selected);");
     expect(styles).toContain(".tcrm-replacement-table__student.is-selected::before");
+    expect(styles).toContain(".tcrm-replacement-table__data.tl-table-wrap {\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-x: auto;");
+    expect(styles).toContain(".tcrm-replacement-table__data .tl-table {\n  border-collapse: separate;\n  border-spacing: 0;\n  font-size: var(--taliya-control-crm-task-table-text-size);\n  min-width: var(--taliya-control-table-min-width);");
     expect(styles).not.toContain(".tcrm-replacement-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-task-table-row-selected);");
   });
 
@@ -790,6 +792,9 @@ describe("@taliya/crm component coverage", () => {
     );
     expect(styles).toMatch(
       /\.tcrm-replacement-drawer__body \{[\s\S]*?min-height: 0;[\s\S]*?overflow-x: hidden;[\s\S]*?overflow-y: auto;/,
+    );
+    expect(styles).toMatch(
+      /\.tcrm-replacement-drawer__fact \{[\s\S]*?grid-template-rows: min-content min-content;/,
     );
     expect(styles).toContain(".tcrm-replacement-drawer__footer {\n  display: grid;");
   });
@@ -3257,6 +3262,7 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(within(drawer).getByRole("button", { name: "Criar tarefa" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Abrir conversa" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Abrir aula original" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Copiar sugestão" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Marcar como cancelada" }));
 
     expect(optionSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "thu-08" }));
@@ -3267,6 +3273,7 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("create-task");
     expect(action).toHaveBeenCalledWith("open-conversation");
     expect(action).toHaveBeenCalledWith("open-original-class");
+    expect(action).toHaveBeenCalledWith("copy-suggestion");
     expect(action).toHaveBeenCalledWith("cancel");
 
     cleanup();

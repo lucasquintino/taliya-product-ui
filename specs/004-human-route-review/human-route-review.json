@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T00:57:21.551Z",
+  "generatedAt": "2026-07-17T01:34:16.107Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 15,
+  "completedRouteCount": 16,
   "failedRouteCount": 0,
-  "pendingRouteCount": 58,
+  "pendingRouteCount": 57,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -1346,38 +1346,65 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:34:12.029Z",
+        "evidence": [
+          "tmp/human-route-review/31-replacements/desktop-final.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:34:12.234Z",
+        "evidence": [
+          "tmp/human-route-review/31-replacements/desktop-final.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:34:12.434Z",
+        "evidence": [
+          "tmp/human-route-review/31-replacements/mobile-final.png",
+          "tmp/human-route-review/31-replacements/mobile-drawer-final.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:34:13.066Z",
+        "evidence": [
+          "browser-observed:desktop-and-mobile-static-2026-07-16"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "shell-navigation",
+          "global-actions",
+          "filter-search",
+          "filter-selects",
+          "quick-filters",
+          "table-sorting",
+          "table-selection",
+          "table-pagination",
+          "drawer-dynamic-content",
+          "drawer-fit-options",
+          "drawer-actions",
+          "drawer-open-close",
+          "mobile-horizontal-table"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-17T01:34:12.902Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review made replacement rows drive the official drawer, connected every shell/worklist/drawer action, and hardened the official table and drawer for mobile content."
+      ]
     },
     {
       "image": "32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png",

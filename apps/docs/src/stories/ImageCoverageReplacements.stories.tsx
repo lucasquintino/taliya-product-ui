@@ -15,6 +15,8 @@ import type {
   PageFilterBarFilter,
   PageQuickFilterItem,
   ReplacementDrawerAction,
+  ReplacementDrawerFact,
+  ReplacementFitOption,
   ReplacementTableRow
 } from "@taliya/crm";
 import { Button } from "@taliya/ui";
@@ -140,7 +142,24 @@ const replacementRows: ReplacementTableRow[] = [
   }
 ];
 
+const replacementStatusLabels: Record<ReplacementTableRow["status"], string> = {
+  found: "Opção encontrada",
+  waiting: "Aguardando resposta",
+  blocked: "Bloqueada por regra",
+  expiring: "Expira amanhã",
+  scheduled: "Agendada",
+  pending: "Pendente",
+  available: "Com opção"
+};
+
+const replacementFitOptions: ReplacementFitOption[] = [
+  { id: "thu-08", title: <>Quinta 08h · Reformer Intermediário</>, instructor: "Instrutor Lucas Peres", vacancy: "1 vaga", badge: "compatível", tone: "compatible" },
+  { id: "fri-10", title: <>Sexta 10h · Pilates Solo</>, instructor: "Instrutora Mariana Lopes", vacancy: "2 vagas", badge: "exige confirmação", tone: "confirmation" },
+  { id: "mon-19", title: <>Segunda 19h · Tower</>, instructor: "Instrutor Lucas Peres", vacancy: "", badge: "conflito leve", tone: "conflict" }
+];
+
 function ReplacementsPageContent({
+  announcement,
   selectedQueueId,
   selectedReplacementId,
   filterValues,
@@ -154,8 +173,10 @@ function ReplacementsPageContent({
   onItemsPerPageClick,
   onPreviousPage,
   onNextPage,
+  onInteraction,
   drawer
 }: {
+  announcement: string;
   selectedQueueId: string;
   selectedReplacementId: string;
   filterValues: Record<string, string | string[]>;
@@ -169,6 +190,7 @@ function ReplacementsPageContent({
   onItemsPerPageClick: () => void;
   onPreviousPage: () => void;
   onNextPage: () => void;
+  onInteraction: (message: string) => void;
   drawer?: React.ReactNode;
 }) {
   const filters = useMemo<PageFilterBarFilter[]>(
@@ -258,9 +280,20 @@ function ReplacementsPageContent({
       drawer={drawer}
       drawerPlacement="floating"
       drawerSize="default"
+      globalActions={{
+        onAvatar: () => onInteraction("Perfil da operadora aberto"),
+        onMessages: () => onInteraction("Mensagens abertas"),
+        onNotifications: () => onInteraction("Notificações abertas"),
+        onSearch: () => onInteraction("Busca global aberta")
+      }}
       navItems={replacementsNavItems}
+      onBack={() => onInteraction("Navegação de retorno acionada")}
+      onNavChange={(id) => onInteraction(`Seção selecionada: ${id}`)}
+      onSidebarSelect={(item) => onInteraction(`Módulo selecionado: ${item.label}`)}
+      onSidebarUtilitySelect={(item) => onInteraction(`Preferência selecionada: ${item.label}`)}
       pageHeaderRhythm="compact-stacked"
       sidebarItems={crmEmptyShellSidebarItems}
+      showGlobalActionsWithDrawer
       stageClassName="sb-image-coverage-replacements-stage"
       subtitle="Studio Vila Mariana · Reposição de aulas e encaixes"
       title="Reposições"
@@ -297,14 +330,17 @@ function ReplacementsPageContent({
         />
       }
     >
-      <ReplacementTable
-        pageLabel={pageLabel}
-        rows={rows}
-        onItemsPerPageClick={onItemsPerPageClick}
-        onNextPage={onNextPage}
-        onPreviousPage={onPreviousPage}
-        onRowSelect={onReplacementSelect}
-      />
+      <>
+        <ReplacementTable
+          pageLabel={pageLabel}
+          rows={rows}
+          onItemsPerPageClick={onItemsPerPageClick}
+          onNextPage={onNextPage}
+          onPreviousPage={onPreviousPage}
+          onRowSelect={onReplacementSelect}
+        />
+        <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+      </>
     </CrmWorklistPage>
   );
 }
@@ -317,43 +353,106 @@ export function ReplacementsShell() {
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [pageLabel, setPageLabel] = useState("1-8 de 8");
   const [drawerState, setDrawerState] = useState("requested" as "requested" | "scheduled" | "blocked");
+  const [announcement, setAnnouncement] = useState("");
+  const [selectedOptionId, setSelectedOptionId] = useState("thu-08");
+  const selectedReplacement = replacementRows.find((row) => row.id === selectedReplacementId) ?? replacementRows[0]!;
+  const selectedStudentName = String(selectedReplacement.student.name);
+  const drawerFacts: ReplacementDrawerFact[] = [
+    { id: "original", icon: "calendar", label: "Aula original", value: selectedReplacement.originalClass },
+    {
+      id: "credit",
+      icon: "clock",
+      label: "Direito / crédito",
+      value: selectedReplacement.status === "blocked" ? "Revisão necessária" : "Elegível",
+      helper: <>Válido até {selectedReplacement.validity}</>,
+      tone: selectedReplacement.status === "blocked" ? "warning" : "success"
+    },
+    { id: "policy", icon: "shield", label: "Política aplicada", value: selectedReplacement.reason },
+    { id: "preference", icon: "shieldCheck", label: "Preferência", value: selectedReplacement.preference },
+    {
+      id: "status",
+      icon: "clock",
+      label: "Status",
+      value: replacementStatusLabels[selectedReplacement.status],
+      tone: selectedReplacement.status === "blocked" ? "danger" : selectedReplacement.status === "waiting" || selectedReplacement.status === "expiring" ? "warning" : "success"
+    },
+    { id: "owner", icon: "user", label: "Responsável / fila", value: "Recepção" }
+  ];
 
   function handleDrawerAction(action: ReplacementDrawerAction) {
     if (action === "reserve-slot") setDrawerState("scheduled");
     if (action === "create-task") setQuery("tarefa criada");
     if (action === "cancel") setDrawerState("blocked");
+    setAnnouncement(`Ação da reposição: ${action}`);
   }
 
   const drawerNode = drawerOpen ? (
     <ReplacementDrawer
       className="sb-image-coverage-replacements-drawer"
+      facts={drawerFacts}
+      inviteSuggestion={`“Oi ${selectedStudentName.split(" ")[0]}, encontramos uma opção compatível para sua reposição. Posso reservar?”`}
+      name={selectedStudentName}
+      options={replacementFitOptions.map((option) => ({ ...option, selected: option.id === selectedOptionId }))}
+      statusLabel={replacementStatusLabels[selectedReplacement.status]}
       state={drawerState}
       onAction={handleDrawerAction}
-      onClose={() => setDrawerOpen(false)}
-      onOptionSelect={(option) => setQuery(`opção:${option.id}`)}
+      onClose={() => {
+        setDrawerOpen(false);
+        setAnnouncement("Drawer de reposição fechado");
+      }}
+      onOptionSelect={(option) => {
+        setSelectedOptionId(option.id);
+        setQuery(`opção:${option.id}`);
+        setAnnouncement(`Opção de encaixe selecionada: ${option.id}`);
+      }}
     />
   ) : null;
 
   return (
     <ReplacementsPageContent
+      announcement={announcement}
       drawer={drawerNode}
       filterValues={filterValues}
       pageLabel={pageLabel}
       query={query}
       selectedQueueId={selectedQueueId}
       selectedReplacementId={selectedReplacementId}
-      onCreateRequest={() => setQuery("novo pedido")}
-      onFilterValueChange={(filter, value) => setFilterValues((current) => ({ ...current, [filter.id]: value }))}
-      onItemsPerPageClick={() => setPageLabel("1-8 de 8")}
-      onNextPage={() => setPageLabel("1-8 de 8")}
-      onPreviousPage={() => setPageLabel("1-8 de 8")}
-      onQueueSelect={(item) => setSelectedQueueId(item.id)}
+      onCreateRequest={() => {
+        setQuery("novo pedido");
+        setAnnouncement("Novo pedido iniciado");
+      }}
+      onFilterValueChange={(filter, value) => {
+        setFilterValues((current) => ({ ...current, [filter.id]: value }));
+        setAnnouncement(`Filtro ${filter.label} atualizado`);
+      }}
+      onInteraction={setAnnouncement}
+      onItemsPerPageClick={() => {
+        setPageLabel("1-8 de 8");
+        setAnnouncement("Quantidade por página alterada");
+      }}
+      onNextPage={() => {
+        setPageLabel("1-8 de 8");
+        setAnnouncement("Próxima página aberta");
+      }}
+      onPreviousPage={() => {
+        setPageLabel("1-8 de 8");
+        setAnnouncement("Página anterior aberta");
+      }}
+      onQueueSelect={(item) => {
+        setSelectedQueueId(item.id);
+        setAnnouncement(`Fila selecionada: ${item.label}`);
+      }}
       onReplacementSelect={(row) => {
         setSelectedReplacementId(row.id);
+        setSelectedOptionId("thu-08");
         setDrawerOpen(true);
         setDrawerState(row.status === "scheduled" ? "scheduled" : row.status === "blocked" ? "blocked" : "requested");
+        setAnnouncement(`Reposição aberta: ${String(row.student.name)}`);
       }}
-      onSearchChange={setQuery}
+      onSearchChange={(value) => {
+        setQuery(value);
+        setAnnouncement(value ? `Busca atualizada: ${value}` : "Busca limpa");
+      }}
     />
   );
 }
