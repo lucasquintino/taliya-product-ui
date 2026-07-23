@@ -4171,6 +4171,58 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("complementary", { name: "Segurança do tenant" })).toBeInTheDocument();
   });
 
+  it("keeps TenantDetailLayout actions, tabs, and security controls interactive", () => {
+    const action = vi.fn();
+    const securityClose = vi.fn();
+    const securityOpen = vi.fn();
+    const { rerender } = render(
+      <crm.TenantDetailLayout
+        onAction={action}
+        onSecurityClose={securityClose}
+        onSecurityOpen={securityOpen}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Voltar para clientes" }));
+    fireEvent.click(screen.getByRole("button", { name: "Solicitar grant" }));
+    fireEvent.click(screen.getAllByRole("button", { name: "Abrir suporte" })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: "Ver auditoria" })[0]);
+    fireEvent.click(screen.getByRole("button", { name: "Mais ações" }));
+
+    expect(action).toHaveBeenCalledWith("back-clients");
+    expect(action).toHaveBeenCalledWith("request-grant");
+    expect(action).toHaveBeenCalledWith("open-support");
+    expect(action).toHaveBeenCalledWith("open-audit");
+    expect(action).toHaveBeenCalledWith("more-actions");
+    expect(securityOpen).toHaveBeenCalledOnce();
+
+    fireEvent.click(screen.getByRole("tab", { name: "Usuários" }));
+    expect(screen.getByRole("heading", { name: "Usuários do tenant" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Ver usuários" }));
+    expect(action).toHaveBeenCalledWith("tab:usuarios");
+    expect(action).toHaveBeenCalledWith("view-users");
+
+    fireEvent.click(screen.getByRole("tab", { name: "Grants" }));
+    expect(screen.getByText("Acesso temporário, escopado, e auditado.")).toBeInTheDocument();
+    expect(action).toHaveBeenCalledWith("tab:grants");
+
+    const securityPanel = screen.getByRole("complementary", { name: "Segurança do tenant" });
+    fireEvent.click(within(securityPanel).getByRole("button", { name: "Usar grant" }));
+    fireEvent.click(within(securityPanel).getByRole("button", { name: "Fechar segurança" }));
+    expect(action).toHaveBeenCalledWith("security:use");
+    expect(securityClose).toHaveBeenCalledOnce();
+
+    rerender(
+      <crm.TenantDetailLayout
+        onAction={action}
+        onSecurityClose={securityClose}
+        onSecurityOpen={securityOpen}
+        securityOpen={false}
+      />
+    );
+    expect(screen.queryByRole("complementary", { name: "Segurança do tenant" })).not.toBeInTheDocument();
+  });
+
   it("keeps TenantSecurityDrawer composed, interactive, and stateful", () => {
     const action = vi.fn();
     const close = vi.fn();

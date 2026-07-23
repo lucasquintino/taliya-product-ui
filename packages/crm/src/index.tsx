@@ -18363,12 +18363,30 @@ export function InternalOverviewDashboard({
 
 export interface TenantDetailLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   footerNote?: React.ReactNode;
+  securityOpen?: boolean;
+  onAction?: (actionId: string) => void;
+  onSecurityClose?: () => void;
+  onSecurityOpen?: () => void;
+}
+
+function TenantDetailTabPanel({ actionId, actionLabel, description, onAction, title }: { actionId: string; actionLabel: string; description: React.ReactNode; onAction?: (actionId: string) => void; title: React.ReactNode }) {
+  return (
+    <Panel className="tcrm-tenant-detail-layout__tab-detail">
+      <h3>{title}</h3>
+      <p>{description}</p>
+      <Button onClick={() => onAction?.(actionId)} size="sm" variant="secondary">{actionLabel}</Button>
+    </Panel>
+  );
 }
 
 export function TenantDetailLayout({
   children,
   className,
-  footerNote = "Visão interna e segura da Taliya. Acesso e ações sensíveis são auditados. Grants são obrigatórios para diagnóstico em dados operacionais."
+  footerNote = "Visão interna e segura da Taliya. Acesso e ações sensíveis são auditados. Grants são obrigatórios para diagnóstico em dados operacionais.",
+  securityOpen = true,
+  onAction,
+  onSecurityClose,
+  onSecurityOpen
 }: TenantDetailLayoutProps) {
   return (
     <section className={cn("tcrm-tenant-detail-layout", className)} aria-label="Detalhe do tenant">
@@ -18376,17 +18394,17 @@ export function TenantDetailLayout({
         {children ?? (
           <>
             <header className="tcrm-tenant-detail-layout__header">
-              <Button leadingIcon="arrowLeft" size="sm" variant="secondary">Voltar para clientes</Button>
+              <Button leadingIcon="arrowLeft" onClick={() => onAction?.("back-clients")} size="sm" variant="secondary">Voltar para clientes</Button>
               <div>
                 <h2>Studio Vila Mariana</h2>
                 <p>Cliente ativo da Taliya · responsável Marina - CS</p>
               </div>
               <span><Chip tone="success">Ativo</Chip><Chip tone="info">Growth</Chip><Chip tone="success">Grant ativo</Chip></span>
               <div className="tcrm-tenant-detail-layout__actions">
-                <Button leadingIcon="shield" size="sm" variant="secondary">Solicitar grant</Button>
-                <Button leadingIcon="headphones" size="sm" variant="secondary">Abrir suporte</Button>
-                <Button leadingIcon="fileText" size="sm" variant="secondary">Ver auditoria</Button>
-                <IconButton icon="more" label="Mais ações" size="sm" variant="subtle" />
+                <Button leadingIcon="shield" onClick={() => { onAction?.("request-grant"); onSecurityOpen?.(); }} size="sm" variant="secondary">Solicitar grant</Button>
+                <Button leadingIcon="headphones" onClick={() => onAction?.("open-support")} size="sm" variant="secondary">Abrir suporte</Button>
+                <Button leadingIcon="fileText" onClick={() => onAction?.("open-audit")} size="sm" variant="secondary">Ver auditoria</Button>
+                <IconButton icon="more" label="Mais ações" onClick={() => onAction?.("more-actions")} size="sm" variant="subtle" />
               </div>
             </header>
             <section className="tcrm-tenant-detail-layout__summary">
@@ -18402,7 +18420,7 @@ export function TenantDetailLayout({
                 <div key={label}><Icon name={icon as IconName} size="15px" /><span>{label}</span><strong>{value}</strong>{label === "Cota" ? <ProgressBar value={68} tone="success" /> : null}</div>
               ))}
             </section>
-            <Tabs compact defaultValue="resumo" items={[{ value: "resumo", label: "Resumo", content: (
+            <Tabs compact defaultValue="resumo" onValueChange={(value) => onAction?.(`tab:${value}`)} items={[{ value: "resumo", label: "Resumo", content: (
               <div className="tcrm-tenant-detail-layout__grid">
                 <Panel className="tcrm-tenant-detail-layout__health">
                   <h3><span>1.</span> Saúde da conta <Chip tone="success">estável</Chip></h3>
@@ -18410,28 +18428,34 @@ export function TenantDetailLayout({
                   <div><MetricTile label="Tickets abertos" value="1" tone="neutral" /><MetricTile label="Incidentes críticos" value="0" tone="negative" /><MetricTile label="Cota" value="68%" tone="positive" /><MetricTile label="Grants ativos" value="1" tone="neutral" /></div>
                 </Panel>
                 <Panel className="tcrm-tenant-detail-layout__users">
-                  <h3><span>2.</span> Usuários do tenant <Button size="sm" variant="ghost">Ver usuários</Button></h3>
+                  <h3><span>2.</span> Usuários do tenant <Button onClick={() => onAction?.("view-users")} size="sm" variant="ghost">Ver usuários</Button></h3>
                   <div className="tcrm-tenant-detail-layout__user-columns"><span>Usuário</span><span>Perfil</span><span>Status</span><span>Último acesso</span></div>
                   {["Ana Souza", "Marina Lopes", "Sam Frank", "João Silva"].map((name, index) => <p key={name}><Avatar name={name} size="xs" />{name}<span>{index === 0 ? "Dona" : index === 1 ? "Admin" : index === 2 ? "Recepção" : "Professor"}</span><Chip tone="success">ativo</Chip><time>{index < 2 ? "hoje" : "2 dias"}</time></p>)}
                 </Panel>
                 <Panel className="tcrm-tenant-detail-layout__entitlements">
-                  <h3><span>3.</span> Entitlements e uso <Button size="sm" variant="ghost">Ver entitlements</Button></h3>
+                  <h3><span>3.</span> Entitlements e uso <Button onClick={() => onAction?.("view-entitlements")} size="sm" variant="ghost">Ver entitlements</Button></h3>
                   <p><Icon name="clock" size="15px" />Plano <strong>Growth</strong></p>
                   <p><Icon name="users" size="15px" />Agentes <strong>3 slots · 3 ativos</strong></p>
                   <p><Icon name="clock" size="15px" />Cota mensal <strong>68% usada</strong><ProgressBar value={68} tone="success" /></p>
                   <p><Icon name="inbox" size="15px" />Pacote extra <strong>nenhum</strong></p>
                   <p><Icon name="alert" size="15px" />Alertas <Chip tone="success">sem bloqueio</Chip></p>
                 </Panel>
-                <Panel className="tcrm-tenant-detail-layout__support"><h3><span>4.</span> Suporte e tickets <Button size="sm" variant="ghost">Abrir suporte</Button></h3><p>Importação duplicou alunos <Chip tone="info">em análise</Chip><span>Marina</span></p><p>Dúvida sobre configuração de Pix <Chip tone="success">respondido</Chip><span>Marina</span></p></Panel>
-                <GrantAccessPanel />
-                <Panel className="tcrm-tenant-detail-layout__incidents"><h3><span>6.</span> Incidentes e integrações <Button size="sm" variant="ghost">Ver incidentes</Button></h3>{["0 críticos", "WhatsApp operando", "Pagamentos operando", "Importação em análise"].map((item, index) => <p key={item}><Icon name={index === 0 ? "shieldAlert" : index === 3 ? "cloudOff" : "checkCircle"} size="17px" />{item}</p>)}</Panel>
-                <Panel className="tcrm-tenant-detail-layout__audit"><h3><span>7.</span> Auditoria recente <Button size="sm" variant="ghost">Ver auditoria</Button></h3>{["Grant aprovado pelo dono", "Ticket atualizado", "Plano Growth renovado", "Usuário Marina fez login"].map((item, index) => <p key={item}><span />{index === 2 ? "12/05" : "hoje"}<strong>{item}</strong><em>{index === 0 ? "Ana Souza" : index === 3 ? "Marina - Suporte" : "Sistema"}</em></p>)}</Panel>
+                <Panel className="tcrm-tenant-detail-layout__support"><h3><span>4.</span> Suporte e tickets <Button onClick={() => onAction?.("open-support")} size="sm" variant="ghost">Abrir suporte</Button></h3><p>Importação duplicou alunos <Chip tone="info">em análise</Chip><span>Marina</span></p><p>Dúvida sobre configuração de Pix <Chip tone="success">respondido</Chip><span>Marina</span></p></Panel>
+                <GrantAccessPanel onAction={(actionId) => onAction?.(`grant:${actionId}`)} />
+                <Panel className="tcrm-tenant-detail-layout__incidents"><h3><span>6.</span> Incidentes e integrações <Button onClick={() => onAction?.("view-incidents")} size="sm" variant="ghost">Ver incidentes</Button></h3>{["0 críticos", "WhatsApp operando", "Pagamentos operando", "Importação em análise"].map((item, index) => <p key={item}><Icon name={index === 0 ? "shieldAlert" : index === 3 ? "cloudOff" : "checkCircle"} size="17px" />{item}</p>)}</Panel>
+                <Panel className="tcrm-tenant-detail-layout__audit"><h3><span>7.</span> Auditoria recente <Button onClick={() => onAction?.("open-audit")} size="sm" variant="ghost">Ver auditoria</Button></h3>{["Grant aprovado pelo dono", "Ticket atualizado", "Plano Growth renovado", "Usuário Marina fez login"].map((item, index) => <p key={item}><span />{index === 2 ? "12/05" : "hoje"}<strong>{item}</strong><em>{index === 0 ? "Ana Souza" : index === 3 ? "Marina - Suporte" : "Sistema"}</em></p>)}</Panel>
               </div>
-            ) }, { value: "usuarios", label: "Usuários", content: null }, { value: "entitlements", label: "Entitlements", content: null }, { value: "suporte", label: "Suporte", content: null }, { value: "grants", label: "Grants", content: null }, { value: "incidentes", label: "Incidentes", content: null }, { value: "auditoria", label: "Auditoria", content: null }]} />
+            ) },
+            { value: "usuarios", label: "Usuários", content: <TenantDetailTabPanel actionId="view-users" actionLabel="Ver usuários" description="Perfis, status e últimos acessos dos usuários do tenant." onAction={onAction} title="Usuários do tenant" /> },
+            { value: "entitlements", label: "Entitlements", content: <TenantDetailTabPanel actionId="view-entitlements" actionLabel="Ver entitlements" description="Plano, agentes, cota mensal, pacotes e alertas contratados." onAction={onAction} title="Entitlements e uso" /> },
+            { value: "suporte", label: "Suporte", content: <TenantDetailTabPanel actionId="open-support" actionLabel="Abrir suporte" description="Tickets ativos e histórico de atendimento do studio." onAction={onAction} title="Suporte e tickets" /> },
+            { value: "grants", label: "Grants", content: <GrantAccessPanel onAction={(actionId) => onAction?.(`grant:${actionId}`)} /> },
+            { value: "incidentes", label: "Incidentes", content: <TenantDetailTabPanel actionId="view-incidents" actionLabel="Ver incidentes" description="Incidentes e estado atual das integrações do tenant." onAction={onAction} title="Incidentes e integrações" /> },
+            { value: "auditoria", label: "Auditoria", content: <TenantDetailTabPanel actionId="open-audit" actionLabel="Ver auditoria" description="Ações sensíveis, acessos e mudanças recentes do tenant." onAction={onAction} title="Auditoria recente" /> }]} />
           </>
         )}
       </main>
-      <SecurityRulePanel />
+      {securityOpen ? <SecurityRulePanel onAction={(actionId) => { if (actionId === "close") onSecurityClose?.(); else onAction?.(`security:${actionId}`); }} /> : null}
       {footerNote ? <footer className="tcrm-tenant-detail-layout__footer"><Icon name="lock" size="12px" />{footerNote}</footer> : null}
     </section>
   );

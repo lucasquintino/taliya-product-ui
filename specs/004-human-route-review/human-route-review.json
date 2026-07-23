@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T15:27:40.506Z",
+  "generatedAt": "2026-07-23T22:14:43.274Z",
   "status": "in-progress",
   "targetRouteCount": 73,
-  "completedRouteCount": 34,
+  "completedRouteCount": 35,
   "failedRouteCount": 0,
-  "pendingRouteCount": 39,
+  "pendingRouteCount": 38,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -3028,38 +3028,53 @@
         "drawer-open-close"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-23T22:14:30.109Z",
+        "evidence": [
+          "tmp/human-route-review/50-internal-tenant-detail/desktop-canonical.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-23T22:14:30.473Z",
+        "evidence": [
+          "tmp/human-route-review/50-internal-tenant-detail/desktop-reduced.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-23T22:14:30.764Z",
+        "evidence": [
+          "tmp/human-route-review/50-internal-tenant-detail/mobile-page.png",
+          "tmp/human-route-review/50-internal-tenant-detail/mobile-security.png"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-23T22:14:30.899Z",
+        "evidence": [
+          "browser-observed:route-50-internal-tenant-detail-55-controls-2026-07-23"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "55 controls and assertions: 24 shell, internal navigation and global actions; 11 tenant detail actions; 5 security actions plus close/reopen; 6 secondary tabs with non-empty content and their 6 actions; return to summary; sidebar hit-target verification"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-07-23T22:14:31.009Z",
+        "evidence": [
+          "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508/50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png"
+        ],
         "issues": []
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Human review filled every tenant-detail tab, wired official actions and security lifecycle, removed fixed-width desktop/mobile overflow, made mobile tabs internally scrollable, and stopped the transparent desktop sidebar container from intercepting content clicks without story-local CSS."
+      ]
     },
     {
       "image": "51A_round-4.1J_onboarding_shell-global-aprovado.png",

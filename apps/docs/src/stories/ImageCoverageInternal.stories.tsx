@@ -270,18 +270,40 @@ export function InternalTenantsListDetailPage() {
 }
 
 export function InternalTenantSecurityPage() {
+  const [activeNavId, setActiveNavId] = useState("clients");
+  const [announcement, setAnnouncement] = useState("");
+  const [securityOpen, setSecurityOpen] = useState(true);
+
   return (
-    <InternalShell
-      avatarSrc={image79Avatar}
-      browserUrl="https://app.taliya.com/internal/tenants/tenant_vila_mariana"
-      contentLayout="internal-tenant-detail"
-      navItems={internalNav("clients")}
-      regions={{ pageHeader: false }}
-      subtitle="Usuarios, grants e seguranca"
-      title="Studio Vila Mariana"
-    >
-      <TenantDetailLayout />
-    </InternalShell>
+    <>
+      <InternalShell
+        avatarSrc={image79Avatar}
+        browserUrl="https://app.taliya.com/internal/tenants/tenant_vila_mariana"
+        contentLayout="internal-tenant-detail"
+        globalActions={{
+          onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
+          onMessages: () => setAnnouncement("Mensagens internas abertas"),
+          onNotifications: () => setAnnouncement("Notificacoes internas abertas"),
+          onSearch: () => setAnnouncement("Busca global aberta")
+        }}
+        navItems={internalNav(activeNavId)}
+        onBack={() => setAnnouncement("Navegacao de retorno acionada")}
+        onNavChange={(id) => { setActiveNavId(id); setAnnouncement(`Secao interna selecionada: ${id}`); }}
+        onSidebarSelect={(item) => setAnnouncement(`Modulo selecionado: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncement(`Preferencia selecionada: ${item.label}`)}
+        regions={{ pageHeader: false }}
+        subtitle="Usuarios, grants e seguranca"
+        title="Studio Vila Mariana"
+      >
+        <TenantDetailLayout
+          onAction={setAnnouncement}
+          onSecurityClose={() => { setSecurityOpen(false); setAnnouncement("Seguranca do tenant fechada"); }}
+          onSecurityOpen={() => { setSecurityOpen(true); setAnnouncement("Seguranca do tenant aberta"); }}
+          securityOpen={securityOpen}
+        />
+      </InternalShell>
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 

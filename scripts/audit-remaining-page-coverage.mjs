@@ -397,7 +397,17 @@ const pageFamilyContracts = [
     page: "InternalTenantSecurityPage",
     file: "ImageCoverageInternal.stories.tsx",
     family: "internal/detail",
-    requiredSnippets: ["<InternalShell", 'browserUrl="https://app.taliya.com/internal/tenants/tenant_vila_mariana"', 'contentLayout="internal-tenant-detail"', "<TenantDetailLayout />", 'regions={{ pageHeader: false }}']
+    requiredSnippets: [
+      "<InternalShell",
+      'browserUrl="https://app.taliya.com/internal/tenants/tenant_vila_mariana"',
+      'contentLayout="internal-tenant-detail"',
+      "<TenantDetailLayout",
+      "onAction={setAnnouncement}",
+      "onSecurityClose=",
+      "onSecurityOpen=",
+      "securityOpen={securityOpen}",
+      'regions={{ pageHeader: false }}'
+    ]
   },
   {
     page: "AgentsCatalogPage",
