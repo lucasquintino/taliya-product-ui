@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo, useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   ClassDrawer,
@@ -15,7 +16,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { AttendanceStatus, ClassDrawerAction, ClassDrawerFact, ClassDrawerStudent, ClassDrawerTimelineItem, ClassOperationalDetailAction, CrmShellNavItem, PageFilterBarFilter, WeeklyCalendarEvent } from "@taliya/crm";
+import type { AttendanceStatus, ClassDrawerAction, ClassDrawerFact, ClassDrawerState, ClassDrawerStudent, ClassDrawerTimelineItem, ClassOperationalDetailAction, CrmShellNavItem, PageFilterBarFilter, WeeklyCalendarEvent } from "@taliya/crm";
 import type { CrmWorklistTableColumn, PageQuickFilterItem } from "@taliya/crm";
 import { Button, ButtonGroup, Chip, Icon, IconButton, List, ListItem, Panel, PersonLabel } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
@@ -118,8 +119,6 @@ export function AgendaCalendarPage() {
           }}
         />
       ) : null}
-      drawerPlacement="floating"
-      drawerSize="compact"
       globalActions={{
         onAvatar: () => announce("Perfil da operadora aberto"),
         onMessages: () => announce("Mensagens abertas"),
@@ -175,9 +174,11 @@ const agendaDrawerActionLabels: Record<ClassDrawerAction, string> = {
   "move-student": "encontrar encaixe",
   "notify-class": "avisar envolvidos",
   "open-grid": "abrir grade",
+  "open-class": "abrir aula",
   "open-schedule": "abrir aula",
   "pause-class": "pausar aula",
-  "save-call": "fazer chamada"
+  "save-call": "fazer chamada",
+  "view-demand": "ver demanda"
 };
 
 const agendaStudentNames = ["Ana Carolina Souza", "Beatriz Lima", "Felipe Andrade", "Gabriela Martins", "Juliana Costa", "Rafael Nunes"];
@@ -294,7 +295,7 @@ export function AgendaClassDetailPage() {
           </ButtonGroup>
         }
         pageHeaderRhythm="stacked"
-        panel={callOpen ? (
+        drawer={callOpen ? (
           <ClassDrawer
             ariaLabel="Chamada da aula"
             closeLabel="Fechar chamada"
@@ -314,8 +315,6 @@ export function AgendaClassDetailPage() {
             title="Chamada"
           />
         ) : null}
-        panelLabel="Painel de chamada"
-        rightPanelState={callOpen ? undefined : "collapsed"}
         rightPanelVariant="class-operation"
         sidebarItems={crmEmptyShellSidebarItems}
         subtitle="terça, 13 maio"
@@ -339,9 +338,7 @@ export function AgendaClassesPage() {
         activeNavId="turmas"
         activeSidebarId="agenda"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <AgendaClassDrawer classRow={selectedClass} onAction={(action) => setAnnouncement(`Ação da turma: ${action}`)} onClose={() => setDrawerOpen(false)} /> : null}
-        drawerPlacement="floating"
-        drawerSize="compact"
+        drawer={drawerOpen ? <AgendaClassDrawer classRow={selectedClass} onAction={(action) => setAnnouncement(`Ação da turma: ${agendaDrawerActionLabels[action]}`)} onClose={() => setDrawerOpen(false)} /> : null}
         filterBar={<ClassesFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de turmas"
         globalActions={{
@@ -372,7 +369,7 @@ export function AgendaClassesPage() {
           onRowSelect={(row) => {
             setSelectedClassId(row.id);
             setDrawerOpen(true);
-            setAnnouncement(`Turma selecionada: ${row.id}`);
+            setAnnouncement(`Turma selecionada: ${row.name}`);
           }}
           page={page}
           selectedRowId={selectedClassId}
@@ -395,8 +392,6 @@ export function AgendaGradePage() {
         activeSidebarId="agenda"
         avatarSrc={image79Avatar}
         drawer={drawerOpen ? <AgendaGradeDrawer event={selectedEvent} onAction={(action) => setAnnouncement(`Ação do bloco: ${action}`)} onClose={() => setDrawerOpen(false)} /> : null}
-        drawerPlacement="floating"
-        drawerSize="compact"
         filterBar={<GradeFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de grade"
         globalActions={{
@@ -589,6 +584,7 @@ function AgendaClassDrawer({ classRow, onAction, onClose }: { classRow: ClassRow
     { id: "schedule", icon: "calendar", label: "Dia/horário recorrente", value: classRow.schedule },
     { id: "capacity", icon: "users", label: "Capacidade", value: classRow.capacity },
     { id: "teacher", icon: "user", label: "Professor da turma", value: <PersonLabel avatarSrc={classRow.teacher === "A definir" ? undefined : image79Avatar} name={classRow.teacher} size="xs" /> },
+    { id: "demand", icon: "users", label: "Demanda", value: classRow.demand, tone: classRow.drawerState === "conflict" ? "danger" : undefined },
     { id: "resource", icon: "user", label: "Recurso / equipamento", value: classRow.name.includes("Reformer") ? "Reformer 2" : classRow.name },
     { id: "status", icon: "clock", label: "Status", value: <Chip tone={classRow.tone}>{classRow.status}</Chip>, tone: classRow.tone === "danger" ? "danger" : classRow.tone === "info" ? "info" : classRow.tone === "success" ? "success" : undefined }
   ];
@@ -628,15 +624,14 @@ function AgendaClassDrawer({ classRow, onAction, onClose }: { classRow: ClassRow
       historyItems={historyItems}
       onAction={onAction}
       onClose={onClose}
-      primaryAction={{ label: "Abrir agenda", action: "open-schedule" }}
+      primaryAction={{ label: "Abrir aula", action: "open-class", icon: "calendar" }}
       rosterHeading={`Alunos fixos (${fixedStudentCount})`}
       secondaryActions={[
-        { label: "Abrir grade", action: "open-grid" },
-        { label: "Mover aluno", action: "move-student" },
-        { label: "Avisar turma", action: "notify-class" },
-        { label: "Pausar turma", action: "pause-class" },
-        { label: "Editar turma", action: "edit-class" }
+        { label: "Ver demanda", action: "view-demand", icon: "users" },
+        { label: "Editar turma", action: "edit-class", icon: "edit" },
+        { label: "Abrir agenda", action: "open-schedule", icon: "calendar" }
       ]}
+      state={classRow.drawerState ?? "open"}
       students={studentPool.slice(0, fixedStudentCount)}
       subtitle={null}
       title={`${classRow.schedule} · ${classRow.name}`}
@@ -659,15 +654,18 @@ type ClassRow = {
   status: string;
   tone: ComponentTone;
   change: string;
+  demand: string;
+  drawerState?: ClassDrawerState;
 };
 
 const classRows: ClassRow[] = [
-  { id: "reformer", name: "Reformer Intermediário", teacher: "João Silva", schedule: "Terça 17h", capacity: "5/6", fixed: "5 alunos", vacancies: "1 vaga", next: "Hoje 17h", status: "Ativa", tone: "success", change: "Aluno movido hoje" },
-  { id: "pilates", name: "Pilates Solo", teacher: "Mariana Lopes", schedule: "Quinta 08h", capacity: "6/6", fixed: "6 alunos", vacancies: "Lotada", next: "Quinta 08h", status: "Cheia", tone: "danger", change: "Sem mudanças" },
-  { id: "tower", name: "Tower", teacher: "A definir", schedule: "Segunda 19h", capacity: "3/5", fixed: "3 alunos", vacancies: "2 vagas", next: "Segunda 19h", status: "Com vaga", tone: "success", change: "Professor pendente" },
-  { id: "alongamento", name: "Alongamento", teacher: "Camila Rocha", schedule: "Sexta 10h", capacity: "4/6", fixed: "4 alunos", vacancies: "2 vagas", next: "Sexta 10h", status: "Ativa", tone: "success", change: "Capacidade ajustada" },
-  { id: "experimental", name: "Experimental", teacher: "Lucas Peres", schedule: "Quarta 14h", capacity: "2/6", fixed: "2 alunos", vacancies: "4 vagas", next: "Quarta 14h", status: "Temporária", tone: "info", change: "Evento recorrente" },
-  { id: "inicial", name: "Reformer Inicial", teacher: "A definir", schedule: "Terça 07h", capacity: "0/6", fixed: "0 alunos", vacancies: "6 vagas", next: "Terça 07h", status: "Pausada", tone: "neutral", change: "Pausada esta semana" }
+  { id: "reformer", name: "Reformer Intermediário", teacher: "João Silva", schedule: "Terça 17h", capacity: "5/6", fixed: "5 alunos", vacancies: "1 vaga", next: "Hoje 17h", status: "Ativa", tone: "success", change: "Aluno movido hoje", demand: "3 interessados" },
+  { id: "pilates", name: "Pilates Solo", teacher: "Mariana Lopes", schedule: "Quinta 08h", capacity: "6/6", fixed: "6 alunos", vacancies: "Lotada", next: "Quinta 08h", status: "Cheia", tone: "danger", change: "Sem mudanças", demand: "5 interessados" },
+  { id: "tower", name: "Tower", teacher: "A definir", schedule: "Segunda 19h", capacity: "3/5", fixed: "3 alunos", vacancies: "2 vagas", next: "Segunda 19h", status: "Com vaga", tone: "success", change: "Professor pendente", demand: "2 interessados" },
+  { id: "alongamento", name: "Alongamento", teacher: "Camila Rocha", schedule: "Sexta 10h", capacity: "4/6", fixed: "4 alunos", vacancies: "2 vagas", next: "Sexta 10h", status: "Ativa", tone: "success", change: "Capacidade ajustada", demand: "1 interessado" },
+  { id: "experimental", name: "Experimental", teacher: "Lucas Peres", schedule: "Quarta 14h", capacity: "2/6", fixed: "2 alunos", vacancies: "4 vagas", next: "Quarta 14h", status: "Temporária", tone: "info", change: "Evento recorrente", demand: "4 interessados" },
+  { id: "inicial", name: "Reformer Inicial", teacher: "A definir", schedule: "Terça 07h", capacity: "0/6", fixed: "0 alunos", vacancies: "6 vagas", next: "Terça 07h", status: "Pausada", tone: "neutral", change: "Pausada esta semana", demand: "Sem demanda" },
+  { id: "conflito", name: "Pilates Avançado", teacher: "Mariana Lopes", schedule: "Quarta 18h", capacity: "4/6", fixed: "4 alunos", vacancies: "2 vagas", next: "Quarta 18h", status: "Conflito", tone: "danger", change: "Sala ocupada no horário", demand: "6 interessados", drawerState: "conflict" }
 ];
 
 const classColumns: Array<CrmWorklistTableColumn<ClassRow>> = [
@@ -702,7 +700,7 @@ function ClassesTable({
       columns={classColumns}
       pagination={{
         itemsPerPage: "10",
-        label: page === 1 ? "1-6 de 18" : "7-12 de 18",
+        label: page === 1 ? "1-7 de 19" : "8-14 de 19",
         page,
         pageCount: 2,
         onItemsPerPageClick: () => onInteraction("Seletor de itens por página aberto"),
@@ -909,7 +907,22 @@ export const Image26AgendaCalendarioOperacional: Story = {
     },
     sourceImage: "26_round-4.1F_agenda_01_calendario-operacional.png.png"
   },
-  render: () => <AgendaCalendarPage />
+  render: () => <AgendaCalendarPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes da aula selecionada" });
+
+    await expect(drawer).toBeInTheDocument();
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fazer chamada" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação da aula: fazer chamada");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar aula selecionada" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes da aula selecionada" })).not.toBeInTheDocument();
+
+    await userEvent.click(canvas.getAllByRole("button", { name: /Reformer/ })[0]!);
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da aula selecionada" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Dia" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Visualização alterada para dia");
+  }
 };
 
 export const Image29AulaDetalheComChamada: Story = {
@@ -937,7 +950,33 @@ export const Image35TurmasListaDetalhe: Story = {
     },
     sourceImage: "35_round-4.1F_turmas_01_lista-detalhe.png.png"
   },
-  render: () => <AgendaClassesPage />
+  render: () => <AgendaClassesPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Turmas", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da turma" })).toHaveAttribute("data-state", "open");
+    await expect(canvas.getByText("3 interessados")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir aula" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação da turma: abrir aula");
+    await userEvent.click(canvas.getByRole("button", { name: "Ver demanda" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação da turma: ver demanda");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar turma" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Pilates Solo/ }));
+    await expect(canvas.getByText("Turma sem vagas fixas")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar turma" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Pilates Avançado/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da turma" })).toHaveAttribute("data-state", "conflict");
+    await expect(canvas.getByText("6 interessados")).toBeInTheDocument();
+
+    await userEvent.type(canvas.getByRole("searchbox"), "Pilates");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Busca de turmas: Pilates");
+    await userEvent.click(canvas.getByRole("button", { name: "Lotadas 6" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila de turmas: Lotadas");
+  }
 };
 
 export const Image36GradeSemanaModeloBloqueio: Story = {
@@ -951,5 +990,20 @@ export const Image36GradeSemanaModeloBloqueio: Story = {
     },
     sourceImage: "36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png"
   },
-  render: () => <AgendaGradePage />
+  render: () => <AgendaGradePage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes do bloco recorrente" });
+
+    await expect(drawer).toBeInTheDocument();
+    await userEvent.click(within(drawer).getByRole("button", { name: "Criar bloqueio" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do bloco: create-task");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar bloco" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes do bloco recorrente" })).not.toBeInTheDocument();
+
+    await userEvent.click(canvas.getAllByRole("button", { name: /Reformer/ })[0]!);
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do bloco recorrente" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Bloqueios ativos 3" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Resumo da grade: Bloqueios ativos");
+  }
 };

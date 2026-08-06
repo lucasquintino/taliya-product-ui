@@ -1,0 +1,65 @@
+[
+  {
+    "id": "crm-image-coverage-access-subscription--image-71-shell-base",
+    "active": {
+      "name": "Conta",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 73
+  },
+  {
+    "id": "crm-image-coverage-access-subscription--image-72-signup",
+    "active": {
+      "name": "Entrar",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 397
+  },
+  {
+    "id": "crm-image-coverage-access-subscription--image-73-signin",
+    "active": {
+      "name": "Criar conta",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 225
+  },
+  {
+    "id": "crm-image-coverage-access-subscription--image-74-review-subscription",
+    "active": {
+      "name": "Voltar aos planos",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 575
+  },
+  {
+    "id": "crm-image-coverage-access-subscription--image-75-pending-confirmation",
+    "active": {
+      "name": "Falar com suporte",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 678
+  },
+  {
+    "id": "crm-image-coverage-access-subscription--image-76-resolve-subscription",
+    "active": {
+      "name": "Falar com suporte",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 588
+  },
+  {
+    "id": "crm-image-coverage-access-subscription--image-77-confirmed-handoff",
+    "active": {
+      "name": "Agendar ajuda humana",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 718
+  }
+]

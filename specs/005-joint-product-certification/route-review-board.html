@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Taliya route review</title>
+    <style>
+      :root {
+        color: #17202a;
+        font: 14px/1.45 Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #f4f6f8; }
+      header {
+        align-items: center;
+        background: #ffffff;
+        border-bottom: 1px solid #dfe4e8;
+        display: flex;
+        justify-content: space-between;
+        min-height: 64px;
+        padding: 12px 24px;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      h1 { font-size: 18px; margin: 0; }
+      #summary { color: #53616f; }
+      main { padding: 24px; }
+      section { margin: 0 auto 32px; max-width: 1600px; }
+      h2 { font-size: 15px; margin: 0 0 12px; }
+      .grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      figure {
+        background: #ffffff;
+        border: 1px solid #dfe4e8;
+        border-radius: 6px;
+        margin: 0;
+        overflow: hidden;
+      }
+      figure button {
+        background: #ffffff;
+        border: 0;
+        cursor: zoom-in;
+        display: block;
+        padding: 0;
+        width: 100%;
+      }
+      figure img {
+        aspect-ratio: 16 / 10;
+        display: block;
+        object-fit: cover;
+        object-position: top;
+        width: 100%;
+      }
+      figcaption { border-top: 1px solid #edf0f2; min-height: 72px; padding: 10px 12px; }
+      figcaption strong { display: block; font-size: 13px; }
+      figcaption span { color: #687684; display: block; font-size: 12px; margin-top: 3px; }
+      dialog {
+        border: 0;
+        border-radius: 6px;
+        box-shadow: 0 20px 70px rgb(11 19 28 / 28%);
+        height: min(92vh, 980px);
+        max-width: 96vw;
+        padding: 0;
+        width: min(96vw, 1680px);
+      }
+      dialog::backdrop { background: rgb(11 19 28 / 72%); }
+      dialog header { min-height: 52px; position: static; }
+      dialog button {
+        align-items: center;
+        background: #ffffff;
+        border: 1px solid #cfd6dc;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 20px;
+        height: 34px;
+        justify-content: center;
+        width: 34px;
+      }
+      #full-image { display: block; height: calc(100% - 52px); object-fit: contain; width: 100%; }
+      @media (max-width: 640px) {
+        header { align-items: flex-start; flex-direction: column; padding: 12px 16px; }
+        main { padding: 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Certificação das rotas</h1>
+      <span id="summary"></span>
+    </header>
+    <main id="families"></main>
+    <dialog id="preview">
+      <header>
+        <strong id="preview-title"></strong>
+        <button type="button" aria-label="Fechar" title="Fechar">&times;</button>
+      </header>
+      <img id="full-image" alt="" />
+    </dialog>
+    <script type="module">
+      const report = await fetch("./route-sweep-1440.json").then((response) => response.json());
+      const host = document.querySelector("#families");
+      const dialog = document.querySelector("#preview");
+      const fullImage = document.querySelector("#full-image");
+      const previewTitle = document.querySelector("#preview-title");
+      const groups = Map.groupBy(report.rows, (row) => row.families[0] ?? "Sem família");
+
+      document.querySelector("#summary").textContent = `${report.rows.length} estados em ${groups.size} famílias`;
+      for (const [family, rows] of groups) {
+        const section = document.createElement("section");
+        section.innerHTML = `<h2>${family} (${rows.length})</h2><div class="grid"></div>`;
+        const grid = section.querySelector(".grid");
+        for (const row of rows) {
+          const figure = document.createElement("figure");
+          const imagePath = `./${row.screenshot}`;
+          figure.innerHTML = `
+            <button type="button" aria-label="Ampliar ${row.surfaceId}">
+              <img loading="lazy" src="${imagePath}" alt="${row.surfaceId}" />
+            </button>
+            <figcaption><strong>${row.index}. ${row.surfaceId}</strong><span>${row.storyId}</span></figcaption>
+          `;
+          figure.querySelector("button").addEventListener("click", () => {
+            fullImage.src = imagePath;
+            fullImage.alt = row.surfaceId;
+            previewTitle.textContent = `${row.index}. ${row.surfaceId}`;
+            dialog.showModal();
+          });
+          grid.append(figure);
+        }
+        host.append(section);
+      }
+      dialog.querySelector("button").addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    </script>
+  </body>
+</html>

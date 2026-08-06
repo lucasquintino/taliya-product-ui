@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-08-05",
+  "artifact": "apps/docs/storybook-static",
+  "baseUrl": "http://127.0.0.1:6224",
+  "viewport": { "width": 1280, "height": 720 },
+  "routes": [
+    { "label": "usage-overview", "storyId": "crm-image-coverage-usage--image-68-uso-visao-geral", "heading": "Uso e cotas" },
+    { "label": "usage-ledger", "storyId": "crm-image-coverage-usage--image-69-uso-extrato", "heading": "Extrato de uso" },
+    { "label": "billing-subscription", "storyId": "crm-image-coverage-billing--image-65-billing-assinatura", "heading": "Assinatura Taliya" },
+    { "label": "billing-invoices", "storyId": "crm-image-coverage-billing--image-66-billing-faturas", "heading": "Faturas Taliya" },
+    { "label": "billing-addons", "storyId": "crm-image-coverage-billing--image-67-billing-add-ons", "heading": "Add-ons Taliya" }
+  ],
+  "drawerGeometry": {
+    "status": "pass",
+    "position": "fixed",
+    "top": "0px",
+    "bottom": "0px",
+    "right": "0px",
+    "height": 720,
+    "width": 420
+  },
+  "lifecycle": {
+    "status": "pass",
+    "closeButton": "Fechar suporte",
+    "closeUnmountsDrawer": true,
+    "reopenButton": "Abrir suporte",
+    "reopenRestoresDrawer": true
+  },
+  "runtimeLogs": [],
+  "sourceAudit": "drawer-lifecycle-audit.json",
+  "notes": [
+    "All five routes pass the same canonical shell drawer geometry.",
+    "The evidence is from the rebuilt static Storybook artifact, not the development server.",
+    "Mobile geometry remains covered by the existing responsive audit; this record is the final desktop browser proof for JPC-030."
+  ]
+}

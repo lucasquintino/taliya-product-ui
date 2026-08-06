@@ -1,0 +1,620 @@
+[
+  {
+    "target": "financeiro-image-30",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "enabledButtons": 69,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 1,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "financeiro-image-32",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": {
+      "bottom": 720,
+      "fullHeight": true,
+      "height": 720,
+      "position": "fixed",
+      "right": 1265,
+      "state": "overdue",
+      "width": 420,
+      "x": 845,
+      "y": 0
+    },
+    "enabledButtons": 76,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 1,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "uso-image-68",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": {
+      "bottom": 899,
+      "fullHeight": false,
+      "height": 720,
+      "position": "static",
+      "right": 1237,
+      "state": "overview",
+      "width": 356.796875,
+      "x": 880.203125,
+      "y": 179
+    },
+    "enabledButtons": 45,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 0,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "relatorios",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "enabledButtons": 47,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 8,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "dinheiro-na-mesa",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "enabledButtons": 63,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 6,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "suporte",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "enabledButtons": 54,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 5,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "billing-image-65",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": {
+      "bottom": 882,
+      "fullHeight": false,
+      "height": 720,
+      "position": "static",
+      "right": 1237,
+      "state": "overview",
+      "width": 356.796875,
+      "x": 880.203125,
+      "y": 162
+    },
+    "enabledButtons": 45,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 0,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "internal-image-48",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "enabledButtons": 49,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 8,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "financeiro-image-30",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "enabledButtons": 69,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 1,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "financeiro-image-32",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": {
+      "bottom": 768,
+      "fullHeight": true,
+      "height": 768,
+      "position": "fixed",
+      "right": 1009,
+      "state": "overdue",
+      "width": 420,
+      "x": 589,
+      "y": 0
+    },
+    "enabledButtons": 76,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 1,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "uso-image-68",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": {
+      "bottom": 947,
+      "fullHeight": false,
+      "height": 768,
+      "position": "static",
+      "right": 981,
+      "state": "overview",
+      "width": 300,
+      "x": 681,
+      "y": 179
+    },
+    "enabledButtons": 45,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 0,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "relatorios",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "enabledButtons": 47,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 8,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "dinheiro-na-mesa",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "enabledButtons": 63,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 6,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "suporte",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "enabledButtons": 54,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 5,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "billing-image-65",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": {
+      "bottom": 930,
+      "fullHeight": false,
+      "height": 768,
+      "position": "static",
+      "right": 981,
+      "state": "overview",
+      "width": 300,
+      "x": 681,
+      "y": 162
+    },
+    "enabledButtons": 45,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 0,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "internal-image-48",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "enabledButtons": 49,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 8,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "financeiro-image-30",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "enabledButtons": 69,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 1,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "financeiro-image-32",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": {
+      "bottom": 844,
+      "fullHeight": true,
+      "height": 844,
+      "position": "fixed",
+      "right": 390,
+      "state": "overdue",
+      "width": 390,
+      "x": 0,
+      "y": 0
+    },
+    "enabledButtons": 76,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 1,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "uso-image-68",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": {
+      "bottom": 1747,
+      "fullHeight": false,
+      "height": 844,
+      "position": "static",
+      "right": 363,
+      "state": "overview",
+      "width": 351,
+      "x": 12,
+      "y": 903
+    },
+    "enabledButtons": 45,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 0,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "relatorios",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "enabledButtons": 47,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 8,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "dinheiro-na-mesa",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "enabledButtons": 63,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 6,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "suporte",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "enabledButtons": 54,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 5,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "billing-image-65",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": {
+      "bottom": 1793,
+      "fullHeight": false,
+      "height": 844,
+      "position": "static",
+      "right": 363,
+      "state": "overview",
+      "width": 351,
+      "x": 12,
+      "y": 949
+    },
+    "enabledButtons": 45,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 0,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  },
+  {
+    "target": "internal-image-48",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "enabledButtons": 49,
+    "headings": {
+      "h1": 3
+    },
+    "panels": {
+      "count": 8,
+      "overlapPairs": 0
+    },
+    "shells": 1
+  }
+]

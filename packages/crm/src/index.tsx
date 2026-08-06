@@ -75,6 +75,7 @@ import type { AuditTableRow, AvatarProps, ButtonVariant, ComponentTone, DiffTabl
 import type { DataTableColumn, DataTableSortState } from "@taliya/ui";
 import type { CrmComponentName } from "./component-registry.js";
 
+/** @deprecated Import MessageBubble from @taliya/ui. */
 export { MessageBubble } from "@taliya/ui";
 export { standardPageKitManifest } from "./standard-page-kit.js";
 export type { StandardPageKitComponent, StandardPageKitManifest } from "./standard-page-kit.js";
@@ -467,15 +468,32 @@ export function CrmBrowserToolbarButton({
 
 export function CrmBrowserToolbar({
   items = crmBrowserToolbarItems,
-  className
+  className,
+  onAction
 }: {
   items?: CrmBrowserToolbarItem[];
   className?: string;
+  onAction?: (item: CrmBrowserToolbarItem) => void;
 }) {
   return (
-    <div className={cn("tcrm-browser-toolbar", className)} role="toolbar" aria-label="Controles do navegador">
-      {items.map((item) => (
-        <CrmBrowserToolbarButton disabled={item.disabled} icon={item.icon} key={item.id} label={item.label} />
+    <div
+      aria-hidden={onAction ? undefined : true}
+      aria-label={onAction ? "Controles do navegador" : undefined}
+      className={cn("tcrm-browser-toolbar", className)}
+      role={onAction ? "toolbar" : undefined}
+    >
+      {items.map((item) => onAction ? (
+        <CrmBrowserToolbarButton
+          disabled={item.disabled}
+          icon={item.icon}
+          key={item.id}
+          label={item.label}
+          onClick={() => onAction(item)}
+        />
+      ) : (
+        <span className="tcrm-browser-toolbar__button" key={item.id}>
+          <Icon name={item.icon} size={item.icon === "star" ? 16 : item.icon === "book" ? 17 : 20} />
+        </span>
       ))}
     </div>
   );
@@ -489,7 +507,7 @@ export function CrmBrowserAddressBar({
   className?: string;
 }) {
   return (
-    <div className={cn("tcrm-browser-address", className)} aria-label={url}>
+    <div className={cn("tcrm-browser-address", className)} aria-label={url} role="group">
       <Icon name="lock" size={13} />
       <span>{url}</span>
       <Icon name="refresh" size={14} />
@@ -500,18 +518,20 @@ export function CrmBrowserAddressBar({
 export function CrmBrowserChrome({
   className,
   toolbarItems = crmBrowserToolbarItems,
+  onToolbarAction,
   url
 }: {
   className?: string;
   toolbarItems?: CrmBrowserToolbarItem[];
+  onToolbarAction?: (item: CrmBrowserToolbarItem) => void;
   url?: string;
 }) {
   return (
-    <header className={cn("tcrm-browser-chrome", className)}>
+    <div aria-hidden={onToolbarAction ? undefined : true} className={cn("tcrm-browser-chrome", className)}>
       <CrmBrowserTrafficLights />
-      <CrmBrowserToolbar items={toolbarItems} />
+      <CrmBrowserToolbar items={toolbarItems} onAction={onToolbarAction} />
       <CrmBrowserAddressBar url={url} />
-    </header>
+    </div>
   );
 }
 
@@ -553,6 +573,7 @@ function CrmShellIconButton({
   );
 }
 
+/** @deprecated Use CrmSidebarFloatingButton, CrmTopbarActionButton, or IconButton according to placement. */
 export function CrmShellRoundButton(props: CrmShellIconButtonProps) {
   return <CrmShellIconButton {...props} />;
 }
@@ -685,6 +706,7 @@ export function CrmTopbarNavChip({
   );
 }
 
+/** @deprecated Use CrmTopbarNavChip or CrmShellTopNav. */
 export function CrmShellTopNavItem(props: CrmTopbarNavChipProps) {
   return <CrmTopbarNavChip {...props} />;
 }
@@ -813,8 +835,55 @@ export function CrmEmptyShellPageHeader({ title = "Jornadas" }: { title?: string
   );
 }
 
-export function CrmEmptyShellCanvas({ className }: { className?: string }) {
-  return <section className={cn("tcrm-empty-shell-canvas", className)} aria-label="Área de conteúdo vazia" />;
+export type CrmEmptyShellState = "empty" | "loading" | "unavailable";
+
+export function CrmEmptyShellCanvas({
+  state = "empty",
+  onRetry,
+  className,
+  embedded = false
+}: {
+  state?: CrmEmptyShellState;
+  onRetry?: () => void;
+  className?: string;
+  embedded?: boolean;
+}) {
+  const content = (
+    <>
+      {state === "loading" ? <LoadingState title="Carregando jornadas" variant="panel" /> : null}
+      {state === "unavailable" ? (
+        <ErrorState
+          action={onRetry ? <Button onClick={onRetry} variant="primary">Tentar novamente</Button> : undefined}
+          description="Não foi possível carregar esta área agora."
+          title="Conteúdo indisponível"
+        />
+      ) : null}
+    </>
+  );
+
+  if (embedded) {
+    return (
+      <div
+        aria-busy={state === "loading" || undefined}
+        aria-label={state === "empty" ? "Área de conteúdo vazia" : "Estado da área de conteúdo"}
+        className={cn("tcrm-empty-shell-canvas__state", className)}
+        data-state={state}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <section
+      aria-busy={state === "loading" || undefined}
+      aria-label={state === "empty" ? "Área de conteúdo vazia" : "Estado da área de conteúdo"}
+      className={cn("tcrm-empty-shell-canvas", className)}
+      data-state={state}
+    >
+      {content}
+    </section>
+  );
 }
 
 export function CrmEmptyShellWindow({
@@ -840,7 +909,10 @@ export function CrmEmptyShell({
   avatarSrc,
   className,
   globalActions,
+  state = "empty",
+  onBack,
   onNavChange,
+  onRetry,
   onSidebarSelect,
   onSidebarUtilitySelect
 }: {
@@ -851,28 +923,36 @@ export function CrmEmptyShell({
   avatarSrc?: string;
   className?: string;
   globalActions?: CrmShellGlobalActionsCallbacks;
+  state?: CrmEmptyShellState;
+  onBack?: () => void;
   onNavChange?: (id: string) => void;
+  onRetry?: () => void;
   onSidebarSelect?: (item: CrmShellSidebarItem) => void;
   onSidebarUtilitySelect?: (item: CrmShellSidebarItem) => void;
 }) {
   return (
-    <div className={cn("tcrm-empty-shell-stage", "tcrm-empty-shell-stage--image-79", className)}>
-      <CrmEmptyShellWindow>
-        <CrmShellSidebar items={sidebarItems} onSelect={onSidebarSelect} onUtilitySelect={onSidebarUtilitySelect} utilityItems={utilityItems} />
-        <main className="tcrm-empty-shell-main">
-          <CrmEmptyShellTopbar avatarSrc={avatarSrc} globalActions={globalActions} navItems={navItems} onNavChange={onNavChange} />
-          <CrmEmptyShellPageHeader title={title} />
-          <CrmEmptyShellCanvas />
-        </main>
-      </CrmEmptyShellWindow>
-    </div>
+    <CrmPageFamilyShell
+      activeNavId={activeItemId(navItems, undefined)}
+      avatarSrc={avatarSrc}
+      className={cn("tcrm-empty-shell-page", className)}
+      contentClassName={cn("tcrm-empty-shell-page__canvas", `tcrm-empty-shell-page__canvas--${state}`)}
+      globalActions={globalActions}
+      navItems={navItems}
+      onBack={onBack}
+      onNavChange={onNavChange}
+      onSidebarSelect={onSidebarSelect}
+      onSidebarUtilitySelect={onSidebarUtilitySelect}
+      sidebarItems={sidebarItems}
+      title={title}
+      utilityItems={utilityItems}
+    >
+      <CrmEmptyShellCanvas embedded onRetry={onRetry} state={state} />
+    </CrmPageFamilyShell>
   );
 }
 
 export type CrmProductShellVariant = "crm" | "internal";
 export type CrmProductShellFrame = "fullscreen" | "window" | "window-inset" | "reference";
-export type CrmProductShellDrawerPlacement = "fixed" | "content" | "floating" | "chrome" | "viewport";
-export type CrmProductShellDrawerSize = "default" | "compact";
 export type CrmProductShellPageHeaderRhythm = "default" | "spacious" | "compact-stacked" | "dashboard" | "reports" | "support" | "internal-overview" | "internal-tenants" | "stacked" | "agents" | "agents-routines" | "agents-routine-detail" | "agents-flow-detail" | "agents-publish" | "settings-hub" | "overview" | "operation" | "inbox" | "usage" | "usage-overview" | "billing" | "billing-invoices";
 export type CrmProductShellContentLayout = "default" | "work-list" | "work-list-compact" | "work-list-wide" | "main-priority" | "kanban" | "three-pane" | "student-profile" | "class-operation" | "finance-overview" | "settings" | "settings-permissions" | "settings-payments" | "settings-agenda" | "settings-notifications" | "settings-hub" | "billing-subscription" | "agent-routine" | "agent-flow" | "agent-test" | "agent-publish" | "opportunity" | "support" | "internal-overview" | "internal-tenants" | "internal-tenant-detail";
 
@@ -907,8 +987,6 @@ export interface CrmProductShellProps extends React.PropsWithChildren<{
   contentClassName?: string;
   contentLayout?: CrmProductShellContentLayout;
   drawer?: React.ReactNode;
-  drawerPlacement?: CrmProductShellDrawerPlacement;
-  drawerSize?: CrmProductShellDrawerSize;
   showGlobalActionsWithDrawer?: boolean;
   pageHeaderRhythm?: CrmProductShellPageHeaderRhythm;
   regions?: CrmProductShellRegions;
@@ -942,8 +1020,6 @@ export function CrmProductShell({
   contentClassName,
   contentLayout = "default",
   drawer,
-  drawerPlacement = "fixed",
-  drawerSize = "default",
   showGlobalActionsWithDrawer = false,
   pageHeaderRhythm = "default",
   regions,
@@ -985,8 +1061,6 @@ export function CrmProductShell({
     !showTopbar && "tcrm-product-shell-stage--no-topbar",
     !resolvedRegions.pageHeader && "tcrm-product-shell-stage--no-page-header",
     Boolean(drawer) && "tcrm-product-shell-stage--drawer",
-    Boolean(drawer) && `tcrm-product-shell-stage--drawer-${drawerPlacement}`,
-    Boolean(drawer) && `tcrm-product-shell-stage--drawer-${drawerSize}`,
     Boolean(drawer) && showGlobalActionsWithDrawer && "tcrm-product-shell-stage--drawer-global-actions",
     pageHeaderRhythm !== "default" && `tcrm-product-shell-stage--page-header-${pageHeaderRhythm}`,
     Boolean(pageHeaderBreadcrumb) && "tcrm-product-shell-stage--page-header-breadcrumb",
@@ -998,8 +1072,6 @@ export function CrmProductShell({
     "tcrm-product-shell-window",
     frame !== "fullscreen" && `tcrm-product-shell-window--frame-${frame}`,
     Boolean(drawer) && "tcrm-product-shell-window--drawer",
-    Boolean(drawer) && `tcrm-product-shell-window--drawer-${drawerPlacement}`,
-    Boolean(drawer) && `tcrm-product-shell-window--drawer-${drawerSize}`,
     Boolean(drawer) && showGlobalActionsWithDrawer && "tcrm-product-shell-window--drawer-global-actions",
     !resolvedRegions.browserChrome && "tcrm-product-shell-window--no-browser-chrome"
   );
@@ -1320,6 +1392,12 @@ export interface SettingsAgentPanelInsight {
   content: React.ReactNode;
 }
 
+export interface SettingsAgentPanelReview {
+  title?: string;
+  description: React.ReactNode;
+  actionLabel?: React.ReactNode;
+}
+
 export interface SettingsAgentPanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "role" | "title"> {
   title?: React.ReactNode;
   role?: React.ReactNode;
@@ -1328,9 +1406,11 @@ export interface SettingsAgentPanelProps extends Omit<React.HTMLAttributes<HTMLE
   questions?: string[];
   placeholder?: string;
   helpLabel?: React.ReactNode;
+  review?: SettingsAgentPanelReview;
   onQuestionSelect?: (question: string) => void;
   onSend?: (message: string) => void;
   onHelp?: () => void;
+  onReviewAction?: () => void;
 }
 
 const settingsAgentPanelDefaultInsights: SettingsAgentPanelInsight[] = [
@@ -1353,9 +1433,11 @@ export function SettingsAgentPanel({
   questions = settingsAgentPanelDefaultQuestions,
   placeholder = "Pergunte sobre permissões...",
   helpLabel = "Agendar ajuda",
+  review,
   onQuestionSelect,
   onSend,
   onHelp,
+  onReviewAction,
   className,
   ...props
 }: SettingsAgentPanelProps) {
@@ -1371,6 +1453,12 @@ export function SettingsAgentPanel({
         </span>
       </header>
       <div className="tcrm-settings-agent-panel__body">
+        {review ? (
+          <InlineAlert className="tcrm-settings-agent-panel__review" tone="warning" title={review.title ?? "Revisão necessária"}>
+            <span>{review.description}</span>
+            {review.actionLabel ? <Button onClick={onReviewAction} size="sm" variant="secondary">{review.actionLabel}</Button> : null}
+          </InlineAlert>
+        ) : null}
         <InlineAlert className="tcrm-settings-agent-panel__intro" tone="info">
           {introduction}
         </InlineAlert>
@@ -1906,6 +1994,111 @@ export function ContextPanel({
         )
       )}
     </aside>
+  );
+}
+
+export interface ConversationDrawerProps extends Omit<ContextPanelProps, "action" | "children" | "className"> {
+  closeLabel?: string;
+  onClose?: () => void;
+}
+
+export function ConversationDrawer({
+  title = "Ana Silva",
+  statusLabel,
+  state = "success",
+  facts = defaultContextPanelFacts,
+  historyItems = defaultContextPanelHistory,
+  taskItems = defaultContextPanelTasks,
+  agentStatus = "Copiloto sugeriu · envio autônomo bloqueado",
+  onAction,
+  onFactAction,
+  onTaskAction,
+  closeLabel = "Fechar conversa",
+  onClose
+}: ConversationDrawerProps) {
+  const isBlocked = state === "blocked";
+  const resolvedStatusLabel = statusLabel ?? (state === "success" ? "aluna ativa" : state);
+  const drawerFacts: CrmDrawerFact[] = facts.map((fact) => ({
+    id: fact.id,
+    icon: fact.icon,
+    label: fact.label,
+    value: (
+      <span className="tcrm-conversation-drawer__fact-value">
+        {fact.value}
+        {fact.actionIcon ? (
+          <IconButton
+            disabled={isBlocked}
+            icon={fact.actionIcon}
+            label={fact.actionLabel ?? String(fact.label)}
+            onClick={() => onFactAction?.(fact.id)}
+            size="sm"
+            type="button"
+            variant="ghost"
+          />
+        ) : null}
+      </span>
+    )
+  }));
+
+  return (
+    <CrmDrawer
+      aria-label="Detalhes da conversa"
+      className="tcrm-conversation-drawer"
+      closeLabel={closeLabel}
+      component="ConversationDrawer"
+      eyebrow="Conversa"
+      facts={drawerFacts}
+      footer={(
+        <>
+          <Button disabled={isBlocked} leadingIcon="user" onClick={() => onAction?.("open-profile")} size="sm" variant="secondary">Abrir perfil</Button>
+          <Button disabled={isBlocked} leadingIcon="plus" onClick={() => onAction?.("create-task")} size="sm" variant="secondary">Criar tarefa</Button>
+          <Button disabled={isBlocked} leadingIcon="moreVertical" onClick={() => onAction?.("more-actions")} size="sm" variant="secondary">Mais ações</Button>
+        </>
+      )}
+      onClose={onClose}
+      sections={[
+        {
+          id: "history",
+          title: "Histórico recente",
+          ariaLabel: "Histórico recente",
+          content: (
+            <ol className="tcrm-conversation-drawer__history">
+              {historyItems.map((item) => (
+                <li key={item.id}>
+                  <time>{item.time}</time>
+                  <span><strong>{item.title}</strong>{item.description ? <small>{item.description}</small> : null}</span>
+                </li>
+              ))}
+            </ol>
+          )
+        },
+        {
+          id: "tasks",
+          title: "Tarefas relacionadas",
+          ariaLabel: "Tarefas relacionadas",
+          content: (
+            <div className="tcrm-conversation-drawer__tasks">
+              {taskItems.map((task) => (
+                <div className="tcrm-conversation-drawer__task" key={task.id}>
+                  <Icon name="calendar" />
+                  <span>{task.label}</span>
+                  {task.status ? <Chip showDot={false} tone={task.statusTone ?? "neutral"}>{task.status}</Chip> : null}
+                  {task.actionIcon ? <IconButton disabled={isBlocked} icon={task.actionIcon} label={task.actionLabel ?? "Abrir tarefa"} onClick={() => onTaskAction?.(task.id)} size="sm" variant="ghost" /> : null}
+                </div>
+              ))}
+            </div>
+          )
+        },
+        {
+          id: "agent",
+          ariaLabel: "Status do agente",
+          variant: "callout",
+          content: <span className="tcrm-conversation-drawer__agent"><Icon name="sparkles" /><strong>{agentStatus}</strong></span>
+        }
+      ]}
+      status={resolvedStatusLabel}
+      title={title}
+    />
   );
 }
 
@@ -2777,15 +2970,13 @@ export function KanbanCard({
 
 export interface CrmPageFamilyShellProps extends Omit<
   CrmProductShellProps,
-  "children" | "contentLayout" | "drawerPlacement" | "drawerSize" | "navItems" | "onNavChange" | "onSidebarSelect" | "onSidebarUtilitySelect" | "sidebarItems" | "utilityItems"
+  "children" | "contentLayout" | "navItems" | "onNavChange" | "onSidebarSelect" | "onSidebarUtilitySelect" | "sidebarItems" | "utilityItems"
 > {
   children: React.ReactNode;
   activeNavId?: string;
   activeSidebarId?: string;
   activeUtilityId?: string;
   contentLayout?: CrmProductShellContentLayout;
-  drawerPlacement?: CrmProductShellDrawerPlacement;
-  drawerSize?: CrmProductShellDrawerSize;
   navItems?: CrmShellNavItem[];
   sidebarItems?: CrmShellSidebarItem[];
   stageClassName?: string;
@@ -2812,8 +3003,6 @@ export function CrmPageFamilyShell({
   contentClassName,
   contentLayout = "default",
   drawer,
-  drawerPlacement,
-  drawerSize,
   navItems,
   onNavChange,
   onSidebarSelect,
@@ -2833,8 +3022,6 @@ export function CrmPageFamilyShell({
       contentClassName={cn("tcrm-page-family-content", contentClassName)}
       contentLayout={contentLayout}
       drawer={drawer}
-      drawerPlacement={drawer ? drawerPlacement ?? "floating" : drawerPlacement}
-      drawerSize={drawer ? drawerSize ?? "compact" : drawerSize}
       navItems={mapActiveItems(navItems, navId)}
       onNavChange={(id) => {
         setNavId(id);
@@ -2998,7 +3185,7 @@ export interface CrmThreePanePageProps extends Omit<CrmPageFamilyShellProps, "ch
   filterBar?: React.ReactNode;
   left: React.ReactNode;
   leftLabel?: string;
-  right: React.ReactNode;
+  right?: React.ReactNode;
   rightLabel?: string;
   threePaneClassName?: string;
 }
@@ -3015,6 +3202,7 @@ export function CrmThreePanePage({
   threePaneClassName,
   ...shellProps
 }: CrmThreePanePageProps) {
+  const drawerOpen = Boolean(shellProps.drawer);
   return (
     <CrmPageFamilyShell {...shellProps} contentLayout="three-pane">
       <div className="tcrm-page-family-stack tcrm-three-pane-page-stack">
@@ -3023,10 +3211,10 @@ export function CrmThreePanePage({
           activePane={activePane}
           center={center}
           centerLabel={centerLabel}
-          className={cn("tcrm-three-pane-page-layout", threePaneClassName)}
+          className={cn("tcrm-three-pane-page-layout", drawerOpen && "tcrm-three-pane-page-layout--drawer", threePaneClassName)}
           left={left}
           leftLabel={leftLabel}
-          right={right}
+          right={right ?? null}
           rightLabel={rightLabel}
         />
       </div>
@@ -3041,9 +3229,8 @@ export interface CrmRightPanelPageProps extends Omit<CrmPageFamilyShellProps, "c
   mainGridColumns?: React.ComponentProps<typeof DashboardGrid>["columns"];
   mainGridDensity?: React.ComponentProps<typeof DashboardGrid>["density"];
   mainLabel?: string;
-  panel: React.ReactNode;
+  panel?: React.ReactNode;
   panelLabel?: string;
-  panelPlacement?: "inline" | "drawer";
   rightPanelClassName?: string;
   rightPanelState?: React.ComponentProps<typeof RightPanelLayout>["state"];
   rightPanelVariant?: "default" | "simulation" | "student-profile" | "class-operation" | "settings" | "settings-permissions" | "settings-payments" | "settings-agenda" | "settings-notifications" | "billing-subscription" | "agent-routine" | "agent-flow" | "agent-test" | "agent-publish" | "agent-execution" | "billing-invoices" | "billing-addons" | "usage-overview" | "usage-ledger";
@@ -3053,20 +3240,18 @@ export function CrmRightPanelPage({
   contentHeader,
   contentHeaderLabel,
   drawer,
-  drawerPlacement,
   main,
   mainGridColumns,
   mainGridDensity,
   mainLabel,
   panel,
   panelLabel,
-  panelPlacement = "inline",
   rightPanelClassName,
   rightPanelState,
   rightPanelVariant = "default",
   ...shellProps
 }: CrmRightPanelPageProps) {
-  const usesDrawerPanel = panelPlacement === "drawer";
+  const hasPanel = Boolean(panel);
   const mainContent = mainGridColumns ? (
     <DashboardGrid className="tcrm-right-panel-page-grid" columns={mainGridColumns} density={mainGridDensity}>
       {main}
@@ -3077,12 +3262,10 @@ export function CrmRightPanelPage({
     <CrmPageFamilyShell
       {...shellProps}
       contentLayout={rightPanelVariant === "student-profile" ? "student-profile" : rightPanelVariant === "class-operation" ? "class-operation" : rightPanelVariant === "settings" ? "settings" : rightPanelVariant === "settings-permissions" ? "settings-permissions" : rightPanelVariant === "settings-payments" ? "settings-payments" : rightPanelVariant === "settings-agenda" ? "settings-agenda" : rightPanelVariant === "settings-notifications" ? "settings-notifications" : rightPanelVariant === "billing-subscription" ? "billing-subscription" : rightPanelVariant === "agent-routine" ? "agent-routine" : rightPanelVariant === "agent-flow" ? "agent-flow" : rightPanelVariant === "agent-test" ? "agent-test" : rightPanelVariant === "agent-publish" ? "agent-publish" : undefined}
-      drawer={usesDrawerPanel ? panel : drawer}
-      drawerPlacement={usesDrawerPanel ? drawerPlacement ?? "floating" : drawerPlacement}
+      drawer={drawer}
     >
       <RightPanelLayout
         className={cn(
-          usesDrawerPanel && "tcrm-right-panel-layout--drawer-panel",
           rightPanelVariant !== "default" && `tcrm-right-panel-layout--${rightPanelVariant}`,
           rightPanelClassName
         )}
@@ -3090,9 +3273,9 @@ export function CrmRightPanelPage({
         contentHeaderLabel={contentHeaderLabel}
         main={mainContent}
         mainLabel={mainLabel}
-        panel={usesDrawerPanel ? <span aria-hidden="true" className="tcrm-right-panel-layout__drawer-reserve" /> : panel}
-        panelLabel={usesDrawerPanel ? undefined : panelLabel}
-        state={rightPanelState}
+        panel={panel}
+        panelLabel={panelLabel}
+        state={!hasPanel ? "collapsed" : rightPanelState}
       />
     </CrmPageFamilyShell>
   );
@@ -3814,6 +3997,182 @@ export function Roster({
 /** @deprecated Use `defaultSetupSteps`, the current nine-block product contract. */
 export const setupShellSourceSteps = defaultSetupSteps;
 
+export interface SetupAgentQuickReply {
+  id: string;
+  label: string;
+}
+
+export interface SetupAgentContext {
+  impact: string;
+  messages: readonly string[];
+  quickReplies: readonly SetupAgentQuickReply[];
+  composerPlaceholder?: string;
+}
+
+export type SetupAgentContextId =
+  | "shellBase"
+  | "consumption"
+  | "studio"
+  | "team"
+  | "channels"
+  | "plans"
+  | "payment"
+  | "students"
+  | "classes"
+  | "agenda"
+  | "review";
+
+export const setupAgentContexts: Record<SetupAgentContextId, SetupAgentContext> = {
+  shellBase: {
+    impact: "Esta etapa afeta agenda, cobrança e comunicação inicial.",
+    messages: [
+      "Estamos na etapa Dados do studio. Vou te avisar o que é obrigatório e o que pode ficar para depois.",
+      "Use a área central para preencher, importar ou revisar dados. Eu acompanho daqui e explico qualquer dúvida."
+    ],
+    quickReplies: [
+      { id: "required", label: "O que é obrigatório?" },
+      { id: "later", label: "Posso deixar para depois?" },
+      { id: "agenda", label: "Como isso afeta a agenda?" }
+    ]
+  },
+  consumption: {
+    impact: "Esta etapa afeta agenda, cobrança e comunicação inicial.",
+    messages: [
+      "Estamos na etapa Consumo de aulas. Vou te ajudar a configurar apenas o necessário para começar com segurança.",
+      "Use a área central para preencher e, se precisar, me pergunte qualquer dúvida ao lado."
+    ],
+    quickReplies: [
+      { id: "replacement-deadline", label: "O que é prazo de reposição?" },
+      { id: "balance-expiration", label: "Como funciona a expiração do saldo?" },
+      { id: "after-go-live", label: "Posso alterar depois do go-live?" }
+    ]
+  },
+  studio: {
+    impact: "Este bloco define a janela em que o studio pode ter aulas.",
+    messages: [
+      "Vamos começar pela base do studio. Esses horários ainda não criam aulas; eles só ajudam o Taliya a montar turmas e agenda com segurança.",
+      "Se alguma turma cair fora desses horários depois, eu vou te avisar antes de publicar."
+    ],
+    quickReplies: [
+      { id: "required", label: "O que é obrigatório?" },
+      { id: "change-later", label: "Posso mudar depois?" },
+      { id: "creates-agenda", label: "Isso já cria agenda?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  team: {
+    impact: "Este bloco prepara quem terá acesso ao Taliya quando o setup for publicado.",
+    messages: [
+      "Você pode começar só com o dono do studio. Se adicionar equipe agora, eu deixo os convites preparados para o final do setup.",
+      "Nenhum convite será enviado enquanto o setup estiver em rascunho."
+    ],
+    quickReplies: [
+      { id: "invite-now", label: "Preciso convidar equipe agora?" },
+      { id: "invite-timing", label: "Quando o convite é enviado?" },
+      { id: "roles-later", label: "Posso mudar os papéis depois?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  channels: {
+    impact: "Este bloco define os canais que o Taliya pode usar para falar com alunos e equipe.",
+    messages: [
+      "O CRM pode continuar mesmo se o WhatsApp ainda não estiver conectado.",
+      "Para agentes responderem alunos no WhatsApp, o número precisa estar no WhatsApp Business e passar pela conexão oficial.",
+      "As redes sociais aqui são só referência do studio. Elas não ativam automações neste setup inicial."
+    ],
+    quickReplies: [
+      { id: "connect-now", label: "Preciso conectar agora?" },
+      { id: "personal-number", label: "Meu número é pessoal" },
+      { id: "lose-whatsapp", label: "Vou perder meu WhatsApp?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  plans: {
+    impact: "Este bloco define como o Taliya entende mensalidades, pacotes e aulas dos alunos.",
+    messages: [
+      "Plano define saldo, recorrência, validade e reposição.",
+      "Horário fixo será configurado depois, em Turmas e Agenda.",
+      "Pacote de aulas também pode ter horário fixo; a diferença é que o saldo é fechado."
+    ],
+    quickReplies: [
+      { id: "plan-type", label: "Qual tipo escolher?" },
+      { id: "fixed-time", label: "Pacote pode ter horário fixo?" },
+      { id: "replacement", label: "Como funciona reposição?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  payment: {
+    impact: "Este bloco define quais meios o studio aceita no começo da operação.",
+    messages: [
+      "Você só escolhe os meios aceitos agora. Nenhum detalhe técnico precisa ser configurado neste setup.",
+      "O Taliya já consegue registrar cobranças, baixas e liberação de aulas. A automação financeira vem depois."
+    ],
+    quickReplies: [
+      { id: "required", label: "O que é obrigatório?" },
+      { id: "settlement", label: "Como funciona a baixa?" },
+      { id: "later", label: "O que fica para depois?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  students: {
+    impact: "Este bloco cria a base inicial de alunos ativos.",
+    messages: [
+      "Você pode misturar planilhas, fotos de caderno, listas coladas e cadastros manuais.",
+      "Eu transformo tudo em rascunho e marco o que precisa de revisão antes de publicar.",
+      "Horários e turmas serão vinculados nos próximos blocos."
+    ],
+    quickReplies: [
+      { id: "required", label: "O que é obrigatório?" },
+      { id: "notebook-photo", label: "Posso importar foto de caderno?" },
+      { id: "duplicates", label: "E se tiver duplicidade?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  classes: {
+    impact: "Este bloco organiza os horários fixos recorrentes do studio.",
+    messages: [
+      "Turma ainda não é agenda. A agenda será montada no próximo bloco.",
+      "Você pode importar planilhas, fotos da grade, listas coladas ou criar turmas manualmente.",
+      "Se algum aluno não for encontrado, eu marco como pendência para você revisar."
+    ],
+    quickReplies: [
+      { id: "class-vs-agenda", label: "Turma é diferente de agenda?" },
+      { id: "link-students", label: "Preciso vincular alunos agora?" },
+      { id: "schedule-image", label: "E se eu só tiver print da grade?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  agenda: {
+    impact: "Este bloco revisa a agenda inicial gerada pelo Taliya.",
+    messages: [
+      "À esquerda está o controle de como cada turma virou agenda. À direita está a semana completa que será publicada.",
+      "Se algo estiver errado na origem, volte para Turmas.",
+      "Reposições, encaixes e ajustes avançados ficam para depois do go-live."
+    ],
+    quickReplies: [
+      { id: "publication-blockers", label: "O que bloqueia publicação?" },
+      { id: "adjust-later", label: "Posso ajustar depois?" },
+      { id: "back-to-classes", label: "Por que voltar para turmas?" }
+    ],
+    composerPlaceholder: "Pergunte sobre este bloco..."
+  },
+  review: {
+    impact: "Esta é a revisão final antes de publicar o setup inicial.",
+    messages: [
+      "Eu organizei a revisão em três partes: publicado agora, pendências e depois do go-live.",
+      "Nada será publicado sem sua confirmação. Você ainda pode voltar em qualquer bloco antes de publicar.",
+      "Configurações avançadas ficam para depois, sem bloquear o início da operação."
+    ],
+    quickReplies: [
+      { id: "published", label: "O que será publicado?" },
+      { id: "blockers", label: "O que bloqueia?" },
+      { id: "later", label: "O que fica para depois?" },
+      { id: "after", label: "O que acontece depois?" }
+    ],
+    composerPlaceholder: "Pergunte sobre a revisão..."
+  }
+};
+
 function SetupShellDefaultStage() {
   return (
     <div className="tcrm-setup-shell__stage">
@@ -3843,15 +4202,23 @@ function SetupShellDefaultStage() {
 }
 
 function SetupShellAgentPanel({
+  context = setupAgentContexts.shellBase,
+  onClose,
+  onHumanHelp,
+  onMenu,
   onQuickReply,
   onSend,
   disabled = false
 }: {
+  context?: SetupAgentContext;
+  onClose?: () => void;
+  onHumanHelp?: () => void;
+  onMenu?: () => void;
   onQuickReply?: (question: string) => void;
-  onSend?: () => void;
+  onSend?: (value: string) => void;
   disabled?: boolean;
 }) {
-  const quickReplies = ["O que é obrigatório?", "Posso deixar para depois?", "Como isso afeta a agenda?"];
+  const [value, setValue] = React.useState("");
   return (
     <section className="tcrm-setup-shell__agent-panel" aria-label="Agente de configuração">
       <header>
@@ -3860,24 +4227,25 @@ function SetupShellAgentPanel({
           <h2>Agente de configuração</h2>
           <p><span aria-hidden="true" /> Guiando setup</p>
         </div>
-        <IconButton disabled={disabled} icon="moreVertical" label="Mais ações do agente" size="sm" variant="ghost" />
-        <IconButton disabled={disabled} icon="x" label="Fechar agente" size="sm" variant="ghost" />
+        <IconButton disabled={disabled || !onMenu} icon="moreVertical" label="Mais ações do agente" onClick={onMenu} size="sm" variant="ghost" />
+        <IconButton disabled={disabled || !onClose} icon="x" label="Fechar agente" onClick={onClose} size="sm" variant="ghost" />
       </header>
-      <div className="tcrm-setup-shell__agent-alert"><Icon name="info" size="22px" /> Esta etapa afeta agenda, cobrança e comunicação inicial.</div>
-      <p className="tcrm-setup-shell__agent-message">Estamos na etapa Dados do studio.<br />Vou te avisar o que é obrigatório e o que pode ficar para depois.</p>
-      <p className="tcrm-setup-shell__agent-message">Use a área central para preencher, importar ou revisar dados. Eu acompanho daqui e explico qualquer dúvida.</p>
+      <div className="tcrm-setup-shell__agent-alert"><Icon name="info" size="22px" /> {context.impact}</div>
+      {context.messages.map((message) => (
+        <p className="tcrm-setup-shell__agent-message" key={message}>{message}</p>
+      ))}
       <div className="tcrm-setup-shell__quick-replies" aria-label="Dúvidas frequentes">
         <strong>Dúvidas frequentes</strong>
-        {quickReplies.map((question) => (
-          <button disabled={disabled} key={question} onClick={() => onQuickReply?.(question)} type="button">{question}</button>
+        {context.quickReplies.map((question) => (
+          <button disabled={disabled || !onQuickReply} key={question.id} onClick={() => onQuickReply?.(question.label)} type="button">{question.label}</button>
         ))}
       </div>
-      <form className="tcrm-setup-shell__agent-composer" onSubmit={(event) => { event.preventDefault(); onSend?.(); }}>
+      <form className="tcrm-setup-shell__agent-composer" onSubmit={(event) => { event.preventDefault(); onSend?.(value); }}>
         <label className="tl-sr-only" htmlFor="setup-shell-agent-question">Pergunte sobre esta etapa</label>
-        <input disabled={disabled} id="setup-shell-agent-question" placeholder="Pergunte sobre esta etapa..." />
-        <IconButton disabled={disabled} icon="send" label="Enviar pergunta" size="md" type="submit" variant="selected" />
+        <input disabled={disabled || !onSend} id="setup-shell-agent-question" onChange={(event) => setValue(event.currentTarget.value)} placeholder={context.composerPlaceholder ?? "Pergunte sobre esta etapa..."} value={value} />
+        <IconButton disabled={disabled || !onSend} icon="send" label="Enviar pergunta" size="md" type="submit" variant="selected" />
       </form>
-      <p className="tcrm-setup-shell__human-help">Precisa de ajuda humana? <button disabled={disabled} type="button">Agendar ajuda</button></p>
+      <p className="tcrm-setup-shell__human-help">Precisa de ajuda humana? <button disabled={disabled || !onHumanHelp} onClick={onHumanHelp} type="button">Agendar ajuda</button></p>
     </section>
   );
 }
@@ -3889,6 +4257,7 @@ export interface SetupShellProps {
   layout?: "guided" | "welcome";
   children?: React.ReactNode;
   agent?: React.ReactNode;
+  agentContext?: SetupAgentContext;
   bottomBar?: React.ReactNode;
   studioName?: React.ReactNode;
   status?: React.ReactNode;
@@ -3898,8 +4267,11 @@ export interface SetupShellProps {
   onHelp?: () => void;
   onProfile?: () => void;
   onStepSelect?: (stepId: string) => void;
+  onAgentClose?: () => void;
+  onAgentHumanHelp?: () => void;
+  onAgentMenu?: () => void;
   onAgentQuickReply?: (question: string) => void;
-  onAgentSend?: () => void;
+  onAgentSend?: (value: string) => void;
   onBottomBarToggle?: () => void;
   className?: string;
 }
@@ -3911,6 +4283,7 @@ export function SetupShell({
   layout = "guided",
   children,
   agent,
+  agentContext,
   bottomBar,
   studioName = "Studio Leticia",
   status = "Setup inicial em andamento",
@@ -3920,6 +4293,9 @@ export function SetupShell({
   onHelp,
   onProfile,
   onStepSelect,
+  onAgentClose,
+  onAgentHumanHelp,
+  onAgentMenu,
   onAgentQuickReply,
   onAgentSend,
   onBottomBarToggle,
@@ -3953,9 +4329,19 @@ export function SetupShell({
         </button>
         <IconButton className="tcrm-setup-shell__account-menu" disabled={isDisabled} icon="chevronDown" label="Abrir menu da conta" size="sm" variant="ghost" />
       </header>
-      <SetupStepper className="tcrm-setup-shell__steps" currentStep={currentStep} disabled={isDisabled} onStepSelect={onStepSelect} steps={steps} />
+      <SetupStepper aria-label="Etapas do setup" className="tcrm-setup-shell__steps" currentStep={currentStep} disabled={isDisabled} onStepSelect={onStepSelect} steps={steps} />
       <main className="tcrm-setup-shell__main">{children ?? <SetupShellDefaultStage />}</main>
-      <aside className="tcrm-setup-shell__agent">{agent ?? <SetupShellAgentPanel disabled={isDisabled} onQuickReply={onAgentQuickReply} onSend={onAgentSend} />}</aside>
+      <aside aria-label="Assistente do setup" className="tcrm-setup-shell__agent">{agent ?? (
+        <SetupShellAgentPanel
+          context={agentContext}
+          disabled={isDisabled}
+          onClose={onAgentClose}
+          onHumanHelp={onAgentHumanHelp}
+          onMenu={onAgentMenu}
+          onQuickReply={onAgentQuickReply}
+          onSend={onAgentSend}
+        />
+      )}</aside>
       {bottomBar ?? <SetupBottomBar disabled={isDisabled} onToggle={onBottomBarToggle} />}
     </div>
   );
@@ -3969,7 +4355,8 @@ export function SetupStepper({
   onStepSelect,
   orientation = "vertical",
   showProgress = orientation === "horizontal",
-  className
+  className,
+  ...props
 }: {
   steps?: string[];
   currentStep?: number;
@@ -3979,7 +4366,7 @@ export function SetupStepper({
   orientation?: "horizontal" | "vertical";
   showProgress?: boolean;
   className?: string;
-}) {
+} & React.HTMLAttributes<HTMLElement>) {
   const activeStep = Math.min(Math.max(currentStep, 1), steps.length);
   const stepItems: StepperStep[] = steps.map((step, index) => {
     const number = index + 1;
@@ -3994,8 +4381,8 @@ export function SetupStepper({
   });
 
   return (
-    <aside className={cn("tcrm-setup-stepper-panel", `tcrm-setup-stepper-panel--${orientation}`, className)} data-component="SetupStepper">
-      {orientation === "vertical" ? <h3>Etapas</h3> : null}
+    <aside className={cn("tcrm-setup-stepper-panel", `tcrm-setup-stepper-panel--${orientation}`, className)} data-component="SetupStepper" {...props}>
+      {orientation === "vertical" ? <h2>Etapas</h2> : null}
       <Stepper
         className="tcrm-setup-stepper"
         currentStepId={stepItems[activeStep - 1]?.id}
@@ -4013,9 +4400,9 @@ export function SetupStepper({
 
 export function SetupBlockHeader({
   title = "Studio",
-  description = "Defina o nomr e os hor\u00e1rios gerais de funcionamento, isso ajuda o Taliya a montar a grade inicial com seguran\u00e7a.",
+  description = "Defina o nome e os hor\u00e1rios gerais de funcionamento, isso ajuda o Taliya a montar a grade inicial com seguran\u00e7a.",
   step = 1,
-  totalSteps = 8,
+  totalSteps = 9,
   badgeLabel,
   showBadge = true,
   state = "current",
@@ -4366,6 +4753,7 @@ export function SetupConsumptionWorkspace({
 export interface SetupStudioWorkspaceProps extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
   activeDays?: string[];
   scheduleMode?: "continuous" | "break";
+  disabled?: boolean;
   header?: React.ReactNode;
   details?: React.ReactNode;
   footer?: React.ReactNode;
@@ -4378,6 +4766,7 @@ export interface SetupStudioWorkspaceProps extends Omit<React.HTMLAttributes<HTM
 export function SetupStudioWorkspace({
   activeDays = ["Seg", "Ter", "Qua", "Qui", "Sex"],
   scheduleMode = "continuous",
+  disabled = false,
   header,
   details,
   footer,
@@ -4397,7 +4786,8 @@ export function SetupStudioWorkspace({
   return (
     <SetupPagePanel className={cn("tcrm-setup-studio-workspace", className)} data-component="SetupStudioWorkspace" {...props}>
       {header ?? <SetupBlockHeader title="Studio" />}
-      <div className="tcrm-setup-studio-workspace__grid">
+      <SettingsWorkspaceControls blocked={disabled}>
+        <div className="tcrm-setup-studio-workspace__grid">
         <Panel className="tcrm-setup-studio-workspace__form" compact>
           {details}
           <section>
@@ -4431,10 +4821,11 @@ export function SetupStudioWorkspace({
         <Panel className="tcrm-setup-studio-workspace__preview" compact>
           <WeeklyHoursGrid onAdjustDay={onAdjustDay} />
         </Panel>
-      </div>
+        </div>
+      </SettingsWorkspaceControls>
       {footer ?? <ButtonGroup className="tcrm-setup-studio-workspace__actions">
-        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
-        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+        <Button disabled={disabled} leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button disabled={disabled} onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
       </ButtonGroup>}
     </SetupPagePanel>
   );
@@ -4475,7 +4866,7 @@ export function SetupTeamWorkspace({
       <Panel className="tcrm-setup-team-workspace__content" compact>
         <section>
           <h3>1. Dono do studio</h3>
-          <RoleCard avatarSrc={ownerAvatarSrc} selected />
+          <RoleCard avatarSrc={ownerAvatarSrc} roleLabel="Dono" selected />
         </section>
         <section className="tcrm-setup-team-workspace__add-person">
           <h3>2. Adicionar pessoa</h3>
@@ -4518,6 +4909,7 @@ export type SetupWhatsAppState = "business" | "personal" | "unknown" | "missing"
 export interface SetupChannelsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   whatsAppState?: SetupWhatsAppState;
   connectionStatus?: "connected" | "pending" | "disconnected";
+  disabled?: boolean;
   header?: React.ReactNode;
   footer?: React.ReactNode;
   onWhatsAppStateChange?: (state: SetupWhatsAppState) => void;
@@ -4528,6 +4920,7 @@ export interface SetupChannelsWorkspaceProps extends React.HTMLAttributes<HTMLEl
 export function SetupChannelsWorkspace({
   whatsAppState = "business",
   connectionStatus = "pending",
+  disabled = false,
   header,
   footer,
   onWhatsAppStateChange,
@@ -4552,7 +4945,8 @@ export function SetupChannelsWorkspace({
         step={3}
         title="Canais"
       />}
-      <div className="tcrm-setup-channels-workspace__grid">
+      <SettingsWorkspaceControls blocked={disabled}>
+        <div className="tcrm-setup-channels-workspace__grid">
         <div className="tcrm-setup-channels-workspace__column">
           <Panel className="tcrm-setup-channels-workspace__whatsapp" compact>
             <h3>1. WhatsApp Business</h3>
@@ -4604,11 +4998,12 @@ export function SetupChannelsWorkspace({
             <InlineAlert tone="info">O CRM pode seguir. Mensagens e agentes pelo WhatsApp so serao ativados apos a conexao oficial.</InlineAlert>
           </Panel>
         </div>
-      </div>
+        </div>
+      </SettingsWorkspaceControls>
       {footer ?? <ButtonGroup className="tcrm-setup-channels-workspace__actions">
-        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
-        <Button onClick={() => onAction?.("later")} variant="secondary">Configurar canais depois</Button>
-        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+        <Button disabled={disabled} leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button disabled={disabled} onClick={() => onAction?.("later")} variant="secondary">Configurar canais depois</Button>
+        <Button disabled={disabled} onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
       </ButtonGroup>}
     </SetupPagePanel>
   );
@@ -4631,6 +5026,7 @@ export const setupPlansDefaultFieldValues: Record<SetupPlanField, string> = {
 
 export interface SetupPlansWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   selectedPlanId?: SetupPlanId;
+  disabled?: boolean;
   fieldValues?: Partial<Record<SetupPlanField, string>>;
   header?: React.ReactNode;
   footer?: React.ReactNode;
@@ -4645,6 +5041,7 @@ export interface SetupPlansWorkspaceProps extends React.HTMLAttributes<HTMLEleme
 
 export function SetupPlansWorkspace({
   selectedPlanId = "pack",
+  disabled = false,
   fieldValues = {},
   header,
   footer,
@@ -4672,7 +5069,8 @@ export function SetupPlansWorkspace({
         step={4}
         title="Planos"
       />}
-      <div className="tcrm-setup-plans-workspace__grid">
+      <SettingsWorkspaceControls blocked={disabled}>
+        <div className="tcrm-setup-plans-workspace__grid">
         <Panel className="tcrm-setup-plans-workspace__list" compact>
           <InlineGroup justify="between"><h3>Planos criados</h3><Button leadingIcon="plus" onClick={onNewPlan} size="sm" variant="secondary">Novo plano</Button></InlineGroup>
           {plans.map((plan) => (
@@ -4713,11 +5111,12 @@ export function SetupPlansWorkspace({
             <ListItem action="Definido depois" title="Horario fixo" />
           </List>
         </Panel>
-      </div>
+        </div>
+      </SettingsWorkspaceControls>
       {footer ?? <ButtonGroup className="tcrm-setup-plans-workspace__actions">
-        <Button leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
-        <Button onClick={() => onAction?.("later")} variant="secondary">Configurar planos depois</Button>
-        <Button onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
+        <Button disabled={disabled} leadingIcon="check" onClick={() => onAction?.("save")} variant="secondary">Salvar rascunho</Button>
+        <Button disabled={disabled} onClick={() => onAction?.("later")} variant="secondary">Configurar planos depois</Button>
+        <Button disabled={disabled} onClick={() => onAction?.("continue")} trailingIcon="arrowRight" variant="primary">Continuar</Button>
       </ButtonGroup>}
     </SetupPagePanel>
   );
@@ -5107,6 +5506,7 @@ export type SetupReviewPanelState = "ready" | "pending" | "blocked" | "published
 
 export interface SetupReviewPanelProps extends Omit<CrmSurfaceProps, "state" | "children" | "title" | "description" | "meta" | "statusLabel" | "icon" | "action" | "selected"> {
   state?: SetupReviewPanelState;
+  headingLevel?: 1 | 2;
   confirmed?: boolean;
   onBack?: () => void;
   onSaveDraft?: () => void;
@@ -5143,6 +5543,7 @@ const setupReviewFutureItems: Array<{ title: string; description: string; icon: 
 
 export function SetupReviewPanel({
   state = "ready",
+  headingLevel = 2,
   confirmed = true,
   onBack,
   onSaveDraft,
@@ -5157,6 +5558,7 @@ export function SetupReviewPanel({
   const isBlocked = state === "blocked";
   const isPublished = state === "published";
   const isBusy = state === "pending";
+  const Heading = `h${headingLevel}` as "h1" | "h2";
 
   return (
     <section
@@ -5167,7 +5569,7 @@ export function SetupReviewPanel({
       {...props}
     >
       <header className="tcrm-setup-review-panel__header">
-        <h2>Revisão</h2>
+        <Heading>Revisão</Heading>
         <Chip showDot={false}>Bloco 9 de 9</Chip>
       </header>
 
@@ -5282,7 +5684,7 @@ export interface SetupReviewWorkspaceProps extends SetupReviewPanelProps {}
 export function SetupReviewWorkspace({ className, ...props }: SetupReviewWorkspaceProps) {
   return (
     <SetupPagePanel className="tcrm-setup-review-workspace" data-component="SetupReviewWorkspace">
-      <SetupReviewPanel className={className} {...props} />
+      <SetupReviewPanel className={className} {...props} headingLevel={1} />
     </SetupPagePanel>
   );
 }
@@ -5292,6 +5694,7 @@ export type SetupAgentChatState = "guide" | "human-help" | "blocked";
 export interface SetupAgentChatProps extends Omit<React.HTMLAttributes<HTMLElement>, "onSubmit"> {
   state?: SetupAgentChatState;
   variant?: "step" | "welcome";
+  context?: SetupAgentContext;
   defaultValue?: string;
   onClose?: () => void;
   onMenu?: () => void;
@@ -5303,6 +5706,7 @@ export interface SetupAgentChatProps extends Omit<React.HTMLAttributes<HTMLEleme
 export function SetupAgentChat({
   state = "guide",
   variant = "step",
+  context,
   defaultValue = "",
   onClose,
   onMenu,
@@ -5316,6 +5720,7 @@ export function SetupAgentChat({
   const isBlocked = state === "blocked";
   const isHumanHelp = state === "human-help";
   const isWelcome = variant === "welcome";
+  const activeContext = context ?? setupAgentContexts.shellBase;
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -5340,8 +5745,8 @@ export function SetupAgentChat({
           <h2>Agente de configuração</h2>
           <p>Guiando setup <span aria-hidden="true" /></p>
         </span>
-        <IconButton className="tcrm-setup-agent-chat__menu" disabled={isBlocked} icon="moreVertical" label="Mais opções do agente" onClick={onMenu} size="sm" variant="ghost" />
-        <IconButton className="tcrm-setup-agent-chat__close" icon="x" label="Fechar agente" onClick={onClose} size="sm" variant="ghost" />
+        <IconButton className="tcrm-setup-agent-chat__menu" disabled={isBlocked || !onMenu} icon="moreVertical" label="Mais opções do agente" onClick={onMenu} size="sm" variant="ghost" />
+        <IconButton className="tcrm-setup-agent-chat__close" disabled={isBlocked || !onClose} icon="x" label="Fechar agente" onClick={onClose} size="sm" variant="ghost" />
       </header>
 
       <div className="tcrm-setup-agent-chat__rule" />
@@ -5355,21 +5760,14 @@ export function SetupAgentChat({
         <>
           <section className="tcrm-setup-agent-chat__info" aria-label="Impacto desta etapa">
             <Icon name="info" />
-            <p>Esta etapa afeta agenda, cobrança e comunicação inicial.</p>
+            <p>{activeContext.impact}</p>
           </section>
 
-          <MessageBubble className="tcrm-setup-agent-chat__message tcrm-setup-agent-chat__message--one" variant="inbound">
-            Estamos na etapa Dados do studio.<br />
-            Vou te avisar o que é obrigatório e<br />
-            o que pode ficar para depois.
-          </MessageBubble>
-
-          <MessageBubble className="tcrm-setup-agent-chat__message tcrm-setup-agent-chat__message--two" variant="inbound">
-            Use a área central para preencher,<br />
-            importar ou revisar dados. Eu<br />
-            acompanho daqui e explico<br />
-            qualquer dúvida.
-          </MessageBubble>
+          {activeContext.messages.map((message, index) => (
+            <MessageBubble className={cn("tcrm-setup-agent-chat__message", `tcrm-setup-agent-chat__message--${index === 0 ? "one" : index === 1 ? "two" : "extra"}`)} key={message} variant="inbound">
+              {message}
+            </MessageBubble>
+          ))}
         </>
       )}
 
@@ -5378,14 +5776,10 @@ export function SetupAgentChat({
       <QuickReplyChips
         className="tcrm-setup-agent-chat__quick-replies"
         items={isWelcome ? [
-          { id: "configurar", label: "O que vou configurar?", disabled: isBlocked },
-          { id: "ajuda", label: "Posso pedir ajuda humana?", selected: isHumanHelp, disabled: isBlocked },
-          { id: "liberacao", label: "Quando o CRM será liberado?", disabled: isBlocked }
-        ] : [
-          { id: "obrigatorio", label: "O que é obrigatório?", disabled: isBlocked },
-          { id: "depois", label: "Posso deixar para depois?", selected: isHumanHelp, disabled: isBlocked },
-          { id: "agenda", label: "Como isso afeta a agenda?", disabled: isBlocked }
-        ]}
+          { id: "configurar", label: "O que vou configurar?", disabled: isBlocked || !onQuickReply },
+          { id: "ajuda", label: "Posso pedir ajuda humana?", selected: isHumanHelp, disabled: isBlocked || !onQuickReply },
+          { id: "liberacao", label: "Quando o CRM será liberado?", disabled: isBlocked || !onQuickReply }
+        ] : activeContext.quickReplies.map((item) => ({ ...item, selected: isHumanHelp && item.id === "later", disabled: isBlocked || !onQuickReply }))}
         onSelect={onQuickReply}
       />
 
@@ -5397,16 +5791,16 @@ export function SetupAgentChat({
             disabled={isBlocked}
             fieldSize="sm"
             onChange={(event) => setValue(event.currentTarget.value)}
-            placeholder="Pergunte sobre esta etapa..."
+            placeholder={activeContext.composerPlaceholder ?? "Pergunte sobre esta etapa..."}
             value={value}
           />
-          <IconButton aria-label="Enviar pergunta" className="tcrm-setup-agent-chat__send" disabled={isBlocked} icon="send" label="Enviar pergunta" size="sm" type="submit" variant="selected" />
+          <IconButton aria-label="Enviar pergunta" className="tcrm-setup-agent-chat__send" disabled={isBlocked || !onSend} icon="send" label="Enviar pergunta" size="sm" type="submit" variant="selected" />
         </form>
       ) : null}
 
       <footer className="tcrm-setup-agent-chat__footer">
         {!isWelcome ? <span>Precisa de ajuda humana?</span> : null}
-        <Button className="tcrm-setup-agent-chat__help-action" disabled={isBlocked} onClick={onHumanHelp} size="sm" type="button" variant="ghost">Agendar ajuda</Button>
+        <Button className="tcrm-setup-agent-chat__help-action" disabled={isBlocked || !onHumanHelp} onClick={onHumanHelp} size="sm" type="button" variant="ghost">Agendar ajuda</Button>
       </footer>
     </section>
   );
@@ -5834,12 +6228,14 @@ export interface SubscriptionReviewPageProps extends Omit<React.HTMLAttributes<H
   title?: React.ReactNode;
   description?: React.ReactNode;
   panel?: React.ReactNode;
+  panelProps?: CheckoutReviewPanelProps;
 }
 
 export function SubscriptionReviewPage({
   title = "Revisar assinatura",
   description = "Confira seu plano antes de ir para o pagamento seguro.",
   panel,
+  panelProps,
   children,
   className,
   ...props
@@ -5850,7 +6246,7 @@ export function SubscriptionReviewPage({
         <h1>{title}</h1>
         {description ? <p>{description}</p> : null}
       </header>
-      {children ?? panel ?? <CheckoutReviewPanel />}
+      {children ?? panel ?? <CheckoutReviewPanel {...panelProps} />}
     </section>
   );
 }
@@ -5859,12 +6255,16 @@ export interface ConfirmedSubscriptionPageProps extends React.HTMLAttributes<HTM
   header?: React.ReactNode;
   summary?: React.ReactNode;
   handoff?: React.ReactNode;
+  summaryProps?: PlanSummaryCardProps;
+  handoffProps?: ConfirmedSetupHandoffProps;
 }
 
 export function ConfirmedSubscriptionPage({
   header,
   summary,
   handoff,
+  summaryProps,
+  handoffProps,
   children,
   className,
   ...props
@@ -5875,8 +6275,8 @@ export function ConfirmedSubscriptionPage({
       <div className="tcrm-confirmed-subscription-page__content">
         {children ?? (
           <>
-            {summary ?? <PlanSummaryCard state="confirmed" />}
-            {handoff ?? <ConfirmedSetupHandoff />}
+            {summary ?? <PlanSummaryCard state="confirmed" {...summaryProps} />}
+            {handoff ?? <ConfirmedSetupHandoff {...handoffProps} />}
           </>
         )}
       </div>
@@ -6211,6 +6611,7 @@ export function SubscriptionStatusCard({
     <StatusSummaryCard
       className={cn("tcrm-subscription-status-card", `tcrm-subscription-status-card--${state}`, className)}
       description={description ?? copy.description}
+      headingLevel={1}
       icon={icon ?? copy.icon}
       state={copy.summaryState}
       statusLabel={resolvedStatusLabel}
@@ -6256,7 +6657,7 @@ export function SubscriptionStatusCard({
           {state === "verifying" ? (
             <>
               {action ?? (
-                <Button aria-busy={true} className="tcrm-subscription-status-card__primary-action" variant="primary">
+                <Button aria-busy={true} className="tcrm-subscription-status-card__primary-action" disabled variant="primary">
                   <Icon className="tl-spin" name="loader" size="14px" />
                   Verificando...
                 </Button>
@@ -6612,7 +7013,7 @@ export function PlanSummaryCard({
           </Chip>
         </header>
         <section className="tcrm-plan-summary-card__review-section" aria-label="Incluso no plano">
-          <h3>Incluso no plano</h3>
+          <h2>Incluso no plano</h2>
           {children ?? (
             <ul className="tcrm-plan-summary-card__review-list">
               {resolvedFeatures.map((feature) => (
@@ -7518,8 +7919,12 @@ export interface BillingSubscriptionAgent {
   icon: IconName;
 }
 
+export type BillingSubscriptionWorkspaceState = "active" | "failed" | "expired" | "loading" | "blocked";
+
 export interface BillingSubscriptionWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
   agents?: BillingSubscriptionAgent[];
+  state?: BillingSubscriptionWorkspaceState;
+  blockedReason?: string;
   onChangePlan?: () => void;
   onViewPlanDetails?: () => void;
   onOpenAgents?: () => void;
@@ -7542,6 +7947,8 @@ const billingSubscriptionAgents: BillingSubscriptionAgent[] = [
 
 export function BillingSubscriptionWorkspace({
   agents = billingSubscriptionAgents,
+  state = "active",
+  blockedReason,
   onChangePlan,
   onViewPlanDetails,
   onOpenAgents,
@@ -7553,17 +7960,47 @@ export function BillingSubscriptionWorkspace({
   className,
   ...props
 }: BillingSubscriptionWorkspaceProps) {
+  const isLoading = state === "loading";
+  const isBlocked = state === "blocked";
+  const isPaymentIssue = state === "failed" || state === "expired";
+  const resolvedBlockedReason = isBlocked ? blockedReason ?? "Assinatura indisponível para esta conta." : undefined;
+  const invoiceStatus = state === "failed" ? "Pagamento falhou" : state === "expired" ? "Expirada" : "Em aberto";
+  const invoiceTone: ComponentTone = isPaymentIssue ? "danger" : "warning";
+
+  if (isLoading) {
+    return (
+      <section aria-busy="true" className={cn("tcrm-billing-subscription-workspace", className)} data-component="BillingSubscriptionWorkspace" data-state={state} {...props}>
+        <LoadingState title="Carregando assinatura" />
+      </section>
+    );
+  }
+
+  if (isBlocked) {
+    return (
+      <section className={cn("tcrm-billing-subscription-workspace", className)} data-component="BillingSubscriptionWorkspace" data-state={state} {...props}>
+        <ErrorState description={resolvedBlockedReason} title="Assinatura indisponível" />
+      </section>
+    );
+  }
+
   return (
-    <section className={cn("tcrm-billing-subscription-workspace", className)} data-component="BillingSubscriptionWorkspace" {...props}>
+    <section className={cn("tcrm-billing-subscription-workspace", className)} data-component="BillingSubscriptionWorkspace" data-state={state} {...props}>
       <div className="tcrm-billing-subscription-workspace__main">
-        <PlanSummaryCard className="tcrm-billing-subscription-workspace__plan" onChangePlan={onChangePlan} onViewDetails={onViewPlanDetails} />
+        <PlanSummaryCard
+          badgeLabel={state === "failed" ? "Pagamento falhou" : state === "expired" ? "Assinatura expirada" : undefined}
+          className="tcrm-billing-subscription-workspace__plan"
+          onChangePlan={onChangePlan}
+          onViewDetails={onViewPlanDetails}
+          state={isPaymentIssue ? "failed" : "active"}
+          title={state === "failed" ? "Pagamento da assinatura falhou" : state === "expired" ? "Assinatura expirada" : undefined}
+        />
 
         <Card className="tcrm-billing-subscription-workspace__agents">
           <header><small>Agentes inclusos</small><h3>7 de 7 agentes inclusos</h3></header>
           <div role="list">
             {agents.map((agent) => <div key={agent.id} role="listitem"><ListIcon icon={agent.icon} tone="info" /><span>{agent.label}</span></div>)}
           </div>
-          <Button onClick={onOpenAgents} variant="secondary">Abrir Agentes</Button>
+          <Button disabled={isPaymentIssue} onClick={onOpenAgents} variant="secondary">Abrir Agentes</Button>
         </Card>
 
         <div className="tcrm-billing-subscription-workspace__billing">
@@ -7572,14 +8009,15 @@ export function BillingSubscriptionWorkspace({
             alertLabel="Uso detalhado fica em Uso e cotas."
             className="tcrm-billing-subscription-workspace__quota"
             ledgerLabel="Ver uso e cotas"
+            disabled={isPaymentIssue}
             onViewLedger={onViewUsage}
           />
           <Card className="tcrm-billing-subscription-workspace__invoice">
             <small>Próxima fatura</small>
             <h3>R$ 799,00</h3>
-            <div><span>Vence em 12/06</span><Chip showDot={false} tone="warning">Em aberto</Chip></div>
+            <div><span>{state === "expired" ? "Venceu em 12/06" : "Vence em 12/06"}</span><Chip showDot={false} tone={invoiceTone}>{invoiceStatus}</Chip></div>
             <p><Icon name="creditCard" /> Cartão final 4242</p>
-            <footer><Button onClick={onViewInvoices} size="sm" variant="secondary">Ver faturas</Button><Button onClick={onUpdatePayment} size="sm" variant="secondary">Atualizar pagamento</Button></footer>
+            <footer><Button onClick={onViewInvoices} size="sm" variant="secondary">Ver faturas</Button><Button onClick={onUpdatePayment} size="sm" variant={isPaymentIssue ? "primary" : "secondary"}>Atualizar pagamento</Button></footer>
           </Card>
         </div>
       </div>
@@ -7587,7 +8025,7 @@ export function BillingSubscriptionWorkspace({
       <Card className="tcrm-billing-subscription-workspace__addons">
         <small>Add-ons ativos</small>
         <div><ListIcon icon="shoppingCart" tone="info" /><span><strong>Nenhum add-on ativo</strong><small>Pacotes extras aparecem aqui quando contratados.</small></span></div>
-        <Button onClick={onViewAddOns} variant="secondary">Ver add-ons</Button>
+        <Button disabled={isPaymentIssue} onClick={onViewAddOns} variant="secondary">Ver add-ons</Button>
       </Card>
 
       <Card className="tcrm-billing-subscription-workspace__actions">
@@ -8026,9 +8464,24 @@ const approvalPanelDefaultSections: ApprovalPanelSection[] = [
     body: "Olá Ana Paula! Consigo reagendar sua visita para quinta-feira às 09h. Pode me confirmar seu endereço completo para registro?"
   },
   {
+    id: "before",
+    title: "Antes da decisão",
+    body: "Visita permanece no horário anterior e a conversa aguarda validação humana."
+  },
+  {
+    id: "after",
+    title: "Depois da decisão",
+    body: "A mensagem confirma a nova janela e solicita os dados necessários para concluir o reagendamento."
+  },
+  {
     id: "impact",
     title: "Impacto esperado",
     body: "Libera continuidade do atendimento, mantém SLA da conversa e consome 1 crédito."
+  },
+  {
+    id: "reason",
+    title: "Motivo da decisão",
+    body: "A alteração atende ao pedido da cliente sem violar a política de confirmação de endereço."
   },
   {
     id: "policy",
@@ -9019,6 +9472,9 @@ export type SettingsHubCardState =
   | "review"
   | "connected"
   | "pending"
+  | "read-only"
+  | "entitlement-blocked"
+  | "error"
   | "blocked"
   | "loading";
 
@@ -9038,6 +9494,9 @@ const settingsHubCardStatusByState: Record<SettingsHubCardState, string> = {
   review: "Revisar",
   connected: "WhatsApp conectado",
   pending: "Pendente",
+  "read-only": "Somente leitura",
+  "entitlement-blocked": "Não contratado",
+  error: "Falha ao carregar",
   blocked: "Bloqueado",
   loading: "Carregando"
 };
@@ -9048,6 +9507,9 @@ const settingsHubCardToneByState: Record<SettingsHubCardState, ComponentTone> = 
   review: "warning",
   connected: "success",
   pending: "warning",
+  "read-only": "info",
+  "entitlement-blocked": "warning",
+  error: "danger",
   blocked: "paused",
   loading: "info"
 };
@@ -9068,6 +9530,15 @@ export function SettingsHubCard({
 }: SettingsHubCardProps) {
   const isBlocked = state === "blocked";
   const isDisabled = disabled || isBlocked;
+  const resolvedActionLabel = actionLabel === "Abrir"
+    ? state === "read-only"
+      ? "Abrir em leitura"
+      : state === "entitlement-blocked"
+        ? "Ver plano"
+        : state === "error"
+          ? "Tentar novamente"
+          : actionLabel
+    : actionLabel;
 
   return (
     <Card className={cn("tcrm-settings-hub-card", className)} data-component="SettingsHubCard" data-state={state} disabled={isDisabled} {...props}>
@@ -9088,7 +9559,7 @@ export function SettingsHubCard({
           onClick={onOpen}
           variant="secondary"
         >
-          {actionLabel}
+          {resolvedActionLabel}
         </Button>
       )}
     </Card>
@@ -9211,13 +9682,14 @@ export function IntegrationStatusRow({
   );
 }
 
-export type UnsavedChangesBarState = "dirty" | "saving" | "saved" | "blocked";
+export type UnsavedChangesBarState = "dirty" | "saving" | "saved" | "blocked" | "error";
 
 const unsavedChangesStatusLabel: Record<UnsavedChangesBarState, string> = {
   dirty: "Alterações não salvas",
   saving: "Salvando alterações",
   saved: "Alterações salvas",
-  blocked: "Salvamento bloqueado"
+  blocked: "Salvamento bloqueado",
+  error: "Falha ao salvar"
 };
 
 export interface UnsavedChangesBarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -9227,6 +9699,7 @@ export interface UnsavedChangesBarProps extends React.HTMLAttributes<HTMLDivElem
   savingLabel?: React.ReactNode;
   savedLabel?: React.ReactNode;
   blockedLabel?: React.ReactNode;
+  errorLabel?: React.ReactNode;
   statusLabel?: React.ReactNode;
   disabled?: boolean;
   onSave?: () => void;
@@ -9240,6 +9713,7 @@ export function UnsavedChangesBar({
   savingLabel = "Salvando...",
   savedLabel = "Salvo",
   blockedLabel = "Bloqueado",
+  errorLabel = "Tentar novamente",
   statusLabel,
   disabled = false,
   onSave,
@@ -9250,7 +9724,8 @@ export function UnsavedChangesBar({
   const saving = state === "saving";
   const saved = state === "saved";
   const blocked = state === "blocked";
-  const saveButtonLabel = saving ? savingLabel : saved ? savedLabel : blocked ? blockedLabel : saveLabel;
+  const failed = state === "error";
+  const saveButtonLabel = saving ? savingLabel : saved ? savedLabel : blocked ? blockedLabel : failed ? errorLabel : saveLabel;
   const statusText = statusLabel ?? unsavedChangesStatusLabel[state];
   return (
     <div
@@ -9290,9 +9765,70 @@ export interface SettingsWorkspaceSaveProps {
   onCancel?: () => void;
 }
 
-export type SettingsStudioField = "studioName" | "publicName" | "mainUnit" | "address" | "city" | "state" | "postalCode";
+export interface SettingsWorkspaceOperationalProps {
+  blockedReason?: string;
+  validationError?: React.ReactNode;
+  systemError?: React.ReactNode;
+  onRequestAccess?: () => void;
+  onRetry?: () => void;
+}
 
-export interface SettingsStudioWorkspaceProps extends Omit<SetupStudioWorkspaceProps, "header" | "details" | "footer" | "onAction">, SettingsWorkspaceSaveProps {
+function resolveSettingsWorkspaceSaveState(
+  saveState: UnsavedChangesBarState,
+  { blockedReason, validationError, systemError }: Pick<SettingsWorkspaceOperationalProps, "blockedReason" | "validationError" | "systemError">
+): UnsavedChangesBarState {
+  if (systemError) return "error";
+  if (blockedReason || validationError) return "blocked";
+  return saveState;
+}
+
+function SettingsWorkspaceControls({
+  blocked,
+  children
+}: {
+  blocked: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <fieldset aria-label="Controles da configuração" className="tcrm-settings-workspace-controls" disabled={blocked}>
+      {children}
+    </fieldset>
+  );
+}
+
+function SettingsWorkspaceFeedback({
+  blockedReason,
+  validationError,
+  systemError,
+  onRequestAccess
+}: SettingsWorkspaceOperationalProps) {
+  return (
+    <>
+      {blockedReason ? (
+        <InlineAlert tone="warning" title="Acesso somente leitura">
+          <span>{blockedReason}</span>
+          {onRequestAccess ? <Button onClick={onRequestAccess} size="sm" variant="secondary">Pedir acesso</Button> : null}
+        </InlineAlert>
+      ) : null}
+      {validationError ? <InlineAlert tone="danger" title="Corrija antes de salvar">{validationError}</InlineAlert> : null}
+      {systemError ? <InlineAlert tone="danger" title="Não foi possível salvar">{systemError}</InlineAlert> : null}
+    </>
+  );
+}
+
+export type SettingsStudioField =
+  | "studioName"
+  | "publicName"
+  | "mainUnit"
+  | "address"
+  | "addressLine2"
+  | "neighborhood"
+  | "city"
+  | "state"
+  | "postalCode"
+  | "timezone";
+
+export interface SettingsStudioWorkspaceProps extends Omit<SetupStudioWorkspaceProps, "header" | "details" | "footer" | "onAction" | "disabled">, SettingsWorkspaceSaveProps, SettingsWorkspaceOperationalProps {
   values?: Partial<Record<SettingsStudioField, string>>;
   onFieldChange?: (field: SettingsStudioField, value: string) => void;
 }
@@ -9301,16 +9837,23 @@ export function SettingsStudioWorkspace({
   values = {},
   onFieldChange,
   saveState = "saved",
+  blockedReason,
+  validationError,
+  systemError,
+  onRequestAccess,
+  onRetry,
   onSave,
   onCancel,
   className,
   ...props
 }: SettingsStudioWorkspaceProps) {
   const field = (name: SettingsStudioField, fallback: string) => values[name] ?? fallback;
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
   return (
     <SetupStudioWorkspace
       className={cn("tcrm-settings-inherited-workspace", "tcrm-settings-studio-workspace", className)}
       data-component="SettingsStudioWorkspace"
+      disabled={Boolean(blockedReason)}
       details={(
         <section className="tcrm-settings-studio-workspace__identity">
           <h3>Identidade e unidade principal</h3>
@@ -9318,14 +9861,29 @@ export function SettingsStudioWorkspace({
             <Input label="Nome do studio" onChange={(event) => onFieldChange?.("studioName", event.currentTarget.value)} value={field("studioName", "Studio Leticia")} />
             <Input label="Nome publico" onChange={(event) => onFieldChange?.("publicName", event.currentTarget.value)} value={field("publicName", "Studio Leticia")} />
             <Input label="Unidade principal" onChange={(event) => onFieldChange?.("mainUnit", event.currentTarget.value)} value={field("mainUnit", "Unidade Centro")} />
-            <Input label="Endereco" onChange={(event) => onFieldChange?.("address", event.currentTarget.value)} value={field("address", "Rua das Flores, 120")} />
+            <Input className="tcrm-settings-studio-workspace__field--wide" label="Endereco" onChange={(event) => onFieldChange?.("address", event.currentTarget.value)} value={field("address", "Rua das Flores, 120")} />
+            <Input label="Complemento" onChange={(event) => onFieldChange?.("addressLine2", event.currentTarget.value)} value={field("addressLine2", "")} />
+            <Input label="Bairro" onChange={(event) => onFieldChange?.("neighborhood", event.currentTarget.value)} value={field("neighborhood", "Centro")} />
             <Input label="Cidade" onChange={(event) => onFieldChange?.("city", event.currentTarget.value)} value={field("city", "Sao Paulo")} />
             <Select label="Estado" onValueChange={(value) => onFieldChange?.("state", value)} options={[{ value: "SP", label: "SP" }, { value: "RJ", label: "RJ" }, { value: "MG", label: "MG" }]} value={field("state", "SP")} />
             <Input label="CEP" onChange={(event) => onFieldChange?.("postalCode", event.currentTarget.value)} value={field("postalCode", "01001-000")} />
+            <Select
+              label="Fuso horario"
+              onValueChange={(value) => onFieldChange?.("timezone", value)}
+              options={[
+                { value: "America/Sao_Paulo", label: "Brasilia (GMT-3)" },
+                { value: "America/Manaus", label: "Manaus (GMT-4)" },
+                { value: "America/Rio_Branco", label: "Rio Branco (GMT-5)" }
+              ]}
+              value={field("timezone", "America/Sao_Paulo")}
+            />
           </div>
         </section>
       )}
-      footer={<UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />}
+      footer={<>
+        <SettingsWorkspaceFeedback blockedReason={blockedReason} onRequestAccess={onRequestAccess} onRetry={onRetry} systemError={systemError} validationError={validationError} />
+        <UnsavedChangesBar onCancel={onCancel} onSave={systemError ? onRetry ?? onSave : onSave} state={resolvedSaveState} />
+      </>}
       header={<SetupBlockHeader description="Edite a identidade do studio e a janela institucional de funcionamento." showBadge={false} title="Studio" />}
       {...props}
     />
@@ -9342,7 +9900,10 @@ export interface SettingsTeamMember {
   status: SettingsTeamMemberStatus;
   lastAccess: string;
   avatarSrc?: string;
+  isLastAdmin?: boolean;
 }
+
+export type SettingsTeamMemberAction = "edit" | "deactivate" | "reactivate" | "resend";
 
 const defaultSettingsTeamMembers: SettingsTeamMember[] = [
   { id: "leticia", name: "Leticia Ramos", email: "leticia@studio.com", role: "Dono/Admin", status: "active", lastAccess: "Hoje, 09:42" },
@@ -9350,33 +9911,69 @@ const defaultSettingsTeamMembers: SettingsTeamMember[] = [
   { id: "ana", name: "Ana Martins", email: "ana@studio.com", role: "Professor", status: "invitePending", lastAccess: "Convite enviado hoje" }
 ];
 
-export interface SettingsTeamWorkspaceProps extends React.HTMLAttributes<HTMLElement>, SettingsWorkspaceSaveProps {
+export interface SettingsTeamWorkspaceProps extends React.HTMLAttributes<HTMLElement>, SettingsWorkspaceSaveProps, SettingsWorkspaceOperationalProps {
   members?: SettingsTeamMember[];
+  confirmSensitiveActions?: boolean;
+  roleOptions?: SelectOption[];
   onInvite?: () => void;
   onOpenPermissions?: () => void;
-  onMemberAction?: (member: SettingsTeamMember, action: "edit" | "deactivate" | "reactivate" | "resend") => void;
+  onMemberAction?: (member: SettingsTeamMember, action: SettingsTeamMemberAction) => void;
+  onRoleChange?: (member: SettingsTeamMember, nextRole: string) => void;
 }
 
 export function SettingsTeamWorkspace({
   members = defaultSettingsTeamMembers,
+  confirmSensitiveActions = true,
+  roleOptions = [
+    { value: "Dono/Admin", label: "Dono/Admin" },
+    { value: "Recepcao", label: "Recepcao" },
+    { value: "Professor", label: "Professor" }
+  ],
   saveState = "saved",
+  blockedReason,
+  validationError,
+  systemError,
+  onRequestAccess,
+  onRetry,
   onInvite,
   onOpenPermissions,
   onMemberAction,
+  onRoleChange,
   onSave,
   onCancel,
   className,
   ...props
 }: SettingsTeamWorkspaceProps) {
+  const [pendingAction, setPendingAction] = React.useState<{ member: SettingsTeamMember; action: "deactivate" | "reactivate" } | null>(null);
+  const [roleEditorMember, setRoleEditorMember] = React.useState<SettingsTeamMember | null>(null);
+  const [nextRole, setNextRole] = React.useState("");
+  const [pendingRoleChange, setPendingRoleChange] = React.useState<{ member: SettingsTeamMember; nextRole: string } | null>(null);
   const statusContract: Record<SettingsTeamMemberStatus, { label: string; tone: ComponentTone }> = {
     active: { label: "Ativo", tone: "success" },
     inactive: { label: "Inativo", tone: "neutral" },
     invitePending: { label: "Convite pendente", tone: "warning" }
   };
+  const requestMemberAction = (member: SettingsTeamMember, action: SettingsTeamMemberAction) => {
+    if (action === "edit" && onRoleChange) {
+      setNextRole(member.role);
+      setRoleEditorMember(member);
+      return;
+    }
+    if (confirmSensitiveActions && (action === "deactivate" || action === "reactivate")) {
+      setPendingAction({ member, action });
+      return;
+    }
+    onMemberAction?.(member, action);
+  };
+  const pendingIsBlocked = pendingAction?.action === "deactivate" && pendingAction.member.isLastAdmin;
+  const isOwnerTransfer = pendingRoleChange?.nextRole === "Dono/Admin" && pendingRoleChange.member.role !== "Dono/Admin";
+  const roleChangeIsBlocked = Boolean(pendingRoleChange?.member.isLastAdmin && pendingRoleChange.nextRole !== "Dono/Admin");
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
   return (
     <SetupPagePanel className={cn("tcrm-settings-team-workspace", className)} data-component="SettingsTeamWorkspace" {...props}>
       <SetupBlockHeader description="Gerencie as pessoas que acessam o CRM, seus papeis e o estado dos convites." showBadge={false} title="Equipe" />
-      <Panel className="tcrm-settings-team-workspace__panel" compact>
+      <SettingsWorkspaceControls blocked={Boolean(blockedReason)}>
+        <Panel className="tcrm-settings-team-workspace__panel" compact>
         <InlineGroup justify="between">
           <div><h3>Usuarios do CRM</h3><p>Papeis detalhados continuam em Permissoes.</p></div>
           <Button leadingIcon="plus" onClick={onInvite} variant="secondary">Convidar pessoa</Button>
@@ -9391,8 +9988,8 @@ export function SettingsTeamWorkspace({
                 action={(
                   <InlineGroup>
                     <Chip tone={status.tone}>{status.label}</Chip>
-                    <Button onClick={() => onMemberAction?.(member, "edit")} size="sm" variant="ghost">Editar</Button>
-                    <Button onClick={() => onMemberAction?.(member, statusAction)} size="sm" variant="secondary">{statusActionLabel}</Button>
+                    <Button onClick={() => requestMemberAction(member, "edit")} size="sm" variant="ghost">Editar</Button>
+                    <Button onClick={() => requestMemberAction(member, statusAction)} size="sm" variant="secondary">{statusActionLabel}</Button>
                   </InlineGroup>
                 )}
                 key={member.id}
@@ -9404,27 +10001,108 @@ export function SettingsTeamWorkspace({
           })}
         </List>
         <Button leadingIcon="shield" onClick={onOpenPermissions} variant="ghost">Abrir Permissoes</Button>
-      </Panel>
-      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+        </Panel>
+      </SettingsWorkspaceControls>
+      <SettingsWorkspaceFeedback blockedReason={blockedReason} onRequestAccess={onRequestAccess} onRetry={onRetry} systemError={systemError} validationError={validationError} />
+      <UnsavedChangesBar onCancel={onCancel} onSave={systemError ? onRetry ?? onSave : onSave} state={resolvedSaveState} />
+      <Modal
+        description="Escolha o novo papel principal. Permissoes finas continuam na pagina Permissoes."
+        footer={(
+          <ButtonGroup align="end">
+            <Button onClick={() => setRoleEditorMember(null)} size="sm" variant="secondary">Cancelar</Button>
+            <Button
+              disabled={!roleEditorMember || nextRole === roleEditorMember.role}
+              onClick={() => {
+                if (!roleEditorMember || nextRole === roleEditorMember.role) return;
+                setPendingRoleChange({ member: roleEditorMember, nextRole });
+                setRoleEditorMember(null);
+              }}
+              size="sm"
+            >
+              Revisar alteracao
+            </Button>
+          </ButtonGroup>
+        )}
+        onOpenChange={(open) => { if (!open) setRoleEditorMember(null); }}
+        open={Boolean(roleEditorMember)}
+        title={roleEditorMember ? `Alterar papel de ${roleEditorMember.name}` : "Alterar papel"}
+        variant="simple"
+      >
+        <Select aria-label="Novo papel" onValueChange={setNextRole} options={roleOptions} value={nextRole} />
+      </Modal>
+      <ConfirmDialog
+        blockedReason={pendingIsBlocked ? "O ultimo Dono/Admin nao pode ser desativado." : undefined}
+        cancelLabel="Manter acesso"
+        confirmLabel={pendingAction?.action === "reactivate" ? "Confirmar reativacao" : "Confirmar desativacao"}
+        destructive={pendingAction?.action === "deactivate"}
+        description={pendingIsBlocked
+          ? "O ultimo Dono/Admin nao pode ser desativado. Transfira a administracao antes de remover este acesso."
+          : pendingAction
+            ? `${pendingAction.member.name} ${pendingAction.action === "reactivate" ? "voltara a acessar" : "perdera o acesso ao"} CRM. O historico operacional sera preservado.`
+            : undefined}
+        onCancel={() => setPendingAction(null)}
+        onConfirm={() => {
+          if (!pendingAction || pendingIsBlocked) return;
+          onMemberAction?.(pendingAction.member, pendingAction.action);
+          setPendingAction(null);
+        }}
+        onOpenChange={(open) => { if (!open) setPendingAction(null); }}
+        open={Boolean(pendingAction)}
+        summary={pendingAction ? <strong>{pendingAction.member.name} · {pendingAction.member.role}</strong> : undefined}
+        title={pendingIsBlocked ? "Mantenha um Dono/Admin ativo" : pendingAction?.action === "reactivate" ? "Reativar acesso?" : "Desativar acesso?"}
+        tone={pendingIsBlocked ? "sensitive" : undefined}
+      />
+      <ConfirmDialog
+        blockedReason={roleChangeIsBlocked ? "Transfira a administracao antes de alterar o papel do ultimo Dono/Admin." : undefined}
+        cancelLabel="Revisar papel"
+        confirmLabel={isOwnerTransfer ? "Confirmar transferencia" : "Confirmar alteracao"}
+        description={pendingRoleChange
+          ? isOwnerTransfer
+            ? `${pendingRoleChange.member.name} passara a ser Dono/Admin do studio. Esta transferencia altera o responsavel principal e ficara registrada na auditoria.`
+            : `${pendingRoleChange.member.name} mudara de ${pendingRoleChange.member.role} para ${pendingRoleChange.nextRole}. O novo acesso sera aplicado imediatamente.`
+          : undefined}
+        onCancel={() => {
+          if (pendingRoleChange) {
+            setNextRole(pendingRoleChange.nextRole);
+            setRoleEditorMember(pendingRoleChange.member);
+          }
+          setPendingRoleChange(null);
+        }}
+        onConfirm={() => {
+          if (!pendingRoleChange || roleChangeIsBlocked) return;
+          onRoleChange?.(pendingRoleChange.member, pendingRoleChange.nextRole);
+          setPendingRoleChange(null);
+        }}
+        onOpenChange={(open) => { if (!open) setPendingRoleChange(null); }}
+        open={Boolean(pendingRoleChange)}
+        summary={pendingRoleChange ? <strong>{pendingRoleChange.member.name} · {pendingRoleChange.member.role} → {pendingRoleChange.nextRole}</strong> : undefined}
+        title={roleChangeIsBlocked ? "Mantenha um Dono/Admin ativo" : isOwnerTransfer ? "Transferir Dono/Admin?" : "Confirmar alteracao de papel?"}
+        tone="sensitive"
+      />
     </SetupPagePanel>
   );
 }
 
-export interface SettingsChannelsWorkspaceProps extends Omit<SetupChannelsWorkspaceProps, "header" | "footer" | "onAction">, SettingsWorkspaceSaveProps {}
+export interface SettingsChannelsWorkspaceProps extends Omit<SetupChannelsWorkspaceProps, "header" | "footer" | "onAction" | "disabled">, SettingsWorkspaceSaveProps, SettingsWorkspaceOperationalProps {}
 
-export function SettingsChannelsWorkspace({ saveState = "saved", onSave, onCancel, className, ...props }: SettingsChannelsWorkspaceProps) {
+export function SettingsChannelsWorkspace({ saveState = "saved", blockedReason, validationError, systemError, onRequestAccess, onRetry, onSave, onCancel, className, ...props }: SettingsChannelsWorkspaceProps) {
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
   return (
     <SetupChannelsWorkspace
       className={cn("tcrm-settings-inherited-workspace", className)}
       data-component="SettingsChannelsWorkspace"
-      footer={<UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />}
+      disabled={Boolean(blockedReason)}
+      footer={<>
+        <SettingsWorkspaceFeedback blockedReason={blockedReason} onRequestAccess={onRequestAccess} onRetry={onRetry} systemError={systemError} validationError={validationError} />
+        <UnsavedChangesBar onCancel={onCancel} onSave={systemError ? onRetry ?? onSave : onSave} state={resolvedSaveState} />
+      </>}
       header={<SetupBlockHeader description="Defina os canais oficiais e acompanhe a conexao tecnica sem configurar mensagens ou automacoes." showBadge={false} title="Canais" />}
       {...props}
     />
   );
 }
 
-export interface SettingsPlansWorkspaceProps extends Omit<SetupPlansWorkspaceProps, "header" | "footer" | "onAction" | "destructiveAction">, SettingsWorkspaceSaveProps {}
+export interface SettingsPlansWorkspaceProps extends Omit<SetupPlansWorkspaceProps, "header" | "footer" | "onAction" | "destructiveAction" | "disabled">, SettingsWorkspaceSaveProps, SettingsWorkspaceOperationalProps {}
 
 const defaultSettingsPlanStates: NonNullable<SetupPlansWorkspaceProps["planStates"]> = {
   weekly: { label: "Ativo", tone: "success", studentsUsing: 18 },
@@ -9432,13 +10110,18 @@ const defaultSettingsPlanStates: NonNullable<SetupPlansWorkspaceProps["planState
   trial: { label: "Inativo", tone: "neutral", studentsUsing: 0 }
 };
 
-export function SettingsPlansWorkspace({ planStates = defaultSettingsPlanStates, saveState = "saved", onSave, onCancel, className, ...props }: SettingsPlansWorkspaceProps) {
+export function SettingsPlansWorkspace({ planStates = defaultSettingsPlanStates, saveState = "saved", blockedReason, validationError, systemError, onRequestAccess, onRetry, onSave, onCancel, className, ...props }: SettingsPlansWorkspaceProps) {
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
   return (
     <SetupPlansWorkspace
       className={cn("tcrm-settings-inherited-workspace", className)}
       data-component="SettingsPlansWorkspace"
       destructiveAction="deactivate"
-      footer={<UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />}
+      disabled={Boolean(blockedReason)}
+      footer={<>
+        <SettingsWorkspaceFeedback blockedReason={blockedReason} onRequestAccess={onRequestAccess} onRetry={onRetry} systemError={systemError} validationError={validationError} />
+        <UnsavedChangesBar onCancel={onCancel} onSave={systemError ? onRetry ?? onSave : onSave} state={resolvedSaveState} />
+      </>}
       header={<SetupBlockHeader description="Configure o que o aluno compra, o consumo de aulas e as regras simples de reposicao." showBadge={false} title="Planos e modelos" />}
       planStates={planStates}
       {...props}
@@ -9478,6 +10161,7 @@ export interface PermissionRoleCardData {
 
 export interface PermissionRoleCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "id" | "onSelect" | "title">, PermissionRoleCardData {
   selected?: boolean;
+  disabled?: boolean;
   onSelect?: (roleId: string) => void;
 }
 
@@ -9490,6 +10174,7 @@ export function PermissionRoleCard({
   tone = "info",
   permissions,
   selected = false,
+  disabled = false,
   onSelect,
   className,
   ...props
@@ -9498,11 +10183,12 @@ export function PermissionRoleCard({
     <Card
       className={cn("tcrm-permission-role-card", selected && "tcrm-permission-role-card--selected", className)}
       data-component="PermissionRoleCard"
+      data-role-id={id}
       data-state={selected ? "selected" : "source"}
       data-tone={tone}
       {...props}
     >
-      <button aria-pressed={selected} className="tcrm-permission-role-card__select" onClick={() => onSelect?.(id)} type="button">
+      <button aria-pressed={selected} className="tcrm-permission-role-card__select" disabled={disabled} onClick={() => onSelect?.(id)} type="button">
         <span className="tcrm-permission-role-card__icon"><Icon name={icon} /></span>
         <span className="tcrm-permission-role-card__copy">
           <strong>{title}</strong>
@@ -9547,11 +10233,12 @@ const settingsPermissionsDefaultRoles: PermissionRoleCardData[] = [
   }
 ];
 
-export interface SettingsPermissionsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+export interface SettingsPermissionsWorkspaceProps extends React.HTMLAttributes<HTMLElement>, SettingsWorkspaceOperationalProps {
   roles?: PermissionRoleCardData[];
   selectedRoleId?: string;
   permissionRows?: PermissionMatrixRow[];
   saveState?: UnsavedChangesBarState;
+  requiresApproval?: boolean;
   onRoleSelect?: (roleId: string) => void;
   onPermissionToggle?: PermissionMatrixProps["onToggleChange"];
   onPermissionSelect?: PermissionMatrixProps["onSelectChange"];
@@ -9564,6 +10251,12 @@ export function SettingsPermissionsWorkspace({
   selectedRoleId,
   permissionRows,
   saveState = "dirty",
+  blockedReason,
+  validationError,
+  systemError,
+  requiresApproval = false,
+  onRequestAccess,
+  onRetry,
   onRoleSelect,
   onPermissionToggle,
   onPermissionSelect,
@@ -9572,6 +10265,21 @@ export function SettingsPermissionsWorkspace({
   className,
   ...props
 }: SettingsPermissionsWorkspaceProps) {
+  const [approvalOpen, setApprovalOpen] = React.useState(false);
+  const saveBlocked = Boolean(blockedReason || validationError);
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
+  const requestSave = () => {
+    if (saveBlocked) return;
+    if (systemError) {
+      (onRetry ?? onSave)?.();
+      return;
+    }
+    if (requiresApproval) {
+      setApprovalOpen(true);
+      return;
+    }
+    onSave?.();
+  };
   return (
     <section className={cn("tcrm-settings-permissions-workspace", className)} data-component="SettingsPermissionsWorkspace" {...props}>
       <section className="tcrm-settings-permissions-workspace__roles">
@@ -9583,6 +10291,7 @@ export function SettingsPermissionsWorkspace({
           {roles.map((role) => (
             <PermissionRoleCard
               {...role}
+              disabled={Boolean(blockedReason)}
               key={role.id}
               onSelect={onRoleSelect}
               selected={role.id === selectedRoleId}
@@ -9590,14 +10299,31 @@ export function SettingsPermissionsWorkspace({
           ))}
         </div>
       </section>
-      <PermissionMatrix onSelectChange={onPermissionSelect} onToggleChange={onPermissionToggle} rows={permissionRows} />
+      <PermissionMatrix blockedReason={blockedReason} onSelectChange={onPermissionSelect} onToggleChange={onPermissionToggle} rows={permissionRows} state={blockedReason ? "blocked" : "source"} />
+      {blockedReason && onRequestAccess ? <Button onClick={onRequestAccess} size="sm" variant="secondary">Pedir acesso</Button> : null}
+      <SettingsWorkspaceFeedback onRetry={onRetry} systemError={systemError} validationError={validationError} />
+      {requiresApproval ? <InlineAlert tone="warning" title="Aprovação necessária">Um Dono/Admin precisa confirmar o aumento de permissão sensível.</InlineAlert> : null}
       <ConfigImpactPreview />
-      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+      <UnsavedChangesBar onCancel={onCancel} onSave={requestSave} state={resolvedSaveState} />
+      <ConfirmDialog
+        cancelLabel="Revisar ajuste"
+        confirmLabel="Confirmar como Dono/Admin"
+        description="Esta mudança amplia acesso a dados ou ações sensíveis e ficará registrada na auditoria."
+        onCancel={() => setApprovalOpen(false)}
+        onConfirm={() => { onSave?.(); setApprovalOpen(false); }}
+        onOpenChange={setApprovalOpen}
+        open={approvalOpen}
+        summary={<strong>Permissões sensíveis da equipe</strong>}
+        title="Confirmar aumento de permissão?"
+        tone="sensitive"
+      />
     </section>
   );
 }
 
-export interface SettingsPaymentsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+export interface SettingsPaymentsWorkspaceProps extends React.HTMLAttributes<HTMLElement>, SettingsWorkspaceOperationalProps {
+  enabledMethods?: PaymentMethodRowMethod[];
+  taliyaPaymentsState?: SettingsTaliyaPaymentsState;
   saveState?: UnsavedChangesBarState;
   ruleRows?: SettingsSectionRow[];
   onMethodSelect?: (method: PaymentMethodRowMethod) => void;
@@ -9605,9 +10331,12 @@ export interface SettingsPaymentsWorkspaceProps extends React.HTMLAttributes<HTM
   onRuleToggle?: (row: SettingsSectionRow, checked: boolean) => void;
   onActivate?: () => void;
   onTechnicalIntegration?: () => void;
+  onViewPlan?: () => void;
   onSave?: () => void;
   onCancel?: () => void;
 }
+
+export type SettingsTaliyaPaymentsState = "pending" | "active" | "blocked" | "error";
 
 const settingsPaymentMethods: Array<{
   method: PaymentMethodRowMethod;
@@ -9630,21 +10359,43 @@ const settingsPaymentIntegrations: Array<{
 ];
 
 export function SettingsPaymentsWorkspace({
+  enabledMethods = ["pix", "cash", "card"],
+  taliyaPaymentsState = "pending",
   saveState = "dirty",
+  blockedReason,
+  validationError,
+  systemError,
+  onRequestAccess,
+  onRetry,
   ruleRows,
   onMethodSelect,
   onRuleAction,
   onRuleToggle,
   onActivate,
   onTechnicalIntegration,
+  onViewPlan,
   onSave,
   onCancel,
   className,
   ...props
 }: SettingsPaymentsWorkspaceProps) {
+  const taliyaPaymentsContract: Record<SettingsTaliyaPaymentsState, {
+    status: string;
+    tone: ComponentTone;
+    integrationState: IntegrationStatusRowState;
+    actionLabel?: string;
+  }> = {
+    pending: { status: "Aguardando ativação", tone: "warning", integrationState: "blocked", actionLabel: "Ativar Pagamentos Taliya" },
+    active: { status: "Ativo", tone: "success", integrationState: "connected" },
+    blocked: { status: "Plano necessário", tone: "danger", integrationState: "blocked", actionLabel: "Ver plano" },
+    error: { status: "Falha técnica", tone: "danger", integrationState: "failed", actionLabel: "Revisar ativação" }
+  };
+  const paymentsContract = taliyaPaymentsContract[taliyaPaymentsState];
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
   return (
     <section className={cn("tcrm-settings-payments-workspace", className)} data-component="SettingsPaymentsWorkspace" {...props}>
-      <Card className="tcrm-settings-payments-workspace__methods">
+      <SettingsWorkspaceControls blocked={Boolean(blockedReason)}>
+        <Card className="tcrm-settings-payments-workspace__methods">
         <header>
           <h3>1. Meios e baixa manual</h3>
           <p>Meios que a equipe pode registrar no Taliya.</p>
@@ -9656,22 +10407,23 @@ export function SettingsPaymentsWorkspace({
               key={method.method}
               method={method.method}
               onSelect={(selectedMethod) => onMethodSelect?.(selectedMethod)}
+              selected={enabledMethods.includes(method.method)}
               state="connected"
               title={method.title}
             />
           ))}
         </div>
-      </Card>
+        </Card>
 
-      <SettingsSection onRowAction={onRuleAction} onToggleChange={onRuleToggle} rows={ruleRows} />
+        <SettingsSection onRowAction={onRuleAction} onToggleChange={onRuleToggle} rows={ruleRows} />
 
-      <Card className="tcrm-settings-payments-workspace__taliya">
+        <Card className="tcrm-settings-payments-workspace__taliya">
         <header>
           <span>
             <h3>3. Pagamentos Taliya</h3>
             <p>Ative pagamentos online quando quiser automatizar baixa e recorrência.</p>
           </span>
-          <Chip tone="warning">Aguardando ativação</Chip>
+          <Chip tone={paymentsContract.tone}>{paymentsContract.status}</Chip>
         </header>
         <div className="tcrm-settings-payments-workspace__integration-grid">
           {settingsPaymentIntegrations.map((integration, index) => (
@@ -9679,19 +10431,23 @@ export function SettingsPaymentsWorkspace({
               key={integration.provider}
               provider={integration.provider}
               showDivider={index < settingsPaymentIntegrations.length - 1}
-              state="blocked"
+              state={paymentsContract.integrationState}
               title={integration.title}
             />
           ))}
         </div>
         <footer>
-          <Button onClick={onActivate} variant="primary">Ativar Pagamentos Taliya</Button>
+          {paymentsContract.actionLabel ? (
+            <Button onClick={taliyaPaymentsState === "blocked" ? onViewPlan : onActivate} variant="primary">{paymentsContract.actionLabel}</Button>
+          ) : <span />}
           <p>Dados legais e bancários são preenchidos no provedor seguro, fora da Taliya.</p>
           <Button onClick={onTechnicalIntegration} trailingIcon="externalLink" variant="ghost">Ver integração técnica</Button>
         </footer>
-      </Card>
+        </Card>
+      </SettingsWorkspaceControls>
 
-      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+      <SettingsWorkspaceFeedback blockedReason={blockedReason} onRequestAccess={onRequestAccess} onRetry={onRetry} systemError={systemError} validationError={validationError} />
+      <UnsavedChangesBar onCancel={onCancel} onSave={systemError ? onRetry ?? onSave : onSave} state={resolvedSaveState} />
     </section>
   );
 }
@@ -9705,7 +10461,7 @@ export interface SettingsAgendaRow {
   statusTone?: ComponentTone;
 }
 
-export interface SettingsAgendaWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+export interface SettingsAgendaWorkspaceProps extends React.HTMLAttributes<HTMLElement>, SettingsWorkspaceOperationalProps {
   closedDays?: SettingsAgendaRow[];
   temporaryBlocks?: SettingsAgendaRow[];
   ruleValues?: Partial<SettingsAgendaRuleValues>;
@@ -9740,6 +10496,11 @@ export function SettingsAgendaWorkspace({
   temporaryBlocks = settingsAgendaTemporaryBlocks,
   ruleValues = {},
   saveState = "dirty",
+  blockedReason,
+  validationError,
+  systemError,
+  onRequestAccess,
+  onRetry,
   onAddException,
   onAddBlock,
   onRowAction,
@@ -9750,6 +10511,7 @@ export function SettingsAgendaWorkspace({
   ...props
 }: SettingsAgendaWorkspaceProps) {
   const resolvedRuleValues: SettingsAgendaRuleValues = { waitlist: true, fitIns: "approval", callTolerance: "10", ...ruleValues };
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
   const renderRows = (rows: SettingsAgendaRow[], icon: IconName) => (
     <div className="tcrm-settings-agenda-workspace__rows" role="list">
       {rows.map((row) => (
@@ -9768,23 +10530,24 @@ export function SettingsAgendaWorkspace({
 
   return (
     <section className={cn("tcrm-settings-agenda-workspace", className)} data-component="SettingsAgendaWorkspace" {...props}>
-      <Card className="tcrm-settings-agenda-workspace__section">
+      <SettingsWorkspaceControls blocked={Boolean(blockedReason)}>
+        <Card className="tcrm-settings-agenda-workspace__section">
         <header>
           <span><h3>1. Dias fechados e exceções</h3><p>Defina feriados, recessos e horários especiais sem mudar a agenda fixa do studio.</p></span>
           <Button onClick={onAddException} trailingIcon="plus" variant="secondary">Adicionar exceção</Button>
         </header>
         {renderRows(closedDays, "calendar")}
-      </Card>
+        </Card>
 
-      <Card className="tcrm-settings-agenda-workspace__section">
+        <Card className="tcrm-settings-agenda-workspace__section">
         <header>
           <span><h3>2. Bloqueios temporários</h3><p>Bloqueie sala, turma ou período quando algo não puder receber marcações.</p></span>
           <Button onClick={onAddBlock} trailingIcon="plus" variant="secondary">Adicionar bloqueio</Button>
         </header>
         {renderRows(temporaryBlocks, "lock")}
-      </Card>
+        </Card>
 
-      <Card className="tcrm-settings-agenda-workspace__section tcrm-settings-agenda-workspace__rules">
+        <Card className="tcrm-settings-agenda-workspace__section tcrm-settings-agenda-workspace__rules">
         <header><span><h3>3. Regras simples da agenda</h3><p>Ajustes globais que mudam como a agenda aceita vagas e encaixes.</p></span></header>
         <div>
           <RuleRow checked={resolvedRuleValues.waitlist} control="none" icon="users" onToggle={(checked) => onRuleChange?.("waitlist", checked)} statusLabel={resolvedRuleValues.waitlist ? "Ligada" : "Desligada"} title="Lista de espera" />
@@ -9807,9 +10570,11 @@ export function SettingsAgendaWorkspace({
             title="Tolerância de chamada"
           />
         </div>
-      </Card>
+        </Card>
+      </SettingsWorkspaceControls>
 
-      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+      <SettingsWorkspaceFeedback blockedReason={blockedReason} onRequestAccess={onRequestAccess} onRetry={onRetry} systemError={systemError} validationError={validationError} />
+      <UnsavedChangesBar onCancel={onCancel} onSave={systemError ? onRetry ?? onSave : onSave} state={resolvedSaveState} />
     </section>
   );
 }
@@ -9829,12 +10594,17 @@ export interface SettingsNotificationRole {
   alerts: SettingsNotificationAlert[];
 }
 
-export interface SettingsNotificationsWorkspaceProps extends React.HTMLAttributes<HTMLElement> {
+export interface SettingsNotificationsWorkspaceProps extends React.HTMLAttributes<HTMLElement>, SettingsWorkspaceOperationalProps {
   roles?: SettingsNotificationRole[];
+  enabledAlertTypesByRole?: Partial<Record<string, string[]>>;
+  reviewAlertIdsByRole?: Partial<Record<string, string[]>>;
+  unavailableChannelReasons?: Partial<Record<SettingsNotificationChannelId, string>>;
   frequencyRules?: Partial<Record<SettingsNotificationFrequencyId, SettingsNotificationRuleValue>>;
   channelRules?: Partial<Record<SettingsNotificationChannelId, SettingsNotificationRuleValue>>;
   saveState?: UnsavedChangesBarState;
+  selectedRoleId?: string;
   onRoleSelect?: (roleId: string) => void;
+  onAlertToggle?: (roleId: string, alertId: string, enabled: boolean) => void;
   onFrequencyChange?: (alertId: string, value: string | boolean) => void;
   onChannelChange?: (channelId: string, value: string | boolean) => void;
   onSave?: () => void;
@@ -9895,10 +10665,20 @@ const settingsNotificationRoles: SettingsNotificationRole[] = [
 
 export function SettingsNotificationsWorkspace({
   roles = settingsNotificationRoles,
+  enabledAlertTypesByRole = {},
+  reviewAlertIdsByRole = {},
+  unavailableChannelReasons = {},
   frequencyRules = {},
   channelRules = {},
   saveState = "dirty",
+  blockedReason,
+  validationError,
+  systemError,
+  onRequestAccess,
+  onRetry,
+  selectedRoleId,
   onRoleSelect,
+  onAlertToggle,
   onFrequencyChange,
   onChannelChange,
   onSave,
@@ -9908,41 +10688,77 @@ export function SettingsNotificationsWorkspace({
 }: SettingsNotificationsWorkspaceProps) {
   const frequency = { ...defaultSettingsNotificationFrequencyRules, ...frequencyRules };
   const channels = { ...defaultSettingsNotificationChannelRules, ...channelRules };
+  const resolvedSaveState = resolveSettingsWorkspaceSaveState(saveState, { blockedReason, validationError, systemError });
   return (
     <section className={cn("tcrm-settings-notifications-workspace", className)} data-component="SettingsNotificationsWorkspace" {...props}>
-      <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__roles">
+      <SettingsWorkspaceControls blocked={Boolean(blockedReason)}>
+        <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__roles">
         <header><h3>1. Alertas por papel</h3><p>Escolha quais alertas cada papel da equipe deve receber.</p></header>
         <div className="tcrm-settings-notifications-workspace__role-grid">
-          {roles.map((role) => (
-            <Button className="tcrm-settings-notifications-workspace__role" key={role.id} onClick={() => onRoleSelect?.(role.id)} variant="ghost">
-              <span className="tcrm-settings-notifications-workspace__role-icon" data-tone={role.tone}><Icon name={role.icon} /></span>
-              <span className="tcrm-settings-notifications-workspace__role-copy"><strong>{role.title}</strong><small>{role.description}</small></span>
-              <span className="tcrm-settings-notifications-workspace__alerts">
-                {role.alerts.map((alert) => <Chip icon={alert.icon} key={alert.id} showDot={false} tone={role.tone}>{alert.label}</Chip>)}
-              </span>
-            </Button>
-          ))}
+          {roles.map((role) => {
+            const enabledAlerts = enabledAlertTypesByRole[role.id] ?? role.alerts.map((alert) => alert.id);
+            const reviewAlerts = reviewAlertIdsByRole[role.id] ?? [];
+            return (
+              <Card
+                className={cn("tcrm-settings-notifications-workspace__role", role.id === selectedRoleId && "tcrm-settings-notifications-workspace__role--selected")}
+                data-role-id={role.id}
+                key={role.id}
+              >
+                <Button
+                  aria-label={`Selecionar papel ${String(role.title)}`}
+                  aria-pressed={role.id === selectedRoleId}
+                  className="tcrm-settings-notifications-workspace__role-select"
+                  onClick={() => onRoleSelect?.(role.id)}
+                  variant="ghost"
+                >
+                  <span className="tcrm-settings-notifications-workspace__role-icon" data-tone={role.tone}><Icon name={role.icon} /></span>
+                  <span className="tcrm-settings-notifications-workspace__role-copy"><strong>{role.title}</strong><small>{role.description}</small></span>
+                </Button>
+                <span className="tcrm-settings-notifications-workspace__alerts">
+                  {role.alerts.map((alert) => {
+                    const enabled = enabledAlerts.includes(alert.id);
+                    const needsReview = reviewAlerts.includes(alert.id);
+                    return (
+                      <Button
+                        aria-label={`Alternar ${String(alert.label)} para ${String(role.title)}`}
+                        aria-pressed={enabled}
+                        className={cn("tcrm-settings-notifications-workspace__alert", needsReview && "tcrm-settings-notifications-workspace__alert--review")}
+                        key={alert.id}
+                        onClick={() => onAlertToggle?.(role.id, alert.id, !enabled)}
+                        variant="ghost"
+                      >
+                        <Chip icon={alert.icon} showDot={false} tone={enabled ? role.tone : "neutral"}>{alert.label}</Chip>
+                        {needsReview ? <Chip icon="alert" showDot={false} tone="warning">Revisar</Chip> : null}
+                      </Button>
+                    );
+                  })}
+                </span>
+              </Card>
+            );
+          })}
         </div>
-      </Card>
+        </Card>
 
-      <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__rules">
+        <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__rules">
         <header><h3>2. Frequência dos alertas</h3><p>Defina quando o Taliya avisa a equipe.</p></header>
         <div className="tcrm-settings-notifications-workspace__rule-head"><span>Nível de alerta</span><span>Frequência</span><span>Status</span></div>
         <RuleRow checked={frequency.critical.enabled} icon="alert" iconTone="danger" onSelectChange={(value) => onFrequencyChange?.("critical", value)} onToggle={(value) => onFrequencyChange?.("critical", value)} rowId="critical" selectValue={frequency.critical.value} title="Crítico" />
         <RuleRow checked={frequency.operational.enabled} icon="alertCircle" iconTone="warning" onSelectChange={(value) => onFrequencyChange?.("operational", value)} onToggle={(value) => onFrequencyChange?.("operational", value)} rowId="operational" selectValue={frequency.operational.value} title="Operacional" />
         <RuleRow checked={frequency.informative.enabled} icon="info" iconTone="info" onSelectChange={(value) => onFrequencyChange?.("informative", value)} onToggle={(value) => onFrequencyChange?.("informative", value)} rowId="informative" selectValue={frequency.informative.value} title="Informativo" />
         <RuleRow checked={frequency["non-critical"].enabled} icon="minus" onSelectChange={(value) => onFrequencyChange?.("non-critical", value)} onToggle={(value) => onFrequencyChange?.("non-critical", value)} rowId="non-critical" selectValue={frequency["non-critical"].value} title="Não crítico" />
-      </Card>
+        </Card>
 
-      <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__channels">
+        <Card className="tcrm-settings-notifications-workspace__section tcrm-settings-notifications-workspace__channels">
         <header><h3>3. Canais internos</h3><p>Escolha onde a equipe recebe avisos internos do CRM.</p></header>
-        <RuleRow checked={channels.taliya.enabled} control="none" icon="layout" onToggle={(value) => onChannelChange?.("taliya", value)} rowId="taliya" title="Dentro do Taliya" />
-        <RuleRow icon="mail" onSelectChange={(value) => onChannelChange?.("email", value)} rowId="email" selectOptions={[{ value: "owner", label: "Ligado para Dono/Admin" }, { value: "all", label: "Ligado para todos" }]} selectValue={channels.email.value} showToggle={false} statusLabel={null} title="E-mail interno" />
-        <RuleRow icon="whatsapp" iconTone="success" onSelectChange={(value) => onChannelChange?.("whatsapp", value)} rowId="whatsapp" selectOptions={[{ value: "critical", label: "Ligado para alertas críticos" }, { value: "all", label: "Ligado para todos" }]} selectValue={channels.whatsapp.value} showToggle={false} statusLabel={null} title="WhatsApp interno" />
-        <RuleRow icon="clock" onSelectChange={(value) => onChannelChange?.("after-hours", value)} rowId="after-hours" selectOptions={[{ value: "critical", label: "Somente crítico" }, { value: "silent", label: "Silenciado" }]} selectValue={channels["after-hours"].value} showToggle={false} statusLabel={null} title="Fora do horário" />
-      </Card>
+        <RuleRow blockedReason={unavailableChannelReasons.taliya} checked={channels.taliya.enabled} control="none" description={unavailableChannelReasons.taliya} icon="layout" onToggle={(value) => onChannelChange?.("taliya", value)} rowId="taliya" state={unavailableChannelReasons.taliya ? "blocked" : "enabled"} title="Dentro do Taliya" />
+        <RuleRow blockedReason={unavailableChannelReasons.email} description={unavailableChannelReasons.email} icon="mail" onSelectChange={(value) => onChannelChange?.("email", value)} rowId="email" selectOptions={[{ value: "owner", label: "Ligado para Dono/Admin" }, { value: "all", label: "Ligado para todos" }]} selectValue={channels.email.value} showToggle={false} state={unavailableChannelReasons.email ? "blocked" : "enabled"} statusLabel={null} title="E-mail interno" />
+        <RuleRow blockedReason={unavailableChannelReasons.whatsapp} description={unavailableChannelReasons.whatsapp} icon="whatsapp" iconTone="success" onSelectChange={(value) => onChannelChange?.("whatsapp", value)} rowId="whatsapp" selectOptions={[{ value: "critical", label: "Ligado para alertas críticos" }, { value: "all", label: "Ligado para todos" }]} selectValue={channels.whatsapp.value} showToggle={false} state={unavailableChannelReasons.whatsapp ? "blocked" : "enabled"} statusLabel={null} title="WhatsApp interno" />
+        <RuleRow blockedReason={unavailableChannelReasons["after-hours"]} description={unavailableChannelReasons["after-hours"]} icon="clock" onSelectChange={(value) => onChannelChange?.("after-hours", value)} rowId="after-hours" selectOptions={[{ value: "critical", label: "Somente crítico" }, { value: "silent", label: "Silenciado" }]} selectValue={channels["after-hours"].value} showToggle={false} state={unavailableChannelReasons["after-hours"] ? "blocked" : "enabled"} statusLabel={null} title="Fora do horário" />
+        </Card>
+      </SettingsWorkspaceControls>
 
-      <UnsavedChangesBar onCancel={onCancel} onSave={onSave} state={saveState} />
+      <SettingsWorkspaceFeedback blockedReason={blockedReason} onRequestAccess={onRequestAccess} onRetry={onRetry} systemError={systemError} validationError={validationError} />
+      <UnsavedChangesBar onCancel={onCancel} onSave={systemError ? onRetry ?? onSave : onSave} state={resolvedSaveState} />
     </section>
   );
 }
@@ -10679,6 +11495,7 @@ export function ComposerPanel({
   );
 }
 
+/** @deprecated Use Composer or ComposerPanel. */
 export function LegacyComposer({ disabled = false, className }: { disabled?: boolean; className?: string }) {
   return <ComposerInput className={className} disabled={disabled} placeholder={disabled ? "Atendimento pausado" : "Responder"} />;
 }
@@ -11168,7 +11985,6 @@ function LifecycleDrawer({
 void LifecycleDrawer;
 
 export type TaskDrawerState = "open" | "blocked" | "completed" | "sensitive" | "loading";
-export type TaskDrawerSize = "default" | "compact";
 export type TaskDrawerActivityOrder = "history-comments" | "comments-history";
 export type TaskDrawerActivityDensity = "compact" | "comfortable";
 
@@ -11205,7 +12021,6 @@ export interface TaskDrawerHistoryItem {
 export interface TaskDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title" | "onChange"> {
   open?: boolean;
   state?: TaskDrawerState;
-  size?: TaskDrawerSize;
   title?: React.ReactNode;
   label?: string;
   statusLabel?: string;
@@ -11263,7 +12078,6 @@ const sourceTaskDrawerHistory: TaskDrawerHistoryItem[] = [
 
 export type CrmDrawerHeaderOrder = "meta-title" | "label-title-status";
 export type CrmDrawerFooterLayout = "default" | "conversation";
-export type CrmDrawerPlacement = "inline" | "overlay";
 
 export interface CrmDrawerFact {
   id: string;
@@ -11308,7 +12122,6 @@ export interface CrmDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, 
   headerOrder?: CrmDrawerHeaderOrder;
   loading?: boolean;
   onClose?: () => void;
-  placement?: CrmDrawerPlacement;
   sections?: CrmDrawerSection[];
   state?: string;
   status?: React.ReactNode;
@@ -11348,7 +12161,6 @@ export function CrmDrawer({
   headerOrder = "meta-title",
   loading,
   onClose,
-  placement = "inline",
   sections,
   state = "open",
   status,
@@ -11364,7 +12176,6 @@ export function CrmDrawer({
       aria-busy={loading || undefined}
       className={cn(
         "tcrm-drawer tcrm-drawer-frame",
-        placement !== "inline" && `tcrm-drawer-frame--${placement}`,
         footerLayout === "conversation" && "tcrm-drawer-frame--footer-conversation",
         className
       )}
@@ -11444,7 +12255,6 @@ export function CrmDrawer({
 export function TaskDrawer({
   open = true,
   state = "open",
-  size = "default",
   title = "Confirmar reposição da Ana",
   label,
   statusLabel = "Aberta",
@@ -11567,7 +12377,6 @@ export function TaskDrawer({
       className={cn(
         "tcrm-task-drawer",
         `tcrm-task-drawer--${state}`,
-        size !== "default" && `tcrm-task-drawer--${size}`,
         activityDensity === "comfortable" && "tcrm-task-drawer--activity-comfortable",
         `tcrm-task-drawer--footer-${footerLayout}`,
         className
@@ -11689,10 +12498,12 @@ export interface ChecklistDrawerProps extends Omit<React.HTMLAttributes<HTMLElem
   totalSteps?: number;
   activity?: ChecklistDrawerActivity;
   comment?: ChecklistDrawerComment;
+  primaryActionLabel?: React.ReactNode;
   onClose?: () => void;
   onStepToggle?: (step: ChecklistDrawerStep, checked: boolean) => void;
-  onContinue?: () => void;
-  onCreateTask?: () => void;
+  onPrimaryAction?: () => void;
+  onAssign?: () => void;
+  onOpenTask?: () => void;
   onComplete?: () => void;
   onOpenOrigin?: () => void;
 }
@@ -11745,10 +12556,12 @@ export function ChecklistDrawer({
   totalSteps,
   activity = sourceChecklistDrawerActivity,
   comment = sourceChecklistDrawerComment,
+  primaryActionLabel = "Continuar",
   onClose,
   onStepToggle,
-  onContinue,
-  onCreateTask,
+  onPrimaryAction,
+  onAssign,
+  onOpenTask,
   onComplete,
   onOpenOrigin,
   className,
@@ -11758,7 +12571,7 @@ export function ChecklistDrawer({
 
   const isLoading = state === "loading";
   const isBlocked = state === "blocked";
-  const controlsDisabled = isLoading || isBlocked;
+  const controlsDisabled = isLoading || isBlocked || state === "completed";
   const completed = completedSteps ?? steps.filter((step) => step.state === "done").length;
   const total = totalSteps ?? steps.length;
   const progressValue = Math.round((completed / Math.max(total, 1)) * 100);
@@ -11846,16 +12659,19 @@ export function ChecklistDrawer({
       component="ChecklistDrawer"
       footer={
         <>
-          <Button className="tcrm-checklist-drawer__action tcrm-checklist-drawer__action--primary" disabled={controlsDisabled} onClick={onContinue} size="sm" variant="primary">
-            Continuar
+          <Button className="tcrm-checklist-drawer__action tcrm-checklist-drawer__action--primary" disabled={controlsDisabled} onClick={onPrimaryAction} size="sm" variant="primary">
+            {primaryActionLabel}
           </Button>
-          <Button className="tcrm-checklist-drawer__action" disabled={controlsDisabled} onClick={onCreateTask} size="sm" variant="secondary">
-            Criar tarefa
+          <Button className="tcrm-checklist-drawer__action" disabled={controlsDisabled} onClick={onAssign} size="sm" variant="secondary">
+            Atribuir
           </Button>
-          <Button className="tcrm-checklist-drawer__action" disabled={controlsDisabled || state === "completed"} onClick={onComplete} size="sm" variant="secondary">
+          <Button className="tcrm-checklist-drawer__action" disabled={controlsDisabled} onClick={onOpenTask} size="sm" variant="secondary">
+            Abrir tarefa
+          </Button>
+          <Button className="tcrm-checklist-drawer__action" disabled={controlsDisabled} onClick={onComplete} size="sm" variant="secondary">
             Concluir
           </Button>
-          <Button className="tcrm-checklist-drawer__action tcrm-checklist-drawer__action--origin" disabled={controlsDisabled} onClick={onOpenOrigin} size="sm" variant="secondary">
+          <Button className="tcrm-checklist-drawer__action tcrm-checklist-drawer__action--origin" disabled={isLoading} onClick={onOpenOrigin} size="sm" variant="secondary">
             Abrir origem
           </Button>
         </>
@@ -11871,8 +12687,52 @@ export function ChecklistDrawer({
   );
 }
 
-export type CaseDrawerState = "open" | "blocked" | "resolved" | "loading";
-export type CaseDrawerAction = "open-origin" | "assume" | "delegate" | "create-task" | "request-approval" | "resolve" | "move-status" | "close" | "message" | "pause" | "cancel" | "reserve" | "do-not-contact" | "escalate" | "open-profile" | "open-conversation";
+export type CaseDrawerState =
+  | "open"
+  | "waiting"
+  | "blocked"
+  | "resolved"
+  | "loading"
+  | "risk-low"
+  | "risk-medium"
+  | "risk-high"
+  | "followed"
+  | "cancellation-open"
+  | "cancellation-saving"
+  | "cancellation-paused"
+  | "cancellation-cancelled"
+  | "cancellation-recovered"
+  | "reactivation-eligible"
+  | "reactivation-returning"
+  | "reactivation-do-not-contact"
+  | "reactivated"
+  | "complaint-severe"
+  | "complaint-waiting"
+  | "complaint-paused"
+  | "complaint-resolved";
+export type CaseDrawerAction =
+  | "open-origin"
+  | "assume"
+  | "delegate"
+  | "create-task"
+  | "create-case"
+  | "request-approval"
+  | "correct"
+  | "resolve"
+  | "move-status"
+  | "close"
+  | "message"
+  | "save"
+  | "pause"
+  | "pause-automation"
+  | "cancel"
+  | "start-return"
+  | "reserve"
+  | "do-not-contact"
+  | "classify"
+  | "escalate"
+  | "open-profile"
+  | "open-conversation";
 
 export interface CaseDrawerFact {
   id: string;
@@ -11954,7 +12814,6 @@ export interface CaseDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>,
   sections?: CaseDrawerSection[];
   footerActions?: CaseDrawerFooterAction[];
   density?: "default" | "compact";
-  widthVariant?: "default" | "wide";
   onAction?: (action: CaseDrawerAction) => void;
   onClose?: () => void;
 }
@@ -12017,7 +12876,6 @@ export function CaseDrawer({
   sections,
   footerActions = sourceCaseDrawerFooterActions,
   density = "default",
-  widthVariant = "default",
   onAction,
   onClose,
   className,
@@ -12026,8 +12884,13 @@ export function CaseDrawer({
   if (!open) return null;
 
   const isLoading = state === "loading";
-  const isBlocked = state === "blocked" || isLoading;
+  const isBlocked = state === "blocked";
   const resolved = state === "resolved";
+  const actionDisabled = (action: CaseDrawerFooterAction) =>
+    isLoading
+    || action.disabled
+    || (isBlocked && !["open-origin", "create-task", "correct"].includes(action.id))
+    || (resolved && action.id === "resolve");
   const sectionTitle = (label: React.ReactNode, index: number) => {
     if (!numberedSections) return label;
     return `${index}. ${String(label)}`;
@@ -12041,7 +12904,7 @@ export function CaseDrawer({
             action.variant === "primary" && "tcrm-case-drawer__action--primary",
             action.fullWidth && "tcrm-case-drawer__action--full"
           )}
-          disabled={isBlocked || action.disabled || (resolved && action.id === "resolve")}
+          disabled={actionDisabled(action)}
           key={action.id}
           leadingIcon={action.leadingIcon}
           onClick={() => emitCaseDrawerAction(action.id, onAction)}
@@ -12197,13 +13060,11 @@ export function CaseDrawer({
         "tcrm-case-drawer",
         `tcrm-case-drawer--${state}`,
         density === "compact" && "tcrm-case-drawer--compact",
-        widthVariant === "wide" && "tcrm-case-drawer--wide",
         numberedSections && "tcrm-case-drawer--numbered",
         className
       )}
       closeLabel="Fechar caso"
       component="CaseDrawer"
-      data-width-variant={widthVariant}
       footer={sections?.some((section) => section.kind === "actions") ? undefined : (
         <>
         {footerActions.map((action) => (
@@ -12213,7 +13074,7 @@ export function CaseDrawer({
               action.variant === "primary" && "tcrm-case-drawer__action--primary",
               action.fullWidth && "tcrm-case-drawer__action--full"
             )}
-            disabled={isBlocked || action.disabled || (resolved && action.id === "resolve")}
+            disabled={actionDisabled(action)}
             key={action.id}
             leadingIcon={action.leadingIcon}
             onClick={() => emitCaseDrawerAction(action.id, onAction)}
@@ -12251,8 +13112,9 @@ export function CaseDrawer({
   );
 }
 
-export type StudentDrawerState = "active" | "risk" | "sensitive" | "loading" | "blocked";
-export type StudentDrawerAction = "close" | "open-profile" | "message" | "create-task" | "note" | "update-data";
+export type StudentDrawerState = "active" | "paused" | "delinquent" | "risk" | "sensitive" | "loading" | "blocked";
+export type StudentDrawerAction = "close" | "open-profile" | "message" | "create-task" | "schedule" | "note" | "update-data";
+export type StudentDrawerFinanceStatus = "ok" | "pending" | "overdue";
 
 export interface StudentDrawerFact {
   id: string;
@@ -12274,6 +13136,13 @@ export interface StudentDrawerPendingItem {
   label: React.ReactNode;
 }
 
+export interface StudentDrawerFinance {
+  status: StudentDrawerFinanceStatus;
+  statusLabel?: React.ReactNode;
+  lastPayment?: React.ReactNode;
+  amount?: React.ReactNode;
+}
+
 export interface StudentDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title" | "onSelect"> {
   open?: boolean;
   state?: StudentDrawerState;
@@ -12283,6 +13152,7 @@ export interface StudentDrawerProps extends Omit<React.HTMLAttributes<HTMLElemen
   facts?: StudentDrawerFact[];
   classes?: StudentDrawerClassItem[];
   pendingItems?: StudentDrawerPendingItem[];
+  finance?: StudentDrawerFinance;
   onAction?: (action: StudentDrawerAction) => void;
   onClose?: () => void;
 }
@@ -12305,6 +13175,13 @@ const sourceStudentDrawerPending: StudentDrawerPendingItem[] = [
   { id: "extra-class", label: "Confirmar disponibilidade para aula extra" }
 ];
 
+const sourceStudentDrawerFinance: StudentDrawerFinance = {
+  status: "pending",
+  statusLabel: "pagamento pendente",
+  lastPayment: "05/04/2024",
+  amount: "R$ 199.00"
+};
+
 function emitStudentDrawerAction(action: StudentDrawerAction, onAction?: (action: StudentDrawerAction) => void, handler?: () => void) {
   handler?.();
   onAction?.(action);
@@ -12315,10 +13192,11 @@ export function StudentDrawer({
   state = "active",
   name = "Ana Paula Martins",
   avatarSrc,
-  statusLabel = "Ativa",
+  statusLabel,
   facts = sourceStudentDrawerFacts,
   classes = sourceStudentDrawerClasses,
   pendingItems = sourceStudentDrawerPending,
+  finance = sourceStudentDrawerFinance,
   onAction,
   onClose,
   className,
@@ -12329,14 +13207,25 @@ export function StudentDrawer({
   const isLoading = state === "loading";
   const isBlocked = state === "blocked" || isLoading;
   const riskMode = state === "risk";
+  const statusMode = state === "paused" ? "paused" : state === "delinquent" ? "delinquent" : riskMode ? "risk" : "active";
+  const resolvedStatusLabel = statusLabel ?? ({
+    active: "Ativa",
+    paused: "Pausada",
+    delinquent: "Inadimplente",
+    risk: "Em risco",
+    sensitive: "Atenção",
+    loading: "Carregando",
+    blocked: "Bloqueada"
+  } satisfies Record<StudentDrawerState, React.ReactNode>)[state];
+  const financeStatusLabel = finance.statusLabel ?? ({ ok: "em dia", pending: "pagamento pendente", overdue: "em atraso" } satisfies Record<StudentDrawerFinanceStatus, React.ReactNode>)[finance.status];
 
   const drawerHeader = (
     <header className="tcrm-student-drawer__header">
       <Avatar className="tcrm-student-drawer__avatar" name={String(name)} size="lg" src={avatarSrc} />
       <div>
         <h2>{name}</h2>
-        <Chip className={cn("tcrm-student-drawer__status", riskMode && "tcrm-student-drawer__status--risk")} showDot={false}>
-          {riskMode ? "Em risco" : statusLabel}
+        <Chip className={cn("tcrm-student-drawer__status", `tcrm-student-drawer__status--${statusMode}`)} showDot={false}>
+          {resolvedStatusLabel}
         </Chip>
       </div>
       <IconButton className="tcrm-student-drawer__close" disabled={isLoading} icon="x" label="Fechar aluno" onClick={() => emitStudentDrawerAction("close", onAction, onClose)} size="sm" variant="default" />
@@ -12350,7 +13239,8 @@ export function StudentDrawer({
       </Button>
       <p>Mais informações, histórico e documentos</p>
       <Button className="tcrm-student-drawer__action" disabled={isBlocked} leadingIcon="whatsapp" onClick={() => emitStudentDrawerAction("message", onAction)} size="sm" variant="secondary">Enviar mensagem</Button>
-      <Button className="tcrm-student-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitStudentDrawerAction("create-task", onAction)} size="sm" variant="secondary">Criar tarefa</Button>
+      <Button className="tcrm-student-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitStudentDrawerAction("schedule", onAction)} size="sm" variant="secondary">Agendar</Button>
+      <Button className="tcrm-student-drawer__action" disabled={isBlocked} leadingIcon="clipboard" onClick={() => emitStudentDrawerAction("create-task", onAction)} size="sm" variant="secondary">Criar tarefa</Button>
       <Button className="tcrm-student-drawer__action" disabled={isBlocked} leadingIcon="clipboard" onClick={() => emitStudentDrawerAction("note", onAction)} size="sm" variant="secondary">Registrar nota</Button>
       <Button className="tcrm-student-drawer__action" disabled={isBlocked} leadingIcon="edit" onClick={() => emitStudentDrawerAction("update-data", onAction)} size="sm" variant="secondary">Atualizar dados</Button>
     </div>
@@ -12395,8 +13285,8 @@ export function StudentDrawer({
       <section className="tcrm-student-drawer__section tcrm-student-drawer__finance" aria-label="Financeiro">
         <h3>Financeiro</h3>
         <dl>
-          <div><dt>Status</dt><dd><Chip className="tcrm-student-drawer__payment-chip" showDot={false}>{riskMode ? "em atraso" : "pagamento pendente"}</Chip></dd></div>
-          <div><dt>Último pagamento</dt><dd>05/04/2024 <span>R$ 199.00</span></dd></div>
+          <div><dt>Status</dt><dd><Chip className={cn("tcrm-student-drawer__payment-chip", `is-${finance.status}`)} showDot={false}>{financeStatusLabel}</Chip></dd></div>
+          <div><dt>Último pagamento</dt><dd>{finance.lastPayment ?? "—"} {finance.amount ? <span>{finance.amount}</span> : null}</dd></div>
         </dl>
       </section>
 
@@ -12423,7 +13313,7 @@ export function StudentDrawer({
   );
 }
 
-export type ClassDrawerState = "open" | "calling" | "saved" | "blocked" | "loading";
+export type ClassDrawerState = "open" | "conflict" | "calling" | "saved" | "blocked" | "loading";
 export type AttendanceStatus = "pending" | "present" | "warned" | "no-show" | "replacement";
 export type ClassDrawerAction =
   | "close"
@@ -12432,6 +13322,8 @@ export type ClassDrawerAction =
   | "create-task"
   | "correct-later"
   | "open-schedule"
+  | "open-class"
+  | "view-demand"
   | "open-grid"
   | "move-student"
   | "notify-class"
@@ -12773,8 +13665,45 @@ export function ClassDrawer({
   );
 }
 
-export type PaymentDrawerState = "due" | "overdue" | "promise" | "paid" | "failed" | "loading" | "blocked";
-export type PaymentDrawerAction = "close" | "send-reminder" | "open-charge" | "register-promise" | "copy-pix-link" | "open-conversation" | "mark-paid" | "create-task" | "open-student";
+export type PaymentDrawerState =
+  | "open"
+  | "due"
+  | "overdue"
+  | "promise"
+  | "reconciliation"
+  | "reconciled"
+  | "dispute"
+  | "paid"
+  | "failed"
+  | "loading"
+  | "blocked";
+export type PaymentDrawerAction =
+  | "close"
+  | "send-reminder"
+  | "open-charge"
+  | "register-promise"
+  | "move-stage"
+  | "approve-receipt"
+  | "copy-pix-link"
+  | "open-conversation"
+  | "mark-paid"
+  | "confirm-payment"
+  | "reconcile"
+  | "resolve-dispute"
+  | "open-receipt"
+  | "export-movement"
+  | "create-task"
+  | "open-student";
+
+export interface PaymentDrawerActionConfig {
+  id: PaymentDrawerAction;
+  label: React.ReactNode;
+  leadingIcon?: IconName;
+  trailingIcon?: IconName;
+  variant?: "primary" | "secondary";
+  placement?: "primary" | "grid" | "footer";
+  disabled?: boolean;
+}
 
 export interface PaymentDrawerFact {
   id: string;
@@ -12803,6 +13732,7 @@ export interface PaymentDrawerProps extends Omit<React.HTMLAttributes<HTMLElemen
   history?: PaymentDrawerHistoryItem[];
   copilotSuggestion?: React.ReactNode;
   markPaidDisabled?: boolean;
+  actions?: PaymentDrawerActionConfig[];
   onAction?: (action: PaymentDrawerAction) => void;
   onClose?: () => void;
 }
@@ -12848,6 +13778,7 @@ export function PaymentDrawer({
   history = sourcePaymentDrawerHistory,
   copilotSuggestion = <>Copiloto, tudo bem? Identificamos que sua mensalidade de R$ 420,00 venceu há 2 dias. Posso te lembrar o link de pagamento?</>,
   markPaidDisabled = false,
+  actions,
   onAction,
   onClose,
   className,
@@ -12858,10 +13789,34 @@ export function PaymentDrawer({
   const isLoading = state === "loading";
   const isBlocked = state === "blocked" || isLoading;
   const isPaid = state === "paid";
+  const isReconciled = state === "reconciled";
   const isFailed = state === "failed";
-  const isDue = state === "due";
+  const isDue = state === "due" || state === "open";
   const isMovement = variant === "movement";
   const effectiveStatus = isPaid ? "Pago" : isFailed ? "Falha" : statusLabel;
+  const defaultActions: PaymentDrawerActionConfig[] = isMovement
+    ? [
+        { id: "send-reminder", label: "Enviar lembrete", leadingIcon: "tag", placement: "primary", variant: "primary" },
+        { id: "copy-pix-link", label: "Copiar link Pix", leadingIcon: "link" },
+        { id: "open-conversation", label: "Abrir conversa", leadingIcon: "whatsapp" },
+        { id: "mark-paid", label: "Marcar como pago", leadingIcon: "checkCircle" },
+        { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+        { id: "open-student", label: "Abrir aluno", leadingIcon: "user", trailingIcon: "arrowRight", placement: "footer" }
+      ]
+    : [
+        { id: "send-reminder", label: "Enviar lembrete", leadingIcon: "tag", placement: "primary", variant: "primary" },
+        { id: "open-charge", label: "Abrir cobrança", leadingIcon: "whatsapp" },
+        { id: "register-promise", label: "Registrar promessa", leadingIcon: "calendar" },
+        { id: "mark-paid", label: "Marcar como pago", leadingIcon: "checkCircle" },
+        { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+        { id: "open-student", label: "Abrir aluno", leadingIcon: "user", trailingIcon: "arrowRight", placement: "footer" }
+      ];
+  const effectiveActions = actions ?? defaultActions;
+  const actionDisabled = (action: PaymentDrawerActionConfig) =>
+    isBlocked || action.disabled || ((isPaid || isReconciled || markPaidDisabled) && ["mark-paid", "confirm-payment", "reconcile", "resolve-dispute"].includes(action.id));
+  const primaryActions = effectiveActions.filter((action) => action.placement === "primary");
+  const gridActions = effectiveActions.filter((action) => !action.placement || action.placement === "grid");
+  const footerActions = effectiveActions.filter((action) => action.placement === "footer");
 
   return (
     <CrmDrawer
@@ -12873,24 +13828,12 @@ export function PaymentDrawer({
       footer={(
         <div className="tcrm-payment-drawer__footer">
           <h3>{isMovement ? "Ações" : "Ações principais"}</h3>
-          <Button className="tcrm-payment-drawer__primary" disabled={isBlocked} leadingIcon="tag" onClick={() => emitPaymentDrawerAction("send-reminder", onAction)} size="sm" variant="primary">Enviar lembrete</Button>
-          <div className="tcrm-payment-drawer__actions">
-            {isMovement ? (
-              <>
-                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="link" onClick={() => emitPaymentDrawerAction("copy-pix-link", onAction)} size="sm" variant="secondary">Copiar link Pix</Button>
-                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="whatsapp" onClick={() => emitPaymentDrawerAction("open-conversation", onAction)} size="sm" variant="secondary">Abrir conversa</Button>
-              </>
-            ) : (
-              <>
-                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="whatsapp" onClick={() => emitPaymentDrawerAction("open-charge", onAction)} size="sm" variant="secondary">Abrir cobrança</Button>
-                <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitPaymentDrawerAction("register-promise", onAction)} size="sm" variant="secondary">Registrar promessa</Button>
-              </>
-            )}
-            <Button className="tcrm-payment-drawer__action" disabled={isBlocked || isPaid || markPaidDisabled} leadingIcon="checkCircle" onClick={() => emitPaymentDrawerAction("mark-paid", onAction)} size="sm" variant="secondary">Marcar como pago</Button>
-            <Button className="tcrm-payment-drawer__action" disabled={isBlocked} leadingIcon="calendar" onClick={() => emitPaymentDrawerAction("create-task", onAction)} size="sm" variant="secondary">Criar tarefa</Button>
-          </div>
+          {primaryActions.map((action) => <Button className="tcrm-payment-drawer__primary" disabled={actionDisabled(action)} key={action.id} leadingIcon={action.leadingIcon} onClick={() => emitPaymentDrawerAction(action.id, onAction)} size="sm" trailingIcon={action.trailingIcon} variant={action.variant ?? "primary"}>{action.label}</Button>)}
+          {gridActions.length > 0 ? <div className="tcrm-payment-drawer__actions">
+            {gridActions.map((action) => <Button className="tcrm-payment-drawer__action" disabled={actionDisabled(action)} key={action.id} leadingIcon={action.leadingIcon} onClick={() => emitPaymentDrawerAction(action.id, onAction)} size="sm" trailingIcon={action.trailingIcon} variant={action.variant ?? "secondary"}>{action.label}</Button>)}
+          </div> : null}
           {!isMovement ? <h3>Ação secundária</h3> : null}
-          <Button className="tcrm-payment-drawer__student" disabled={isBlocked} leadingIcon="user" onClick={() => emitPaymentDrawerAction("open-student", onAction)} size="sm" trailingIcon="arrowRight" variant="secondary">Abrir aluno</Button>
+          {footerActions.map((action) => <Button className="tcrm-payment-drawer__student" disabled={actionDisabled(action)} key={action.id} leadingIcon={action.leadingIcon} onClick={() => emitPaymentDrawerAction(action.id, onAction)} size="sm" trailingIcon={action.trailingIcon} variant={action.variant ?? "secondary"}>{action.label}</Button>)}
         </div>
       )}
       headerClassName="tcrm-payment-drawer__header"
@@ -12899,7 +13842,7 @@ export function PaymentDrawer({
       onClose={() => emitPaymentDrawerAction("close", onAction, onClose)}
       state={state}
       status={(
-          <span className={cn("tcrm-payment-drawer__status-label", isDue && "tcrm-payment-drawer__status-label--due", isPaid && "tcrm-payment-drawer__status-label--paid", isFailed && "tcrm-payment-drawer__status-label--failed")}>
+          <span className={cn("tcrm-payment-drawer__status-label", isDue && "tcrm-payment-drawer__status-label--due", (isPaid || isReconciled) && "tcrm-payment-drawer__status-label--paid", isFailed && "tcrm-payment-drawer__status-label--failed")}>
           {effectiveStatus}
         </span>
       )}
@@ -12944,9 +13887,9 @@ export function PaymentDrawer({
   );
 }
 
-export type ReplacementDrawerState = "requested" | "scheduled" | "blocked" | "loading";
+export type ReplacementDrawerState = "requested" | "no-vacancy" | "conflict" | "waiting" | "expired" | "scheduled" | "consumed" | "blocked" | "loading";
 export type ReplacementFitTone = "compatible" | "confirmation" | "conflict";
-export type ReplacementDrawerAction = "close" | "reserve-slot" | "send-invite" | "create-task" | "open-conversation" | "open-original-class" | "copy-suggestion" | "cancel";
+export type ReplacementDrawerAction = "close" | "find-fit" | "reserve-slot" | "send-invite" | "consume-credit" | "create-task" | "open-conversation" | "open-original-class" | "copy-suggestion" | "cancel";
 
 export interface ReplacementDrawerFact {
   id: string;
@@ -13018,7 +13961,21 @@ export function ReplacementDrawer({
 
   const isLoading = state === "loading";
   const isBlocked = state === "blocked" || isLoading;
-  const isScheduled = state === "scheduled";
+  const isConsumed = state === "consumed";
+  const isExpired = state === "expired";
+  const hasSelectedOption = options.some((option) => option.selected);
+  const mutationDisabled = isBlocked || isExpired || isConsumed;
+  const resolvedStatusLabel = ({
+    requested: statusLabel,
+    "no-vacancy": "Sem vaga",
+    conflict: "Conflito",
+    waiting: "Aguardando resposta",
+    expired: "Vencida",
+    scheduled: "Agendada",
+    consumed: "Crédito consumido",
+    blocked: "Bloqueada",
+    loading: "Carregando"
+  } satisfies Record<ReplacementDrawerState, React.ReactNode>)[state];
 
   return (
     <CrmDrawer
@@ -13029,14 +13986,16 @@ export function ReplacementDrawer({
       eyebrow="Reposição selecionada"
       footer={(
         <div className="tcrm-replacement-drawer__footer">
-          <Button className="tcrm-replacement-drawer__primary" disabled={isBlocked} onClick={() => emitReplacementDrawerAction("reserve-slot", onAction)} size="sm" variant="primary">Reservar vaga</Button>
+          <Button className="tcrm-replacement-drawer__primary" disabled={mutationDisabled || !hasSelectedOption || state === "waiting"} onClick={() => emitReplacementDrawerAction("reserve-slot", onAction)} size="sm" variant="primary">Reservar vaga</Button>
           <div className="tcrm-replacement-drawer__actions">
-            <Button className="tcrm-replacement-drawer__action" disabled={isBlocked} onClick={() => emitReplacementDrawerAction("send-invite", onAction)} size="sm" variant="secondary">Enviar convite</Button>
-            <Button className="tcrm-replacement-drawer__action" disabled={isBlocked} onClick={() => emitReplacementDrawerAction("create-task", onAction)} size="sm" variant="secondary">Criar tarefa</Button>
+            <Button className="tcrm-replacement-drawer__action" disabled={isBlocked || isConsumed} onClick={() => emitReplacementDrawerAction("find-fit", onAction)} size="sm" variant="secondary">Encontrar encaixe</Button>
+            <Button className="tcrm-replacement-drawer__action" disabled={mutationDisabled || !hasSelectedOption || state === "waiting"} onClick={() => emitReplacementDrawerAction("send-invite", onAction)} size="sm" variant="secondary">Enviar convite</Button>
+            <Button className="tcrm-replacement-drawer__action" disabled={isBlocked || state !== "scheduled"} onClick={() => emitReplacementDrawerAction("consume-credit", onAction)} size="sm" variant="secondary">Consumir crédito</Button>
+            <Button className="tcrm-replacement-drawer__action" disabled={mutationDisabled} onClick={() => emitReplacementDrawerAction("create-task", onAction)} size="sm" variant="secondary">Criar tarefa</Button>
             <Button className="tcrm-replacement-drawer__action" disabled={isBlocked} onClick={() => emitReplacementDrawerAction("open-conversation", onAction)} size="sm" variant="secondary">Abrir conversa</Button>
             <Button className="tcrm-replacement-drawer__action" disabled={isBlocked} onClick={() => emitReplacementDrawerAction("open-original-class", onAction)} size="sm" variant="secondary">Abrir aula original</Button>
           </div>
-          <Button className="tcrm-replacement-drawer__cancel" disabled={isBlocked} onClick={() => emitReplacementDrawerAction("cancel", onAction)} size="sm" variant="secondary">Marcar como cancelada</Button>
+          <Button className="tcrm-replacement-drawer__cancel" disabled={mutationDisabled} onClick={() => emitReplacementDrawerAction("cancel", onAction)} size="sm" variant="secondary">Marcar como cancelada</Button>
         </div>
       )}
       headerClassName="tcrm-replacement-drawer__header"
@@ -13053,7 +14012,7 @@ export function ReplacementDrawer({
               <Icon name={fact.icon} size="13px" />
               <dt>{fact.label}</dt>
               <dd>
-                {fact.id === "status" ? (isScheduled ? "Agendada" : statusLabel) : fact.value}
+                {fact.id === "status" ? resolvedStatusLabel : fact.value}
                 {fact.helper ? <small>{fact.helper}</small> : null}
               </dd>
             </div>
@@ -13062,13 +14021,13 @@ export function ReplacementDrawer({
 
         <section className="tcrm-replacement-drawer__options" aria-label="Opções de encaixe">
           <h3>Opções de encaixe</h3>
-          <ul>
+          {options.length > 0 ? <ul>
             {options.map((option) => (
               <li key={option.id}>
                 <button
                   aria-pressed={Boolean(option.selected)}
                   className={cn("tcrm-replacement-drawer__option", option.selected && "is-selected", `tcrm-replacement-drawer__option--${option.tone}`)}
-                  disabled={isBlocked}
+                  disabled={mutationDisabled || state === "waiting"}
                   onClick={() => onOptionSelect?.(option)}
                   type="button"
                 >
@@ -13083,7 +14042,7 @@ export function ReplacementDrawer({
                 </button>
               </li>
             ))}
-          </ul>
+          </ul> : <EmptyState description="Tente ampliar horários, turma ou validade do crédito." title="Nenhum encaixe compatível" />}
         </section>
 
         <section className="tcrm-replacement-drawer__invite" aria-label="Sugestão de convite">
@@ -13105,12 +14064,30 @@ export function ReplacementDrawer({
   );
 }
 
-export type LeadDrawerState = "interested" | "trial" | "enrollment" | "lost" | "loading" | "blocked";
+export type LeadDrawerState =
+  | "interested"
+  | "new"
+  | "no-slot"
+  | "ready"
+  | "trial"
+  | "trial-scheduled"
+  | "trial-missed"
+  | "trial-convert"
+  | "enrollment"
+  | "enrollment-missing"
+  | "enrollment-payment"
+  | "enrollment-ready"
+  | "enrollment-converted"
+  | "lost"
+  | "loading"
+  | "blocked";
 export type LeadDrawerAction =
   | "close"
   | "open-conversation"
+  | "qualify"
   | "schedule-trial"
   | "create-follow-up"
+  | "create-task"
   | "move-stage"
   | "start-enrollment"
   | "mark-lost"
@@ -13121,6 +14098,8 @@ export type LeadDrawerAction =
   | "mark-attended"
   | "mark-absence"
   | "request-data"
+  | "validate-enrollment"
+  | "charge-payment"
   | "choose-first-class"
   | "convert-student";
 
@@ -13282,11 +14261,11 @@ export function LeadDrawer({
                 state: item.state ?? (item.checked ? "complete" : "incomplete"),
                 title: item.label
               }))}
-              onAction={(itemId) => {
+              onAction={onChecklistToggle ? (itemId) => {
                 const item = checklistItems.find((candidate) => candidate.id === itemId);
                 if (!item || isBlocked || item.disabled) return;
-                onChecklistToggle?.(item, !item.checked);
-              }}
+                onChecklistToggle(item, !item.checked);
+              } : undefined}
               title={checklistTitle ?? "Checklist"}
             />
           )
@@ -13852,6 +14831,18 @@ export function SupportAgentPanel({
 }
 
 export type SupportTicketDrawerState = "open" | "answered" | "access active" | "loading" | "blocked";
+export type SupportTicketDrawerAction =
+  | "reply"
+  | "attach"
+  | "request-access"
+  | "revoke-access"
+  | "import"
+  | "audit"
+  | "resolve"
+  | "use-grant"
+  | "reply-studio"
+  | "tenant"
+  | "revoke";
 
 export interface SupportTicketPanelFact {
   id: string;
@@ -13878,7 +14869,7 @@ export interface SupportTicketDrawerProps extends Omit<React.HTMLAttributes<HTML
   summary?: React.ReactNode;
   messages?: SupportTicketPanelMessage[];
   onClose?: () => void;
-  onAction?: (actionId: string) => void;
+  onAction?: (actionId: SupportTicketDrawerAction) => void;
 }
 
 export function SupportTicketDrawer({
@@ -13927,7 +14918,18 @@ export function SupportTicketDrawer({
 
 export type TenantSecurityDrawerState = "security review" | "grant access" | "revoked" | "allowed" | "denied" | "warning" | "loading" | "blocked" | "closed";
 
-export type TenantSummaryDrawerState = "active" | "risk" | "loading" | "blocked" | "closed";
+export type TenantSummaryDrawerState = "active" | "degraded" | "tenant-blocked" | "risk" | "loading" | "blocked" | "closed";
+export type TenantSummaryDrawerGrantState = "none" | "pending" | "active" | "revoked";
+export type TenantSummaryDrawerAction =
+  | "open-tenant"
+  | "support"
+  | "grants"
+  | "billing"
+  | "request-grant"
+  | "grant-access"
+  | "revoke-access"
+  | "audit"
+  | "note";
 
 export interface TenantSummaryDrawerFact {
   id: string;
@@ -13946,12 +14948,13 @@ export interface TenantSummaryDrawerActivity {
 export interface TenantSummaryDrawerProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
   open?: boolean;
   state?: TenantSummaryDrawerState;
+  grantState?: TenantSummaryDrawerGrantState;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   facts?: TenantSummaryDrawerFact[];
   activities?: TenantSummaryDrawerActivity[];
   onClose?: () => void;
-  onAction?: (actionId: string) => void;
+  onAction?: (actionId: TenantSummaryDrawerAction) => void;
 }
 
 const defaultTenantSummaryFacts: TenantSummaryDrawerFact[] = [
@@ -13977,6 +14980,7 @@ const defaultTenantSummaryActivities: TenantSummaryDrawerActivity[] = [
 export function TenantSummaryDrawer({
   open = true,
   state = "active",
+  grantState = "active",
   title = "Studio Vila Mariana",
   subtitle = "Cliente ativo da Taliya",
   facts = defaultTenantSummaryFacts,
@@ -13988,7 +14992,21 @@ export function TenantSummaryDrawer({
 }: TenantSummaryDrawerProps) {
   if (!open || state === "closed") return null;
   const disabled = state === "loading" || state === "blocked";
-  const isRisk = state === "risk";
+  const isTenantBlocked = state === "tenant-blocked";
+  const isDegraded = state === "degraded" || state === "risk";
+  const isRisk = isDegraded || isTenantBlocked;
+  const healthLabel = isTenantBlocked ? "bloqueado" : isDegraded ? "degradado" : "estável";
+  const healthTone: ComponentTone = isTenantBlocked ? "danger" : isDegraded ? "warning" : "success";
+  const healthCopy = isTenantBlocked
+    ? "O tenant está bloqueado e exige revisão de segurança, billing e incidentes antes de liberar acesso."
+    : isDegraded
+      ? "Há degradação em billing, cota, suporte ou operação."
+      : "Uso regular, billing em dia e suporte ativo em importação.";
+  const grantAction: { id: TenantSummaryDrawerAction; label: string; disabled?: boolean } = grantState === "active"
+    ? { id: "revoke-access", label: "Revogar acesso" }
+    : grantState === "pending"
+      ? { id: "grant-access", label: "Aprovar grant" }
+      : { id: "grant-access", label: "Conceder acesso" };
 
   const footer = (
     <div className="tcrm-tenant-summary-drawer__actions">
@@ -13996,8 +15014,8 @@ export function TenantSummaryDrawer({
       <div>
         {([
           ["support", "Ver suporte"], ["grants", "Ver grants"], ["billing", "Ver billing"],
-          ["request-grant", "Solicitar grant"], ["audit", "Ver auditoria"], ["note", "Adicionar nota interna"]
-        ] as Array<[string, string]>).map(([id, label]) => <Button disabled={disabled} key={id} onClick={() => onAction?.(id)} size="sm" variant="secondary">{label}</Button>)}
+          [grantAction.id, grantAction.label], ["audit", "Ver auditoria"], ["note", "Adicionar nota interna"]
+        ] as Array<[TenantSummaryDrawerAction, string]>).map(([id, label]) => <Button disabled={disabled || ((id === "grant-access" || id === "revoke-access") && isTenantBlocked)} key={id} onClick={() => onAction?.(id)} size="sm" variant="secondary">{label}</Button>)}
       </div>
     </div>
   );
@@ -14007,6 +15025,7 @@ export function TenantSummaryDrawer({
       aria-label="Resumo do tenant selecionado"
       className={cn("tcrm-tenant-summary-drawer", className)}
       component="TenantSummaryDrawer"
+      data-grant-state={grantState}
       footer={footer}
       header={(
         <header className="tcrm-tenant-summary-drawer__header">
@@ -14031,10 +15050,10 @@ export function TenantSummaryDrawer({
         ))}
       </dl>
       <section className="tcrm-tenant-summary-drawer__health">
-        <h3>Saúde da conta <Chip tone={isRisk ? "warning" : "success"}>{isRisk ? "requer atenção" : "estável"}</Chip></h3>
+        <h3>Saúde da conta <Chip tone={healthTone}>{healthLabel}</Chip></h3>
         <p>
-          <Icon name={isRisk ? "alert" : "shieldCheck"} size="18px" tone={isRisk ? "warning" : "success"} />
-          {isRisk ? "Há sinais de risco em billing, cota, suporte ou operação." : "Uso regular, billing em dia e suporte ativo em importação."}
+          <Icon name={isRisk ? "alert" : "shieldCheck"} size="18px" tone={healthTone} />
+          {healthCopy}
         </p>
       </section>
       <section className="tcrm-tenant-summary-drawer__security">
@@ -14048,7 +15067,7 @@ export function TenantSummaryDrawer({
       </section>
       <section className="tcrm-tenant-summary-drawer__copilot">
         <Icon name="sparkles" size="22px" tone="info" />
-        <div><h3>Copiloto interno</h3><p>{isRisk ? "Resumo: priorizar a revisão dos sinais de risco antes de executar ações no tenant." : "Resumo: acompanhar o ticket de importação antes do grant expirar. Não há incidente crítico neste tenant."}</p><small><Icon name="info" size="14px" />Apenas resume e prioriza. Não concede grant, não altera billing e não bloqueia tenant.</small></div>
+        <div><h3>Copiloto interno</h3><p>{isTenantBlocked ? "Resumo: revisar o incidente e as restrições antes de qualquer mudança de acesso." : isDegraded ? "Resumo: priorizar a recuperação dos sinais degradados antes de ampliar acesso." : "Resumo: acompanhar o ticket de importação antes do grant expirar. Não há incidente crítico neste tenant."}</p><small><Icon name="info" size="14px" />Apenas resume e prioriza. Não concede grant, não altera billing e não bloqueia tenant.</small></div>
       </section>
     </CrmDrawer>
   );
@@ -14172,8 +15191,10 @@ export function WeeklyHoursGrid({
       </header> : null}
       {variant === "schedule" ? (
         <div className="tcrm-weekly-hours-grid__schedule" role="grid" aria-readonly={disabled || undefined}>
-          <div className="tcrm-weekly-hours-grid__corner" />
-          {days.map((day) => <div className="tcrm-weekly-hours-grid__day" key={day} role="columnheader">{day}</div>)}
+          <div className="tcrm-weekly-hours-grid__header-row" role="row">
+            <div aria-label="Horário" className="tcrm-weekly-hours-grid__corner" role="columnheader" />
+            {days.map((day) => <div className="tcrm-weekly-hours-grid__day" key={day} role="columnheader">{day}</div>)}
+          </div>
           <div className="tcrm-weekly-hours-grid__schedule-axis" aria-hidden="true">
             {axis.map((item) => <span key={item}>{item}</span>)}
           </div>
@@ -14203,8 +15224,10 @@ export function WeeklyHoursGrid({
           ))}
         </div>
       ) : <div className="tcrm-weekly-hours-grid__matrix" role="grid" aria-readonly={disabled || undefined}>
-        <div className="tcrm-weekly-hours-grid__corner" />
-        {days.map((day) => <div className="tcrm-weekly-hours-grid__day" key={day} role="columnheader">{day}</div>)}
+        <div className="tcrm-weekly-hours-grid__header-row" role="row">
+          <div aria-label="Horário" className="tcrm-weekly-hours-grid__corner" role="columnheader" />
+          {days.map((day) => <div className="tcrm-weekly-hours-grid__day" key={day} role="columnheader">{day}</div>)}
+        </div>
         <div className="tcrm-weekly-hours-grid__axis" aria-hidden="true">
           {axis.map((item) => <span key={item}>{item}</span>)}
         </div>
@@ -14509,9 +15532,7 @@ export function InviteRow({
   return (
     <article
       aria-busy={isLoading || undefined}
-      aria-disabled={isDisabled || undefined}
       aria-label={`${row.name}, ${row.role}, ${row.status}`}
-      aria-selected={selected || undefined}
       className={cn(
         "tcrm-invite-row",
         onOpen && "tcrm-invite-row--interactive",
@@ -14522,12 +15543,20 @@ export function InviteRow({
       )}
       data-component="InviteRow"
       data-state={state}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      role={onOpen ? "button" : "row"}
-      tabIndex={onOpen && !isDisabled ? 0 : undefined}
+      role="listitem"
       {...props}
     >
+      {onOpen ? (
+        <Button
+          aria-label={`Abrir ${row.name}`}
+          aria-pressed={selected}
+          className="tcrm-invite-row__open"
+          disabled={isDisabled}
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
+          variant="ghost"
+        />
+      ) : null}
       <span className="tcrm-invite-row__person">
         <Avatar aria-hidden="true" className="tcrm-invite-row__avatar" name={row.name} size="sm" />
         <strong>{row.name}</strong>
@@ -16105,7 +17134,7 @@ export function PhonePreview({
         </span>
         <IconButton icon="moreVertical" label="Mais ações" size="sm" variant="ghost" />
       </header>
-      <main>
+      <div className="tcrm-phone-preview__body">
         {state === "loading" ? (
           <LoadingState className="tcrm-phone-preview__loading" title="Preparando conversa" variant="spinner" />
         ) : state === "blocked" ? (
@@ -16127,7 +17156,7 @@ export function PhonePreview({
             </Card>
           </>
         )}
-      </main>
+      </div>
       <div className="tcrm-phone-preview__composer">
         <Input aria-label="Mensagem" className="tcrm-phone-preview__composer-input" disabled leadingIcon="message" placeholder="Mensagem" fieldSize="sm" />
         <IconButton disabled={state === "loading"} icon="send" label="Enviar mensagem" size="lg" variant="selected" />
@@ -16404,6 +17433,7 @@ export function StudentHeader({
   avatarSrc,
   phone,
   email,
+  headingLevel = 2,
   variant = "default",
   studentId = "ID: 456871",
   responsible = "Nikki Olaw",
@@ -16418,6 +17448,7 @@ export function StudentHeader({
   avatarSrc?: string;
   phone?: React.ReactNode;
   email?: React.ReactNode;
+  headingLevel?: 1 | 2;
   variant?: "default" | "reference";
   studentId?: React.ReactNode;
   responsible?: React.ReactNode;
@@ -16431,13 +17462,14 @@ export function StudentHeader({
   const resolvedEmail = email ?? (variant === "reference" ? "joao.silva@email.com" : "ana.paula@email.com");
   const studentTags = tags ?? (variant === "reference" ? ["Aluno", "VIP"] : ["Plano Mensal", "Reformer Iniciante"]);
   const statusTags = ["pagamento pendente", "boa frequencia", "proxima aula marcada"];
+  const Heading = headingLevel === 1 ? "h1" : "h2";
 
   if (variant === "reference") {
     return (
       <Card className={cn("tcrm-student-header", "tcrm-student-header--reference", className)} data-component="StudentHeader" data-variant="reference">
         <Avatar name={resolvedName} size="lg" src={avatarSrc} />
         <div className="tcrm-student-header__body">
-          <div className="tcrm-student-header__identity"><h2>{resolvedName}</h2><Chip showDot={false} tone={toneForState(state)}>{state === "active" ? "Ativo" : state}</Chip></div>
+          <div className="tcrm-student-header__identity"><Heading>{resolvedName}</Heading><Chip showDot={false} tone={toneForState(state)}>{state === "active" ? "Ativo" : state}</Chip></div>
           <InlineGroup className="tcrm-student-header__tags" compact wrap>
             {studentTags.map((tag, index) => <Chip key={index} showDot={false}>{tag}</Chip>)}
             <Chip showDot={false}>Responsável principal: <strong>{responsible}</strong></Chip>
@@ -16459,7 +17491,7 @@ export function StudentHeader({
     <Card className={cn("tcrm-student-header", className)}>
       <Avatar name={resolvedName} size="2xl" src={avatarSrc} />
       <div className="tcrm-student-header__body">
-        <h2>{resolvedName}</h2>
+        <Heading>{resolvedName}</Heading>
         <InlineGroup className="tcrm-student-header__tags" compact wrap>
           <Chip showDot={false} tone={toneForState(state)}>{state === "active" ? "Ativa" : state}</Chip>
           {studentTags.map((tag, index) => (
@@ -17355,8 +18387,9 @@ export function EnrollmentChecklist({
           const itemKey = stateKey(item.state) || "incomplete";
           return (
             <button
-              aria-label="Abrir"
+              aria-label={typeof item.title === "string" ? `Revisar ${item.title}` : `Revisar item ${item.id}`}
               className={cn("tcrm-enrollment-checklist__item", `tcrm-enrollment-checklist__item--${itemKey}`)}
+              disabled={!onAction || item.state === "blocked"}
               key={item.id}
               onClick={() => onAction?.(item.id)}
               type="button"
@@ -17753,10 +18786,12 @@ export function SupportTicketPanel({
   summary?: React.ReactNode;
   messages?: SupportTicketPanelMessage[];
   onClose?: () => void;
-  onAction?: (actionId: string) => void;
+  onAction?: (actionId: SupportTicketDrawerAction) => void;
 }) {
   const key = stateKey(state) || "open";
   const isDisabled = key === "loading" || key === "blocked";
+  const hasActiveAccess = key === "access-active";
+  const isAnswered = key === "answered";
 
   if (variant === "internal") {
     return (
@@ -17829,7 +18864,7 @@ export function SupportTicketPanel({
   return (
     <section className={cn("tcrm-support-ticket-panel", "tcrm-support-ticket-panel--support", className)} data-state={key} aria-label={String(title)}>
       <header className="tcrm-support-ticket-panel__header">
-        <Chip className="tcrm-internal-status-chip tcrm-internal-status-chip--selected" showDot={false} tone="info">Ticket selecionado</Chip>
+        <Chip className="tcrm-internal-status-chip tcrm-internal-status-chip--selected" showDot={false} tone={isAnswered ? "success" : "info"}>{isAnswered ? "Ticket respondido" : "Ticket selecionado"}</Chip>
           <IconButton className="tcrm-support-ticket-panel__close" disabled={isDisabled} icon="x" label="Fechar ticket" onClick={onClose} size="sm" variant="subtle" />
         <h3>{title}</h3>
         <p>{subtitle}</p>
@@ -17860,15 +18895,15 @@ export function SupportTicketPanel({
       <section className="tcrm-support-ticket-panel__access">
         <div>
           <h4>Acesso temporário</h4>
-          <Chip className="tcrm-internal-status-chip tcrm-internal-status-chip--unauthorized" showDot={false} tone="danger">Não autorizado</Chip>
+          <Chip className={cn("tcrm-internal-status-chip", hasActiveAccess ? "tcrm-internal-status-chip--grant" : "tcrm-internal-status-chip--unauthorized")} showDot={false} tone={hasActiveAccess ? "success" : "danger"}>{hasActiveAccess ? "Autorizado" : "Não autorizado"}</Chip>
         </div>
-        <p><Icon name="lock" size="15px" />A Taliya pode solicitar acesso limitado se precisar investigar dados.</p>
-        <Button disabled={isDisabled} leadingIcon="link" onClick={() => onAction?.("access")} size="sm" variant="secondary">Autorizar acesso</Button>
+        <p><Icon name={hasActiveAccess ? "shieldCheck" : "lock"} size="15px" />{hasActiveAccess ? "Acesso limitado ativo, escopado e auditado." : "A Taliya pode solicitar acesso limitado se precisar investigar dados."}</p>
+        <Button disabled={isDisabled} leadingIcon={hasActiveAccess ? "x" : "link"} onClick={() => onAction?.(hasActiveAccess ? "revoke-access" : "request-access")} size="sm" variant="secondary">{hasActiveAccess ? "Revogar acesso" : "Autorizar acesso"}</Button>
       </section>
       <div className="tcrm-support-ticket-panel__actions">
         <Button disabled={isDisabled} leadingIcon="arrowLeft" onClick={() => onAction?.("reply")} size="sm" variant="primary">Responder</Button>
         <Button disabled={isDisabled} leadingIcon="link" onClick={() => onAction?.("attach")} size="sm" variant="secondary">Anexar arquivo</Button>
-        <Button aria-label="Autorizar acesso pelo rodapé" disabled={isDisabled} leadingIcon="lock" onClick={() => onAction?.("access")} size="sm" variant="secondary">Autorizar acesso</Button>
+        <Button aria-label={hasActiveAccess ? "Revogar acesso pelo rodapé" : "Autorizar acesso pelo rodapé"} disabled={isDisabled} leadingIcon={hasActiveAccess ? "x" : "lock"} onClick={() => onAction?.(hasActiveAccess ? "revoke-access" : "request-access")} size="sm" variant="secondary">{hasActiveAccess ? "Revogar acesso" : "Autorizar acesso"}</Button>
         <Button disabled={isDisabled} leadingIcon="upload" onClick={() => onAction?.("import")} size="sm" variant="secondary">Abrir importação</Button>
         <Button disabled={isDisabled} leadingIcon="shield" onClick={() => onAction?.("audit")} size="sm" variant="secondary">Ver auditoria</Button>
         <Button disabled={isDisabled} leadingIcon="checkCircle" onClick={() => onAction?.("resolve")} size="sm" variant="secondary">Marcar resolvido</Button>
@@ -18096,6 +19131,8 @@ export interface InternalOverviewDashboardFilter {
   label: React.ReactNode;
 }
 
+export type InternalOverviewDashboardState = "normal" | "degraded" | "critical" | "empty" | "loading";
+
 export type InternalShellDashboardRow = InternalOverviewDashboardRow;
 export type InternalShellDashboardCard = InternalOverviewDashboardCard;
 export type InternalShellActivityItem = InternalOverviewDashboardActivityItem;
@@ -18114,6 +19151,7 @@ export interface InternalOverviewDashboardProps extends Omit<React.HTMLAttribute
   activityActionLabel?: React.ReactNode;
   copilot?: InternalOverviewDashboardCopilot;
   children?: React.ReactNode;
+  state?: InternalOverviewDashboardState;
   fluid?: boolean;
   showFilters?: boolean;
   showHeader?: boolean;
@@ -18310,6 +19348,7 @@ export function InternalOverviewDashboard({
     note: "O copiloto interno apenas resume e prioriza. Não concede grant, não altera billing e não bloqueia tenant.",
     actionLabel: "Ver recomendações"
   },
+  state = "normal",
   fluid = false,
   showFilters = true,
   showHeader = true,
@@ -18320,8 +19359,14 @@ export function InternalOverviewDashboard({
   onCopilotAction,
   ...props
 }: InternalOverviewDashboardProps) {
+  const stateNotice = state === "critical"
+    ? { title: "Incidente crítico em investigação", description: "Billing e automações exigem acompanhamento imediato.", tone: "danger" as const }
+    : state === "degraded"
+      ? { title: "Operação degradada", description: "Alguns tenants apresentam falhas de integração ou pagamento.", tone: "warning" as const }
+      : null;
+
   return (
-    <section className={cn("tcrm-internal-shell", fluid && "tcrm-internal-shell--fluid", className)} aria-label={String(title)} {...props}>
+    <section aria-busy={state === "loading" || undefined} className={cn("tcrm-internal-shell", fluid && "tcrm-internal-shell--fluid", className)} data-state={state} aria-label={String(title)} {...props}>
       {showHeader ? (
         <PageHeader
           actions={actions}
@@ -18335,8 +19380,13 @@ export function InternalOverviewDashboard({
           {filters.map((filter) => <Button key={filter.id} onClick={() => onFilterSelect?.(filter)} size="sm" variant="secondary">{filter.label}</Button>)}
         </FilterBar>
       ) : null}
-      {children ?? (
+      {state === "loading" ? (
+        <LoadingState title="Carregando operação interna" />
+      ) : state === "empty" ? (
+        <EmptyState description="Leads, tenants, tickets e incidentes aparecem aqui quando houver atividade." icon="clipboard" title="Nenhuma atividade operacional" />
+      ) : children ?? (
         <>
+          {stateNotice ? <InlineAlert tone={stateNotice.tone} title={stateNotice.title}>{stateNotice.description}</InlineAlert> : null}
           <div className="tcrm-internal-shell__cards">
             {cards.map((card) => <InternalShellCard card={card} key={card.id} onCardAction={onCardAction} />)}
           </div>
@@ -18363,6 +19413,7 @@ export function InternalOverviewDashboard({
 
 export interface TenantDetailLayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   footerNote?: React.ReactNode;
+  headingLevel?: 1 | 2;
   securityOpen?: boolean;
   onAction?: (actionId: string) => void;
   onSecurityClose?: () => void;
@@ -18383,20 +19434,22 @@ export function TenantDetailLayout({
   children,
   className,
   footerNote = "Visão interna e segura da Taliya. Acesso e ações sensíveis são auditados. Grants são obrigatórios para diagnóstico em dados operacionais.",
+  headingLevel = 2,
   securityOpen = true,
   onAction,
   onSecurityClose,
   onSecurityOpen
 }: TenantDetailLayoutProps) {
+  const Heading = headingLevel === 1 ? "h1" : "h2";
   return (
     <section className={cn("tcrm-tenant-detail-layout", className)} aria-label="Detalhe do tenant">
-      <main className="tcrm-tenant-detail-layout__main">
+      <div className="tcrm-tenant-detail-layout__main">
         {children ?? (
           <>
             <header className="tcrm-tenant-detail-layout__header">
               <Button leadingIcon="arrowLeft" onClick={() => onAction?.("back-clients")} size="sm" variant="secondary">Voltar para clientes</Button>
               <div>
-                <h2>Studio Vila Mariana</h2>
+                <Heading>Studio Vila Mariana</Heading>
                 <p>Cliente ativo da Taliya · responsável Marina - CS</p>
               </div>
               <span><Chip tone="success">Ativo</Chip><Chip tone="info">Growth</Chip><Chip tone="success">Grant ativo</Chip></span>
@@ -18430,15 +19483,15 @@ export function TenantDetailLayout({
                 <Panel className="tcrm-tenant-detail-layout__users">
                   <h3><span>2.</span> Usuários do tenant <Button onClick={() => onAction?.("view-users")} size="sm" variant="ghost">Ver usuários</Button></h3>
                   <div className="tcrm-tenant-detail-layout__user-columns"><span>Usuário</span><span>Perfil</span><span>Status</span><span>Último acesso</span></div>
-                  {["Ana Souza", "Marina Lopes", "Sam Frank", "João Silva"].map((name, index) => <p key={name}><Avatar name={name} size="xs" />{name}<span>{index === 0 ? "Dona" : index === 1 ? "Admin" : index === 2 ? "Recepção" : "Professor"}</span><Chip tone="success">ativo</Chip><time>{index < 2 ? "hoje" : "2 dias"}</time></p>)}
+                  {["Ana Souza", "Marina Lopes", "Sam Frank", "João Silva"].map((name, index) => <div className="tcrm-tenant-detail-layout__user-row" key={name}><Avatar name={name} size="xs" />{name}<span>{index === 0 ? "Dona" : index === 1 ? "Admin" : index === 2 ? "Recepção" : "Professor"}</span><Chip tone="success">ativo</Chip><time>{index < 2 ? "hoje" : "2 dias"}</time></div>)}
                 </Panel>
                 <Panel className="tcrm-tenant-detail-layout__entitlements">
                   <h3><span>3.</span> Entitlements e uso <Button onClick={() => onAction?.("view-entitlements")} size="sm" variant="ghost">Ver entitlements</Button></h3>
-                  <p><Icon name="clock" size="15px" />Plano <strong>Growth</strong></p>
-                  <p><Icon name="users" size="15px" />Agentes <strong>3 slots · 3 ativos</strong></p>
-                  <p><Icon name="clock" size="15px" />Cota mensal <strong>68% usada</strong><ProgressBar value={68} tone="success" /></p>
-                  <p><Icon name="inbox" size="15px" />Pacote extra <strong>nenhum</strong></p>
-                  <p><Icon name="alert" size="15px" />Alertas <Chip tone="success">sem bloqueio</Chip></p>
+                  <div className="tcrm-tenant-detail-layout__entitlement-row"><Icon name="clock" size="15px" />Plano <strong>Growth</strong></div>
+                  <div className="tcrm-tenant-detail-layout__entitlement-row"><Icon name="users" size="15px" />Agentes <strong>3 slots · 3 ativos</strong></div>
+                  <div className="tcrm-tenant-detail-layout__entitlement-row"><Icon name="clock" size="15px" />Cota mensal <strong>68% usada</strong><ProgressBar value={68} tone="success" /></div>
+                  <div className="tcrm-tenant-detail-layout__entitlement-row"><Icon name="inbox" size="15px" />Pacote extra <strong>nenhum</strong></div>
+                  <div className="tcrm-tenant-detail-layout__entitlement-row"><Icon name="alert" size="15px" />Alertas <Chip tone="success">sem bloqueio</Chip></div>
                 </Panel>
                 <Panel className="tcrm-tenant-detail-layout__support"><h3><span>4.</span> Suporte e tickets <Button onClick={() => onAction?.("open-support")} size="sm" variant="ghost">Abrir suporte</Button></h3><p>Importação duplicou alunos <Chip tone="info">em análise</Chip><span>Marina</span></p><p>Dúvida sobre configuração de Pix <Chip tone="success">respondido</Chip><span>Marina</span></p></Panel>
                 <GrantAccessPanel onAction={(actionId) => onAction?.(`grant:${actionId}`)} />
@@ -18454,7 +19507,7 @@ export function TenantDetailLayout({
             { value: "auditoria", label: "Auditoria", content: <TenantDetailTabPanel actionId="open-audit" actionLabel="Ver auditoria" description="Ações sensíveis, acessos e mudanças recentes do tenant." onAction={onAction} title="Auditoria recente" /> }]} />
           </>
         )}
-      </main>
+      </div>
       {securityOpen ? <SecurityRulePanel onAction={(actionId) => { if (actionId === "close") onSecurityClose?.(); else onAction?.(`security:${actionId}`); }} /> : null}
       {footerNote ? <footer className="tcrm-tenant-detail-layout__footer"><Icon name="lock" size="12px" />{footerNote}</footer> : null}
     </section>
@@ -19366,7 +20419,7 @@ export function CrmWorklistTable<T extends { id: string }>({
   headingAction,
   headingDescription,
   loadingTitle = "Carregando lista",
-  minTableWidth,
+  minTableWidth = "var(--taliya-control-table-min-width)",
   onRowSelect,
   onSelectionChange,
   pageSizeLabel,
@@ -19989,7 +21042,6 @@ export interface CrmRecordDrawerProps extends Omit<React.HTMLAttributes<HTMLDivE
   tabsLabel?: string;
   actions?: CrmRecordDrawerAction[];
   blockedReason?: React.ReactNode;
-  inline?: boolean;
   onTabChange?: (tabId: string) => void;
   onOpenChange?: (open: boolean) => void;
   onAction?: (action: CrmRecordDrawerAction) => void;
@@ -20050,7 +21102,6 @@ export function CrmRecordDrawer({
       loading={isLoading}
       onOpenChange={onOpenChange}
       open={open}
-      size="md"
       title={title}
       headerMeta={meta}
       {...props}
@@ -20088,7 +21139,7 @@ export function CrmRecordDrawer({
 }
 
 export type ChecklistTableState = "source" | "loading" | "empty" | "blocked";
-export type ChecklistTableStatus = "progress" | "blocked" | "pending" | "review" | "done";
+export type ChecklistTableStatus = "progress" | "blocked" | "pending" | "overdue" | "review" | "done";
 
 export interface ChecklistTableOwner {
   name: React.ReactNode;
@@ -20132,6 +21183,7 @@ const checklistTableStatusLabel: Record<ChecklistTableStatus, string> = {
   progress: "Em andamento",
   blocked: "Bloqueado",
   pending: "Pendente",
+  overdue: "Atrasado",
   review: "Em revisão",
   done: "Concluído"
 };
@@ -20140,6 +21192,7 @@ const checklistTableStatusTone: Record<ChecklistTableStatus, ComponentTone> = {
   progress: "info",
   blocked: "danger",
   pending: "warning",
+  overdue: "danger",
   review: "paused",
   done: "success"
 };
@@ -20166,9 +21219,9 @@ const sourceChecklistTableRows: ChecklistTableRow[] = [
     type: "Agenda",
     progress: { completed: 4, total: 7 },
     owner: { name: "Lucas" },
-    deadline: <>Hoje<br />09:30</>,
+    deadline: <>Ontem<br />09:30</>,
     deadlineTone: "danger",
-    status: "blocked",
+    status: "overdue",
     nextStep: <>Resolver conflito<br />de sala</>,
     activity: "08:15"
   },
@@ -20367,7 +21420,7 @@ export function ChecklistTable({
 export type ApprovalTableState = "source" | "loading" | "empty" | "blocked";
 export type ApprovalTableType = "message" | "agenda" | "finance" | "announcement" | "agent" | "data";
 export type ApprovalTableRisk = "low" | "medium" | "high";
-export type ApprovalTableStatus = "pending" | "review" | "blocked";
+export type ApprovalTableStatus = "pending" | "review" | "blocked" | "expired" | "approved" | "rejected";
 
 export interface ApprovalTableRequester {
   name: React.ReactNode;
@@ -20430,13 +21483,19 @@ const approvalTableRiskLabel: Record<ApprovalTableRisk, string> = {
 const approvalTableStatusLabel: Record<ApprovalTableStatus, React.ReactNode> = {
   pending: "Pendente",
   review: "Em revisão",
-  blocked: <>Bloqueada<br />por política</>
+  blocked: <>Bloqueada<br />por política</>,
+  expired: "Expirada",
+  approved: "Aprovada",
+  rejected: "Rejeitada"
 };
 
 const approvalTableStatusTone: Record<ApprovalTableStatus, ComponentTone> = {
   pending: "warning",
   review: "info",
-  blocked: "danger"
+  blocked: "danger",
+  expired: "danger",
+  approved: "success",
+  rejected: "danger"
 };
 
 const sourceApprovalTableRows: ApprovalTableRow[] = [
@@ -20492,8 +21551,9 @@ const sourceApprovalTableRows: ApprovalTableRow[] = [
     requester: { name: <>Agente de<br />comunicação</>, icon: "user" },
     risk: "low",
     cost: "Cota 82%",
-    deadline: "Amanhã",
-    status: "pending",
+    deadline: "Expirou 08:00",
+    deadlineTone: "danger",
+    status: "expired",
     activity: <>Rascunho pronto<br />para envio</>
   },
   {
@@ -20521,7 +21581,7 @@ const sourceApprovalTableRows: ApprovalTableRow[] = [
     cost: "—",
     deadline: <>Hoje<br />16:00</>,
     deadlineTone: "danger",
-    status: "pending",
+    status: "approved",
     activity: <>Sugestão de<br />normalização</>
   }
 ];
@@ -20688,8 +21748,8 @@ export function ApprovalTable({
 }
 
 export type StudentTableState = "source" | "loading" | "empty" | "blocked";
-export type StudentTableStatus = "active" | "risk" | "noClass" | "inactive";
-export type StudentTableFinance = "ok" | "pending";
+export type StudentTableStatus = "active" | "paused" | "delinquent" | "risk" | "noClass" | "inactive";
+export type StudentTableFinance = "ok" | "pending" | "overdue";
 export type StudentTableRisk = "low" | "medium" | "high" | "none";
 
 export interface StudentTablePerson {
@@ -20733,6 +21793,8 @@ export interface StudentTableProps extends Omit<React.HTMLAttributes<HTMLElement
 
 const studentTableStatusLabel: Record<StudentTableStatus, string> = {
   active: "Ativa",
+  paused: "Pausada",
+  delinquent: "Inadimplente",
   risk: "Em risco",
   noClass: "Sem turma",
   inactive: "Inativa"
@@ -20740,6 +21802,8 @@ const studentTableStatusLabel: Record<StudentTableStatus, string> = {
 
 const studentTableStatusTone: Record<StudentTableStatus, ComponentTone> = {
   active: "success",
+  paused: "neutral",
+  delinquent: "danger",
   risk: "danger",
   noClass: "info",
   inactive: "neutral"
@@ -20747,12 +21811,20 @@ const studentTableStatusTone: Record<StudentTableStatus, ComponentTone> = {
 
 const studentTableFinanceLabel: Record<StudentTableFinance, React.ReactNode> = {
   ok: "OK",
-  pending: <>pagamento<br />pendente</>
+  pending: <>pagamento<br />pendente</>,
+  overdue: <>em<br />atraso</>
+};
+
+const studentTableFinanceAccessibleLabel: Record<StudentTableFinance, string> = {
+  ok: "OK",
+  pending: "Pagamento pendente",
+  overdue: "Em atraso"
 };
 
 const studentTableFinanceTone: Record<StudentTableFinance, ComponentTone> = {
   ok: "success",
-  pending: "warning"
+  pending: "warning",
+  overdue: "danger"
 };
 
 const studentTableRiskLabel: Record<StudentTableRisk, string> = {
@@ -20979,7 +22051,7 @@ export function StudentTable({
                 key: "finance",
                 header: "Financeiro",
                 sortable: true,
-                render: (row) => <Chip className={cn("tcrm-student-table__finance", `is-${row.finance}`)} showDot={false} tone={studentTableFinanceTone[row.finance]}>{studentTableFinanceLabel[row.finance]}</Chip>
+                render: (row) => <Chip aria-label={studentTableFinanceAccessibleLabel[row.finance]} className={cn("tcrm-student-table__finance", `is-${row.finance}`)} showDot={false} tone={studentTableFinanceTone[row.finance]}>{studentTableFinanceLabel[row.finance]}</Chip>
               },
               {
                 key: "risk",
@@ -21027,7 +22099,7 @@ export function StudentTable({
 }
 
 export type ReplacementTableState = "source" | "loading" | "empty" | "blocked";
-export type ReplacementTableStatus = "found" | "waiting" | "blocked" | "expiring" | "scheduled" | "pending" | "available";
+export type ReplacementTableStatus = "found" | "waiting" | "blocked" | "noVacancy" | "conflict" | "expiring" | "expired" | "scheduled" | "pending" | "available";
 export type ReplacementTableMode = "copilot" | "manual" | "autonomous" | "blocked";
 
 export interface ReplacementTableStudent {
@@ -21065,7 +22137,10 @@ const replacementTableStatusLabel: Record<ReplacementTableStatus, React.ReactNod
   found: "Opção encontrada",
   waiting: "Aguardando resposta",
   blocked: "Bloqueada por regra",
+  noVacancy: "Sem vaga",
+  conflict: "Conflito",
   expiring: "Expira amanhã",
+  expired: "Vencida",
   scheduled: "Agendada",
   pending: "Pendente",
   available: "Com opção"
@@ -21075,7 +22150,10 @@ const replacementTableStatusTone: Record<ReplacementTableStatus, ComponentTone> 
   found: "success",
   waiting: "warning",
   blocked: "danger",
+  noVacancy: "danger",
+  conflict: "danger",
   expiring: "warning",
+  expired: "danger",
   scheduled: "success",
   pending: "neutral",
   available: "success"
@@ -21319,6 +22397,22 @@ export interface OpportunityPanelHistoryItem {
   time: React.ReactNode;
 }
 
+export type OpportunityPanelState = "open" | "ownerless" | "assigned" | "resolved" | "loading" | "blocked";
+export type OpportunityPanelAction = "primary" | "enrollment" | "charge" | "conversation" | "task" | "no-action" | "more";
+
+export interface OpportunityPanelProps extends Omit<CrmSurfaceProps, "state"> {
+  state?: OpportunityPanelState;
+  description?: React.ReactNode;
+  facts?: OpportunityPanelFact[];
+  history?: OpportunityPanelHistoryItem[];
+  suggestion?: React.ReactNode;
+  notice?: React.ReactNode;
+  manualNotice?: React.ReactNode;
+  primaryActionLabel?: React.ReactNode;
+  onClose?: () => void;
+  onAction?: (actionId: OpportunityPanelAction) => void;
+}
+
 const defaultOpportunityPanelFacts: OpportunityPanelFact[] = [
   { id: "origin", label: "Origem", value: "Matrículas", icon: "folder" },
   { id: "value", label: "Valor estimado", value: "R$ 420", icon: "coins" },
@@ -21350,24 +22444,17 @@ export function OpportunityPanel({
   onClose,
   onAction,
   className
-}: CrmSurfaceProps & {
-  description?: React.ReactNode;
-  facts?: OpportunityPanelFact[];
-  history?: OpportunityPanelHistoryItem[];
-  suggestion?: React.ReactNode;
-  notice?: React.ReactNode;
-  manualNotice?: React.ReactNode;
-  primaryActionLabel?: React.ReactNode;
-  onClose?: () => void;
-  onAction?: (actionId: string) => void;
-}) {
+}: OpportunityPanelProps) {
   const key = stateKey(state) || "open";
+  const isDisabled = key === "loading" || key === "blocked" || key === "resolved";
+  const stateLabel = key === "resolved" ? "Oportunidade resolvida" : key === "ownerless" ? "Oportunidade sem dono" : key === "assigned" ? "Oportunidade atribuída" : "Oportunidade selecionada";
+  const stateTone: ComponentTone = key === "resolved" || key === "assigned" ? "success" : key === "ownerless" ? "warning" : "info";
 
   return (
-    <section className={cn("tcrm-opportunity-panel", className)} data-state={key} aria-label={String(title)}>
+    <section aria-busy={key === "loading" || undefined} className={cn("tcrm-opportunity-panel", className)} data-state={key} aria-label={String(title)}>
       <header className="tcrm-opportunity-panel__header">
-        <Chip className="tcrm-opportunity-chip tcrm-opportunity-chip--selected" showDot={false} tone="info">Oportunidade selecionada</Chip>
-        <IconButton className="tcrm-opportunity-panel__close" icon="x" label="Fechar oportunidade" onClick={onClose} size="sm" variant="subtle" />
+        <Chip className="tcrm-opportunity-chip tcrm-opportunity-chip--selected" showDot={false} tone={stateTone}>{stateLabel}</Chip>
+        <IconButton className="tcrm-opportunity-panel__close" disabled={key === "loading" || key === "blocked"} icon="x" label="Fechar oportunidade" onClick={onClose} size="sm" variant="subtle" />
         <h3>{title}</h3>
         <p>{description}</p>
       </header>
@@ -21401,13 +22488,13 @@ export function OpportunityPanel({
         <p>{manualNotice}</p>
       </section>
       <div className="tcrm-opportunity-panel__actions">
-        <Button leadingIcon="sliders" onClick={() => onAction?.("primary")} size="sm" variant="primary">{primaryActionLabel}</Button>
-        <Button leadingIcon="clipboard" onClick={() => onAction?.("enrollment")} size="sm" variant="secondary">Abrir matrícula</Button>
-        <Button leadingIcon="clipboard" onClick={() => onAction?.("charge")} size="sm" variant="secondary">Abrir cobrança</Button>
-        <Button leadingIcon="message" onClick={() => onAction?.("conversation")} size="sm" variant="secondary">Abrir conversa</Button>
-        <Button leadingIcon="checkCircle" onClick={() => onAction?.("task")} size="sm" variant="secondary">Criar tarefa</Button>
-        <Button leadingIcon="x" onClick={() => onAction?.("no-action")} size="sm" variant="secondary">Marcar sem ação</Button>
-        <Button leadingIcon="moreVertical" onClick={() => onAction?.("more")} size="sm" variant="secondary">Mais ações</Button>
+        <Button disabled={isDisabled} leadingIcon="sliders" onClick={() => onAction?.("primary")} size="sm" variant="primary">{primaryActionLabel}</Button>
+        <Button disabled={isDisabled} leadingIcon="clipboard" onClick={() => onAction?.("enrollment")} size="sm" variant="secondary">Abrir matrícula</Button>
+        <Button disabled={isDisabled} leadingIcon="clipboard" onClick={() => onAction?.("charge")} size="sm" variant="secondary">Abrir cobrança</Button>
+        <Button disabled={isDisabled} leadingIcon="message" onClick={() => onAction?.("conversation")} size="sm" variant="secondary">Abrir conversa</Button>
+        <Button disabled={isDisabled} leadingIcon="checkCircle" onClick={() => onAction?.("task")} size="sm" variant="secondary">Criar tarefa</Button>
+        <Button disabled={isDisabled} leadingIcon="x" onClick={() => onAction?.("no-action")} size="sm" variant="secondary">Marcar sem ação</Button>
+        <Button disabled={isDisabled} leadingIcon="moreVertical" onClick={() => onAction?.("more")} size="sm" variant="secondary">Mais ações</Button>
       </div>
     </section>
   );

@@ -1,0 +1,2212 @@
+{
+  "generatedAt": "2026-08-04T19:49:48.728Z",
+  "viewport": [
+    1440,
+    900
+  ],
+  "count": 73,
+  "rows": [
+    {
+      "surfaceId": "conta-basica",
+      "route": "Pre-CRM",
+      "families": [
+        "Access / Subscription shell"
+      ],
+      "image": "72_round-4.1Q_acesso-assinatura_signup-criar-conta-salvo-ajustes.png",
+      "storyId": "crm-image-coverage-access-subscription--image-72-signup",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "index": 1,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/01-crm-image-coverage-access-subscription--image-72-signup.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 11,
+      "drawerCount": 0,
+      "enabledButtonCount": 11,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 941,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-access-subscription--image-72-signup",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "conta-basica",
+      "route": "Pre-CRM",
+      "families": [
+        "Access / Subscription shell"
+      ],
+      "image": "73_round-4.1Q_acesso-assinatura_signin-entrar-salvo-ajustes.png",
+      "storyId": "crm-image-coverage-access-subscription--image-73-signin",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "index": 2,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/02-crm-image-coverage-access-subscription--image-73-signin.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 11,
+      "drawerCount": 0,
+      "enabledButtonCount": 11,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 941,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-access-subscription--image-73-signin",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "escolha-de-plano-checkout-taliya",
+      "route": "Pre-CRM + provedor externo",
+      "families": [
+        "Access / Subscription shell"
+      ],
+      "image": "74_round-4.1Q_acesso-assinatura_revisar-assinatura-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-74-review-subscription",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "index": 3,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/03-crm-image-coverage-access-subscription--image-74-review-subscription.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 11,
+      "drawerCount": 0,
+      "enabledButtonCount": 11,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 941,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-access-subscription--image-74-review-subscription",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "escolha-de-plano-checkout-taliya",
+      "route": "Pre-CRM + provedor externo",
+      "families": [
+        "Access / Subscription shell"
+      ],
+      "image": "75_round-4.1Q_acesso-assinatura_aguardando-confirmacao-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-75-pending-confirmation",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "index": 4,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/04-crm-image-coverage-access-subscription--image-75-pending-confirmation.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 8,
+      "drawerCount": 0,
+      "enabledButtonCount": 8,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 941,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-access-subscription--image-75-pending-confirmation",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "escolha-de-plano-checkout-taliya",
+      "route": "Pre-CRM + provedor externo",
+      "families": [
+        "Access / Subscription shell"
+      ],
+      "image": "76_round-4.1Q_acesso-assinatura_resolver-assinatura-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-76-resolve-subscription",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "index": 5,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/05-crm-image-coverage-access-subscription--image-76-resolve-subscription.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 8,
+      "drawerCount": 0,
+      "enabledButtonCount": 8,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 941,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-access-subscription--image-76-resolve-subscription",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "escolha-de-plano-checkout-taliya",
+      "route": "Pre-CRM + provedor externo",
+      "families": [
+        "Access / Subscription shell"
+      ],
+      "image": "77_round-4.1Q_acesso-assinatura_assinatura-confirmada-setup-guiado-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-77-confirmed-handoff",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "index": 6,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/06-crm-image-coverage-access-subscription--image-77-confirmed-handoff.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 7,
+      "drawerCount": 0,
+      "enabledButtonCount": 7,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 941,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-access-subscription--image-77-confirmed-handoff",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51A_round-4.1J_onboarding_shell-global-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 7,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/07-crm-image-coverage-setup--image-51-a-onboarding-shell-global.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 26,
+      "drawerCount": 0,
+      "enabledButtonCount": 26,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 738,
+        "width": 756.8046875,
+        "x": 240,
+        "y": 99
+      },
+      "title": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 8,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/08-crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 10,
+      "drawerCount": 0,
+      "enabledButtonCount": 10,
+      "errorCount": 0,
+      "mainCount": 0,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": null,
+      "title": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 9,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/09-crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 29,
+      "drawerCount": 0,
+      "enabledButtonCount": 29,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 770,
+        "width": 772.8046875,
+        "x": 232,
+        "y": 80
+      },
+      "title": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 10,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/10-crm-image-coverage-setup--image-51-d-onboarding-studio.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 32,
+      "drawerCount": 0,
+      "enabledButtonCount": 32,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 762,
+        "width": 772.8046875,
+        "x": 232,
+        "y": 88
+      },
+      "title": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 11,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/11-crm-image-coverage-setup--image-51-e-onboarding-equipe.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 28,
+      "drawerCount": 0,
+      "enabledButtonCount": 28,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 762,
+        "width": 772.8046875,
+        "x": 232,
+        "y": 88
+      },
+      "title": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 12,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/12-crm-image-coverage-setup--image-51-f-onboarding-canais.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 25,
+      "drawerCount": 0,
+      "enabledButtonCount": 25,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 762,
+        "width": 772.8046875,
+        "x": 232,
+        "y": 88
+      },
+      "title": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 13,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/13-crm-image-coverage-setup--image-51-g-onboarding-planos.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 69,
+      "drawerCount": 0,
+      "enabledButtonCount": 69,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 797,
+        "width": 786.8046875,
+        "x": 225,
+        "y": 68
+      },
+      "title": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 14,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/14-crm-image-coverage-setup--image-51-k-onboarding-pagamento.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 24,
+      "drawerCount": 0,
+      "enabledButtonCount": 24,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 797,
+        "width": 786.8046875,
+        "x": 225,
+        "y": 68
+      },
+      "title": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 15,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/15-crm-image-coverage-setup--image-51-h-onboarding-alunos.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 39,
+      "drawerCount": 0,
+      "enabledButtonCount": 39,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 770,
+        "width": 772.8046875,
+        "x": 232,
+        "y": 80
+      },
+      "title": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 16,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/16-crm-image-coverage-setup--image-51-i-onboarding-turmas.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 40,
+      "drawerCount": 0,
+      "enabledButtonCount": 40,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 770,
+        "width": 769.8046875,
+        "x": 231,
+        "y": 80
+      },
+      "title": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 17,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/17-crm-image-coverage-setup--image-51-j-onboarding-agenda.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 28,
+      "drawerCount": 0,
+      "enabledButtonCount": 28,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 770,
+        "width": 769.8046875,
+        "x": 231,
+        "y": 80
+      },
+      "title": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 18,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/18-crm-image-coverage-setup--image-51-l-onboarding-revisao.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 30,
+      "drawerCount": 0,
+      "enabledButtonCount": 30,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 807,
+        "width": 765.8046875,
+        "x": 228,
+        "y": 75
+      },
+      "title": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "onboarding-setup",
+      "route": "/onboarding/*",
+      "families": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "image": "78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+      "storyId": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+      "storyTitle": "CRM / Image Coverage / Setup",
+      "index": 19,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/19-crm-image-coverage-setup--image-78-onboarding-bem-vindo.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 17,
+      "drawerCount": 0,
+      "enabledButtonCount": 17,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 781,
+        "width": 948,
+        "x": 45,
+        "y": 103
+      },
+      "title": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "hoje",
+      "route": "/app/hoje",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "17_round-4.1A_hoje_01_acima-da-dobra.png.png",
+      "storyId": "crm-image-coverage-hoje--image-17-hoje-base",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "index": 20,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/20-crm-image-coverage-hoje--image-17-hoje-base.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 54,
+      "drawerCount": 0,
+      "enabledButtonCount": 54,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-hoje--image-17-hoje-base",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "hoje",
+      "route": "/app/hoje",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "18_round-4.1A_hoje_02_drawer-tarefa.png.png",
+      "storyId": "crm-image-coverage-hoje--image-18-hoje-drawer-tarefa",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "index": 21,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/21-crm-image-coverage-hoje--image-18-hoje-drawer-tarefa.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 63,
+      "drawerCount": 1,
+      "enabledButtonCount": 63,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-hoje--image-18-hoje-drawer-tarefa",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "hoje",
+      "route": "/app/hoje",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "19_round-4.1A_hoje_03_estado-critico-do-dia.png",
+      "storyId": "crm-image-coverage-hoje--image-19-hoje-estado-critico",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "index": 22,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/22-crm-image-coverage-hoje--image-19-hoje-estado-critico.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 54,
+      "drawerCount": 0,
+      "enabledButtonCount": 54,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-hoje--image-19-hoje-estado-critico",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "hoje",
+      "route": "/app/hoje",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "20_round-4.1A_hoje_04_historico-de-hoje.png.png",
+      "storyId": "crm-image-coverage-hoje--image-20-historico-de-hoje",
+      "storyTitle": "CRM / Image Coverage / Hoje",
+      "index": 23,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/23-crm-image-coverage-hoje--image-20-historico-de-hoje.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 65,
+      "drawerCount": 0,
+      "enabledButtonCount": 65,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": -909
+      },
+      "title": "crm-image-coverage-hoje--image-20-historico-de-hoje",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "inbox-conversas",
+      "route": "/app/inbox",
+      "families": [
+        "Three-pane conversation workspace"
+      ],
+      "image": "24_round-4.1D_inbox_01_conversa-aberta.png.png",
+      "storyId": "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta",
+      "storyTitle": "CRM / Image Coverage / Inbox",
+      "index": 24,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/24-crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 57,
+      "drawerCount": 0,
+      "enabledButtonCount": 57,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "alunos",
+      "route": "/app/alunos",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "27_round-4.1E_alunos_01_lista-perfil-resumido.png.png",
+      "storyId": "crm-image-coverage-alunos--image-27-lista-perfil-resumido",
+      "storyTitle": "CRM / Image Coverage / Alunos",
+      "index": 25,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/25-crm-image-coverage-alunos--image-27-lista-perfil-resumido.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 64,
+      "drawerCount": 1,
+      "enabledButtonCount": 64,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-alunos--image-27-lista-perfil-resumido",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "perfil-do-aluno",
+      "route": "/app/alunos/[id]",
+      "families": [
+        "Profile / Detail workspace"
+      ],
+      "image": "28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png",
+      "storyId": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+      "storyTitle": "CRM / Image Coverage / Alunos",
+      "index": 26,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/26-crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 43,
+      "drawerCount": 0,
+      "enabledButtonCount": 43,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "agenda",
+      "route": "/app/agenda",
+      "families": [
+        "Calendar / Schedule workspace"
+      ],
+      "image": "26_round-4.1F_agenda_01_calendario-operacional.png.png",
+      "storyId": "crm-image-coverage-agenda--image-26-agenda-calendario-operacional",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "index": 27,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/27-crm-image-coverage-agenda--image-26-agenda-calendario-operacional.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 77,
+      "drawerCount": 1,
+      "enabledButtonCount": 73,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agenda--image-26-agenda-calendario-operacional",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "grade",
+      "route": "/app/grade",
+      "families": [
+        "Calendar / Schedule workspace"
+      ],
+      "image": "36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png",
+      "storyId": "crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "index": 28,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/28-crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 45,
+      "drawerCount": 1,
+      "enabledButtonCount": 45,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "turmas",
+      "route": "/app/turmas",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "35_round-4.1F_turmas_01_lista-detalhe.png.png",
+      "storyId": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "index": 29,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/29-crm-image-coverage-agenda--image-35-turmas-lista-detalhe.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 57,
+      "drawerCount": 1,
+      "enabledButtonCount": 57,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "aula-chamada",
+      "route": "/app/aulas/[id]",
+      "families": [
+        "Calendar / Schedule workspace",
+        "Profile / Detail workspace"
+      ],
+      "image": "29_round-4.1F_aula_01_detalhe-com-chamada.png.png",
+      "storyId": "crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada",
+      "storyTitle": "CRM / Image Coverage / Agenda",
+      "index": 30,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/30-crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 46,
+      "drawerCount": 1,
+      "enabledButtonCount": 46,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "reposicoes",
+      "route": "/app/reposicoes",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png",
+      "storyId": "crm-image-coverage-reposições--image-31-fluxo-encaixe",
+      "storyTitle": "CRM / Image Coverage / Reposições",
+      "index": 31,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/31-crm-image-coverage-reposi--es--image-31-fluxo-encaixe.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 59,
+      "drawerCount": 1,
+      "enabledButtonCount": 59,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-reposições--image-31-fluxo-encaixe",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "vendas-pipeline",
+      "route": "/app/vendas",
+      "families": [
+        "Kanban workspace"
+      ],
+      "image": "37_round-4.1G_vendas_01_pipeline-kanban.png.png",
+      "storyId": "crm-image-coverage-vendas--image-37-vendas-pipeline-kanban",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "index": 32,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/32-crm-image-coverage-vendas--image-37-vendas-pipeline-kanban.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 88,
+      "drawerCount": 0,
+      "enabledButtonCount": 88,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-vendas--image-37-vendas-pipeline-kanban",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "interessados",
+      "route": "/app/interessados",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "38_round-4.1G_vendas_02_lista-interessados.png.png",
+      "storyId": "crm-image-coverage-vendas--image-38-lista-interessados",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "index": 33,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/33-crm-image-coverage-vendas--image-38-lista-interessados.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 78,
+      "drawerCount": 1,
+      "enabledButtonCount": 78,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-vendas--image-38-lista-interessados",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "aulas-experimentais",
+      "route": "/app/aulas-experimentais",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "39_round-4.1G_experimental_01_lista-acompanhamento.png.png",
+      "storyId": "crm-image-coverage-vendas--image-39-experimental-lista",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "index": 34,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/34-crm-image-coverage-vendas--image-39-experimental-lista.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 70,
+      "drawerCount": 1,
+      "enabledButtonCount": 70,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-vendas--image-39-experimental-lista",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "matriculas",
+      "route": "/app/matriculas",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "40_round-4.1G_matriculas_01_checklist-conversao.png.png",
+      "storyId": "crm-image-coverage-vendas--image-40-matriculas-checklist-conversao",
+      "storyTitle": "CRM / Image Coverage / Vendas",
+      "index": 35,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/35-crm-image-coverage-vendas--image-40-matriculas-checklist-conversao.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 77,
+      "drawerCount": 1,
+      "enabledButtonCount": 76,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-vendas--image-40-matriculas-checklist-conversao",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "financeiro",
+      "route": "/app/financeiro",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "30_round-4.1F_financeiro_01_visao-geral-filas.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-30-visao-geral-filas",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "index": 36,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/36-crm-image-coverage-financeiro--image-30-visao-geral-filas.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 69,
+      "drawerCount": 0,
+      "enabledButtonCount": 69,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-financeiro--image-30-visao-geral-filas",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "financeiro",
+      "route": "/app/financeiro",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "index": 37,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/37-crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 76,
+      "drawerCount": 1,
+      "enabledButtonCount": 76,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "financeiro-kanban",
+      "route": "/app/financeiro/kanban",
+      "families": [
+        "Kanban workspace"
+      ],
+      "image": "33_round-4.1F_financeiro_03_kanban-financeiro.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-33-financeiro-kanban",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "index": 38,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/38-crm-image-coverage-financeiro--image-33-financeiro-kanban.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 91,
+      "drawerCount": 0,
+      "enabledButtonCount": 91,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-financeiro--image-33-financeiro-kanban",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "movimentacoes-financeiras",
+      "route": "/app/financeiro/movimentacoes",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png",
+      "storyId": "crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer",
+      "storyTitle": "CRM / Image Coverage / Financeiro",
+      "index": 39,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/39-crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 77,
+      "drawerCount": 1,
+      "enabledButtonCount": 77,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "retencao",
+      "route": "/app/retencao",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "41_round-4.1H_retencao_01_riscos-lista-drawer.png.png",
+      "storyId": "crm-image-coverage-retencao--image-41-retencao-riscos",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "index": 40,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/40-crm-image-coverage-retencao--image-41-retencao-riscos.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 64,
+      "drawerCount": 1,
+      "enabledButtonCount": 64,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-retencao--image-41-retencao-riscos",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "cancelamentos",
+      "route": "/app/cancelamentos",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "42_round-4.1H_cancelamentos_01_fila-salvamento-drawer.png.png",
+      "storyId": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "index": 41,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/41-crm-image-coverage-retencao--image-42-cancelamentos-fila.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 61,
+      "drawerCount": 1,
+      "enabledButtonCount": 61,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "reativacoes",
+      "route": "/app/retencao/reativacoes",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "43_round-4.1H_reativacoes_01_ex-alunos-retorno.png.png",
+      "storyId": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "index": 42,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/42-crm-image-coverage-retencao--image-43-reativacoes-ex-alunos.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 61,
+      "drawerCount": 1,
+      "enabledButtonCount": 61,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "reclamacoes",
+      "route": "/app/reclamacoes",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "44_round-4.1H_reclamacoes_01_fila-caso-sensivel-drawer.png.png",
+      "storyId": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+      "storyTitle": "CRM / Image Coverage / Retencao",
+      "index": 43,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/43-crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 61,
+      "drawerCount": 1,
+      "enabledButtonCount": 61,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "operacao-jornadas",
+      "route": "/app/operacao",
+      "families": [
+        "Kanban workspace"
+      ],
+      "image": "21_round-4.1B_operacao_01_kanban-geral.png.png",
+      "storyId": "crm-image-coverage-operação--image-21-kanban-geral",
+      "storyTitle": "CRM / Image Coverage / Operação",
+      "index": 44,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/44-crm-image-coverage-opera--o--image-21-kanban-geral.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 72,
+      "drawerCount": 0,
+      "enabledButtonCount": 72,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-operação--image-21-kanban-geral",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "operacao-jornadas",
+      "route": "/app/operacao",
+      "families": [
+        "Kanban workspace"
+      ],
+      "image": "22_round-4.1B_operacao_02_kanban-com-drawer.png",
+      "storyId": "crm-image-coverage-operação--image-22-kanban-com-drawer",
+      "storyTitle": "CRM / Image Coverage / Operação",
+      "index": 45,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/45-crm-image-coverage-opera--o--image-22-kanban-com-drawer.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 74,
+      "drawerCount": 1,
+      "enabledButtonCount": 74,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-operação--image-22-kanban-com-drawer",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "tarefas",
+      "route": "/app/tarefas",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "23_round-4.1C_tarefas_01_lista-detalhe.png.png",
+      "storyId": "crm-image-coverage-tarefas--image-23-lista-detalhe",
+      "storyTitle": "CRM / Image Coverage / Tarefas",
+      "index": 46,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/46-crm-image-coverage-tarefas--image-23-lista-detalhe.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 63,
+      "drawerCount": 1,
+      "enabledButtonCount": 63,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-tarefas--image-23-lista-detalhe",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "checklists",
+      "route": "/app/checklists",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png",
+      "storyId": "crm-image-coverage-checklists--image-24-lista-execucao-detalhe",
+      "storyTitle": "CRM / Image Coverage / Checklists",
+      "index": 47,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/47-crm-image-coverage-checklists--image-24-lista-execucao-detalhe.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 60,
+      "drawerCount": 1,
+      "enabledButtonCount": 60,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-checklists--image-24-lista-execucao-detalhe",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "aprovacoes",
+      "route": "/app/aprovacoes",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "25_round-4.1C_aprovacoes_01_lista-decisao-detalhe.png.png",
+      "storyId": "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe",
+      "storyTitle": "CRM / Image Coverage / Aprovacoes",
+      "index": 48,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/48-crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 61,
+      "drawerCount": 0,
+      "enabledButtonCount": 61,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "agentes",
+      "route": "/app/agentes",
+      "families": [
+        "Card catalog / Hub grid",
+        "Flow / Automation editor"
+      ],
+      "image": "52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-52-agentes-catalogo",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "index": 49,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/49-crm-image-coverage-agentes--image-52-agentes-catalogo.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 34,
+      "drawerCount": 0,
+      "enabledButtonCount": 34,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agentes--image-52-agentes-catalogo",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "agentes",
+      "route": "/app/agentes",
+      "families": [
+        "Card catalog / Hub grid",
+        "Flow / Automation editor"
+      ],
+      "image": "53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-53-agente-agenda-rotinas",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "index": 50,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/50-crm-image-coverage-agentes--image-53-agente-agenda-rotinas.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 32,
+      "drawerCount": 0,
+      "enabledButtonCount": 32,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agentes--image-53-agente-agenda-rotinas",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "fluxos",
+      "route": "/app/fluxos, /app/fluxos/[flowId]",
+      "families": [
+        "Flow / Automation editor"
+      ],
+      "image": "54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-54-rotina-presenca-faltas",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "index": 51,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/51-crm-image-coverage-agentes--image-54-rotina-presenca-faltas.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 45,
+      "drawerCount": 1,
+      "enabledButtonCount": 44,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agentes--image-54-rotina-presenca-faltas",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "fluxos",
+      "route": "/app/fluxos, /app/fluxos/[flowId]",
+      "families": [
+        "Flow / Automation editor"
+      ],
+      "image": "56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-56-fluxo-falta-com-aviso",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "index": 52,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/52-crm-image-coverage-agentes--image-56-fluxo-falta-com-aviso.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 52,
+      "drawerCount": 1,
+      "enabledButtonCount": 50,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agentes--image-56-fluxo-falta-com-aviso",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "simulacoes",
+      "route": "/app/fluxos/[flowId]/simular",
+      "families": [
+        "Flow / Automation editor"
+      ],
+      "image": "58_round-4.1L_agentes_05_teste-fluxo-falta-com-aviso-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-58-teste-fluxo-falta-com-aviso",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "index": 53,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/53-crm-image-coverage-agentes--image-58-teste-fluxo-falta-com-aviso.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 49,
+      "drawerCount": 1,
+      "enabledButtonCount": 48,
+      "errorCount": 0,
+      "mainCount": 2,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agentes--image-58-teste-fluxo-falta-com-aviso",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "publicacao-de-rotina",
+      "route": "Contextual em Fluxos",
+      "families": [
+        "Flow / Automation editor"
+      ],
+      "image": "59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-59-publicar-rotina",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "index": 54,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/54-crm-image-coverage-agentes--image-59-publicar-rotina.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 56,
+      "drawerCount": 1,
+      "enabledButtonCount": 55,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agentes--image-59-publicar-rotina",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "execucao-de-fluxo",
+      "route": "/app/fluxos/execucoes/[runId]",
+      "families": [
+        "Flow / Automation editor"
+      ],
+      "image": "70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png",
+      "storyId": "crm-image-coverage-agentes--image-70-execucoes-fluxo",
+      "storyTitle": "CRM / Image Coverage / Agentes",
+      "index": 55,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/55-crm-image-coverage-agentes--image-70-execucoes-fluxo.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 44,
+      "drawerCount": 1,
+      "enabledButtonCount": 39,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 900,
+        "width": 1440,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-agentes--image-70-execucoes-fluxo",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "uso-e-cotas",
+      "route": "/app/uso",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "68_round-4.1O_uso_01_visao-geral-aprovado.png",
+      "storyId": "crm-image-coverage-usage--image-68-uso-visao-geral",
+      "storyTitle": "CRM / Image Coverage / Usage",
+      "index": 56,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/56-crm-image-coverage-usage--image-68-uso-visao-geral.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 46,
+      "drawerCount": 1,
+      "enabledButtonCount": 45,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-usage--image-68-uso-visao-geral",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "extrato-de-uso",
+      "route": "/app/uso/extrato",
+      "families": [
+        "Ledger table / right assistant rail"
+      ],
+      "image": "69_round-4.1O_uso_02_extrato-aprovado.png",
+      "storyId": "crm-image-coverage-usage--image-69-uso-extrato",
+      "storyTitle": "CRM / Image Coverage / Usage",
+      "index": 57,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/57-crm-image-coverage-usage--image-69-uso-extrato.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 49,
+      "drawerCount": 1,
+      "enabledButtonCount": 48,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-usage--image-69-uso-extrato",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "relatorios",
+      "route": "/app/relatorios",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "45_round-4.1I_relatorios_01_visao-gestao.png.png",
+      "storyId": "crm-image-coverage-relatorios--reports-management",
+      "storyTitle": "CRM / Image Coverage / Relatorios",
+      "index": 58,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/58-crm-image-coverage-relatorios--reports-management.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 47,
+      "drawerCount": 0,
+      "enabledButtonCount": 47,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-relatorios--reports-management",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "dinheiro-na-mesa",
+      "route": "/app/dinheiro-na-mesa",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png",
+      "storyId": "crm-image-coverage-relatorios--money-on-the-table",
+      "storyTitle": "CRM / Image Coverage / Relatorios",
+      "index": 59,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/59-crm-image-coverage-relatorios--money-on-the-table.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 63,
+      "drawerCount": 0,
+      "enabledButtonCount": 63,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-relatorios--money-on-the-table",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "configuracoes",
+      "route": "/app/configuracoes",
+      "families": [
+        "Card catalog / Hub grid"
+      ],
+      "image": "60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "index": 60,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/60-crm-image-coverage-configuracoes--image-60-configuracoes-hub.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 35,
+      "drawerCount": 0,
+      "enabledButtonCount": 35,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "config-permissoes",
+      "route": "/app/configuracoes/permissoes",
+      "families": [
+        "Config / Form with right assistant rail"
+      ],
+      "image": "61_round-4.1M_configuracoes_02_permissoes-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "index": 61,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/61-crm-image-coverage-configuracoes--image-61-configuracoes-permissoes.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 44,
+      "drawerCount": 0,
+      "enabledButtonCount": 42,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "config-pagamentos-financeiro",
+      "route": "/app/configuracoes/pagamentos",
+      "families": [
+        "Config / Form with right assistant rail"
+      ],
+      "image": "62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "index": 62,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/62-crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 46,
+      "drawerCount": 0,
+      "enabledButtonCount": 44,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "config-agenda",
+      "route": "/app/configuracoes/agenda",
+      "families": [
+        "Config / Form with right assistant rail",
+        "Calendar / Schedule workspace"
+      ],
+      "image": "63_round-4.1M_configuracoes_04_agenda-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "index": 63,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/63-crm-image-coverage-configuracoes--image-63-configuracoes-agenda.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 50,
+      "drawerCount": 0,
+      "enabledButtonCount": 48,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "config-notificacoes-canais",
+      "route": "/app/configuracoes/notificacoes",
+      "families": [
+        "Config / Form with right assistant rail"
+      ],
+      "image": "64_round-4.1M_configuracoes_05_notificacoes-aprovado.png",
+      "storyId": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+      "storyTitle": "CRM / Image Coverage / Configuracoes",
+      "index": 64,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/64-crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 50,
+      "drawerCount": 0,
+      "enabledButtonCount": 48,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "suporte-taliya",
+      "route": "/app/suporte",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "47_round-4.1J_suporte_01_central-studio-taliya.png.png",
+      "storyId": "crm-image-coverage-suporte--support-central",
+      "storyTitle": "CRM / Image Coverage / Suporte",
+      "index": 65,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/65-crm-image-coverage-suporte--support-central.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 56,
+      "drawerCount": 0,
+      "enabledButtonCount": 54,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-suporte--support-central",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "billing-taliya",
+      "route": "/app/billing",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "65_round-4.1N_billing_01_assinatura-taliya-aprovado.png",
+      "storyId": "crm-image-coverage-billing--image-65-billing-assinatura",
+      "storyTitle": "CRM / Image Coverage / Billing",
+      "index": 66,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/66-crm-image-coverage-billing--image-65-billing-assinatura.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 46,
+      "drawerCount": 1,
+      "enabledButtonCount": 45,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-billing--image-65-billing-assinatura",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "faturas-taliya",
+      "route": "/app/billing/invoices",
+      "families": [
+        "Ledger table / right assistant rail"
+      ],
+      "image": "66_round-4.1N_billing_02_faturas-taliya-aprovado.png",
+      "storyId": "crm-image-coverage-billing--image-66-billing-faturas",
+      "storyTitle": "CRM / Image Coverage / Billing",
+      "index": 67,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/67-crm-image-coverage-billing--image-66-billing-faturas.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 49,
+      "drawerCount": 1,
+      "enabledButtonCount": 48,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-billing--image-66-billing-faturas",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "add-ons-taliya",
+      "route": "/app/billing/add-ons",
+      "families": [
+        "Card catalog / Hub grid"
+      ],
+      "image": "67_round-4.1N_billing_03_add-ons-taliya-aprovado.png",
+      "storyId": "crm-image-coverage-billing--image-67-billing-add-ons",
+      "storyTitle": "CRM / Image Coverage / Billing",
+      "index": 68,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/68-crm-image-coverage-billing--image-67-billing-add-ons.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 41,
+      "drawerCount": 1,
+      "enabledButtonCount": 40,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-billing--image-67-billing-add-ons",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "internal-operacao",
+      "route": "/internal",
+      "families": [
+        "Dashboard / Card grid"
+      ],
+      "image": "48_round-4.1K_internal_01_visao-operacional.png.png",
+      "storyId": "crm-image-coverage-internal--image-48-internal-visao-operacional",
+      "storyTitle": "CRM / Image Coverage / Internal",
+      "index": 69,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/69-crm-image-coverage-internal--image-48-internal-visao-operacional.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 49,
+      "drawerCount": 0,
+      "enabledButtonCount": 49,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-internal--image-48-internal-visao-operacional",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "internal-tenants",
+      "route": "/internal/tenants",
+      "families": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "image": "49_round-4.1K_internal_02_tenants-lista-detalhe.png",
+      "storyId": "crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe",
+      "storyTitle": "CRM / Image Coverage / Internal",
+      "index": 70,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/70-crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 65,
+      "drawerCount": 1,
+      "enabledButtonCount": 63,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "internal-tenant-detalhe",
+      "route": "/internal/tenants/[tenantId]",
+      "families": [
+        "Profile / Detail workspace"
+      ],
+      "image": "50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png",
+      "storyId": "crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants",
+      "storyTitle": "CRM / Image Coverage / Internal",
+      "index": 71,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/71-crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 52,
+      "drawerCount": 0,
+      "enabledButtonCount": 52,
+      "errorCount": 0,
+      "mainCount": 2,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 900,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "access-shell",
+      "route": "Pre-CRM shell",
+      "families": [
+        "Access / Subscription shell"
+      ],
+      "image": "71_round-4.1Q_acesso-assinatura_shell-base-aprovado.png",
+      "storyId": "crm-image-coverage-access-subscription--image-71-shell-base",
+      "storyTitle": "CRM / Image Coverage / Access Subscription",
+      "index": 72,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/72-crm-image-coverage-access-subscription--image-71-shell-base.png",
+      "bodyClientWidth": 1425,
+      "bodyScrollWidth": 1425,
+      "buttonCount": 5,
+      "drawerCount": 0,
+      "enabledButtonCount": 5,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1425,
+      "rootScrollWidth": 1425,
+      "stage": {
+        "height": 941,
+        "width": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-access-subscription--image-71-shell-base",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    },
+    {
+      "surfaceId": "empty-app-shell",
+      "route": "Logged-in shell state",
+      "families": [
+        "App shell baseline"
+      ],
+      "image": "79_round-4.1S_app-shell_01_base-web-sem-conteudo.png",
+      "storyId": "crm-image-coverage-image-79-empty-shell--image-79-empty-shell",
+      "storyTitle": "CRM / Image Coverage / Image 79 Empty Shell",
+      "index": 73,
+      "screenshot": "visual-diagnostics/evidence/routes-1440/73-crm-image-coverage-image-79-empty-shell--image-79-empty-shell.png",
+      "bodyClientWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "buttonCount": 27,
+      "drawerCount": 0,
+      "enabledButtonCount": 27,
+      "errorCount": 0,
+      "mainCount": 1,
+      "rootClientWidth": 1440,
+      "rootScrollWidth": 1440,
+      "stage": {
+        "height": 868,
+        "width": 1160,
+        "x": 0,
+        "y": 0
+      },
+      "title": "crm-image-coverage-image-79-empty-shell--image-79-empty-shell",
+      "viewportOverflow": false,
+      "navigationOverflow": false
+    }
+  ]
+}

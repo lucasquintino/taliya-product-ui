@@ -1,4 +1,5 @@
-import type { Meta } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import { FileUpload } from "@taliya/ui";
 
@@ -12,30 +13,39 @@ const meta: Meta<typeof FileUpload> = {
 
 export default meta;
 
-export function AllStates() {
-  return (
+type Story = StoryObj<typeof meta>;
+
+const onAction = fn();
+
+export const AllStates: Story = {
+  render: () => (
     <PrimitivePage>
       <main className="sb-source-page">
         <SourcePanel className="sb-source-panel--batch4-files" number="1" title="File upload">
           <SourceGrid className="sb-source-grid--3">
             <SourceItem label="Idle">
-              <FileUpload />
+              <FileUpload onAction={onAction} />
             </SourceItem>
             <SourceItem label="Dragging">
-              <FileUpload state="dragging" title="Solte o arquivo" description="CSV de alunos detectado." />
+              <FileUpload onAction={onAction} state="dragging" title="Solte o arquivo" description="CSV de alunos detectado." />
             </SourceItem>
             <SourceItem label="Uploading">
-              <FileUpload state="uploading" title="Enviando arquivo" description="Processando planilha..." actionLabel="Aguarde" />
+              <FileUpload actionDisabled onAction={onAction} state="uploading" title="Enviando arquivo" description="Processando planilha..." actionLabel="Aguarde" />
             </SourceItem>
             <SourceItem label="Complete">
-              <FileUpload state="complete" title="Arquivo recebido" description="280 linhas prontas para importar." actionLabel="Revisar" />
+              <FileUpload onAction={onAction} state="complete" title="Arquivo recebido" description="280 linhas prontas para importar." actionLabel="Revisar" />
             </SourceItem>
             <SourceItem label="Error">
-              <FileUpload state="error" title="Falha no arquivo" description="Formato invalido ou corrompido." actionLabel="Trocar" />
+              <FileUpload onAction={onAction} state="error" title="Falha no arquivo" description="Formato invalido ou corrompido." actionLabel="Trocar" />
             </SourceItem>
           </SourceGrid>
         </SourcePanel>
       </main>
     </PrimitivePage>
-  );
-}
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Selecionar" }));
+    await expect(onAction).toHaveBeenCalled();
+  }
+};

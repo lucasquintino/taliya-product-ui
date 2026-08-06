@@ -2,6 +2,8 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
+  ActionMenu,
+  AttachmentList,
   Avatar,
   AvatarStack,
   AuditTable,
@@ -31,6 +33,7 @@ import {
   DrawerSection,
   EmptyState,
   ExecutionRow,
+  FileUpload,
   FieldGroup,
   FieldGrid,
   FieldStack,
@@ -50,16 +53,20 @@ import {
   MetricTile,
   MoneyInput,
   Modal,
+  NavPill,
   Panel,
   PanelBody,
   PanelHeader,
+  PasswordInput,
   Popover,
   PermissionTable,
   ProgressBar,
   RelationshipCard,
+  Radio,
   SearchInput,
   SegmentedControl,
   Select,
+  SocialAuthButton,
   Stack,
   StatePage,
   StatusDot,
@@ -82,6 +89,61 @@ import {
 afterEach(() => cleanup());
 
 describe("@taliya/ui primitives", () => {
+  it("forwards file action and attachment removal callbacks", () => {
+    const onAction = vi.fn();
+    const onRemove = vi.fn();
+    const attachment = { id: "contract", name: "contrato.pdf" };
+
+    render(
+      <>
+        <FileUpload onAction={onAction} />
+        <AttachmentList items={[attachment]} onRemove={onRemove} removable />
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Selecionar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Remover contrato.pdf" }));
+
+    expect(onAction).toHaveBeenCalledOnce();
+    expect(onRemove).toHaveBeenCalledWith(attachment);
+  });
+
+  it("keeps direct interaction contracts for public input and action helpers", () => {
+    const onNav = vi.fn();
+    const onRadio = vi.fn();
+    const onSocial = vi.fn();
+    const onMenu = vi.fn();
+
+    render(
+      <>
+        <NavPill onClick={onNav}>Agenda</NavPill>
+        <PasswordInput aria-label="Senha" />
+        <Radio label="Plano mensal" onChange={onRadio} />
+        <SocialAuthButton onClick={onSocial} provider="Google" />
+        <ActionMenu actions={[{ label: "Abrir", onSelect: onMenu }]} label="Acoes" />
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Agenda" }));
+    fireEvent.click(screen.getByRole("button", { name: "Mostrar senha" }));
+    fireEvent.click(screen.getByRole("radio", { name: "Plano mensal" }));
+    fireEvent.click(screen.getByRole("button", { name: "Continuar com Google" }));
+    fireEvent.click(screen.getByRole("button", { name: "Acoes" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "Abrir" }));
+
+    expect(onNav).toHaveBeenCalledOnce();
+    expect(screen.getByLabelText("Senha")).toHaveAttribute("type", "text");
+    expect(onRadio).toHaveBeenCalledOnce();
+    expect(onSocial).toHaveBeenCalledOnce();
+    expect(onMenu).toHaveBeenCalledOnce();
+  });
+
+  it("uses a placeholder as the accessible name when an input has no visible label", () => {
+    render(<Input placeholder="Buscar registros" type="search" />);
+
+    expect(screen.getByRole("searchbox", { name: "Buscar registros" })).toBeInTheDocument();
+  });
+
   it("emits distinct badge tone classes", () => {
     render(
       <div>
@@ -858,6 +920,7 @@ describe("@taliya/ui primitives", () => {
         <ChecklistItem onToggle={checklistToggle} owner="Sam Frank" state="incomplete" title="Revisar consentimento" />
         <MetricTile data-testid="batch8-metric" label="Casos abertos" onSelect={metricSelect} selected value="128" />
         <StatusSummaryCard state="ok" title="CRM ativo" />
+        <StatusSummaryCard headingLevel={2} state="attention" title="Integração pendente" />
         <DiffTable onRowClick={diffRowClick} rows={[{ id: "plan", label: "Plano", before: "Pro", after: "Enterprise", status: "changed" }]} title="Diff" />
         <PermissionTable onRequestAccess={requestAccess} onRowClick={permissionRowClick} rows={[{ id: "reports", module: "Relatorios", profile: "Gestor", action: "Visualizar", state: "request" }]} />
         <AuditTable onOpenObject={openAudit} onRowClick={auditRowClick} rows={[{ id: "log-1", actor: "Sam", object: "#1", action: "Atualizou", time: "10:24", origin: "Web", status: "success" }]} />
@@ -869,6 +932,8 @@ describe("@taliya/ui primitives", () => {
         <ConfidenceMeter segments={5} value={86} />
       </div>
     );
+
+    expect(screen.getByRole("heading", { level: 2, name: "Integração pendente" })).toBeInTheDocument();
 
     fireEvent.keyDown(screen.getByRole("button", { name: /abrir alteracao plan/i }), { key: "Enter" });
     fireEvent.keyDown(screen.getByRole("button", { name: /abrir permissao reports/i }), { key: "Enter" });

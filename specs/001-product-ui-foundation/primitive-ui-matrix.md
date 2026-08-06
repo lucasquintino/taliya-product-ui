@@ -108,7 +108,7 @@ These can follow once P0 primitives are stable, but they still belong in `@taliy
 | `Stepper` | 13, 15 | complete, current, blocked, pending | `SetupStepper` and preflight flows compose this. |
 | `ChecklistItem` | 13, 15 | complete, incomplete, warning, blocked, action available | Base for activation checklist, preflight checklist, enrollment checklist. |
 | `MetricTile` | 10, 12, 15 | default, positive delta, negative delta, warning, selected | CRM `MetricCard` can compose this. |
-| `StatusSummaryCard` | 10, 12, 15 | ok, attention, danger, blocked, action | Base for plan, quota, integration, incident summaries. |
+| `StatusSummaryCard` | 10, 12, 15 | ok, attention, danger, blocked, action, semantic heading level | Base for plan, quota, integration, incident summaries; `headingLevel` promotes the visible title when the card is the page result without changing its visual anatomy. |
 | `DiffTable` | 14, 15 | changed, removed, added, approved, rejected | Used for approval and finance before/after. |
 | `PermissionTable` | 12, 15 | allowed, blocked, request access, pending | CRM `PermissionMatrix` composes this. |
 | `AuditTable` | 12, 15 | success, pending, alert, denied | CRM `AuditTrail` can compose it. |

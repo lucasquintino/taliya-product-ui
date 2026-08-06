@@ -1,0 +1,314 @@
+[
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+    "viewport": 390,
+    "file": "390/01-image-60-configuracoes-hub.png",
+    "actual": {
+      "height": 844,
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "h1": [
+      "Configurações"
+    ],
+    "horizontalOverflow": false,
+    "main": null,
+    "mainPanelOverlap": null,
+    "panel": null,
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+    "viewport": 390,
+    "file": "390/02-image-61-configuracoes-permissoes.png",
+    "actual": {
+      "height": 844,
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "h1": [
+      "Permissões"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 417.5,
+      "height": 764,
+      "right": -179,
+      "width": 333,
+      "x": -512,
+      "y": -346.5
+    },
+    "mainPanelOverlap": true,
+    "panel": {
+      "bottom": 1212.5,
+      "height": 898,
+      "right": -179,
+      "width": 333,
+      "x": -512,
+      "y": 314.5
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+    "viewport": 390,
+    "file": "390/03-image-62-configuracoes-pagamentos.png",
+    "actual": {
+      "height": 844,
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "h1": [
+      "Pagamentos e financeiro"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 500,
+      "height": 812,
+      "right": -246,
+      "width": 323,
+      "x": -569,
+      "y": -312
+    },
+    "mainPanelOverlap": true,
+    "panel": {
+      "bottom": 1352,
+      "height": 922,
+      "right": -246,
+      "width": 323,
+      "x": -569,
+      "y": 430
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+    "viewport": 390,
+    "file": "390/04-image-63-configuracoes-agenda.png",
+    "actual": {
+      "height": 844,
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "h1": [
+      "Agenda"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 530,
+      "height": 766,
+      "right": 354,
+      "width": 301,
+      "x": 53,
+      "y": -236
+    },
+    "mainPanelOverlap": true,
+    "panel": {
+      "bottom": 1332,
+      "height": 860,
+      "right": 354,
+      "width": 301,
+      "x": 53,
+      "y": 472
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+    "viewport": 390,
+    "file": "390/05-image-64-configuracoes-notificacoes.png",
+    "actual": {
+      "height": 844,
+      "scrollHeight": 844,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "h1": [
+      "Notificacoes"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 571,
+      "height": 806,
+      "right": 356,
+      "width": 306,
+      "x": 50,
+      "y": -235
+    },
+    "mainPanelOverlap": true,
+    "panel": {
+      "bottom": 1417,
+      "height": 886,
+      "right": 356,
+      "width": 306,
+      "x": 50,
+      "y": 531
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+    "viewport": 1024,
+    "file": "1024/01-image-60-configuracoes-hub.png",
+    "actual": {
+      "height": 768,
+      "scrollHeight": 914,
+      "scrollWidth": 1009,
+      "width": 1009
+    },
+    "h1": [
+      "Configurações"
+    ],
+    "horizontalOverflow": false,
+    "main": null,
+    "mainPanelOverlap": null,
+    "panel": null,
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+    "viewport": 1024,
+    "file": "1024/02-image-61-configuracoes-permissoes.png",
+    "actual": {
+      "height": 768,
+      "scrollHeight": 1157,
+      "scrollWidth": 1009,
+      "width": 1009
+    },
+    "h1": [
+      "Permissões"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 768,
+      "height": 898,
+      "right": 683,
+      "width": 569,
+      "x": 114,
+      "y": -130
+    },
+    "mainPanelOverlap": false,
+    "panel": {
+      "bottom": 639,
+      "height": 898,
+      "right": 1009,
+      "width": 300,
+      "x": 709,
+      "y": -259
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+    "viewport": 1024,
+    "file": "1024/03-image-62-configuracoes-pagamentos.png",
+    "actual": {
+      "height": 768,
+      "scrollHeight": 1166,
+      "scrollWidth": 1009,
+      "width": 1009
+    },
+    "h1": [
+      "Pagamentos e financeiro"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 768,
+      "height": 922,
+      "right": 665,
+      "width": 553,
+      "x": 112,
+      "y": -154
+    },
+    "mainPanelOverlap": false,
+    "panel": {
+      "bottom": 666,
+      "height": 922,
+      "right": 997,
+      "width": 300,
+      "x": 697,
+      "y": -256
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+    "viewport": 1024,
+    "file": "1024/04-image-63-configuracoes-agenda.png",
+    "actual": {
+      "height": 768,
+      "scrollHeight": 1123,
+      "scrollWidth": 1009,
+      "width": 1009
+    },
+    "h1": [
+      "Agenda"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 768,
+      "height": 860,
+      "right": 652,
+      "width": 527,
+      "x": 125,
+      "y": -92
+    },
+    "mainPanelOverlap": false,
+    "panel": {
+      "bottom": 674,
+      "height": 860,
+      "right": 988,
+      "width": 300,
+      "x": 688,
+      "y": -186
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+    "viewport": 1024,
+    "file": "1024/05-image-64-configuracoes-notificacoes.png",
+    "actual": {
+      "height": 768,
+      "scrollHeight": 1116,
+      "scrollWidth": 1009,
+      "width": 1009
+    },
+    "h1": [
+      "Notificacoes"
+    ],
+    "horizontalOverflow": false,
+    "main": {
+      "bottom": 768,
+      "height": 886,
+      "right": 655,
+      "width": 533,
+      "x": 122,
+      "y": -118
+    },
+    "mainPanelOverlap": false,
+    "panel": {
+      "bottom": 693,
+      "height": 886,
+      "right": 990,
+      "width": 300,
+      "x": 690,
+      "y": -193
+    },
+    "unnamedVisibleControls": 0,
+    "visibleErrors": []
+  }
+]

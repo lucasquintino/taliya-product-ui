@@ -1,6 +1,6 @@
 {
   "name": "@taliya/tokens",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Official design tokens for Taliya products.",
   "license": "UNLICENSED",
   "repository": {
@@ -17,7 +17,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "sideEffects": ["**/*.css"],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -25,7 +27,10 @@
     },
     "./tokens.css": "./src/tokens.css"
   },
-  "files": ["dist", "src/tokens.css"],
+  "files": [
+    "dist",
+    "src/tokens.css"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",

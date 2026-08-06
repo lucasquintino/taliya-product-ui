@@ -1,6 +1,6 @@
 # Local Release Manifest Audit
 
-Generated: 2026-07-16T16:33:27.741Z
+Generated: 2026-08-05T17:00:38.736Z
 
 Status: pass
 
@@ -15,6 +15,6 @@ This audit validates the consumer-facing local release manifest. The manifest gi
 
 | Package | Version | Manifest tarball | Tarball exists | SHA-256 | Status |
 | --- | --- | --- | --- | --- | --- |
-| `@taliya/tokens` | `0.1.0` | `taliya-tokens-0.1.0.tgz` | yes | `678bcf843b8a` | pass |
-| `@taliya/ui` | `0.1.0` | `taliya-ui-0.1.0.tgz` | yes | `8b88c9b22a6e` | pass |
-| `@taliya/crm` | `0.1.0` | `taliya-crm-0.1.0.tgz` | yes | `fd65881f4d15` | pass |
+| `@taliya/tokens` | `0.1.1` | `taliya-tokens-0.1.1.tgz` | yes | `1d5bf73f5cd9` | pass |
+| `@taliya/ui` | `0.1.1` | `taliya-ui-0.1.1.tgz` | yes | `32cb6f906152` | pass |
+| `@taliya/crm` | `0.1.1` | `taliya-crm-0.1.1.tgz` | yes | `c69e7fefc4f4` | pass |

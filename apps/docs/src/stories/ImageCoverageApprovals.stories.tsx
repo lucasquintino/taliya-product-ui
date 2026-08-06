@@ -1,5 +1,6 @@
 ﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo, useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   ApprovalDrawer,
@@ -104,8 +105,9 @@ const approvalRows: ApprovalTableRow[] = [
     requester: { name: <>Agente de<br />comunicação</>, icon: "user" },
     risk: "low",
     cost: "Cota 82%",
-    deadline: "Amanhã",
-    status: "pending",
+    deadline: "Expirou 08:00",
+    deadlineTone: "danger",
+    status: "expired",
     activity: <>Rascunho pronto<br />para envio</>
   },
   {
@@ -133,7 +135,7 @@ const approvalRows: ApprovalTableRow[] = [
     cost: "-",
     deadline: <>Hoje<br />16:00</>,
     deadlineTone: "danger",
-    status: "pending",
+    status: "approved",
     activity: <>Sugestão de<br />normalização</>
   }
 ];
@@ -181,8 +183,8 @@ const approvalRiskLabels = {
 } satisfies Record<ApprovalTableRow["risk"], string>;
 
 function approvalDrawerFacts(row: ApprovalTableRow, state: ApprovalPanelState): ApprovalPanelFact[] {
-  const status = state === "approved" ? "Aprovada" : state === "rejected" ? "Rejeitada" : row.status === "blocked" ? "Bloqueada" : row.status === "review" ? "Em revisão" : "Pendente";
-  const statusTone = state === "approved" ? "approved" : state === "rejected" ? "rejected" : row.status === "blocked" ? "expired" : "pending";
+  const status = state === "approved" ? "Aprovada" : state === "rejected" ? "Rejeitada" : state === "expired" ? "Expirada" : state === "blocked" ? "Bloqueada" : row.status === "review" ? "Em revisão" : "Pendente";
+  const statusTone = state === "approved" ? "approved" : state === "rejected" ? "rejected" : state === "expired" || state === "blocked" ? "expired" : "pending";
 
   return [
     { id: "status", icon: "clipboard", label: "Status", value: status, dotTone: statusTone },
@@ -200,7 +202,10 @@ function approvalDrawerSections(row: ApprovalTableRow): ApprovalPanelSection[] {
     return [
       { id: "context", title: "Contexto resumido", body: "Ana Paula pediu reagendamento da visita técnica para quinta-feira pela manhã. O agente preparou uma resposta para confirmar o novo horário e coletar o endereço completo." },
       { id: "proposal", title: "Proposta principal", badge: "Sugestão do copiloto", variant: "suggestion", body: "Olá Ana Paula! Consigo reagendar sua visita para quinta-feira às 09h. Pode me confirmar seu endereço completo para registro?" },
+      { id: "before", title: "Antes da decisão", body: "A visita permanece no horário anterior e a conversa aguarda validação humana." },
+      { id: "after", title: "Depois da decisão", body: "A nova janela é comunicada e o endereço completo é solicitado antes da confirmação." },
       { id: "impact", title: "Impacto esperado", body: "Libera continuidade do atendimento, mantém SLA da conversa e consome 1 crédito." },
+      { id: "reason", title: "Motivo da decisão", body: "O reagendamento atende ao pedido da cliente e preserva o guardrail de confirmação de endereço." },
       { id: "policy", title: "Política / guardrail aplicado", body: "Mensagens externas geradas por agente exigem validação humana antes do envio. Agente não aprova sozinho." }
     ];
   }
@@ -208,10 +213,29 @@ function approvalDrawerSections(row: ApprovalTableRow): ApprovalPanelSection[] {
   return [
     { id: "context", title: "Contexto resumido", body: `${approvalTitles[row.id]} foi encaminhada para revisão humana pela fila de ${approvalTypeLabels[row.type].toLowerCase()}.` },
     { id: "proposal", title: "Proposta principal", badge: "Revisão necessária", variant: "suggestion", body: <>Confirmar a decisão considerando origem, prazo e impacto informado: {row.activity}.</> },
+    { id: "before", title: "Antes da decisão", body: <>A solicitação permanece pendente na origem {approvalOrigins[row.id]}.</> },
+    { id: "after", title: "Depois da decisão", body: <>A origem recebe a decisão e pode prosseguir com {approvalTitles[row.id]?.toLowerCase() ?? "a ação proposta"}.</> },
     { id: "impact", title: "Impacto esperado", body: <>Custo ou cota estimada: {row.cost}.</> },
+    { id: "reason", title: "Motivo da decisão", body: <>Revisão humana exigida por risco {approvalRiskLabels[row.risk].toLowerCase()} e pelo impacto informado.</> },
     { id: "policy", title: "Política / guardrail aplicado", body: `A decisão exige validação humana por risco ${approvalRiskLabels[row.risk].toLowerCase()}.` }
   ];
 }
+
+function approvalPanelStateForRow(row: ApprovalTableRow): ApprovalPanelState {
+  if (row.status === "blocked" || row.status === "expired" || row.status === "approved" || row.status === "rejected") {
+    return row.status;
+  }
+  return "pending";
+}
+
+const approvalActionAnnouncement = {
+  approve: "Aprovação aprovada",
+  edit: "Edição da aprovação aberta",
+  reject: "Aprovação rejeitada",
+  "request-data": "Dados adicionais solicitados",
+  "open-origin": "Origem da aprovação aberta",
+  close: "Drawer de aprovação fechado"
+} as const;
 
 function ApprovalsPageContent({
   selectedQueueId,
@@ -293,7 +317,10 @@ function ApprovalsPageContent({
         options: [
           { value: "pendente", label: "Pendente", icon: "clock" },
           { value: "revisao", label: "Em revisão", icon: "eye" },
-          { value: "bloqueada", label: "Bloqueada", icon: "lock" }
+          { value: "bloqueada", label: "Bloqueada", icon: "lock" },
+          { value: "expirada", label: "Expirada", icon: "alert" },
+          { value: "aprovada", label: "Aprovada", icon: "checkCircle" },
+          { value: "rejeitada", label: "Rejeitada", icon: "x" }
         ]
       },
       {
@@ -338,7 +365,6 @@ function ApprovalsPageContent({
       contentClassName="sb-image-coverage-approvals-content"
       contentLayout="main-priority"
       drawer={drawer}
-      drawerPlacement="floating"
       globalActions={{
         onAvatar: () => onInteraction("Perfil da operadora aberto"),
         onMessages: () => onInteraction("Mensagens abertas"),
@@ -437,7 +463,7 @@ export function ApprovalsShell() {
       onAction={(action) => {
         if (action === "approve") setDrawerState("approved");
         if (action === "reject") setDrawerState("rejected");
-        setAnnouncement(`Ação da aprovação: ${action}`);
+        setAnnouncement(approvalActionAnnouncement[action]);
       }}
       onClose={() => {
         setDrawerOpen(false);
@@ -477,7 +503,7 @@ export function ApprovalsShell() {
       onApprovalSelect={(row) => {
         setSelectedApprovalId(row.id);
         setDrawerOpen(true);
-        setDrawerState(row.status === "blocked" ? "blocked" : "pending");
+        setDrawerState(approvalPanelStateForRow(row));
         setAnnouncement(`Aprovação aberta: ${approvalTitles[row.id]}`);
       }}
       onCreateApproval={() => {
@@ -523,5 +549,33 @@ export const Image25ListaDecisaoDetalhe: Story = {
       }
     }
   },
-  render: () => <ApprovalsShell />
+  render: () => <ApprovalsShell />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Aprovações", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("heading", { name: "Antes da decisão" })).toBeInTheDocument();
+    await expect(canvas.getByRole("heading", { name: "Depois da decisão" })).toBeInTheDocument();
+    await expect(canvas.getByRole("heading", { name: "Motivo da decisão" })).toBeInTheDocument();
+    await expect(canvas.getByRole("cell", { name: "Expirada" })).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Editar" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Edição da aprovação aberta");
+    await userEvent.click(canvas.getByRole("button", { name: "Pedir dados" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Dados adicionais solicitados");
+    await userEvent.click(canvas.getByRole("button", { name: "Aprovar" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da aprovação" })).toHaveAttribute("data-state", "approved");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar aprovação" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Aprovar alteração/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Rejeitar" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da aprovação" })).toHaveAttribute("data-state", "rejected");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Aprovação rejeitada");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar aprovação" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes da aprovação" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("row", { name: /Aprovar comunicado/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da aprovação" })).toHaveAttribute("data-state", "expired");
+    await expect(canvas.getByRole("button", { name: "Aprovar" })).toBeDisabled();
+  }
 };

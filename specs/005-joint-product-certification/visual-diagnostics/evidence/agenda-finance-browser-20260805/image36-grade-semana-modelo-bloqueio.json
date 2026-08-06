@@ -1,0 +1,67 @@
+{
+  "storyId": "crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio",
+  "metrics": {
+    "brokenImages": [],
+    "document": {
+      "scrollHeight": 2000,
+      "scrollWidth": 2880
+    },
+    "drawer": {
+      "className": "tcrm-drawer tcrm-drawer-frame tcrm-class-drawer tcrm-class-drawer--calling tcrm-class-drawer--recurring-block tcrm-class-drawer--compact",
+      "display": "grid",
+      "grid": "375px",
+      "overflow": "hidden",
+      "rect": {
+        "bottom": 2000,
+        "height": 2000,
+        "right": 2880,
+        "width": 420,
+        "x": 2460,
+        "y": 0
+      },
+      "selector": "[aria-label=\"Detalhes do bloco recorrente\"]"
+    },
+    "main": {
+      "className": "tcrm-empty-shell-main tcrm-product-shell-main",
+      "display": "block",
+      "grid": "none",
+      "overflow": "visible",
+      "rect": {
+        "bottom": 1943,
+        "height": 1943,
+        "right": 2880,
+        "width": 2808,
+        "x": 72,
+        "y": 0
+      },
+      "selector": "main"
+    },
+    "shell": {
+      "className": "tcrm-empty-shell-stage tcrm-product-shell-stage tcrm-product-shell-stage--crm tcrm-product-shell-stage--drawer tcrm-product-shell-stage--drawer-global-actions tcrm-product-shell-stage--content-work-list tcrm-page-family-shell",
+      "display": "flex",
+      "grid": "none",
+      "overflow": "visible",
+      "rect": {
+        "bottom": 2000,
+        "height": 2000,
+        "right": 2880,
+        "width": 2880,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "[data-component=\"CrmProductShell\"]"
+    },
+    "statuses": [
+      "Resumo da grade: Bloqueios ativos"
+    ],
+    "url": "http://127.0.0.1:6224/iframe.html?id=crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio&viewMode=story&fresh=20260805-grade",
+    "viewport": {
+      "height": 2000,
+      "width": 2880
+    }
+  },
+  "notes": [
+    "Recurring block drawer rendered through the official CrmDrawer lifecycle.",
+    "Storybook play contract executed in a fresh tab without runtime errors."
+  ]
+}

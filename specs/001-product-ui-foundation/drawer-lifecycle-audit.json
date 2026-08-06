@@ -1,8 +1,11 @@
 {
-  "date": "2026-07-23",
+  "date": "2026-08-05",
   "status": "pass",
-  "rowCount": 23,
+  "rowCount": 33,
   "failedCount": 0,
+  "canonicalGeometryStatus": "pass",
+  "missingCanonical": [],
+  "forbiddenCanonical": [],
   "rows": [
     {
       "page": "TasksShell",
@@ -164,7 +167,77 @@
       "family": "dashboard/reports",
       "missingSnippets": [],
       "status": "pass"
+    },
+    {
+      "page": "UsageOverviewPage",
+      "file": "apps/docs/src/stories/ImageCoverageUsage.stories.tsx",
+      "family": "right-panel/usage",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "UsageLedgerPage",
+      "file": "apps/docs/src/stories/ImageCoverageUsage.stories.tsx",
+      "family": "right-panel/usage",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingSubscriptionPage",
+      "file": "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingInvoicesPage",
+      "file": "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "BillingAddOnsPage",
+      "file": "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
+      "family": "right-panel/billing",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentPresenceRoutinePage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAbsenceFlowPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentAbsenceFlowTestPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentPublishRoutinePage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agents",
+      "missingSnippets": [],
+      "status": "pass"
+    },
+    {
+      "page": "AgentExecutionReceiptPage",
+      "file": "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
+      "family": "right-panel/agents",
+      "missingSnippets": [],
+      "status": "pass"
     }
   ],
-  "note": "This audit proves selected-object drawers can close, unmount, and reopen from their page interaction. It does not certify visual parity or browser behavior."
+  "note": "This audit proves selected-object drawers can close, unmount, and reopen, and that public source uses one full-height geometry contract. It does not certify visual parity or browser behavior."
 }

@@ -11,7 +11,10 @@ const reportMdPath = resolve(specDir, "release-candidate-audit.md");
 function runCommand(commandText, timeoutMs = 300000) {
   const startedAt = Date.now();
   const command = process.platform === "win32" ? process.env.ComSpec || "cmd.exe" : "sh";
-  const args = process.platform === "win32" ? ["/d", "/s", "/c", commandText] : ["-c", commandText];
+  const executableCommandText = commandText.replaceAll("corepack pnpm", "pnpm");
+  const args = process.platform === "win32"
+    ? ["/d", "/s", "/c", executableCommandText]
+    : ["-c", executableCommandText];
   const result = spawnSync(command, args, {
     cwd: root,
     encoding: "utf8",
@@ -163,7 +166,7 @@ const gateDefinitions = [
     id: "consumer-installed-contract-markers",
     commandText: "corepack pnpm consumer:audit",
     timeoutMs: 120000,
-    proves: "installed Internal packages expose current public contract markers, including drawer-size API/CSS, content-drawer full-width topbar CSS, compact checklist drawer tokens, and checklist drawer header/rhythm CSS"
+    proves: "installed Internal packages expose the canonical full-height drawer API/CSS, official width reservation, dynamic viewport height, and checklist drawer anatomy"
   },
   {
     id: "consumer-page-kit-shell-only-route-probe",

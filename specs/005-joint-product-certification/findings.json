@@ -1,0 +1,621 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-05T09:56:41.000Z",
+  "summary": {
+    "openP0": 0,
+    "openP1": 1,
+    "openP2": 0,
+    "openP3": 0,
+    "resolved": 29
+  },
+  "findings": [
+    {
+      "id": "JPC-001",
+      "severity": "P1",
+      "status": "open",
+      "category": "consumer-versioning",
+      "title": "Source and npm publish different CRM contracts under version 0.1.0",
+      "affected": [
+        "@taliya/crm",
+        "taliya-internal",
+        "scripts/audit-consumer-integration.mjs"
+      ],
+      "evidence": [
+        "Local source declares CrmDashboardPage layoutVariant finance-overview.",
+        "The npm-installed @taliya/crm@0.1.0 in taliya-internal does not declare finance-overview.",
+        "The local future-consumer fixture passes from fresh local tarballs.",
+        "The real Internal consumer integration audit fails the installed contract marker.",
+        "npm latest for all three packages remains 0.1.0, published 2026-07-16."
+      ],
+      "requiredResolution": "Publish a new semver version after the current certification batch, update Internal from the registry, and prove installed contract parity. Never overwrite or reinterpret npm 0.1.0."
+    },
+    {
+      "id": "JPC-002",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "public-api-governance",
+      "title": "Public visual exports are not fully governed by the CRM component registry",
+      "affected": [
+        "ConfirmedSubscriptionPage",
+        "CrmShellRoundButton",
+        "CrmShellTopNavItem",
+        "FinanceQueueGrid",
+        "InternalSecurityRulesPanel",
+        "LegacyComposer",
+        "ProductWindowAppChrome",
+        "SetupPagePanel",
+        "SetupWelcomeMain",
+        "StudentProfileActionRail",
+        "StudentProfileOverviewGrid",
+        "SubscriptionReviewPage"
+      ],
+      "evidence": [
+        "The AST inventory detects 274 CRM public visual exports and 262 CRM registry rows.",
+        "Twelve declared CRM components have no registry row.",
+        "Existing component architecture audit passes because it does not require every public visual export to be classified."
+      ],
+      "requiredResolution": "Classify each export as canonical, compatibility alias, internal implementation detail, or deprecated; register canonical exports and strengthen the governance audit.",
+      "resolution": "Registered all 274 detected CRM visual exports, classified the three historical wrappers as compatibility aliases, added source-map contracts for the nine canonical compositions, and made unregistered or orphan registry rows fail the joint component audit."
+    },
+    {
+      "id": "JPC-003",
+      "severity": "P2",
+      "status": "resolved",
+      "category": "duplicate-architecture",
+      "title": "Three unused direct wrappers duplicate canonical controls",
+      "affected": ["CrmShellRoundButton", "CrmShellTopNavItem", "LegacyComposer"],
+      "evidence": [
+        "All three are public exports with zero references outside their own declaration.",
+        "CrmShellRoundButton directly wraps CrmShellIconButton.",
+        "CrmShellTopNavItem directly wraps CrmTopbarNavChip.",
+        "LegacyComposer directly wraps ComposerInput with fixed copy."
+      ],
+      "requiredResolution": "Deprecate as compatibility aliases or remove in the next breaking release; keep them out of canonical stories and new consumer contracts.",
+      "resolution": "Added compatibility classifications and @deprecated API annotations pointing new work to IconButton/placed shell controls, CrmTopbarNavChip/CrmShellTopNav, and Composer/ComposerPanel."
+    },
+    {
+      "id": "JPC-004",
+      "severity": "P2",
+      "status": "resolved",
+      "category": "storybook-coverage",
+      "title": "Public or registered components lack isolated Storybook evidence",
+      "affected": [
+        "AgentPublishFlowCard",
+        "CrmPageFamilyShell",
+        "ProductWindowAppChrome",
+        "QuotaBadge",
+        "SetupWelcomeMain"
+      ],
+      "evidence": [
+        "The public component inventory finds no story source reference for these canonical or potentially canonical components.",
+        "AgentPublishFlowCard, CrmPageFamilyShell, and QuotaBadge already have registry or source-map contracts.",
+        "Local AGENTS rules require isolated stories for public helpers and slots."
+      ],
+      "requiredResolution": "Decide public ownership first, then add isolated stories for canonical components or make implementation details private.",
+      "resolution": "Added and statically reviewed isolated stories for AgentPublishFlowCard, CrmPageFamilyShell, ProductWindowAppChrome, QuotaBadge, and SetupWelcomeMain. Storybook play verifies the interactive agent-card and setup contracts. Remaining no-story names are compatibility-only aliases and are intentionally non-canonical."
+    },
+    {
+      "id": "JPC-005",
+      "severity": "P2",
+      "status": "resolved",
+      "category": "test-coverage",
+      "title": "Seventy-five public visual components have no direct test reference",
+      "affected": ["@taliya/ui", "@taliya/crm"],
+      "evidence": [
+        "The AST inventory detects 75 public visual component names absent from package test sources.",
+        "The package suites pass, but indirect parent coverage does not prove every public behavior contract."
+      ],
+      "requiredResolution": "Classify components by interaction risk and add direct tests for every interactive public component; document visual-only exceptions.",
+      "resolution": "Added direct tests for the interactive public contracts, reducing nominally untested exports from 75 to 38. Classified all 38 remaining static, structural, primitive-layout, or compatibility-only exceptions in component-test-policy.json. The component inventory gate now rejects missing, duplicate, stale, storyless canonical, or incorrectly classified exceptions. UI passes 48 tests and CRM passes 172 tests."
+    },
+    {
+      "id": "JPC-006",
+      "severity": "P2",
+      "status": "resolved",
+      "category": "package-boundary",
+      "title": "CRM reexports the UI MessageBubble primitive without compatibility classification",
+      "affected": ["@taliya/crm/MessageBubble", "@taliya/ui/MessageBubble"],
+      "evidence": [
+        "MessageBubble is implemented and isolated in @taliya/ui.",
+        "@taliya/crm reexports the same runtime component.",
+        "The public API policy does not currently classify that reexport as a compatibility alias."
+      ],
+      "requiredResolution": "Classify the CRM reexport as compatibility-only and direct new consumers to @taliya/ui, or justify CRM ownership explicitly.",
+      "resolution": "Classified @taliya/crm/MessageBubble as a compatibility reexport whose canonical package is @taliya/ui, added a deprecation annotation, and strengthened collision classification in the joint component audit."
+    },
+    {
+      "id": "JPC-007",
+      "severity": "P2",
+      "status": "resolved",
+      "category": "evidence-freshness",
+      "title": "Drawer lifecycle report is stale",
+      "affected": ["specs/001-product-ui-foundation/drawer-lifecycle-audit.json"],
+      "evidence": [
+        "drawer-lifecycle:audit reports failedRows=0 and stale=true."
+      ],
+      "requiredResolution": "Regenerate after architecture decisions and rerun the lifecycle audit before family certification.",
+      "resolution": "Regenerated drawer-lifecycle-audit.json and .md after the architecture and Agent lifecycle changes; drawer-lifecycle:audit passes all 28 rows with no stale evidence."
+    },
+    {
+      "id": "JPC-008",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "audit-correctness",
+      "title": "Future consumer fixture used a stale exact union sentinel",
+      "affected": ["scripts/audit-consumer-integration.mjs"],
+      "evidence": [
+        "The sentinel omitted the existing finance-overview layout variant.",
+        "After aligning the marker with the source contract, the complete local future-consumer fixture passes."
+      ],
+      "resolution": "Updated the installed contract marker to include finance-overview and reran the full future-consumer fixture successfully."
+    },
+    {
+      "id": "JPC-009",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "inert-interaction",
+      "title": "File action controls render enabled but expose no consumer callbacks",
+      "affected": ["@taliya/ui/FileUpload", "@taliya/ui/AttachmentList"],
+      "evidence": [
+        "FileUpload renders an enabled action Button but its public props expose no action callback or disabled state.",
+        "AttachmentList removable renders enabled remove IconButtons but exposes no onRemove callback or item identity.",
+        "Both controls are keyboard-focusable and visually actionable while clicks are inert."
+      ],
+      "requiredResolution": "Add backwards-compatible consumer-owned callbacks and disabled semantics, then prove click behavior in direct package tests and Storybook interactions without changing visual anatomy.",
+      "resolution": "Added FileUpload onAction/actionDisabled and AttachmentList onRemove(item), plus direct UI tests and Storybook play assertions. The final static build was inspected and clicked in-browser; evidence 11 and 12 confirm unchanged anatomy, disabled uploading semantics, accessible remove controls, and visible focus."
+    },
+    {
+      "id": "JPC-010",
+      "severity": "P2",
+      "status": "resolved",
+      "category": "inert-interaction",
+      "title": "Decorative browser chrome exposed enabled controls without an action contract",
+      "affected": ["@taliya/crm/CrmBrowserToolbar", "@taliya/crm/CrmBrowserChrome"],
+      "evidence": [
+        "Default browser-frame toolbar items rendered as enabled buttons even though the composition exposed no callback.",
+        "The chrome is visual framing by default, not application navigation."
+      ],
+      "requiredResolution": "Keep default chrome out of the interactive accessibility tree and expose an explicit callback mode for consumers that need functional controls.",
+      "resolution": "CrmBrowserToolbar now renders visual spans by default and real buttons only when onAction is supplied; CrmBrowserChrome forwards onToolbarAction. Direct tests prove both modes and the CRM suite passes 172/172."
+    },
+    {
+      "id": "JPC-011",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "responsive-layout",
+      "title": "Official structural shells overlap or clip content at intermediate desktop widths",
+      "affected": [
+        "@taliya/crm/CrmProductShell",
+        "@taliya/crm/RightPanelLayout",
+        "@taliya/crm/SetupShell",
+        "@taliya/crm/AccessShell",
+        "@taliya/crm/ProductWindowFrame"
+      ],
+      "evidence": [
+        "At 1440x900 the card-catalog and config families crowd product navigation into global actions.",
+        "The setup family compresses the source-sized embedded agent rail until its heading and content clip.",
+        "Right-panel config and flow families use fixed-width columns that collide or clip inside the product shell.",
+        "The access family retains a 1528px window, producing horizontal overflow and a clipped contextual rail.",
+        "Evidence is recorded in visual-diagnostics/intermediate-desktop-layout-20260804.md and family captures 03, 10, 11, 12, and 13."
+      ],
+      "requiredResolution": "Add a shared official 981-1500px responsive contract, preserve source dimensions above 1500px and stacked behavior below 981px, then rebuild and recapture all affected families at 1440x900.",
+      "resolution": "Added official responsive contracts for product navigation, right-panel, setup, access, drawer reservation, and Agent flow layouts. Recaptured the five affected families at 1440x900 without viewport overflow, verified the Agent flow at 1024x900 without overlap, and verified a 390x844 full-screen drawer plus horizontally contained, vertically scrollable closed-page content."
+    },
+    {
+      "id": "JPC-012",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "drawer-lifecycle",
+      "title": "Agent page drawers expose a close control without page-owned close or reopen state",
+      "affected": [
+        "@taliya/crm/CrmRightPanelPage",
+        "AgentPresenceRoutinePage",
+        "AgentAbsenceFlowPage",
+        "AgentAbsenceFlowTestPage",
+        "AgentPublishRoutinePage",
+        "AgentExecutionReceiptPage"
+      ],
+      "evidence": [
+        "AgentFlowDrawer directly supports and tests onClose, but all five full-page Agent stories mount it without that callback.",
+        "CrmRightPanelPage reserves a drawer placeholder whenever panelPlacement is drawer, including when panel is null.",
+        "The existing 23-row lifecycle audit covers selected-object pages and does not include persistent Agent assistant pages.",
+        "The failure and ownership contract are recorded in visual-diagnostics/agent-drawer-lifecycle-20260804.md."
+      ],
+      "requiredResolution": "Make absent drawer panels collapse cleanly, control the assistant lifecycle in every Agent page, expose an official reopen action, and prove close/unmount/reopen in direct tests and Storybook/browser interactions.",
+      "resolution": "CrmRightPanelPage now collapses absent drawer panels without stale reservation. All five Agent pages own open state, pass onClose, expose an official Button reopen action, and share Storybook play coverage. Direct CRM tests pass 172/172, the lifecycle audit passes 28/28, and browser interaction proved close, unmount, collapsed layout, reopen, and no horizontal viewport overflow on every affected page."
+    },
+    {
+      "id": "JPC-013",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "inert-journey",
+      "title": "Access and subscription stories expose enabled journey actions without observable outcomes",
+      "affected": [
+        "Image72Signup",
+        "Image73Signin",
+        "Image74ReviewSubscription",
+        "Image75PendingConfirmation",
+        "Image76ResolveSubscription",
+        "Image77ConfirmedHandoff"
+      ],
+      "evidence": [
+        "The seven Access / Subscription visual states form a coherent journey and render without layout defects at 1440x900.",
+        "Image coverage stories mount AuthCard, SubscriptionReviewPage, SubscriptionStatusCard, SubscriptionResolutionPanel, and ConfirmedSubscriptionPage with their default enabled actions and no page-owned callbacks.",
+        "The public components expose callbacks at lower composition levels, but the default full-page stories do not prove submit, provider auth, coupon, payment, retry, support, or setup-handoff outcomes."
+      ],
+      "requiredResolution": "Make the official image-coverage stories own an executable access/subscription journey, add Storybook interaction assertions for every essential action and state transition, and verify the complete flow in the browser without introducing story-local anatomy.",
+      "resolution": "All seven official Access / Subscription stories now pass page-owned callbacks into the official components and exercise essential auth, coupon, payment, retry, support, and setup-handoff actions through Storybook play assertions. The rebuilt static Storybook completed successfully, and browser execution on the static artifact reached each story's final expected control with no visible Storybook error; evidence is recorded in visual-diagnostics/evidence/setup-responsive-20260804/static-access-play-results.json."
+    },
+    {
+      "id": "JPC-014",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "responsive-layout",
+      "title": "Setup page content collides or clips inside the stable shell at 1440px",
+      "affected": [
+        "Image51DOnboardingStudio",
+        "Image51EOnboardingEquipe",
+        "Image51FOnboardingCanais",
+        "Image51GOnboardingPlanos",
+        "Image51HOnboardingAlunos",
+        "Image51IOnboardingTurmas",
+        "Image51LOnboardingRevisao"
+      ],
+      "evidence": [
+        "The rebuilt 1440x900 route sweep has no viewport overflow, but the setup content panels still clip internally.",
+        "Studio schedule labels collide, team/channel fields and status content are cut, the plan editor compresses controls into overlapping rows, data tables truncate their action edge, and review cards overlap copy and actions.",
+        "The shell, stepper, agent rail, and bottom bar remain stable, isolating the defect to the official setup page-content layouts."
+      ],
+      "requiredResolution": "Make setup content grids and dense domain panels fluid within the official shell at reduced desktop widths, preserve readable controls and table access, and recapture all 13 setup states at 1440px and mobile before certification.",
+      "resolution": "Official setup shell, workspace, agent-chat, payment, grids, tables, and review layouts now adapt without story-local anatomy. All 13 setup stories pass interaction plays on the rebuilt static Storybook. Browser evidence covers every state at 390px and 1024px with zero horizontal overflow or visible Storybook errors, while the reduced-desktop 1440px inspection found no remaining collisions; static metrics and captures are stored under visual-diagnostics/evidence/setup-responsive-static-20260804."
+    },
+    {
+      "id": "JPC-015",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "consumer-contract",
+      "title": "Internal lead drawer still used the removed placement variant",
+      "affected": [
+        "taliya-internal/features/internal/leads/leads-workspace.tsx",
+        "@taliya/crm/CrmDrawer",
+        "scripts/audit-consumer-integration.mjs"
+      ],
+      "evidence": [
+        "A clean Internal clone failed TypeScript because LeadsWorkspace passed placement=overlay to CrmDrawer.",
+        "The current library intentionally exposes one canonical drawer geometry and no placement prop.",
+        "Clean package refresh and page-kit checks otherwise passed."
+      ],
+      "requiredResolution": "Remove the legacy prop, reject old drawer geometry props in consumer audits, and rerun the complete clean Internal suite.",
+      "resolution": "Removed placement=overlay from the real Internal working tree and clean certification clone. The consumer audit now rejects legacy geometry props. Clean Internal TypeScript, ESLint, 165 tests, production build, integration audit, page-kit audit, and package-sync audit all pass against the current local tarballs."
+    },
+    {
+      "id": "JPC-016",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "human-journey-validation",
+      "title": "Human setup review found residual copy, state, clipping, and responsive defects",
+      "affected": [
+        "SetupWelcomePage",
+        "SetupStudioWorkspace",
+        "SetupTeamWorkspace",
+        "SetupPlansWorkspace",
+        "SetupClassesWorkspace",
+        "SetupAgendaWorkspace",
+        "SetupStepper"
+      ],
+      "evidence": [
+        "All 13 official setup surfaces were exercised as human workflows at 1280x720 and 390x844.",
+        "The review found an eight-step counter for a nine-step flow, incorrect copy and owner role, non-persistent plan fields, clipped import and agenda content, agent scroll defects, and mobile stepper and schedule collisions.",
+        "Final static captures verify a single agent scroll area, an isolated mobile stepper footer, nine-step copy, a wrapping long plan label, and persistent plan-type selection."
+      ],
+      "requiredResolution": "Correct the official setup components and responsive styles, keep story composition data-only, add regression assertions, rebuild the static Storybook, and repeat the critical human interactions on the final artifact.",
+      "resolution": "Corrected the official setup copy, role contract, controlled plan state, responsive team, agenda, import, weekday, agent, stepper, and segmented-control layouts. CRM 173/173 tests, package typechecks, docs smoke, and the final static Storybook build pass. Browser recaptures and interaction evidence are recorded in visual-diagnostics/evidence/onboarding-human-20260804."
+    },
+    {
+      "id": "JPC-017",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "responsive-layout",
+      "title": "Post-live settings workspaces overlap the configuration agent panel at intermediate desktop widths",
+      "affected": [
+        "SettingsTeamWorkspace",
+        "SettingsChannelsWorkspace",
+        "SettingsPlansWorkspace",
+        "SettingsPaymentsWorkspace",
+        "SettingsNotificationsWorkspace"
+      ],
+      "evidence": [
+        "At 1280x720, fixed-width descendants rendered beneath the configuration agent panel even though the root viewport reported no overflow.",
+        "The overlap intercepted the Team deactivate action and clipped settings header chips and notification rule controls.",
+        "Final geometry reports zero descendants under the panel for Team, Channels, Plans, Payments, and Notifications."
+      ],
+      "requiredResolution": "Make every official settings workspace fluid within the right-panel main column, keep the agent rail stable, rebuild Storybook, and repeat visual and interaction checks.",
+      "resolution": "Updated only official CRM responsive contracts for settings workspaces, sections, headers, and rule rows. Final desktop captures show no overlap, the previously blocked Team action is executable, all nine Storybook play contracts pass, and evidence is recorded in visual-diagnostics/settings-human-audit-20260804.md."
+    },
+    {
+      "id": "JPC-018",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "product-state-contract",
+      "title": "Post-live settings pages do not yet represent every canonical field and operational state",
+      "affected": [
+        "Settings configuration route family"
+      ],
+      "evidence": [
+        "Team now confirms deactivate/reactivate and role changes, blocks the last admin, and uses a two-stage strong confirmation for owner transfer.",
+        "Permissions now represents approval, blocked-permission, and validation-error states; its sensitive-save confirmation and isolated states pass tests and the rebuilt static Storybook.",
+        "Notifications now edits enabled alert types per role and represents an unavailable internal channel.",
+        "Payments now represents active, entitlement-blocked, and provider-error variants of Taliya Payments.",
+        "Studio field coverage, manual payment selection, notification role and alert selection, Team confirmation, and blocked-last-admin handling were corrected during this audit.",
+        "The eight editable workspaces now share official blocked-permission, correctable validation, saving, and recoverable system-error contracts; Hub cards remain navigable in read-only, entitlement-blocked, and error states.",
+        "The rebuilt static Storybook exposes one retry action for system errors, keeps request-access outside disabled controls, and produced no browser errors during the sampled human interaction pass.",
+        "Remaining gaps are domain-specific isolated outcomes: Studio reviewAgendaImpact; Channels pending/disconnected; Plans draftPlan, cannotDelete, and reviewConsumption; Notifications reviewAlert."
+      ],
+      "requiredResolution": "Promote the remaining domain-specific state contracts into controlled official component APIs, add isolated stories and interaction assertions, and certify their product outcomes without story-local anatomy.",
+      "resolution": "Added official transverse blocked, validation, saving, and system-error behavior across editable settings; kept Hub recovery states navigable; isolated Studio agenda impact, Channels connection lifecycle, Plans draft/review/inactivation fallback, and Notifications alert review. CRM 182/182 tests, typechecks, lints, token governance, API/coverage gates, static Storybook build, and sampled human interactions pass without story-local anatomy."
+    },
+    {
+      "id": "JPC-019",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "product-context-contract",
+      "title": "Setup routes reused generic Studio guidance instead of their domain context",
+      "affected": [
+        "SetupShellAgentPanel",
+        "SetupAgentChat",
+        "Setup routes 51C-51L"
+      ],
+      "evidence": [
+        "Every embedded guided route rendered the same Dados do studio message before this audit.",
+        "Canonical setup specs define different impact, guidance and quick replies for Studio, Team, Channels, Plans, Payment, Students, Classes, Agenda and Review.",
+        "Menu, close, human-help and send controls could appear enabled without a callback, and Review lacked a page-level h1."
+      ],
+      "requiredResolution": "Promote contextual agent content to an official public contract, make enabled actions require callbacks, restore the Review page heading, and exercise every guided route on the static Storybook.",
+      "resolution": "Added SetupAgentContext/setupAgentContexts, shared it between standalone and embedded agents, disabled absent actions, promoted Review to h1, extended all 13 plays, and passed 184 CRM tests plus current desktop/mobile/tablet browser evidence documented in setup-joint-certification-audit-20260805.md."
+    },
+    {
+      "id": "JPC-020",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "responsive-layout",
+      "title": "Setup shell compressed three work regions and controls at 1024px",
+      "affected": [
+        "SetupShell",
+        "SetupStudioWorkspace",
+        "SetupPaymentWorkspace",
+        "SetupReviewWorkspace"
+      ],
+      "evidence": [
+        "Fresh 1024px captures showed topbar overlap while stepper, content and agent remained in three narrow columns.",
+        "Studio weekday controls and Payment method/flow content collided even though the document itself had no horizontal overflow.",
+        "The geometry probe found the shell still using the wide desktop composition at a 1009px inner viewport."
+      ],
+      "requiredResolution": "Move the official setup shell to its stacked composition before the three-column layout becomes compressed, preserve wide-desktop and mobile behavior, rebuild Storybook, and repeat all 13 tablet checks.",
+      "resolution": "The official Setup shell now stacks stepper, main content and agent between 981px and 1120px. The rebuilt static Storybook passes 13/13 tablet routes and the combined 26 responsive checks with zero errors, horizontal overflow, unnamed controls or region overlap."
+    },
+    {
+      "id": "JPC-021",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "responsive-layout",
+      "title": "Settings retained fixed desktop geometry and clipped controls at mobile and tablet widths",
+      "affected": [
+        "SettingsPermissionsWorkspace",
+        "SettingsPaymentsWorkspace",
+        "SettingsAgendaWorkspace",
+        "SettingsNotificationsWorkspace",
+        "SettingsAgentPanel"
+      ],
+      "evidence": [
+        "Mobile headers, payment tracks and agenda selects exceeded or compressed the available width.",
+        "At 1024px the main workspace and assistant rail stayed side by side and compressed dense settings controls.",
+        "The notification status column exposed a 72px box with 103px of intrinsic content, clipping Desligado.",
+        "Fresh 390px, 1024px and 1280px captures cover all five canonical Settings routes without document overflow or visible Storybook errors."
+      ],
+      "requiredResolution": "Contain every Settings workspace on mobile, stack the official right-panel composition before its content compresses, preserve full status labels, rebuild Storybook, and repeat current human inspection.",
+      "resolution": "Official Settings responsive contracts now reset fixed geometry on mobile, constrain Payments descendants, stack main and assistant between 981px and 1120px, and reserve 104px for notification status. CRM passes 185/185 tests and typecheck; the rebuilt static Storybook and fresh human captures pass."
+    },
+    {
+      "id": "JPC-022",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "shell-architecture-and-journey",
+      "title": "Today history and the empty route did not use their canonical responsive contracts",
+      "affected": [
+        "TodayHistoryStory",
+        "CrmEmptyShell",
+        "CrmEmptyShellCanvas",
+        "Image79EmptyShell"
+      ],
+      "evidence": [
+        "Today history targeted a non-scrolling container and opened above the history region.",
+        "The former Image 79 route owned a fixed 1160px-wide shell, overflowing by 151px at tablet width and 785px at mobile width.",
+        "The first canonical refactor briefly nested two elements with the same canvas class and left 9px of residual vertical scroll.",
+        "Final evidence covers five canonical routes at 390px, 1024px and 1280px with zero horizontal overflow, one visible h1, one product shell and no visible Storybook error.",
+        "The task drawer measures 390x844 on mobile and 420x768 on tablet, both at top 0; the history region opens at top 0 in the active scroll container."
+      ],
+      "requiredResolution": "Use the single CrmProductShell composition, remove duplicate canvas anatomy, promote empty/loading/unavailable states, fix history scrolling, exercise essential actions, and repeat responsive human inspection.",
+      "resolution": "CrmEmptyShell now composes CrmPageFamilyShell, embeds one state surface inside the canonical canvas, exposes complete callbacks and official states, and Today scrolls with scrollIntoView. Seven plays pass; CRM passes 186/186 tests; responsive metrics and final captures are recorded under today-shell-final-current-20260805."
+    },
+    {
+      "id": "JPC-023",
+      "severity": "P2",
+      "status": "resolved",
+      "category": "primitive-reuse",
+      "title": "Three internal actions bypassed the official Button primitive",
+      "affected": [
+        "SettingsNotificationsWorkspace",
+        "InviteRow"
+      ],
+      "evidence": [
+        "The component architecture gate classified two role/alert controls in SettingsNotificationsWorkspace and one row-open control in InviteRow as Refatorar.",
+        "The controls duplicated focus, disabled and button reset behavior already owned by @taliya/ui Button.",
+        "After promotion, the architecture report classifies all 32 compound native-root components as justified and reports refactor=0, missingPrimitive=0."
+      ],
+      "requiredResolution": "Compose these actions with the official Button primitive, preserve their established visual geometry, and add direct regression assertions.",
+      "resolution": "Replaced all three direct controls with Button, added scoped resets that preserve the certified geometry, asserted tl-button ownership in direct tests, and passed 186 CRM tests, typecheck and the component architecture gate."
+    },
+    {
+      "id": "JPC-024",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "worklist-product-contract",
+      "title": "Checklist and approval Worklists lacked canonical actions, terminal states and decision context",
+      "affected": [
+        "ChecklistDrawer",
+        "ChecklistTable",
+        "ApprovalDrawer",
+        "ApprovalTable",
+        "ImageCoverageTasks",
+        "ImageCoverageChecklists",
+        "ImageCoverageApprovals"
+      ],
+      "evidence": [
+        "Checklist lacked assign and open-task actions, completion did not enter a terminal drawer state, and overdue was not an explicit table status.",
+        "Approval lacked before, after and reason sections, could not represent expired, approved or rejected rows, and exposed implementation ids in action announcements.",
+        "Dense tables compressed semantic columns beneath the fixed drawer instead of preserving an internal scrollable minimum width."
+      ],
+      "requiredResolution": "Promote the missing contracts into official CRM components, add route-level interaction plays, preserve usable table geometry and verify all three Worklists on the final static artifact at mobile, tablet and desktop widths.",
+      "resolution": "Official Checklist and Approval contracts now expose all required actions, states and decision context; tables retain token-backed minimum widths; three route plays reach their expected terminal states. CRM passes 187 tests, the final static Storybook build succeeds, and nine responsive checks report zero overflow, one shell, one h1, no visible errors and full-height canonical drawers."
+    },
+    {
+      "id": "JPC-025",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "worklist-product-contract",
+      "title": "Student, class and replacement Worklists lacked canonical lifecycle actions, states and readable constrained tables",
+      "affected": [
+        "StudentTable",
+        "StudentDrawer",
+        "ClassDrawer",
+        "ReplacementTable",
+        "ReplacementDrawer",
+        "CrmWorklistTable",
+        "ImageCoverageStudents",
+        "ImageCoverageAgenda",
+        "ImageCoverageReplacements"
+      ],
+      "evidence": [
+        "The regional audit recorded WLS-001 through WLS-012 across Alunos, Turmas and Reposicoes.",
+        "Alunos lacked schedule, paused and delinquent lifecycle states, independent finance data and readable constrained table geometry.",
+        "Turmas lacked demand, open-class, view-demand and conflict contracts; the generic table compressed ten columns to 532px and allowed cell content to overflow.",
+        "Reposicoes lacked find-fit, consume-credit, no-vacancy, conflict, waiting, expired, consumed and empty-options contracts.",
+        "Final static plays end in delinquent, conflict and expired states with zero browser errors; nine responsive checks pass at 390x844, 1024x768 and 1280x720."
+      ],
+      "requiredResolution": "Promote missing domain states and actions into official CRM components, keep lifecycle and finance independent, preserve token-backed table minimum widths and internal scrolling, add route plays, and certify the final static artifact across mobile, tablet and desktop.",
+      "resolution": "Official Student, Class, Replacement and Worklist table contracts now expose every required state and action. CRM passes 192 tests; final static plays are clean; all drawers remain fixed and full-height; nine responsive checks pass; and Turmas preserves a 760px token-backed table inside its 532px visible region with internal scrolling and zero overflowing cells."
+    },
+    {
+      "id": "JPC-026",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "worklist-product-contract",
+      "title": "Commercial Worklists collapsed lifecycle states and left qualification, payment and conversion outcomes incomplete",
+      "affected": [
+        "LeadDrawer",
+        "EnrollmentChecklist",
+        "CrmWorklistTable",
+        "ImageCoverageSales"
+      ],
+      "evidence": [
+        "The regional audit recorded SAL-001 through SAL-008 across Interessados, Aulas experimentais and Matriculas.",
+        "Interested and trial lifecycle states collapsed into generic drawer states and actions announced implementation ids without observable transitions.",
+        "Enrollment omitted initial payment, validation and charge actions, awaiting-payment state and a reachable conversion outcome.",
+        "Checklist controls shared an ambiguous accessible name and remained enabled without an available callback.",
+        "Final route plays reach enrollment-missing and enrollment-ready states; nine responsive checks pass at 390x844, 1024x768 and 1280x720 with empty browser error and warning logs."
+      ],
+      "requiredResolution": "Promote explicit commercial lifecycle states and actions into official CRM components, make checklist controls accessible and callback-aware, add observable route plays, and certify the final static artifact across mobile, tablet and desktop.",
+      "resolution": "LeadDrawer and EnrollmentChecklist now expose the required commercial contracts; all three stories use contextual official actions and observable transitions. CRM passes 194 tests, docs smoke passes 5 tests, the final static Storybook build succeeds, all architecture gates pass after refreshing derived evidence, and nine responsive checks preserve one shell, one h1, zero document overflow and full-height fixed drawers."
+    },
+    {
+      "id": "JPC-027",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "worklist-product-contract",
+      "title": "Retention Worklists exposed incompatible actions and lacked observable terminal lifecycle states",
+      "affected": [
+        "CaseDrawer",
+        "CrmWorklistTable",
+        "ImageCoverageRetention"
+      ],
+      "evidence": [
+        "The regional audit confirmed RTN-001 through RTN-012 across Retencao, Cancelamentos, Reativacoes and Reclamacoes.",
+        "Risk follow-up, cancellation save/pause, reactivation return/reserve and complaint classify/pause/resolve actions lacked complete official state transitions and contextual guards.",
+        "Actions announced raw implementation ids; terminal or forbidden rows still exposed incompatible enabled actions; complaint automation content claimed a paused state without an observable action.",
+        "Final route plays reach risk-low, cancellation-cancelled, reactivation-do-not-contact and complaint-waiting states; twelve responsive checks pass at 390x844, 1024x768 and 1280x720 with empty browser error and warning logs."
+      ],
+      "requiredResolution": "Promote retention lifecycle states and actions into the official CaseDrawer contract, enforce contextual action guards, add observable route plays and certify the final static artifact across mobile, tablet and desktop.",
+      "resolution": "CaseDrawer now exposes the required retention lifecycle and action contracts; all four stories use contextual official actions, localized outcomes and observable transitions. CRM passes 195 tests, package lint/build and docs lint/typecheck pass, the rebuilt static Storybook is clean, and twelve responsive checks preserve one shell, one h1, zero document overflow and fixed full-height drawers."
+    },
+    {
+      "id": "JPC-028",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "worklist-product-contract",
+      "title": "Finance movement and Internal tenant Worklists lacked canonical outcomes and readable dense tables",
+      "affected": [
+        "PaymentDrawer",
+        "TenantSummaryDrawer",
+        "CrmWorklistTable",
+        "ImageCoverageFinance",
+        "ImageCoverageInternal"
+      ],
+      "evidence": [
+        "The regional audit confirmed FWL-001 through FWL-012 across Movimentacoes financeiras and Internal tenants.",
+        "Payment movements lacked dispute/reconciliation states and confirm, reconcile, receipt and contextual export actions; callbacks exposed raw ids and terminal rows inherited incompatible actions.",
+        "Tenant summaries collapsed degraded and blocked accounts into risk, did not model grant state independently and offered the same request action for active grants.",
+        "The 760px dense tables clipped 14 cells on each route; final token-backed tables report zero overflowing cells in all six responsive checks."
+      ],
+      "requiredResolution": "Promote financial movement and tenant access lifecycles into typed official drawer contracts, add observable route plays, preserve readable token-backed table geometry and certify the final static artifact across mobile, tablet and desktop.",
+      "resolution": "PaymentDrawer and TenantSummaryDrawer now expose the canonical domain states, contextual typed actions and terminal guards; both stories use localized observable transitions. CRM passes 196 tests, build/lint/typecheck/token gates pass, the final static Storybook is clean, and six responsive checks preserve full-height drawers, zero document overflow and zero clipped cells."
+    },
+    {
+      "id": "JPC-029",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "kanban-product-contract",
+      "title": "Kanban pages selected cards without completing their canonical domain lifecycles",
+      "affected": [
+        "CrmKanbanPage",
+        "CaseDrawer",
+        "PaymentDrawer",
+        "LeadDrawer",
+        "ImageCoverageSales",
+        "ImageCoverageFinance",
+        "ImageCoverageOperation"
+      ],
+      "evidence": [
+        "The source diagnostic found that Sales and Finance selected cards without a functional domain drawer or observable stage transitions.",
+        "Operation supported selection and drag/drop, but drawer facts were static and assume, delegate, approval, resolve, move and correction actions did not mutate the board.",
+        "Blocked Operation cases disabled the recovery action together with unsafe mutations.",
+        "Four dedicated interaction stories now reach converted, paid, resolved and corrected states with empty browser warning and error logs.",
+        "Twelve responsive captures pass at 390x844, 1024x768 and 1280x720 with zero document overflow, zero column overlap, zero card overflow and fixed full-height drawers."
+      ],
+      "requiredResolution": "Promote typed Kanban lifecycle actions and states into official CRM contracts, keep page stories limited to domain data and callbacks, add observable interaction stories and certify the rebuilt static artifact across mobile, tablet and desktop.",
+      "resolution": "Sales, Finance and Operation now use controlled official Kanban compositions with contextual official drawers and observable domain transitions. Blocked recovery is available while unsafe mutations stay guarded. CRM passes 197 tests, docs smoke passes 5 tests, the static Storybook and architecture gates pass, and the Kanban negative probe rejects a return to story-local composition."
+    },
+    {
+      "id": "JPC-030",
+      "severity": "P1",
+      "status": "resolved",
+      "category": "drawer-architecture",
+      "title": "Usage and Billing mount canonical drawers as contained right-panel rails",
+      "affected": [
+        "CrmRightPanelPage",
+        "UsageDrawer",
+        "ImageCoverageUsage",
+        "ImageCoverageBilling",
+        "ImageCoverageAgents"
+      ],
+      "evidence": [
+        "At 1280x720 the UsageDrawer computes as position static at y=179 with bottom=899 inside the right-panel region, instead of fixed at top=0 and bottom=720.",
+        "CrmRightPanelPage exposes the forbidden panelPlacement inline/drawer public variant while its default panel slot accepts domain CrmDrawer compositions.",
+        "BillingSupportDrawer returns UsageDrawer and all three Billing routes mount it through the same contained panel path.",
+        "The current drawer lifecycle audit does not reject panelPlacement or a domain drawer passed to the panel slot.",
+        "Final static Storybook browser evidence for all five Usage and Billing routes records fixed top=0, bottom=0, right=0, 720px height, 420px width, close/unmount/reopen success, and empty runtime logs."
+      ],
+      "requiredResolution": "Remove the page-family placement variant, reserve panel for non-drawer assistant rails, route every domain drawer through the canonical shell drawer slot, strengthen the lifecycle gate, and prove fixed full-height geometry plus close/reopen behavior on the final static Storybook artifact.",
+      "resolution": "Removed the placement variant and routed Usage and Billing domain drawers through the canonical CrmProductShell drawer slot. The drawer lifecycle audit passes all 33 governed rows, and final static Storybook browser evidence covers all five affected routes with fixed full-height geometry, close/unmount/reopen behavior, and no runtime logs."
+    }
+  ]
+}

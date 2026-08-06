@@ -24,6 +24,7 @@ import {
   CrmTopbarActionButton,
   CrmTopbarNavChip,
   PageHeader,
+  ProductWindowAppChrome,
   ProductWindowFrame,
   Sidebar,
   SidebarItem,
@@ -145,6 +146,16 @@ export function ProductWindowFrameStory() {
           <div className="sb-crm-shell-story__window-body">Frameless</div>
         </ProductWindowFrame>
       </div>
+    </StorySurface>
+  );
+}
+
+export function ProductWindowAppChromeStory() {
+  return (
+    <StorySurface wide>
+      <ComponentSurface>
+        <ProductWindowAppChrome />
+      </ComponentSurface>
     </StorySurface>
   );
 }

@@ -40,8 +40,9 @@ function InteractiveChecklistDrawer() {
         steps={steps}
         completedSteps={completedSteps}
         onClose={() => setEvent("fechado")}
-        onContinue={() => setEvent("continuar")}
-        onCreateTask={() => setEvent("criar-tarefa")}
+        onPrimaryAction={() => setEvent("continuar")}
+        onAssign={() => setEvent("atribuir")}
+        onOpenTask={() => setEvent("abrir-tarefa")}
         onComplete={() => {
           setEvent("concluir");
           setSteps((current) => current.map((step) => ({ ...step, state: "done" })));

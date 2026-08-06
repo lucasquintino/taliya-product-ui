@@ -1,0 +1,146 @@
+{
+  "storyId": "crm-image-coverage-agenda--image-26-agenda-calendario-operacional",
+  "rows": [
+    {
+      "viewport": "1440",
+      "metrics": {
+        "brokenImages": [],
+        "document": {
+          "overflowX": false,
+          "scrollHeight": 1161,
+          "scrollWidth": 1410
+        },
+        "drawer": {
+          "bottom": 900,
+          "fullHeight": true,
+          "height": 900,
+          "position": "fixed",
+          "right": 1410,
+          "state": "calling",
+          "width": 420,
+          "x": 990,
+          "y": 0
+        },
+        "enabledButtons": 73,
+        "root": {
+          "bottom": 900,
+          "height": 900,
+          "right": 1410,
+          "width": 1410,
+          "x": 0
+        },
+        "statuses": [
+          "Visualização alterada para dia"
+        ],
+        "viewport": {
+          "actual": {
+            "height": 900,
+            "width": 1440
+          },
+          "clientHeight": 900,
+          "clientWidth": 1410,
+          "requested": {
+            "height": 900,
+            "name": "1440",
+            "width": 1440
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "viewport": "1024",
+      "metrics": {
+        "brokenImages": [],
+        "document": {
+          "overflowX": false,
+          "scrollHeight": 1215,
+          "scrollWidth": 994
+        },
+        "drawer": {
+          "bottom": 768,
+          "fullHeight": true,
+          "height": 768,
+          "position": "fixed",
+          "right": 994,
+          "state": "calling",
+          "width": 420,
+          "x": 574,
+          "y": 0
+        },
+        "enabledButtons": 73,
+        "root": {
+          "bottom": 768,
+          "height": 768,
+          "right": 994,
+          "width": 994,
+          "x": 0
+        },
+        "statuses": [
+          "Visualização alterada para dia"
+        ],
+        "viewport": {
+          "actual": {
+            "height": 768,
+            "width": 1024
+          },
+          "clientHeight": 768,
+          "clientWidth": 994,
+          "requested": {
+            "height": 768,
+            "name": "1024",
+            "width": 1024
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "viewport": "390",
+      "metrics": {
+        "brokenImages": [],
+        "document": {
+          "overflowX": false,
+          "scrollHeight": 720,
+          "scrollWidth": 480
+        },
+        "drawer": {
+          "bottom": 720,
+          "fullHeight": true,
+          "height": 720,
+          "position": "fixed",
+          "right": 480,
+          "state": "calling",
+          "width": 480,
+          "x": 0,
+          "y": 0
+        },
+        "enabledButtons": 73,
+        "root": {
+          "bottom": 720,
+          "height": 720,
+          "right": 480,
+          "width": 480,
+          "x": 0
+        },
+        "statuses": [
+          "Visualização alterada para dia"
+        ],
+        "viewport": {
+          "actual": {
+            "height": 720,
+            "width": 480
+          },
+          "clientHeight": 720,
+          "clientWidth": 480,
+          "requested": {
+            "height": 720,
+            "name": "390",
+            "width": 390
+          }
+        }
+      },
+      "errors": []
+    }
+  ]
+}

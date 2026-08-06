@@ -1,6 +1,6 @@
 # Reference Sheet Coverage Audit
 
-Generated: 2026-07-16T16:31:31.220Z
+Generated: 2026-08-05T19:37:00.529Z
 
 Status: pass-structural-not-visual
 

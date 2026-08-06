@@ -1,0 +1,119 @@
+[
+  {
+    "id": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+    "active": {
+      "name": "Continuar",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 1041
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+    "active": {
+      "name": "Fechar agente",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 416
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 1810
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 1541
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 1597
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 2018
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 2654
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 1974
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 2144
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 2166
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+    "active": {
+      "name": "Salvar rascunho",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 1947
+  },
+  {
+    "id": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+    "active": {
+      "name": "Publicar setup inicial",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 2320
+  },
+  {
+    "id": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+    "active": {
+      "name": "Agendar ajuda",
+      "role": "BUTTON"
+    },
+    "errorVisible": false,
+    "textLength": 509
+  }
+]

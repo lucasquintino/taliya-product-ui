@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-16T16:34:04.370Z",
-  "status": "pass-current-internal-library",
+  "generatedAt": "2026-08-05T19:24:04.081Z",
+  "status": "fail",
   "currentInternalLibraryAccepted": true,
-  "currentInternalConsumptionPass": true,
+  "currentInternalConsumptionPass": false,
   "internalRouteWorkspacePass": true,
   "publicPageKitPass": true,
   "technicalReleaseCandidatePass": true,
@@ -98,7 +98,7 @@
     },
     {
       "id": "current-internal-consuming-official-kit",
-      "status": "pass",
+      "status": "fail",
       "evidence": "consumer integration/page-kit/runtime and registry-consumer-adoption audits",
       "meaning": "Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones."
     },

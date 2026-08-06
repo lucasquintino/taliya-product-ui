@@ -2080,10 +2080,18 @@
 .tcrm-three-pane-layout {
   display: grid;
   gap: var(--taliya-layout-crm-three-pane-gap);
-  grid-template-columns: var(--taliya-layout-crm-three-pane-columns);
+  grid-template-columns: minmax(0, 1.73fr) minmax(0, 1.8fr) minmax(0, 1fr);
   height: var(--taliya-layout-crm-three-pane-height);
   overflow: hidden;
-  width: var(--taliya-layout-crm-three-pane-width);
+  width: min(var(--taliya-layout-crm-three-pane-width), 100%);
+}
+
+.tcrm-three-pane-page-layout--drawer {
+  grid-template-columns: minmax(0, 1.73fr) minmax(0, 1.8fr);
+}
+
+.tcrm-three-pane-page-layout--drawer > .tcrm-three-pane-layout__right {
+  display: none;
 }
 
 .tcrm-three-pane-layout__left,
@@ -2091,6 +2099,11 @@
 .tcrm-three-pane-layout__right {
   min-height: 0;
   overflow: hidden;
+}
+
+.tcrm-three-pane-layout__right > .tcrm-context-panel {
+  min-width: 0;
+  width: 100%;
 }
 
 .tcrm-right-panel-layout {
@@ -2133,12 +2146,7 @@
 .tcrm-right-panel-layout--class-operation > .tcrm-right-panel-layout__panel {
   position: relative;
   transform: translateY(calc(var(--taliya-layout-crm-right-panel-class-operation-panel-offset-y) - var(--taliya-space-4)));
-  z-index: var(--taliya-layout-crm-product-shell-viewport-drawer-z-index);
-}
-
-.tcrm-right-panel-layout--class-operation .tcrm-class-drawer {
-  height: var(--taliya-layout-crm-right-panel-class-operation-height);
-  width: 100%;
+  z-index: var(--taliya-layout-crm-product-shell-drawer-z-index);
 }
 
 .tcrm-right-panel-layout--settings {
@@ -2370,11 +2378,6 @@
   transform: translateY(var(--taliya-layout-crm-right-panel-billing-subscription-panel-offset-y));
 }
 
-.tcrm-right-panel-layout--billing-subscription > .tcrm-right-panel-layout__panel > .tcrm-usage-drawer {
-  height: 100%;
-  width: 100%;
-}
-
 .tcrm-product-shell-stage--content-billing-subscription .tcrm-product-shell-page-header {
   margin-left: var(--taliya-layout-crm-product-shell-billing-subscription-header-margin-left);
 }
@@ -2404,35 +2407,35 @@
   padding-inline: var(--taliya-control-crm-billing-subscription-action-padding-x);
 }
 
-.tcrm-right-panel-layout--billing-subscription .tcrm-usage-drawer__header {
+.tcrm-product-shell-stage--content-billing-subscription > .tcrm-usage-drawer .tcrm-usage-drawer__header {
   transform: translateY(var(--taliya-layout-crm-billing-subscription-drawer-header-offset-y));
 }
 
-.tcrm-right-panel-layout--billing-subscription .tcrm-usage-drawer__header h2 {
+.tcrm-product-shell-stage--content-billing-subscription > .tcrm-usage-drawer .tcrm-usage-drawer__header h2 {
   font-size: var(--taliya-type-crm-billing-subscription-drawer-title-size);
   line-height: var(--taliya-type-crm-billing-subscription-drawer-title-line-height);
   white-space: nowrap;
 }
 
-.tcrm-right-panel-layout--billing-subscription .tcrm-usage-drawer__callout {
+.tcrm-product-shell-stage--content-billing-subscription > .tcrm-usage-drawer .tcrm-usage-drawer__callout {
   transform: translateY(var(--taliya-layout-crm-billing-subscription-drawer-callout-offset-y));
 }
 
-.tcrm-right-panel-layout--billing-subscription .tcrm-usage-drawer__questions {
+.tcrm-product-shell-stage--content-billing-subscription > .tcrm-usage-drawer .tcrm-usage-drawer__questions {
   transform: translateY(var(--taliya-layout-crm-billing-subscription-drawer-questions-offset-y));
 }
 
-.tcrm-right-panel-layout--billing-subscription .tcrm-usage-drawer__question.tl-button {
+.tcrm-product-shell-stage--content-billing-subscription > .tcrm-usage-drawer .tcrm-usage-drawer__question.tl-button {
   justify-self: start;
   max-width: 100%;
   width: max-content;
 }
 
-.tcrm-right-panel-layout--billing-subscription .tcrm-usage-drawer__composer {
+.tcrm-product-shell-stage--content-billing-subscription > .tcrm-usage-drawer .tcrm-usage-drawer__composer {
   transform: translateY(var(--taliya-layout-crm-billing-subscription-drawer-composer-offset-y));
 }
 
-.tcrm-right-panel-layout--billing-subscription .tcrm-usage-drawer__footer {
+.tcrm-product-shell-stage--content-billing-subscription > .tcrm-usage-drawer .tcrm-usage-drawer__footer {
   transform: translateY(var(--taliya-layout-crm-billing-subscription-drawer-footer-offset-y));
 }
 
@@ -2445,11 +2448,6 @@
   height: var(--taliya-layout-crm-right-panel-billing-invoices-height);
   overflow: hidden;
   transform: translateY(var(--taliya-layout-crm-right-panel-billing-invoices-panel-offset-y));
-}
-
-.tcrm-right-panel-layout--billing-invoices > .tcrm-right-panel-layout__panel > .tcrm-usage-drawer {
-  height: 100%;
-  width: 100%;
 }
 
 .tcrm-right-panel-layout--billing-addons {
@@ -2472,11 +2470,6 @@
   transform: translateY(var(--taliya-layout-crm-right-panel-billing-addons-panel-offset-y));
 }
 
-.tcrm-right-panel-layout--billing-addons > .tcrm-right-panel-layout__panel > .tcrm-usage-drawer {
-  height: 100%;
-  width: 100%;
-}
-
 .tcrm-right-panel-layout--usage-overview {
   gap: var(--taliya-layout-crm-right-panel-usage-overview-gap);
   grid-template-columns: var(--taliya-layout-crm-right-panel-usage-overview-columns);
@@ -2495,11 +2488,6 @@
   height: var(--taliya-layout-crm-right-panel-usage-overview-height);
   overflow: hidden;
   transform: translateY(var(--taliya-layout-crm-right-panel-usage-overview-panel-offset-y));
-}
-
-.tcrm-right-panel-layout--usage-overview > .tcrm-right-panel-layout__panel > .tcrm-usage-drawer {
-  height: 100%;
-  width: 100%;
 }
 
 .tcrm-right-panel-layout--usage-ledger {
@@ -2522,48 +2510,11 @@
   transform: translateY(var(--taliya-layout-crm-right-panel-usage-ledger-panel-offset-y));
 }
 
-.tcrm-right-panel-layout--usage-ledger > .tcrm-right-panel-layout__panel > .tcrm-usage-drawer {
-  height: 100%;
-  width: 100%;
-}
-
-@media (min-width: 1600px) {
-  .tcrm-right-panel-layout--drawer-panel {
-    grid-template-columns: var(--taliya-layout-crm-right-panel-drawer-wide-columns);
-  }
-
-  .tcrm-right-panel-layout--drawer-panel.tcrm-right-panel-layout--simulation {
-    grid-template-columns: var(--taliya-layout-crm-right-panel-drawer-simulation-columns);
-  }
-
-  .tcrm-right-panel-layout--drawer-panel.tcrm-right-panel-layout--agent-test {
-    grid-template-columns: var(--taliya-layout-crm-right-panel-drawer-simulation-columns);
-  }
-}
-
-.tcrm-right-panel-layout--drawer-panel {
-  transform: translateX(var(--taliya-layout-crm-right-panel-drawer-panel-offset-x));
-}
-
-.tcrm-right-panel-layout--drawer-panel.tcrm-right-panel-layout--agent-execution {
-  grid-template-columns: var(--taliya-layout-crm-right-panel-agent-execution-columns);
-  transform: translateX(var(--taliya-layout-crm-right-panel-agent-execution-offset-x));
-}
-
 .tcrm-right-panel-layout__main,
 .tcrm-right-panel-layout__panel {
   min-height: 0;
   min-width: 0;
   overflow: hidden;
-}
-
-.tcrm-right-panel-layout__drawer-reserve {
-  align-items: start;
-  display: grid;
-  gap: var(--taliya-control-crm-agent-flow-drawer-info-gap);
-  grid-template-columns: var(--taliya-layout-crm-agent-flow-drawer-info-columns);
-  height: 100%;
-  width: 100%;
 }
 
 .tcrm-context-panel {
@@ -2586,6 +2537,55 @@
 
 .tcrm-context-panel--blocked {
   opacity: var(--taliya-control-opacity-subtle-disabled);
+}
+
+.tcrm-conversation-drawer__fact-value {
+  align-items: center;
+  display: flex;
+  gap: var(--taliya-space-1);
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.tcrm-conversation-drawer__history,
+.tcrm-conversation-drawer__tasks {
+  display: grid;
+  gap: var(--taliya-space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tcrm-conversation-drawer__history li,
+.tcrm-conversation-drawer__task {
+  align-items: center;
+  display: grid;
+  gap: var(--taliya-space-2);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-width: 0;
+}
+
+.tcrm-conversation-drawer__history time,
+.tcrm-conversation-drawer__history small {
+  color: var(--taliya-color-text-muted);
+  font-size: var(--taliya-type-caption-size);
+}
+
+.tcrm-conversation-drawer__history span {
+  display: grid;
+  gap: var(--taliya-space-1);
+  min-width: 0;
+}
+
+.tcrm-conversation-drawer__task > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.tcrm-conversation-drawer__agent {
+  align-items: center;
+  display: flex;
+  gap: var(--taliya-space-2);
 }
 
 .tcrm-context-panel__header,
@@ -4954,6 +4954,13 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   position: relative;
 }
 
+.tcrm-weekly-hours-grid__header-row {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  grid-template-columns: subgrid;
+}
+
 .tcrm-weekly-hours-grid__corner {
   grid-column: 1;
   grid-row: 1;
@@ -5211,7 +5218,20 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   background: var(--taliya-color-crm-invite-row-hover-bg);
 }
 
-.tcrm-invite-row:focus-visible {
+.tcrm-invite-row__open {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  inset: 0;
+  min-height: 0;
+  padding: 0;
+  position: absolute;
+  white-space: normal;
+  z-index: 1;
+}
+
+.tcrm-invite-row__open:focus-visible {
   box-shadow: inset 0 0 0 var(--taliya-border-width-focus) var(--taliya-focus-ring-info);
   outline: none;
 }
@@ -5231,6 +5251,16 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   gap: var(--taliya-space-3);
   grid-template-columns: var(--taliya-control-crm-invite-row-avatar-size) minmax(0, 1fr);
   min-width: 0;
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
+}
+
+.tcrm-invite-row__cell,
+.tcrm-invite-row__status {
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
 }
 
 .tcrm-invite-row__avatar.tl-avatar {
@@ -5251,7 +5281,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 
 .tcrm-invite-row[data-state="incomplete"] .tcrm-invite-row__avatar.tl-avatar {
   background: var(--taliya-color-certified-css-019);
-  color: var(--taliya-status-warning-fg);
+  color: var(--taliya-color-crm-invite-row-danger);
 }
 
 .tcrm-invite-row[data-state="expired"] .tcrm-invite-row__avatar.tl-avatar {
@@ -5343,6 +5373,8 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   gap: var(--taliya-control-crm-invite-row-action-gap);
   justify-self: end;
   padding-right: var(--taliya-border-width-default);
+  position: relative;
+  z-index: 3;
 }
 
 .tcrm-invite-row__actions .tl-icon-button {
@@ -6276,12 +6308,17 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   align-self: start;
   grid-column: 2;
   grid-row: 2;
+  height: calc(var(--taliya-layout-viewport-height) - (var(--taliya-layout-crm-setup-shell-topbar-height) + var(--taliya-control-crm-setup-agent-chat-welcome-agent-bottom-space)));
   width: var(--taliya-layout-crm-setup-shell-agent-width);
   max-height: calc(var(--taliya-layout-viewport-height) - (var(--taliya-layout-crm-setup-shell-topbar-height) + var(--taliya-control-crm-setup-agent-chat-welcome-agent-bottom-space)));
+  overflow: hidden;
   padding: 0;
 }
 
 .tcrm-setup-shell--layout-welcome .tcrm-setup-shell__agent > .tcrm-setup-agent-chat {
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
   transform: scale(var(--taliya-control-crm-setup-agent-chat-embedded-scale));
   transform-origin: top left;
 }
@@ -6396,7 +6433,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   width: min(var(--taliya-control-table-min-width), 100%);
 }
 
-.tcrm-setup-stepper-panel h3 {
+.tcrm-setup-stepper-panel h2 {
   align-self: end;
   font-size: var(--taliya-type-cardTitle-size);
   font-weight: var(--taliya-control-crm-permission-matrix-title-weight);
@@ -6506,6 +6543,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 
 .tcrm-setup-stepper__sequence {
   align-items: center;
+  background: var(--taliya-color-crm-setup-shell-panel-bg);
   border-top: var(--taliya-border-width-default) solid var(--taliya-status-blocked-bg);
   color: var(--taliya-color-crm-setup-shell-muted);
   display: flex;
@@ -6514,6 +6552,8 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   line-height: var(--taliya-space-4);
   margin: 0;
   padding-left: var(--taliya-radius-2xs);
+  position: relative;
+  z-index: 1;
 }
 
 .tcrm-setup-shell__main {
@@ -7098,9 +7138,8 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   font-size: var(--taliya-control-crm-setup-import-source-card-title-size);
   font-weight: var(--taliya-control-crm-setup-import-source-card-title-weight);
   line-height: var(--taliya-control-crm-setup-import-source-card-title-line-height);
-  overflow: hidden;
-  text-overflow: clip;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .tcrm-setup-import-source-card__description {
@@ -7108,9 +7147,8 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   font-size: var(--taliya-control-crm-setup-import-source-card-description-size);
   line-height: var(--taliya-control-crm-setup-import-source-card-description-line-height);
   margin-top: var(--taliya-control-crm-setup-import-source-card-description-margin-top);
-  overflow: hidden;
-  text-overflow: clip;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .tcrm-setup-import-source-card__status {
@@ -7162,6 +7200,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   width: var(--taliya-layout-crm-setup-review-panel-width);
 }
 
+.tcrm-setup-review-panel h1,
 .tcrm-setup-review-panel h2,
 .tcrm-setup-review-panel h3,
 .tcrm-setup-review-panel p {
@@ -7175,6 +7214,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   height: var(--taliya-control-crm-surface-icon-size);
 }
 
+.tcrm-setup-review-panel__header h1,
 .tcrm-setup-review-panel__header h2 {
   font-size: var(--taliya-control-crm-setup-review-panel-title-size);
   font-weight: var(--taliya-type-bodyStrong-weight);
@@ -7510,7 +7550,9 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   display: block;
   font-family: var(--taliya-type-font-primary);
   height: var(--taliya-layout-crm-setup-agent-chat-height);
-  overflow: hidden;
+  max-height: var(--taliya-layout-viewport-height);
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: var(--taliya-control-crm-setup-agent-chat-padding);
   width: var(--taliya-layout-crm-setup-agent-chat-width);
 }
@@ -7989,10 +8031,15 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   color: var(--taliya-color-crm-unsaved-changes-bar-saved-fg);
 }
 
-.tcrm-unsaved-changes-bar[data-state="var(--taliya-operationalState-blocked-status)"] .tcrm-unsaved-changes-bar__save {
+.tcrm-unsaved-changes-bar[data-state="blocked"] .tcrm-unsaved-changes-bar__save {
   background: var(--taliya-color-crm-unsaved-changes-bar-blocked-bg);
   border-color: var(--taliya-color-crm-kanban-board-bg);
   color: var(--taliya-color-crm-unsaved-changes-bar-blocked-fg);
+}
+
+.tcrm-settings-workspace-controls {
+  all: unset;
+  display: contents;
 }
 
 .tcrm-integration-status-row {
@@ -10606,7 +10653,7 @@ button.tcrm-integration-status-row:disabled {
 }
 
 .tcrm-plan-summary-card__active-header small,
-.tcrm-plan-summary-card__review-section h3,
+.tcrm-plan-summary-card__review-section h2,
 .tcrm-plan-summary-card__review-footer strong,
 .tcrm-plan-summary-card--failed h3 {
   font-size: var(--taliya-type-small-size);
@@ -10711,7 +10758,7 @@ button.tcrm-integration-status-row:disabled {
   margin-top: var(--taliya-type-body-size);
 }
 
-.tcrm-plan-summary-card__review-section h3 {
+.tcrm-plan-summary-card__review-section h2 {
   color: var(--taliya-color-crm-plan-summary-title);
   margin: 0;
 }
@@ -12337,10 +12384,12 @@ button.tcrm-integration-status-row:disabled {
 }
 
 .tcrm-settings-permissions-workspace {
+  box-sizing: border-box;
   display: grid;
   gap: var(--taliya-control-crm-settings-permissions-gap);
+  max-width: 100%;
   min-width: 0;
-  width: var(--taliya-layout-crm-settings-permissions-width);
+  width: min(100%, var(--taliya-layout-crm-settings-permissions-width));
 }
 
 .tcrm-settings-permissions-workspace > .tcrm-unsaved-changes-bar {
@@ -12385,13 +12434,20 @@ button.tcrm-integration-status-row:disabled {
 .tcrm-settings-payments-workspace {
   display: grid;
   gap: var(--taliya-space-2);
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
+  width: 100%;
+}
+
+.tcrm-settings-payments-workspace > .tl-card,
+.tcrm-settings-payments-workspace > .tcrm-settings-workspace-controls > * {
+  box-sizing: border-box;
+  max-width: 100%;
   min-width: 0;
   width: 100%;
 }
 
 .tcrm-settings-payments-workspace > .tl-card {
-  box-sizing: border-box;
-  min-width: 0;
   padding: var(--taliya-space-4);
 }
 
@@ -12601,15 +12657,41 @@ button.tcrm-integration-status-row:disabled {
   border: var(--taliya-border-width-default) solid var(--taliya-color-border-default);
   border-radius: var(--taliya-radius-sm);
   color: var(--taliya-color-text-primary);
-  cursor: pointer;
   display: grid;
   gap: var(--taliya-space-3);
-  grid-template-columns: auto minmax(0, 1fr);
   padding: var(--taliya-space-4);
+  height: auto;
+}
+
+.tcrm-settings-notifications-workspace__role--selected {
+  border-color: var(--taliya-color-focus-ring);
+  box-shadow: 0 0 0 var(--taliya-border-width-default) var(--taliya-color-focus-ring);
+}
+
+.tcrm-settings-notifications-workspace__role-select {
+  align-items: start;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  display: grid;
+  font-size: inherit;
+  font-weight: inherit;
+  gap: var(--taliya-space-3);
+  grid-template-columns: auto minmax(0, 1fr);
+  line-height: inherit;
+  min-height: 0;
+  padding: 0;
   text-align: left;
   white-space: normal;
-  height: auto;
-  justify-content: stretch;
+  width: 100%;
+}
+
+.tcrm-settings-notifications-workspace__role-select:focus-visible,
+.tcrm-settings-notifications-workspace__alert:focus-visible {
+  outline: var(--taliya-border-width-focus) solid var(--taliya-color-focus-ring);
+  outline-offset: var(--taliya-border-width-focus);
 }
 
 .tcrm-settings-notifications-workspace__role-icon {
@@ -12646,10 +12728,27 @@ button.tcrm-integration-status-row:disabled {
 .tcrm-settings-notifications-workspace__alerts {
   display: grid;
   gap: var(--taliya-space-2);
-  grid-column: 1 / -1;
 }
 
-.tcrm-settings-notifications-workspace__alerts .tl-chip {
+.tcrm-settings-notifications-workspace__alert {
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  display: flex;
+  font-size: inherit;
+  font-weight: inherit;
+  gap: var(--taliya-space-2);
+  justify-content: flex-start;
+  line-height: inherit;
+  min-height: 0;
+  padding: 0;
+  text-align: left;
+  white-space: normal;
+}
+
+.tcrm-settings-notifications-workspace__alert .tl-chip {
   justify-self: start;
 }
 
@@ -13461,7 +13560,9 @@ button.tcrm-integration-status-row:disabled {
   color: var(--taliya-color-crm-comment-thread-disabled-fg);
 }
 
-.tcrm-drawer-frame {
+.tcrm-drawer-frame,
+.tcrm-support-ticket-drawer,
+.tcrm-tenant-security-drawer {
   background: var(--taliya-color-crm-task-drawer-bg);
   border-left: var(--taliya-border-width-default) solid var(--taliya-color-crm-task-drawer-edge);
   border-radius: var(--taliya-control-crm-task-drawer-radius);
@@ -13471,23 +13572,13 @@ button.tcrm-integration-status-row:disabled {
   font-size: var(--taliya-control-crm-task-drawer-body-size);
   font-family: var(--taliya-type-font-primary);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: 100%;
+  height: var(--taliya-layout-viewport-dynamic-height);
   line-height: var(--taliya-control-crm-task-drawer-body-line-height);
-  max-height: 100%;
+  max-height: var(--taliya-layout-viewport-dynamic-height);
+  max-width: 100%;
   min-height: 0;
   overflow: hidden;
-  width: var(--taliya-layout-crm-task-drawer-width);
-}
-
-.tcrm-drawer-frame--overlay {
-  bottom: var(--taliya-layout-crm-product-shell-viewport-drawer-bottom);
-  box-shadow: var(--taliya-shadow-overlay);
-  height: calc(var(--taliya-layout-viewport-height) - var(--taliya-layout-crm-product-shell-viewport-drawer-top) - var(--taliya-layout-crm-product-shell-viewport-drawer-bottom));
-  max-height: calc(var(--taliya-layout-viewport-height) - var(--taliya-layout-crm-product-shell-viewport-drawer-top) - var(--taliya-layout-crm-product-shell-viewport-drawer-bottom));
-  position: fixed;
-  right: var(--taliya-layout-crm-product-shell-viewport-drawer-bottom);
-  top: var(--taliya-layout-crm-product-shell-viewport-drawer-top);
-  z-index: var(--taliya-layout-crm-product-shell-viewport-drawer-z-index);
+  width: var(--taliya-control-drawer-width-md);
 }
 
 .tcrm-drawer-frame__header {
@@ -13759,27 +13850,14 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   font-size: var(--taliya-control-crm-task-drawer-body-size);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: var(--taliya-layout-crm-task-drawer-height);
   line-height: var(--taliya-control-crm-task-drawer-body-line-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-task-drawer-padding);
-  width: var(--taliya-layout-crm-task-drawer-width);
 }
 
 .tcrm-task-drawer.tcrm-drawer-frame {
   border-radius: var(--taliya-control-crm-task-drawer-radius);
   padding: 0;
-  width: var(--taliya-layout-crm-task-drawer-width);
-}
-
-.tcrm-task-drawer.tcrm-drawer-frame.tcrm-task-drawer--compact {
-  --taliya-control-crm-task-drawer-fact-row-height: var(--taliya-control-crm-task-drawer-compact-fact-row-height);
-  --taliya-control-crm-task-drawer-header-label-margin-bottom: var(--taliya-control-crm-task-drawer-compact-header-label-margin-bottom);
-  --taliya-control-crm-task-drawer-header-min-height: var(--taliya-control-crm-task-drawer-compact-header-min-height);
-  --taliya-control-crm-task-drawer-header-padding: var(--taliya-control-crm-task-drawer-compact-header-padding);
-  --taliya-control-crm-task-drawer-header-row-gap: var(--taliya-control-crm-task-drawer-compact-header-row-gap);
-  --taliya-control-crm-task-drawer-section-gap: var(--taliya-control-crm-task-drawer-compact-section-gap);
-  width: var(--taliya-layout-crm-task-drawer-compact-width);
 }
 
 .tcrm-task-drawer.tcrm-drawer-frame .tcrm-drawer-frame__footer {
@@ -14296,7 +14374,6 @@ button.tcrm-integration-status-row:disabled {
 }
 
 .tcrm-checklist-drawer.tcrm-drawer-frame {
-  width: var(--taliya-layout-crm-checklist-drawer-width);
 }
 
 .tcrm-checklist-drawer.tcrm-drawer-frame .tcrm-drawer-frame__meta {
@@ -14567,8 +14644,7 @@ button.tcrm-integration-status-row:disabled {
   width: 100%;
 }
 
-.tcrm-checklist-drawer__action--primary.tl-button,
-.tcrm-checklist-drawer__action--origin.tl-button {
+.tcrm-checklist-drawer__action--primary.tl-button {
   grid-column: 1 / -1;
 }
 
@@ -14597,20 +14673,13 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   font-size: var(--taliya-control-crm-case-drawer-body-size);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: var(--taliya-layout-crm-case-drawer-height);
   line-height: var(--taliya-control-crm-case-drawer-body-line-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-case-drawer-padding);
-  width: var(--taliya-layout-crm-case-drawer-width);
 }
 
 .tcrm-case-drawer.tcrm-drawer-frame {
-  height: 100%;
   padding: 0;
-}
-
-.tcrm-case-drawer--wide.tcrm-drawer-frame {
-  width: var(--taliya-layout-crm-case-drawer-wide-width);
 }
 
 .tcrm-case-drawer.tcrm-drawer-frame .tcrm-drawer-frame__header,
@@ -15459,11 +15528,9 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   font-size: var(--taliya-control-crm-student-drawer-body-size);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: var(--taliya-layout-crm-student-drawer-height);
   line-height: var(--taliya-control-crm-student-drawer-body-line-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-student-drawer-padding);
-  width: var(--taliya-layout-crm-student-drawer-width);
 }
 
 .tcrm-student-drawer.tcrm-drawer-frame .tcrm-drawer-frame__body {
@@ -15510,9 +15577,15 @@ button.tcrm-integration-status-row:disabled {
   padding: var(--taliya-control-crm-task-queue-list-item-padding);
 }
 
-.tcrm-student-drawer__status--risk.tl-chip {
+.tcrm-student-drawer__status--risk.tl-chip,
+.tcrm-student-drawer__status--delinquent.tl-chip {
   background: var(--taliya-color-crm-student-drawer-chip-warning-bg);
   color: var(--taliya-color-crm-student-drawer-chip-warning-fg);
+}
+
+.tcrm-student-drawer__status--paused.tl-chip {
+  background: var(--taliya-surface-field-disabled-soft);
+  color: var(--taliya-text-secondary);
 }
 
 .tcrm-student-drawer__close.tl-icon-button {
@@ -15830,11 +15903,9 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   font-size: var(--taliya-control-crm-class-drawer-body-size);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: var(--taliya-layout-crm-class-drawer-height);
   line-height: var(--taliya-control-crm-class-drawer-body-line-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-class-drawer-padding);
-  width: var(--taliya-layout-crm-class-drawer-width);
 }
 
 .tcrm-class-drawer.tcrm-drawer-frame .tcrm-drawer-frame__body {
@@ -15852,7 +15923,7 @@ button.tcrm-integration-status-row:disabled {
 }
 
 .tcrm-class-drawer--compact {
-  width: var(--taliya-layout-crm-class-drawer-compact-width);
+  max-width: 100%;
 }
 
 .tcrm-class-drawer--class-detail.tcrm-class-drawer--compact {
@@ -16567,26 +16638,16 @@ button.tcrm-integration-status-row:disabled {
   display: flex;
   flex-direction: column;
   font-size: var(--taliya-control-crm-payment-drawer-body-size);
-  height: var(--taliya-layout-crm-payment-drawer-height);
   line-height: var(--taliya-control-crm-payment-drawer-body-line-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-payment-drawer-padding);
   position: relative;
-  width: var(--taliya-layout-crm-payment-drawer-width);
 }
 
 .tcrm-payment-drawer.tcrm-drawer-frame {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   padding: 0;
-}
-
-.tcrm-payment-drawer--compact {
-  width: var(--taliya-layout-crm-payment-drawer-compact-width);
-}
-
-.tcrm-product-shell-stage--drawer-floating > .tcrm-payment-drawer--movement {
-  transform: translateY(var(--taliya-layout-crm-payment-drawer-movement-offset-y));
 }
 
 .tcrm-payment-drawer h2,
@@ -16950,11 +17011,9 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   font-size: var(--taliya-control-crm-replacement-drawer-body-size);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: var(--taliya-layout-crm-replacement-drawer-height);
   line-height: var(--taliya-control-crm-replacement-drawer-body-line-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-replacement-drawer-padding);
-  width: var(--taliya-layout-crm-replacement-drawer-width);
 }
 
 .tcrm-replacement-drawer.tcrm-drawer-frame {
@@ -17376,12 +17435,14 @@ button.tcrm-integration-status-row:disabled {
 }
 
 .tcrm-replacement-drawer--scheduled .tcrm-replacement-drawer__eyebrow.tl-chip,
+.tcrm-replacement-drawer--consumed .tcrm-replacement-drawer__eyebrow.tl-chip,
 .tcrm-replacement-drawer--scheduled .tcrm-replacement-drawer__fact--success dd {
   background: var(--taliya-color-crm-replacement-drawer-success-bg);
   color: var(--taliya-color-crm-replacement-drawer-success-fg);
 }
 
 .tcrm-replacement-drawer--blocked,
+.tcrm-replacement-drawer--expired,
 .tcrm-replacement-drawer--loading {
   background: linear-gradient(0deg, var(--taliya-surface-field-disabled-soft), var(--taliya-surface-field-disabled-soft)), var(--taliya-color-crm-replacement-drawer-bg);
 }
@@ -17403,11 +17464,9 @@ button.tcrm-integration-status-row:disabled {
   display: flex;
   flex-direction: column;
   font-size: var(--taliya-control-crm-lead-drawer-body-size);
-  height: var(--taliya-layout-crm-lead-drawer-height);
   line-height: var(--taliya-control-crm-lead-drawer-body-line-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-lead-drawer-padding);
-  width: var(--taliya-layout-crm-lead-drawer-width);
 }
 
 .tcrm-lead-drawer--compact {
@@ -17420,7 +17479,6 @@ button.tcrm-integration-status-row:disabled {
   --taliya-control-crm-lead-drawer-notice-height: var(--taliya-control-crm-lead-drawer-compact-notice-height);
   --taliya-control-crm-lead-drawer-padding: var(--taliya-control-crm-lead-drawer-compact-padding);
   --taliya-control-crm-lead-drawer-primary-height: var(--taliya-control-crm-lead-drawer-compact-primary-height);
-  width: var(--taliya-layout-crm-lead-drawer-compact-width);
 }
 
 .tcrm-lead-drawer--compact .tcrm-lead-drawer__header {
@@ -17851,11 +17909,6 @@ button.tcrm-integration-status-row:disabled {
   grid-template-rows: auto minmax(0, 1fr) auto;
   line-height: var(--taliya-control-crm-lead-drawer-body-line-height);
   padding: 0;
-  width: var(--taliya-layout-crm-lead-drawer-width);
-}
-
-.tcrm-lead-drawer.tcrm-drawer-frame.tcrm-lead-drawer--compact {
-  width: var(--taliya-layout-crm-lead-drawer-compact-width);
 }
 
 .tcrm-lead-drawer.tcrm-drawer-frame .tcrm-drawer-frame__header {
@@ -17909,6 +17962,7 @@ button.tcrm-integration-status-row:disabled {
 }
 
 .tcrm-lead-drawer.tcrm-drawer-frame .tcrm-drawer-frame__fact {
+  column-gap: var(--taliya-space-1);
   grid-template-columns: var(--taliya-layout-crm-lead-drawer-fact-columns);
   min-height: var(--taliya-control-crm-lead-drawer-fact-row-height);
 }
@@ -18109,10 +18163,8 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   font-family: var(--taliya-type-font-primary);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: var(--taliya-layout-crm-agent-flow-drawer-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-agent-flow-drawer-padding);
-  width: var(--taliya-layout-crm-agent-flow-drawer-width);
 }
 
 .tcrm-agent-flow-drawer.tcrm-drawer-frame .tcrm-drawer-frame__body {
@@ -18391,10 +18443,8 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   font-family: var(--taliya-type-font-primary);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: var(--taliya-layout-crm-usage-drawer-height);
   overflow: hidden;
   padding: var(--taliya-control-crm-usage-drawer-padding);
-  width: var(--taliya-layout-crm-usage-drawer-width);
 }
 
 .tcrm-usage-drawer.tcrm-drawer-frame .tcrm-drawer-frame__body {
@@ -18789,6 +18839,7 @@ button.tcrm-integration-status-row:disabled {
   grid-template-rows: var(--taliya-control-crm-conversation-list-filter-height) minmax(0, 1fr) var(--taliya-control-crm-conversation-list-footer-height);
   height: var(--taliya-control-crm-conversation-list-height);
   overflow: hidden;
+  position: relative;
   width: var(--taliya-layout-crm-conversation-list-width);
 }
 
@@ -21349,7 +21400,7 @@ button.tcrm-integration-status-row:disabled {
   white-space: nowrap;
 }
 
-.tcrm-phone-preview > main {
+.tcrm-phone-preview__body {
   align-content: start;
   background-image:
     radial-gradient(circle at var(--taliya-border-width-default) var(--taliya-border-width-default), var(--taliya-color-crm-phone-preview-wallpaper-mark) var(--taliya-border-width-default), var(--taliya-color-crm-kanban-board-bg) var(--taliya-border-width-default));
@@ -21766,7 +21817,7 @@ button.tcrm-integration-status-row:disabled {
   gap: var(--taliya-space-3);
 }
 
-.tcrm-student-header h2 {
+.tcrm-student-header :is(h1, h2) {
   font-size: var(--taliya-type-panel-title-size);
   line-height: var(--taliya-type-panel-title-line-height);
   margin: 0;
@@ -21825,7 +21876,7 @@ button.tcrm-integration-status-row:disabled {
   gap: var(--taliya-space-2);
 }
 
-.tcrm-student-header--reference h2 {
+.tcrm-student-header--reference :is(h1, h2) {
   font-size: var(--taliya-type-cardTitle-size);
   line-height: var(--taliya-type-cardTitle-line-height);
 }
@@ -23698,13 +23749,6 @@ button.tcrm-pipeline-card__select:focus-visible,
 
 .tcrm-support-ticket-drawer {
   display: inline-block;
-  height: var(--taliya-control-crm-support-ticket-panel-height);
-  width: var(--taliya-layout-crm-support-ticket-panel-width);
-}
-
-.tcrm-support-ticket-drawer--internal {
-  height: var(--taliya-control-crm-internal-ticket-panel-height);
-  width: var(--taliya-layout-crm-internal-ticket-panel-width);
 }
 
 .tcrm-support-ticket-drawer__panel {
@@ -23727,9 +23771,7 @@ button.tcrm-pipeline-card__select:focus-visible,
   border-radius: var(--taliya-space-3);
   box-shadow: var(--taliya-shadow-crm-product-shell-panel);
   font-size: var(--taliya-control-crm-tenant-summary-drawer-text-size);
-  height: var(--taliya-control-crm-tenant-summary-drawer-height);
   line-height: var(--taliya-control-crm-tenant-summary-drawer-text-line-height);
-  width: var(--taliya-layout-crm-tenant-summary-drawer-width);
 }
 
 .tcrm-tenant-summary-drawer.tcrm-drawer-frame .tcrm-drawer-frame__body {
@@ -23931,8 +23973,6 @@ button.tcrm-pipeline-card__select:focus-visible,
 
 .tcrm-tenant-security-drawer {
   display: inline-block;
-  height: var(--taliya-control-crm-security-rule-panel-height);
-  width: var(--taliya-layout-crm-security-rule-panel-width);
 }
 
 .tcrm-tenant-security-drawer__panel {
@@ -24636,7 +24676,7 @@ button.tcrm-pipeline-card__select:focus-visible,
   grid-template-columns: var(--taliya-layout-crm-student-header-columns) auto;
 }
 
-.tcrm-tenant-detail-layout__header h2 {
+.tcrm-tenant-detail-layout__header :is(h1, h2) {
   font-size: var(--taliya-type-numeric-size);
   line-height: var(--taliya-type-numeric-line-height);
   margin: 0;
@@ -24728,8 +24768,8 @@ button.tcrm-pipeline-card__select:focus-visible,
   padding: var(--taliya-radius-chip);
 }
 
-.tcrm-tenant-detail-layout__users p,
-.tcrm-tenant-detail-layout__entitlements p,
+.tcrm-tenant-detail-layout__users .tcrm-tenant-detail-layout__user-row,
+.tcrm-tenant-detail-layout__entitlements .tcrm-tenant-detail-layout__entitlement-row,
 .tcrm-tenant-detail-layout__support p,
 .tcrm-tenant-detail-layout__incidents p,
 .tcrm-tenant-detail-layout__audit p {
@@ -24824,7 +24864,7 @@ button.tcrm-pipeline-card__select:focus-visible,
   gap: var(--taliya-space-1);
 }
 
-.tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__users p {
+.tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__users .tcrm-tenant-detail-layout__user-row {
   gap: var(--taliya-space-2);
   grid-template-columns: var(--taliya-layout-crm-internal-tenant-detail-user-columns);
   min-height: var(--taliya-control-crm-internal-tenant-detail-row-height);
@@ -24834,13 +24874,14 @@ button.tcrm-pipeline-card__select:focus-visible,
   gap: var(--taliya-space-1);
 }
 
-.tcrm-product-shell-stage--content-internal-tenant-detail :is(.tcrm-tenant-detail-layout__entitlements, .tcrm-tenant-detail-layout__incidents) p {
+.tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__entitlements .tcrm-tenant-detail-layout__entitlement-row,
+.tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__incidents p {
   display: flex;
   gap: var(--taliya-space-2);
   min-height: var(--taliya-control-crm-internal-tenant-detail-row-height);
 }
 
-.tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__entitlements p > :is(strong, .tl-chip) {
+.tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__entitlements .tcrm-tenant-detail-layout__entitlement-row > :is(strong, .tl-chip) {
   margin-left: auto;
 }
 
@@ -27331,14 +27372,15 @@ button.tcrm-pipeline-card__select:focus-visible,
   box-shadow: none;
   flex: 1 1 auto;
   min-height: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tcrm-checklist-table__data .tl-table {
   border-collapse: separate;
   border-spacing: 0;
   font-size: var(--taliya-control-crm-task-table-text-size);
-  min-width: 100%;
+  min-width: var(--taliya-control-table-min-width);
   table-layout: fixed;
 }
 
@@ -27556,14 +27598,15 @@ button.tcrm-pipeline-card__select:focus-visible,
   box-shadow: none;
   flex: 1 1 auto;
   min-height: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tcrm-approval-table__data .tl-table {
   border-collapse: separate;
   border-spacing: 0;
   font-size: var(--taliya-control-crm-task-table-text-size);
-  min-width: 100%;
+  min-width: var(--taliya-control-table-min-width);
   table-layout: fixed;
 }
 
@@ -27794,14 +27837,15 @@ button.tcrm-pipeline-card__select:focus-visible,
   box-shadow: none;
   flex: 1 1 auto;
   min-height: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .tcrm-student-table__data .tl-table {
   border-collapse: separate;
   border-spacing: 0;
   font-size: var(--taliya-control-crm-task-table-text-size);
-  min-width: 100%;
+  min-width: var(--taliya-control-table-min-width);
   table-layout: fixed;
 }
 
@@ -29032,6 +29076,36 @@ button.tcrm-pipeline-card__select:focus-visible,
   min-height: 0;
 }
 
+.tcrm-empty-shell-page .tcrm-empty-shell-canvas {
+  box-sizing: border-box;
+  display: grid;
+  min-height: calc(
+    var(--taliya-layout-viewport-height) -
+    var(--taliya-layout-crm-empty-shell-window-chrome-height) -
+    var(--taliya-layout-crm-product-shell-main-topbar-height) -
+    var(--taliya-layout-crm-empty-shell-main-header-height) -
+    var(--taliya-space-8)
+  );
+  place-items: center;
+  width: 100%;
+}
+
+.tcrm-empty-shell-page__canvas--empty {
+  place-items: stretch;
+}
+
+.tcrm-empty-shell-canvas__state {
+  display: grid;
+  min-height: 100%;
+  place-items: center;
+  width: 100%;
+}
+
+.tcrm-empty-shell-page .tcrm-empty-shell-canvas__state > .tl-state {
+  max-width: var(--taliya-layout-state-page-max-width);
+  width: 100%;
+}
+
 .tcrm-product-shell-window {
   border: 0;
   border-radius: 0;
@@ -29197,83 +29271,7 @@ button.tcrm-pipeline-card__select:focus-visible,
 .tcrm-journey-shell-canvas__surface--primary .tcrm-journey-shell-canvas__actions { top: var(--taliya-space-6); }
 
 .tcrm-product-shell-window--drawer .tcrm-product-shell-main {
-  padding-right: var(--taliya-layout-crm-task-drawer-width);
-}
-
-.tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main {
-  padding-right: var(--taliya-layout-crm-product-shell-floating-drawer-reserved-width);
-}
-
-.tcrm-product-shell-window--drawer-compact .tcrm-product-shell-main {
-  padding-right: var(--taliya-layout-crm-product-shell-drawer-compact-width);
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-agent-flow-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-agent-flow-drawer-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage--content-agent-routine:has(> .tcrm-agent-flow-drawer--routine) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-agent-flow-drawer-routine-width) + var(--taliya-layout-crm-product-shell-agent-routine-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-class-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-class-drawer-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-class-drawer--compact) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-class-drawer-compact-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-case-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-case-drawer-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-case-drawer--wide) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-case-drawer-wide-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-lead-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-lead-drawer-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-lead-drawer--compact) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-lead-drawer-compact-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-usage-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-usage-drawer-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-payment-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-payment-drawer-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-payment-drawer--compact) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-payment-drawer-compact-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-tenant-security-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-security-rule-panel-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-tenant-summary-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-tenant-summary-drawer-width) + var(--taliya-layout-crm-tenant-summary-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-support-ticket-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-support-ticket-panel-width) + var(--taliya-layout-crm-product-shell-content-drawer-right));
-}
-
-.tcrm-product-shell-stage--content-internal-overview:has(> .tcrm-support-ticket-drawer--internal) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-internal-ticket-panel-width) + var(--taliya-layout-crm-internal-overview-drawer-right));
-}
-
-.tcrm-product-shell-stage--content-support:has(> .tcrm-support-ticket-drawer) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-support-ticket-panel-width) + var(--taliya-layout-crm-product-shell-support-content-drawer-right));
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-opportunity-panel) .tcrm-product-shell-main {
-  padding-right: calc(var(--taliya-layout-crm-opportunity-drawer-width) + var(--taliya-layout-crm-product-shell-floating-drawer-right));
+  padding-right: var(--taliya-control-drawer-width-md);
 }
 
 .tcrm-product-shell-main {
@@ -29304,23 +29302,7 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 .tcrm-product-shell-window--drawer .tcrm-product-shell-main .tcrm-empty-shell-topbar {
-  right: var(--taliya-layout-crm-task-drawer-width);
-}
-
-.tcrm-product-shell-window--drawer-compact .tcrm-product-shell-main .tcrm-empty-shell-topbar {
-  right: var(--taliya-layout-crm-product-shell-drawer-compact-width);
-}
-
-.tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main .tcrm-empty-shell-topbar {
-  right: 0;
-}
-
-.tcrm-product-shell-window--drawer-content .tcrm-product-shell-main .tcrm-empty-shell-topbar {
-  right: 0;
-}
-
-.tcrm-product-shell-window--drawer-chrome .tcrm-product-shell-main .tcrm-empty-shell-topbar {
-  right: 0;
+  right: var(--taliya-control-drawer-width-md);
 }
 
 .tcrm-product-shell-main .tcrm-empty-shell-topbar > .tcrm-empty-shell-back {
@@ -30427,182 +30409,35 @@ button.tcrm-pipeline-card__select:focus-visible,
 .tcrm-product-shell-stage > .tcrm-class-drawer,
 .tcrm-product-shell-stage > .tcrm-lead-drawer,
 .tcrm-product-shell-stage > .tcrm-payment-drawer,
+.tcrm-product-shell-stage > .tcrm-drawer-frame,
 .tcrm-product-shell-stage > .tcrm-opportunity-panel,
 .tcrm-product-shell-stage > .tcrm-usage-drawer,
 .tcrm-product-shell-stage > .tcrm-student-drawer,
 .tcrm-product-shell-stage > .tcrm-replacement-drawer,
 .tcrm-product-shell-stage > .tcrm-agent-flow-drawer,
 .tcrm-product-shell-stage > .tcrm-support-ticket-drawer,
-.tcrm-product-shell-stage > .tcrm-tenant-security-drawer {
+.tcrm-product-shell-stage > .tcrm-tenant-security-drawer,
+.tcrm-product-shell-stage > .tcrm-tenant-summary-drawer {
   bottom: 0;
+  border-radius: 0;
   box-shadow: var(--taliya-shadow-crm-product-shell-panel);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-drawer-top));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-drawer-top));
+  box-sizing: border-box;
+  height: var(--taliya-layout-viewport-dynamic-height);
+  max-height: var(--taliya-layout-viewport-dynamic-height);
+  max-width: 100%;
   overflow: hidden;
   position: fixed;
   right: 0;
-  top: var(--taliya-layout-crm-product-shell-drawer-top);
-  z-index: 30;
+  top: 0;
+  width: var(--taliya-control-drawer-width-md);
+  z-index: var(--taliya-layout-crm-product-shell-drawer-z-index);
 }
 
-.tcrm-product-shell-stage--drawer-content > .tcrm-task-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-case-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-approval-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-class-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-lead-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-payment-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-opportunity-panel,
-.tcrm-product-shell-stage--drawer-content > .tcrm-usage-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-student-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-replacement-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-agent-flow-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-support-ticket-drawer,
-.tcrm-product-shell-stage--drawer-content > .tcrm-tenant-security-drawer {
-  bottom: var(--taliya-layout-crm-product-shell-content-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-content-drawer-top) - var(--taliya-layout-crm-product-shell-content-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-content-drawer-top) - var(--taliya-layout-crm-product-shell-content-drawer-bottom));
-  right: var(--taliya-layout-crm-product-shell-content-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-content-drawer-top);
-}
-
-.tcrm-product-shell-stage--content-support.tcrm-product-shell-stage--drawer-content > .tcrm-support-ticket-drawer {
-  bottom: var(--taliya-layout-crm-product-shell-support-content-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-support-content-drawer-top) - var(--taliya-layout-crm-product-shell-support-content-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-support-content-drawer-top) - var(--taliya-layout-crm-product-shell-support-content-drawer-bottom));
-  right: var(--taliya-layout-crm-product-shell-support-content-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-support-content-drawer-top);
-}
-
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-task-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-case-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-approval-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-class-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-lead-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-payment-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-opportunity-panel,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-usage-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-student-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-replacement-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-agent-flow-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-support-ticket-drawer,
-.tcrm-product-shell-stage--drawer-chrome > .tcrm-tenant-security-drawer {
-  bottom: var(--taliya-layout-crm-product-shell-floating-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-drawer-top) - var(--taliya-layout-crm-product-shell-floating-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-drawer-top) - var(--taliya-layout-crm-product-shell-floating-drawer-bottom));
-  right: var(--taliya-layout-crm-product-shell-floating-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-drawer-top);
-  z-index: var(--taliya-layout-crm-product-shell-viewport-drawer-z-index);
-}
-
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-task-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-case-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-approval-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-class-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-lead-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-payment-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-opportunity-panel,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-usage-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-student-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-replacement-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-agent-flow-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-support-ticket-drawer,
-.tcrm-product-shell-stage--drawer-viewport > .tcrm-tenant-security-drawer {
-  bottom: var(--taliya-layout-crm-product-shell-viewport-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-viewport-drawer-top) - var(--taliya-layout-crm-product-shell-viewport-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-viewport-drawer-top) - var(--taliya-layout-crm-product-shell-viewport-drawer-bottom));
-  top: var(--taliya-layout-crm-product-shell-viewport-drawer-top);
-  z-index: var(--taliya-layout-crm-product-shell-viewport-drawer-z-index);
-}
-
-.tcrm-product-shell-stage--drawer-floating > .tcrm-task-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-case-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-approval-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-class-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-lead-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-payment-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-opportunity-panel,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-usage-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-student-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-replacement-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-agent-flow-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-support-ticket-drawer,
-.tcrm-product-shell-stage--drawer-floating > .tcrm-tenant-security-drawer {
-  bottom: var(--taliya-layout-crm-product-shell-floating-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-floating-drawer-top) - var(--taliya-layout-crm-product-shell-floating-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-floating-drawer-top) - var(--taliya-layout-crm-product-shell-floating-drawer-bottom));
-  right: var(--taliya-layout-crm-product-shell-floating-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-floating-drawer-top);
-}
-
-.tcrm-product-shell-stage--content-agent-routine.tcrm-product-shell-stage--drawer-floating > .tcrm-agent-flow-drawer--routine {
-  bottom: var(--taliya-layout-crm-product-shell-agent-routine-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-agent-routine-drawer-top) - var(--taliya-layout-crm-product-shell-agent-routine-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-agent-routine-drawer-top) - var(--taliya-layout-crm-product-shell-agent-routine-drawer-bottom));
-  right: var(--taliya-layout-crm-product-shell-agent-routine-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-agent-routine-drawer-top);
-  width: var(--taliya-layout-crm-agent-flow-drawer-routine-width);
-}
-
-.tcrm-product-shell-stage--content-agent-flow.tcrm-product-shell-stage--drawer-floating > .tcrm-agent-flow-drawer--flow {
-  bottom: var(--taliya-layout-crm-product-shell-agent-flow-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-agent-flow-drawer-top) - var(--taliya-layout-crm-product-shell-agent-flow-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-agent-flow-drawer-top) - var(--taliya-layout-crm-product-shell-agent-flow-drawer-bottom));
-  right: var(--taliya-layout-crm-product-shell-agent-flow-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-agent-flow-drawer-top);
-  width: var(--taliya-layout-crm-product-shell-agent-flow-drawer-width);
-}
-
-.tcrm-product-shell-stage--content-agent-test.tcrm-product-shell-stage--drawer-floating > .tcrm-agent-flow-drawer--test {
-  bottom: var(--taliya-layout-crm-product-shell-agent-test-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-agent-test-drawer-top) - var(--taliya-layout-crm-product-shell-agent-test-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-agent-test-drawer-top) - var(--taliya-layout-crm-product-shell-agent-test-drawer-bottom));
-  right: var(--taliya-layout-crm-product-shell-agent-test-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-agent-test-drawer-top);
-  width: var(--taliya-layout-crm-product-shell-agent-test-drawer-width);
-}
-
-.tcrm-product-shell-stage--content-internal-overview.tcrm-product-shell-stage--drawer-floating > .tcrm-support-ticket-drawer--internal {
-  bottom: var(--taliya-layout-crm-internal-overview-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-internal-overview-drawer-top) - var(--taliya-layout-crm-internal-overview-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-internal-overview-drawer-top) - var(--taliya-layout-crm-internal-overview-drawer-bottom));
-  right: var(--taliya-layout-crm-internal-overview-drawer-right);
-  top: var(--taliya-layout-crm-internal-overview-drawer-top);
-}
-
-.tcrm-product-shell-stage--drawer-floating > .tcrm-replacement-drawer {
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-replacement-floating-drawer-top) - var(--taliya-layout-crm-product-shell-floating-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-replacement-floating-drawer-top) - var(--taliya-layout-crm-product-shell-floating-drawer-bottom));
-  top: var(--taliya-layout-crm-product-shell-replacement-floating-drawer-top);
-}
-
-.tcrm-product-shell-stage--drawer-floating > .tcrm-tenant-security-drawer {
-  bottom: var(--taliya-layout-crm-product-shell-tenant-floating-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-tenant-floating-drawer-top) - var(--taliya-layout-crm-product-shell-tenant-floating-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-tenant-floating-drawer-top) - var(--taliya-layout-crm-product-shell-tenant-floating-drawer-bottom));
-  top: var(--taliya-layout-crm-product-shell-tenant-floating-drawer-top);
-}
-
-.tcrm-product-shell-stage--drawer-floating > .tcrm-tenant-summary-drawer {
-  bottom: var(--taliya-layout-crm-tenant-summary-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-tenant-summary-drawer-top) - var(--taliya-layout-crm-tenant-summary-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-tenant-summary-drawer-top) - var(--taliya-layout-crm-tenant-summary-drawer-bottom));
-  position: fixed;
-  right: var(--taliya-layout-crm-tenant-summary-drawer-right);
-  top: var(--taliya-layout-crm-tenant-summary-drawer-top);
-  z-index: 30;
-}
-
-.tcrm-product-shell-stage:has(> .tcrm-opportunity-panel) .tcrm-product-shell-main .tcrm-empty-shell-topbar {
-  right: var(--taliya-space-6);
-}
-
-.tcrm-product-shell-stage--drawer-floating > .tcrm-opportunity-panel {
-  bottom: var(--taliya-layout-crm-product-shell-opportunity-floating-drawer-bottom);
-  height: calc(100vh - var(--taliya-layout-crm-product-shell-opportunity-floating-drawer-top) - var(--taliya-layout-crm-product-shell-opportunity-floating-drawer-bottom));
-  max-height: calc(100vh - var(--taliya-layout-crm-product-shell-opportunity-floating-drawer-top) - var(--taliya-layout-crm-product-shell-opportunity-floating-drawer-bottom));
-  overflow-y: auto;
-  right: var(--taliya-layout-crm-product-shell-opportunity-floating-drawer-right);
-  top: var(--taliya-layout-crm-product-shell-opportunity-floating-drawer-top);
+.tcrm-product-shell-stage > .tcrm-support-ticket-drawer > .tcrm-support-ticket-panel {
+  border-radius: 0;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
 }
 
 .tcrm-product-shell-window .tcrm-empty-shell-sidebar {
@@ -31626,6 +31461,8 @@ button.tcrm-pipeline-card__select:focus-visible,
 
 .tcrm-setup-classes-workspace__sources .tcrm-setup-import-source-card:last-child {
   grid-column: 1 / -1;
+  height: auto;
+  min-height: var(--taliya-layout-crm-setup-classes-source-card-height);
   width: 100%;
 }
 
@@ -31788,8 +31625,8 @@ button.tcrm-pipeline-card__select:focus-visible,
   min-height: var(--taliya-control-crm-setup-agenda-schedule-min-height);
 }
 
-.tcrm-weekly-hours-grid__schedule > .tcrm-weekly-hours-grid__corner,
-.tcrm-weekly-hours-grid__schedule > .tcrm-weekly-hours-grid__day {
+.tcrm-weekly-hours-grid__header-row > .tcrm-weekly-hours-grid__corner,
+.tcrm-weekly-hours-grid__header-row > .tcrm-weekly-hours-grid__day {
   border-bottom: var(--taliya-border-width-default) solid var(--taliya-border-color-subtle);
 }
 
@@ -32089,8 +31926,11 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 .tcrm-setup-plans-workspace__editor .tl-segmented__label {
+  display: block;
   line-height: var(--taliya-type-caption-line-height);
+  overflow-wrap: anywhere;
   white-space: normal;
+  width: 100%;
 }
 
 .tcrm-setup-plans-workspace__segments--type {
@@ -32412,6 +32252,153 @@ button.tcrm-pipeline-card__select:focus-visible,
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .tcrm-setup-consumption-workspace__footer {
+    height: auto;
+  }
+
+  .tcrm-setup-consumption-workspace__footer .tl-button-group {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tcrm-setup-consumption-workspace__footer .tl-button {
+    justify-content: center;
+    white-space: normal;
+    width: 100%;
+  }
+
+  .tcrm-setup-shell__stage {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .tcrm-setup-shell__stage > *,
+  .tcrm-setup-shell__dash--hero,
+  .tcrm-setup-shell__card-row,
+  .tcrm-setup-shell__wide-card,
+  .tcrm-setup-shell__skeleton-lines,
+  .tcrm-setup-shell__skeleton-media,
+  .tcrm-setup-shell__hint {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .tcrm-setup-shell__dash--hero,
+  .tcrm-setup-shell__card-row,
+  .tcrm-setup-shell__wide-card,
+  .tcrm-setup-shell__skeleton-lines {
+    width: 100%;
+  }
+
+  .tcrm-setup-shell__skeleton-lines i {
+    max-width: 100%;
+  }
+
+  .tcrm-setup-shell__skeleton-lines {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-shell__wide-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-shell__hint {
+    justify-content: center;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  .tcrm-setup-payment-workspace__future,
+  .tcrm-setup-payment-workspace__future-grid,
+  .tcrm-setup-payment-workspace__future-grid > *,
+  .tcrm-setup-payment-workspace__future .tl-inline-group {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-setup-payment-workspace__future .tl-inline-group {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tcrm-setup-payment-workspace__future .tl-button {
+    height: auto;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) {
+    display: grid;
+    gap: var(--taliya-space-4);
+    height: auto;
+    max-width: 100%;
+    min-height: 0;
+    padding: var(--taliya-space-4);
+    width: 100%;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__header,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__rule,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__info,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__message,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__quick-replies,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__composer,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__footer {
+    margin-top: 0;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__header {
+    grid-template-columns: var(--taliya-control-crm-setup-agent-chat-logo-size) minmax(0, 1fr) auto auto;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__identity h2 {
+    font-size: var(--taliya-type-card-title-size);
+    line-height: var(--taliya-type-card-title-line-height);
+    overflow-wrap: normal;
+    white-space: normal;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__identity p,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__info p,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__message {
+    font-size: var(--taliya-type-body-size);
+    line-height: var(--taliya-type-body-line-height);
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__identity p {
+    overflow-wrap: normal;
+    white-space: normal;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__info,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__message--one,
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__message--two {
+    height: auto;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__quick-replies {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__quick-replies .tcrm-quick-reply-chip {
+    font-size: var(--taliya-type-body-size);
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-setup-agent-chat:not(.tcrm-setup-agent-chat--welcome) .tcrm-setup-agent-chat__footer {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
   .tcrm-setup-channels-workspace__whatsapp,
   .tcrm-setup-channels-workspace__email,
   .tcrm-setup-channels-workspace__public,
@@ -32442,6 +32429,14 @@ button.tcrm-pipeline-card__select:focus-visible,
   .tcrm-setup-agenda-workspace__summary,
   .tcrm-setup-agenda-workspace__body {
     grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  .tcrm-setup-agenda-workspace__summary > .tl-panel,
+  .tcrm-setup-agenda-workspace__control,
+  .tcrm-setup-agenda-workspace__calendar {
+    height: auto;
+    overflow: visible;
   }
 
   .tcrm-access-shell-window.tcrm-window-frame {
@@ -32486,6 +32481,94 @@ button.tcrm-pipeline-card__select:focus-visible,
     width: 100%;
   }
 
+  .tcrm-auth-card,
+  .tcrm-auth-card[data-mode="signin"] {
+    height: auto;
+    max-width: 100%;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .tcrm-auth-card form,
+  .tcrm-auth-card[data-mode="signin"] form {
+    padding: var(--taliya-space-6) var(--taliya-space-4);
+  }
+
+  .tcrm-auth-card__providers,
+  .tcrm-auth-card[data-mode="signin"] .tcrm-auth-card__providers,
+  .tcrm-auth-card__divider,
+  .tcrm-auth-card[data-mode="signin"] .tcrm-auth-card__divider,
+  .tcrm-auth-card__fields,
+  .tcrm-auth-card[data-mode="signin"] .tcrm-auth-card__fields,
+  .tcrm-auth-card__options,
+  .tcrm-auth-card__submit.tl-button,
+  .tcrm-auth-card[data-mode="signin"] .tcrm-auth-card__submit.tl-button,
+  .tcrm-auth-card .tl-alert,
+  .tcrm-auth-card[data-mode="signin"] .tl-alert {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-auth-card__options {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .tcrm-subscription-status-card.tl-card,
+  .tcrm-subscription-status-card--failed.tl-card,
+  .tcrm-subscription-status-card--confirmed.tl-card,
+  .tcrm-subscription-status-card--verifying.tl-card {
+    gap: var(--taliya-space-5);
+    max-width: 100%;
+    min-height: 0;
+    padding: var(--taliya-space-6) var(--taliya-space-4);
+    width: 100%;
+  }
+
+  .tcrm-subscription-status-card--verifying .tl-status-summary__header {
+    height: auto;
+  }
+
+  .tcrm-subscription-status-card--verifying .tl-status-summary__header > span:nth-child(2),
+  .tcrm-subscription-status-card--failed .tl-status-summary__header > span:nth-child(2) {
+    margin-top: 0;
+    transform: none;
+  }
+
+  .tcrm-subscription-status-card__content,
+  .tcrm-subscription-status-card--failed .tcrm-subscription-status-card__content {
+    gap: var(--taliya-space-4);
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-subscription-status-card__status-row,
+  .tcrm-subscription-status-card--failed .tcrm-subscription-status-card__status-row {
+    flex-wrap: wrap;
+    gap: var(--taliya-space-2);
+    height: auto;
+    min-height: var(--taliya-control-crm-subscription-status-row-height);
+    padding-block: var(--taliya-space-2);
+  }
+
+  .tcrm-subscription-status-card--verifying .tcrm-subscription-progress-stepper.tl-stepper,
+  .tcrm-subscription-status-card--verifying .tcrm-subscription-status-card__details,
+  .tcrm-subscription-status-card--verifying .tcrm-secure-payment-notice.tl-alert,
+  .tcrm-subscription-status-card--verifying .tcrm-subscription-status-card__primary-action.tl-button,
+  .tcrm-subscription-status-card--verifying .tcrm-subscription-status-card__footer-note {
+    margin-top: 0;
+  }
+
+  .tcrm-subscription-progress-stepper.tl-stepper {
+    height: auto;
+    min-height: var(--taliya-control-crm-subscription-progress-height);
+  }
+
+  .tcrm-subscription-status-card__links {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .tcrm-subscription-review-page,
   .tcrm-confirmed-subscription-page {
     transform: none;
@@ -32524,6 +32607,265 @@ button.tcrm-pipeline-card__select:focus-visible,
   .tcrm-dashboard-grid--4,
   .tcrm-dashboard-grid--asymmetrical {
     grid-template-columns: 1fr;
+  }
+
+  .tcrm-setup-page {
+    min-height: var(--taliya-layout-viewport-height);
+    overflow: visible;
+    place-items: start stretch;
+  }
+
+  .tcrm-setup-page > .tcrm-setup-page__shell.tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(5, auto);
+    height: auto;
+    min-height: var(--taliya-layout-viewport-height);
+    overflow: visible;
+    padding: var(--taliya-space-3);
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__topbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--taliya-space-3);
+    min-height: 0;
+    padding-block: var(--taliya-space-2);
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__topbar-divider {
+    display: none;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__logo.tl-logo--wordmark {
+    flex: 0 1 var(--taliya-control-crm-setup-shell-topbar-logo-width);
+    max-width: 40%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__studio.tl-button {
+    flex: 1 1 140px;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__status.tl-chip {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__progress {
+    flex: 1 1 100%;
+    grid-template-columns: minmax(0, 1fr) auto;
+    justify-content: stretch;
+    order: 10;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__progress .tl-progress {
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__help.tl-button {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-stepper-panel {
+    height: min(300px, 45vh);
+    max-height: none;
+    overflow: hidden;
+    padding: var(--taliya-space-4);
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-stepper-panel .tl-stepper-wrap {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-stepper-panel h2 {
+    align-self: auto;
+    margin: 0 0 var(--taliya-space-4);
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__main,
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__agent {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__main {
+    padding: var(--taliya-space-4);
+    place-items: start stretch;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__agent-panel {
+    height: auto;
+    grid-template-rows: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-bottom-bar {
+    gap: var(--taliya-space-3);
+    grid-column: 1;
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    margin-top: 0;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-bottom-bar__divider {
+    display: none;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-bottom-bar__toggle {
+    justify-self: start;
+  }
+
+  .tcrm-setup-block-header,
+  .tcrm-setup-plans-workspace > .tcrm-setup-block-header,
+  .tcrm-setup-agenda-workspace > .tcrm-setup-block-header {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    min-height: var(--taliya-layout-crm-setup-block-header-height);
+    width: 100%;
+  }
+
+  .tcrm-setup-block-header__title-row,
+  .tcrm-setup-block-header__actions {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tcrm-setup-block-header p {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .tcrm-setup-studio-workspace__preview .tcrm-weekly-hours-grid {
+    height: auto;
+    overflow-x: auto;
+  }
+
+  .tcrm-setup-studio-workspace__days {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tcrm-setup-studio-workspace__preview .tcrm-weekly-hours-grid__matrix {
+    min-width: var(--taliya-layout-crm-compact-calendar-width);
+  }
+
+  .tcrm-setup-team-workspace .tcrm-role-card,
+  .tcrm-setup-team-workspace .tcrm-invite-row {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-setup-channels-workspace__connect,
+  .tcrm-setup-plans-workspace__actions,
+  .tcrm-setup-students-workspace__actions,
+  .tcrm-setup-classes-workspace__actions,
+  .tcrm-setup-review-panel__footer {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tcrm-setup-channels-workspace__connect .tl-button {
+    height: auto;
+    white-space: normal;
+  }
+
+  .tcrm-setup-plans-workspace__segments--type,
+  .tcrm-setup-plans-workspace__segments--quantity,
+  .tcrm-setup-plans-workspace__segments--three,
+  .tcrm-setup-plans-workspace__segments--validity,
+  .tcrm-setup-plans-workspace__segments--deadline,
+  .tcrm-setup-plans-workspace__segments--notice {
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  }
+
+  .tcrm-setup-plans-workspace__understanding .tl-list-item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-plans-workspace__understanding .tl-list-item__action {
+    justify-self: start;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .tcrm-setup-students-workspace__summary-grid,
+  .tcrm-setup-classes-workspace__summary-grid {
+    height: auto;
+  }
+
+  .tcrm-setup-students-workspace__summary-grid > .tl-panel,
+  .tcrm-setup-classes-workspace__summary-grid > .tl-panel {
+    height: auto;
+    overflow: visible;
+  }
+
+  .tcrm-setup-students-workspace .tcrm-worklist-table,
+  .tcrm-setup-classes-workspace .tcrm-worklist-table {
+    height: auto;
+  }
+
+  .tcrm-setup-students-workspace .tcrm-worklist-table__data.tl-table-wrap,
+  .tcrm-setup-classes-workspace .tcrm-worklist-table__data.tl-table-wrap {
+    overflow-x: auto;
+  }
+
+  .tcrm-setup-review-workspace > .tcrm-setup-review-panel {
+    height: auto;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__publish-grid,
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__pending-grid,
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__future-grid,
+  .tcrm-setup-review-panel__safe-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-review-workspace .tcrm-setup-review-card,
+  .tcrm-setup-review-workspace .tcrm-setup-review-alert,
+  .tcrm-setup-review-workspace .tcrm-setup-review-future-card {
+    height: auto;
+    min-height: var(--taliya-layout-crm-setup-review-panel-future-card-height);
+  }
+
+  .tcrm-setup-review-card {
+    grid-template-rows: auto auto;
+  }
+
+  .tcrm-setup-review-alert {
+    grid-template-columns: var(--taliya-control-crm-setup-review-panel-alert-icon-column) minmax(0, 1fr);
+    row-gap: var(--taliya-space-3);
+  }
+
+  .tcrm-setup-review-alert .tl-button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .tcrm-setup-review-panel__safe-row span {
+    align-items: flex-start;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .tcrm-setup-review-panel__footer {
+    justify-content: flex-start;
+    margin-top: var(--taliya-space-6);
+    position: static;
   }
 
   .tcrm-right-panel-layout {
@@ -32837,6 +33179,25 @@ button.tcrm-pipeline-card__select:focus-visible,
     display: none;
   }
 
+  .tcrm-product-shell-window--drawer:not(.tcrm-product-shell-window--drawer-global-actions) .tcrm-empty-shell-topbar > .tcrm-empty-shell-nav {
+    max-width: none;
+    right: var(--taliya-space-4);
+  }
+
+  .tcrm-product-shell-main .tcrm-empty-shell-topbar > .tcrm-empty-shell-nav {
+    gap: var(--taliya-layout-crm-product-shell-topbar-responsive-nav-gap);
+    left: var(--taliya-layout-crm-product-shell-topbar-responsive-nav-left);
+    max-width: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    right: var(--taliya-layout-crm-product-shell-topbar-responsive-actions-reserve);
+    scrollbar-width: none;
+  }
+
+  .tcrm-product-shell-main .tcrm-empty-shell-topbar > .tcrm-empty-shell-nav::-webkit-scrollbar {
+    display: none;
+  }
+
   :is(.tcrm-product-shell-stage--page-header-dashboard, .tcrm-product-shell-stage--page-header-reports) .tcrm-product-shell-main .tcrm-empty-shell-topbar > .tcrm-empty-shell-nav {
     gap: var(--taliya-space-1);
   }
@@ -32865,6 +33226,578 @@ button.tcrm-pipeline-card__select:focus-visible,
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: none;
     height: auto;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1500px) {
+  .tcrm-right-panel-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 32%);
+    max-width: 100%;
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout[data-state="collapsed"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-right-panel-layout__main,
+  .tcrm-right-panel-layout__panel {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) > .tcrm-right-panel-layout__main > * {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--settings
+    :is(.tcrm-settings-team-workspace, .tcrm-settings-inherited-workspace) > *,
+  .tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace > *,
+  .tcrm-right-panel-layout--settings-agenda .tcrm-settings-agenda-workspace > *,
+  .tcrm-right-panel-layout--settings-notifications .tcrm-settings-notifications-workspace > * {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  :is(
+    .tcrm-product-shell-stage--content-settings,
+    .tcrm-product-shell-stage--content-settings-payments,
+    .tcrm-product-shell-stage--content-settings-agenda,
+    .tcrm-product-shell-stage--content-settings-notifications,
+    .tcrm-product-shell-stage--content-settings-permissions
+  ) .tcrm-product-shell-page-header__actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    left: auto;
+    max-width: min(360px, calc(68% - var(--taliya-space-8)));
+    right: calc(32% + var(--taliya-space-4));
+    top: var(--taliya-space-4);
+  }
+
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    :is(.tcrm-rule-row__body, .tcrm-rule-row__control, .tcrm-rule-row__status) {
+    transform: none;
+  }
+
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    .tcrm-rule-row {
+    --taliya-layout-crm-rule-row-columns: 38px minmax(0, 1fr) minmax(150px, .8fr) 104px;
+    --taliya-layout-crm-rule-row-control-width: 100%;
+    --taliya-layout-crm-rule-row-width: 100%;
+  }
+
+  .tcrm-setup-page > .tcrm-setup-page__shell.tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) {
+    --taliya-layout-crm-setup-shell-columns: 200px minmax(0, 1fr) minmax(320px, 28vw);
+  }
+
+  .tcrm-setup-page .tcrm-setup-bottom-bar {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-setup-page .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__main {
+    overflow-x: hidden;
+    overflow-y: auto;
+    place-items: start stretch;
+  }
+
+  .tcrm-setup-consumption-workspace__models.tl-panel,
+  .tcrm-setup-consumption-workspace__settings {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-consumption-workspace__models .tcrm-setup-content-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-consumption-workspace__models .tcrm-setup-choice-card {
+    height: auto;
+    min-height: var(--taliya-layout-crm-setup-consumption-choice-height);
+    width: 100%;
+  }
+
+  .tcrm-setup-page .tcrm-setup-block-header,
+  .tcrm-setup-plans-workspace > .tcrm-setup-block-header,
+  .tcrm-setup-agenda-workspace > .tcrm-setup-block-header {
+    height: auto;
+    min-height: var(--taliya-layout-crm-setup-block-header-height);
+    width: 100%;
+  }
+
+  .tcrm-setup-block-header p {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .tcrm-setup-studio-workspace__grid,
+  .tcrm-setup-channels-workspace__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-studio-workspace__preview .tcrm-weekly-hours-grid {
+    height: auto;
+  }
+
+  .tcrm-setup-studio-workspace__preview .tcrm-weekly-hours-grid__matrix {
+    grid-template-columns: var(--taliya-space-8) repeat(5, minmax(0, 1fr));
+  }
+
+  .tcrm-setup-studio-workspace__preview .tcrm-weekly-hours-grid__column {
+    min-width: 0;
+    width: auto;
+  }
+
+  .tcrm-setup-team-workspace__fields,
+  .tcrm-setup-channels-workspace__choices,
+  .tcrm-setup-channels-workspace__public-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tcrm-setup-team-workspace .tcrm-role-card {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    width: 100%;
+  }
+
+  .tcrm-setup-team-workspace .tcrm-invite-row {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-setup-channels-workspace__whatsapp,
+  .tcrm-setup-channels-workspace__email,
+  .tcrm-setup-channels-workspace__public,
+  .tcrm-setup-channels-workspace__status {
+    height: auto;
+  }
+
+  .tcrm-setup-channels-workspace__column > .tl-panel {
+    overflow: visible;
+  }
+
+  .tcrm-setup-channels-workspace__connect {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tcrm-setup-channels-workspace__connect .tl-button {
+    height: auto;
+    white-space: normal;
+  }
+
+  .tcrm-setup-plans-workspace__grid {
+    grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .tcrm-setup-plans-workspace__understanding {
+    grid-column: 1 / -1;
+  }
+
+  .tcrm-setup-plans-workspace__plan .tl-button-group,
+  .tcrm-setup-plans-workspace__actions,
+  .tcrm-setup-students-workspace__actions,
+  .tcrm-setup-classes-workspace__actions,
+  .tcrm-setup-review-panel__footer {
+    flex-wrap: wrap;
+  }
+
+  .tcrm-setup-plans-workspace__segments--type,
+  .tcrm-setup-plans-workspace__segments--quantity,
+  .tcrm-setup-plans-workspace__segments--three,
+  .tcrm-setup-plans-workspace__segments--validity,
+  .tcrm-setup-plans-workspace__segments--deadline,
+  .tcrm-setup-plans-workspace__segments--notice {
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  }
+
+  .tcrm-setup-students-workspace__summary-grid,
+  .tcrm-setup-classes-workspace__summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  .tcrm-setup-students-workspace__summary-grid > .tl-panel,
+  .tcrm-setup-classes-workspace__summary-grid > .tl-panel {
+    height: auto;
+    overflow: visible;
+  }
+
+  .tcrm-setup-students-workspace__summary-grid > .tl-panel:last-child,
+  .tcrm-setup-classes-workspace__summary-grid > .tl-panel:last-child {
+    grid-column: auto;
+  }
+
+  .tcrm-setup-plans-workspace__understanding .tl-list-item__action {
+    justify-self: end;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    text-align: right;
+    white-space: normal;
+  }
+
+  .tcrm-setup-students-workspace .tcrm-worklist-table,
+  .tcrm-setup-classes-workspace .tcrm-worklist-table {
+    height: auto;
+  }
+
+  .tcrm-setup-students-workspace .tcrm-worklist-table__data.tl-table-wrap,
+  .tcrm-setup-classes-workspace .tcrm-worklist-table__data.tl-table-wrap {
+    overflow-x: auto;
+  }
+
+  .tcrm-setup-agenda-workspace__summary,
+  .tcrm-setup-agenda-workspace__body {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  .tcrm-setup-agenda-workspace__summary > .tl-panel,
+  .tcrm-setup-agenda-workspace__control,
+  .tcrm-setup-agenda-workspace__calendar {
+    height: auto;
+    overflow: visible;
+  }
+
+  .tcrm-setup-review-workspace > .tcrm-setup-review-panel {
+    height: auto;
+    min-height: 100%;
+    overflow: visible;
+  }
+
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__publish-grid,
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__future-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__pending-grid,
+  .tcrm-setup-review-panel__safe-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-review-workspace .tcrm-setup-review-card,
+  .tcrm-setup-review-workspace .tcrm-setup-review-alert,
+  .tcrm-setup-review-workspace .tcrm-setup-review-future-card {
+    height: auto;
+    min-height: var(--taliya-layout-crm-setup-review-panel-future-card-height);
+  }
+
+  .tcrm-setup-review-card {
+    grid-template-rows: auto auto;
+  }
+
+  .tcrm-setup-review-alert {
+    row-gap: var(--taliya-space-3);
+  }
+
+  .tcrm-setup-review-alert .tl-button {
+    align-self: start;
+  }
+
+  .tcrm-setup-review-panel__safe-row span {
+    align-items: start;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .tcrm-setup-review-panel__footer {
+    margin-top: var(--taliya-space-6);
+    position: static;
+  }
+
+  .tcrm-setup-shell__dash--hero,
+  .tcrm-setup-shell__card-row,
+  .tcrm-setup-shell__wide-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-setup-shell__card-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-mode-selector--flow {
+    gap: var(--taliya-space-2);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-mode-card--flow strong {
+    white-space: normal;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-agent-flow-settings-panel .tl-field-grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tcrm-access-shell-window.tcrm-window-frame {
+    max-width: calc(100vw - (2 * var(--taliya-space-4)));
+    width: calc(100% - (2 * var(--taliya-space-4)));
+  }
+
+  .tcrm-access-shell__main {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 32%);
+  }
+
+  .tcrm-access-shell__content,
+  .tcrm-access-shell__rail,
+  .tcrm-access-shell__rail-card {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1200px) {
+  .tcrm-setup-plans-workspace__grid,
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__publish-grid,
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__pending-grid,
+  .tcrm-setup-review-workspace .tcrm-setup-review-panel__future-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-setup-plans-workspace__understanding {
+    grid-column: auto;
+  }
+
+  .tcrm-setup-team-workspace .tcrm-role-card,
+  .tcrm-setup-team-workspace .tcrm-invite-row {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    width: 100%;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-section-panel--mode.tl-panel {
+    height: auto;
+    margin-bottom: 0;
+    min-height: 0;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-mode-selector--flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-mode-card--flow {
+    min-width: 0;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-mode-card--flow strong {
+    overflow-wrap: anywhere;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-flow-builder__lane,
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-flow-builder--compact .tcrm-flow-builder__lane {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-flow-builder__arrow {
+    display: none;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-flow-step-card {
+    border-left: 0;
+    border-top: var(--taliya-border-width-default) solid var(--taliya-border-color-subtle);
+    padding: var(--taliya-space-4) 0;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-agent-flow-settings-panel .tl-field-grid--4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-agent-flow-settings-panel .tl-field__hint {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .tcrm-product-shell-stage--drawer .tcrm-right-panel-layout .tcrm-agent-flow-action-bar.tl-button-group {
+    flex-wrap: wrap;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1120px) {
+  .tcrm-setup-page > .tcrm-setup-page__shell.tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(5, auto);
+    height: auto;
+    min-height: var(--taliya-layout-viewport-height);
+    overflow: visible;
+    padding: var(--taliya-space-3);
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__topbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--taliya-space-3);
+    min-height: 0;
+    padding-block: var(--taliya-space-2);
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__topbar-divider {
+    display: none;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__logo.tl-logo--wordmark {
+    flex: 0 1 var(--taliya-control-crm-setup-shell-topbar-logo-width);
+    max-width: 40%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__studio.tl-button {
+    flex: 1 1 140px;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__status.tl-chip {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__progress {
+    flex: 1 1 100%;
+    grid-template-columns: minmax(0, 1fr) auto;
+    justify-content: stretch;
+    order: 10;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__progress .tl-progress {
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__help.tl-button {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-stepper-panel {
+    height: min(300px, 45vh);
+    max-height: none;
+    overflow: hidden;
+    padding: var(--taliya-space-4);
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-stepper-panel .tl-stepper-wrap {
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-stepper-panel h2 {
+    align-self: auto;
+    margin: 0 0 var(--taliya-space-4);
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__main,
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__agent {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__main {
+    padding: var(--taliya-space-4);
+    place-items: start stretch;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-shell__agent-panel {
+    height: auto;
+    grid-template-rows: auto;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-bottom-bar {
+    gap: var(--taliya-space-3);
+    grid-column: 1;
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    margin-top: 0;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-bottom-bar__divider {
+    display: none;
+  }
+
+  .tcrm-setup-shell:not(.tcrm-setup-shell--layout-welcome) .tcrm-setup-bottom-bar__toggle {
+    justify-self: start;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) {
+    gap: var(--taliya-space-4);
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) > :is(.tcrm-right-panel-layout__main, .tcrm-right-panel-layout__panel) {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    transform: none;
+    width: 100%;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) .tcrm-settings-agent-panel.tl-panel {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) :is(
+    .tcrm-settings-agent-panel__body,
+    .tcrm-settings-agent-panel__questions,
+    .tcrm-settings-agent-panel__composer
+  ) {
+    height: auto;
+    overflow: visible;
+    transform: none;
   }
 }
 
@@ -33009,8 +33942,11 @@ button.tcrm-pipeline-card__select:focus-visible,
 
   .tcrm-product-shell-window .tcrm-empty-shell-window__body {
     display: block;
-    min-height: var(--taliya-layout-viewport-height);
+    height: calc(var(--taliya-layout-viewport-height) - var(--taliya-layout-crm-empty-shell-window-chrome-height));
+    min-height: 0;
     min-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .tcrm-product-shell-window .tcrm-empty-shell-sidebar,
@@ -33065,9 +34001,7 @@ button.tcrm-pipeline-card__select:focus-visible,
     width: 100%;
   }
 
-  .tcrm-product-shell-window--drawer .tcrm-product-shell-main,
-  .tcrm-product-shell-window--drawer-compact .tcrm-product-shell-main,
-  .tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main {
+  .tcrm-product-shell-window--drawer .tcrm-product-shell-main {
     padding-right: 0;
   }
 
@@ -33082,9 +34016,9 @@ button.tcrm-pipeline-card__select:focus-visible,
     border-radius: 0;
     bottom: 0;
     box-sizing: border-box;
-    height: var(--taliya-layout-viewport-height);
+    height: var(--taliya-layout-viewport-dynamic-height);
     left: 0;
-    max-height: var(--taliya-layout-viewport-height);
+    max-height: var(--taliya-layout-viewport-dynamic-height);
     max-width: 100%;
     right: 0;
     top: 0;
@@ -33104,9 +34038,9 @@ button.tcrm-pipeline-card__select:focus-visible,
     border-radius: 0;
     bottom: 0;
     box-sizing: border-box;
-    height: var(--taliya-layout-viewport-height);
+    height: var(--taliya-layout-viewport-dynamic-height);
     left: 0;
-    max-height: var(--taliya-layout-viewport-height);
+    max-height: var(--taliya-layout-viewport-dynamic-height);
     max-width: 100%;
     right: 0;
     top: 0;
@@ -33328,6 +34262,99 @@ button.tcrm-pipeline-card__select:focus-visible,
     width: 100%;
   }
 
+  .tcrm-right-panel-layout,
+  .tcrm-right-panel-layout--student-profile,
+  .tcrm-right-panel-layout--agent-routine,
+  .tcrm-right-panel-layout--agent-flow,
+  .tcrm-right-panel-layout--agent-test,
+  .tcrm-right-panel-layout--agent-publish,
+  .tcrm-right-panel-layout--agent-execution {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    max-width: 100%;
+    overflow: visible;
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout__main,
+  .tcrm-right-panel-layout__panel {
+    max-width: 100%;
+    min-width: 0;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-section-panel--mode.tl-panel {
+    height: auto;
+    margin-bottom: 0;
+    min-height: 0;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-mode-selector--flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-mode-card--flow {
+    min-width: 0;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-mode-card--flow strong {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-flow-builder__lane,
+  .tcrm-right-panel-layout--agent-flow .tcrm-flow-builder--compact .tcrm-flow-builder__lane {
+    gap: var(--taliya-space-3);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-flow-builder__arrow {
+    display: none;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-flow-step-card {
+    border-left: 0;
+    border-top: var(--taliya-border-width-default) solid var(--taliya-border-color-subtle);
+    min-width: 0;
+    padding: var(--taliya-space-4) 0;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-settings-panel .tl-field-grid--4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-settings-panel :is(.tl-field-grid, .tl-field, .tl-field-stack) {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-settings-panel .tl-field__hint {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-settings-panel .tl-field-stack {
+    height: auto;
+    overflow: visible;
+    top: 0;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-action-bar.tl-button-group {
+    align-items: stretch;
+    flex-direction: column;
+    max-width: 100%;
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--agent-flow .tcrm-agent-flow-action-bar > .tl-button:nth-child(n) {
+    width: 100%;
+  }
+
   .tcrm-dashboard-page-stack--opportunity .tcrm-dashboard-grid {
     grid-template-rows: none;
     height: auto;
@@ -33482,10 +34509,311 @@ button.tcrm-pipeline-card__select:focus-visible,
     display: none;
   }
 
-  .tcrm-drawer-frame--overlay {
+  :is(
+    .tcrm-product-shell-stage--content-settings,
+    .tcrm-product-shell-stage--content-settings-payments,
+    .tcrm-product-shell-stage--content-settings-agenda,
+    .tcrm-product-shell-stage--content-settings-notifications,
+    .tcrm-product-shell-stage--content-settings-permissions
+  ) .tcrm-product-shell-page-header {
+    height: auto;
+    min-height: 0;
+    padding: var(--taliya-space-4);
+    width: auto;
+  }
+
+  :is(
+    .tcrm-product-shell-stage--content-settings,
+    .tcrm-product-shell-stage--content-settings-payments,
+    .tcrm-product-shell-stage--content-settings-agenda,
+    .tcrm-product-shell-stage--content-settings-notifications,
+    .tcrm-product-shell-stage--content-settings-permissions
+  ) .tcrm-product-shell-page-header__copy {
+    translate: none;
+  }
+
+  :is(
+    .tcrm-product-shell-stage--content-settings,
+    .tcrm-product-shell-stage--content-settings-payments,
+    .tcrm-product-shell-stage--content-settings-agenda,
+    .tcrm-product-shell-stage--content-settings-notifications,
+    .tcrm-product-shell-stage--content-settings-permissions
+  ) .tcrm-product-shell-page-header :is(h1, p) {
+    top: auto;
+  }
+
+  :is(
+    .tcrm-product-shell-stage--content-settings,
+    .tcrm-product-shell-stage--content-settings-payments,
+    .tcrm-product-shell-stage--content-settings-agenda,
+    .tcrm-product-shell-stage--content-settings-notifications,
+    .tcrm-product-shell-stage--content-settings-permissions
+  ) .tcrm-product-shell-page-header__actions {
+    align-self: stretch;
+    flex-wrap: wrap;
+    gap: var(--taliya-space-2);
+    justify-content: flex-start;
+    left: auto;
     max-width: 100%;
+    position: static;
+    right: auto;
+    top: auto;
     width: 100%;
   }
+
+  :is(
+    .tcrm-product-shell-stage--content-settings,
+    .tcrm-product-shell-stage--content-settings-payments,
+    .tcrm-product-shell-stage--content-settings-agenda,
+    .tcrm-product-shell-stage--content-settings-notifications,
+    .tcrm-product-shell-stage--content-settings-permissions
+  ) .tcrm-page-family-content.tcrm-product-shell-content {
+    padding: var(--taliya-space-3);
+  }
+
+  .tcrm-product-shell-stage--content-settings-permissions .tcrm-product-shell-main::before {
+    display: none;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) {
+    gap: var(--taliya-space-4);
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    transform: none;
+    width: 100%;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) > :is(.tcrm-right-panel-layout__main, .tcrm-right-panel-layout__panel) {
+    border-radius: 0;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding-inline: 0;
+    transform: none;
+    width: 100%;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) .tcrm-settings-agent-panel.tl-panel {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) :is(
+    .tcrm-settings-agent-panel__body,
+    .tcrm-settings-agent-panel__questions,
+    .tcrm-settings-agent-panel__composer
+  ) {
+    height: auto;
+    overflow: visible;
+    transform: none;
+  }
+
+  .tcrm-right-panel-layout--settings-permissions .tcrm-settings-permissions-workspace,
+  .tcrm-right-panel-layout--settings-permissions .tcrm-settings-permissions-workspace__roles,
+  .tcrm-right-panel-layout--settings-permissions .tcrm-permission-matrix,
+  .tcrm-right-panel-layout--settings-permissions .tcrm-impact-summary,
+  .tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace,
+  .tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace__methods,
+  .tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace__taliya,
+  .tcrm-right-panel-layout--settings-agenda .tcrm-settings-agenda-workspace__section:nth-of-type(n),
+  .tcrm-right-panel-layout--settings-notifications .tcrm-settings-notifications-workspace__section:nth-of-type(n),
+  .tcrm-right-panel-layout--settings-notifications .tcrm-settings-notifications-workspace__role {
+    height: auto;
+    max-width: 100%;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace > * {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--settings-payments .tcrm-settings-section__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-settings-permissions-workspace__role-grid,
+  .tcrm-settings-payments-workspace__method-grid,
+  .tcrm-settings-payments-workspace__integration-grid,
+  .tcrm-settings-notifications-workspace__role-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-settings-payments-workspace__method-grid .tcrm-payment-method-row {
+    height: auto;
+    min-height: var(--taliya-control-crm-payment-method-row-height);
+  }
+
+  .tcrm-settings-payments-workspace__method-grid
+    :is(.tcrm-payment-method-row__mark, .tcrm-payment-method-row__body) {
+    transform: none;
+  }
+
+  .tcrm-settings-payments-workspace__taliya > header,
+  .tcrm-settings-payments-workspace__taliya > footer,
+  .tcrm-settings-agenda-workspace__section > header {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-settings-agenda-workspace__section > header .tl-button {
+    width: 100%;
+  }
+
+  .tcrm-settings-agenda-workspace__row {
+    align-items: start;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    grid-template-rows: auto auto auto auto;
+    height: auto;
+    padding: var(--taliya-space-3);
+  }
+
+  .tcrm-settings-agenda-workspace__row > strong,
+  .tcrm-settings-agenda-workspace__row > span {
+    grid-column: 2;
+  }
+
+  .tcrm-settings-agenda-workspace__row > .tl-chip {
+    justify-self: start;
+  }
+
+  .tcrm-settings-agenda-workspace__row > .tl-icon-button:nth-last-child(2) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .tcrm-settings-agenda-workspace__row > .tl-icon-button:last-child {
+    grid-column: 4;
+    grid-row: 1;
+  }
+
+  .tcrm-right-panel-layout--settings-agenda
+    .tcrm-settings-agenda-workspace__rules .tcrm-rule-row,
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    .tcrm-rule-row {
+    --taliya-layout-crm-rule-row-columns: var(--taliya-space-6) minmax(0, 1fr);
+    --taliya-layout-crm-rule-row-control-width: 100%;
+    --taliya-layout-crm-rule-row-width: 100%;
+    gap: var(--taliya-space-2);
+    grid-template-rows: auto;
+    height: auto;
+    min-height: var(--taliya-control-crm-rule-row-height);
+    padding: var(--taliya-space-3);
+  }
+
+  .tcrm-right-panel-layout--settings-agenda
+    .tcrm-settings-agenda-workspace__rules .tcrm-rule-row__icon,
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    .tcrm-rule-row__icon {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .tcrm-right-panel-layout--settings-agenda
+    .tcrm-settings-agenda-workspace__rules .tcrm-rule-row__body,
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    .tcrm-rule-row__body {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .tcrm-right-panel-layout--settings-agenda
+    .tcrm-settings-agenda-workspace__rules :is(.tcrm-rule-row__control, .tcrm-rule-row__status),
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    :is(.tcrm-rule-row__control, .tcrm-rule-row__status) {
+    grid-column: 2;
+    justify-content: flex-start;
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--settings-agenda
+    .tcrm-settings-agenda-workspace__rules .tcrm-rule-row__select,
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    .tcrm-rule-row__select {
+    max-width: 100%;
+    transform: none;
+    width: 100%;
+  }
+
+  .tcrm-right-panel-layout--settings-agenda
+    .tcrm-settings-agenda-workspace__rules .tcrm-rule-row__body :is(strong, small),
+  .tcrm-right-panel-layout--settings-notifications
+    :is(.tcrm-settings-notifications-workspace__rules, .tcrm-settings-notifications-workspace__channels)
+    .tcrm-rule-row__body :is(strong, small) {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .tcrm-settings-notifications-workspace__rule-head {
+    display: none;
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) .tcrm-unsaved-changes-bar {
+    gap: var(--taliya-space-2);
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+    overflow: visible;
+    padding: var(--taliya-space-3);
+  }
+
+  :is(
+    .tcrm-right-panel-layout--settings,
+    .tcrm-right-panel-layout--settings-payments,
+    .tcrm-right-panel-layout--settings-agenda,
+    .tcrm-right-panel-layout--settings-notifications,
+    .tcrm-right-panel-layout--settings-permissions
+  ) .tcrm-unsaved-changes-bar :is(.tcrm-unsaved-changes-bar__cancel, .tcrm-unsaved-changes-bar__save) {
+    grid-column: 1;
+    width: 100%;
+  }
+
 }
 .tcrm-settings-inherited-workspace > .tcrm-unsaved-changes-bar,
 .tcrm-settings-team-workspace > .tcrm-unsaved-changes-bar {
@@ -33505,13 +34833,17 @@ button.tcrm-pipeline-card__select:focus-visible,
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.tcrm-settings-studio-workspace__fields > :nth-child(4) {
+.tcrm-settings-studio-workspace__field--wide {
   grid-column: 1 / -1;
 }
 
 .tcrm-settings-team-workspace {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
   display: grid;
   gap: var(--taliya-space-4);
+  width: 100%;
 }
 
 .tcrm-settings-team-workspace__panel {
@@ -33520,7 +34852,30 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 .tcrm-settings-team-workspace__panel .tl-list-item__action {
-  min-width: max-content;
+  min-width: 0;
+}
+
+.tcrm-settings-inherited-workspace {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+}
+
+@media (max-width: 980px) {
+  .tcrm-settings-permissions-workspace__roles {
+    height: auto;
+    min-height: var(--taliya-control-crm-settings-permissions-roles-height);
+  }
+
+  .tcrm-settings-permissions-workspace__role-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-settings-team-workspace__panel .tl-list-item__action {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
 }
 
 @media (max-width: 840px) {
@@ -33528,7 +34883,7 @@ button.tcrm-pipeline-card__select:focus-visible,
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .tcrm-settings-studio-workspace__fields > :nth-child(4) {
+  .tcrm-settings-studio-workspace__field--wide {
     grid-column: auto;
   }
 }

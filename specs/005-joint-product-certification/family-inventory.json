@@ -1,0 +1,1634 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-05T18:42:39.703Z",
+  "status": "in-progress",
+  "reviewDimensions": [
+    "purpose",
+    "referenceAnatomy",
+    "officialComponents",
+    "variantsAndStates",
+    "responsiveLayout",
+    "interactionBehavior",
+    "accessibility",
+    "duplicateArchitecture",
+    "pageAdoption",
+    "visualComparison"
+  ],
+  "summary": {
+    "structuralFamilyCount": 15,
+    "mappedProductFamilyCount": 13,
+    "nonPageReferenceFamilyCount": 2,
+    "jointPassCount": 0,
+    "missingReferencedFamilyCount": 0
+  },
+  "missingFamilies": [],
+  "staleRows": [],
+  "rows": [
+    {
+      "id": "component-reference-boards",
+      "family": "Component/reference boards",
+      "referenceImage": "01, 07-15",
+      "referenceReason": "These are not product pages. They are extraction boards for tokens, primitives, states, overlays, communication, setup/data, agenda/finance/docs, agents/audit/reports. They must feed component contracts, not page-layout families.",
+      "coreOfficialComponents": "`@taliya/tokens`, `@taliya/ui` primitives, certified domain components",
+      "coveredPages": "01, 07, 08, 09, 10, 11, 12, 13, 14, 15. Image 06 is historical shell direction/context.",
+      "mappedSurfaces": [],
+      "mappedVisualTargetCount": 0,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:11.152Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:11.591Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:11.811Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:12.070Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "not-applicable",
+          "reviewedAt": "2026-08-04T19:45:26.506Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": [
+            "Reference boards define extraction contracts and are intentionally not product routes."
+          ]
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "app-shell-baseline",
+      "family": "App shell baseline",
+      "referenceImage": "`16_round-4.1S_app-shell_01_base-web.png`; current accepted baseline `17_round-4.1A_hoje_01_acima-da-dobra.png.png`",
+      "referenceReason": "Defines browser/app frame, sidebar, topbar, global actions, page title rhythm, content surface, and logged-in shell spacing. Image 17 is the accepted working baseline.",
+      "coreOfficialComponents": "`CrmProductShell`, shell nav, sidebar, topbar, global actions, page header, optional drawer slot",
+      "coveredPages": "All logged-in CRM pages 17-50, 52-70, 79 unless the page uses SetupShell or AccessShell.",
+      "mappedSurfaces": [
+        "Empty app shell"
+      ],
+      "mappedVisualTargetCount": 1,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:12.308Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:12.513Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:12.660Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T05:44:05.876Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/today-shell-joint-certification-audit-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/today-shell-final-current-20260805"
+          ],
+          "findings": [
+            "JPC-022"
+          ]
+        },
+        "responsiveLayout": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T05:44:06.337Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/today-shell-joint-certification-audit-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/today-shell-final-current-20260805"
+          ],
+          "findings": [
+            "JPC-022"
+          ]
+        },
+        "interactionBehavior": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T05:44:06.801Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/today-shell-joint-certification-audit-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/today-shell-final-current-20260805"
+          ],
+          "findings": [
+            "JPC-022"
+          ]
+        },
+        "accessibility": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T05:44:07.253Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/today-shell-joint-certification-audit-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/today-shell-final-current-20260805"
+          ],
+          "findings": [
+            "JPC-022"
+          ]
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:12.839Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:23.720Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T05:44:07.909Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/today-shell-joint-certification-audit-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/today-shell-final-current-20260805"
+          ],
+          "findings": [
+            "JPC-022"
+          ]
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-product-owner"
+    },
+    {
+      "id": "dashboard-card-grid",
+      "family": "Dashboard / Card grid",
+      "referenceImage": "`17_round-4.1A_hoje_01_acima-da-dobra.png.png`",
+      "referenceReason": "Best approved operational dashboard: multiple panel sizes, row/list cards, section rhythm, and no table-first or kanban-first layout.",
+      "coreOfficialComponents": "`DashboardGrid`, `Panel`, `MetricCard`, `StatusCard`, `ChartPanel`, `List`, `ListItem`, `ActivityFeed`, `PageFilterBar` when needed",
+      "coveredPages": "17, 19, 20, 30, 45, 48, 52, 60, 65, 67, 68, 79. Also parts of 47 and 59.",
+      "mappedSurfaces": [
+        "Hoje",
+        "Financeiro",
+        "Uso e cotas",
+        "Relatorios",
+        "Dinheiro na Mesa",
+        "Suporte Taliya",
+        "Billing Taliya",
+        "Internal operacao"
+      ],
+      "mappedVisualTargetCount": 12,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:13.044Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:13.222Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:13.405Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:13.632Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:23.919Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "card-catalog-hub-grid",
+      "family": "Card catalog / Hub grid",
+      "referenceImage": "`60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png`; secondary `52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png` and `67_round-4.1N_billing_03_add-ons-taliya-aprovado.png`",
+      "referenceReason": "Repeated card gallery/hub structure: card grid, status chips, compact descriptions, CTA/action affordance. It is close to dashboard but its primary behavior is choosing/opening a section or add-on, not reading KPIs.",
+      "coreOfficialComponents": "`DashboardGrid`, `SettingsHubCard`, `AgentCatalog`, `AgentCard`, `AddOnCard`, `PlanBlockedState`, `EmptyState`, `Panel`, `Button`",
+      "coveredPages": "52, 60, 67, and parts of 65.",
+      "mappedSurfaces": [
+        "Agentes",
+        "Configuracoes",
+        "Add-ons Taliya"
+      ],
+      "mappedVisualTargetCount": 4,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:13.814Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:13.968Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:14.169Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:14.362Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:24.111Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "kanban-workspace",
+      "family": "Kanban workspace",
+      "referenceImage": "`21_round-4.1B_operacao_01_kanban-geral.png.png`",
+      "referenceReason": "Best source for full kanban page: shell, page filter bar, quick-filter rail, board container, columns, cards, horizontal/vertical board behavior, and activity below.",
+      "coreOfficialComponents": "`PageFilterBar`, `PageQuickFilters`, `KanbanBoard`, `KanbanColumn`, `KanbanCard`, `FinanceKanbanCard`, `PipelineCard`, optional activity table/drawer",
+      "coveredPages": "21, 22, 33, 37.",
+      "mappedSurfaces": [
+        "Vendas/Pipeline",
+        "Financeiro Kanban",
+        "Operacao/Jornadas"
+      ],
+      "mappedVisualTargetCount": 4,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:14.621Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:15.186Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:15.453Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T10:51:53.111Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/kanban-family-final-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/kanban-family-final-current-20260805",
+            "specs/005-joint-product-certification/findings.json#JPC-029"
+          ],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T10:52:00.825Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/kanban-family-final-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/kanban-family-final-current-20260805/responsive-metrics.json"
+          ],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T10:52:12.375Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/kanban-family-final-20260805.md",
+            "apps/docs/src/stories/ImageCoverageSales.stories.tsx",
+            "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
+            "apps/docs/src/stories/ImageCoverageOperation.stories.tsx"
+          ],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T10:52:19.130Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/kanban-family-final-20260805.md",
+            "packages/crm/src/index.test.tsx",
+            "apps/docs/src/stories/ImageCoverageOperation.stories.tsx"
+          ],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:15.727Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:24.302Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T10:52:27.126Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/kanban-family-final-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/kanban-family-final-current-20260805"
+          ],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-product-owner"
+    },
+    {
+      "id": "worklist-table-quick-filters-drawer",
+      "family": "Worklist / Table + quick filters + drawer",
+      "referenceImage": "`23_round-4.1C_tarefas_01_lista-detalhe.png.png`",
+      "referenceReason": "Best source for the official worklist pattern: filter bar, left quick-filter rail, dense table, pagination, selected row, and right detail drawer.",
+      "coreOfficialComponents": "`WorkListDetailPage`, `PageFilterBar`, `PageQuickFilters`, `DataTable`, `TablePagination`, official drawer family (`TaskDrawer`, `ApprovalDrawer`, `LeadDrawer`, `CaseDrawer`, `PaymentDrawer`, `ClassDrawer`, `TenantSecurityDrawer`)",
+      "coveredPages": "23, 24 checklist, 25, 27, 31, 34, 35, 38, 39, 40, 41, 42, 43, 44, 49.",
+      "mappedSurfaces": [
+        "Alunos",
+        "Turmas",
+        "Reposicoes",
+        "Interessados",
+        "Aulas experimentais",
+        "Matriculas",
+        "Movimentacoes financeiras",
+        "Retencao",
+        "Cancelamentos",
+        "Reativacoes",
+        "Reclamacoes",
+        "Tarefas",
+        "Checklists",
+        "Aprovacoes",
+        "Internal tenants"
+      ],
+      "mappedVisualTargetCount": 15,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:15.973Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:16.195Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:16.393Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T09:59:20.153Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-core-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-student-class-replacement-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-sales-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/retention-worklist-source-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/final-worklists-source-diagnostic-20260805.md"
+          ],
+          "findings": [
+            "JPC-024",
+            "JPC-025",
+            "JPC-026",
+            "JPC-027",
+            "JPC-028"
+          ]
+        },
+        "responsiveLayout": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T09:59:20.816Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-core-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-student-class-replacement-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-sales-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/retention-worklist-source-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/final-worklists-source-diagnostic-20260805.md"
+          ],
+          "findings": [
+            "JPC-024",
+            "JPC-025",
+            "JPC-026",
+            "JPC-027",
+            "JPC-028"
+          ]
+        },
+        "interactionBehavior": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T09:59:21.502Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-core-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-student-class-replacement-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-sales-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/retention-worklist-source-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/final-worklists-source-diagnostic-20260805.md"
+          ],
+          "findings": [
+            "JPC-024",
+            "JPC-025",
+            "JPC-026",
+            "JPC-027",
+            "JPC-028"
+          ]
+        },
+        "accessibility": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T09:59:22.144Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-core-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-student-class-replacement-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-sales-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/retention-worklist-source-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/final-worklists-source-diagnostic-20260805.md"
+          ],
+          "findings": [
+            "JPC-024",
+            "JPC-025",
+            "JPC-026",
+            "JPC-027",
+            "JPC-028"
+          ]
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:16.579Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:24.472Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T09:59:22.897Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-core-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-student-class-replacement-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/worklist-sales-regional-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/retention-worklist-source-diagnostic-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/final-worklists-source-diagnostic-20260805.md"
+          ],
+          "findings": [
+            "JPC-024",
+            "JPC-025",
+            "JPC-026",
+            "JPC-027",
+            "JPC-028"
+          ]
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-product-owner"
+    },
+    {
+      "id": "ledger-table-right-assistant-rail",
+      "family": "Ledger table / right assistant rail",
+      "referenceImage": "`69_round-4.1O_uso_02_extrato-aprovado.png`; secondary `66_round-4.1N_billing_02_faturas-taliya-aprovado.png`",
+      "referenceReason": "Table pages that look like a dashboard/detail panel with an embedded ledger/history table and a persistent right assistant rail. They do not have the Worklist quick-filter rail or global drawer geometry, so forcing `WorkListDetailPage` would reduce visual parity.",
+      "coreOfficialComponents": "`CrmProductShell`, `DashboardGrid`/panel primitives, `UsageLedgerTable` or invoice-history table primitive, `AgentPanel`/support rail, `PageFilterBar` only when the source has an inline filter row inside the panel",
+      "coveredPages": "66, 69.",
+      "mappedSurfaces": [
+        "Extrato de uso",
+        "Faturas Taliya"
+      ],
+      "mappedVisualTargetCount": 2,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:16.757Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:16.945Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:17.137Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:17.362Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:24.649Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "three-pane-conversation-workspace",
+      "family": "Three-pane conversation workspace",
+      "referenceImage": "`24_round-4.1D_inbox_01_conversa-aberta.png.png`",
+      "referenceReason": "Only true three-pane source: conversation list, central thread/composer, contextual right panel, top filters, and channel actions.",
+      "coreOfficialComponents": "`ThreePaneLayout`, `ConversationList`, `ConversationThread`, `ContextPanel`, `ComposerInput`, `MessageBubble`, `PageFilterBar`, `AgentPanel`/context rail",
+      "coveredPages": "24D. Future support/contact inbox pages should reuse this family if they use list + thread + context panel.",
+      "mappedSurfaces": [
+        "Inbox/conversas"
+      ],
+      "mappedVisualTargetCount": 1,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:17.535Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:17.723Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:17.904Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:18.065Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:24.830Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "calendar-schedule-workspace",
+      "family": "Calendar / Schedule workspace",
+      "referenceImage": "`26_round-4.1F_agenda_01_calendario-operacional.png.png`",
+      "referenceReason": "Best source for operational schedule: date navigation, compact calendar filters, mini-calendar/quick rail, weekly grid, event cards, selected class drawer.",
+      "coreOfficialComponents": "`WeeklyCalendar`, `MiniCalendar`, `ClassCard`, `ClassDrawer`, `Roster`, `PageFilterBar`, `PageQuickFilters`, `DashboardGrid` for side summaries",
+      "coveredPages": "26, 29, 36, 51J, 63. Parts of 35 when the class list opens schedule detail.",
+      "mappedSurfaces": [
+        "Agenda",
+        "Grade",
+        "Aula/Chamada",
+        "Config. agenda"
+      ],
+      "mappedVisualTargetCount": 4,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:18.208Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:18.403Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:18.572Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:18.737Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:25.068Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "profile-detail-workspace",
+      "family": "Profile / Detail workspace",
+      "referenceImage": "`28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png`",
+      "referenceReason": "Best source for object profile: identity header, tabs, mixed summary panels, timeline, relationship/context blocks, action rail.",
+      "coreOfficialComponents": "`StudentHeader`, `ProfileTabs`, `StudentSummary`, `RelationshipList`, `ActivityFeed`, `Panel`, `DashboardGrid`, `ButtonGroup`",
+      "coveredPages": "28, 50. Potential future tenant/student/account detail pages.",
+      "mappedSurfaces": [
+        "Perfil do aluno",
+        "Aula/Chamada",
+        "Internal tenant detalhe"
+      ],
+      "mappedVisualTargetCount": 3,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:18.903Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:19.097Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:19.266Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:19.435Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:25.279Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "config-form-with-right-assistant-rail",
+      "family": "Config / Form with right assistant rail",
+      "referenceImage": "`61_round-4.1M_configuracoes_02_permissoes-aprovado.png`",
+      "referenceReason": "Best source for settings/form page: breadcrumb, title, status chips, form/card sections, editable table/controls, sticky actions, right contextual assistant.",
+      "coreOfficialComponents": "`SettingsSection`, `PermissionMatrix`, `ImpactSummary`, `ConfigImpactPreview`, `RuleRow`, `IntegrationStatusRow`, `UnsavedChangesBar`, `FieldGroup`, `Select`, `Toggle`, `AgentPanel`",
+      "coveredPages": "51C, 51D v2, 51E, 51F, 51G, 51K, 60, 61, 62, 63, 64.",
+      "mappedSurfaces": [
+        "Onboarding/setup",
+        "Config. permissoes",
+        "Config. pagamentos/financeiro",
+        "Config. agenda",
+        "Config. notificacoes/canais"
+      ],
+      "mappedVisualTargetCount": 17,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:19.597Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:19.837Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:20.049Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:20.264Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:25.579Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "setup-wizard-onboarding-shell",
+      "family": "Setup wizard / Onboarding shell",
+      "referenceImage": "`51A_round-4.1J_onboarding_shell-global-aprovado.png`",
+      "referenceReason": "Defines non-CRM setup shell: top progress, left stepper, central setup content, right setup agent, bottom status bar.",
+      "coreOfficialComponents": "`SetupShell`, `SetupStepper`, `SetupBlockHeader`, `SetupBottomBar`, `SetupAgentChat`, `SetupWelcome`, setup form/list primitives",
+      "coveredPages": "51A, 51B, 51C, 51D v2, 51E, 51F, 51G, 51H, 51I, 51J, 51K, 51L, 78.",
+      "mappedSurfaces": [
+        "Onboarding/setup"
+      ],
+      "mappedVisualTargetCount": 13,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:20.511Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:20.766Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:20.967Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:56:02.052Z",
+          "evidence": [
+            "specs/005-joint-product-certification/route-sweep-1440.json#rows-7-19",
+            "apps/docs/src/stories/ImageCoverageSetup.stories.tsx"
+          ],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T21:07:41.447Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-static-20260804/results.json"
+          ],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T21:07:49.743Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-20260804/static-play-results.json",
+            "apps/docs/src/stories/ImageCoverageSetup.stories.tsx"
+          ],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pass",
+          "reviewedAt": "2026-08-05T03:40:58.675Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805"
+          ],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:21.135Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:25.847Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T21:07:56.628Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-static-20260804",
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/routes-1440"
+          ],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-product-owner"
+    },
+    {
+      "id": "flow-automation-editor",
+      "family": "Flow / Automation editor",
+      "referenceImage": "`56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png`",
+      "referenceReason": "Best source for automation configuration: breadcrumb page header, mode selector, flow explanation/steps, settings controls, fixed right agent rail.",
+      "coreOfficialComponents": "`ModeSelector`, `ModeCard`, `FlowBuilder`, `FlowStepCard`, `ScenarioList`, `PhonePreview`, `SimulationRunner`, `ExecutionTimeline`, `ExecutionReceipt`, `PreflightChecklist`, `AgentFlowDrawer`/right agent rail",
+      "coveredPages": "53, 54, 56, 58, 59, 70. Image 52 is more dashboard/catalog than flow editor.",
+      "mappedSurfaces": [
+        "Agentes",
+        "Fluxos",
+        "Simulacoes",
+        "Publicacao de rotina",
+        "Execucao de fluxo"
+      ],
+      "mappedVisualTargetCount": 7,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:21.284Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:21.488Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:21.692Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:21.852Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:26.063Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "access-subscription-shell",
+      "family": "Access / Subscription shell",
+      "referenceImage": "`71_round-4.1Q_acesso-assinatura_shell-base-aprovado.png`",
+      "referenceReason": "Defines pre-CRM browser shell with brand bar, large central slot, right context cards, and footer. Different from logged-in CRM and setup shells.",
+      "coreOfficialComponents": "`AccessShell`, `AuthCard`, `CheckoutReviewPanel`, `CheckoutPaymentCard`, `SubscriptionStatusCard`, `SubscriptionProgressStepper`, `SubscriptionResolutionPanel`, `ConfirmedSetupHandoff`, `AccessFooterLinks`",
+      "coveredPages": "71, 72, 73, 74, 75, 76, 77.",
+      "mappedSurfaces": [
+        "Conta basica",
+        "Escolha de plano/checkout Taliya",
+        "Access shell"
+      ],
+      "mappedVisualTargetCount": 7,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:22.010Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:22.186Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:22.406Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:47:29.904Z",
+          "evidence": [
+            "specs/005-joint-product-certification/route-sweep-1440.json#rows-1-6-72",
+            "apps/docs/src/stories/ImageCoverageAccessSubscription.stories.tsx"
+          ],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T21:08:03.022Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-20260804/static-access-play-results.json",
+            "apps/docs/src/stories/ImageCoverageAccessSubscription.stories.tsx"
+          ],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:22.608Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:26.284Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json",
+            "specs/005-joint-product-certification/joint-certification-ledger.json"
+          ],
+          "findings": []
+        },
+        "visualComparison": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:47:30.012Z",
+          "evidence": [
+            "specs/005-joint-product-certification/visual-diagnostics/evidence/routes-1440"
+          ],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    },
+    {
+      "id": "internal-backoffice-dashboard-detail-hybrid",
+      "family": "Internal / Backoffice dashboard-detail hybrid",
+      "referenceImage": "`48_round-4.1K_internal_01_visao-operacional.png.png`; `49_round-4.1K_internal_02_tenants-lista-detalhe.png`; `50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png`",
+      "referenceReason": "Internal uses the same `CrmProductShell`, but its content alternates between dashboard, table/detail, and detail/security rail. It should reuse existing structural families rather than invent an internal shell.",
+      "coreOfficialComponents": "`CrmProductShell`, `InternalOverviewDashboard`, `TenantCard`, `TenantDetailLayout`, `SecurityRulePanel`, `TenantSecurityDrawer`, `DataTable`, `DashboardGrid`",
+      "coveredPages": "48 fits Dashboard/Card grid; 49 fits Worklist/Table + drawer; 50 fits Profile/Detail workspace.",
+      "mappedSurfaces": [],
+      "mappedVisualTargetCount": 0,
+      "codex": {
+        "purpose": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:22.772Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": []
+        },
+        "referenceAnatomy": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:22.938Z",
+          "evidence": [
+            "specs/001-product-ui-foundation/page-structure-family-audit.md",
+            "specs/005-joint-product-certification/route-sweep-1440.json"
+          ],
+          "findings": []
+        },
+        "officialComponents": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:23.165Z",
+          "evidence": [
+            "specs/005-joint-product-certification/component-inventory.json",
+            "specs/001-product-ui-foundation/page-structure-family-audit.md"
+          ],
+          "findings": []
+        },
+        "variantsAndStates": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "responsiveLayout": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "interactionBehavior": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "accessibility": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        },
+        "duplicateArchitecture": {
+          "status": "pass",
+          "reviewedAt": "2026-08-04T19:45:23.467Z",
+          "evidence": [
+            "specs/005-joint-product-certification/findings.json#JPC-002-JPC-003-JPC-006",
+            "specs/005-joint-product-certification/component-inventory.json"
+          ],
+          "findings": []
+        },
+        "pageAdoption": {
+          "status": "not-applicable",
+          "reviewedAt": "2026-08-04T19:45:26.675Z",
+          "evidence": [
+            "specs/005-joint-product-certification/surface-contracts.json"
+          ],
+          "findings": [
+            "Current Internal surfaces adopt canonical dashboard, worklist, and profile families instead of a separate hybrid page family."
+          ]
+        },
+        "visualComparison": {
+          "status": "pending",
+          "reviewedAt": null,
+          "evidence": [],
+          "findings": []
+        }
+      },
+      "productOwner": {
+        "status": "pending",
+        "reviewedAt": null,
+        "evidence": [],
+        "findings": []
+      },
+      "jointStatus": "pending-codex"
+    }
+  ]
+}

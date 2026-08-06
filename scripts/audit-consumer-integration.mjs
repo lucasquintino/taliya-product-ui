@@ -81,45 +81,45 @@ const installedPackageSpecs = [
 ];
 const installedPackageContractMarkers = [
   {
-    id: "crm-product-shell-drawer-size-api",
+    id: "crm-product-shell-canonical-drawer-api",
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
     file: "dist/index.d.ts",
     requiredText: [
-      "export type CrmProductShellDrawerSize = \"default\" | \"compact\";",
-      "drawerSize?: CrmProductShellDrawerSize;"
+      "drawer?: React.ReactNode;",
+      "showGlobalActionsWithDrawer?: boolean;"
     ]
   },
   {
-    id: "crm-product-shell-compact-drawer-css",
+    id: "crm-product-shell-canonical-drawer-css",
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
     file: "src/styles.css",
     requiredText: [
-      ".tcrm-product-shell-window--drawer-compact",
-      "var(--taliya-layout-crm-product-shell-drawer-compact-width)",
-      "var(--taliya-layout-crm-checklist-drawer-width)"
+      ".tcrm-product-shell-window--drawer .tcrm-product-shell-main",
+      "height: var(--taliya-layout-viewport-dynamic-height);",
+      "width: var(--taliya-control-drawer-width-md);"
     ]
   },
   {
-    id: "crm-task-drawer-compact-size-api",
-    packageName: "@taliya/crm",
-    packagePath: ["@taliya", "crm"],
+    id: "ui-canonical-drawer-api",
+    packageName: "@taliya/ui",
+    packagePath: ["@taliya", "ui"],
     file: "dist/index.d.ts",
     requiredText: [
-      "export type TaskDrawerSize = \"default\" | \"compact\";",
-      "size?: TaskDrawerSize;"
+      "export interface DrawerProps",
+      "modal?: boolean;"
     ]
   },
   {
-    id: "crm-task-drawer-compact-size-css",
-    packageName: "@taliya/crm",
-    packagePath: ["@taliya", "crm"],
+    id: "ui-canonical-drawer-css",
+    packageName: "@taliya/ui",
+    packagePath: ["@taliya", "ui"],
     file: "src/styles.css",
     requiredText: [
-      ".tcrm-task-drawer.tcrm-drawer-frame.tcrm-task-drawer--compact",
-      "var(--taliya-layout-crm-task-drawer-compact-width)",
-      "var(--taliya-control-crm-work-list-detail-filter-icon-size)"
+      ".tl-drawer {",
+      "height: var(--taliya-layout-viewport-dynamic-height);",
+      "width: min(var(--taliya-control-drawer-width-md), 100vw);"
     ]
   },
   {
@@ -133,24 +133,22 @@ const installedPackageContractMarkers = [
     ]
   },
   {
-    id: "crm-task-drawer-compact-density-css",
+    id: "crm-task-drawer-standard-density-css",
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
     file: "src/styles.css",
     requiredText: [
-      "--taliya-control-crm-task-drawer-fact-row-height: var(--taliya-control-crm-task-drawer-compact-fact-row-height);",
-      "--taliya-control-crm-task-drawer-header-min-height: var(--taliya-control-crm-task-drawer-compact-header-min-height);",
-      "--taliya-control-crm-task-drawer-section-gap: var(--taliya-control-crm-task-drawer-compact-section-gap);",
-      ".tcrm-task-drawer--compact .tcrm-task-drawer__copilot"
+      ".tcrm-task-drawer.tcrm-drawer-frame",
+      ".tcrm-task-drawer__copilot",
+      ".tcrm-task-drawer__checklist"
     ]
   },
   {
-    id: "tokens-task-drawer-compact-work-list-density",
+    id: "tokens-work-list-density",
     packageName: "@taliya/tokens",
     packagePath: ["@taliya", "tokens"],
     file: "src/tokens.css",
     requiredText: [
-      "--taliya-layout-crm-task-drawer-compact-width: var(--taliya-layout-crm-checklist-drawer-width);",
       "--taliya-control-crm-work-list-detail-filter-padding-x: 8px;",
       "--taliya-control-crm-work-list-detail-filter-gap: 6px;",
       "--taliya-control-crm-work-list-detail-filter-icon-size: 14px;",
@@ -295,7 +293,7 @@ const installedPackageContractMarkers = [
       ".tcrm-right-panel-layout--agent-routine",
       ".tcrm-product-shell-stage--page-header-agents-routine-detail",
       ".tcrm-product-shell-stage--content-agent-routine",
-      ".tcrm-agent-flow-drawer--routine"
+      ".tcrm-product-shell-stage > .tcrm-agent-flow-drawer"
     ]
   },
   {
@@ -305,8 +303,7 @@ const installedPackageContractMarkers = [
     file: "src/tokens.css",
     requiredText: [
       "--taliya-layout-crm-product-shell-main-header-agents-routine-detail-height: 141px;",
-      "--taliya-layout-crm-agent-flow-drawer-routine-width: 388px;",
-      "--taliya-layout-crm-product-shell-agent-routine-drawer-top: 143px;",
+      "--taliya-control-drawer-width-md: 420px;",
       "--taliya-control-crm-agent-routine-flow-card-routine-detail-height: 198px;"
     ]
   },
@@ -330,8 +327,8 @@ const installedPackageContractMarkers = [
     requiredText: [
       ".tcrm-right-panel-layout--agent-flow",
       ".tcrm-product-shell-stage--page-header-agents-flow-detail",
-      ".tcrm-product-shell-stage--content-agent-flow",
-      "var(--taliya-layout-crm-product-shell-agent-flow-drawer-right)"
+      ".tcrm-agent-flow-section-panel--mode.tl-panel",
+      ".tcrm-product-shell-stage > .tcrm-agent-flow-drawer"
     ]
   },
   {
@@ -341,8 +338,7 @@ const installedPackageContractMarkers = [
     file: "src/tokens.css",
     requiredText: [
       "--taliya-layout-crm-product-shell-main-header-agents-flow-detail-height: 140px;",
-      "--taliya-layout-crm-product-shell-agent-flow-drawer-width: 395px;",
-      "--taliya-layout-crm-product-shell-agent-flow-drawer-top: 139px;",
+      "--taliya-control-drawer-width-md: 420px;",
       "--taliya-control-crm-agent-flow-section-panel-mode-flow-detail-height: 148px;"
     ]
   },
@@ -364,8 +360,8 @@ const installedPackageContractMarkers = [
     file: "src/styles.css",
     requiredText: [
       ".tcrm-right-panel-layout--agent-test .tcrm-simulation-runner",
-      ".tcrm-product-shell-stage--content-agent-test",
-      "var(--taliya-layout-crm-product-shell-agent-test-drawer-width)"
+      ".tcrm-agent-flow-drawer--test",
+      ".tcrm-product-shell-stage > .tcrm-agent-flow-drawer"
     ]
   },
   {
@@ -374,33 +370,9 @@ const installedPackageContractMarkers = [
     packagePath: ["@taliya", "tokens"],
     file: "src/tokens.css",
     requiredText: [
-      "--taliya-layout-crm-product-shell-agent-test-drawer-width: 382px;",
-      "--taliya-layout-crm-product-shell-agent-test-drawer-top: 139px;",
+      "--taliya-control-drawer-width-md: 420px;",
       "--taliya-control-crm-simulation-runner-test-panel-height: 572px;",
       "--taliya-control-crm-simulation-runner-test-action-height: 51px;"
-    ]
-  },
-  {
-    id: "crm-agent-execution-layout-css",
-    packageName: "@taliya/crm",
-    packagePath: ["@taliya", "crm"],
-    file: "src/styles.css",
-    requiredText: [
-      ".tcrm-right-panel-layout--drawer-panel.tcrm-right-panel-layout--agent-execution",
-      "var(--taliya-layout-crm-right-panel-agent-execution-columns)",
-      "var(--taliya-layout-crm-right-panel-agent-execution-offset-x)"
-    ]
-  },
-  {
-    id: "tokens-agent-execution-layout",
-    packageName: "@taliya/tokens",
-    packagePath: ["@taliya", "tokens"],
-    file: "src/tokens.css",
-    requiredText: [
-      "--taliya-layout-crm-right-panel-agent-execution-main-width: 1007px;",
-      "--taliya-layout-crm-right-panel-agent-execution-rail-width: 368px;",
-      "--taliya-layout-crm-right-panel-agent-execution-offset-x: -5px;",
-      "--taliya-layout-crm-right-panel-agent-execution-columns: var(--taliya-layout-crm-right-panel-agent-execution-main-width) var(--taliya-layout-crm-right-panel-agent-execution-rail-width);"
     ]
   },
   {
@@ -409,7 +381,7 @@ const installedPackageContractMarkers = [
     packagePath: ["@taliya", "crm"],
     file: "dist/index.d.ts",
     requiredText: [
-      "layoutVariant?: \"default\" | \"opportunity\" | \"support\" | \"settings-hub\";",
+      "layoutVariant?: \"default\" | \"finance-overview\" | \"opportunity\" | \"support\" | \"settings-hub\";",
       "SettingsHubCard",
       "topNavSelection?: \"auto\" | \"none\";"
     ]
@@ -657,7 +629,7 @@ const installedPackageContractMarkers = [
       ".tcrm-support-ticket-drawer--internal",
       ".tcrm-product-shell-stage--content-internal-overview .tcrm-product-shell-content",
       ".tcrm-product-shell-stage--page-header-internal-overview .tcrm-product-shell-page-header",
-      ".tcrm-product-shell-stage--content-internal-overview.tcrm-product-shell-stage--drawer-floating > .tcrm-support-ticket-drawer--internal"
+      ".tcrm-product-shell-stage > .tcrm-support-ticket-drawer"
     ]
   },
   {
@@ -666,7 +638,7 @@ const installedPackageContractMarkers = [
     packagePath: ["@taliya", "crm"],
     file: "dist/index.d.ts",
     requiredText: [
-      "export type TenantSummaryDrawerState = \"active\" | \"risk\" | \"loading\" | \"blocked\" | \"closed\";",
+      "export type TenantSummaryDrawerState = \"active\" | \"degraded\" | \"tenant-blocked\" | \"risk\" | \"loading\" | \"blocked\" | \"closed\";",
       "export interface TenantSummaryDrawerProps",
       "export declare function TenantSummaryDrawer"
     ]
@@ -680,7 +652,7 @@ const installedPackageContractMarkers = [
       ".tcrm-tenant-summary-drawer.tcrm-drawer-frame",
       ".tcrm-product-shell-stage--content-internal-tenants",
       ".tcrm-product-shell-stage--page-header-internal-tenants .tcrm-product-shell-page-header",
-      ".tcrm-product-shell-stage--drawer-floating > .tcrm-tenant-summary-drawer"
+      ".tcrm-product-shell-stage > .tcrm-tenant-summary-drawer"
     ]
   },
   {
@@ -898,24 +870,23 @@ const installedPackageContractMarkers = [
     ]
   },
   {
-    id: "crm-replacement-floating-drawer-css",
+    id: "crm-replacement-canonical-drawer-css",
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
     file: "src/styles.css",
     requiredText: [
-      ".tcrm-product-shell-stage--drawer-floating > .tcrm-replacement-drawer",
-      "var(--taliya-layout-crm-product-shell-replacement-floating-drawer-top)",
+      ".tcrm-product-shell-stage > .tcrm-replacement-drawer",
+      "height: var(--taliya-layout-viewport-dynamic-height);",
       ".tcrm-replacement-drawer__fact[data-fact=\"credit\"]",
       "var(--taliya-control-crm-replacement-drawer-credit-fact-row-height)"
     ]
   },
   {
-    id: "tokens-replacement-floating-drawer",
+    id: "tokens-replacement-drawer-content",
     packageName: "@taliya/tokens",
     packagePath: ["@taliya", "tokens"],
     file: "src/tokens.css",
     requiredText: [
-      "--taliya-layout-crm-product-shell-replacement-floating-drawer-top: 104px;",
       "--taliya-control-crm-replacement-drawer-title-offset-top: 28px;",
       "--taliya-control-crm-replacement-drawer-credit-fact-row-height: 45px;",
       "--taliya-control-crm-replacement-drawer-footer-gap: 5px;"
@@ -1068,34 +1039,34 @@ const installedPackageContractMarkers = [
     ]
   },
   {
-    id: "crm-product-shell-floating-drawer-reserve-css",
+    id: "crm-product-shell-drawer-reserve-css",
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
     file: "src/styles.css",
     requiredText: [
-      ".tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main",
-      ".tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main .tcrm-empty-shell-topbar",
-      ".tcrm-product-shell-window--drawer-floating .tcrm-product-shell-main .tcrm-empty-shell-topbar {\n  right: 0;",
-      "var(--taliya-layout-crm-product-shell-floating-drawer-reserved-width)"
+      ".tcrm-product-shell-window--drawer .tcrm-product-shell-main",
+      ".tcrm-product-shell-window--drawer .tcrm-product-shell-main .tcrm-empty-shell-topbar",
+      "var(--taliya-control-drawer-width-md)"
     ]
   },
   {
-    id: "crm-product-shell-content-drawer-topbar-css",
+    id: "crm-product-shell-canonical-drawer-topbar-css",
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
     file: "src/styles.css",
     requiredText: [
-      ".tcrm-product-shell-window--drawer-content .tcrm-product-shell-main .tcrm-empty-shell-topbar",
-      "right: 0;"
+      ".tcrm-product-shell-window--drawer .tcrm-product-shell-main .tcrm-empty-shell-topbar",
+      "right: var(--taliya-control-drawer-width-md);"
     ]
   },
   {
-    id: "tokens-product-shell-floating-drawer-reserve",
+    id: "tokens-product-shell-canonical-drawer",
     packageName: "@taliya/tokens",
     packagePath: ["@taliya", "tokens"],
     file: "src/tokens.css",
     requiredText: [
-      "--taliya-layout-crm-product-shell-floating-drawer-reserved-width: var(--taliya-control-drawer-width-sm);"
+      "--taliya-layout-crm-product-shell-drawer-z-index: 50;",
+      "--taliya-control-drawer-width-md: 420px;"
     ]
   },
   {
@@ -1356,7 +1327,6 @@ const installedPackageContractMarkers = [
     file: "src/tokens.css",
     requiredText: [
       "--taliya-layout-crm-checklist-drawer-width: 342px;",
-      "--taliya-layout-crm-product-shell-drawer-compact-width: var(--taliya-layout-crm-checklist-drawer-width);",
       "--taliya-control-crm-checklist-drawer-section-header-height: 32px;",
       "--taliya-control-crm-checklist-drawer-step-row-height: 35px;",
       "--taliya-control-crm-checklist-drawer-step-row-padding-y: 5px;",
@@ -1754,6 +1724,14 @@ const forbiddenTaliyaSubpathMatches = findInFiles(extendedSourceFiles, (source) 
     }))
 );
 
+const forbiddenDrawerVariantMatches = findInFiles(activeSourceFiles, (source) =>
+  Array.from(source.matchAll(/(?:drawerPlacement|drawerSize|widthVariant)\s*=|<(?:CrmDrawer|TaskDrawer|CaseDrawer|Drawer)\b[^>]*\b(?:placement|side|size|inline)\s*=/g))
+    .map((match) => ({
+      line: lineNumber(source, match.index ?? 0),
+      text: match[0]
+    }))
+);
+
 const classNameMatches = findInFiles(activeSourceFiles, (source) =>
   Array.from(source.matchAll(/\b(?:[A-Za-z][A-Za-z0-9]*ClassName|className)\s*=/g)).map((match) => ({
     line: lineNumber(source, match.index ?? 0),
@@ -1790,6 +1768,10 @@ const report = {
     allowedSubpaths: Array.from(allowedTaliyaSubpathImports),
     matches: forbiddenTaliyaSubpathMatches
   },
+  forbiddenDrawerVariantStatus: {
+    pass: forbiddenDrawerVariantMatches.length === 0,
+    matches: forbiddenDrawerVariantMatches
+  },
   activeClassNameStatus: {
     pass: classNameMatches.length === 0,
     matches: classNameMatches
@@ -1810,6 +1792,7 @@ const checks = [
   ["Tokenized global reset", report.globalsStatus.pass],
   ["No forbidden implementation imports", report.forbiddenImportStatus.pass],
   ["No forbidden Taliya package subpath imports", report.forbiddenTaliyaSubpathImportStatus.pass],
+  ["No legacy drawer geometry variants", report.forbiddenDrawerVariantStatus.pass],
   ["No active local className hooks", report.activeClassNameStatus.pass],
   ["No extra active consumer CSS files", report.activeCssStatus.pass]
 ];
@@ -1851,6 +1834,7 @@ const markdown = [
   ...report.globalsStatus.details.map((detail) => `- ${detail}`),
   `- Forbidden import matches: ${report.forbiddenImportStatus.matches.length}`,
   `- Forbidden Taliya package subpath import matches: ${report.forbiddenTaliyaSubpathImportStatus.matches.length}`,
+  `- Legacy drawer geometry variant matches: ${report.forbiddenDrawerVariantStatus.matches.length}`,
   `- Active className matches: ${report.activeClassNameStatus.matches.length}`,
   `- Extra active CSS files: ${report.activeCssStatus.extraCssFiles.length}`,
   ""

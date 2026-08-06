@@ -36,3 +36,34 @@ export const Published: Story = {
     );
   }
 };
+
+export const DraftAndReview: Story = {
+  args: {
+    planStates: {
+      weekly: { label: "Ativo", tone: "success", studentsUsing: 18 },
+      pack: { label: "Revisar consumo", tone: "warning", studentsUsing: 7 },
+      trial: { label: "Rascunho", tone: "info", studentsUsing: 0 }
+    }
+  }
+};
+
+export const PlanInUseCannotDelete: Story = {
+  args: {
+    planStates: {
+      pack: { label: "Ativo", tone: "success", studentsUsing: 7 }
+    },
+    selectedPlanId: "pack"
+  }
+};
+
+export const ValidationError: Story = {
+  args: { validationError: "Valor e validade do plano precisam ser corrigidos." }
+};
+
+export const BlockedPermission: Story = {
+  args: { blockedReason: "Seu papel pode consultar planos, mas nao pode altera-los.", onRequestAccess: () => undefined }
+};
+
+export const SystemError: Story = {
+  args: { systemError: "O plano nao foi salvo. Tente novamente.", onRetry: () => undefined }
+};

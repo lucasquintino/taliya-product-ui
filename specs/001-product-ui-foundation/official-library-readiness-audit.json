@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-16T16:34:04.542Z",
-  "status": "pass-official-library-current-scope",
-  "officialConsumerReady": true,
+  "generatedAt": "2026-08-05T19:35:00.805Z",
+  "status": "fail",
+  "officialConsumerReady": false,
   "globalGoalComplete": false,
-  "currentVersion": "0.1.0",
+  "currentVersion": "0.1.1",
   "consistentPackageVersion": true,
-  "currentInternalReady": true,
-  "crmRealCanStart": true,
+  "currentInternalReady": false,
+  "crmRealCanStart": false,
   "realFutureCrmAdoptionExecuted": false,
   "releaseCandidateStatus": "pass",
   "releaseCandidateGateCount": 103,
@@ -22,9 +22,9 @@
   "reportRows": [
     {
       "id": "aggregate-readiness",
-      "status": "pass",
+      "status": "fail",
       "evidence": "library-readiness-gate.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "package-artifacts",
@@ -64,15 +64,15 @@
     },
     {
       "id": "library-consumption",
-      "status": "pass",
+      "status": "fail",
       "evidence": "library-consumption-status.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "crm-real-readiness",
-      "status": "pass",
+      "status": "fail",
       "evidence": "crm-real-readiness-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "release-policy",
@@ -94,9 +94,9 @@
     },
     {
       "id": "goal-completion",
-      "status": "pass",
+      "status": "fail",
       "evidence": "goal-completion-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     }
   ],
   "packageRows": [
@@ -104,7 +104,7 @@
       "id": "tokens",
       "packageName": "@taliya/tokens",
       "status": "pass",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "missingExports": [],
       "missingFiles": [],
       "missingPeers": [],
@@ -115,7 +115,7 @@
       "id": "ui",
       "packageName": "@taliya/ui",
       "status": "pass",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "missingExports": [],
       "missingFiles": [],
       "missingPeers": [],
@@ -126,7 +126,7 @@
       "id": "crm",
       "packageName": "@taliya/crm",
       "status": "pass",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "missingExports": [],
       "missingFiles": [],
       "missingPeers": [],

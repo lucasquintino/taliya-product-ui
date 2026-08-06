@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   CrmDashboardPage,
   CrmKanbanPage,
+  CrmPageFamilyShell,
   CrmRightPanelPage,
   CrmThreePanePage,
   CrmWorklistPage,
@@ -60,6 +61,21 @@ function DemoFilterBar({ placeholder = "Buscar..." }: { placeholder?: string }) 
 function DemoQuickFilters({ heading = "Filtros rapidos" }: { heading?: string }) {
   return <PageQuickFilters heading={heading} items={quickItems} selectionTone="soft" />;
 }
+
+export const FamilyShell: Story = {
+  render: () => (
+    <CrmPageFamilyShell
+      activeNavId="lista"
+      activeSidebarId="clipboard"
+      navItems={navItems}
+      sidebarItems={crmEmptyShellSidebarItems}
+      subtitle="Contrato estrutural compartilhado"
+      title="Familia de pagina"
+    >
+      <Panel>Conteudo preparado pelo consumidor</Panel>
+    </CrmPageFamilyShell>
+  )
+};
 
 export const Worklist: Story = {
   render: () => (

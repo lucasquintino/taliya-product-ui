@@ -1,0 +1,24 @@
+{
+  "storyId": "crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca",
+  "metrics": {
+    "brokenImages": 0,
+    "drawerRect": {
+      "bottom": 1440,
+      "height": 1440,
+      "right": 2560,
+      "width": 420,
+      "x": 2140
+    },
+    "drawerState": "overdue",
+    "scrollWidth": 2560,
+    "statuses": [
+      "Cobrança selecionada: overdue:eduardo"
+    ],
+    "viewportWidth": 2560
+  },
+  "errors": [],
+  "notes": [
+    "Selected billing drawer rendered through the official shell drawer slot.",
+    "Storybook play contract executed in a fresh tab after aligning the assertion with the semantic overdue state."
+  ]
+}

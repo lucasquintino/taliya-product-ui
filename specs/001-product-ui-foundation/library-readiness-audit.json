@@ -1,7 +1,7 @@
 {
-  "date": "2026-06-25",
+  "date": "2026-08-05",
   "objective": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
-  "status": "integration-readiness-proven-for-current-internal-scope",
+  "status": "integration-readiness-proven-with-release-blockers",
   "notClaimed": [
     "source-image-1-to-1-certification-for-every-approved-image",
     "future-consumer-app-compliance-before-that-app-runs-consumer-audit"
@@ -87,7 +87,7 @@
       "result": "proven",
       "evidence": [
         "corepack pnpm consumer:audit",
-        "consumer-integration-audit.md Standard page-kit runtime count: 37/37",
+        "consumer-integration-audit.md Standard page-kit runtime count: 52/52",
         "corepack pnpm future-consumer-fixture:audit",
         "packages/crm/src/standard-page-kit.ts"
       ]
@@ -98,7 +98,7 @@
       "evidence": [
         "corepack pnpm components:audit",
         "specs/001-product-ui-foundation/component-architecture-audit.md",
-        "component-architecture-audit.json primitiveReuseClassification: justified=29, refactor=0, missingPrimitive=0"
+        "component-architecture-audit.json primitiveReuseClassification: justified=32, refactor=0, missingPrimitive=0"
       ]
     },
     {
@@ -107,7 +107,7 @@
       "evidence": [
         "corepack pnpm consumer:audit",
         "specs/001-product-ui-foundation/consumer-integration-audit.md",
-        "consumer-integration-audit.json packageStatus sourceRows pass=true for vendor/taliya-product-ui tarball dependencies",
+        "consumer-integration-audit.json packageStatus sourceRows pass=true for the currently installed vendor/taliya-product-ui tarball dependencies; current 0.1.1 package sync is separately blocked until refresh",
         "consumer-integration-audit.json installedPackageStatus: pass=true for @taliya/tokens, @taliya/ui, @taliya/crm"
       ]
     },

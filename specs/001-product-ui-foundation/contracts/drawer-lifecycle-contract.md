@@ -10,6 +10,20 @@ Default page state:
 
 Approved images with open drawers are reference states for selected items, not required initial route states.
 
+## Canonical Geometry
+
+Every operational drawer uses one geometry contract:
+
+- fixed to the right edge of the viewport;
+- `top: 0` and `bottom: 0`;
+- height and max-height equal to `100dvh` through the official dynamic viewport token;
+- one official medium width, capped at `100vw`;
+- full viewport width on mobile;
+- shell main content reserves the same official width;
+- no public placement, side, inline, compact-width, wide-width, or size prop.
+
+Reference-image differences never override this product contract. Domain drawers may vary their facts, sections, actions, states, and internal density, but not their outer geometry.
+
 ## Required Drawer Anatomy
 
 Every operational drawer must define:

@@ -19,7 +19,18 @@ type Story = StoryObj<typeof meta>;
 export const Published: Story = {
   render: function Render() {
     const initialDays = ["Seg", "Ter", "Qua", "Qui", "Sex"];
-    const initialValues: Record<SettingsStudioField, string> = { studioName: "Studio Leticia", publicName: "Studio Leticia", mainUnit: "Unidade Centro", address: "Rua das Flores, 120", city: "Sao Paulo", state: "SP", postalCode: "01001-000" };
+    const initialValues: Record<SettingsStudioField, string> = {
+      studioName: "Studio Leticia",
+      publicName: "Studio Leticia",
+      mainUnit: "Unidade Centro",
+      address: "Rua das Flores, 120",
+      addressLine2: "Sala 12",
+      neighborhood: "Centro",
+      city: "Sao Paulo",
+      state: "SP",
+      postalCode: "01001-000",
+      timezone: "America/Sao_Paulo"
+    };
     const [activeDays, setActiveDays] = useState(initialDays);
     const [savedDays, setSavedDays] = useState(initialDays);
     const [values, setValues] = useState(initialValues);
@@ -37,4 +48,16 @@ export const Published: Story = {
       />
     );
   }
+};
+
+export const ValidationError: Story = {
+  args: { validationError: "Nome do studio e horario de funcionamento precisam ser corrigidos." }
+};
+
+export const BlockedPermission: Story = {
+  args: { blockedReason: "Somente Dono/Admin pode editar os dados do studio.", onRequestAccess: () => undefined }
+};
+
+export const SystemError: Story = {
+  args: { systemError: "A alteracao nao foi salva. Seus dados continuam nesta tela.", onRetry: () => undefined }
 };

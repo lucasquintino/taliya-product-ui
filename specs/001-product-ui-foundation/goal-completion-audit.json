@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-16T16:34:04.211Z",
-  "date": "2026-07-16",
+  "generatedAt": "2026-08-05T19:35:00.822Z",
+  "date": "2026-08-05",
   "goal": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   "trueGoal": {
     "statement": "Transformar taliya-product-ui em uma biblioteca oficial, reutilizavel e instalavel, com @taliya/tokens, @taliya/ui e @taliya/crm, capaz de alimentar os stories/imagens do CRM Taliya, o taliya-internal hoje e o futuro CRM Taliya depois, sem reimplementar shell, filtros, tabela, drawer, kanban, cards ou padroes visuais localmente.",
@@ -19,9 +19,9 @@
       "Consumer pages that reimplement shell/filter/table/drawer/kanban/card visuals locally."
     ]
   },
-  "verdict": "not-complete-globally",
+  "verdict": "readiness-regression",
   "summary": {
-    "currentInternalReadiness": "proven",
+    "currentInternalReadiness": "regressed",
     "futureCrmAdoption": "not-executed",
     "globalSourceImageParity": "scoped-out-by-product-acceptance"
   },
@@ -38,7 +38,7 @@
     },
     {
       "requirement": "Installable, publishable, CSS-safe, peer-safe, workspace-free, locally versioned, package-files-restricted, and documented local package artifacts",
-      "status": "proven",
+      "status": "failed",
       "evidence": [
         "package-artifacts:audit sourcePublishable/packedPublishable",
         "package-artifacts:audit sourceCssSideEffects/packedCssSideEffects",
@@ -48,7 +48,7 @@
         "package-artifacts:audit package files field and forbidden tarball files",
         "package-artifacts:audit required README snippets",
         "registry-consumer-adoption:audit 3/3 packages with no effective vendor dependencies",
-        "library-readiness-gate registry migration/adoption pass",
+        "library-readiness-gate registry migration/adoption missing/fail",
         "npm-registry distribution channel",
         "consumer:audit installedPackageStatus"
       ]
@@ -75,7 +75,7 @@
       "requirement": "Component architecture supports reuse",
       "status": "proven-for-current-scope",
       "evidence": [
-        "components:audit 333 valid stories",
+        "components:audit 343 valid stories",
         "primitiveReuseClassification refactor=0 missingPrimitive=0"
       ]
     },
@@ -184,13 +184,13 @@
     },
     {
       "requirement": "Library consumption status handoff is current and coherent",
-      "status": "proven-for-current-internal",
+      "status": "failed",
       "evidence": [
         "library-consumption-status:audit",
         "library-consumption-status.md",
-        "status=pass-current-internal-library",
+        "status=fail",
         "currentInternalLibraryAccepted=true",
-        "currentInternalConsumptionPass=true",
+        "currentInternalConsumptionPass=false",
         "publicPageKitPass=true",
         "technicalReleaseCandidatePass=true",
         "aggregateReadinessPass=true",
@@ -201,13 +201,13 @@
     },
     {
       "requirement": "CRM real readiness handoff proves the library can start the real CRM",
-      "status": "proven-for-current-scope",
+      "status": "failed",
       "evidence": [
         "crm-real-readiness:audit",
         "crm-real-readiness-audit.md",
-        "status=pass-ready-to-start-crm-real",
-        "currentInternalReady=true",
-        "crmRealCanStart=true",
+        "status=fail",
+        "currentInternalReady=false",
+        "crmRealCanStart=false",
         "realFutureCrmAdoptionExecuted=false",
         "globalGoalComplete=false",
         "standardPageKitComponents=52",
@@ -216,14 +216,14 @@
     },
     {
       "requirement": "Official library readiness handoff proves the packages can be consumed as the reusable UI source",
-      "status": "proven-for-current-scope",
+      "status": "failed",
       "evidence": [
         "official-library-readiness:audit",
         "official-library-readiness-audit.md",
-        "status=pass-official-library-current-scope",
-        "officialConsumerReady=true",
-        "currentInternalReady=true",
-        "crmRealCanStart=true",
+        "status=fail",
+        "officialConsumerReady=false",
+        "currentInternalReady=false",
+        "crmRealCanStart=false",
         "realFutureCrmAdoptionExecuted=false",
         "releaseCandidateGates=103",
         "registryManualItems=3"

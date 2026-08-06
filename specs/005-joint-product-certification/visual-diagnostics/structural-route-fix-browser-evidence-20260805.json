@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-08-05",
+  "artifact": "apps/docs/storybook-static",
+  "baseUrl": "http://127.0.0.1:6224",
+  "viewport": { "width": 1280, "height": 720 },
+  "routes": [
+    {
+      "label": "inbox-conversation-open",
+      "storyId": "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta",
+      "heading": "Inbox",
+      "layout": {
+        "status": "pass",
+        "rootScrollWidth": 1265,
+        "rootClientWidth": 1265,
+        "contextPanelWidth": 243.71,
+        "contextPanelRight": 1239,
+        "contextPanelScrollWidth": 244,
+        "contextPanelClientWidth": 244
+      },
+      "runtimeLogs": []
+    },
+    {
+      "label": "student-profile",
+      "storyId": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+      "heading": "Ana Paula Martins",
+      "layout": {
+        "status": "pass",
+        "mainCount": 1,
+        "pageHeading": "h1",
+        "rootScrollWidth": 1265,
+        "rootClientWidth": 1265
+      },
+      "runtimeLogs": []
+    },
+    {
+      "label": "class-call",
+      "storyId": "crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada",
+      "heading": "Terça 17h · Reformer Intermediário",
+      "drawerGeometry": {
+        "status": "pass",
+        "position": "fixed",
+        "top": 0,
+        "bottom": 720,
+        "right": 1265,
+        "height": 720,
+        "width": 420
+      },
+      "lifecycle": {
+        "closeButton": "Fechar chamada",
+        "closeUnmountsDrawer": true,
+        "reopenButton": "Fazer chamada",
+        "reopenRestoresDrawer": true
+      },
+      "runtimeLogs": []
+    },
+    {
+      "label": "internal-tenant-detail",
+      "storyId": "crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants",
+      "heading": "Studio Vila Mariana",
+      "layout": {
+        "status": "pass",
+        "mainCount": 1,
+        "pageHeading": "h1",
+        "rootScrollWidth": 1265,
+        "rootClientWidth": 1265
+      },
+      "runtimeLogs": []
+    }
+  ],
+  "sourceChanges": [
+    "ThreePaneLayout now constrains ContextPanel to the available right column.",
+    "ClassDrawer is mounted through the canonical shell drawer slot.",
+    "StudentHeader and TenantDetailLayout support page-level h1 without nested main landmarks."
+  ],
+  "notes": [
+    "Evidence comes from the rebuilt static Storybook artifact.",
+    "Inbox ContextPanel is a persistent context rail, not a domain drawer; its width now follows the official three-pane column."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-07-15T15:21:35.251Z",
+  "consumerRoot": "/tmp/taliya-internal-clean.JgWb6B/repo",
+  "sourceDir": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/dist-packages",
+  "vendorDir": "/tmp/taliya-internal-clean.JgWb6B/repo/vendor/taliya-product-ui",
+  "reportLabel": "taliya-internal-clean-clone",
+  "git": {
+    "isGitRepo": true,
+    "gitRoot": "/private/tmp/taliya-internal-clean.JgWb6B/repo"
+  },
+  "status": "fail",
+  "rows": [
+    {
+      "fileName": "taliya-tokens-0.1.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": false,
+      "gitStatus": "",
+      "synced": true,
+      "pass": false
+    },
+    {
+      "fileName": "taliya-ui-0.1.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": false,
+      "gitStatus": "",
+      "synced": true,
+      "pass": false
+    },
+    {
+      "fileName": "taliya-crm-0.1.0.tgz",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": false,
+      "gitStatus": "",
+      "synced": true,
+      "pass": false
+    },
+    {
+      "fileName": "taliya-product-ui-local-manifest.json",
+      "sourceExists": true,
+      "vendorExists": true,
+      "tracked": false,
+      "gitStatus": "",
+      "synced": true,
+      "pass": false
+    }
+  ]
+}

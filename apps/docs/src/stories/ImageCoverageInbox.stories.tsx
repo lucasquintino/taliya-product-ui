@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo, useState } from "react";
 
 import {
-  ContextPanel,
+  ConversationDrawer,
   ConversationList,
   ConversationThread,
   CrmThreePanePage,
@@ -64,6 +64,7 @@ export function InboxConversationPage() {
   const [activeFilterId, setActiveFilterId] = useState("all");
   const [announcement, setAnnouncement] = useState("");
   const [selectedId, setSelectedId] = useState("ana-silva");
+  const [drawerOpen, setDrawerOpen] = useState(true);
   const selectedConversation = inboxConversationRows.find((row) => row.id === selectedId) ?? inboxConversationRows[0]!;
   const selectedMessages = selectedConversation.id === "ana-silva" ? undefined : [{
     id: `${selectedConversation.id}-inbound`,
@@ -121,6 +122,23 @@ export function InboxConversationPage() {
         </>
       )}
       filterBar={<InboxFilters onAction={setAnnouncement} />}
+      drawer={drawerOpen ? (
+        <ConversationDrawer
+          avatarSrc={selectedConversation.avatarSrc}
+          facts={selectedFacts}
+          historyItems={selectedHistory}
+          onAction={(action) => setAnnouncement(`Ação do contexto: ${action}`)}
+          onClose={() => {
+            setDrawerOpen(false);
+            setAnnouncement("Detalhes da conversa fechados");
+          }}
+          onFactAction={(fact) => setAnnouncement(`Ação do dado: ${fact}`)}
+          onTaskAction={(task) => setAnnouncement(`Tarefa relacionada aberta: ${task}`)}
+          statusLabel={selectedConversation.statusLabel}
+          taskItems={selectedTasks}
+          title={selectedConversation.name}
+        />
+      ) : null}
       globalActions={{
         onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
         onMessages: () => setAnnouncement("Mensagens abertas"),
@@ -132,6 +150,7 @@ export function InboxConversationPage() {
           activeFilterId={activeFilterId}
           onConversationSelect={(row) => {
             setSelectedId(row.id);
+            setDrawerOpen(true);
             setAnnouncement(`Conversa aberta: ${row.name}`);
           }}
           onFilterChange={(filter) => {
@@ -150,20 +169,8 @@ export function InboxConversationPage() {
       onNavChange={(id) => setAnnouncement(`Seção selecionada: ${id}`)}
       onSidebarSelect={(item) => setAnnouncement(`Módulo selecionado: ${item.label}`)}
       onSidebarUtilitySelect={(item) => setAnnouncement(`Preferência selecionada: ${item.label}`)}
+      pageHeaderActions={!drawerOpen ? <Button leadingIcon="message" onClick={() => setDrawerOpen(true)} size="sm" variant="primary">Abrir conversa</Button> : undefined}
       pageHeaderRhythm="inbox"
-      right={(
-        <ContextPanel
-          avatarSrc={selectedConversation.avatarSrc}
-          facts={selectedFacts}
-          historyItems={selectedHistory}
-          onAction={(action) => setAnnouncement(`Ação do contexto: ${action}`)}
-          onFactAction={(fact) => setAnnouncement(`Ação do dado: ${fact}`)}
-          onTaskAction={(task) => setAnnouncement(`Tarefa relacionada aberta: ${task}`)}
-          statusLabel={selectedConversation.statusLabel}
-          taskItems={selectedTasks}
-          title={selectedConversation.name}
-        />
-      )}
       sidebarItems={crmEmptyShellSidebarItems}
       subtitle="Studio Vila Mariana · Atendimento e conversas"
       title="Inbox"
@@ -248,7 +255,7 @@ export const Image24DInboxConversaAberta: Story = {
     docs: {
       description: {
         story:
-          "Fonte: 24_round-4.1D_inbox_01_conversa-aberta.png.png. Composicao oficial Three-pane/PageFilterBar/ConversationList/ConversationThread/ContextPanel para Inbox."
+          "Fonte: 24_round-4.1D_inbox_01_conversa-aberta.png.png. Composicao oficial Three-pane/PageFilterBar/ConversationList/ConversationThread/ConversationDrawer para Inbox."
       }
     },
     sourceImage: "24_round-4.1D_inbox_01_conversa-aberta.png.png"

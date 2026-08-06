@@ -181,7 +181,7 @@ const starterFileContracts = [
   },
   {
     file: "app/crm/page.tsx",
-    requiredFragments: ["CrmShellClient", "../../components/crm-shell-client", "WorkListPage", "../../features/crm/work-list/work-list-page"]
+    requiredFragments: ["CrmRecordDrawer", "CrmShellClient", "drawer=", "../../components/crm-shell-client", "WorkListPage", "../../features/crm/work-list/work-list-page"]
   },
   {
     file: "app/crm/kanban/page.tsx",
@@ -223,13 +223,12 @@ export function WorkListPage() {
         <CrmRecordDrawer
           actions={[{ id: "open", label: "Abrir", variant: "primary" }]}
           facts={[{ id: "owner", label: "Dono", value: "Mariana", icon: "user" }]}
-          inline
-          open
+          open={false}
           title="Ana Silva"
           onOpenChange={() => undefined}
         />
       }
-      detailState="selected"
+      detailState="closed"
       filterBar={
         <PageFilterBar
           actions={<Button variant="primary">Novo lead</Button>}
@@ -259,12 +258,15 @@ export function WorkListPage() {
 );
 writeText(
   resolve(fixtureRoot, "app/crm/page.tsx"),
-  `import { CrmShellClient } from "../../components/crm-shell-client";
+  `import { CrmRecordDrawer } from "@taliya/crm";
+import { CrmShellClient } from "../../components/crm-shell-client";
 import { WorkListPage } from "../../features/crm/work-list/work-list-page";
 
 export default function CrmPage() {
   return (
-    <CrmShellClient>
+    <CrmShellClient
+      drawer={<CrmRecordDrawer open title="Ana Silva" onOpenChange={() => undefined} />}
+    >
       <WorkListPage />
     </CrmShellClient>
   );
@@ -341,17 +343,24 @@ for (const specifier of requiredExportResolutions) {
 }
 
 const rows = [{ id: "lead-1", name: "Ana Silva", stage: "Novo", owner: "Mariana" }];
+const recordDrawer = createElement(CrmRecordDrawer, {
+  actions: [{ id: "open", label: "Abrir", variant: "primary" }],
+  facts: [{ id: "owner", label: "Dono", value: "Mariana", icon: "user" }],
+  open: true,
+  title: "Ana Silva",
+  onOpenChange: () => undefined
+});
 const app = createElement(
   CrmProductShell,
-  { title: "CRM", subtitle: "Fixture de adoção futura" },
+  { drawer: recordDrawer, title: "CRM", subtitle: "Fixture de adoção futura" },
   createElement(Toolbar),
   createElement(
     WorkListDetailPage,
     {
       filterBar: createElement(PageFilterBar, { searchPlaceholder: "Buscar leads..." }),
       quickFilters: createElement(PageQuickFilters, { title: "Filtros", items: [] }),
-      detail: createElement(CrmRecordDrawer, { inline: true, open: true, title: "Ana Silva", onOpenChange: () => undefined }),
-      detailState: "selected"
+      detail: createElement(CrmRecordDrawer, { open: false, title: "Ana Silva", onOpenChange: () => undefined }),
+      detailState: "closed"
     },
     createElement(DataTable, { columns: [{ key: "name", header: "Lead" }], rows })
   ),
@@ -371,14 +380,6 @@ const app = createElement(
       { key: "owner", header: "Dono", sortable: true }
     ],
     rows
-  }),
-  createElement(CrmRecordDrawer, {
-    actions: [{ id: "open", label: "Abrir", variant: "primary" }],
-    facts: [{ id: "owner", label: "Dono", value: "Mariana", icon: "user" }],
-    inline: true,
-    open: true,
-    title: "Ana Silva",
-    onOpenChange: () => undefined
   }),
   createElement(
     KanbanBoard,
@@ -401,7 +402,7 @@ const requiredMarkers = [
   "tcrm-kanban-board",
   "tcrm-kanban-column",
   "tcrm-kanban-card",
-  "tcrm-record-drawer",
+  "tcrm-product-shell-stage--drawer",
   "Novo lead",
   "Ana Silva"
 ];

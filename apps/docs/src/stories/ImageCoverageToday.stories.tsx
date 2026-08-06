@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   ActivityFeed,
@@ -45,7 +46,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Coverage das imagens 17-18 do dashboard Hoje. A composição usa shell, primitives e componentes oficiais; status semi-aprovável, não certificada 1:1."
+          "Família operacional Hoje composta pelo shell, dashboard, painéis, linhas, histórico e drawer oficiais. Certificada pelo Codex; aprovação do product owner pendente."
       }
     }
   }
@@ -87,7 +88,17 @@ const todayTaskDrawerHistory: TaskDrawerHistoryItem[] = [
   { id: "latest", time: "09:12", body: "Sistema encontrou uma vaga compatível." }
 ];
 
-function TodayDashboard({ selectedTask = false, variant = "base", onTaskSelect }: { selectedTask?: boolean; variant?: "base" | "critical"; onTaskSelect?: () => void }) {
+function TodayDashboard({
+  selectedTask = false,
+  variant = "base",
+  onAction,
+  onTaskSelect
+}: {
+  selectedTask?: boolean;
+  variant?: "base" | "critical";
+  onAction?: (message: string) => void;
+  onTaskSelect?: () => void;
+}) {
   const critical = variant === "critical";
   const [selectedRowId, setSelectedRowId] = useState(selectedTask ? "tasks:replacement" : "");
   const selectRows = (section: string) => ({
@@ -198,7 +209,7 @@ function TodayDashboard({ selectedTask = false, variant = "base", onTaskSelect }
 
       <CrmOperationalPanel
         badge={<Chip showDot={false}>{critical ? "18 aguardando" : "12 aguardando"}</Chip>}
-        footer={<Button size="sm" variant="ghost">Ver fila completa</Button>}
+        footer={<Button onClick={() => onAction?.("Fila humana aberta")} size="sm" variant="ghost">Ver fila completa</Button>}
         icon="user"
         title="Fila humana"
       >
@@ -327,7 +338,7 @@ export function TodayShell({
   const [taskCompleted, setTaskCompleted] = useState(false);
   const [taskChecklist, setTaskChecklist] = useState(todayTaskDrawerChecklist);
   return (
-    <CrmDashboardPage
+      <CrmDashboardPage
         activeNavId="hoje"
         after={historyOnly ? null : <TodayAfterContent historyScrollReserve={historyScrollReserve} onActivityAction={setAnnouncedAction} showHistory={historyScrollReserve} />}
         avatarSrc={image79Avatar}
@@ -335,7 +346,6 @@ export function TodayShell({
         columns={historyOnly ? 1 : variant === "critical" ? "todayCritical" : "today"}
         contentClassName="sb-image-coverage-today-content"
         dashboardClassName={historyOnly ? "sb-image-coverage-today-history-grid" : "sb-image-coverage-today-stage--dashboard-grid"}
-        drawerPlacement={drawerOpen ? "viewport" : undefined}
         globalActions={{
           onAvatar: () => setAnnouncedAction("Perfil da operadora aberto"),
           onMessages: () => setAnnouncedAction("Mensagens abertas"),
@@ -378,6 +388,10 @@ export function TodayShell({
           ) : null
         }
         navItems={todayNavItems}
+        onBack={() => setAnnouncedAction("Navegação de retorno acionada")}
+        onNavChange={(id) => setAnnouncedAction(`Navegação aberta: ${id}`)}
+        onSidebarSelect={(item) => setAnnouncedAction(`Área aberta: ${item.label}`)}
+        onSidebarUtilitySelect={(item) => setAnnouncedAction(`Utilitário aberto: ${item.label}`)}
         pageHeaderRhythm="dashboard"
         sidebarItems={todaySidebarItems}
         stageClassName="sb-image-coverage-today-stage"
@@ -385,7 +399,7 @@ export function TodayShell({
         title="Hoje"
         utilityItems={todaySidebarUtilityItems}
       >
-        {historyOnly ? <ActivityFeed fluid /> : <TodayDashboard onTaskSelect={() => setDrawerOpen(true)} selectedTask={drawerOpen} variant={variant} />}
+        {historyOnly ? <ActivityFeed fluid /> : <TodayDashboard onAction={setAnnouncedAction} onTaskSelect={() => setDrawerOpen(true)} selectedTask={drawerOpen} variant={variant} />}
         <span aria-live="polite" className="tl-sr-only" role="status">{announcedAction}</span>
       </CrmDashboardPage>
   );
@@ -396,8 +410,7 @@ function TodayHistoryStory() {
     const frame = window.requestAnimationFrame(() => {
       const history = document.querySelector<HTMLElement>('[data-component="ActivityFeed"]');
       if (!history) return;
-      const targetTop = history.getBoundingClientRect().top + window.scrollY - 225;
-      window.scrollTo({ top: Math.max(0, targetTop) });
+      history.scrollIntoView({ block: "start" });
     });
 
     return () => window.cancelAnimationFrame(frame);
@@ -411,11 +424,23 @@ export const Image17HojeBase: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Fonte: 17_round-4.1A_hoje_01_acima-da-dobra.png.png. Status: em ajuste visual, não certificada 1:1."
+        story: "Fonte: 17_round-4.1A_hoje_01_acima-da-dobra.png.png. Dashboard operacional diário base. Certificado pelo Codex em desktop, tablet e mobile; aprovação do product owner pendente."
       }
-    }
+    },
+    sourceImage: "17_round-4.1A_hoje_01_acima-da-dobra.png.png"
   },
-  render: () => <TodayShell />
+  render: () => <TodayShell />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: /Confirmar reposição com Ana Paula/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da tarefa" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar tarefa" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes da tarefa" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Prioridades" }));
+    await expect(canvas.getByRole("button", { name: "Prioridades" })).toHaveAttribute("aria-current", "page");
+    await userEvent.click(canvas.getByRole("button", { name: "Ver fila completa" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila humana aberta");
+  }
 };
 
 export const Image18HojeDrawerTarefa: Story = {
@@ -423,11 +448,21 @@ export const Image18HojeDrawerTarefa: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Fonte: 18_round-4.1A_hoje_02_drawer-tarefa.png.png. Status: em ajuste visual, não certificada 1:1."
+        story: "Fonte: 18_round-4.1A_hoje_02_drawer-tarefa.png.png. Tarefa selecionada no drawer canônico full-height, com checklist e conclusão funcionais. Certificado pelo Codex; aprovação do product owner pendente."
       }
-    }
+    },
+    sourceImage: "18_round-4.1A_hoje_02_drawer-tarefa.png.png"
   },
-  render: () => <TodayShell drawer />
+  render: () => <TodayShell drawer />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const checklistItem = canvas.getByRole("button", { name: "1. Confirmar horário com a aluna" });
+    await userEvent.click(checklistItem);
+    await expect(checklistItem).toHaveAttribute("aria-pressed", "true");
+    await userEvent.click(canvas.getByRole("button", { name: "Concluir" }));
+    await expect(canvas.getByText("Concluída", { exact: true })).toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: "Concluir" })).toBeDisabled();
+  }
 };
 
 export const Image19HojeEstadoCritico: Story = {
@@ -440,7 +475,14 @@ export const Image19HojeEstadoCritico: Story = {
     },
     sourceImage: "19_round-4.1A_hoje_03_estado-critico-do-dia.png"
   },
-  render: () => <TodayShell variant="critical" />
+  render: () => <TodayShell variant="critical" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText("Cota em 92% afetando comunicados")).toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: "Abrir Abrir o estúdio" })).toHaveClass("is-complete");
+    await userEvent.click(canvas.getByRole("button", { name: /4 conversas aguardando humano/ }));
+    await expect(canvas.getByRole("button", { name: /4 conversas aguardando humano/ })).toHaveAttribute("aria-pressed", "true");
+  }
 };
 
 export const Image20HistoricoDeHoje: Story = {
@@ -452,5 +494,11 @@ export const Image20HistoricoDeHoje: Story = {
       }
     }
   },
-  render: () => <TodayHistoryStory />
+  render: () => <TodayHistoryStory />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("region", { name: "Histórico de hoje" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Exportar histórico" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Histórico exportado");
+  }
 };

@@ -57,8 +57,8 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-list-detail.detail-width"]).toBe("330px");
     expect(allTokens["layout.crm-list-detail.gap"]).toBe("8px");
     expect(allTokens["layout.crm-list-detail.spacious-filter-gap"]).toBe("18px");
-    expect(allTokens["layout.crm-task-drawer.compact-width"]).toContain("crm-checklist-drawer-width");
-    expect(allTokens["layout.crm-case-drawer.wide-width"]).toBe("425px");
+    expect(allTokens["layout.crm-task-drawer.width"]).toBe("401px");
+    expect(allTokens["layout.crm-case-drawer.width"]).toBe("403px");
     expect(allTokens["control.crm-work-list-detail.filter-padding-x"]).toBe("8px");
     expect(allTokens["control.crm-work-list-detail.filter-gap"]).toBe("6px");
     expect(allTokens["control.crm-work-list-detail.filter-icon-size"]).toBe("14px");
@@ -127,20 +127,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-product-shell.content-dashboard-padding"]).toBe("0 41px 28px 52px");
     expect(allTokens["layout.crm-product-shell.content-opportunity-padding"]).toBe("5px 28px 28px 30px");
     expect(allTokens["layout.crm-product-shell.content-support-padding"]).toBe("0 10px 28px 38px");
-    expect(allTokens["layout.crm-product-shell.floating-drawer-top"]).toBe("120px");
-    expect(allTokens["layout.crm-product-shell.replacement-floating-drawer-top"]).toBe("104px");
-    expect(allTokens["layout.crm-product-shell.tenant-floating-drawer-top"]).toBe("99px");
-    expect(allTokens["layout.crm-product-shell.tenant-floating-drawer-bottom"]).toBe("4px");
-    expect(allTokens["layout.crm-product-shell.floating-drawer-right"]).toBe("14px");
-    expect(allTokens["layout.crm-product-shell.floating-drawer-bottom"]).toBe("24px");
     expect(allTokens["color.crm-approval-panel.bg"]).toBe("var(--taliya-color-white)");
-    expect(allTokens["layout.crm-product-shell.opportunity-floating-drawer-top"]).toBe("116px");
-    expect(allTokens["layout.crm-product-shell.opportunity-floating-drawer-right"]).toBe("24px");
-    expect(allTokens["layout.crm-product-shell.opportunity-floating-drawer-bottom"]).toBe("42px");
-    expect(allTokens["layout.crm-product-shell.support-content-drawer-top"]).toBe("198px");
-    expect(allTokens["layout.crm-product-shell.support-content-drawer-right"]).toBe("74px");
-    expect(allTokens["layout.crm-product-shell.support-content-drawer-bottom"]).toBe("35px");
-    expect(allTokens["layout.crm-product-shell.floating-drawer-reserved-width"]).toBe("var(--taliya-control-drawer-width-sm)");
     expect(allTokens["control.crm-replacement-drawer.title-offset-top"]).toBe("28px");
     expect(allTokens["control.crm-replacement-drawer.credit-fact-row-height"]).toBe("45px");
     expect(allTokens["control.crm-replacement-drawer.footer-gap"]).toBe("5px");
@@ -148,8 +135,10 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-three-pane.columns"]).toContain("crm-three-pane-center-width");
     expect(allTokens["layout.crm-right-panel.width"]).toBe("1390px");
     expect(allTokens["layout.crm-right-panel.columns"]).toContain("crm-right-panel-main-width");
-    expect(allTokens["layout.crm-right-panel.drawer-wide-columns"]).toContain("crm-right-panel-drawer-wide-main-width");
-    expect(allTokens["layout.crm-right-panel.drawer-panel-offset-x"]).toBe("-8px");
+    expect(allTokens["layout.crm-right-panel.student-profile-width"]).toBe("100%");
+    expect(allTokens["layout.crm-right-panel.student-profile-columns"]).toBe(
+      "minmax(0, 1fr) var(--taliya-layout-crm-right-panel-student-profile-rail-width)"
+    );
     expect(allTokens["layout.crm-dashboard.columns-asymmetrical"]).toContain("1.35fr");
     expect(allTokens["layout.crm-dashboard.columns-support"]).toBe("276px minmax(0, 1fr)");
     expect(allTokens["layout.crm-dashboard.gap-support"]).toBe("16px");
@@ -175,7 +164,6 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-dashboard.today-critical-checklist-extra-width"]).toBe("24px");
     expect(allTokens["layout.crm-dashboard.today-critical-now-offset-x"]).toBe("29px");
     expect(allTokens["layout.crm-payment-drawer.width"]).toBe("371px");
-    expect(allTokens["layout.crm-payment-drawer.compact-width"]).toBe("323px");
     expect(allTokens["layout.crm-payment-drawer.height"]).toBe("941px");
     expect(allTokens["layout.crm-payment-drawer.movement-offset-y"]).toBe("-21px");
     expect(allTokens["layout.crm-payment-drawer.fact-columns"]).toBe("18px 112px minmax(0, 1fr)");
@@ -307,7 +295,9 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-setup-bottom-bar.columns"]).toBe("278px 1px minmax(0, 1fr) 360px 1px 44px");
     expect(allTokens["layout.crm-access-shell.main-width"]).toBe("440px");
     expect(allTokens["layout.crm-access-shell.window-width"]).toBe("1528px");
-    expect(allTokens["layout.crm-access-shell.window-height"]).toBe("852px");
+    expect(allTokens["layout.crm-access-shell.window-height"]).toBe("890px");
+    expect(allTokens["layout.crm-access-shell.body-height"]).toBe("826px");
+    expect(allTokens["layout.crm-access-shell.main-height"]).toBe("663px");
     expect(allTokens["layout.crm-access-shell.content-width"]).toBe("966px");
     expect(allTokens["layout.crm-access-shell.centered-content-width"]).toBe("100%");
     expect(allTokens["layout.crm-access-shell.centered-content-placeholder-height"]).toBe("100%");
@@ -456,12 +446,9 @@ describe("@taliya/tokens", () => {
     expect(allTokens["control.crm-agent-routine-workspace.routine-detail-gap"]).toBe("12px");
     expect(allTokens["layout.crm-agent-flow-drawer.routine-width"]).toBe("388px");
     expect(allTokens["layout.crm-product-shell.main.header-agents-routine-detail-height"]).toBe("141px");
-    expect(allTokens["layout.crm-product-shell.agent-routine-drawer-top"]).toBe("143px");
     expect(allTokens["layout.crm-product-shell.main.header-agents-flow-detail-height"]).toBe("140px");
-    expect(allTokens["layout.crm-product-shell.agent-flow-drawer-right"]).toBe("41px");
     expect(allTokens["control.crm-agent-flow-section-panel-mode.flow-detail-height"]).toBe("148px");
     expect(allTokens["layout.crm-product-shell.agent-test-drawer-width"]).toBe("382px");
-    expect(allTokens["layout.crm-product-shell.agent-test-drawer-top"]).toBe("139px");
     expect(allTokens["control.crm-simulation-runner.test-panel-height"]).toBe("572px");
     expect(allTokens["control.crm-agent-routine-flow-card.icon-size"]).toBe("58px");
     expect(allTokens["control.crm-agent-routine-flow-card.button-height"]).toBe("24px");
@@ -759,15 +746,11 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-agent-flow-drawer.height"]).toBe("780px");
     expect(allTokens["layout.crm-agent-flow-drawer.info-columns"]).toBe("21px minmax(0, 1fr)");
     expect(allTokens["layout.crm-agent-flow-drawer.test-info-columns"]).toBe("21px minmax(0, 1fr)");
-    expect(allTokens["layout.crm-right-panel.drawer-simulation-main-width"]).toBe("1138px");
-    expect(allTokens["layout.crm-right-panel.drawer-simulation-rail-width"]).toBe("237px");
     expect(allTokens["layout.crm-class-drawer.width"]).toBe("399px");
-    expect(allTokens["layout.crm-class-drawer.compact-width"]).toBe("323px");
     expect(allTokens["layout.crm-class-drawer.roster-columns"]).toBe("44px minmax(0, 1fr) auto 32px");
     expect(allTokens["layout.crm-class-drawer.compact-roster-columns"]).toBe("42px minmax(0, 1fr) 82px 28px");
     expect(allTokens["layout.crm-class-drawer.compact-footer-columns"]).toBe("1fr");
     expect(allTokens["layout.crm-lead-drawer.width"]).toBe("399px");
-    expect(allTokens["layout.crm-lead-drawer.compact-width"]).toBe("324px");
     expect(allTokens["layout.crm-lead-drawer.fact-columns"]).toBe("18px 104px minmax(0, 1fr)");
     expect(allTokens["layout.crm-lead-drawer.history-columns"]).toBe("68px minmax(0, 1fr)");
     expect(allTokens["control.crm-lead-drawer.compact-padding"]).toBe("14px 18px 16px");

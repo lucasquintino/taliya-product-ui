@@ -988,11 +988,11 @@
       "expectedInteractions": [
         "shell-navigation",
         "global-actions",
-        "filter-search",
-        "quick-filters",
-        "table-selection",
         "profile-tabs",
-        "drawer-open-close"
+        "header-actions",
+        "overview-actions",
+        "rail-actions",
+        "mobile-responsive-flow"
       ],
       "canonicalVisual": {
         "status": "pass",

@@ -48,25 +48,25 @@ const contracts = [
     page: "SettingsHubPage",
     file: "apps/docs/src/stories/ImageCoverageSettings.stories.tsx",
     family: "dashboard/settings",
-    requiredPageSnippets: ["<CrmDashboardPage", "columns={4}", "settingsHubItems.map", "<SettingsHubCard", "onOpen={() => setOpenedSettingId"]
+    requiredPageSnippets: ["<CrmDashboardPage", "columns={4}", "settingsHubItems.map", "<SettingsHubCard", "onOpen={() => { setOpenedSettingId"]
   },
   {
     page: "FinanceBillingDrawerPage",
     file: "apps/docs/src/stories/ImageCoverageFinance.stories.tsx",
     family: "dashboard/finance",
-    requiredPageSnippets: ["<FinanceOverviewDashboard", "drawer={drawerOpen ? <PaymentDrawer", "onClose={() => setDrawerOpen(false)}", "onOpenCase={() => setDrawerOpen(true)}"]
+    requiredPageSnippets: ["<FinanceOverviewDashboard", "drawer={drawerOpen ? (", "<PaymentDrawer", "onClose={() => setDrawerOpen(false)}", "onOpenCase={(caseId) =>", "setSelectedCaseId(caseId)", "setDrawerOpen(true)"]
   },
   {
     page: "AgendaCalendarPage",
     file: "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
     family: "dashboard/calendar",
-    requiredPageSnippets: ["<CrmDashboardPage", "before={<AgendaFilters />}", "<AgendaSidePanel />", "<WeeklyCalendar compact", "drawer={drawerOpen ? <AgendaSelectedClassDrawer", "onClose={() => setDrawerOpen(false)}", "onEventSelect={() => setDrawerOpen(true)}"]
+    requiredPageSnippets: ["<CrmDashboardPage", "before={(\n        <AgendaFilters", "<AgendaSidePanel", "<WeeklyCalendar", "compact", "drawer={drawerOpen ? (", "<AgendaSelectedClassDrawer", "setDrawerOpen(false)", "onEventSelect={(eventId, event) =>", "setSelectedEventId(eventId)", "setDrawerOpen(true)"]
   },
   {
     page: "AgendaClassDetailPage",
     file: "apps/docs/src/stories/ImageCoverageAgenda.stories.tsx",
     family: "right-panel/detail",
-    requiredPageSnippets: ["<CrmRightPanelPage", "main={<ClassOperationalDetail", "panel={", "<ClassDrawer"]
+    requiredPageSnippets: ["<CrmRightPanelPage", "main={<ClassOperationalDetail", "drawer={callOpen ? (", "<ClassDrawer"]
   },
   {
     page: "StudentProfilePage",
@@ -78,61 +78,61 @@ const contracts = [
     page: "BillingSubscriptionPage",
     file: "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingSubscriptionWorkspace", "rightPanelVariant=\"billing-subscription\"", "browserUrl=\"https://app.taliya.com/app/billing\"", "topNavSelection: \"none\"", "navItems: crmOperationalNavItems"]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <BillingSupportDrawer", "onClose={() => setDrawerOpen(false)}", "<BillingSubscriptionWorkspace", "rightPanelVariant=\"billing-subscription\"", "browserUrl=\"https://app.taliya.com/app/billing\"", "topNavSelection: \"none\"", "navItems: crmOperationalNavItems"]
   },
   {
     page: "BillingInvoicesPage",
     file: "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingInvoicesWorkspace", "rightPanelVariant=\"billing-invoices\""]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <BillingSupportDrawer", "onClose={() => setDrawerOpen(false)}", "<BillingInvoicesWorkspace", "rightPanelVariant=\"billing-invoices\""]
   },
   {
     page: "BillingAddOnsPage",
     file: "apps/docs/src/stories/ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingAddOnsWorkspace", "rightPanelVariant=\"billing-addons\""]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <BillingSupportDrawer", "onClose={() => setDrawerOpen(false)}", "<BillingAddOnsWorkspace", "rightPanelVariant=\"billing-addons\""]
   },
   {
     page: "UsageOverviewPage",
     file: "apps/docs/src/stories/ImageCoverageUsage.stories.tsx",
     family: "right-panel/usage",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<UsageOverviewWorkspace", "rightPanelVariant=\"usage-overview\""]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <UsageDrawer", "onClose={() => setDrawerOpen(false)}", "<UsageOverviewWorkspace", "rightPanelVariant=\"usage-overview\""]
   },
   {
     page: "UsageLedgerPage",
     file: "apps/docs/src/stories/ImageCoverageUsage.stories.tsx",
     family: "right-panel/usage",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<UsageLedgerTable", "rightPanelVariant=\"usage-ledger\""]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <UsageDrawer", "onClose={() => setDrawerOpen(false)}", "<UsageLedgerTable", "rightPanelVariant=\"usage-ledger\""]
   },
   {
     page: "AgentPresenceRoutinePage",
     file: "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentRoutineWorkspace"]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "<AgentRoutineWorkspace"]
   },
   {
     page: "AgentAbsenceFlowPage",
     file: "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentFlowWorkspace"]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "<AgentFlowWorkspace"]
   },
   {
     page: "AgentAbsenceFlowTestPage",
     file: "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<SimulationRunner"]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "<SimulationRunner"]
   },
   {
     page: "AgentPublishRoutinePage",
     file: "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredPageSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentPublishRoutineWorkspace"]
+    requiredPageSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "<AgentPublishRoutineWorkspace"]
   },
   {
     page: "AgentExecutionReceiptPage",
     file: "apps/docs/src/stories/ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredPageSnippets: ["<CrmRightPanelPage", "main={<ExecutionReceipt", "panel={<AgentFlowDrawer"]
+    requiredPageSnippets: ["<CrmRightPanelPage", "main={<ExecutionReceipt", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}"]
   },
   {
     page: "SettingsPermissionsPage",

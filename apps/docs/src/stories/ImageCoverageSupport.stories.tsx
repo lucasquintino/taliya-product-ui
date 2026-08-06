@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   CrmWorklistTable,
@@ -11,7 +12,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { CrmShellNavItem, CrmShellSidebarItem, SupportTicketPanelFact, SupportTicketPanelMessage } from "@taliya/crm";
+import type { CrmShellNavItem, CrmShellSidebarItem, SupportTicketDrawerAction, SupportTicketDrawerState, SupportTicketPanelFact, SupportTicketPanelMessage } from "@taliya/crm";
 import { Button, ButtonGroup, Chip, Icon, IconButton, InlineGroup } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
@@ -49,10 +50,12 @@ const supportSidebarItems: CrmShellSidebarItem[] = [
 
 export function SupportCentralPage() {
   const [selectedTicketId, setSelectedTicketId] = useState("import");
+  const [ticketStates, setTicketStates] = useState<Record<string, SupportTicketDrawerState>>({});
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
   const selectedTicket = supportTicketRows.find((row) => row.id === selectedTicketId) ?? supportTicketRows[0]!;
   const drawerModel = supportTicketDrawerModel(selectedTicket);
+  const selectedState = ticketStates[selectedTicketId] ?? "open";
 
   return (
     <>
@@ -65,11 +68,24 @@ export function SupportCentralPage() {
         drawer={drawerOpen ? (
           <SupportTicketDrawer
             {...drawerModel}
-            onAction={(action) => setAnnouncement(`Ação do ticket: ${action}:${selectedTicket.id}`)}
+            onAction={(action: SupportTicketDrawerAction) => {
+              if (action === "request-access") {
+                setTicketStates((current) => ({ ...current, [selectedTicket.id]: "access active" }));
+                setAnnouncement(`Acesso autorizado: ${selectedTicket.title}`);
+              } else if (action === "revoke-access") {
+                setTicketStates((current) => ({ ...current, [selectedTicket.id]: "open" }));
+                setAnnouncement(`Acesso revogado: ${selectedTicket.title}`);
+              } else if (action === "reply" || action === "resolve") {
+                setTicketStates((current) => ({ ...current, [selectedTicket.id]: "answered" }));
+                setAnnouncement(`Ticket respondido: ${selectedTicket.title}`);
+              } else {
+                setAnnouncement(`Ação do ticket: ${action}:${selectedTicket.id}`);
+              }
+            }}
             onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de ticket fechado"); }}
+            state={selectedState}
           />
         ) : null}
-        drawerPlacement="content"
         globalActions={{
           onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
           onMessages: () => setAnnouncement("Mensagens abertas"),
@@ -313,5 +329,34 @@ export const SupportCentral: Story = {
     },
     sourceImage: "47_round-4.1J_suporte_01_central-studio-taliya.png.png"
   },
-  render: () => <SupportCentralPage />
+  render: () => <SupportCentralPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes do ticket de suporte" });
+    await userEvent.click(within(drawer).getByRole("button", { name: "Autorizar acesso" }));
+    await expect(drawer).toHaveAttribute("data-state", "access-active");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Revogar acesso" }));
+    await expect(drawer).toHaveAttribute("data-state", "open");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Marcar resolvido" }));
+    await expect(drawer).toHaveAttribute("data-state", "answered");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ticket respondido: Importacao duplicou alunos");
+  }
+};
+
+export const SupportInteractionContract: Story = {
+  name: "Suporte interaction contract",
+  render: () => <SupportCentralPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes do ticket de suporte" });
+
+    await userEvent.click(within(drawer).getByRole("button", { name: "Autorizar acesso" }));
+    await expect(drawer).toHaveAttribute("data-state", "access-active");
+    await expect(within(drawer).getByText("Autorizado")).toBeInTheDocument();
+    await userEvent.click(within(drawer).getByRole("button", { name: "Revogar acesso" }));
+    await expect(drawer).toHaveAttribute("data-state", "open");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Marcar resolvido" }));
+    await expect(drawer).toHaveAttribute("data-state", "answered");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ticket respondido: Importacao duplicou alunos");
+  }
 };

@@ -1,0 +1,83 @@
+{
+  "storyId": "crm-image-coverage-agenda--image-26-agenda-calendario-operacional",
+  "metrics": {
+    "brokenImages": [],
+    "document": {
+      "overflowX": "visible",
+      "scrollHeight": 2000,
+      "scrollWidth": 2880
+    },
+    "drawer": {
+      "className": "tcrm-drawer tcrm-drawer-frame tcrm-class-drawer tcrm-class-drawer--calling tcrm-class-drawer--class-detail tcrm-class-drawer--compact",
+      "display": "grid",
+      "grid": "375px",
+      "overflow": "hidden",
+      "rect": {
+        "bottom": 2000,
+        "height": 2000,
+        "right": 2880,
+        "width": 420,
+        "x": 2460,
+        "y": 0
+      },
+      "selector": "[aria-label=\"Detalhes da aula selecionada\"]"
+    },
+    "main": {
+      "className": "tcrm-empty-shell-main tcrm-product-shell-main",
+      "display": "block",
+      "grid": "none",
+      "overflow": "visible",
+      "rect": {
+        "bottom": 1943,
+        "height": 1943,
+        "right": 2880,
+        "width": 2808,
+        "x": 72,
+        "y": 0
+      },
+      "selector": "main"
+    },
+    "schedule": {
+      "className": "tl-icon-button tl-icon-button--md tl-icon-button--default tl-icon-button--selected tcrm-shell-round-button tcrm-sidebar-floating-button",
+      "display": "flex",
+      "grid": "none",
+      "overflow": "visible",
+      "rect": {
+        "bottom": 229,
+        "height": 40,
+        "right": 57,
+        "width": 40,
+        "x": 17,
+        "y": 189
+      },
+      "selector": "[aria-label=\"Agenda\"]"
+    },
+    "shell": {
+      "className": "tcrm-empty-shell-stage tcrm-product-shell-stage tcrm-product-shell-stage--crm tcrm-product-shell-stage--drawer tcrm-product-shell-stage--drawer-global-actions tcrm-product-shell-stage--page-header-compact-stacked tcrm-page-family-shell",
+      "display": "flex",
+      "grid": "none",
+      "overflow": "visible",
+      "rect": {
+        "bottom": 2000,
+        "height": 2000,
+        "right": 2880,
+        "width": 2880,
+        "x": 0,
+        "y": 0
+      },
+      "selector": "[data-component=\"CrmProductShell\"]"
+    },
+    "statuses": [
+      "Visualização alterada para dia"
+    ],
+    "url": "http://127.0.0.1:6224/iframe.html?id=crm-image-coverage-agenda--image-26-agenda-calendario-operacional&viewMode=story&fresh=20260805-agenda",
+    "viewport": {
+      "height": 2000,
+      "width": 2880
+    }
+  },
+  "notes": [
+    "Initial aula drawer rendered through the official route composition.",
+    "Storybook play contract executed in a fresh tab without runtime errors."
+  ]
+}

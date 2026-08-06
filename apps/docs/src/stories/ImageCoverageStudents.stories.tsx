@@ -1,6 +1,7 @@
 ﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import {
   CrmRightPanelPage,
@@ -23,7 +24,9 @@ import type {
   StudentDrawerAction,
   StudentDrawerClassItem,
   StudentDrawerFact,
+  StudentDrawerFinance,
   StudentDrawerPendingItem,
+  StudentDrawerState,
   StudentProfileAction,
   StudentTableRow
 } from "@taliya/crm";
@@ -38,7 +41,6 @@ import source34JulianaRocha from "../assets/source34-juliana-rocha.png";
 const studentsNavItems: CrmShellNavItem[] = [
   { id: "alunos", label: "Alunos", active: true },
   { id: "responsaveis", label: "Responsaveis" },
-  { id: "contatos", label: "Contatos" },
   { id: "segmentos", label: "Segmentos" },
   { id: "linha-tempo", label: "Linha do tempo" }
 ];
@@ -81,12 +83,12 @@ const studentRows: StudentTableRow[] = [
   {
     id: "joao-pedro",
     student: { name: "Joao Pedro Silva", avatarSrc: source13JoaoPedro },
-    status: "active",
+    status: "delinquent",
     plan: "Premium",
     currentClass: "Mat Pilates",
     owner: "Nikki Olaw",
     presence: "6/10",
-    finance: "pending",
+    finance: "overdue",
     risk: "medium",
     activity: { label: "contrato atualizado", status: "info" }
   },
@@ -117,7 +119,7 @@ const studentRows: StudentTableRow[] = [
   {
     id: "juliana-rocha",
     student: { name: "Juliana Rocha", avatarSrc: source34JulianaRocha },
-    status: "inactive",
+    status: "paused",
     plan: "Plano pausado",
     currentClass: "Pilates Solo",
     owner: "proprio",
@@ -310,8 +312,6 @@ function StudentsPageContent({
       contentClassName="sb-image-coverage-students-content"
       contentLayout="main-priority"
       drawer={drawer}
-      drawerPlacement="floating"
-      drawerSize="compact"
       globalActions={{
         onAvatar: () => onInteraction("Perfil da operadora aberto"),
         onMessages: () => onInteraction("Mensagens abertas"),
@@ -386,6 +386,8 @@ function StudentsPageContent({
 
 const studentStatusLabels: Record<StudentTableRow["status"], string> = {
   active: "Ativa",
+  paused: "Pausada",
+  delinquent: "Inadimplente",
   inactive: "Inativa",
   noClass: "Sem turma",
   risk: "Em risco"
@@ -396,6 +398,7 @@ const studentDrawerActionLabels: Record<StudentDrawerAction, string> = {
   "open-profile": "abrir perfil",
   message: "enviar mensagem",
   "create-task": "criar tarefa",
+  schedule: "agendar",
   note: "registrar nota",
   "update-data": "atualizar dados"
 };
@@ -426,6 +429,18 @@ export function StudentsShell() {
         { id: "review", label: `Revisar situação: ${studentStatusLabels[selectedStudent.status]}` },
         { id: "follow-up", label: "Criar acompanhamento com responsável" }
       ];
+  const selectedState: StudentDrawerState = selectedStudent.status === "risk"
+    ? "risk"
+    : selectedStudent.status === "paused"
+      ? "paused"
+      : selectedStudent.status === "delinquent"
+        ? "delinquent"
+        : "active";
+  const selectedFinance: StudentDrawerFinance = {
+    status: selectedStudent.finance,
+    lastPayment: selectedStudent.finance === "overdue" ? "05/03/2024" : "05/04/2024",
+    amount: selectedStudent.finance === "overdue" ? "R$ 398,00" : "R$ 199,00"
+  };
 
   const drawerNode = drawerOpen ? (
     <StudentDrawer
@@ -433,6 +448,7 @@ export function StudentsShell() {
       className="sb-image-coverage-students-drawer"
       classes={selectedClasses}
       facts={selectedFacts}
+      finance={selectedFinance}
       name={selectedStudent.student.name}
       onAction={(action) => setAnnouncement(`Ação do aluno: ${studentDrawerActionLabels[action]}`)}
       onClose={() => {
@@ -440,7 +456,7 @@ export function StudentsShell() {
         setAnnouncement("Resumo do aluno fechado");
       }}
       pendingItems={selectedPending}
-      state={selectedStudent.status === "risk" ? "risk" : "active"}
+      state={selectedState}
       statusLabel={studentStatusLabels[selectedStudent.status]}
     />
   ) : null;
@@ -529,6 +545,7 @@ export function StudentProfilePage() {
         contentHeader={
           <StudentHeader
             avatarSrc={source28AnaPaula}
+            headingLevel={1}
             onAction={(action) => setAnnouncement(`Ação do cabeçalho: ${headerActionLabels[action] ?? action}`)}
           />
         }
@@ -558,7 +575,6 @@ export function StudentProfilePage() {
         mainLabel="Resumo operacional do aluno"
         navItems={[
           { id: "alunos", label: "Alunos" },
-          { id: "contatos", label: "Contatos" },
           { id: "segmentos", label: "Segmentos" },
           { id: "linha", label: "Linha do tempo" }
         ]}
@@ -591,7 +607,50 @@ export const Image27ListaPerfilResumido: Story = {
     },
     sourceImage: "27_round-4.1E_alunos_01_lista-perfil-resumido.png.png"
   },
-  render: () => <StudentsShell />
+  render: () => <StudentsShell />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Alunos", level: 1 })).toBeInTheDocument();
+    const initialDrawer = canvas.queryByRole("complementary", { name: "Resumo do aluno" });
+    if (initialDrawer) {
+      await userEvent.click(within(initialDrawer).getByRole("button", { name: "Fechar aluno" }));
+      await waitFor(() => expect(canvas.queryByRole("complementary", { name: "Resumo do aluno" })).not.toBeInTheDocument());
+    }
+    await userEvent.click(canvas.getByRole("row", { name: /Ana Paula Martins/ }));
+    await waitFor(() => expect(canvas.getByRole("complementary", { name: "Resumo do aluno" })).toHaveAttribute("data-state", "active"));
+    let drawer = canvas.getByRole("complementary", { name: "Resumo do aluno" });
+    await expect(within(drawer).getByText("em dia")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Agendar" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do aluno: agendar");
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar aluno" }));
+    await expect(canvas.queryByRole("complementary", { name: "Resumo do aluno" })).not.toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("row", { name: /Carla Mendes/ }));
+    await waitFor(() => expect(canvas.getByRole("complementary", { name: "Resumo do aluno" })).toHaveAttribute("data-state", "risk"));
+    drawer = canvas.getByRole("complementary", { name: "Resumo do aluno" });
+    await expect(within(drawer).getByText("Em risco")).toBeInTheDocument();
+    await expect(within(drawer).getByText("em dia")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar aluno" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Juliana Rocha/ }));
+    await waitFor(() => expect(canvas.getByRole("complementary", { name: "Resumo do aluno" })).toHaveAttribute("data-state", "paused"));
+    drawer = canvas.getByRole("complementary", { name: "Resumo do aluno" });
+    await expect(within(drawer).getByText("Pausada")).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar aluno" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Joao Pedro Silva/ }));
+    await waitFor(() => expect(canvas.getByRole("complementary", { name: "Resumo do aluno" })).toHaveAttribute("data-state", "delinquent"));
+    drawer = canvas.getByRole("complementary", { name: "Resumo do aluno" });
+    await expect(within(drawer).getByText("Inadimplente")).toBeInTheDocument();
+    await expect(within(drawer).getByText("em atraso")).toBeInTheDocument();
+
+    await userEvent.type(canvas.getByRole("searchbox", { name: "Buscar alunos" }), "Ana");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Busca de alunos: Ana");
+    await userEvent.click(canvas.getByRole("button", { name: "Em risco 18" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Segmento selecionado: Em risco");
+  }
 };
 
 export const Image28AlunoPerfilResumoOperacional: Story = {
@@ -605,5 +664,29 @@ export const Image28AlunoPerfilResumoOperacional: Story = {
     },
     sourceImage: "28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png"
   },
-  render: () => <StudentProfilePage />
+  render: () => <StudentProfilePage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const profile = canvas.getByRole("region", { name: "Ana Paula Martins" });
+    const actionRail = canvas.getByRole("complementary", { name: "Acoes e relacionamento do aluno" });
+    const profileHeader = profile.querySelector<HTMLElement>('[data-region="content-header"]');
+
+    if (!profileHeader) {
+      throw new Error("Student profile header is required for the Image 28 interaction contract");
+    }
+
+    await expect(profile).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("tab", { name: /^Agenda$/ }));
+    await expect(canvas.getByRole("tab", { name: /^Agenda$/ })).toHaveAttribute("aria-selected", "true");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Aba do perfil selecionada: agenda");
+
+    await userEvent.click(within(profileHeader).getByRole("button", { name: /^Criar tarefa$/ }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do cabeçalho: criação de tarefa aberta");
+    await userEvent.click(within(profile).getByRole("button", { name: /^Ver agenda$/ }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do perfil: agenda aberta");
+    await userEvent.click(within(actionRail).getByRole("button", { name: /^Alterar plano$/ }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do perfil: alteração de plano aberta");
+    await userEvent.click(canvas.getByRole("button", { name: /^Buscar$/ }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Busca global aberta");
+  }
 };

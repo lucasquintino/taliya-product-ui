@@ -1264,6 +1264,9 @@ export function Input({
   const descriptionId = helperText || error || blockedReason ? `${inputId}-description` : undefined;
   const resolvedState = error ? "error" : blockedReason ? "blocked" : fieldState;
   const isDisabled = disabled || Boolean(blockedReason);
+  const fallbackAriaLabel =
+    props["aria-label"] ??
+    (!label && !props["aria-labelledby"] && typeof props.placeholder === "string" ? props.placeholder : undefined);
 
   return (
     <label
@@ -1294,6 +1297,7 @@ export function Input({
         <input
           aria-busy={loading || undefined}
           aria-describedby={descriptionId}
+          aria-label={fallbackAriaLabel}
           aria-invalid={Boolean(error) || undefined}
           aria-labelledby={labelId}
           className="tl-input"
@@ -1863,6 +1867,8 @@ export interface FileUploadProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
   description?: string;
   actionLabel?: string;
+  actionDisabled?: boolean;
+  onAction?: () => void;
 }
 
 export function FileUpload({
@@ -1870,6 +1876,8 @@ export function FileUpload({
   title = "Enviar arquivo",
   description = "Arraste ou selecione um arquivo.",
   actionLabel = "Selecionar",
+  actionDisabled = false,
+  onAction,
   className,
   ...props
 }: FileUploadProps) {
@@ -1880,7 +1888,7 @@ export function FileUpload({
         <strong>{title}</strong>
         <span>{description}</span>
       </div>
-      <Button size="sm" variant="secondary">
+      <Button disabled={actionDisabled} onClick={onAction} size="sm" variant="secondary">
         {actionLabel}
       </Button>
     </div>
@@ -1897,10 +1905,12 @@ export interface AttachmentItem {
 export function AttachmentList({
   items,
   removable = false,
+  onRemove,
   className
 }: {
   items: AttachmentItem[];
   removable?: boolean;
+  onRemove?: (item: AttachmentItem) => void;
   className?: string;
 }) {
   return (
@@ -1912,7 +1922,7 @@ export function AttachmentList({
             <strong>{item.name}</strong>
             {item.meta ? <small>{item.meta}</small> : null}
           </span>
-          {removable ? <IconButton icon="x" label={`Remover ${item.name}`} size="sm" /> : null}
+          {removable ? <IconButton icon="x" label={`Remover ${item.name}`} onClick={() => onRemove?.(item)} size="sm" /> : null}
         </li>
       ))}
     </ul>
@@ -2540,8 +2550,6 @@ export interface DrawerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   headerStatus?: React.ReactNode;
   headerMeta?: React.ReactNode;
   headerActions?: React.ReactNode;
-  side?: "right" | "left";
-  size?: "sm" | "md" | "lg";
   footer?: React.ReactNode;
   footerLayout?: DrawerFooterProps["layout"];
   trigger?: React.ReactElement;
@@ -2552,7 +2560,6 @@ export interface DrawerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   closeLabel?: string;
   bodyClassName?: string;
   overlayClassName?: string;
-  inline?: boolean;
 }
 
 export function Drawer({
@@ -2564,8 +2571,6 @@ export function Drawer({
   headerStatus,
   headerMeta,
   headerActions,
-  side = "right",
-  size = "md",
   footer,
   footerLayout = "row",
   trigger,
@@ -2577,17 +2582,16 @@ export function Drawer({
   className,
   bodyClassName,
   overlayClassName,
-  inline = false,
   children,
   ...props
 }: DrawerProps) {
-  const descriptionId = useId();
+  const accessibleDescription = description ?? (typeof title === "string" ? `Detalhes de ${title}.` : "Detalhes do painel.");
   const header = title ? (
     <DrawerHeader
-      asDialogClose={!inline}
-      asDialogTitle={!inline}
+      asDialogClose
+      asDialogTitle
       actions={headerActions}
-      description={description ? <span id={descriptionId}>{description}</span> : undefined}
+      description={description}
       meta={headerMeta}
       onClose={dismissible ? () => onOpenChange?.(false) : undefined}
       status={blockedReason ? <Badge tone="warning">Bloqueado</Badge> : headerStatus}
@@ -2608,32 +2612,13 @@ export function Drawer({
   );
   const drawerFooter = footer ? <DrawerFooter layout={footerLayout}>{footer}</DrawerFooter> : null;
 
-  if (inline) {
-    if (open === false) return null;
-
-    return (
-      <div
-        aria-describedby={description ? descriptionId : undefined}
-        aria-modal="false"
-        className={cn("tl-drawer", "tl-drawer--inline", `tl-drawer--${side}`, `tl-drawer--${size}`, className)}
-        role="dialog"
-        {...props}
-      >
-        {header}
-        {body}
-        {drawerFooter}
-      </div>
-    );
-  }
-
   return (
     <RadixDialog.Root defaultOpen={defaultOpen} modal={modal} onOpenChange={onOpenChange} open={open}>
       {trigger ? <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger> : null}
       <RadixDialog.Portal>
         <RadixDialog.Overlay className={cn("tl-overlay", "tl-drawer-overlay", overlayClassName)} />
         <RadixDialog.Content
-          aria-describedby={description ? descriptionId : undefined}
-          className={cn("tl-drawer", `tl-drawer--${side}`, `tl-drawer--${size}`, className)}
+          className={cn("tl-drawer", className)}
           onOpenAutoFocus={(event) => {
             event.preventDefault();
             (event.currentTarget as HTMLElement).focus({ preventScroll: true });
@@ -2646,6 +2631,11 @@ export function Drawer({
           }}
           {...props}
         >
+          {!description ? (
+            <RadixDialog.Description className="tl-sr-only">
+              {accessibleDescription}
+            </RadixDialog.Description>
+          ) : null}
           {header}
           {body}
           {drawerFooter}
@@ -2701,7 +2691,11 @@ export function DrawerHeader({
         {status ? <div className="tl-drawer-header__status">{status}</div> : null}
         {heading}
         {meta ? <p>{meta}</p> : null}
-        {description ? <div className="tl-drawer-header__description">{description}</div> : null}
+        {description && asDialogTitle ? (
+          <RadixDialog.Description asChild>
+            <div className="tl-drawer-header__description">{description}</div>
+          </RadixDialog.Description>
+        ) : description ? <div className="tl-drawer-header__description">{description}</div> : null}
         {actions ? <div className="tl-drawer-header__actions">{actions}</div> : null}
       </div>
       {closeButton && asDialogClose ? (
@@ -2806,13 +2800,14 @@ export function Modal({
   ...props
 }: ModalProps) {
   const descriptionId = useId();
+  const accessibleDescription = description ?? (typeof title === "string" ? `Conteúdo de ${title}.` : "Conteúdo do diálogo.");
 
   if (inline) {
     if (open === false) return null;
 
     return (
       <div
-        aria-describedby={description ? descriptionId : undefined}
+        aria-describedby={descriptionId}
         aria-modal="false"
         className={cn("tl-modal", "tl-modal--inline", `tl-modal--${variant}`, `tl-modal--${size}`, alert && "tl-modal--alert", className)}
         role="dialog"
@@ -2835,7 +2830,7 @@ export function Modal({
         ) : null}
         <header className="tl-modal__header">
           <h2 className={titleHidden ? "tl-sr-only" : undefined}>{title}</h2>
-          {description ? <p id={descriptionId}>{description}</p> : null}
+          <p className={!description ? "tl-sr-only" : undefined} id={descriptionId}>{accessibleDescription}</p>
         </header>
         <div className={cn("tl-modal__body", bodyClassName)}>{children}</div>
         {footer ? <footer className="tl-modal__footer">{footer}</footer> : null}
@@ -2849,7 +2844,6 @@ export function Modal({
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="tl-overlay tl-modal-backdrop" />
         <RadixDialog.Content
-          aria-describedby={description ? descriptionId : undefined}
           className={cn("tl-modal", `tl-modal--${variant}`, `tl-modal--${size}`, alert && "tl-modal--alert", className)}
           onOpenAutoFocus={(event) => {
             event.preventDefault();
@@ -2877,11 +2871,9 @@ export function Modal({
             <RadixDialog.Title asChild>
               <h2 className={titleHidden ? "tl-sr-only" : undefined}>{title}</h2>
             </RadixDialog.Title>
-            {description ? (
-              <RadixDialog.Description asChild>
-                <p id={descriptionId}>{description}</p>
-              </RadixDialog.Description>
-            ) : null}
+            <RadixDialog.Description asChild>
+              <p className={!description ? "tl-sr-only" : undefined}>{accessibleDescription}</p>
+            </RadixDialog.Description>
           </header>
           <div className={cn("tl-modal__body", bodyClassName)}>{children}</div>
           {footer ? <footer className="tl-modal__footer">{footer}</footer> : null}
@@ -3454,6 +3446,7 @@ export type StatusSummaryState = "ok" | "attention" | "danger" | "blocked" | "in
 
 export interface StatusSummaryCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
   title: React.ReactNode;
+  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
   description?: React.ReactNode;
   state?: StatusSummaryState;
   icon?: IconName;
@@ -3476,6 +3469,7 @@ const statusSummaryToneByState: Record<StatusSummaryState, ComponentTone> = {
 
 export function StatusSummaryCard({
   title,
+  headingLevel,
   description,
   state = "info",
   icon,
@@ -3491,6 +3485,7 @@ export function StatusSummaryCard({
   ...props
 }: StatusSummaryCardProps) {
   const tone = statusSummaryToneByState[state];
+  const TitleElement: React.ElementType = headingLevel ? `h${headingLevel}` : "strong";
   return (
     <Card
       className={cn(
@@ -3508,7 +3503,7 @@ export function StatusSummaryCard({
           <Icon name={icon ?? alertIconForTone(tone)} size="var(--taliya-control-status-summary-icon-size)" />
         </span>
         <span>
-          <strong>{title}</strong>
+          <TitleElement className="tl-status-summary__title">{title}</TitleElement>
           {description ? <small>{description}</small> : null}
         </span>
         <Chip tone={tone}>{statusLabel ?? state}</Chip>
@@ -4588,7 +4583,9 @@ export function ComposerInput({
         />
       </div>
       <div className="tl-composer-input__toolbar">
-        <span className="tl-composer-input__actions">{actionsOrder.map(actionControl)}</span>
+        <span className="tl-composer-input__actions">
+          {actionsOrder.map((action) => <React.Fragment key={action}>{actionControl(action)}</React.Fragment>)}
+        </span>
         <span className="tl-composer-input__submit">
           {showInternalToggle ? (
             <Toggle
@@ -5145,7 +5142,19 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-export function Avatar({ name, src, size = "md", status, badge, selected = false, disabled = false, className, ...props }: AvatarProps) {
+export function Avatar({
+  name,
+  src,
+  size = "md",
+  status,
+  badge,
+  selected = false,
+  disabled = false,
+  className,
+  "aria-hidden": ariaHidden,
+  role,
+  ...props
+}: AvatarProps) {
   const [failedSrc, setFailedSrc] = useState<string | undefined>();
   const initials = name
     .split(" ")
@@ -5158,8 +5167,8 @@ export function Avatar({ name, src, size = "md", status, badge, selected = false
 
   return (
     <div
-      aria-label={name}
-      aria-selected={selected || undefined}
+      aria-hidden={ariaHidden}
+      aria-label={ariaHidden ? undefined : name}
       className={cn(
         "tl-avatar",
         `tl-avatar--${size}`,
@@ -5168,6 +5177,7 @@ export function Avatar({ name, src, size = "md", status, badge, selected = false
         className
       )}
       data-disabled={disabled || undefined}
+      role={ariaHidden ? undefined : (role ?? "img")}
       {...props}
     >
       {shouldShowImage ? <img alt="" onError={() => setFailedSrc(src)} src={src} /> : <span>{initials}</span>}

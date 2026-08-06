@@ -1,5 +1,6 @@
 ﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   CaseDrawer,
@@ -15,7 +16,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { CrmShellNavItem, CrmShellSidebarItem } from "@taliya/crm";
+import type { CaseDrawerAction, CaseDrawerFact, CaseDrawerFooterAction, CaseDrawerState, CrmShellNavItem, CrmShellSidebarItem } from "@taliya/crm";
 import {
   IconButton
 } from "@taliya/ui";
@@ -429,28 +430,85 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
   const [selectedCardId, setSelectedCardId] = useState(drawer ? "ana" : "");
   const [selectedActivityId, setSelectedActivityId] = useState("");
   const [columns, setColumns] = useState(operationColumns);
-  const selectedCardTitle =
-    columns
-      .flatMap((column) => column.cards)
-      .find((card) => card.id === selectedCardId)?.title ?? "Reposicao da Ana sem encaixe";
-  const moveCard = (cardId: string, targetColumnId: string) => {
+  const selectedEntry = columns
+    .flatMap((column) => column.cards.map((card) => ({ card, column })))
+    .find(({ card }) => card.id === selectedCardId);
+  const selectedCardTitle = selectedEntry?.card.title ?? "Reposicao da Ana sem encaixe";
+  const selectedDrawerState: CaseDrawerState = selectedEntry?.column.id === "bloqueado"
+    ? "blocked"
+    : selectedEntry?.column.id === "aguardando"
+      ? "waiting"
+      : selectedEntry?.column.id === "resolvido"
+        ? "resolved"
+        : "open";
+  const selectedFacts: CaseDrawerFact[] = selectedEntry ? [
+    { id: "origin", icon: "folder", label: "Origem", value: selectedEntry.card.tags.join(" / ") },
+    { id: "owner", icon: "user", label: "Dono / fila", value: selectedEntry.card.owner },
+    { id: "status", icon: "clock", label: "Status", value: selectedEntry.column.title, tone: selectedEntry.column.id === "bloqueado" ? "danger" : undefined },
+    { id: "impact", icon: "shieldCheck", label: "Impacto", value: selectedEntry.card.impact },
+    { id: "next", icon: "clock", label: "Próxima ação recomendada", value: selectedEntry.card.nextAction }
+  ] : [];
+  const selectedFooterActions: CaseDrawerFooterAction[] = selectedDrawerState === "resolved"
+    ? [
+      { id: "open-origin", label: "Abrir origem", variant: "primary", fullWidth: true },
+      { id: "create-task", label: "Criar tarefa" }
+    ]
+    : [
+      { id: "open-origin", label: "Abrir origem", variant: "primary", fullWidth: true },
+      ...(selectedDrawerState === "blocked" ? [{ id: "correct" as const, label: "Corrigir agora", leadingIcon: "refresh" as const }] : []),
+      { id: "assume", label: "Assumir" },
+      { id: "delegate", label: "Delegar" },
+      { id: "create-task", label: "Criar tarefa" },
+      { id: "request-approval", label: "Pedir aprovação" },
+      { id: "resolve", label: "Marcar resolvido" },
+      { id: "move-status", label: "Mover status", trailingIcon: "chevronDown" }
+    ];
+
+  const moveCard = (cardId: string, targetColumnId: string, patch: Partial<OperationCard> = {}) => {
     setColumns((currentColumns) => {
       const sourceColumn = currentColumns.find((column) => column.cards.some((card) => card.id === cardId));
-      if (!sourceColumn || sourceColumn.id === targetColumnId) return currentColumns;
+      if (!sourceColumn) return currentColumns;
       const card = sourceColumn.cards.find((item) => item.id === cardId);
       if (!card) return currentColumns;
+      const targetState = targetColumnId === "bloqueado"
+        ? "automação bloqueada"
+        : targetColumnId === "aguardando"
+          ? "aguardando resposta"
+          : targetColumnId === "resolvido"
+            ? "resolvido"
+            : "manual disponível";
+      const updatedCard = { ...card, state: targetState, ...patch };
+      if (sourceColumn.id === targetColumnId) {
+        return currentColumns.map((column) => column.id === sourceColumn.id
+          ? { ...column, cards: column.cards.map((item) => item.id === cardId ? updatedCard : item) }
+          : column);
+      }
       return currentColumns.map((column) => {
         if (column.id === sourceColumn.id) {
           return { ...column, cards: column.cards.filter((item) => item.id !== cardId) };
         }
         if (column.id === targetColumnId) {
-          return { ...column, cards: [...column.cards, card] };
+          return { ...column, cards: [...column.cards, updatedCard] };
         }
         return column;
       });
     });
     setSelectedCardId(cardId);
     setAnnouncedAction(`Pendência movida para ${targetColumnId}`);
+  };
+  const handleCaseAction = (action: CaseDrawerAction) => {
+    if (!selectedEntry) return;
+    const currentIndex = columns.findIndex((column) => column.id === selectedEntry.column.id);
+    const nextColumn = columns[Math.min(columns.length - 1, currentIndex + 1)];
+    if (action === "assume") moveCard(selectedCardId, "assumido", { owner: "Eu", nextAction: "executar agora" });
+    if (action === "delegate") moveCard(selectedCardId, selectedEntry.column.id, { owner: "Equipe de Operação", nextAction: "aguardar aceite" });
+    if (action === "request-approval") moveCard(selectedCardId, "aguardando", { nextAction: "aguardar aprovação" });
+    if (action === "resolve") moveCard(selectedCardId, "resolvido", { impact: "pendência concluída", nextAction: "concluído" });
+    if (action === "move-status") moveCard(selectedCardId, nextColumn?.id ?? selectedEntry.column.id);
+    if (action === "correct") moveCard(selectedCardId, "assumido", { impact: "correção aplicada", nextAction: "validar correção" });
+    if (!["assume", "delegate", "request-approval", "resolve", "move-status", "correct"].includes(action)) {
+      setAnnouncedAction(`Ação do caso: ${action}`);
+    }
   };
 
   return (
@@ -475,12 +533,15 @@ export function OperationShell({ drawer = false }: { drawer?: boolean }) {
       drawer={selectedCardId ? (
         <CaseDrawer
           className="sb-image-coverage-operation-drawer"
-          onAction={(action) => setAnnouncedAction(`Ação do caso: ${action}`)}
+          facts={selectedFacts}
+          footerActions={selectedFooterActions}
+          onAction={handleCaseAction}
           onClose={() => setSelectedCardId("")}
+          state={selectedDrawerState}
+          statusLabel={selectedEntry?.column.title}
           title={selectedCardTitle}
         />
       ) : null}
-      drawerPlacement="viewport"
       filterBar={<OperationFilters onAction={setAnnouncedAction} showActions={!drawer} />}
       globalActions={{
         onAvatar: () => setAnnouncedAction("Perfil da operadora aberto"),
@@ -535,6 +596,25 @@ export const Image21KanbanGeral: Story = {
   render: () => <OperationShell />
 };
 
+export const OperationLifecycleContract: Story = {
+  name: "Operation lifecycle contract",
+  render: () => <OperationShell />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole("button", { name: /^Reposição da Ana sem encaixe.*Dono:/ }));
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes do caso operacional" });
+    await expect(drawer).toHaveAttribute("data-state", "open");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Assumir" }));
+    await expect(canvas.getByRole("button", { name: /Reposição da Ana sem encaixe.*Dono: Eu/ })).toBeInTheDocument();
+    await userEvent.click(within(drawer).getByRole("button", { name: "Pedir aprovação" }));
+    await expect(drawer).toHaveAttribute("data-state", "waiting");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Marcar resolvido" }));
+    await expect(drawer).toHaveAttribute("data-state", "resolved");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Pendência movida para resolvido");
+  }
+};
+
 export const Image22KanbanComDrawer: Story = {
   name: "22 kanban com drawer",
   parameters: {
@@ -545,4 +625,23 @@ export const Image22KanbanComDrawer: Story = {
     }
   },
   render: () => <OperationShell drawer />
+};
+
+export const OperationBlockedRecoveryContract: Story = {
+  name: "Operation blocked recovery contract",
+  render: () => <OperationShell drawer />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes do caso operacional" });
+
+    await expect(drawer).toHaveAttribute("data-state", "open");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar caso" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes do caso operacional" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: /^WhatsApp com falha de envio.*Dono:/ }));
+    const blockedDrawer = canvas.getByRole("complementary", { name: "Detalhes do caso operacional" });
+    await expect(blockedDrawer).toHaveAttribute("data-state", "blocked");
+    await userEvent.click(within(blockedDrawer).getByRole("button", { name: "Corrigir agora" }));
+    await expect(blockedDrawer).toHaveAttribute("data-state", "open");
+    await expect(canvas.getByRole("button", { name: /WhatsApp com falha de envio.*correção aplicada/ })).toBeInTheDocument();
+  }
 };

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-16T16:35:03.103Z",
+  "generatedAt": "2026-08-05T16:54:38.672Z",
   "status": "pass",
   "contractScope": "covered-route-targets",
   "conclusion": "All 73 covered route targets have top-level source files, and the delivered folder matches its ZIP archive.",

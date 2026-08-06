@@ -33,12 +33,16 @@ const contracts = [
     family: "sales-kanban",
     requiredPageSnippets: [
       "<CrmKanbanPage",
-      "filterBar={<SalesPipelineFilters />}",
-      "<SalesPipelineBoard />"
+      "filterBar={<SalesPipelineFilters onInteraction={setAnnouncement} />}",
+      "<SalesPipelineBoard",
+      "columns={columns}",
+      "onCardSelect={(cardId) =>",
+      "aria-live=\"polite\""
     ],
+    requiredSourceSnippets: ["Perdidos", "<SalesLeadDrawer"],
     requiredOwnerSnippets: {
       SalesPipelineFilters: ["<PageFilterBar", "advancedFiltersLabel=\"Mais filtros\"", "filters={filters}"],
-      SalesPipelineBoard: ["<KanbanColumn", "<PipelineCard", "columns.map", "Perdidos"]
+      SalesPipelineBoard: ["<KanbanColumn", "<PipelineCard", "columns.map", "selected={selectedCardId === card.id}"]
     },
     forbiddenSnippets: ["drawer={<LeadDrawer", "<GenericBoard", "function GenericBoard", "<KanbanCard"]
   },
@@ -48,12 +52,16 @@ const contracts = [
     family: "finance-kanban",
     requiredPageSnippets: [
       "<CrmKanbanPage",
-      "filterBar={<FinanceiroKanbanFilters />}",
-      "<FinanceKanbanColumns />"
+      "filterBar={<FinanceiroKanbanFilters onInteraction={setAnnouncement} />}",
+      "<FinanceKanbanColumns",
+      "columns={columns}",
+      "onCardSelect={(cardId) =>",
+      "aria-live=\"polite\""
     ],
+    requiredSourceSnippets: ["Resolvido", "<PaymentDrawer"],
     requiredOwnerSnippets: {
       FinanceiroKanbanFilters: ["<PageFilterBar", "filters={filters}", "searchVisible={false}"],
-      FinanceKanbanColumns: ["<KanbanColumn", "<FinanceKanbanCard", "columns.map", "Resolvido"]
+      FinanceKanbanColumns: ["<KanbanColumn", "<FinanceKanbanCard", "columns.map", "selected={selectedCardId === card.id}"]
     },
     forbiddenSnippets: ["<GenericBoard", "function GenericBoard", "<PaymentCaseCard"]
   }
@@ -88,6 +96,9 @@ const rows = contracts.map((contract) => {
   const missingPageSnippets = contract.requiredPageSnippets
     .filter((snippet) => !pageSource.includes(snippet))
     .map((snippet) => `${contract.page}: ${snippet}`);
+  const missingSourceSnippets = (contract.requiredSourceSnippets ?? [])
+    .filter((snippet) => !source.includes(snippet))
+    .map((snippet) => `${contract.file}: ${snippet}`);
   const missingOwnerSnippets = Object.entries(contract.requiredOwnerSnippets).flatMap(([owner, snippets]) => {
     const ownerSource = sourceWindowForFunction(source, owner);
     if (!ownerSource) return [`${owner}: function missing`];
@@ -105,7 +116,7 @@ const rows = contracts.map((contract) => {
     }
     return contractSource.includes(snippet);
   });
-  const missingSnippets = [...missingPageSnippets, ...missingOwnerSnippets];
+  const missingSnippets = [...missingPageSnippets, ...missingSourceSnippets, ...missingOwnerSnippets];
 
   return {
     page: contract.page,

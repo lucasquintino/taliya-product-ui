@@ -1,17 +1,22 @@
 # Drawer Lifecycle Audit
 
-Date: 2026-07-23
+Date: 2026-08-05
 
 Status: pass
 
 This audit protects selected-object drawer lifecycle across official worklist, kanban, and dashboard stories. Every listed page must mount its drawer conditionally, close and unmount it through the official drawer callback, and reopen it from its primary row, card, event, ticket, or action selection.
 
+It also rejects public placement, side, inline, compact-width and wide-width variants. Every mounted drawer must use the official fixed-right, full-height, medium-width geometry and full-width mobile behavior.
+
 It does **not** certify 1:1 visual approval or replace browser interaction tests.
 
 ## Summary
 
-- Checked page rows: 23
+- Checked page rows: 33
 - Failed page rows: 0
+- Canonical geometry: pass
+- Missing canonical markers: None
+- Forbidden variant markers: None
 
 | Page | Family | Status | Missing snippets |
 | --- | --- | --- | --- |
@@ -38,3 +43,13 @@ It does **not** certify 1:1 visual approval or replace browser interaction tests
 | InternalOverviewPage | dashboard/internal | pass | None |
 | InternalTenantsListDetailPage | worklist/internal | pass | None |
 | MoneyOnTheTablePage | dashboard/reports | pass | None |
+| UsageOverviewPage | right-panel/usage | pass | None |
+| UsageLedgerPage | right-panel/usage | pass | None |
+| BillingSubscriptionPage | right-panel/billing | pass | None |
+| BillingInvoicesPage | right-panel/billing | pass | None |
+| BillingAddOnsPage | right-panel/billing | pass | None |
+| AgentPresenceRoutinePage | right-panel/agents | pass | None |
+| AgentAbsenceFlowPage | right-panel/agents | pass | None |
+| AgentAbsenceFlowTestPage | right-panel/agents | pass | None |
+| AgentPublishRoutinePage | right-panel/agents | pass | None |
+| AgentExecutionReceiptPage | right-panel/agents | pass | None |

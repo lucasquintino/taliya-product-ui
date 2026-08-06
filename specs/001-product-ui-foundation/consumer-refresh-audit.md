@@ -1,6 +1,6 @@
 # Consumer Refresh Audit
 
-Generated: 2026-07-16T16:33:28.399Z
+Generated: 2026-08-05T16:56:35.436Z
 
 Status: pass
 
@@ -16,8 +16,8 @@ This audit orchestrates the local package refresh flow for a consumer: vendor sy
 
 | Step | Command | Status | Exit code | Duration ms |
 | --- | --- | --- | ---: | ---: |
-| `vendor-sync` | `node scripts/sync-consumer-vendor.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 50 |
+| `vendor-sync` | `node scripts/sync-consumer-vendor.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 48 |
 | `dependency-sync` | `node scripts/sync-consumer-dependencies.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 36 |
-| `install-plan` | `node scripts/install-consumer-packages.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 36 |
-| `lockfile` | `node scripts/audit-consumer-lockfile.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 41 |
-| `package-sync` | `node scripts/audit-consumer-package-sync.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui` | pass | 0 | 58 |
+| `install-plan` | `node scripts/install-consumer-packages.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 37 |
+| `lockfile` | `node scripts/audit-consumer-lockfile.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 40 |
+| `package-sync` | `node scripts/audit-consumer-package-sync.mjs --check --consumer /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal --vendor vendor/taliya-product-ui` | pass | 0 | 72 |

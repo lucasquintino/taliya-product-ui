@@ -1,0 +1,422 @@
+[
+  {
+    "name": "retencao",
+    "storyId": "crm-image-coverage-retencao--image-41-retencao-riscos",
+    "viewport": {
+      "key": "390",
+      "width": 390,
+      "height": 844
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/retencao-390.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 844,
+        "position": "fixed",
+        "state": "risk-low",
+        "top": 0,
+        "width": 390
+      },
+      "h1": [
+        "Retenção"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 760,
+        "tableWidth": 760,
+        "width": 349
+      },
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "cancelamentos",
+    "storyId": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+    "viewport": {
+      "key": "390",
+      "width": 390,
+      "height": 844
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/cancelamentos-390.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 844,
+        "position": "fixed",
+        "state": "cancellation-cancelled",
+        "top": 0,
+        "width": 390
+      },
+      "h1": [
+        "Cancelamentos"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 880,
+        "tableWidth": 880,
+        "width": 349
+      },
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "reativacoes",
+    "storyId": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+    "viewport": {
+      "key": "390",
+      "width": 390,
+      "height": 844
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/reativacoes-390.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 844,
+        "position": "fixed",
+        "state": "reactivation-do-not-contact",
+        "top": 0,
+        "width": 390
+      },
+      "h1": [
+        "Reativações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 900,
+        "tableWidth": 900,
+        "width": 349
+      },
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "reclamacoes",
+    "storyId": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+    "viewport": {
+      "key": "390",
+      "width": 390,
+      "height": 844
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/reclamacoes-390.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 844,
+        "position": "fixed",
+        "state": "complaint-waiting",
+        "top": 0,
+        "width": 390
+      },
+      "h1": [
+        "Reclamações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 840,
+        "tableWidth": 840,
+        "width": 349
+      },
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "retencao",
+    "storyId": "crm-image-coverage-retencao--image-41-retencao-riscos",
+    "viewport": {
+      "key": "1024",
+      "width": 1024,
+      "height": 768
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/retencao-1024.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 768,
+        "position": "fixed",
+        "state": "risk-low",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Retenção"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 760,
+        "tableWidth": 760,
+        "width": 247
+      },
+      "viewport": {
+        "height": 768,
+        "width": 1024
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "cancelamentos",
+    "storyId": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+    "viewport": {
+      "key": "1024",
+      "width": 1024,
+      "height": 768
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/cancelamentos-1024.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 768,
+        "position": "fixed",
+        "state": "cancellation-cancelled",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Cancelamentos"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 880,
+        "tableWidth": 880,
+        "width": 247
+      },
+      "viewport": {
+        "height": 768,
+        "width": 1024
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "reativacoes",
+    "storyId": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+    "viewport": {
+      "key": "1024",
+      "width": 1024,
+      "height": 768
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/reativacoes-1024.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 768,
+        "position": "fixed",
+        "state": "reactivation-do-not-contact",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Reativações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 900,
+        "tableWidth": 900,
+        "width": 247
+      },
+      "viewport": {
+        "height": 768,
+        "width": 1024
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "reclamacoes",
+    "storyId": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+    "viewport": {
+      "key": "1024",
+      "width": 1024,
+      "height": 768
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/reclamacoes-1024.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 768,
+        "position": "fixed",
+        "state": "complaint-waiting",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Reclamações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 840,
+        "tableWidth": 840,
+        "width": 247
+      },
+      "viewport": {
+        "height": 768,
+        "width": 1024
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "retencao",
+    "storyId": "crm-image-coverage-retencao--image-41-retencao-riscos",
+    "viewport": {
+      "key": "1280",
+      "width": 1280,
+      "height": 720
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/retencao-1280.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 720,
+        "position": "fixed",
+        "state": "risk-low",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Retenção"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 760,
+        "tableWidth": 760,
+        "width": 503
+      },
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "cancelamentos",
+    "storyId": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+    "viewport": {
+      "key": "1280",
+      "width": 1280,
+      "height": 720
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/cancelamentos-1280.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 720,
+        "position": "fixed",
+        "state": "cancellation-cancelled",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Cancelamentos"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 880,
+        "tableWidth": 880,
+        "width": 503
+      },
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "reativacoes",
+    "storyId": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+    "viewport": {
+      "key": "1280",
+      "width": 1280,
+      "height": 720
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/reativacoes-1280.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 720,
+        "position": "fixed",
+        "state": "reactivation-do-not-contact",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Reativações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 900,
+        "tableWidth": 900,
+        "width": 503
+      },
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "reclamacoes",
+    "storyId": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+    "viewport": {
+      "key": "1280",
+      "width": 1280,
+      "height": 720
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/retention-worklist-final-current-20260805/reclamacoes-1280.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "height": 720,
+        "position": "fixed",
+        "state": "complaint-waiting",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Reclamações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "scrollWidth": 840,
+        "tableWidth": 840,
+        "width": 503
+      },
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": 0
+    }
+  }
+]

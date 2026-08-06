@@ -1,0 +1,224 @@
+[
+  {
+    "name": "movimentacoes",
+    "viewport": {
+      "key": "390",
+      "width": 390,
+      "height": 844
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/final-worklists-final-current-20260805/movimentacoes-390.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "component": "PaymentDrawer",
+        "grantState": null,
+        "height": 844,
+        "position": "fixed",
+        "state": "dispute",
+        "top": 0,
+        "width": 390
+      },
+      "h1": [
+        "Movimentações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "overflowingCells": [],
+        "scrollWidth": 1120,
+        "tableWidth": 1120,
+        "width": 349
+      },
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "internal-tenants",
+    "viewport": {
+      "key": "390",
+      "width": 390,
+      "height": 844
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/final-worklists-final-current-20260805/internal-tenants-390.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "component": "TenantSummaryDrawer",
+        "grantState": "active",
+        "height": 844,
+        "position": "fixed",
+        "state": "active",
+        "top": 0,
+        "width": 390
+      },
+      "h1": [
+        "Clientes"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "overflowingCells": [],
+        "scrollWidth": 1200,
+        "tableWidth": 1200,
+        "width": 349
+      },
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "movimentacoes",
+    "viewport": {
+      "key": "1024",
+      "width": 1024,
+      "height": 768
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/final-worklists-final-current-20260805/movimentacoes-1024.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "component": "PaymentDrawer",
+        "grantState": null,
+        "height": 768,
+        "position": "fixed",
+        "state": "dispute",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Movimentações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "overflowingCells": [],
+        "scrollWidth": 1120,
+        "tableWidth": 1120,
+        "width": 297
+      },
+      "viewport": {
+        "height": 768,
+        "width": 1024
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "internal-tenants",
+    "viewport": {
+      "key": "1024",
+      "width": 1024,
+      "height": 768
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/final-worklists-final-current-20260805/internal-tenants-1024.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "component": "TenantSummaryDrawer",
+        "grantState": "active",
+        "height": 768,
+        "position": "fixed",
+        "state": "active",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Clientes"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "overflowingCells": [],
+        "scrollWidth": 1200,
+        "tableWidth": 1200,
+        "width": 301
+      },
+      "viewport": {
+        "height": 768,
+        "width": 1024
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "movimentacoes",
+    "viewport": {
+      "key": "1280",
+      "width": 1280,
+      "height": 720
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/final-worklists-final-current-20260805/movimentacoes-1280.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "component": "PaymentDrawer",
+        "grantState": null,
+        "height": 720,
+        "position": "fixed",
+        "state": "dispute",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Movimentações"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "overflowingCells": [],
+        "scrollWidth": 1120,
+        "tableWidth": 1120,
+        "width": 553
+      },
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": 0
+    }
+  },
+  {
+    "name": "internal-tenants",
+    "viewport": {
+      "key": "1280",
+      "width": 1280,
+      "height": 720
+    },
+    "file": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/final-worklists-final-current-20260805/internal-tenants-1280.png",
+    "metric": {
+      "documentOverflow": 0,
+      "drawer": {
+        "component": "TenantSummaryDrawer",
+        "grantState": "active",
+        "height": 720,
+        "position": "fixed",
+        "state": "active",
+        "top": 0,
+        "width": 420
+      },
+      "h1": [
+        "Clientes"
+      ],
+      "shells": 1,
+      "table": {
+        "overflowX": "auto",
+        "overflowingCells": [],
+        "scrollWidth": 1200,
+        "tableWidth": 1200,
+        "width": 557
+      },
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": 0
+    }
+  }
+]

@@ -123,8 +123,6 @@ const dynamicApiRows = [
     snippets: [
       "export interface CrmProductShellProps",
       "drawer?: React.ReactNode",
-      "drawerPlacement?:",
-      "drawerSize?:",
       "pageHeaderRhythm?:",
       "contentLayout?:"
     ]

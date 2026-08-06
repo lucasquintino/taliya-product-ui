@@ -1,6 +1,6 @@
 # Public API Surface Audit
 
-Generated: 2026-07-15T06:45:36.325Z
+Generated: 2026-08-05T09:57:24.299Z
 
 Status: pass
 
@@ -21,6 +21,10 @@ This audit guards the public API vocabulary. It keeps the standard page kit cano
 | `@taliya/crm:GlobalActions` | `@taliya/crm:CrmShellGlobalActions` | Pass | Legacy short action-cluster name retained for compatibility. New shell work should use CrmShellGlobalActions or CrmProductShell global-action props. |
 | `@taliya/crm:TaskQueueList` | `@taliya/crm:PageQuickFilters` | Pass | Historical image-23 crop component. New work-list rails must use PageQuickFilters with page-specific items. |
 | `@taliya/ui:ActionMenu` | `@taliya/ui:DropdownMenu` | Pass | Semantic alias for action-trigger menus. DropdownMenu owns the primitive implementation. |
+| `@taliya/crm:CrmShellRoundButton` | `@taliya/ui:IconButton` | Pass | Historical direct shell wrapper retained for published API compatibility. New shell controls should use CrmSidebarFloatingButton, CrmTopbarActionButton, or the IconButton primitive according to placement. |
+| `@taliya/crm:CrmShellTopNavItem` | `@taliya/crm:CrmTopbarNavChip` | Pass | Historical direct navigation wrapper retained for published API compatibility. New shell navigation must use CrmTopbarNavChip or CrmShellTopNav. |
+| `@taliya/crm:LegacyComposer` | `@taliya/crm:Composer` | Pass | Historical fixed-placeholder composer retained for published API compatibility. New inbox flows must use Composer or ComposerPanel. |
+| `@taliya/crm:MessageBubble` | `@taliya/ui:MessageBubble` | Pass | Compatibility re-export retained for existing CRM consumers. The primitive implementation and canonical import live in @taliya/ui. |
 
 ## Domain Specializations
 

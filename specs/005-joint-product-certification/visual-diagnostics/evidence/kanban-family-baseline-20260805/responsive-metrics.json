@@ -1,0 +1,350 @@
+[
+  {
+    "board": {
+      "h": 570,
+      "w": 1104,
+      "x": 122,
+      "y": 299
+    },
+    "boardClient": 1104,
+    "boardScroll": 1104,
+    "cards": 18,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 6,
+    "docOverflow": 0,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 1104,
+      "x": 122,
+      "y": 299
+    },
+    "lanesScroll": 1667,
+    "viewport": {
+      "h": 900,
+      "w": 1280
+    },
+    "key": "vendas"
+  },
+  {
+    "board": {
+      "h": 607,
+      "w": 1093,
+      "x": 122,
+      "y": 299
+    },
+    "boardClient": 1093,
+    "boardScroll": 1093,
+    "cards": 21,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 7,
+    "docOverflow": -15,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 607,
+      "w": 1093,
+      "x": 122,
+      "y": 299
+    },
+    "lanesScroll": 1537,
+    "viewport": {
+      "h": 900,
+      "w": 1280
+    },
+    "key": "financeiro"
+  },
+  {
+    "board": {
+      "h": 570,
+      "w": 1141,
+      "x": 96,
+      "y": 269
+    },
+    "boardClient": 1141,
+    "boardScroll": 1141,
+    "cards": 14,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 5,
+    "docOverflow": -15,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 930,
+      "x": 307,
+      "y": 269
+    },
+    "lanesScroll": 1027,
+    "viewport": {
+      "h": 900,
+      "w": 1280
+    },
+    "key": "operacao-geral"
+  },
+  {
+    "board": {
+      "h": 570,
+      "w": 721,
+      "x": 96,
+      "y": 323
+    },
+    "boardClient": 721,
+    "boardScroll": 721,
+    "cards": 14,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 5,
+    "docOverflow": -15,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 510,
+      "x": 307,
+      "y": 323
+    },
+    "lanesScroll": 1027,
+    "viewport": {
+      "h": 900,
+      "w": 1280
+    },
+    "key": "operacao-drawer"
+  },
+  {
+    "board": {
+      "h": 570,
+      "w": 833,
+      "x": 122,
+      "y": 299
+    },
+    "boardClient": 833,
+    "boardScroll": 833,
+    "cards": 18,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 6,
+    "docOverflow": -15,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 833,
+      "x": 122,
+      "y": 299
+    },
+    "lanesScroll": 1667,
+    "viewport": {
+      "h": 768,
+      "w": 1024
+    },
+    "key": "vendas"
+  },
+  {
+    "board": {
+      "h": 607,
+      "w": 837,
+      "x": 122,
+      "y": 299
+    },
+    "boardClient": 837,
+    "boardScroll": 837,
+    "cards": 21,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 7,
+    "docOverflow": -15,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 607,
+      "w": 837,
+      "x": 122,
+      "y": 299
+    },
+    "lanesScroll": 1537,
+    "viewport": {
+      "h": 768,
+      "w": 1024
+    },
+    "key": "financeiro"
+  },
+  {
+    "board": {
+      "h": 570,
+      "w": 885,
+      "x": 96,
+      "y": 269
+    },
+    "boardClient": 885,
+    "boardScroll": 885,
+    "cards": 14,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 5,
+    "docOverflow": -15,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 674,
+      "x": 307,
+      "y": 269
+    },
+    "lanesScroll": 1027,
+    "viewport": {
+      "h": 768,
+      "w": 1024
+    },
+    "key": "operacao-geral"
+  },
+  {
+    "board": {
+      "h": 570,
+      "w": 465,
+      "x": 96,
+      "y": 323
+    },
+    "boardClient": 465,
+    "boardScroll": 465,
+    "cards": 14,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 5,
+    "docOverflow": -15,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 254,
+      "x": 307,
+      "y": 323
+    },
+    "lanesScroll": 1027,
+    "viewport": {
+      "h": 768,
+      "w": 1024
+    },
+    "key": "operacao-drawer"
+  },
+  {
+    "board": {
+      "h": 570,
+      "w": 351,
+      "x": 12,
+      "y": 361
+    },
+    "boardClient": 351,
+    "boardScroll": 351,
+    "cards": 18,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 6,
+    "docOverflow": 0,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 351,
+      "x": 12,
+      "y": 361
+    },
+    "lanesScroll": 1667,
+    "viewport": {
+      "h": 844,
+      "w": 390
+    },
+    "key": "vendas"
+  },
+  {
+    "board": {
+      "h": 607,
+      "w": 303,
+      "x": 38,
+      "y": 361
+    },
+    "boardClient": 303,
+    "boardScroll": 303,
+    "cards": 21,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 7,
+    "docOverflow": 0,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 607,
+      "w": 303,
+      "x": 38,
+      "y": 361
+    },
+    "lanesScroll": 1537,
+    "viewport": {
+      "h": 844,
+      "w": 390
+    },
+    "key": "financeiro"
+  },
+  {
+    "board": {
+      "h": 876,
+      "w": 351,
+      "x": 12,
+      "y": 377
+    },
+    "boardClient": 351,
+    "boardScroll": 351,
+    "cards": 14,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 5,
+    "docOverflow": 0,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 351,
+      "x": 12,
+      "y": 683
+    },
+    "lanesScroll": 1027,
+    "viewport": {
+      "h": 844,
+      "w": 390
+    },
+    "key": "operacao-geral"
+  },
+  {
+    "board": {
+      "h": 876,
+      "w": 351,
+      "x": 12,
+      "y": 323
+    },
+    "boardClient": 351,
+    "boardScroll": 351,
+    "cards": 14,
+    "clippedCards": 0,
+    "columnOverlaps": [],
+    "columns": 5,
+    "docOverflow": 0,
+    "drawer": null,
+    "h1": 3,
+    "lanes": {
+      "h": 570,
+      "w": 351,
+      "x": 12,
+      "y": 629
+    },
+    "lanesScroll": 1027,
+    "viewport": {
+      "h": 844,
+      "w": 390
+    },
+    "key": "operacao-drawer"
+  }
+]

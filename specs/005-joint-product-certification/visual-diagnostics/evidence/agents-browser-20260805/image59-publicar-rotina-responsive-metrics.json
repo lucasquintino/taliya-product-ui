@@ -1,0 +1,137 @@
+{
+  "storyId": "crm-image-coverage-agentes--image-59-publicar-rotina",
+  "rows": [
+    {
+      "viewport": "1440",
+      "metrics": {
+        "brokenImages": [],
+        "document": {
+          "overflowX": false,
+          "scrollHeight": 900,
+          "scrollWidth": 1440
+        },
+        "drawer": {
+          "bottom": 900,
+          "fullHeight": true,
+          "height": 900,
+          "position": "fixed",
+          "right": 1440,
+          "state": "publish",
+          "width": 420,
+          "x": 1020,
+          "y": 0
+        },
+        "enabledButtons": 55,
+        "root": {
+          "bottom": 900,
+          "height": 900,
+          "right": 1440,
+          "width": 1440,
+          "x": 0
+        },
+        "statuses": [],
+        "viewport": {
+          "actual": {
+            "height": 900,
+            "width": 1440
+          },
+          "clientWidth": 1440,
+          "requested": {
+            "height": 900,
+            "name": "1440",
+            "width": 1440
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "viewport": "1024",
+      "metrics": {
+        "brokenImages": [],
+        "document": {
+          "overflowX": false,
+          "scrollHeight": 768,
+          "scrollWidth": 1024
+        },
+        "drawer": {
+          "bottom": 768,
+          "fullHeight": true,
+          "height": 768,
+          "position": "fixed",
+          "right": 1024,
+          "state": "publish",
+          "width": 420,
+          "x": 604,
+          "y": 0
+        },
+        "enabledButtons": 55,
+        "root": {
+          "bottom": 768,
+          "height": 768,
+          "right": 1024,
+          "width": 1024,
+          "x": 0
+        },
+        "statuses": [],
+        "viewport": {
+          "actual": {
+            "height": 768,
+            "width": 1024
+          },
+          "clientWidth": 1024,
+          "requested": {
+            "height": 768,
+            "name": "1024",
+            "width": 1024
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "viewport": "390",
+      "metrics": {
+        "brokenImages": [],
+        "document": {
+          "overflowX": false,
+          "scrollHeight": 720,
+          "scrollWidth": 480
+        },
+        "drawer": {
+          "bottom": 720,
+          "fullHeight": true,
+          "height": 720,
+          "position": "fixed",
+          "right": 480,
+          "state": "publish",
+          "width": 480,
+          "x": 0,
+          "y": 0
+        },
+        "enabledButtons": 55,
+        "root": {
+          "bottom": 720,
+          "height": 720,
+          "right": 480,
+          "width": 480,
+          "x": 0
+        },
+        "statuses": [],
+        "viewport": {
+          "actual": {
+            "height": 720,
+            "width": 480
+          },
+          "clientWidth": 480,
+          "requested": {
+            "height": 720,
+            "name": "390",
+            "width": 390
+          }
+        }
+      },
+      "errors": []
+    }
+  ]
+}

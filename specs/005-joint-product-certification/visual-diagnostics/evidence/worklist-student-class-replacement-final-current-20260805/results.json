@@ -1,0 +1,354 @@
+{
+  "generatedAt": "2026-08-05T07:51:53.287Z",
+  "classTable": {
+    "overflowX": "auto",
+    "overflowingCells": [],
+    "tableWidth": 760,
+    "wrapperScrollWidth": 760,
+    "wrapperWidth": 532
+  },
+  "results": [
+    {
+      "route": "alunos",
+      "storyId": "crm-image-coverage-alunos--image-27-lista-perfil-resumido",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "expectedDrawerWidth": 390,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 390,
+        "drawer": {
+          "bottom": 844,
+          "component": "StudentDrawer",
+          "height": 844,
+          "label": "Resumo do aluno",
+          "position": "fixed",
+          "state": "delinquent",
+          "top": 0,
+          "width": 390
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Alunos"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 390,
+        "shellCount": 1,
+        "storyWidth": 390,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/390-alunos.png"
+    },
+    {
+      "route": "turmas",
+      "storyId": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "expectedDrawerWidth": 390,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 390,
+        "drawer": {
+          "bottom": 844,
+          "component": "ClassDrawer",
+          "height": 844,
+          "label": "Detalhes da turma",
+          "position": "fixed",
+          "state": "conflict",
+          "top": 0,
+          "width": 390
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Turmas"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 390,
+        "shellCount": 1,
+        "storyWidth": 390,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/390-turmas.png"
+    },
+    {
+      "route": "reposicoes",
+      "storyId": "crm-image-coverage-reposições--image-31-fluxo-encaixe",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "expectedDrawerWidth": 375,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 375,
+        "drawer": {
+          "bottom": 844,
+          "component": "ReplacementDrawer",
+          "height": 844,
+          "label": "Detalhes da reposição",
+          "position": "fixed",
+          "state": "expired",
+          "top": 0,
+          "width": 375
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Reposições"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 375,
+        "shellCount": 1,
+        "storyWidth": 390,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/390-reposicoes.png"
+    },
+    {
+      "route": "alunos",
+      "storyId": "crm-image-coverage-alunos--image-27-lista-perfil-resumido",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "expectedDrawerWidth": 420,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 1009,
+        "drawer": {
+          "bottom": 768,
+          "component": "StudentDrawer",
+          "height": 768,
+          "label": "Resumo do aluno",
+          "position": "fixed",
+          "state": "delinquent",
+          "top": 0,
+          "width": 420
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Alunos"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 1009,
+        "shellCount": 1,
+        "storyWidth": 1024,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/1024-alunos.png"
+    },
+    {
+      "route": "turmas",
+      "storyId": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "expectedDrawerWidth": 420,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 1009,
+        "drawer": {
+          "bottom": 768,
+          "component": "ClassDrawer",
+          "height": 768,
+          "label": "Detalhes da turma",
+          "position": "fixed",
+          "state": "conflict",
+          "top": 0,
+          "width": 420
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Turmas"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 1009,
+        "shellCount": 1,
+        "storyWidth": 1024,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/1024-turmas.png"
+    },
+    {
+      "route": "reposicoes",
+      "storyId": "crm-image-coverage-reposições--image-31-fluxo-encaixe",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "expectedDrawerWidth": 420,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 1009,
+        "drawer": {
+          "bottom": 768,
+          "component": "ReplacementDrawer",
+          "height": 768,
+          "label": "Detalhes da reposição",
+          "position": "fixed",
+          "state": "expired",
+          "top": 0,
+          "width": 420
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Reposições"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 1009,
+        "shellCount": 1,
+        "storyWidth": 1024,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/1024-reposicoes.png"
+    },
+    {
+      "route": "alunos",
+      "storyId": "crm-image-coverage-alunos--image-27-lista-perfil-resumido",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "expectedDrawerWidth": 420,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 1265,
+        "drawer": {
+          "bottom": 720,
+          "component": "StudentDrawer",
+          "height": 720,
+          "label": "Resumo do aluno",
+          "position": "fixed",
+          "state": "delinquent",
+          "top": 0,
+          "width": 420
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Alunos"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 1265,
+        "shellCount": 1,
+        "storyWidth": 1280,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/1280-alunos.png"
+    },
+    {
+      "route": "turmas",
+      "storyId": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "expectedDrawerWidth": 420,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 1265,
+        "drawer": {
+          "bottom": 720,
+          "component": "ClassDrawer",
+          "height": 720,
+          "label": "Detalhes da turma",
+          "position": "fixed",
+          "state": "conflict",
+          "top": 0,
+          "width": 420
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Turmas"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 1265,
+        "shellCount": 1,
+        "storyWidth": 1280,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/1280-turmas.png"
+    },
+    {
+      "route": "reposicoes",
+      "storyId": "crm-image-coverage-reposições--image-31-fluxo-encaixe",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "expectedDrawerWidth": 420,
+      "metrics": {
+        "canvasCount": 1,
+        "clientWidth": 1265,
+        "drawer": {
+          "bottom": 720,
+          "component": "ReplacementDrawer",
+          "height": 720,
+          "label": "Detalhes da reposição",
+          "position": "fixed",
+          "state": "expired",
+          "top": 0,
+          "width": 420
+        },
+        "drawerCount": 1,
+        "headings": [
+          "Reposições"
+        ],
+        "history": null,
+        "loaded": true,
+        "overflow": 0,
+        "scrollTop": 0,
+        "scrollWidth": 1265,
+        "shellCount": 1,
+        "storyWidth": 1280,
+        "visibleErrors": 0,
+        "windowBodyScrollTop": 0
+      },
+      "pass": true,
+      "screenshot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/005-joint-product-certification/visual-diagnostics/evidence/worklist-student-class-replacement-final-current-20260805/1280-reposicoes.png"
+    }
+  ]
+}

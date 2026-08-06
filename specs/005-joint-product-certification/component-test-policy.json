@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "description": "Risk-based exceptions for public visual components without a direct package-test reference. Every public component absent from direct tests must appear exactly once here.",
+  "categories": [
+    {
+      "id": "compatibility-alias",
+      "requiresStory": false,
+      "requiresCompatibilityAlias": true,
+      "rationale": "Deprecated compatibility-only export whose canonical implementation is directly tested. It must remain classified as an alias and must not gain canonical stories or new usage.",
+      "components": [
+        "@taliya/crm:CrmShellRoundButton",
+        "@taliya/crm:CrmShellTopNavItem",
+        "@taliya/crm:GlobalActions",
+        "@taliya/crm:LegacyComposer",
+        "@taliya/crm:Topbar"
+      ]
+    },
+    {
+      "id": "static-presentational",
+      "requiresStory": true,
+      "requiresCompatibilityAlias": false,
+      "rationale": "Pure presentational output with no consumer-owned behavior; variants, states, and visual semantics are reviewed through an official Storybook reference.",
+      "components": [
+        "@taliya/crm:AgentRoutineIntro",
+        "@taliya/crm:AgentStatus",
+        "@taliya/crm:ChannelStatus",
+        "@taliya/crm:CopilotSuggestion",
+        "@taliya/crm:CrmBrowserAddressBar",
+        "@taliya/crm:CrmBrowserTrafficLights",
+        "@taliya/crm:CrmEmptyShellPageHeader",
+        "@taliya/crm:CrmShellBrand",
+        "@taliya/crm:QuotaBadge",
+        "@taliya/crm:SecurePaymentNotice",
+        "@taliya/crm:StatusCard",
+        "@taliya/crm:SubscriptionProgressStepper",
+        "@taliya/crm:SubscriptionResultHeader",
+        "@taliya/ui:ErrorState",
+        "@taliya/ui:ListIcon",
+        "@taliya/ui:MetaText",
+        "@taliya/ui:PersonLabel"
+      ]
+    },
+    {
+      "id": "structural-composition",
+      "requiresStory": true,
+      "requiresCompatibilityAlias": false,
+      "rationale": "Layout-only composition that owns anatomy and slots but delegates all behavior to directly tested child components or consumer-provided nodes.",
+      "components": [
+        "@taliya/crm:CrmEmptyShellCanvas",
+        "@taliya/crm:CrmEmptyShellWindow",
+        "@taliya/crm:CrmOperationalPanel",
+        "@taliya/crm:InternalWorklistPage",
+        "@taliya/crm:PageHeader",
+        "@taliya/crm:ProductWindowAppChrome",
+        "@taliya/crm:ProductWindowFrame",
+        "@taliya/crm:SetupContentGrid",
+        "@taliya/crm:SetupPagePanel",
+        "@taliya/crm:SetupWelcomeMain"
+      ]
+    },
+    {
+      "id": "layout-primitive",
+      "requiresStory": true,
+      "requiresCompatibilityAlias": false,
+      "rationale": "Primitive only applies layout, semantic grouping, or native HTML prop forwarding; it introduces no custom interaction state machine.",
+      "components": [
+        "@taliya/ui:ButtonGroup",
+        "@taliya/ui:List",
+        "@taliya/ui:ListItem",
+        "@taliya/ui:ScrollArea"
+      ]
+    }
+  ]
+}

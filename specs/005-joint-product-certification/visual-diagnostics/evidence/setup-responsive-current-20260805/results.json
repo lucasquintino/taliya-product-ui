@@ -1,0 +1,1242 @@
+{
+  "capturedAt": "2026-08-05T03:32:58.257Z",
+  "source": "current static Storybook responsive harness",
+  "stories": [
+    {
+      "storyId": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+      "viewport": 390,
+      "file": "390/01-01-shell-global.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 2293,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2068.7734375,
+          "height": 766,
+          "right": 354,
+          "width": 333,
+          "x": 21,
+          "y": 1302.7734375
+        },
+        "main": {
+          "bottom": 1290.7734375,
+          "height": 730,
+          "right": 354,
+          "width": 333,
+          "x": 21,
+          "y": 560.7734375
+        },
+        "steps": {
+          "bottom": 548.7734375,
+          "height": 300,
+          "right": 354,
+          "width": 333,
+          "x": 21,
+          "y": 248.7734375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+      "viewport": 390,
+      "file": "390/02-02-agent-chat.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 844,
+        "scrollWidth": 390,
+        "width": 390
+      },
+      "contextOk": true,
+      "h1": [],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": null,
+      "regions": {
+        "agent": null,
+        "main": null,
+        "steps": null
+      },
+      "stepsMainOverlap": null,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+      "viewport": 390,
+      "file": "390/03-03-consumption.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 2820,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Consumo de aulas"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2604.2109375,
+          "height": 744,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 1860.2109375
+        },
+        "main": {
+          "bottom": 1848.2109375,
+          "height": 1294,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+      "viewport": 390,
+      "file": "390/04-04-studio.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 2741,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Studio"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2525.2109375,
+          "height": 744,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 1781.2109375
+        },
+        "main": {
+          "bottom": 1769.2109375,
+          "height": 1215,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+      "viewport": 390,
+      "file": "390/05-05-team.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 3220,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Equipe"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 3004.7109375,
+          "height": 766,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2238.7109375
+        },
+        "main": {
+          "bottom": 2226.7109375,
+          "height": 1672.5,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+      "viewport": 390,
+      "file": "390/06-06-channels.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 3519,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Canais"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 3303.7109375,
+          "height": 883,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2420.7109375
+        },
+        "main": {
+          "bottom": 2408.7109375,
+          "height": 1854.5,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+      "viewport": 390,
+      "file": "390/07-07-plans.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 3840,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Planos"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 3624.2109375,
+          "height": 808,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2816.2109375
+        },
+        "main": {
+          "bottom": 2804.2109375,
+          "height": 2250,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+      "viewport": 390,
+      "file": "390/08-08-payment.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 3612,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Pagamento"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 3396.7109375,
+          "height": 766,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2630.7109375
+        },
+        "main": {
+          "bottom": 2618.7109375,
+          "height": 2064.5,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+      "viewport": 390,
+      "file": "390/09-09-students.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 3174,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Alunos"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2958.7109375,
+          "height": 811,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2147.7109375
+        },
+        "main": {
+          "bottom": 2135.7109375,
+          "height": 1581.5,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+      "viewport": 390,
+      "file": "390/10-10-classes.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 3182,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Turmas"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2966.7109375,
+          "height": 811,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2155.7109375
+        },
+        "main": {
+          "bottom": 2143.7109375,
+          "height": 1589.5,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+      "viewport": 390,
+      "file": "390/11-11-agenda.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 3241,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Agenda"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 3025.2109375,
+          "height": 836,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2189.2109375
+        },
+        "main": {
+          "bottom": 2177.2109375,
+          "height": 1623,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+      "viewport": 390,
+      "file": "390/12-12-review.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 4084,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Revisão"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 3868.2109375,
+          "height": 877,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 2991.2109375
+        },
+        "main": {
+          "bottom": 2979.2109375,
+          "height": 2425,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 554.2109375
+        },
+        "steps": {
+          "bottom": 542.2109375,
+          "height": 300,
+          "right": 362,
+          "width": 349,
+          "x": 13,
+          "y": 242.2109375
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+      "viewport": 390,
+      "file": "390/13-13-welcome.png",
+      "actual": {
+        "height": 844,
+        "scrollHeight": 1561,
+        "scrollWidth": 375,
+        "width": 375
+      },
+      "contextOk": true,
+      "h1": [
+        "Bem-vindo à Taliya"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 1545.2265625,
+          "height": 711,
+          "right": 359,
+          "width": 343,
+          "x": 16,
+          "y": 834.2265625
+        },
+        "main": {
+          "bottom": 834.2265625,
+          "height": 643,
+          "right": 372,
+          "width": 343,
+          "x": 29,
+          "y": 191.2265625
+        },
+        "steps": null
+      },
+      "stepsMainOverlap": null,
+      "target": {
+        "height": 844,
+        "width": 390
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+      "viewport": 1024,
+      "file": "1024/01-01-shell-global.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 1881,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 1657,
+          "height": 499,
+          "right": 988,
+          "width": 967,
+          "x": 21,
+          "y": 1158
+        },
+        "main": {
+          "bottom": 1146,
+          "height": 686,
+          "right": 988,
+          "width": 967,
+          "x": 21,
+          "y": 460
+        },
+        "steps": {
+          "bottom": 448,
+          "height": 300,
+          "right": 988,
+          "width": 967,
+          "x": 21,
+          "y": 148
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+      "viewport": 1024,
+      "file": "1024/02-02-agent-chat.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 768,
+        "scrollWidth": 1024,
+        "width": 1024
+      },
+      "contextOk": true,
+      "h1": [],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": null,
+      "regions": {
+        "agent": null,
+        "main": null,
+        "steps": null
+      },
+      "stepsMainOverlap": null,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+      "viewport": 1024,
+      "file": "1024/03-03-consumption.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2415,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Consumo de aulas"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2199,
+          "height": 499,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1700
+        },
+        "main": {
+          "bottom": 1688,
+          "height": 1236,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+      "viewport": 1024,
+      "file": "1024/04-04-studio.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2327,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Studio"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2111,
+          "height": 524,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1587
+        },
+        "main": {
+          "bottom": 1575,
+          "height": 1123,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+      "viewport": 1024,
+      "file": "1024/05-05-team.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2557,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Equipe"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2341.5,
+          "height": 499,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1842.5
+        },
+        "main": {
+          "bottom": 1830.5,
+          "height": 1378.5,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+      "viewport": 1024,
+      "file": "1024/06-06-channels.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2544,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Canais"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2328.5,
+          "height": 566,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1762.5
+        },
+        "main": {
+          "bottom": 1750.5,
+          "height": 1298.5,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+      "viewport": 1024,
+      "file": "1024/07-07-plans.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 3028,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Planos"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2812,
+          "height": 566,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 2246
+        },
+        "main": {
+          "bottom": 2234,
+          "height": 1782,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+      "viewport": 1024,
+      "file": "1024/08-08-payment.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2003,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Pagamento"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 1787.5,
+          "height": 499,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1288.5
+        },
+        "main": {
+          "bottom": 1276.5,
+          "height": 824.5,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+      "viewport": 1024,
+      "file": "1024/09-09-students.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2520,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Alunos"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2304.5,
+          "height": 566,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1738.5
+        },
+        "main": {
+          "bottom": 1726.5,
+          "height": 1274.5,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+      "viewport": 1024,
+      "file": "1024/10-10-classes.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2576,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Turmas"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2360.5,
+          "height": 566,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1794.5
+        },
+        "main": {
+          "bottom": 1782.5,
+          "height": 1330.5,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+      "viewport": 1024,
+      "file": "1024/11-11-agenda.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 2640,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Agenda"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2424.5,
+          "height": 566,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 1858.5
+        },
+        "main": {
+          "bottom": 1846.5,
+          "height": 1394.5,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+      "viewport": 1024,
+      "file": "1024/12-12-review.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 3194,
+        "scrollWidth": 1009,
+        "width": 1009
+      },
+      "contextOk": true,
+      "h1": [
+        "Revisão"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 2978,
+          "height": 566,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 2412
+        },
+        "main": {
+          "bottom": 2400,
+          "height": 1948,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 452
+        },
+        "steps": {
+          "bottom": 440,
+          "height": 300,
+          "right": 996,
+          "width": 983,
+          "x": 13,
+          "y": 140
+        }
+      },
+      "stepsMainOverlap": false,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+      "viewport": 1024,
+      "file": "1024/13-13-welcome.png",
+      "actual": {
+        "height": 768,
+        "scrollHeight": 768,
+        "scrollWidth": 1024,
+        "width": 1024
+      },
+      "contextOk": true,
+      "h1": [
+        "Bem-vindo à Taliya"
+      ],
+      "horizontalOverflow": false,
+      "mainAgentOverlap": false,
+      "regions": {
+        "agent": {
+          "bottom": 738,
+          "height": 635,
+          "right": 1008,
+          "width": 428,
+          "x": 580,
+          "y": 103
+        },
+        "main": {
+          "bottom": 752,
+          "height": 649,
+          "right": 577,
+          "width": 532,
+          "x": 45,
+          "y": 103
+        },
+        "steps": null
+      },
+      "stepsMainOverlap": null,
+      "target": {
+        "height": 768,
+        "width": 1024
+      },
+      "unnamedVisibleControls": 0,
+      "visibleErrors": []
+    }
+  ]
+}

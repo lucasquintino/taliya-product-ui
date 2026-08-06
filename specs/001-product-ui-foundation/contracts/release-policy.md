@@ -14,7 +14,7 @@ The local tarball channel is the official current channel for `taliya-internal` 
 
 ## Registry Gate
 
-Registry publication is configured but remains manual and environment-protected. The three packages share version `0.1.0`, use public access on npm, and publish only through `.github/workflows/publish-packages.yml` with npm provenance.
+Registry publication is configured but remains manual and environment-protected. The release candidate packages share version `0.1.1`, use public access on npm, and publish only through `.github/workflows/publish-packages.yml` with npm provenance.
 
 - `semver-version`: Changesets keeps all three packages in one fixed version group.
 - `registry-target-and-access`: `https://registry.npmjs.org/`, public scoped packages.
@@ -23,7 +23,7 @@ Registry publication is configured but remains manual and environment-protected.
 
 ## Consumer Migration
 
-Current consumers continue to use `vendor-local-tarballs`. After a verified publish they migrate all three dependencies to the same caret range, such as `^0.1.0`. Local package audits remain in place until registry-backed consumer adoption passes.
+Current consumers continue to use `vendor-local-tarballs`. After a verified publish they migrate all three dependencies to the same caret range, `^0.1.1`. Local package audits remain in place until registry-backed consumer adoption passes.
 
 ## Audit
 

@@ -2588,6 +2588,33 @@ const storyRenderers = {
               title="Notificações"
             />
           </PrimitiveState>
+          <PrimitiveState label="read only">
+            <SettingsHubCard
+              description="Dados visíveis sem permissão de edição."
+              icon="shield"
+              onOpen={open("read-only")}
+              state="read-only"
+              title="Permissões"
+            />
+          </PrimitiveState>
+          <PrimitiveState label="entitlement blocked">
+            <SettingsHubCard
+              description="Recurso disponível em outro plano."
+              icon="creditCard"
+              onOpen={open("billing")}
+              state="entitlement-blocked"
+              title="Pagamentos Taliya"
+            />
+          </PrimitiveState>
+          <PrimitiveState label="recoverable error">
+            <SettingsHubCard
+              description="Não foi possível carregar o estado atual."
+              icon="alertCircle"
+              onOpen={open("retry")}
+              state="error"
+              title="Canais"
+            />
+          </PrimitiveState>
         </PrimitiveMatrix>
         <output aria-live="polite" className="tl-sr-only">{event ?? "sem acao"}</output>
       </StoryPage>
@@ -2989,7 +3016,6 @@ const storyRenderers = {
           </PrimitiveState>
           <PrimitiveState label="compact - image 23 list detail">
             <TaskDrawer
-              size="compact"
               title="Confirmar reposição da Ana"
               statusLabel="Aberta"
               onChecklistToggle={(item, checked) => setEvent(`compact:${item.id}:${checked}`)}

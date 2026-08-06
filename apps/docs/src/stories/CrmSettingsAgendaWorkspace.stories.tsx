@@ -20,3 +20,15 @@ export const Source: Story = {};
 export const Saving: Story = {
   args: { saveState: "saving" }
 };
+
+export const ValidationError: Story = {
+  args: { validationError: "O periodo do bloqueio termina antes de comecar." }
+};
+
+export const BlockedPermission: Story = {
+  args: { blockedReason: "Seu papel pode consultar regras da agenda, mas nao pode altera-las.", onRequestAccess: () => undefined }
+};
+
+export const SystemError: Story = {
+  args: { systemError: "As regras da agenda nao foram salvas.", onRetry: () => undefined }
+};

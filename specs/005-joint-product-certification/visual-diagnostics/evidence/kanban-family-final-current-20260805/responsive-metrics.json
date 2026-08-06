@@ -1,0 +1,524 @@
+[
+  {
+    "target": "vendas-image-37",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "board": {
+      "bottom": 869,
+      "height": 570,
+      "right": 1211,
+      "width": 1089,
+      "x": 122,
+      "y": 299
+    },
+    "cards": {
+      "count": 18,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 6,
+      "overlap": false,
+      "visibleCount": 5
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 869,
+      "clientWidth": 1078,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 1211,
+      "scrollWidth": 1667,
+      "width": 1089,
+      "x": 122,
+      "y": 299
+    }
+  },
+  {
+    "target": "financeiro-image-33",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "board": {
+      "bottom": 906,
+      "height": 607,
+      "right": 1215,
+      "width": 1093,
+      "x": 122,
+      "y": 299
+    },
+    "cards": {
+      "count": 21,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 7,
+      "overlap": false,
+      "visibleCount": 6
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 906,
+      "clientWidth": 1080,
+      "height": 607,
+      "horizontalScroll": true,
+      "right": 1215,
+      "scrollWidth": 1537,
+      "width": 1093,
+      "x": 122,
+      "y": 299
+    }
+  },
+  {
+    "target": "operacao-image-21",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "board": {
+      "bottom": 839,
+      "height": 570,
+      "right": 1237,
+      "width": 1141,
+      "x": 96,
+      "y": 269
+    },
+    "cards": {
+      "count": 14,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 5,
+      "overlap": false,
+      "visibleCount": 5
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 839,
+      "clientWidth": 919,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 1237,
+      "scrollWidth": 1027,
+      "width": 930,
+      "x": 307,
+      "y": 269
+    }
+  },
+  {
+    "target": "operacao-image-22",
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "board": {
+      "bottom": 893,
+      "height": 570,
+      "right": 817,
+      "width": 721,
+      "x": 96,
+      "y": 323
+    },
+    "cards": {
+      "count": 14,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 5,
+      "overlap": false,
+      "visibleCount": 5
+    },
+    "document": {
+      "clientWidth": 1265,
+      "overflowX": false,
+      "scrollWidth": 1265
+    },
+    "drawer": {
+      "bottom": 720,
+      "fullHeight": true,
+      "height": 720,
+      "position": "fixed",
+      "right": 1265,
+      "state": "open",
+      "width": 420,
+      "x": 845,
+      "y": 0
+    },
+    "lanes": {
+      "bottom": 893,
+      "clientWidth": 499,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 817,
+      "scrollWidth": 1027,
+      "width": 510,
+      "x": 307,
+      "y": 323
+    }
+  },
+  {
+    "target": "vendas-image-37",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "board": {
+      "bottom": 869,
+      "height": 570,
+      "right": 955,
+      "width": 833,
+      "x": 122,
+      "y": 299
+    },
+    "cards": {
+      "count": 18,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 6,
+      "overlap": false,
+      "visibleCount": 4
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 869,
+      "clientWidth": 822,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 955,
+      "scrollWidth": 1667,
+      "width": 833,
+      "x": 122,
+      "y": 299
+    }
+  },
+  {
+    "target": "financeiro-image-33",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "board": {
+      "bottom": 906,
+      "height": 607,
+      "right": 959,
+      "width": 837,
+      "x": 122,
+      "y": 299
+    },
+    "cards": {
+      "count": 21,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 7,
+      "overlap": false,
+      "visibleCount": 5
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 906,
+      "clientWidth": 824,
+      "height": 607,
+      "horizontalScroll": true,
+      "right": 959,
+      "scrollWidth": 1537,
+      "width": 837,
+      "x": 122,
+      "y": 299
+    }
+  },
+  {
+    "target": "operacao-image-21",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "board": {
+      "bottom": 839,
+      "height": 570,
+      "right": 981,
+      "width": 885,
+      "x": 96,
+      "y": 269
+    },
+    "cards": {
+      "count": 14,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 5,
+      "overlap": false,
+      "visibleCount": 4
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 839,
+      "clientWidth": 663,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 981,
+      "scrollWidth": 1027,
+      "width": 674,
+      "x": 307,
+      "y": 269
+    }
+  },
+  {
+    "target": "operacao-image-22",
+    "viewport": {
+      "height": 768,
+      "width": 1024
+    },
+    "board": {
+      "bottom": 893,
+      "height": 570,
+      "right": 561,
+      "width": 465,
+      "x": 96,
+      "y": 323
+    },
+    "cards": {
+      "count": 14,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 5,
+      "overlap": false,
+      "visibleCount": 4
+    },
+    "document": {
+      "clientWidth": 1009,
+      "overflowX": false,
+      "scrollWidth": 1009
+    },
+    "drawer": {
+      "bottom": 768,
+      "fullHeight": true,
+      "height": 768,
+      "position": "fixed",
+      "right": 1009,
+      "state": "open",
+      "width": 420,
+      "x": 589,
+      "y": 0
+    },
+    "lanes": {
+      "bottom": 893,
+      "clientWidth": 243,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 561,
+      "scrollWidth": 1027,
+      "width": 254,
+      "x": 307,
+      "y": 323
+    }
+  },
+  {
+    "target": "vendas-image-37",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "board": {
+      "bottom": 931,
+      "height": 570,
+      "right": 363,
+      "width": 351,
+      "x": 12,
+      "y": 361
+    },
+    "cards": {
+      "count": 18,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 6,
+      "overlap": false,
+      "visibleCount": 2
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 931,
+      "clientWidth": 340,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 363,
+      "scrollWidth": 1667,
+      "width": 351,
+      "x": 12,
+      "y": 361
+    }
+  },
+  {
+    "target": "financeiro-image-33",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "board": {
+      "bottom": 968,
+      "height": 607,
+      "right": 341,
+      "width": 303,
+      "x": 38,
+      "y": 361
+    },
+    "cards": {
+      "count": 21,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 7,
+      "overlap": false,
+      "visibleCount": 2
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 968,
+      "clientWidth": 290,
+      "height": 607,
+      "horizontalScroll": true,
+      "right": 341,
+      "scrollWidth": 1537,
+      "width": 303,
+      "x": 38,
+      "y": 361
+    }
+  },
+  {
+    "target": "operacao-image-21",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "board": {
+      "bottom": 1253,
+      "height": 876,
+      "right": 363,
+      "width": 351,
+      "x": 12,
+      "y": 377
+    },
+    "cards": {
+      "count": 14,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 5,
+      "overlap": false,
+      "visibleCount": 2
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": null,
+    "lanes": {
+      "bottom": 1253,
+      "clientWidth": 340,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 363,
+      "scrollWidth": 1027,
+      "width": 351,
+      "x": 12,
+      "y": 683
+    }
+  },
+  {
+    "target": "operacao-image-22",
+    "viewport": {
+      "height": 844,
+      "width": 390
+    },
+    "board": {
+      "bottom": 1199,
+      "height": 876,
+      "right": 363,
+      "width": 351,
+      "x": 12,
+      "y": 323
+    },
+    "cards": {
+      "count": 14,
+      "intrinsicOverflowCount": 0
+    },
+    "columns": {
+      "count": 5,
+      "overlap": false,
+      "visibleCount": 2
+    },
+    "document": {
+      "clientWidth": 390,
+      "overflowX": false,
+      "scrollWidth": 390
+    },
+    "drawer": {
+      "bottom": 844,
+      "fullHeight": true,
+      "height": 844,
+      "position": "fixed",
+      "right": 390,
+      "state": "open",
+      "width": 390,
+      "x": 0,
+      "y": 0
+    },
+    "lanes": {
+      "bottom": 1199,
+      "clientWidth": 340,
+      "height": 570,
+      "horizontalScroll": true,
+      "right": 363,
+      "scrollWidth": 1027,
+      "width": 351,
+      "x": 12,
+      "y": 629
+    }
+  }
+]

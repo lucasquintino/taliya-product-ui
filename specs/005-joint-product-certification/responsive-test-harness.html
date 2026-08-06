@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Taliya responsive test harness</title>
+    <style>
+      html,
+      body {
+        background: #e9ebef;
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        display: grid;
+        justify-content: start;
+        padding: 16px;
+      }
+
+      iframe {
+        background: #fff;
+        border: 1px solid #cbd0d8;
+        box-shadow: 0 8px 24px rgb(20 25 35 / 12%);
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="preview" title="Responsive Storybook preview"></iframe>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const storyId = params.get("id") || "crm-image-coverage-setup--image-51-g-onboarding-planos";
+      const width = Number(params.get("width")) || 390;
+      const height = Number(params.get("height")) || 844;
+      const port = Number(params.get("port")) || 6222;
+      const frame = document.querySelector("#preview");
+
+      frame.width = String(width);
+      frame.height = String(height);
+
+      const storyPath = `/iframe.html?id=${encodeURIComponent(storyId)}&viewMode=story`;
+      frame.src = String(port) === window.location.port
+        ? storyPath
+        : `${window.location.protocol}//${window.location.hostname}:${port}${storyPath}`;
+
+      function publishMetrics() {
+        try {
+          const documentRoot = frame.contentDocument;
+          const frameWindow = frame.contentWindow;
+          if (!documentRoot || !frameWindow) return;
+          const visible = (element) => {
+            const rect = element.getBoundingClientRect();
+            const style = frameWindow.getComputedStyle(element);
+            return rect.width > 0 && rect.height > 0 && style.display !== "none" && style.visibility !== "hidden";
+          };
+          const drawers = [...documentRoot.querySelectorAll('[role="complementary"][data-component]')].filter(visible);
+          const drawer = drawers[0];
+          const drawerRect = drawer?.getBoundingClientRect();
+          const windowBody = documentRoot.querySelector(".tcrm-window-frame__body");
+          const history = documentRoot.querySelector('[aria-label="Histórico de hoje"]');
+          const historyRect = history?.getBoundingClientRect();
+          document.body.dataset.metrics = JSON.stringify({
+            loaded: true,
+            storyWidth: frameWindow.innerWidth,
+            clientWidth: documentRoot.documentElement.clientWidth,
+            scrollWidth: documentRoot.documentElement.scrollWidth,
+            overflow: documentRoot.documentElement.scrollWidth - documentRoot.documentElement.clientWidth,
+            headings: [...documentRoot.querySelectorAll("h1")].filter(visible).map((element) => element.textContent.trim()),
+            visibleErrors: [...documentRoot.querySelectorAll(".sb-errordisplay")].filter(visible).length,
+            drawer: drawerRect ? {
+              component: drawer.getAttribute("data-component"),
+              label: drawer.getAttribute("aria-label"),
+              state: drawer.getAttribute("data-state"),
+              top: Math.round(drawerRect.top),
+              bottom: Math.round(drawerRect.bottom),
+              height: Math.round(drawerRect.height),
+              width: Math.round(drawerRect.width),
+              position: frameWindow.getComputedStyle(drawer).position
+            } : null,
+            drawerCount: drawers.length,
+            scrollTop: documentRoot.scrollingElement?.scrollTop || 0,
+            windowBodyScrollTop: windowBody?.scrollTop || 0,
+            history: historyRect ? {
+              top: Math.round(historyRect.top),
+              bottom: Math.round(historyRect.bottom),
+              height: Math.round(historyRect.height)
+            } : null,
+            shellCount: documentRoot.querySelectorAll('[data-component="CrmProductShell"]').length,
+            canvasCount: documentRoot.querySelectorAll('[data-component="CrmProductShell"] .tcrm-empty-shell-canvas').length
+          });
+        } catch (error) {
+          document.body.dataset.metrics = JSON.stringify({ loaded: false, error: String(error) });
+        }
+      }
+
+      frame.addEventListener("load", () => {
+        publishMetrics();
+        window.setTimeout(publishMetrics, 500);
+        window.setTimeout(publishMetrics, 2000);
+      });
+    </script>
+  </body>
+</html>

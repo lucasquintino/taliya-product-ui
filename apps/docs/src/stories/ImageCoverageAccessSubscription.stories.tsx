@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import {
   AccessShell,
@@ -26,43 +27,38 @@ export default meta;
 
 type Story = StoryObj;
 
-type AccessCoverageFrameProfile = {
-  width?: number;
-  height?: number;
+const accessActions = {
+  account: fn(),
+  applyCoupon: fn(),
+  authForgotPassword: fn(),
+  authGoogle: fn(),
+  authMicrosoft: fn(),
+  authPrivacy: fn(),
+  authSubmit: fn(),
+  authSwitchMode: fn(),
+  authTerms: fn(),
+  backToPlans: fn(),
+  changePlan: fn(),
+  continuePayment: fn(),
+  featureHelp: fn(),
+  help: fn(),
+  reopenPayment: fn(),
+  retryPayment: fn(),
+  scheduleHelp: fn(),
+  startSetup: fn(),
+  support: fn()
 };
 
-type CssVariableStyle = React.CSSProperties & Record<`--${string}`, string>;
-
-const ACCESS_COVERAGE_TALL_FRAME = {
-  "--taliya-layout-crm-access-shell-window-height": "var(--taliya-layout-crm-quota-progress-width)",
-  "--taliya-layout-crm-access-shell-body-height": "826px",
-  "--taliya-layout-crm-access-shell-main-height": "663px"
-} satisfies CssVariableStyle;
-
-function AccessCoverageStage({ children, tone = "default" }: { children: React.ReactNode; tone?: "default" | "soft" }) {
-  return <div className={`sb-image-coverage-access-stage sb-image-coverage-access-stage--${tone}`}>{children}</div>;
+function resetAccessActions() {
+  Object.values(accessActions).forEach((action) => action.mockClear());
 }
 
-function accessCoverageFrameStyle(profile?: AccessCoverageFrameProfile): CssVariableStyle | undefined {
-  if (!profile) return undefined;
+function AccessCoverageShell(props: React.ComponentProps<typeof AccessShell>) {
+  return <AccessShell onAccount={accessActions.account} onHelp={accessActions.help} {...props} />;
+}
 
-  const style = {
-    ...ACCESS_COVERAGE_TALL_FRAME
-  } as CssVariableStyle;
-
-  if (profile.width) {
-    style["--taliya-layout-crm-access-shell-window-width"] = `${profile.width}px`;
-  }
-
-  if (profile.height) {
-    const bodyHeight = profile.height - 64;
-    const mainHeight = bodyHeight - 90 - 73;
-    style["--taliya-layout-crm-access-shell-window-height"] = `${profile.height}px`;
-    style["--taliya-layout-crm-access-shell-body-height"] = `${bodyHeight}px`;
-    style["--taliya-layout-crm-access-shell-main-height"] = `${mainHeight}px`;
-  }
-
-  return style;
+function AccessCoverageStage({ children }: { children: React.ReactNode }) {
+  return <div className="sb-image-coverage-access-stage">{children}</div>;
 }
 
 export const Image71ShellBase: Story = {
@@ -76,9 +72,17 @@ export const Image71ShellBase: Story = {
   },
   render: () => (
     <AccessCoverageStage>
-      <AccessShell />
+      <AccessCoverageShell />
     </AccessCoverageStage>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    resetAccessActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Ajuda" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Conta" }));
+    await expect(accessActions.help).toHaveBeenCalledTimes(1);
+    await expect(accessActions.account).toHaveBeenCalledTimes(1);
+  }
 };
 
 export const Image72Signup: Story = {
@@ -92,11 +96,29 @@ export const Image72Signup: Story = {
   },
   render: () => (
     <AccessCoverageStage>
-      <AccessShell layout="centered">
-        <AuthCard />
-      </AccessShell>
+      <AccessCoverageShell layout="centered">
+        <AuthCard
+          onGoogle={accessActions.authGoogle}
+          onMicrosoft={accessActions.authMicrosoft}
+          onPrivacy={accessActions.authPrivacy}
+          onSubmit={accessActions.authSubmit}
+          onSwitchMode={accessActions.authSwitchMode}
+          onTerms={accessActions.authTerms}
+        />
+      </AccessCoverageShell>
     </AccessCoverageStage>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    resetAccessActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Continuar com Google" }));
+    await userEvent.type(canvas.getByRole("textbox", { name: "E-mail profissional" }), "ana@studiolume.com");
+    await userEvent.click(canvas.getByRole("button", { name: "Continuar com e-mail" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Entrar" }));
+    await expect(accessActions.authGoogle).toHaveBeenCalledTimes(1);
+    await expect(accessActions.authSubmit).toHaveBeenCalledTimes(1);
+    await expect(accessActions.authSwitchMode).toHaveBeenCalledTimes(1);
+  }
 };
 
 export const Image73Signin: Story = {
@@ -110,11 +132,30 @@ export const Image73Signin: Story = {
   },
   render: () => (
     <AccessCoverageStage>
-      <AccessShell layout="centered">
-        <AuthCard mode="signin" />
-      </AccessShell>
+      <AccessCoverageShell layout="centered">
+        <AuthCard
+          mode="signin"
+          onForgotPassword={accessActions.authForgotPassword}
+          onGoogle={accessActions.authGoogle}
+          onMicrosoft={accessActions.authMicrosoft}
+          onSubmit={accessActions.authSubmit}
+          onSwitchMode={accessActions.authSwitchMode}
+        />
+      </AccessCoverageShell>
     </AccessCoverageStage>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    resetAccessActions();
+    const canvas = within(canvasElement);
+    await userEvent.type(canvas.getByPlaceholderText("E-mail"), "ana@studiolume.com");
+    await userEvent.type(canvas.getByPlaceholderText("Senha"), "senha-segura");
+    await userEvent.click(canvas.getByRole("button", { name: "Entrar" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Esqueci minha senha" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Criar conta" }));
+    await expect(accessActions.authSubmit).toHaveBeenCalledTimes(1);
+    await expect(accessActions.authForgotPassword).toHaveBeenCalledTimes(1);
+    await expect(accessActions.authSwitchMode).toHaveBeenCalledTimes(1);
+  }
 };
 
 export const Image74ReviewSubscription: Story = {
@@ -127,12 +168,31 @@ export const Image74ReviewSubscription: Story = {
     }
   },
   render: () => (
-    <AccessCoverageStage tone="soft">
-      <AccessShell layout="centered" style={accessCoverageFrameStyle({ height: 875 })}>
-        <SubscriptionReviewPage />
-      </AccessShell>
+    <AccessCoverageStage>
+      <AccessCoverageShell layout="centered">
+        <SubscriptionReviewPage
+          panelProps={{
+            onApplyCoupon: accessActions.applyCoupon,
+            onBackToPlans: accessActions.backToPlans,
+            onChangePlan: accessActions.changePlan,
+            onContinuePayment: accessActions.continuePayment,
+            onFeatureHelp: accessActions.featureHelp
+          }}
+        />
+      </AccessCoverageShell>
     </AccessCoverageStage>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    resetAccessActions();
+    const canvas = within(canvasElement);
+    await userEvent.type(canvas.getByRole("textbox", { name: "Código promocional" }), "TALIYA10");
+    await userEvent.click(canvas.getByRole("button", { name: "Aplicar" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Continuar para pagamento seguro" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Voltar aos planos" }));
+    await expect(accessActions.applyCoupon).toHaveBeenCalledWith("TALIYA10");
+    await expect(accessActions.continuePayment).toHaveBeenCalledTimes(1);
+    await expect(accessActions.backToPlans).toHaveBeenCalledTimes(1);
+  }
 };
 
 export const Image75PendingConfirmation: Story = {
@@ -145,12 +205,25 @@ export const Image75PendingConfirmation: Story = {
     }
   },
   render: () => (
-    <AccessCoverageStage tone="soft">
-      <AccessShell layout="centered" style={accessCoverageFrameStyle({ width: 1508, height: 890 })}>
-        <SubscriptionStatusCard state="verifying" />
-      </AccessShell>
+    <AccessCoverageStage>
+      <AccessCoverageShell layout="centered">
+        <SubscriptionStatusCard
+          onReopenPayment={accessActions.reopenPayment}
+          onSupport={accessActions.support}
+          state="verifying"
+        />
+      </AccessCoverageShell>
     </AccessCoverageStage>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    resetAccessActions();
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("button", { name: /Verificando/i })).toBeDisabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Reabrir pagamento seguro" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Falar com suporte" }));
+    await expect(accessActions.reopenPayment).toHaveBeenCalledTimes(1);
+    await expect(accessActions.support).toHaveBeenCalledTimes(1);
+  }
 };
 
 export const Image76ResolveSubscription: Story = {
@@ -163,12 +236,26 @@ export const Image76ResolveSubscription: Story = {
     }
   },
   render: () => (
-    <AccessCoverageStage tone="soft">
-      <AccessShell layout="centered" style={accessCoverageFrameStyle({ width: 1531, height: 890 })}>
-        <SubscriptionResolutionPanel />
-      </AccessShell>
+    <AccessCoverageStage>
+      <AccessCoverageShell layout="centered">
+        <SubscriptionResolutionPanel
+          onBackToPlans={accessActions.backToPlans}
+          onRetry={accessActions.retryPayment}
+          onSupport={accessActions.support}
+        />
+      </AccessCoverageShell>
     </AccessCoverageStage>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    resetAccessActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Tentar pagamento novamente" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Voltar aos planos" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Falar com suporte" }));
+    await expect(accessActions.retryPayment).toHaveBeenCalledTimes(1);
+    await expect(accessActions.backToPlans).toHaveBeenCalledTimes(1);
+    await expect(accessActions.support).toHaveBeenCalledTimes(1);
+  }
 };
 
 export const Image77ConfirmedHandoff: Story = {
@@ -181,10 +268,23 @@ export const Image77ConfirmedHandoff: Story = {
     }
   },
   render: () => (
-    <AccessCoverageStage tone="soft">
-      <AccessShell layout="centered" style={accessCoverageFrameStyle({ width: 1536, height: 890 })}>
-        <ConfirmedSubscriptionPage />
-      </AccessShell>
+    <AccessCoverageStage>
+      <AccessCoverageShell layout="centered">
+        <ConfirmedSubscriptionPage
+          handoffProps={{
+            onScheduleHelp: accessActions.scheduleHelp,
+            onStartSetup: accessActions.startSetup
+          }}
+        />
+      </AccessCoverageShell>
     </AccessCoverageStage>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    resetAccessActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Começar setup guiado" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Agendar ajuda humana" }));
+    await expect(accessActions.startSetup).toHaveBeenCalledTimes(1);
+    await expect(accessActions.scheduleHelp).toHaveBeenCalledTimes(1);
+  }
 };

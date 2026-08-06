@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   BillingAddOnsWorkspace,
@@ -13,8 +14,8 @@ import {
   crmEmptyShellSidebarUtilityItems,
   crmOperationalNavItems
 } from "@taliya/crm";
-import type { CrmShellNavItem } from "@taliya/crm";
-import { Breadcrumb, ButtonGroup, Chip } from "@taliya/ui";
+import type { BillingSubscriptionWorkspaceState, CrmShellNavItem, UsageDrawerAction } from "@taliya/crm";
+import { Breadcrumb, Button, ButtonGroup, Chip } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
 
@@ -78,7 +79,7 @@ function billingShellProps({
   };
 }
 
-function BillingSupportDrawer({ topic }: { topic: "assinatura" | "faturas" | "add-ons" }) {
+function BillingSupportDrawer({ topic, onAction, onClose }: { topic: "assinatura" | "faturas" | "add-ons"; onAction?: (action: UsageDrawerAction, payload?: string) => void; onClose?: () => void }) {
   const copy = {
     assinatura: {
       message: <>Esta pagina mostra sua assinatura<br />com a Taliya: plano contratado,<br />agentes inclusos, cotas, add-ons<br />e faturas. Pagamentos de alunos<br />ficam no Financeiro.</>,
@@ -115,76 +116,89 @@ function BillingSupportDrawer({ topic }: { topic: "assinatura" | "faturas" | "ad
     }
   }[topic];
 
-  return <UsageDrawer state="overview" title="Agente de Suporte Taliya" {...copy} />;
+  return <UsageDrawer onAction={onAction} onClose={onClose} state="overview" title="Agente de Suporte Taliya" {...copy} />;
 }
 
-export function BillingSubscriptionPage() {
-  const [, setAction] = useState("");
+export function BillingSubscriptionPage({ initialState = "active" }: { initialState?: BillingSubscriptionWorkspaceState } = {}) {
+  const [announcement, setAnnouncement] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(true);
+  const [subscriptionState, setSubscriptionState] = useState(initialState);
+  const statusLabel = subscriptionState === "failed" ? "Pagamento falhou" : subscriptionState === "expired" ? "Expirada" : subscriptionState === "blocked" ? "Bloqueada" : subscriptionState === "loading" ? "Carregando" : "Ativa";
+  const statusTone = subscriptionState === "active" ? "success" : subscriptionState === "loading" ? "neutral" : "danger";
 
   return (
-    <CrmRightPanelPage
-      main={(
-        <BillingSubscriptionWorkspace
-          onChangePlan={() => setAction("change-plan")}
-          onOpenAgents={() => setAction("open-agents")}
-          onSupport={() => setAction("support")}
-          onUpdatePayment={() => setAction("update-payment")}
-          onViewAddOns={() => setAction("view-addons")}
-          onViewInvoices={() => setAction("view-invoices")}
-          onViewPlanDetails={() => setAction("view-plan")}
-          onViewUsage={() => setAction("view-usage")}
-        />
-      )}
-      mainGridColumns={1}
-      panel={<BillingSupportDrawer topic="assinatura" />}
-      rightPanelVariant="billing-subscription"
-      browserUrl="https://app.taliya.com/app/billing"
-      {...billingShellProps({
-        activeNavId: undefined,
-        navItems: crmOperationalNavItems,
-        pageHeaderActions: <ButtonGroup><Chip icon="checkCircle" showDot={false} tone="success">Ativo</Chip><Chip icon="users" showDot={false} tone="neutral">Plano 7 agentes</Chip><Chip icon="calendar" showDot={false} tone="neutral">Renova em 12/06</Chip></ButtonGroup>,
-        pageHeaderBreadcrumb: <Breadcrumb items={[{ label: "Billing" }, { label: "Assinatura" }]} />,
-        pageHeaderRhythm: "billing",
-        subtitle: "Plano, agentes, cotas e faturas da sua conta Taliya",
-        title: "Assinatura Taliya",
-        topNavSelection: "none"
-      })}
-    />
+    <>
+      <CrmRightPanelPage
+        browserUrl="https://app.taliya.com/app/billing"
+        drawer={drawerOpen ? <BillingSupportDrawer onAction={(action, payload) => setAnnouncement(payload ? `Suporte de assinatura: ${action} (${payload})` : `Suporte de assinatura: ${action}`)} onClose={() => setDrawerOpen(false)} topic="assinatura" /> : null}
+        main={(
+          <BillingSubscriptionWorkspace
+            onChangePlan={() => setAnnouncement("Alteração de plano aberta")}
+            onOpenAgents={() => setAnnouncement("Agentes abertos")}
+            onSupport={() => { setDrawerOpen(true); setAnnouncement("Suporte de assinatura aberto"); }}
+            onUpdatePayment={() => {
+              setSubscriptionState("active");
+              setAnnouncement(subscriptionState === "failed" || subscriptionState === "expired" ? "Pagamento atualizado; assinatura ativa" : "Atualização de pagamento aberta");
+            }}
+            onViewAddOns={() => setAnnouncement("Add-ons abertos")}
+            onViewInvoices={() => setAnnouncement("Faturas abertas")}
+            onViewPlanDetails={() => setAnnouncement("Detalhes do plano abertos")}
+            onViewUsage={() => setAnnouncement("Uso e cotas aberto")}
+            state={subscriptionState}
+          />
+        )}
+        mainGridColumns={1}
+        rightPanelVariant="billing-subscription"
+        {...billingShellProps({
+          activeNavId: undefined,
+          navItems: crmOperationalNavItems,
+          pageHeaderActions: drawerOpen ? <ButtonGroup><Chip icon={subscriptionState === "active" ? "checkCircle" : "alertCircle"} showDot={false} tone={statusTone}>{statusLabel}</Chip><Chip icon="users" showDot={false} tone="neutral">Plano 7 agentes</Chip><Chip icon="calendar" showDot={false} tone="neutral">Renova em 12/06</Chip></ButtonGroup> : <Button leadingIcon="sparkles" onClick={() => setDrawerOpen(true)} size="sm" variant="secondary">Abrir suporte</Button>,
+          pageHeaderBreadcrumb: <Breadcrumb items={[{ label: "Billing" }, { label: "Assinatura" }]} />,
+          pageHeaderRhythm: "billing",
+          subtitle: "Plano, agentes, cotas e faturas da sua conta Taliya",
+          title: "Assinatura Taliya",
+          topNavSelection: "none"
+        })}
+      />
+      <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
 export function BillingInvoicesPage() {
-  const [, setAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(true);
 
   return (
+    <>
     <CrmRightPanelPage
+      drawer={drawerOpen ? <BillingSupportDrawer onAction={(action) => setAnnouncement(`Suporte de faturas: ${action}`)} onClose={() => setDrawerOpen(false)} topic="faturas" /> : null}
       main={(
         <BillingInvoicesWorkspace
-          onDownloadCurrent={() => setAction("download-current")}
-          onDownloadInvoice={(row) => setAction(`download-${row.id}`)}
-          onOpenCurrent={() => setAction("open-current")}
-          onOpenInvoice={(row) => setAction(`open-${row.id}`)}
-          onPayCurrent={() => setAction("pay-current")}
-          onRetryInvoice={(row) => setAction(`retry-${row.id}`)}
-          onRowClick={(row) => setAction(`row-${row.id}`)}
+          onDownloadCurrent={() => setAnnouncement("download-current")}
+          onDownloadInvoice={(row) => setAnnouncement(`download-${row.id}`)}
+          onOpenCurrent={() => setAnnouncement("open-current")}
+          onOpenInvoice={(row) => setAnnouncement(`open-${row.id}`)}
+          onPayCurrent={() => setAnnouncement("pay-current")}
+          onRetryInvoice={(row) => setAnnouncement(`retry-${row.id}`)}
+          onRowClick={(row) => setAnnouncement(`row-${row.id}`)}
         />
       )}
       mainGridColumns={1}
-      panel={<BillingSupportDrawer topic="faturas" />}
       rightPanelVariant="billing-invoices"
       {...billingShellProps({
         navItems: crmOperationalNavItems,
-        pageHeaderActions: (
+        pageHeaderActions: drawerOpen ? (
           <CrmHeaderSummary
             items={[
               { id: "subscription", icon: "checkCircle", label: "Assinatura ativa", tone: "success" },
               { id: "open", icon: "alertCircle", label: "1 fatura em aberto", tone: "warning" },
               { id: "card", icon: "creditCard", label: "Cartão final 4242" }
             ]}
-            onSelect={(item) => setAction(`summary-${item.id}`)}
+            onSelect={(item) => setAnnouncement(`summary-${item.id}`)}
             variant="billing-invoices"
           />
-        ),
+        ) : <Button leadingIcon="sparkles" onClick={() => { setDrawerOpen(true); setAnnouncement("Suporte de faturas reaberto"); }} size="sm" variant="secondary">Abrir suporte</Button>,
         pageHeaderBreadcrumb: <Breadcrumb items={[{ label: "Billing" }, { label: "Faturas" }]} />,
         pageHeaderRhythm: "billing-invoices",
         subtitle: "Pagamentos da assinatura do studio com a Taliya",
@@ -192,31 +206,35 @@ export function BillingInvoicesPage() {
         topNavSelection: "none"
       })}
     />
+    <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
 export function BillingAddOnsPage() {
-  const [, setAction] = useState("");
+  const [announcement, setAnnouncement] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(true);
 
   return (
+    <>
     <CrmRightPanelPage
-      main={<BillingAddOnsWorkspace onAddOnAction={(option) => setAction(`addon-${option.id}`)} />}
+      drawer={drawerOpen ? <BillingSupportDrawer onAction={(action) => setAnnouncement(`Suporte de add-ons: ${action}`)} onClose={() => setDrawerOpen(false)} topic="add-ons" /> : null}
+      main={<BillingAddOnsWorkspace onAddOnAction={(option) => setAnnouncement(`addon-${option.id}`)} />}
       mainGridColumns={1}
-      panel={<BillingSupportDrawer topic="add-ons" />}
       rightPanelVariant="billing-addons"
       {...billingShellProps({
         navItems: crmOperationalNavItems,
-        pageHeaderActions: (
+        pageHeaderActions: drawerOpen ? (
           <CrmHeaderSummary
             items={[
               { id: "plan", icon: "users", label: "Plano 7 agentes" },
               { id: "active", icon: "package", label: "Nenhum add-on ativo" },
               { id: "quota", icon: "pieChart", label: <>Cota <strong>42%</strong> usada</>, tone: "info" }
             ]}
-            onSelect={(item) => setAction(`summary-${item.id}`)}
+            onSelect={(item) => setAnnouncement(`summary-${item.id}`)}
             variant="billing"
           />
-        ),
+        ) : <Button leadingIcon="sparkles" onClick={() => { setDrawerOpen(true); setAnnouncement("Suporte de add-ons reaberto"); }} size="sm" variant="secondary">Abrir suporte</Button>,
         pageHeaderBreadcrumb: <Breadcrumb items={[{ label: "Billing" }, { label: "Add-ons" }]} />,
         pageHeaderRhythm: "billing",
         subtitle: "Extras para ampliar agentes e cotas da sua assinatura",
@@ -224,6 +242,8 @@ export function BillingAddOnsPage() {
         topNavSelection: "none"
       })}
     />
+    <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
+    </>
   );
 }
 
@@ -243,4 +263,44 @@ export const Image67BillingAddOns: Story = {
   name: "67 billing add-ons taliya",
   parameters: { sourceImage: "67_round-4.1N_billing_03_add-ons-taliya-aprovado.png" },
   render: () => <BillingAddOnsPage />
+};
+
+export const BillingSubscriptionFailedContract: Story = {
+  name: "Billing subscription failed",
+  render: () => <BillingSubscriptionPage initialState="failed" />
+};
+
+export const BillingSubscriptionExpiredContract: Story = {
+  name: "Billing subscription expired",
+  render: () => <BillingSubscriptionPage initialState="expired" />
+};
+
+export const BillingSubscriptionLoadingContract: Story = {
+  name: "Billing subscription loading",
+  render: () => <BillingSubscriptionPage initialState="loading" />
+};
+
+export const BillingSubscriptionBlockedContract: Story = {
+  name: "Billing subscription blocked",
+  render: () => <BillingSubscriptionPage initialState="blocked" />
+};
+
+export const BillingSubscriptionInteractionContract: Story = {
+  name: "Billing subscription interaction contract",
+  render: () => <BillingSubscriptionPage initialState="failed" />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const workspace = canvasElement.querySelector('[data-component="BillingSubscriptionWorkspace"]');
+
+    await expect(workspace).toHaveAttribute("data-state", "failed");
+    await userEvent.click(canvas.getByRole("button", { name: "Atualizar pagamento" }));
+    await expect(workspace).toHaveAttribute("data-state", "active");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Pagamento atualizado; assinatura ativa");
+
+    const drawer = canvas.getByRole("complementary", { name: "Agente de suporte de uso" });
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar suporte" }));
+    await expect(canvas.queryByRole("complementary", { name: "Agente de suporte de uso" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir suporte" }));
+    await expect(canvas.getByRole("complementary", { name: "Agente de suporte de uso" })).toBeInTheDocument();
+  }
 };

@@ -1,0 +1,73 @@
+[
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+    "file": "01-image-60-configuracoes-hub.png",
+    "h1": [
+      "Configurações"
+    ],
+    "visibleErrors": [],
+    "snapshotLength": 2310,
+    "unnamedButtons": 0,
+    "unnamedLinks": 0
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+    "file": "02-image-61-configuracoes-permissoes.png",
+    "h1": [
+      "Permissões",
+      "1. Papéis do CRM",
+      "2. Ajustes sensíveis",
+      "3. Impacto antes de salvar",
+      "Agente de Configuração"
+    ],
+    "visibleErrors": [],
+    "snapshotLength": 7428,
+    "unnamedButtons": 0,
+    "unnamedLinks": 0
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+    "file": "03-image-62-configuracoes-pagamentos.png",
+    "h1": [
+      "Pagamentos e financeiro",
+      "1. Meios e baixa manual",
+      "2. Regras financeiras simples",
+      "3. Pagamentos Taliya",
+      "Agente de Configuração"
+    ],
+    "visibleErrors": [],
+    "snapshotLength": 6402,
+    "unnamedButtons": 0,
+    "unnamedLinks": 0
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+    "file": "04-image-63-configuracoes-agenda.png",
+    "h1": [
+      "Agenda",
+      "1. Dias fechados e exceções",
+      "2. Bloqueios temporários",
+      "3. Regras simples da agenda",
+      "Agente de Configuração"
+    ],
+    "visibleErrors": [],
+    "snapshotLength": 4638,
+    "unnamedButtons": 0,
+    "unnamedLinks": 0
+  },
+  {
+    "storyId": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+    "file": "05-image-64-configuracoes-notificacoes.png",
+    "h1": [
+      "Notificacoes",
+      "1. Alertas por papel",
+      "2. Frequência dos alertas",
+      "3. Canais internos",
+      "Agente de Configuração"
+    ],
+    "visibleErrors": [],
+    "snapshotLength": 6205,
+    "unnamedButtons": 0,
+    "unnamedLinks": 0
+  }
+]

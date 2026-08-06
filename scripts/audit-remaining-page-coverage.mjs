@@ -150,7 +150,7 @@ const pageFamilyContracts = [
     page: "AgendaClassDetailPage",
     file: "ImageCoverageAgenda.stories.tsx",
     family: "right-panel/detail",
-    requiredSnippets: ["<CrmRightPanelPage", "main={<ClassOperationalDetail", "panel={", "<ClassDrawer"]
+    requiredSnippets: ["<CrmRightPanelPage", "main={<ClassOperationalDetail", "drawer={callOpen ? (", "<ClassDrawer"]
   },
   {
     page: "AgendaClassesPage",
@@ -167,7 +167,7 @@ const pageFamilyContracts = [
       "onPageChange={setPage}",
       "page={page}",
       "setSelectedClassId(row.id)",
-      "onAction={(action) => setAnnouncement(`Ação da turma: ${action}`)}",
+      "onAction={(action) => setAnnouncement(`Ação da turma: ${agendaDrawerActionLabels[action]}`)}",
       "setDrawerOpen(true)"
     ]
   },
@@ -210,7 +210,9 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmKanbanPage",
       "filterBar={<FinanceiroKanbanFilters onInteraction={setAnnouncement} />}",
-      "<FinanceKanbanColumns onInteraction={setAnnouncement} />",
+      "<FinanceKanbanColumns",
+      "columns={columns}",
+      "onCardSelect={(cardId) =>",
       "globalActions={{",
       "onNavChange={(id) => setAnnouncement",
       "role=\"status\""
@@ -223,7 +225,7 @@ const pageFamilyContracts = [
     requiredSnippets: [
       "<CrmWorklistPage",
       'worklistLayoutMode="wide-main"',
-      'drawerPlacement="fixed"',
+      "drawer={drawerOpen ? (",
       "filterBar={<MovementsFilters onInteraction={setAnnouncement} />}",
       "quickFilters={<MovementsQuickFilters onInteraction={setAnnouncement} />}",
       "<MovementTable",
@@ -244,7 +246,9 @@ const pageFamilyContracts = [
       "filterBar={<SalesPipelineFilters onInteraction={setAnnouncement} />}",
       "globalActions={{",
       "onNavChange={(id)",
-      "<SalesPipelineBoard onInteraction={setAnnouncement} />"
+      "<SalesPipelineBoard",
+      "columns={columns}",
+      "onCardSelect={(cardId) =>"
     ]
   },
   {
@@ -290,7 +294,8 @@ const pageFamilyContracts = [
       "globalActions={{",
       "quickFilters={<EnrollmentQuickRail onInteraction={setAnnouncement} />}",
       "showGlobalActionsWithDrawer",
-      "<EnrollmentDrawer enrollment={selectedEnrollment}",
+      "<EnrollmentDrawer",
+      "enrollment={selectedEnrollment}",
       "<EnrollmentTable",
       "setSelectedEnrollmentId(row.id)"
     ]
@@ -360,7 +365,7 @@ const pageFamilyContracts = [
       "drawer={drawerOpen ? <ComplaintDrawer",
       "complaint={selectedComplaint}",
       "onClose={() => { setDrawerOpen(false);",
-      "onAction={(action)"
+      "onAction={handleAction}"
     ]
   },
   {
@@ -391,7 +396,7 @@ const pageFamilyContracts = [
     page: "InternalTenantsListDetailPage",
     file: "ImageCoverageInternal.stories.tsx",
     family: "internal/table",
-    requiredSnippets: ["<InternalWorklistPage", 'contentLayout="internal-tenants"', 'pageHeaderRhythm="internal-tenants"', 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters", "quickFilters={<InternalTenantQuickFilters", "<InternalTenantsTable", "setSelectedTenantId(tenantId)", "drawerModel = tenantSummaryModel(selectedTenant)", "<TenantSummaryDrawer {...drawerModel}", "onClose={() => { setDrawerOpen(false);"]
+    requiredSnippets: ["<InternalWorklistPage", 'contentLayout="internal-tenants"', 'pageHeaderRhythm="internal-tenants"', 'worklistLayoutMode="main-priority"', "filterBar={<InternalTenantFilters", "quickFilters={<InternalTenantQuickFilters", "<InternalTenantsTable", "setSelectedTenantId(tenantId)", "drawerModel = tenantSummaryModel(selectedTenant, effectiveGrantState)", "<TenantSummaryDrawer {...drawerModel}", "onClose={() => { setDrawerOpen(false);"]
   },
   {
     page: "InternalTenantSecurityPage",
@@ -425,37 +430,37 @@ const pageFamilyContracts = [
     page: "AgentPresenceRoutinePage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentRoutineWorkspace"]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "pageHeaderActions={!drawerOpen ? <AgentDrawerReopenAction", "<AgentRoutineWorkspace"]
   },
   {
     page: "AgentAbsenceFlowPage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentFlowWorkspace"]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "pageHeaderActions={!drawerOpen ? <AgentDrawerReopenAction", "<AgentFlowWorkspace"]
   },
   {
     page: "AgentAbsenceFlowTestPage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", 'panel={<AgentFlowDrawer state="test" />}', "<SimulationRunner", 'rightPanelVariant="agent-test"', 'browserUrl: "https://app.taliya.com/app/agentes/agenda/rotinas/presenca-e-faltas/fluxos/falta-com-aviso/teste"']
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", 'state="test"', "onClose={() => setDrawerOpen(false)}", "pageHeaderActions={!drawerOpen ? <AgentDrawerReopenAction", "<SimulationRunner", 'rightPanelVariant="agent-test"', 'browserUrl: "https://app.taliya.com/app/agentes/agenda/rotinas/presenca-e-faltas/fluxos/falta-com-aviso/teste"']
   },
   {
     page: "AgentPublishRoutinePage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<AgentFlowDrawer", "<AgentPublishRoutineWorkspace"]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "pageHeaderActions={!drawerOpen ? <AgentDrawerReopenAction", "<AgentPublishRoutineWorkspace"]
   },
   {
     page: "AgentExecutionReceiptPage",
     file: "ImageCoverageAgents.stories.tsx",
     family: "right-panel/agent",
-    requiredSnippets: ["<CrmRightPanelPage", "main={<ExecutionReceipt", "panel={<AgentFlowDrawer"]
+    requiredSnippets: ["<CrmRightPanelPage", "main={<ExecutionReceipt", "drawer={drawerOpen ? <AgentFlowDrawer", "onClose={() => setDrawerOpen(false)}", "pageHeaderActions={!drawerOpen ? <AgentDrawerReopenAction"]
   },
   {
     page: "SettingsHubPage",
     file: "ImageCoverageSettings.stories.tsx",
     family: "dashboard/settings",
-    requiredSnippets: ["<CrmDashboardPage", "columns={4}", "settingsHubItems.map", "<SettingsHubCard", "onOpen={() => setOpenedSettingId"]
+    requiredSnippets: ["<CrmDashboardPage", "columns={4}", "settingsHubItems.map", "<SettingsHubCard", "onOpen={() => { setOpenedSettingId"]
   },
   {
     page: "SettingsPermissionsPage",
@@ -485,31 +490,31 @@ const pageFamilyContracts = [
     page: "BillingSubscriptionPage",
     file: "ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingSubscriptionWorkspace", "onViewInvoices=", "onViewUsage=", "rightPanelVariant=\"billing-subscription\"", "browserUrl=\"https://app.taliya.com/app/billing\"", "topNavSelection: \"none\"", "navItems: crmOperationalNavItems"]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <BillingSupportDrawer", "onClose={() => setDrawerOpen(false)}", "<BillingSubscriptionWorkspace", "onViewInvoices=", "onViewUsage=", "rightPanelVariant=\"billing-subscription\"", "browserUrl=\"https://app.taliya.com/app/billing\"", "topNavSelection: \"none\"", "navItems: crmOperationalNavItems"]
   },
   {
     page: "BillingInvoicesPage",
     file: "ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingInvoicesWorkspace", "rightPanelVariant=\"billing-invoices\"", "onPayCurrent=", "onOpenInvoice="]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <BillingSupportDrawer", "onClose={() => setDrawerOpen(false)}", "<BillingInvoicesWorkspace", "rightPanelVariant=\"billing-invoices\"", "onPayCurrent=", "onOpenInvoice="]
   },
   {
     page: "BillingAddOnsPage",
     file: "ImageCoverageBilling.stories.tsx",
     family: "right-panel/billing",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<BillingSupportDrawer", "<BillingAddOnsWorkspace", "rightPanelVariant=\"billing-addons\"", "onAddOnAction="]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <BillingSupportDrawer", "onClose={() => setDrawerOpen(false)}", "<BillingAddOnsWorkspace", "rightPanelVariant=\"billing-addons\"", "onAddOnAction="]
   },
   {
     page: "UsageOverviewPage",
     file: "ImageCoverageUsage.stories.tsx",
     family: "right-panel/usage",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<UsageOverviewWorkspace", "rightPanelVariant=\"usage-overview\"", "onViewLedger=", "onViewFlows="]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <UsageDrawer", "onClose={() => setDrawerOpen(false)}", "<UsageOverviewWorkspace", "rightPanelVariant=\"usage-overview\"", "onViewLedger=", "onViewFlows="]
   },
   {
     page: "UsageLedgerPage",
     file: "ImageCoverageUsage.stories.tsx",
     family: "right-panel/usage",
-    requiredSnippets: ["<CrmRightPanelPage", "panel={<UsageDrawer", "<UsageLedgerTable", "rightPanelVariant=\"usage-ledger\"", "onAction=", "onFilterClick=", "onLoadMore="]
+    requiredSnippets: ["<CrmRightPanelPage", "drawer={drawerOpen ? <UsageDrawer", "onClose={() => setDrawerOpen(false)}", "<UsageLedgerTable", "rightPanelVariant=\"usage-ledger\"", "onAction=", "onFilterClick=", "onLoadMore="]
   },
   {
     page: "StudentProfilePage",
@@ -521,7 +526,7 @@ const pageFamilyContracts = [
     page: "SetupShellGlobalPage",
     file: "ImageCoverageSetup.stories.tsx",
     family: "setup",
-    requiredSnippets: ["<SetupPage", 'frameVariant="shell-global"', "onAgentQuickReply=", "onStepSelect=", "progress={32}", "step={2}"]
+    requiredSnippets: ["<SetupPage", "{...setupAgentProps(setupAgentContexts.shellBase, setAction)}", 'frameVariant="shell-global"', "onStepSelect=", "progress={32}", "step={2}"]
   },
   {
     page: "SetupAgentChatPage",
@@ -898,7 +903,7 @@ const tableFamilyDetailContracts = [
     drawer: "RetentionRiskDrawer",
     layoutMode: "wide-rail",
     requiredTableSnippets: ["<CrmWorklistTable", "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", "facts={retentionRiskDrawerFacts(risk)}", "footerActions={retentionRiskFooterActions}", "history={history}", "title={risk.student}"]
+    requiredDrawerSnippets: ["<CaseDrawer", "facts={retentionRiskDrawerFacts(risk)}", "footerActions={retentionRiskFooterActions(state)}", "history={history}", "title={risk.student}"]
   },
   {
     page: "RetentionCancellationQueuePage",
@@ -909,7 +914,7 @@ const tableFamilyDetailContracts = [
     drawer: "CancellationDrawer",
     layoutMode: "wide-rail",
     requiredTableSnippets: ["<CrmWorklistTable", 'density="compact"', 'minTableWidth="880px"', "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', "alternativesVariant=\"steps\"", "facts={cancellationDrawerFacts(cancellation)}", "footerActions={cancellationFooterActions}", "sections={sections}", "title={cancellation.student}"]
+    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', "alternativesVariant=\"steps\"", "facts={cancellationDrawerFacts(cancellation)}", "footerActions={cancellationFooterActions(state)}", "sections={sections}", "title={cancellation.student}"]
   },
   {
     page: "RetentionReactivationListPage",
@@ -921,7 +926,7 @@ const tableFamilyDetailContracts = [
     layoutMode: "wide-rail",
     requiredFilterSnippets: ['placement: "advanced"', 'label: "Contato permitido"'],
     requiredTableSnippets: ["<CrmWorklistTable", 'density="compact"', 'minTableWidth="900px"', "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', 'factsLayout="grid"', 'kind: "facts"', "facts={reactivationDrawerFacts(reactivation)}", "footerActions={reactivationFooterActions}", "sections={sections}", "title={reactivation.student}"]
+    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', 'factsLayout="grid"', 'kind: "facts"', "facts={reactivationDrawerFacts(reactivation)}", "footerActions={reactivationFooterActions(state, hasOpportunity)}", "sections={sections}", "title={reactivation.student}"]
   },
   {
     page: "RetentionComplaintQueuePage",
@@ -933,7 +938,7 @@ const tableFamilyDetailContracts = [
     layoutMode: "wide-rail",
     requiredFilterSnippets: ['placement: "advanced"', 'label: "Prazo"'],
     requiredTableSnippets: ["<CrmWorklistTable", 'density="compact"', 'minTableWidth="840px"', "pagination={{", "onRowSelect={onRowSelect}", "rowActions={(row)", "onRowSelect?.(row)", "selectedRowId={selectedRowId}"],
-    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', 'factsLayout="grid"', "facts={complaintDrawerFacts(complaint)}", "footerActions={complaintFooterActions}", "sections={sections}", "title={complaint.student}"]
+    requiredDrawerSnippets: ["<CaseDrawer", 'density="compact"', 'factsLayout="grid"', "facts={complaintDrawerFacts(complaint)}", "footerActions={complaintFooterActions(state)}", "sections={sections}", "title={complaint.student}"]
   }
 ];
 

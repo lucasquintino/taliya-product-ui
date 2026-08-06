@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   ChartPanel,
@@ -12,8 +13,8 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { ChartPanelStat, CrmShellNavItem, OpportunityPanelFact, OpportunityPanelHistoryItem, PageFilterBarFilter } from "@taliya/crm";
-import { Button, ButtonGroup } from "@taliya/ui";
+import type { ChartPanelStat, CrmShellNavItem, OpportunityPanelAction, OpportunityPanelFact, OpportunityPanelHistoryItem, OpportunityPanelState, PageFilterBarFilter } from "@taliya/crm";
+import { Button, ButtonGroup, EmptyState, LoadingState } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
@@ -46,7 +47,7 @@ const reportsNav: CrmShellNavItem[] = [
   { id: "exports", label: "Exportacoes" }
 ];
 
-export function ReportsManagementPage() {
+export function ReportsManagementPage({ state = "ready" }: { state?: "ready" | "loading" | "empty" } = {}) {
   const [announcement, setAnnouncement] = useState("");
 
   return (
@@ -89,10 +90,10 @@ export function ReportsManagementPage() {
         title="Relatorios"
         utilityItems={crmEmptyShellSidebarUtilityItems}
       >
-        <ReportsManagementContent
+        {state === "loading" ? <LoadingState title="Carregando relatórios" /> : state === "empty" ? <EmptyState description="Gere um relatório ou ajuste o período para começar." icon="fileText" title="Nenhum relatório disponível" /> : <ReportsManagementContent
           onOpen={(action) => setAnnouncement(`Ação do relatório: ${action}`)}
           onStatOpen={(stat) => setAnnouncement(`Exportação selecionada: ${stat.label}`)}
-        />
+        />}
       </CrmDashboardPage>
       <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
     </>
@@ -101,10 +102,12 @@ export function ReportsManagementPage() {
 
 export function MoneyOnTheTablePage() {
   const [selectedOpportunityId, setSelectedOpportunityId] = useState("ana");
+  const [opportunityStates, setOpportunityStates] = useState<Record<string, OpportunityPanelState>>({ lucas: "ownerless" });
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
   const selectedOpportunity = findMoneyOpportunity(selectedOpportunityId) ?? findMoneyOpportunity("ana")!;
-  const drawerModel = moneyOpportunityPanelModel(selectedOpportunity.group, selectedOpportunity.row);
+  const selectedState = opportunityStates[selectedOpportunity.row.id] ?? "open";
+  const drawerModel = moneyOpportunityPanelModel(selectedOpportunity.group, selectedOpportunity.row, selectedState);
 
   return (
     <>
@@ -118,11 +121,20 @@ export function MoneyOnTheTablePage() {
         drawer={drawerOpen ? (
           <OpportunityPanel
             {...drawerModel}
-            onAction={(action) => setAnnouncement(`Ação da oportunidade: ${action}:${selectedOpportunity.row.id}`)}
+            onAction={(action: OpportunityPanelAction) => {
+              if (action === "primary" || action === "no-action") {
+                setOpportunityStates((current) => ({ ...current, [selectedOpportunity.row.id]: "resolved" }));
+                setAnnouncement(`Oportunidade resolvida: ${selectedOpportunity.row.name}`);
+              } else if (action === "task" && selectedState === "ownerless") {
+                setOpportunityStates((current) => ({ ...current, [selectedOpportunity.row.id]: "assigned" }));
+                setAnnouncement(`Oportunidade atribuída: ${selectedOpportunity.row.name}`);
+              } else {
+                setAnnouncement(`Ação da oportunidade: ${action}:${selectedOpportunity.row.id}`);
+              }
+            }}
             onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de oportunidade fechado"); }}
           />
         ) : null}
-        drawerPlacement="floating"
         globalActions={{
           onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
           onMessages: () => setAnnouncement("Mensagens abertas"),
@@ -316,6 +328,7 @@ type MoneyOpportunityRow = {
   action: string;
   badge: string;
   badgeTone: ComponentTone;
+  owner?: string;
 };
 
 type MoneyOpportunityGroup = {
@@ -383,7 +396,7 @@ const moneyOpportunityGroups: MoneyOpportunityGroup[] = [
     summary: "R$ 1.260 possiveis",
     rows: [
       { id: "ana", name: "Ana Souza", subtitle: "Matriculas", detail: "Pagamento inicial pendente", amount: "R$ 420", action: "Enviar Pix", badge: "bloqueada", badgeTone: "danger" },
-      { id: "lucas", name: "Lucas Ferreira", subtitle: "Matriculas", detail: "Faltando CPF", action: "Pedir dado", badge: "bloqueada", badgeTone: "danger" }
+      { id: "lucas", name: "Lucas Ferreira", subtitle: "Matriculas", detail: "Faltando CPF", action: "Pedir dado", badge: "bloqueada", badgeTone: "danger", owner: "Sem dono" }
     ]
   },
   {
@@ -451,7 +464,7 @@ function findMoneyOpportunity(id: string) {
   return undefined;
 }
 
-function moneyOpportunityPanelModel(group: MoneyOpportunityGroup, row: MoneyOpportunityRow) {
+function moneyOpportunityPanelModel(group: MoneyOpportunityGroup, row: MoneyOpportunityRow, state: OpportunityPanelState = "open") {
   const ownerByGroup: Record<string, string> = {
     enrollments: "Recepcao",
     trials: "Comercial",
@@ -482,9 +495,9 @@ function moneyOpportunityPanelModel(group: MoneyOpportunityGroup, row: MoneyOppo
     { id: "origin", label: "Origem", value: row.subtitle ?? group.title, icon: "folder" },
     { id: "value", label: "Valor estimado", value: row.amount ?? group.summary, icon: "coins" },
     { id: "impact", label: "Impacto", value: impactByGroup[group.id], icon: "sparkles" },
-    { id: "owner", label: "Dono / fila", value: ownerByGroup[group.id], icon: "user" },
+    { id: "owner", label: "Dono / fila", value: state === "ownerless" ? "Sem dono" : row.owner ?? ownerByGroup[group.id], icon: "user" },
     { id: "deadline", label: "Prazo", value: deadline, icon: "clock", tone: deadline === "hoje" ? "danger" : "warning" },
-    { id: "status", label: "Status", value: status, icon: "checkCircle", tone: row.badgeTone, presentation: "chip" },
+    { id: "status", label: "Status", value: state === "resolved" ? "resolvida" : state === "assigned" ? "atribuída" : state === "ownerless" ? "sem dono" : status, icon: "checkCircle", tone: state === "resolved" || state === "assigned" ? "success" : state === "ownerless" ? "warning" : row.badgeTone, presentation: "chip" },
     { id: "method", label: "Metodo disponivel", value: methodByGroup[group.id], icon: "coins" },
     { id: "blocker", label: "Bloqueio", value: row.detail, icon: "calendar" }
   ];
@@ -503,6 +516,7 @@ function moneyOpportunityPanelModel(group: MoneyOpportunityGroup, row: MoneyOppo
     notice: `${ownerByGroup[group.id]} confirma a proxima etapa antes da conclusao.`,
     primaryActionLabel: row.action,
     suggestion: `Copiloto sugere ${row.action.toLowerCase()} e acompanhar esta oportunidade ate a conclusao.`,
+    state,
     title: row.name
   };
 }
@@ -517,7 +531,16 @@ export const ReportsManagement: Story = {
     },
     sourceImage: "45_round-4.1I_relatorios_01_visao-gestao.png.png"
   },
-  render: () => <ReportsManagementPage />
+  render: () => <ReportsManagementPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir financeiro" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do relatório: open-finance");
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir Financeiro mensal" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Exportação selecionada: Financeiro mensal");
+    await userEvent.click(canvas.getByRole("button", { name: "Exportar" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Exportação de relatório iniciada");
+  }
 };
 
 export const MoneyOnTheTable: Story = {
@@ -530,5 +553,61 @@ export const MoneyOnTheTable: Story = {
     },
     sourceImage: "46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png"
   },
-  render: () => <MoneyOnTheTablePage />
+  render: () => <MoneyOnTheTablePage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("region", { name: "Ana Souza" });
+    await userEvent.click(within(drawer).getByRole("button", { name: "Enviar Pix" }));
+    await expect(drawer).toHaveAttribute("data-state", "resolved");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar oportunidade" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Pedir dado" }));
+    const ownerlessDrawer = canvas.getByRole("region", { name: "Lucas Ferreira" });
+    await expect(ownerlessDrawer).toHaveAttribute("data-state", "ownerless");
+    await userEvent.click(within(ownerlessDrawer).getByRole("button", { name: "Criar tarefa" }));
+    await expect(ownerlessDrawer).toHaveAttribute("data-state", "assigned");
+  }
+};
+
+export const ReportsLoadingContract: Story = {
+  name: "Relatorios loading",
+  render: () => <ReportsManagementPage state="loading" />
+};
+
+export const ReportsEmptyContract: Story = {
+  name: "Relatorios empty",
+  render: () => <ReportsManagementPage state="empty" />
+};
+
+export const ReportsInteractionContract: Story = {
+  name: "Relatorios interaction contract",
+  render: () => <ReportsManagementPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir financeiro" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do relatório: open-finance");
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir Financeiro mensal" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Exportação selecionada: Financeiro mensal");
+    await userEvent.click(canvas.getByRole("button", { name: "Exportar" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Exportação de relatório iniciada");
+  }
+};
+
+export const MoneyInteractionContract: Story = {
+  name: "Dinheiro na mesa interaction contract",
+  render: () => <MoneyOnTheTablePage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("region", { name: "Ana Souza" });
+
+    await userEvent.click(within(drawer).getByRole("button", { name: "Enviar Pix" }));
+    await expect(drawer).toHaveAttribute("data-state", "resolved");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Oportunidade resolvida: Ana Souza");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar oportunidade" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Pedir dado" }));
+    const ownerlessDrawer = canvas.getByRole("region", { name: "Lucas Ferreira" });
+    await expect(ownerlessDrawer).toHaveAttribute("data-state", "ownerless");
+    await userEvent.click(within(ownerlessDrawer).getByRole("button", { name: "Criar tarefa" }));
+    await expect(ownerlessDrawer).toHaveAttribute("data-state", "assigned");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Oportunidade atribuída: Lucas Ferreira");
+  }
 };

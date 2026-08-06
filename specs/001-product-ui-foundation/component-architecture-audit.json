@@ -1,13 +1,13 @@
 {
   "storyArchitecture": {
-    "total": 333,
+    "total": 343,
     "invalidTitleCount": 0,
     "legacyBatchTitleCount": 0,
     "invalidTitles": [],
     "legacyBatchTitles": []
   },
   "crmPrimitiveReuse": {
-    "scannedComponents": 268,
+    "scannedComponents": 273,
     "componentsWithNativeControls": 32,
     "nativeControlTotals": {
       "button": 38,
@@ -300,6 +300,7 @@
           "button": 1
         },
         "primitiveUses": [
+          "Chip",
           "Icon"
         ],
         "classification": {

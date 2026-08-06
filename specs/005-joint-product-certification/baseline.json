@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-04T14:11:12-03:00",
+  "repository": {
+    "path": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl",
+    "branch": "main",
+    "commit": "c90e8eb",
+    "remote": "https://github.com/lucasquintino/taliya-product-ui.git",
+    "trackedTreeMatchesOrigin": true,
+    "preservedUntrackedFiles": [
+      "specs/001-product-ui-foundation/consumer-vendor-versioning-audit-taliya-internal-clean-clone.json",
+      "specs/001-product-ui-foundation/consumer-vendor-versioning-audit-taliya-internal-clean-clone.md"
+    ]
+  },
+  "packages": {
+    "@taliya/tokens": "0.1.0",
+    "@taliya/ui": "0.1.0",
+    "@taliya/crm": "0.1.0",
+    "@taliya/docs": "0.0.0"
+  },
+  "inputs": {
+    "productSpecificationRepository": {
+      "path": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/agentes-landing-system",
+      "branch": "master",
+      "commit": "3d446f36d10413ba06712dba0bf333b45a0da894",
+      "remote": "https://github.com/lucasquintino/agentes-landing-system.git",
+      "contractRoot": "specs/006-crm-operational-core"
+    },
+    "internalConsumerRepository": {
+      "path": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
+      "branch": "main",
+      "commit": "f48ee26",
+      "remote": "https://github.com/lucasquintino/taliya-internal.git"
+    },
+    "sourceImages": {
+      "path": "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508",
+      "available": true,
+      "coveredTargetCount": 73
+    }
+  },
+  "existingReview": {
+    "status": "in-progress",
+    "visualTargetCount": 73,
+    "passedVisualTargets": 35,
+    "failedVisualTargets": 0,
+    "pendingVisualTargets": 38,
+    "productPurposeCertifiedTargets": 0,
+    "productOwnerApprovedTargets": 0
+  },
+  "inventorySize": {
+    "storybookFiles": 338,
+    "crmRegistryComponents": 272,
+    "publicComponentCertificationStatus": "not-yet-inventoried"
+  },
+  "readOnlyGates": [
+    { "name": "tokens", "status": "pass" },
+    { "name": "component-architecture", "status": "pass" },
+    { "name": "storybook-anatomy-strict", "status": "pass" },
+    { "name": "full-image-page-coverage", "status": "pass" },
+    { "name": "public-api-surface", "status": "pass" },
+    { "name": "package-boundaries", "status": "pass" },
+    { "name": "domain-wrappers", "status": "pass" },
+    {
+      "name": "drawer-lifecycle",
+      "status": "stale",
+      "failedRows": 0,
+      "note": "The existing report is stale and must be regenerated before certification."
+    },
+    {
+      "name": "human-route-review",
+      "status": "in-progress",
+      "passed": 35,
+      "total": 73
+    }
+  ]
+}

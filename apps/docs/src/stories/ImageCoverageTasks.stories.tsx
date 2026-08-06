@@ -1,5 +1,6 @@
 ﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo, useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   CrmWorklistPage,
@@ -406,8 +407,6 @@ function TasksPageContent({
       className="sb-image-coverage-tasks-shell"
       contentClassName="sb-image-coverage-tasks-content"
       drawer={drawer}
-      drawerPlacement="floating"
-      drawerSize="compact"
       globalActions={{
         onAvatar: () => onShellAction("Perfil da operadora aberto"),
         onMessages: () => onShellAction("Mensagens abertas"),
@@ -594,7 +593,6 @@ export function TasksShell({ drawer = true }: { drawer?: boolean }) {
         prependHistory("reschedule-local", "reposicão reagendada para quinta, 08:00");
         setAnnouncedAction("Tarefa reagendada");
       }}
-      size="compact"
       state={drawerState}
       statusLabel={drawerState === "completed" ? "Concluída" : taskStatusLabel[selectedTask.status]}
       title={selectedTask.title}
@@ -681,7 +679,34 @@ export const Image23ListaDetalhe: Story = {
       }
     }
   },
-  render: () => <TasksShell drawer />
+  render: () => <TasksShell drawer />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Tarefas", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: "Atrasadas 3" })).toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: "Sem dono 2" })).toBeInTheDocument();
+    await expect(canvas.getByRole("button", { name: "Aguardando 8" })).toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Assumir" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Tarefa assumida");
+    await userEvent.click(canvas.getByRole("button", { name: "Delegar" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Tarefa delegada");
+    await userEvent.click(canvas.getByRole("button", { name: "Reagendar" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Tarefa reagendada");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar tarefa" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes da tarefa" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Atrasadas 3" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila selecionada: Atrasadas");
+    await userEvent.click(canvas.getByRole("button", { name: "Ordenar por Prazo" }));
+    await expect(canvas.getByRole("columnheader", { name: "Prazo" })).toHaveAttribute("aria-sort", "ascending");
+
+    await userEvent.click(canvas.getByRole("row", { name: /Validar comprovante/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Concluir" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da tarefa" })).toHaveAttribute("data-state", "completed");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Tarefa concluída");
+  }
 };
 
 export const Image23ListaSemDrawer: Story = {

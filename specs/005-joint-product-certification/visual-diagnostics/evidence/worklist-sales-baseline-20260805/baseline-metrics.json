@@ -1,0 +1,245 @@
+{
+  "generatedAt": "2026-08-05T07:57:21.155Z",
+  "results": {
+    "interessados": {
+      "dom": {
+        "bodyState": "sb-main-fullscreen sb-show-main",
+        "drawer": {
+          "component": "LeadDrawer",
+          "height": 720,
+          "label": "Detalhes do interessado",
+          "position": "fixed",
+          "state": "interested",
+          "top": 0
+        },
+        "h1": [
+          "Vendas"
+        ],
+        "shellCount": 1,
+        "visibleErrors": 0
+      },
+      "logs": [],
+      "details": {
+        "buttons": [
+          {
+            "disabled": false,
+            "name": "Fechar interessado"
+          },
+          {
+            "disabled": false,
+            "name": "Ver todos"
+          },
+          {
+            "disabled": false,
+            "name": "Ação sugerida: responder preco hoje"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir conversa"
+          },
+          {
+            "disabled": false,
+            "name": "Agendar experimental"
+          },
+          {
+            "disabled": false,
+            "name": "Criar follow-up"
+          },
+          {
+            "disabled": false,
+            "name": "Mover etapa"
+          },
+          {
+            "disabled": false,
+            "name": "Iniciar matrícula"
+          },
+          {
+            "disabled": false,
+            "name": "Marcar perdido"
+          },
+          {
+            "disabled": false,
+            "name": "Mais ações"
+          }
+        ],
+        "drawerState": "interested",
+        "table": {
+          "width": 760
+        },
+        "wrapper": {
+          "overflowX": "auto",
+          "scrollWidth": 760,
+          "width": 558
+        }
+      }
+    },
+    "experimental": {
+      "dom": {
+        "bodyState": "sb-main-fullscreen sb-show-main",
+        "drawer": {
+          "component": "LeadDrawer",
+          "height": 720,
+          "label": "Detalhes do interessado",
+          "position": "fixed",
+          "state": "trial",
+          "top": 0
+        },
+        "h1": [
+          "Experimental"
+        ],
+        "shellCount": 1,
+        "visibleErrors": 0
+      },
+      "logs": [],
+      "details": {
+        "buttons": [
+          {
+            "disabled": false,
+            "name": "Fechar interessado"
+          },
+          {
+            "disabled": false,
+            "name": "Ver todos"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir conversa"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir aula na Agenda"
+          },
+          {
+            "disabled": false,
+            "name": "Confirmar presenca"
+          },
+          {
+            "disabled": false,
+            "name": "Remarcar"
+          },
+          {
+            "disabled": false,
+            "name": "Marcar compareceu"
+          },
+          {
+            "disabled": false,
+            "name": "Marcar falta"
+          },
+          {
+            "disabled": false,
+            "name": "Criar follow-up"
+          },
+          {
+            "disabled": false,
+            "name": "Iniciar matricula"
+          },
+          {
+            "disabled": false,
+            "name": "Marcar perdido"
+          }
+        ],
+        "drawerState": "trial",
+        "table": {
+          "width": 760
+        },
+        "wrapper": {
+          "overflowX": "auto",
+          "scrollWidth": 760,
+          "width": 558
+        }
+      }
+    },
+    "matriculas": {
+      "dom": {
+        "bodyState": "sb-main-fullscreen sb-show-main",
+        "drawer": {
+          "component": "LeadDrawer",
+          "height": 720,
+          "label": "Detalhes do interessado",
+          "position": "fixed",
+          "state": "enrollment",
+          "top": 0
+        },
+        "h1": [
+          "Matriculas"
+        ],
+        "shellCount": 1,
+        "visibleErrors": 0
+      },
+      "logs": [],
+      "details": {
+        "buttons": [
+          {
+            "disabled": false,
+            "name": "Fechar interessado"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir"
+          },
+          {
+            "disabled": false,
+            "name": "Ver todos"
+          },
+          {
+            "disabled": false,
+            "name": "Pedir dado"
+          },
+          {
+            "disabled": true,
+            "name": "Converter em aluno"
+          },
+          {
+            "disabled": false,
+            "name": "Escolher primeira aula"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir interessado"
+          },
+          {
+            "disabled": false,
+            "name": "Abrir conversa"
+          },
+          {
+            "disabled": false,
+            "name": "Criar tarefa"
+          },
+          {
+            "disabled": false,
+            "name": "Marcar perdido"
+          },
+          {
+            "disabled": false,
+            "name": "Mais ações"
+          }
+        ],
+        "drawerState": "enrollment",
+        "table": {
+          "width": 760
+        },
+        "wrapper": {
+          "overflowX": "auto",
+          "scrollWidth": 760,
+          "width": 558
+        }
+      }
+    }
+  }
+}

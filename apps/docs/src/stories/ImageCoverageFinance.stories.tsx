@@ -1,6 +1,7 @@
 ﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import type React from "react";
 import { useMemo, useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   CrmDashboardPage,
@@ -24,6 +25,7 @@ import type {
   PageFilterBarFilter,
   PageQuickFilterItem,
   PaymentDrawerAction,
+  PaymentDrawerActionConfig,
   PaymentDrawerFact,
   PaymentDrawerState
 } from "@taliya/crm";
@@ -310,7 +312,6 @@ function FinanceOverviewDashboard({
         className="sb-image-coverage-finance-shell"
         columns={1}
         drawer={drawer}
-        drawerPlacement={drawer ? "viewport" : undefined}
         globalActions={{
           onAvatar: () => announce("Perfil da operadora aberto"),
           onMessages: () => announce("Mensagens abertas"),
@@ -373,17 +374,72 @@ function FinanceiroKanbanFilters({
   );
 }
 
-function FinanceKanbanColumns({ onInteraction }: { onInteraction: (message: string) => void }) {
-  const [selectedCard, setSelectedCard] = useState("");
-  const columns = [
-    { title: "A vencer", count: 12, total: "R$ 6.730,00", state: "default" as const, cards: [{ title: "Fernanda Lima", amount: "R$ 420,00", state: "scheduled", due: "vence 14/05", method: "mensalidade" }, { title: "Rafael Martins", amount: "R$ 980,00", state: "scheduled", due: "vence 15/05", method: "plano trimestral" }, { title: "Bianca Oliveira", amount: "R$ 290,00", state: "scheduled", due: "vence 16/05", method: "aula avulsa" }] },
-    { title: "Vence hoje", count: 8, total: "R$ 3.850,00", state: "waiting" as const, cards: [{ title: "Lucas Ferreira", amount: "R$ 980,00", state: "today", due: "vence hoje 20:00", method: "plano trimestral" }, { title: "Marina Costa", amount: "R$ 210,00", state: "today", due: "vence hoje 21:00", method: "mensalidade" }, { title: "Camila Souza", amount: "R$ 420,00", state: "today", due: "vence hoje 18:00", method: "Pix" }] },
-    { title: "Em atraso", count: 14, total: "R$ 5.430,00", state: "blocked" as const, cards: [{ title: "Gabriela Lima", amount: "R$ 420,00", state: "overdue", due: "2 dias em atraso", method: "mensalidade" }, { title: "Eduardo Santos", amount: "R$ 210,00", state: "overdue", due: "5 dias em atraso", method: "Pix" }, { title: "Isabela Prado", amount: "R$ 980,00", state: "overdue", due: "7 dias em atraso", method: "plano trimestral" }] },
-    { title: "Promessa", count: 9, total: "R$ 3.100,00", state: "waiting" as const, cards: [{ title: "Felipe Costa", amount: "R$ 420,00", state: "promise", due: "prometido para 15/05", method: "WhatsApp" }, { title: "Renata Alves", amount: "R$ 980,00", state: "promise", due: "prometido para 16/05", method: "WhatsApp" }, { title: "Diego Ramos", amount: "R$ 210,00", state: "promise", due: "prometido para 17/05", method: "mensalidade" }] },
-    { title: "Comprovante", count: 11, total: "R$ 4.620,00", state: "default" as const, cards: [{ title: "Ana Paula Martins", amount: "R$ 420,00", state: "validation", due: "comprovante enviado 09/05", method: "Pix", owner: "Mariana" }, { title: "Gustavo Lima", amount: "R$ 980,00", state: "validation", due: "comprovante enviado 10/05", method: "Pix", owner: "Mariana" }, { title: "Marina Beatriz", amount: "R$ 210,00", state: "validation", due: "comprovante enviado 11/05", method: "cartao" }] },
-    { title: "Conciliacao", count: 6, total: "R$ 2.390,00", state: "default" as const, cards: [{ title: "Bruno Mendes", amount: "R$ 420,00", state: "reconciliation", due: "cartao recusado", method: "cartao", owner: "Sistema" }, { title: "Carolina Dias", amount: "R$ 980,00", state: "reconciliation", due: "limite insuficiente", method: "cartao", owner: "Sistema" }, { title: "Joao Victor", amount: "R$ 210,00", state: "reconciliation", due: "Pix duvidoso", method: "WhatsApp", owner: "Sistema" }] },
-    { title: "Resolvido", count: 15, total: "R$ 8.740,00", state: "resolved" as const, cards: [{ title: "Pedro Henrique", amount: "R$ 420,00", state: "resolved", due: "pago em 09/05", method: "Pix" }, { title: "Juliana Rocha", amount: "R$ 980,00", state: "resolved", due: "pago em 10/05", method: "cartao" }, { title: "Thiago Alves", amount: "R$ 210,00", state: "resolved", due: "pago em 11/05", method: "WhatsApp" }] }
+type FinanceKanbanCardData = {
+  id: string;
+  title: string;
+  amount: string;
+  state: "scheduled" | "today" | "overdue" | "promise" | "validation" | "reconciliation" | "resolved";
+  due: string;
+  method: string;
+  owner?: string;
+};
+
+type FinanceKanbanColumnData = {
+  id: string;
+  title: string;
+  count: number;
+  total: string;
+  state: "default" | "waiting" | "blocked" | "resolved";
+  cards: FinanceKanbanCardData[];
+};
+
+const financeKanbanInitialColumns: FinanceKanbanColumnData[] = [
+  { id: "due", title: "A vencer", count: 12, total: "R$ 6.730,00", state: "default", cards: [{ id: "fernanda", title: "Fernanda Lima", amount: "R$ 420,00", state: "scheduled", due: "vence 14/05", method: "mensalidade" }, { id: "rafael", title: "Rafael Martins", amount: "R$ 980,00", state: "scheduled", due: "vence 15/05", method: "plano trimestral" }, { id: "bianca", title: "Bianca Oliveira", amount: "R$ 290,00", state: "scheduled", due: "vence 16/05", method: "aula avulsa" }] },
+  { id: "today", title: "Vence hoje", count: 8, total: "R$ 3.850,00", state: "waiting", cards: [{ id: "lucas", title: "Lucas Ferreira", amount: "R$ 980,00", state: "today", due: "vence hoje 20:00", method: "plano trimestral" }, { id: "marina", title: "Marina Costa", amount: "R$ 210,00", state: "today", due: "vence hoje 21:00", method: "mensalidade" }, { id: "camila", title: "Camila Souza", amount: "R$ 420,00", state: "today", due: "vence hoje 18:00", method: "Pix" }] },
+  { id: "overdue", title: "Em atraso", count: 14, total: "R$ 5.430,00", state: "blocked", cards: [{ id: "gabriela", title: "Gabriela Lima", amount: "R$ 420,00", state: "overdue", due: "2 dias em atraso", method: "mensalidade" }, { id: "eduardo", title: "Eduardo Santos", amount: "R$ 210,00", state: "overdue", due: "5 dias em atraso", method: "Pix" }, { id: "isabela", title: "Isabela Prado", amount: "R$ 980,00", state: "overdue", due: "7 dias em atraso", method: "plano trimestral" }] },
+  { id: "promise", title: "Promessa", count: 9, total: "R$ 3.100,00", state: "waiting", cards: [{ id: "felipe", title: "Felipe Costa", amount: "R$ 420,00", state: "promise", due: "prometido para 15/05", method: "WhatsApp" }, { id: "renata", title: "Renata Alves", amount: "R$ 980,00", state: "promise", due: "prometido para 16/05", method: "WhatsApp" }, { id: "diego", title: "Diego Ramos", amount: "R$ 210,00", state: "promise", due: "prometido para 17/05", method: "mensalidade" }] },
+  { id: "validation", title: "Comprovante", count: 11, total: "R$ 4.620,00", state: "default", cards: [{ id: "ana-proof", title: "Ana Paula Martins", amount: "R$ 420,00", state: "validation", due: "comprovante enviado 09/05", method: "Pix", owner: "Mariana" }, { id: "gustavo-proof", title: "Gustavo Lima", amount: "R$ 980,00", state: "validation", due: "comprovante enviado 10/05", method: "Pix", owner: "Mariana" }, { id: "marina-proof", title: "Marina Beatriz", amount: "R$ 210,00", state: "validation", due: "comprovante enviado 11/05", method: "cartao" }] },
+  { id: "reconciliation", title: "Conciliacao", count: 6, total: "R$ 2.390,00", state: "default", cards: [{ id: "bruno", title: "Bruno Mendes", amount: "R$ 420,00", state: "reconciliation", due: "cartao recusado", method: "cartao", owner: "Sistema" }, { id: "carolina", title: "Carolina Dias", amount: "R$ 980,00", state: "reconciliation", due: "limite insuficiente", method: "cartao", owner: "Sistema" }, { id: "joao", title: "Joao Victor", amount: "R$ 210,00", state: "reconciliation", due: "Pix duvidoso", method: "WhatsApp", owner: "Sistema" }] },
+  { id: "resolved", title: "Resolvido", count: 15, total: "R$ 8.740,00", state: "resolved", cards: [{ id: "pedro", title: "Pedro Henrique", amount: "R$ 420,00", state: "resolved", due: "pago em 09/05", method: "Pix" }, { id: "juliana", title: "Juliana Rocha", amount: "R$ 980,00", state: "resolved", due: "pago em 10/05", method: "cartao" }, { id: "thiago", title: "Thiago Alves", amount: "R$ 210,00", state: "resolved", due: "pago em 11/05", method: "WhatsApp" }] }
+];
+
+function financeKanbanDrawerState(card: FinanceKanbanCardData): PaymentDrawerState {
+  if (card.state === "resolved") return "paid";
+  if (card.state === "overdue") return "overdue";
+  if (card.state === "promise") return "promise";
+  if (["validation", "reconciliation"].includes(card.state)) return "reconciliation";
+  return "due";
+}
+
+function financeKanbanActions(card: FinanceKanbanCardData): PaymentDrawerActionConfig[] {
+  if (card.state === "resolved") return [
+    { id: "open-receipt", label: "Abrir comprovante", leadingIcon: "clipboard", placement: "primary", variant: "primary" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    { id: "open-student", label: "Abrir aluno", leadingIcon: "user", trailingIcon: "arrowRight", placement: "footer" }
   ];
+  if (card.state === "validation") return [
+    { id: "approve-receipt", label: "Aprovar comprovante", leadingIcon: "checkCircle", placement: "primary", variant: "primary" },
+    { id: "move-stage", label: "Mover etapa", leadingIcon: "refresh" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    { id: "open-student", label: "Abrir aluno", leadingIcon: "user", trailingIcon: "arrowRight", placement: "footer" }
+  ];
+  return [
+    { id: "send-reminder", label: "Enviar lembrete", leadingIcon: "tag", placement: "primary", variant: "primary" },
+    { id: "register-promise", label: "Registrar promessa", leadingIcon: "calendar" },
+    { id: "move-stage", label: "Mover etapa", leadingIcon: "refresh" },
+    { id: "mark-paid", label: "Marcar como pago", leadingIcon: "checkCircle" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    { id: "open-student", label: "Abrir aluno", leadingIcon: "user", trailingIcon: "arrowRight", placement: "footer" }
+  ];
+}
+
+function FinanceKanbanColumns({ columns, onCardMenu, onCardSelect, onInteraction, selectedCardId }: {
+  columns: FinanceKanbanColumnData[];
+  onCardMenu: (cardId: string) => void;
+  onCardSelect: (cardId: string) => void;
+  onInteraction: (message: string) => void;
+  selectedCardId: string;
+}) {
 
   return (
     <>
@@ -397,17 +453,13 @@ function FinanceKanbanColumns({ onInteraction }: { onInteraction: (message: stri
           title={column.title}
         >
           {column.cards.map((card) => {
-            const cardId = `${column.title}:${card.title}`;
             return (
               <FinanceKanbanCard
-                key={cardId}
+                key={card.id}
                 {...card}
-                onMenu={() => onInteraction(`Menu da cobrança: ${cardId}`)}
-                onSelect={() => {
-                  setSelectedCard(cardId);
-                  onInteraction(`Cobrança selecionada: ${cardId}`);
-                }}
-                selected={selectedCard === cardId}
+                onMenu={() => onCardMenu(card.id)}
+                onSelect={() => onCardSelect(card.id)}
+                selected={selectedCardId === card.id}
               />
             );
           })}
@@ -501,6 +553,10 @@ interface MovementRow {
   activity: string;
 }
 
+function movementTypeTableLabel(type: string) {
+  return type === "Desconto aprovado" ? "Desconto" : type;
+}
+
 const movementRows: MovementRow[] = [
     { id: "fernanda", student: "Fernanda Lima", avatarSrc: source34FernandaLima, type: "Mensalidade", typeTone: "info", status: "A vencer", statusTone: "info", amount: "R$ 420,00", due: "14/05", plan: "Mensal", method: "Pix", origin: "Sistema", owner: "Financeiro", activity: "gerada hoje" },
     { id: "juliana", student: "Juliana Rocha", avatarSrc: source34JulianaRocha, type: "Recebido", typeTone: "success", status: "Pago", statusTone: "success", amount: "R$ 420,00", due: "-", plan: "Mensal", method: "Pix", origin: "WhatsApp", owner: "Mariana", activity: "pago 09:12" },
@@ -511,16 +567,77 @@ const movementRows: MovementRow[] = [
     { id: "marina", student: "Marina Beatriz", avatarSrc: image79Avatar, type: "Comprovante", typeTone: "info", status: "Em analise", statusTone: "info", amount: "R$ 210,00", due: "-", plan: "Avulsa", method: "Pix", origin: "WhatsApp", owner: "Financeiro", activity: "enviado hoje" },
     { id: "carla", student: "Carla Nunes", avatarSrc: image79Avatar, type: "Estorno", typeTone: "neutral", status: "Estornado", statusTone: "neutral", amount: "R$ 120,00", due: "-", plan: "Avulso", method: "Cartao", origin: "Sistema", owner: "Coordenacao", activity: "processado ontem" },
     { id: "roberto", student: "Roberto Lima", avatarSrc: image79Avatar, type: "Desconto aprovado", typeTone: "success", status: "Aprovado", statusTone: "success", amount: "R$ 180,00", due: "-", plan: "Premium", method: "Manual", origin: "Coordenacao", owner: "Coordenacao", activity: "desconto aprovado" },
-    { id: "silvia", student: "Silvia Prado", avatarSrc: image79Avatar, type: "Ajuste manual", typeTone: "info", status: "Ajustado", statusTone: "info", amount: "R$ 75,00", due: "-", plan: "Plano Mensal", method: "Manual", origin: "Financeiro", owner: "Financeiro", activity: "ajuste registrado" }
+    { id: "silvia", student: "Silvia Prado", avatarSrc: image79Avatar, type: "Ajuste manual", typeTone: "info", status: "Ajustado", statusTone: "info", amount: "R$ 75,00", due: "-", plan: "Plano Mensal", method: "Manual", origin: "Financeiro", owner: "Financeiro", activity: "ajuste registrado" },
+    { id: "paulo", student: "Paulo Nunes", avatarSrc: image79Avatar, type: "Disputa", typeTone: "danger", status: "Disputa", statusTone: "danger", amount: "R$ 420,00", due: "11/05", plan: "Mensal", method: "Cartao", origin: "Gateway", owner: "Financeiro", activity: "contestada hoje" }
 ];
 
 function movementDrawerState(row: MovementRow): PaymentDrawerState {
   if (row.status === "Pago") return "paid";
   if (row.status === "Em atraso") return "overdue";
   if (row.status === "Falha") return "failed";
-  if (["Prometido", "Pendente", "Em analise"].includes(row.status)) return "promise";
-  return "due";
+  if (row.status === "Disputa") return "dispute";
+  if (["Pendente", "Em analise"].includes(row.status)) return "reconciliation";
+  if (row.status === "Prometido") return "promise";
+  if (["Estornado", "Aprovado", "Ajustado"].includes(row.status)) return "reconciled";
+  return "open";
 }
+
+function movementDrawerActions(state: PaymentDrawerState): PaymentDrawerActionConfig[] {
+  const footer: PaymentDrawerActionConfig = { id: "open-student", label: "Abrir aluno", leadingIcon: "user", trailingIcon: "arrowRight", placement: "footer" };
+  if (state === "reconciliation") return [
+    { id: "reconcile", label: "Conciliar movimentação", leadingIcon: "checkCircle", placement: "primary", variant: "primary" },
+    { id: "open-receipt", label: "Abrir comprovante", leadingIcon: "clipboard" },
+    { id: "export-movement", label: "Exportar comprovante", leadingIcon: "download" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    footer
+  ];
+  if (state === "dispute") return [
+    { id: "resolve-dispute", label: "Resolver disputa", leadingIcon: "checkCircle", placement: "primary", variant: "primary" },
+    { id: "open-receipt", label: "Abrir comprovante", leadingIcon: "clipboard" },
+    { id: "export-movement", label: "Exportar movimentação", leadingIcon: "download" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    footer
+  ];
+  if (state === "paid" || state === "reconciled") return [
+    { id: "export-movement", label: "Exportar comprovante", leadingIcon: "download", placement: "primary", variant: "primary" },
+    { id: "open-receipt", label: "Abrir comprovante", leadingIcon: "clipboard" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    footer
+  ];
+  if (state === "failed") return [
+    { id: "confirm-payment", label: "Confirmar pagamento", leadingIcon: "checkCircle", placement: "primary", variant: "primary" },
+    { id: "open-conversation", label: "Abrir conversa", leadingIcon: "whatsapp" },
+    { id: "export-movement", label: "Exportar movimentação", leadingIcon: "download" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    footer
+  ];
+  return [
+    { id: "confirm-payment", label: "Confirmar pagamento", leadingIcon: "checkCircle", placement: "primary", variant: "primary" },
+    { id: "send-reminder", label: "Enviar lembrete", leadingIcon: "tag" },
+    { id: "export-movement", label: "Exportar movimentação", leadingIcon: "download" },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    footer
+  ];
+}
+
+const movementActionLabels: Record<PaymentDrawerAction, string> = {
+  close: "Detalhes da movimentação fechados",
+  "send-reminder": "Lembrete financeiro enviado",
+  "open-charge": "Cobrança aberta",
+  "register-promise": "Promessa registrada",
+  "move-stage": "Cobrança movida",
+  "approve-receipt": "Comprovante aprovado",
+  "copy-pix-link": "Link Pix copiado",
+  "open-conversation": "Conversa financeira aberta",
+  "mark-paid": "Pagamento confirmado",
+  "confirm-payment": "Pagamento confirmado",
+  reconcile: "Movimentação conciliada",
+  "resolve-dispute": "Disputa resolvida",
+  "open-receipt": "Comprovante aberto",
+  "export-movement": "Movimentação exportada",
+  "create-task": "Tarefa financeira criada",
+  "open-student": "Aluno aberto"
+};
 
 function movementDrawerFacts(row: MovementRow, state: PaymentDrawerState): PaymentDrawerFact[] {
   const status = state === "paid" ? "Pago" : row.status;
@@ -557,7 +674,7 @@ function MovementTable({
       ariaLabel="Tabela de movimentacoes financeiras"
       columns={[
         { key: "student", header: "Aluno", render: (row) => <PersonLabel avatarSrc={row.avatarSrc} name={row.student} size="xs" />, sortable: true, width: "16%" },
-        { key: "type", header: "Tipo", render: (row) => <Chip showDot={false} tone={row.typeTone}>{row.type}</Chip>, width: "11%" },
+        { key: "type", header: "Tipo", render: (row) => <Chip showDot={false} tone={row.typeTone}>{movementTypeTableLabel(row.type)}</Chip>, width: "11%" },
         { key: "status", header: "Status", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip>, sortable: true, width: "10%" },
         { key: "amount", header: "Valor", sortable: true, width: "9%" },
         { key: "due", header: "Vencimento", width: "9%" },
@@ -568,6 +685,7 @@ function MovementTable({
         { key: "activity", header: "Ultima atividade", width: "12%" }
       ]}
       density="compact"
+      minTableWidth="var(--taliya-control-crm-movements-table-min-width)"
       pagination={{
         itemsPerPage: "10",
         label: `${(page - 1) * 10 + 1}-${Math.min(page * 10, 256)} de 256`,
@@ -596,11 +714,11 @@ export const Image30VisaoGeralFilas: Story = {
       }
     }
   },
-  render: () => <FinanceOverviewDashboard />
+  render: () => <FinanceBillingDrawerPage initialDrawerOpen={false} />
 };
 
-export function FinanceBillingDrawerPage() {
-  const [drawerOpen, setDrawerOpen] = useState(true);
+export function FinanceBillingDrawerPage({ initialDrawerOpen = true }: { initialDrawerOpen?: boolean } = {}) {
+  const [drawerOpen, setDrawerOpen] = useState(initialDrawerOpen);
   const [selectedCaseId, setSelectedCaseId] = useState("overdue:gabriela");
   const [drawerState, setDrawerState] = useState<PaymentDrawerState>();
   const [announcement, setAnnouncement] = useState("");
@@ -642,6 +760,57 @@ export function FinanceBillingDrawerPage() {
 
 export function FinanceKanbanPage() {
   const [announcement, setAnnouncement] = useState("");
+  const [columns, setColumns] = useState(financeKanbanInitialColumns);
+  const [selectedCardId, setSelectedCardId] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const selectedEntry = columns
+    .flatMap((column) => column.cards.map((card) => ({ card, column })))
+    .find(({ card }) => card.id === selectedCardId);
+
+  const updateCard = (cardId: string, targetColumnId: string | undefined, patch: Partial<FinanceKanbanCardData>) => {
+    setColumns((current) => {
+      const source = current.find((column) => column.cards.some((card) => card.id === cardId));
+      if (!source) return current;
+      const target = current.find((column) => column.id === (targetColumnId ?? source.id));
+      const card = source.cards.find((item) => item.id === cardId);
+      if (!target || !card) return current;
+      const updatedCard = { ...card, ...patch };
+      if (source.id === target.id) {
+        return current.map((column) => column.id === source.id
+          ? { ...column, cards: column.cards.map((item) => item.id === cardId ? updatedCard : item) }
+          : column);
+      }
+      return current.map((column) => {
+        if (column.id === source.id) return { ...column, count: Math.max(0, column.count - 1), cards: column.cards.filter((item) => item.id !== cardId) };
+        if (column.id === target.id) return { ...column, count: column.count + 1, cards: [...column.cards, updatedCard] };
+        return column;
+      });
+    });
+  };
+
+  const handleKanbanAction = (action: PaymentDrawerAction) => {
+    if (!selectedEntry) return;
+    const currentIndex = columns.findIndex((column) => column.id === selectedEntry.column.id);
+    const nextColumn = columns[Math.min(columns.length - 1, currentIndex + 1)];
+    if (action === "send-reminder") updateCard(selectedCardId, undefined, { due: "lembrete enviado agora" });
+    if (action === "register-promise") updateCard(selectedCardId, "promise", { state: "promise", due: "prometido para amanhã" });
+    if (action === "move-stage") updateCard(selectedCardId, nextColumn?.id, { due: `movido para ${nextColumn?.title ?? selectedEntry.column.title}` });
+    if (["approve-receipt", "mark-paid", "confirm-payment"].includes(action)) {
+      updateCard(selectedCardId, "resolved", { state: "resolved", due: "pago agora" });
+    }
+    setAnnouncement(`${movementActionLabels[action]}: ${selectedEntry.card.title}`);
+  };
+
+  const selectedCard = selectedEntry?.card;
+  const drawerState = selectedCard ? financeKanbanDrawerState(selectedCard) : "due";
+  const drawerFacts: PaymentDrawerFact[] = selectedCard ? [
+    { id: "amount", icon: "wallet", label: "Valor", value: selectedCard.amount },
+    { id: "due", icon: "calendar", label: "Vencimento", value: selectedCard.due, tone: selectedCard.state === "overdue" ? "danger" : undefined },
+    { id: "method", icon: "tag", label: "Metodo", value: selectedCard.method },
+    { id: "owner", icon: "user", label: "Responsavel", value: selectedCard.owner ?? "Financeiro" },
+    { id: "status", icon: "checkCircle", label: "Status", value: selectedEntry?.column.title ?? "A vencer", tone: selectedCard.state === "resolved" ? "success" : selectedCard.state === "overdue" ? "danger" : undefined },
+    { id: "student", icon: "user", label: "Aluno vinculado", value: selectedCard.title }
+  ] : [];
 
   return (
     <>
@@ -650,6 +819,23 @@ export function FinanceKanbanPage() {
         activeSidebarId="financeiro"
         avatarSrc={image79Avatar}
         className="sb-image-coverage-finance-shell"
+        drawer={drawerOpen && selectedCard ? (
+          <PaymentDrawer
+            actions={financeKanbanActions(selectedCard)}
+            amount={selectedCard.amount}
+            context={[`${selectedEntry?.column.title}: ${selectedCard.due}.`, `Método registrado: ${selectedCard.method}.`]}
+            copilotSuggestion={`Revise a cobrança de ${selectedCard.title} e escolha o próximo passo financeiro.`}
+            facts={drawerFacts}
+            name={selectedCard.title}
+            onAction={handleKanbanAction}
+            onClose={() => {
+              setDrawerOpen(false);
+              setAnnouncement("Drawer financeiro fechado");
+            }}
+            state={drawerState}
+            statusLabel={selectedEntry?.column.title}
+          />
+        ) : null}
         filterBar={<FinanceiroKanbanFilters onInteraction={setAnnouncement} />}
         globalActions={{
           onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
@@ -677,7 +863,21 @@ export function FinanceKanbanPage() {
         title="Financeiro"
         utilityItems={crmEmptyShellSidebarUtilityItems}
       >
-        <FinanceKanbanColumns onInteraction={setAnnouncement} />
+        <FinanceKanbanColumns
+          columns={columns}
+          onCardMenu={(cardId) => {
+            setSelectedCardId(cardId);
+            setDrawerOpen(true);
+            setAnnouncement(`Menu da cobrança aberto: ${cardId}`);
+          }}
+          onCardSelect={(cardId) => {
+            setSelectedCardId(cardId);
+            setDrawerOpen(true);
+            setAnnouncement(`Cobrança selecionada: ${cardId}`);
+          }}
+          onInteraction={setAnnouncement}
+          selectedCardId={selectedCardId}
+        />
       </CrmKanbanPage>
       <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
     </>
@@ -692,12 +892,12 @@ export function FinanceMovementsPage() {
   const [page, setPage] = useState(1);
   const selectedMovement = movementRows.find((row) => row.id === selectedMovementId) ?? movementRows[0]!;
   const effectiveDrawerState = drawerState ?? movementDrawerState(selectedMovement);
-  const effectiveStatus = effectiveDrawerState === "paid" ? "Pago" : selectedMovement.status;
-  const movementIsFinalized = ["Pago", "Estornado", "Aprovado", "Ajustado"].includes(selectedMovement.status);
+  const effectiveStatus = effectiveDrawerState === "paid" ? "Pago" : effectiveDrawerState === "reconciled" ? "Conciliado" : selectedMovement.status;
 
   function handleMovementAction(action: PaymentDrawerAction) {
-    if (action === "mark-paid") setDrawerState("paid");
-    setAnnouncement(`Ação da movimentação: ${action}`);
+    if (action === "mark-paid" || action === "confirm-payment") setDrawerState("paid");
+    if (action === "reconcile" || action === "resolve-dispute") setDrawerState("reconciled");
+    setAnnouncement(`${movementActionLabels[action]}: ${selectedMovement.student}`);
   }
 
   return (
@@ -711,6 +911,7 @@ export function FinanceMovementsPage() {
         drawer={drawerOpen ? (
           <PaymentDrawer
             amount={selectedMovement.amount}
+            actions={movementDrawerActions(effectiveDrawerState)}
             compact
             context={[`${selectedMovement.type} de ${selectedMovement.amount}.`, `Última atividade: ${selectedMovement.activity}.`]}
             copilotSuggestion={`Revise ${selectedMovement.type.toLowerCase()} de ${selectedMovement.student} e escolha o próximo passo operacional.`}
@@ -721,7 +922,6 @@ export function FinanceMovementsPage() {
               { id: "activity", label: selectedMovement.activity },
               { id: "owner", label: `Responsável: ${selectedMovement.owner}` }
             ]}
-            markPaidDisabled={movementIsFinalized}
             name={selectedMovement.student}
             onAction={handleMovementAction}
             onClose={() => setDrawerOpen(false)}
@@ -730,7 +930,6 @@ export function FinanceMovementsPage() {
             variant="movement"
           />
         ) : null}
-        drawerPlacement="fixed"
         filterBar={<MovementsFilters onInteraction={setAnnouncement} />}
         globalActions={{
           onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
@@ -748,7 +947,7 @@ export function FinanceMovementsPage() {
         sidebarItems={crmEmptyShellSidebarItems}
         stageClassName="sb-image-coverage-finance-stage"
         subtitle="Mensalidades, cobrancas, pagamentos e ajustes"
-        title="Movimentacoes"
+        title="Movimentações"
         utilityItems={crmEmptyShellSidebarUtilityItems}
         worklistLayoutMode="wide-main"
       >
@@ -773,7 +972,52 @@ export function FinanceMovementsPage() {
 export const Image32FinanceiroDrawerCobranca: Story = {
   name: "32 financeiro drawer cobranca selecionada",
   parameters: { sourceImage: "32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png" },
-  render: () => <FinanceBillingDrawerPage />
+  render: () => <FinanceBillingDrawerPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes da cobrança" });
+
+    await expect(drawer).toHaveAttribute("data-state", "overdue");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Registrar promessa" }));
+    await expect(drawer).toHaveAttribute("data-state", "promise");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Marcar como pago" }));
+    await expect(drawer).toHaveAttribute("data-state", "paid");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar cobrança" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes da cobrança" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir cobranca de Eduardo Santos" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da cobrança" })).toBeInTheDocument();
+  }
+};
+
+export const FinanceOverviewInteractionContract: Story = {
+  name: "Financeiro overview interaction contract",
+  render: () => <FinanceBillingDrawerPage initialDrawerOpen={false} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: /9 cobrancas atrasadas/ }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Prioridade selecionada: overdue");
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir cobranca de Gabriela Lima" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da cobrança" })).toBeInTheDocument();
+    await expect(canvas.getByRole("status")).toHaveTextContent("Cobrança selecionada: overdue:gabriela");
+  }
+};
+
+export const FinanceBillingInteractionContract: Story = {
+  name: "Financeiro billing interaction contract",
+  render: () => <FinanceBillingDrawerPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes da cobrança" });
+
+    await userEvent.click(within(drawer).getByRole("button", { name: "Registrar promessa" }));
+    await expect(drawer).toHaveAttribute("data-state", "promise");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Marcar como pago" }));
+    await expect(drawer).toHaveAttribute("data-state", "paid");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar cobrança" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes da cobrança" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir cobranca de Eduardo Santos" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da cobrança" })).toBeInTheDocument();
+  }
 };
 
 export const Image33FinanceiroKanban: Story = {
@@ -782,8 +1026,58 @@ export const Image33FinanceiroKanban: Story = {
   render: () => <FinanceKanbanPage />
 };
 
+export const FinanceKanbanInteractionContract: Story = {
+  name: "Finance kanban interaction contract",
+  render: () => <FinanceKanbanPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole("button", { name: /^Fernanda Lima R/ }));
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes da cobrança" });
+    await expect(drawer).toHaveAttribute("data-state", "due");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Enviar lembrete" }));
+    await expect(canvas.getByRole("button", { name: /Fernanda Lima.*lembrete enviado agora/ })).toBeInTheDocument();
+    await userEvent.click(within(drawer).getByRole("button", { name: "Registrar promessa" }));
+    await expect(drawer).toHaveAttribute("data-state", "promise");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Marcar como pago" }));
+    await expect(drawer).toHaveAttribute("data-state", "paid");
+    await expect(within(drawer).queryByRole("button", { name: "Marcar como pago" })).not.toBeInTheDocument();
+
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar cobrança" }));
+    await userEvent.click(canvas.getByRole("button", { name: /^Ana Paula Martins R/ }));
+    const proofDrawer = canvas.getByRole("complementary", { name: "Detalhes da cobrança" });
+    await expect(proofDrawer).toHaveAttribute("data-state", "reconciliation");
+    await userEvent.click(within(proofDrawer).getByRole("button", { name: "Aprovar comprovante" }));
+    await expect(proofDrawer).toHaveAttribute("data-state", "paid");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Comprovante aprovado: Ana Paula Martins");
+  }
+};
+
 export const Image34MovimentacoesFiltrosDrawer: Story = {
   name: "34 movimentacoes filtros drawer",
   parameters: { sourceImage: "34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png" },
-  render: () => <FinanceMovementsPage />
+  render: () => <FinanceMovementsPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes da cobrança" });
+
+    await expect(drawer).toHaveAttribute("data-state", "open");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Confirmar pagamento" }));
+    await expect(drawer).toHaveAttribute("data-state", "paid");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Pagamento confirmado: Fernanda Lima");
+
+    await userEvent.click(canvas.getByRole("row", { name: /Ana Paula Martins/ }));
+    await expect(drawer).toHaveAttribute("data-state", "reconciliation");
+    await userEvent.click(within(drawer).getByRole("button", { name: "Conciliar movimentação" }));
+    await expect(drawer).toHaveAttribute("data-state", "reconciled");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Movimentação conciliada: Ana Paula Martins");
+
+    await userEvent.click(within(drawer).getByRole("button", { name: "Fechar cobrança" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes da cobrança" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("row", { name: /Paulo Nunes/ }));
+    const reopened = canvas.getByRole("complementary", { name: "Detalhes da cobrança" });
+    await expect(reopened).toHaveAttribute("data-state", "dispute");
+    await expect(within(reopened).getByRole("button", { name: "Resolver disputa" })).toBeEnabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Conciliacao pendente 11" }));
+  }
 };

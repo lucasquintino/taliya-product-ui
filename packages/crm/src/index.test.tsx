@@ -50,6 +50,331 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("region", { name: "Filas financeiras" })).toHaveClass("tcrm-finance-queue-grid--compact");
   });
 
+  it("forwards direct shell-control and page-family navigation callbacks", () => {
+    const onToolbar = vi.fn();
+    const onBack = vi.fn();
+    const onSearch = vi.fn();
+    const onSidebarSelect = vi.fn();
+    const onUtilitySelect = vi.fn();
+    const onNavChange = vi.fn();
+
+    render(
+      <>
+        <crm.CrmBrowserToolbarButton icon="star" label="Favoritar pagina" onClick={onToolbar} />
+        <crm.CrmShellBackButton label="Voltar ao inicio" onClick={onBack} />
+        <crm.CrmShellGlobalActions onSearch={onSearch} />
+        <crm.CrmSidebarNavigation
+          items={[{ id: "agenda", label: "Abrir agenda", icon: "calendar" }]}
+          onSelect={onSidebarSelect}
+        />
+        <crm.CrmSidebarUtilityNavigation
+          items={[{ id: "night", label: "Ativar modo noite", icon: "moon" }]}
+          onSelect={onUtilitySelect}
+        />
+        <crm.CrmPageFamilyShell
+          navItems={[{ id: "list", label: "Lista direta" }, { id: "board", label: "Quadro direto" }]}
+          onNavChange={onNavChange}
+          regions={{ browserChrome: false, globalActions: false, sidebar: false }}
+          title="Contrato de familia"
+        >
+          <span>Conteudo</span>
+        </crm.CrmPageFamilyShell>
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Favoritar pagina" }));
+    fireEvent.click(screen.getByRole("button", { name: "Voltar ao inicio" }));
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir agenda" }));
+    fireEvent.click(screen.getByRole("button", { name: "Ativar modo noite" }));
+    fireEvent.click(screen.getByRole("button", { name: "Quadro direto" }));
+
+    expect(onToolbar).toHaveBeenCalledOnce();
+    expect(onBack).toHaveBeenCalledOnce();
+    expect(onSearch).toHaveBeenCalledOnce();
+    expect(onSidebarSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "agenda" }));
+    expect(onUtilitySelect).toHaveBeenCalledWith(expect.objectContaining({ id: "night" }));
+    expect(onNavChange).toHaveBeenCalledWith("board");
+    expect(screen.getByRole("button", { name: "Quadro direto" })).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("forwards access-shell account and help actions", () => {
+    const onAccount = vi.fn();
+    const onHelp = vi.fn();
+
+    render(
+      <crm.AccessShell layout="centered" onAccount={onAccount} onHelp={onHelp}>
+        <span>Acesso seguro</span>
+      </crm.AccessShell>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Ajuda" }));
+    fireEvent.click(screen.getByRole("button", { name: "Conta" }));
+
+    expect(onHelp).toHaveBeenCalledOnce();
+    expect(onAccount).toHaveBeenCalledOnce();
+  });
+
+  it("keeps browser chrome decorative unless an action contract is supplied", () => {
+    const onAction = vi.fn();
+    const item: crm.CrmBrowserToolbarItem = { id: "favorite", icon: "star", label: "Favoritar contrato" };
+
+    render(
+      <>
+        <section data-testid="decorative-browser"><crm.CrmBrowserToolbar items={[item]} /></section>
+        <section data-testid="interactive-browser"><crm.CrmBrowserChrome onToolbarAction={onAction} toolbarItems={[item]} /></section>
+      </>
+    );
+
+    expect(within(screen.getByTestId("decorative-browser")).queryByRole("button")).not.toBeInTheDocument();
+    fireEvent.click(within(screen.getByTestId("interactive-browser")).getByRole("button", { name: "Favoritar contrato" }));
+
+    expect(onAction).toHaveBeenCalledWith(item);
+  });
+
+  it("owns approval-table row, sort, and pagination interactions", () => {
+    const onItemsPerPageClick = vi.fn();
+    const onNextPage = vi.fn();
+    const onPreviousPage = vi.fn();
+    const onRowSelect = vi.fn();
+    const rows: crm.ApprovalTableRow[] = [
+      {
+        id: "second",
+        index: 2,
+        title: "Segunda aprovacao",
+        type: "message",
+        origin: "WhatsApp",
+        requester: { name: "Copiloto" },
+        risk: "low",
+        cost: "1 credito",
+        deadline: "Hoje",
+        status: "pending",
+        activity: "Agora"
+      },
+      {
+        id: "first",
+        index: 1,
+        title: "Primeira aprovacao",
+        type: "agenda",
+        origin: "Agenda",
+        requester: { name: "Recepcao" },
+        risk: "medium",
+        cost: "2 creditos",
+        deadline: "Amanha",
+        status: "review",
+        activity: "Ontem"
+      }
+    ];
+
+    render(
+      <crm.ApprovalTable
+        itemsPerPage="20"
+        onItemsPerPageClick={onItemsPerPageClick}
+        onNextPage={onNextPage}
+        onPreviousPage={onPreviousPage}
+        onRowSelect={onRowSelect}
+        pageLabel="1-2 de 2"
+        rows={rows}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("row", { name: /Primeira aprovacao/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Ordenar por Aprovação" }));
+    fireEvent.click(screen.getByRole("button", { name: "Alterar itens por pagina" }));
+    fireEvent.click(screen.getByRole("button", { name: "Pagina anterior" }));
+    fireEvent.click(screen.getByRole("button", { name: "Proxima pagina" }));
+
+    expect(onRowSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "first" }));
+    expect(onItemsPerPageClick).toHaveBeenCalledOnce();
+    expect(onPreviousPage).toHaveBeenCalledOnce();
+    expect(onNextPage).toHaveBeenCalledOnce();
+  });
+
+  it("forwards composed shell and operational-row actions", () => {
+    const onNavChange = vi.fn();
+    const onSearch = vi.fn();
+    const onSelect = vi.fn();
+    const onUtilitySelect = vi.fn();
+    const onRowOpen = vi.fn();
+
+    render(
+      <>
+        <crm.CrmShellSidebar
+          items={[{ id: "agenda", label: "Agenda composta", icon: "calendar" }]}
+          onSelect={onSelect}
+          onUtilitySelect={onUtilitySelect}
+          utilityItems={[{ id: "theme", label: "Tema composto", icon: "sun" }]}
+        />
+        <crm.CrmEmptyShellTopbar
+          globalActions={{ onSearch }}
+          navItems={[{ id: "tasks", label: "Tarefas compostas" }]}
+          onNavChange={onNavChange}
+        />
+        <crm.CrmOperationalRows
+          onRowOpen={onRowOpen}
+          rows={[
+            { id: "open", title: "Linha operacional" },
+            { disabled: true, id: "blocked", title: "Linha bloqueada" }
+          ]}
+        />
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Agenda composta" }));
+    fireEvent.click(screen.getByRole("button", { name: "Tema composto" }));
+    fireEvent.click(screen.getByRole("button", { name: "Tarefas compostas" }));
+    fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir Linha operacional" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir Linha bloqueada" }));
+
+    expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "agenda" }));
+    expect(onUtilitySelect).toHaveBeenCalledWith(expect.objectContaining({ id: "theme" }));
+    expect(onNavChange).toHaveBeenCalledWith("tasks");
+    expect(onSearch).toHaveBeenCalledOnce();
+    expect(onRowOpen).toHaveBeenCalledOnce();
+    expect(onRowOpen).toHaveBeenCalledWith(expect.objectContaining({ id: "open" }));
+  });
+
+  it("owns setup, subscription, and flow-card action contracts", () => {
+    const onBackToPlans = vi.fn();
+    const onFlowMenu = vi.fn();
+    const onFlowOpen = vi.fn();
+    const onRetry = vi.fn();
+    const onSetupAction = vi.fn();
+    const onSupport = vi.fn();
+
+    render(
+      <>
+        <crm.SetupBlockHeader actionLabel="Revisar configuracao" onAction={onSetupAction} state="warning" />
+        <crm.SubscriptionStatusCard
+          onBackToPlans={onBackToPlans}
+          onRetry={onRetry}
+          onSupport={onSupport}
+          state="failed"
+        />
+        <crm.FlowStepCard
+          id="qualification"
+          menuLabel="Opcoes da qualificacao"
+          onMenu={onFlowMenu}
+          onOpen={onFlowOpen}
+          title="Qualificar lead"
+        />
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Revisar configuracao" }));
+    fireEvent.click(screen.getByRole("button", { name: "Tentar pagamento novamente" }));
+    fireEvent.click(screen.getByRole("button", { name: "Voltar aos planos" }));
+    fireEvent.click(screen.getByRole("button", { name: "Falar com suporte" }));
+    fireEvent.keyDown(screen.getByRole("button", { name: "Qualificar lead" }), { key: "Enter" });
+    fireEvent.click(screen.getByRole("button", { name: "Opcoes da qualificacao" }));
+
+    expect(onSetupAction).toHaveBeenCalledOnce();
+    expect(onRetry).toHaveBeenCalledOnce();
+    expect(onBackToPlans).toHaveBeenCalledOnce();
+    expect(onSupport).toHaveBeenCalledOnce();
+    expect(onFlowOpen).toHaveBeenCalledWith("qualification");
+    expect(onFlowMenu).toHaveBeenCalledWith("qualification");
+  });
+
+  it("forwards direct agent, mode, role, and setup-card actions", () => {
+    const onAgentOpen = vi.fn();
+    const onRoutineOpen = vi.fn();
+    const onPublishAction = vi.fn();
+    const onModeSelect = vi.fn();
+    const onRoleSelect = vi.fn();
+    const onChoiceSelect = vi.fn();
+    const onImportSelect = vi.fn();
+    const onSchedule = vi.fn();
+
+    render(
+      <>
+        <crm.AgentCard id="agenda" onOpen={onAgentOpen} title="Agenda direta" />
+        <crm.AgentRoutineFlowCard id="absence" onOpen={onRoutineOpen} title="Falta direta" />
+        <crm.AgentPublishFlowCard
+          facts={[]}
+          id="confirmation"
+          mode="Autonomo"
+          onAction={onPublishAction}
+          status="Pronto"
+          title="Confirmacao direta"
+        />
+        <crm.ModeCard mode="copilot" onSelect={onModeSelect} title="Copiloto direto" />
+        <crm.PermissionRoleCard
+          description="Acesso total"
+          icon="shield"
+          id="owner"
+          onSelect={onRoleSelect}
+          permissions={["Tudo"]}
+          status="Ativo"
+          title="Dono direto"
+        />
+        <crm.SetupChoiceCard onSelect={onChoiceSelect} title="Plano direto" />
+        <crm.SetupImportSourceCard onSelect={onImportSelect} title="Importacao direta" />
+        <crm.SetupHumanHelpCTA onSchedule={onSchedule} />
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Ver agente" }));
+    fireEvent.click(screen.getByRole("button", { name: "Ver e ajustar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Ver fluxo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Copiloto direto" }));
+    fireEvent.click(screen.getByRole("button", { name: /Dono direto/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Plano direto/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Importacao direta/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Agendar ajuda" }));
+
+    expect(onAgentOpen).toHaveBeenCalledWith("agenda");
+    expect(onRoutineOpen).toHaveBeenCalledWith("absence");
+    expect(onPublishAction).toHaveBeenCalledWith("confirmation", "view");
+    expect(onModeSelect).toHaveBeenCalledWith("copilot");
+    expect(onRoleSelect).toHaveBeenCalledWith("owner");
+    expect(onChoiceSelect).toHaveBeenCalledOnce();
+    expect(onImportSelect).toHaveBeenCalledOnce();
+    expect(onSchedule).toHaveBeenCalledOnce();
+  });
+
+  it("forwards direct setup, composer, access, and checkout workflow actions", () => {
+    const onStepSelect = vi.fn();
+    const onStart = vi.fn();
+    const onPublish = vi.fn();
+    const onSend = vi.fn();
+    const onFooterLink = vi.fn((_: string, __: number, event: React.MouseEvent<HTMLAnchorElement>) => event.preventDefault());
+    const onApplyCoupon = vi.fn();
+    const onContinuePayment = vi.fn();
+
+    render(
+      <>
+        <crm.SetupStepper currentStep={1} onStepSelect={onStepSelect} steps={["Studio", "Equipe"]} />
+        <crm.SetupWelcome onStart={onStart} />
+        <crm.SetupReviewPanel onPublish={onPublish} />
+        <crm.Composer defaultValue="Mensagem pronta" onSend={onSend} />
+        <crm.AccessFooterLinks links={["Ajuda direta"]} onLinkClick={onFooterLink} />
+        <crm.CheckoutPaymentCard onApplyCoupon={onApplyCoupon} onContinuePayment={onContinuePayment} />
+      </>
+    );
+
+    const setupStepper = screen.getByText("Etapas").closest("aside");
+    expect(setupStepper).not.toBeNull();
+    fireEvent.click(within(setupStepper as HTMLElement).getByRole("button", { name: /Equipe/ }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Nome do studio" }), { target: { value: "Studio Direto" } });
+    fireEvent.click(screen.getByRole("button", { name: "Começar setup guiado" }));
+    fireEvent.click(screen.getByRole("button", { name: "Publicar setup inicial" }));
+    fireEvent.click(screen.getByRole("button", { name: "Enviar" }));
+    fireEvent.click(screen.getByRole("link", { name: "Ajuda direta" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Código promocional" }), { target: { value: "TALIYA10" } });
+    fireEvent.click(screen.getByRole("button", { name: "Aplicar" }));
+    fireEvent.click(screen.getByRole("button", { name: "Continuar para pagamento seguro" }));
+
+    expect(onStepSelect).toHaveBeenCalledWith("equipe");
+    expect(onStart).toHaveBeenCalledOnce();
+    expect(onPublish).toHaveBeenCalledOnce();
+    expect(onSend).toHaveBeenCalledWith("Mensagem pronta");
+    expect(onFooterLink).toHaveBeenCalledWith("Ajuda direta", 0, expect.anything());
+    expect(onApplyCoupon).toHaveBeenCalledWith("TALIYA10");
+    expect(onContinuePayment).toHaveBeenCalledOnce();
+  });
+
   it("supports kanban column metadata and menu actions", () => {
     const onMenu = vi.fn();
     render(<crm.KanbanColumn count={12} meta="R$ 6.730,00" onMenu={onMenu} title="A vencer" />);
@@ -143,6 +468,22 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByLabelText("Painel direito de contexto")).toBeInTheDocument();
     expect(screen.getAllByText("Ana Silva").length).toBeGreaterThan(0);
     expect(screen.getByText("Aluno")).toBeInTheDocument();
+  });
+
+  it("routes inbox conversation context through the canonical drawer slot", () => {
+    render(
+      <crm.CrmThreePanePage
+        drawer={<crm.ConversationDrawer onClose={() => undefined} title="Ana Silva" />}
+        left={<crm.ConversationList />}
+        center={<crm.ConversationThread />}
+        right={null}
+        title="Inbox"
+      />
+    );
+
+    expect(screen.getByRole("complementary", { name: "Detalhes da conversa" })).toHaveAttribute("data-component", "ConversationDrawer");
+    expect(screen.getByRole("complementary", { name: "Detalhes da conversa" }).closest("[data-component='CrmProductShell']")).toHaveClass("tcrm-product-shell-stage--drawer");
+    expect(screen.getByLabelText("Painel direito de contexto").closest("[data-component='ThreePaneLayout']")).toHaveClass("tcrm-three-pane-page-layout--drawer");
   });
 
   it("scopes setup frame geometry without changing default or welcome layouts", () => {
@@ -529,18 +870,28 @@ describe("@taliya/crm component coverage", () => {
 
     rerender(
       <crm.CrmRightPanelPage
+        drawer={<div>Agente da execução</div>}
         main={<div>Recibo da execução</div>}
-        panel={<div>Agente da execução</div>}
-        panelPlacement="drawer"
         rightPanelVariant="agent-execution"
         title="Execução: Falta com aviso"
       />
     );
 
-    expect(screen.getByText("Recibo da execução").closest("[data-component='RightPanelLayout']")).toHaveClass(
-      "tcrm-right-panel-layout--drawer-panel",
-      "tcrm-right-panel-layout--agent-execution"
+    expect(screen.getByText("Recibo da execução").closest("[data-component='RightPanelLayout']")).toHaveClass("tcrm-right-panel-layout--agent-execution");
+    expect(screen.getByText("Recibo da execução").closest("[data-component='RightPanelLayout']")).toHaveAttribute("data-state", "collapsed");
+    expect(screen.getByText("Agente da execução").closest("[data-component='CrmProductShell']")).toHaveClass("tcrm-product-shell-stage--drawer");
+
+    rerender(
+      <crm.CrmRightPanelPage
+        main={<div>Recibo sem agente</div>}
+        rightPanelVariant="agent-execution"
+        title="Execução: Falta com aviso"
+      />
     );
+
+    const collapsedDrawerLayout = screen.getByText("Recibo sem agente").closest("[data-component='RightPanelLayout']");
+    expect(collapsedDrawerLayout).toHaveAttribute("data-state", "collapsed");
+    expect(screen.queryByText("Agente da execução")).not.toBeInTheDocument();
 
     rerender(
       <crm.CrmRightPanelPage
@@ -743,11 +1094,43 @@ describe("@taliya/crm component coverage", () => {
   it("keeps the official three-pane family usable on narrow viewports", () => {
     const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
 
+    expect(styles).toContain(".tcrm-conversation-list {\n  background: var(--taliya-color-crm-conversation-list-bg);");
+    expect(styles).toMatch(/\.tcrm-conversation-list \{[\s\S]*?position: relative;[\s\S]*?width: var\(--taliya-layout-crm-conversation-list-width\);/);
+    expect(styles).toContain(".tcrm-three-pane-layout__right > .tcrm-context-panel {\n  min-width: 0;\n  width: 100%;\n}");
     expect(styles).toMatch(
       /@media \(max-width: 980px\) \{[\s\S]*?\.tcrm-three-pane-layout \{[\s\S]*?height: auto;[\s\S]*?overflow: visible;[\s\S]*?width: 100%;/,
     );
     expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list,\n  .tcrm-three-pane-layout .tcrm-conversation-thread,\n  .tcrm-three-pane-layout .tcrm-context-panel {");
     expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list__subject {\n    display: none;");
+  });
+
+  it("keeps Settings workspaces contained on narrow viewports", () => {
+    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+
+    expect(styles).toMatch(
+      /@media \(max-width: 760px\) \{[\s\S]*?:is\([\s\S]*?\.tcrm-product-shell-stage--content-settings-payments[\s\S]*?\) \.tcrm-product-shell-page-header \{[\s\S]*?height: auto;[\s\S]*?min-height: 0;/,
+    );
+    expect(styles).toContain(
+      ".tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace {\n    grid-template-columns: minmax(0, 1fr);",
+    );
+    expect(styles).toContain(
+      ".tcrm-settings-payments-workspace > .tl-card,\n.tcrm-settings-payments-workspace > .tcrm-settings-workspace-controls > * {\n  box-sizing: border-box;\n  max-width: 100%;\n  min-width: 0;\n  width: 100%;",
+    );
+    expect(styles).toContain(
+      ".tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace > * {\n    box-sizing: border-box;\n    max-width: 100%;\n    min-width: 0;\n    width: 100%;",
+    );
+    expect(styles).toContain(
+      ".tcrm-right-panel-layout--settings-payments .tcrm-settings-section__grid {\n    grid-template-columns: minmax(0, 1fr);",
+    );
+    expect(styles).toMatch(
+      /\.tcrm-right-panel-layout--settings-agenda[\s\S]*?\.tcrm-settings-agenda-workspace__rules \.tcrm-rule-row__select,[\s\S]*?transform: none;[\s\S]*?width: 100%;/,
+    );
+    expect(styles).toMatch(
+      /@media \(min-width: 981px\) and \(max-width: 1120px\) \{[\s\S]*?\.tcrm-right-panel-layout--settings-payments,[\s\S]*?grid-template-columns: minmax\(0, 1fr\);[\s\S]*?> :is\(\.tcrm-right-panel-layout__main, \.tcrm-right-panel-layout__panel\) \{[\s\S]*?height: auto;[\s\S]*?transform: none;/,
+    );
+    expect(styles).toContain(
+      "--taliya-layout-crm-rule-row-columns: 38px minmax(0, 1fr) minmax(150px, .8fr) 104px;",
+    );
   });
 
   it("keeps ApprovalDrawer opaque and actionable above a scrollable mobile worklist", () => {
@@ -1811,12 +2194,11 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByText("Carregando dados")).toBeInTheDocument();
   });
 
-  it("renders CrmRecordDrawer inline for shell-embedded consumer routes", () => {
+  it("renders CrmRecordDrawer with the canonical portal drawer", () => {
     const onOpenChange = vi.fn();
     const { rerender } = render(
       <crm.CrmRecordDrawer
         facts={[{ id: "owner", label: "Dono", value: "Mariana", icon: "user" }]}
-        inline
         onOpenChange={onOpenChange}
         open
         title="Ana Silva"
@@ -1824,16 +2206,16 @@ describe("@taliya/crm component coverage", () => {
     );
 
     const dialog = screen.getByRole("dialog");
-    expect(dialog).toHaveAttribute("aria-modal", "false");
     expect(dialog).toHaveAttribute("data-component", "CrmRecordDrawer");
-    expect(dialog).toHaveClass("tl-drawer--inline");
+    expect(dialog).toHaveClass("tl-drawer");
+    expect(dialog.className).not.toMatch(/tl-drawer--(?:inline|left|right|sm|md|lg)/);
     expect(screen.getByRole("heading", { name: "Ana Silva" })).toBeInTheDocument();
     expect(screen.getByText("Mariana")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Fechar painel" }));
     expect(onOpenChange).toHaveBeenCalledWith(false);
 
-    rerender(<crm.CrmRecordDrawer inline open={false} title="Ana Silva" />);
+    rerender(<crm.CrmRecordDrawer open={false} title="Ana Silva" />);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
@@ -1983,6 +2365,9 @@ describe("@taliya/crm component coverage", () => {
     expect(onPreviousPage).toHaveBeenCalledTimes(1);
     expect(onNextPage).toHaveBeenCalledTimes(1);
 
+    rerender(<crm.CrmWorklistTable ariaLabel="Tabela padrao" columns={[{ key: "name", header: "Nome" }]} rows={rows} />);
+    expect(screen.getByRole("table")).toHaveStyle({ minWidth: "var(--taliya-control-table-min-width)" });
+
     rerender(<crm.CrmWorklistTable ariaLabel="Tabela padrao" columns={[{ key: "name", header: "Nome" }]} rows={rows} state="loading" />);
     expect(screen.getByLabelText("Tabela padrao")).toHaveAttribute("aria-busy", "true");
     expect(screen.getByText("Carregando lista")).toBeInTheDocument();
@@ -2012,7 +2397,6 @@ describe("@taliya/crm component coverage", () => {
         ]}
         headerOrder="label-title-status"
         onClose={onClose}
-        placement="overlay"
         sections={[
           { id: "summary", title: "Resumo", variant: "card", content: <p>Secao dinamica</p> }
         ]}
@@ -2026,7 +2410,7 @@ describe("@taliya/crm component coverage", () => {
     const drawer = screen.getByRole("complementary", { name: "Detalhe do registro" });
     expect(drawer).toHaveAttribute("data-component", "CrmDrawer");
     expect(drawer).toHaveAttribute("data-state", "open");
-    expect(drawer).toHaveClass("tcrm-drawer-frame--overlay");
+    expect(drawer).toHaveClass("tcrm-drawer-frame");
     expect(screen.getByText("Tarefa")).toBeInTheDocument();
     expect(screen.getByText("Aberta")).toBeInTheDocument();
     expect(screen.getByText("Origem")).toBeInTheDocument();
@@ -2125,6 +2509,43 @@ describe("@taliya/crm component coverage", () => {
     expect(onRowSelect).toHaveBeenCalledTimes(1);
   });
 
+  it("renders prepared paused, delinquent, and overdue student states", () => {
+    render(
+      <crm.StudentTable
+        rows={[
+          {
+            id: "paused",
+            student: { name: "Aluno Pausado" },
+            status: "paused",
+            plan: "Plano pausado",
+            currentClass: "Pilates Solo",
+            owner: "Recepcao",
+            presence: "0/10",
+            finance: "ok",
+            risk: "low",
+            activity: { label: "Pausa vigente", status: "update" }
+          },
+          {
+            id: "delinquent",
+            student: { name: "Aluno Inadimplente" },
+            status: "delinquent",
+            plan: "Mensal",
+            currentClass: "Reformer",
+            owner: "Financeiro",
+            presence: "6/10",
+            finance: "overdue",
+            risk: "medium",
+            activity: { label: "Cobranca pendente", status: "danger" }
+          }
+        ]}
+      />
+    );
+
+    expect(screen.getByRole("cell", { name: "Pausada" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "Inadimplente" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "Em atraso" })).toBeInTheDocument();
+  });
+
   it("renders ReplacementTable as a DataTable-backed interactive replacement table", () => {
     const onRowSelect = vi.fn();
     const onItemsPerPageClick = vi.fn();
@@ -2166,6 +2587,32 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByText("Tabela bloqueada")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("row", { name: /Ana Carolina Souza/ }));
     expect(onRowSelect).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders prepared no-vacancy, conflict, and expired replacement states", () => {
+    const baseRow = {
+      student: { name: "Ana Souza" },
+      originalClass: "Terca 17h",
+      reason: "Falta avisada",
+      validity: "12/06",
+      preference: "Manha",
+      nextAction: "Revisar",
+      mode: "manual" as const
+    };
+
+    render(
+      <crm.ReplacementTable
+        rows={[
+          { ...baseRow, id: "no-vacancy", status: "noVacancy" },
+          { ...baseRow, id: "conflict", student: { name: "Bruna Lima" }, status: "conflict" },
+          { ...baseRow, id: "expired", student: { name: "Carla Mendes" }, status: "expired" }
+        ]}
+      />
+    );
+
+    expect(screen.getByRole("cell", { name: "Sem vaga" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "Conflito" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "Vencida" })).toBeInTheDocument();
   });
 
   it("renders QuickReplyChips as accessible source-derived buttons with disabled and selected states", () => {
@@ -2263,6 +2710,11 @@ describe("@taliya/crm component coverage", () => {
   it("renders the image 79 empty CRM shell from reusable subcomponents", () => {
     render(<crm.CrmEmptyShell />);
 
+    const shell = screen.getByRole("heading", { name: "Jornadas" }).closest("[data-component='CrmProductShell']");
+    expect(shell).toHaveClass("tcrm-empty-shell-page", "tcrm-page-family-shell");
+    expect(shell).not.toHaveClass("tcrm-empty-shell-stage--image-79");
+    expect(shell?.querySelectorAll(".tcrm-empty-shell-canvas")).toHaveLength(1);
+    expect(shell?.querySelectorAll(".tcrm-empty-shell-canvas__state")).toHaveLength(1);
     expect(screen.getByLabelText("https://app.taliya.com")).toBeInTheDocument();
     expect(screen.getByLabelText("Taliya")).toBeInTheDocument();
     expect(screen.getByLabelText(/CRM/i)).toBeInTheDocument();
@@ -2276,6 +2728,19 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("button", { name: "Modo noite" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Modo dia" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Configura/ })).not.toBeInTheDocument();
+  });
+
+  it("uses official loading and recoverable unavailable states in the empty shell canvas", () => {
+    const onRetry = vi.fn();
+    const { rerender } = render(<crm.CrmEmptyShell state="loading" />);
+
+    expect(screen.getByLabelText("Estado da área de conteúdo")).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByText("Carregando jornadas")).toBeInTheDocument();
+
+    rerender(<crm.CrmEmptyShell onRetry={onRetry} state="unavailable" />);
+    expect(screen.getByRole("alert")).toHaveTextContent("Conteúdo indisponível");
+    fireEvent.click(screen.getByRole("button", { name: "Tentar novamente" }));
+    expect(onRetry).toHaveBeenCalledOnce();
   });
 
   it("keeps image 79 primitive controls interactive and reusable", () => {
@@ -2670,8 +3135,10 @@ describe("@taliya/crm component coverage", () => {
     cleanup();
 
     render(<crm.ConversationList state="blocked" />);
-    expect(screen.getByRole("button", { name: "Abrir conversa de Ana Silva" })).toHaveAttribute("aria-disabled", "true");
-    expect(screen.getByText("Lista bloqueada")).toBeInTheDocument();
+    const blockedList = screen.getByLabelText("Lista de conversas");
+    expect(within(blockedList).getByRole("button", { name: "Abrir conversa de Ana Silva" })).toHaveAttribute("aria-disabled", "true");
+    expect(within(blockedList).getByText("Lista bloqueada")).toBeInTheDocument();
+    expect(blockedList).toHaveClass("tcrm-conversation-list");
   });
 
   it("renders image 62 IntegrationStatusRow with real action behavior", () => {
@@ -2731,6 +3198,7 @@ describe("@taliya/crm component coverage", () => {
         <crm.UnsavedChangesBar state="saving" />
         <crm.UnsavedChangesBar state="saved" />
         <crm.UnsavedChangesBar state="blocked" />
+        <crm.UnsavedChangesBar state="error" />
       </div>
     );
 
@@ -2738,6 +3206,23 @@ describe("@taliya/crm component coverage", () => {
     expect(within(screen.getByRole("region", { name: "Salvando alterações" })).getByRole("button", { name: /Salvando/ })).toBeDisabled();
     expect(within(screen.getByRole("region", { name: "Alterações salvas" })).getByRole("button", { name: "Salvo" })).toBeDisabled();
     expect(within(screen.getByRole("region", { name: "Salvamento bloqueado" })).getByRole("button", { name: "Bloqueado" })).toBeDisabled();
+    expect(within(screen.getByRole("region", { name: "Falha ao salvar" })).getByRole("button", { name: "Tentar novamente" })).toBeEnabled();
+  });
+
+  it("keeps read-only and entitlement settings hub cards navigable", () => {
+    const onOpen = vi.fn();
+
+    const { rerender } = render(<crm.SettingsHubCard onOpen={onOpen} state="read-only" />);
+    fireEvent.click(screen.getByRole("button", { name: "Abrir em leitura" }));
+    expect(onOpen).toHaveBeenCalledOnce();
+
+    rerender(<crm.SettingsHubCard onOpen={onOpen} state="entitlement-blocked" />);
+    fireEvent.click(screen.getByRole("button", { name: "Ver plano" }));
+    expect(onOpen).toHaveBeenCalledTimes(2);
+
+    rerender(<crm.SettingsHubCard onOpen={onOpen} state="error" />);
+    fireEvent.click(screen.getByRole("button", { name: "Tentar novamente" }));
+    expect(onOpen).toHaveBeenCalledTimes(3);
   });
 
   it("renders ConfigImpactPreview from the approved ImpactSummary anatomy", () => {
@@ -2832,6 +3317,51 @@ describe("@taliya/crm component coverage", () => {
     expect(scheduleHelp).toHaveBeenCalledTimes(1);
   });
 
+  it("delegates subscription page actions and keeps verification non-interactive", () => {
+    const applyCoupon = vi.fn();
+    const continuePayment = vi.fn();
+    const startSetup = vi.fn();
+    const scheduleHelp = vi.fn();
+
+    render(
+      <div>
+        <div data-testid="subscription-review-page">
+          <crm.SubscriptionReviewPage
+            panelProps={{ onApplyCoupon: applyCoupon, onContinuePayment: continuePayment }}
+          />
+        </div>
+        <div data-testid="subscription-verifying-page">
+          <crm.SubscriptionStatusCard state="verifying" />
+        </div>
+        <div data-testid="subscription-confirmed-page">
+          <crm.ConfirmedSubscriptionPage
+            handoffProps={{ onScheduleHelp: scheduleHelp, onStartSetup: startSetup }}
+          />
+        </div>
+      </div>
+    );
+
+    const review = within(screen.getByTestId("subscription-review-page"));
+    fireEvent.change(review.getByRole("textbox", { name: "Código promocional" }), {
+      target: { value: "TALIYA10" }
+    });
+    fireEvent.click(review.getByRole("button", { name: "Aplicar" }));
+    fireEvent.click(review.getByRole("button", { name: "Continuar para pagamento seguro" }));
+
+    const verifying = within(screen.getByTestId("subscription-verifying-page"));
+    expect(verifying.getByRole("heading", { level: 1, name: "Estamos confirmando sua assinatura" })).toBeInTheDocument();
+    expect(verifying.getByRole("button", { name: /Verificando/i })).toBeDisabled();
+
+    const confirmed = within(screen.getByTestId("subscription-confirmed-page"));
+    fireEvent.click(confirmed.getByRole("button", { name: "Começar setup guiado" }));
+    fireEvent.click(confirmed.getByRole("button", { name: "Agendar ajuda humana" }));
+
+    expect(applyCoupon).toHaveBeenCalledWith("TALIYA10");
+    expect(continuePayment).toHaveBeenCalledTimes(1);
+    expect(startSetup).toHaveBeenCalledTimes(1);
+    expect(scheduleHelp).toHaveBeenCalledTimes(1);
+  });
+
   it("keeps plan summary variants composed and interactive", () => {
     const changePlan = vi.fn();
     const viewDetails = vi.fn();
@@ -2905,6 +3435,27 @@ describe("@taliya/crm component coverage", () => {
     expect(onUpdatePayment).toHaveBeenCalledOnce();
     expect(onViewAddOns).toHaveBeenCalledOnce();
     expect(onSupport).toHaveBeenCalledOnce();
+  });
+
+  it("exposes billing subscription lifecycle states", () => {
+    const onUpdatePayment = vi.fn();
+    const { container, rerender } = render(<crm.BillingSubscriptionWorkspace onUpdatePayment={onUpdatePayment} />);
+
+    expect(container.querySelector('[data-component="BillingSubscriptionWorkspace"]')).toHaveAttribute("data-state", "active");
+    rerender(<crm.BillingSubscriptionWorkspace onUpdatePayment={onUpdatePayment} state="failed" />);
+    expect(container.querySelector('[data-component="BillingSubscriptionWorkspace"]')).toHaveAttribute("data-state", "failed");
+    expect(screen.getByText("Pagamento falhou")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Atualizar pagamento" }));
+    expect(onUpdatePayment).toHaveBeenCalledOnce();
+
+    rerender(<crm.BillingSubscriptionWorkspace state="expired" />);
+    expect(screen.getByText("Assinatura expirada")).toBeInTheDocument();
+    rerender(<crm.BillingSubscriptionWorkspace state="loading" />);
+    expect(container.querySelector('[data-component="BillingSubscriptionWorkspace"]')).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByText("Carregando assinatura")).toBeInTheDocument();
+    rerender(<crm.BillingSubscriptionWorkspace blockedReason="Conta sem acesso ao Billing" state="blocked" />);
+    expect(screen.getByText("Assinatura indisponível")).toBeInTheDocument();
+    expect(screen.getByText("Conta sem acesso ao Billing")).toBeInTheDocument();
   });
 
   it("owns the billing invoices workspace anatomy and invoice actions", () => {
@@ -2998,6 +3549,31 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.queryByRole("complementary", { name: "Detalhes do caso operacional" })).not.toBeInTheDocument();
   });
 
+  it("keeps blocked case recovery actions available while guarding unsafe mutations", () => {
+    const action = vi.fn();
+    render(
+      <crm.CaseDrawer
+        footerActions={[
+          { id: "open-origin", label: "Abrir origem" },
+          { id: "correct", label: "Corrigir agora" },
+          { id: "create-task", label: "Criar tarefa" },
+          { id: "assume", label: "Assumir" },
+          { id: "resolve", label: "Marcar resolvido" }
+        ]}
+        onAction={action}
+        state="blocked"
+      />
+    );
+
+    expect(screen.getByRole("button", { name: "Abrir origem" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Corrigir agora" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Criar tarefa" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Assumir" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Marcar resolvido" })).toBeDisabled();
+    fireEvent.click(screen.getByRole("button", { name: "Corrigir agora" }));
+    expect(action).toHaveBeenCalledWith("correct");
+  });
+
   it("renders CaseDrawer operational sections with reusable case grammar", () => {
     const action = vi.fn();
     render(
@@ -3005,6 +3581,7 @@ describe("@taliya/crm component coverage", () => {
         density="compact"
         footerActions={[
           { id: "message", label: "Enviar mensagem", variant: "primary" },
+          { id: "correct", label: "Corrigir agora" },
           { id: "create-task", label: "Criar tarefa" }
         ]}
         onAction={action}
@@ -3019,13 +3596,10 @@ describe("@taliya/crm component coverage", () => {
           { id: "opportunity", title: "Oportunidade", kind: "facts", items: [{ id: "slot", label: "Vaga aberta", meta: "Quinta, 09:00", tone: "success" }] }
         ]}
         numberedSections
-        widthVariant="wide"
       />
     );
 
     const drawer = screen.getByRole("complementary", { name: "Detalhes do caso operacional" });
-    expect(drawer).toHaveAttribute("data-width-variant", "wide");
-    expect(drawer).toHaveClass("tcrm-case-drawer--wide");
     expect(within(drawer).getByRole("heading", { name: "2. Motivo declarado" })).toBeInTheDocument();
     expect(within(drawer).getByText("Aluna aguardando retorno.")).toBeInTheDocument();
     expect(within(drawer).getByRole("heading", { name: "4. Automacao pausada" })).toBeInTheDocument();
@@ -3037,7 +3611,46 @@ describe("@taliya/crm component coverage", () => {
     expect(drawer).toHaveClass("tcrm-case-drawer--compact");
     expect(drawer.querySelector(".tcrm-drawer-frame__footer")).toBeNull();
     fireEvent.click(within(drawer).getByRole("button", { name: "Enviar mensagem" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Corrigir agora" }));
     expect(action).toHaveBeenCalledWith("message");
+    expect(action).toHaveBeenCalledWith("correct");
+  });
+
+  it("supports retention lifecycle states, actions, and contextual action guards", () => {
+    const action = vi.fn();
+
+    render(
+      <crm.CaseDrawer
+        footerActions={[
+          { id: "create-case", label: "Abrir caso" },
+          { id: "save", label: "Registrar salvamento" },
+          { id: "start-return", label: "Iniciar retorno" },
+          { id: "reserve", label: "Reservar vaga", disabled: true },
+          { id: "classify", label: "Classificar" },
+          { id: "pause-automation", label: "Pausar automacao" }
+        ]}
+        onAction={action}
+        state="reactivation-do-not-contact"
+      />
+    );
+
+    const drawer = screen.getByRole("complementary", { name: "Detalhes do caso operacional" });
+    expect(drawer).toHaveAttribute("data-state", "reactivation-do-not-contact");
+    expect(within(drawer).getByRole("button", { name: "Reservar vaga" })).toBeDisabled();
+
+    fireEvent.click(within(drawer).getByRole("button", { name: "Abrir caso" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Registrar salvamento" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Iniciar retorno" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Classificar" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Pausar automacao" }));
+
+    expect(action.mock.calls.map(([value]) => value)).toEqual([
+      "create-case",
+      "save",
+      "start-return",
+      "classify",
+      "pause-automation"
+    ]);
   });
 
   it("keeps the student drawer cloned, prop-driven, and interactive", () => {
@@ -3061,18 +3674,42 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(within(drawer).getByRole("button", { name: "Fechar aluno" }));
     fireEvent.click(within(drawer).getByRole("button", { name: /Abrir perfil/ }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Enviar mensagem" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Agendar" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Atualizar dados" }));
 
     expect(close).toHaveBeenCalledTimes(1);
     expect(action).toHaveBeenCalledWith("close");
     expect(action).toHaveBeenCalledWith("open-profile");
     expect(action).toHaveBeenCalledWith("message");
+    expect(action).toHaveBeenCalledWith("schedule");
     expect(action).toHaveBeenCalledWith("update-data");
 
     cleanup();
 
     render(<crm.StudentDrawer open={false} />);
     expect(screen.queryByRole("complementary", { name: "Resumo do aluno" })).not.toBeInTheDocument();
+  });
+
+  it("keeps student lifecycle and finance states independent", () => {
+    const { rerender } = render(
+      <crm.StudentDrawer finance={{ status: "ok" }} state="risk" />
+    );
+
+    let drawer = screen.getByRole("complementary", { name: "Resumo do aluno" });
+    expect(drawer).toHaveAttribute("data-state", "risk");
+    expect(within(drawer).getByText("Em risco")).toBeInTheDocument();
+    expect(within(drawer).getByText("em dia")).toBeInTheDocument();
+    expect(within(drawer).queryByText("em atraso")).not.toBeInTheDocument();
+
+    rerender(<crm.StudentDrawer finance={{ status: "overdue" }} state="delinquent" />);
+    drawer = screen.getByRole("complementary", { name: "Resumo do aluno" });
+    expect(drawer).toHaveAttribute("data-state", "delinquent");
+    expect(within(drawer).getByText("Inadimplente")).toBeInTheDocument();
+    expect(within(drawer).getByText("em atraso")).toBeInTheDocument();
+
+    rerender(<crm.StudentDrawer state="paused" />);
+    expect(screen.getByRole("complementary", { name: "Resumo do aluno" })).toHaveAttribute("data-state", "paused");
+    expect(screen.getByText("Pausada")).toBeInTheDocument();
   });
 
   it("keeps the class drawer cloned, prop-driven, and interactive", () => {
@@ -3144,6 +3781,29 @@ describe("@taliya/crm component coverage", () => {
     expect(within(drawer).getByText("Alteracoes nesta turma podem afetar 3 aulas futuras.")).toBeInTheDocument();
     expect(within(drawer).getByText("Ana Carolina Souza").closest("li")).toHaveAttribute("data-attendance", "pending");
     expect(within(drawer).getByText("Beatriz Lima").closest("li")).toHaveAttribute("data-attendance", "present");
+  });
+
+  it("exposes class-detail demand actions and conflict state", () => {
+    const action = vi.fn();
+    render(
+      <crm.ClassDrawer
+        ariaLabel="Detalhes da turma"
+        facts={[{ id: "demand", icon: "users", label: "Demanda", value: "6 interessados", tone: "danger" }]}
+        onAction={action}
+        primaryAction={{ label: "Abrir aula", action: "open-class" }}
+        secondaryActions={[{ label: "Ver demanda", action: "view-demand" }]}
+        state="conflict"
+        variant="class-detail"
+      />
+    );
+
+    const drawer = screen.getByRole("complementary", { name: "Detalhes da turma" });
+    expect(drawer).toHaveAttribute("data-state", "conflict");
+    expect(within(drawer).getByText("6 interessados")).toBeInTheDocument();
+    fireEvent.click(within(drawer).getByRole("button", { name: "Abrir aula" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Ver demanda" }));
+    expect(action).toHaveBeenCalledWith("open-class");
+    expect(action).toHaveBeenCalledWith("view-demand");
   });
 
   it("renders prepared roster statuses and class-detail actions in content", () => {
@@ -3255,6 +3915,39 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("open-conversation");
   });
 
+  it("supports contextual movement reconciliation and dispute actions", () => {
+    const action = vi.fn();
+    const actions: crm.PaymentDrawerActionConfig[] = [
+      { id: "reconcile", label: "Conciliar movimentação", leadingIcon: "checkCircle", placement: "primary" },
+      { id: "approve-receipt", label: "Aprovar comprovante", leadingIcon: "checkCircle" },
+      { id: "move-stage", label: "Mover etapa", leadingIcon: "refresh" },
+      { id: "open-receipt", label: "Abrir comprovante", leadingIcon: "clipboard" },
+      { id: "export-movement", label: "Exportar comprovante", leadingIcon: "download" },
+      { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" }
+    ];
+    const { rerender } = render(<crm.PaymentDrawer actions={actions} onAction={action} state="reconciliation" statusLabel="Conciliação pendente" variant="movement" />);
+
+    const drawer = screen.getByRole("complementary", { name: "Detalhes da cobrança" });
+    expect(drawer).toHaveAttribute("data-state", "reconciliation");
+    fireEvent.click(within(drawer).getByRole("button", { name: "Conciliar movimentação" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Aprovar comprovante" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Mover etapa" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Abrir comprovante" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Exportar comprovante" }));
+    expect(action).toHaveBeenCalledWith("reconcile");
+    expect(action).toHaveBeenCalledWith("approve-receipt");
+    expect(action).toHaveBeenCalledWith("move-stage");
+    expect(action).toHaveBeenCalledWith("open-receipt");
+    expect(action).toHaveBeenCalledWith("export-movement");
+
+    rerender(<crm.PaymentDrawer actions={actions} onAction={action} state="reconciled" statusLabel="Conciliado" variant="movement" />);
+    expect(screen.getByText("Conciliado")).toHaveClass("tcrm-payment-drawer__status-label--paid");
+    expect(screen.getByRole("button", { name: "Conciliar movimentação" })).toBeDisabled();
+
+    rerender(<crm.PaymentDrawer actions={[{ id: "resolve-dispute", label: "Resolver disputa", placement: "primary" }]} state="dispute" statusLabel="Disputa" variant="movement" />);
+    expect(screen.getByRole("button", { name: "Resolver disputa" })).toBeEnabled();
+  });
+
   it("keeps the replacement drawer cloned, prop-driven, and interactive", () => {
     const action = vi.fn();
     const close = vi.fn();
@@ -3289,6 +3982,7 @@ describe("@taliya/crm component coverage", () => {
 
     fireEvent.click(within(drawer).getByRole("button", { name: /Quinta 08h/ }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Fechar reposição" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Encontrar encaixe" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Reservar vaga" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Enviar convite" }));
     fireEvent.click(within(drawer).getByRole("button", { name: "Criar tarefa" }));
@@ -3300,6 +3994,7 @@ describe("@taliya/crm component coverage", () => {
     expect(optionSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "thu-08" }));
     expect(close).toHaveBeenCalledTimes(1);
     expect(action).toHaveBeenCalledWith("close");
+    expect(action).toHaveBeenCalledWith("find-fit");
     expect(action).toHaveBeenCalledWith("reserve-slot");
     expect(action).toHaveBeenCalledWith("send-invite");
     expect(action).toHaveBeenCalledWith("create-task");
@@ -3312,6 +4007,34 @@ describe("@taliya/crm component coverage", () => {
 
     render(<crm.ReplacementDrawer open={false} />);
     expect(screen.queryByRole("complementary", { name: "Detalhes da reposição" })).not.toBeInTheDocument();
+  });
+
+  it("enforces replacement lifecycle actions and terminal guards", () => {
+    const action = vi.fn();
+    const { rerender } = render(<crm.ReplacementDrawer onAction={action} state="scheduled" />);
+
+    let drawer = screen.getByRole("complementary", { name: "Detalhes da reposição" });
+    fireEvent.click(within(drawer).getByRole("button", { name: "Consumir crédito" }));
+    expect(action).toHaveBeenCalledWith("consume-credit");
+
+    rerender(<crm.ReplacementDrawer onAction={action} options={[]} state="no-vacancy" />);
+    drawer = screen.getByRole("complementary", { name: "Detalhes da reposição" });
+    expect(drawer).toHaveAttribute("data-state", "no-vacancy");
+    expect(within(drawer).getByText("Nenhum encaixe compatível")).toBeInTheDocument();
+    expect(within(drawer).getByRole("button", { name: "Reservar vaga" })).toBeDisabled();
+    fireEvent.click(within(drawer).getByRole("button", { name: "Encontrar encaixe" }));
+    expect(action).toHaveBeenCalledWith("find-fit");
+
+    rerender(<crm.ReplacementDrawer onAction={action} options={[]} state="expired" />);
+    drawer = screen.getByRole("complementary", { name: "Detalhes da reposição" });
+    expect(drawer).toHaveAttribute("data-state", "expired");
+    expect(within(drawer).getByRole("button", { name: "Reservar vaga" })).toBeDisabled();
+
+    rerender(<crm.ReplacementDrawer onAction={action} state="consumed" />);
+    drawer = screen.getByRole("complementary", { name: "Detalhes da reposição" });
+    expect(drawer).toHaveAttribute("data-state", "consumed");
+    expect(within(drawer).getByRole("button", { name: "Reservar vaga" })).toBeDisabled();
+    expect(within(drawer).getByRole("button", { name: "Encontrar encaixe" })).toBeDisabled();
   });
 
   it("keeps the lead drawer cloned, prop-driven, and interactive", () => {
@@ -3356,6 +4079,76 @@ describe("@taliya/crm component coverage", () => {
 
     render(<crm.LeadDrawer open={false} />);
     expect(screen.queryByRole("complementary", { name: "Detalhes do interessado" })).not.toBeInTheDocument();
+  });
+
+  it("exposes explicit commercial lead, trial, and enrollment lifecycle contracts", () => {
+    const action = vi.fn();
+    const checklistToggle = vi.fn();
+    const checklistItems = [
+      { id: "payment", label: "Pagamento inicial", checked: false }
+    ];
+    const { rerender } = render(
+      <crm.LeadDrawer
+        checklistItems={checklistItems}
+        onAction={action}
+        onChecklistToggle={checklistToggle}
+        primaryAction={{ action: "qualify", label: "Qualificar" }}
+        secondaryActions={[{ action: "schedule-trial", label: "Agendar experimental" }]}
+        state="new"
+      />
+    );
+
+    let drawer = screen.getByRole("complementary", { name: "Detalhes do interessado" });
+    expect(drawer).toHaveAttribute("data-state", "new");
+    fireEvent.click(within(drawer).getByRole("button", { name: "Qualificar" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Revisar Pagamento inicial" }));
+    expect(action).toHaveBeenCalledWith("qualify");
+    expect(checklistToggle).toHaveBeenCalledWith(checklistItems[0], true);
+
+    rerender(
+      <crm.LeadDrawer
+        onAction={action}
+        primaryAction={{ action: "charge-payment", label: "Cobrar pagamento" }}
+        secondaryActions={[
+          { action: "validate-enrollment", label: "Validar matrícula" },
+          { action: "create-task", label: "Criar tarefa" },
+          { action: "convert-student", label: "Converter em aluno" }
+        ]}
+        state="enrollment-payment"
+      />
+    );
+
+    drawer = screen.getByRole("complementary", { name: "Detalhes do interessado" });
+    expect(drawer).toHaveAttribute("data-state", "enrollment-payment");
+    fireEvent.click(within(drawer).getByRole("button", { name: "Cobrar pagamento" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Validar matrícula" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Criar tarefa" }));
+    fireEvent.click(within(drawer).getByRole("button", { name: "Converter em aluno" }));
+    expect(action).toHaveBeenCalledWith("charge-payment");
+    expect(action).toHaveBeenCalledWith("validate-enrollment");
+    expect(action).toHaveBeenCalledWith("create-task");
+    expect(action).toHaveBeenCalledWith("convert-student");
+
+    for (const state of ["no-slot", "ready", "trial-scheduled", "trial-missed", "trial-convert", "enrollment-missing", "enrollment-ready", "enrollment-converted"] as const) {
+      rerender(<crm.LeadDrawer state={state} />);
+      expect(screen.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", state);
+    }
+  });
+
+  it("gives enrollment checklist actions unique names and disables inert controls", () => {
+    const items = [
+      { id: "data", title: "Dados básicos", state: "complete" as const },
+      { id: "payment", title: "Pagamento inicial", state: "warning" as const }
+    ];
+    const { rerender } = render(<crm.EnrollmentChecklist items={items} />);
+
+    expect(screen.getByRole("button", { name: "Revisar Dados básicos" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Revisar Pagamento inicial" })).toBeDisabled();
+
+    const action = vi.fn();
+    rerender(<crm.EnrollmentChecklist items={items} onAction={action} />);
+    fireEvent.click(screen.getByRole("button", { name: "Revisar Pagamento inicial" }));
+    expect(action).toHaveBeenCalledWith("payment");
   });
 
   it("keeps the agent flow drawer cloned, contextual, and interactive", () => {
@@ -3503,6 +4296,11 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("attach");
     expect(action).toHaveBeenCalledWith("resolve");
 
+    rerender(<crm.SupportTicketDrawer onAction={action} state="access active" />);
+    expect(screen.getByText("Autorizado")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Revogar acesso" }));
+    expect(action).toHaveBeenCalledWith("revoke-access");
+
     rerender(
       <crm.SupportTicketDrawer
         facts={[{ id: "type", label: "Tipo", value: "Integracao", icon: "link" }]}
@@ -3634,6 +4432,8 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(within(screen.getByTestId("simulation")).getByRole("button", { name: "Voltar ao fluxo" }));
     fireEvent.click(within(screen.getByTestId("receipt")).getByRole("button", { name: "Abrir tarefa" }));
 
+    expect(within(screen.getByTestId("phone-preview")).queryByRole("main")).not.toBeInTheDocument();
+
     expect(agentOpen).toHaveBeenCalledWith("agenda");
     expect(routineOpen).toHaveBeenCalledWith("presenca");
     expect(modeChange).toHaveBeenCalledWith("manual");
@@ -3694,7 +4494,7 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByTestId("pipeline").querySelector(".lucide-camera")).toBeInTheDocument();
     fireEvent.click(within(screen.getByTestId("lead")).getByRole("button", { name: "Abrir conversa" }));
     fireEvent.click(within(screen.getByTestId("trial")).getByRole("button", { name: /Ana Souza/ }));
-    fireEvent.click(within(screen.getByTestId("enrollment")).getAllByRole("button", { name: "Abrir" })[0]);
+    fireEvent.click(within(screen.getByTestId("enrollment")).getByRole("button", { name: "Revisar Dados básicos" }));
     fireEvent.click(within(screen.getByTestId("risk")).getByRole("button", { name: "Abrir risco" }));
 
     expect(action).toHaveBeenCalledWith("message");
@@ -3814,12 +4614,10 @@ describe("@taliya/crm component coverage", () => {
     expect(insetWindow).toHaveClass("tcrm-product-shell-window--frame-window-inset");
   });
 
-  it("lets CrmProductShell opt drawers into content-height placement", () => {
+  it("uses one canonical drawer geometry in CrmProductShell", () => {
     const { rerender } = render(
       <crm.CrmProductShell
         drawer={<crm.ChecklistDrawer />}
-        drawerPlacement="content"
-        drawerSize="compact"
         subtitle="Rotinas operacionais do estudio"
         title="Checklists"
       >
@@ -3829,16 +4627,15 @@ describe("@taliya/crm component coverage", () => {
 
     const shell = screen.getByText("Tabela de checklists").closest(".tcrm-product-shell-stage");
     const window = screen.getByText("Tabela de checklists").closest(".tcrm-product-shell-window");
-    expect(shell).toHaveClass("tcrm-product-shell-stage--drawer-content");
-    expect(shell).toHaveClass("tcrm-product-shell-stage--drawer-compact");
-    expect(window).toHaveClass("tcrm-product-shell-window--drawer-content");
-    expect(window).toHaveClass("tcrm-product-shell-window--drawer-compact");
+    expect(shell).toHaveClass("tcrm-product-shell-stage--drawer");
+    expect(window).toHaveClass("tcrm-product-shell-window--drawer");
+    expect(shell?.className).not.toMatch(/drawer-(?:content|floating|chrome|viewport|compact)/);
+    expect(window?.className).not.toMatch(/drawer-(?:content|floating|chrome|viewport|compact)/);
     expect(screen.getByRole("complementary", { name: "Detalhes do checklist" })).toHaveAttribute("data-component", "ChecklistDrawer");
 
     rerender(
       <crm.CrmProductShell
         drawer={<crm.ApprovalDrawer />}
-        drawerPlacement="floating"
         pageHeaderRhythm="spacious"
         subtitle="Decisoes aguardando revisao humana"
         title="Aprovacoes"
@@ -3849,42 +4646,9 @@ describe("@taliya/crm component coverage", () => {
 
     const approvalShell = screen.getByText("Tabela de aprovacoes").closest(".tcrm-product-shell-stage");
     const approvalWindow = screen.getByText("Tabela de aprovacoes").closest(".tcrm-product-shell-window");
-    expect(approvalShell).toHaveClass("tcrm-product-shell-stage--drawer-floating");
+    expect(approvalShell).toHaveClass("tcrm-product-shell-stage--drawer");
     expect(approvalShell).toHaveClass("tcrm-product-shell-stage--page-header-spacious");
-    expect(approvalWindow).toHaveClass("tcrm-product-shell-window--drawer-floating");
-
-    rerender(
-      <crm.CrmProductShell
-        drawer={<crm.CaseDrawer />}
-        drawerPlacement="chrome"
-        subtitle="Pedidos em acompanhamento"
-        title="Cancelamentos"
-      >
-        <p>Fila com drawer abaixo do chrome</p>
-      </crm.CrmProductShell>
-    );
-
-    const chromeShell = screen.getByText("Fila com drawer abaixo do chrome").closest(".tcrm-product-shell-stage");
-    const chromeWindow = screen.getByText("Fila com drawer abaixo do chrome").closest(".tcrm-product-shell-window");
-    expect(chromeShell).toHaveClass("tcrm-product-shell-stage--drawer-chrome");
-    expect(chromeWindow).toHaveClass("tcrm-product-shell-window--drawer-chrome");
-
-    rerender(
-      <crm.CrmProductShell
-        drawer={<crm.TaskDrawer />}
-        drawerPlacement="viewport"
-        pageHeaderRhythm="dashboard"
-        subtitle="Studio Vila Mariana"
-        title="Hoje"
-      >
-        <p>Dashboard Hoje com tarefa</p>
-      </crm.CrmProductShell>
-    );
-
-    const viewportShell = screen.getByText("Dashboard Hoje com tarefa").closest(".tcrm-product-shell-stage");
-    const viewportWindow = screen.getByText("Dashboard Hoje com tarefa").closest(".tcrm-product-shell-window");
-    expect(viewportShell).toHaveClass("tcrm-product-shell-stage--drawer-viewport");
-    expect(viewportWindow).toHaveClass("tcrm-product-shell-window--drawer-viewport");
+    expect(approvalWindow).toHaveClass("tcrm-product-shell-window--drawer");
 
     rerender(
       <crm.CrmProductShell
@@ -4129,13 +4893,27 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("button", { name: "Abrir fila quente" })).toBeInTheDocument();
   });
 
+  it("exposes internal overview operational states", () => {
+    const { container, rerender } = render(<crm.InternalOverviewDashboard state="normal" />);
+
+    expect(container.querySelector(".tcrm-internal-shell")).toHaveAttribute("data-state", "normal");
+    rerender(<crm.InternalOverviewDashboard state="degraded" />);
+    expect(screen.getByText("Operação degradada")).toBeInTheDocument();
+    rerender(<crm.InternalOverviewDashboard state="critical" />);
+    expect(screen.getByText("Incidente crítico em investigação")).toBeInTheDocument();
+    rerender(<crm.InternalOverviewDashboard state="loading" />);
+    expect(screen.getByText("Carregando operação interna")).toBeInTheDocument();
+    expect(container.querySelector(".tcrm-internal-shell")).toHaveAttribute("aria-busy", "true");
+    rerender(<crm.InternalOverviewDashboard state="empty" />);
+    expect(screen.getByText("Nenhuma atividade operacional")).toBeInTheDocument();
+  });
+
   it("forwards the internal overview shell contract to CrmProductShell", () => {
     render(
       <crm.InternalShell
         browserUrl="https://app.taliya.com/internal"
         contentLayout="internal-overview"
         drawer={<crm.SupportTicketDrawer variant="internal" />}
-        drawerPlacement="floating"
         pageHeaderRhythm="internal-overview"
         title="Taliya Interno"
       >
@@ -4146,7 +4924,7 @@ describe("@taliya/crm component coverage", () => {
     const shell = screen.getByText("Conteudo operacional").closest("[data-component='CrmProductShell']");
     expect(shell).toHaveAttribute("data-shell-variant", "internal");
     expect(shell).toHaveClass("tcrm-product-shell-stage--content-internal-overview");
-    expect(shell).toHaveClass("tcrm-product-shell-stage--drawer-floating");
+    expect(shell).toHaveClass("tcrm-product-shell-stage--drawer");
     expect(shell).toHaveClass("tcrm-product-shell-stage--page-header-internal-overview");
     expect(screen.getByLabelText("https://app.taliya.com/internal")).toBeInTheDocument();
     expect(screen.getByRole("complementary", { name: "Detalhes do ticket de suporte" })).toHaveClass("tcrm-support-ticket-drawer--internal");
@@ -4160,13 +4938,15 @@ describe("@taliya/crm component coverage", () => {
         regions={{ pageHeader: false }}
         title="Studio Vila Mariana"
       >
-        <crm.TenantDetailLayout />
+        <crm.TenantDetailLayout headingLevel={1} />
       </crm.InternalShell>
     );
 
     const shell = screen.getByLabelText("Detalhe do tenant").closest("[data-component='CrmProductShell']");
     expect(shell).toHaveClass("tcrm-product-shell-stage--content-internal-tenant-detail");
     expect(screen.getByLabelText("https://app.taliya.com/internal/tenants/tenant_vila_mariana")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Studio Vila Mariana", level: 1 })).toBeInTheDocument();
+    expect(screen.getAllByRole("main")).toHaveLength(1);
     expect(screen.getByText(/Visão interna e segura da Taliya/)).toBeInTheDocument();
     expect(screen.getByRole("complementary", { name: "Segurança do tenant" })).toBeInTheDocument();
   });
@@ -4223,6 +5003,13 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.queryByRole("complementary", { name: "Segurança do tenant" })).not.toBeInTheDocument();
   });
 
+  it("supports a page-level heading without changing the student header anatomy", () => {
+    render(<crm.StudentHeader headingLevel={1} />);
+
+    expect(screen.getByRole("heading", { name: "Ana Paula Martins", level: 1 })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Ana Paula Martins", level: 2 })).not.toBeInTheDocument();
+  });
+
   it("keeps TenantSecurityDrawer composed, interactive, and stateful", () => {
     const action = vi.fn();
     const close = vi.fn();
@@ -4272,10 +5059,23 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("grants");
     expect(close).toHaveBeenCalledOnce();
 
-    rerender(<crm.TenantSummaryDrawer state="risk" />);
-    expect(screen.getByText("requer atenção")).toBeInTheDocument();
-    expect(screen.getByText(/Há sinais de risco/)).toBeInTheDocument();
-    expect(screen.getByText(/priorizar a revisão dos sinais de risco/)).toBeInTheDocument();
+    rerender(<crm.TenantSummaryDrawer grantState="none" onAction={action} state="degraded" />);
+    expect(screen.getByText("degradado")).toBeInTheDocument();
+    expect(screen.getByText(/Há degradação/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Conceder acesso" })).toBeEnabled();
+    fireEvent.click(screen.getByRole("button", { name: "Conceder acesso" }));
+    expect(action).toHaveBeenCalledWith("grant-access");
+
+    rerender(<crm.TenantSummaryDrawer grantState="active" onAction={action} state="active" />);
+    expect(screen.getByRole("complementary", { name: "Resumo do tenant selecionado" })).toHaveAttribute("data-grant-state", "active");
+    fireEvent.click(screen.getByRole("button", { name: "Revogar acesso" }));
+    expect(action).toHaveBeenCalledWith("revoke-access");
+
+    rerender(<crm.TenantSummaryDrawer grantState="none" onAction={action} state="tenant-blocked" />);
+    expect(screen.getByText("bloqueado")).toBeInTheDocument();
+    expect(screen.getByText(/tenant está bloqueado/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Conceder acesso" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Ver auditoria" })).toBeEnabled();
 
     rerender(<crm.TenantSummaryDrawer state="loading" />);
     expect(screen.getByRole("complementary", { name: "Resumo do tenant selecionado" })).toHaveAttribute("aria-busy", "true");
@@ -4363,16 +5163,18 @@ describe("@taliya/crm component coverage", () => {
     const remove = vi.fn();
 
     const { rerender } = render(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} />);
-    const row = screen.getByRole("button", { name: /Ana Martins.*Professor.*Convite preparado/i });
+    const row = screen.getByRole("listitem", { name: /Ana Martins.*Professor.*Convite preparado/i });
+    const openAction = screen.getByRole("button", { name: "Abrir Ana Martins" });
 
     expect(row).toHaveAttribute("data-component", "InviteRow");
     expect(row).toHaveAttribute("data-state", "prepared");
+    expect(openAction).toHaveClass("tl-button");
     expect(screen.getByText("AM")).toBeInTheDocument();
     expect(screen.getByText("ana@studio.com")).toBeInTheDocument();
     expect(screen.getByText("(11) 98888-1111")).toBeInTheDocument();
 
-    fireEvent.click(row);
-    fireEvent.keyDown(row, { key: "Enter" });
+    fireEvent.click(openAction);
+    fireEvent.keyDown(openAction, { key: "Enter" });
     fireEvent.click(screen.getByRole("button", { name: "Editar Ana Martins" }));
     fireEvent.click(screen.getByRole("button", { name: "Remover Ana Martins" }));
     expect(open).toHaveBeenCalledTimes(2);
@@ -4380,16 +5182,18 @@ describe("@taliya/crm component coverage", () => {
     expect(remove).toHaveBeenCalledWith(expect.objectContaining({ id: "ana-martins" }), "prepared");
 
     rerender(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} state="incomplete" />);
-    expect(screen.getByRole("button", { name: /Roberto Lima.*Dados incompletos/i })).toHaveAttribute("data-state", "incomplete");
+    expect(screen.getByRole("listitem", { name: /Roberto Lima.*Dados incompletos/i })).toHaveAttribute("data-state", "incomplete");
     expect(screen.getByText("RL")).toBeInTheDocument();
     expect(screen.getByText("Dados incompletos")).toBeInTheDocument();
 
     rerender(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} state="loading" />);
-    expect(screen.getByRole("button", { name: /Carregando equipe.*Atualizando/i })).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByRole("listitem", { name: /Carregando equipe.*Atualizando/i })).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByRole("button", { name: "Abrir Carregando equipe" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Editar Carregando equipe" })).toBeDisabled();
 
     rerender(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} state="blocked" />);
-    expect(screen.getByRole("button", { name: /Acesso bloqueado.*Bloqueado/i })).toHaveAttribute("aria-disabled", "true");
+    expect(screen.getByRole("listitem", { name: /Acesso bloqueado.*Bloqueado/i })).toHaveAttribute("data-state", "blocked");
+    expect(screen.getByRole("button", { name: "Abrir Acesso bloqueado" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Remover Acesso bloqueado" })).toBeDisabled();
   });
 
@@ -4532,6 +5336,24 @@ describe("@taliya/crm component coverage", () => {
     expect(openChange).toHaveBeenLastCalledWith(false);
   });
 
+  it("exposes opportunity ownership and terminal states", () => {
+    const action = vi.fn();
+    const { container, rerender } = render(<crm.OpportunityPanel onAction={action} state="ownerless" />);
+
+    expect(container.querySelector(".tcrm-opportunity-panel")).toHaveAttribute("data-state", "ownerless");
+    expect(screen.getByText("Oportunidade sem dono")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Criar tarefa" }));
+    expect(action).toHaveBeenCalledWith("task");
+
+    rerender(<crm.OpportunityPanel state="resolved" />);
+    expect(screen.getByText("Oportunidade resolvida")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Criar tarefa" })).toBeDisabled();
+    rerender(<crm.OpportunityPanel state="loading" />);
+    expect(container.querySelector(".tcrm-opportunity-panel")).toHaveAttribute("aria-busy", "true");
+    rerender(<crm.OpportunityPanel state="blocked" />);
+    expect(screen.getByRole("button", { name: "Fechar oportunidade" })).toBeDisabled();
+  });
+
   it("keeps batch 10 support, internal, reports, data quality, and blocked states interactive", () => {
     const action = vi.fn();
     const open = vi.fn();
@@ -4626,7 +5448,7 @@ describe("@taliya/crm component coverage", () => {
     expect(action).toHaveBeenCalledWith("message");
     expect(action).toHaveBeenCalledWith("reserve");
     expect(action).toHaveBeenCalledWith("escalate");
-    expect(action).toHaveBeenCalledWith("access");
+    expect(action).toHaveBeenCalledWith("request-access");
     expect(action).toHaveBeenCalledWith("revoke");
     expect(action).toHaveBeenCalledWith("audit");
     expect(action).toHaveBeenCalledWith("primary");
@@ -4718,12 +5540,10 @@ describe("@taliya/crm component coverage", () => {
         label="Tarefa"
         showChecklistProgress={false}
         showCommentsLink={false}
-        size="compact"
         statusLabel="Pendente"
         title="Confirmar reposição com Ana Paula"
       />
     );
-    expect(screen.getByRole("complementary", { name: "Detalhes da tarefa" })).toHaveClass("tcrm-task-drawer--compact");
     expect(screen.getByRole("heading", { name: "Confirmar reposição com Ana Paula" })).toBeInTheDocument();
     expect(screen.getByText("Tarefa")).toBeInTheDocument();
     expect(screen.getByText("Pendente")).toBeInTheDocument();
@@ -4742,7 +5562,6 @@ describe("@taliya/crm component coverage", () => {
       <crm.TaskDrawer
         activityDensity="comfortable"
         facts={[{ id: "deadline", icon: "calendar", label: "Prazo", value: "Hoje", tone: "danger", showToneIcon: false }]}
-        size="compact"
       />
     );
     expect(screen.getByRole("heading", { name: "Confirmar reposição da Ana" }).closest("header")).toHaveClass("tcrm-drawer-frame__header--without-label");
@@ -4756,8 +5575,9 @@ describe("@taliya/crm component coverage", () => {
   it("renders ChecklistDrawer as the source-derived checklist execution panel with real actions", () => {
     const close = vi.fn();
     const stepToggle = vi.fn();
-    const continueAction = vi.fn();
-    const createTask = vi.fn();
+    const primaryAction = vi.fn();
+    const assign = vi.fn();
+    const openTask = vi.fn();
     const complete = vi.fn();
     const origin = vi.fn();
 
@@ -4771,8 +5591,9 @@ describe("@taliya/crm component coverage", () => {
         ]}
         onClose={close}
         onStepToggle={stepToggle}
-        onContinue={continueAction}
-        onCreateTask={createTask}
+        onPrimaryAction={primaryAction}
+        onAssign={assign}
+        onOpenTask={openTask}
         onComplete={complete}
         onOpenOrigin={origin}
       />
@@ -4790,14 +5611,16 @@ describe("@taliya/crm component coverage", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Fechar checklist" }));
     fireEvent.click(screen.getByRole("button", { name: "Continuar" }));
-    fireEvent.click(screen.getByRole("button", { name: "Criar tarefa" }));
+    fireEvent.click(screen.getByRole("button", { name: "Atribuir" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir tarefa" }));
     fireEvent.click(screen.getByRole("button", { name: "Concluir" }));
     fireEvent.click(screen.getByRole("button", { name: "Abrir origem" }));
     fireEvent.click(screen.getByRole("button", { name: /Validar professores confirmados/ }));
 
     expect(close).toHaveBeenCalledTimes(1);
-    expect(continueAction).toHaveBeenCalledTimes(1);
-    expect(createTask).toHaveBeenCalledTimes(1);
+    expect(primaryAction).toHaveBeenCalledTimes(1);
+    expect(assign).toHaveBeenCalledTimes(1);
+    expect(openTask).toHaveBeenCalledTimes(1);
     expect(complete).toHaveBeenCalledTimes(1);
     expect(origin).toHaveBeenCalledTimes(1);
     expect(stepToggle).toHaveBeenCalledWith(expect.objectContaining({ id: "validate-teachers" }), true);
@@ -4808,6 +5631,12 @@ describe("@taliya/crm component coverage", () => {
 
     rerender(<crm.ChecklistDrawer state="blocked" />);
     expect(screen.getByRole("button", { name: "Continuar" })).toBeDisabled();
+
+    rerender(<crm.ChecklistDrawer primaryActionLabel="Iniciar" state="completed" />);
+    expect(screen.getByRole("button", { name: "Iniciar" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Atribuir" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Abrir tarefa" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Abrir origem" })).toBeEnabled();
 
     rerender(<crm.ChecklistDrawer open={false} />);
     expect(screen.queryByRole("complementary", { name: "Detalhes do checklist" })).not.toBeInTheDocument();
@@ -4838,6 +5667,9 @@ describe("@taliya/crm component coverage", () => {
     expect(drawer).toHaveAttribute("data-component", "ApprovalDrawer");
     expect(drawer).toHaveAttribute("data-state", "pending");
     expect(screen.getByRole("heading", { name: /Aprovar mensagem para Ana Paula/ })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Antes da decisão" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Depois da decisão" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Motivo da decisão" })).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /Fechar aprova/ }));
     fireEvent.click(screen.getByRole("button", { name: "Aprovar" }));
@@ -4868,6 +5700,85 @@ describe("@taliya/crm component coverage", () => {
 
     rerender(<crm.ApprovalDrawer open={false} />);
     expect(screen.queryByRole("complementary", { name: /Detalhes da aprova/ })).not.toBeInTheDocument();
+  });
+
+  it("represents the essential checklist and approval states in official worklist tables", () => {
+    const checklistSelect = vi.fn();
+    const { unmount } = render(<crm.ChecklistTable onRowSelect={checklistSelect} />);
+
+    expect(screen.getAllByText("Em andamento")).not.toHaveLength(0);
+    expect(screen.getByText("Pendente")).toBeInTheDocument();
+    expect(screen.getByText("Atrasado")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("row", { name: /Revisão diária da agenda/ }));
+    expect(checklistSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "daily-agenda", status: "overdue" }));
+
+    unmount();
+    const approvalSelect = vi.fn();
+    render(
+      <crm.ApprovalTable
+        onRowSelect={approvalSelect}
+        rows={[
+          {
+            id: "pending",
+            index: 1,
+            title: "Decisão pendente",
+            type: "message",
+            origin: "Inbox",
+            requester: { name: "Copiloto" },
+            risk: "low",
+            cost: "1 crédito",
+            deadline: "Hoje",
+            status: "pending",
+            activity: "Criada agora"
+          },
+          {
+            id: "expired",
+            index: 2,
+            title: "Decisão expirada",
+            type: "agenda",
+            origin: "Agenda",
+            requester: { name: "Recepção" },
+            risk: "medium",
+            cost: "—",
+            deadline: "Expirou",
+            status: "expired",
+            activity: "Prazo encerrado"
+          },
+          {
+            id: "approved",
+            index: 3,
+            title: "Decisão aprovada",
+            type: "data",
+            origin: "CRM",
+            requester: { name: "Gestor" },
+            risk: "low",
+            cost: "—",
+            deadline: "Hoje",
+            status: "approved",
+            activity: "Aprovada agora"
+          },
+          {
+            id: "rejected",
+            index: 4,
+            title: "Decisão rejeitada",
+            type: "finance",
+            origin: "Financeiro",
+            requester: { name: "Gestor" },
+            risk: "high",
+            cost: "R$ 100",
+            deadline: "Hoje",
+            status: "rejected",
+            activity: "Rejeitada agora"
+          }
+        ]}
+      />
+    );
+
+    expect(screen.getByText("Expirada")).toBeInTheDocument();
+    expect(screen.getByText("Aprovada")).toBeInTheDocument();
+    expect(screen.getByText("Rejeitada")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("row", { name: /Decisão expirada/ }));
+    expect(approvalSelect).toHaveBeenCalledWith(expect.objectContaining({ id: "expired", status: "expired" }));
   });
 
   it("renders the Image 11 compact ApprovalPanel with consumer-controlled decisions", () => {
@@ -4971,6 +5882,8 @@ describe("@taliya/crm component coverage", () => {
     );
 
     expect(screen.getByRole("heading", { name: "Studio" })).toBeInTheDocument();
+    expect(screen.getByText("Bloco 1 de 9")).toBeInTheDocument();
+    expect(screen.getByText(/Defina o nome e os hor.rios gerais/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox", { name: "Seg" }));
     fireEvent.click(screen.getByRole("button", { name: "Tem pausa" }));
     fireEvent.click(screen.getByRole("button", { name: /Ajustar hor.rios por dia/i }));
@@ -5000,6 +5913,8 @@ describe("@taliya/crm component coverage", () => {
     );
 
     expect(screen.getByRole("heading", { name: "Equipe" })).toBeInTheDocument();
+    expect(screen.getByText("Dono")).toBeInTheDocument();
+    expect(screen.queryByText("Dono/Admin")).not.toBeInTheDocument();
     expect(screen.getByLabelText("Nome")).toHaveValue("Ana Martins");
     fireEvent.click(screen.getByRole("button", { name: "Adicionar pessoa" }));
     fireEvent.click(screen.getByRole("button", { name: /Editar Ana Martins/i }));
@@ -5042,6 +5957,7 @@ describe("@taliya/crm component coverage", () => {
 
   it("owns the setup plans workspace anatomy and behavior", () => {
     const onAction = vi.fn();
+    const onFieldChange = vi.fn();
     const onNewPlan = vi.fn();
     const onPlanAction = vi.fn();
     const onPlanSelect = vi.fn();
@@ -5049,6 +5965,7 @@ describe("@taliya/crm component coverage", () => {
     render(
       <crm.SetupPlansWorkspace
         onAction={onAction}
+        onFieldChange={onFieldChange}
         onNewPlan={onNewPlan}
         onPlanAction={onPlanAction}
         onPlanSelect={onPlanSelect}
@@ -5057,6 +5974,7 @@ describe("@taliya/crm component coverage", () => {
 
     expect(screen.getByRole("heading", { name: "Planos" })).toBeInTheDocument();
     expect(screen.getByLabelText("1. Nome do plano")).toHaveValue("Pacote 8 aulas");
+    fireEvent.click(screen.getByRole("button", { name: "Aula avulsa" }));
     fireEvent.click(screen.getByRole("button", { name: /Aula experimental/ }));
     fireEvent.click(screen.getByRole("button", { name: "Novo plano" }));
     fireEvent.click(screen.getAllByRole("button", { name: "Editar" })[0]);
@@ -5067,6 +5985,7 @@ describe("@taliya/crm component coverage", () => {
     expect(onPlanSelect).toHaveBeenCalledWith("trial");
     expect(onNewPlan).toHaveBeenCalledOnce();
     expect(onPlanAction).toHaveBeenCalledWith("weekly", "edit");
+    expect(onFieldChange).toHaveBeenCalledWith("type", "single");
     expect(onAction.mock.calls.map(([action]) => action)).toEqual(["save", "later", "continue"]);
   });
 
@@ -5169,7 +6088,7 @@ describe("@taliya/crm component coverage", () => {
 
     render(<crm.SetupReviewWorkspace confirmed onBack={onBack} onConfirmChange={onConfirmChange} onOpenArea={onOpenArea} onPublish={onPublish} onResolveBlocking={onResolveBlocking} onReviewWarnings={onReviewWarnings} onSaveDraft={onSaveDraft} />);
 
-    expect(screen.getByRole("heading", { name: "Revisão" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "Revisão" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /StudioNome e horários gerais/i }));
     fireEvent.click(screen.getByRole("button", { name: "Resolver" }));
     fireEvent.click(screen.getByRole("button", { name: "Revisar avisos" }));
@@ -5229,6 +6148,52 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByText("Pagamento workspace")).toBeInTheDocument();
     expect(screen.getByText("Pagamento")).toBeInTheDocument();
     expect(screen.getByText("Revisão")).toBeInTheDocument();
+  });
+
+  it("renders contextual setup agent guidance and forwards embedded actions", () => {
+    const onAgentClose = vi.fn();
+    const onAgentHumanHelp = vi.fn();
+    const onAgentMenu = vi.fn();
+    const onAgentQuickReply = vi.fn();
+    const onAgentSend = vi.fn();
+
+    render(
+      <crm.SetupPage
+        agentContext={crm.setupAgentContexts.payment}
+        onAgentClose={onAgentClose}
+        onAgentHumanHelp={onAgentHumanHelp}
+        onAgentMenu={onAgentMenu}
+        onAgentQuickReply={onAgentQuickReply}
+        onAgentSend={onAgentSend}
+        step={5}
+      >
+        <span>Pagamento workspace</span>
+      </crm.SetupPage>,
+    );
+
+    expect(screen.getByText("Este bloco define quais meios o studio aceita no começo da operação.")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Mais ações do agente" }));
+    fireEvent.click(screen.getByRole("button", { name: "Como funciona a baixa?" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Pergunte sobre esta etapa" }), { target: { value: "Como registrar?" } });
+    fireEvent.click(screen.getByRole("button", { name: "Enviar pergunta" }));
+    fireEvent.click(screen.getByRole("button", { name: "Agendar ajuda" }));
+    fireEvent.click(screen.getByRole("button", { name: "Fechar agente" }));
+
+    expect(onAgentMenu).toHaveBeenCalledOnce();
+    expect(onAgentQuickReply).toHaveBeenCalledWith("Como funciona a baixa?");
+    expect(onAgentSend).toHaveBeenCalledWith("Como registrar?");
+    expect(onAgentHumanHelp).toHaveBeenCalledOnce();
+    expect(onAgentClose).toHaveBeenCalledOnce();
+  });
+
+  it("disables embedded setup agent actions without callbacks", () => {
+    render(<crm.SetupPage step={1}><span>Studio workspace</span></crm.SetupPage>);
+
+    expect(screen.getByRole("button", { name: "Mais ações do agente" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Fechar agente" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "O que é obrigatório?" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Enviar pergunta" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Agendar ajuda" })).toBeDisabled();
   });
 
   it("renders the source-backed setup welcome agent variant", () => {
@@ -5351,13 +6316,14 @@ describe("@taliya/crm component coverage", () => {
         onFieldChange={onFieldChange}
         onSave={onSave}
         saveState="dirty"
-        values={{ studioName: "Studio Aurora" }}
+        values={{ studioName: "Studio Aurora", timezone: "America/Manaus" }}
       />
     );
 
     expect(screen.getByRole("heading", { name: "Identidade e unidade principal" })).toBeInTheDocument();
     expect(screen.queryByText("Bloco 1 de 8")).not.toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "Nome do studio" })).toHaveValue("Studio Aurora");
+    expect(screen.getByRole("combobox", { name: "Fuso horario" })).toHaveTextContent("Manaus (GMT-4)");
     fireEvent.change(screen.getByRole("textbox", { name: "Nome do studio" }), { target: { value: "Studio Solar" } });
     fireEvent.click(screen.getByRole("checkbox", { name: "Sab" }));
     fireEvent.click(screen.getByRole("button", { name: "Cancelar" }));
@@ -5405,7 +6371,120 @@ describe("@taliya/crm component coverage", () => {
 
     expect(screen.getByText("Inativo")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Reativar" }));
+    expect(screen.getByRole("heading", { name: "Reativar acesso?" })).toBeInTheDocument();
+    expect(onMemberAction).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar reativacao" }));
     expect(onMemberAction).toHaveBeenCalledWith(inactiveMember, "reactivate");
+  });
+
+  it("blocks deactivation of the last active admin", () => {
+    const onMemberAction = vi.fn();
+    const lastAdmin: crm.SettingsTeamMember = {
+      id: "leticia",
+      name: "Leticia Ramos",
+      email: "leticia@studio.com",
+      role: "Dono/Admin",
+      status: "active",
+      lastAccess: "Hoje, 09:42",
+      isLastAdmin: true
+    };
+
+    render(<crm.SettingsTeamWorkspace members={[lastAdmin]} onMemberAction={onMemberAction} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Desativar" }));
+    expect(screen.getByRole("heading", { name: "Mantenha um Dono/Admin ativo" })).toBeInTheDocument();
+    expect(screen.getByText(/O ultimo Dono\/Admin nao pode ser desativado/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Confirmar desativacao" })).toBeDisabled();
+    expect(onMemberAction).not.toHaveBeenCalled();
+  });
+
+  it("confirms a role change before applying it", () => {
+    const onRoleChange = vi.fn();
+    const member: crm.SettingsTeamMember = {
+      id: "carla",
+      name: "Carla Souza",
+      email: "carla@studio.com",
+      role: "Recepcao",
+      status: "active",
+      lastAccess: "Ontem, 18:15"
+    };
+
+    render(<crm.SettingsTeamWorkspace members={[member]} onRoleChange={onRoleChange} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Editar" }));
+    fireEvent.click(screen.getByRole("combobox", { name: "Novo papel" }));
+    fireEvent.click(screen.getByRole("option", { name: "Professor" }));
+    fireEvent.click(screen.getByRole("button", { name: "Revisar alteracao" }));
+    expect(screen.getByRole("heading", { name: "Confirmar alteracao de papel?" })).toBeInTheDocument();
+    expect(onRoleChange).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar alteracao" }));
+    expect(onRoleChange).toHaveBeenCalledWith(member, "Professor");
+  });
+
+  it("uses a strong confirmation before transferring ownership", () => {
+    const onRoleChange = vi.fn();
+    const member: crm.SettingsTeamMember = {
+      id: "carla",
+      name: "Carla Souza",
+      email: "carla@studio.com",
+      role: "Recepcao",
+      status: "active",
+      lastAccess: "Ontem, 18:15"
+    };
+
+    render(<crm.SettingsTeamWorkspace members={[member]} onRoleChange={onRoleChange} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Editar" }));
+    fireEvent.click(screen.getByRole("combobox", { name: "Novo papel" }));
+    fireEvent.click(screen.getByRole("option", { name: "Dono/Admin" }));
+    fireEvent.click(screen.getByRole("button", { name: "Revisar alteracao" }));
+    expect(screen.getByRole("heading", { name: "Transferir Dono/Admin?" })).toBeInTheDocument();
+    expect(screen.getByText(/altera o responsavel principal/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar transferencia" }));
+    expect(onRoleChange).toHaveBeenCalledWith(member, "Dono/Admin");
+  });
+
+  it("makes every editable settings workspace genuinely read-only when permission is blocked", () => {
+    const cases = [
+      () => <crm.SettingsStudioWorkspace blockedReason="Sem permissao" />,
+      () => <crm.SettingsTeamWorkspace blockedReason="Sem permissao" />,
+      () => <crm.SettingsChannelsWorkspace blockedReason="Sem permissao" />,
+      () => <crm.SettingsPlansWorkspace blockedReason="Sem permissao" />,
+      () => <crm.SettingsPaymentsWorkspace blockedReason="Sem permissao" />,
+      () => <crm.SettingsAgendaWorkspace blockedReason="Sem permissao" />,
+      () => <crm.SettingsNotificationsWorkspace blockedReason="Sem permissao" />
+    ];
+
+    for (const renderCase of cases) {
+      render(renderCase());
+      expect(screen.getByRole("group", { name: "Controles da configuração" })).toBeDisabled();
+      expect(screen.getByText("Acesso somente leitura")).toBeInTheDocument();
+      expect(within(screen.getByRole("region", { name: "Salvamento bloqueado" })).getByRole("button", { name: "Bloqueado" })).toBeDisabled();
+      cleanup();
+    }
+  });
+
+  it("keeps validation fields correctable and exposes a recoverable system-error retry", () => {
+    render(<crm.SettingsStudioWorkspace validationError="Nome obrigatorio" />);
+    expect(screen.getByText("Nome obrigatorio")).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Nome do studio" })).toBeEnabled();
+    expect(within(screen.getByRole("region", { name: "Salvamento bloqueado" })).getByRole("button", { name: "Bloqueado" })).toBeDisabled();
+
+    cleanup();
+
+    const onRetry = vi.fn();
+    render(<crm.SettingsAgendaWorkspace onRetry={onRetry} systemError="Falha temporaria" />);
+    expect(screen.getByText("Falha temporaria")).toBeInTheDocument();
+    fireEvent.click(within(screen.getByRole("region", { name: "Falha ao salvar" })).getByRole("button", { name: "Tentar novamente" }));
+    expect(onRetry).toHaveBeenCalledOnce();
+  });
+
+  it("keeps the request-access action outside blocked settings controls", () => {
+    const onRequestAccess = vi.fn();
+    render(<crm.SettingsTeamWorkspace blockedReason="Somente Dono/Admin" onRequestAccess={onRequestAccess} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Pedir acesso" }));
+    expect(onRequestAccess).toHaveBeenCalledOnce();
   });
 
   it("owns the post-live channels workspace anatomy and behavior", () => {
@@ -5414,7 +6493,7 @@ describe("@taliya/crm component coverage", () => {
     const onSave = vi.fn();
     const onWhatsAppStateChange = vi.fn();
 
-    render(
+    const { rerender } = render(
       <crm.SettingsChannelsWorkspace
         connectionStatus="connected"
         onCancel={onCancel}
@@ -5435,6 +6514,13 @@ describe("@taliya/crm component coverage", () => {
     expect(onWhatsAppStateChange).toHaveBeenCalledWith("personal");
     expect(onCancel).toHaveBeenCalledOnce();
     expect(onSave).toHaveBeenCalledOnce();
+
+    rerender(<crm.SettingsChannelsWorkspace connectionStatus="pending" />);
+    expect(screen.getAllByText("Pendente de conexao oficial").length).toBeGreaterThan(0);
+    expect(screen.getByRole("button", { name: "Conectar WhatsApp Business" })).toBeInTheDocument();
+
+    rerender(<crm.SettingsChannelsWorkspace connectionStatus="disconnected" />);
+    expect(screen.getAllByText("Desconectado").length).toBeGreaterThan(0);
   });
 
   it("owns the post-live plans workspace anatomy and behavior", () => {
@@ -5443,7 +6529,7 @@ describe("@taliya/crm component coverage", () => {
     const onPlanAction = vi.fn();
     const onSave = vi.fn();
 
-    render(<crm.SettingsPlansWorkspace fieldValues={{ name: "Plano Aurora", quantity: "12" }} onCancel={onCancel} onFieldChange={onFieldChange} onPlanAction={onPlanAction} onSave={onSave} saveState="dirty" />);
+    const { rerender } = render(<crm.SettingsPlansWorkspace fieldValues={{ name: "Plano Aurora", quantity: "12" }} onCancel={onCancel} onFieldChange={onFieldChange} onPlanAction={onPlanAction} onSave={onSave} saveState="dirty" />);
 
     expect(screen.getByRole("heading", { name: "Planos e modelos" })).toBeInTheDocument();
     expect(screen.getByText("18 alunos usando")).toBeInTheDocument();
@@ -5458,6 +6544,12 @@ describe("@taliya/crm component coverage", () => {
     expect(onFieldChange).toHaveBeenCalledWith("name", "Plano Solar");
     expect(onCancel).toHaveBeenCalledOnce();
     expect(onSave).toHaveBeenCalledOnce();
+    expect(screen.queryByRole("button", { name: "Remover" })).not.toBeInTheDocument();
+
+    rerender(<crm.SettingsPlansWorkspace planStates={{ pack: { label: "Revisar consumo", tone: "warning", studentsUsing: 7 }, trial: { label: "Rascunho", tone: "info", studentsUsing: 0 } }} />);
+    expect(screen.getByText("Revisar consumo")).toBeInTheDocument();
+    expect(screen.getAllByText("Rascunho").length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("button", { name: "Inativar" }).length).toBeGreaterThan(0);
   });
 
   it("owns the settings permissions workspace anatomy and behavior", () => {
@@ -5490,6 +6582,25 @@ describe("@taliya/crm component coverage", () => {
     expect(onSave).toHaveBeenCalledOnce();
   });
 
+  it("represents blocked, validation, and sensitive-approval permission states", () => {
+    const onSave = vi.fn();
+    const { rerender } = render(<crm.SettingsPermissionsWorkspace blockedReason="Somente Dono/Admin pode editar." onSave={onSave} />);
+    expect(screen.getByText("Somente Dono/Admin pode editar.")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Dono\/Admin/ })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Bloqueado" })).toBeDisabled();
+
+    rerender(<crm.SettingsPermissionsWorkspace onSave={onSave} validationError="Desconto acima do limite permitido." />);
+    expect(screen.getByText("Desconto acima do limite permitido.")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Bloqueado" })).toBeDisabled();
+
+    rerender(<crm.SettingsPermissionsWorkspace onSave={onSave} requiresApproval saveState="dirty" />);
+    fireEvent.click(screen.getByRole("button", { name: "Salvar alterações" }));
+    expect(screen.getByRole("heading", { name: "Confirmar aumento de permissão?" })).toBeInTheDocument();
+    expect(onSave).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Confirmar como Dono/Admin" }));
+    expect(onSave).toHaveBeenCalledOnce();
+  });
+
   it("owns the settings payments workspace anatomy and behavior", () => {
     const onActivate = vi.fn();
     const onCancel = vi.fn();
@@ -5500,6 +6611,7 @@ describe("@taliya/crm component coverage", () => {
 
     render(
       <crm.SettingsPaymentsWorkspace
+        enabledMethods={["pix", "cash"]}
         onActivate={onActivate}
         onCancel={onCancel}
         onMethodSelect={onMethodSelect}
@@ -5513,7 +6625,8 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("heading", { name: "2. Regras financeiras simples" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "3. Pagamentos Taliya" })).toBeInTheDocument();
     expect(screen.getAllByText("Ativo")).toHaveLength(3);
-    expect(screen.getByRole("button", { name: /Pix manual/ })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("button", { name: /Pix manual/ })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: /Cartão presencial/ })).toHaveAttribute("aria-pressed", "false");
     expect(screen.getAllByText("Bloqueado até ativar")).toHaveLength(4);
     fireEvent.click(screen.getByRole("button", { name: /Pix manual/ }));
     fireEvent.click(screen.getByRole("button", { name: "Alterar Vencimento padrão" }));
@@ -5528,6 +6641,23 @@ describe("@taliya/crm component coverage", () => {
     expect(onTechnicalIntegration).toHaveBeenCalledOnce();
     expect(onCancel).toHaveBeenCalledOnce();
     expect(onSave).toHaveBeenCalledOnce();
+  });
+
+  it("represents active, entitlement-blocked, and provider-error Taliya Payments states", () => {
+    const { rerender } = render(<crm.SettingsPaymentsWorkspace taliyaPaymentsState="active" />);
+    const paymentsHeader = () => within(screen.getByRole("heading", { name: "3. Pagamentos Taliya" }).closest("header")!);
+    expect(paymentsHeader().getByText("Ativo")).toBeInTheDocument();
+    expect(screen.getAllByRole("group", { name: /Conectado/ })).toHaveLength(4);
+    expect(screen.queryByRole("button", { name: "Ativar Pagamentos Taliya" })).not.toBeInTheDocument();
+
+    rerender(<crm.SettingsPaymentsWorkspace onViewPlan={vi.fn()} taliyaPaymentsState="blocked" />);
+    expect(paymentsHeader().getByText("Plano necessário")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Ver plano" })).toBeInTheDocument();
+
+    rerender(<crm.SettingsPaymentsWorkspace taliyaPaymentsState="error" />);
+    expect(paymentsHeader().getByText("Falha técnica")).toBeInTheDocument();
+    expect(screen.getAllByRole("group", { name: /Falha técnica/ })).toHaveLength(4);
+    expect(screen.getByRole("button", { name: "Revisar ativação" })).toBeInTheDocument();
   });
 
   it("owns the settings agenda workspace anatomy and behavior", () => {
@@ -5571,29 +6701,46 @@ describe("@taliya/crm component coverage", () => {
     const onCancel = vi.fn();
     const onChannelChange = vi.fn();
     const onFrequencyChange = vi.fn();
+    const onAlertToggle = vi.fn();
     const onRoleSelect = vi.fn();
     const onSave = vi.fn();
 
     render(
       <crm.SettingsNotificationsWorkspace
+        enabledAlertTypesByRole={{ frontdesk: ["class-problem"] }}
+        onAlertToggle={onAlertToggle}
         onCancel={onCancel}
         onChannelChange={onChannelChange}
         onFrequencyChange={onFrequencyChange}
         onRoleSelect={onRoleSelect}
+        reviewAlertIdsByRole={{ owner: ["integration-failure"] }}
         onSave={onSave}
+        selectedRoleId="owner"
+        unavailableChannelReasons={{ whatsapp: "WhatsApp da equipe indisponível." }}
       />
     );
 
     expect(screen.getByRole("heading", { name: "1. Alertas por papel" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "2. Frequência dos alertas" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "3. Canais internos" })).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: /Recepção/ }));
+    expect(screen.getByRole("button", { name: "Selecionar papel Dono/Admin" })).toHaveClass("tl-button");
+    expect(screen.getByRole("button", { name: "Selecionar papel Dono/Admin" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Selecionar papel Recepção" })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("button", { name: "Alternar Aula com problema para Recepção" })).toHaveClass("tl-button");
+    expect(screen.getByRole("button", { name: "Alternar Aula com problema para Recepção" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Alternar Aluno sem contato para Recepção" })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByText("Revisar")).toBeInTheDocument();
+    expect(screen.getByText("WhatsApp da equipe indisponível.")).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Selecionar valor de WhatsApp interno" })).toBeDisabled();
+    fireEvent.click(screen.getByRole("button", { name: "Selecionar papel Recepção" }));
+    fireEvent.click(screen.getByRole("button", { name: "Alternar Aula com problema para Recepção" }));
     fireEvent.click(screen.getByRole("switch", { name: "Alternar Crítico" }));
     fireEvent.click(screen.getByRole("switch", { name: "Alternar Dentro do Taliya" }));
     fireEvent.click(screen.getByRole("button", { name: "Cancelar" }));
     fireEvent.click(screen.getByRole("button", { name: "Salvar alterações" }));
 
     expect(onRoleSelect).toHaveBeenCalledWith("frontdesk");
+    expect(onAlertToggle).toHaveBeenCalledWith("frontdesk", "class-problem", false);
     expect(onFrequencyChange).toHaveBeenCalledWith("critical", false);
     expect(onChannelChange).toHaveBeenCalledWith("taliya", false);
     expect(onCancel).toHaveBeenCalledOnce();
@@ -5603,16 +6750,19 @@ describe("@taliya/crm component coverage", () => {
   it("owns the settings agent panel questions, composer, and human help", () => {
     const onHelp = vi.fn();
     const onQuestionSelect = vi.fn();
+    const onReviewAction = vi.fn();
     const onSend = vi.fn();
 
-    render(<crm.SettingsAgentPanel onHelp={onHelp} onQuestionSelect={onQuestionSelect} onSend={onSend} />);
+    render(<crm.SettingsAgentPanel onHelp={onHelp} onQuestionSelect={onQuestionSelect} onReviewAction={onReviewAction} onSend={onSend} review={{ title: "Revisar impacto na Agenda", description: "O novo horario conflita com aulas futuras.", actionLabel: "Abrir Agenda" }} />);
 
+    fireEvent.click(screen.getByRole("button", { name: "Abrir Agenda" }));
     fireEvent.click(screen.getByRole("button", { name: /O que a Recepção pode fazer/ }));
     fireEvent.change(screen.getByRole("textbox", { name: "Pergunte ao agente de configuração" }), { target: { value: "Quem pode aprovar?" } });
     fireEvent.click(screen.getByRole("button", { name: "Enviar" }));
     fireEvent.click(screen.getByRole("button", { name: "Agendar ajuda" }));
 
     expect(onQuestionSelect).toHaveBeenCalledWith("O que a Recepção pode fazer?");
+    expect(onReviewAction).toHaveBeenCalledOnce();
     expect(onSend).toHaveBeenCalledWith("Quem pode aprovar?");
     expect(onHelp).toHaveBeenCalledOnce();
   });

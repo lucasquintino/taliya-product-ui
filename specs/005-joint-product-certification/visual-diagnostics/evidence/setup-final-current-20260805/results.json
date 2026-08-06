@@ -1,0 +1,282 @@
+{
+  "capturedAt": "2026-08-05T03:33:57.080Z",
+  "source": "final rebuilt static Storybook 127.0.0.1:6218",
+  "viewport": "1280x720 in-app browser",
+  "manualInteraction": {
+    "composerValue": "Como registrar uma baixa manual?",
+    "impactPresent": true,
+    "quickReplyCount": 1,
+    "visibleErrors": 0
+  },
+  "stories": [
+    {
+      "storyId": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+      "file": "01-shell-global.png",
+      "contextOk": true,
+      "document": {
+        "height": 870,
+        "width": 1265
+      },
+      "expectedContext": "Esta etapa afeta agenda, cobrança e comunicação inicial.",
+      "h1": [],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+      "file": "02-agent-chat.png",
+      "contextOk": true,
+      "document": {
+        "height": 720,
+        "width": 1280
+      },
+      "expectedContext": "Esta etapa afeta agenda, cobrança e comunicação inicial.",
+      "h1": [],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+      "file": "03-consumption.png",
+      "contextOk": true,
+      "document": {
+        "height": 879,
+        "width": 1265
+      },
+      "expectedContext": "Esta etapa afeta agenda, cobrança e comunicação inicial.",
+      "h1": [
+        "Consumo de aulas"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+      "file": "04-studio.png",
+      "contextOk": true,
+      "document": {
+        "height": 882,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco define a janela em que o studio pode ter aulas.",
+      "h1": [
+        "Studio"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+      "file": "05-team.png",
+      "contextOk": true,
+      "document": {
+        "height": 882,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco prepara quem terá acesso ao Taliya quando o setup for publicado.",
+      "h1": [
+        "Equipe"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+      "file": "06-channels.png",
+      "contextOk": true,
+      "document": {
+        "height": 882,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco define os canais que o Taliya pode usar para falar com alunos e equipe.",
+      "h1": [
+        "Canais"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+      "file": "07-plans.png",
+      "contextOk": true,
+      "document": {
+        "height": 896,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco define como o Taliya entende mensalidades, pacotes e aulas dos alunos.",
+      "h1": [
+        "Planos"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+      "file": "08-payment.png",
+      "contextOk": true,
+      "document": {
+        "height": 896,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco define quais meios o studio aceita no começo da operação.",
+      "h1": [
+        "Pagamento"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+      "file": "09-students.png",
+      "contextOk": true,
+      "document": {
+        "height": 879,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco cria a base inicial de alunos ativos.",
+      "h1": [
+        "Alunos"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+      "file": "10-classes.png",
+      "contextOk": true,
+      "document": {
+        "height": 879,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco organiza os horários fixos recorrentes do studio.",
+      "h1": [
+        "Turmas"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+      "file": "11-agenda.png",
+      "contextOk": true,
+      "document": {
+        "height": 879,
+        "width": 1265
+      },
+      "expectedContext": "Este bloco revisa a agenda inicial gerada pelo Taliya.",
+      "h1": [
+        "Agenda"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+      "file": "12-review.png",
+      "contextOk": true,
+      "document": {
+        "height": 901,
+        "width": 1265
+      },
+      "expectedContext": "Esta é a revisão final antes de publicar o setup inicial.",
+      "h1": [
+        "Revisão"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1265
+      },
+      "visibleErrors": []
+    },
+    {
+      "storyId": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+      "file": "13-welcome.png",
+      "contextOk": true,
+      "document": {
+        "height": 720,
+        "width": 1280
+      },
+      "expectedContext": "Bem-vindo à Taliya",
+      "h1": [
+        "Bem-vindo à Taliya"
+      ],
+      "horizontalOverflow": false,
+      "playCompleted": true,
+      "unnamedVisibleControls": 0,
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      },
+      "visibleErrors": []
+    }
+  ]
+}

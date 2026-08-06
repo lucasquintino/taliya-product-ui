@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-08-05",
+  "artifact": "apps/docs/storybook-static",
+  "baseUrl": "http://127.0.0.1:6224",
+  "viewport": { "width": 2560, "height": 1440 },
+  "scope": "All 73 crm-image-coverage Storybook routes with an initially mounted drawer root",
+  "contract": {
+    "position": "fixed",
+    "top": "0px",
+    "right": "0px",
+    "bottom": "0px",
+    "width": 420,
+    "height": 1440,
+    "rootHorizontalOverflow": 0,
+    "mainLandmarkCount": 1
+  },
+  "result": {
+    "routesScanned": 170,
+    "routesWithMountedDrawers": 73,
+    "routesViolatingDrawerContract": 0,
+    "status": "pass"
+  },
+  "studentRoutes": [
+    {
+      "storyId": "crm-image-coverage-alunos--students-shell",
+      "component": "StudentDrawer",
+      "status": "pass",
+      "geometry": {
+        "position": "fixed",
+        "top": "0px",
+        "right": "0px",
+        "bottom": "0px",
+        "width": 420,
+        "height": 1440,
+        "rootHorizontalOverflow": 0,
+        "mainLandmarkCount": 1
+      }
+    },
+    {
+      "storyId": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+      "component": "StudentProfileActionRail",
+      "status": "not-a-drawer",
+      "layout": "CrmRightPanelPage / right-panel student-profile",
+      "geometry": {
+        "position": "static",
+        "width": 377,
+        "height": 723,
+        "note": "This is the page's persistent action rail, not a global drawer."
+      }
+    }
+  ],
+  "notes": [
+    "The scan evaluates the drawer root class tcrm-drawer, not its internal body, header, footer, or action elements.",
+    "All mounted drawer roots were fixed, viewport-anchored, 420px wide, full-height, and had zero root horizontal overflow.",
+    "Student profile is recorded separately because changing it to a drawer would alter the structural family contract, not fix a drawer geometry bug."
+  ]
+}

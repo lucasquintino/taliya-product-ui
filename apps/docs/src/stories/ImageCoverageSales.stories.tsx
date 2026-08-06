@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import {
   CrmKanbanPage,
@@ -14,9 +15,9 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { CrmShellNavItem, CrmWorklistTableColumn, LeadDrawerChecklistItem, LeadDrawerFact, LeadDrawerHistoryItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
+import type { CrmShellNavItem, CrmWorklistTableColumn, LeadDrawerAction, LeadDrawerChecklistItem, LeadDrawerFact, LeadDrawerHistoryItem, LeadDrawerState, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
 import { Button, ButtonGroup, Chip, Icon, IconButton, PersonLabel } from "@taliya/ui";
-import type { ComponentTone } from "@taliya/ui";
+import type { ComponentTone, IconName } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
 
@@ -45,8 +46,147 @@ const salesNavItems: CrmShellNavItem[] = [
   { id: "historico", label: "Histórico" }
 ];
 
+type CommercialDrawerOverride = { state: LeadDrawerState; statusLabel: string };
+
+const commercialActionLabels: Partial<Record<LeadDrawerAction, string>> = {
+  "charge-payment": "cobrar pagamento",
+  "choose-first-class": "escolher primeira aula",
+  "confirm-presence": "confirmar presença",
+  "convert-student": "converter em aluno",
+  "create-follow-up": "criar follow-up",
+  "create-task": "criar tarefa",
+  "mark-absence": "marcar falta",
+  "mark-attended": "marcar comparecimento",
+  "mark-lost": "marcar como perdido",
+  "move-stage": "mover etapa",
+  "open-class": "abrir aula",
+  "open-conversation": "abrir conversa",
+  "qualify": "qualificar",
+  "request-data": "pedir dados",
+  "reschedule": "remarcar",
+  "schedule-trial": "agendar experimental",
+  "start-enrollment": "iniciar matrícula",
+  "validate-enrollment": "validar matrícula"
+};
+
+function commercialActionMessage(scope: string, action: LeadDrawerAction) {
+  return `${scope}: ${commercialActionLabels[action] ?? "mais ações"}`;
+}
+
+type PipelineLeadCard = {
+  id: string;
+  title: string;
+  source: string;
+  sourceIcon: IconName;
+  interest: string;
+  nextAction: string;
+  meta: string;
+  state: string;
+  statusLabel: string;
+};
+
+type PipelineStage = {
+  id: string;
+  title: string;
+  count: number;
+  state?: "default" | "waiting" | "blocked" | "resolved";
+  cards: PipelineLeadCard[];
+};
+
+const salesPipelineInitialColumns: PipelineStage[] = [
+  { id: "novo", title: "Novo", count: 12, cards: [
+    { id: "ana", title: "Ana Souza", source: "WhatsApp", sourceIcon: "whatsapp", interest: "começar Pilates", nextAction: "responder preço hoje", meta: "Recepção", state: "lead", statusLabel: "copiloto sugeriu" },
+    { id: "mariana", title: "Mariana Oliveira", source: "Instagram", sourceIcon: "camera", interest: "quer informações", nextAction: "enviar valores", meta: "Atendimento", state: "lead", statusLabel: "manual" },
+    { id: "lucas", title: "Lucas Ferreira", source: "Site", sourceIcon: "externalLink", interest: "musculação", nextAction: "apresentar planos", meta: "Recepção", state: "lead", statusLabel: "manual" }
+  ] },
+  { id: "conversando", title: "Conversando", count: 9, cards: [
+    { id: "marina", title: "Marina Lopes", source: "Instagram", sourceIcon: "camera", interest: "quer experimental", nextAction: "oferecer horários", meta: "Atendimento", state: "lead", statusLabel: "manual" },
+    { id: "gustavo", title: "Gustavo Almeida", source: "WhatsApp", sourceIcon: "whatsapp", interest: "treinar à tarde", nextAction: "confirmar horário", meta: "Recepção", state: "lead", statusLabel: "copiloto sugeriu" },
+    { id: "beatriz", title: "Beatriz Lima", source: "Facebook", sourceIcon: "message", interest: "personal trainer", nextAction: "tirar dúvidas", meta: "Atendimento", state: "lead", statusLabel: "manual" }
+  ] },
+  { id: "experimental", title: "Experimental", count: 8, cards: [
+    { id: "julia", title: "Julia Ramos", source: "Indicação", sourceIcon: "users", interest: "dor lombar", nextAction: "confirmar experimental", meta: "Recepção", state: "trial", statusLabel: "experimental hoje" },
+    { id: "rafael", title: "Rafael Martins", source: "WhatsApp", sourceIcon: "whatsapp", interest: "emagrecimento", nextAction: "lembrar do horário", meta: "Atendimento", state: "trial", statusLabel: "experimental hoje" },
+    { id: "patricia", title: "Patricia Silva", source: "Instagram", sourceIcon: "camera", interest: "Pilates solo", nextAction: "confirmar presença", meta: "Recepção", state: "trial", statusLabel: "experimental hoje" }
+  ] },
+  { id: "pos-aula", title: "Pós-aula", count: 7, state: "waiting", cards: [
+    { id: "felipe", title: "Felipe Andrade", source: "Balcão", sourceIcon: "home", interest: "fortalecimento", nextAction: "iniciar matrícula", meta: "Gestora", state: "hot", statusLabel: "quente" },
+    { id: "camila", title: "Camila Rocha", source: "WhatsApp", sourceIcon: "whatsapp", interest: "melhorar postura", nextAction: "enviar proposta", meta: "Atendimento", state: "hot", statusLabel: "quente" },
+    { id: "henrique", title: "Henrique Costa", source: "Instagram", sourceIcon: "camera", interest: "performance", nextAction: "agendar retorno", meta: "Atendimento", state: "hot", statusLabel: "quente" }
+  ] },
+  { id: "matricula", title: "Matrícula", count: 6, state: "resolved", cards: [
+    { id: "carla", title: "Carla Menezes", source: "Instagram", sourceIcon: "camera", interest: "preço", nextAction: "última tentativa", meta: "Atendimento", state: "enrollment", statusLabel: "sem resposta" },
+    { id: "pedro", title: "Pedro Santos", source: "Site", sourceIcon: "externalLink", interest: "turma manhã", nextAction: "retornar quando abrir vaga", meta: "Recepção", state: "enrollment", statusLabel: "sem vaga" },
+    { id: "thiago", title: "Thiago Oliveira", source: "Balcão", sourceIcon: "home", interest: "musculação", nextAction: "coletar documentos", meta: "Gestora", state: "enrollment", statusLabel: "pronto para matrícula" }
+  ] },
+  { id: "perdidos", title: "Perdidos", count: 4, state: "blocked", cards: [
+    { id: "isabela", title: "Isabela Prado", source: "Site", sourceIcon: "externalLink", interest: "sem retorno", nextAction: "marcar perdido", meta: "Atendimento", state: "lost", statusLabel: "perdido" },
+    { id: "andre", title: "André Lima", source: "Instagram", sourceIcon: "camera", interest: "preço", nextAction: "encerrar contato", meta: "Recepção", state: "lost", statusLabel: "desistiu" },
+    { id: "sofia", title: "Sofia Mendes", source: "WhatsApp", sourceIcon: "whatsapp", interest: "Pilates", nextAction: "arquivar", meta: "Atendimento", state: "lost", statusLabel: "perdido" }
+  ] }
+];
+
+function pipelineLeadRow(card: PipelineLeadCard, stage: PipelineStage): SalesLeadRow {
+  const danger = stage.id === "perdidos";
+  const warning = ["pos-aula", "matricula"].includes(stage.id);
+  return {
+    id: card.id,
+    lead: card.title,
+    stage: stage.title,
+    stageTone: danger ? "danger" : warning ? "warning" : "info",
+    nextAction: card.nextAction,
+    desiredTime: "a combinar",
+    owner: card.meta,
+    lastActivity: "agora",
+    status: card.statusLabel,
+    statusTone: danger ? "danger" : card.statusLabel === "quente" ? "danger" : "info"
+  };
+}
+
 export function SalesPipelinePage() {
   const [announcement, setAnnouncement] = useState("");
+  const [columns, setColumns] = useState(salesPipelineInitialColumns);
+  const [selectedCardId, setSelectedCardId] = useState("");
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const selectedEntry = columns
+    .flatMap((column) => column.cards.map((card) => ({ card, column })))
+    .find(({ card }) => card.id === selectedCardId);
+  const selectedLead = selectedEntry ? pipelineLeadRow(selectedEntry.card, selectedEntry.column) : undefined;
+
+  const updateLead = (cardId: string, targetStageId: string | undefined, patch: Partial<PipelineLeadCard>) => {
+    setColumns((current) => {
+      const source = current.find((column) => column.cards.some((card) => card.id === cardId));
+      if (!source) return current;
+      const target = current.find((column) => column.id === (targetStageId ?? source.id));
+      const card = source.cards.find((item) => item.id === cardId);
+      if (!target || !card) return current;
+      const updatedCard = { ...card, ...patch };
+      if (source.id === target.id) {
+        return current.map((column) => column.id === source.id
+          ? { ...column, cards: column.cards.map((item) => item.id === cardId ? updatedCard : item) }
+          : column);
+      }
+      return current.map((column) => {
+        if (column.id === source.id) return { ...column, count: Math.max(0, column.count - 1), cards: column.cards.filter((item) => item.id !== cardId) };
+        if (column.id === target.id) return { ...column, count: column.count + 1, cards: [...column.cards, updatedCard] };
+        return column;
+      });
+    });
+  };
+
+  const handlePipelineAction = (action: LeadDrawerAction) => {
+    if (!selectedEntry) return;
+    const currentIndex = columns.findIndex((column) => column.id === selectedEntry.column.id);
+    const nextStage = columns[Math.min(columns.length - 2, currentIndex + 1)];
+    if (action === "qualify") updateLead(selectedCardId, "conversando", { statusLabel: "qualificado", nextAction: "responder conversa hoje" });
+    if (action === "create-follow-up") updateLead(selectedCardId, undefined, { nextAction: "follow-up criado para hoje" });
+    if (action === "move-stage") updateLead(selectedCardId, nextStage?.id, { nextAction: `continuar em ${nextStage?.title ?? selectedEntry.column.title}` });
+    if (action === "schedule-trial") updateLead(selectedCardId, "experimental", { state: "trial", statusLabel: "experimental agendada", nextAction: "confirmar presença" });
+    if (action === "start-enrollment") updateLead(selectedCardId, "matricula", { state: "enrollment", statusLabel: "pronto para matrícula", nextAction: "coletar documentos" });
+    if (action === "convert-student") updateLead(selectedCardId, "matricula", { state: "enrollment", statusLabel: "convertido em aluno", nextAction: "concluir matrícula" });
+    if (action === "mark-lost") updateLead(selectedCardId, "perdidos", { state: "lost", statusLabel: "perdido", nextAction: "sem ação" });
+    setAnnouncement(commercialActionMessage("Ação do pipeline", action));
+  };
 
   return (
     <>
@@ -54,6 +194,17 @@ export function SalesPipelinePage() {
         activeNavId="pipeline"
         activeSidebarId="vendas"
         avatarSrc={image79Avatar}
+        drawer={drawerOpen && selectedLead ? (
+          <SalesLeadDrawer
+            lead={selectedLead}
+            onAction={handlePipelineAction}
+            onClose={() => {
+              setDrawerOpen(false);
+              setAnnouncement("Drawer do pipeline fechado");
+            }}
+            pipeline
+          />
+        ) : null}
         filterBar={<SalesPipelineFilters onInteraction={setAnnouncement} />}
         globalActions={{
           onAvatar: () => setAnnouncement("Perfil da operadora aberto"),
@@ -74,7 +225,21 @@ export function SalesPipelinePage() {
         title="Vendas"
         utilityItems={crmEmptyShellSidebarUtilityItems}
       >
-        <SalesPipelineBoard onInteraction={setAnnouncement} />
+        <SalesPipelineBoard
+          columns={columns}
+          onCardMenu={(cardId) => {
+            setSelectedCardId(cardId);
+            setDrawerOpen(true);
+            setAnnouncement(`Opções do interessado abertas: ${cardId}`);
+          }}
+          onCardSelect={(cardId) => {
+            setSelectedCardId(cardId);
+            setDrawerOpen(true);
+            setAnnouncement(`Interessado selecionado: ${cardId}`);
+          }}
+          onInteraction={setAnnouncement}
+          selectedCardId={selectedCardId}
+        />
       </CrmKanbanPage>
       <span aria-live="polite" className="tl-sr-only" role="status">{announcement}</span>
     </>
@@ -85,7 +250,22 @@ export function SalesInterestedListPage() {
   const [selectedLeadId, setSelectedLeadId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
+  const [leadOverrides, setLeadOverrides] = useState<Record<string, CommercialDrawerOverride>>({});
   const selectedLead = salesLeadRows.find((row) => row.id === selectedLeadId) ?? salesLeadRows[0]!;
+  const selectedOverride = leadOverrides[selectedLead.id];
+
+  const handleLeadAction = (action: LeadDrawerAction) => {
+    if (action === "close") return;
+    const transition: Partial<Record<LeadDrawerAction, CommercialDrawerOverride>> = {
+      qualify: { state: "interested", statusLabel: "Qualificada" },
+      "schedule-trial": { state: "trial-scheduled", statusLabel: "Experimental agendada" },
+      "start-enrollment": { state: "enrollment-missing", statusLabel: "Pré-matrícula iniciada" },
+      "mark-lost": { state: "lost", statusLabel: "Perdido" }
+    };
+    const next = transition[action];
+    if (next) setLeadOverrides((current) => ({ ...current, [selectedLead.id]: next }));
+    setAnnouncement(commercialActionMessage("Ação do interessado", action));
+  };
 
   return (
     <>
@@ -93,7 +273,7 @@ export function SalesInterestedListPage() {
         activeNavId="lista"
         activeSidebarId="vendas"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <SalesLeadDrawer lead={selectedLead} onAction={(action) => setAnnouncement(`Ação do interessado: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer do interessado fechado"); }} /> : null}
+        drawer={drawerOpen ? <SalesLeadDrawer lead={selectedLead} onAction={handleLeadAction} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer do interessado fechado"); }} state={selectedOverride?.state} statusLabel={selectedOverride?.statusLabel} /> : null}
         filterBar={<SalesInterestedFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de interessados"
         globalActions={{
@@ -114,7 +294,7 @@ export function SalesInterestedListPage() {
         showGlobalActionsWithDrawer
         sidebarItems={crmEmptyShellSidebarItems}
         subtitle="Studio Vila Mariana · Lista de interessados"
-        title="Vendas"
+        title="Interessados"
         utilityItems={crmEmptyShellSidebarUtilityItems}
         contentLayout="work-list-compact"
         worklistLayoutMode="compact-rail"
@@ -139,7 +319,23 @@ export function SalesExperimentalListPage() {
   const [selectedExperimentalId, setSelectedExperimentalId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
+  const [experimentalOverrides, setExperimentalOverrides] = useState<Record<string, CommercialDrawerOverride>>({});
   const selectedExperimental = experimentalRows.find((row) => row.id === selectedExperimentalId) ?? experimentalRows[0]!;
+  const selectedOverride = experimentalOverrides[selectedExperimental.id];
+
+  const handleExperimentalAction = (action: LeadDrawerAction) => {
+    if (action === "close") return;
+    const transition: Partial<Record<LeadDrawerAction, CommercialDrawerOverride>> = {
+      "confirm-presence": { state: "trial-scheduled", statusLabel: "Presença confirmada" },
+      reschedule: { state: "trial-scheduled", statusLabel: "Remarcação iniciada" },
+      "mark-attended": { state: "trial-convert", statusLabel: "Pronta para matrícula" },
+      "mark-absence": { state: "trial-missed", statusLabel: "Faltou" },
+      "start-enrollment": { state: "enrollment-missing", statusLabel: "Matrícula iniciada" }
+    };
+    const next = transition[action];
+    if (next) setExperimentalOverrides((current) => ({ ...current, [selectedExperimental.id]: next }));
+    setAnnouncement(commercialActionMessage("Ação da aula experimental", action));
+  };
 
   return (
     <>
@@ -147,7 +343,7 @@ export function SalesExperimentalListPage() {
         activeNavId="experimental"
         activeSidebarId="vendas"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <ExperimentalDrawer experimental={selectedExperimental} onAction={(action) => setAnnouncement(`Ação da experimental: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer da experimental fechado"); }} /> : null}
+        drawer={drawerOpen ? <ExperimentalDrawer experimental={selectedExperimental} onAction={handleExperimentalAction} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer da aula experimental fechado"); }} state={selectedOverride?.state} statusLabel={selectedOverride?.statusLabel} /> : null}
         filterBar={<ExperimentalFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de experimental"
         globalActions={{
@@ -168,7 +364,7 @@ export function SalesExperimentalListPage() {
         showGlobalActionsWithDrawer
         sidebarItems={crmEmptyShellSidebarItems}
         subtitle="Studio Vila Mariana - Aulas experimentais e proximos passos"
-        title="Experimental"
+        title="Aulas experimentais"
         utilityItems={crmEmptyShellSidebarUtilityItems}
         contentLayout="work-list-compact"
         worklistLayoutMode="compact-rail"
@@ -193,7 +389,23 @@ export function SalesEnrollmentChecklistPage() {
   const [selectedEnrollmentId, setSelectedEnrollmentId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
+  const [enrollmentOverrides, setEnrollmentOverrides] = useState<Record<string, CommercialDrawerOverride>>({});
+  const [checklistOverrides, setChecklistOverrides] = useState<Record<string, Record<string, boolean>>>({});
   const selectedEnrollment = enrollmentRows.find((row) => row.id === selectedEnrollmentId) ?? enrollmentRows[0]!;
+  const selectedOverride = enrollmentOverrides[selectedEnrollment.id];
+
+  const handleEnrollmentAction = (action: LeadDrawerAction) => {
+    if (action === "close") return;
+    const transition: Partial<Record<LeadDrawerAction, CommercialDrawerOverride>> = {
+      "validate-enrollment": { state: "enrollment-payment", statusLabel: "Aguardando pagamento" },
+      "charge-payment": { state: "enrollment-ready", statusLabel: "Pronta para aluno" },
+      "convert-student": { state: "enrollment-converted", statusLabel: "Convertida" },
+      "mark-lost": { state: "lost", statusLabel: "Perdida" }
+    };
+    const next = transition[action];
+    if (next) setEnrollmentOverrides((current) => ({ ...current, [selectedEnrollment.id]: next }));
+    setAnnouncement(commercialActionMessage("Ação da matrícula", action));
+  };
 
   return (
     <>
@@ -201,7 +413,31 @@ export function SalesEnrollmentChecklistPage() {
         activeNavId="matriculas"
         activeSidebarId="vendas"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <EnrollmentDrawer enrollment={selectedEnrollment} onAction={(action) => setAnnouncement(`Ação da matrícula: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer da matrícula fechado"); }} /> : null}
+        drawer={drawerOpen ? <EnrollmentDrawer
+          checklistOverrides={checklistOverrides[selectedEnrollment.id]}
+          enrollment={selectedEnrollment}
+          onAction={handleEnrollmentAction}
+          onChecklistToggle={(item, checked) => {
+            setChecklistOverrides((current) => ({
+              ...current,
+              [selectedEnrollment.id]: { ...current[selectedEnrollment.id], [item.id]: checked }
+            }));
+            if (item.id === "payment") {
+              setEnrollmentOverrides((current) => ({
+                ...current,
+                [selectedEnrollment.id]: checked
+                  ? { state: "enrollment-ready", statusLabel: "Pronta para aluno" }
+                  : { state: "enrollment-payment", statusLabel: "Aguardando pagamento" }
+              }));
+              setAnnouncement(checked ? "Pagamento inicial confirmado" : "Pagamento inicial reaberto");
+              return;
+            }
+            setAnnouncement(`Checklist da matrícula: ${String(item.label)} ${checked ? "concluído" : "reaberto"}`);
+          }}
+          onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer da matrícula fechado"); }}
+          state={selectedOverride?.state}
+          statusLabel={selectedOverride?.statusLabel}
+        /> : null}
         filterBar={<EnrollmentFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de matriculas"
         globalActions={{
@@ -222,7 +458,7 @@ export function SalesEnrollmentChecklistPage() {
         showGlobalActionsWithDrawer
         sidebarItems={crmEmptyShellSidebarItems}
         subtitle="Studio Vila Mariana - Conversao de interessados em alunos"
-        title="Matriculas"
+        title="Matrículas"
         utilityItems={crmEmptyShellSidebarUtilityItems}
         contentLayout="work-list-compact"
         worklistLayoutMode="compact-rail"
@@ -338,50 +574,21 @@ function SalesPipelineFilters({ onInteraction }: { onInteraction: (message: stri
   );
 }
 
-function SalesPipelineBoard({ onInteraction }: { onInteraction: (message: string) => void }) {
-  const [selectedCard, setSelectedCard] = useState("");
-  const columns = [
-    { title: "Novo", count: 12, cards: [
-      { title: "Ana Souza", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "começar Pilates", nextAction: "responder preço hoje", meta: "Recepção", state: "lead", statusLabel: "copiloto sugeriu" },
-      { title: "Mariana Oliveira", source: "Instagram", sourceIcon: "camera" as const, interest: "quer informações", nextAction: "enviar valores", meta: "Atendimento", state: "lead", statusLabel: "manual" },
-      { title: "Lucas Ferreira", source: "Site", sourceIcon: "externalLink" as const, interest: "musculação", nextAction: "apresentar planos", meta: "Recepção", state: "lead", statusLabel: "manual" }
-    ] },
-    { title: "Conversando", count: 9, cards: [
-      { title: "Marina Lopes", source: "Instagram", sourceIcon: "camera" as const, interest: "quer experimental", nextAction: "oferecer horários", meta: "Atendimento", state: "lead", statusLabel: "manual" },
-      { title: "Gustavo Almeida", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "treinar à tarde", nextAction: "confirmar horário", meta: "Recepção", state: "lead", statusLabel: "copiloto sugeriu" },
-      { title: "Beatriz Lima", source: "Facebook", sourceIcon: "message" as const, interest: "personal trainer", nextAction: "tirar dúvidas", meta: "Atendimento", state: "lead", statusLabel: "manual" }
-    ] },
-    { title: "Experimental", count: 8, cards: [
-      { title: "Julia Ramos", source: "Indicação", sourceIcon: "users" as const, interest: "dor lombar", nextAction: "confirmar experimental", meta: "Recepção", state: "trial", statusLabel: "experimental hoje" },
-      { title: "Rafael Martins", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "emagrecimento", nextAction: "lembrar do horário", meta: "Atendimento", state: "trial", statusLabel: "experimental hoje" },
-      { title: "Patricia Silva", source: "Instagram", sourceIcon: "camera" as const, interest: "Pilates solo", nextAction: "confirmar presença", meta: "Recepção", state: "trial", statusLabel: "experimental hoje" }
-    ] },
-    { title: "Pós-aula", count: 7, state: "waiting" as const, cards: [
-      { title: "Felipe Andrade", source: "Balcão", sourceIcon: "home" as const, interest: "fortalecimento", nextAction: "iniciar matrícula", meta: "Gestora", state: "hot", statusLabel: "quente" },
-      { title: "Camila Rocha", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "melhorar postura", nextAction: "enviar proposta", meta: "Atendimento", state: "hot", statusLabel: "quente" },
-      { title: "Henrique Costa", source: "Instagram", sourceIcon: "camera" as const, interest: "performance", nextAction: "agendar retorno", meta: "Atendimento", state: "hot", statusLabel: "quente" }
-    ] },
-    { title: "Matrícula", count: 6, state: "resolved" as const, cards: [
-      { title: "Carla Menezes", source: "Instagram", sourceIcon: "camera" as const, interest: "preço", nextAction: "última tentativa", meta: "Atendimento", state: "enrollment", statusLabel: "sem resposta" },
-      { title: "Pedro Santos", source: "Site", sourceIcon: "externalLink" as const, interest: "turma manhã", nextAction: "retornar quando abrir vaga", meta: "Recepção", state: "enrollment", statusLabel: "sem vaga" },
-      { title: "Thiago Oliveira", source: "Balcão", sourceIcon: "home" as const, interest: "musculação", nextAction: "coletar documentos", meta: "Gestora", state: "enrollment", statusLabel: "pronto para matrícula" }
-    ] },
-    { title: "Perdidos", count: 4, state: "blocked" as const, cards: [
-      { title: "Isabela Prado", source: "Site", sourceIcon: "externalLink" as const, interest: "sem retorno", nextAction: "marcar perdido", meta: "Atendimento", state: "lost", statusLabel: "perdido" },
-      { title: "André Lima", source: "Instagram", sourceIcon: "camera" as const, interest: "preço", nextAction: "encerrar contato", meta: "Recepção", state: "lost", statusLabel: "desistiu" },
-      { title: "Sofia Mendes", source: "WhatsApp", sourceIcon: "whatsapp" as const, interest: "Pilates", nextAction: "arquivar", meta: "Atendimento", state: "lost", statusLabel: "perdido" }
-    ] }
-  ];
-
+function SalesPipelineBoard({ columns, onCardMenu, onCardSelect, onInteraction, selectedCardId }: {
+  columns: PipelineStage[];
+  onCardMenu: (cardId: string) => void;
+  onCardSelect: (cardId: string) => void;
+  onInteraction: (message: string) => void;
+  selectedCardId: string;
+}) {
   return (
     <>
       {columns.map((column) => (
-        <KanbanColumn count={column.count} key={column.title} onMenu={() => { setSelectedCard(`menu:${column.title}`); onInteraction(`Menu da etapa: ${column.title}`); }} state={column.state} title={column.title}>
+        <KanbanColumn count={column.count} key={column.title} onMenu={() => onInteraction(`Menu da etapa: ${column.title}`)} state={column.state} title={column.title}>
           {column.cards.map((card) => {
-            const cardId = `${column.title}:${card.title}`;
-            return <PipelineCard key={cardId} {...card} onMenu={() => { setSelectedCard(`menu:${cardId}`); onInteraction(`Menu do interessado: ${cardId}`); }} onSelect={() => { setSelectedCard(cardId); onInteraction(`Interessado selecionado: ${cardId}`); }} selected={selectedCard === cardId} />;
+            return <PipelineCard key={card.id} {...card} onMenu={() => onCardMenu(card.id)} onSelect={() => onCardSelect(card.id)} selected={selectedCardId === card.id} />;
           })}
-          <Button leadingIcon="plus" onClick={() => { setSelectedCard(`add:${column.title}`); onInteraction(`Adicionar interessado em ${column.title}`); }} size="sm" variant="secondary">Adicionar interessado</Button>
+          <Button leadingIcon="plus" onClick={() => onInteraction(`Adicionar interessado em ${column.title}`)} size="sm" variant="secondary">Adicionar interessado</Button>
         </KanbanColumn>
       ))}
     </>
@@ -566,7 +773,21 @@ const salesLeadColumns: Array<CrmWorklistTableColumn<SalesLeadRow>> = [
   { key: "status", header: "Status", sortable: true, width: "16%", render: (row) => <Chip showDot={false} tone={row.statusTone}>{row.status}</Chip> }
 ];
 
-function SalesLeadDrawer({ lead, onAction, onClose }: { lead: SalesLeadRow; onAction: (action: string) => void; onClose: () => void }) {
+function SalesLeadDrawer({
+  lead,
+  onAction,
+  onClose,
+  pipeline = false,
+  state,
+  statusLabel
+}: {
+  lead: SalesLeadRow;
+  onAction: (action: LeadDrawerAction) => void;
+  onClose: () => void;
+  pipeline?: boolean;
+  state?: LeadDrawerState;
+  statusLabel?: string;
+}) {
   const canonicalLead = lead.id === "ana";
   const facts: LeadDrawerFact[] = [
     { id: "channel", icon: "calendar", label: "Canal", value: <><Icon name="whatsapp" size="12px" /> WhatsApp permitido</>, tone: "success" },
@@ -589,7 +810,50 @@ function SalesLeadDrawer({ lead, onAction, onClose }: { lead: SalesLeadRow; onAc
     { id: "owner", time: "anterior", title: `Responsável: ${lead.owner}`, description: `Status atual: ${lead.status}` },
     { id: "origin", time: "início", title: "Conversa iniciada via WhatsApp", description: `Horário desejado: ${lead.desiredTime}` }
   ];
-  const state = lead.status === "perdido" ? "lost" : lead.stage.includes("Experimental") ? "trial" : lead.stage === "Pre-matricula" ? "enrollment" : "interested";
+  const resolvedState: LeadDrawerState = state ?? (
+    lead.status === "perdido" ? "lost"
+      : lead.stage === "Novo" ? "new"
+        : lead.stage === "Sem vaga" ? "no-slot"
+          : lead.stage === "Pre-matricula" ? "ready"
+            : lead.stage.includes("Experimental") ? "trial-scheduled"
+              : "interested"
+  );
+  const primaryAction = resolvedState === "new"
+    ? { label: "Qualificar", action: "qualify" as const, icon: "checkCircle" as const }
+    : resolvedState === "ready"
+      ? { label: "Iniciar matrícula", action: "start-enrollment" as const, icon: "graduation" as const }
+      : { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const };
+  const baseSecondaryActions = resolvedState === "enrollment-missing"
+    ? [
+      { label: "Criar tarefa", action: "create-task" as const, icon: "calendar" as const }
+    ]
+    : resolvedState === "new"
+    ? [
+      { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const },
+      { label: "Agendar experimental", action: "schedule-trial" as const, icon: "calendar" as const },
+      { label: "Criar follow-up", action: "create-follow-up" as const, icon: "checkCircle" as const },
+      { label: "Marcar perdido", action: "mark-lost" as const, icon: "x" as const }
+    ]
+    : resolvedState === "ready"
+      ? [
+        { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const },
+        { label: "Agendar experimental", action: "schedule-trial" as const, icon: "calendar" as const },
+        { label: "Criar follow-up", action: "create-follow-up" as const, icon: "checkCircle" as const }
+      ]
+      : [
+        { label: "Qualificar", action: "qualify" as const, icon: "checkCircle" as const },
+        { label: "Agendar experimental", action: "schedule-trial" as const, icon: "calendar" as const, disabled: resolvedState === "no-slot" || resolvedState === "lost" },
+        { label: "Criar follow-up", action: "create-follow-up" as const, icon: "checkCircle" as const },
+        { label: "Iniciar matrícula", action: "start-enrollment" as const, icon: "graduation" as const, disabled: resolvedState === "no-slot" || resolvedState === "lost" },
+        { label: "Marcar perdido", action: "mark-lost" as const, icon: "x" as const, disabled: resolvedState === "lost" }
+      ];
+  const secondaryActions = pipeline && !["lost", "no-slot"].includes(resolvedState)
+    ? [
+      ...baseSecondaryActions,
+      { label: "Mover etapa", action: "move-stage" as const, icon: "refresh" as const },
+      { label: "Converter em aluno", action: "convert-student" as const, icon: "graduation" as const }
+    ]
+    : baseSecondaryActions;
 
   return (
     <LeadDrawer
@@ -600,8 +864,10 @@ function SalesLeadDrawer({ lead, onAction, onClose }: { lead: SalesLeadRow; onAc
       name={lead.lead}
       onAction={onAction}
       onClose={onClose}
-      state={state}
-      statusLabel={lead.stage}
+      primaryAction={primaryAction}
+      secondaryActions={secondaryActions}
+      state={resolvedState}
+      statusLabel={statusLabel ?? lead.stage}
       suggestedAction={`Ação sugerida: ${lead.nextAction}`}
     />
   );
@@ -858,13 +1124,61 @@ const experimentalDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "waiting", time: "ontem 18:40", title: "Aguardando confirmacao", description: "Recepcao acompanha manualmente" }
 ];
 
-function ExperimentalDrawer({ experimental, onAction, onClose }: { experimental: ExperimentalRow; onAction?: (action: string) => void; onClose?: () => void }) {
+function ExperimentalDrawer({
+  experimental,
+  onAction,
+  onClose,
+  state,
+  statusLabel
+}: {
+  experimental: ExperimentalRow;
+  onAction?: (action: LeadDrawerAction) => void;
+  onClose?: () => void;
+  state?: LeadDrawerState;
+  statusLabel?: string;
+}) {
   const history = experimental.id === "ana" ? experimentalDrawerHistory : [
     { id: "latest", time: experimental.last, title: `Status: ${experimental.status}`, description: `Próxima ação: ${experimental.next}` },
     { id: "owner", time: "anterior", title: `Acompanhamento por ${experimental.owner}`, description: `${experimental.lesson} - ${experimental.time}` },
     { id: "scheduled", time: "início", title: "Experimental agendada", description: "Aula vinculada à grade" }
   ];
-  const state = experimental.status === "Faltou" ? "lost" : experimental.status === "Pronta para matricula" ? "enrollment" : "trial";
+  const resolvedState: LeadDrawerState = state ?? (
+    experimental.status === "Faltou" ? "trial-missed"
+      : experimental.status === "Pronta para matricula" || experimental.status === "Compareceu" ? "trial-convert"
+        : "trial-scheduled"
+  );
+  const primaryAction = resolvedState === "enrollment-missing"
+    ? { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const }
+    : resolvedState === "trial-convert"
+      ? { label: "Iniciar matrícula", action: "start-enrollment" as const, icon: "graduation" as const }
+      : resolvedState === "trial-missed"
+        ? { label: "Remarcar", action: "reschedule" as const, icon: "refresh" as const }
+        : { label: "Confirmar presença", action: "confirm-presence" as const, icon: "checkCircle" as const };
+  const secondaryActions = resolvedState === "enrollment-missing"
+    ? [
+      { label: "Abrir aula na Agenda", action: "open-class" as const, icon: "calendar" as const },
+      { label: "Criar follow-up", action: "create-follow-up" as const, icon: "message" as const }
+    ]
+    : resolvedState === "trial-convert"
+    ? [
+      { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const },
+      { label: "Abrir aula na Agenda", action: "open-class" as const, icon: "calendar" as const },
+      { label: "Criar follow-up", action: "create-follow-up" as const, icon: "message" as const }
+    ]
+    : resolvedState === "trial-missed"
+      ? [
+        { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const },
+        { label: "Abrir aula na Agenda", action: "open-class" as const, icon: "calendar" as const },
+        { label: "Criar follow-up", action: "create-follow-up" as const, icon: "message" as const },
+        { label: "Marcar perdido", action: "mark-lost" as const, icon: "x" as const }
+      ]
+      : [
+        { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const },
+        { label: "Abrir aula na Agenda", action: "open-class" as const, icon: "calendar" as const },
+        { label: "Remarcar", action: "reschedule" as const, icon: "refresh" as const },
+        { label: "Marcar compareceu", action: "mark-attended" as const, icon: "checkCircle" as const },
+        { label: "Marcar falta", action: "mark-absence" as const, icon: "x" as const }
+      ];
 
   return (
     <LeadDrawer
@@ -878,19 +1192,10 @@ function ExperimentalDrawer({ experimental, onAction, onClose }: { experimental:
       notice={<><strong>A operacao manual e sempre possivel.</strong><small>O copiloto apenas sugere. A Agenda e a origem do horario da aula.</small></>}
       onAction={onAction}
       onClose={onClose}
-      primaryAction={{ label: "Abrir conversa", action: "open-conversation", icon: "whatsapp" }}
-      secondaryActions={[
-        { label: "Abrir aula na Agenda", action: "open-class", icon: "calendar" },
-        { label: "Confirmar presenca", action: "confirm-presence", icon: "checkCircle" },
-        { label: "Remarcar", action: "reschedule", icon: "refresh" },
-        { label: "Marcar compareceu", action: "mark-attended", icon: "checkCircle" },
-        { label: "Marcar falta", action: "mark-absence", icon: "x" },
-        { label: "Criar follow-up", action: "create-follow-up", icon: "message" },
-        { label: "Iniciar matricula", action: "start-enrollment", icon: "graduation" },
-        { label: "Marcar perdido", action: "mark-lost", icon: "lock" }
-      ]}
-      state={state}
-      statusLabel={experimental.status}
+      primaryAction={primaryAction}
+      secondaryActions={secondaryActions}
+      state={resolvedState}
+      statusLabel={statusLabel ?? experimental.status}
       suggestedAction={null}
     />
   );
@@ -910,6 +1215,7 @@ function EnrollmentFilters({ onInteraction }: { onInteraction: (message: string)
       value: String(values.status ?? ""),
       options: [
         { value: "missing-cpf", label: "Faltando CPF" },
+        { value: "payment", label: "Aguardando pagamento" },
         { value: "ready", label: "Pronta para aluno" },
         { value: "blocked", label: "Bloqueada" }
       ]
@@ -998,6 +1304,7 @@ function EnrollmentQuickRail({ onInteraction }: { onInteraction: (message: strin
     { id: "all", label: "Todas", icon: "users", count: "128", selected: selectedId === "all" },
     { id: "ready", label: "Prontas para aluno", icon: "clipboardCheck", count: "24", selected: selectedId === "ready" },
     { id: "missing", label: "Faltando dados", icon: "alert", count: "19", tone: "danger", selected: selectedId === "missing" },
+    { id: "payment", label: "Aguardando pagamento", icon: "creditCard", count: "12", tone: "warning", selected: selectedId === "payment" },
     { id: "plan", label: "Escolher plano", icon: "shield", count: "17", selected: selectedId === "plan" },
     { id: "class", label: "Primeira aula", icon: "clock", count: "16", selected: selectedId === "class" },
     { id: "blocked", label: "Bloqueadas", icon: "lock", count: "6", tone: "danger", selected: selectedId === "blocked" },
@@ -1035,14 +1342,14 @@ type EnrollmentRow = {
 };
 
 const enrollmentRows: EnrollmentRow[] = [
-  { id: "ana", person: "Ana Souza", origin: "Experimental", originTone: "info", plan: "Plano 2x/semana", checklist: "4/5", status: "Faltando CPF", statusTone: "warning", owner: "Recepção", next: "pedir dado", last: "hoje 10:24" },
-  { id: "pedro", person: "Pedro Santos", origin: "Pós-aula", originTone: "warning", plan: "Plano mensal", checklist: "5/5", status: "Pronta para aluno", statusTone: "success", owner: "Gestora", next: "converter", last: "hoje 09:40" },
-  { id: "julia", person: "Julia Ramos", origin: "Vendas", originTone: "info", plan: "A definir", checklist: "2/5", status: "Escolher plano", statusTone: "info", owner: "Recepção", next: "enviar opções", last: "ontem" },
-  { id: "marina", person: "Marina Lopes", origin: "Balcão", originTone: "neutral", plan: "Plano 3x/semana", checklist: "3/5", status: "Primeira aula pendente", statusTone: "info", owner: "Atendimento", next: "escolher aula", last: "hoje" },
-  { id: "carla", person: "Carla Menezes", origin: "WhatsApp", originTone: "success", plan: "Plano mensal", checklist: "4/5", status: "Bloqueada", statusTone: "danger", owner: "Financeiro", next: "pendência financeira", last: "2 dias" },
-  { id: "felipe", person: "Felipe Andrade", origin: "Experimental", originTone: "info", plan: "Plano 2x/semana", checklist: "5/5", status: "Convertida", statusTone: "success", owner: "Recepção", next: "aluno criado", last: "hoje 08:30" },
-  { id: "beatriz", person: "Beatriz Lima", origin: "Indicação", originTone: "info", plan: "Plano mensal", checklist: "3/5", status: "Faltando contato", statusTone: "warning", owner: "Recepção", next: "pedir telefone", last: "ontem" },
-  { id: "lucas", person: "Lucas Ferreira", origin: "Vendas", originTone: "info", plan: "Plano trimestral", checklist: "4/5", status: "Aguardando confirmação", statusTone: "info", owner: "Gestora", next: "confirmar início", last: "amanhã" }
+  { id: "ana", person: "Ana Souza", origin: "Experimental", originTone: "info", plan: "Plano 2x/semana", checklist: "4/6", status: "Faltando CPF", statusTone: "warning", owner: "Recepção", next: "validar dados", last: "hoje 10:24" },
+  { id: "pedro", person: "Pedro Santos", origin: "Pós-aula", originTone: "warning", plan: "Plano mensal", checklist: "6/6", status: "Pronta para aluno", statusTone: "success", owner: "Gestora", next: "converter", last: "hoje 09:40" },
+  { id: "julia", person: "Julia Ramos", origin: "Vendas", originTone: "info", plan: "A definir", checklist: "2/6", status: "Escolher plano", statusTone: "info", owner: "Recepção", next: "enviar opções", last: "ontem" },
+  { id: "marina", person: "Marina Lopes", origin: "Balcão", originTone: "neutral", plan: "Plano 3x/semana", checklist: "3/6", status: "Primeira aula pendente", statusTone: "info", owner: "Atendimento", next: "escolher aula", last: "hoje" },
+  { id: "carla", person: "Carla Menezes", origin: "WhatsApp", originTone: "success", plan: "Plano mensal", checklist: "5/6", status: "Aguardando pagamento", statusTone: "warning", owner: "Financeiro", next: "cobrar pagamento", last: "2 dias" },
+  { id: "felipe", person: "Felipe Andrade", origin: "Experimental", originTone: "info", plan: "Plano 2x/semana", checklist: "6/6", status: "Convertida", statusTone: "success", owner: "Recepção", next: "aluno criado", last: "hoje 08:30" },
+  { id: "beatriz", person: "Beatriz Lima", origin: "Indicação", originTone: "info", plan: "Plano mensal", checklist: "3/6", status: "Faltando contato", statusTone: "warning", owner: "Recepção", next: "pedir telefone", last: "ontem" },
+  { id: "lucas", person: "Lucas Ferreira", origin: "Vendas", originTone: "info", plan: "Plano trimestral", checklist: "5/6", status: "Aguardando pagamento", statusTone: "warning", owner: "Gestora", next: "cobrar pagamento", last: "amanhã" }
 ];
 
 function EnrollmentTable({
@@ -1094,23 +1401,33 @@ function EnrollmentTable({
   );
 }
 
-function enrollmentDrawerFacts(enrollment: EnrollmentRow): LeadDrawerFact[] {
+function enrollmentDrawerFacts(enrollment: EnrollmentRow, state: LeadDrawerState): LeadDrawerFact[] {
+  const paymentConfirmed = state === "enrollment-ready" || state === "enrollment-converted";
+  const paymentPending = state === "enrollment-payment";
   return [
     { id: "origin", icon: "graduation", label: "Origem", value: enrollment.origin },
     { id: "previous", icon: "user", label: "Etapa anterior", value: "Pós-aula" },
     { id: "owner", icon: "user", label: "Dono / fila", value: enrollment.owner },
     { id: "plan", icon: "clock", label: "Plano escolhido", value: enrollment.plan },
     { id: "first", icon: "calendar", label: "Primeira aula", value: enrollment.id === "ana" ? "terça 17h - Reformer Intermediário" : enrollment.next },
+    {
+      id: "payment",
+      icon: "creditCard",
+      label: "Pagamento inicial",
+      value: paymentConfirmed ? "Confirmado" : paymentPending ? "Pendente" : "Aguardando validação",
+      tone: paymentConfirmed ? "success" : "warning"
+    },
     { id: "channel", icon: "message", label: "Canal permitido", value: <><Icon name="whatsapp" size="12px" /> WhatsApp permitido</>, tone: "success" }
   ];
 }
 
-const enrollmentChecklist: LeadDrawerChecklistItem[] = [
-  { id: "basic", label: "Dados básicos", checked: true },
-  { id: "plan", label: "Plano escolhido", checked: true },
-  { id: "class", label: "Primeira aula definida", checked: true },
-  { id: "consent", label: "Consentimento registrado", checked: true },
-  { id: "cpf", label: "CPF pendente" }
+const enrollmentChecklistLabels = [
+  { id: "basic", label: "Dados básicos" },
+  { id: "plan", label: "Plano escolhido" },
+  { id: "class", label: "Primeira aula definida" },
+  { id: "consent", label: "Consentimento registrado" },
+  { id: "fiscal", label: "Dados fiscais validados" },
+  { id: "payment", label: "Pagamento inicial" }
 ];
 
 const enrollmentDrawerHistory: LeadDrawerHistoryItem[] = [
@@ -1119,48 +1436,84 @@ const enrollmentDrawerHistory: LeadDrawerHistoryItem[] = [
   { id: "plan", time: "ontem 18:10", title: "Plano 2x/semana escolhido", description: "Primeira aula sugerida" }
 ];
 
-function enrollmentChecklistFor(enrollment: EnrollmentRow): LeadDrawerChecklistItem[] {
-  if (enrollment.id === "ana") return enrollmentChecklist;
+function enrollmentChecklistFor(enrollment: EnrollmentRow, state: LeadDrawerState, overrides?: Record<string, boolean>): LeadDrawerChecklistItem[] {
   const checkedCount = Number(enrollment.checklist.split("/")[0]);
-  return ["Dados básicos", "Plano escolhido", "Primeira aula definida", "Consentimento registrado", enrollment.status]
-    .map((label, index) => ({ id: `step-${index}`, label, checked: index < checkedCount }));
+  return enrollmentChecklistLabels.map((item, index) => {
+    let checked = index < checkedCount;
+    if (state === "enrollment-payment") checked = item.id !== "payment";
+    if (state === "enrollment-missing" && enrollment.status === "Faltando CPF") checked = item.id !== "fiscal" && item.id !== "payment";
+    if (state === "enrollment-ready" || state === "enrollment-converted") checked = true;
+    checked = overrides?.[item.id] ?? checked;
+    return { ...item, checked, state: checked ? "complete" : "warning" };
+  });
 }
 
-function EnrollmentDrawer({ enrollment, onAction, onClose }: { enrollment: EnrollmentRow; onAction?: (action: string) => void; onClose?: () => void }) {
-  const checklist = enrollmentChecklistFor(enrollment);
+function EnrollmentDrawer({
+  checklistOverrides,
+  enrollment,
+  onAction,
+  onChecklistToggle,
+  onClose,
+  state,
+  statusLabel
+}: {
+  checklistOverrides?: Record<string, boolean>;
+  enrollment: EnrollmentRow;
+  onAction?: (action: LeadDrawerAction) => void;
+  onChecklistToggle?: (item: LeadDrawerChecklistItem, checked: boolean) => void;
+  onClose?: () => void;
+  state?: LeadDrawerState;
+  statusLabel?: string;
+}) {
+  const resolvedState: LeadDrawerState = state ?? (
+    enrollment.status === "Aguardando pagamento" ? "enrollment-payment"
+      : enrollment.status === "Pronta para aluno" ? "enrollment-ready"
+        : enrollment.status === "Convertida" ? "enrollment-converted"
+          : enrollment.status === "Bloqueada" ? "blocked"
+            : "enrollment-missing"
+  );
+  const checklist = enrollmentChecklistFor(enrollment, resolvedState, checklistOverrides);
+  const checklistProgressLabel = `${checklist.filter((item) => item.checked).length}/${checklist.length}`;
   const history = enrollment.id === "ana" ? enrollmentDrawerHistory : [
     { id: "latest", time: enrollment.last, title: `Status: ${enrollment.status}`, description: `Próxima ação: ${enrollment.next}` },
     { id: "owner", time: "anterior", title: `Acompanhamento por ${enrollment.owner}`, description: `${enrollment.plan} - checklist ${enrollment.checklist}` },
     { id: "start", time: "início", title: "Pré-matrícula iniciada", description: `Origem: ${enrollment.origin}` }
+  ];
+  const primaryAction = resolvedState === "enrollment-payment"
+    ? { label: "Cobrar pagamento", action: "charge-payment" as const, icon: "creditCard" as const }
+    : resolvedState === "enrollment-ready"
+      ? { label: "Converter em aluno", action: "convert-student" as const, icon: "graduation" as const }
+      : resolvedState === "enrollment-converted"
+        ? { label: "Aluno convertido", action: "convert-student" as const, icon: "checkCircle" as const, disabled: true }
+        : { label: "Validar matrícula", action: "validate-enrollment" as const, icon: "clipboard" as const };
+  const secondaryActions = [
+    { label: "Pedir dados", action: "request-data" as const, icon: "clipboard" as const, disabled: resolvedState === "enrollment-ready" || resolvedState === "enrollment-converted" },
+    { label: "Escolher primeira aula", action: "choose-first-class" as const, icon: "calendar" as const, disabled: resolvedState === "enrollment-ready" || resolvedState === "enrollment-converted" },
+    { label: "Abrir conversa", action: "open-conversation" as const, icon: "whatsapp" as const },
+    { label: "Criar tarefa", action: "create-task" as const, icon: "calendar" as const },
+    { label: "Marcar perdido", action: "mark-lost" as const, icon: "x" as const, disabled: resolvedState === "enrollment-converted" }
   ];
 
   return (
     <LeadDrawer
       compact
       checklistItems={checklist}
-      checklistProgressLabel={enrollment.checklist}
+      checklistProgressLabel={checklistProgressLabel}
       checklistTitle="Checklist de matrícula"
       copilotBody={enrollment.id === "ana" ? "Pedir CPF de forma curta e explicar que é necessário para concluir o cadastro." : `Acompanhar ${enrollment.person}: ${enrollment.next}.`}
       copilotTitle="Copiloto sugere"
       eyebrow="Pré-matrícula selecionada"
-      facts={enrollmentDrawerFacts(enrollment)}
+      facts={enrollmentDrawerFacts(enrollment, resolvedState)}
       history={history}
       name={enrollment.person}
       notice={<><strong>A operação manual é sempre possível.</strong></>}
       onAction={onAction}
+      onChecklistToggle={onChecklistToggle}
       onClose={onClose}
-      primaryAction={{ label: "Pedir dado", action: "request-data", icon: "clipboard" }}
-      secondaryActions={[
-        { label: "Converter em aluno", action: "convert-student", icon: "clipboard", disabled: true },
-        { label: "Escolher primeira aula", action: "choose-first-class", icon: "calendar" },
-        { label: "Abrir interessado", action: "open-conversation", icon: "whatsapp" },
-        { label: "Abrir conversa", action: "open-conversation", icon: "whatsapp" },
-        { label: "Criar tarefa", action: "create-follow-up", icon: "calendar" },
-        { label: "Marcar perdido", action: "mark-lost", icon: "x" },
-        { label: "Mais ações", action: "more-actions", icon: "moreVertical" }
-      ]}
-      state="enrollment"
-      statusLabel={enrollment.status}
+      primaryAction={primaryAction}
+      secondaryActions={secondaryActions}
+      state={resolvedState}
+      statusLabel={statusLabel ?? enrollment.status}
       suggestedAction={null}
     />
   );
@@ -1176,7 +1529,41 @@ export const Image38ListaInteressados: Story = {
     },
     sourceImage: "38_round-4.1G_vendas_02_lista-interessados.png.png"
   },
-  render: () => <SalesInterestedListPage />
+  render: () => <SalesInterestedListPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Interessados", level: 1 })).toBeInTheDocument();
+    const initialDrawer = canvas.queryByRole("complementary", { name: "Detalhes do interessado" });
+    if (initialDrawer) {
+      await userEvent.click(within(initialDrawer).getByRole("button", { name: "Fechar interessado" }));
+      await waitFor(() => expect(canvas.queryByRole("complementary", { name: "Detalhes do interessado" })).not.toBeInTheDocument());
+    }
+
+    await userEvent.click(canvas.getByRole("row", { name: /Marina Lopes/ }));
+    await waitFor(() => expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "new"));
+    await userEvent.click(canvas.getByRole("button", { name: "Qualificar" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "interested");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do interessado: qualificar");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar interessado" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Pedro Santos/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "no-slot");
+    await expect(canvas.getByRole("button", { name: "Agendar experimental" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar interessado" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Gabriela Martins/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "ready");
+    await userEvent.click(canvas.getByRole("button", { name: "Iniciar matrícula" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "enrollment-missing");
+    await expect(canvas.getByRole("button", { name: "Criar tarefa" })).toBeInTheDocument();
+    await expect(canvas.queryByRole("button", { name: "Qualificar" })).not.toBeInTheDocument();
+
+    await userEvent.type(canvas.getByPlaceholderText("Buscar por nome, telefone ou conversa"), "Ana");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Busca de interessados: Ana");
+    await userEvent.click(canvas.getByRole("button", { name: "Sem vaga 18" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila de vendas selecionada: Sem vaga");
+  }
 };
 
 export const Image37VendasPipelineKanban: Story = {
@@ -1192,6 +1579,30 @@ export const Image37VendasPipelineKanban: Story = {
   render: () => <SalesPipelinePage />
 };
 
+export const PipelineInteractionContract: Story = {
+  name: "Pipeline interaction contract",
+  render: () => <SalesPipelinePage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole("button", { name: /Ana Souza WhatsApp/ }));
+    const drawer = canvas.getByRole("complementary", { name: "Detalhes do interessado" });
+    await expect(drawer).toHaveAttribute("data-state", "new");
+
+    await userEvent.click(within(drawer).getByRole("button", { name: "Qualificar" }));
+    await expect(drawer).toHaveAttribute("data-state", "interested");
+    await expect(canvas.getByRole("button", { name: /Ana Souza WhatsApp.*qualificado/ })).toBeInTheDocument();
+
+    await userEvent.click(within(drawer).getByRole("button", { name: "Criar follow-up" }));
+    await expect(canvas.getByRole("button", { name: /Ana Souza WhatsApp.*follow-up criado para hoje/ })).toBeInTheDocument();
+    await userEvent.click(within(drawer).getByRole("button", { name: "Mover etapa" }));
+    await expect(canvas.getByRole("button", { name: /Ana Souza WhatsApp.*continuar em Experimental/ })).toBeInTheDocument();
+    await userEvent.click(within(drawer).getByRole("button", { name: "Converter em aluno" }));
+    await expect(canvas.getByRole("button", { name: /Ana Souza WhatsApp.*convertido em aluno/ })).toBeInTheDocument();
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação do pipeline: converter em aluno");
+  }
+};
+
 export const Image39ExperimentalLista: Story = {
   name: "39 experimental lista acompanhamento",
   parameters: {
@@ -1202,7 +1613,35 @@ export const Image39ExperimentalLista: Story = {
     },
     sourceImage: "39_round-4.1G_experimental_01_lista-acompanhamento.png.png"
   },
-  render: () => <SalesExperimentalListPage />
+  render: () => <SalesExperimentalListPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Aulas experimentais", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "trial-scheduled");
+    await userEvent.click(canvas.getByRole("button", { name: "Confirmar presença" }));
+    await expect(canvas.getByText("Presença confirmada")).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Marcar compareceu" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "trial-convert");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação da aula experimental: marcar comparecimento");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar interessado" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Carla Menezes/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "trial-missed");
+    await userEvent.click(canvas.getByRole("button", { name: "Remarcar" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "trial-scheduled");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar interessado" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Camila Rocha/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "trial-convert");
+    await userEvent.click(canvas.getByRole("button", { name: "Iniciar matrícula" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "enrollment-missing");
+    await expect(canvas.getByRole("button", { name: "Abrir conversa" })).toBeInTheDocument();
+    await expect(canvas.queryByRole("button", { name: "Confirmar presença" })).not.toBeInTheDocument();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Faltaram 4" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila de experimental selecionada: Faltaram");
+  }
 };
 
 export const Image40MatriculasChecklistConversao: Story = {
@@ -1215,5 +1654,34 @@ export const Image40MatriculasChecklistConversao: Story = {
     },
     sourceImage: "40_round-4.1G_matriculas_01_checklist-conversao.png.png"
   },
-  render: () => <SalesEnrollmentChecklistPage />
+  render: () => <SalesEnrollmentChecklistPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Matrículas", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "enrollment-missing");
+    await expect(canvas.getAllByText("Pagamento inicial")).toHaveLength(2);
+    await userEvent.click(canvas.getByRole("button", { name: "Validar matrícula" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "enrollment-payment");
+    await expect(canvas.getByText("Pendente")).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Cobrar pagamento" }));
+    const readyDrawer = canvas.getByRole("complementary", { name: "Detalhes do interessado" });
+    await expect(readyDrawer).toHaveAttribute("data-state", "enrollment-ready");
+    await expect(within(readyDrawer).getByText("6/6")).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Converter em aluno" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "enrollment-converted");
+    await expect(canvas.getByRole("button", { name: "Aluno convertido" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar interessado" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Carla Menezes/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "enrollment-payment");
+    await userEvent.click(canvas.getByRole("button", { name: "Revisar Pagamento inicial" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do interessado" })).toHaveAttribute("data-state", "enrollment-ready");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Pagamento inicial confirmado");
+
+    await userEvent.type(canvas.getByPlaceholderText("Buscar por interessado, telefone ou matrícula"), "Pedro");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Busca de matrícula: Pedro");
+    await userEvent.click(canvas.getByRole("button", { name: "Aguardando pagamento 12" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila de matrícula selecionada: Aguardando pagamento");
+  }
 };

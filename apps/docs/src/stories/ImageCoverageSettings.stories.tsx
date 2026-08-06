@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import type {
   PermissionMatrixRow,
@@ -53,6 +54,27 @@ export default meta;
 
 type Story = StoryObj;
 
+const settingsActions = {
+  agendaAddBlock: fn(),
+  agendaAddException: fn(),
+  agendaRowAction: fn(),
+  channelsConnect: fn(),
+  hubOpen: fn(),
+  notificationsRole: fn(),
+  notificationsAlert: fn(),
+  paymentsActivate: fn(),
+  paymentsMethod: fn(),
+  paymentsRule: fn(),
+  paymentsTechnical: fn(),
+  teamInvite: fn(),
+  teamMemberAction: fn(),
+  teamPermissions: fn()
+};
+
+function resetSettingsActions() {
+  Object.values(settingsActions).forEach((action) => action.mockClear());
+}
+
 const settingsNavItems = [
   { id: "hoje", label: "Hoje" },
   { id: "tarefas", label: "Tarefas" },
@@ -102,9 +124,12 @@ const initialStudioValues: Record<SettingsStudioField, string> = {
   publicName: "Studio Leticia",
   mainUnit: "Unidade Centro",
   address: "Rua das Flores, 120",
+  addressLine2: "Sala 12",
+  neighborhood: "Centro",
   city: "Sao Paulo",
   state: "SP",
-  postalCode: "01001-000"
+  postalCode: "01001-000",
+  timezone: "America/Sao_Paulo"
 };
 
 const initialTeamMembers: SettingsTeamMember[] = [
@@ -140,6 +165,12 @@ const initialChannelRules: Record<SettingsNotificationChannelId, SettingsNotific
   "after-hours": { value: "critical", enabled: true }
 };
 
+const initialAlertsByRole: Record<string, string[]> = {
+  owner: ["integration-failure", "critical-payment", "pending-approval", "config-pending"],
+  frontdesk: ["class-problem", "student-no-contact", "manual-charge", "pending-invite"],
+  teacher: ["own-class", "pending-roll-call", "student-no-contact", "important-note"]
+};
+
 export function SettingsHubPage() {
   const [, setOpenedSettingId] = useState("");
 
@@ -157,7 +188,7 @@ export function SettingsHubPage() {
           description={item.description}
           icon={item.icon}
           key={item.id}
-          onOpen={() => setOpenedSettingId(item.id)}
+          onOpen={() => { setOpenedSettingId(item.id); settingsActions.hubOpen(item.id); }}
           state={item.state}
           title={item.title}
         />
@@ -175,6 +206,7 @@ export function SettingsStudioPage() {
   const [studioValues, setStudioValues] = useState(initialStudioValues);
   const [savedStudioValues, setSavedStudioValues] = useState(initialStudioValues);
   const [saveState, setSaveState] = useState<"dirty" | "saved">("saved");
+  const [agendaImpactReview, setAgendaImpactReview] = useState(false);
   const [, setLastAction] = useState("");
 
   return (
@@ -183,16 +215,16 @@ export function SettingsStudioPage() {
         <SettingsStudioWorkspace
           activeDays={activeDays}
           onActiveDaysChange={(days) => { setActiveDays(days); setSaveState("dirty"); }}
-          onCancel={() => { setActiveDays(savedDays); setScheduleMode(savedScheduleMode); setStudioValues(savedStudioValues); setSaveState("saved"); }}
+          onCancel={() => { setActiveDays(savedDays); setScheduleMode(savedScheduleMode); setStudioValues(savedStudioValues); setAgendaImpactReview(false); setSaveState("saved"); }}
           onFieldChange={(field, value) => { setStudioValues((current) => ({ ...current, [field]: value })); setSaveState("dirty"); }}
           onSave={() => { setSavedDays(activeDays); setSavedScheduleMode(scheduleMode); setSavedStudioValues(studioValues); setSaveState("saved"); }}
-          onScheduleModeChange={(mode) => { setScheduleMode(mode); setSaveState("dirty"); }}
+          onScheduleModeChange={(mode) => { setScheduleMode(mode); setAgendaImpactReview(true); setSaveState("dirty"); }}
           saveState={saveState}
           scheduleMode={scheduleMode}
           values={studioValues}
         />
       )}
-      panel={<SettingsAgentPanel insights={[{ id: "schedule", content: "Horários institucionais delimitam quando o studio pode operar; aulas existentes não são movidas." }, { id: "unit", content: "Nome, unidade e endereço aparecem em comunicações e registros operacionais." }]} introduction="Mudanças no horário institucional não movem aulas já criadas. Conflitos aparecem em Agenda." onHelp={() => setLastAction("help")} onQuestionSelect={(question) => setLastAction(`question:${question}`)} onSend={(message) => setLastAction(`send:${message}`)} placeholder="Pergunte sobre o studio..." questions={["Isso muda aulas já marcadas?", "Onde edito horários por dia?", "Posso cadastrar outra unidade?", "O que muda ao salvar?"]} role="Ajudando em Studio" />}
+      panel={<SettingsAgentPanel insights={[{ id: "schedule", content: "Horários institucionais delimitam quando o studio pode operar; aulas existentes não são movidas." }, { id: "unit", content: "Nome, unidade e endereço aparecem em comunicações e registros operacionais." }]} introduction="Mudanças no horário institucional não movem aulas já criadas. Conflitos aparecem em Agenda." onHelp={() => setLastAction("help")} onQuestionSelect={(question) => setLastAction(`question:${question}`)} onReviewAction={() => { setAgendaImpactReview(false); setLastAction("open-agenda"); }} onSend={(message) => setLastAction(`send:${message}`)} placeholder="Pergunte sobre o studio..." questions={["Isso muda aulas já marcadas?", "Onde edito horários por dia?", "Posso cadastrar outra unidade?", "O que muda ao salvar?"]} review={agendaImpactReview ? { title: "Revisar impacto na Agenda", description: "O novo horário pode conflitar com aulas futuras já marcadas.", actionLabel: "Abrir Agenda" } : undefined} role="Ajudando em Studio" />}
       browserUrl="https://app.taliya.com/app/configuracoes/studio"
       pageHeaderBreadcrumb={<Breadcrumb items={[{ label: "Configurações" }, { label: "Studio" }]} />}
       pageHeaderRhythm="stacked"
@@ -212,7 +244,7 @@ export function SettingsTeamPage() {
   const pendingInvites = members.filter((member) => member.status === "invitePending").length;
   return (
     <CrmRightPanelPage
-      main={<SettingsTeamWorkspace members={members} onCancel={() => { setMembers(savedMembers.map((member) => ({ ...member }))); setSaveState("saved"); }} onInvite={() => setLastAction("invite")} onMemberAction={(member, action) => { setLastAction(action); if (action === "deactivate" || action === "reactivate") setMembers((current) => current.map((item) => item.id === member.id ? { ...item, status: action === "deactivate" ? "inactive" : "active" } : item)); setSaveState("dirty"); }} onOpenPermissions={() => setLastAction("permissions")} onSave={() => { setSavedMembers(members.map((member) => ({ ...member }))); setSaveState("saved"); }} saveState={saveState} />}
+      main={<SettingsTeamWorkspace members={members} onCancel={() => { setMembers(savedMembers.map((member) => ({ ...member }))); setSaveState("saved"); }} onInvite={() => { setLastAction("invite"); settingsActions.teamInvite(); }} onMemberAction={(member, action) => { setLastAction(action); settingsActions.teamMemberAction(member.id, action); if (action === "deactivate" || action === "reactivate") setMembers((current) => current.map((item) => item.id === member.id ? { ...item, status: action === "deactivate" ? "inactive" : "active" } : item)); setSaveState("dirty"); }} onOpenPermissions={() => { setLastAction("permissions"); settingsActions.teamPermissions(); }} onSave={() => { setSavedMembers(members.map((member) => ({ ...member }))); setSaveState("saved"); }} saveState={saveState} />}
       panel={<SettingsAgentPanel insights={[{ id: "access", content: "Desativar uma pessoa remove o acesso sem apagar o histórico operacional." }, { id: "roles", content: "O papel principal começa aqui; limites detalhados continuam em Permissões." }]} introduction="Equipe gerencia acesso e papel principal. Permissões detalhadas continuam na página Permissões." onHelp={() => setLastAction("help")} onQuestionSelect={(question) => setLastAction(`question:${question}`)} onSend={(message) => setLastAction(`send:${message}`)} placeholder="Pergunte sobre a equipe..." questions={["Quando o convite é enviado?", "O que acontece ao desativar?", "Onde altero permissões?", "Quem pode convidar pessoas?"]} role="Ajudando em Equipe" />}
       browserUrl="https://app.taliya.com/app/configuracoes/equipe"
       pageHeaderBreadcrumb={<Breadcrumb items={[{ label: "Configurações" }, { label: "Equipe" }]} />}
@@ -230,7 +262,7 @@ export function SettingsChannelsPage() {
   const [, setLastAction] = useState("");
   return (
     <CrmRightPanelPage
-      main={<SettingsChannelsWorkspace connectionStatus="connected" onCancel={() => { setWhatsAppState("business"); setSaveState("saved"); }} onConnectWhatsApp={() => setLastAction("test-connection")} onSave={() => setSaveState("saved")} onWhatsAppStateChange={(state) => { setWhatsAppState(state); setSaveState("dirty"); }} saveState={saveState} whatsAppState={whatsAppState} />}
+      main={<SettingsChannelsWorkspace connectionStatus="connected" onCancel={() => { setWhatsAppState("business"); setSaveState("saved"); }} onConnectWhatsApp={() => { setLastAction("test-connection"); settingsActions.channelsConnect(); }} onSave={() => setSaveState("saved")} onWhatsAppStateChange={(state) => { setWhatsAppState(state); setSaveState("dirty"); }} saveState={saveState} whatsAppState={whatsAppState} />}
       panel={<SettingsAgentPanel insights={[{ id: "whatsapp", content: "A conexão oficial permite atender pelo CRM sem impedir o uso do WhatsApp Business no celular." }, { id: "scope", content: "Esta página registra canais; mensagens e automações são configuradas nos fluxos correspondentes." }]} introduction="Canais define os contatos oficiais. Mensagens, campanhas e automações continuam fora desta página." onHelp={() => setLastAction("help")} onQuestionSelect={(question) => setLastAction(`question:${question}`)} onSend={(message) => setLastAction(`send:${message}`)} placeholder="Pergunte sobre canais..." questions={["Posso continuar usando o celular?", "Como testo a conexão?", "Onde configuro mensagens?", "O que muda ao salvar?"]} role="Ajudando em Canais" />}
       browserUrl="https://app.taliya.com/app/configuracoes/canais"
       pageHeaderBreadcrumb={<Breadcrumb items={[{ label: "Configurações" }, { label: "Canais" }]} />}
@@ -322,6 +354,9 @@ export function SettingsPermissionsPage() {
 }
 
 export function SettingsPaymentsPage() {
+  const initialEnabledMethods = ["pix", "cash", "card"] as const;
+  const [enabledMethods, setEnabledMethods] = useState<Array<(typeof initialEnabledMethods)[number]>>([...initialEnabledMethods]);
+  const [savedEnabledMethods, setSavedEnabledMethods] = useState<Array<(typeof initialEnabledMethods)[number]>>([...initialEnabledMethods]);
   const [savedRules, setSavedRules] = useState(() => initialPaymentRuleRows.map((row) => ({ ...row })));
   const [ruleRows, setRuleRows] = useState(() => initialPaymentRuleRows.map((row) => ({ ...row })));
   const [saveState, setSaveState] = useState<"dirty" | "saved">("saved");
@@ -331,13 +366,14 @@ export function SettingsPaymentsPage() {
     <CrmRightPanelPage
       main={(
         <SettingsPaymentsWorkspace
-          onActivate={() => setLastAction("activate")}
-          onCancel={() => { setRuleRows(savedRules.map((row) => ({ ...row }))); setSaveState("saved"); }}
-          onMethodSelect={(method) => setLastAction(`method:${method}`)}
-          onRuleAction={(row) => { setLastAction(`rule:${row.id}`); setSaveState("dirty"); }}
+          enabledMethods={enabledMethods}
+          onActivate={() => { setLastAction("activate"); settingsActions.paymentsActivate(); }}
+          onCancel={() => { setEnabledMethods([...savedEnabledMethods]); setRuleRows(savedRules.map((row) => ({ ...row }))); setSaveState("saved"); }}
+          onMethodSelect={(method) => { setEnabledMethods((methods) => methods.includes(method) ? methods.filter((item) => item !== method) : [...methods, method]); setSaveState("dirty"); setLastAction(`method:${method}`); settingsActions.paymentsMethod(method); }}
+          onRuleAction={(row) => { setLastAction(`rule:${row.id}`); settingsActions.paymentsRule(row.id); setSaveState("dirty"); }}
           onRuleToggle={(row, checked) => { setRuleRows((rows) => rows.map((item) => item.id === row.id ? { ...item, checked } : item)); setSaveState("dirty"); }}
-          onSave={() => { setSavedRules(ruleRows.map((row) => ({ ...row }))); setSaveState("saved"); setLastAction("save"); }}
-          onTechnicalIntegration={() => setLastAction("technical-integration")}
+          onSave={() => { setSavedEnabledMethods([...enabledMethods]); setSavedRules(ruleRows.map((row) => ({ ...row }))); setSaveState("saved"); setLastAction("save"); }}
+          onTechnicalIntegration={() => { setLastAction("technical-integration"); settingsActions.paymentsTechnical(); }}
           ruleRows={ruleRows}
           saveState={saveState}
         />
@@ -386,10 +422,10 @@ export function SettingsAgendaPage() {
     <CrmRightPanelPage
       main={(
         <SettingsAgendaWorkspace
-          onAddBlock={() => setLastAction("add-block")}
-          onAddException={() => setLastAction("add-exception")}
+          onAddBlock={() => { setLastAction("add-block"); settingsActions.agendaAddBlock(); }}
+          onAddException={() => { setLastAction("add-exception"); settingsActions.agendaAddException(); }}
           onCancel={() => { setRuleValues(savedRules); setSaveState("saved"); }}
-          onRowAction={(rowId, action) => setLastAction(`${action}:${rowId}`)}
+          onRowAction={(rowId, action) => { setLastAction(`${action}:${rowId}`); settingsActions.agendaRowAction(rowId, action); }}
           onRuleChange={(ruleId, value) => { setRuleValues((rules) => ({ ...rules, [ruleId]: value })); setSaveState("dirty"); }}
           onSave={() => { setSavedRules(ruleValues); setSaveState("saved"); setLastAction("save"); }}
           ruleValues={ruleValues}
@@ -428,6 +464,9 @@ export function SettingsAgendaPage() {
 }
 
 export function SettingsNotificationsPage() {
+  const [selectedRoleId, setSelectedRoleId] = useState("owner");
+  const [savedAlertsByRole, setSavedAlertsByRole] = useState(initialAlertsByRole);
+  const [alertsByRole, setAlertsByRole] = useState(initialAlertsByRole);
   const [savedFrequencyRules, setSavedFrequencyRules] = useState(initialFrequencyRules);
   const [frequencyRules, setFrequencyRules] = useState(initialFrequencyRules);
   const [savedChannelRules, setSavedChannelRules] = useState(initialChannelRules);
@@ -444,14 +483,17 @@ export function SettingsNotificationsPage() {
     <CrmRightPanelPage
       main={(
         <SettingsNotificationsWorkspace
+          enabledAlertTypesByRole={alertsByRole}
           channelRules={channelRules}
           frequencyRules={frequencyRules}
-          onCancel={() => { setChannelRules(savedChannelRules); setFrequencyRules(savedFrequencyRules); setSaveState("saved"); }}
+          onAlertToggle={(roleId, alertId, enabled) => { setAlertsByRole((roles) => ({ ...roles, [roleId]: enabled ? [...(roles[roleId] ?? []), alertId] : (roles[roleId] ?? []).filter((id) => id !== alertId) })); setSaveState("dirty"); settingsActions.notificationsAlert(roleId, alertId, enabled); }}
+          onCancel={() => { setAlertsByRole(savedAlertsByRole); setChannelRules(savedChannelRules); setFrequencyRules(savedFrequencyRules); setSaveState("saved"); }}
           onChannelChange={(channelId, value) => { setChannelRules((rules) => updateRule(rules, channelId as SettingsNotificationChannelId, value)); setSaveState("dirty"); }}
           onFrequencyChange={(alertId, value) => { setFrequencyRules((rules) => updateRule(rules, alertId as SettingsNotificationFrequencyId, value)); setSaveState("dirty"); }}
-          onRoleSelect={(roleId) => setLastAction(`role:${roleId}`)}
-          onSave={() => { setSavedChannelRules(channelRules); setSavedFrequencyRules(frequencyRules); setSaveState("saved"); setLastAction("save"); }}
+          onRoleSelect={(roleId) => { setSelectedRoleId(roleId); setLastAction(`role:${roleId}`); settingsActions.notificationsRole(roleId); }}
+          onSave={() => { setSavedAlertsByRole(alertsByRole); setSavedChannelRules(channelRules); setSavedFrequencyRules(frequencyRules); setSaveState("saved"); setLastAction("save"); }}
           saveState={saveState}
+          selectedRoleId={selectedRoleId}
         />
       )}
       panel={(
@@ -488,49 +530,140 @@ export function SettingsNotificationsPage() {
 export const Image60ConfiguracoesHub: Story = {
   name: "60 configuracoes hub",
   parameters: { sourceImage: "60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png" },
-  render: () => <SettingsHubPage />
+  render: () => <SettingsHubPage />,
+  play: async ({ canvasElement }) => {
+    resetSettingsActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getAllByRole("button", { name: "Abrir" })[0]!);
+    await expect(settingsActions.hubOpen).toHaveBeenCalledWith("studio");
+  }
 };
 
 export const ConfiguracoesStudio: Story = {
   name: "Configuracoes Studio pos-live",
-  render: () => <SettingsStudioPage />
+  render: () => <SettingsStudioPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Sab" }));
+    await expect(canvas.getByText("Alteração manual", { exact: true })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Salvar alterações" }));
+    await expect(canvas.getByRole("button", { name: "Salvo" })).toBeDisabled();
+  }
 };
 
 export const ConfiguracoesEquipe: Story = {
   name: "Configuracoes Equipe pos-live",
-  render: () => <SettingsTeamPage />
+  render: () => <SettingsTeamPage />,
+  play: async ({ canvasElement }) => {
+    resetSettingsActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Convidar pessoa" }));
+    await userEvent.click(canvas.getAllByRole("button", { name: "Editar" })[0]!);
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir Permissoes" }));
+    await userEvent.click(canvas.getAllByRole("button", { name: "Desativar" })[0]!);
+    const dialog = within(canvasElement.ownerDocument.body);
+    await expect(dialog.getByRole("heading", { name: "Desativar acesso?" })).toBeInTheDocument();
+    await userEvent.click(dialog.getByRole("button", { name: "Confirmar desativacao" }));
+    await expect(canvas.getByText("Inativo", { exact: true })).toBeInTheDocument();
+    await expect(settingsActions.teamInvite).toHaveBeenCalledTimes(1);
+    await expect(settingsActions.teamMemberAction).toHaveBeenCalledWith("leticia", "edit");
+    await expect(settingsActions.teamPermissions).toHaveBeenCalledTimes(1);
+    await expect(settingsActions.teamMemberAction).toHaveBeenCalledWith("leticia", "deactivate");
+  }
 };
 
 export const ConfiguracoesCanais: Story = {
   name: "Configuracoes Canais pos-live",
-  render: () => <SettingsChannelsPage />
+  render: () => <SettingsChannelsPage />,
+  play: async ({ canvasElement }) => {
+    resetSettingsActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Ainda esta no WhatsApp pessoal" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Testar conexao" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Salvar alterações" }));
+    await expect(settingsActions.channelsConnect).toHaveBeenCalledTimes(1);
+    await expect(canvas.getByRole("button", { name: "Salvo" })).toBeDisabled();
+  }
 };
 
 export const ConfiguracoesPlanosModelos: Story = {
   name: "Configuracoes Planos e modelos pos-live",
-  render: () => <SettingsPlansPage />
+  render: () => <SettingsPlansPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Aula avulsa" }));
+    await expect(canvas.getByRole("button", { name: "Aula avulsa" })).toHaveAttribute("aria-pressed", "true");
+    await userEvent.click(canvas.getByRole("button", { name: "Salvar alterações" }));
+    await expect(canvas.getByRole("button", { name: "Salvo" })).toBeDisabled();
+  }
 };
 
 export const Image61ConfiguracoesPermissoes: Story = {
   name: "61 configuracoes permissoes",
   parameters: { sourceImage: "61_round-4.1M_configuracoes_02_permissoes-aprovado.png" },
-  render: () => <SettingsPermissionsPage />
+  render: () => <SettingsPermissionsPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const frontdeskRole = canvasElement.querySelector<HTMLElement>('[data-component="PermissionRoleCard"][data-role-id="frontdesk"] button');
+    await expect(frontdeskRole).not.toBeNull();
+    await userEvent.click(frontdeskRole!);
+    await userEvent.click(canvas.getByRole("switch", { name: "Alterar permissão Professor pode adicionar observação" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Salvar alterações" }));
+    await expect(canvas.getByRole("button", { name: "Salvo" })).toBeDisabled();
+  }
 };
 
 export const Image62ConfiguracoesPagamentos: Story = {
   name: "62 configuracoes pagamentos financeiro",
   parameters: { sourceImage: "62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png" },
-  render: () => <SettingsPaymentsPage />
+  render: () => <SettingsPaymentsPage />,
+  play: async ({ canvasElement }) => {
+    resetSettingsActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: /Pix manual/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Alterar Vencimento padrão" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Ativar Pagamentos Taliya" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Ver integração técnica" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Salvar alterações" }));
+    await expect(settingsActions.paymentsMethod).toHaveBeenCalledWith("pix");
+    await expect(settingsActions.paymentsRule).toHaveBeenCalledWith("due-date");
+    await expect(settingsActions.paymentsActivate).toHaveBeenCalledTimes(1);
+    await expect(settingsActions.paymentsTechnical).toHaveBeenCalledTimes(1);
+  }
 };
 
 export const Image63ConfiguracoesAgenda: Story = {
   name: "63 configuracoes agenda",
   parameters: { sourceImage: "63_round-4.1M_configuracoes_04_agenda-aprovado.png" },
-  render: () => <SettingsAgendaPage />
+  render: () => <SettingsAgendaPage />,
+  play: async ({ canvasElement }) => {
+    resetSettingsActions();
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Adicionar exceção" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Editar Natal" }));
+    await userEvent.click(canvas.getByRole("switch", { name: "Alternar Lista de espera" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Salvar alterações" }));
+    await expect(settingsActions.agendaAddException).toHaveBeenCalledTimes(1);
+    await expect(settingsActions.agendaRowAction).toHaveBeenCalledWith("christmas", "edit");
+  }
 };
 
 export const Image64ConfiguracoesNotificacoes: Story = {
   name: "64 configuracoes notificacoes",
   parameters: { sourceImage: "64_round-4.1M_configuracoes_05_notificacoes-aprovado.png" },
-  render: () => <SettingsNotificationsPage />
+  render: () => <SettingsNotificationsPage />,
+  play: async ({ canvasElement }) => {
+    resetSettingsActions();
+    const canvas = within(canvasElement);
+    const frontdeskRole = canvasElement.querySelector<HTMLElement>('.tcrm-settings-notifications-workspace__role[data-role-id="frontdesk"]');
+    await expect(frontdeskRole).not.toBeNull();
+    await userEvent.click(frontdeskRole!);
+    await userEvent.click(canvas.getByRole("button", { name: "Alternar Aula com problema para Recepção" }));
+    await expect(canvas.getByRole("button", { name: "Alternar Aula com problema para Recepção" })).toHaveAttribute("aria-pressed", "false");
+    await userEvent.click(canvas.getByRole("switch", { name: "Alternar Crítico" }));
+    await userEvent.click(canvas.getByRole("switch", { name: "Alternar Dentro do Taliya" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Salvar alterações" }));
+    await expect(settingsActions.notificationsRole).toHaveBeenCalledWith("frontdesk");
+    await expect(settingsActions.notificationsAlert).toHaveBeenCalledWith("frontdesk", "class-problem", false);
+  }
 };

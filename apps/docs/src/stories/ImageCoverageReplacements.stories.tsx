@@ -1,5 +1,6 @@
 ﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo, useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   CrmWorklistPage,
@@ -16,6 +17,7 @@ import type {
   PageQuickFilterItem,
   ReplacementDrawerAction,
   ReplacementDrawerFact,
+  ReplacementDrawerState,
   ReplacementFitOption,
   ReplacementTableRow
 } from "@taliya/crm";
@@ -81,9 +83,9 @@ const replacementRows: ReplacementTableRow[] = [
     reason: "No-show",
     validity: "18/05",
     preference: "Noite",
-    status: "blocked",
-    nextAction: "Revisar política",
-    mode: "blocked"
+    status: "noVacancy",
+    nextAction: "Encontrar encaixe",
+    mode: "manual"
   },
   {
     id: "beatriz-lima",
@@ -92,7 +94,7 @@ const replacementRows: ReplacementTableRow[] = [
     reason: <>Crédito vence<br />amanhã</>,
     validity: "14/05",
     preference: "Cedo",
-    status: "expiring",
+    status: "expired",
     nextAction: "Buscar horário",
     mode: "manual"
   },
@@ -125,8 +127,8 @@ const replacementRows: ReplacementTableRow[] = [
     reason: <>Pedido da<br />recepção</>,
     validity: "30/05",
     preference: "Sem preferência",
-    status: "pending",
-    nextAction: "Verificar vaga",
+    status: "conflict",
+    nextAction: "Resolver conflito",
     mode: "manual"
   },
   {
@@ -146,7 +148,10 @@ const replacementStatusLabels: Record<ReplacementTableRow["status"], string> = {
   found: "Opção encontrada",
   waiting: "Aguardando resposta",
   blocked: "Bloqueada por regra",
+  noVacancy: "Sem vaga",
+  conflict: "Conflito",
   expiring: "Expira amanhã",
+  expired: "Vencida",
   scheduled: "Agendada",
   pending: "Pendente",
   available: "Com opção"
@@ -157,6 +162,29 @@ const replacementFitOptions: ReplacementFitOption[] = [
   { id: "fri-10", title: <>Sexta 10h · Pilates Solo</>, instructor: "Instrutora Mariana Lopes", vacancy: "2 vagas", badge: "exige confirmação", tone: "confirmation" },
   { id: "mon-19", title: <>Segunda 19h · Tower</>, instructor: "Instrutor Lucas Peres", vacancy: "", badge: "conflito leve", tone: "conflict" }
 ];
+
+const replacementDrawerActionLabels: Record<ReplacementDrawerAction, string> = {
+  close: "fechar",
+  "find-fit": "encontrar encaixe",
+  "reserve-slot": "reservar vaga",
+  "send-invite": "enviar convite",
+  "consume-credit": "consumir crédito",
+  "create-task": "criar tarefa",
+  "open-conversation": "abrir conversa",
+  "open-original-class": "abrir aula original",
+  "copy-suggestion": "copiar sugestão",
+  cancel: "cancelar"
+};
+
+function replacementDrawerStateForRow(row: ReplacementTableRow): ReplacementDrawerState {
+  if (row.status === "waiting") return "waiting";
+  if (row.status === "noVacancy") return "no-vacancy";
+  if (row.status === "conflict") return "conflict";
+  if (row.status === "expired") return "expired";
+  if (row.status === "scheduled") return "scheduled";
+  if (row.status === "blocked") return "blocked";
+  return "requested";
+}
 
 function ReplacementsPageContent({
   announcement,
@@ -278,8 +306,6 @@ function ReplacementsPageContent({
       contentClassName="sb-image-coverage-replacements-content"
       contentLayout="main-priority"
       drawer={drawer}
-      drawerPlacement="floating"
-      drawerSize="default"
       globalActions={{
         onAvatar: () => onInteraction("Perfil da operadora aberto"),
         onMessages: () => onInteraction("Mensagens abertas"),
@@ -352,7 +378,7 @@ export function ReplacementsShell() {
   const [selectedReplacementId, setSelectedReplacementId] = useState("ana-carolina");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [pageLabel, setPageLabel] = useState("1-8 de 8");
-  const [drawerState, setDrawerState] = useState("requested" as "requested" | "scheduled" | "blocked");
+  const [drawerState, setDrawerState] = useState<ReplacementDrawerState>("requested");
   const [announcement, setAnnouncement] = useState("");
   const [selectedOptionId, setSelectedOptionId] = useState("thu-08");
   const selectedReplacement = replacementRows.find((row) => row.id === selectedReplacementId) ?? replacementRows[0]!;
@@ -380,10 +406,16 @@ export function ReplacementsShell() {
   ];
 
   function handleDrawerAction(action: ReplacementDrawerAction) {
+    if (action === "find-fit") {
+      setDrawerState("requested");
+      setSelectedOptionId("thu-08");
+    }
     if (action === "reserve-slot") setDrawerState("scheduled");
+    if (action === "send-invite") setDrawerState("waiting");
+    if (action === "consume-credit") setDrawerState("consumed");
     if (action === "create-task") setQuery("tarefa criada");
     if (action === "cancel") setDrawerState("blocked");
-    setAnnouncement(`Ação da reposição: ${action}`);
+    setAnnouncement(`Ação da reposição: ${replacementDrawerActionLabels[action]}`);
   }
 
   const drawerNode = drawerOpen ? (
@@ -392,7 +424,7 @@ export function ReplacementsShell() {
       facts={drawerFacts}
       inviteSuggestion={`“Oi ${selectedStudentName.split(" ")[0]}, encontramos uma opção compatível para sua reposição. Posso reservar?”`}
       name={selectedStudentName}
-      options={replacementFitOptions.map((option) => ({ ...option, selected: option.id === selectedOptionId }))}
+      options={drawerState === "no-vacancy" || drawerState === "expired" ? [] : replacementFitOptions.map((option) => ({ ...option, selected: option.id === selectedOptionId }))}
       statusLabel={replacementStatusLabels[selectedReplacement.status]}
       state={drawerState}
       onAction={handleDrawerAction}
@@ -402,8 +434,7 @@ export function ReplacementsShell() {
       }}
       onOptionSelect={(option) => {
         setSelectedOptionId(option.id);
-        setQuery(`opção:${option.id}`);
-        setAnnouncement(`Opção de encaixe selecionada: ${option.id}`);
+        setAnnouncement(`Opção de encaixe selecionada: ${String(option.title)}`);
       }}
     />
   ) : null;
@@ -446,7 +477,7 @@ export function ReplacementsShell() {
         setSelectedReplacementId(row.id);
         setSelectedOptionId("thu-08");
         setDrawerOpen(true);
-        setDrawerState(row.status === "scheduled" ? "scheduled" : row.status === "blocked" ? "blocked" : "requested");
+        setDrawerState(replacementDrawerStateForRow(row));
         setAnnouncement(`Reposição aberta: ${String(row.student.name)}`);
       }}
       onSearchChange={(value) => {
@@ -467,5 +498,44 @@ export const Image31FluxoEncaixe: Story = {
       }
     }
   },
-  render: () => <ReplacementsShell />
+  render: () => <ReplacementsShell />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Reposições", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "requested");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Reservar vaga" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "scheduled");
+    await userEvent.click(canvas.getByRole("button", { name: "Consumir crédito" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "consumed");
+    await expect(canvas.getByRole("button", { name: "Reservar vaga" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar reposição" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Felipe Andrade/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "waiting");
+    await expect(canvas.getByRole("button", { name: "Reservar vaga" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar reposição" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Gabriela Martins/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "no-vacancy");
+    await expect(canvas.getByText("Nenhum encaixe compatível")).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Encontrar encaixe" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "requested");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação da reposição: encontrar encaixe");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar reposição" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Lucas Peres/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "conflict");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar reposição" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Beatriz Lima/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes da reposição" })).toHaveAttribute("data-state", "expired");
+    await expect(canvas.getByRole("button", { name: "Reservar vaga" })).toBeDisabled();
+
+    await userEvent.type(canvas.getByRole("searchbox", { name: "Buscar aluno ou reposição" }), "Ana");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Busca atualizada: Ana");
+    await userEvent.click(canvas.getByRole("button", { name: "Aguardando resposta 2" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila selecionada: Aguardando resposta");
+  }
 };

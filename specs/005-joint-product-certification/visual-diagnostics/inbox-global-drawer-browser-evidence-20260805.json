@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-08-05",
+  "artifact": "apps/docs/storybook-static",
+  "baseUrl": "http://127.0.0.1:6224",
+  "route": {
+    "storyId": "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta",
+    "url": "http://127.0.0.1:6224/iframe.html?id=crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta&viewMode=story&fresh=20260805-inbox-final",
+    "viewport": { "width": 2560, "height": 1440 },
+    "note": "The Storybook browser backend retained its default 2560x1440 viewport; the attempted viewport override was not used as evidence."
+  },
+  "drawer": {
+    "component": "ConversationDrawer -> CrmDrawer",
+    "status": "pass",
+    "position": "fixed",
+    "top": "0px",
+    "right": "0px",
+    "bottom": "0px",
+    "width": 420,
+    "height": 1440,
+    "x": 2140,
+    "y": 0,
+    "zIndex": "50"
+  },
+  "layout": {
+    "status": "pass",
+    "shellClassIncludes": "tcrm-product-shell-stage--drawer",
+    "pageLayoutClassIncludes": "tcrm-three-pane-page-layout--drawer",
+    "rightContextPaneDisplay": "none",
+    "mainCount": 1,
+    "rootHorizontalOverflow": 0
+  },
+  "lifecycle": {
+    "close": "drawer unmounted and root overflow remained 0",
+    "reopen": "drawer restored with the same fixed full-height geometry",
+    "runtimeLogs": []
+  },
+  "comparison": {
+    "referenceStoryId": "crm-image-coverage-hoje--image-18-hoje-drawer-tarefa",
+    "referenceGeometry": {
+      "position": "fixed",
+      "top": "0px",
+      "right": "0px",
+      "bottom": "0px",
+      "width": 420,
+      "height": 1440,
+      "x": 2140,
+      "y": 0,
+      "mainCount": 1,
+      "rootHorizontalOverflow": 0
+    },
+    "status": "pass",
+    "note": "Inbox and Hoje now share the same global drawer geometry and viewport anchoring."
+  },
+  "sourceChanges": [
+    "Inbox now routes conversation context through the canonical CrmProductShell drawer slot.",
+    "ConversationDrawer is the Inbox-specific domain wrapper around CrmDrawer.",
+    "CrmThreePanePage hides the persistent context rail while the global drawer is open.",
+    "The shared fixed-position selector now includes the base tcrm-drawer-frame class."
+  ]
+}

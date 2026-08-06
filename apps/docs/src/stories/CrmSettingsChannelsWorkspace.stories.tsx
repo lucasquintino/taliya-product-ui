@@ -31,3 +31,27 @@ export const Connected: Story = {
     );
   }
 };
+
+export const PendingConnection: Story = {
+  args: { connectionStatus: "pending" }
+};
+
+export const Disconnected: Story = {
+  args: { connectionStatus: "disconnected" }
+};
+
+export const Saving: Story = {
+  args: { connectionStatus: "connected", saveState: "saving" }
+};
+
+export const ValidationError: Story = {
+  args: { validationError: "Revise o e-mail e a URL informados antes de salvar." }
+};
+
+export const BlockedPermission: Story = {
+  args: { blockedReason: "Seu papel pode consultar os canais, mas nao pode altera-los.", onRequestAccess: () => undefined }
+};
+
+export const SystemError: Story = {
+  args: { systemError: "A configuracao dos canais nao foi salva.", onRetry: () => undefined }
+};

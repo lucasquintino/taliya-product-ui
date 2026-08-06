@@ -1,6 +1,6 @@
 # Release Policy Audit
 
-Generated: 2026-07-16T16:33:28.568Z
+Generated: 2026-08-05T17:00:39.168Z
 
 Status: pass-registry-policy
 
@@ -9,7 +9,7 @@ This audit validates the versioned release policy for the current local tarball 
 ## Summary
 
 - Current channel: `local-tarball`
-- Current package version: `0.1.0`
+- Current package version: `0.1.1`
 - Registry ready: `true`
 - Registry version ready: `true`
 - Registry decision ready: `true`
@@ -25,7 +25,7 @@ This audit validates the versioned release policy for the current local tarball 
 | `local-manifest` | pass | dist-packages/taliya-product-ui-local-manifest.json | current local channel must point at the generated local release manifest |
 | `consumer-refresh-commands` | pass | contracts/release-policy.json | local channel must name the official consumer refresh commands |
 | `source-package-jsons` | pass | packages/tokens/package.json, packages/ui/package.json, packages/crm/package.json | release policy must cover tokens, ui, and crm package manifests |
-| `package-versions-aligned` | pass | packages/tokens/package.json=0.1.0, packages/ui/package.json=0.1.0, packages/crm/package.json=0.1.0 | all public packages must share the same release version |
+| `package-versions-aligned` | pass | packages/tokens/package.json=0.1.1, packages/ui/package.json=0.1.1, packages/crm/package.json=0.1.1 | all public packages must share the same release version |
 | `registry-required-items` | pass | semver-version, registry-target-and-access, controlled-publish-workflow, consumer-dependency-migration | registry gate must explicitly require semver, registry/access, controlled publish, and consumer migration decisions |
 | `registry-status` | pass | configured | registry status must be explicit |
 | `registry-package-metadata` | pass | packages/tokens/package.json:ready, packages/ui/package.json:ready, packages/crm/package.json:ready | all public packages must declare npm access, registry, provenance, license, and repository metadata |

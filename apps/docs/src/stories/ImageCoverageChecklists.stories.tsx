@@ -1,5 +1,6 @@
 ﻿import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useMemo, useState } from "react";
+import { expect, userEvent, within } from "storybook/test";
 
 import {
   ChecklistDrawer,
@@ -14,6 +15,7 @@ import type {
   ChecklistDrawerActivity,
   ChecklistDrawerComment,
   ChecklistDrawerFact,
+  ChecklistDrawerState,
   ChecklistDrawerStep,
   ChecklistTableRow,
   CrmShellNavItem,
@@ -70,9 +72,9 @@ const checklistRows: ChecklistTableRow[] = [
     type: "Agenda",
     progress: { completed: 4, total: 7 },
     owner: { name: "Lucas" },
-    deadline: <>Hoje<br />09:30</>,
+    deadline: <>Ontem<br />09:30</>,
     deadlineTone: "danger",
-    status: "blocked",
+    status: "overdue",
     nextStep: <>Resolver conflito<br />de sala</>,
     activity: "08:15"
   },
@@ -135,6 +137,7 @@ const checklistStatusLabel: Record<ChecklistTableRow["status"], string> = {
   progress: "Em andamento",
   blocked: "Bloqueado",
   pending: "Pendente",
+  overdue: "Atrasado",
   review: "Em revisão",
   done: "Concluído"
 };
@@ -206,7 +209,8 @@ function ChecklistsPageContent({
         options: [
           { value: "andamento", label: "Em andamento", icon: "play" },
           { value: "bloqueado", label: "Bloqueado", icon: "lock" },
-          { value: "pendente", label: "Pendente", icon: "clock" }
+          { value: "pendente", label: "Pendente", icon: "clock" },
+          { value: "atrasado", label: "Atrasado", icon: "alert" }
         ]
       },
       {
@@ -248,8 +252,6 @@ function ChecklistsPageContent({
       avatarSrc={image79Avatar}
       contentLayout="work-list"
       drawer={drawer}
-      drawerPlacement="content"
-      drawerSize="compact"
       globalActions={{
         onAvatar: () => onShellAction("Perfil da operadora aberto"),
         onMessages: () => onShellAction("Mensagens abertas"),
@@ -321,6 +323,8 @@ export function ChecklistsShell() {
   const [selectedQueueId, setSelectedQueueId] = useState("today");
   const [selectedChecklistId, setSelectedChecklistId] = useState("opening");
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [drawerState, setDrawerState] = useState<ChecklistDrawerState>("open");
+  const [assignedOwner, setAssignedOwner] = useState<React.ReactNode>("Mariana");
   const [pageLabel, setPageLabel] = useState("1-5 de 12");
   const [steps, setSteps] = useState<ChecklistDrawerStep[]>(checklistDrawerSteps);
   const [comment, setComment] = useState<ChecklistDrawerComment>(
@@ -329,11 +333,11 @@ export function ChecklistsShell() {
   const checkedCount = steps.filter((item) => item.state === "done").length;
   const selectedChecklist = checklistRows.find((row) => row.id === selectedChecklistId) ?? checklistRows[0]!;
   const drawerFacts = useMemo<ChecklistDrawerFact[]>(() => [
-    { id: "status", icon: "calendar", label: "Status", value: <><span className="tcrm-checklist-drawer__status-dot" aria-hidden="true" />{checklistStatusLabel[selectedChecklist.status]}</>, tone: selectedChecklist.status === "blocked" ? "danger" : "info" },
-    { id: "owner", icon: "user", label: "Responsável", value: selectedChecklist.owner.name, avatarSrc: selectedChecklist.owner.avatarSrc },
+    { id: "status", icon: "calendar", label: "Status", value: <><span className="tcrm-checklist-drawer__status-dot" aria-hidden="true" />{drawerState === "completed" ? "Concluído" : checklistStatusLabel[selectedChecklist.status]}</>, tone: selectedChecklist.status === "blocked" || selectedChecklist.status === "overdue" ? "danger" : "info" },
+    { id: "owner", icon: "user", label: "Responsável", value: assignedOwner, avatarSrc: selectedChecklist.owner.avatarSrc },
     { id: "deadline", icon: "calendar", label: "Prazo", value: selectedChecklist.deadline, tone: selectedChecklist.deadlineTone === "danger" ? "danger" : undefined },
     { id: "progress", icon: "clock", label: "Progresso", value: `${checkedCount}/${steps.length}` }
-  ], [checkedCount, selectedChecklist, steps.length]);
+  ], [assignedOwner, checkedCount, drawerState, selectedChecklist, steps.length]);
   const drawerActivity = useMemo<ChecklistDrawerActivity>(() => selectedChecklist.id === "opening"
     ? checklistDrawerActivity
     : {
@@ -350,6 +354,9 @@ export function ChecklistsShell() {
       comment={comment}
       completedSteps={checkedCount}
       facts={drawerFacts}
+      primaryActionLabel={selectedChecklist.status === "pending" ? "Iniciar" : "Continuar"}
+      state={drawerState}
+      statusLabel={drawerState === "completed" ? "Concluído" : checklistStatusLabel[selectedChecklist.status]}
       steps={steps}
       totalSteps={steps.length}
       onStepToggle={(item, checked) => {
@@ -360,16 +367,22 @@ export function ChecklistsShell() {
         setDrawerOpen(false);
         setAnnouncedAction("Drawer de checklist fechado");
       }}
-      onContinue={() => {
+      onPrimaryAction={() => {
+        setDrawerState("open");
         setSelectedQueueId("opening");
-        setAnnouncedAction("Execução do checklist continuada");
+        setAnnouncedAction(selectedChecklist.status === "pending" ? "Checklist iniciado" : "Execução do checklist continuada");
       }}
-      onCreateTask={() => {
-        setQuery("tarefa criada");
-        setAnnouncedAction("Tarefa criada a partir do checklist");
+      onAssign={() => {
+        setAssignedOwner("Você");
+        setAnnouncedAction("Checklist atribuído a você");
+      }}
+      onOpenTask={() => {
+        setQuery(String(selectedChecklist.title));
+        setAnnouncedAction("Tarefa do checklist aberta");
       }}
       onComplete={() => {
         setSteps((current) => current.map((step) => ({ ...step, state: "done" })));
+        setDrawerState("completed");
         setComment({ id: "local-complete", author: "Você", body: "Checklist concluído pela story.", time: "Agora" });
         setAnnouncedAction("Checklist concluído");
       }}
@@ -397,6 +410,8 @@ export function ChecklistsShell() {
       onChecklistSelect={(row) => {
         setSelectedChecklistId(row.id);
         setDrawerOpen(true);
+        setDrawerState(row.status === "blocked" ? "blocked" : row.status === "done" ? "completed" : "open");
+        setAssignedOwner(row.owner.name);
         setSteps(contextualChecklistSteps(row));
         setComment(row.id === "opening"
           ? { id: "mariana", author: "Mariana", body: "Recepção aberta. Sala 2 ainda aguardando confirmação do professor.", time: "07:45", avatarSrc: image79Avatar }
@@ -446,5 +461,27 @@ export const Image24ListaExecucaoDetalhe: Story = {
       }
     }
   },
-  render: () => <ChecklistsShell />
+  render: () => <ChecklistsShell />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Checklists", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("cell", { name: "Atrasado" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: /5\. Revisar pagamentos críticos/ }));
+    await expect(canvas.getByRole("button", { name: /5\. Revisar pagamentos críticos/ })).toHaveAttribute("aria-pressed", "true");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Atribuir" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Checklist atribuído a você");
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir tarefa" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Tarefa do checklist aberta");
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar checklist" }));
+    await expect(canvas.queryByRole("complementary", { name: "Detalhes do checklist" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("row", { name: /Fechamento do dia/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Iniciar" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Checklist iniciado");
+    await userEvent.click(canvas.getByRole("button", { name: "Concluir" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do checklist" })).toHaveAttribute("data-state", "completed");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Checklist concluído");
+  }
 };

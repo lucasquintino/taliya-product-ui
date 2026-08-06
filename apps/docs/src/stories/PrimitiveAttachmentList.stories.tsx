@@ -1,4 +1,5 @@
-import type { Meta } from "@storybook/react-vite";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 
 import { AttachmentList } from "@taliya/ui";
 
@@ -18,8 +19,12 @@ const attachments = [
   { id: "error", name: "arquivo-corrompido.csv", meta: "Falha ao processar", state: "error" as const }
 ];
 
-export function AllStates() {
-  return (
+type Story = StoryObj<typeof meta>;
+
+const onRemove = fn();
+
+export const AllStates: Story = {
+  render: () => (
     <PrimitivePage>
       <main className="sb-source-page">
         <SourcePanel className="sb-source-panel--batch4-files" number="1" title="Attachment list">
@@ -28,11 +33,16 @@ export function AllStates() {
               <AttachmentList items={attachments.slice(0, 2)} />
             </SourceItem>
             <SourceItem label="Removable">
-              <AttachmentList items={attachments} removable />
+              <AttachmentList items={attachments} onRemove={onRemove} removable />
             </SourceItem>
           </SourceGrid>
         </SourcePanel>
       </main>
     </PrimitivePage>
-  );
-}
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Remover contrato-assinado.pdf" }));
+    await expect(onRemove).toHaveBeenCalledWith(attachments[0]);
+  }
+};

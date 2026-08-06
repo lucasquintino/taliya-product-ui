@@ -136,9 +136,9 @@ import "@taliya/crm/styles.css";
 Durante o desenvolvimento local, `taliya-internal` consome os tarballs gerados em `dist-packages`:
 
 ```text
-@taliya/tokens -> dist-packages/taliya-tokens-0.1.0.tgz
-@taliya/ui     -> dist-packages/taliya-ui-0.1.0.tgz
-@taliya/crm    -> dist-packages/taliya-crm-0.1.0.tgz
+@taliya/tokens -> dist-packages/taliya-tokens-0.1.1.tgz
+@taliya/ui     -> dist-packages/taliya-ui-0.1.1.tgz
+@taliya/crm    -> dist-packages/taliya-crm-0.1.1.tgz
 ```
 
 Fluxo local recomendado apos alterar tokens/componentes:

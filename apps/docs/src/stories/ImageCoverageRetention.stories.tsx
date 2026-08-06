@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import { useState } from "react";
 
 import {
@@ -10,7 +11,7 @@ import {
   crmEmptyShellSidebarItems,
   crmEmptyShellSidebarUtilityItems
 } from "@taliya/crm";
-import type { CaseDrawerFact, CaseDrawerFooterAction, CaseDrawerHistoryItem, CaseDrawerSection, CrmShellNavItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
+import type { CaseDrawerAction, CaseDrawerFact, CaseDrawerFooterAction, CaseDrawerHistoryItem, CaseDrawerSection, CaseDrawerState, CrmShellNavItem, PageFilterBarFilter, PageQuickFilterItem } from "@taliya/crm";
 import { Chip, Icon, IconButton, InlineGroup, PersonLabel } from "@taliya/ui";
 import type { ComponentTone } from "@taliya/ui";
 
@@ -36,15 +37,53 @@ type Story = StoryObj;
 const retentionNavItems: CrmShellNavItem[] = [
   { id: "riscos", label: "Riscos" },
   { id: "cancelamentos", label: "Cancelamentos" },
-  { id: "reativacoes", label: "Reativacoes" },
-  { id: "reclamacoes", label: "Reclamacoes" }
+  { id: "reativacoes", label: "Reativações" },
+  { id: "reclamacoes", label: "Reclamações" }
 ];
+
+type CaseOverride = { state: CaseDrawerState; statusLabel: string };
+
+const caseActionLabels: Partial<Record<CaseDrawerAction, string>> = {
+  cancel: "confirmar cancelamento",
+  classify: "classificar caso",
+  "create-case": "abrir caso",
+  "create-task": "criar tarefa",
+  "do-not-contact": "marcar como não contatar",
+  escalate: "escalar caso",
+  message: "enviar mensagem",
+  "open-conversation": "abrir conversa",
+  "open-profile": "abrir aluno",
+  pause: "converter em pausa",
+  "pause-automation": "pausar automação",
+  reserve: "reservar vaga",
+  resolve: "resolver caso",
+  save: "registrar salvamento",
+  "start-return": "iniciar retorno"
+};
+
+function caseActionMessage(scope: string, action: CaseDrawerAction) {
+  return `${scope}: ${caseActionLabels[action] ?? "atualizar caso"}`;
+}
 
 export function RetentionRiskListPage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
+  const [overrides, setOverrides] = useState<Record<string, CaseOverride>>({});
   const selectedRisk = retentionRiskRows.find((row) => row.id === selectedRowId) ?? retentionRiskRows[0]!;
+  const selectedOverride = overrides[selectedRisk.id];
+  const selectedState = selectedOverride?.state ?? retentionRiskState(selectedRisk);
+  const selectedStatus = selectedOverride?.statusLabel ?? `Risco ${selectedRisk.risk}`;
+
+  const handleAction = (action: CaseDrawerAction) => {
+    if (action === "close") return;
+    if (action === "resolve") {
+      setOverrides((current) => ({ ...current, [selectedRisk.id]: { state: "followed", statusLabel: "Acompanhado" } }));
+      setAnnouncement("Risco marcado como acompanhado");
+      return;
+    }
+    setAnnouncement(caseActionMessage("Ação de retenção", action));
+  };
 
   return (
     <>
@@ -52,7 +91,7 @@ export function RetentionRiskListPage() {
         activeNavId="riscos"
         activeSidebarId="retencao"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <RetentionRiskDrawer risk={selectedRisk} onAction={(action) => setAnnouncement(`Ação do risco: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de risco fechado"); }} /> : null}
+        drawer={drawerOpen ? <RetentionRiskDrawer risk={selectedRisk} onAction={handleAction} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de risco fechado"); }} state={selectedState} statusLabel={selectedStatus} /> : null}
         filterBar={<RetentionRiskFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de retencao"
         globalActions={{
@@ -71,8 +110,8 @@ export function RetentionRiskListPage() {
         quickFilters={<RetentionRiskQuickRail onInteraction={setAnnouncement} />}
         showGlobalActionsWithDrawer
         sidebarItems={crmEmptyShellSidebarItems}
-        subtitle="Alunos em risco e proximas acoes"
-        title="Retencao"
+        subtitle="Alunos em risco e próximas ações"
+        title="Retenção"
         utilityItems={crmEmptyShellSidebarUtilityItems}
         worklistLayoutMode="wide-rail"
       >
@@ -95,7 +134,23 @@ export function RetentionCancellationQueuePage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
+  const [overrides, setOverrides] = useState<Record<string, CaseOverride>>({});
   const selectedCancellation = cancellationRows.find((row) => row.id === selectedRowId) ?? cancellationRows[0]!;
+  const selectedOverride = overrides[selectedCancellation.id];
+  const selectedState = selectedOverride?.state ?? cancellationState(selectedCancellation);
+  const selectedStatus = selectedOverride?.statusLabel ?? selectedCancellation.status;
+
+  const handleAction = (action: CaseDrawerAction) => {
+    if (action === "close") return;
+    const transitions: Partial<Record<CaseDrawerAction, CaseOverride>> = {
+      save: { state: "cancellation-saving", statusLabel: "Em salvamento" },
+      pause: { state: "cancellation-paused", statusLabel: "Pausa registrada" },
+      cancel: { state: "cancellation-cancelled", statusLabel: "Cancelado" }
+    };
+    const transition = transitions[action];
+    if (transition) setOverrides((current) => ({ ...current, [selectedCancellation.id]: transition }));
+    setAnnouncement(caseActionMessage("Cancelamento", action));
+  };
 
   return (
     <>
@@ -103,8 +158,7 @@ export function RetentionCancellationQueuePage() {
         activeNavId="cancelamentos"
         activeSidebarId="retencao"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <CancellationDrawer cancellation={selectedCancellation} onAction={(action) => setAnnouncement(`Ação de cancelamento: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de cancelamento fechado"); }} /> : null}
-        drawerPlacement="chrome"
+        drawer={drawerOpen ? <CancellationDrawer cancellation={selectedCancellation} onAction={handleAction} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de cancelamento fechado"); }} state={selectedState} statusLabel={selectedStatus} /> : null}
         filterBar={<CancellationFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de cancelamentos"
         globalActions={{
@@ -147,7 +201,25 @@ export function RetentionReactivationListPage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
+  const [overrides, setOverrides] = useState<Record<string, CaseOverride>>({});
   const selectedReactivation = reactivationRows.find((row) => row.id === selectedRowId) ?? reactivationRows[0]!;
+  const selectedOverride = overrides[selectedReactivation.id];
+  const selectedState = selectedOverride?.state ?? reactivationState(selectedReactivation);
+  const selectedStatus = selectedOverride?.statusLabel ?? selectedReactivation.status;
+
+  const handleAction = (action: CaseDrawerAction) => {
+    if (action === "close") return;
+    if (action === "start-return") {
+      setOverrides((current) => ({ ...current, [selectedReactivation.id]: { state: "reactivation-returning", statusLabel: "Retorno iniciado" } }));
+    }
+    if (action === "reserve") {
+      setOverrides((current) => ({ ...current, [selectedReactivation.id]: { state: "reactivated", statusLabel: "Reativado" } }));
+    }
+    if (action === "do-not-contact") {
+      setOverrides((current) => ({ ...current, [selectedReactivation.id]: { state: "reactivation-do-not-contact", statusLabel: "Não contatar" } }));
+    }
+    setAnnouncement(caseActionMessage("Reativação", action));
+  };
 
   return (
     <>
@@ -155,8 +227,7 @@ export function RetentionReactivationListPage() {
         activeNavId="reativacoes"
         activeSidebarId="retencao"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <ReactivationDrawer onAction={(action) => setAnnouncement(`Ação de reativação: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de reativação fechado"); }} reactivation={selectedReactivation} /> : null}
-        drawerPlacement="chrome"
+        drawer={drawerOpen ? <ReactivationDrawer onAction={handleAction} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de reativação fechado"); }} reactivation={selectedReactivation} state={selectedState} statusLabel={selectedStatus} /> : null}
         filterBar={<ReactivationFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de reativacoes"
         globalActions={{
@@ -176,7 +247,7 @@ export function RetentionReactivationListPage() {
         showGlobalActionsWithDrawer
         sidebarItems={crmEmptyShellSidebarItems}
         subtitle="Ex-alunos e alunos pausados com chance de retorno."
-        title="Reativacoes"
+        title="Reativações"
         utilityItems={crmEmptyShellSidebarUtilityItems}
         worklistLayoutMode="wide-rail"
       >
@@ -199,7 +270,25 @@ export function RetentionComplaintQueuePage() {
   const [selectedRowId, setSelectedRowId] = useState("ana");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [announcement, setAnnouncement] = useState("");
+  const [overrides, setOverrides] = useState<Record<string, CaseOverride>>({});
   const selectedComplaint = complaintRows.find((row) => row.id === selectedRowId) ?? complaintRows[0]!;
+  const selectedOverride = overrides[selectedComplaint.id];
+  const selectedState = selectedOverride?.state ?? complaintState(selectedComplaint);
+  const selectedStatus = selectedOverride?.statusLabel ?? selectedComplaint.status;
+
+  const handleAction = (action: CaseDrawerAction) => {
+    if (action === "close") return;
+    if (action === "classify") {
+      setOverrides((current) => ({ ...current, [selectedComplaint.id]: { state: selectedComplaint.severity === "Alta" ? "complaint-severe" : "complaint-waiting", statusLabel: `Classificada · ${selectedComplaint.severity}` } }));
+    }
+    if (action === "pause-automation") {
+      setOverrides((current) => ({ ...current, [selectedComplaint.id]: { state: "complaint-paused", statusLabel: "Automação pausada" } }));
+    }
+    if (action === "resolve") {
+      setOverrides((current) => ({ ...current, [selectedComplaint.id]: { state: "complaint-resolved", statusLabel: "Resolvida" } }));
+    }
+    setAnnouncement(caseActionMessage("Reclamação", action));
+  };
 
   return (
     <>
@@ -207,8 +296,7 @@ export function RetentionComplaintQueuePage() {
         activeNavId="reclamacoes"
         activeSidebarId="retencao"
         avatarSrc={image79Avatar}
-        drawer={drawerOpen ? <ComplaintDrawer complaint={selectedComplaint} onAction={(action) => setAnnouncement(`Ação da reclamação: ${action}`)} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de reclamação fechado"); }} /> : null}
-        drawerPlacement="chrome"
+        drawer={drawerOpen ? <ComplaintDrawer complaint={selectedComplaint} onAction={handleAction} onClose={() => { setDrawerOpen(false); setAnnouncement("Drawer de reclamação fechado"); }} state={selectedState} statusLabel={selectedStatus} /> : null}
         filterBar={<ComplaintFilters onInteraction={setAnnouncement} />}
         filterBarLabel="Filtros de reclamacoes"
         globalActions={{
@@ -227,8 +315,8 @@ export function RetentionComplaintQueuePage() {
         quickFilters={<ComplaintQuickRail onInteraction={setAnnouncement} />}
         showGlobalActionsWithDrawer
         sidebarItems={crmEmptyShellSidebarItems}
-        subtitle="Casos sensiveis, respostas e recuperacao de confianca"
-        title="Reclamacoes"
+        subtitle="Casos sensíveis, respostas e recuperação de confiança"
+        title="Reclamações"
         utilityItems={crmEmptyShellSidebarUtilityItems}
         worklistLayoutMode="wide-rail"
       >
@@ -340,6 +428,12 @@ const retentionRiskRows: RetentionRiskRow[] = [
   { id: "bianca", student: "Bianca Oliveira", status: "Ativa", statusTone: "success", risk: "alto", riskTone: "danger", reason: "sem resposta no WhatsApp", last: "Interacao 01/05", next: "Enviar mensagem pessoal hoje", owner: "Mariana" }
 ];
 
+function retentionRiskState(risk: RetentionRiskRow): CaseDrawerState {
+  if (risk.risk === "alto") return "risk-high";
+  if (risk.risk === "medio") return "risk-medium";
+  return "risk-low";
+}
+
 function RetentionRiskTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: RetentionRiskRow) => void; selectedRowId?: string }) {
   const [page, setPage] = useState(1);
 
@@ -393,14 +487,18 @@ function retentionRiskDrawerFacts(risk: RetentionRiskRow): CaseDrawerFact[] {
   ];
 }
 
-const retentionRiskFooterActions: CaseDrawerFooterAction[] = [
-  { id: "message", label: "Enviar mensagem", leadingIcon: "whatsapp", variant: "primary" },
-  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
-  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
-  { id: "resolve", label: "Marcar acompanhado", leadingIcon: "checkCircle" }
-];
+function retentionRiskFooterActions(state: CaseDrawerState): CaseDrawerFooterAction[] {
+  const followed = state === "followed";
+  return [
+    { id: "message", label: "Enviar mensagem", leadingIcon: "whatsapp", variant: "primary", disabled: followed },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar", disabled: followed },
+    { id: "create-case", label: "Abrir caso", leadingIcon: "clipboardCheck", disabled: followed },
+    { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+    { id: "resolve", label: followed ? "Acompanhado" : "Marcar acompanhado", leadingIcon: "checkCircle", disabled: followed }
+  ];
+}
 
-function RetentionRiskDrawer({ risk, onAction, onClose }: { risk: RetentionRiskRow; onAction?: (action: string) => void; onClose?: () => void }) {
+function RetentionRiskDrawer({ risk, onAction, onClose, state, statusLabel }: { risk: RetentionRiskRow; onAction?: (action: CaseDrawerAction) => void; onClose?: () => void; state: CaseDrawerState; statusLabel: string }) {
   const history: CaseDrawerHistoryItem[] = risk.id === "ana" ? [
     { id: "missed", time: "08/05", label: "Faltou a aula em 08/05" },
     { id: "replacement", time: "09/05", label: "Reposicao oferecida em 09/05" },
@@ -424,7 +522,7 @@ function RetentionRiskDrawer({ risk, onAction, onClose }: { risk: RetentionRiskR
     <CaseDrawer
       avatarSrc={image79Avatar}
       facts={retentionRiskDrawerFacts(risk)}
-      footerActions={retentionRiskFooterActions}
+      footerActions={retentionRiskFooterActions(state)}
       history={history}
       messageQuotaLabel="revisao humana"
       numberedSections
@@ -432,9 +530,9 @@ function RetentionRiskDrawer({ risk, onAction, onClose }: { risk: RetentionRiskR
       onClose={onClose}
       sections={sections}
       showMessageSuggestion={false}
-      statusLabel={`Risco ${risk.risk}`}
+      state={state}
+      statusLabel={statusLabel}
       title={risk.student}
-      widthVariant="wide"
     />
   );
 }
@@ -531,6 +629,12 @@ const cancellationRows: CancellationRow[] = [
   { id: "bianca", student: "Bianca Oliveira", type: "Duvida de saida", status: "Novo", statusTone: "info", reason: "dificuldade financeira", impact: "R$ 360/mes", deadline: "amanha 09:00", owner: "Mariana" }
 ];
 
+function cancellationState(cancellation: CancellationRow): CaseDrawerState {
+  if (cancellation.status === "Em salvamento") return "cancellation-saving";
+  if (cancellation.status === "Retido") return "cancellation-recovered";
+  return "cancellation-open";
+}
+
 function CancellationTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: CancellationRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
@@ -577,16 +681,20 @@ function cancellationDrawerFacts(cancellation: CancellationRow): CaseDrawerFact[
   ];
 }
 
-const cancellationFooterActions: CaseDrawerFooterAction[] = [
-  { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp" },
-  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
-  { id: "pause", label: "Registrar pausa", leadingIcon: "clock" },
-  { id: "cancel", label: "Confirmar cancelamento", leadingIcon: "x" },
-  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
-  { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
-];
+function cancellationFooterActions(state: CaseDrawerState): CaseDrawerFooterAction[] {
+  const terminal = state === "cancellation-paused" || state === "cancellation-cancelled" || state === "cancellation-recovered";
+  return [
+    { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp", disabled: terminal },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    { id: "save", label: state === "cancellation-saving" ? "Salvamento registrado" : "Registrar salvamento", leadingIcon: "clipboardCheck", disabled: terminal || state === "cancellation-saving" },
+    { id: "pause", label: state === "cancellation-paused" ? "Pausa registrada" : "Converter em pausa", leadingIcon: "clock", disabled: terminal },
+    { id: "cancel", label: state === "cancellation-cancelled" ? "Cancelamento confirmado" : "Confirmar cancelamento", leadingIcon: "x", disabled: terminal },
+    { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+    { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
+  ];
+}
 
-function CancellationDrawer({ cancellation, onAction, onClose }: { cancellation: CancellationRow; onAction?: (action: string) => void; onClose?: () => void }) {
+function CancellationDrawer({ cancellation, onAction, onClose, state, statusLabel }: { cancellation: CancellationRow; onAction?: (action: CaseDrawerAction) => void; onClose?: () => void; state: CaseDrawerState; statusLabel: string }) {
   const plan = [
     "Oferecer dois horarios alternativos",
     "Confirmar se pausa temporaria resolve",
@@ -627,16 +735,16 @@ function CancellationDrawer({ cancellation, onAction, onClose }: { cancellation:
       eyebrowLabel="Cancelamento"
       facts={cancellationDrawerFacts(cancellation)}
       factsLayout="grid"
-      footerActions={cancellationFooterActions}
+      footerActions={cancellationFooterActions(state)}
       history={history}
       showMessageSuggestion={false}
       numberedSections
       onAction={onAction}
       onClose={onClose}
       sections={sections}
-      statusLabel={cancellation.status}
+      state={state}
+      statusLabel={statusLabel}
       title={cancellation.student}
-      widthVariant="wide"
     />
   );
 }
@@ -732,6 +840,12 @@ const reactivationRows: ReactivationRow[] = [
   { id: "bianca", student: "Bianca Oliveira", status: "Sem resposta", statusTone: "neutral", reason: "falta de tempo", activity: "ultimo contato em 01/05", opportunity: "vaga aberta no Pilates Solo", nextAction: "enviar lembrete carinhoso", owner: "Mariana" }
 ];
 
+function reactivationState(reactivation: ReactivationRow): CaseDrawerState {
+  if (reactivation.status === "Nao contatar") return "reactivation-do-not-contact";
+  if (reactivation.status === "Reativado") return "reactivated";
+  return "reactivation-eligible";
+}
+
 function ReactivationTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: ReactivationRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
@@ -778,16 +892,21 @@ function reactivationDrawerFacts(reactivation: ReactivationRow): CaseDrawerFact[
   ];
 }
 
-const reactivationFooterActions: CaseDrawerFooterAction[] = [
-  { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp" },
-  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
-  { id: "reserve", label: "Reservar vaga", leadingIcon: "calendar" },
-  { id: "do-not-contact", label: "Marcar como nao contatar", leadingIcon: "checkCircle" },
-  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
-  { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
-];
+function reactivationFooterActions(state: CaseDrawerState, hasOpportunity: boolean): CaseDrawerFooterAction[] {
+  const restricted = state === "reactivation-do-not-contact" || state === "reactivated";
+  const returning = state === "reactivation-returning";
+  return [
+    { id: "message", label: "Enviar mensagem", variant: "primary", leadingIcon: "whatsapp", disabled: restricted },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
+    { id: "start-return", label: returning ? "Retorno iniciado" : "Iniciar retorno", leadingIcon: "refresh", disabled: restricted || returning || !hasOpportunity },
+    { id: "reserve", label: state === "reactivated" ? "Vaga reservada" : "Reservar vaga validada", leadingIcon: "calendar", disabled: restricted || !returning || !hasOpportunity },
+    { id: "do-not-contact", label: state === "reactivation-do-not-contact" ? "Não contatar" : "Marcar como não contatar", leadingIcon: "checkCircle", disabled: restricted },
+    { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+    { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
+  ];
+}
 
-function ReactivationDrawer({ onAction, onClose, reactivation }: { onAction?: (action: string) => void; onClose?: () => void; reactivation: ReactivationRow }) {
+function ReactivationDrawer({ onAction, onClose, reactivation, state, statusLabel }: { onAction?: (action: CaseDrawerAction) => void; onClose?: () => void; reactivation: ReactivationRow; state: CaseDrawerState; statusLabel: string }) {
   const hasOpportunity = reactivation.opportunity !== "-";
   const sections: CaseDrawerSection[] = [
     { id: "opportunity", title: "Oportunidade de retorno", kind: "facts", items: hasOpportunity ? [
@@ -813,18 +932,18 @@ function ReactivationDrawer({ onAction, onClose, reactivation }: { onAction?: (a
     <CaseDrawer
       avatarSrc={image79Avatar}
       density="compact"
-      eyebrowLabel="Reativacao"
+      eyebrowLabel="Reativação"
       facts={reactivationDrawerFacts(reactivation)}
       factsLayout="grid"
-      footerActions={reactivationFooterActions}
+      footerActions={reactivationFooterActions(state, hasOpportunity)}
       numberedSections
       onAction={onAction}
       onClose={onClose}
       sections={sections}
       showMessageSuggestion={false}
-      statusLabel={reactivation.status}
+      state={state}
+      statusLabel={statusLabel}
       title={reactivation.student}
-      widthVariant="wide"
     />
   );
 }
@@ -924,6 +1043,11 @@ const complaintRows: ComplaintRow[] = [
   { id: "bianca", student: "Bianca Oliveira", severity: "Media", severityTone: "warning", status: "Em andamento", statusTone: "info", origin: "WhatsApp", originIcon: "whatsapp", reason: "remarcar aula", deadline: "13/05 14:00", owner: "Mariana", activity: "msg. enviada ontem" }
 ];
 
+function complaintState(complaint: ComplaintRow): CaseDrawerState {
+  if (complaint.severity === "Alta" && complaint.status === "Reaberta") return "complaint-severe";
+  return "complaint-waiting";
+}
+
 function ComplaintTable({ onInteraction, onRowSelect, selectedRowId }: { onInteraction: (message: string) => void; onRowSelect?: (row: ComplaintRow) => void; selectedRowId?: string }) {
   return (
     <CrmWorklistTable
@@ -971,17 +1095,25 @@ function complaintDrawerFacts(complaint: ComplaintRow): CaseDrawerFact[] {
   ];
 }
 
-const complaintFooterActions: CaseDrawerFooterAction[] = [
-  { id: "message", label: "Responder", variant: "primary", leadingIcon: "arrowLeft" },
-  { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar" },
-  { id: "escalate", label: "Escalar", leadingIcon: "upload" },
-  { id: "resolve", label: "Marcar resolvida", leadingIcon: "checkCircle" },
-  { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
-  { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
-];
+function complaintFooterActions(state: CaseDrawerState): CaseDrawerFooterAction[] {
+  const resolved = state === "complaint-resolved";
+  const paused = state === "complaint-paused";
+  return [
+    { id: "message", label: "Responder", variant: "primary", leadingIcon: "arrowLeft", disabled: resolved },
+    { id: "create-task", label: "Criar tarefa", leadingIcon: "calendar", disabled: resolved },
+    { id: "classify", label: "Classificar", leadingIcon: "tag", disabled: resolved },
+    { id: "pause-automation", label: paused ? "Automação pausada" : "Pausar automação", leadingIcon: "pause", disabled: paused || resolved },
+    { id: "escalate", label: "Escalar", leadingIcon: "upload", disabled: resolved },
+    { id: "resolve", label: resolved ? "Resolvida" : "Marcar resolvida", leadingIcon: "checkCircle", disabled: resolved },
+    { id: "open-profile", label: "Abrir aluno", leadingIcon: "user" },
+    { id: "open-conversation", label: "Abrir conversa", leadingIcon: "message" }
+  ];
+}
 
-function ComplaintDrawer({ complaint, onAction, onClose }: { complaint: ComplaintRow; onAction?: (action: string) => void; onClose?: () => void }) {
+function ComplaintDrawer({ complaint, onAction, onClose, state, statusLabel }: { complaint: ComplaintRow; onAction?: (action: CaseDrawerAction) => void; onClose?: () => void; state: CaseDrawerState; statusLabel: string }) {
   const firstName = complaint.student.split(" ")[0];
+  const automationPaused = state === "complaint-paused";
+  const complaintResolved = state === "complaint-resolved";
   const sections: CaseDrawerSection[] = [
     {
       id: "declared-reason",
@@ -1001,11 +1133,15 @@ function ComplaintDrawer({ complaint, onAction, onClose }: { complaint: Complain
       ]
     },
     {
-      id: "automation-paused",
-      title: "Automacao pausada",
+      id: "automation-state",
+      title: complaintResolved ? "Automação encerrada" : automationPaused ? "Automação pausada" : "Automação ativa",
       kind: "alert",
       icon: "alert",
-      description: `Mensagens automaticas e acoes autonomas pausadas enquanto o caso esta ${complaint.status.toLowerCase()}.`
+      description: complaintResolved
+        ? "Ações automáticas encerradas após a resolução humana do caso."
+        : automationPaused
+          ? "Mensagens automáticas e ações autônomas pausadas por decisão humana."
+          : "Mensagens automáticas seguem ativas até que a operação decida pausar."
     },
     {
       id: "resolution-plan",
@@ -1043,18 +1179,18 @@ function ComplaintDrawer({ complaint, onAction, onClose }: { complaint: Complain
     <CaseDrawer
       avatarSrc={image79Avatar}
       density="compact"
-      eyebrowLabel="Reclamacao"
+      eyebrowLabel="Reclamação"
       facts={complaintDrawerFacts(complaint)}
       factsLayout="grid"
-      footerActions={complaintFooterActions}
+      footerActions={complaintFooterActions(state)}
       sections={sections}
       showMessageSuggestion={false}
       numberedSections
       onAction={onAction}
       onClose={onClose}
-      statusLabel={`${complaint.severity} severidade`}
+      state={state}
+      statusLabel={statusLabel}
       title={complaint.student}
-      widthVariant="wide"
     />
   );
 }
@@ -1069,7 +1205,25 @@ export const Image41RetencaoRiscos: Story = {
     },
     sourceImage: "41_round-4.1H_retencao_01_riscos-lista-drawer.png.png"
   },
-  render: () => <RetentionRiskListPage />
+  render: () => <RetentionRiskListPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Retenção", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "risk-high");
+    await userEvent.click(canvas.getByRole("button", { name: "Abrir caso" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Ação de retenção: abrir caso");
+    await userEvent.click(canvas.getByRole("button", { name: "Marcar acompanhado" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "followed");
+    await expect(canvas.getByRole("button", { name: "Acompanhado" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar caso" }));
+    await waitFor(() => expect(canvas.queryByRole("complementary", { name: "Detalhes do caso operacional" })).not.toBeInTheDocument());
+    await userEvent.click(canvas.getByRole("row", { name: /Lucas Oliveira/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "risk-low");
+    await userEvent.click(canvas.getByRole("button", { name: "Alto risco 12" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Segmento de retenção selecionado: Alto risco");
+  }
 };
 
 export const Image42CancelamentosFila: Story = {
@@ -1082,7 +1236,32 @@ export const Image42CancelamentosFila: Story = {
     },
     sourceImage: "42_round-4.1H_cancelamentos_01_fila-salvamento-drawer.png.png"
   },
-  render: () => <RetentionCancellationQueuePage />
+  render: () => <RetentionCancellationQueuePage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Cancelamentos", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "cancellation-saving");
+    await expect(canvas.getByRole("button", { name: "Salvamento registrado" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar caso" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Joao Pedro Silva/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "cancellation-open");
+    await userEvent.click(canvas.getByRole("button", { name: "Registrar salvamento" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "cancellation-saving");
+    await expect(canvas.getByRole("status")).toHaveTextContent("Cancelamento: registrar salvamento");
+    await userEvent.click(canvas.getByRole("button", { name: "Converter em pausa" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "cancellation-paused");
+    await expect(canvas.getByRole("button", { name: "Confirmar cancelamento" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar caso" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Carla Mendes/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Confirmar cancelamento" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "cancellation-cancelled");
+    await expect(canvas.getByRole("button", { name: "Cancelamento confirmado" })).toBeDisabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Em salvamento 12" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila de cancelamentos selecionada: Em salvamento");
+  }
 };
 
 export const Image43ReativacoesExAlunos: Story = {
@@ -1095,7 +1274,27 @@ export const Image43ReativacoesExAlunos: Story = {
     },
     sourceImage: "43_round-4.1H_reativacoes_01_ex-alunos-retorno.png.png"
   },
-  render: () => <RetentionReactivationListPage />
+  render: () => <RetentionReactivationListPage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Reativações", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "reactivation-eligible");
+    await expect(canvas.getByRole("button", { name: "Reservar vaga validada" })).toBeDisabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Iniciar retorno" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "reactivation-returning");
+    await userEvent.click(canvas.getByRole("button", { name: "Reservar vaga validada" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "reactivated");
+    await expect(canvas.getByRole("button", { name: "Vaga reservada" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar caso" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Gabriel Santos/ }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "reactivation-do-not-contact");
+    await expect(canvas.getByRole("button", { name: "Enviar mensagem" })).toBeDisabled();
+    await expect(canvas.getByRole("button", { name: "Reservar vaga validada" })).toBeDisabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Elegiveis para retorno 10" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila de reativações selecionada: Elegiveis para retorno");
+  }
 };
 
 export const Image44ReclamacoesCasoSensivel: Story = {
@@ -1108,5 +1307,26 @@ export const Image44ReclamacoesCasoSensivel: Story = {
     },
     sourceImage: "44_round-4.1H_reclamacoes_01_fila-caso-sensivel-drawer.png.png"
   },
-  render: () => <RetentionComplaintQueuePage />
+  render: () => <RetentionComplaintQueuePage />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByRole("heading", { name: "Reclamações", level: 1 })).toBeInTheDocument();
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "complaint-waiting");
+    await expect(canvas.getByRole("heading", { name: "4. Automação ativa" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Classificar" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "complaint-severe");
+    await userEvent.click(canvas.getByRole("button", { name: "Pausar automação" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "complaint-paused");
+    await expect(canvas.getByRole("heading", { name: "4. Automação pausada" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Marcar resolvida" }));
+    await expect(canvas.getByRole("complementary", { name: "Detalhes do caso operacional" })).toHaveAttribute("data-state", "complaint-resolved");
+    await expect(canvas.getByRole("button", { name: "Resolvida" })).toBeDisabled();
+
+    await userEvent.click(canvas.getByRole("button", { name: "Fechar caso" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Lucas Oliveira/ }));
+    await expect(canvas.getByRole("heading", { name: "4. Automação ativa" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Resolvidas 18" }));
+    await expect(canvas.getByRole("status")).toHaveTextContent("Fila selecionada: Resolvidas");
+  }
 };

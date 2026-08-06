@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-08-05",
+  "artifact": "apps/docs/storybook-static",
+  "baseUrl": "http://127.0.0.1:6224",
+  "route": {
+    "storyId": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+    "url": "http://127.0.0.1:6224/iframe.html?id=crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional&viewMode=story&fresh=20260805-profile-fixed",
+    "viewport": { "width": 2560, "height": 1440 }
+  },
+  "composition": {
+    "family": "right-panel",
+    "component": "CrmRightPanelPage",
+    "variant": "student-profile",
+    "drawer": "none by contract; the persistent StudentProfileActionRail is the detail affordance for this route"
+  },
+  "before": {
+    "layoutWidth": 1289,
+    "mainWidth": 901,
+    "railWidth": 377,
+    "unusedHorizontalSpace": 1199,
+    "rootHorizontalOverflow": 0
+  },
+  "after": {
+    "layoutWidth": 2436,
+    "gridTemplateColumns": "2048px 377px",
+    "mainWidth": 2048,
+    "railWidth": 377,
+    "layoutX": 96,
+    "layoutRight": 2532,
+    "shellRight": 2560,
+    "rootHorizontalOverflow": 0,
+    "bodyHorizontalOverflow": 0,
+    "drawerCount": 0,
+    "status": "pass"
+  },
+  "responsive": {
+    "viewport": { "width": 390, "height": 844 },
+    "mediaQuery": "max-width: 980px",
+    "layout": {
+      "x": 12,
+      "width": 366,
+      "right": 378,
+      "gridTemplateColumns": "366px",
+      "mainWidth": 366,
+      "railWidth": 366,
+      "documentWidth": 390,
+      "documentScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "status": "pass"
+    }
+  },
+  "sourceChanges": [
+    "The official student-profile width token now fills the available content width.",
+    "The official student-profile columns token keeps a flexible main column and a fixed 377px action rail.",
+    "The shared responsive right-panel contract stacks the student-profile rail into one full-width column below 980px.",
+    "No story-local CSS or route-specific markup was added."
+  ]
+}

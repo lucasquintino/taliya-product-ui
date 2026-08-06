@@ -37,6 +37,34 @@
       "canonicalName": "DropdownMenu",
       "canonicalPackage": "@taliya/ui",
       "reason": "Semantic alias for action-trigger menus. DropdownMenu owns the primitive implementation."
+    },
+    {
+      "name": "CrmShellRoundButton",
+      "package": "@taliya/crm",
+      "canonicalName": "IconButton",
+      "canonicalPackage": "@taliya/ui",
+      "reason": "Historical direct shell wrapper retained for published API compatibility. New shell controls should use CrmSidebarFloatingButton, CrmTopbarActionButton, or the IconButton primitive according to placement."
+    },
+    {
+      "name": "CrmShellTopNavItem",
+      "package": "@taliya/crm",
+      "canonicalName": "CrmTopbarNavChip",
+      "canonicalPackage": "@taliya/crm",
+      "reason": "Historical direct navigation wrapper retained for published API compatibility. New shell navigation must use CrmTopbarNavChip or CrmShellTopNav."
+    },
+    {
+      "name": "LegacyComposer",
+      "package": "@taliya/crm",
+      "canonicalName": "Composer",
+      "canonicalPackage": "@taliya/crm",
+      "reason": "Historical fixed-placeholder composer retained for published API compatibility. New inbox flows must use Composer or ComposerPanel."
+    },
+    {
+      "name": "MessageBubble",
+      "package": "@taliya/crm",
+      "canonicalName": "MessageBubble",
+      "canonicalPackage": "@taliya/ui",
+      "reason": "Compatibility re-export retained for existing CRM consumers. The primitive implementation and canonical import live in @taliya/ui."
     }
   ],
   "domainSpecializations": [

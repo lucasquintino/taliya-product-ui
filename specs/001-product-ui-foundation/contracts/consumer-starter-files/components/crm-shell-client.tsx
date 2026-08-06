@@ -3,11 +3,12 @@ import { Toolbar } from "@taliya/ui";
 
 type CrmShellClientProps = {
   children: React.ReactNode;
+  drawer?: React.ReactNode;
 };
 
-export function CrmShellClient({ children }: CrmShellClientProps) {
+export function CrmShellClient({ children, drawer }: CrmShellClientProps) {
   return (
-    <CrmProductShell>
+    <CrmProductShell drawer={drawer}>
       <Toolbar />
       {children}
     </CrmProductShell>

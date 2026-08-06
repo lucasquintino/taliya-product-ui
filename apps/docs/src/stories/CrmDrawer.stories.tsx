@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { CrmDrawer } from "@taliya/crm";
+import { CrmDrawer, CrmProductShell } from "@taliya/crm";
 import { Button } from "@taliya/ui";
 
 const meta = {
   title: "CRM / Operational / CrmDrawer",
   parameters: {
-    layout: "centered",
+    layout: "fullscreen",
     docs: {
       description: {
         component:
@@ -39,14 +39,13 @@ const actions = [
 
 export const Source: Story = {
   render: () => (
-    <div style={{ height: 720, width: 360 }}>
-      <CrmDrawer
+    <CrmProductShell
+      drawer={<CrmDrawer
         closeLabel="Fechar exemplo"
         actions={actions}
         eyebrow="Tarefa"
         facts={facts}
         headerOrder="label-title-status"
-        placement="overlay"
         sections={[
           {
             id: "summary",
@@ -58,31 +57,33 @@ export const Source: Story = {
         ]}
         status="Aberta"
         title="Confirmar reposicao da Ana"
-      />
-    </div>
+      />}
+      subtitle="Operacao diaria"
+      title="Tarefas"
+    >
+      <div />
+    </CrmProductShell>
   )
 };
 
 export const States: Story = {
   render: () => (
-    <div style={{ display: "grid", gap: 24, gridTemplateColumns: "repeat(3, 360px)" }}>
-      {["open", "loading", "blocked"].map((state) => (
-        <div key={state} style={{ height: 640, width: 360 }}>
-          <CrmDrawer
-            closeLabel={`Fechar ${state}`}
-            actions={actions}
-            eyebrow="Caso"
-            facts={facts}
-            headerOrder="label-title-status"
-            loading={state === "loading"}
-            placement={state === "open" ? "overlay" : "inline"}
-            sections={[{ id: "summary", title: "Resumo", variant: "card", content: <DrawerBody /> }]}
-            state={state}
-            status={state === "blocked" ? "Bloqueado" : "Aberto"}
-            title={`Drawer ${state}`}
-          />
-        </div>
-      ))}
-    </div>
+    <CrmProductShell
+      drawer={<CrmDrawer
+        actions={actions}
+        closeLabel="Fechar bloqueado"
+        eyebrow="Caso"
+        facts={facts}
+        headerOrder="label-title-status"
+        sections={[{ id: "summary", title: "Resumo", variant: "card", content: <DrawerBody /> }]}
+        state="blocked"
+        status="Bloqueado"
+        title="Drawer bloqueado"
+      />}
+      subtitle="Estados operacionais"
+      title="Casos"
+    >
+      <div />
+    </CrmProductShell>
   )
 };

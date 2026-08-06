@@ -1,0 +1,1133 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-04T17:14:18.099Z",
+  "source": {
+    "repository": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/agentes-landing-system",
+    "commit": "3d446f36d10413ba06712dba0bf333b45a0da894",
+    "file": "specs/006-crm-operational-core/final-screen-contract-matrix.pt-BR.md"
+  },
+  "surfaceCount": 50,
+  "visualTargetCount": 73,
+  "contractsWithoutVisualTargets": [],
+  "surfaces": [
+    {
+      "id": "conta-basica",
+      "surface": "Conta basica",
+      "route": "Pre-CRM",
+      "requiredBlocks": "Google, Microsoft, e-mail com link seguro, login com e-mail/senha",
+      "essentialActions": "criar conta, entrar",
+      "essentialStates": "assinatura ausente, conta criada",
+      "note": "Nao libera CRM antes da assinatura confirmada.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Access / Subscription shell"
+      ],
+      "visualTargets": [
+        {
+          "image": "72_round-4.1Q_acesso-assinatura_signup-criar-conta-salvo-ajustes.png",
+          "storyId": "crm-image-coverage-access-subscription--image-72-signup",
+          "storyTitle": "CRM / Image Coverage / Access Subscription"
+        },
+        {
+          "image": "73_round-4.1Q_acesso-assinatura_signin-entrar-salvo-ajustes.png",
+          "storyId": "crm-image-coverage-access-subscription--image-73-signin",
+          "storyTitle": "CRM / Image Coverage / Access Subscription"
+        }
+      ]
+    },
+    {
+      "id": "escolha-de-plano-checkout-taliya",
+      "surface": "Escolha de plano/checkout Taliya",
+      "route": "Pre-CRM + provedor externo",
+      "requiredBlocks": "plano, valor, cupom, checkout hospedado, status de confirmacao, recuperacao e setup guiado",
+      "essentialActions": "escolher plano, revisar, iniciar pagamento, tentar novamente, comecar setup, agendar ajuda",
+      "essentialStates": "revisao, verificando, pendente, aprovado, falha",
+      "note": "Fora do CRM operacional; imagens 74, 75, 76 e 77 aprovadas.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Access / Subscription shell"
+      ],
+      "visualTargets": [
+        {
+          "image": "74_round-4.1Q_acesso-assinatura_revisar-assinatura-aprovado.png",
+          "storyId": "crm-image-coverage-access-subscription--image-74-review-subscription",
+          "storyTitle": "CRM / Image Coverage / Access Subscription"
+        },
+        {
+          "image": "75_round-4.1Q_acesso-assinatura_aguardando-confirmacao-aprovado.png",
+          "storyId": "crm-image-coverage-access-subscription--image-75-pending-confirmation",
+          "storyTitle": "CRM / Image Coverage / Access Subscription"
+        },
+        {
+          "image": "76_round-4.1Q_acesso-assinatura_resolver-assinatura-aprovado.png",
+          "storyId": "crm-image-coverage-access-subscription--image-76-resolve-subscription",
+          "storyTitle": "CRM / Image Coverage / Access Subscription"
+        },
+        {
+          "image": "77_round-4.1Q_acesso-assinatura_assinatura-confirmada-setup-guiado-aprovado.png",
+          "storyId": "crm-image-coverage-access-subscription--image-77-confirmed-handoff",
+          "storyTitle": "CRM / Image Coverage / Access Subscription"
+        }
+      ]
+    },
+    {
+      "id": "onboarding-setup",
+      "surface": "Onboarding/setup",
+      "route": "/onboarding/*",
+      "requiredBlocks": "studio, equipe, canais, planos, alunos, turmas, agenda, pagamento, revisao, agente de configuracao",
+      "essentialActions": "continuar, salvar, revisar, publicar",
+      "essentialStates": "incompleto, pronto, pendente",
+      "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Setup wizard / Onboarding shell",
+        "Config / Form with right assistant rail"
+      ],
+      "visualTargets": [
+        {
+          "image": "51A_round-4.1J_onboarding_shell-global-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-a-onboarding-shell-global",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-d-onboarding-studio",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-e-onboarding-equipe",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-f-onboarding-canais",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-g-onboarding-planos",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-k-onboarding-pagamento",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-h-onboarding-alunos",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-i-onboarding-turmas",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-j-onboarding-agenda",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-51-l-onboarding-revisao",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        },
+        {
+          "image": "78_round-4.1Q_onboarding_bem-vindo-taliya-setup-guiado-aprovado.png",
+          "storyId": "crm-image-coverage-setup--image-78-onboarding-bem-vindo",
+          "storyTitle": "CRM / Image Coverage / Setup"
+        }
+      ]
+    },
+    {
+      "id": "hoje",
+      "surface": "Hoje",
+      "route": "/app/hoje",
+      "requiredBlocks": "prioridades, aulas, dinheiro, tarefas, aprovacoes, alertas, cotas",
+      "essentialActions": "abrir origem, aprovar, delegar, resolver",
+      "essentialStates": "sem pendencia, critico, bloqueado",
+      "note": "Hoje nao substitui Operacao.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "17_round-4.1A_hoje_01_acima-da-dobra.png.png",
+          "storyId": "crm-image-coverage-hoje--image-17-hoje-base",
+          "storyTitle": "CRM / Image Coverage / Hoje"
+        },
+        {
+          "image": "18_round-4.1A_hoje_02_drawer-tarefa.png.png",
+          "storyId": "crm-image-coverage-hoje--image-18-hoje-drawer-tarefa",
+          "storyTitle": "CRM / Image Coverage / Hoje"
+        },
+        {
+          "image": "19_round-4.1A_hoje_03_estado-critico-do-dia.png",
+          "storyId": "crm-image-coverage-hoje--image-19-hoje-estado-critico",
+          "storyTitle": "CRM / Image Coverage / Hoje"
+        },
+        {
+          "image": "20_round-4.1A_hoje_04_historico-de-hoje.png.png",
+          "storyId": "crm-image-coverage-hoje--image-20-historico-de-hoje",
+          "storyTitle": "CRM / Image Coverage / Hoje"
+        }
+      ]
+    },
+    {
+      "id": "inbox-conversas",
+      "surface": "Inbox/conversas",
+      "route": "/app/inbox",
+      "requiredBlocks": "lista, conversa, contexto, vinculo, sugestao, falhas",
+      "essentialActions": "responder, assumir, criar tarefa, abrir aluno/interessado",
+      "essentialStates": "novo, aguardando humano, falha, opt-out",
+      "note": "Contatos sao contextuais.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Three-pane conversation workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "24_round-4.1D_inbox_01_conversa-aberta.png.png",
+          "storyId": "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta",
+          "storyTitle": "CRM / Image Coverage / Inbox"
+        }
+      ]
+    },
+    {
+      "id": "alunos",
+      "surface": "Alunos",
+      "route": "/app/alunos",
+      "requiredBlocks": "lista, filtros, status, resumo lateral",
+      "essentialActions": "abrir perfil, conversar, tarefa, agendar",
+      "essentialStates": "ativo, pausado, inadimplente, risco",
+      "note": "Sem pagina propria de Contatos.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "27_round-4.1E_alunos_01_lista-perfil-resumido.png.png",
+          "storyId": "crm-image-coverage-alunos--image-27-lista-perfil-resumido",
+          "storyTitle": "CRM / Image Coverage / Alunos"
+        }
+      ]
+    },
+    {
+      "id": "perfil-do-aluno",
+      "surface": "Perfil do aluno",
+      "route": "/app/alunos/[id]",
+      "requiredBlocks": "resumo, agenda, financeiro, historico, tarefas, conversas",
+      "essentialActions": "nota, tarefa, abrir cobranca, abrir aula, conversar",
+      "essentialStates": "sensivel restrito, risco, pendencia",
+      "note": "Historico/professor/documentos contextuais.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Profile / Detail workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "28_round-4.1E_aluno-perfil_01_resumo-operacional.png.png",
+          "storyId": "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional",
+          "storyTitle": "CRM / Image Coverage / Alunos"
+        }
+      ]
+    },
+    {
+      "id": "agenda",
+      "surface": "Agenda",
+      "route": "/app/agenda",
+      "requiredBlocks": "calendario, aulas, conflitos, capacidade, filtros",
+      "essentialActions": "abrir aula, criar aula, ajustar horario",
+      "essentialStates": "vaga, lotado, conflito, feriado",
+      "note": "Eventos/workshops contextuais.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Calendar / Schedule workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "26_round-4.1F_agenda_01_calendario-operacional.png.png",
+          "storyId": "crm-image-coverage-agenda--image-26-agenda-calendario-operacional",
+          "storyTitle": "CRM / Image Coverage / Agenda"
+        }
+      ]
+    },
+    {
+      "id": "grade",
+      "surface": "Grade",
+      "route": "/app/grade",
+      "requiredBlocks": "semana modelo, bloqueios, turmas, disponibilidade",
+      "essentialActions": "ajustar grade, simular impacto",
+      "essentialStates": "indisponivel, conflito, publicado",
+      "note": "Feriados/recursos em Configuracoes de Agenda.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Calendar / Schedule workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "36_round-4.1F_grade_01_semana-modelo-bloqueio.png.png",
+          "storyId": "crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio",
+          "storyTitle": "CRM / Image Coverage / Agenda"
+        }
+      ]
+    },
+    {
+      "id": "turmas",
+      "surface": "Turmas",
+      "route": "/app/turmas",
+      "requiredBlocks": "lista, capacidade, professor, alunos, demanda",
+      "essentialActions": "criar/editar turma, abrir aula, ver demanda",
+      "essentialStates": "lotada, vaga, conflito",
+      "note": "Lista de espera geral contextual.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "35_round-4.1F_turmas_01_lista-detalhe.png.png",
+          "storyId": "crm-image-coverage-agenda--image-35-turmas-lista-detalhe",
+          "storyTitle": "CRM / Image Coverage / Agenda"
+        }
+      ]
+    },
+    {
+      "id": "aula-chamada",
+      "surface": "Aula/Chamada",
+      "route": "/app/aulas/[id]",
+      "requiredBlocks": "alunos, presenca, faltas, observacoes, creditos",
+      "essentialActions": "fazer chamada, corrigir, abrir reposicao, nota",
+      "essentialStates": "chamada pendente, falta, no-show",
+      "note": "Professor/notas contextuais.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Calendar / Schedule workspace",
+        "Profile / Detail workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "29_round-4.1F_aula_01_detalhe-com-chamada.png.png",
+          "storyId": "crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada",
+          "storyTitle": "CRM / Image Coverage / Agenda"
+        }
+      ]
+    },
+    {
+      "id": "reposicoes",
+      "surface": "Reposicoes",
+      "route": "/app/reposicoes",
+      "requiredBlocks": "pedidos, creditos, vagas, candidatos, conflitos",
+      "essentialActions": "encontrar encaixe, reservar, convidar, consumir credito",
+      "essentialStates": "sem vaga, conflito, aguardando resposta, vencido",
+      "note": "Sem `/app/creditos-reposicao`; sem lista de espera geral.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "31_round-4.1F_reposicoes_01_fluxo-encaixe.png.png",
+          "storyId": "crm-image-coverage-reposições--image-31-fluxo-encaixe",
+          "storyTitle": "CRM / Image Coverage / Reposições"
+        }
+      ]
+    },
+    {
+      "id": "vendas-pipeline",
+      "surface": "Vendas/Pipeline",
+      "route": "/app/vendas",
+      "requiredBlocks": "etapas, origem, proxima acao, dono, conversa",
+      "essentialActions": "qualificar, mover, follow-up, converter",
+      "essentialStates": "novo, quente, sem resposta, sem vaga",
+      "note": "Sem Segmentos/Comunicados.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Kanban workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "37_round-4.1G_vendas_01_pipeline-kanban.png.png",
+          "storyId": "crm-image-coverage-vendas--image-37-vendas-pipeline-kanban",
+          "storyTitle": "CRM / Image Coverage / Vendas"
+        }
+      ]
+    },
+    {
+      "id": "interessados",
+      "surface": "Interessados",
+      "route": "/app/interessados",
+      "requiredBlocks": "lista, perfil resumido, origem, status",
+      "essentialActions": "abrir conversa, qualificar, agendar experimental",
+      "essentialStates": "novo, sem vaga, perdido, pronto",
+      "note": "Contato contextual.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "38_round-4.1G_vendas_02_lista-interessados.png.png",
+          "storyId": "crm-image-coverage-vendas--image-38-lista-interessados",
+          "storyTitle": "CRM / Image Coverage / Vendas"
+        }
+      ]
+    },
+    {
+      "id": "aulas-experimentais",
+      "surface": "Aulas experimentais",
+      "route": "/app/aulas-experimentais",
+      "requiredBlocks": "aulas, interessado, status, pos-aula",
+      "essentialActions": "confirmar, remarcar, marcar compareceu/faltou, matricular",
+      "essentialStates": "agendada, faltou, converter",
+      "note": "Rota canonica substitui `/app/experimental`.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "39_round-4.1G_experimental_01_lista-acompanhamento.png.png",
+          "storyId": "crm-image-coverage-vendas--image-39-experimental-lista",
+          "storyTitle": "CRM / Image Coverage / Vendas"
+        }
+      ]
+    },
+    {
+      "id": "matriculas",
+      "surface": "Matriculas",
+      "route": "/app/matriculas",
+      "requiredBlocks": "checklist, dados, plano, primeira aula, pagamento inicial",
+      "essentialActions": "validar, cobrar, converter, tarefa",
+      "essentialStates": "faltando, aguardando pagamento, pronto",
+      "note": "Sem `/app/checkout-alunos`.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "40_round-4.1G_matriculas_01_checklist-conversao.png.png",
+          "storyId": "crm-image-coverage-vendas--image-40-matriculas-checklist-conversao",
+          "storyTitle": "CRM / Image Coverage / Vendas"
+        }
+      ]
+    },
+    {
+      "id": "financeiro",
+      "surface": "Financeiro",
+      "route": "/app/financeiro",
+      "requiredBlocks": "filas, KPIs, prioridades, cobranca selecionada",
+      "essentialActions": "abrir cobranca, lembrar, confirmar, tarefa",
+      "essentialStates": "aberto, atraso, falha, conciliacao",
+      "note": "Financeiro dos alunos, nao Billing Taliya.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "30_round-4.1F_financeiro_01_visao-geral-filas.png.png",
+          "storyId": "crm-image-coverage-financeiro--image-30-visao-geral-filas",
+          "storyTitle": "CRM / Image Coverage / Financeiro"
+        },
+        {
+          "image": "32_round-4.1F_financeiro_02_drawer-cobranca-selecionada.png.png",
+          "storyId": "crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca",
+          "storyTitle": "CRM / Image Coverage / Financeiro"
+        }
+      ]
+    },
+    {
+      "id": "financeiro-kanban",
+      "surface": "Financeiro Kanban",
+      "route": "/app/financeiro/kanban",
+      "requiredBlocks": "etapas, cards, responsaveis, proxima acao",
+      "essentialActions": "mover, lembrar, promessa, aprovacao",
+      "essentialStates": "a vencer, atraso, promessa, resolvido",
+      "note": "Subitem de Financeiro.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Kanban workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "33_round-4.1F_financeiro_03_kanban-financeiro.png.png",
+          "storyId": "crm-image-coverage-financeiro--image-33-financeiro-kanban",
+          "storyTitle": "CRM / Image Coverage / Financeiro"
+        }
+      ]
+    },
+    {
+      "id": "movimentacoes-financeiras",
+      "surface": "Movimentacoes financeiras",
+      "route": "/app/financeiro/movimentacoes",
+      "requiredBlocks": "tabela, filtros, comprovantes, ajustes",
+      "essentialActions": "confirmar, conciliar, exportar, tarefa",
+      "essentialStates": "pago, aberto, falhou, disputa",
+      "note": "Documentos/comprovantes contextuais.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "34_round-4.1F_financeiro_04_movimentacoes-filtros-drawer.png.png",
+          "storyId": "crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer",
+          "storyTitle": "CRM / Image Coverage / Financeiro"
+        }
+      ]
+    },
+    {
+      "id": "retencao",
+      "surface": "Retencao",
+      "route": "/app/retencao",
+      "requiredBlocks": "riscos, frequencia, inativos, sinais",
+      "essentialActions": "tarefa, mensagem, caso, acompanhar",
+      "essentialStates": "risco baixo/medio/alto",
+      "note": "Pagina propria.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "41_round-4.1H_retencao_01_riscos-lista-drawer.png.png",
+          "storyId": "crm-image-coverage-retencao--image-41-retencao-riscos",
+          "storyTitle": "CRM / Image Coverage / Retencao"
+        }
+      ]
+    },
+    {
+      "id": "cancelamentos",
+      "surface": "Cancelamentos",
+      "route": "/app/cancelamentos",
+      "requiredBlocks": "pedidos, motivos, salvamento, pausa",
+      "essentialActions": "registrar, salvar, converter pausa",
+      "essentialStates": "aberto, salvamento, cancelado",
+      "note": "Pagina propria.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "42_round-4.1H_cancelamentos_01_fila-salvamento-drawer.png.png",
+          "storyId": "crm-image-coverage-retencao--image-42-cancelamentos-fila",
+          "storyTitle": "CRM / Image Coverage / Retencao"
+        }
+      ]
+    },
+    {
+      "id": "reativacoes",
+      "surface": "Reativacoes",
+      "route": "/app/retencao/reativacoes",
+      "requiredBlocks": "ex-alunos, elegibilidade, oportunidade",
+      "essentialActions": "iniciar retorno, reservar vaga validada",
+      "essentialStates": "elegivel, nao contatar, reativado",
+      "note": "Pagina propria.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "43_round-4.1H_reativacoes_01_ex-alunos-retorno.png.png",
+          "storyId": "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos",
+          "storyTitle": "CRM / Image Coverage / Retencao"
+        }
+      ]
+    },
+    {
+      "id": "reclamacoes",
+      "surface": "Reclamacoes",
+      "route": "/app/reclamacoes",
+      "requiredBlocks": "severidade, dono, prazo, resposta",
+      "essentialActions": "classificar, pausar automacao, escalar, resolver",
+      "essentialStates": "severo, aguardando, resolvido",
+      "note": "Pagina propria.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "44_round-4.1H_reclamacoes_01_fila-caso-sensivel-drawer.png.png",
+          "storyId": "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel",
+          "storyTitle": "CRM / Image Coverage / Retencao"
+        }
+      ]
+    },
+    {
+      "id": "operacao-jornadas",
+      "surface": "Operacao/Jornadas",
+      "route": "/app/operacao",
+      "requiredBlocks": "jornadas, casos, bloqueios, alertas",
+      "essentialActions": "abrir caso, atribuir, mover, corrigir",
+      "essentialStates": "aberto, bloqueado, aguardando, resolvido",
+      "note": "Central profunda; Hoje so resume.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Kanban workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "21_round-4.1B_operacao_01_kanban-geral.png.png",
+          "storyId": "crm-image-coverage-operação--image-21-kanban-geral",
+          "storyTitle": "CRM / Image Coverage / Operação"
+        },
+        {
+          "image": "22_round-4.1B_operacao_02_kanban-com-drawer.png",
+          "storyId": "crm-image-coverage-operação--image-22-kanban-com-drawer",
+          "storyTitle": "CRM / Image Coverage / Operação"
+        }
+      ]
+    },
+    {
+      "id": "tarefas",
+      "surface": "Tarefas",
+      "route": "/app/tarefas",
+      "requiredBlocks": "fila, dono, prazo, origem, caso",
+      "essentialActions": "assumir, delegar, concluir, reagendar",
+      "essentialStates": "atrasada, sem dono, aguardando",
+      "note": "Subitem de Operacao.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "23_round-4.1C_tarefas_01_lista-detalhe.png.png",
+          "storyId": "crm-image-coverage-tarefas--image-23-lista-detalhe",
+          "storyTitle": "CRM / Image Coverage / Tarefas"
+        }
+      ]
+    },
+    {
+      "id": "checklists",
+      "surface": "Checklists",
+      "route": "/app/checklists",
+      "requiredBlocks": "rotinas recorrentes, execucoes, responsaveis, historico",
+      "essentialActions": "iniciar, concluir, atribuir, abrir tarefa",
+      "essentialStates": "pendente, em execucao, atrasado",
+      "note": "Pagina propria dentro de Operacao.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "24_round-4.1C_checklists_01_lista-execucao-detalhe.png.png",
+          "storyId": "crm-image-coverage-checklists--image-24-lista-execucao-detalhe",
+          "storyTitle": "CRM / Image Coverage / Checklists"
+        }
+      ]
+    },
+    {
+      "id": "aprovacoes",
+      "surface": "Aprovacoes",
+      "route": "/app/aprovacoes",
+      "requiredBlocks": "proposta, antes/depois, risco, impacto, motivo",
+      "essentialActions": "aprovar, editar, rejeitar, pedir dados",
+      "essentialStates": "pendente, expirada, aprovada, rejeitada",
+      "note": "Pagina propria dentro de Operacao.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "25_round-4.1C_aprovacoes_01_lista-decisao-detalhe.png.png",
+          "storyId": "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe",
+          "storyTitle": "CRM / Image Coverage / Aprovacoes"
+        }
+      ]
+    },
+    {
+      "id": "agentes",
+      "surface": "Agentes",
+      "route": "/app/agentes",
+      "requiredBlocks": "catalogo, slots, agentes ativos, status",
+      "essentialActions": "abrir agente, ativar/pausar quando permitido",
+      "essentialStates": "ativo, nao configurado, bloqueado",
+      "note": "Subitem de Agentes.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Card catalog / Hub grid",
+        "Flow / Automation editor"
+      ],
+      "visualTargets": [
+        {
+          "image": "52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png",
+          "storyId": "crm-image-coverage-agentes--image-52-agentes-catalogo",
+          "storyTitle": "CRM / Image Coverage / Agentes"
+        },
+        {
+          "image": "53_round-4.1L_agentes_02_agente-agenda-rotinas-aprovado.png",
+          "storyId": "crm-image-coverage-agentes--image-53-agente-agenda-rotinas",
+          "storyTitle": "CRM / Image Coverage / Agentes"
+        }
+      ]
+    },
+    {
+      "id": "fluxos",
+      "surface": "Fluxos",
+      "route": "/app/fluxos, /app/fluxos/[flowId]",
+      "requiredBlocks": "rotina, fluxo, modo, regras, fallback",
+      "essentialActions": "editar, simular, preparar publicacao",
+      "essentialStates": "rascunho, pronto, ativo, pausado",
+      "note": "Politicas de agente ficam aqui.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Flow / Automation editor"
+      ],
+      "visualTargets": [
+        {
+          "image": "54_round-4.1L_agentes_03_rotina-presenca-faltas-aprovado.png",
+          "storyId": "crm-image-coverage-agentes--image-54-rotina-presenca-faltas",
+          "storyTitle": "CRM / Image Coverage / Agentes"
+        },
+        {
+          "image": "56_round-4.1L_agentes_04_fluxo-falta-com-aviso-v2-aprovado.png",
+          "storyId": "crm-image-coverage-agentes--image-56-fluxo-falta-com-aviso",
+          "storyTitle": "CRM / Image Coverage / Agentes"
+        }
+      ]
+    },
+    {
+      "id": "simulacoes",
+      "surface": "Simulacoes",
+      "route": "/app/fluxos/[flowId]/simular",
+      "requiredBlocks": "cenarios, resultado, celular/preview, limites",
+      "essentialActions": "testar/simular, ajustar, publicar",
+      "essentialStates": "seguro, bloqueado, precisa ajuste",
+      "note": "Imagem 58 usa linguagem final de simulacao.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Flow / Automation editor"
+      ],
+      "visualTargets": [
+        {
+          "image": "58_round-4.1L_agentes_05_teste-fluxo-falta-com-aviso-aprovado.png",
+          "storyId": "crm-image-coverage-agentes--image-58-teste-fluxo-falta-com-aviso",
+          "storyTitle": "CRM / Image Coverage / Agentes"
+        }
+      ]
+    },
+    {
+      "id": "publicacao-de-rotina",
+      "surface": "Publicacao de rotina",
+      "route": "Contextual em Fluxos",
+      "requiredBlocks": "preflight, impacto, o que sera ativado",
+      "essentialActions": "publicar, revisar, cancelar",
+      "essentialStates": "pronto, bloqueado, publicado",
+      "note": "Imagem 59; nao precisa aba propria.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Flow / Automation editor"
+      ],
+      "visualTargets": [
+        {
+          "image": "59_round-4.1L_agentes_06_publicar-rotina-presenca-faltas-aprovado.png",
+          "storyId": "crm-image-coverage-agentes--image-59-publicar-rotina",
+          "storyTitle": "CRM / Image Coverage / Agentes"
+        }
+      ]
+    },
+    {
+      "id": "execucao-de-fluxo",
+      "surface": "Execucao de fluxo",
+      "route": "/app/fluxos/execucoes/[runId]",
+      "requiredBlocks": "resumo, linha do tempo, regras, continuidade",
+      "essentialActions": "abrir origem, criar tarefa, explicar",
+      "essentialStates": "sucesso, falha, excecao",
+      "note": "Recibo operacional, nao log tecnico.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Flow / Automation editor"
+      ],
+      "visualTargets": [
+        {
+          "image": "70_round-4.1P_execucoes_01_fluxo-falta-com-aviso-aprovado.png",
+          "storyId": "crm-image-coverage-agentes--image-70-execucoes-fluxo",
+          "storyTitle": "CRM / Image Coverage / Agentes"
+        }
+      ]
+    },
+    {
+      "id": "uso-e-cotas",
+      "surface": "Uso e cotas",
+      "route": "/app/uso",
+      "requiredBlocks": "consumo, cota, origem, alertas, economia",
+      "essentialActions": "abrir extrato, abrir fluxo, ver alternativa",
+      "essentialStates": "70%, 90%, 100%, bloqueado",
+      "note": "Add-ons ficam em Billing.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "68_round-4.1O_uso_01_visao-geral-aprovado.png",
+          "storyId": "crm-image-coverage-usage--image-68-uso-visao-geral",
+          "storyTitle": "CRM / Image Coverage / Usage"
+        }
+      ]
+    },
+    {
+      "id": "extrato-de-uso",
+      "surface": "Extrato de uso",
+      "route": "/app/uso/extrato",
+      "requiredBlocks": "lancamentos, origem, agente, fluxo, status",
+      "essentialActions": "filtrar, abrir origem",
+      "essentialStates": "estimado, confirmado, falhou",
+      "note": "Subitem de Uso.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Ledger table / right assistant rail"
+      ],
+      "visualTargets": [
+        {
+          "image": "69_round-4.1O_uso_02_extrato-aprovado.png",
+          "storyId": "crm-image-coverage-usage--image-69-uso-extrato",
+          "storyTitle": "CRM / Image Coverage / Usage"
+        }
+      ]
+    },
+    {
+      "id": "relatorios",
+      "surface": "Relatorios",
+      "route": "/app/relatorios",
+      "requiredBlocks": "indicadores, filtros, origem, exportacao local",
+      "essentialActions": "filtrar, abrir origem, exportar",
+      "essentialStates": "sem dados, carregando, pronto",
+      "note": "Exportacao e acao local.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "45_round-4.1I_relatorios_01_visao-gestao.png.png",
+          "storyId": "crm-image-coverage-relatorios--reports-management",
+          "storyTitle": "CRM / Image Coverage / Relatorios"
+        }
+      ]
+    },
+    {
+      "id": "dinheiro-na-mesa",
+      "surface": "Dinheiro na Mesa",
+      "route": "/app/dinheiro-na-mesa",
+      "requiredBlocks": "oportunidades, origem, impacto, proxima acao",
+      "essentialActions": "abrir oportunidade, criar tarefa, abrir origem",
+      "essentialStates": "oportunidade, sem dono, resolvido",
+      "note": "Pagina propria.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "46_round-4.1I_dinheiro-na-mesa_01_oportunidades-por-origem.png.png",
+          "storyId": "crm-image-coverage-relatorios--money-on-the-table",
+          "storyTitle": "CRM / Image Coverage / Relatorios"
+        }
+      ]
+    },
+    {
+      "id": "configuracoes",
+      "surface": "Configuracoes",
+      "route": "/app/configuracoes",
+      "requiredBlocks": "hub/cards por area",
+      "essentialActions": "abrir card, editar area",
+      "essentialStates": "incompleto, salvo, pendente",
+      "note": "Sem politicas/integracoes/privacidade como paginas proprias.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Card catalog / Hub grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "60_round-4.1M_configuracoes_01_hub-8-cards-aprovado.png",
+          "storyId": "crm-image-coverage-configuracoes--image-60-configuracoes-hub",
+          "storyTitle": "CRM / Image Coverage / Configuracoes"
+        }
+      ]
+    },
+    {
+      "id": "config-permissoes",
+      "surface": "Config. permissoes",
+      "route": "/app/configuracoes/permissoes",
+      "requiredBlocks": "papeis, equipe, acessos sensiveis",
+      "essentialActions": "convidar, alterar papel, remover",
+      "essentialStates": "convite pendente, ativo",
+      "note": "Pagina propria de configuracao.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Config / Form with right assistant rail"
+      ],
+      "visualTargets": [
+        {
+          "image": "61_round-4.1M_configuracoes_02_permissoes-aprovado.png",
+          "storyId": "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes",
+          "storyTitle": "CRM / Image Coverage / Configuracoes"
+        }
+      ]
+    },
+    {
+      "id": "config-pagamentos-financeiro",
+      "surface": "Config. pagamentos/financeiro",
+      "route": "/app/configuracoes/pagamentos",
+      "requiredBlocks": "meios, regras simples, baixa manual, modelos",
+      "essentialActions": "salvar, testar, revisar impacto",
+      "essentialStates": "pendente, salvo, falha",
+      "note": "Pagamentos do studio para alunos, nao Billing Taliya.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Config / Form with right assistant rail"
+      ],
+      "visualTargets": [
+        {
+          "image": "62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png",
+          "storyId": "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos",
+          "storyTitle": "CRM / Image Coverage / Configuracoes"
+        }
+      ]
+    },
+    {
+      "id": "config-agenda",
+      "surface": "Config. agenda",
+      "route": "/app/configuracoes/agenda",
+      "requiredBlocks": "feriados, bloqueios, disponibilidade, reposicao",
+      "essentialActions": "salvar regra, criar excecao",
+      "essentialStates": "impacto pendente, salvo",
+      "note": "Recursos/feriados/disponibilidade aqui.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Config / Form with right assistant rail",
+        "Calendar / Schedule workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "63_round-4.1M_configuracoes_04_agenda-aprovado.png",
+          "storyId": "crm-image-coverage-configuracoes--image-63-configuracoes-agenda",
+          "storyTitle": "CRM / Image Coverage / Configuracoes"
+        }
+      ]
+    },
+    {
+      "id": "config-notificacoes-canais",
+      "surface": "Config. notificacoes/canais",
+      "route": "/app/configuracoes/notificacoes",
+      "requiredBlocks": "canais, notificacoes, horarios, mensagens internas",
+      "essentialActions": "salvar, testar canal",
+      "essentialStates": "desconectado, salvo, falha",
+      "note": "Integracoes tecnicas embutidas.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Config / Form with right assistant rail"
+      ],
+      "visualTargets": [
+        {
+          "image": "64_round-4.1M_configuracoes_05_notificacoes-aprovado.png",
+          "storyId": "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes",
+          "storyTitle": "CRM / Image Coverage / Configuracoes"
+        }
+      ]
+    },
+    {
+      "id": "suporte-taliya",
+      "surface": "Suporte Taliya",
+      "route": "/app/suporte",
+      "requiredBlocks": "tickets, status, suporte 24/7, grants, historico",
+      "essentialActions": "abrir ticket, falar com suporte, autorizar/revogar grant",
+      "essentialStates": "aberto, respondido, acesso ativo",
+      "note": "Topbar global; nao e Inbox dos alunos.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "47_round-4.1J_suporte_01_central-studio-taliya.png.png",
+          "storyId": "crm-image-coverage-suporte--support-central",
+          "storyTitle": "CRM / Image Coverage / Suporte"
+        }
+      ]
+    },
+    {
+      "id": "billing-taliya",
+      "surface": "Billing Taliya",
+      "route": "/app/billing",
+      "requiredBlocks": "plano, assinatura, status, fatura, add-ons",
+      "essentialActions": "atualizar pagamento, ver faturas, add-on, suporte",
+      "essentialStates": "ativo, falha, vencido",
+      "note": "Topbar global/menu de conta; separado do Financeiro.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "65_round-4.1N_billing_01_assinatura-taliya-aprovado.png",
+          "storyId": "crm-image-coverage-billing--image-65-billing-assinatura",
+          "storyTitle": "CRM / Image Coverage / Billing"
+        }
+      ]
+    },
+    {
+      "id": "faturas-taliya",
+      "surface": "Faturas Taliya",
+      "route": "/app/billing/invoices",
+      "requiredBlocks": "fatura atual, historico, status",
+      "essentialActions": "ver fatura, resolver pagamento",
+      "essentialStates": "paga, pendente, falhou",
+      "note": "Dentro de Billing.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Ledger table / right assistant rail"
+      ],
+      "visualTargets": [
+        {
+          "image": "66_round-4.1N_billing_02_faturas-taliya-aprovado.png",
+          "storyId": "crm-image-coverage-billing--image-66-billing-faturas",
+          "storyTitle": "CRM / Image Coverage / Billing"
+        }
+      ]
+    },
+    {
+      "id": "add-ons-taliya",
+      "surface": "Add-ons Taliya",
+      "route": "/app/billing/add-ons",
+      "requiredBlocks": "add-ons ativos, pacotes, mais agentes",
+      "essentialActions": "comprar/solicitar, abrir suporte",
+      "essentialStates": "ativo, vazio, pendente",
+      "note": "Dentro de Billing.",
+      "contractKind": "canonical-product-surface",
+      "structuralFamilies": [
+        "Card catalog / Hub grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "67_round-4.1N_billing_03_add-ons-taliya-aprovado.png",
+          "storyId": "crm-image-coverage-billing--image-67-billing-add-ons",
+          "storyTitle": "CRM / Image Coverage / Billing"
+        }
+      ]
+    },
+    {
+      "id": "internal-operacao",
+      "surface": "Internal operacao",
+      "route": "/internal",
+      "requiredBlocks": "saude operacional, tenants, atividade, alertas e atalhos",
+      "essentialActions": "abrir tenant, abrir fila, investigar alerta",
+      "essentialStates": "normal, degradado, critico, vazio",
+      "note": "Backoffice Taliya; fora do app do studio.",
+      "contractKind": "canonical-internal-surface",
+      "structuralFamilies": [
+        "Dashboard / Card grid"
+      ],
+      "visualTargets": [
+        {
+          "image": "48_round-4.1K_internal_01_visao-operacional.png.png",
+          "storyId": "crm-image-coverage-internal--image-48-internal-visao-operacional",
+          "storyTitle": "CRM / Image Coverage / Internal"
+        }
+      ]
+    },
+    {
+      "id": "internal-tenants",
+      "surface": "Internal tenants",
+      "route": "/internal/tenants",
+      "requiredBlocks": "lista, filtros, status, resumo e grants",
+      "essentialActions": "buscar, filtrar, abrir tenant, conceder ou revogar acesso",
+      "essentialStates": "ativo, bloqueado, degradado, grant ativo",
+      "note": "Backoffice Taliya; fora do app do studio.",
+      "contractKind": "canonical-internal-surface",
+      "structuralFamilies": [
+        "Worklist / Table + quick filters + drawer"
+      ],
+      "visualTargets": [
+        {
+          "image": "49_round-4.1K_internal_02_tenants-lista-detalhe.png",
+          "storyId": "crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe",
+          "storyTitle": "CRM / Image Coverage / Internal"
+        }
+      ]
+    },
+    {
+      "id": "internal-tenant-detalhe",
+      "surface": "Internal tenant detalhe",
+      "route": "/internal/tenants/[tenantId]",
+      "requiredBlocks": "identidade, usuarios, grants, seguranca, auditoria e integracoes",
+      "essentialActions": "alternar aba, abrir regra, conceder ou revogar acesso, auditar",
+      "essentialStates": "ativo, restrito, grant aberto, incidente",
+      "note": "Backoffice Taliya; detalhe de seguranca do tenant.",
+      "contractKind": "canonical-internal-surface",
+      "structuralFamilies": [
+        "Profile / Detail workspace"
+      ],
+      "visualTargets": [
+        {
+          "image": "50_round-4.1K_internal_03_tenant-detalhe-usuarios-grants.png",
+          "storyId": "crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants",
+          "storyTitle": "CRM / Image Coverage / Internal"
+        }
+      ]
+    },
+    {
+      "id": "access-shell",
+      "surface": "Access shell",
+      "route": "Pre-CRM shell",
+      "requiredBlocks": "janela do produto, marca, slot principal, contexto e rodape",
+      "essentialActions": "abrir ajuda, conta e links institucionais aplicaveis",
+      "essentialStates": "base, autenticacao, assinatura",
+      "note": "Contrato estrutural da imagem 71; nao e uma pagina de negocio isolada.",
+      "contractKind": "derived-structural-surface",
+      "structuralFamilies": [
+        "Access / Subscription shell"
+      ],
+      "visualTargets": [
+        {
+          "image": "71_round-4.1Q_acesso-assinatura_shell-base-aprovado.png",
+          "storyId": "crm-image-coverage-access-subscription--image-71-shell-base",
+          "storyTitle": "CRM / Image Coverage / Access Subscription"
+        }
+      ]
+    },
+    {
+      "id": "empty-app-shell",
+      "surface": "Empty app shell",
+      "route": "Logged-in shell state",
+      "requiredBlocks": "sidebar, topbar, titulo e canvas vazio",
+      "essentialActions": "navegar, abrir acoes globais e perfil",
+      "essentialStates": "vazio, carregando, indisponivel",
+      "note": "Contrato estrutural da imagem 79; valida a casca sem conteudo de dominio.",
+      "contractKind": "derived-structural-surface",
+      "structuralFamilies": [
+        "App shell baseline"
+      ],
+      "visualTargets": [
+        {
+          "image": "79_round-4.1S_app-shell_01_base-web-sem-conteudo.png",
+          "storyId": "crm-image-coverage-image-79-empty-shell--image-79-empty-shell",
+          "storyTitle": "CRM / Image Coverage / Image 79 Empty Shell"
+        }
+      ]
+    }
+  ]
+}

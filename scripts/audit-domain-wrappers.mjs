@@ -142,6 +142,13 @@ const wrapperContracts = [
     value: "wraps the official CrmDrawer with lead-specific checklist, timeline, sales facts and footer actions"
   },
   {
+    name: "ConversationDrawer",
+    kind: "drawer",
+    globalRoots: ["<CrmDrawer"],
+    requiredSnippets: ["drawerFacts", "tcrm-conversation-drawer__history", "tcrm-conversation-drawer__tasks", "component=\"ConversationDrawer\""],
+    value: "wraps the official CrmDrawer with conversation facts, recent history, related tasks, agent status and inbox actions"
+  },
+  {
     name: "ChecklistDrawer",
     kind: "drawer",
     globalRoots: ["<CrmDrawer"],

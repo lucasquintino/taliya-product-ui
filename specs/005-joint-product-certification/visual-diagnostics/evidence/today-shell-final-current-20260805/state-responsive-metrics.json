@@ -1,0 +1,78 @@
+[
+  {
+    "id": "crm-image-coverage-image-79-empty-shell--loading",
+    "viewport": "390",
+    "loaded": true,
+    "storyWidth": 390,
+    "clientWidth": 390,
+    "scrollWidth": 390,
+    "overflow": 0,
+    "headings": [
+      "Jornadas"
+    ],
+    "visibleErrors": 0,
+    "drawer": null,
+    "scrollTop": 0,
+    "windowBodyScrollTop": 0,
+    "history": null,
+    "shellCount": 1,
+    "canvasCount": 1
+  },
+  {
+    "id": "crm-image-coverage-image-79-empty-shell--loading",
+    "viewport": "1024",
+    "loaded": true,
+    "storyWidth": 1024,
+    "clientWidth": 1024,
+    "scrollWidth": 1024,
+    "overflow": 0,
+    "headings": [
+      "Jornadas"
+    ],
+    "visibleErrors": 0,
+    "drawer": null,
+    "scrollTop": 0,
+    "windowBodyScrollTop": 0,
+    "history": null,
+    "shellCount": 1,
+    "canvasCount": 1
+  },
+  {
+    "id": "crm-image-coverage-image-79-empty-shell--unavailable",
+    "viewport": "390",
+    "loaded": true,
+    "storyWidth": 390,
+    "clientWidth": 390,
+    "scrollWidth": 390,
+    "overflow": 0,
+    "headings": [
+      "Jornadas"
+    ],
+    "visibleErrors": 0,
+    "drawer": null,
+    "scrollTop": 0,
+    "windowBodyScrollTop": 0,
+    "history": null,
+    "shellCount": 1,
+    "canvasCount": 1
+  },
+  {
+    "id": "crm-image-coverage-image-79-empty-shell--unavailable",
+    "viewport": "1024",
+    "loaded": true,
+    "storyWidth": 1024,
+    "clientWidth": 1024,
+    "scrollWidth": 1024,
+    "overflow": 0,
+    "headings": [
+      "Jornadas"
+    ],
+    "visibleErrors": 0,
+    "drawer": null,
+    "scrollTop": 0,
+    "windowBodyScrollTop": 0,
+    "history": null,
+    "shellCount": 1,
+    "canvasCount": 1
+  }
+]

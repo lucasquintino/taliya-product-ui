@@ -1,0 +1,299 @@
+[
+  {
+    "route": "tasks",
+    "storyId": "crm-image-coverage-tarefas--image-23-lista-detalhe",
+    "width": 390,
+    "height": 844,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 375,
+      "drawer": {
+        "bottom": 844,
+        "component": "TaskDrawer",
+        "height": 844,
+        "label": "Detalhes da tarefa",
+        "position": "fixed",
+        "state": "completed",
+        "top": 0,
+        "width": 375
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Tarefas"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 375,
+      "shellCount": 1,
+      "storyWidth": 390,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "tasks",
+    "storyId": "crm-image-coverage-tarefas--image-23-lista-detalhe",
+    "width": 1024,
+    "height": 768,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 1009,
+      "drawer": {
+        "bottom": 768,
+        "component": "TaskDrawer",
+        "height": 768,
+        "label": "Detalhes da tarefa",
+        "position": "fixed",
+        "state": "completed",
+        "top": 0,
+        "width": 420
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Tarefas"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 1009,
+      "shellCount": 1,
+      "storyWidth": 1024,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "tasks",
+    "storyId": "crm-image-coverage-tarefas--image-23-lista-detalhe",
+    "width": 1280,
+    "height": 720,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 1265,
+      "drawer": {
+        "bottom": 720,
+        "component": "TaskDrawer",
+        "height": 720,
+        "label": "Detalhes da tarefa",
+        "position": "fixed",
+        "state": "completed",
+        "top": 0,
+        "width": 420
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Tarefas"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 1265,
+      "shellCount": 1,
+      "storyWidth": 1280,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "checklists",
+    "storyId": "crm-image-coverage-checklists--image-24-lista-execucao-detalhe",
+    "width": 390,
+    "height": 844,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 375,
+      "drawer": {
+        "bottom": 844,
+        "component": "ChecklistDrawer",
+        "height": 844,
+        "label": "Detalhes do checklist",
+        "position": "fixed",
+        "state": "completed",
+        "top": 0,
+        "width": 375
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Checklists"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 375,
+      "shellCount": 1,
+      "storyWidth": 390,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "checklists",
+    "storyId": "crm-image-coverage-checklists--image-24-lista-execucao-detalhe",
+    "width": 1024,
+    "height": 768,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 1009,
+      "drawer": {
+        "bottom": 768,
+        "component": "ChecklistDrawer",
+        "height": 768,
+        "label": "Detalhes do checklist",
+        "position": "fixed",
+        "state": "completed",
+        "top": 0,
+        "width": 420
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Checklists"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 1009,
+      "shellCount": 1,
+      "storyWidth": 1024,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "checklists",
+    "storyId": "crm-image-coverage-checklists--image-24-lista-execucao-detalhe",
+    "width": 1280,
+    "height": 720,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 1265,
+      "drawer": {
+        "bottom": 720,
+        "component": "ChecklistDrawer",
+        "height": 720,
+        "label": "Detalhes do checklist",
+        "position": "fixed",
+        "state": "completed",
+        "top": 0,
+        "width": 420
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Checklists"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 1265,
+      "shellCount": 1,
+      "storyWidth": 1280,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "approvals",
+    "storyId": "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe",
+    "width": 390,
+    "height": 844,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 375,
+      "drawer": {
+        "bottom": 844,
+        "component": "ApprovalDrawer",
+        "height": 844,
+        "label": "Detalhes da aprovação",
+        "position": "fixed",
+        "state": "expired",
+        "top": 0,
+        "width": 375
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Aprovações"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 375,
+      "shellCount": 1,
+      "storyWidth": 390,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "approvals",
+    "storyId": "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe",
+    "width": 1024,
+    "height": 768,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 1009,
+      "drawer": {
+        "bottom": 768,
+        "component": "ApprovalDrawer",
+        "height": 768,
+        "label": "Detalhes da aprovação",
+        "position": "fixed",
+        "state": "expired",
+        "top": 0,
+        "width": 420
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Aprovações"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 1009,
+      "shellCount": 1,
+      "storyWidth": 1024,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  },
+  {
+    "route": "approvals",
+    "storyId": "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe",
+    "width": 1280,
+    "height": 720,
+    "metrics": {
+      "canvasCount": 1,
+      "clientWidth": 1265,
+      "drawer": {
+        "bottom": 720,
+        "component": "ApprovalDrawer",
+        "height": 720,
+        "label": "Detalhes da aprovação",
+        "position": "fixed",
+        "state": "expired",
+        "top": 0,
+        "width": 420
+      },
+      "drawerCount": 1,
+      "headings": [
+        "Aprovações"
+      ],
+      "history": null,
+      "loaded": true,
+      "overflow": 0,
+      "scrollTop": 0,
+      "scrollWidth": 1265,
+      "shellCount": 1,
+      "storyWidth": 1280,
+      "visibleErrors": 0,
+      "windowBodyScrollTop": 0
+    }
+  }
+]
