@@ -4,7 +4,6 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import process from 'node:process';
 
 const repoRoot = process.cwd();
 const manifestPath = path.join(repoRoot, '.specify', 'integrations', 'codex.manifest.json');
