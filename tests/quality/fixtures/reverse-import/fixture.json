@@ -1,0 +1,5 @@
+{
+  "fixtureId": "reverse-import",
+  "description": "Controlled placeholder input for the architecture gate negative probe.",
+  "expectedFailureCode": "ARCH_REVERSE_IMPORT"
+}
