@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-/* global console, process */
+/* global Buffer, console, process */
 
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
