@@ -199,6 +199,7 @@
     "quality:governance": "node scripts/quality/run-governance-gate.mjs --check",
     "quality:governance:negative-probe": "node scripts/quality/probe-governance-gate.mjs",
     "quality:governance:evidence": "node scripts/quality/record-governance-evidence.mjs"
+    ,"quality:select": "node scripts/quality/select-gates.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",

@@ -1,4 +1,4 @@
-﻿import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +8,28 @@ import * as crm from "./index";
 import { CrmProductShell, DashboardGrid, ListDetailLayout, SetupShell, ThreePaneLayout, WorkListDetailPage, crmComponentNames } from "./index";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+
+function readCrmStyles() {
+  return readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8").replace(/\r\n?/g, "\n");
+}
+
+function expectCss(styles: string) {
+  const normalized = styles.replace(/\s+/g, " ").trim();
+  const normalizeFragment = (fragment: string) => fragment.replace(/\s+/g, " ").trim();
+  return {
+    toContain(fragment: string) {
+      expect(normalized).toContain(normalizeFragment(fragment));
+    },
+    toMatch(pattern: RegExp) {
+      expect(normalized).toMatch(pattern);
+    },
+    not: {
+      toContain(fragment: string) {
+        expect(normalized).not.toContain(normalizeFragment(fragment));
+      }
+    }
+  };
+}
 
 afterEach(() => {
   cleanup();
@@ -1072,119 +1094,119 @@ describe("@taliya/crm component coverage", () => {
   });
 
   it("keeps WorkListDetailPage quick filters stretched to the table height", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toContain(".tcrm-work-list-detail-page__layout {\n  align-items: stretch;");
-    expect(styles).toContain(".tcrm-work-list-detail-page__rail > .tcrm-page-quick-filters {\n  height: 100%;");
-    expect(styles).toContain(".tcrm-work-list-detail-page--compact-rail .tcrm-page-quick-filters__item-label,\n.tcrm-work-list-detail-page--main-priority .tcrm-page-quick-filters__item-label {\n  overflow: visible;");
-    expect(styles).toContain(".tcrm-work-list-detail-page--compact-rail .tcrm-work-list-detail-page__layout {");
-    expect(styles).toContain(".tcrm-work-list-detail-page--balanced-rail .tcrm-work-list-detail-page__layout {");
-    expect(styles).toContain(".tcrm-work-list-detail-page--wide-main .tcrm-work-list-detail-page__layout {");
-    expect(styles).toContain(".tcrm-work-list-detail-page--wide-rail .tcrm-work-list-detail-page__layout {");
-    expect(styles).toContain("--taliya-layout-crm-list-detail-list-width: var(--taliya-layout-crm-page-quick-filters-width);");
-    expect(styles).toContain("overflow-wrap: anywhere;");
-    expect(styles).toContain("white-space: normal;");
-    expect(styles).toContain(".tcrm-worklist-table__data.tl-table-wrap {");
-    expect(styles).toContain("overflow-x: auto;\n  overflow-y: hidden;");
-    expect(styles).toMatch(
+    expectCss(styles).toContain(".tcrm-work-list-detail-page__layout {\n  align-items: stretch;");
+    expectCss(styles).toContain(".tcrm-work-list-detail-page__rail > .tcrm-page-quick-filters {\n  height: 100%;");
+    expectCss(styles).toContain(".tcrm-work-list-detail-page--compact-rail .tcrm-page-quick-filters__item-label,\n.tcrm-work-list-detail-page--main-priority .tcrm-page-quick-filters__item-label {\n  overflow: visible;");
+    expectCss(styles).toContain(".tcrm-work-list-detail-page--compact-rail .tcrm-work-list-detail-page__layout {");
+    expectCss(styles).toContain(".tcrm-work-list-detail-page--balanced-rail .tcrm-work-list-detail-page__layout {");
+    expectCss(styles).toContain(".tcrm-work-list-detail-page--wide-main .tcrm-work-list-detail-page__layout {");
+    expectCss(styles).toContain(".tcrm-work-list-detail-page--wide-rail .tcrm-work-list-detail-page__layout {");
+    expectCss(styles).toContain("--taliya-layout-crm-list-detail-list-width: var(--taliya-layout-crm-page-quick-filters-width);");
+    expectCss(styles).toContain("overflow-wrap: anywhere;");
+    expectCss(styles).toContain("white-space: normal;");
+    expectCss(styles).toContain(".tcrm-worklist-table__data.tl-table-wrap {");
+    expectCss(styles).toContain("overflow-x: auto;\n  overflow-y: hidden;");
+    expectCss(styles).toMatch(
       /@media \(max-width: 760px\) \{[\s\S]*?\.tcrm-worklist-table__data \.tl-table \{[\s\S]*?min-width: var\(--taliya-control-table-min-width\);/,
     );
   });
 
   it("keeps the official three-pane family usable on narrow viewports", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toContain(".tcrm-conversation-list {\n  background: var(--taliya-color-crm-conversation-list-bg);");
-    expect(styles).toMatch(/\.tcrm-conversation-list \{[\s\S]*?position: relative;[\s\S]*?width: var\(--taliya-layout-crm-conversation-list-width\);/);
-    expect(styles).toContain(".tcrm-three-pane-layout__right > .tcrm-context-panel {\n  min-width: 0;\n  width: 100%;\n}");
-    expect(styles).toMatch(
+    expectCss(styles).toContain(".tcrm-conversation-list {\n  background: var(--taliya-color-crm-conversation-list-bg);");
+    expectCss(styles).toMatch(/\.tcrm-conversation-list \{[\s\S]*?position: relative;[\s\S]*?width: var\(--taliya-layout-crm-conversation-list-width\);/);
+    expectCss(styles).toContain(".tcrm-three-pane-layout__right > .tcrm-context-panel {\n  min-width: 0;\n  width: 100%;\n}");
+    expectCss(styles).toMatch(
       /@media \(max-width: 980px\) \{[\s\S]*?\.tcrm-three-pane-layout \{[\s\S]*?height: auto;[\s\S]*?overflow: visible;[\s\S]*?width: 100%;/,
     );
-    expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list,\n  .tcrm-three-pane-layout .tcrm-conversation-thread,\n  .tcrm-three-pane-layout .tcrm-context-panel {");
-    expect(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list__subject {\n    display: none;");
+    expectCss(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list,\n  .tcrm-three-pane-layout .tcrm-conversation-thread,\n  .tcrm-three-pane-layout .tcrm-context-panel {");
+    expectCss(styles).toContain(".tcrm-three-pane-layout .tcrm-conversation-list__subject {\n    display: none;");
   });
 
   it("keeps Settings workspaces contained on narrow viewports", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /@media \(max-width: 760px\) \{[\s\S]*?:is\([\s\S]*?\.tcrm-product-shell-stage--content-settings-payments[\s\S]*?\) \.tcrm-product-shell-page-header \{[\s\S]*?height: auto;[\s\S]*?min-height: 0;/,
     );
-    expect(styles).toContain(
+    expectCss(styles).toContain(
       ".tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace {\n    grid-template-columns: minmax(0, 1fr);",
     );
-    expect(styles).toContain(
+    expectCss(styles).toContain(
       ".tcrm-settings-payments-workspace > .tl-card,\n.tcrm-settings-payments-workspace > .tcrm-settings-workspace-controls > * {\n  box-sizing: border-box;\n  max-width: 100%;\n  min-width: 0;\n  width: 100%;",
     );
-    expect(styles).toContain(
+    expectCss(styles).toContain(
       ".tcrm-right-panel-layout--settings-payments .tcrm-settings-payments-workspace > * {\n    box-sizing: border-box;\n    max-width: 100%;\n    min-width: 0;\n    width: 100%;",
     );
-    expect(styles).toContain(
+    expectCss(styles).toContain(
       ".tcrm-right-panel-layout--settings-payments .tcrm-settings-section__grid {\n    grid-template-columns: minmax(0, 1fr);",
     );
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /\.tcrm-right-panel-layout--settings-agenda[\s\S]*?\.tcrm-settings-agenda-workspace__rules \.tcrm-rule-row__select,[\s\S]*?transform: none;[\s\S]*?width: 100%;/,
     );
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /@media \(min-width: 981px\) and \(max-width: 1120px\) \{[\s\S]*?\.tcrm-right-panel-layout--settings-payments,[\s\S]*?grid-template-columns: minmax\(0, 1fr\);[\s\S]*?> :is\(\.tcrm-right-panel-layout__main, \.tcrm-right-panel-layout__panel\) \{[\s\S]*?height: auto;[\s\S]*?transform: none;/,
     );
-    expect(styles).toContain(
+    expectCss(styles).toContain(
       "--taliya-layout-crm-rule-row-columns: 38px minmax(0, 1fr) minmax(150px, .8fr) 104px;",
     );
   });
 
   it("keeps ApprovalDrawer opaque and actionable above a scrollable mobile worklist", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toContain(".tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-approval-drawer {");
-    expect(styles).toContain(".tcrm-product-shell-stage > .tcrm-approval-drawer .tcrm-approval-panel__sections {\n    flex: 1 1 auto;\n    min-height: 0;\n    overflow-y: auto;");
-    expect(styles).toContain(".tcrm-approval-table__data.tl-table-wrap {\n    overflow-x: auto;");
-    expect(styles).toContain(".tcrm-approval-table__data .tl-table {\n    min-width: var(--taliya-control-table-min-width);");
+    expectCss(styles).toContain(".tcrm-product-shell-stage.tcrm-product-shell-stage--drawer > .tcrm-approval-drawer {");
+    expectCss(styles).toContain(".tcrm-product-shell-stage > .tcrm-approval-drawer .tcrm-approval-panel__sections {\n    flex: 1 1 auto;\n    min-height: 0;\n    overflow-y: auto;");
+    expectCss(styles).toContain(".tcrm-approval-table__data.tl-table-wrap {\n    overflow-x: auto;");
+    expectCss(styles).toContain(".tcrm-approval-table__data .tl-table {\n    min-width: var(--taliya-control-table-min-width);");
   });
 
   it("keeps ChecklistTable selected rows as dot-only selection without the task-table rail", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toContain(".tcrm-checklist-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-checklist-table-row-selected);");
-    expect(styles).toContain(".tcrm-checklist-table__data .tl-table__row--selected:hover {\n  background: var(--taliya-color-crm-checklist-row-bg-selected);");
-    expect(styles).toContain(".tcrm-checklist-table__title-cell.is-selected::before");
+    expectCss(styles).toContain(".tcrm-checklist-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-checklist-table-row-selected);");
+    expectCss(styles).toContain(".tcrm-checklist-table__data .tl-table__row--selected:hover {\n  background: var(--taliya-color-crm-checklist-row-bg-selected);");
+    expectCss(styles).toContain(".tcrm-checklist-table__title-cell.is-selected::before");
   });
 
   it("keeps ReplacementTable selected rows as dot-only selection without the task-table rail", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toContain(".tcrm-replacement-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-checklist-table-row-selected);");
-    expect(styles).toContain(".tcrm-replacement-table__student.is-selected::before");
-    expect(styles).toContain(".tcrm-replacement-table__data.tl-table-wrap {\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-x: auto;");
-    expect(styles).toContain(".tcrm-replacement-table__data .tl-table {\n  border-collapse: separate;\n  border-spacing: 0;\n  font-size: var(--taliya-control-crm-task-table-text-size);\n  min-width: var(--taliya-control-table-min-width);");
-    expect(styles).not.toContain(".tcrm-replacement-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-task-table-row-selected);");
+    expectCss(styles).toContain(".tcrm-replacement-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-checklist-table-row-selected);");
+    expectCss(styles).toContain(".tcrm-replacement-table__student.is-selected::before");
+    expectCss(styles).toContain(".tcrm-replacement-table__data.tl-table-wrap {\n  background: transparent;\n  border: 0;\n  border-radius: 0;\n  box-shadow: none;\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-x: auto;");
+    expectCss(styles).toContain(".tcrm-replacement-table__data .tl-table {\n  border-collapse: separate;\n  border-spacing: 0;\n  font-size: var(--taliya-control-crm-task-table-text-size);\n  min-width: var(--taliya-control-table-min-width);");
+    expectCss(styles).not.toContain(".tcrm-replacement-table__data .tl-table__row--selected {\n  box-shadow: var(--taliya-shadow-crm-task-table-row-selected);");
   });
 
   it("keeps ChecklistDrawer step content on a real text track inside Button", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /\.tcrm-checklist-drawer__step-button > span \{[\s\S]*?display: grid;[\s\S]*?grid-column: 1 \/ -1;[\s\S]*?grid-template-columns: var\(--taliya-control-crm-task-drawer-check-size\) minmax\(0, 1fr\);/,
     );
-    expect(styles).toContain(".tcrm-checklist-drawer__step-copy {\n  display: grid;");
+    expectCss(styles).toContain(".tcrm-checklist-drawer__step-copy {\n  display: grid;");
   });
 
   it("keeps ReplacementDrawer footer contained with a scrollable body track", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /\.tcrm-replacement-drawer\.tcrm-drawer-frame \{[\s\S]*?display: grid;[\s\S]*?grid-template-rows: auto minmax\(0, 1fr\) auto;/,
     );
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /\.tcrm-replacement-drawer\.tcrm-drawer-frame \.tcrm-drawer-frame__body \{[\s\S]*?padding:/,
     );
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /\.tcrm-replacement-drawer__body \{[\s\S]*?min-height: 0;[\s\S]*?overflow-x: hidden;[\s\S]*?overflow-y: auto;/,
     );
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /\.tcrm-replacement-drawer__fact \{[\s\S]*?grid-template-rows: min-content min-content;/,
     );
-    expect(styles).toContain(".tcrm-replacement-drawer__footer {\n  display: grid;");
+    expectCss(styles).toContain(".tcrm-replacement-drawer__footer {\n  display: grid;");
   });
 
   it("renders ProfileTabs as the source-shaped student profile tab bar", () => {
@@ -2012,9 +2034,9 @@ describe("@taliya/crm component coverage", () => {
   });
 
   it("removes the commercial kanban inset on mobile viewports", () => {
-    const styles = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+    const styles = readCrmStyles();
 
-    expect(styles).toMatch(
+    expectCss(styles).toMatch(
       /@media \(max-width: 760px\) \{[\s\S]*?\.tcrm-kanban-page-stack--commercial \{[\s\S]*?padding-inline: 0;/,
     );
   });

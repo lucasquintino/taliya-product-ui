@@ -1,0 +1,35 @@
+name: Quality gates
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: Canonical change profile
+        required: false
+        default: governance
+      stage:
+        description: Gate stage
+        required: false
+        default: pr
+
+jobs:
+  select-and-run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      QUALITY_PROFILE: ${{ inputs.profile || 'governance' }}
+      QUALITY_STAGE: ${{ inputs.stage || 'pr' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm quality:select --profile "$QUALITY_PROFILE" --stage "$QUALITY_STAGE"
+      - run: pnpm quality:governance
