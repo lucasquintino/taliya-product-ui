@@ -13,6 +13,7 @@ export default defineConfig({
     environment: "jsdom",
     exclude: [...configDefaults.exclude, "dist/**"],
     setupFiles: ["./src/test.setup.ts"],
-    testTimeout: 30000
+    testTimeout: 30000,
+    coverage: { thresholds: { lines: 90, functions: 90, branches: 85 } }
   }
 });

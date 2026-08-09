@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "sourceFiles", "rows"],
+  "properties": {
+    "schemaVersion": { "const": "public-behavior-matrix.v1" },
+    "sourceFiles": { "type": "array", "minItems": 1 },
+    "rows": { "type": "array", "minItems": 1, "items": { "type": "object", "required": ["id", "symbol", "ownerPackage", "source", "kind", "requiredTestLayers"] } }
+  }
+}

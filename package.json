@@ -199,7 +199,9 @@
     "quality:governance": "node scripts/quality/run-governance-gate.mjs --check",
     "quality:governance:negative-probe": "node scripts/quality/probe-governance-gate.mjs",
     "quality:governance:evidence": "node scripts/quality/record-governance-evidence.mjs"
-    ,"quality:select": "node scripts/quality/select-gates.mjs"
+    ,"quality:select": "node scripts/quality/select-gates.mjs",
+    "behavior-matrix:audit": "node scripts/quality/generate-behavior-matrix.mjs --check",
+    "behavior-matrix:audit:update": "node scripts/quality/generate-behavior-matrix.mjs --update"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
