@@ -195,7 +195,9 @@
     "report-freshness:audit:stale-probe": "node scripts/probe-report-freshness-stale.mjs",
     "report-provenance:audit": "node scripts/audit-report-provenance.mjs --check",
     "report-provenance:audit:update": "node scripts/audit-report-provenance.mjs --update",
-    "audit-checks:read-only-probe": "node scripts/probe-audit-checks-read-only.mjs"
+    "audit-checks:read-only-probe": "node scripts/probe-audit-checks-read-only.mjs",
+    "quality:governance": "node scripts/quality/run-governance-gate.mjs --check",
+    "quality:governance:negative-probe": "node scripts/quality/probe-governance-gate.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",

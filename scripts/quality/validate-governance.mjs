@@ -6,7 +6,9 @@ import { fileURLToPath } from "node:url";
 import { validatePolicyFixture } from "./governance-fixtures.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
-const policyPath = resolve(repoRoot, "governance/quality-policy.json");
+const policyOverrideIndex = process.argv.indexOf("--policy");
+const policyOverride = policyOverrideIndex >= 0 ? process.argv[policyOverrideIndex + 1] : undefined;
+const policyPath = policyOverride ? resolve(repoRoot, policyOverride) : resolve(repoRoot, "governance/quality-policy.json");
 const matrixPath = resolve(repoRoot, "specs/006-engineering-quality-hardening/ci-gate-matrix.md");
 
 const expectedProfiles = [
