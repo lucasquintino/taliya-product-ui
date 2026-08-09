@@ -1,0 +1,5 @@
+{
+  "cases": [
+    {"ruleId": "CMD-999", "command": "pnpm install", "expected": "match"}
+  ]
+}

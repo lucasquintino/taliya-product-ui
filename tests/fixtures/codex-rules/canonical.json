@@ -1,0 +1,10 @@
+{
+  "cases": [
+    {"ruleId": "CMD-001", "command": "Remove-Item -Recurse $HOME", "expected": "match"},
+    {"ruleId": "CMD-001", "command": "Remove-Item -LiteralPath .\\tmp\\fixture.txt", "expected": "nonMatch"},
+    {"ruleId": "CMD-002", "command": "git clean -fd C:\\Users\\lucas\\taliya-product-ui", "expected": "match"},
+    {"ruleId": "CMD-002", "command": "git diff --check", "expected": "nonMatch"},
+    {"ruleId": "CMD-003", "command": "pnpm install", "expected": "match"},
+    {"ruleId": "CMD-003", "command": "node scripts/quality/validate-governance.mjs --check", "expected": "nonMatch"}
+  ]
+}

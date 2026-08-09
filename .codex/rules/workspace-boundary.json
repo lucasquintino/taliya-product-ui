@@ -1,0 +1,12 @@
+{
+  "id": "CMD-002",
+  "kind": "command-execution",
+  "decision": "deny",
+  "statement": "Reject destructive operations when the target is not an explicit repository-relative path.",
+  "pattern": "(rm|remove-item|move-item|git\\s+(clean|reset)).*?(\\$HOME|\\$env:|~|(^|\\s)[A-Za-z]:\\\\|(^|\\s)/)",
+  "flags": "i",
+  "examples": {
+    "match": "git clean -fd C:\\Users\\lucas\\taliya-product-ui",
+    "nonMatch": "git diff --check"
+  }
+}

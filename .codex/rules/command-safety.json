@@ -1,0 +1,12 @@
+{
+  "id": "CMD-001",
+  "kind": "command-execution",
+  "decision": "deny",
+  "statement": "Reject recursive destructive filesystem commands aimed at a broad or unresolved target.",
+  "pattern": "(rm|remove-item)\\s+(-rf|.*-recurse).*?(\\$env:|\\$HOME|~|/|\\\\)$",
+  "flags": "i",
+  "examples": {
+    "match": "Remove-Item -Recurse $HOME",
+    "nonMatch": "Remove-Item -LiteralPath .\\tmp\\fixture.txt"
+  }
+}

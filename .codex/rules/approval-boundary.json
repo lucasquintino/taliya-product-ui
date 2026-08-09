@@ -1,0 +1,12 @@
+{
+  "id": "CMD-003",
+  "kind": "command-execution",
+  "decision": "require-approval",
+  "statement": "Require explicit implementation approval before dependency installation, publishing, or product-source mutation.",
+  "pattern": "(pnpm\\s+(install|add|remove)|npm\\s+install|yarn\\s+add|publish|git\\s+push|packages/(tokens|ui|crm)/src)",
+  "flags": "i",
+  "examples": {
+    "match": "pnpm install",
+    "nonMatch": "node scripts/quality/validate-governance.mjs --check"
+  }
+}
