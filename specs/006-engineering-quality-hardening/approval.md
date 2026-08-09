@@ -2,14 +2,14 @@
 
 **Feature**: `006-engineering-quality-hardening`
 **Gate**: `GATE-SDD-APPROVED` under `contracts/sdd-lifecycle-contract.md`
-**Lifecycle state**: `READY_FOR_APPROVAL`
-**SDD decision**: `READY_FOR_USER_APPROVAL`
-**Implementation authorization**: `AWAITING_USER_APPROVAL`
-**Implementation permitted now**: `NO`
+**Lifecycle state**: `APPROVED`
+**SDD decision**: `APPROVED_BY_USER`
+**Implementation authorization**: `APPROVED_FOR_IMPLEMENTATION`
+**Implementation permitted now**: `YES, within T101-T176 and all phase gates`
 
 ## Decision Summary
 
-The SDD candidate defines the problem, requirements, research decisions, entities, contracts, delivery plan, implementation backlog, evidence model, risks, Definition of Done, and bidirectional traceability for the engineering-quality hardening program. Integrated validation passed and `readiness-manifest.json` fingerprints the stable review candidate, so the package is ready for a user approval decision.
+The SDD candidate defines the problem, requirements, research decisions, entities, contracts, delivery plan, implementation backlog, evidence model, risks, Definition of Done, and bidirectional traceability for the engineering-quality hardening program. The user explicitly approved the fingerprinted candidate and authorized implementation of the complete T101-T176 range, subject to the phase gates and stop conditions.
 
 This record deliberately does **not** infer implementation approval from any of the following:
 
@@ -20,7 +20,7 @@ This record deliberately does **not** infer implementation approval from any of 
 - the user's earlier request to create the SDD;
 - a coding agent's judgment.
 
-The candidate is now `READY_FOR_APPROVAL`, but this is not implementation approval. Only a later explicit user instruction may atomically change the lifecycle state to `APPROVED` and the authorization token to `APPROVED_FOR_IMPLEMENTATION` against the exact readiness manifest and committed revision.
+The approval is bound to readiness manifest `artifactManifestHash=22c101b75bdc9c51ec7deba4c7a53cff1cabc4593b9898dbc129e80aae8ab518`, `sourceTreeHash=009e787fbca4672a1d4b8b7cbd41581883f08a504b49544a9dbdb87906712b26`, and reviewed commit `a384da27925e6746019c8ada26db3e224248d157`. Any material change to scope, contracts, gates, task range, or evidence requirements invalidates this authorization and reopens review.
 
 ## Review Scope
 
@@ -47,7 +47,7 @@ Approval does not expand the Product UI scope into backend, authentication, auth
 | Task backlog | Exact `T101-T176`, ordered and all unchecked | PASS; 76 unique contiguous tasks, all blocked |
 | Constitution check | No unauthorized exception | PASS; twelve principles and no exception |
 | SDD quality analysis | No critical inconsistency | PASS; schemas, fixtures, links, workflow, scope, vocabulary, and statuses agree |
-| User approval | Explicit instruction after `READY_FOR_APPROVAL` | AWAITING USER DECISION |
+| User approval | Explicit instruction after `READY_FOR_APPROVAL` | PASS; explicit approval recorded below |
 
 The checklist files are the authoritative evidence for the first six rows. This table is a decision summary and must not be used to override a failed checklist item.
 
@@ -75,28 +75,30 @@ An approval transition must record all fields below in a reviewable documentatio
 
 | Field | Current value |
 |---|---|
-| Lifecycle state | `READY_FOR_APPROVAL` |
-| Decision | `READY_FOR_USER_APPROVAL` |
-| Authorization state | `AWAITING_USER_APPROVAL` |
-| Approver | Not recorded because approval has not occurred |
-| Approval source | Not recorded because approval has not occurred |
-| Approval timestamp | Not recorded because approval has not occurred |
-| Approved SDD commit | Not recorded because approval has not occurred |
-| Readiness source-tree and artifact-manifest hashes | Recorded in `readiness-manifest.json`; not yet bound to an approval envelope |
-| Candidate task range | `T101-T176`, validated and awaiting explicit approval |
-| Approved task range | None |
-| Conditions or exclusions | Implementation remains blocked |
+| Lifecycle state | `APPROVED` |
+| Decision | `APPROVED_BY_USER` |
+| Authorization token | `APPROVED_FOR_IMPLEMENTATION` |
+| Approver | Repository owner / user |
+| Approval source | Explicit user instruction in the active Codex conversation |
+| Approval timestamp | `2026-08-09T00:39:43Z` |
+| Approved SDD commit | `a384da27925e6746019c8ada26db3e224248d157` |
+| Readiness source-tree hash | `009e787fbca4672a1d4b8b7cbd41581883f08a504b49544a9dbdb87906712b26` |
+| Artifact manifest hash | `22c101b75bdc9c51ec7deba4c7a53cff1cabc4593b9898dbc129e80aae8ab518` |
+| Candidate task range | `T101-T176` |
+| Approved task range | `T101-T176` |
+| Conditions or exclusions | Follow every dependency, gate, evidence, rollback, security, performance, and release condition; publication remains separately authorized |
 
 ## What Explicit Approval Will Authorize
 
-After the approval transition and a recorded implementation checkpoint, agents may begin at the first dependency-ready unchecked task in `tasks.md`, following the phase gates and change-profile evidence. Approval does not authorize skipping tasks, weakening gates, silently accepting baselines, publishing packages, or combining unrelated structural and behavior changes.
+The approval authorizes agents to begin at the first dependency-ready unchecked task in `tasks.md`, following the phase gates and change-profile evidence. It does not authorize skipping tasks, weakening gates, silently accepting baselines, publishing packages, or combining unrelated structural and behavior changes.
 
 Package publication remains a later, separate outcome guarded by `G-RELEASE`; SDD approval alone never authorizes publication.
 
 ## Current Stop Decision
 
 ```text
-SDD: READY FOR APPROVAL / READY FOR USER APPROVAL
-IMPLEMENTATION: BLOCKED BY GATE-SDD-APPROVED
-NEXT TRANSITION: EXPLICIT USER APPROVAL OR REJECTION
+SDD: APPROVED / APPROVED BY USER
+IMPLEMENTATION: APPROVED FOR IMPLEMENTATION
+CURRENT TASK: T101
+NEXT CHECKPOINT: G-GOV after T109
 ```
