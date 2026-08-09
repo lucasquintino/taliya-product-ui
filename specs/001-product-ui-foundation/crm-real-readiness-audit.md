@@ -1,6 +1,6 @@
 # CRM Real Readiness Audit
 
-Generated: 2026-08-09T02:40:50.930Z
+Generated: 2026-08-09T02:51:07.506Z
 
 Status: fail
 
@@ -29,7 +29,7 @@ This report answers whether `taliya-product-ui` is practically ready to start th
 
 | Area | Status | Evidence | Meaning |
 | --- | --- | --- | --- |
-| `official-packages-and-release` | fail | release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json | Official release is incomplete: technicalCandidate=true, registryPublished=0/3. |
+| `official-packages-and-release` | fail | release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json | Official release is incomplete: technicalCandidate=false, registryPublished=0/3. |
 | `current-internal-fully-consuming` | fail | library-consumption-status.json and consumer-page-kit-audit.json | Internal functionally consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones. |
 | `current-internal-registry-adoption` | fail | registry-consumer-adoption-audit.json | Internal still lacks official registry adoption: adopted=0/3, distributionConfig=false. |
 | `standard-page-kit-complete` | pass | public-api-audit.json and standard-page-kit.manifest.json | The standard page kit exposes the core components needed to start CRM pages. |

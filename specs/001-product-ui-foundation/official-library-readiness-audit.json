@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T02:40:53.113Z",
+  "generatedAt": "2026-08-09T02:51:08.774Z",
   "status": "fail",
   "officialConsumerReady": false,
   "globalGoalComplete": false,
@@ -88,9 +88,9 @@
     },
     {
       "id": "release-candidate",
-      "status": "pass",
+      "status": "fail",
       "evidence": "release-candidate-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "goal-completion",

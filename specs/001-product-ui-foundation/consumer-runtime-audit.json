@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-05T19:25:09.104Z",
+  "generatedAt": "2026-08-09T02:57:22.763Z",
   "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
   "packageJsonExists": true,
   "requestedScripts": [
@@ -16,7 +16,7 @@
       "commandText": "npm run typecheck",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 13543,
+      "durationMs": 6762,
       "stdout": "> taliya-internal@0.1.0 typecheck\n> tsc --noEmit",
       "stderr": ""
     },
@@ -25,7 +25,7 @@
       "commandText": "npm run lint",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 22087,
+      "durationMs": 13288,
       "stdout": "> taliya-internal@0.1.0 lint\n> eslint .",
       "stderr": ""
     },
@@ -34,8 +34,8 @@
       "commandText": "npm run test",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 46940,
-      "stdout": "> taliya-internal@0.1.0 test\n> vitest run\n\n\n RUN  v4.1.9 /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal\n\n\n Test Files  27 passed (27)\n      Tests  165 passed (165)\n   Start at  16:23:10\n   Duration  43.19s (transform 7.21s, setup 16.00s, import 13.39s, tests 13.82s, environment 205.92s)",
+      "durationMs": 21423,
+      "stdout": "> taliya-internal@0.1.0 test\n> vitest run\n\n\n RUN  v4.1.9 /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal\n\n\n Test Files  28 passed (28)\n      Tests  174 passed (174)\n   Start at  23:56:49\n   Duration  19.95s (transform 4.78s, setup 7.52s, import 9.96s, tests 10.66s, environment 86.03s)",
       "stderr": ""
     },
     {
@@ -43,8 +43,8 @@
       "commandText": "npm run build",
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 75348,
-      "stdout": "> taliya-internal@0.1.0 build\n> next build\n\n▲ Next.js 16.2.9 (Turbopack)\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 35.6s\n  Running TypeScript ...\n  Finished TypeScript in 31.0s ...\n  Collecting page data using 7 workers ...\n  Generating static pages using 7 workers (0/3) ...\n✓ Generating static pages using 7 workers (3/3) in 386ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n├ ƒ /internal\n├ ƒ /internal/actions\n├ ƒ /internal/landing\n├ ƒ /internal/leads\n├ ƒ /internal/leads/kanban\n└ ƒ /internal/session\n\n\nƒ Proxy (Middleware)\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand",
+      "durationMs": 13079,
+      "stdout": "> taliya-internal@0.1.0 build\n> next build\n\n▲ Next.js 16.3.0 (Turbopack)\n✓ Running next.config.ts took 233ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1587ms\n  Running TypeScript ...\n  Finished TypeScript in 5.3s ...\n  Collecting page data using 7 workers ...\n  Generating static pages using 7 workers (0/3) ...\n✓ Generating static pages using 7 workers (3/3) in 272ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n├ ƒ /internal\n├ ƒ /internal/actions\n├ ƒ /internal/landing\n├ ƒ /internal/leads\n├ ƒ /internal/leads/kanban\n└ ƒ /internal/session\n\n\nƒ Proxy (Middleware)\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand",
       "stderr": ""
     }
   ]
