@@ -8,7 +8,7 @@ export function runChildren(commands, { cwd = process.cwd(), timeoutMs = 120000 
   const results = [];
   let exitCode = 0;
   for (const child of commands) {
-    const result = spawnSync(child.command, child.args ?? [], { cwd, encoding: 'utf8', timeout: child.timeoutMs ?? timeoutMs });
+    const result = spawnSync(child.command, child.args ?? [], { cwd: child.cwd ?? cwd, encoding: 'utf8', timeout: child.timeoutMs ?? timeoutMs });
     const timedOut = result.error?.code === 'ETIMEDOUT';
     const failureCode = timedOut ? 'CHILD_TIMEOUT' : result.signal ? 'CHILD_SIGNAL' : result.status === 0 ? undefined : 'CHILD_EXIT_NONZERO';
     const childResult = { id: child.id, command: [child.command, ...(child.args ?? [])].join(' '), exitCode: result.status ?? 1, signal: result.signal ?? null, timedOut, failureCode, output: `${result.stdout ?? ''}${result.stderr ?? ''}` };
