@@ -1,0 +1,9 @@
+{
+  "id": "policy-unknown-gate",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.valid.json",
+  "expected": "invalid",
+  "failureCode": "POLICY_UNKNOWN_GATE",
+  "mutations": [
+    { "op": "add", "path": "/gates/GATE_ARCHITECTURE", "value": {} }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "policy-unknown-profile",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.valid.json",
+  "expected": "invalid",
+  "failureCode": "POLICY_UNKNOWN_PROFILE",
+  "mutations": [
+    { "op": "add", "path": "/changeProfiles/ui_component", "value": {} }
+  ]
+}

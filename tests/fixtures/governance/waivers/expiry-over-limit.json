@@ -1,0 +1,9 @@
+{
+  "id": "waiver-expiry-over-sixty-days",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/waiver.valid.json",
+  "expected": "invalid",
+  "failureCode": "WAIVER_EXPIRY_OVER_LIMIT",
+  "mutations": [
+    { "op": "replace", "path": "/expiresAt", "value": "2026-11-01T00:00:00Z" }
+  ]
+}

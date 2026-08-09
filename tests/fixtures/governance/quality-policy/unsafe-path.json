@@ -1,0 +1,9 @@
+{
+  "id": "policy-windows-traversal-path",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.valid.json",
+  "expected": "invalid",
+  "failureCode": "POLICY_INVALID_PATH",
+  "mutations": [
+    { "op": "replace", "path": "/changeProfiles/ui-component/pathMatchers/0", "value": "C:\\repo\\..\\secret" }
+  ]
+}

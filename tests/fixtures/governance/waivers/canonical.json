@@ -1,0 +1,5 @@
+{
+  "id": "waiver-canonical",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/waiver.valid.json",
+  "expected": "valid"
+}

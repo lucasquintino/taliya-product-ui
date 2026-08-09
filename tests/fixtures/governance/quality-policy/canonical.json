@@ -1,0 +1,5 @@
+{
+  "id": "policy-canonical",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.valid.json",
+  "expected": "valid"
+}

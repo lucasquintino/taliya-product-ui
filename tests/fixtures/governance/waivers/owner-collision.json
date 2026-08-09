@@ -1,0 +1,9 @@
+{
+  "id": "waiver-owner-approver-collision",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/waiver.valid.json",
+  "expected": "invalid",
+  "failureCode": "WAIVER_OWNER_APPROVER_COLLISION",
+  "mutations": [
+    { "op": "replace", "path": "/approvedBy/id", "value": "crm-maintainer" }
+  ]
+}

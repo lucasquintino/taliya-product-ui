@@ -1,0 +1,9 @@
+{
+  "id": "waiver-windows-traversal-path",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/waiver.valid.json",
+  "expected": "invalid",
+  "failureCode": "WAIVER_INVALID_PATH",
+  "mutations": [
+    { "op": "replace", "path": "/scope/paths/0", "value": "packages\\crm\\..\\secret.ts" }
+  ]
+}

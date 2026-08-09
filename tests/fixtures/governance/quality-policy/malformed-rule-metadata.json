@@ -1,0 +1,9 @@
+{
+  "id": "policy-rule-owner-empty",
+  "source": "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.valid.json",
+  "expected": "invalid",
+  "failureCode": "POLICY_RULE_OWNER_REQUIRED",
+  "mutations": [
+    { "op": "replace", "path": "/rules/RULE_ARCH_DIRECTION/owner/id", "value": "" }
+  ]
+}
