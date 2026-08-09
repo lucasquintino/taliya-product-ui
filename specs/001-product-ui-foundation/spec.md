@@ -3,6 +3,7 @@
 **Feature Branch**: `001-product-ui-foundation`  
 **Created**: 2026-05-28  
 **Status**: Draft ready for approval  
+**Lifecycle classification**: `HISTORICAL_DRAFT`; execution authorization is `NONE` and no completion is inferred by feature 006.
 **Input**: Create a standalone Spec Kit project for the complete Taliya Product UI component library specification, separate from the landing and future SaaS implementation, with architecture, decisions, image coverage, canonical tokens, contracts, Storybook workflow, QA gates, and P0/P1/P2 component matrix.
 
 ## User Scenarios & Testing *(mandatory)*

@@ -1,5 +1,7 @@
 # Feature Specification: Human Route Review
 
+**Lifecycle classification**: `HISTORICAL_IN_PROGRESS`; execution authorization is `NONE` and pending review evidence remains pending.
+
 ## Objective
 
 Review every official product route as a user would experience it, at the approved source viewport and responsive desktop/mobile viewports, with real browser interaction and evidence per route.

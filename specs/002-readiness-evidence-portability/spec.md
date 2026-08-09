@@ -1,6 +1,7 @@
 # Feature Specification: Readiness And Evidence Portability
 
 **Status**: Approved for implementation
+**Lifecycle classification**: `HISTORICAL_APPROVED`; execution authorization is `NONE` and its evidence does not certify feature 006.
 
 ## Objective
 

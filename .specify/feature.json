@@ -1,1 +1,10 @@
-{"feature_directory":"specs/006-engineering-quality-hardening"}
+{
+  "feature_directory": "specs/006-engineering-quality-hardening",
+  "active_feature": "006-engineering-quality-hardening",
+  "phase": "implementation",
+  "lifecycle": "IMPLEMENTATION_IN_PROGRESS",
+  "authorization": "APPROVED_FOR_IMPLEMENTATION",
+  "approved_task_range": "T101-T176",
+  "approval_record": "specs/006-engineering-quality-hardening/approval.md",
+  "precedence_document": "specs/README.md"
+}

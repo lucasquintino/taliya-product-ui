@@ -1,6 +1,7 @@
 # Feature Specification: Official Story Anatomy
 
 **Status**: Approved for implementation
+**Lifecycle classification**: `HISTORICAL_APPROVED`; execution authorization is `NONE` and its evidence does not certify feature 006.
 
 ## Objective
 

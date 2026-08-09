@@ -1,5 +1,7 @@
 # Joint Product Certification
 
+**Lifecycle classification**: `HISTORICAL_IN_PROGRESS`; execution authorization is `NONE` and pending certification evidence remains pending.
+
 ## Objective
 
 Certify `taliya-product-ui` as the official reusable product library through a
