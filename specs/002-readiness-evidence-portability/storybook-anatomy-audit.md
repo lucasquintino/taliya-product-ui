@@ -2,9 +2,9 @@
 
 Status: pass
 
-Capture-only stage selectors: 26
+Capture-only stage selectors: 27
 
-Allowed fixture-geometry overrides: 29
+Allowed fixture-geometry overrides: 30
 
 Reusable-anatomy selectors in docs: 0
 
