@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T03:12:39.009Z",
-  "sourceCommit": "aebbece6e499d9c61612f6a019f4fa3921a65a57",
+  "generatedAt": "2026-08-09T03:12:57.062Z",
+  "sourceCommit": "a94f5a8ff626a8ffdee604d7267615a1920ae3dd",
   "sourceTreeSha256": "05391600fe536c085a6234112fe32c15bc83808c5b146f1d7186a9f0eb404783",
   "reportCount": 72,
   "reports": [
@@ -515,7 +515,7 @@
     },
     {
       "file": "specs/002-readiness-evidence-portability/report-freshness-audit.json",
-      "sha256": "ac6bd9a0834b2c0dd8aa164415083d085e25eeccf45dad3f8e2eef3b29fb8658",
+      "sha256": "35ad9ac777015e3f57bfb82387dd7ada933b8e6c5e4afce9db5d065f877d2fa6",
       "dependencies": []
     },
     {
