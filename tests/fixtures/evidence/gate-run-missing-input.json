@@ -1,0 +1,1 @@
+{"id":"gate-run-missing-input","kind":"gate-run","expected":"invalid","failureCode":"GATE-RUN-INPUT-MISSING","remove":"inputFingerprints"}
