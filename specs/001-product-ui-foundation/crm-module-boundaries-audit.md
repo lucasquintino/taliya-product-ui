@@ -1,6 +1,6 @@
 # CRM Module Boundaries Audit
 
-Date: 2026-08-05
+Date: deterministic
 
 Status: pass
 
@@ -8,8 +8,8 @@ Status: pass
 
 - Contracts: 6
 - Failed: 0
-- Main implementation: 23870 lines / 971317 bytes
-- Component registry: 290 lines / 19302 bytes
+- Main implementation: 23870 lines / 995186 bytes
+- Component registry: 290 lines / 19591 bytes
 
 | Contract | Status |
 | --- | --- |

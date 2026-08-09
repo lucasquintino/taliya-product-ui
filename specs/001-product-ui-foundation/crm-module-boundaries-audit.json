@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-05",
+  "date": "deterministic",
   "status": "pass",
   "rowCount": 6,
   "failedCount": 0,
   "metrics": {
-    "indexBytes": 971317,
+    "indexBytes": 995186,
     "indexLines": 23870,
-    "registryBytes": 19302,
+    "registryBytes": 19591,
     "registryLines": 290
   },
   "rows": [

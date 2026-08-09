@@ -1,5 +1,8 @@
+/* global console, process */
+
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, relative, resolve } from "node:path";
+import { parseMode } from "./quality/modes.mjs";
 
 const root = process.cwd();
 const specDir = resolve(root, "specs/001-product-ui-foundation");
@@ -66,10 +69,6 @@ const canonicalSurfaceAliases = new Map([
 
 function read(file) {
   return readFileSync(file, "utf8");
-}
-
-function countPattern(text, pattern) {
-  return Array.from(text.matchAll(pattern)).length;
 }
 
 function scanCssFile(file) {
@@ -401,7 +400,7 @@ function assertNoRegression(audit) {
   }
 }
 
-const mode = process.argv.includes("--check") ? "check" : "update";
+const mode = parseMode(process.argv);
 const audit = buildAudit();
 
 if (mode === "check") {

@@ -1,8 +1,11 @@
+/* global console, process */
+
 import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { parseMode } from "./quality/modes.mjs";
 
 const root = process.cwd();
-const checkMode = process.argv.includes("--check");
+const checkMode = parseMode(process.argv) === "check";
 const sourceDir = resolve(root, "packages/crm/src");
 const indexPath = resolve(sourceDir, "index.tsx");
 const registryPath = resolve(sourceDir, "component-registry.ts");
@@ -11,6 +14,7 @@ const jsonPath = resolve(root, "specs/001-product-ui-foundation/crm-module-bound
 const mdPath = resolve(root, "specs/001-product-ui-foundation/crm-module-boundaries-audit.md");
 const indexSource = readFileSync(indexPath, "utf8");
 const registrySource = existsSync(registryPath) ? readFileSync(registryPath, "utf8") : "";
+const auditDate = "deterministic";
 
 const rows = [
   {
@@ -41,7 +45,7 @@ const rows = [
 
 const failedRows = rows.filter((row) => !row.pass);
 const audit = {
-  date: new Date().toISOString().slice(0, 10),
+  date: auditDate,
   status: failedRows.length === 0 ? "pass" : "fail",
   rowCount: rows.length,
   failedCount: failedRows.length,
