@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* global process */
+/* global console, process */
 
 import crypto from 'node:crypto';
 import { runChildren } from './run-children.mjs';
