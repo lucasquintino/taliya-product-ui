@@ -1,0 +1,1465 @@
+{
+    "schemaVersion":  "1.1.0",
+    "policyId":  "taliya-engineering-quality",
+    "policyVersion":  "1.0.0",
+    "constitutionVersion":  "1.0.0",
+    "effectiveFrom":  "2026-08-08T12:00:00Z",
+    "rules":  {
+                  "RULE_ARCH_DIRECTION":  {
+                                              "statement":  "Package imports preserve the declared dependency direction.",
+                                              "scope":  [
+                                                            "packages"
+                                                        ],
+                                              "severity":  "high",
+                                              "enforcementKind":  "static",
+                                              "evidenceKinds":  [
+                                                                    "architecture-report"
+                                                                ],
+                                              "owner":  {
+                                                            "id":  "product-ui-maintainers",
+                                                            "kind":  "team"
+                                                        },
+                                              "references":  [
+                                                                 "specs/006-engineering-quality-hardening/contracts/architecture-ratchet-contract.md"
+                                                             ],
+                                              "waiverPolicy":  "standard-risk",
+                                              "lifecycle":  "active"
+                                          }
+              },
+    "changeProfiles":  {
+                           "ui-component":  {
+                                                "description":  "Changes to reusable component source or its public contract.",
+                                                "pathMatchers":  [
+                                                                     "packages/ui/src/**",
+                                                                     "packages/crm/src/**"
+                                                                 ],
+                                                "impactLabels":  [
+                                                                     "component",
+                                                                     "public-api"
+                                                                 ],
+                                                "examples":  {
+                                                                 "matches":  [
+                                                                                 "packages/ui/src/Button.tsx"
+                                                                             ],
+                                                                 "doesNotMatch":  [
+                                                                                      "specs/006-engineering-quality-hardening/spec.md"
+                                                                                  ]
+                                                             },
+                                                "requiredGates":  {
+                                                                      "pr":  [
+                                                                                 "G-ARCH"
+                                                                             ],
+                                                                      "nightly":  [
+                                                                                      "G-ARCH"
+                                                                                  ],
+                                                                      "release":  [
+                                                                                      "G-ARCH"
+                                                                                  ]
+                                                                  },
+                                                "nonApplicableGates":  {
+
+                                                                       }
+                                            },
+                           "sdd-only":  {
+                                            "examples":  {
+                                                             "matches":  [
+                                                                             "packages/ui/src/Button.tsx"
+                                                                         ],
+                                                             "doesNotMatch":  [
+                                                                                  "specs/006-engineering-quality-hardening/spec.md"
+                                                                              ]
+                                                         },
+                                            "nonApplicableGates":  {
+
+                                                                   },
+                                            "description":  "Canonical sdd-only change profile.",
+                                            "pathMatchers":  [
+                                                                 "packages/**",
+                                                                 "apps/**",
+                                                                 "scripts/**",
+                                                                 "governance/**"
+                                                             ],
+                                            "impactLabels":  [
+                                                                 "governance"
+                                                             ],
+                                            "requiredGates":  {
+                                                                  "pr":  [
+                                                                             "G-GOV"
+                                                                         ],
+                                                                  "nightly":  [
+                                                                                  "G-GOV"
+                                                                              ],
+                                                                  "release":  [
+                                                                                  "G-GOV"
+                                                                              ]
+                                                              }
+                                        },
+                           "governance":  {
+                                              "examples":  {
+                                                               "matches":  [
+                                                                               "packages/ui/src/Button.tsx"
+                                                                           ],
+                                                               "doesNotMatch":  [
+                                                                                    "specs/006-engineering-quality-hardening/spec.md"
+                                                                                ]
+                                                           },
+                                              "nonApplicableGates":  {
+
+                                                                     },
+                                              "description":  "Canonical governance change profile.",
+                                              "pathMatchers":  [
+                                                                   "packages/**",
+                                                                   "apps/**",
+                                                                   "scripts/**",
+                                                                   "governance/**"
+                                                               ],
+                                              "impactLabels":  [
+                                                                   "governance"
+                                                               ],
+                                              "requiredGates":  {
+                                                                    "pr":  [
+                                                                               "G-GOV"
+                                                                           ],
+                                                                    "nightly":  [
+                                                                                    "G-GOV"
+                                                                                ],
+                                                                    "release":  [
+                                                                                    "G-GOV"
+                                                                                ]
+                                                                }
+                                          },
+                           "documentation-only":  {
+                                                      "examples":  {
+                                                                       "matches":  [
+                                                                                       "packages/ui/src/Button.tsx"
+                                                                                   ],
+                                                                       "doesNotMatch":  [
+                                                                                            "specs/006-engineering-quality-hardening/spec.md"
+                                                                                        ]
+                                                                   },
+                                                      "nonApplicableGates":  {
+
+                                                                             },
+                                                      "description":  "Canonical documentation-only change profile.",
+                                                      "pathMatchers":  [
+                                                                           "packages/**",
+                                                                           "apps/**",
+                                                                           "scripts/**",
+                                                                           "governance/**"
+                                                                       ],
+                                                      "impactLabels":  [
+                                                                           "governance"
+                                                                       ],
+                                                      "requiredGates":  {
+                                                                            "pr":  [
+                                                                                       "G-GOV"
+                                                                                   ],
+                                                                            "nightly":  [
+                                                                                            "G-GOV"
+                                                                                        ],
+                                                                            "release":  [
+                                                                                            "G-GOV"
+                                                                                        ]
+                                                                        }
+                                                  },
+                           "tokens":  {
+                                          "examples":  {
+                                                           "matches":  [
+                                                                           "packages/ui/src/Button.tsx"
+                                                                       ],
+                                                           "doesNotMatch":  [
+                                                                                "specs/006-engineering-quality-hardening/spec.md"
+                                                                            ]
+                                                       },
+                                          "nonApplicableGates":  {
+
+                                                                 },
+                                          "description":  "Canonical tokens change profile.",
+                                          "pathMatchers":  [
+                                                               "packages/**",
+                                                               "apps/**",
+                                                               "scripts/**",
+                                                               "governance/**"
+                                                           ],
+                                          "impactLabels":  [
+                                                               "governance"
+                                                           ],
+                                          "requiredGates":  {
+                                                                "pr":  [
+                                                                           "G-GOV"
+                                                                       ],
+                                                                "nightly":  [
+                                                                                "G-GOV"
+                                                                            ],
+                                                                "release":  [
+                                                                                "G-GOV"
+                                                                            ]
+                                                            }
+                                      },
+                           "crm-component":  {
+                                                 "examples":  {
+                                                                  "matches":  [
+                                                                                  "packages/ui/src/Button.tsx"
+                                                                              ],
+                                                                  "doesNotMatch":  [
+                                                                                       "specs/006-engineering-quality-hardening/spec.md"
+                                                                                   ]
+                                                              },
+                                                 "nonApplicableGates":  {
+
+                                                                        },
+                                                 "description":  "Canonical crm-component change profile.",
+                                                 "pathMatchers":  [
+                                                                      "packages/**",
+                                                                      "apps/**",
+                                                                      "scripts/**",
+                                                                      "governance/**"
+                                                                  ],
+                                                 "impactLabels":  [
+                                                                      "governance"
+                                                                  ],
+                                                 "requiredGates":  {
+                                                                       "pr":  [
+                                                                                  "G-GOV"
+                                                                              ],
+                                                                       "nightly":  [
+                                                                                       "G-GOV"
+                                                                                   ],
+                                                                       "release":  [
+                                                                                       "G-GOV"
+                                                                                   ]
+                                                                   }
+                                             },
+                           "storybook-docs":  {
+                                                  "examples":  {
+                                                                   "matches":  [
+                                                                                   "packages/ui/src/Button.tsx"
+                                                                               ],
+                                                                   "doesNotMatch":  [
+                                                                                        "specs/006-engineering-quality-hardening/spec.md"
+                                                                                    ]
+                                                               },
+                                                  "nonApplicableGates":  {
+
+                                                                         },
+                                                  "description":  "Canonical storybook-docs change profile.",
+                                                  "pathMatchers":  [
+                                                                       "packages/**",
+                                                                       "apps/**",
+                                                                       "scripts/**",
+                                                                       "governance/**"
+                                                                   ],
+                                                  "impactLabels":  [
+                                                                       "governance"
+                                                                   ],
+                                                  "requiredGates":  {
+                                                                        "pr":  [
+                                                                                   "G-GOV"
+                                                                               ],
+                                                                        "nightly":  [
+                                                                                        "G-GOV"
+                                                                                    ],
+                                                                        "release":  [
+                                                                                        "G-GOV"
+                                                                                    ]
+                                                                    }
+                                              },
+                           "dependency-build":  {
+                                                    "examples":  {
+                                                                     "matches":  [
+                                                                                     "packages/ui/src/Button.tsx"
+                                                                                 ],
+                                                                     "doesNotMatch":  [
+                                                                                          "specs/006-engineering-quality-hardening/spec.md"
+                                                                                      ]
+                                                                 },
+                                                    "nonApplicableGates":  {
+
+                                                                           },
+                                                    "description":  "Canonical dependency-build change profile.",
+                                                    "pathMatchers":  [
+                                                                         "packages/**",
+                                                                         "apps/**",
+                                                                         "scripts/**",
+                                                                         "governance/**"
+                                                                     ],
+                                                    "impactLabels":  [
+                                                                         "governance"
+                                                                     ],
+                                                    "requiredGates":  {
+                                                                          "pr":  [
+                                                                                     "G-GOV"
+                                                                                 ],
+                                                                          "nightly":  [
+                                                                                          "G-GOV"
+                                                                                      ],
+                                                                          "release":  [
+                                                                                          "G-GOV"
+                                                                                      ]
+                                                                      }
+                                                },
+                           "workflow-release":  {
+                                                    "examples":  {
+                                                                     "matches":  [
+                                                                                     "packages/ui/src/Button.tsx"
+                                                                                 ],
+                                                                     "doesNotMatch":  [
+                                                                                          "specs/006-engineering-quality-hardening/spec.md"
+                                                                                      ]
+                                                                 },
+                                                    "nonApplicableGates":  {
+
+                                                                           },
+                                                    "description":  "Canonical workflow-release change profile.",
+                                                    "pathMatchers":  [
+                                                                         "packages/**",
+                                                                         "apps/**",
+                                                                         "scripts/**",
+                                                                         "governance/**"
+                                                                     ],
+                                                    "impactLabels":  [
+                                                                         "governance"
+                                                                     ],
+                                                    "requiredGates":  {
+                                                                          "pr":  [
+                                                                                     "G-GOV"
+                                                                                 ],
+                                                                          "nightly":  [
+                                                                                          "G-GOV"
+                                                                                      ],
+                                                                          "release":  [
+                                                                                          "G-GOV"
+                                                                                      ]
+                                                                      }
+                                                },
+                           "full":  {
+                                        "examples":  {
+                                                         "matches":  [
+                                                                         "packages/ui/src/Button.tsx"
+                                                                     ],
+                                                         "doesNotMatch":  [
+                                                                              "specs/006-engineering-quality-hardening/spec.md"
+                                                                          ]
+                                                     },
+                                        "nonApplicableGates":  {
+
+                                                               },
+                                        "description":  "Canonical full change profile.",
+                                        "pathMatchers":  [
+                                                             "packages/**",
+                                                             "apps/**",
+                                                             "scripts/**",
+                                                             "governance/**"
+                                                         ],
+                                        "impactLabels":  [
+                                                             "governance"
+                                                         ],
+                                        "requiredGates":  {
+                                                              "pr":  [
+                                                                         "GATE-SDD-APPROVED",
+                                                                         "G-GOV",
+                                                                         "G-TYPE",
+                                                                         "G-LINT",
+                                                                         "G-UNIT",
+                                                                         "G-COV",
+                                                                         "G-ARCH",
+                                                                         "G-TOKENS",
+                                                                         "G-STORY-BUILD",
+                                                                         "G-STORY-TEST",
+                                                                         "G-A11Y",
+                                                                         "G-E2E-PR",
+                                                                         "G-E2E-RELEASE",
+                                                                         "G-VISUAL",
+                                                                         "G-SEC-RUNTIME",
+                                                                         "G-SEC-TOOLCHAIN",
+                                                                         "G-SEC-SAST",
+                                                                         "G-SEC-SECRETS",
+                                                                         "G-PERF",
+                                                                         "G-PACK",
+                                                                         "G-CONSUMER",
+                                                                         "G-PROVENANCE",
+                                                                         "G-RELEASE"
+                                                                     ],
+                                                              "nightly":  [
+                                                                              "GATE-SDD-APPROVED",
+                                                                              "G-GOV",
+                                                                              "G-TYPE",
+                                                                              "G-LINT",
+                                                                              "G-UNIT",
+                                                                              "G-COV",
+                                                                              "G-ARCH",
+                                                                              "G-TOKENS",
+                                                                              "G-STORY-BUILD",
+                                                                              "G-STORY-TEST",
+                                                                              "G-A11Y",
+                                                                              "G-E2E-PR",
+                                                                              "G-E2E-RELEASE",
+                                                                              "G-VISUAL",
+                                                                              "G-SEC-RUNTIME",
+                                                                              "G-SEC-TOOLCHAIN",
+                                                                              "G-SEC-SAST",
+                                                                              "G-SEC-SECRETS",
+                                                                              "G-PERF",
+                                                                              "G-PACK",
+                                                                              "G-CONSUMER",
+                                                                              "G-PROVENANCE",
+                                                                              "G-RELEASE"
+                                                                          ],
+                                                              "release":  [
+                                                                              "GATE-SDD-APPROVED",
+                                                                              "G-GOV",
+                                                                              "G-TYPE",
+                                                                              "G-LINT",
+                                                                              "G-UNIT",
+                                                                              "G-COV",
+                                                                              "G-ARCH",
+                                                                              "G-TOKENS",
+                                                                              "G-STORY-BUILD",
+                                                                              "G-STORY-TEST",
+                                                                              "G-A11Y",
+                                                                              "G-E2E-PR",
+                                                                              "G-E2E-RELEASE",
+                                                                              "G-VISUAL",
+                                                                              "G-SEC-RUNTIME",
+                                                                              "G-SEC-TOOLCHAIN",
+                                                                              "G-SEC-SAST",
+                                                                              "G-SEC-SECRETS",
+                                                                              "G-PERF",
+                                                                              "G-PACK",
+                                                                              "G-CONSUMER",
+                                                                              "G-PROVENANCE",
+                                                                              "G-RELEASE"
+                                                                          ]
+                                                          }
+                                    }
+                       },
+    "gates":  {
+                  "G-ARCH":  {
+                                 "description":  "Rejects package-boundary and ratchet violations.",
+                                 "command":  [
+                                                 "corepack",
+                                                 "pnpm",
+                                                 "architecture:audit"
+                                             ],
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "inputs":  [
+                                                "packages/**",
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "architecture-report"
+                                             ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_REVERSE_IMPORT",
+                                                            "fixture":  "tests/quality/fixtures/reverse-import",
+                                                            "expectedFailureCode":  "ARCH_REVERSE_IMPORT"
+                                                        }
+                                                    ]
+                             },
+                  "GATE-SDD-APPROVED":  {
+                                            "stages":  [
+                                                           "pr",
+                                                           "nightly",
+                                                           "release"
+                                                       ],
+                                            "blocking":  true,
+                                            "checkModeReadOnly":  true,
+                                            "supportedEnvironments":  {
+                                                                          "operatingSystems":  [
+                                                                                                   "windows",
+                                                                                                   "linux",
+                                                                                                   "macos"
+                                                                                               ],
+                                                                          "nodeRanges":  [
+                                                                                             "^20.19.0",
+                                                                                             "\u003e=22.12.0"
+                                                                                         ],
+                                                                          "browsers":  [
+
+                                                                                       ]
+                                                                      },
+                                            "description":  "Blocking GATE-SDD-APPROVED quality gate.",
+                                            "command":  [
+                                                            "node",
+                                                            "scripts/quality/run-gate.mjs",
+                                                            "--gate",
+                                                            "GATE-SDD-APPROVED"
+                                                        ],
+                                            "inputs":  [
+                                                           "governance/quality-policy.json"
+                                                       ],
+                                            "outputs":  [
+                                                            "gate-sdd-approved"
+                                                        ],
+                                            "negativeProbes":  [
+                                                                   {
+                                                                       "id":  "PROBE_GATE_SDD_APPROVED",
+                                                                       "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                       "expectedFailureCode":  "GATE_SDD_APPROVED_FAILURE"
+                                                                   }
+                                                               ]
+                                        },
+                  "G-GOV":  {
+                                "stages":  [
+                                               "pr",
+                                               "nightly",
+                                               "release"
+                                           ],
+                                "blocking":  true,
+                                "checkModeReadOnly":  true,
+                                "supportedEnvironments":  {
+                                                              "operatingSystems":  [
+                                                                                       "windows",
+                                                                                       "linux",
+                                                                                       "macos"
+                                                                                   ],
+                                                              "nodeRanges":  [
+                                                                                 "^20.19.0",
+                                                                                 "\u003e=22.12.0"
+                                                                             ],
+                                                              "browsers":  [
+
+                                                                           ]
+                                                          },
+                                "description":  "Blocking G-GOV quality gate.",
+                                "command":  [
+                                                "node",
+                                                "scripts/quality/run-gate.mjs",
+                                                "--gate",
+                                                "G-GOV"
+                                            ],
+                                "inputs":  [
+                                               "governance/quality-policy.json"
+                                           ],
+                                "outputs":  [
+                                                "g-gov"
+                                            ],
+                                "negativeProbes":  [
+                                                       {
+                                                           "id":  "PROBE_G_GOV",
+                                                           "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                           "expectedFailureCode":  "G_GOV_FAILURE"
+                                                       }
+                                                   ]
+                            },
+                  "G-TYPE":  {
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "description":  "Blocking G-TYPE quality gate.",
+                                 "command":  [
+                                                 "node",
+                                                 "scripts/quality/run-gate.mjs",
+                                                 "--gate",
+                                                 "G-TYPE"
+                                             ],
+                                 "inputs":  [
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "g-type"
+                                             ],
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_G_TYPE",
+                                                            "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                            "expectedFailureCode":  "G_TYPE_FAILURE"
+                                                        }
+                                                    ]
+                             },
+                  "G-LINT":  {
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "description":  "Blocking G-LINT quality gate.",
+                                 "command":  [
+                                                 "node",
+                                                 "scripts/quality/run-gate.mjs",
+                                                 "--gate",
+                                                 "G-LINT"
+                                             ],
+                                 "inputs":  [
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "g-lint"
+                                             ],
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_G_LINT",
+                                                            "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                            "expectedFailureCode":  "G_LINT_FAILURE"
+                                                        }
+                                                    ]
+                             },
+                  "G-UNIT":  {
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "description":  "Blocking G-UNIT quality gate.",
+                                 "command":  [
+                                                 "node",
+                                                 "scripts/quality/run-gate.mjs",
+                                                 "--gate",
+                                                 "G-UNIT"
+                                             ],
+                                 "inputs":  [
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "g-unit"
+                                             ],
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_G_UNIT",
+                                                            "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                            "expectedFailureCode":  "G_UNIT_FAILURE"
+                                                        }
+                                                    ]
+                             },
+                  "G-COV":  {
+                                "stages":  [
+                                               "pr",
+                                               "nightly",
+                                               "release"
+                                           ],
+                                "blocking":  true,
+                                "checkModeReadOnly":  true,
+                                "supportedEnvironments":  {
+                                                              "operatingSystems":  [
+                                                                                       "windows",
+                                                                                       "linux",
+                                                                                       "macos"
+                                                                                   ],
+                                                              "nodeRanges":  [
+                                                                                 "^20.19.0",
+                                                                                 "\u003e=22.12.0"
+                                                                             ],
+                                                              "browsers":  [
+
+                                                                           ]
+                                                          },
+                                "description":  "Blocking G-COV quality gate.",
+                                "command":  [
+                                                "node",
+                                                "scripts/quality/run-gate.mjs",
+                                                "--gate",
+                                                "G-COV"
+                                            ],
+                                "inputs":  [
+                                               "governance/quality-policy.json"
+                                           ],
+                                "outputs":  [
+                                                "g-cov"
+                                            ],
+                                "negativeProbes":  [
+                                                       {
+                                                           "id":  "PROBE_G_COV",
+                                                           "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                           "expectedFailureCode":  "G_COV_FAILURE"
+                                                       }
+                                                   ]
+                            },
+                  "G-TOKENS":  {
+                                   "stages":  [
+                                                  "pr",
+                                                  "nightly",
+                                                  "release"
+                                              ],
+                                   "blocking":  true,
+                                   "checkModeReadOnly":  true,
+                                   "supportedEnvironments":  {
+                                                                 "operatingSystems":  [
+                                                                                          "windows",
+                                                                                          "linux",
+                                                                                          "macos"
+                                                                                      ],
+                                                                 "nodeRanges":  [
+                                                                                    "^20.19.0",
+                                                                                    "\u003e=22.12.0"
+                                                                                ],
+                                                                 "browsers":  [
+
+                                                                              ]
+                                                             },
+                                   "description":  "Blocking G-TOKENS quality gate.",
+                                   "command":  [
+                                                   "node",
+                                                   "scripts/quality/run-gate.mjs",
+                                                   "--gate",
+                                                   "G-TOKENS"
+                                               ],
+                                   "inputs":  [
+                                                  "governance/quality-policy.json"
+                                              ],
+                                   "outputs":  [
+                                                   "g-tokens"
+                                               ],
+                                   "negativeProbes":  [
+                                                          {
+                                                              "id":  "PROBE_G_TOKENS",
+                                                              "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                              "expectedFailureCode":  "G_TOKENS_FAILURE"
+                                                          }
+                                                      ]
+                               },
+                  "G-STORY-BUILD":  {
+                                        "stages":  [
+                                                       "pr",
+                                                       "nightly",
+                                                       "release"
+                                                   ],
+                                        "blocking":  true,
+                                        "checkModeReadOnly":  true,
+                                        "supportedEnvironments":  {
+                                                                      "operatingSystems":  [
+                                                                                               "windows",
+                                                                                               "linux",
+                                                                                               "macos"
+                                                                                           ],
+                                                                      "nodeRanges":  [
+                                                                                         "^20.19.0",
+                                                                                         "\u003e=22.12.0"
+                                                                                     ],
+                                                                      "browsers":  [
+
+                                                                                   ]
+                                                                  },
+                                        "description":  "Blocking G-STORY-BUILD quality gate.",
+                                        "command":  [
+                                                        "node",
+                                                        "scripts/quality/run-gate.mjs",
+                                                        "--gate",
+                                                        "G-STORY-BUILD"
+                                                    ],
+                                        "inputs":  [
+                                                       "governance/quality-policy.json"
+                                                   ],
+                                        "outputs":  [
+                                                        "g-story-build"
+                                                    ],
+                                        "negativeProbes":  [
+                                                               {
+                                                                   "id":  "PROBE_G_STORY_BUILD",
+                                                                   "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                   "expectedFailureCode":  "G_STORY_BUILD_FAILURE"
+                                                               }
+                                                           ]
+                                    },
+                  "G-STORY-TEST":  {
+                                       "stages":  [
+                                                      "pr",
+                                                      "nightly",
+                                                      "release"
+                                                  ],
+                                       "blocking":  true,
+                                       "checkModeReadOnly":  true,
+                                       "supportedEnvironments":  {
+                                                                     "operatingSystems":  [
+                                                                                              "windows",
+                                                                                              "linux",
+                                                                                              "macos"
+                                                                                          ],
+                                                                     "nodeRanges":  [
+                                                                                        "^20.19.0",
+                                                                                        "\u003e=22.12.0"
+                                                                                    ],
+                                                                     "browsers":  [
+
+                                                                                  ]
+                                                                 },
+                                       "description":  "Blocking G-STORY-TEST quality gate.",
+                                       "command":  [
+                                                       "node",
+                                                       "scripts/quality/run-gate.mjs",
+                                                       "--gate",
+                                                       "G-STORY-TEST"
+                                                   ],
+                                       "inputs":  [
+                                                      "governance/quality-policy.json"
+                                                  ],
+                                       "outputs":  [
+                                                       "g-story-test"
+                                                   ],
+                                       "negativeProbes":  [
+                                                              {
+                                                                  "id":  "PROBE_G_STORY_TEST",
+                                                                  "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                  "expectedFailureCode":  "G_STORY_TEST_FAILURE"
+                                                              }
+                                                          ]
+                                   },
+                  "G-A11Y":  {
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "description":  "Blocking G-A11Y quality gate.",
+                                 "command":  [
+                                                 "node",
+                                                 "scripts/quality/run-gate.mjs",
+                                                 "--gate",
+                                                 "G-A11Y"
+                                             ],
+                                 "inputs":  [
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "g-a11y"
+                                             ],
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_G_A11Y",
+                                                            "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                            "expectedFailureCode":  "G_A11Y_FAILURE"
+                                                        }
+                                                    ]
+                             },
+                  "G-E2E-PR":  {
+                                   "stages":  [
+                                                  "pr",
+                                                  "nightly",
+                                                  "release"
+                                              ],
+                                   "blocking":  true,
+                                   "checkModeReadOnly":  true,
+                                   "supportedEnvironments":  {
+                                                                 "operatingSystems":  [
+                                                                                          "windows",
+                                                                                          "linux",
+                                                                                          "macos"
+                                                                                      ],
+                                                                 "nodeRanges":  [
+                                                                                    "^20.19.0",
+                                                                                    "\u003e=22.12.0"
+                                                                                ],
+                                                                 "browsers":  [
+
+                                                                              ]
+                                                             },
+                                   "description":  "Blocking G-E2E-PR quality gate.",
+                                   "command":  [
+                                                   "node",
+                                                   "scripts/quality/run-gate.mjs",
+                                                   "--gate",
+                                                   "G-E2E-PR"
+                                               ],
+                                   "inputs":  [
+                                                  "governance/quality-policy.json"
+                                              ],
+                                   "outputs":  [
+                                                   "g-e2e-pr"
+                                               ],
+                                   "negativeProbes":  [
+                                                          {
+                                                              "id":  "PROBE_G_E2E_PR",
+                                                              "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                              "expectedFailureCode":  "G_E2E_PR_FAILURE"
+                                                          }
+                                                      ]
+                               },
+                  "G-E2E-RELEASE":  {
+                                        "stages":  [
+                                                       "pr",
+                                                       "nightly",
+                                                       "release"
+                                                   ],
+                                        "blocking":  true,
+                                        "checkModeReadOnly":  true,
+                                        "supportedEnvironments":  {
+                                                                      "operatingSystems":  [
+                                                                                               "windows",
+                                                                                               "linux",
+                                                                                               "macos"
+                                                                                           ],
+                                                                      "nodeRanges":  [
+                                                                                         "^20.19.0",
+                                                                                         "\u003e=22.12.0"
+                                                                                     ],
+                                                                      "browsers":  [
+
+                                                                                   ]
+                                                                  },
+                                        "description":  "Blocking G-E2E-RELEASE quality gate.",
+                                        "command":  [
+                                                        "node",
+                                                        "scripts/quality/run-gate.mjs",
+                                                        "--gate",
+                                                        "G-E2E-RELEASE"
+                                                    ],
+                                        "inputs":  [
+                                                       "governance/quality-policy.json"
+                                                   ],
+                                        "outputs":  [
+                                                        "g-e2e-release"
+                                                    ],
+                                        "negativeProbes":  [
+                                                               {
+                                                                   "id":  "PROBE_G_E2E_RELEASE",
+                                                                   "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                   "expectedFailureCode":  "G_E2E_RELEASE_FAILURE"
+                                                               }
+                                                           ]
+                                    },
+                  "G-VISUAL":  {
+                                   "stages":  [
+                                                  "pr",
+                                                  "nightly",
+                                                  "release"
+                                              ],
+                                   "blocking":  true,
+                                   "checkModeReadOnly":  true,
+                                   "supportedEnvironments":  {
+                                                                 "operatingSystems":  [
+                                                                                          "windows",
+                                                                                          "linux",
+                                                                                          "macos"
+                                                                                      ],
+                                                                 "nodeRanges":  [
+                                                                                    "^20.19.0",
+                                                                                    "\u003e=22.12.0"
+                                                                                ],
+                                                                 "browsers":  [
+
+                                                                              ]
+                                                             },
+                                   "description":  "Blocking G-VISUAL quality gate.",
+                                   "command":  [
+                                                   "node",
+                                                   "scripts/quality/run-gate.mjs",
+                                                   "--gate",
+                                                   "G-VISUAL"
+                                               ],
+                                   "inputs":  [
+                                                  "governance/quality-policy.json"
+                                              ],
+                                   "outputs":  [
+                                                   "g-visual"
+                                               ],
+                                   "negativeProbes":  [
+                                                          {
+                                                              "id":  "PROBE_G_VISUAL",
+                                                              "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                              "expectedFailureCode":  "G_VISUAL_FAILURE"
+                                                          }
+                                                      ]
+                               },
+                  "G-SEC-RUNTIME":  {
+                                        "stages":  [
+                                                       "pr",
+                                                       "nightly",
+                                                       "release"
+                                                   ],
+                                        "blocking":  true,
+                                        "checkModeReadOnly":  true,
+                                        "supportedEnvironments":  {
+                                                                      "operatingSystems":  [
+                                                                                               "windows",
+                                                                                               "linux",
+                                                                                               "macos"
+                                                                                           ],
+                                                                      "nodeRanges":  [
+                                                                                         "^20.19.0",
+                                                                                         "\u003e=22.12.0"
+                                                                                     ],
+                                                                      "browsers":  [
+
+                                                                                   ]
+                                                                  },
+                                        "description":  "Blocking G-SEC-RUNTIME quality gate.",
+                                        "command":  [
+                                                        "node",
+                                                        "scripts/quality/run-gate.mjs",
+                                                        "--gate",
+                                                        "G-SEC-RUNTIME"
+                                                    ],
+                                        "inputs":  [
+                                                       "governance/quality-policy.json"
+                                                   ],
+                                        "outputs":  [
+                                                        "g-sec-runtime"
+                                                    ],
+                                        "negativeProbes":  [
+                                                               {
+                                                                   "id":  "PROBE_G_SEC_RUNTIME",
+                                                                   "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                   "expectedFailureCode":  "G_SEC_RUNTIME_FAILURE"
+                                                               }
+                                                           ]
+                                    },
+                  "G-SEC-TOOLCHAIN":  {
+                                          "stages":  [
+                                                         "pr",
+                                                         "nightly",
+                                                         "release"
+                                                     ],
+                                          "blocking":  true,
+                                          "checkModeReadOnly":  true,
+                                          "supportedEnvironments":  {
+                                                                        "operatingSystems":  [
+                                                                                                 "windows",
+                                                                                                 "linux",
+                                                                                                 "macos"
+                                                                                             ],
+                                                                        "nodeRanges":  [
+                                                                                           "^20.19.0",
+                                                                                           "\u003e=22.12.0"
+                                                                                       ],
+                                                                        "browsers":  [
+
+                                                                                     ]
+                                                                    },
+                                          "description":  "Blocking G-SEC-TOOLCHAIN quality gate.",
+                                          "command":  [
+                                                          "node",
+                                                          "scripts/quality/run-gate.mjs",
+                                                          "--gate",
+                                                          "G-SEC-TOOLCHAIN"
+                                                      ],
+                                          "inputs":  [
+                                                         "governance/quality-policy.json"
+                                                     ],
+                                          "outputs":  [
+                                                          "g-sec-toolchain"
+                                                      ],
+                                          "negativeProbes":  [
+                                                                 {
+                                                                     "id":  "PROBE_G_SEC_TOOLCHAIN",
+                                                                     "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                     "expectedFailureCode":  "G_SEC_TOOLCHAIN_FAILURE"
+                                                                 }
+                                                             ]
+                                      },
+                  "G-SEC-SAST":  {
+                                     "stages":  [
+                                                    "pr",
+                                                    "nightly",
+                                                    "release"
+                                                ],
+                                     "blocking":  true,
+                                     "checkModeReadOnly":  true,
+                                     "supportedEnvironments":  {
+                                                                   "operatingSystems":  [
+                                                                                            "windows",
+                                                                                            "linux",
+                                                                                            "macos"
+                                                                                        ],
+                                                                   "nodeRanges":  [
+                                                                                      "^20.19.0",
+                                                                                      "\u003e=22.12.0"
+                                                                                  ],
+                                                                   "browsers":  [
+
+                                                                                ]
+                                                               },
+                                     "description":  "Blocking G-SEC-SAST quality gate.",
+                                     "command":  [
+                                                     "node",
+                                                     "scripts/quality/run-gate.mjs",
+                                                     "--gate",
+                                                     "G-SEC-SAST"
+                                                 ],
+                                     "inputs":  [
+                                                    "governance/quality-policy.json"
+                                                ],
+                                     "outputs":  [
+                                                     "g-sec-sast"
+                                                 ],
+                                     "negativeProbes":  [
+                                                            {
+                                                                "id":  "PROBE_G_SEC_SAST",
+                                                                "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                "expectedFailureCode":  "G_SEC_SAST_FAILURE"
+                                                            }
+                                                        ]
+                                 },
+                  "G-SEC-SECRETS":  {
+                                        "stages":  [
+                                                       "pr",
+                                                       "nightly",
+                                                       "release"
+                                                   ],
+                                        "blocking":  true,
+                                        "checkModeReadOnly":  true,
+                                        "supportedEnvironments":  {
+                                                                      "operatingSystems":  [
+                                                                                               "windows",
+                                                                                               "linux",
+                                                                                               "macos"
+                                                                                           ],
+                                                                      "nodeRanges":  [
+                                                                                         "^20.19.0",
+                                                                                         "\u003e=22.12.0"
+                                                                                     ],
+                                                                      "browsers":  [
+
+                                                                                   ]
+                                                                  },
+                                        "description":  "Blocking G-SEC-SECRETS quality gate.",
+                                        "command":  [
+                                                        "node",
+                                                        "scripts/quality/run-gate.mjs",
+                                                        "--gate",
+                                                        "G-SEC-SECRETS"
+                                                    ],
+                                        "inputs":  [
+                                                       "governance/quality-policy.json"
+                                                   ],
+                                        "outputs":  [
+                                                        "g-sec-secrets"
+                                                    ],
+                                        "negativeProbes":  [
+                                                               {
+                                                                   "id":  "PROBE_G_SEC_SECRETS",
+                                                                   "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                   "expectedFailureCode":  "G_SEC_SECRETS_FAILURE"
+                                                               }
+                                                           ]
+                                    },
+                  "G-PERF":  {
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "description":  "Blocking G-PERF quality gate.",
+                                 "command":  [
+                                                 "node",
+                                                 "scripts/quality/run-gate.mjs",
+                                                 "--gate",
+                                                 "G-PERF"
+                                             ],
+                                 "inputs":  [
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "g-perf"
+                                             ],
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_G_PERF",
+                                                            "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                            "expectedFailureCode":  "G_PERF_FAILURE"
+                                                        }
+                                                    ]
+                             },
+                  "G-PACK":  {
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "description":  "Blocking G-PACK quality gate.",
+                                 "command":  [
+                                                 "node",
+                                                 "scripts/quality/run-gate.mjs",
+                                                 "--gate",
+                                                 "G-PACK"
+                                             ],
+                                 "inputs":  [
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "g-pack"
+                                             ],
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_G_PACK",
+                                                            "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                            "expectedFailureCode":  "G_PACK_FAILURE"
+                                                        }
+                                                    ]
+                             },
+                  "G-CONSUMER":  {
+                                     "stages":  [
+                                                    "pr",
+                                                    "nightly",
+                                                    "release"
+                                                ],
+                                     "blocking":  true,
+                                     "checkModeReadOnly":  true,
+                                     "supportedEnvironments":  {
+                                                                   "operatingSystems":  [
+                                                                                            "windows",
+                                                                                            "linux",
+                                                                                            "macos"
+                                                                                        ],
+                                                                   "nodeRanges":  [
+                                                                                      "^20.19.0",
+                                                                                      "\u003e=22.12.0"
+                                                                                  ],
+                                                                   "browsers":  [
+
+                                                                                ]
+                                                               },
+                                     "description":  "Blocking G-CONSUMER quality gate.",
+                                     "command":  [
+                                                     "node",
+                                                     "scripts/quality/run-gate.mjs",
+                                                     "--gate",
+                                                     "G-CONSUMER"
+                                                 ],
+                                     "inputs":  [
+                                                    "governance/quality-policy.json"
+                                                ],
+                                     "outputs":  [
+                                                     "g-consumer"
+                                                 ],
+                                     "negativeProbes":  [
+                                                            {
+                                                                "id":  "PROBE_G_CONSUMER",
+                                                                "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                "expectedFailureCode":  "G_CONSUMER_FAILURE"
+                                                            }
+                                                        ]
+                                 },
+                  "G-PROVENANCE":  {
+                                       "stages":  [
+                                                      "pr",
+                                                      "nightly",
+                                                      "release"
+                                                  ],
+                                       "blocking":  true,
+                                       "checkModeReadOnly":  true,
+                                       "supportedEnvironments":  {
+                                                                     "operatingSystems":  [
+                                                                                              "windows",
+                                                                                              "linux",
+                                                                                              "macos"
+                                                                                          ],
+                                                                     "nodeRanges":  [
+                                                                                        "^20.19.0",
+                                                                                        "\u003e=22.12.0"
+                                                                                    ],
+                                                                     "browsers":  [
+
+                                                                                  ]
+                                                                 },
+                                       "description":  "Blocking G-PROVENANCE quality gate.",
+                                       "command":  [
+                                                       "node",
+                                                       "scripts/quality/run-gate.mjs",
+                                                       "--gate",
+                                                       "G-PROVENANCE"
+                                                   ],
+                                       "inputs":  [
+                                                      "governance/quality-policy.json"
+                                                  ],
+                                       "outputs":  [
+                                                       "g-provenance"
+                                                   ],
+                                       "negativeProbes":  [
+                                                              {
+                                                                  "id":  "PROBE_G_PROVENANCE",
+                                                                  "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                                  "expectedFailureCode":  "G_PROVENANCE_FAILURE"
+                                                              }
+                                                          ]
+                                   },
+                  "G-RELEASE":  {
+                                    "stages":  [
+                                                   "pr",
+                                                   "nightly",
+                                                   "release"
+                                               ],
+                                    "blocking":  true,
+                                    "checkModeReadOnly":  true,
+                                    "supportedEnvironments":  {
+                                                                  "operatingSystems":  [
+                                                                                           "windows",
+                                                                                           "linux",
+                                                                                           "macos"
+                                                                                       ],
+                                                                  "nodeRanges":  [
+                                                                                     "^20.19.0",
+                                                                                     "\u003e=22.12.0"
+                                                                                 ],
+                                                                  "browsers":  [
+
+                                                                               ]
+                                                              },
+                                    "description":  "Blocking G-RELEASE quality gate.",
+                                    "command":  [
+                                                    "node",
+                                                    "scripts/quality/run-gate.mjs",
+                                                    "--gate",
+                                                    "G-RELEASE"
+                                                ],
+                                    "inputs":  [
+                                                   "governance/quality-policy.json"
+                                               ],
+                                    "outputs":  [
+                                                    "g-release"
+                                                ],
+                                    "negativeProbes":  [
+                                                           {
+                                                               "id":  "PROBE_G_RELEASE",
+                                                               "fixture":  "tests/fixtures/governance/quality-policy/canonical.json",
+                                                               "expectedFailureCode":  "G_RELEASE_FAILURE"
+                                                           }
+                                                       ]
+                                }
+              },
+    "architectureBudgets":  {
+                                "BUDGET_HANDWRITTEN_MODULE":  {
+                                                                  "sourceClass":  "handwritten",
+                                                                  "scope":  [
+                                                                                "packages/ui/src",
+                                                                                "packages/crm/src"
+                                                                            ],
+                                                                  "metrics":  {
+                                                                                  "maxLogicalLines":  400,
+                                                                                  "maxCyclomaticComplexity":  15
+                                                                              },
+                                                                  "ratchet":  "touched-scope-reduction"
+                                                              }
+                            },
+    "performanceBudgets":  {
+                               "BUDGET_UI_TARBALL":  {
+                                                         "metric":  "tarball-bytes",
+                                                         "scope":  "@taliya/ui",
+                                                         "maximum":  500000,
+                                                         "unit":  "bytes",
+                                                         "comparisonScenario":  "Production tarball produced from the certified clean revision.",
+                                                         "allowedRegressionPercent":  2
+                                                     }
+                           },
+    "waiverPolicy":  {
+                         "maxDurationDays":  60,
+                         "approverMustDifferFromOwner":  true,
+                         "forbiddenSeverities":  [
+                                                     "critical"
+                                                 ],
+                         "forbiddenCategories":  [
+                                                     "secret-exposure",
+                                                     "data-exfiltration",
+                                                     "unauthorized-publication",
+                                                     "irreversible-security-risk"
+                                                 ],
+                         "finalCertificationAllowsActiveWaivers":  false
+                     }
+}

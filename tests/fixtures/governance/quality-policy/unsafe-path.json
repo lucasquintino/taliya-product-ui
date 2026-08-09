@@ -1,6 +1,6 @@
 {
   "id": "policy-windows-traversal-path",
-  "source": "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.valid.json",
+  "source": "governance/quality-policy.json",
   "expected": "invalid",
   "failureCode": "POLICY_INVALID_PATH",
   "mutations": [
