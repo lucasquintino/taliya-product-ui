@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T02:41:27.963Z",
-  "sourceCommit": "45d3a058618b526afd6f5230817427e48249c7c2",
+  "generatedAt": "2026-08-09T02:46:24.927Z",
+  "sourceCommit": "891a60e607a9df017ee11c18731f19bd6ce70852",
   "sourceTreeSha256": "05391600fe536c085a6234112fe32c15bc83808c5b146f1d7186a9f0eb404783",
   "reportCount": 72,
   "reports": [
@@ -217,7 +217,7 @@
     },
     {
       "file": "future-consumer-fixture-audit.json",
-      "sha256": "ebe5697d6076f85320f6a03635b95156393e05a7b414bdb5be9729511f571cdf",
+      "sha256": "7a825e20e53acb73b8db426cce903736d8fe304212ff791418cbadf1cec24b02",
       "dependencies": []
     },
     {
@@ -515,7 +515,7 @@
     },
     {
       "file": "specs/002-readiness-evidence-portability/report-freshness-audit.json",
-      "sha256": "5de996162a506f0cf809b5a3cbb2d91665f27cf4d1d0cd4f3aee2ce461fa67cb",
+      "sha256": "c53238ce69c4e120ad0a9d1e315860d2ab1d5ac1734959e513266f6afc18a28b",
       "dependencies": []
     },
     {
