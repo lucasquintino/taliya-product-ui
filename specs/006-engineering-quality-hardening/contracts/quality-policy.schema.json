@@ -1,0 +1,817 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taliya.dev/schemas/engineering-quality-policy.schema.json",
+  "title": "Taliya Engineering Quality Policy",
+  "description": "Versioned policy that maps engineering rules and change profiles to blocking gates and budgets. Schema validity does not authorize implementation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "policyId",
+    "policyVersion",
+    "constitutionVersion",
+    "effectiveFrom",
+    "rules",
+    "changeProfiles",
+    "gates",
+    "architectureBudgets",
+    "performanceBudgets",
+    "waiverPolicy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.1.0"
+    },
+    "policyId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,63}$"
+    },
+    "policyVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "constitutionVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "rules": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/stableId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/engineeringRule"
+      }
+    },
+    "changeProfiles": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/profileId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/changeProfile"
+      }
+    },
+    "gates": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/gateId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/gateDefinition"
+      }
+    },
+    "architectureBudgets": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/stableId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/architectureBudget"
+      }
+    },
+    "performanceBudgets": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "$ref": "#/$defs/stableId"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/performanceBudget"
+      }
+    },
+    "waiverPolicy": {
+      "$ref": "#/$defs/waiverPolicy"
+    }
+  },
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+[.][0-9]+[.][0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "stableId": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{2,63}$"
+    },
+    "gateId": {
+      "enum": [
+        "GATE-SDD-APPROVED",
+        "G-GOV",
+        "G-TYPE",
+        "G-LINT",
+        "G-UNIT",
+        "G-COV",
+        "G-ARCH",
+        "G-TOKENS",
+        "G-STORY-BUILD",
+        "G-STORY-TEST",
+        "G-A11Y",
+        "G-E2E-PR",
+        "G-E2E-RELEASE",
+        "G-VISUAL",
+        "G-SEC-RUNTIME",
+        "G-SEC-TOOLCHAIN",
+        "G-SEC-SAST",
+        "G-SEC-SECRETS",
+        "G-PERF",
+        "G-PACK",
+        "G-CONSUMER",
+        "G-PROVENANCE",
+        "G-RELEASE"
+      ]
+    },
+    "profileId": {
+      "enum": [
+        "sdd-only",
+        "governance",
+        "documentation-only",
+        "tokens",
+        "ui-component",
+        "crm-component",
+        "storybook-docs",
+        "dependency-build",
+        "workflow-release",
+        "full"
+      ]
+    },
+    "repositoryRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)[.][.](?:/|$))(?!.*//)[A-Za-z0-9._@-]+(?:/[A-Za-z0-9._@-]+)*$"
+    },
+    "relativePathPattern": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)[.][.](?:/|$))(?!.*//)[A-Za-z0-9._@*?{}\\[\\]!,+-]+(?:/[A-Za-z0-9._@*?{}\\[\\]!,+-]+)*$"
+    },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128
+        },
+        "kind": {
+          "enum": [
+            "team",
+            "role",
+            "person"
+          ]
+        }
+      }
+    },
+    "engineeringRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "scope",
+        "severity",
+        "enforcementKind",
+        "evidenceKinds",
+        "owner",
+        "references",
+        "waiverPolicy",
+        "lifecycle"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 10
+        },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/relativePathPattern"
+          }
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "low",
+            "moderate",
+            "high",
+            "critical"
+          ]
+        },
+        "enforcementKind": {
+          "enum": [
+            "static",
+            "test",
+            "browser",
+            "review",
+            "release",
+            "external"
+          ]
+        },
+        "evidenceKinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
+        },
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "references": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://"
+              },
+              {
+                "$ref": "#/$defs/repositoryRelativePath"
+              }
+            ]
+          }
+        },
+        "waiverPolicy": {
+          "enum": [
+            "forbidden",
+            "standard-risk"
+          ]
+        },
+        "lifecycle": {
+          "enum": [
+            "proposed",
+            "active",
+            "deprecated",
+            "retired"
+          ]
+        }
+      }
+    },
+    "matcherExamples": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matches",
+        "doesNotMatch"
+      ],
+      "properties": {
+        "matches": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/relativePathPattern"
+          }
+        },
+        "doesNotMatch": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/relativePathPattern"
+          }
+        }
+      }
+    },
+    "changeProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "pathMatchers",
+        "impactLabels",
+        "examples",
+        "requiredGates"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "pathMatchers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/relativePathPattern"
+          }
+        },
+        "impactLabels": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "governance",
+              "tokens",
+              "public-api",
+              "component",
+              "interaction",
+              "accessibility",
+              "visual",
+              "security",
+              "performance",
+              "workflow",
+              "release"
+            ]
+          }
+        },
+        "examples": {
+          "$ref": "#/$defs/matcherExamples"
+        },
+        "requiredGates": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "pr",
+            "nightly",
+            "release"
+          ],
+          "properties": {
+            "pr": {
+              "$ref": "#/$defs/gateIdSet"
+            },
+            "nightly": {
+              "$ref": "#/$defs/gateIdSet"
+            },
+            "release": {
+              "$ref": "#/$defs/gateIdSet"
+            }
+          }
+        },
+        "nonApplicableGates": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/gateId"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    },
+    "gateIdSet": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/gateId"
+      }
+    },
+    "gateDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "command",
+        "stages",
+        "inputs",
+        "outputs",
+        "blocking",
+        "checkModeReadOnly",
+        "supportedEnvironments",
+        "negativeProbes"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "command": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "pr",
+              "nightly",
+              "release"
+            ]
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/relativePathPattern"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "blocking": {
+          "const": true
+        },
+        "checkModeReadOnly": {
+          "const": true
+        },
+        "supportedEnvironments": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "operatingSystems",
+            "nodeRanges"
+          ],
+          "properties": {
+            "operatingSystems": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "windows",
+                  "linux",
+                  "macos"
+                ]
+              }
+            },
+            "nodeRanges": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "browsers": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "chromium",
+                  "firefox",
+                  "webkit"
+                ]
+              }
+            }
+          }
+        },
+        "negativeProbes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "fixture",
+              "expectedFailureCode"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "fixture": {
+                "$ref": "#/$defs/repositoryRelativePath"
+              },
+              "expectedFailureCode": {
+                "$ref": "#/$defs/stableId"
+              }
+            }
+          }
+        }
+      }
+    },
+    "architectureBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceClass",
+        "scope",
+        "metrics",
+        "ratchet"
+      ],
+      "properties": {
+        "sourceClass": {
+          "enum": [
+            "handwritten",
+            "generated",
+            "test",
+            "story",
+            "stylesheet",
+            "barrel",
+            "script"
+          ]
+        },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/relativePathPattern"
+          }
+        },
+        "metrics": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "ratchet": {
+          "enum": [
+            "no-growth",
+            "touched-scope-reduction",
+            "final-zero"
+          ]
+        }
+      }
+    },
+    "performanceBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric",
+        "scope",
+        "maximum",
+        "unit",
+        "comparisonScenario",
+        "allowedRegressionPercent"
+      ],
+      "properties": {
+        "metric": {
+          "enum": [
+            "package-bytes",
+            "css-bytes",
+            "tarball-bytes",
+            "tree-shaken-bytes",
+            "render-duration",
+            "update-duration",
+            "browser-metric"
+          ]
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "maximum": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "enum": [
+            "bytes",
+            "milliseconds",
+            "score"
+          ]
+        },
+        "comparisonScenario": {
+          "type": "string",
+          "minLength": 10
+        },
+        "allowedRegressionPercent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "waiverPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maxDurationDays",
+        "approverMustDifferFromOwner",
+        "forbiddenSeverities",
+        "forbiddenCategories",
+        "finalCertificationAllowsActiveWaivers"
+      ],
+      "properties": {
+        "maxDurationDays": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60
+        },
+        "approverMustDifferFromOwner": {
+          "const": true
+        },
+        "forbiddenSeverities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "contains": {
+            "const": "critical"
+          },
+          "items": {
+            "enum": [
+              "critical"
+            ]
+          }
+        },
+        "forbiddenCategories": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "secret-exposure",
+              "data-exfiltration",
+              "unauthorized-publication",
+              "irreversible-security-risk"
+            ]
+          },
+          "allOf": [
+            {
+              "contains": {
+                "const": "secret-exposure"
+              }
+            },
+            {
+              "contains": {
+                "const": "data-exfiltration"
+              }
+            },
+            {
+              "contains": {
+                "const": "unauthorized-publication"
+              }
+            },
+            {
+              "contains": {
+                "const": "irreversible-security-risk"
+              }
+            }
+          ]
+        },
+        "finalCertificationAllowsActiveWaivers": {
+          "const": false
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schemaVersion": "1.1.0",
+      "policyId": "taliya-engineering-quality",
+      "policyVersion": "1.0.0",
+      "constitutionVersion": "1.0.0",
+      "effectiveFrom": "2026-08-08T12:00:00Z",
+      "rules": {
+        "RULE_ARCH_DIRECTION": {
+          "statement": "Package imports preserve the declared dependency direction.",
+          "scope": [
+            "packages"
+          ],
+          "severity": "high",
+          "enforcementKind": "static",
+          "evidenceKinds": [
+            "architecture-report"
+          ],
+          "owner": {
+            "id": "product-ui-maintainers",
+            "kind": "team"
+          },
+          "references": [
+            "specs/006-engineering-quality-hardening/contracts/architecture-ratchet-contract.md"
+          ],
+          "waiverPolicy": "standard-risk",
+          "lifecycle": "active"
+        }
+      },
+      "changeProfiles": {
+        "ui-component": {
+          "description": "Changes to reusable component source or its public contract.",
+          "pathMatchers": [
+            "packages/ui/src/**",
+            "packages/crm/src/**"
+          ],
+          "impactLabels": [
+            "component",
+            "public-api"
+          ],
+          "examples": {
+            "matches": [
+              "packages/ui/src/Button.tsx"
+            ],
+            "doesNotMatch": [
+              "specs/006-engineering-quality-hardening/spec.md"
+            ]
+          },
+          "requiredGates": {
+            "pr": [
+              "G-ARCH"
+            ],
+            "nightly": [
+              "G-ARCH"
+            ],
+            "release": [
+              "G-ARCH"
+            ]
+          },
+          "nonApplicableGates": {}
+        }
+      },
+      "gates": {
+        "G-ARCH": {
+          "description": "Rejects package-boundary and ratchet violations.",
+          "command": [
+            "corepack",
+            "pnpm",
+            "architecture:audit"
+          ],
+          "stages": [
+            "pr",
+            "nightly",
+            "release"
+          ],
+          "inputs": [
+            "packages/**",
+            "governance/quality-policy.json"
+          ],
+          "outputs": [
+            "architecture-report"
+          ],
+          "blocking": true,
+          "checkModeReadOnly": true,
+          "supportedEnvironments": {
+            "operatingSystems": [
+              "windows",
+              "linux",
+              "macos"
+            ],
+            "nodeRanges": [
+              "^20.19.0",
+              ">=22.12.0"
+            ],
+            "browsers": []
+          },
+          "negativeProbes": [
+            {
+              "id": "PROBE_REVERSE_IMPORT",
+              "fixture": "tests/quality/fixtures/reverse-import",
+              "expectedFailureCode": "ARCH_REVERSE_IMPORT"
+            }
+          ]
+        }
+      },
+      "architectureBudgets": {
+        "BUDGET_HANDWRITTEN_MODULE": {
+          "sourceClass": "handwritten",
+          "scope": [
+            "packages/ui/src",
+            "packages/crm/src"
+          ],
+          "metrics": {
+            "maxLogicalLines": 400,
+            "maxCyclomaticComplexity": 15
+          },
+          "ratchet": "touched-scope-reduction"
+        }
+      },
+      "performanceBudgets": {
+        "BUDGET_UI_TARBALL": {
+          "metric": "tarball-bytes",
+          "scope": "@taliya/ui",
+          "maximum": 500000,
+          "unit": "bytes",
+          "comparisonScenario": "Production tarball produced from the certified clean revision.",
+          "allowedRegressionPercent": 2
+        }
+      },
+      "waiverPolicy": {
+        "maxDurationDays": 60,
+        "approverMustDifferFromOwner": true,
+        "forbiddenSeverities": [
+          "critical"
+        ],
+        "forbiddenCategories": [
+          "secret-exposure",
+          "data-exfiltration",
+          "unauthorized-publication",
+          "irreversible-security-risk"
+        ],
+        "finalCertificationAllowsActiveWaivers": false
+      }
+    }
+  ]
+}

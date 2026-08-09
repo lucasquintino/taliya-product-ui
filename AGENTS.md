@@ -2,13 +2,30 @@
 
 <INSTRUCTIONS>
 <!-- SPECKIT START -->
-Current feature plan: `specs/001-product-ui-foundation/plan.md`.
+Current feature plan: `specs/006-engineering-quality-hardening/plan.md`.
 
 This project is the standalone Taliya Product UI library for the future SaaS/CRM. It is not the landing project and must not import from or depend on `agentes-landing-system`.
 
-During the current phase, complete and review the Spec Kit only. Do not install dependencies, scaffold Storybook, create component source files, or implement UI until the user explicitly approves implementation.
+During the current phase, complete and review the Spec Kit 006 only. Do not install dependencies, modify package/component source, update governance baselines, regenerate release artifacts, publish packages, or implement any task until the user explicitly approves implementation after the SDD acceptance checklist is complete.
 
-Before specification changes or future implementation, read:
+Before changing the active SDD artifacts or starting future approved implementation, read the mandatory manifest defined by `specs/006-engineering-quality-hardening/contracts/sdd-lifecycle-contract.md`. At minimum, read:
+- `specs/006-engineering-quality-hardening/spec.md`
+- `specs/006-engineering-quality-hardening/research.md`
+- `specs/006-engineering-quality-hardening/data-model.md`
+- `specs/006-engineering-quality-hardening/plan.md`
+- `specs/006-engineering-quality-hardening/tasks.md`
+- `specs/006-engineering-quality-hardening/quickstart.md`
+- `specs/006-engineering-quality-hardening/source-of-truth-reconciliation.md`
+- `specs/006-engineering-quality-hardening/ci-gate-matrix.md`
+- `specs/006-engineering-quality-hardening/definition-of-done.md`
+- `specs/006-engineering-quality-hardening/traceability-matrix.md`
+- `specs/006-engineering-quality-hardening/approval.md`
+- `specs/006-engineering-quality-hardening/contracts/`
+- `specs/006-engineering-quality-hardening/checklists/requirements.md`
+- `specs/006-engineering-quality-hardening/checklists/sdd-readiness.md`
+- `specs/006-engineering-quality-hardening/checklists/implementation-readiness.md`
+
+Before future implementation, also read the relevant foundation sources:
 - `specs/001-product-ui-foundation/spec.md`
 - `specs/001-product-ui-foundation/plan.md`
 - `specs/001-product-ui-foundation/tasks.md`
@@ -56,7 +73,7 @@ Design rules:
 - `primitive-ui-matrix.md` is mandatory before expanding `Primitives / UI`; reusable primitives belong to `@taliya/ui`, while `@taliya/crm` owns composed product patterns.
 - `token-system-v1.md` is the implementation target for tokens; `token-values-v0.md` is historical extraction input.
 - `token-governance-audit.md` and `token-governance-baseline.json` are mandatory token-governance artifacts. Run `corepack pnpm tokens:audit` before accepting any component/token work, and run `corepack pnpm tokens:audit:update` only after intentionally reducing or reclassifying token debt.
-- `implementation-execution-plan.md` is the official implementation order after approval; follow its batches and stop conditions.
+- `specs/006-engineering-quality-hardening/tasks.md` is the official hardening order after approval. Within an authorized component slice, `implementation-execution-plan.md` still governs component-batch ordering and stop conditions unless feature 006 explicitly imposes a stricter prerequisite.
 - Final navigation docs beat older image labels when there is conflict.
 - Setup has 9 official blocks: Studio, Equipe, Canais, Planos, Pagamento, Alunos, Turmas, Agenda, Revisao.
 - `AgentPanel` must be contextual; do not hardcode all assistant panels as "Agente de Configuracao".

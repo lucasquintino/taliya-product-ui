@@ -4,19 +4,30 @@ Biblioteca de componentes do futuro SaaS/CRM Taliya.
 
 Este projeto e separado da landing `agentes-landing-system`. A landing nao consome esta biblioteca. O objetivo aqui e criar o design system e a component library do produto operacional Taliya: shell, navegacao, componentes base, padroes CRM, setup, billing, uso/cotas, agentes/fluxos e estados operacionais.
 
-Fase atual: biblioteca de componentes implementada a partir da spec, com tokens, primitives, componentes CRM e Storybook como catalogo visual.
+Fase atual: a biblioteca ja possui tokens, primitives, componentes CRM e Storybook, mas sua prontidao global ainda nao esta certificada. O trabalho autorizado agora e somente o SDD de hardening e certificacao continua da feature 006; implementacao permanece bloqueada ate aprovacao explicita.
 
 ## Fonte De Verdade
 
 Spec Kit e a fonte de verdade do projeto.
 
-Feature ativa:
+Feature ativa para engenharia, qualidade e prontidao:
 
 ```text
-specs/001-product-ui-foundation/plan.md
+specs/006-engineering-quality-hardening/plan.md
 ```
 
-Artefatos obrigatorios antes de implementar:
+Estado de autorizacao:
+
+```text
+SDD: READY FOR APPROVAL / READY FOR USER APPROVAL
+Implementation: AWAITING USER APPROVAL / BLOCKED BY GATE-SDD-APPROVED
+```
+
+O SDD 006 passou pela validacao integrada e possui manifesto deterministico do candidato. Isso torna o plano revisavel e aprovavel, mas nao autoriza implementacao: `GATE-SDD-APPROVED` permanece fechado ate uma aprovacao humana explicita vinculada ao manifesto e ao intervalo de tarefas.
+
+A feature `001-product-ui-foundation` permanece como contrato historico e de produto. As features 002-005 permanecem evidencias especializadas. A precedencia completa fica em `specs/006-engineering-quality-hardening/source-of-truth-reconciliation.md`; nenhuma delas pode ser usada isoladamente para afirmar prontidao global atual.
+
+Artefatos de produto obrigatorios, alem do SDD 006, antes de futura implementacao de componentes:
 
 ```text
 specs/001-product-ui-foundation/component-matrix.md
@@ -481,7 +492,7 @@ O arquivo `primitive-ui-matrix.md` define o escopo oficial de `Primitives / UI`:
 
 O arquivo `token-system-v1.md` e o alvo de implementacao dos tokens. `token-values-v0.md` permanece como extracao historica inicial da board 01.
 
-O arquivo `implementation-execution-plan.md` define a ordem oficial de execucao apos aprovacao: tokens, primitives P0, shell CRM recomposto, primitives P1, padroes CRM, componentes de dominio, image coverage e QA.
+O backlog `specs/006-engineering-quality-hardening/tasks.md` define a ordem global de hardening. Dentro de um slice de componente explicitamente autorizado e depois de satisfeitos os pre-requisitos mais estritos da feature 006, `implementation-execution-plan.md` governa somente a ordem interna desse slice: tokens, primitives P0, shell CRM recomposto, primitives P1, padroes CRM, componentes de dominio, image coverage e QA.
 
 Diretorio canonico das imagens aprovadas:
 

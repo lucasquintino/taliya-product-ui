@@ -1,0 +1,161 @@
+# Automated Test and Quality-Evidence Strategy
+
+**Status**: planned; implementation blocked by `GATE-SDD-APPROVED`
+**Primary requirements**: FR-022 through FR-031
+**Target outcome**: every public behavior has risk-appropriate executable evidence, not merely a test file or story count
+
+## Current Baseline
+
+A focused run on 2026-08-08 produced:
+
+| Scope | Result | Interpretation |
+| --- | --- | --- |
+| `@taliya/tokens` | 5/5 pass | Small current token behavior suite is green |
+| `@taliya/ui` | 49/49 pass | Current jsdom component suite is green |
+| `@taliya/crm` | 194/202 pass; 8 fail | Overall test gate is red |
+| `@taliya/docs` smoke | 5/5 pass | Docs source smoke is green; this is not Storybook browser execution |
+
+All eight CRM failures are in `packages/crm/src/index.test.tsx` and assert LF-formatted raw CSS fragments against a CRLF checkout. They reveal non-portable test design; they do not by themselves prove a rendered CSS regression. P2/T116 must replace every one with normalized/parser-based semantic CSS plus rendered-layout assertions, preserve the intended regression signal, and make the CRM suite 202/202 green before P2/T119 can run.
+
+The current Vitest configs define no coverage thresholds. No maintained Playwright configuration exists. The historical static Storybook DOM audit is useful but stale and failing for responsive overflow. Therefore the current repository does not yet provide complete automated evidence.
+
+## Test Model
+
+“Tests for everything” means every public requirement, behavior, state transition, failure mode, compatibility promise, and critical non-functional constraint has at least one appropriate evidence mechanism. It does not mean testing private implementation lines or maximizing coverage with assertions that cannot detect regressions.
+
+| Layer | Proves | Primary subjects | Required evidence |
+| --- | --- | --- | --- |
+| Static/type | Contract shape and prohibited constructs | TypeScript graph, exports, lint rules | `G-TYPE`, `G-LINT`, negative fixtures |
+| Unit | Pure transformation and decision behavior | tokens, utilities, formatters, reducers, hooks without browser semantics | deterministic Vitest tests |
+| Component browser contract | Render, events, state, semantics, focus, keyboard | every public interactive UI/CRM component | real-browser component/story test |
+| Integration | Multiple components collaborating through public contracts | page kits, shell/layout, table/filter/drawer/form compositions | browser integration tests with prepared data/callbacks |
+| Story interaction | Official documented variants and states actually execute | every interactive isolated story | Storybook test-run evidence in a static build |
+| Synthetic-consumer E2E | Published package behavior outside the monorepo | packed JS/types/CSS, representative journeys | Playwright against a clean consumer |
+| Accessibility | Automated rule violations and interaction semantics | all changed interactive stories and critical journeys | axe plus explicit keyboard/focus/announcement tests |
+| Responsive | Supported viewport behavior and containment | affected public stories and critical page families | Playwright viewport matrix and overflow classification |
+| Visual | Approved appearance and 1:1 component contract | touched canonical components/families | static Storybook capture, diff, and human decision |
+| Artifact compatibility | Exact package contents and public imports | tarballs, declarations, exports, CSS entry points | pack/install/compile/runtime fixture |
+
+## Test-First Change Protocol
+
+For every behavior change or refactor with behavior risk:
+
+1. map the requirement and acceptance scenario to the affected public contract;
+2. add or identify a test that fails for the missing/regressed behavior;
+3. confirm the failure is specific and not caused by stale artifacts or environment drift;
+4. implement the smallest authorized change;
+5. make the direct test pass;
+6. run the package and cross-package impact set;
+7. run browser, accessibility, responsive, visual, and consumer gates selected by the change profile;
+8. retain the regression test and evidence mapping.
+
+A structural-only move begins with characterization tests and public API/declaration snapshots. If the characterization reveals an existing defect, the move stops and the behavior correction is split into its own approved slice.
+
+## Coverage Contract
+
+Coverage is measured for each production package and for changed lines:
+
+| Metric | Minimum |
+| --- | ---: |
+| Lines per package | 90% |
+| Functions per package | 90% |
+| Branches per package | 85% |
+| Changed lines | 95% |
+| Critical public behaviors | 100% explicitly mapped |
+
+Generated, declaration-only, and deliberately unreachable exhaustive-guard code may be excluded only through a versioned path/symbol policy with owner and rationale. A percentage cannot compensate for an untested critical behavior such as focus restoration, a blocked action, public import compatibility, or drawer lifecycle.
+
+Thresholds cannot be lowered by an ordinary change. Historical gaps are fingerprinted and reduced; changed scope may not add uncovered behavior.
+
+## Public Component Contract Matrix
+
+Each public component is classified as static, interactive, overlay, form, collection, navigation, layout, visualization, or composed page kit. Applicable rows are mandatory:
+
+| Behavior | Static | Interactive | Overlay/form | Collection/page kit |
+| --- | --- | --- | --- | --- |
+| Default render and public props | Required | Required | Required | Required |
+| Callback/event outcome | If applicable | Required | Required | Required |
+| Disabled/read-only/blocked | If applicable | Required | Required | Required |
+| Loading/empty/error | If applicable | If applicable | If applicable | Required |
+| Keyboard interaction | If focusable | Required | Required | Required |
+| Focus entry/restoration/trap | If focusable | If applicable | Required | If applicable |
+| Accessible name/role/state | Required | Required | Required | Required |
+| Reduced motion | If animated | If animated | If animated | If animated |
+| Narrow/wide containment | If layout-bearing | Required | Required | Required |
+| Isolated Storybook story | Required | Required | Required | Required for every public unit plus composed story |
+| Canonical visual comparison | If source-mapped | If source-mapped | If source-mapped | Required when source-mapped |
+
+An entry is `not applicable` only when its component classification and reason are recorded. Omission is a failure.
+
+## Critical Synthetic-Consumer Journeys
+
+The clean packed consumer must cover at least:
+
+1. install all three tarballs and compile every supported public root import;
+2. import root CSS and render a token-driven primitive without missing styles;
+3. interact with button, input, select, checkbox, and validation/error states;
+4. open and close modal/drawer/popover behavior with Escape, focus containment, and focus restoration;
+5. filter/select/paginate a representative table and invoke prepared callbacks;
+6. render shell plus a representative CRM page kit at desktop and mobile widths without unapproved overflow;
+7. execute a representative kanban/card and drawer journey without backend calls;
+8. verify deprecated aliases still compile and behave while compatibility is promised;
+9. verify optional CSS subpaths and the root compatibility stylesheet when P5/P6 introduce them;
+10. fail when the packed artifact, declaration, CSS, or source/evidence revision does not match.
+
+PR runs use Chromium for affected journeys. Release certification runs the full set in Chromium, Firefox, and WebKit.
+
+## Storybook Browser Strategy
+
+- Build Storybook statically before certification; a development server is iteration evidence only.
+- Execute every story `play` function and every changed interactive story in a real browser.
+- Reject render exceptions, empty roots, console errors, unnamed visible interactive controls, and unexpected network calls.
+- Scan canonical desktop and supported reduced/mobile viewports.
+- Treat source-sized intentional canvases as an explicit responsive classification; unclassified overflow fails.
+- Link every changed component to its isolated story and every source-mapped component to its canonical capture.
+- Triage every current overflow to an owning source path under `packages/ui/src/**`, `packages/crm/src/**`, or `apps/docs/src/**`. A confirmed defect is fixed in the smallest explicitly approved component/visual slice and re-probed; an unresolved defect remains `blocked` and requires its separately approved slice before P3/T136. Merely refreshing or cataloguing the report cannot make `G-STORY-TEST` or `G-VISUAL` pass.
+
+The existing 635-story report is a historical input, not a baseline pass: it reports 85 stories with horizontal overflow across 87 checks.
+
+## Accessibility Strategy
+
+Automated axe checks reject serious and critical violations. Automation is supplemented by explicit contracts for:
+
+- tab order and all keyboard-operable controls;
+- focus visibility, entry, containment, and restoration;
+- accessible names, descriptions, roles, values, expanded/selected/current states;
+- error identification and live announcements where state changes asynchronously;
+- semantic headings, lists, tables, labels, and status messages;
+- contrast evidence for tokens and state combinations;
+- pointer-independent behavior and minimum target sizing where applicable;
+- reduced-motion behavior for every animation.
+
+No accessibility claim is made solely from zero unnamed DOM controls.
+
+## Determinism and Portability
+
+- Run supported Node/pnpm versions from a frozen lockfile.
+- Test Windows, macOS, and Linux for type/lint/unit/build/pack portability.
+- Normalize path separators and line endings in test harnesses; prefer parsers, DOM/computed behavior, or normalized fixtures over raw source-string fragments.
+- Use stable IDs and deterministic clocks/randomness; freeze time and random seeds where relevant.
+- Use repository fixtures with sanitized, versioned data; no live API or machine-local source path participates in a blocking test.
+- Check mode cannot alter tracked files.
+- Evidence records commit SHA, source-tree hash, config/input hashes, tool versions, OS/browser, start/end time, and exit status.
+- Two runs from unchanged inputs must produce the same normalized decision.
+
+## Flake and Retry Policy
+
+A test that passes only after retry is nondeterministic and does not count as a clean pass. CI may capture one diagnostic retry, but the gate result remains failed/flaky. Quarantine requires a valid waiver and blocks `100% conformant` and release certification for affected scope. `.skip`, `.only`, and silent catches are rejected unless explicitly classified by a blocking policy.
+
+## Execution Stages
+
+| Stage | Minimum execution |
+| --- | --- |
+| PR | type/lint/architecture, affected unit/component/integration, coverage, changed stories in Chromium, axe, affected responsive/visual checks, pack/consumer when public artifacts change |
+| Nightly | full packages/docs, full static Storybook runtime scan, full accessibility scan, all critical E2E in three browsers, repeated determinism probe |
+| Release | clean-clone OS matrix plus clean packed consumer in three browsers, full visual/component certification, security/performance/artifact/provenance gates on one revision |
+
+Exact applicability is defined in `ci-gate-matrix.md`.
+
+## Exit Criteria
+
+The testing program is complete only when `G-TYPE`, `G-LINT`, `G-UNIT`, `G-COV`, `G-STORY-BUILD`, `G-STORY-TEST`, `G-A11Y`, `G-E2E-PR`, `G-E2E-RELEASE`, `G-VISUAL`, `G-PACK`, and `G-CONSUMER` have executable negative probes and current same-revision evidence, all current tests pass portably, thresholds are met, and every functional requirement has an evidence mapping.

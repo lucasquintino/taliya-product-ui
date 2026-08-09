@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0.0",
+  "fixtures": [
+    {
+      "id": "quality-policy-valid",
+      "schema": "quality-policy.schema.json",
+      "file": "quality-policy.valid.json",
+      "expectedValid": true
+    },
+    {
+      "id": "quality-policy-unknown-gate",
+      "schema": "quality-policy.schema.json",
+      "file": "quality-policy.unknown-gate.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "POLICY_UNKNOWN_GATE"
+    },
+    {
+      "id": "quality-policy-unknown-profile",
+      "schema": "quality-policy.schema.json",
+      "file": "quality-policy.unknown-profile.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "POLICY_UNKNOWN_PROFILE"
+    },
+    {
+      "id": "quality-policy-windows-traversal",
+      "schema": "quality-policy.schema.json",
+      "file": "quality-policy.windows-traversal.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "POLICY_INVALID_PATH"
+    },
+    {
+      "id": "gate-run-pass",
+      "schema": "gate-run.schema.json",
+      "file": "gate-run.pass.valid.json",
+      "expectedValid": true
+    },
+    {
+      "id": "gate-run-not-applicable",
+      "schema": "gate-run.schema.json",
+      "file": "gate-run.not-applicable.valid.json",
+      "expectedValid": true
+    },
+    {
+      "id": "gate-run-not-applicable-missing-reason",
+      "schema": "gate-run.schema.json",
+      "file": "gate-run.not-applicable-missing-reason.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "GATE_NOT_APPLICABLE_REASON_REQUIRED"
+    },
+    {
+      "id": "gate-run-unknown-vocabulary",
+      "schema": "gate-run.schema.json",
+      "file": "gate-run.unknown-vocabulary.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "GATE_UNKNOWN_VOCABULARY"
+    },
+    {
+      "id": "gate-run-windows-path",
+      "schema": "gate-run.schema.json",
+      "file": "gate-run.windows-path.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "GATE_INVALID_PATH"
+    },
+    {
+      "id": "evidence-provenance-valid",
+      "schema": "evidence-provenance.schema.json",
+      "file": "evidence-provenance.valid.json",
+      "expectedValid": true
+    },
+    {
+      "id": "evidence-provenance-risk-without-waiver",
+      "schema": "evidence-provenance.schema.json",
+      "file": "evidence-provenance.risk-without-waiver.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "EVIDENCE_RISK_REQUIRES_WAIVER"
+    },
+    {
+      "id": "evidence-provenance-unknown-gate",
+      "schema": "evidence-provenance.schema.json",
+      "file": "evidence-provenance.unknown-gate.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "EVIDENCE_UNKNOWN_GATE"
+    },
+    {
+      "id": "evidence-provenance-windows-unc",
+      "schema": "evidence-provenance.schema.json",
+      "file": "evidence-provenance.windows-unc.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "EVIDENCE_INVALID_PATH"
+    },
+    {
+      "id": "waiver-valid",
+      "schema": "waiver.schema.json",
+      "file": "waiver.valid.json",
+      "expectedValid": true
+    },
+    {
+      "id": "waiver-invalid-status",
+      "schema": "waiver.schema.json",
+      "file": "waiver.invalid-status.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "WAIVER_INVALID_STATUS"
+    },
+    {
+      "id": "waiver-noncanonical-decision",
+      "schema": "waiver.schema.json",
+      "file": "waiver.noncanonical-decision.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "WAIVER_NONCANONICAL_DECISION"
+    },
+    {
+      "id": "waiver-windows-traversal",
+      "schema": "waiver.schema.json",
+      "file": "waiver.windows-traversal.invalid.json",
+      "expectedValid": false,
+      "expectedFailureCode": "WAIVER_INVALID_PATH"
+    },
+    {
+      "id": "release-certification-valid",
+      "schema": "release-certification.schema.json",
+      "embeddedExample": 0,
+      "expectedValid": true
+    },
+    {
+      "id": "release-certified-with-active-waiver",
+      "schema": "release-certification.schema.json",
+      "embeddedExample": 0,
+      "mutation": {
+        "jsonPointer": "/waivers/active",
+        "value": 1
+      },
+      "expectedValid": false,
+      "expectedFailureCode": "RELEASE_CERTIFIED_WITH_ACTIVE_WAIVER"
+    },
+    {
+      "id": "release-windows-artifact-path",
+      "schema": "release-certification.schema.json",
+      "embeddedExample": 0,
+      "mutation": {
+        "jsonPointer": "/packages/0/relativePath",
+        "value": "C:\\artifacts\\taliya-ui.tgz"
+      },
+      "expectedValid": false,
+      "expectedFailureCode": "RELEASE_INVALID_ARTIFACT_PATH"
+    }
+  ]
+}

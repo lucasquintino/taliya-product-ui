@@ -31,7 +31,7 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+[Evaluate every active constitutional principle. Record implementation debt as a gap, not an exception. Any actual exception requires scope, rationale, rejected alternative, migration path, owner, approval, and expiry under Complexity Tracking.]
 
 ## Project Structure
 
@@ -93,6 +93,21 @@ ios/ or android/
 
 **Structure Decision**: [Document the selected structure and reference the real
 directories captured above]
+
+## Delivery Waves
+
+[Define incremental, independently reversible waves. Each wave must state prerequisites, changed paths, required tests/evidence, a measurable exit condition, and rollback. Separate structural refactors from behavior or visual changes.]
+
+## Risk, Security, Performance, And Release Strategy
+
+[Describe trust boundaries, supply-chain controls, baseline methodology, regression budgets, same-revision evidence, artifact identity, compatibility, and release approval. Do not claim system-wide security or performance without the owning system and comparable measurements.]
+
+## Plan Exit Criteria
+
+- [ ] Every material unknown is resolved or assigned an explicit research/baseline task.
+- [ ] Every requirement maps to a decision, task, and evidence mechanism.
+- [ ] Every wave has an exit condition and rollback.
+- [ ] The implementation authorization gate remains explicit.
 
 ## Complexity Tracking
 

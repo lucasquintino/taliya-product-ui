@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taliya.dev/schemas/waiver.schema.json",
+  "title": "Taliya Engineering Rule Waiver",
+  "description": "Time-bounded risk-accepted decision for one exact rule and scope. Critical irreversible security risks are intentionally not representable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "waiverId",
+    "decision",
+    "policyVersion",
+    "ruleId",
+    "ruleSeverity",
+    "riskCategory",
+    "scope",
+    "reason",
+    "risk",
+    "compensatingControls",
+    "compensatingEvidenceIds",
+    "owner",
+    "approvedBy",
+    "trackingIssue",
+    "approvalRevision",
+    "createdAt",
+    "approvedAt",
+    "expiresAt",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.1.0"
+    },
+    "waiverId": {
+      "type": "string",
+      "pattern": "^WVR-[0-9]{4}-[0-9]{3,}$"
+    },
+    "decision": {
+      "const": "risk-accepted",
+      "description": "Canonical machine vocabulary. Human interfaces may render this as accepted risk."
+    },
+    "policyVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "ruleId": {
+      "$ref": "#/$defs/ruleId"
+    },
+    "ruleSeverity": {
+      "enum": [
+        "low",
+        "moderate",
+        "high"
+      ]
+    },
+    "riskCategory": {
+      "enum": [
+        "architecture-debt",
+        "test-gap",
+        "accessibility-noncritical",
+        "performance-regression",
+        "dependency-noncritical",
+        "security-noncritical",
+        "temporary-tooling"
+      ]
+    },
+    "scope": {
+      "$ref": "#/$defs/exactScope"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 20
+    },
+    "risk": {
+      "type": "string",
+      "minLength": 20
+    },
+    "compensatingControls": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 10
+      }
+    },
+    "compensatingEvidenceIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "owner": {
+      "$ref": "#/$defs/identity"
+    },
+    "approvedBy": {
+      "$ref": "#/$defs/identity",
+      "description": "The semantic validator rejects the same accountable identity as owner."
+    },
+    "trackingIssue": {
+      "type": "string",
+      "pattern": "^(?:https://[^\\\\[:space:]]+|[A-Z][A-Z0-9]+-[0-9]+)$"
+    },
+    "approvalRevision": {
+      "$ref": "#/$defs/gitSha"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approvedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Must be later than approvedAt and no more than 60 days after createdAt; the semantic validator enforces date arithmetic."
+    },
+    "nextReviewAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "expired",
+        "revoked",
+        "resolved"
+      ]
+    }
+  },
+  "$defs": {
+    "ruleId": {
+      "type": "string",
+      "pattern": "^RULE_[A-Z0-9_]{2,59}$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+[.][0-9]+[.][0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "repositoryRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)[.][.](?:/|$))(?!.*//)[A-Za-z0-9._@-]+(?:/[A-Za-z0-9._@-]+)*$"
+    },
+    "exactSymbol": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*?\\\\/]+$"
+    },
+    "exactScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paths",
+        "symbols"
+      ],
+      "properties": {
+        "paths": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/repositoryRelativePath"
+          }
+        },
+        "symbols": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/exactSymbol"
+          }
+        }
+      },
+      "anyOf": [
+        {
+          "properties": {
+            "paths": {
+              "minItems": 1
+            }
+          }
+        },
+        {
+          "properties": {
+            "symbols": {
+              "minItems": 1
+            }
+          }
+        }
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128
+        },
+        "kind": {
+          "enum": [
+            "team",
+            "role",
+            "person"
+          ]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schemaVersion": "1.1.0",
+      "waiverId": "WVR-2026-001",
+      "decision": "risk-accepted",
+      "policyVersion": "1.0.0",
+      "ruleId": "RULE_MODULE_SIZE",
+      "ruleSeverity": "moderate",
+      "riskCategory": "architecture-debt",
+      "scope": {
+        "paths": [
+          "packages/crm/src/legacy/Example.tsx"
+        ],
+        "symbols": [
+          "LegacyExample"
+        ]
+      },
+      "reason": "The approved modularization sequence moves this isolated symbol in a later phase.",
+      "risk": "Review and change isolation remain weaker for this exact legacy symbol until removal.",
+      "compensatingControls": [
+        "No-growth ratchet is enforced on the exact fingerprint.",
+        "Focused behavior and public compatibility tests remain blocking."
+      ],
+      "compensatingEvidenceIds": [
+        "04910716-cf11-422e-bbd4-e1dcb1b934d1"
+      ],
+      "owner": {
+        "id": "crm-maintainer",
+        "kind": "role"
+      },
+      "approvedBy": {
+        "id": "engineering-reviewer",
+        "kind": "role"
+      },
+      "trackingIssue": "ARCH-001",
+      "approvalRevision": "743cc5baf94f39d910f53cfd7c0876785ae83041",
+      "createdAt": "2026-08-08T12:00:00Z",
+      "approvedAt": "2026-08-08T13:00:00Z",
+      "expiresAt": "2026-09-07T13:00:00Z",
+      "nextReviewAt": "2026-08-22T13:00:00Z",
+      "status": "active"
+    }
+  ]
+}

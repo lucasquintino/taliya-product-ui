@@ -1,0 +1,147 @@
+{
+    "schemaVersion":  "1.1.0",
+    "policyId":  "taliya-engineering-quality",
+    "policyVersion":  "1.0.0",
+    "constitutionVersion":  "1.0.0",
+    "effectiveFrom":  "2026-08-08T12:00:00Z",
+    "rules":  {
+                  "RULE_ARCH_DIRECTION":  {
+                                              "statement":  "Package imports preserve the declared dependency direction.",
+                                              "scope":  [
+                                                            "packages"
+                                                        ],
+                                              "severity":  "high",
+                                              "enforcementKind":  "static",
+                                              "evidenceKinds":  [
+                                                                    "architecture-report"
+                                                                ],
+                                              "owner":  {
+                                                            "id":  "product-ui-maintainers",
+                                                            "kind":  "team"
+                                                        },
+                                              "references":  [
+                                                                 "specs/006-engineering-quality-hardening/contracts/architecture-ratchet-contract.md"
+                                                             ],
+                                              "waiverPolicy":  "standard-risk",
+                                              "lifecycle":  "active"
+                                          }
+              },
+    "changeProfiles":  {
+                           "ui-component":  {
+                                                "description":  "Changes to reusable component source or its public contract.",
+                                                "pathMatchers":  [
+                                                                     "packages/ui/src/**",
+                                                                     "packages/crm/src/**"
+                                                                 ],
+                                                "impactLabels":  [
+                                                                     "component",
+                                                                     "public-api"
+                                                                 ],
+                                                "examples":  {
+                                                                 "matches":  [
+                                                                                 "packages/ui/src/Button.tsx"
+                                                                             ],
+                                                                 "doesNotMatch":  [
+                                                                                      "specs/006-engineering-quality-hardening/spec.md"
+                                                                                  ]
+                                                             },
+                                                "requiredGates":  {
+                                                                      "pr":  [
+                                                                                 "G-ARCH"
+                                                                             ],
+                                                                      "nightly":  [
+                                                                                      "G-ARCH"
+                                                                                  ],
+                                                                      "release":  [
+                                                                                      "G-ARCH"
+                                                                                  ]
+                                                                  },
+                                                "nonApplicableGates":  {
+
+                                                                       }
+                                            }
+                       },
+    "gates":  {
+                  "G-ARCH":  {
+                                 "description":  "Rejects package-boundary and ratchet violations.",
+                                 "command":  [
+                                                 "corepack",
+                                                 "pnpm",
+                                                 "architecture:audit"
+                                             ],
+                                 "stages":  [
+                                                "pr",
+                                                "nightly",
+                                                "release"
+                                            ],
+                                 "inputs":  [
+                                                "packages/**",
+                                                "governance/quality-policy.json"
+                                            ],
+                                 "outputs":  [
+                                                 "architecture-report"
+                                             ],
+                                 "blocking":  true,
+                                 "checkModeReadOnly":  true,
+                                 "supportedEnvironments":  {
+                                                               "operatingSystems":  [
+                                                                                        "windows",
+                                                                                        "linux",
+                                                                                        "macos"
+                                                                                    ],
+                                                               "nodeRanges":  [
+                                                                                  "^20.19.0",
+                                                                                  "\u003e=22.12.0"
+                                                                              ],
+                                                               "browsers":  [
+
+                                                                            ]
+                                                           },
+                                 "negativeProbes":  [
+                                                        {
+                                                            "id":  "PROBE_REVERSE_IMPORT",
+                                                            "fixture":  "tests/quality/fixtures/reverse-import",
+                                                            "expectedFailureCode":  "ARCH_REVERSE_IMPORT"
+                                                        }
+                                                    ]
+                             }
+              },
+    "architectureBudgets":  {
+                                "BUDGET_HANDWRITTEN_MODULE":  {
+                                                                  "sourceClass":  "handwritten",
+                                                                  "scope":  [
+                                                                                "packages/ui/src",
+                                                                                "packages/crm/src"
+                                                                            ],
+                                                                  "metrics":  {
+                                                                                  "maxLogicalLines":  400,
+                                                                                  "maxCyclomaticComplexity":  15
+                                                                              },
+                                                                  "ratchet":  "touched-scope-reduction"
+                                                              }
+                            },
+    "performanceBudgets":  {
+                               "BUDGET_UI_TARBALL":  {
+                                                         "metric":  "tarball-bytes",
+                                                         "scope":  "@taliya/ui",
+                                                         "maximum":  500000,
+                                                         "unit":  "bytes",
+                                                         "comparisonScenario":  "Production tarball produced from the certified clean revision.",
+                                                         "allowedRegressionPercent":  2
+                                                     }
+                           },
+    "waiverPolicy":  {
+                         "maxDurationDays":  60,
+                         "approverMustDifferFromOwner":  true,
+                         "forbiddenSeverities":  [
+                                                     "critical"
+                                                 ],
+                         "forbiddenCategories":  [
+                                                     "secret-exposure",
+                                                     "data-exfiltration",
+                                                     "unauthorized-publication",
+                                                     "irreversible-security-risk"
+                                                 ],
+                         "finalCertificationAllowsActiveWaivers":  false
+                     }
+}

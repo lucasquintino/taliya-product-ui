@@ -1,0 +1,49 @@
+{
+    "schemaVersion":  "1.1.0",
+    "runId":  "39f96237-a9db-4c98-bdba-49466d6b0b9a",
+    "gateId":  "G-PERF",
+    "profileIds":  [
+                       "documentation-only"
+                   ],
+    "policyVersion":  "1.0.0",
+    "stage":  "pr",
+    "source":  {
+                   "commitSha":  "743cc5baf94f39d910f53cfd7c0876785ae83041",
+                   "sourceTreeHash":  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                   "dirty":  false
+               },
+    "configHash":  "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "command":  [
+                    "corepack",
+                    "pnpm",
+                    "performance:audit"
+                ],
+    "workingDirectory":  ".",
+    "runner":  {
+                   "operatingSystem":  "linux",
+                   "architecture":  "x64",
+                   "nodeVersion":  "22.12.0",
+                   "packageManagerVersion":  "9.15.4",
+                   "timezone":  "UTC"
+               },
+    "startedAt":  "2026-08-08T12:00:00Z",
+    "endedAt":  "2026-08-08T12:00:00Z",
+    "durationMs":  0,
+    "attempt":  1,
+    "status":  "not-applicable",
+    "notApplicable":  {
+                          "profileId":  "documentation-only"
+                      },
+    "exitCode":  0,
+    "failureCodes":  [
+
+                     ],
+    "inputFingerprints":  {
+                              "source":  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                              "policy":  "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                          },
+    "evidenceIds":  [
+
+                    ],
+    "decisionFingerprint":  "9999999999999999999999999999999999999999999999999999999999999999"
+}

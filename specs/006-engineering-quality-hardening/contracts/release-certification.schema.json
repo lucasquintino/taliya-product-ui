@@ -1,0 +1,924 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taliya.dev/schemas/release-certification.schema.json",
+  "title": "Taliya Release Certification",
+  "description": "Decision for one clean source revision and the exact package artifacts eligible for publication. Certification does not itself publish.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "certificationId",
+    "candidateId",
+    "policyVersion",
+    "constitutionVersion",
+    "sddApproval",
+    "profileIds",
+    "source",
+    "packages",
+    "gateRunIds",
+    "evidenceArtifactIds",
+    "consumerValidation",
+    "matrices",
+    "security",
+    "performance",
+    "waivers",
+    "baselines",
+    "artifactConsistency",
+    "provenance",
+    "decision",
+    "publishEligible",
+    "failureCodes",
+    "decidedAt",
+    "approvedBy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.1.0"
+    },
+    "certificationId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidateId": {
+      "type": "string",
+      "pattern": "^RC-[0-9]{4}[.][0-9]{2}[.][0-9]{2}-[A-Za-z0-9._-]+$"
+    },
+    "policyVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "constitutionVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "sddApproval": {
+      "$ref": "#/$defs/sddApproval"
+    },
+    "profileIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "contains": {
+        "const": "full"
+      },
+      "items": {
+        "$ref": "#/$defs/profileId"
+      }
+    },
+    "source": {
+      "$ref": "#/$defs/certifiedSource"
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/packageArtifact"
+      }
+    },
+    "gateRunIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "evidenceArtifactIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "consumerValidation": {
+      "$ref": "#/$defs/consumerValidation"
+    },
+    "matrices": {
+      "$ref": "#/$defs/releaseMatrices"
+    },
+    "security": {
+      "$ref": "#/$defs/securityDecision"
+    },
+    "performance": {
+      "$ref": "#/$defs/performanceDecision"
+    },
+    "waivers": {
+      "$ref": "#/$defs/waiverDecision"
+    },
+    "baselines": {
+      "$ref": "#/$defs/baselineDecision"
+    },
+    "artifactConsistency": {
+      "type": "boolean",
+      "description": "True only when validated and publish-intended hashes are identical for every package."
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "decision": {
+      "enum": [
+        "certified",
+        "risk-accepted",
+        "rejected"
+      ]
+    },
+    "publishEligible": {
+      "type": "boolean",
+      "description": "Only a certified decision may authorize publication; publication remains a separate user-authorized action."
+    },
+    "failureCodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/stableId"
+      }
+    },
+    "decidedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approvedBy": {
+      "$ref": "#/$defs/identity"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "certified"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifactConsistency": {
+            "const": true
+          },
+          "publishEligible": {
+            "const": true
+          },
+          "consumerValidation": {
+            "properties": {
+              "status": {
+                "const": "pass"
+              },
+              "cleanConsumer": {
+                "const": true
+              },
+              "workspaceLinks": {
+                "const": false
+              },
+              "exactCandidateTarballs": {
+                "const": true
+              }
+            }
+          },
+          "security": {
+            "properties": {
+              "runtimeCritical": {
+                "const": 0
+              },
+              "runtimeHigh": {
+                "const": 0
+              },
+              "toolchainCritical": {
+                "const": 0
+              },
+              "toolchainHigh": {
+                "const": 0
+              },
+              "dependencyReviewBlocking": {
+                "const": 0
+              },
+              "staticAnalysisBlocking": {
+                "const": 0
+              },
+              "secretFindings": {
+                "const": 0
+              }
+            }
+          },
+          "performance": {
+            "properties": {
+              "allBudgetsPass": {
+                "const": true
+              },
+              "comparableScenarios": {
+                "const": true
+              }
+            }
+          },
+          "waivers": {
+            "properties": {
+              "active": {
+                "const": 0
+              },
+              "expired": {
+                "const": 0
+              },
+              "activeWaiverIds": {
+                "maxItems": 0
+              }
+            }
+          },
+          "baselines": {
+            "properties": {
+              "unauthorizedGrowth": {
+                "const": 0
+              },
+              "reintroducedRemovedFindings": {
+                "const": 0
+              },
+              "unresolvedHandwrittenFindings": {
+                "const": 0
+              }
+            }
+          },
+          "failureCodes": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "risk-accepted"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "publishEligible": {
+            "const": false
+          },
+          "waivers": {
+            "properties": {
+              "active": {
+                "minimum": 1
+              },
+              "expired": {
+                "const": 0
+              },
+              "activeWaiverIds": {
+                "minItems": 1
+              }
+            }
+          },
+          "failureCodes": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "rejected"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "publishEligible": {
+            "const": false
+          },
+          "failureCodes": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+[.][0-9]+[.][0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "stableId": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]{2,63}$"
+    },
+    "profileId": {
+      "enum": [
+        "sdd-only",
+        "governance",
+        "documentation-only",
+        "tokens",
+        "ui-component",
+        "crm-component",
+        "storybook-docs",
+        "dependency-build",
+        "workflow-release",
+        "full"
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)[.][.](?:/|$))(?!.*//)[A-Za-z0-9._@-]+(?:/[A-Za-z0-9._@-]+)*$"
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128
+        },
+        "kind": {
+          "enum": [
+            "team",
+            "role",
+            "person"
+          ]
+        }
+      }
+    },
+    "sddApproval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "featureId",
+        "authorizationToken",
+        "approvedRevision",
+        "sourceTreeHash",
+        "artifactManifestHash",
+        "approvedAt",
+        "approvedBy"
+      ],
+      "properties": {
+        "featureId": {
+          "const": "006-engineering-quality-hardening"
+        },
+        "authorizationToken": {
+          "const": "APPROVED_FOR_IMPLEMENTATION"
+        },
+        "approvedRevision": {
+          "$ref": "#/$defs/gitSha"
+        },
+        "sourceTreeHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "artifactManifestHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approvedBy": {
+          "$ref": "#/$defs/identity"
+        }
+      }
+    },
+    "certifiedSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commitSha",
+        "sourceTreeHash",
+        "dirty",
+        "lockfileHash"
+      ],
+      "properties": {
+        "commitSha": {
+          "$ref": "#/$defs/gitSha"
+        },
+        "sourceTreeHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "dirty": {
+          "const": false
+        },
+        "lockfileHash": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "packageArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "relativePath",
+        "validatedSha256",
+        "publishSha256",
+        "sizeBytes"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "@taliya/tokens",
+            "@taliya/ui",
+            "@taliya/crm"
+          ]
+        },
+        "version": {
+          "$ref": "#/$defs/semanticVersion"
+        },
+        "relativePath": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "validatedSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "publishSha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "installedTarball": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "sha256"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "@taliya/tokens",
+            "@taliya/ui",
+            "@taliya/crm"
+          ]
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "consumerValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gateRunId",
+        "sourceTreeHash",
+        "cleanConsumer",
+        "workspaceLinks",
+        "exactCandidateTarballs",
+        "installedTarballs",
+        "status"
+      ],
+      "properties": {
+        "gateRunId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "sourceTreeHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "cleanConsumer": {
+          "type": "boolean"
+        },
+        "workspaceLinks": {
+          "type": "boolean"
+        },
+        "exactCandidateTarballs": {
+          "type": "boolean"
+        },
+        "installedTarballs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/installedTarball"
+          }
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        }
+      }
+    },
+    "releaseMatrices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operatingSystems",
+        "nodeVersions",
+        "browsers"
+      ],
+      "properties": {
+        "operatingSystems": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "windows",
+              "linux",
+              "macos"
+            ]
+          },
+          "allOf": [
+            {
+              "contains": {
+                "const": "windows"
+              }
+            },
+            {
+              "contains": {
+                "const": "linux"
+              }
+            },
+            {
+              "contains": {
+                "const": "macos"
+              }
+            }
+          ]
+        },
+        "nodeVersions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "browsers": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "chromium",
+              "firefox",
+              "webkit"
+            ]
+          },
+          "allOf": [
+            {
+              "contains": {
+                "const": "chromium"
+              }
+            },
+            {
+              "contains": {
+                "const": "firefox"
+              }
+            },
+            {
+              "contains": {
+                "const": "webkit"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "securityDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtimeCritical",
+        "runtimeHigh",
+        "toolchainCritical",
+        "toolchainHigh",
+        "dependencyReviewBlocking",
+        "staticAnalysisBlocking",
+        "secretFindings",
+        "evidenceArtifactIds"
+      ],
+      "properties": {
+        "runtimeCritical": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "runtimeHigh": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toolchainCritical": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "toolchainHigh": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dependencyReviewBlocking": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "staticAnalysisBlocking": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "secretFindings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidenceArtifactIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "performanceDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "budgetPolicyHash",
+        "allBudgetsPass",
+        "comparableScenarios",
+        "evidenceArtifactIds"
+      ],
+      "properties": {
+        "budgetPolicyHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "allBudgetsPass": {
+          "type": "boolean"
+        },
+        "comparableScenarios": {
+          "type": "boolean"
+        },
+        "evidenceArtifactIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "waiverDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "active",
+        "expired",
+        "activeWaiverIds"
+      ],
+      "properties": {
+        "active": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expired": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "activeWaiverIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^WVR-[0-9]{4}-[0-9]{3,}$"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "active": {
+                "const": 0
+              }
+            },
+            "required": [
+              "active"
+            ]
+          },
+          "then": {
+            "properties": {
+              "activeWaiverIds": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "activeWaiverIds": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "baselineDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unauthorizedGrowth",
+        "reintroducedRemovedFindings",
+        "unresolvedHandwrittenFindings"
+      ],
+      "properties": {
+        "unauthorizedGrowth": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reintroducedRemovedFindings": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolvedHandwrittenFindings": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sbomArtifactId",
+        "attestationArtifactId",
+        "protectedPublishIdentity",
+        "immutableWorkflowActions",
+        "leastPrivilegePermissions",
+        "approvedEnvironment"
+      ],
+      "properties": {
+        "sbomArtifactId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attestationArtifactId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "protectedPublishIdentity": {
+          "const": true
+        },
+        "immutableWorkflowActions": {
+          "const": true
+        },
+        "leastPrivilegePermissions": {
+          "const": true
+        },
+        "approvedEnvironment": {
+          "type": "string",
+          "minLength": 2
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schemaVersion": "1.1.0",
+      "certificationId": "8b7e30a4-15f6-4778-a41e-688607577eb8",
+      "candidateId": "RC-2026.08.08-v1.0.0",
+      "policyVersion": "1.0.0",
+      "constitutionVersion": "1.0.0",
+      "sddApproval": {
+        "featureId": "006-engineering-quality-hardening",
+        "authorizationToken": "APPROVED_FOR_IMPLEMENTATION",
+        "approvedRevision": "743cc5baf94f39d910f53cfd7c0876785ae83041",
+        "sourceTreeHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "artifactManifestHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "approvedAt": "2026-08-08T14:00:00Z",
+        "approvedBy": {
+          "id": "product-owner",
+          "kind": "role"
+        }
+      },
+      "profileIds": [
+        "full"
+      ],
+      "source": {
+        "commitSha": "743cc5baf94f39d910f53cfd7c0876785ae83041",
+        "sourceTreeHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dirty": false,
+        "lockfileHash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      },
+      "packages": [
+        {
+          "name": "@taliya/ui",
+          "version": "1.0.0",
+          "relativePath": "artifacts/packages/taliya-ui-1.0.0.tgz",
+          "validatedSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+          "publishSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+          "sizeBytes": 180000
+        }
+      ],
+      "gateRunIds": [
+        "0bf24249-38e7-4495-bcd5-87dac51ac8e6"
+      ],
+      "evidenceArtifactIds": [
+        "04910716-cf11-422e-bbd4-e1dcb1b934d1"
+      ],
+      "consumerValidation": {
+        "gateRunId": "b08f8b87-afeb-4d36-8509-5270dde93529",
+        "sourceTreeHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "cleanConsumer": true,
+        "workspaceLinks": false,
+        "exactCandidateTarballs": true,
+        "installedTarballs": [
+          {
+            "name": "@taliya/ui",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        ],
+        "status": "pass"
+      },
+      "matrices": {
+        "operatingSystems": [
+          "windows",
+          "linux",
+          "macos"
+        ],
+        "nodeVersions": [
+          "20.19.0",
+          "22.12.0"
+        ],
+        "browsers": [
+          "chromium",
+          "firefox",
+          "webkit"
+        ]
+      },
+      "security": {
+        "runtimeCritical": 0,
+        "runtimeHigh": 0,
+        "toolchainCritical": 0,
+        "toolchainHigh": 0,
+        "dependencyReviewBlocking": 0,
+        "staticAnalysisBlocking": 0,
+        "secretFindings": 0,
+        "evidenceArtifactIds": [
+          "ddc23822-6e02-42f5-a7d2-751eb491fca4"
+        ]
+      },
+      "performance": {
+        "budgetPolicyHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "allBudgetsPass": true,
+        "comparableScenarios": true,
+        "evidenceArtifactIds": [
+          "7a285cf1-c036-450b-b48a-bce0ddc26cdf"
+        ]
+      },
+      "waivers": {
+        "active": 0,
+        "expired": 0,
+        "activeWaiverIds": []
+      },
+      "baselines": {
+        "unauthorizedGrowth": 0,
+        "reintroducedRemovedFindings": 0,
+        "unresolvedHandwrittenFindings": 0
+      },
+      "artifactConsistency": true,
+      "provenance": {
+        "sbomArtifactId": "faef00ee-2cca-40c0-a6cc-0cd133513ea1",
+        "attestationArtifactId": "ced534f0-dcab-49cf-af68-b4bc4f79f414",
+        "protectedPublishIdentity": true,
+        "immutableWorkflowActions": true,
+        "leastPrivilegePermissions": true,
+        "approvedEnvironment": "package-release"
+      },
+      "decision": "certified",
+      "publishEligible": true,
+      "failureCodes": [],
+      "decidedAt": "2026-08-08T18:00:00Z",
+      "approvedBy": {
+        "id": "release-owner",
+        "kind": "role"
+      }
+    }
+  ]
+}

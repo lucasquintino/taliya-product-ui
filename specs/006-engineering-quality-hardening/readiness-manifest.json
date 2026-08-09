@@ -1,0 +1,293 @@
+{
+    "schemaVersion":  "1.0.0",
+    "featureId":  "006-engineering-quality-hardening",
+    "lifecycle":  "READY_FOR_APPROVAL",
+    "generatedAt":  "2026-08-09T00:39:24Z",
+    "candidateBaseRevision":  "e3098fa540a7ea242db8131dbbc7adb7d2b52b77",
+    "candidateDirty":  true,
+    "contentNormalization":  "utf8-lf",
+    "sourceTreeNormalization":  "utf8-text-lf;binary-raw",
+    "sourceTreeScope":  "git-tracked-plus-nonignored-untracked-excluding-decision-envelope-and-manifest",
+    "sourceTreeFileCount":  1629,
+    "sourceTreeHash":  "eed8b4b0287f512beffcbe4b11b8fbe715cfd4ca5aec64bd026e265f9183aa51",
+    "artifactCount":  55,
+    "artifactManifestHash":  "dc55564a9ae07937d59a8da950c041cdd510df7dfd40d35272e7793c7e3e3bbb",
+    "excludedDecisionEnvelope":  "specs/006-engineering-quality-hardening/approval.md",
+    "artifacts":  [
+                      {
+                          "path":  ".specify/feature.json",
+                          "sha256":  "3a5c3e6e6d0058a39505536f5121c110f5f6ada2398729d94de467f1dc46d0e4",
+                          "sizeBytes":  64
+                      },
+                      {
+                          "path":  ".specify/memory/constitution.md",
+                          "sha256":  "e28a703858d3e9cd2b0ff515756e618c35656eed012e288e3a0d1c6521206d5e",
+                          "sizeBytes":  6831
+                      },
+                      {
+                          "path":  ".specify/templates/checklist-template.md",
+                          "sha256":  "fa0a30bbf6e35d3765c399e715d4f86e884f520edb4956fbd758796111bab563",
+                          "sizeBytes":  1500
+                      },
+                      {
+                          "path":  ".specify/templates/plan-template.md",
+                          "sha256":  "6c0f3416ed4befd9be14404c35ea63da7d3beef3c51c9bb4955f0ad51182ac4a",
+                          "sizeBytes":  4799
+                      },
+                      {
+                          "path":  ".specify/templates/spec-template.md",
+                          "sha256":  "09df89d23c99b99d3b5b422c0abae60a624949aecf3209a0f6247f9ab9acb9b9",
+                          "sizeBytes":  5540
+                      },
+                      {
+                          "path":  ".specify/templates/tasks-template.md",
+                          "sha256":  "61ae72b4c57bdb2fee32073c2dca6791f40230ea3b3ca54b057c75b79d07e1c9",
+                          "sizeBytes":  9781
+                      },
+                      {
+                          "path":  ".specify/workflows/speckit/workflow.yml",
+                          "sha256":  "007a382ad740aff3408da0a611e85b6990a097d236845ee2bd267665b644b273",
+                          "sizeBytes":  2430
+                      },
+                      {
+                          "path":  ".specify/workflows/workflow-registry.json",
+                          "sha256":  "39a2b957662d7b5e740eb16e440f406f8c0fa719013c145c16dbe83d4b9ab577",
+                          "sizeBytes":  413
+                      },
+                      {
+                          "path":  "AGENTS.md",
+                          "sha256":  "0e59d3461cc0c6ce7ffcba4f503ded8d6a311eb195a0b548defc0c8f86a051d3",
+                          "sizeBytes":  8502
+                      },
+                      {
+                          "path":  "README.md",
+                          "sha256":  "41eaca91f54aa839199557c2ad0b312387a782a793a03b8e117393ad784e077f",
+                          "sizeBytes":  22223
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/architecture-migration.md",
+                          "sha256":  "27d694a870f0e17b3cd41fbf253b849f65a53caac7c5a16eed3b3f881eb7af47",
+                          "sizeBytes":  9936
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/checklists/implementation-readiness.md",
+                          "sha256":  "81aeaf4f794c05070cce734900fb8e38836e5dba2df5425051844b859c37ccf1",
+                          "sizeBytes":  4440
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/checklists/requirements.md",
+                          "sha256":  "691732534491306f121a19a9302b569e9d82ef3494e5c90302db4017f45fb2e7",
+                          "sizeBytes":  6525
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/checklists/sdd-readiness.md",
+                          "sha256":  "3aed81a54e855f85e49ff0bb8cb9aad33ff46a9853405975056e176fd681df13",
+                          "sizeBytes":  5559
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/ci-gate-matrix.md",
+                          "sha256":  "9fa9c8845c4d6d2ed161a759ebfe8f673db5ed52708a852b2534c7c5394d3d74",
+                          "sizeBytes":  12930
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/architecture-ratchet-contract.md",
+                          "sha256":  "d22aa3475b62a8810f66dc5f98e622af587a101d3bb098a86314496ef55c3695",
+                          "sizeBytes":  5703
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/evidence-provenance.schema.json",
+                          "sha256":  "db681c98b23e287179b0868937a493afb859e6dbafd4b30f920bc7d5cac0daed",
+                          "sizeBytes":  8567
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/evidence-provenance.risk-without-waiver.invalid.json",
+                          "sha256":  "0cb28aeb3f8bff84404d09e8ffb00f90b697c3e4e19e91c34d7b0cc5723e8b0b",
+                          "sizeBytes":  1751
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/evidence-provenance.unknown-gate.invalid.json",
+                          "sha256":  "b1826afd0d182763a96ce01f497e058047bbccca8c556c16055cd33cd67ec14a",
+                          "sizeBytes":  1753
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/evidence-provenance.valid.json",
+                          "sha256":  "00a2dcb699b977be60f8835a446ba2a64ee18f70b001569eff211e7152381ad7",
+                          "sizeBytes":  1742
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/evidence-provenance.windows-unc.invalid.json",
+                          "sha256":  "ced45e60b1e7dda7dc6e8a6c36d9f1cff38eb89ed025e55a3199d488d990ecc5",
+                          "sizeBytes":  1743
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/gate-run.not-applicable.valid.json",
+                          "sha256":  "d6d384cee7ae0beede913a696f12f946cf32ef6181ad4b5042541d4f292d35b6",
+                          "sizeBytes":  1886
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/gate-run.not-applicable-missing-reason.invalid.json",
+                          "sha256":  "6c56dfb1eed658578bd0da9a944b01c75d8760831c1596201384e2bfe6ae6b61",
+                          "sizeBytes":  1773
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/gate-run.pass.valid.json",
+                          "sha256":  "d17790bc428be6f95771d4e44cf2ff7df5c7af14ca7bfc5ba99d5d174b85e3ee",
+                          "sizeBytes":  1715
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/gate-run.unknown-vocabulary.invalid.json",
+                          "sha256":  "c98aba32fe02c1dade1cf9e1c8f55d3e6b9b089626a5b21269c7b8ddf4289f3a",
+                          "sizeBytes":  1726
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/gate-run.windows-path.invalid.json",
+                          "sha256":  "2c5f7029b293b0d01ef9eea1d21348eee6a3bc085453042e51b8c46a86df2519",
+                          "sizeBytes":  1731
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/manifest.json",
+                          "sha256":  "1010121b2274f538e686c110ece5cbd14abddbd397a1c20286cf9879f8c14532",
+                          "sizeBytes":  4684
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.unknown-gate.invalid.json",
+                          "sha256":  "45638880c63aff47ed975ab138ac7008149aa1c9b37eeffbe3119fb39a19940b",
+                          "sizeBytes":  10397
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.unknown-profile.invalid.json",
+                          "sha256":  "122bc3334a6ad1deb6845b238fe3ccbd99edbd81f3bf629ef381631a78b4f679",
+                          "sizeBytes":  9902
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.valid.json",
+                          "sha256":  "e875805dcb4e353d19fe6dc877aff6cfcb94c472406181694ce9f5336eebc850",
+                          "sizeBytes":  9902
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/quality-policy.windows-traversal.invalid.json",
+                          "sha256":  "ff99db75bb880162bb66e60264bd2dd5357b5dd2dd9c9d4b11735269c4219bcd",
+                          "sizeBytes":  9914
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/waiver.invalid-status.invalid.json",
+                          "sha256":  "93b46bff781c9cf48abb80f239a9767b0ecf492b44c36ea1b71ccce3be9bf0a3",
+                          "sizeBytes":  1669
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/waiver.noncanonical-decision.invalid.json",
+                          "sha256":  "d18c23489b82770764deff6c55ff214737c660c25c6210d6d4296dda231fe1e2",
+                          "sizeBytes":  1667
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/waiver.valid.json",
+                          "sha256":  "e865e84ecf9c01c5c1be87d4f15f9bedadf2bac57c9eab478300aae808242624",
+                          "sizeBytes":  1667
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/examples/waiver.windows-traversal.invalid.json",
+                          "sha256":  "1a366ec5a66d17001d3c6e8574cf9e1538cf8815e1348315e46b3223088f6df3",
+                          "sizeBytes":  1660
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/gate-run.schema.json",
+                          "sha256":  "810a5ec0a164eaf247e60e0140d45e9c71457f9a0666d10178ba67dee0fc7312",
+                          "sizeBytes":  10916
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/public-api-compatibility-contract.md",
+                          "sha256":  "c78b5951f8b0da1b0b4f5b934135506ac9c59079fcfe454719d18165c681e7fd",
+                          "sizeBytes":  5528
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/quality-policy.schema.json",
+                          "sha256":  "ff8c0d089221c2d04b82e0ad8c884bd8bc4da2da693d039d582eb345f8a3ffaa",
+                          "sizeBytes":  19603
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/release-certification.schema.json",
+                          "sha256":  "8a49649e57b03a4a6991fca88de87fc0cc503afd7a4d3bb2370facc63bf72c86",
+                          "sizeBytes":  21944
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/sdd-lifecycle-contract.md",
+                          "sha256":  "672b0f2cedcd31ae2b08a6e9783b6eb5052edb295044bec658b951321531b6ac",
+                          "sizeBytes":  8244
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/contracts/waiver.schema.json",
+                          "sha256":  "df63df728020c32a0833287dca1fa457db8bf34230023b852162a9baf636fd05",
+                          "sizeBytes":  6380
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/current-state-audit.md",
+                          "sha256":  "51aeeb5f046405438ef6d81c3a0627706c2f2b6ad5cf18dd2bfc5e2c3987f7e1",
+                          "sizeBytes":  9246
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/data-model.md",
+                          "sha256":  "790ad20468ef56c76977d43fc70ea840324f1ab7228bce193b8e35366a60cc13",
+                          "sizeBytes":  18865
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/definition-of-done.md",
+                          "sha256":  "f54d270155c095c332a4712c5c364b487fc9589d7e559e917b846e050cc4cbc2",
+                          "sizeBytes":  8434
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/performance-strategy.md",
+                          "sha256":  "cf6585e18513c27ebcbf5bbbeb4f30afa0ce7a6304f88e650d779a62a0ea2229",
+                          "sizeBytes":  8906
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/plan.md",
+                          "sha256":  "1334f2ffb85b8c437efe7aeb9d41cdd93e535d7e63ad0640ef2cc9539e8becd7",
+                          "sizeBytes":  17540
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/quickstart.md",
+                          "sha256":  "81a75e1baed6a5535c24cfedbddee6795745f8ef5c2b246d45399c4267894b7a",
+                          "sizeBytes":  25126
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/research.md",
+                          "sha256":  "a4ac83504cee1261295563512530a949d408b40e0d3e42c833ebcc38240e9062",
+                          "sizeBytes":  14874
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/risk-register.md",
+                          "sha256":  "4188710f798d423bd75dd0b5637ca82e30817102d36a382f5bc41b1102d8a0e8",
+                          "sizeBytes":  9461
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/security-strategy.md",
+                          "sha256":  "0900d901ec54fe7ee795eca166de0c8d1150c5ae400f393f00f4407c92e22c4e",
+                          "sizeBytes":  9822
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/source-of-truth-reconciliation.md",
+                          "sha256":  "ebc6c99907292a8511e53819adcaea005ff70afcba89a7507024cec6b08e493f",
+                          "sizeBytes":  8259
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/spec.md",
+                          "sha256":  "f838c493121fe9be74f9a787dc8944864bb9154b8ef12a4af339bb57afb55a6f",
+                          "sizeBytes":  25655
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/tasks.md",
+                          "sha256":  "e108ed12ecdf745bd13a4d4bb4d61cc273f41ff034c90715159d8d8e14b3d7c3",
+                          "sizeBytes":  30694
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/test-strategy.md",
+                          "sha256":  "17fe815b43d5a1b80369e4b64c644545c075f8626d168547e2abceb84806d719",
+                          "sizeBytes":  11832
+                      },
+                      {
+                          "path":  "specs/006-engineering-quality-hardening/traceability-matrix.md",
+                          "sha256":  "29fe9bdff2b8b10ef4db22127bd2c143d8cb526599f213a132a2d0cd00e76bad",
+                          "sizeBytes":  21923
+                      }
+                  ]
+}

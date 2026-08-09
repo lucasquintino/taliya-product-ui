@@ -5,6 +5,14 @@
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
 
+## SDD Authorization Gate *(mandatory)*
+
+State the current phase and the exact condition that authorizes implementation. A generated spec, plan, or task list is not implementation approval. No non-trivial implementation may begin while an SDD artifact, clarification, traceability link, checklist, analysis finding, or explicit human approval is missing.
+
+## Clarifications
+
+Record each material question and resolved answer by session date. Do not carry `NEEDS CLARIFICATION` into planning.
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--
@@ -126,3 +134,15 @@
 - [Assumption about scope boundaries, e.g., "Mobile support is out of scope for v1"]
 - [Assumption about data/environment, e.g., "Existing authentication system will be reused"]
 - [Dependency on existing system/service, e.g., "Requires access to the existing user profile API"]
+
+## Dependencies
+
+- [Existing contract, system, evidence, decision, or predecessor feature required by this feature]
+
+## Non-Goals
+
+- [Explicitly excluded behavior, platform, migration, or guarantee]
+
+## Traceability Requirement *(mandatory)*
+
+Before implementation approval, every functional requirement must map to at least one plan decision, implementation task, and acceptance/evidence mechanism. Every implementation task must map back to an approved requirement and user story.

@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taliya.dev/schemas/gate-run.schema.json",
+  "title": "Taliya Quality Gate Run",
+  "description": "Immutable result of one canonical gate execution against one source tree, profile selection, and effective policy.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runId",
+    "gateId",
+    "profileIds",
+    "policyVersion",
+    "stage",
+    "source",
+    "configHash",
+    "command",
+    "workingDirectory",
+    "runner",
+    "startedAt",
+    "endedAt",
+    "attempt",
+    "status",
+    "exitCode",
+    "failureCodes",
+    "inputFingerprints",
+    "evidenceIds",
+    "decisionFingerprint"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.1.0"
+    },
+    "runId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "gateId": {
+      "$ref": "#/$defs/gateId"
+    },
+    "profileIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/profileId"
+      }
+    },
+    "policyVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "stage": {
+      "enum": [
+        "pr",
+        "nightly",
+        "release"
+      ]
+    },
+    "source": {
+      "$ref": "#/$defs/sourceIdentity"
+    },
+    "configHash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "command": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "workingDirectory": {
+      "$ref": "#/$defs/repositoryRelativePath"
+    },
+    "runner": {
+      "$ref": "#/$defs/runner"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "durationMs": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "retryOf": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "fail",
+        "blocked",
+        "error",
+        "not-applicable"
+      ]
+    },
+    "notApplicable": {
+      "$ref": "#/$defs/notApplicableDecision"
+    },
+    "exitCode": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failureCodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/failureCode"
+      }
+    },
+    "inputFingerprints": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-z][a-zA-Z0-9._-]{1,127}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/sha256"
+      }
+    },
+    "evidenceIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "decisionFingerprint": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "pass"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "exitCode": {
+            "const": 0
+          },
+          "failureCodes": {
+            "maxItems": 0
+          },
+          "evidenceIds": {
+            "minItems": 1
+          }
+        },
+        "not": {
+          "required": [
+            "notApplicable"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "fail",
+              "blocked",
+              "error"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "exitCode": {
+            "minimum": 1
+          },
+          "failureCodes": {
+            "minItems": 1
+          }
+        },
+        "not": {
+          "required": [
+            "notApplicable"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "not-applicable"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "notApplicable"
+        ],
+        "properties": {
+          "exitCode": {
+            "const": 0
+          },
+          "failureCodes": {
+            "maxItems": 0
+          },
+          "evidenceIds": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "gateId": {
+      "enum": [
+        "GATE-SDD-APPROVED",
+        "G-GOV",
+        "G-TYPE",
+        "G-LINT",
+        "G-UNIT",
+        "G-COV",
+        "G-ARCH",
+        "G-TOKENS",
+        "G-STORY-BUILD",
+        "G-STORY-TEST",
+        "G-A11Y",
+        "G-E2E-PR",
+        "G-E2E-RELEASE",
+        "G-VISUAL",
+        "G-SEC-RUNTIME",
+        "G-SEC-TOOLCHAIN",
+        "G-SEC-SAST",
+        "G-SEC-SECRETS",
+        "G-PERF",
+        "G-PACK",
+        "G-CONSUMER",
+        "G-PROVENANCE",
+        "G-RELEASE"
+      ]
+    },
+    "profileId": {
+      "enum": [
+        "sdd-only",
+        "governance",
+        "documentation-only",
+        "tokens",
+        "ui-component",
+        "crm-component",
+        "storybook-docs",
+        "dependency-build",
+        "workflow-release",
+        "full"
+      ]
+    },
+    "failureCode": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]{2,63}$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+[.][0-9]+[.][0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "repositoryRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|/)[.][.](?:/|$))(?!.*//)(?:[.]|[A-Za-z0-9._@-]+(?:/[A-Za-z0-9._@-]+)*)$"
+    },
+    "sourceIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commitSha",
+        "sourceTreeHash",
+        "dirty"
+      ],
+      "properties": {
+        "commitSha": {
+          "$ref": "#/$defs/gitSha"
+        },
+        "sourceTreeHash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "dirty": {
+          "type": "boolean"
+        }
+      }
+    },
+    "runner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operatingSystem",
+        "architecture",
+        "nodeVersion",
+        "packageManagerVersion",
+        "timezone"
+      ],
+      "properties": {
+        "operatingSystem": {
+          "enum": [
+            "windows",
+            "linux",
+            "macos"
+          ]
+        },
+        "architecture": {
+          "enum": [
+            "x64",
+            "arm64"
+          ]
+        },
+        "nodeVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "packageManagerVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "browser": {
+          "enum": [
+            "chromium",
+            "firefox",
+            "webkit"
+          ]
+        },
+        "browserVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timezone": {
+          "const": "UTC"
+        }
+      },
+      "dependentRequired": {
+        "browser": [
+          "browserVersion"
+        ],
+        "browserVersion": [
+          "browser"
+        ]
+      }
+    },
+    "notApplicableDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profileId",
+        "reason"
+      ],
+      "properties": {
+        "profileId": {
+          "$ref": "#/$defs/profileId"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 20,
+          "description": "Policy-derived reason. Manual skipping is invalid."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schemaVersion": "1.1.0",
+      "runId": "0bf24249-38e7-4495-bcd5-87dac51ac8e6",
+      "gateId": "G-ARCH",
+      "profileIds": [
+        "ui-component"
+      ],
+      "policyVersion": "1.0.0",
+      "stage": "pr",
+      "source": {
+        "commitSha": "743cc5baf94f39d910f53cfd7c0876785ae83041",
+        "sourceTreeHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dirty": false
+      },
+      "configHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "command": [
+        "corepack",
+        "pnpm",
+        "architecture:audit"
+      ],
+      "workingDirectory": ".",
+      "runner": {
+        "operatingSystem": "windows",
+        "architecture": "x64",
+        "nodeVersion": "22.12.0",
+        "packageManagerVersion": "9.15.4",
+        "timezone": "UTC"
+      },
+      "startedAt": "2026-08-08T12:00:00Z",
+      "endedAt": "2026-08-08T12:00:03Z",
+      "durationMs": 3000,
+      "attempt": 1,
+      "status": "pass",
+      "exitCode": 0,
+      "failureCodes": [],
+      "inputFingerprints": {
+        "source": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "policy": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "evidenceIds": [
+        "04910716-cf11-422e-bbd4-e1dcb1b934d1"
+      ],
+      "decisionFingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "schemaVersion": "1.1.0",
+      "runId": "39f96237-a9db-4c98-bdba-49466d6b0b9a",
+      "gateId": "G-PERF",
+      "profileIds": [
+        "documentation-only"
+      ],
+      "policyVersion": "1.0.0",
+      "stage": "pr",
+      "source": {
+        "commitSha": "743cc5baf94f39d910f53cfd7c0876785ae83041",
+        "sourceTreeHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dirty": false
+      },
+      "configHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "command": [
+        "corepack",
+        "pnpm",
+        "performance:audit"
+      ],
+      "workingDirectory": ".",
+      "runner": {
+        "operatingSystem": "linux",
+        "architecture": "x64",
+        "nodeVersion": "22.12.0",
+        "packageManagerVersion": "9.15.4",
+        "timezone": "UTC"
+      },
+      "startedAt": "2026-08-08T12:00:00Z",
+      "endedAt": "2026-08-08T12:00:00Z",
+      "durationMs": 0,
+      "attempt": 1,
+      "status": "not-applicable",
+      "notApplicable": {
+        "profileId": "documentation-only",
+        "reason": "The versioned documentation-only profile excludes performance execution."
+      },
+      "exitCode": 0,
+      "failureCodes": [],
+      "inputFingerprints": {
+        "source": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "policy": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "evidenceIds": [],
+      "decisionFingerprint": "9999999999999999999999999999999999999999999999999999999999999999"
+    }
+  ]
+}

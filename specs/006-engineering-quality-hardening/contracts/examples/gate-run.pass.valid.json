@@ -1,0 +1,46 @@
+{
+    "schemaVersion":  "1.1.0",
+    "runId":  "0bf24249-38e7-4495-bcd5-87dac51ac8e6",
+    "gateId":  "G-ARCH",
+    "profileIds":  [
+                       "ui-component"
+                   ],
+    "policyVersion":  "1.0.0",
+    "stage":  "pr",
+    "source":  {
+                   "commitSha":  "743cc5baf94f39d910f53cfd7c0876785ae83041",
+                   "sourceTreeHash":  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                   "dirty":  false
+               },
+    "configHash":  "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "command":  [
+                    "corepack",
+                    "pnpm",
+                    "architecture:audit"
+                ],
+    "workingDirectory":  ".",
+    "runner":  {
+                   "operatingSystem":  "windows",
+                   "architecture":  "x64",
+                   "nodeVersion":  "22.12.0",
+                   "packageManagerVersion":  "9.15.4",
+                   "timezone":  "UTC"
+               },
+    "startedAt":  "2026-08-08T12:00:00Z",
+    "endedAt":  "2026-08-08T12:00:03Z",
+    "durationMs":  3000,
+    "attempt":  1,
+    "status":  "pass",
+    "exitCode":  0,
+    "failureCodes":  [
+
+                     ],
+    "inputFingerprints":  {
+                              "source":  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                              "policy":  "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                          },
+    "evidenceIds":  [
+                        "04910716-cf11-422e-bbd4-e1dcb1b934d1"
+                    ],
+    "decisionFingerprint":  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+}

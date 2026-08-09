@@ -1,0 +1,41 @@
+{
+    "schemaVersion":  "1.1.0",
+    "waiverId":  "WVR-2026-001",
+    "decision":  "risk-accepted",
+    "policyVersion":  "1.0.0",
+    "ruleId":  "RULE_MODULE_SIZE",
+    "ruleSeverity":  "moderate",
+    "riskCategory":  "architecture-debt",
+    "scope":  {
+                  "paths":  [
+                                "packages\\crm\\..\\secret.ts"
+                            ],
+                  "symbols":  [
+                                  "LegacyExample"
+                              ]
+              },
+    "reason":  "The approved modularization sequence moves this isolated symbol in a later phase.",
+    "risk":  "Review and change isolation remain weaker for this exact legacy symbol until removal.",
+    "compensatingControls":  [
+                                 "No-growth ratchet is enforced on the exact fingerprint.",
+                                 "Focused behavior and public compatibility tests remain blocking."
+                             ],
+    "compensatingEvidenceIds":  [
+                                    "04910716-cf11-422e-bbd4-e1dcb1b934d1"
+                                ],
+    "owner":  {
+                  "id":  "crm-maintainer",
+                  "kind":  "role"
+              },
+    "approvedBy":  {
+                       "id":  "engineering-reviewer",
+                       "kind":  "role"
+                   },
+    "trackingIssue":  "ARCH-001",
+    "approvalRevision":  "743cc5baf94f39d910f53cfd7c0876785ae83041",
+    "createdAt":  "2026-08-08T12:00:00Z",
+    "approvedAt":  "2026-08-08T13:00:00Z",
+    "expiresAt":  "2026-09-07T13:00:00Z",
+    "nextReviewAt":  "2026-08-22T13:00:00Z",
+    "status":  "active"
+}
