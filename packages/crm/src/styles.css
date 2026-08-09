@@ -9972,7 +9972,13 @@ button.tcrm-integration-status-row:disabled {
 .tcrm-usage-overview-workspace {
   display: grid;
   gap: var(--taliya-control-crm-usage-overview-workspace-gap);
+  grid-template-columns: minmax(0, 1fr);
   width: min(100%, var(--taliya-layout-crm-usage-overview-width));
+}
+
+.tcrm-usage-overview-workspace > * {
+  max-width: 100%;
+  min-width: 0;
 }
 
 .tcrm-usage-overview-workspace__lower {
@@ -12387,6 +12393,7 @@ button.tcrm-integration-status-row:disabled {
   box-sizing: border-box;
   display: grid;
   gap: var(--taliya-control-crm-settings-permissions-gap);
+  grid-template-columns: minmax(0, 1fr);
   max-width: 100%;
   min-width: 0;
   width: min(100%, var(--taliya-layout-crm-settings-permissions-width));
@@ -19924,6 +19931,8 @@ button.tcrm-integration-status-row:disabled {
   display: grid;
   gap: var(--taliya-space-3);
   max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
   width: var(--taliya-layout-crm-composer-panel-width);
 }
 
@@ -24378,6 +24387,42 @@ button.tcrm-pipeline-card__select:focus-visible,
   padding-block: var(--taliya-space-2);
 }
 
+@media (max-width: 980px) {
+  .tcrm-billing-subscription-workspace__main,
+  .tcrm-billing-subscription-workspace__actions.tl-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-billing-subscription-workspace__billing {
+    grid-template-rows: auto auto;
+  }
+
+  .tcrm-billing-subscription-workspace__plan.tl-card,
+  .tcrm-billing-subscription-workspace__agents.tl-card {
+    height: auto;
+    min-height: 0;
+  }
+
+  .tcrm-roster--expected.tl-list,
+  .tcrm-worklist-table.tl-panel,
+  .tcrm-worklist-table__data.tl-table-wrap,
+  .tcrm-worklist-table__pagination.tl-table-pagination {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-roster--expected .tcrm-roster__row.tl-list-item {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+  }
+
+  .tcrm-roster--expected .tl-list-item__trailing,
+  .tcrm-roster--expected .tl-list-item__action {
+    width: auto;
+  }
+}
+
 .tcrm-work-list-detail-page .tcrm-internal-tenants-table .tl-table--dense tbody tr {
   height: var(--taliya-control-crm-invoice-table-row-height);
 }
@@ -24659,8 +24704,9 @@ button.tcrm-pipeline-card__select:focus-visible,
   gap: var(--taliya-type-body-size);
   grid-template-columns: var(--taliya-layout-crm-tenant-detail-layout-columns);
   height: var(--taliya-control-crm-tenant-detail-layout-height);
+  max-width: 100%;
   overflow: hidden;
-  width: var(--taliya-layout-crm-tenant-detail-layout-width);
+  width: min(100%, var(--taliya-layout-crm-tenant-detail-layout-width));
 }
 
 .tcrm-tenant-detail-layout__main {
@@ -31207,6 +31253,7 @@ button.tcrm-pipeline-card__select:focus-visible,
 .tcrm-setup-page-panel {
   display: grid;
   gap: var(--taliya-space-4);
+  grid-template-columns: minmax(0, 1fr);
   min-width: 0;
   width: 100%;
 }
@@ -34863,6 +34910,94 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 @media (max-width: 980px) {
+  .tcrm-settings-inherited-workspace > .tcrm-setup-block-header,
+  .tcrm-settings-team-workspace > .tcrm-setup-block-header,
+  .tcrm-settings-team-workspace__panel,
+  .tcrm-settings-team-workspace__panel > .tl-inline-group,
+  .tcrm-settings-team-workspace__panel > .tl-list,
+  .tcrm-settings-inherited-workspace > .tcrm-setup-channels-workspace__grid,
+  .tcrm-settings-inherited-workspace > .tcrm-setup-plans-workspace__grid,
+  .tcrm-settings-permissions-workspace__roles,
+  .tcrm-settings-permissions-workspace__role-grid,
+  .tcrm-settings-permissions-workspace .tcrm-permission-role-card,
+  .tcrm-settings-permissions-workspace .tcrm-permission-matrix,
+  .tcrm-settings-inherited-workspace > .tcrm-unsaved-changes-bar,
+  .tcrm-settings-team-workspace > .tcrm-unsaved-changes-bar,
+  .tcrm-settings-permissions-workspace > .tcrm-unsaved-changes-bar {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-settings-team-workspace__panel > .tl-inline-group {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-settings-team-workspace__panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-settings-team-workspace__panel > .tl-inline-group > :first-child {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .tcrm-settings-team-workspace__panel > .tl-inline-group > .tl-button {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-settings-team-workspace__panel .tl-list-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tcrm-settings-team-workspace__panel .tl-list-item__content,
+  .tcrm-settings-team-workspace__panel .tl-list-item__action {
+    flex: 1 1 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-settings-team-workspace__panel .tl-list-item__action > .tl-inline-group {
+    flex-wrap: wrap;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .tcrm-settings-permissions-workspace .tcrm-permission-matrix {
+    height: auto;
+    min-height: 0;
+  }
+
+  .tcrm-settings-permissions-workspace .tcrm-permission-matrix__table {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  :is(
+    .tcrm-settings-inherited-workspace > .tcrm-unsaved-changes-bar,
+    .tcrm-settings-team-workspace > .tcrm-unsaved-changes-bar,
+    .tcrm-settings-permissions-workspace > .tcrm-unsaved-changes-bar
+  ) {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  :is(
+    .tcrm-settings-inherited-workspace > .tcrm-unsaved-changes-bar,
+    .tcrm-settings-team-workspace > .tcrm-unsaved-changes-bar,
+    .tcrm-settings-permissions-workspace > .tcrm-unsaved-changes-bar
+  ) :is(.tcrm-unsaved-changes-bar__cancel, .tcrm-unsaved-changes-bar__save) {
+    grid-column: 1;
+    width: 100%;
+  }
+
   .tcrm-settings-permissions-workspace__roles {
     height: auto;
     min-height: var(--taliya-control-crm-settings-permissions-roles-height);
@@ -34885,5 +35020,231 @@ button.tcrm-pipeline-card__select:focus-visible,
 
   .tcrm-settings-studio-workspace__field--wide {
     grid-column: auto;
+  }
+}
+
+@media (max-width: 980px) {
+  .tcrm-usage-overview-workspace__lower {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-usage-overview-workspace__origins.tl-card,
+  .tcrm-usage-overview-workspace__alerts.tl-card,
+  .tcrm-usage-overview-workspace__affected.tl-card {
+    height: auto;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-quota-progress__usage-labels,
+  .tcrm-quota-progress__progress-wrap {
+    width: 100%;
+  }
+
+  .tcrm-mode-selector--flow,
+  .tcrm-mode-selector--routine {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-mode-card,
+  .tcrm-mode-card strong,
+  .tcrm-mode-card small {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .tcrm-mode-card--flow strong {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .tcrm-billing-invoices-workspace,
+  .tcrm-billing-invoices-workspace__current.tl-card,
+  .tcrm-billing-invoices-workspace__entitlements,
+  .tcrm-invoice-table-card.tl-card,
+  .tcrm-invoice-table.tl-table-wrap,
+  .tcrm-usage-overview-workspace,
+  .tcrm-billing-subscription-workspace {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-invoice-table.tl-table-wrap {
+    overflow-x: auto;
+  }
+
+  .tcrm-billing-invoices-workspace__current header,
+  .tcrm-billing-invoices-workspace__current footer {
+    min-width: 0;
+  }
+
+  .tcrm-quota-progress.tl-card {
+    box-sizing: border-box;
+    height: auto;
+    max-width: 100%;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .tcrm-quota-progress__usage-labels,
+  .tcrm-quota-progress__status-row {
+    max-width: 100%;
+  }
+
+  .tcrm-quota-progress__usage-labels {
+    flex-wrap: wrap;
+    gap: var(--taliya-space-1) var(--taliya-space-3);
+  }
+
+  .tcrm-quota-progress__status-row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tcrm-quota-progress__actions {
+    bottom: auto;
+    left: auto;
+    margin-top: var(--taliya-space-4);
+    position: static;
+    right: auto;
+    width: 100%;
+  }
+
+  .tcrm-quota-progress__action.tl-button {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+  }
+
+  .tcrm-setup-welcome,
+  .tcrm-setup-welcome-main,
+  .tcrm-setup-welcome__input,
+  .tcrm-setup-welcome__button,
+  .tcrm-usage-header-summary.tl-button-group,
+  .tcrm-class-card-reference,
+  .tcrm-roster-reference,
+  .tcrm-copilot-panel,
+  .tcrm-composer-panel,
+  .tcrm-composer.tl-composer-input {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-setup-welcome {
+    padding-inline: var(--taliya-space-4);
+  }
+
+  .tcrm-setup-welcome h1,
+  .tcrm-setup-welcome__subtitle,
+  .tcrm-setup-welcome__prompt {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .tcrm-usage-header-summary.tl-button-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-usage-header-summary__item.tl-button {
+    min-width: 0;
+    white-space: normal;
+    width: 100%;
+  }
+
+  .tcrm-class-card-reference > header,
+  .tcrm-class-card-reference > footer,
+  .tcrm-class-card-reference__teacher,
+  .tcrm-class-card-reference__time {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .tcrm-class-card-reference > strong,
+  .tcrm-class-card-reference > small,
+  .tcrm-class-card-reference dt,
+  .tcrm-class-card-reference dd {
+    overflow-wrap: anywhere;
+  }
+
+  .tcrm-roster-reference {
+    overflow-x: auto;
+  }
+
+  .tcrm-roster-reference__header,
+  .tcrm-roster-reference__row {
+    min-width: var(--taliya-layout-crm-weekly-calendar-width);
+  }
+
+  .tcrm-copilot-panel__card-header,
+  .tcrm-copilot-panel__suggestion .tcrm-surface__header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-copilot-panel__copy-suggestion.tl-icon-button {
+    right: var(--taliya-space-3);
+    top: var(--taliya-space-3);
+  }
+
+  .tcrm-composer .tl-composer-input__toolbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .tcrm-composer .tl-composer-input__submit {
+    grid-column: 2;
+  }
+
+  .tcrm-drawer-frame,
+  .tcrm-drawer-frame__header,
+  .tcrm-drawer-frame__body,
+  .tcrm-drawer-frame__footer {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .tcrm-drawer-frame {
+    width: 100%;
+  }
+
+  .tcrm-retention-panel,
+  .tcrm-cancellation-case,
+  .tcrm-reactivation-card,
+  .tcrm-complaint-panel,
+  .tcrm-quota-blocked-state,
+  .tcrm-tenant-detail-layout {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tcrm-retention-panel__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-retention-panel__facts div:nth-child(even) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .tcrm-tenant-detail-layout {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: visible;
+  }
+
+  .tcrm-tenant-detail-layout__summary,
+  .tcrm-tenant-detail-layout__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tcrm-tenant-detail-layout__summary > div + div {
+    border-left: 0;
+    border-top: var(--taliya-border-width-default) solid var(--taliya-border-color-subtle);
   }
 }

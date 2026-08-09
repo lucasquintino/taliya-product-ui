@@ -177,6 +177,9 @@ async function readRuntimeMetrics(port) {
     const bodyScrollWidth = body?.scrollWidth || 0;
     const rootWidth = root?.clientWidth || 0;
     const rootScrollWidth = root?.scrollWidth || 0;
+    const rootChild = root?.firstElementChild;
+    const rootChildRect = rootChild?.getBoundingClientRect();
+    const rootChildStyle = rootChild ? getComputedStyle(rootChild) : null;
     const documentOverflowX = documentElement.scrollWidth > documentElement.clientWidth + 1;
     const bodyOverflowX = bodyScrollWidth > bodyWidth + 1;
     const rootOverflowX = rootScrollWidth > rootWidth + 1;
@@ -204,6 +207,18 @@ async function readRuntimeMetrics(port) {
       bodyScrollWidth,
       rootWidth,
       rootScrollWidth,
+      media: {
+        max760: window.matchMedia("(max-width: 760px)").matches,
+        max980: window.matchMedia("(max-width: 980px)").matches,
+      },
+      rootChild: rootChild ? {
+        tagName: rootChild.tagName,
+        className: typeof rootChild.className === "string" ? rootChild.className.slice(0, 240) : "",
+        width: Math.round(rootChildRect?.width || 0),
+        widthStyle: rootChildStyle?.width || "",
+        maxWidth: rootChildStyle?.maxWidth || "",
+        minWidth: rootChildStyle?.minWidth || "",
+      } : null,
       overflowNodes,
       unnamedInteractiveCount,
       unnamedInteractive,
