@@ -1,6 +1,6 @@
 # Release Candidate Audit
 
-Generated: 2026-08-09T01:55:01.114Z
+Generated: 2026-08-09T02:40:53.264Z
 
 Status: fail
 
@@ -10,109 +10,109 @@ This audit is the technical release-candidate gate for `taliya-product-ui`. It p
 
 | Gate | Command | Status | Exit code | Duration ms | Proves |
 | --- | --- | --- | ---: | ---: | --- |
-| `typecheck` | `corepack pnpm typecheck` | pass | 0 | 27592 | package and docs TypeScript contracts compile |
-| `lint` | `corepack pnpm lint` | pass | 0 | 55717 | package lint rules pass |
-| `test` | `corepack pnpm test` | pass | 0 | 64291 | package tests and Storybook smoke pass |
-| `build` | `corepack pnpm build` | pass | 0 | 418833 | packages and static Storybook build |
-| `readiness` | `corepack pnpm readiness:audit` | fail | 1 | 49822 | library, Internal consumer, and synthetic future consumer readiness gates pass |
-| `storybook-anatomy` | `corepack pnpm storybook-anatomy:audit:strict` | pass | 0 | 1310 | Storybook owns no product anatomy or official component appearance while fixture geometry remains explicitly classified |
-| `storybook-anatomy-override-probe` | `corepack pnpm storybook-anatomy:audit:override-probe` | pass | 0 | 1384 | Storybook strict ownership rejects an injected official component appearance override |
-| `domain-wrappers` | `corepack pnpm domain-wrappers:audit` | pass | 0 | 1209 | retained CRM table/drawer wrappers add explicit domain mapping or anatomy instead of empty pass-through wrappers |
-| `domain-wrappers-direct-drawer-probe` | `corepack pnpm domain-wrappers:audit:direct-drawer-probe` | pass | 0 | 1368 | direct <aside> drawer contracts fail instead of returning as hidden drawer-unification debt |
-| `consumer-starter-templates-route-contract-probe` | `corepack pnpm consumer-starter-templates:audit:route-contract-probe` | pass | 0 | 1749 | future CRM starter route-local componentContractId links fail when missing or dangling |
-| `future-consumer-discovery` | `corepack pnpm future-consumer-discovery:audit` | pass | 0 | 1165 | local sibling directories are scanned for a real future CRM consumer before goal evidence is evaluated |
-| `future-consumer-discovery-negative-probe` | `corepack pnpm future-consumer-discovery:audit:negative-probe` | pass | 0 | 1459 | a missing future CRM scan root fails discovery instead of being accepted as zero candidates |
-| `future-consumer-discovery-partial-probe` | `corepack pnpm future-consumer-discovery:audit:partial-probe` | pass | 0 | 1501 | partial future CRM evidence is not accepted as a real future CRM candidate |
-| `future-consumer-discovery-positive-probe` | `corepack pnpm future-consumer-discovery:audit:positive-probe` | pass | 0 | 1374 | a future CRM directory with the full consumer contract is accepted as a real future CRM candidate |
-| `future-consumer-adoption` | `corepack pnpm future-consumer-adoption:audit` | pass | 0 | 1273 | discovered real future CRM candidates must have matching labeled readiness evidence before adoption is considered executed |
-| `future-consumer-adoption-positive-probe` | `corepack pnpm future-consumer-adoption:audit:positive-probe` | pass | 0 | 1352 | a discovered future CRM candidate with matching labeled readiness evidence is accepted |
-| `future-consumer-adoption-mismatch-probe` | `corepack pnpm future-consumer-adoption:audit:mismatch-probe` | pass | 0 | 1394 | a discovered future CRM candidate cannot be adopted with readiness evidence for a different consumer root |
-| `future-consumer-adoption-negative-probe` | `corepack pnpm future-consumer-adoption:audit:negative-probe` | pass | 0 | 1334 | a discovered future CRM candidate without matching labeled readiness evidence fails the adoption audit |
-| `future-crm-adoption-handoff` | `corepack pnpm future-crm-adoption-handoff:audit` | pass | 0 | 1170 | future CRM adoption handoff is present, linked, and carries the non-completion rule |
-| `consumer-package-sync-negative-probe` | `corepack pnpm consumer-package-sync:audit:negative-probe` | pass | 0 | 1400 | fresh consumer vendor tarballs with stale installed package files fail package sync |
-| `consumer-installed-contract-markers` | `corepack pnpm consumer:audit` | fail | 1 | 2344 | installed Internal packages expose the canonical full-height drawer API/CSS, official width reservation, dynamic viewport height, and checklist drawer anatomy |
-| `consumer-page-kit-shell-only-route-probe` | `corepack pnpm consumer-page-kit:audit:shell-only-route-probe` | pass | 0 | 1478 | a route that renders only InternalShell without its workspace fails the page-kit audit |
-| `consumer-page-kit-wrapper-contract-probe` | `corepack pnpm consumer-page-kit:audit:wrapper-contract-probe` | pass | 0 | 1373 | a wrapper that renders official roots only in an unused helper fails the page-kit audit |
-| `consumer-page-kit-route-wrapper-contract-probe` | `corepack pnpm consumer-page-kit:audit:route-wrapper-contract-probe` | pass | 0 | 1304 | a route-local workspace without a component contract fails the page-kit audit |
-| `consumer-page-kit-mismatched-route-contract-probe` | `corepack pnpm consumer-page-kit:audit:mismatched-route-contract-probe` | pass | 0 | 1278 | a route-local component linked to a component contract for another wrapper fails the page-kit audit |
-| `consumer-page-kit-default-identifier-route-probe` | `corepack pnpm consumer-page-kit:audit:default-identifier-route-probe` | pass | 0 | 1396 | a route that exports a named component as default can satisfy the page-kit audit |
-| `consumer-page-kit-uncovered-route-probe` | `corepack pnpm consumer-page-kit:audit:uncovered-route-probe` | pass | 0 | 1267 | a discovered Internal route that is missing from page-kit config fails the page-kit audit |
-| `consumer-page-kit-path-traversal-probe` | `corepack pnpm consumer-page-kit:audit:path-traversal-probe` | pass | 0 | 1280 | consumer page-kit config paths outside the consumer root fail schema validation |
-| `consumer-readiness-config-path-traversal-probe` | `corepack pnpm consumer-readiness-config:audit:path-traversal-probe` | pass | 0 | 1235 | consumer readiness config paths outside the consumer root fail schema validation |
-| `certification-scope` | `corepack pnpm certification-scope:audit` | pass | 0 | 1202 | product-scoped visual certification acceptance is explicit and validated when present |
-| `certification-scope-positive-probe` | `corepack pnpm certification-scope:audit:positive-probe` | pass | 0 | 1307 | valid product-scoped visual certification acceptance is recognized as scoped completion |
-| `certification-scope-negative-probe` | `corepack pnpm certification-scope:audit:negative-probe` | pass | 0 | 1259 | invalid product-scoped visual certification acceptance fails the certification scope audit |
-| `visual-certification-backlog-update` | `node scripts/audit-visual-certification-backlog.mjs` | pass | 0 | 166 | visual certification backlog evidence is regenerated from current Batch 9/11 ledgers |
-| `visual-certification-backlog` | `node scripts/audit-visual-certification-backlog.mjs --check` | pass | 0 | 163 | visual certification backlog audit is parseable and current |
-| `remaining-page-coverage-update` | `node scripts/audit-remaining-page-coverage.mjs` | pass | 0 | 308 | remaining page coverage evidence is regenerated from current Storybook source and static index |
-| `remaining-page-coverage` | `node scripts/audit-remaining-page-coverage.mjs --check` | pass | 0 | 313 | all remaining page/image stories are present as individual static Storybook entries |
-| `remaining-page-coverage-family-contract-probe` | `node scripts/probe-remaining-page-coverage-family-contract.mjs` | pass | 0 | 460 | remaining page coverage rejects owner pages that drift away from their official page-family contracts |
-| `kanban-family-update` | `node scripts/audit-kanban-family.mjs` | pass | 0 | 117 | kanban family evidence is regenerated from current Operacao, Vendas, and Financeiro story sources |
-| `kanban-family` | `node scripts/audit-kanban-family.mjs --check` | pass | 0 | 104 | official kanban image coverage pages use reusable page-family, filter, column, card, activity, and drawer components |
-| `kanban-family-negative-probe` | `node scripts/probe-kanban-family-regression.mjs` | pass | 0 | 217 | kanban family audit rejects CrmKanbanPage regressions |
-| `dashboard-family-update` | `node scripts/audit-dashboard-family.mjs` | pass | 0 | 107 | dashboard/right-panel/setup family evidence is regenerated from current story sources |
-| `dashboard-family` | `node scripts/audit-dashboard-family.mjs --check` | pass | 0 | 114 | official dashboard, right-panel, and setup image coverage pages use reusable page-family wrappers and domain slots |
-| `dashboard-family-negative-probe` | `node scripts/probe-dashboard-family-regression.mjs` | pass | 0 | 225 | dashboard family audit rejects CrmRightPanelPage regressions |
-| `source-assets-update` | `node scripts/audit-source-assets.mjs --update` | pass | 0 | 390 | the canonical source-image manifest is regenerated from configured files, hashes, dimensions, and coverage mapping |
-| `source-assets` | `node scripts/audit-source-assets.mjs --check` | pass | 0 | 305 | every covered route target has a versioned source-image manifest entry |
-| `source-assets-reconciliation-update` | `node scripts/audit-source-assets-reconciliation.mjs --update` | pass | 0 | 1454 | folder/ZIP/hash/count/derivative reconciliation evidence is regenerated from the delivered source package |
-| `source-assets-reconciliation` | `node scripts/audit-source-assets-reconciliation.mjs --check` | pass | 0 | 1387 | the delivered source package reconciles with the covered route set without counting nested derivatives |
-| `source-assets-reconciliation-nested-exclusion-probe` | `node scripts/probe-source-assets-reconciliation-nested-exclusion.mjs` | pass | 0 | 1591 | recursive derivative images are rejected as substitutes for covered route source images |
-| `full-image-page-coverage-update` | `node scripts/audit-full-image-page-coverage.mjs` | pass | 0 | 300 | full product page/source-image Storybook coverage evidence is regenerated from current image map, source assets, and static index |
-| `full-image-page-coverage` | `node scripts/audit-full-image-page-coverage.mjs --check` | pass | 0 | 239 | every product page/source image target has a dedicated static Storybook image-coverage story with an exact source-image marker and official package imports |
-| `full-image-page-coverage-missing-story-probe` | `node scripts/probe-full-image-page-coverage-missing-story.mjs` | pass | 0 | 371 | full product page/source-image coverage rejects missing static Storybook entries |
-| `full-image-page-coverage-missing-source-marker-probe` | `node scripts/probe-full-image-page-coverage-missing-source-marker.mjs` | pass | 0 | 344 | full product page/source-image coverage rejects stories that lose their exact approved source-image marker |
-| `full-image-page-coverage-misplaced-source-marker-probe` | `node scripts/probe-full-image-page-coverage-misplaced-source-marker.mjs` | pass | 0 | 328 | full product page/source-image coverage rejects source-image markers placed in a different story export |
-| `full-image-page-coverage-nonofficial-import-probe` | `node scripts/probe-full-image-page-coverage-nonofficial-import.mjs` | pass | 0 | 320 | full product page/source-image coverage rejects stories that stop importing official @taliya packages |
-| `full-image-page-coverage-unmapped-map-target-probe` | `node scripts/probe-full-image-page-coverage-unmapped-map-target.mjs` | pass | 0 | 330 | full product page/source-image coverage rejects Covered map rows that have no Storybook mapping |
-| `reference-sheet-coverage-update` | `node scripts/audit-reference-sheet-coverage.mjs` | pass | 0 | 228 | component reference-sheet coverage is regenerated from current source hashes and static Storybook index |
-| `reference-sheet-coverage` | `node scripts/audit-reference-sheet-coverage.mjs --check` | pass | 0 | 216 | all 11 active reference sheets map every named component uniquely to an official isolated story |
-| `reference-sheet-coverage-missing-story-probe` | `node scripts/probe-reference-sheet-coverage-missing-story.mjs` | pass | 0 | 334 | reference-sheet coverage rejects a missing required official component story |
-| `visual-certification-plan` | `node scripts/audit-visual-certification-plan.mjs --check` | pass | 0 | 370 | every incomplete image-certification row has source, story, evidence, blocker, next-action, and current evidence assertion data |
-| `visual-certification-plan-negative-probe` | `node scripts/probe-visual-certification-plan-stale-ledger.mjs` | pass | 0 | 767 | stale visual evidence and pending rows without current evidence assertions fail the release-candidate gate |
-| `visual-certification-plan-missing-artifact-probe` | `node scripts/probe-visual-certification-plan-missing-artifact.mjs` | pass | 0 | 563 | visual certification plan rejects ledger evidence that points at missing screenshot or metrics artifacts |
-| `visual-product-review-update` | `node scripts/audit-visual-product-review.mjs` | pass | 0 | 163 | the local product-review board and review contract are regenerated from current capture evidence |
-| `visual-product-review` | `node scripts/audit-visual-product-review.mjs --check` | pass | 0 | 141 | all product-review rows expose current source, render, diff, metrics, blocker, and next-action evidence without automatic approval |
-| `visual-certification-capture` | `node scripts/capture-visual-certification-batch.mjs --check` | fail | 1 | 304 | every pending image with a Storybook target has current source-sized screenshot and raw pixel-diff evidence without threshold-based approval |
-| `visual-certification-capture-source-contract-probe` | `node scripts/probe-visual-certification-capture-source-contract.mjs` | fail | 1 | 317 | visual capture currency ignores volatile manifest metadata and rejects changed official source image hashes |
-| `audit-checks-read-only-probe` | `node scripts/probe-audit-checks-read-only.mjs` | pass | 0 | 8104 | audit check commands do not mutate tracked or untracked repository state |
-| `readiness-refresh-update` | `node scripts/audit-library-readiness.mjs` | pass | 0 | 69062 | aggregate readiness evidence is regenerated after all package, family, source-image, and visual-certification reports |
-| `readiness-refresh` | `node scripts/audit-library-readiness.mjs --check` | fail | 1 | 57266 | the final aggregate readiness state matches every lower-level gate updated in this release-candidate run |
-| `goal-completion-update` | `node scripts/audit-goal-completion.mjs` | fail | 1 | 164 | goal completion evidence is regenerated from current reports before library acceptance is evaluated |
-| `library-acceptance-update` | `node scripts/audit-library-acceptance.mjs` | pass | 0 | 123 | current Internal/library acceptance evidence is regenerated from current readiness and goal reports |
-| `library-acceptance` | `node scripts/audit-library-acceptance.mjs --check` | fail | 1 | 109 | current Internal/library acceptance gate passes while global completion remains separately reported |
-| `library-acceptance-positive-probe` | `node scripts/probe-library-acceptance-valid-evidence.mjs` | pass | 0 | 200 | valid Internal/library acceptance evidence is accepted in an isolated probe |
-| `library-acceptance-negative-probe` | `node scripts/probe-library-acceptance-false-positive.mjs` | pass | 0 | 193 | false-positive Internal/library acceptance evidence is rejected |
-| `goal-completion-refresh` | `node scripts/audit-goal-completion.mjs` | fail | 1 | 112 | goal completion evidence is refreshed after current Internal/library acceptance is evaluated |
-| `library-consumption-status-update` | `node scripts/audit-library-consumption-status.mjs` | pass | 0 | 105 | compact library consumption status is regenerated from current release/readiness/acceptance/goal reports |
-| `library-consumption-status` | `node scripts/audit-library-consumption-status.mjs --check` | fail | 1 | 124 | compact library consumption status passes while global completion remains separately reported |
-| `library-consumption-status-positive-probe` | `node scripts/probe-library-consumption-status-valid-evidence.mjs` | pass | 0 | 226 | valid compact library consumption evidence is accepted in an isolated probe |
-| `library-consumption-status-global-complete-probe` | `node scripts/probe-library-consumption-status-global-complete.mjs` | pass | 0 | 224 | complete compact library consumption evidence reports pass-global-goal when future CRM adoption is executed |
-| `library-consumption-status-stale-release-probe` | `node scripts/probe-library-consumption-status-stale-release-candidate.mjs` | pass | 0 | 235 | compact library consumption evidence rejects stale release candidates that lack consumption-status gates |
-| `library-consumption-status-stale-readiness-probe` | `node scripts/probe-library-consumption-status-stale-readiness.mjs` | pass | 0 | 292 | compact library consumption evidence rejects stale readiness reports that lack required aggregate gates |
-| `library-consumption-status-negative-probe` | `node scripts/probe-library-consumption-status-false-positive.mjs` | pass | 0 | 238 | false-positive compact library consumption evidence is rejected |
-| `crm-real-readiness-update` | `node scripts/audit-crm-real-readiness.mjs` | pass | 0 | 162 | CRM real readiness handoff is regenerated from current package, Internal, page-kit, dynamic page/drawer, bootstrap, and future-consumer evidence |
-| `crm-real-readiness` | `node scripts/audit-crm-real-readiness.mjs --check` | fail | 1 | 124 | library is practically ready to start the real CRM while global adoption remains separately reported |
-| `crm-real-readiness-stale-remaining-page-coverage-probe` | `node scripts/probe-crm-real-readiness-stale-remaining-page-coverage.mjs` | pass | 0 | 168 | CRM real readiness rejects stale remaining-page Storybook coverage evidence |
+| `typecheck` | `corepack pnpm typecheck` | pass | 0 | 27415 | package and docs TypeScript contracts compile |
+| `lint` | `corepack pnpm lint` | pass | 0 | 54882 | package lint rules pass |
+| `test` | `corepack pnpm test` | pass | 0 | 60996 | package tests and Storybook smoke pass |
+| `build` | `corepack pnpm build` | pass | 0 | 458325 | packages and static Storybook build |
+| `readiness` | `corepack pnpm readiness:audit` | fail | 1 | 42083 | library, Internal consumer, and synthetic future consumer readiness gates pass |
+| `storybook-anatomy` | `corepack pnpm storybook-anatomy:audit:strict` | pass | 0 | 789 | Storybook owns no product anatomy or official component appearance while fixture geometry remains explicitly classified |
+| `storybook-anatomy-override-probe` | `corepack pnpm storybook-anatomy:audit:override-probe` | pass | 0 | 820 | Storybook strict ownership rejects an injected official component appearance override |
+| `domain-wrappers` | `corepack pnpm domain-wrappers:audit` | pass | 0 | 978 | retained CRM table/drawer wrappers add explicit domain mapping or anatomy instead of empty pass-through wrappers |
+| `domain-wrappers-direct-drawer-probe` | `corepack pnpm domain-wrappers:audit:direct-drawer-probe` | pass | 0 | 964 | direct <aside> drawer contracts fail instead of returning as hidden drawer-unification debt |
+| `consumer-starter-templates-route-contract-probe` | `corepack pnpm consumer-starter-templates:audit:route-contract-probe` | pass | 0 | 1103 | future CRM starter route-local componentContractId links fail when missing or dangling |
+| `future-consumer-discovery` | `corepack pnpm future-consumer-discovery:audit` | pass | 0 | 783 | local sibling directories are scanned for a real future CRM consumer before goal evidence is evaluated |
+| `future-consumer-discovery-negative-probe` | `corepack pnpm future-consumer-discovery:audit:negative-probe` | pass | 0 | 858 | a missing future CRM scan root fails discovery instead of being accepted as zero candidates |
+| `future-consumer-discovery-partial-probe` | `corepack pnpm future-consumer-discovery:audit:partial-probe` | pass | 0 | 818 | partial future CRM evidence is not accepted as a real future CRM candidate |
+| `future-consumer-discovery-positive-probe` | `corepack pnpm future-consumer-discovery:audit:positive-probe` | pass | 0 | 885 | a future CRM directory with the full consumer contract is accepted as a real future CRM candidate |
+| `future-consumer-adoption` | `corepack pnpm future-consumer-adoption:audit` | pass | 0 | 801 | discovered real future CRM candidates must have matching labeled readiness evidence before adoption is considered executed |
+| `future-consumer-adoption-positive-probe` | `corepack pnpm future-consumer-adoption:audit:positive-probe` | pass | 0 | 804 | a discovered future CRM candidate with matching labeled readiness evidence is accepted |
+| `future-consumer-adoption-mismatch-probe` | `corepack pnpm future-consumer-adoption:audit:mismatch-probe` | pass | 0 | 819 | a discovered future CRM candidate cannot be adopted with readiness evidence for a different consumer root |
+| `future-consumer-adoption-negative-probe` | `corepack pnpm future-consumer-adoption:audit:negative-probe` | pass | 0 | 852 | a discovered future CRM candidate without matching labeled readiness evidence fails the adoption audit |
+| `future-crm-adoption-handoff` | `corepack pnpm future-crm-adoption-handoff:audit` | pass | 0 | 811 | future CRM adoption handoff is present, linked, and carries the non-completion rule |
+| `consumer-package-sync-negative-probe` | `corepack pnpm consumer-package-sync:audit:negative-probe` | pass | 0 | 924 | fresh consumer vendor tarballs with stale installed package files fail package sync |
+| `consumer-installed-contract-markers` | `corepack pnpm consumer:audit` | fail | 1 | 1775 | installed Internal packages expose the canonical full-height drawer API/CSS, official width reservation, dynamic viewport height, and checklist drawer anatomy |
+| `consumer-page-kit-shell-only-route-probe` | `corepack pnpm consumer-page-kit:audit:shell-only-route-probe` | pass | 0 | 950 | a route that renders only InternalShell without its workspace fails the page-kit audit |
+| `consumer-page-kit-wrapper-contract-probe` | `corepack pnpm consumer-page-kit:audit:wrapper-contract-probe` | pass | 0 | 872 | a wrapper that renders official roots only in an unused helper fails the page-kit audit |
+| `consumer-page-kit-route-wrapper-contract-probe` | `corepack pnpm consumer-page-kit:audit:route-wrapper-contract-probe` | pass | 0 | 964 | a route-local workspace without a component contract fails the page-kit audit |
+| `consumer-page-kit-mismatched-route-contract-probe` | `corepack pnpm consumer-page-kit:audit:mismatched-route-contract-probe` | pass | 0 | 832 | a route-local component linked to a component contract for another wrapper fails the page-kit audit |
+| `consumer-page-kit-default-identifier-route-probe` | `corepack pnpm consumer-page-kit:audit:default-identifier-route-probe` | pass | 0 | 844 | a route that exports a named component as default can satisfy the page-kit audit |
+| `consumer-page-kit-uncovered-route-probe` | `corepack pnpm consumer-page-kit:audit:uncovered-route-probe` | pass | 0 | 885 | a discovered Internal route that is missing from page-kit config fails the page-kit audit |
+| `consumer-page-kit-path-traversal-probe` | `corepack pnpm consumer-page-kit:audit:path-traversal-probe` | pass | 0 | 858 | consumer page-kit config paths outside the consumer root fail schema validation |
+| `consumer-readiness-config-path-traversal-probe` | `corepack pnpm consumer-readiness-config:audit:path-traversal-probe` | pass | 0 | 845 | consumer readiness config paths outside the consumer root fail schema validation |
+| `certification-scope` | `corepack pnpm certification-scope:audit` | pass | 0 | 759 | product-scoped visual certification acceptance is explicit and validated when present |
+| `certification-scope-positive-probe` | `corepack pnpm certification-scope:audit:positive-probe` | pass | 0 | 816 | valid product-scoped visual certification acceptance is recognized as scoped completion |
+| `certification-scope-negative-probe` | `corepack pnpm certification-scope:audit:negative-probe` | pass | 0 | 834 | invalid product-scoped visual certification acceptance fails the certification scope audit |
+| `visual-certification-backlog-update` | `node scripts/audit-visual-certification-backlog.mjs` | pass | 0 | 124 | visual certification backlog evidence is regenerated from current Batch 9/11 ledgers |
+| `visual-certification-backlog` | `node scripts/audit-visual-certification-backlog.mjs --check` | pass | 0 | 125 | visual certification backlog audit is parseable and current |
+| `remaining-page-coverage-update` | `node scripts/audit-remaining-page-coverage.mjs` | pass | 0 | 228 | remaining page coverage evidence is regenerated from current Storybook source and static index |
+| `remaining-page-coverage` | `node scripts/audit-remaining-page-coverage.mjs --check` | pass | 0 | 177 | all remaining page/image stories are present as individual static Storybook entries |
+| `remaining-page-coverage-family-contract-probe` | `node scripts/probe-remaining-page-coverage-family-contract.mjs` | pass | 0 | 231 | remaining page coverage rejects owner pages that drift away from their official page-family contracts |
+| `kanban-family-update` | `node scripts/audit-kanban-family.mjs` | pass | 0 | 66 | kanban family evidence is regenerated from current Operacao, Vendas, and Financeiro story sources |
+| `kanban-family` | `node scripts/audit-kanban-family.mjs --check` | pass | 0 | 65 | official kanban image coverage pages use reusable page-family, filter, column, card, activity, and drawer components |
+| `kanban-family-negative-probe` | `node scripts/probe-kanban-family-regression.mjs` | pass | 0 | 152 | kanban family audit rejects CrmKanbanPage regressions |
+| `dashboard-family-update` | `node scripts/audit-dashboard-family.mjs` | pass | 0 | 102 | dashboard/right-panel/setup family evidence is regenerated from current story sources |
+| `dashboard-family` | `node scripts/audit-dashboard-family.mjs --check` | pass | 0 | 108 | official dashboard, right-panel, and setup image coverage pages use reusable page-family wrappers and domain slots |
+| `dashboard-family-negative-probe` | `node scripts/probe-dashboard-family-regression.mjs` | pass | 0 | 175 | dashboard family audit rejects CrmRightPanelPage regressions |
+| `source-assets-update` | `node scripts/audit-source-assets.mjs --update` | pass | 0 | 348 | the canonical source-image manifest is regenerated from configured files, hashes, dimensions, and coverage mapping |
+| `source-assets` | `node scripts/audit-source-assets.mjs --check` | pass | 0 | 263 | every covered route target has a versioned source-image manifest entry |
+| `source-assets-reconciliation-update` | `node scripts/audit-source-assets-reconciliation.mjs --update` | pass | 0 | 1442 | folder/ZIP/hash/count/derivative reconciliation evidence is regenerated from the delivered source package |
+| `source-assets-reconciliation` | `node scripts/audit-source-assets-reconciliation.mjs --check` | pass | 0 | 1229 | the delivered source package reconciles with the covered route set without counting nested derivatives |
+| `source-assets-reconciliation-nested-exclusion-probe` | `node scripts/probe-source-assets-reconciliation-nested-exclusion.mjs` | pass | 0 | 1341 | recursive derivative images are rejected as substitutes for covered route source images |
+| `full-image-page-coverage-update` | `node scripts/audit-full-image-page-coverage.mjs` | pass | 0 | 248 | full product page/source-image Storybook coverage evidence is regenerated from current image map, source assets, and static index |
+| `full-image-page-coverage` | `node scripts/audit-full-image-page-coverage.mjs --check` | pass | 0 | 209 | every product page/source image target has a dedicated static Storybook image-coverage story with an exact source-image marker and official package imports |
+| `full-image-page-coverage-missing-story-probe` | `node scripts/probe-full-image-page-coverage-missing-story.mjs` | pass | 0 | 330 | full product page/source-image coverage rejects missing static Storybook entries |
+| `full-image-page-coverage-missing-source-marker-probe` | `node scripts/probe-full-image-page-coverage-missing-source-marker.mjs` | pass | 0 | 294 | full product page/source-image coverage rejects stories that lose their exact approved source-image marker |
+| `full-image-page-coverage-misplaced-source-marker-probe` | `node scripts/probe-full-image-page-coverage-misplaced-source-marker.mjs` | pass | 0 | 333 | full product page/source-image coverage rejects source-image markers placed in a different story export |
+| `full-image-page-coverage-nonofficial-import-probe` | `node scripts/probe-full-image-page-coverage-nonofficial-import.mjs` | pass | 0 | 327 | full product page/source-image coverage rejects stories that stop importing official @taliya packages |
+| `full-image-page-coverage-unmapped-map-target-probe` | `node scripts/probe-full-image-page-coverage-unmapped-map-target.mjs` | pass | 0 | 337 | full product page/source-image coverage rejects Covered map rows that have no Storybook mapping |
+| `reference-sheet-coverage-update` | `node scripts/audit-reference-sheet-coverage.mjs` | pass | 0 | 233 | component reference-sheet coverage is regenerated from current source hashes and static Storybook index |
+| `reference-sheet-coverage` | `node scripts/audit-reference-sheet-coverage.mjs --check` | pass | 0 | 206 | all 11 active reference sheets map every named component uniquely to an official isolated story |
+| `reference-sheet-coverage-missing-story-probe` | `node scripts/probe-reference-sheet-coverage-missing-story.mjs` | pass | 0 | 315 | reference-sheet coverage rejects a missing required official component story |
+| `visual-certification-plan` | `node scripts/audit-visual-certification-plan.mjs --check` | pass | 0 | 297 | every incomplete image-certification row has source, story, evidence, blocker, next-action, and current evidence assertion data |
+| `visual-certification-plan-negative-probe` | `node scripts/probe-visual-certification-plan-stale-ledger.mjs` | pass | 0 | 779 | stale visual evidence and pending rows without current evidence assertions fail the release-candidate gate |
+| `visual-certification-plan-missing-artifact-probe` | `node scripts/probe-visual-certification-plan-missing-artifact.mjs` | pass | 0 | 398 | visual certification plan rejects ledger evidence that points at missing screenshot or metrics artifacts |
+| `visual-product-review-update` | `node scripts/audit-visual-product-review.mjs` | pass | 0 | 149 | the local product-review board and review contract are regenerated from current capture evidence |
+| `visual-product-review` | `node scripts/audit-visual-product-review.mjs --check` | pass | 0 | 123 | all product-review rows expose current source, render, diff, metrics, blocker, and next-action evidence without automatic approval |
+| `visual-certification-capture` | `node scripts/capture-visual-certification-batch.mjs --check` | pass | 0 | 252 | every pending image with a Storybook target has current source-sized screenshot and raw pixel-diff evidence without threshold-based approval |
+| `visual-certification-capture-source-contract-probe` | `node scripts/probe-visual-certification-capture-source-contract.mjs` | pass | 0 | 1420 | visual capture currency ignores volatile manifest metadata and rejects changed official source image hashes |
+| `audit-checks-read-only-probe` | `node scripts/probe-audit-checks-read-only.mjs` | pass | 0 | 7157 | audit check commands do not mutate tracked or untracked repository state |
+| `readiness-refresh-update` | `node scripts/audit-library-readiness.mjs` | pass | 0 | 64863 | aggregate readiness evidence is regenerated after all package, family, source-image, and visual-certification reports |
+| `readiness-refresh` | `node scripts/audit-library-readiness.mjs --check` | fail | 1 | 39536 | the final aggregate readiness state matches every lower-level gate updated in this release-candidate run |
+| `goal-completion-update` | `node scripts/audit-goal-completion.mjs` | fail | 1 | 122 | goal completion evidence is regenerated from current reports before library acceptance is evaluated |
+| `library-acceptance-update` | `node scripts/audit-library-acceptance.mjs` | pass | 0 | 87 | current Internal/library acceptance evidence is regenerated from current readiness and goal reports |
+| `library-acceptance` | `node scripts/audit-library-acceptance.mjs --check` | fail | 1 | 77 | current Internal/library acceptance gate passes while global completion remains separately reported |
+| `library-acceptance-positive-probe` | `node scripts/probe-library-acceptance-valid-evidence.mjs` | pass | 0 | 127 | valid Internal/library acceptance evidence is accepted in an isolated probe |
+| `library-acceptance-negative-probe` | `node scripts/probe-library-acceptance-false-positive.mjs` | pass | 0 | 126 | false-positive Internal/library acceptance evidence is rejected |
+| `goal-completion-refresh` | `node scripts/audit-goal-completion.mjs` | fail | 1 | 78 | goal completion evidence is refreshed after current Internal/library acceptance is evaluated |
+| `library-consumption-status-update` | `node scripts/audit-library-consumption-status.mjs` | pass | 0 | 74 | compact library consumption status is regenerated from current release/readiness/acceptance/goal reports |
+| `library-consumption-status` | `node scripts/audit-library-consumption-status.mjs --check` | fail | 1 | 85 | compact library consumption status passes while global completion remains separately reported |
+| `library-consumption-status-positive-probe` | `node scripts/probe-library-consumption-status-valid-evidence.mjs` | pass | 0 | 152 | valid compact library consumption evidence is accepted in an isolated probe |
+| `library-consumption-status-global-complete-probe` | `node scripts/probe-library-consumption-status-global-complete.mjs` | pass | 0 | 137 | complete compact library consumption evidence reports pass-global-goal when future CRM adoption is executed |
+| `library-consumption-status-stale-release-probe` | `node scripts/probe-library-consumption-status-stale-release-candidate.mjs` | pass | 0 | 141 | compact library consumption evidence rejects stale release candidates that lack consumption-status gates |
+| `library-consumption-status-stale-readiness-probe` | `node scripts/probe-library-consumption-status-stale-readiness.mjs` | pass | 0 | 155 | compact library consumption evidence rejects stale readiness reports that lack required aggregate gates |
+| `library-consumption-status-negative-probe` | `node scripts/probe-library-consumption-status-false-positive.mjs` | pass | 0 | 146 | false-positive compact library consumption evidence is rejected |
+| `crm-real-readiness-update` | `node scripts/audit-crm-real-readiness.mjs` | pass | 0 | 104 | CRM real readiness handoff is regenerated from current package, Internal, page-kit, dynamic page/drawer, bootstrap, and future-consumer evidence |
+| `crm-real-readiness` | `node scripts/audit-crm-real-readiness.mjs --check` | fail | 1 | 91 | library is practically ready to start the real CRM while global adoption remains separately reported |
+| `crm-real-readiness-stale-remaining-page-coverage-probe` | `node scripts/probe-crm-real-readiness-stale-remaining-page-coverage.mjs` | pass | 0 | 156 | CRM real readiness rejects stale remaining-page Storybook coverage evidence |
 | `local-release-manifest-update` | `node scripts/audit-local-release-manifest.mjs --update-manifest` | pass | 0 | 78 | consumer-facing local release manifest is regenerated from current package tarballs |
-| `local-release-manifest` | `node scripts/audit-local-release-manifest.mjs --check` | pass | 0 | 75 | local package manifest matches current tarball names, versions, hashes, sizes, and install order |
-| `consumer-dependencies-sync-check` | `node scripts/sync-consumer-dependencies.mjs --check` | fail | 1 | 66 | the current Internal package.json @taliya/* dependency tarballs match the local release manifest |
-| `consumer-dependencies-sync-stale-manifest-probe` | `node scripts/probe-consumer-dependencies-stale-manifest.mjs` | pass | 0 | 166 | stale consumer package.json tarball dependencies fail the manifest-driven dependency sync check |
-| `consumer-package-install-plan` | `node scripts/install-consumer-packages.mjs --check` | fail | 1 | 101 | the current Internal consumer can reinstall manifest-derived local package tarballs from its vendor directory |
-| `consumer-package-install-missing-vendor-probe` | `node scripts/probe-consumer-package-install-missing-vendor.mjs` | pass | 0 | 200 | a consumer package install plan fails when manifest-derived vendor tarballs are missing |
-| `consumer-lockfile` | `node scripts/audit-consumer-lockfile.mjs --check` | fail | 1 | 112 | the current Internal package-lock.json local Taliya package entries match the local release manifest |
-| `consumer-lockfile-stale-probe` | `node scripts/probe-consumer-lockfile-stale.mjs` | pass | 0 | 200 | stale package-lock resolved tarballs fail the consumer lockfile audit |
-| `consumer-refresh` | `node scripts/refresh-consumer-packages.mjs --check` | fail | 1 | 601 | the current Internal consumer can run the manifest-driven package refresh flow end-to-end in check mode |
-| `consumer-vendor-sync-check` | `node scripts/sync-consumer-vendor.mjs --check` | fail | 1 | 120 | the current Internal vendor directory matches the local release manifest, including tarballs and manifest |
-| `consumer-vendor-sync-stale-manifest-probe` | `node scripts/probe-consumer-vendor-sync-stale-manifest.mjs` | pass | 0 | 227 | a consumer vendor directory with a stale local release manifest fails the manifest-driven sync check |
-| `release-policy-update` | `node scripts/audit-release-policy.mjs` | pass | 0 | 130 | versioned local/registry release policy evidence is regenerated before release-channel checks |
-| `release-policy` | `node scripts/audit-release-policy.mjs --check` | pass | 0 | 107 | release policy explicitly separates local tarball channel from future registry publication decisions |
-| `release-policy-negative-probe` | `node scripts/probe-release-policy-invalid-contract.mjs` | pass | 0 | 158 | invalid release policy contracts fail instead of being accepted as release evidence |
-| `release-channel-update` | `node scripts/audit-release-channel.mjs` | pass | 0 | 84 | local tarball release channel evidence is regenerated before official library readiness is checked |
-| `release-channel` | `node scripts/audit-release-channel.mjs --check` | pass | 0 | 81 | the current local package release channel is reliable for consumers, while registry publication remains separately reported |
-| `official-library-readiness-update` | `node scripts/audit-official-library-readiness.mjs` | fail | 1 | 87 | official library readiness evidence is regenerated from package metadata, gates, Internal consumption, CRM readiness, and goal caveats |
-| `official-library-readiness` | `node scripts/audit-official-library-readiness.mjs --check` | fail | 1 | 84 | the library is ready as the official reusable consumer package set for the current scope |
-| `goal-completion` | `node scripts/audit-goal-completion.mjs --check` | fail | 1 | 101 | goal-level readiness has no current-scope regression |
+| `local-release-manifest` | `node scripts/audit-local-release-manifest.mjs --check` | pass | 0 | 70 | local package manifest matches current tarball names, versions, hashes, sizes, and install order |
+| `consumer-dependencies-sync-check` | `node scripts/sync-consumer-dependencies.mjs --check` | fail | 1 | 63 | the current Internal package.json @taliya/* dependency tarballs match the local release manifest |
+| `consumer-dependencies-sync-stale-manifest-probe` | `node scripts/probe-consumer-dependencies-stale-manifest.mjs` | pass | 0 | 142 | stale consumer package.json tarball dependencies fail the manifest-driven dependency sync check |
+| `consumer-package-install-plan` | `node scripts/install-consumer-packages.mjs --check` | fail | 1 | 76 | the current Internal consumer can reinstall manifest-derived local package tarballs from its vendor directory |
+| `consumer-package-install-missing-vendor-probe` | `node scripts/probe-consumer-package-install-missing-vendor.mjs` | pass | 0 | 147 | a consumer package install plan fails when manifest-derived vendor tarballs are missing |
+| `consumer-lockfile` | `node scripts/audit-consumer-lockfile.mjs --check` | fail | 1 | 73 | the current Internal package-lock.json local Taliya package entries match the local release manifest |
+| `consumer-lockfile-stale-probe` | `node scripts/probe-consumer-lockfile-stale.mjs` | pass | 0 | 134 | stale package-lock resolved tarballs fail the consumer lockfile audit |
+| `consumer-refresh` | `node scripts/refresh-consumer-packages.mjs --check` | fail | 1 | 432 | the current Internal consumer can run the manifest-driven package refresh flow end-to-end in check mode |
+| `consumer-vendor-sync-check` | `node scripts/sync-consumer-vendor.mjs --check` | fail | 1 | 68 | the current Internal vendor directory matches the local release manifest, including tarballs and manifest |
+| `consumer-vendor-sync-stale-manifest-probe` | `node scripts/probe-consumer-vendor-sync-stale-manifest.mjs` | pass | 0 | 154 | a consumer vendor directory with a stale local release manifest fails the manifest-driven sync check |
+| `release-policy-update` | `node scripts/audit-release-policy.mjs` | pass | 0 | 71 | versioned local/registry release policy evidence is regenerated before release-channel checks |
+| `release-policy` | `node scripts/audit-release-policy.mjs --check` | pass | 0 | 64 | release policy explicitly separates local tarball channel from future registry publication decisions |
+| `release-policy-negative-probe` | `node scripts/probe-release-policy-invalid-contract.mjs` | pass | 0 | 137 | invalid release policy contracts fail instead of being accepted as release evidence |
+| `release-channel-update` | `node scripts/audit-release-channel.mjs` | pass | 0 | 80 | local tarball release channel evidence is regenerated before official library readiness is checked |
+| `release-channel` | `node scripts/audit-release-channel.mjs --check` | pass | 0 | 74 | the current local package release channel is reliable for consumers, while registry publication remains separately reported |
+| `official-library-readiness-update` | `node scripts/audit-official-library-readiness.mjs` | fail | 1 | 72 | official library readiness evidence is regenerated from package metadata, gates, Internal consumption, CRM readiness, and goal caveats |
+| `official-library-readiness` | `node scripts/audit-official-library-readiness.mjs --check` | fail | 1 | 66 | the library is ready as the official reusable consumer package set for the current scope |
+| `goal-completion` | `node scripts/audit-goal-completion.mjs --check` | fail | 1 | 77 | goal-level readiness has no current-scope regression |
 
 ## Skipped
 

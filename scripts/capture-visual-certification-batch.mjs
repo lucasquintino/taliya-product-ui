@@ -23,7 +23,11 @@ function sha256(filePath) {
 }
 
 function removeChromeProfile(profileDir) {
-  rmSync(profileDir, { recursive: true, force: true, maxRetries: 8, retryDelay: 125 });
+  try {
+    rmSync(profileDir, { recursive: true, force: true, maxRetries: 16, retryDelay: 250 });
+  } catch (error) {
+    if (error?.code !== "ENOTEMPTY" && error?.code !== "EBUSY") throw error;
+  }
 }
 
 function sourceManifestContractSha256(manifest) {

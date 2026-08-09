@@ -1,6 +1,6 @@
 # Visual Product Review Audit
 
-Generated: 2026-08-09T01:52:40.311Z
+Generated: 2026-08-09T02:38:55.953Z
 
 Status: pass-review-ready-not-approved
 
@@ -13,7 +13,7 @@ This audit prepares source-backed product review. It does not approve any image 
 | Invalid evidence rows | 0 |
 | Product-review decisions | 63 |
 
-Review contract SHA-256: `788af7e6d7d7cf5923804efebb26f091a8405ffb0d83b8afc190eaf5d5d27f75`
+Review contract SHA-256: `eda8f035b4a21290b5d2ec687608cd6553c939c465f4b18781e3ad24e3017c7e`
 
 Generated local board: `tmp/visual-product-review/index.html`
 
@@ -22,7 +22,7 @@ Generated local board: `tmp/visual-product-review/index.html`
 | 1 | `19_round-4.1A_hoje_03_estado-critico-do-dia.png` | 8.2652 | 5.41% | ready |
 | 2 | `79_round-4.1S_app-shell_01_base-web-sem-conteudo.png` | 30.9558 | 23.81% | ready |
 | 3 | `69_round-4.1O_uso_02_extrato-aprovado.png` | 11.0506 | 6.59% | ready |
-| 4 | `68_round-4.1O_uso_01_visao-geral-aprovado.png` | 10.1533 | 6.48% | ready |
+| 4 | `68_round-4.1O_uso_01_visao-geral-aprovado.png` | 10.3242 | 6.59% | ready |
 | 5 | `67_round-4.1N_billing_03_add-ons-taliya-aprovado.png` | 10.0294 | 6.13% | ready |
 | 6 | `66_round-4.1N_billing_02_faturas-taliya-aprovado.png` | 9.6540 | 5.79% | ready |
 | 7 | `21_round-4.1B_operacao_01_kanban-geral.png.png` | 13.0717 | 9.11% | ready |
@@ -80,5 +80,5 @@ Generated local board: `tmp/visual-product-review/index.html`
 | 59 | `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | 13.0520 | 8.50% | ready |
 | 60 | `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | 16.9916 | 9.92% | ready |
 | 61 | `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | 12.0530 | 7.11% | ready |
-| 62 | `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | 12.7938 | 7.88% | ready |
+| 62 | `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | 12.7955 | 7.88% | ready |
 | 63 | `65_round-4.1N_billing_01_assinatura-taliya-aprovado.png` | 12.1298 | 7.50% | ready |

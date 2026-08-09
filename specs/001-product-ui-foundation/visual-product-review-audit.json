@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T01:52:40.311Z",
+  "generatedAt": "2026-08-09T02:38:55.953Z",
   "status": "pass-review-ready-not-approved",
   "note": "This report prepares product review. It never approves visual parity automatically.",
   "sourceDir": "/Users/lucasquintino/Downloads/taliya-crm-chatgpt-images-named-20260511-082508",
@@ -8,7 +8,7 @@
   "reviewRowCount": 63,
   "invalidRowCount": 0,
   "productReviewDecisionCount": 63,
-  "reviewContractSha256": "788af7e6d7d7cf5923804efebb26f091a8405ffb0d83b8afc190eaf5d5d27f75",
+  "reviewContractSha256": "eda8f035b4a21290b5d2ec687608cd6553c939c465f4b18781e3ad24e3017c7e",
   "rows": [
     {
       "priority": 1,
@@ -90,10 +90,10 @@
       "currentExists": true,
       "diffExists": true,
       "sourceSha256": "b06fcb9aafe10cbac6e86dbd7cb87a4962c2dbcb7d9c6b26265dfbc0455e43e6",
-      "currentSha256": "544fc38138a6fdeaa1abbd2c69a18ef7de1bddb32523dd8a92aff90dda9ad5b8",
-      "diffSha256": "46e63dd9b82c1945a8ec133a5c83ea747988185c1cb97945efc6cdd3b5687dbd",
-      "meanAbsoluteRgbDelta": 10.153303682562939,
-      "differentPixelRatio": 0.06476959392773929,
+      "currentSha256": "cb1683826aa6f95d83082723759a1a4b0019b557260ee83b3ce390648f991256",
+      "diffSha256": "f87cd4f815b3f9b091d0240d884ba7863a0a3aa4c03a3417f983b3a14f7adb01",
+      "meanAbsoluteRgbDelta": 10.324163597298956,
+      "differentPixelRatio": 0.06593523294974715,
       "renderValid": true,
       "blocker": "Explicit **failed 1:1**. Global nav, no-selection state, breadcrumb, title/subtitle, overview facts, 890/30/376 split, workspace y=294 and support rail y=179 now follow the source through official owners. Residual differences remain in shell/browser rendering, typography, icons, avatar, antialiasing and support-panel micro-rhythm. This is the official semi-approved composition baseline, not pixel-perfect certification.",
       "nextAction": "Product review must decide whether to accept this semi-approved baseline. Reopen technical work only for reusable shell or support-panel hypotheses; preserve UsageOverviewWorkspace, QuotaProgress and UsageOriginRow, and keep the story free of local anatomy."
@@ -1366,10 +1366,10 @@
       "currentExists": true,
       "diffExists": true,
       "sourceSha256": "b48a5328a13b6c1994de5234e65ead9c40cad0593dc2f96ac4e7e2ef97fb3e71",
-      "currentSha256": "82928f635d119a775721bef473866fe8a7389ccde187de6683f85985a905db8b",
-      "diffSha256": "eedae171a1c02283f16fb1523bbf383a215cb640f5ed05c6ae2d59b756dccfb4",
-      "meanAbsoluteRgbDelta": 12.793832605842313,
-      "differentPixelRatio": 0.07880622793362026,
+      "currentSha256": "b1f470c43d1fe6893f524e74a5e5158369faf1e62d8d22d06165b0c6f1161ba4",
+      "diffSha256": "775888063d78ffe9c53c35de1a09217699c13000aac9c16d22e14603817fff2c",
+      "meanAbsoluteRgbDelta": 12.795463949343562,
+      "differentPixelRatio": 0.07881703855193675,
       "renderValid": true,
       "blocker": "Falhou 1:1; owner, anatomia, URL, tracks, offsets e ritmo oficiais corretos; residual de chrome, tipografia, ícones, bordas, sombras e antialiasing",
       "nextAction": "Revisão visual de produto; nenhuma anatomia ou CSS local pendente"

@@ -1,6 +1,6 @@
 # Visual Certification Capture Audit
 
-Generated: 2026-08-05T20:58:00.969Z
+Generated: 2026-08-09T02:21:21.859Z
 
 Status: pass-captured-not-certified
 
@@ -17,7 +17,7 @@ This report records reproducible source-sized Storybook screenshots and raw pixe
 | `19_round-4.1A_hoje_03_estado-critico-do-dia.png` | `crm-image-coverage-hoje--image-19-hoje-estado-critico` | captured | valid | 1672x941 | 8.27 | 5.41% |
 | `79_round-4.1S_app-shell_01_base-web-sem-conteudo.png` | `crm-image-coverage-image-79-empty-shell--image-79-empty-shell` | captured | valid | 1160x868 | 30.96 | 23.81% |
 | `69_round-4.1O_uso_02_extrato-aprovado.png` | `crm-image-coverage-usage--image-69-uso-extrato` | captured | valid | 1448x1086 | 11.05 | 6.59% |
-| `68_round-4.1O_uso_01_visao-geral-aprovado.png` | `crm-image-coverage-usage--image-68-uso-visao-geral` | captured | valid | 1448x1086 | 10.15 | 6.48% |
+| `68_round-4.1O_uso_01_visao-geral-aprovado.png` | `crm-image-coverage-usage--image-68-uso-visao-geral` | captured | valid | 1448x1086 | 10.32 | 6.59% |
 | `67_round-4.1N_billing_03_add-ons-taliya-aprovado.png` | `crm-image-coverage-billing--image-67-billing-add-ons` | captured | valid | 1448x1086 | 10.03 | 6.13% |
 | `66_round-4.1N_billing_02_faturas-taliya-aprovado.png` | `crm-image-coverage-billing--image-66-billing-faturas` | captured | valid | 1448x1086 | 9.65 | 5.79% |
 | `21_round-4.1B_operacao_01_kanban-geral.png.png` | `crm-image-coverage-operação--image-21-kanban-geral` | captured | valid | 1448x1086 | 13.07 | 9.11% |
@@ -75,5 +75,5 @@ This report records reproducible source-sized Storybook screenshots and raw pixe
 | `61_round-4.1M_configuracoes_02_permissoes-aprovado.png` | `crm-image-coverage-configuracoes--image-61-configuracoes-permissoes` | captured | valid | 1491x1055 | 13.05 | 8.50% |
 | `62_round-4.1M_configuracoes_03_pagamentos-financeiro-aprovado.png` | `crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos` | captured | valid | 1448x1086 | 16.99 | 9.92% |
 | `63_round-4.1M_configuracoes_04_agenda-aprovado.png` | `crm-image-coverage-configuracoes--image-63-configuracoes-agenda` | captured | valid | 1448x1086 | 12.05 | 7.11% |
-| `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | `crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes` | captured | valid | 1448x1086 | 12.79 | 7.88% |
+| `64_round-4.1M_configuracoes_05_notificacoes-aprovado.png` | `crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes` | captured | valid | 1448x1086 | 12.80 | 7.88% |
 | `65_round-4.1N_billing_01_assinatura-taliya-aprovado.png` | `crm-image-coverage-billing--image-65-billing-assinatura` | captured | valid | 1448x1086 | 12.13 | 7.50% |
