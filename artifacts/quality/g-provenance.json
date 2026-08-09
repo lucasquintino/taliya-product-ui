@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "gate-evidence.v1",
+  "gateId": "G-PROVENANCE",
+  "decision": "pass",
+  "sourceRevision": "11a4a0b7f55e2688ae8eb5f27c92c806537a2217",
+  "runner": {
+    "operatingSystem": "win32",
+    "architecture": "x64",
+    "nodeVersion": "v24.15.0"
+  },
+  "generatedAt": "2026-08-09T01:31:56.182Z",
+  "command": "C:\\Program Files\\nodejs\\node.exe --test scripts/quality/__tests__/gate-run-contract.test.mjs scripts/quality/__tests__/evidence-provenance.test.mjs scripts/quality/__tests__/evidence-validation.test.mjs",
+  "workingDirectory": ".",
+  "exitCode": 0,
+  "outputSha256": "06a6679ee59c996775fe07561712d1a7e77644b927817246fa813deefd9480b8"
+}

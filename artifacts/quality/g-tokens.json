@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "gate-evidence.v1",
+  "gateId": "G-TOKENS",
+  "decision": "pass",
+  "sourceRevision": "11a4a0b7f55e2688ae8eb5f27c92c806537a2217",
+  "runner": {
+    "operatingSystem": "win32",
+    "architecture": "x64",
+    "nodeVersion": "v24.15.0"
+  },
+  "generatedAt": "2026-08-09T01:31:56.182Z",
+  "command": "C:\\Program Files\\nodejs\\node.exe scripts/audit-design-tokens.mjs --check",
+  "workingDirectory": ".",
+  "exitCode": 0,
+  "outputSha256": "8425913e2c22747a54c69befb62472ad8de6c10e7d318a06b77651df71bc1da5"
+}

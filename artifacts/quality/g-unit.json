@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "gate-evidence.v1",
+  "gateId": "G-UNIT",
+  "decision": "pass",
+  "sourceRevision": "11a4a0b7f55e2688ae8eb5f27c92c806537a2217",
+  "runner": {
+    "operatingSystem": "win32",
+    "architecture": "x64",
+    "nodeVersion": "v24.15.0"
+  },
+  "generatedAt": "2026-08-09T01:31:56.182Z",
+  "command": "C:\\Program Files\\nodejs\\node.exe scripts/quality/run-unit-suites.mjs",
+  "workingDirectory": ".",
+  "exitCode": 0,
+  "outputSha256": "82ebd5d6cd826a793774d2c6b455b0c59e876b7dc0f7f331400a6f994a3bd3fa"
+}

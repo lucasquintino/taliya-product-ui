@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "gate-evidence.v1",
+  "gateId": "G-ARCH",
+  "decision": "pass",
+  "sourceRevision": "11a4a0b7f55e2688ae8eb5f27c92c806537a2217",
+  "runner": {
+    "operatingSystem": "win32",
+    "architecture": "x64",
+    "nodeVersion": "v24.15.0"
+  },
+  "generatedAt": "2026-08-09T01:31:56.182Z",
+  "command": "C:\\Program Files\\nodejs\\node.exe scripts/audit-package-boundaries.mjs --check",
+  "workingDirectory": ".",
+  "exitCode": 0,
+  "outputSha256": "eb698e7051645528f3adc04e29ba97fbedfd3ef9519e1e6ac62effb992d2a82d"
+}

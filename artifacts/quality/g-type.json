@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "gate-evidence.v1",
+  "gateId": "G-TYPE",
+  "decision": "pass",
+  "sourceRevision": "11a4a0b7f55e2688ae8eb5f27c92c806537a2217",
+  "runner": {
+    "operatingSystem": "win32",
+    "architecture": "x64",
+    "nodeVersion": "v24.15.0"
+  },
+  "generatedAt": "2026-08-09T01:31:56.182Z",
+  "command": "C:\\Program Files\\nodejs\\node.exe scripts/quality/typecheck-clean.mjs",
+  "workingDirectory": ".",
+  "exitCode": 0,
+  "outputSha256": "41f7b33d67baeeaf68c28f439b623d9b65ddb84e4fa53a766cf547bc952e8cd9"
+}

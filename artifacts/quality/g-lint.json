@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "gate-evidence.v1",
+  "gateId": "G-LINT",
+  "decision": "pass",
+  "sourceRevision": "11a4a0b7f55e2688ae8eb5f27c92c806537a2217",
+  "runner": {
+    "operatingSystem": "win32",
+    "architecture": "x64",
+    "nodeVersion": "v24.15.0"
+  },
+  "generatedAt": "2026-08-09T01:31:56.182Z",
+  "command": "C:\\Program Files\\nodejs\\node.exe node_modules/eslint/bin/eslint.js packages/tokens/src packages/ui/src packages/crm/src apps/docs/src",
+  "workingDirectory": ".",
+  "exitCode": 0,
+  "outputSha256": "e6ff8f9af2c70bea4bc10c682513ca79aae68cc22383522d78ba6201a4dd40d4"
+}
