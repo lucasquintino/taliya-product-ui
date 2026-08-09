@@ -1,0 +1,1 @@
+{"id":"low-lines","expected":"invalid","failureCode":"COVERAGE-THRESHOLD-LINES","thresholds":{"lines":89,"functions":90,"branches":85,"changedLines":95},"criticalRows":1}
