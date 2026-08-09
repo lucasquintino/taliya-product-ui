@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T01:34:19.684Z",
-  "sourceCommit": "6ec05b7c8547a7346cfd4d96635fd7d2937be985",
-  "sourceTreeSha256": "2fa16e0eb687e805381b9afa3c190d7af705d0e7608e6914746308389c63f81e",
+  "generatedAt": "2026-08-09T01:55:55.978Z",
+  "sourceCommit": "1ef672f0dd50ebf5cb55c751bbfe613cbf9c8573",
+  "sourceTreeSha256": "7d34c4d3a19138eab921b40d2f21c8e6381353dd1d8fc836419c1608f72e4e10",
   "reportCount": 72,
   "reports": [
     {
@@ -142,7 +142,7 @@
     },
     {
       "file": "consumer-refresh-audit.json",
-      "sha256": "7c671b56a2e04b73f15e2da90cf8e1d7a5b96a8919bce33f66a551e59f8c2190",
+      "sha256": "5f99688d334a872b47f28066fad0652809bfcfa4edacc0634b17c41bda470942",
       "dependencies": []
     },
     {
@@ -177,7 +177,7 @@
     },
     {
       "file": "crm-real-readiness-audit.json",
-      "sha256": "f23f5cedb9821faaa6ca74fd497addebd1be09c9edf90174ffaa460594b2179e",
+      "sha256": "d586c9cff003016ade0d3b56d6d4aa4076d2a43dc7e889d98a619a3f73337741",
       "dependencies": []
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "file": "goal-completion-audit.json",
-      "sha256": "fe7526087d2a945946cd0a351239b36e8013d370aa87c1fb0ff807e4da22fb58",
+      "sha256": "c533aa83a7783e15c893073bbe1bc7701fcc43c292107935070ceb060500f707",
       "dependencies": []
     },
     {
@@ -247,17 +247,17 @@
     },
     {
       "file": "library-acceptance-audit.json",
-      "sha256": "b52500b4ff7fe3bbd2a0457f92e7646f8edb6d47567b788d040581bff4d0e9eb",
+      "sha256": "2249b050a73973155325723d1ba6dd20e7cdb4901beb4264770d694ab0f1f19d",
       "dependencies": [
         {
           "file": "goal-completion-audit.json",
           "exists": true,
-          "sha256": "fe7526087d2a945946cd0a351239b36e8013d370aa87c1fb0ff807e4da22fb58"
+          "sha256": "c533aa83a7783e15c893073bbe1bc7701fcc43c292107935070ceb060500f707"
         },
         {
           "file": "library-readiness-gate.json",
           "exists": true,
-          "sha256": "3c59f2eeeb06359e3f7240c0e87ad204c08d4282536186554636d365d39f5468"
+          "sha256": "f4e0c789d1396bf4999ba5910260ff7e3ad1c57bb2681c4914b92205cb4f084a"
         },
         {
           "file": "future-consumer-adoption-audit.json",
@@ -272,33 +272,33 @@
         {
           "file": "visual-certification-backlog-audit.json",
           "exists": true,
-          "sha256": "f87a4226d08349e38cfccbf24be4a2dd8d75b9f46071d1367da67a30a7f70f19"
+          "sha256": "ba2df0f6f758ab0b721af479e6493fd31b3c4a78a30e5ce1542dddcb26de2af5"
         }
       ]
     },
     {
       "file": "library-consumption-status.json",
-      "sha256": "aabeb375d59af30110398e73c8944a7e2349fef967ebe9c6ac7ea352991f9357",
+      "sha256": "042d007f7f4f7cc7b8094f7612ef0f3032f383d8d57127f0c56b9a88465e4914",
       "dependencies": [
         {
           "file": "library-readiness-gate.json",
           "exists": true,
-          "sha256": "3c59f2eeeb06359e3f7240c0e87ad204c08d4282536186554636d365d39f5468"
+          "sha256": "f4e0c789d1396bf4999ba5910260ff7e3ad1c57bb2681c4914b92205cb4f084a"
         },
         {
           "file": "release-candidate-audit.json",
           "exists": true,
-          "sha256": "da368f153ca5fb82b0bef36e8ea11384300ef1876e4e997a87aa8bf7a283986a"
+          "sha256": "bf1c125b155bbd05858fa0839fd07c21c5c45fbd780b2ebf31523518edb4ad13"
         },
         {
           "file": "library-acceptance-audit.json",
           "exists": true,
-          "sha256": "b52500b4ff7fe3bbd2a0457f92e7646f8edb6d47567b788d040581bff4d0e9eb"
+          "sha256": "2249b050a73973155325723d1ba6dd20e7cdb4901beb4264770d694ab0f1f19d"
         },
         {
           "file": "goal-completion-audit.json",
           "exists": true,
-          "sha256": "fe7526087d2a945946cd0a351239b36e8013d370aa87c1fb0ff807e4da22fb58"
+          "sha256": "c533aa83a7783e15c893073bbe1bc7701fcc43c292107935070ceb060500f707"
         }
       ]
     },
@@ -309,37 +309,37 @@
     },
     {
       "file": "library-readiness-gate.json",
-      "sha256": "3c59f2eeeb06359e3f7240c0e87ad204c08d4282536186554636d365d39f5468",
+      "sha256": "f4e0c789d1396bf4999ba5910260ff7e3ad1c57bb2681c4914b92205cb4f084a",
       "dependencies": []
     },
     {
       "file": "local-release-manifest-audit.json",
-      "sha256": "a0c9be6dfffcf27141232ddca92fdb47606af153f0fa23e94b76072a1cfa3d25",
+      "sha256": "2b5dafa15ec716b7474f64028b4cecd6aba4770d16a0f3c36d7ba90775ed2253",
       "dependencies": []
     },
     {
       "file": "official-library-readiness-audit.json",
-      "sha256": "86631f63595e4b71694b55296804a13efeb5d4ac862eb5b89b65c56976c5bc7e",
+      "sha256": "b2eca86b24408201911b92a6c1c901a97f0a4cb12bdf29a2e500a981b81f75fe",
       "dependencies": [
         {
           "file": "library-readiness-gate.json",
           "exists": true,
-          "sha256": "3c59f2eeeb06359e3f7240c0e87ad204c08d4282536186554636d365d39f5468"
+          "sha256": "f4e0c789d1396bf4999ba5910260ff7e3ad1c57bb2681c4914b92205cb4f084a"
         },
         {
           "file": "release-channel-audit.json",
           "exists": true,
-          "sha256": "dbe95fdf7140f8f47778e86a2fbaeb468d1b7970882627e0f0207ae4773ee225"
+          "sha256": "c031cec91a47b8027bae569548e24b97189a3b0051eca8911d648be3fe193f65"
         },
         {
           "file": "library-consumption-status.json",
           "exists": true,
-          "sha256": "aabeb375d59af30110398e73c8944a7e2349fef967ebe9c6ac7ea352991f9357"
+          "sha256": "042d007f7f4f7cc7b8094f7612ef0f3032f383d8d57127f0c56b9a88465e4914"
         },
         {
           "file": "crm-real-readiness-audit.json",
           "exists": true,
-          "sha256": "f23f5cedb9821faaa6ca74fd497addebd1be09c9edf90174ffaa460594b2179e"
+          "sha256": "d586c9cff003016ade0d3b56d6d4aa4076d2a43dc7e889d98a619a3f73337741"
         }
       ]
     },
@@ -365,12 +365,12 @@
     },
     {
       "file": "reference-sheet-coverage-audit.json",
-      "sha256": "5839d1b144f3058587886b7ff796e28ba4e3ab2dfcecbc1cf60f65c4ff7018ea",
+      "sha256": "59a0e6d1cfc990d9e070b2b5105c8f63ecfc3a32358597bf96d6a6d57927a93e",
       "dependencies": [
         {
           "file": "../002-readiness-evidence-portability/source-assets-manifest.json",
           "exists": true,
-          "sha256": "cddb13d94b4e01f91e66184de741da775e343c38d33abec4efd4d9a99e0568de"
+          "sha256": "68901807438e5417def2f6ce6c620ede9affc784e6a5aa37584259e7dcb80d01"
         }
       ]
     },
@@ -386,33 +386,33 @@
     },
     {
       "file": "release-candidate-audit.json",
-      "sha256": "da368f153ca5fb82b0bef36e8ea11384300ef1876e4e997a87aa8bf7a283986a",
+      "sha256": "bf1c125b155bbd05858fa0839fd07c21c5c45fbd780b2ebf31523518edb4ad13",
       "dependencies": [
         {
           "file": "library-readiness-gate.json",
           "exists": true,
-          "sha256": "3c59f2eeeb06359e3f7240c0e87ad204c08d4282536186554636d365d39f5468"
+          "sha256": "f4e0c789d1396bf4999ba5910260ff7e3ad1c57bb2681c4914b92205cb4f084a"
         },
         {
           "file": "release-channel-audit.json",
           "exists": true,
-          "sha256": "dbe95fdf7140f8f47778e86a2fbaeb468d1b7970882627e0f0207ae4773ee225"
+          "sha256": "c031cec91a47b8027bae569548e24b97189a3b0051eca8911d648be3fe193f65"
         },
         {
           "file": "official-library-readiness-audit.json",
           "exists": true,
-          "sha256": "86631f63595e4b71694b55296804a13efeb5d4ac862eb5b89b65c56976c5bc7e"
+          "sha256": "b2eca86b24408201911b92a6c1c901a97f0a4cb12bdf29a2e500a981b81f75fe"
         },
         {
           "file": "goal-completion-audit.json",
           "exists": true,
-          "sha256": "fe7526087d2a945946cd0a351239b36e8013d370aa87c1fb0ff807e4da22fb58"
+          "sha256": "c533aa83a7783e15c893073bbe1bc7701fcc43c292107935070ceb060500f707"
         }
       ]
     },
     {
       "file": "release-channel-audit.json",
-      "sha256": "dbe95fdf7140f8f47778e86a2fbaeb468d1b7970882627e0f0207ae4773ee225",
+      "sha256": "c031cec91a47b8027bae569548e24b97189a3b0051eca8911d648be3fe193f65",
       "dependencies": [
         {
           "file": "package-artifacts-audit.json",
@@ -422,12 +422,12 @@
         {
           "file": "local-release-manifest-audit.json",
           "exists": true,
-          "sha256": "a0c9be6dfffcf27141232ddca92fdb47606af153f0fa23e94b76072a1cfa3d25"
+          "sha256": "2b5dafa15ec716b7474f64028b4cecd6aba4770d16a0f3c36d7ba90775ed2253"
         },
         {
           "file": "release-policy-audit.json",
           "exists": true,
-          "sha256": "6557daa96ad73a0b3d9a90bd1587092d082c6cb641bdff4a2f02b2191791525f"
+          "sha256": "136d6f252e7ed869fb0cbfed9abc9df3bca89199fae0fa9add8c70b29cb6451f"
         },
         {
           "file": "consumer-package-sync-audit.json",
@@ -453,7 +453,7 @@
     },
     {
       "file": "release-policy-audit.json",
-      "sha256": "6557daa96ad73a0b3d9a90bd1587092d082c6cb641bdff4a2f02b2191791525f",
+      "sha256": "136d6f252e7ed869fb0cbfed9abc9df3bca89199fae0fa9add8c70b29cb6451f",
       "dependencies": []
     },
     {
@@ -463,7 +463,7 @@
     },
     {
       "file": "visual-certification-backlog-audit.json",
-      "sha256": "f87a4226d08349e38cfccbf24be4a2dd8d75b9f46071d1367da67a30a7f70f19",
+      "sha256": "ba2df0f6f758ab0b721af479e6493fd31b3c4a78a30e5ce1542dddcb26de2af5",
       "dependencies": []
     },
     {
@@ -478,7 +478,7 @@
         {
           "file": "visual-certification-backlog-audit.json",
           "exists": true,
-          "sha256": "f87a4226d08349e38cfccbf24be4a2dd8d75b9f46071d1367da67a30a7f70f19"
+          "sha256": "ba2df0f6f758ab0b721af479e6493fd31b3c4a78a30e5ce1542dddcb26de2af5"
         },
         {
           "file": "full-image-page-coverage-audit.json",
@@ -493,13 +493,13 @@
         {
           "file": "reference-sheet-coverage-audit.json",
           "exists": true,
-          "sha256": "5839d1b144f3058587886b7ff796e28ba4e3ab2dfcecbc1cf60f65c4ff7018ea"
+          "sha256": "59a0e6d1cfc990d9e070b2b5105c8f63ecfc3a32358597bf96d6a6d57927a93e"
         }
       ]
     },
     {
       "file": "visual-product-review-audit.json",
-      "sha256": "9ea01a81a81a6380be82c89b36f87b7d0033f7a1e0b197a3bdab1849a56c010d",
+      "sha256": "cdb29da4c801da0e034d9858d57ee095ca3e1f76a0d8ef74b2ba1f9930cc5622",
       "dependencies": [
         {
           "file": "visual-certification-plan-audit.json",
@@ -515,22 +515,22 @@
     },
     {
       "file": "specs/002-readiness-evidence-portability/report-freshness-audit.json",
-      "sha256": "05450b86ca0e61a4007ab794def9eaa13e31fea5319592595ba704b9ad8c4006",
+      "sha256": "08aa4005eb9d0ebe1c156bb06c52b7c47d2e88ffb54e658453bf0d9cca68c1e2",
       "dependencies": []
     },
     {
       "file": "specs/002-readiness-evidence-portability/source-assets-manifest.json",
-      "sha256": "cddb13d94b4e01f91e66184de741da775e343c38d33abec4efd4d9a99e0568de",
+      "sha256": "68901807438e5417def2f6ce6c620ede9affc784e6a5aa37584259e7dcb80d01",
       "dependencies": []
     },
     {
       "file": "specs/002-readiness-evidence-portability/source-assets-reconciliation-audit.json",
-      "sha256": "52eb8e9b1716d649ceea0eeca976d9824fd1dbeba785c5f6145de4d094a02f4f",
+      "sha256": "0ca2774735e46d7df28eac75bebf191eca94e66a52d36d73c236eea35899e7d2",
       "dependencies": [
         {
           "file": "../002-readiness-evidence-portability/source-assets-manifest.json",
           "exists": true,
-          "sha256": "cddb13d94b4e01f91e66184de741da775e343c38d33abec4efd4d9a99e0568de"
+          "sha256": "68901807438e5417def2f6ce6c620ede9affc784e6a5aa37584259e7dcb80d01"
         },
         {
           "file": "../001-product-ui-foundation/image-coverage-map.md",

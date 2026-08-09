@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T01:32:55.726Z",
+  "generatedAt": "2026-08-09T01:54:59.921Z",
   "status": "fail",
   "mode": "check",
   "checkMode": true,
@@ -14,7 +14,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 159,
+      "durationMs": 90,
       "stdoutTail": [
         "Consumer vendor sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "would-copy: vendor/taliya-product-ui/taliya-tokens-0.1.1.tgz",
@@ -32,7 +32,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 115,
+      "durationMs": 86,
       "stdoutTail": [
         "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal (npm-registry)",
         "would-update: @taliya/tokens -> ^0.1.1",
@@ -49,7 +49,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 104,
+      "durationMs": 87,
       "stdoutTail": [
         "Consumer package install plan for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "blocked: @taliya/tokens dependency-mismatch registry-ok",
@@ -66,7 +66,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 123,
+      "durationMs": 98,
       "stdoutTail": [
         "Consumer lockfile audit: fail",
         "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit.md",
@@ -82,14 +82,14 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 154,
+      "durationMs": 132,
       "stdoutTail": [
         "Consumer package sync audit: fail",
         "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/001-product-ui-foundation/consumer-package-sync-audit.md",
         "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/001-product-ui-foundation/consumer-package-sync-audit.json"
       ],
       "stderrTail": [
-        "Out-of-sync packages: taliya-tokens-0.1.1.tgz, taliya-ui-0.1.1.tgz, taliya-crm-0.1.1.tgz, taliya-product-ui-local-manifest.json, @taliya/tokens/README.md, @taliya/tokens/dist/index.d.ts, @taliya/tokens/dist/index.js, @taliya/tokens/src/tokens.css, @taliya/ui/README.md, @taliya/ui/dist/index.d.ts, @taliya/ui/dist/index.js, @taliya/ui/src/styles.css, @taliya/crm/README.md, @taliya/crm/dist/index.d.ts, @taliya/crm/dist/index.js, @taliya/crm/dist/standard-page-kit.d.ts, @taliya/crm/dist/standard-page-kit.js, @taliya/crm/src/styles.css"
+        "Out-of-sync packages: taliya-tokens-0.1.1.tgz, taliya-ui-0.1.1.tgz, taliya-crm-0.1.1.tgz, taliya-product-ui-local-manifest.json, @taliya/tokens/dist/index.d.ts, @taliya/tokens/dist/index.js, @taliya/tokens/src/tokens.css, @taliya/ui/dist/index.d.ts, @taliya/ui/dist/index.js, @taliya/ui/src/styles.css, @taliya/crm/README.md, @taliya/crm/dist/index.d.ts, @taliya/crm/dist/index.js, @taliya/crm/src/styles.css"
       ]
     }
   ]
