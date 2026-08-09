@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T00:01:02.797Z",
-  "status": "in-progress",
+  "generatedAt": "2026-08-09T01:18:26.725Z",
+  "status": "complete",
   "targetRouteCount": 73,
-  "completedRouteCount": 35,
+  "completedRouteCount": 73,
   "failedRouteCount": 0,
-  "pendingRouteCount": 38,
+  "pendingRouteCount": 0,
   "duplicateImages": [],
   "staleImages": [],
   "invalidImages": [],
@@ -3108,38 +3108,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:55.102Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-a-onboarding-shell-global.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:55.193Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-a-onboarding-shell-global.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.266Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-a-onboarding-shell-global.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:55.357Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:55.438Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51B_round-4.1J_onboarding_agente-configuracao-chat-aprovado.png",
@@ -3173,38 +3190,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:55.603Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:55.684Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.356Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:55.847Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:55.930Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51C_round-4.1J_onboarding_workspace-configuracao-aprovado.png",
@@ -3238,38 +3272,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:56.107Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:56.199Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.444Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:56.389Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:56.478Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51D_round-4.1J_onboarding_bloco-1-studio-v2-sem-nome-aprovado.png",
@@ -3303,38 +3354,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:56.655Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-d-onboarding-studio.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:56.745Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-d-onboarding-studio.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.545Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-d-onboarding-studio.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:56.909Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:56.990Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51E_round-4.1J_onboarding_bloco-2-equipe-aprovado.png",
@@ -3368,38 +3436,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:57.152Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-e-onboarding-equipe.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:57.232Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-e-onboarding-equipe.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.639Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-e-onboarding-equipe.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:57.395Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:57.476Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51F_round-4.1J_onboarding_bloco-3-canais-aprovado.png",
@@ -3433,38 +3518,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:57.638Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-f-onboarding-canais.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:57.720Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-f-onboarding-canais.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.741Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-f-onboarding-canais.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:57.881Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:57.962Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51G_round-4.1J_onboarding_bloco-4-planos-aprovado.png",
@@ -3498,38 +3600,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:58.125Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-g-onboarding-planos.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:58.207Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-g-onboarding-planos.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.857Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-g-onboarding-planos.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:58.371Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:58.453Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51K_round-4.1J_onboarding_bloco-5-pagamento-aprovado.png",
@@ -3563,38 +3682,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:58.613Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-k-onboarding-pagamento.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:58.695Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-k-onboarding-pagamento.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:06.983Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-k-onboarding-pagamento.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:28:58.857Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:58.936Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51H_round-4.1J_onboarding_bloco-5-alunos-aprovado.png",
@@ -3628,38 +3764,57 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.187Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-h-onboarding-alunos.png",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.282Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-h-onboarding-alunos.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.363Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-h-onboarding-alunos.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.445Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Source selection, row actions, row selection, draft save, setup-agent quick reply"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:59.416Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51I_round-4.1J_onboarding_bloco-6-turmas-aprovado.png",
@@ -3693,38 +3848,57 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.608Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-i-onboarding-turmas.png",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.688Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-i-onboarding-turmas.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.771Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-i-onboarding-turmas.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:10:03.853Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Source selection, row actions, row selection, draft save, setup-agent quick reply"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:28:59.895Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51J_round-4.1J_onboarding_bloco-7-agenda-aprovado.png",
@@ -3758,38 +3932,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:00.056Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-j-onboarding-agenda.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:00.136Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-j-onboarding-agenda.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:07.278Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-j-onboarding-agenda.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:00.303Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:29:00.382Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "51L_round-4.1J_onboarding_bloco-9-revisao-aprovado.png",
@@ -3823,38 +4014,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:00.540Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-l-onboarding-revisao.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:00.620Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-l-onboarding-revisao.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:07.407Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-l-onboarding-revisao.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:00.779Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:29:00.858Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "52_round-4.1L_agentes_01_catalogo-agentes-aprovado.png",
@@ -3888,37 +4096,51 @@
         "drawer-or-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:56.102Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:56.185Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:56.281Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:56.373Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Story play test and drawer lifecycle"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:54:56.490Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -3953,37 +4175,51 @@
         "drawer-or-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:56.778Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:56.899Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:57.008Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:57.106Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Story play test and drawer lifecycle"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:54:57.195Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4018,37 +4254,51 @@
         "drawer-or-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:57.378Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:57.469Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:57.561Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:57.653Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Story play test and drawer lifecycle"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:54:57.745Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4083,37 +4333,51 @@
         "drawer-or-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:57.934Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:58.039Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:58.147Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:58.252Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Story play test and drawer lifecycle"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:54:58.349Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4148,37 +4412,51 @@
         "drawer-or-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:58.532Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:58.625Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:58.716Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:58.813Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Story play test and drawer lifecycle"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:54:58.907Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4213,37 +4491,51 @@
         "drawer-or-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.093Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.185Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.278Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.370Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Story play test and drawer lifecycle"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:54:59.464Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4278,37 +4570,51 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.078Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.174Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.253Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.333Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:11.414Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4343,37 +4649,51 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.591Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.683Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.798Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:11.953Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:12.097Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4408,37 +4728,51 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:12.338Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:12.442Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:12.547Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:12.651Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:12.770Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4473,37 +4807,51 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:12.991Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:13.107Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:13.218Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:13.321Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:13.426Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4538,37 +4886,51 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:13.638Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:13.748Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:13.858Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:13.967Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:14.087Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4602,37 +4964,51 @@
         "confirmation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:14.322Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:14.442Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:14.588Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:14.739Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:14.888Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4666,37 +5042,51 @@
         "confirmation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:15.159Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:15.273Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:15.377Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:15.482Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:15.585Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4730,37 +5120,51 @@
         "confirmation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:15.818Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:15.922Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:16.029Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:16.148Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:16.267Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4794,37 +5198,51 @@
         "pagination"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:16.509Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:16.613Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:16.732Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:16.846Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:16.955Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4858,37 +5276,51 @@
         "pagination"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:17.191Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:17.296Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:17.400Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:17.505Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:17.624Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4923,37 +5355,51 @@
         "drawer-or-panel-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.666Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.760Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.851Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:54:59.983Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Story play test and drawer lifecycle"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:55:00.240Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -4986,37 +5432,51 @@
         "handoff-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:17.881Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:17.986Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:18.089Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:18.192Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:18.297Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -5049,37 +5509,51 @@
         "handoff-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:18.521Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:18.642Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:18.762Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:18.868Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:18.973Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -5112,37 +5586,51 @@
         "handoff-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:19.212Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:19.328Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:19.446Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:19.567Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:19.686Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -5175,37 +5663,51 @@
         "handoff-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:19.909Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:20.012Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:20.130Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:20.246Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:20.348Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -5238,37 +5740,51 @@
         "handoff-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:20.565Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:20.686Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:20.807Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:20.915Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:21.057Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -5301,37 +5817,51 @@
         "handoff-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:21.504Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:21.639Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:21.739Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:21.831Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:21.922Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -5364,37 +5894,51 @@
         "handoff-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:22.130Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:22.250Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:22.365Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:22.473Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:22.579Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     },
     {
@@ -5429,38 +5973,55 @@
         "validation-states"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:01.016Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-78-onboarding-bem-vindo.png"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:01.096Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-78-onboarding-bem-vindo.png"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:40:07.541Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-78-onboarding-bem-vindo.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T00:29:01.255Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Fluxo play executado no Storybook preview."
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T00:29:01.335Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
-      "notes": []
+      "finalStatus": "pass",
+      "notes": [
+        "Revisao atual de Setup em 2026-08-09 com captura desktop, runtime responsivo e fluxo interativo."
+      ]
     },
     {
       "image": "79_round-4.1S_app-shell_01_base-web-sem-conteudo.png",
@@ -5490,37 +6051,51 @@
         "empty-state-actions"
       ],
       "canonicalVisual": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:22.838Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": []
       },
       "desktopResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:22.970Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "mobileResponsive": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:23.101Z",
+        "evidence": [
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json"
+        ],
         "issues": []
       },
       "interactionReview": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
+        "status": "pass",
+        "reviewedAt": "2026-08-09T01:18:23.259Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
         "issues": [],
-        "tested": []
+        "tested": [
+          "Isolated Storybook play flow and route controls"
+        ]
       },
       "sourceComparison": {
-        "status": "pending",
-        "reviewedAt": null,
-        "evidence": [],
-        "issues": []
+        "status": "not-applicable",
+        "reviewedAt": "2026-08-09T01:18:23.396Z",
+        "evidence": [
+          "specs/004-human-route-review/evidence/config-billing-access-20260809/config-billing-access-route-review-20260809.md"
+        ],
+        "issues": [
+          "Escopo atual valida rotas e exclui paridade 1:1 com o conjunto de imagens."
+        ]
       },
-      "finalStatus": "pending",
+      "finalStatus": "pass",
       "notes": []
     }
   ]

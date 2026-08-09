@@ -655,7 +655,7 @@ export const Image64ConfiguracoesNotificacoes: Story = {
   play: async ({ canvasElement }) => {
     resetSettingsActions();
     const canvas = within(canvasElement);
-    const frontdeskRole = canvasElement.querySelector<HTMLElement>('.tcrm-settings-notifications-workspace__role[data-role-id="frontdesk"]');
+    const frontdeskRole = canvasElement.querySelector<HTMLElement>('.tcrm-settings-notifications-workspace__role[data-role-id="frontdesk"] button');
     await expect(frontdeskRole).not.toBeNull();
     await userEvent.click(frontdeskRole!);
     await userEvent.click(canvas.getByRole("button", { name: "Alternar Aula com problema para Recepção" }));

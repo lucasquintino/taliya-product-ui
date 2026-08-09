@@ -1,55 +1,55 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T00:51:16.561Z",
+  "generatedAt": "2026-08-09T01:34:21.010Z",
   "readiness": {
-    "generatedAt": "2026-07-16T00:45:46.705Z",
+    "generatedAt": "2026-08-09T01:34:17.230Z",
     "status": "fail"
   },
-  "status": "pass",
+  "status": "fail",
   "rows": [
     {
       "file": "release-candidate-audit.json",
-      "generatedAt": "2026-07-16T00:46:41.765Z",
+      "generatedAt": "2026-08-09T01:32:57.865Z",
       "acceptanceClaim": false,
-      "staleByTime": false,
+      "staleByTime": true,
       "contradictsReadiness": false,
-      "status": "pass"
+      "status": "fail"
     },
     {
       "file": "official-library-readiness-audit.json",
-      "generatedAt": "2026-07-16T00:51:02.164Z",
+      "generatedAt": "2026-08-09T01:33:03.095Z",
       "acceptanceClaim": false,
-      "staleByTime": false,
+      "staleByTime": true,
       "contradictsReadiness": false,
-      "status": "pass"
+      "status": "fail"
     },
     {
       "file": "library-consumption-status.json",
-      "generatedAt": "2026-07-16T00:51:02.549Z",
+      "generatedAt": "2026-08-09T01:32:59.077Z",
       "acceptanceClaim": false,
-      "staleByTime": false,
+      "staleByTime": true,
       "contradictsReadiness": false,
-      "status": "pass"
+      "status": "fail"
     },
     {
       "file": "crm-real-readiness-audit.json",
-      "generatedAt": "2026-07-16T00:50:33.436Z",
+      "generatedAt": "2026-08-09T01:33:00.370Z",
       "acceptanceClaim": false,
-      "staleByTime": false,
+      "staleByTime": true,
       "contradictsReadiness": false,
-      "status": "pass"
+      "status": "fail"
     },
     {
       "file": "library-acceptance-audit.json",
-      "generatedAt": "2026-07-16T00:46:39.372Z",
+      "generatedAt": "2026-08-09T01:33:01.856Z",
       "acceptanceClaim": false,
-      "staleByTime": false,
+      "staleByTime": true,
       "contradictsReadiness": false,
-      "status": "pass"
+      "status": "fail"
     },
     {
       "file": "goal-completion-audit.json",
-      "generatedAt": "2026-07-16T00:51:02.918Z",
+      "generatedAt": "2026-08-09T01:34:18.503Z",
       "acceptanceClaim": false,
       "staleByTime": false,
       "contradictsReadiness": false,

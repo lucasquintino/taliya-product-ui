@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-05T19:35:00.805Z",
+  "generatedAt": "2026-08-09T01:33:03.095Z",
   "status": "fail",
   "officialConsumerReady": false,
   "globalGoalComplete": false,
@@ -8,12 +8,12 @@
   "currentInternalReady": false,
   "crmRealCanStart": false,
   "realFutureCrmAdoptionExecuted": false,
-  "releaseCandidateStatus": "pass",
+  "releaseCandidateStatus": "fail",
   "releaseCandidateGateCount": 103,
-  "releaseChannelStatus": "pass-registry-release-channel",
+  "releaseChannelStatus": "pass-local-release-channel",
   "releasePolicyStatus": "pass-registry-policy",
   "localTarballChannelReady": true,
-  "registryReady": true,
+  "registryReady": false,
   "registryManualItems": [
     "Choose the target registry and access model before publishing.",
     "Run npm provenance/publish steps from CI or a controlled release machine.",
@@ -88,9 +88,9 @@
     },
     {
       "id": "release-candidate",
-      "status": "pass",
+      "status": "fail",
       "evidence": "release-candidate-audit.json",
-      "note": "required gate report is in an accepted state"
+      "note": "required gate report is not in an accepted state"
     },
     {
       "id": "goal-completion",

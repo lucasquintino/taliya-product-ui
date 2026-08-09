@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-05T19:24:04.470Z",
+  "generatedAt": "2026-08-09T01:33:00.370Z",
   "status": "fail",
   "currentInternalReady": false,
   "crmRealCanStart": false,
@@ -22,7 +22,7 @@
       "id": "official-packages-and-release",
       "status": "fail",
       "evidence": "release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json",
-      "meaning": "Official release is incomplete: technicalCandidate=true, registryPublished=0/3."
+      "meaning": "Official release is incomplete: technicalCandidate=false, registryPublished=0/3."
     },
     {
       "id": "current-internal-fully-consuming",

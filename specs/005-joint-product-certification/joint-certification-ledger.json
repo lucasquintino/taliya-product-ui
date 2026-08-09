@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T00:01:53.871Z",
+  "generatedAt": "2026-08-09T01:10:25.169Z",
   "status": "in-progress",
   "reviewDimensions": [
     "productPurpose",
@@ -16,7 +16,7 @@
   "summary": {
     "visualTargetCount": 73,
     "surfaceCount": 50,
-    "legacyVisualPassCount": 35,
+    "legacyVisualPassCount": 55,
     "codexCompleteCount": 73,
     "productOwnerPassCount": 0,
     "jointPassCount": 0,
@@ -796,110 +796,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-a-onboarding-shell-global.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-a-onboarding-shell-global.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-a-onboarding-shell-global.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:27.396Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:27.497Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.694Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:27.648Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:27.889Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.080Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.207Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.321Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.441Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -931,110 +946,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.602Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.734Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.782Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.836Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:28.936Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.025Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.113Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.201Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.289Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -1066,110 +1096,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.377Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.465Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.870Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.553Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.642Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.729Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.818Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.907Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:29.995Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -1201,110 +1246,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-d-onboarding-studio.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-d-onboarding-studio.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-d-onboarding-studio.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.084Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.173Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.958Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.261Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.349Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.437Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.530Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.618Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.707Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -1336,110 +1396,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-e-onboarding-equipe.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-e-onboarding-equipe.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-e-onboarding-equipe.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.803Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.891Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:38.047Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:30.979Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.068Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.164Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.259Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.348Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.435Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -1471,110 +1546,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-f-onboarding-canais.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-f-onboarding-canais.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-f-onboarding-canais.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.523Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.612Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:38.134Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.700Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.788Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.875Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:31.962Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.050Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.139Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -1606,110 +1696,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-g-onboarding-planos.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-g-onboarding-planos.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-g-onboarding-planos.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.228Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.319Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:38.224Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.410Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.505Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.594Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.682Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.772Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.861Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -1741,110 +1846,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-k-onboarding-pagamento.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-k-onboarding-pagamento.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-k-onboarding-pagamento.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:32.949Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.037Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:38.319Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.125Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.213Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.300Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.389Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.478Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.566Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -1876,110 +1996,128 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-h-onboarding-alunos.png",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-h-onboarding-alunos.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-h-onboarding-alunos.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.654Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.742Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T01:10:24.020Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md",
+            "apps/docs/src/stories/ImageCoverageSetup.stories.tsx"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.829Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:33.919Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.007Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.095Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.186Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.274Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -2011,110 +2149,128 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-i-onboarding-turmas.png",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-i-onboarding-turmas.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-i-onboarding-turmas.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.362Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.451Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T01:10:24.111Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md",
+            "apps/docs/src/stories/ImageCoverageSetup.stories.tsx"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.540Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.628Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.715Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.803Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.891Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:34.980Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -2146,110 +2302,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-j-onboarding-agenda.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-j-onboarding-agenda.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-j-onboarding-agenda.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:35.068Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:35.157Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:38.583Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:35.246Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:35.334Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:35.506Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:35.894Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.048Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.153Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -2281,110 +2452,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-l-onboarding-revisao.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-l-onboarding-revisao.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-51-l-onboarding-revisao.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.255Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.366Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:38.670Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.457Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.545Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.634Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.723Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.811Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.899Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -2416,110 +2602,125 @@
         "note": "Usa shell proprio, sem sidebar operacional; comeca pela 77."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-78-onboarding-bem-vindo.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-78-onboarding-bem-vindo.png",
+          "specs/004-human-route-review/evidence/setup-20260809/desktop/desktop-crm-image-coverage-setup--image-78-onboarding-bem-vindo.png",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:36.988Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "requiredBlocks": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.076Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "interactionOutcomes": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:38.758Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "essentialStates": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.165Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "componentOwnership": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.253Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "duplicateArchitecture": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.341Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "responsiveLayout": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.429Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "accessibility": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.518Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         },
         "consumerBoundary": {
           "status": "pass",
-          "reviewedAt": "2026-08-05T03:40:34.212Z",
+          "reviewedAt": "2026-08-09T00:29:37.606Z",
           "evidence": [
             "specs/005-joint-product-certification/visual-diagnostics/setup-joint-certification-audit-20260805.md",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-final-current-20260805",
             "specs/005-joint-product-certification/visual-diagnostics/evidence/setup-responsive-current-20260805",
-            "specs/001-product-ui-foundation/component-source-map.md"
+            "specs/001-product-ui-foundation/component-source-map.md",
+            "specs/004-human-route-review/evidence/setup-20260809/setup-route-review-20260809.md"
           ],
           "findings": []
         }
@@ -6726,12 +6927,17 @@
         "note": "Subitem de Agentes."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
@@ -6888,12 +7094,17 @@
         "note": "Subitem de Agentes."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
@@ -7049,12 +7260,17 @@
         "note": "Politicas de agente ficam aqui."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
@@ -7210,12 +7426,17 @@
         "note": "Politicas de agente ficam aqui."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
@@ -7371,12 +7592,17 @@
         "note": "Imagem 58 usa linguagem final de simulacao."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
@@ -7478,12 +7704,17 @@
         "note": "Imagem 59; nao precisa aba propria."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {
@@ -7639,12 +7870,17 @@
         "note": "Recibo operacional, nao log tecnico."
       },
       "legacyHumanReview": {
-        "status": "pending",
-        "canonicalVisual": "pending",
-        "desktopResponsive": "pending",
-        "mobileResponsive": "pending",
-        "interactionReview": "pending",
-        "evidence": []
+        "status": "pass",
+        "canonicalVisual": "pass",
+        "desktopResponsive": "pass",
+        "mobileResponsive": "pass",
+        "interactionReview": "pass",
+        "evidence": [
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260809-final.json",
+          "specs/004-human-route-review/evidence/agentes-20260809/agentes-route-review-20260809.md"
+        ]
       },
       "codex": {
         "productPurpose": {

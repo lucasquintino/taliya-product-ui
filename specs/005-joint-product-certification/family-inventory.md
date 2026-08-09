@@ -1,6 +1,6 @@
 # Structural Family Inventory
 
-Generated: 2026-08-09T00:01:02.809Z
+Generated: 2026-08-09T00:29:40.314Z
 
 - Structural families: 15
 - Families mapped to current product surfaces: 13

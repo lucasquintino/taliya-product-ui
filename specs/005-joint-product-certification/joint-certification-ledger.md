@@ -1,12 +1,12 @@
 # Joint Certification Ledger
 
-Generated: 2026-08-09T00:01:53.871Z
+Generated: 2026-08-09T01:10:25.169Z
 
 Status: in-progress
 
 - Product surfaces: 50
 - Visual targets: 73
-- Legacy visual passes: 35
+- Legacy visual passes: 55
 - Codex complete: 73
 - Product-owner passes: 0
 - Joint passes: 0

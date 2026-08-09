@@ -1,22 +1,22 @@
 # Release Channel Audit
 
-Generated: 2026-08-05T16:56:35.787Z
+Generated: 2026-08-09T01:32:57.142Z
 
-Status: pass-registry-release-channel
+Status: pass-local-release-channel
 
 This report separates the current local install channel from a future registry publish channel. The local channel is enough for `taliya-internal` and for starting a real CRM app from vendored tarballs. Registry publication still needs explicit release decisions.
 
 ## Summary
 
 - Local tarball channel ready: `true`
-- Registry ready: `true`
-- Current package version: `0.1.0`
+- Registry ready: `false`
+- Current package version: `0.1.1`
 - Package artifacts pass: `true`
 - Local release manifest pass: `true`
 - Local release manifest: `dist-packages/taliya-product-ui-local-manifest.json`
 - Release policy: `pass-registry-policy`
-- Registry publication: `pass-published`
-- Registry consumer adoption: `pass-registry-adoption`
+- Registry publication: `not-published`
+- Registry consumer adoption: `not-adopted`
 - Consumer package sync: `pass`
 - Consumer vendor versioning: `pass`
 - Consumer config versioning: `pass`
@@ -27,13 +27,14 @@ This report separates the current local install channel from a future registry p
 
 | Package | Version | Private | Tarball exists | Registry version ready |
 | --- | --- | --- | --- | --- |
-| `@taliya/tokens` | `0.1.0` | no | yes | yes |
-| `@taliya/ui` | `0.1.0` | no | yes | yes |
-| `@taliya/crm` | `0.1.0` | no | yes | yes |
+| `@taliya/tokens` | `0.1.1` | no | yes | yes |
+| `@taliya/ui` | `0.1.1` | no | yes | yes |
+| `@taliya/crm` | `0.1.1` | no | yes | yes |
 
 ## Registry Blockers
 
-- None
+- npm registry publication is not proven for 0.1.1
+- taliya-internal registry adoption is not proven
 
 ## Meaning
 

@@ -1,6 +1,6 @@
 # Official Library Readiness Audit
 
-Generated: 2026-08-05T19:35:00.805Z
+Generated: 2026-08-09T01:33:03.095Z
 
 Status: fail
 
@@ -15,10 +15,10 @@ This report answers whether `taliya-product-ui` is ready to act as the official 
 - Global goal complete: `false`
 - Package version: `0.1.1`
 - Release-candidate gates: `103`
-- Release channel: `pass-registry-release-channel`
+- Release channel: `pass-local-release-channel`
 - Release policy: `pass-registry-policy`
 - Local tarball channel ready: `true`
-- Registry ready: `true`
+- Registry ready: `false`
 
 ## Gate Rows
 
@@ -35,7 +35,7 @@ This report answers whether `taliya-product-ui` is ready to act as the official 
 | `crm-real-readiness` | fail | crm-real-readiness-audit.json | required gate report is not in an accepted state |
 | `release-policy` | pass | release-policy-audit.json | required gate report is in an accepted state |
 | `release-channel` | pass | release-channel-audit.json | required gate report is in an accepted state |
-| `release-candidate` | pass | release-candidate-audit.json | required gate report is in an accepted state |
+| `release-candidate` | fail | release-candidate-audit.json | required gate report is not in an accepted state |
 | `goal-completion` | fail | goal-completion-audit.json | required gate report is not in an accepted state |
 | `@taliya/tokens` | pass | 0.1.1 | package metadata supports official consumer installation |
 | `@taliya/ui` | pass | 0.1.1 | package metadata supports official consumer installation |
