@@ -5,6 +5,17 @@
   width: var(--tl-icon-size, var(--taliya-control-icon-size-md));
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 .tl-icon--success {
   color: var(--taliya-status-success-fg);
 }

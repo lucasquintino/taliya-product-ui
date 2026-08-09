@@ -202,6 +202,7 @@
     ,"quality:select": "node scripts/quality/select-gates.mjs",
     "behavior-matrix:audit": "node scripts/quality/generate-behavior-matrix.mjs --check",
     "behavior-matrix:audit:update": "node scripts/quality/generate-behavior-matrix.mjs --update"
+    ,"story:tests": "node scripts/quality/run-story-tests.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",

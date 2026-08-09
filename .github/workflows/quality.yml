@@ -33,3 +33,5 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm quality:select --profile "$QUALITY_PROFILE" --stage "$QUALITY_STAGE"
       - run: pnpm quality:governance
+      - run: pnpm storybook:build
+      - run: node scripts/quality/run-story-tests.mjs
