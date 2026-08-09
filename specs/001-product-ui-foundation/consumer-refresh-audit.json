@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09T02:40:52.394Z",
+  "generatedAt": "2026-08-09T03:12:28.109Z",
   "status": "fail",
   "mode": "check",
   "checkMode": true,
@@ -14,7 +14,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 74,
+      "durationMs": 92,
       "stdoutTail": [
         "Consumer vendor sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "would-copy: vendor/taliya-product-ui/taliya-tokens-0.1.1.tgz",
@@ -32,7 +32,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 60,
+      "durationMs": 56,
       "stdoutTail": [
         "Consumer dependency sync dry-run for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal (npm-registry)",
         "would-update: @taliya/tokens -> ^0.1.1",
@@ -49,7 +49,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 59,
+      "durationMs": 51,
       "stdoutTail": [
         "Consumer package install plan for /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
         "blocked: @taliya/tokens dependency-mismatch registry-ok",
@@ -66,7 +66,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 71,
+      "durationMs": 58,
       "stdoutTail": [
         "Consumer lockfile audit: fail",
         "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit.md",
@@ -82,7 +82,7 @@
       "required": true,
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 97,
+      "durationMs": 99,
       "stdoutTail": [
         "Consumer package sync audit: fail",
         "Wrote /Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-product-ui-impl/specs/001-product-ui-foundation/consumer-package-sync-audit.md",
