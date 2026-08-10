@@ -1,6 +1,6 @@
 # Consumer Lockfile Audit
 
-Generated: 2026-07-16T12:34:41.005Z
+Generated: 2026-08-10T22:24:25.932Z
 
 Status: pass
 
@@ -16,6 +16,6 @@ Manifest: `dist-packages/taliya-product-ui-local-manifest.json`
 
 | Package | Lock entry | Expected version | Lock version | Root dependency | Resolved tarball | Integrity | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `@taliya/tokens` | yes | `0.1.0` | `0.1.0` | pass | pass | pass | pass |
-| `@taliya/ui` | yes | `0.1.0` | `0.1.0` | pass | pass | pass | pass |
-| `@taliya/crm` | yes | `0.1.0` | `0.1.0` | pass | pass | pass | pass |
+| `@taliya/tokens` | yes | `0.1.1` | `0.1.1` | pass | pass | pass | pass |
+| `@taliya/ui` | yes | `0.1.1` | `0.1.1` | pass | pass | pass | pass |
+| `@taliya/crm` | yes | `0.1.1` | `0.1.1` | pass | pass | pass | pass |

@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-09T03:12:25.633Z",
-  "status": "fail",
-  "currentInternalLibraryAccepted": false,
-  "currentInternalConsumptionPass": false,
+  "generatedAt": "2026-08-10T22:38:34.114Z",
+  "status": "pass-current-internal-library",
+  "currentInternalLibraryAccepted": true,
+  "currentInternalConsumptionPass": true,
   "internalRouteWorkspacePass": true,
   "publicPageKitPass": true,
   "technicalReleaseCandidatePass": true,
-  "aggregateReadinessPass": false,
+  "aggregateReadinessPass": true,
   "futureCrmProcessPass": true,
   "futureCrmRealAdoptionExecuted": false,
   "globalGoalComplete": false,
@@ -88,21 +88,17 @@
     "goal-completion"
   ],
   "distributionChannel": "npm-registry",
-  "missingReadinessGateIds": [
-    "consumer-integration",
-    "registry-consumer-adoption",
-    "goal-completion"
-  ],
+  "missingReadinessGateIds": [],
   "rows": [
     {
       "id": "current-internal-accepted",
-      "status": "fail",
+      "status": "pass",
       "evidence": "library-acceptance-audit.json",
       "meaning": "Current Internal can use taliya-product-ui as the official reusable UI library."
     },
     {
       "id": "current-internal-consuming-official-kit",
-      "status": "fail",
+      "status": "pass",
       "evidence": "consumer integration/page-kit/runtime and registry-consumer-adoption audits",
       "meaning": "Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones."
     },
@@ -126,9 +122,9 @@
     },
     {
       "id": "aggregate-readiness",
-      "status": "fail",
+      "status": "pass",
       "evidence": "library-readiness-gate.json",
-      "meaning": "Readiness is missing required gates: consumer-integration, registry-consumer-adoption, goal-completion."
+      "meaning": "The aggregate package, consumer, future-fixture, and governance gates are green."
     },
     {
       "id": "future-crm-process",

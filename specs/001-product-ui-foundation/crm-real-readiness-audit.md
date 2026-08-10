@@ -1,15 +1,15 @@
 # CRM Real Readiness Audit
 
-Generated: 2026-08-09T03:12:26.555Z
+Generated: 2026-08-10T22:38:34.626Z
 
-Status: fail
+Status: pass-ready-to-start-crm-real
 
 This report answers whether `taliya-product-ui` is practically ready to start the real CRM implementation and what still blocks global completion. It consolidates the official package, Internal adoption, page-kit, dynamic page/drawer, bootstrap, future-consumer, and visual-scope evidence.
 
 ## Summary
 
-- Current Internal ready: `false`
-- CRM real can start from the library: `false`
+- Current Internal ready: `true`
+- CRM real can start from the library: `true`
 - Real future CRM adoption executed: `false`
 - Global goal complete: `false`
 
@@ -20,8 +20,8 @@ This report answers whether `taliya-product-ui` is practically ready to start th
 - Remaining page/image stories checked: 54/54
 - Domain drawer families checked: 13
 - Internal covered routes: 4
-- Published npm packages: 0/3
-- Registry-adopted Internal packages: 0/3
+- Published npm packages: 3/3
+- Registry-adopted Internal packages: 3/3
 - Future CRM candidates discovered: 0
 - Future CRM candidates adopted: 0
 
@@ -29,9 +29,9 @@ This report answers whether `taliya-product-ui` is practically ready to start th
 
 | Area | Status | Evidence | Meaning |
 | --- | --- | --- | --- |
-| `official-packages-and-release` | fail | release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json | Official release is incomplete: technicalCandidate=true, registryPublished=0/3. |
-| `current-internal-fully-consuming` | fail | library-consumption-status.json and consumer-page-kit-audit.json | Internal functionally consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones. |
-| `current-internal-registry-adoption` | fail | registry-consumer-adoption-audit.json | Internal still lacks official registry adoption: adopted=0/3, distributionConfig=false. |
+| `official-packages-and-release` | pass | release-candidate-audit.json, library-consumption-status.json, and registry-publication-audit.json | Packages are buildable, installable, audited, release-ready, and all three exact versions are public on npm. |
+| `current-internal-fully-consuming` | pass | library-consumption-status.json and consumer-page-kit-audit.json | Internal functionally consumes official shell, filters, tables, kanban, drawers, route states, and wrapper roots without local visual clones. |
+| `current-internal-registry-adoption` | pass | registry-consumer-adoption-audit.json | Internal resolves all three official packages from npm with aligned manifests, lockfile, installed versions, and distribution config. |
 | `standard-page-kit-complete` | pass | public-api-audit.json and standard-page-kit.manifest.json | The standard page kit exposes the core components needed to start CRM pages. |
 | `remaining-page-story-coverage` | pass | remaining-page-coverage-audit.json and static Storybook index | Every remaining page/image has an individual static Storybook entry using official page compositions, with generic table/metric/kanban placeholders rejected. |
 | `dynamic-page-contracts` | pass | component-api-contract.md and package public interfaces | Pages are composed through official shell/filter/quick-filter/table slots, rows, state props, and callbacks. |
@@ -72,8 +72,6 @@ This report answers whether `taliya-product-ui` is practically ready to start th
 
 ## Next Actions
 
-- Publish @taliya/tokens, @taliya/ui, and @taliya/crm at the exact aligned version through the official npm release workflow.
-- Migrate taliya-internal from vendored tarballs to the published npm versions and refresh its manifest, lockfile, installed modules, and distribution config.
 - Create or connect the real CRM app.
 - Bootstrap or version taliya-readiness.config.json and taliya-page-kit.config.json in the CRM app.
 - Compose CRM pages only from official page-kit roots; promote missing variants back into @taliya/ui or @taliya/crm.

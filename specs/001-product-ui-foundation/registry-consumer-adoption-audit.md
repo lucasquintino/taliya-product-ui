@@ -1,20 +1,20 @@
 # Registry Consumer Adoption Audit
 
-Generated: 2026-08-05T18:38:14.685Z
+Generated: 2026-08-10T22:24:24.514Z
 
-Status: not-adopted
+Status: pass-registry-adoption
 
 This report proves that the real Internal consumer uses the published npm packages rather than vendored tarball dependency sources.
 
 - Consumer: `/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal`
 - Version: `0.1.1`
-- Registry publication: missing
-- Distribution config: pending
+- Registry publication: pass
+- Distribution config: pass
 - No effective vendor dependencies: pass
-- Adopted packages: 0/3
+- Adopted packages: 3/3
 
 | Package | Dependency | Root lock | Locked version | Registry resolved | Installed | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `@taliya/tokens` | `^0.1.0` | `^0.1.0` | `0.1.0` | yes | `0.1.0` | pending |
-| `@taliya/ui` | `^0.1.0` | `^0.1.0` | `0.1.0` | yes | `0.1.0` | pending |
-| `@taliya/crm` | `^0.1.0` | `^0.1.0` | `0.1.0` | yes | `0.1.0` | pending |
+| `@taliya/tokens` | `^0.1.1` | `^0.1.1` | `0.1.1` | yes | `0.1.1` | pass |
+| `@taliya/ui` | `^0.1.1` | `^0.1.1` | `0.1.1` | yes | `0.1.1` | pass |
+| `@taliya/crm` | `^0.1.1` | `^0.1.1` | `0.1.1` | yes | `0.1.1` | pass |
