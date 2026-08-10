@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-10T22:49:19.281Z",
-  "sourceCommit": "28b5343c1bb3c13d5ee7cc207d8eda85ecaf24e4",
+  "generatedAt": "2026-08-10T22:58:52.909Z",
+  "sourceCommit": "6635ec8657ffc723e19f4852e99a620ab9cbff52",
   "sourceTreeSha256": "05391600fe536c085a6234112fe32c15bc83808c5b146f1d7186a9f0eb404783",
   "reportCount": 72,
   "reports": [
@@ -142,7 +142,7 @@
     },
     {
       "file": "consumer-refresh-audit.json",
-      "sha256": "e2abaa7f46829ad298c205b39209e3fe95605aad16c9421257af1e4e659751ac",
+      "sha256": "70e78d8e1825cc6b45fbacf6fe40ab67fc199a0ed811cb8f029fcf178d297f24",
       "dependencies": []
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "file": "goal-completion-audit.json",
-      "sha256": "be09d2fa08875c61d366103145251a0e18af32df7d73909e0a5e5dd62cee0cd9",
+      "sha256": "0b8e424e9f8fd7d98347c3666dd352e6e6c7c1b0d2fec1eb597e6eba69812cf1",
       "dependencies": []
     },
     {
@@ -252,7 +252,7 @@
         {
           "file": "goal-completion-audit.json",
           "exists": true,
-          "sha256": "be09d2fa08875c61d366103145251a0e18af32df7d73909e0a5e5dd62cee0cd9"
+          "sha256": "0b8e424e9f8fd7d98347c3666dd352e6e6c7c1b0d2fec1eb597e6eba69812cf1"
         },
         {
           "file": "library-readiness-gate.json",
@@ -298,7 +298,7 @@
         {
           "file": "goal-completion-audit.json",
           "exists": true,
-          "sha256": "be09d2fa08875c61d366103145251a0e18af32df7d73909e0a5e5dd62cee0cd9"
+          "sha256": "0b8e424e9f8fd7d98347c3666dd352e6e6c7c1b0d2fec1eb597e6eba69812cf1"
         }
       ]
     },
@@ -406,7 +406,7 @@
         {
           "file": "goal-completion-audit.json",
           "exists": true,
-          "sha256": "be09d2fa08875c61d366103145251a0e18af32df7d73909e0a5e5dd62cee0cd9"
+          "sha256": "0b8e424e9f8fd7d98347c3666dd352e6e6c7c1b0d2fec1eb597e6eba69812cf1"
         }
       ]
     },
