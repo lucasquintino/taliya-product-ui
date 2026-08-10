@@ -7,6 +7,7 @@ import http from "node:http";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { chromium } from "@playwright/test";
+import { hasSourceChanges } from "./source-identity.mjs";
 
 const root = process.cwd();
 const storybookFlag = process.argv.indexOf("--storybook-dir");
@@ -64,7 +65,7 @@ await Promise.all(Array.from({ length: Math.min(workerCount, entries.length) }, 
 await browser.close();
 await new Promise((resolve) => server.close(resolve));
 const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
-const dirty = Boolean(spawnSync("git", ["status", "--porcelain", "--untracked-files=all"], { cwd: root, encoding: "utf8" }).stdout.trim());
+const dirty = hasSourceChanges(root);
 const sourceTreeHash = (() => {
   const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
   const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative)).sort().map((relative) => {

@@ -5,10 +5,11 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { hasSourceChanges } from "./source-identity.mjs";
 
 const root = process.cwd();
 const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
-const sourceDirty = Boolean(spawnSync("git", ["status", "--porcelain", "--untracked-files=all"], { cwd: root, encoding: "utf8" }).stdout.trim());
+const sourceDirty = hasSourceChanges(root);
 const normalizedHash = (value) => crypto.createHash("sha256").update(value).digest("hex");
 const isGeneratedEvidencePath = (relative) => relative.startsWith("artifacts/") || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
 const sourceTreeHash = (() => {

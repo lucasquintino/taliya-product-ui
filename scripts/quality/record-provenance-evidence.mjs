@@ -5,6 +5,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { hasSourceChanges } from "./source-identity.mjs";
 
 const root = process.cwd();
 const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex");
@@ -26,7 +27,7 @@ const hashFile = (relative) => {
 };
 const isGeneratedEvidencePath = (relative) => relative.startsWith("artifacts/") || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
 const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
-const sourceDirty = Boolean(spawnSync("git", ["status", "--porcelain", "--untracked-files=all"], { cwd: root, encoding: "utf8" }).stdout.trim());
+const sourceDirty = hasSourceChanges(root);
 const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
 const sourceRows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative)).sort().map((relative) => {
   const raw = fs.readFileSync(path.join(root, relative));
