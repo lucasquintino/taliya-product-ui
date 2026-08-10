@@ -153,7 +153,7 @@ const existing = existsSync(outputPath) ? JSON.parse(readFileSync(outputPath, "u
 const manifest = {
   schemaVersion: 1,
   generatedAt: checkMode && existing?.generatedAt ? existing.generatedAt : new Date().toISOString(),
-  sourceCommit: gitOutput(["rev-parse", "HEAD"]) || null,
+  sourceCommit: existing?.sourceCommit ?? (gitOutput(["rev-parse", "HEAD"]) || null),
   sourceTreeSha256: sourceTree.digest("hex"),
   reportCount: reports.length,
   reports
