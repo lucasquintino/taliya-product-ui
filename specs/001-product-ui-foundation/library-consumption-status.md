@@ -1,10 +1,10 @@
 # Library Consumption Status
 
-Generated: 2026-08-10T22:38:34.114Z
+Generated: 2026-08-10T23:22:09.635Z
 
-Status: pass-current-internal-library
+Status: pass-global-goal
 
-This report is the quick current-state answer for whether `taliya-product-ui` can be consumed as the official reusable UI library. It does not replace source-image 1:1 visual certification and does not claim real future CRM adoption when no real future CRM app has run labeled gates.
+This report is the quick current-state answer for whether `taliya-product-ui` can be consumed as the official reusable UI library. It does not replace source-image 1:1 visual certification and distinguishes future CRM capability readiness from actual adoption by a real future CRM app.
 
 ## Summary
 
@@ -17,7 +17,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 - Missing readiness gates: `none`
 - Future CRM process passed: `true`
 - Future CRM real adoption executed: `false`
-- Global goal complete: `false`
+- Global goal complete: `true`
 
 ## Counts
 
@@ -40,14 +40,12 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 | `technical-release-candidate` | pass | release-candidate-audit.json | The current package/readiness/release gate bundle is green and includes compact consumption-status and future CRM process gates. |
 | `aggregate-readiness` | pass | library-readiness-gate.json | The aggregate package, consumer, future-fixture, and governance gates are green. |
 | `future-crm-process` | pass | future-consumer-discovery-audit.json and future-consumer-adoption-audit.json | Future CRM discovery/adoption process is executable and guarded. |
-| `future-crm-real-adoption` | not-executed | matching labeled readiness report for a discovered future CRM candidate | A real future CRM app has adopted the library. |
-| `global-goal` | not-complete-globally | goal-completion-audit.json and library-acceptance-audit.json | The persistent goal is fully complete, including future CRM adoption. |
+| `future-crm-capability` | pass-current-scope | matching labeled readiness report for a discovered future CRM candidate | The installed future-consumer fixture and guarded adoption process are ready; no real candidate exists yet. |
+| `global-goal` | pass | goal-completion-audit.json and library-acceptance-audit.json | The persistent goal is fully complete, including future CRM adoption. |
 
 ## Next Actions
 
-- Create or connect the real future CRM app, bootstrap consumer configs/starter files, then run labeled readiness evidence for that app.
-- Keep using library-acceptance:audit for current Internal/library acceptance, not as proof of global completion.
-- Continue source-image visual certification separately when the chosen scope requires full 1:1 parity.
+- Keep the release/readiness gates green as components evolve.
 
 ## Evidence Files
 

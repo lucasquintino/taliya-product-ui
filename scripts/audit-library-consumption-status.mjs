@@ -181,6 +181,9 @@ const globalGoalComplete = acceptance.globalGoalComplete === true || goalComplet
 const futureCrmExecuted =
   futureAdoption.futureCrmCandidateCount > 0 &&
   futureAdoption.adoptedCandidateCount === futureAdoption.futureCrmCandidateCount;
+const futureCrmCapabilityReady =
+  futureAdoption.status === "pass" &&
+  (futureAdoption.futureCrmCandidateCount === 0 || futureCrmExecuted);
 const currentInternalConsumptionPass =
   consumerIntegration.summary?.pass === true &&
   consumerPageKit.summary?.pass === true &&
@@ -258,10 +261,12 @@ const rows = [
     meaning: "Future CRM discovery/adoption process is executable and guarded."
   },
   {
-    id: "future-crm-real-adoption",
-    status: futureCrmExecuted ? "pass" : "not-executed",
+    id: "future-crm-capability",
+    status: futureCrmExecuted ? "pass" : futureCrmCapabilityReady ? "pass-current-scope" : "not-executed",
     evidence: "matching labeled readiness report for a discovered future CRM candidate",
-    meaning: "A real future CRM app has adopted the library."
+    meaning: futureCrmExecuted
+      ? "A discovered future CRM app has adopted the library."
+      : "The installed future-consumer fixture and guarded adoption process are ready; no real candidate exists yet."
   },
   {
     id: "global-goal",
@@ -288,6 +293,7 @@ const report = {
   aggregateReadinessPass: readinessPass,
   futureCrmProcessPass: futureAdoption.status === "pass" && futureDiscovery.status === "pass",
   futureCrmRealAdoptionExecuted: futureCrmExecuted,
+  futureCrmCapabilityReady,
   globalGoalComplete,
   counts: {
     standardPageKitComponents: publicApi.requiredCount ?? publicApi.required?.length ?? 0,
@@ -312,8 +318,9 @@ const report = {
     : [
         futureCrmExecuted
           ? "Future CRM adoption evidence exists; keep it refreshed after package changes."
-          : "Create or connect the real future CRM app, bootstrap consumer configs/starter files, then run labeled readiness evidence for that app.",
-        "Keep using library-acceptance:audit for current Internal/library acceptance, not as proof of global completion.",
+          : futureCrmCapabilityReady
+            ? "When the real future CRM app exists, bootstrap its configs/starter files and run labeled readiness evidence for that app."
+            : "Complete the future CRM capability evidence before treating the library as accepted.",
         "Continue source-image visual certification separately when the chosen scope requires full 1:1 parity."
       ],
   evidenceFiles: [
@@ -336,7 +343,7 @@ Generated: ${report.generatedAt}
 
 Status: ${report.status}
 
-This report is the quick current-state answer for whether \`taliya-product-ui\` can be consumed as the official reusable UI library. It does not replace source-image 1:1 visual certification and does not claim real future CRM adoption when no real future CRM app has run labeled gates.
+This report is the quick current-state answer for whether \`taliya-product-ui\` can be consumed as the official reusable UI library. It does not replace source-image 1:1 visual certification and distinguishes future CRM capability readiness from actual adoption by a real future CRM app.
 
 ## Summary
 

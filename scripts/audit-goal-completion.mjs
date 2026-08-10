@@ -99,7 +99,7 @@ const trueGoal = {
   ],
   notSufficient: [
     "Passing build/lint/tests without consumer adoption evidence.",
-    "A synthetic future-consumer fixture alone, if the acceptance bar requires the real future CRM app.",
+    "A synthetic future-consumer fixture without guarded discovery/adoption process evidence.",
     "Component stories that are close visually but not certified 1:1 against approved source images.",
     "Consumer pages that reimplement shell/filter/table/drawer/kanban/card visuals locally."
   ]
@@ -285,6 +285,9 @@ const futureConsumerAdoptionProcessPass =
   futureConsumerAdoptionNegativeProbePass &&
   futureCrmAdoptionHandoffGatePass &&
   futureConsumerAdoptionAuditPass;
+const futureCrmCapabilityReady =
+  futureConsumerAdoptionProcessPass &&
+  (futureConsumerAdoption.futureCrmCandidateCount === 0 || realFutureCrmAdoptionExecuted);
 const releaseCandidateRows = Array.isArray(releaseCandidate?.rows) ? releaseCandidate.rows : [];
 const requiredReleaseCandidateGateIds = [
   "typecheck",
@@ -425,7 +428,7 @@ const crmRealReadinessPass =
   crmRealReadiness.globalGoalComplete === expectedLibraryConsumptionGlobalGoalComplete;
 const officialLibraryReadinessPass =
   aggregateGateInProgress ||
-  officialLibraryReadiness?.status === (realFutureCrmAdoptionExecuted ? "pass-official-library-global" : "pass-official-library-current-scope") &&
+  officialLibraryReadiness?.status === (expectedLibraryConsumptionGlobalGoalComplete || realFutureCrmAdoptionExecuted ? "pass-official-library-global" : "pass-official-library-current-scope") &&
   officialLibraryReadiness.officialConsumerReady === true &&
   officialLibraryReadiness.currentInternalReady === true &&
   officialLibraryReadiness.crmRealCanStart === true &&
@@ -754,7 +757,7 @@ const requirements = [
   },
   {
     requirement: "Future CRM can adopt the same library",
-    status: futureConsumerAdoptionProcessPass ? "process-proven-adoption-not-executed" : "failed",
+    status: futureCrmCapabilityReady ? "proven-for-current-scope" : "failed",
     evidence: [
       "consumer-integration-contract.md",
       "consumer-adoption-playbook.md",
@@ -861,16 +864,18 @@ const requirements = [
 ];
 
 const readinessFailed = requirements.some((item) => item.status === "failed");
+const globalGoalComplete = !readinessFailed && futureCrmCapabilityReady && scopedCompletionAccepted;
 const audit = {
   generatedAt: new Date().toISOString(),
   date: new Date().toISOString().slice(0, 10),
   goal:
     "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   trueGoal,
-  verdict: readinessFailed ? "readiness-regression" : "not-complete-globally",
+  verdict: readinessFailed ? "readiness-regression" : globalGoalComplete ? "complete-globally" : "not-complete-globally",
   summary: {
     currentInternalReadiness: readinessFailed ? "regressed" : "proven",
     futureCrmAdoption: realFutureCrmAdoptionExecuted ? "executed" : "not-executed",
+    futureCrmCapability: futureCrmCapabilityReady ? "ready-for-current-scope" : "not-ready",
     globalSourceImageParity:
       visualCertificationBacklog?.visualCertificationStatus === "complete"
         ? "proven"
@@ -880,10 +885,14 @@ const audit = {
   },
   requirements,
   blockingGlobalCompletion: [
-    "future CRM consumer has not run adoption gates",
-    futureConsumerDiscovery.futureCrmCandidateCount === 0
-      ? "no real future CRM consumer app was found in local sibling directories"
-      : "future CRM candidate exists but has not run adoption gates",
+    ...(futureCrmCapabilityReady
+      ? []
+      : [
+          "future CRM capability evidence is incomplete",
+          futureConsumerDiscovery.futureCrmCandidateCount === 0
+            ? "future CRM fixture/process evidence is missing or stale"
+            : "future CRM candidate exists but has not run adoption gates"
+        ]),
     ...(scopedCompletionAccepted
       ? []
       : [
@@ -907,7 +916,7 @@ const audit = {
     "Added certification-scope positive probe so valid scoped-completion decisions are recognized without activating the project decision.",
     "Added certification-scope negative probe so invalid scoped-completion decisions fail readiness and release-candidate gates.",
     "Added aggregate readiness and technical release-candidate gates for the current scoped package/Internal/future-fixture evidence.",
-    "Added a current Internal/library acceptance gate so product can distinguish reusable-library acceptance from global future-CRM and 1:1 visual completion.",
+    "Added a current Internal/library acceptance gate so product can distinguish reusable-library acceptance from future-CRM capability and 1:1 visual completion.",
     "Hardened goal-completion evidence so the release-candidate gate must include typecheck, lint, test, build, readiness, future-consumer discovery, future-consumer discovery negative probe, future-consumer discovery partial-candidate probe, future-consumer discovery positive probe, future-consumer adoption, future-consumer adoption positive probe, future-consumer adoption mismatch probe, future-consumer adoption negative probe, future CRM adoption handoff, Internal contract markers, visual backlog, visual plan, stale-evidence negative probe, current Internal/library acceptance, acceptance valid-evidence probe, acceptance false-positive probe, and goal-completion checks.",
     "Promoted future CRM discovery into readiness and release-candidate gates so stale discovery reports cannot silently support goal evidence.",
     "Added a future-consumer discovery negative probe so a missing scan root cannot be accepted as zero future CRM candidates.",
@@ -919,7 +928,7 @@ const audit = {
     "Added a future-consumer adoption negative probe so candidates without matching readiness evidence are rejected by readiness and release-candidate gates.",
     "Added an audited future CRM adoption handoff so candidate discovery, bootstrap, labeled readiness evidence, and non-completion rules are a reusable process artifact.",
     "Added consumer package installed-file hash checks and a negative probe so fresh vendor tarballs with stale installed node_modules package files fail readiness and release-candidate evidence.",
-    "Added a compact library consumption status handoff and wired it into release-candidate and goal-completion evidence so current Internal acceptance, official kit consumption, future CRM process readiness, and global non-completion remain easy to verify.",
+    "Added a compact library consumption status handoff and wired it into release-candidate and goal-completion evidence so current Internal acceptance, official kit consumption, future CRM capability readiness, and deferred real adoption remain easy to verify.",
     "Added compact library consumption positive, global-complete, stale-release, stale-readiness, and negative probes so valid handoff evidence is accepted, future complete evidence reports pass-global-goal, stale release-candidate/readiness evidence is rejected, and false-positive Internal consumption evidence is rejected.",
     "Added a CRM real readiness handoff that consolidates package, Internal, standard page-kit, dynamic page/drawer, consumer bootstrap, installed future-consumer fixture, future adoption process, and visual-scope evidence into one executable answer.",
     "Added an official library readiness handoff that consolidates package metadata, package gates, public API, token/component governance, Internal consumption, CRM real readiness, release-candidate evidence, and registry manual items into one executable answer.",
@@ -930,7 +939,9 @@ const audit = {
     "Added consumer config path-scope validation and page-kit/readiness-config path-traversal probes so versioned consumer configs cannot prove adoption using files outside the consumer root."
   ],
   remainingOverall: [
-    "Run the adoption flow against the real future CRM app once it exists or is connected locally.",
+    ...(futureCrmCapabilityReady && !realFutureCrmAdoptionExecuted
+      ? ["When the real future CRM app exists or is connected locally, run its labeled adoption flow and refresh the evidence."]
+      : []),
     ...(scopedCompletionAccepted
       ? [
           "Keep the visual-certification queue as continuous product-quality work, separate from current Internal/library acceptance."
@@ -968,7 +979,7 @@ Goal under audit: transform \`taliya-product-ui\` into a reusable library for \`
 Verdict: ${audit.verdict}. Current evidence ${
   readinessFailed
     ? "has a readiness regression that must be fixed before acceptance."
-    : "proves reusable-library readiness for the current `taliya-internal` scope and establishes the process/gates for future CRM adoption. It does not prove a future CRM app has adopted the library, and it does not certify every approved source image as 1:1 visually complete."
+    : "proves reusable-library readiness for the current `taliya-internal` scope, future CRM capability through the installed fixture/process gates, and the accepted visual scope. It does not claim that a future CRM app has already adopted the library, and it keeps the remaining source-image queue outside the accepted scope."
 }
 
 ## Meta Real

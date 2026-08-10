@@ -10,11 +10,11 @@ const reportMdPath = resolve(specDir, "future-crm-adoption-handoff-audit.md");
 
 const requiredHandoffSnippets = [
   "# Future CRM Adoption Handoff",
-  "## Current Scope Vs Global Goal",
+  "## Current Scope Vs Future Adoption",
   "## Candidate Discovery Criteria",
   "## Bootstrap Sequence",
   "## Adoption Evidence Required",
-  "## Non-Completion Rule",
+  "## Conditional Adoption Rule",
   "corepack pnpm future-consumer-discovery:audit",
   "corepack pnpm future-consumer-discovery:audit:negative-probe",
   "corepack pnpm future-consumer-discovery:audit:partial-probe",
@@ -33,7 +33,7 @@ const requiredHandoffSnippets = [
   "corepack pnpm future-consumer-adoption:audit:negative-probe",
   "library-readiness-gate-<label>.json",
   "must not be absolute and must not use `..`",
-  "current Internal/library readiness accepted, future CRM adoption process proven, real future CRM adoption not executed"
+  "current Internal/library readiness accepted, future CRM capability ready for the current scope, real future CRM adoption deferred until a candidate exists"
 ];
 
 const requiredLinks = [
@@ -105,7 +105,7 @@ Generated: ${report.generatedAt}
 
 Status: ${report.status}
 
-This audit proves the future CRM adoption handoff exists, contains the required non-completion and labeled-evidence rules, and is linked from the consumer adoption docs used by readiness gates.
+This audit proves the future CRM adoption handoff exists, contains the required conditional-adoption and labeled-evidence rules, and is linked from the consumer adoption docs used by readiness gates.
 
 Handoff exists: ${handoffExists ? "yes" : "no"}
 

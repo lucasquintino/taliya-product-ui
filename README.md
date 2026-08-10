@@ -335,7 +335,7 @@ corepack pnpm library-consumption-status:audit:stale-readiness-probe
 corepack pnpm library-consumption-status:audit:negative-probe
 ```
 
-Esse comando escreve `library-consumption-status.md/json` e consolida se o Internal esta aceito, se consome o page kit oficial, se o manifest runtime esta disponivel, se o processo do futuro CRM esta pronto, se a adocao real do futuro CRM aconteceu, e se a meta global ainda esta aberta.
+Esse comando escreve `library-consumption-status.md/json` e consolida se o Internal esta aceito, se consome o page kit oficial, se o manifest runtime esta disponivel, se a capacidade do futuro CRM esta pronta e se a adocao real deve ser executada quando surgir um candidato.
 Os probes validam que evidencia coerente e aceita, que evidencia futura completa vira `pass-global-goal`, que um release antigo sem os gates de consumo e rejeitado, que readiness antigo sem gates agregados obrigatorios e rejeitado, e que um falso positivo de consumo do Internal e rejeitado.
 
 Prontidao pratica para iniciar o CRM real:

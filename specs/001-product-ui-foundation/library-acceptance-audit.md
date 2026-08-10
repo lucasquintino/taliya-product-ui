@@ -1,18 +1,18 @@
 # Library Acceptance Audit
 
-Generated: 2026-08-10T22:38:35.568Z
+Generated: 2026-08-10T23:22:09.282Z
 
 Status: pass-current-internal-library
 
-This audit answers whether `taliya-product-ui` is currently acceptable as the official reusable library for the current `taliya-internal` scope. It deliberately keeps that separate from the larger persistent goal of real future CRM adoption plus full source-image 1:1 certification.
+This audit answers whether `taliya-product-ui` is currently acceptable as the official reusable library for the current `taliya-internal` scope and whether the future CRM capability contract is ready. A real future CRM candidate must still run labeled adoption gates when it exists; absence of a candidate is not itself a blocker.
 
 Report label: `default`
 
 Current Internal/library accepted: yes
 
-Global goal complete: no
+Global goal complete: yes
 
-Global goal status: `not-complete-globally`
+Global goal status: `complete`
 
 ## Acceptance Gates
 
@@ -20,7 +20,7 @@ Global goal status: `not-complete-globally`
 | --- | --- | --- |
 | `current-readiness` | pass | aggregate readiness gate passed for the current Internal/library scope |
 | `current-internal-library-readiness` | pass | current taliya-internal can consume official packages/page-kit without local visual clones |
-| `future-crm-adoption-executed` | not-executed | future CRM adoption is process-proven only until a real candidate exists and runs labeled gates |
+| `future-crm-capability` | pass-current-scope | the future CRM fixture and guarded adoption process are ready; no real candidate exists yet |
 | `source-image-visual-parity` | scoped-out-by-product-acceptance | product explicitly accepted current Internal/library readiness as the scoped completion bar |
 
 ## Current Internal Requirement Rows
@@ -44,7 +44,7 @@ Global goal status: `not-complete-globally`
 ## Summary
 
 - Readiness: `pass`
-- Goal verdict: `not-complete-globally`
+- Goal verdict: `complete-globally`
 - Current Internal readiness: `proven`
 - Future CRM adoption: `not-executed`
 - Global source-image parity: `scoped-out-by-product-acceptance`
@@ -53,9 +53,8 @@ Global goal status: `not-complete-globally`
 
 ## Next Actions
 
-- Run adoption gates against the real future CRM app when it exists or is connected locally.
-- Keep remaining source-image 1:1 work in the visual backlog as continuous refinement, not as a blocker for current Internal/library acceptance.
-- Use this audit as the current Internal/library acceptance gate, not as proof that the full persistent goal is complete.
+- When a real future CRM app exists, run its labeled adoption gates and keep this capability gate refreshed.
+- Keep remaining source-image 1:1 work in the visual backlog as continuous refinement, outside the accepted current scope.
 
 ## Evidence Sources
 

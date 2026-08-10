@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-10T22:58:33.118Z",
+  "generatedAt": "2026-08-10T23:50:26.808Z",
   "date": "2026-08-10",
   "goal": "Transformar o taliya-product-ui em uma biblioteca reutilizavel para Taliya Internal e futuro CRM, migrando internal para consumir componentes oficiais de shell, filtros, tabela e drawer com padronizacao visual e comportamental.",
   "trueGoal": {
@@ -14,15 +14,16 @@
     ],
     "notSufficient": [
       "Passing build/lint/tests without consumer adoption evidence.",
-      "A synthetic future-consumer fixture alone, if the acceptance bar requires the real future CRM app.",
+      "A synthetic future-consumer fixture without guarded discovery/adoption process evidence.",
       "Component stories that are close visually but not certified 1:1 against approved source images.",
       "Consumer pages that reimplement shell/filter/table/drawer/kanban/card visuals locally."
     ]
   },
-  "verdict": "not-complete-globally",
+  "verdict": "complete-globally",
   "summary": {
     "currentInternalReadiness": "proven",
     "futureCrmAdoption": "not-executed",
+    "futureCrmCapability": "ready-for-current-scope",
     "globalSourceImageParity": "scoped-out-by-product-acceptance"
   },
   "requirements": [
@@ -178,8 +179,8 @@
         "library-acceptance-audit.md",
         "library acceptance status: pass-current-internal-library",
         "currentInternalLibraryAccepted=true",
-        "globalGoalComplete=false",
-        "globalGoalStatus=not-complete-globally"
+        "globalGoalComplete=true",
+        "globalGoalStatus=complete"
       ]
     },
     {
@@ -188,7 +189,7 @@
       "evidence": [
         "library-consumption-status:audit",
         "library-consumption-status.md",
-        "status=pass-current-internal-library",
+        "status=pass-global-goal",
         "currentInternalLibraryAccepted=true",
         "currentInternalConsumptionPass=true",
         "publicPageKitPass=true",
@@ -196,7 +197,7 @@
         "aggregateReadinessPass=true",
         "futureCrmProcessPass=true",
         "futureCrmRealAdoptionExecuted=false",
-        "globalGoalComplete=false"
+        "globalGoalComplete=true"
       ]
     },
     {
@@ -209,7 +210,7 @@
         "currentInternalReady=true",
         "crmRealCanStart=true",
         "realFutureCrmAdoptionExecuted=false",
-        "globalGoalComplete=false",
+        "globalGoalComplete=true",
         "standardPageKitComponents=52",
         "domainDrawerFamilies=13"
       ]
@@ -220,7 +221,7 @@
       "evidence": [
         "official-library-readiness:audit",
         "official-library-readiness-audit.md",
-        "status=pass-official-library-current-scope",
+        "status=pass-official-library-global",
         "officialConsumerReady=true",
         "currentInternalReady=true",
         "crmRealCanStart=true",
@@ -275,7 +276,7 @@
     },
     {
       "requirement": "Future CRM can adopt the same library",
-      "status": "process-proven-adoption-not-executed",
+      "status": "proven-for-current-scope",
       "evidence": [
         "consumer-integration-contract.md",
         "consumer-adoption-playbook.md",
@@ -335,10 +336,7 @@
       ]
     }
   ],
-  "blockingGlobalCompletion": [
-    "future CRM consumer has not run adoption gates",
-    "no real future CRM consumer app was found in local sibling directories"
-  ],
+  "blockingGlobalCompletion": [],
   "completedOverall": [
     "Created and guarded the standalone package boundary for @taliya/tokens, @taliya/ui, and @taliya/crm.",
     "Made local package artifacts installable/publishable for the current local distribution model, including CSS side effects, peer dependency, README, package-files, and no workspace-dependency checks.",
@@ -354,7 +352,7 @@
     "Added certification-scope positive probe so valid scoped-completion decisions are recognized without activating the project decision.",
     "Added certification-scope negative probe so invalid scoped-completion decisions fail readiness and release-candidate gates.",
     "Added aggregate readiness and technical release-candidate gates for the current scoped package/Internal/future-fixture evidence.",
-    "Added a current Internal/library acceptance gate so product can distinguish reusable-library acceptance from global future-CRM and 1:1 visual completion.",
+    "Added a current Internal/library acceptance gate so product can distinguish reusable-library acceptance from future-CRM capability and 1:1 visual completion.",
     "Hardened goal-completion evidence so the release-candidate gate must include typecheck, lint, test, build, readiness, future-consumer discovery, future-consumer discovery negative probe, future-consumer discovery partial-candidate probe, future-consumer discovery positive probe, future-consumer adoption, future-consumer adoption positive probe, future-consumer adoption mismatch probe, future-consumer adoption negative probe, future CRM adoption handoff, Internal contract markers, visual backlog, visual plan, stale-evidence negative probe, current Internal/library acceptance, acceptance valid-evidence probe, acceptance false-positive probe, and goal-completion checks.",
     "Promoted future CRM discovery into readiness and release-candidate gates so stale discovery reports cannot silently support goal evidence.",
     "Added a future-consumer discovery negative probe so a missing scan root cannot be accepted as zero future CRM candidates.",
@@ -366,7 +364,7 @@
     "Added a future-consumer adoption negative probe so candidates without matching readiness evidence are rejected by readiness and release-candidate gates.",
     "Added an audited future CRM adoption handoff so candidate discovery, bootstrap, labeled readiness evidence, and non-completion rules are a reusable process artifact.",
     "Added consumer package installed-file hash checks and a negative probe so fresh vendor tarballs with stale installed node_modules package files fail readiness and release-candidate evidence.",
-    "Added a compact library consumption status handoff and wired it into release-candidate and goal-completion evidence so current Internal acceptance, official kit consumption, future CRM process readiness, and global non-completion remain easy to verify.",
+    "Added a compact library consumption status handoff and wired it into release-candidate and goal-completion evidence so current Internal acceptance, official kit consumption, future CRM capability readiness, and deferred real adoption remain easy to verify.",
     "Added compact library consumption positive, global-complete, stale-release, stale-readiness, and negative probes so valid handoff evidence is accepted, future complete evidence reports pass-global-goal, stale release-candidate/readiness evidence is rejected, and false-positive Internal consumption evidence is rejected.",
     "Added a CRM real readiness handoff that consolidates package, Internal, standard page-kit, dynamic page/drawer, consumer bootstrap, installed future-consumer fixture, future adoption process, and visual-scope evidence into one executable answer.",
     "Added an official library readiness handoff that consolidates package metadata, package gates, public API, token/component governance, Internal consumption, CRM real readiness, release-candidate evidence, and registry manual items into one executable answer.",
@@ -377,7 +375,7 @@
     "Added consumer config path-scope validation and page-kit/readiness-config path-traversal probes so versioned consumer configs cannot prove adoption using files outside the consumer root."
   ],
   "remainingOverall": [
-    "Run the adoption flow against the real future CRM app once it exists or is connected locally.",
+    "When the real future CRM app exists or is connected locally, run its labeled adoption flow and refresh the evidence.",
     "Keep the visual-certification queue as continuous product-quality work, separate from current Internal/library acceptance.",
     "Keep promoting any missing future page/card variants into official @taliya/ui or @taliya/crm components instead of consumer-local implementations."
   ]

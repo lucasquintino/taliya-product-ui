@@ -6,7 +6,7 @@ The consumer app owns routes, data loading, permissions, persistence, and callba
 
 For the step-by-step implementation workflow, use `specs/001-product-ui-foundation/consumer-adoption-playbook.md`.
 
-For the exact future CRM handoff and global-goal non-completion rule, use `specs/001-product-ui-foundation/future-crm-adoption-handoff.md`.
+For the exact future CRM handoff and conditional adoption rule, use `specs/001-product-ui-foundation/future-crm-adoption-handoff.md`.
 
 The official reusable page-kit component list lives in `specs/001-product-ui-foundation/contracts/standard-page-kit.manifest.json`. `public-api:audit` reads this manifest and verifies every listed component is exported, story-covered, and documented.
 

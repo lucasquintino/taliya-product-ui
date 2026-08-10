@@ -4,7 +4,7 @@ This playbook explains how `taliya-internal` and the future Taliya CRM should ad
 
 It is an implementation workflow, not a visual parity certificate. Source-image targets still require the visual parity contract, static Storybook captures, and component-level review.
 
-For the exact future CRM handoff and non-completion rules, use `specs/001-product-ui-foundation/future-crm-adoption-handoff.md`.
+For the exact future CRM handoff and conditional adoption rules, use `specs/001-product-ui-foundation/future-crm-adoption-handoff.md`.
 
 ## Adoption Order
 
@@ -167,7 +167,7 @@ corepack pnpm library-acceptance:audit:positive-probe
 corepack pnpm library-acceptance:audit:negative-probe
 ```
 
-This is the clearest gate for deciding whether the library is usable as the official reusable UI source for the current `taliya-internal` scope. It intentionally reports global completion separately, because the future CRM app and remaining source-image certification can still be open.
+This is the clearest gate for deciding whether the library is usable as the official reusable UI source for the current `taliya-internal` scope. It distinguishes future CRM capability readiness from adoption by a real future CRM app, and keeps remaining source-image certification explicitly scoped.
 The positive probe proves valid Internal/library evidence is accepted in isolation; the negative probe proves that this acceptance gate rejects false-positive readiness/Internal evidence.
 
 For the fastest current-state readout after the readiness/release/acceptance reports exist, run:

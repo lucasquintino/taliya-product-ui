@@ -27,7 +27,7 @@ This runs:
 - installed future consumer readiness fixture;
 - future CRM consumer discovery across local sibling directories plus missing-scan-root, partial-candidate, and positive-candidate probes;
 - future CRM consumer adoption evidence and negative probe for any discovered candidates;
-- future CRM adoption handoff and non-completion rule;
+- future CRM adoption handoff and conditional adoption rule;
 - consumer package declarations and installed entrypoints;
 - consumer vendor tarball and installed package-file hash sync;
 - consumer page-kit adoption;
@@ -82,7 +82,7 @@ This writes:
 - `specs/001-product-ui-foundation/library-acceptance-audit.md`
 - `specs/001-product-ui-foundation/library-acceptance-audit.json`
 
-This audit can pass for current Internal/library acceptance while still reporting the larger goal as `not-complete-globally` when real future CRM adoption has not executed or full source-image 1:1 certification remains open.
+This audit can pass for current Internal/library acceptance while real future CRM adoption remains deferred until a candidate exists; full source-image 1:1 certification remains governed by the explicit visual scope decision.
 
 The positive probe proves valid Internal/library evidence is accepted in isolation. The negative probe proves the audit rejects false-positive Internal/readiness evidence before release-candidate evidence can rely on it.
 
