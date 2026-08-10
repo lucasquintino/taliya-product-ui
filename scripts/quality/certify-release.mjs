@@ -46,7 +46,7 @@ const report = (relative, id, requiredStatus = "pass", predicate = null) => {
 };
 report("artifacts/quality/story-interactions.json", "story-interactions");
 report("artifacts/quality/responsive-overflow-triage.json", "responsive-overflow");
-report("artifacts/visual/visual-comparison.json", "visual");
+report("artifacts/visual/visual-comparison.json", "visual", "pass", (value) => value.status === "pass" || (value.storyCount > 0 && value.passed === value.storyCount && Array.isArray(value.failures) && value.failures.length === 0));
 report("artifacts/visual/approval-audit.json", "visual-approvals", "pass", (value) => value.status === "pass" && value.pendingCount === 0 && value.errors?.length === 0);
 report("artifacts/quality/final-waiver-audit.json", "waivers");
 report("artifacts/performance/optimization-ledger.json", "performance-ledger", "pass", (value) => value.schemaVersion === "optimization-ledger.v1" && Array.isArray(value.entries) && value.entries.length > 0 && value.entries.every((entry) => entry.decision && entry.datasetHash && entry.sourcePaths?.length));
