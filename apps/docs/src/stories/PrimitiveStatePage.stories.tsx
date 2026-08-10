@@ -4,10 +4,12 @@ import { Button, ErrorState, LoadingState, StatePage } from "@taliya/ui";
 
 import { batch4SourceDescription, PrimitivePage, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof StatePage> = {
   title: "Primitives / UI / StatePage",
   component: StatePage,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

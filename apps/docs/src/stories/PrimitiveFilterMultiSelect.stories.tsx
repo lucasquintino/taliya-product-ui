@@ -19,6 +19,7 @@ const statusOptions: Array<{ value: string; label: string; icon: IconName }> = [
   { value: "bloqueado", label: "Bloqueado", icon: "lock" }
 ];
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof FilterMultiSelect> = {
   title: "Primitives / UI / FilterMultiSelect",
   component: FilterMultiSelect,
@@ -29,7 +30,8 @@ const meta: Meta<typeof FilterMultiSelect> = {
         component: `${batch3SourceDescription} FilterMultiSelect e o primitive oficial para filtros dropdown com selecao multipla.`
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

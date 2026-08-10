@@ -5,10 +5,12 @@ import { CalendarCell, CalendarGrid } from "@taliya/ui";
 
 import { batch6SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof CalendarCell> = {
   title: "Primitives / UI / CalendarCell",
   component: CalendarCell,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

@@ -4,10 +4,12 @@ import { Badge, Button, Chip, DrawerHeader, InlineGroup, MetaText } from "@taliy
 
 import { batch5SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof DrawerHeader> = {
   title: "Primitives / UI / DrawerHeader",
   component: DrawerHeader,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

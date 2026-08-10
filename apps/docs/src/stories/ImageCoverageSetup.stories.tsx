@@ -628,17 +628,17 @@ export const Image51AOnboardingShellGlobal: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Enviar pergunta" }));
     await userEvent.click(canvas.getByRole("button", { name: "Agendar ajuda" }));
     await userEvent.click(canvas.getByRole("button", { name: "Fechar agente" }));
-    await userEvent.click(canvas.getByRole("button", { name: "Continuar" }));
+    await userEvent.click(canvas.getByRole("button", { name: /Expandir/ }));
+    await expect(setupActions.shellBottomBarToggle).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellStudioSelect).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellHelp).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellProfile).toHaveBeenCalledTimes(1);
-    await expect(setupActions.shellStepSelect).toHaveBeenCalledWith(2);
+    await expect(setupActions.shellStepSelect).toHaveBeenCalledWith("equipe");
     await expect(setupActions.shellAgentQuickReply).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellAgentSend).toHaveBeenCalledWith("Como continuar?");
     await expect(setupActions.shellAgentMenu).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellAgentHumanHelp).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellAgentClose).toHaveBeenCalledTimes(1);
-    await expect(setupActions.shellBottomBarToggle).toHaveBeenCalledTimes(1);
   }
 };
 
@@ -793,13 +793,14 @@ export const Image51HOnboardingAlunos: Story = {
     resetSetupActions();
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: /Importar arquivos Planilhas/ }));
+    await expect(setupActions.studentsSourceSelect).toHaveBeenCalledWith("files");
+    await userEvent.click(canvas.getByText("Ana Martins", { exact: true }));
     await userEvent.click(canvas.getByRole("button", { name: "Editar Ana Martins" }));
     await userEvent.click(canvas.getByRole("button", { name: "Ver Ana Martins" }));
     await userEvent.click(canvas.getByRole("button", { name: "Salvar rascunho" }));
     await userEvent.click(canvas.getByRole("button", { name: "Posso importar foto de caderno?" }));
     await expect(canvas.getByText("Este bloco cria a base inicial de alunos ativos.")).toBeInTheDocument();
-    await expect(setupActions.studentsSourceSelect).toHaveBeenCalledTimes(1);
-    await expect(setupActions.studentsStudentAction).toHaveBeenCalledTimes(1);
+    await expect(setupActions.studentsStudentAction).toHaveBeenCalledTimes(2);
     await expect(setupActions.studentsStudentSelect).toHaveBeenCalledTimes(1);
     await expect(setupActions.studentsAction).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellAgentQuickReply).toHaveBeenCalledWith("Posso importar foto de caderno?");
@@ -814,13 +815,14 @@ export const Image51IOnboardingTurmas: Story = {
     resetSetupActions();
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: /Importar arquivos Planilhas/ }));
+    await userEvent.click(canvas.getByRole("cell", { name: "Ter/Qui 18h" }));
     await userEvent.click(canvas.getByRole("button", { name: "Editar Ter/Qui 18h" }));
     await userEvent.click(canvas.getByRole("button", { name: "Ver Ter/Qui 18h" }));
     await userEvent.click(canvas.getByRole("button", { name: "Salvar rascunho" }));
     await userEvent.click(canvas.getByRole("button", { name: "Turma é diferente de agenda?" }));
     await expect(canvas.getByText(/Este bloco organiza os horários fixos/)).toBeInTheDocument();
     await expect(setupActions.classesSourceSelect).toHaveBeenCalledTimes(1);
-    await expect(setupActions.classesClassAction).toHaveBeenCalledTimes(1);
+    await expect(setupActions.classesClassAction).toHaveBeenCalledTimes(2);
     await expect(setupActions.classesClassSelect).toHaveBeenCalledTimes(1);
     await expect(setupActions.classesAction).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellAgentQuickReply).toHaveBeenCalledWith("Turma é diferente de agenda?");

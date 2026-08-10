@@ -8,6 +8,7 @@ import source24AnaSilva from "../assets/source24-ana-silva.png";
 import source24CarlaMenezes from "../assets/source24-carla-menezes.png";
 import source24MarinaLopes from "../assets/source24-marina-lopes.png";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Operational / ReplacementTable",
   component: ReplacementTable,
@@ -19,7 +20,8 @@ const meta = {
           "Tabela reutilizavel de reposicoes extraida da imagem 31. Usa DataTable, TablePagination, Avatar e Chip oficiais; status em revisao visual."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof ReplacementTable>;
 
 export default meta;

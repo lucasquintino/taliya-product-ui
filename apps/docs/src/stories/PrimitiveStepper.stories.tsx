@@ -6,10 +6,12 @@ import type { StepperStep } from "@taliya/ui";
 
 import { batch8SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Stepper> = {
   title: "Primitives / UI / Stepper",
   component: Stepper,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

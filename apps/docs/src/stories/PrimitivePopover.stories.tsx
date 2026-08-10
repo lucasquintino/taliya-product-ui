@@ -5,10 +5,12 @@ import { Badge, Button, IconButton, Input, InlineGroup, MetaText, Popover, Selec
 
 import { batch5SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Popover> = {
   title: "Primitives / UI / Popover",
   component: Popover,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

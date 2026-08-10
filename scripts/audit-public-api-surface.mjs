@@ -10,8 +10,8 @@ const standardPageKitPath = path.join(specDir, "contracts/standard-page-kit.mani
 const check = process.argv.includes("--check");
 
 const packageFiles = {
-  "@taliya/ui": path.join(root, "packages/ui/src/index.tsx"),
-  "@taliya/crm": path.join(root, "packages/crm/src/index.tsx")
+  "@taliya/ui": path.join(root, "packages/ui/src/internal-ui-runtime.tsx"),
+  "@taliya/crm": path.join(root, "packages/crm/src/internal-crm-runtime.tsx")
 };
 
 function read(filePath) {

@@ -4,10 +4,12 @@ import { ImportProgressCard } from "@taliya/ui";
 
 import { batch8SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof ImportProgressCard> = {
   title: "Primitives / UI / ImportProgressCard",
   component: ImportProgressCard,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

@@ -1,4 +1,4 @@
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { basename, relative, resolve } from "node:path";
@@ -23,7 +23,13 @@ function sha256(filePath) {
 }
 
 function removeChromeProfile(profileDir) {
-  rmSync(profileDir, { recursive: true, force: true, maxRetries: 8, retryDelay: 125 });
+  try {
+    rmSync(profileDir, { recursive: true, force: true, maxRetries: 40, retryDelay: 250 });
+    return null;
+  } catch (error) {
+    if (error?.code === "EPERM" || error?.code === "EBUSY") return error;
+    throw error;
+  }
 }
 
 function sourceManifestContractSha256(manifest) {
@@ -375,6 +381,9 @@ function chromeDomInspection(target, profileDir, screenshotPath) {
       settled = true;
       clearTimeout(timeout);
       child.kill("SIGTERM");
+      if (process.platform === "win32" && child.pid) {
+        spawnSync("taskkill", ["/PID", String(child.pid), "/T", "/F"], { windowsHide: true, stdio: "ignore" });
+      }
       setTimeout(() => child.kill("SIGKILL"), 1000).unref();
       if (error) rejectPromise(new Error(`${error.message}: ${stderr.slice(-1000)}`));
       else resolvePromise(result);
@@ -451,12 +460,19 @@ function imageMetrics(sourcePath, currentPath, diffPath) {
   };
 }
 
+const cleanupWarnings = [];
+
 async function captureTarget(target, index) {
   const stem = basename(target.image).replace(/\.(?:png|jpe?g|webp)$/i, "").replace(/[^A-Za-z0-9._-]+/g, "-");
   const currentPath = resolve(outputDir, `${stem}--current.png`);
   const diffPath = resolve(outputDir, `${stem}--diff.png`);
   const inspectionProfileDir = resolve(outputDir, `.chrome-inspection-profile-${index}`);
-  removeChromeProfile(inspectionProfileDir);
+  let cleanupWarning = null;
+  const previousCleanup = removeChromeProfile(inspectionProfileDir);
+  if (previousCleanup) {
+    cleanupWarning = `${inspectionProfileDir}: ${previousCleanup.code}`;
+    cleanupWarnings.push(cleanupWarning);
+  }
   try {
     const previous = existingRowsByImage.get(target.image);
     const reusable =
@@ -504,6 +520,7 @@ async function captureTarget(target, index) {
       renderErrors,
       renderValid,
       status: metrics.dimensionMatch && !metrics.visuallyBlank && renderValid ? "captured" : "capture-invalid",
+      cleanupWarning,
       ...metrics
     };
   } catch (error) {
@@ -515,7 +532,12 @@ async function captureTarget(target, index) {
       error: error instanceof Error ? error.message : String(error)
     };
   } finally {
-    removeChromeProfile(inspectionProfileDir);
+    const cleanupError = removeChromeProfile(inspectionProfileDir);
+    if (cleanupError) {
+      cleanupWarning = `${inspectionProfileDir}: ${cleanupError.code}`;
+      cleanupWarnings.push(cleanupWarning);
+      console.warn(`VISUAL-CAPTURE-CLEANUP-WARNING: ${cleanupWarning}`);
+    }
   }
 }
 
@@ -554,6 +576,7 @@ const report = {
   capturedCount,
   failedCount: rows.length - capturedCount,
   outputDir: outputDir.replace(`${root}/`, ""),
+  cleanupWarnings,
   rows
 };
 writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);

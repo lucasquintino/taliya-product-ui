@@ -147,8 +147,8 @@ function pendingReview(previous = {}) {
 }
 
 const packageSources = [
-  { package: "@taliya/ui", file: "packages/ui/src/index.tsx" },
-  { package: "@taliya/crm", file: "packages/crm/src/index.tsx" },
+  { package: "@taliya/ui", file: "packages/ui/src/internal-ui-runtime.tsx" },
+  { package: "@taliya/crm", file: "packages/crm/src/internal-crm-runtime.tsx" },
 ];
 const registryText = await readFile(path.join(root, "packages/crm/src/component-registry.ts"), "utf8");
 const registry = new Map(

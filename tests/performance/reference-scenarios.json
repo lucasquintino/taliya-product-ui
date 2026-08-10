@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "performance-scenarios.v1",
+  "dataset": { "rows": 40, "warmups": 3, "repetitions": 15 },
+  "scenarios": [
+    { "id": "ui-button", "package": "@taliya/ui", "kind": "server-render", "purpose": "baseline primitive render" },
+    { "id": "ui-data-table", "package": "@taliya/ui", "kind": "server-render", "purpose": "representative repeated-row render" }
+  ],
+  "measurement": { "median": "blocking after reproducibility review", "p95": "blocking after reproducibility review", "variance": "informational when above 20%" }
+}

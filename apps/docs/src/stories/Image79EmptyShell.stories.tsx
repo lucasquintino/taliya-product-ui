@@ -7,6 +7,7 @@ import type { CrmEmptyShellState } from "@taliya/crm";
 
 import image79Avatar from "../assets/image79-avatar.png";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta = {
   title: "CRM / Image Coverage / Image 79 Empty Shell",
   parameters: {
@@ -17,7 +18,8 @@ const meta: Meta = {
           "Rota vazia oficial composta pelo mesmo CrmProductShell usado no CRM e no Internal. O canvas suporta estados vazio, carregando e indisponível sem duplicar a anatomia do shell."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

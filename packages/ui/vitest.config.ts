@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
-    exclude: [...configDefaults.exclude, "dist/**"],
+    exclude: [...configDefaults.exclude, "dist/**", "src/**/*.browser.test.tsx"],
     setupFiles: ["./src/test.setup.ts"],
     coverage: { thresholds: { lines: 90, functions: 90, branches: 85 } }
   }

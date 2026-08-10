@@ -6,10 +6,12 @@ import { AvatarStack, Badge, Chip } from "@taliya/ui";
 import image79Avatar from "../assets/image79-avatar.png";
 import { batch2SourceDescription, PrimitiveMatrix, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof AvatarStack> = {
   title: "Primitives / UI / AvatarStack",
   component: AvatarStack,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

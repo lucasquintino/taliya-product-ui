@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { FallbackControlCard } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof FallbackControlCard> = { title: "CRM / Config / FallbackControlCard", component: FallbackControlCard, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof FallbackControlCard> = { title: "CRM / Config / FallbackControlCard", component: FallbackControlCard, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

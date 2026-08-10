@@ -139,3 +139,6 @@ As composicoes `SubscriptionReviewPage`, `ConfirmedSubscriptionPage`, `FinanceQu
 `ClassDrawer variant="recurring-block"` representa fatos de recorrencia, proximas aulas, impactos e orientacao de bloqueio com `impactItems` e `blockNotice` tipados. A variante mantem acoes no fluxo do drawer para que copiloto e audit continuem parte do mesmo documento operacional.
 
 Pipelines comerciais usam `CrmKanbanPage laneWidth="commercial"` para preservar leitura dos cards e overflow horizontal. `PipelineCard sourceIcon` representa a origem com um icone oficial; identidade, interesse, proxima acao, dono, status, selecao e menus devem ser fornecidos por props e callbacks.
+# Security responsibility
+
+`@taliya/crm` is a presentation composition library. The consumer owns authentication, authorization, tenant isolation, CSP, CSRF, rate limiting, storage, and backend audit controls; CRM props must never be treated as authorization evidence.

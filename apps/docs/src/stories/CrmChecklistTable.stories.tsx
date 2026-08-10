@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChecklistTable } from "@taliya/crm";
 import type { ChecklistTableRow } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Operational / ChecklistTable",
   parameters: {
@@ -14,7 +15,8 @@ const meta = {
       }
     },
     layout: "fullscreen"
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof ChecklistTable>;
 
 export default meta;

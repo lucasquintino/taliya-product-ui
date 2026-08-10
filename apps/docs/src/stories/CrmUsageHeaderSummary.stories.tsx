@@ -2,11 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { CrmHeaderSummary } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Shell / Components / CrmHeaderSummary",
   component: CrmHeaderSummary,
   parameters: { layout: "centered" },
-  args: { onSelect: () => undefined }
+  args: { onSelect: () => undefined },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof CrmHeaderSummary>;
 
 export default meta;

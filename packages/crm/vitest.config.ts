@@ -11,7 +11,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    exclude: [...configDefaults.exclude, "dist/**"],
+    exclude: [...configDefaults.exclude, "dist/**", "src/**/*.browser.test.tsx"],
     setupFiles: ["./src/test.setup.ts"],
     testTimeout: 30000,
     coverage: { thresholds: { lines: 90, functions: 90, branches: 85 } }

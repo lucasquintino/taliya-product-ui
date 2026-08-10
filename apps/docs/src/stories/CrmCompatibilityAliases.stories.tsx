@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CrmShellRoundButton, CrmShellTopNavItem, GlobalActions, LegacyComposer } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Surface / Compatibility aliases",
   parameters: {
@@ -12,7 +13,8 @@ const meta = {
           "Isolated compatibility coverage for published aliases. New consumers should use the canonical components named in each story description."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;

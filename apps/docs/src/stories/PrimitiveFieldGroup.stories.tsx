@@ -4,10 +4,12 @@ import { Button, FieldGrid, FieldGroup, Input, Select, Textarea, Toggle } from "
 
 import { batch3SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof FieldGroup> = {
   title: "Primitives / UI / FieldGroup",
   component: FieldGroup,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

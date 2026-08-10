@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-15T17:43:46.846Z",
+  "generatedAt": "2026-08-09T12:01:11.518Z",
   "packageRows": [
     {
       "packageName": "@taliya/tokens",
       "sourcePackage": "packages/tokens/package.json",
-      "tarball": "dist-packages/taliya-tokens-0.1.0.tgz",
+      "tarball": "dist-packages/taliya-tokens-0.1.1.tgz",
       "tarballExists": true,
-      "tarballSize": 219661,
+      "tarballSize": 218337,
       "requiredFiles": [
         "package/package.json",
         "package/README.md",
@@ -69,9 +69,9 @@
     {
       "packageName": "@taliya/ui",
       "sourcePackage": "packages/ui/package.json",
-      "tarball": "dist-packages/taliya-ui-0.1.0.tgz",
+      "tarball": "dist-packages/taliya-ui-0.1.1.tgz",
       "tarballExists": true,
-      "tarballSize": 80734,
+      "tarballSize": 72392,
       "requiredFiles": [
         "package/package.json",
         "package/README.md",
@@ -130,8 +130,8 @@
         {
           "dependencyName": "@taliya/tokens",
           "packageName": "@taliya/tokens",
-          "expectedVersion": "0.1.0",
-          "actualVersion": "0.1.0",
+          "expectedVersion": "0.1.1",
+          "actualVersion": "0.1.1",
           "pass": true
         }
       ],
@@ -153,9 +153,9 @@
     {
       "packageName": "@taliya/crm",
       "sourcePackage": "packages/crm/package.json",
-      "tarball": "dist-packages/taliya-crm-0.1.0.tgz",
+      "tarball": "dist-packages/taliya-crm-0.1.1.tgz",
       "tarballExists": true,
-      "tarballSize": 427389,
+      "tarballSize": 474728,
       "requiredFiles": [
         "package/package.json",
         "package/README.md",
@@ -163,7 +163,11 @@
         "package/dist/index.d.ts",
         "package/dist/standard-page-kit.js",
         "package/dist/standard-page-kit.d.ts",
-        "package/src/styles.css"
+        "package/src/styles.css",
+        "package/src/styles/foundation.css",
+        "package/src/styles/primitives.css",
+        "package/src/styles/patterns.css",
+        "package/src/styles/domains.css"
       ],
       "missingFiles": [],
       "requiredExports": [
@@ -190,7 +194,8 @@
       "typesMatches": true,
       "expectedFilesField": [
         "dist",
-        "src/styles.css"
+        "src/styles.css",
+        "src/styles"
       ],
       "sourceFilesFieldMatches": true,
       "packedFilesFieldMatches": true,
@@ -224,15 +229,15 @@
         {
           "dependencyName": "@taliya/tokens",
           "packageName": "@taliya/tokens",
-          "expectedVersion": "0.1.0",
-          "actualVersion": "0.1.0",
+          "expectedVersion": "0.1.1",
+          "actualVersion": "0.1.1",
           "pass": true
         },
         {
           "dependencyName": "@taliya/ui",
           "packageName": "@taliya/ui",
-          "expectedVersion": "0.1.0",
-          "actualVersion": "0.1.0",
+          "expectedVersion": "0.1.1",
+          "actualVersion": "0.1.1",
           "pass": true
         }
       ],
@@ -242,7 +247,8 @@
         "import \"@taliya/crm/styles.css\"",
         "standardPageKitManifest",
         "import { standardPageKitManifest } from \"@taliya/crm/standard-page-kit\"",
-        "drawerPlacement=\"fixed\" | \"content\" | \"floating\"",
+        "possui um unico contrato de drawer",
+        "ocupa `100dvh`",
         "pageHeaderRhythm=\"dashboard\" | \"reports\" | \"support\" | \"internal-overview\" | \"internal-tenants\" | \"stacked\" | \"agents\" | \"agents-routines\" | \"agents-routine-detail\" | \"agents-flow-detail\" | \"agents-publish\" | \"settings-hub\" | \"overview\"",
         "CrmDashboardPage layoutVariant=\"settings-hub\"",
         "rightPanelVariant=\"settings-permissions\"",

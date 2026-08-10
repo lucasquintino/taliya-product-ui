@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "public-api-snapshot.v1",
+  "package": "@taliya/tokens",
+  "runtimeExports": [
+    "allTokens",
+    "borderTokens",
+    "certifiedCssTokens",
+    "chartTokens",
+    "colorTokens",
+    "connectorTokens",
+    "controlTokens",
+    "crmProductShellSurfaceTokens",
+    "densityTokens",
+    "focusTokens",
+    "layoutTokens",
+    "legacyTokens",
+    "motionTokens",
+    "operationalStateNames",
+    "operationalStateTokens",
+    "quotaNames",
+    "quotaTokens",
+    "radiusTokens",
+    "rawTokens",
+    "shadowTokens",
+    "spacingTokens",
+    "statusNames",
+    "statusTokens",
+    "surfaceTokens",
+    "tokenGroupNames",
+    "tokenGroups",
+    "tokenToCssVar",
+    "tokenVar",
+    "typeTokens"
+  ],
+  "typeExports": [
+    "TaliyaOperationalState",
+    "TaliyaQuotaState",
+    "TaliyaStatus",
+    "TaliyaTokenName",
+    "TokenCategory",
+    "TokenRecord"
+  ],
+  "styleExports": [],
+  "exportMap": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tokens.css": "./src/tokens.css"
+  },
+  "fingerprint": "a984d190615cf35970b078ca99751ec3762ff69909c2a7a25a2d9796980cd1f5"
+}

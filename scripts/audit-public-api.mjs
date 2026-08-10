@@ -10,11 +10,11 @@ const check = process.argv.includes("--check");
 
 const packageFiles = {
   "@taliya/ui": {
-    source: path.join(root, "packages/ui/src/index.tsx"),
+    source: path.join(root, "packages/ui/src/internal-ui-runtime.tsx"),
     readme: path.join(root, "packages/ui/README.md")
   },
   "@taliya/crm": {
-    source: path.join(root, "packages/crm/src/index.tsx"),
+    source: path.join(root, "packages/crm/src/internal-crm-runtime.tsx"),
     readme: path.join(root, "packages/crm/README.md")
   }
 };
@@ -87,11 +87,29 @@ function exportNames(source) {
   return names;
 }
 
+function exportNamesFromFile(filePath, visited = new Set()) {
+  const resolvedPath = path.resolve(filePath);
+  if (visited.has(resolvedPath) || !fs.existsSync(resolvedPath)) return new Set();
+  visited.add(resolvedPath);
+  const source = read(resolvedPath);
+  const names = exportNames(source);
+  for (const match of source.matchAll(/export\s+\*\s+from\s+["']([^"']+)["']/g)) {
+    const specifier = match[1];
+    if (!specifier.startsWith(".")) continue;
+    const base = path.resolve(path.dirname(resolvedPath), specifier.replace(/\.js$/, ""));
+    const candidates = [base, `${base}.ts`, `${base}.tsx`, path.join(base, "index.ts"), path.join(base, "index.tsx")];
+    const target = candidates.find((candidate) => fs.existsSync(candidate));
+    if (!target) continue;
+    for (const name of exportNamesFromFile(target, visited)) names.add(name);
+  }
+  return names;
+}
+
 const packageSources = Object.fromEntries(
   Object.entries(packageFiles).map(([packageName, files]) => [
     packageName,
     {
-      exports: exportNames(read(files.source)),
+      exports: exportNamesFromFile(files.source),
       readme: read(files.readme)
     }
   ])

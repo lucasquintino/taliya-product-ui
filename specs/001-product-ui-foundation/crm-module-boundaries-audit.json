@@ -4,8 +4,8 @@
   "rowCount": 6,
   "failedCount": 0,
   "metrics": {
-    "indexBytes": 995186,
-    "indexLines": 23870,
+    "indexBytes": 203278,
+    "indexLines": 4665,
     "registryBytes": 19591,
     "registryLines": 290
   },

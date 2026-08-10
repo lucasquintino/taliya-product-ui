@@ -21,10 +21,12 @@ import {
 
 import { batch5SourceDescription, PrimitivePage, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Drawer> = {
   title: "Primitives / UI / Drawer",
   component: Drawer,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

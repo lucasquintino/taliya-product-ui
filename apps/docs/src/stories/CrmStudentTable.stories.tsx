@@ -9,6 +9,7 @@ import source28AnaPaula from "../assets/source28-ana-paula.png";
 import source34GabrielLima from "../assets/source34-gabriel-lima.png";
 import source34JulianaRocha from "../assets/source34-juliana-rocha.png";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Students / StudentTable",
   component: StudentTable,
@@ -20,7 +21,8 @@ const meta = {
           "Tabela reutilizavel de alunos extraida da imagem 27. Usa DataTable, TablePagination, Avatar, Chip e StatusDot oficiais; status em revisao visual."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof StudentTable>;
 
 export default meta;

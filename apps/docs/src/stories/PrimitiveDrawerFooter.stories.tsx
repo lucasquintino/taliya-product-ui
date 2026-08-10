@@ -4,10 +4,12 @@ import { Button, DrawerFooter } from "@taliya/ui";
 
 import { batch5SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof DrawerFooter> = {
   title: "Primitives / UI / DrawerFooter",
   component: DrawerFooter,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

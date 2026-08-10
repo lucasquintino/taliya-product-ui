@@ -29,7 +29,8 @@ const buildResult = spawnSync(
   ["-r", "--filter", "./packages/**", "build"],
   {
     cwd: rootDir,
-    stdio: "inherit"
+    stdio: "inherit",
+    shell: process.platform === "win32"
   }
 );
 
@@ -49,7 +50,8 @@ for (const packageName of packages) {
     ["pack", "--pack-destination", outputDir],
     {
       cwd: packageDir,
-      stdio: "inherit"
+      stdio: "inherit",
+      shell: process.platform === "win32"
     }
   );
 

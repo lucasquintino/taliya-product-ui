@@ -19,50 +19,65 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          version: 9.15.4
+          fetch-depth: 1
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.12.0
           cache: pnpm
 
+      - name: Enable pinned package manager
+        run: corepack enable && corepack prepare pnpm@9.15.4 --activate
+
       - name: Install frozen workspace
-        run: pnpm install --frozen-lockfile
+        run: corepack pnpm install --frozen-lockfile
+
+      - name: Install PR browser
+        run: corepack pnpm exec playwright install chromium
 
       - name: Typecheck
-        run: pnpm typecheck
+        run: corepack pnpm typecheck
 
       - name: Lint
-        run: pnpm lint
+        run: corepack pnpm lint
 
       - name: Test official packages
-        run: pnpm --filter @taliya/tokens test && pnpm --filter @taliya/ui test && pnpm --filter @taliya/crm test
+        run: corepack pnpm --filter @taliya/tokens test && corepack pnpm --filter @taliya/ui test && corepack pnpm --filter @taliya/crm test
 
       - name: Build packages and static Storybook
-        run: pnpm build
+        run: corepack pnpm build
 
       - name: Pack current packages
-        run: pnpm pack:local
+        run: corepack pnpm pack:local
 
       - name: Audit package artifacts
-        run: pnpm package-artifacts:audit
+        run: corepack pnpm package-artifacts:audit
 
       - name: Install synthetic future consumer
-        run: pnpm future-consumer-fixture:audit
+        run: corepack pnpm future-consumer-fixture:audit
+
+      - name: Run deterministic quality gates
+        run: |
+          corepack pnpm quality:governance
+          node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
+          node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static
+          corepack pnpm e2e:pr
+          node scripts/quality/audit-dependencies.mjs --prod
+          node scripts/quality/audit-dependencies.mjs --full
+          node scripts/quality/run-sast.mjs
+          node scripts/quality/run-secrets.mjs
 
       - name: Reject stale artifacts and reports
-        run: pnpm pack:local:stale-artifact-probe && pnpm report-freshness:audit:stale-probe
+        run: corepack pnpm pack:local:stale-artifact-probe && corepack pnpm report-freshness:audit:stale-probe
 
       - name: Prove checks are read-only
-        run: pnpm audit-checks:read-only-probe
+        run: corepack pnpm audit-checks:read-only-probe
 
       - name: Upload Storybook build
         if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: storybook-static
           path: apps/docs/storybook-static

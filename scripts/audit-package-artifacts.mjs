@@ -71,9 +71,13 @@ const packageSpecs = [
       "package/dist/index.d.ts",
       "package/dist/standard-page-kit.js",
       "package/dist/standard-page-kit.d.ts",
-      "package/src/styles.css"
+      "package/src/styles.css",
+      "package/src/styles/foundation.css",
+      "package/src/styles/primitives.css",
+      "package/src/styles/patterns.css",
+      "package/src/styles/domains.css"
     ],
-    expectedFilesField: ["dist", "src/styles.css"],
+    expectedFilesField: ["dist", "src/styles.css", "src/styles"],
     requiredExports: [".", "./standard-page-kit", "./styles.css"],
     requiredPackedLocalDependencies: {
       "@taliya/tokens": "@taliya/tokens",
@@ -111,7 +115,7 @@ const packageSpecs = [
 ];
 
 const forbiddenPackedFilePatterns = [
-  /\/src\/(?!tokens\.css$|styles\.css$)/,
+  /\/src\/(?!tokens\.css$|styles\.css$|styles\/[^/]+\.css$)/,
   /\.stories\./,
   /\.test\./,
   /\.spec\./,

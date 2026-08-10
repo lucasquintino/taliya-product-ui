@@ -4,13 +4,15 @@ import { useState } from "react";
 import type { SetupPlanField } from "@taliya/crm";
 import { SettingsPlansWorkspace, setupPlansDefaultFieldValues } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Config / SettingsPlansWorkspace",
   component: SettingsPlansWorkspace,
   parameters: {
     layout: "centered",
     docs: { description: { component: "Workspace pós-live de Planos e modelos com status, uso e inativação." } }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof SettingsPlansWorkspace>;
 
 export default meta;

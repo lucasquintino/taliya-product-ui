@@ -9,8 +9,10 @@ import { Button, List, Panel } from "@taliya/ui";
 
 const component = "InternalOverviewDashboard" satisfies Batch10StoryComponent;
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
-  title: "CRM / Internal / InternalOverviewDashboard"
+  title: "CRM / Internal / InternalOverviewDashboard",
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;

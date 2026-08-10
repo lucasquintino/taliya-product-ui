@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { GeneralSettingsPanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof GeneralSettingsPanel> = { title: "CRM / Config / GeneralSettingsPanel", component: GeneralSettingsPanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof GeneralSettingsPanel> = { title: "CRM / Config / GeneralSettingsPanel", component: GeneralSettingsPanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

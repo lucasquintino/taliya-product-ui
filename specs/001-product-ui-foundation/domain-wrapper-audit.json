@@ -1,7 +1,7 @@
 {
-  "date": "2026-07-15",
+  "date": "2026-08-09",
   "status": "pass",
-  "contractCount": 28,
+  "contractCount": 29,
   "failedCount": 0,
   "legacyDirectDrawerCount": 0,
   "rows": [
@@ -348,6 +348,24 @@
         "history",
         "drawerActions",
         "component=\"LeadDrawer\""
+      ],
+      "missingGlobalRoots": [],
+      "missingRequiredSnippets": [],
+      "pass": true
+    },
+    {
+      "name": "ConversationDrawer",
+      "kind": "drawer",
+      "value": "wraps the official CrmDrawer with conversation facts, recent history, related tasks, agent status and inbox actions",
+      "present": true,
+      "globalRoots": [
+        "<CrmDrawer"
+      ],
+      "requiredSnippets": [
+        "drawerFacts",
+        "tcrm-conversation-drawer__history",
+        "tcrm-conversation-drawer__tasks",
+        "component=\"ConversationDrawer\""
       ],
       "missingGlobalRoots": [],
       "missingRequiredSnippets": [],

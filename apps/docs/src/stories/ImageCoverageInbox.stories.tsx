@@ -28,6 +28,7 @@ import source24JuliaRamos from "../assets/source24-julia-ramos.png";
 import source24MarinaLopes from "../assets/source24-marina-lopes.png";
 import source24PedroSantos from "../assets/source24-pedro-santos.png";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Image Coverage / Inbox",
   parameters: {
@@ -38,7 +39,8 @@ const meta = {
           "Familia oficial de Inbox. As paginas usam o padrao estrutural Three-pane + PageFilterBar + componentes oficiais de conversa/contexto."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;

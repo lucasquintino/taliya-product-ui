@@ -1,0 +1,41 @@
+name: Security and supply chain
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.12.0
+          cache: pnpm
+      - name: Enable pinned package manager
+        run: corepack enable && corepack prepare pnpm@9.15.4 --activate
+      - name: Install immutable workspace
+        run: corepack pnpm install --frozen-lockfile
+      - name: Runtime dependency audit
+        run: node scripts/quality/audit-dependencies.mjs --prod
+      - name: Toolchain dependency audit
+        run: node scripts/quality/audit-dependencies.mjs --full
+      - name: Static security analysis
+        run: node scripts/quality/run-sast.mjs
+      - name: Secret detection
+        run: node scripts/quality/run-secrets.mjs
+      - name: Negative security probes
+        run: node scripts/quality/probe-security-gates.mjs
+      - name: Trust-boundary audit
+        run: node scripts/quality/audit-trust-boundaries.mjs
+      - name: Security responsibility contract
+        run: node scripts/quality/validate-security-boundary.mjs

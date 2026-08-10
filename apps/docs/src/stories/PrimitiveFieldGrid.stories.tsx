@@ -4,6 +4,7 @@ import { FieldGrid, Input, Panel, Select, Textarea } from "@taliya/ui";
 
 import { batch3SourceDescription, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof FieldGrid> = {
   title: "Primitives / UI / FieldGrid",
   component: FieldGrid,
@@ -14,7 +15,8 @@ const meta: Meta<typeof FieldGrid> = {
         component: `${batch3SourceDescription}\n\nFieldGrid is the official responsive form-grid primitive for compact operational forms, modal forms, drawer field groups, and setup field layouts.`
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

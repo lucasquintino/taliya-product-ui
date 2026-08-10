@@ -20,3 +20,6 @@ Importe o CSS de tokens uma vez no app consumidor, antes de `@taliya/ui/styles.c
 ```ts
 import "@taliya/tokens/tokens.css";
 ```
+# Security responsibility
+
+`@taliya/tokens` is presentation-only. The consumer owns authentication, authorization, tenant isolation, CSP, CSRF, rate limiting, storage, and backend audit controls.

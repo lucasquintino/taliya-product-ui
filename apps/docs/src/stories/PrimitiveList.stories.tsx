@@ -4,10 +4,12 @@ import { Badge, Button, InlineGroup, List, ListIcon, ListItem, MetaText } from "
 
 import { batch4SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof List> = {
   title: "Primitives / UI / List",
   component: List,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

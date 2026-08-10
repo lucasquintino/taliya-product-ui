@@ -10,6 +10,7 @@ import source25SamFrank from "../assets/source25-sam-frank.png";
 
 import { PrimitiveMatrix, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Timeline / OperationActivityTable",
   component: OperationActivityTable,
@@ -20,7 +21,8 @@ const meta = {
           "Componente oficial extraido da area Atividade recente da imagem 21 de Operacao. Usado pelas imagens 21-22; cobre linha selecionada, hover/focus via CSS, loading, empty e blocked."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof OperationActivityTable>;
 
 export default meta;

@@ -1,0 +1,70 @@
+.tl-icon {
+  color: currentColor;
+  flex: 0 0 auto;
+  height: var(--tl-icon-size, var(--taliya-control-icon-size-md));
+  width: var(--tl-icon-size, var(--taliya-control-icon-size-md));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.tl-icon--success {
+  color: var(--taliya-status-success-fg);
+}
+
+.tl-icon--info {
+  color: var(--taliya-status-info-fg);
+}
+
+.tl-icon--warning {
+  color: var(--taliya-status-warning-fg);
+}
+
+.tl-icon--danger {
+  color: var(--taliya-status-danger-fg);
+}
+
+.tl-icon--paused,
+.tl-icon--neutral {
+  color: var(--taliya-status-paused-fg);
+}
+
+.tl-icon--blocked {
+  color: var(--taliya-status-blocked-fg);
+}
+
+.tl-icon--update,
+.tl-icon--quota {
+  color: var(--taliya-status-neutral-fg);
+}
+
+.tl-spin {
+  animation: tl-spin var(--taliya-motion-slow) linear infinite;
+}
+
+.tl-sr-only {
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  height: var(--taliya-border-width-default);
+  margin: var(--taliya-control-crm-subscription-secure-body-offset-y);
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: var(--taliya-border-width-default);
+}
+
+@keyframes tl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+

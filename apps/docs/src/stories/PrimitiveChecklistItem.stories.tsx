@@ -5,10 +5,12 @@ import { ChecklistItem } from "@taliya/ui";
 
 import { batch8SourceDescription, PrimitiveMatrix, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof ChecklistItem> = {
   title: "Primitives / UI / ChecklistItem",
   component: ChecklistItem,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

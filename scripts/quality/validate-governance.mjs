@@ -48,6 +48,18 @@ const expectedGates = [
   "G-PROVENANCE",
   "G-RELEASE"
 ];
+const expectedProfileGates = {
+  "sdd-only": ["GATE-SDD-APPROVED"],
+  governance: ["G-GOV", "G-LINT", "G-UNIT", "G-PROVENANCE"],
+  "documentation-only": ["G-GOV", "G-PROVENANCE"],
+  tokens: ["G-GOV", "G-TYPE", "G-LINT", "G-UNIT", "G-COV", "G-ARCH", "G-TOKENS", "G-STORY-BUILD", "G-STORY-TEST", "G-A11Y", "G-VISUAL", "G-PERF", "G-PACK", "G-CONSUMER", "G-PROVENANCE"],
+  "ui-component": ["G-GOV", "G-TYPE", "G-LINT", "G-UNIT", "G-COV", "G-ARCH", "G-TOKENS", "G-STORY-BUILD", "G-STORY-TEST", "G-A11Y", "G-E2E-PR", "G-E2E-RELEASE", "G-VISUAL", "G-SEC-SAST", "G-PERF", "G-PACK", "G-CONSUMER", "G-PROVENANCE"],
+  "crm-component": ["G-GOV", "G-TYPE", "G-LINT", "G-UNIT", "G-COV", "G-ARCH", "G-TOKENS", "G-STORY-BUILD", "G-STORY-TEST", "G-A11Y", "G-E2E-PR", "G-E2E-RELEASE", "G-VISUAL", "G-SEC-SAST", "G-PERF", "G-PACK", "G-CONSUMER", "G-PROVENANCE"],
+  "storybook-docs": ["G-GOV", "G-TYPE", "G-LINT", "G-UNIT", "G-STORY-BUILD", "G-STORY-TEST", "G-A11Y", "G-E2E-PR", "G-E2E-RELEASE", "G-VISUAL", "G-PROVENANCE"],
+  "dependency-build": ["G-GOV", "G-TYPE", "G-LINT", "G-UNIT", "G-ARCH", "G-SEC-RUNTIME", "G-SEC-TOOLCHAIN", "G-SEC-SAST", "G-SEC-SECRETS", "G-PERF", "G-PACK", "G-CONSUMER", "G-PROVENANCE"],
+  "workflow-release": ["G-GOV", "G-LINT", "G-UNIT", "G-SEC-RUNTIME", "G-SEC-TOOLCHAIN", "G-SEC-SAST", "G-SEC-SECRETS", "G-PERF", "G-PACK", "G-CONSUMER", "G-PROVENANCE", "G-RELEASE"],
+  full: expectedGates
+};
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -73,6 +85,9 @@ function validatePolicy(policy) {
 
   for (const [profileId, profile] of Object.entries(policy.changeProfiles ?? {})) {
     for (const stage of ["pr", "nightly", "release"]) {
+      const expected = expectedProfileGates[profileId] ?? [];
+      const actual = profile.requiredGates?.[stage] ?? [];
+      if (JSON.stringify(actual) !== JSON.stringify(expected)) errors.push(issue("POLICY_PROFILE_GATE_MATRIX_DRIFT", `/changeProfiles/${profileId}/requiredGates/${stage}`, "profile gate set/order differs from ci-gate-matrix.md"));
       for (const gate of profile.requiredGates?.[stage] ?? []) {
         if (!(gate in policy.gates)) errors.push(issue("POLICY_PROFILE_GATE_REFERENCE", `/changeProfiles/${profileId}/requiredGates/${stage}`, `unknown gate ${gate}`));
       }

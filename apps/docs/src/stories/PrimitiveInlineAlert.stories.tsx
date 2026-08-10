@@ -5,10 +5,12 @@ import { Button, InlineAlert } from "@taliya/ui";
 
 import { batch2SourceDescription, PrimitiveMatrix, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof InlineAlert> = {
   title: "Primitives / UI / InlineAlert",
   component: InlineAlert,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

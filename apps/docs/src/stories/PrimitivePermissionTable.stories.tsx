@@ -4,10 +4,12 @@ import { PermissionTable } from "@taliya/ui";
 
 import { batch8SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof PermissionTable> = {
   title: "Primitives / UI / PermissionTable",
   component: PermissionTable,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

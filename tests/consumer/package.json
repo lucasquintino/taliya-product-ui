@@ -1,0 +1,10 @@
+{
+  "name": "taliya-packed-consumer-fixture",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@taliya/tokens": "file:../../dist-packages/taliya-tokens-0.1.1.tgz",
+    "@taliya/ui": "file:../../dist-packages/taliya-ui-0.1.1.tgz",
+    "@taliya/crm": "file:../../dist-packages/taliya-crm-0.1.1.tgz"
+  }
+}

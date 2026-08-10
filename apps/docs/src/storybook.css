@@ -2300,7 +2300,7 @@ body {
 }
 
 .sb-primitive-page:has(.sb-crm-batch10-source-catalog) {
-  max-width: 1440px;
+  max-width: 100%;
 }
 
 .sb-primitive-page:has(.sb-crm-batch10-student-header-story) {
@@ -2347,7 +2347,7 @@ body {
 .sb-primitive-page:has(.sb-crm-batch10-retention-story--CancellationCase),
 .sb-primitive-page:has(.sb-crm-batch10-retention-story--ReactivationCard),
 .sb-primitive-page:has(.sb-crm-batch10-retention-story--ComplaintPanel) {
-  max-width: 960px;
+  max-width: 100%;
 }
 
 .sb-primitive-page:has(.sb-crm-batch10-sensitive-story) {
@@ -2371,7 +2371,12 @@ body {
 }
 
 .sb-primitive-page:has(.sb-crm-batch10-tenant-detail-story) {
-  max-width: 1540px;
+  max-width: 100%;
+}
+
+.sb-crm-batch10-tenant-detail-story .tcrm-tenant-detail-layout {
+  max-width: 100%;
+  width: 100%;
 }
 
 .sb-primitive-page:has(.sb-crm-batch10-security-story) {
@@ -2399,7 +2404,7 @@ body {
 }
 
 .sb-crm-batch10-page .sb-crm-batch10-agent-card-grid {
-  grid-template-columns: repeat(3, 471px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .sb-crm-batch10-page .sb-primitive-state > div {
@@ -2447,7 +2452,7 @@ body {
 
 .sb-crm-batch10-retention-story .sb-primitive-matrix {
   align-items: start;
-  grid-template-columns: repeat(3, max-content);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .sb-crm-batch10-sensitive-story .sb-primitive-matrix {
@@ -2474,7 +2479,7 @@ body {
 
 .sb-crm-batch10-advanced-state-story .sb-primitive-matrix {
   align-items: start;
-  grid-template-columns: repeat(3, max-content);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .sb-crm-batch10-report-filter-story,

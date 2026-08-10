@@ -4,10 +4,12 @@ import { Button, Timeline } from "@taliya/ui";
 
 import { batch6SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Timeline> = {
   title: "Primitives / UI / Timeline",
   component: Timeline,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

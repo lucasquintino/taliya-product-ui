@@ -4,10 +4,12 @@ import { Button, MessageBubble } from "@taliya/ui";
 
 import { batch6SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof MessageBubble> = {
   title: "Primitives / UI / MessageBubble",
   component: MessageBubble,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

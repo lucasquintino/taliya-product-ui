@@ -27,10 +27,12 @@ const rows: CaseRow[] = [
   { id: "cs-1032", code: "#CS-1032", subject: "Acesso negado ao sistema", status: "Resolvido", priority: "Baixa", category: "Acesso", updated: "24/04/2024 09:02", owner: "Sam Frank", ownerAvatar: image79Avatar, priorityTone: "success" }
 ];
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof DataTable> = {
   title: "Primitives / UI / DataTable",
   component: DataTable,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

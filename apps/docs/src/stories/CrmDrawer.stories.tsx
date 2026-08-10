@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CrmDrawer, CrmProductShell } from "@taliya/crm";
 import { Button } from "@taliya/ui";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Operational / CrmDrawer",
   parameters: {
@@ -13,7 +14,8 @@ const meta = {
           "Drawer global do CRM. Ele padroniza header, conteudo scrollavel e footer fixo; paginas passam conteudo e acoes por slots."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;

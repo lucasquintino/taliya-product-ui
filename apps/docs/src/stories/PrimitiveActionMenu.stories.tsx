@@ -8,7 +8,10 @@ import { batch2SourceDescription, PrimitiveMatrix, PrimitivePage, PrimitiveState
 const meta: Meta<typeof ActionMenu> = {
   title: "Primitives / UI / ActionMenu",
   component: ActionMenu,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } },
+  play: async ({ canvasElement }) => {
+    canvasElement.querySelector<HTMLButtonElement>("button:not([disabled])")?.click();
+  }
 };
 
 export default meta;

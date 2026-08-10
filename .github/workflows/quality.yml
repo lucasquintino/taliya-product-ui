@@ -24,14 +24,32 @@ jobs:
       QUALITY_PROFILE: ${{ inputs.profile || 'governance' }}
       QUALITY_STAGE: ${{ inputs.stage || 'pr' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22
           cache: pnpm
-      - run: corepack enable
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm quality:select --profile "$QUALITY_PROFILE" --stage "$QUALITY_STAGE"
-      - run: pnpm quality:governance
-      - run: pnpm storybook:build
-      - run: node scripts/quality/run-story-tests.mjs
+      - run: corepack enable && corepack prepare pnpm@9.15.4 --activate
+      - run: corepack pnpm install --frozen-lockfile
+      - run: corepack pnpm quality:select --profile "$QUALITY_PROFILE" --stage "$QUALITY_STAGE"
+      - run: corepack pnpm quality:governance
+      - run: corepack pnpm storybook:build
+      - run: node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
+      - run: node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static
+      - name: Capture package-wave visual evidence
+        if: env.QUALITY_PROFILE == 'ui-component' || env.QUALITY_PROFILE == 'crm-component' || env.QUALITY_PROFILE == 'full'
+        run: node scripts/quality/capture-storybook.mjs --storybook-dir apps/docs/storybook-static --output-dir artifacts/visual/captures --report artifacts/visual/capture-report.json --timeout 30000
+      - name: Compare package-wave visuals
+        if: env.QUALITY_PROFILE == 'ui-component' || env.QUALITY_PROFILE == 'crm-component' || env.QUALITY_PROFILE == 'full'
+        run: node scripts/quality/compare-visuals.mjs
+      - name: Validate package-wave visual approvals
+        if: env.QUALITY_PROFILE == 'ui-component' || env.QUALITY_PROFILE == 'crm-component' || env.QUALITY_PROFILE == 'full'
+        run: node scripts/quality/validate-visual-approvals.mjs
+      - name: Run Wave 5 UI checkpoint
+        if: env.QUALITY_PROFILE == 'ui-component' || env.QUALITY_PROFILE == 'full'
+        run: corepack pnpm wave5:evidence
+      - name: Run Wave 6 CRM checkpoint
+        if: env.QUALITY_PROFILE == 'crm-component' || env.QUALITY_PROFILE == 'full'
+        run: corepack pnpm wave6:evidence
+      - run: node scripts/quality/run-sast.mjs
+      - run: node scripts/quality/run-secrets.mjs

@@ -7,7 +7,7 @@ import { parseMode } from "./quality/modes.mjs";
 const root = process.cwd();
 const checkMode = parseMode(process.argv) === "check";
 const sourceDir = resolve(root, "packages/crm/src");
-const indexPath = resolve(sourceDir, "index.tsx");
+const indexPath = resolve(sourceDir, "internal-crm-runtime.tsx");
 const registryPath = resolve(sourceDir, "component-registry.ts");
 const pageKitPath = resolve(sourceDir, "standard-page-kit.ts");
 const jsonPath = resolve(root, "specs/001-product-ui-foundation/crm-module-boundaries-audit.json");

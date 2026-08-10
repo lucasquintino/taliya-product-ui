@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { SensitiveTimelinePanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof SensitiveTimelinePanel> = { title: "CRM / Students / SensitiveTimelinePanel", component: SensitiveTimelinePanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof SensitiveTimelinePanel> = { title: "CRM / Students / SensitiveTimelinePanel", component: SensitiveTimelinePanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

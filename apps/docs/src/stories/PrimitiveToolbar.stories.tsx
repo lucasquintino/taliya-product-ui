@@ -4,6 +4,7 @@ import { Button, Chip, IconButton, Toolbar } from "@taliya/ui";
 
 import { batch4SourceDescription, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Toolbar> = {
   title: "Primitives / UI / Toolbar",
   component: Toolbar,
@@ -14,7 +15,8 @@ const meta: Meta<typeof Toolbar> = {
         component: `${batch4SourceDescription}\n\nToolbar is the official horizontal layout primitive for page, panel, drawer, and table action bars.`
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

@@ -4,10 +4,12 @@ import { Button, EmptyState, IconButton } from "@taliya/ui";
 
 import { batch4SourceDescription, PrimitivePage, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof EmptyState> = {
   title: "Primitives / UI / EmptyState",
   component: EmptyState,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

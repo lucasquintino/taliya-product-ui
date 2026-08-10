@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ApprovalTable } from "@taliya/crm";
 import type { ApprovalTableRow } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Approvals / ApprovalTable",
   parameters: {
@@ -14,7 +15,8 @@ const meta = {
       }
     },
     layout: "fullscreen"
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof ApprovalTable>;
 
 export default meta;

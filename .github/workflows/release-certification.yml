@@ -1,0 +1,54 @@
+name: Release certification
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  certify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    environment: npm-trusted-publish
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.12.0
+          cache: pnpm
+      - run: corepack enable && corepack prepare pnpm@9.15.4 --activate
+      - run: corepack pnpm install --frozen-lockfile
+      - run: corepack pnpm exec playwright install chromium firefox webkit
+      - if: runner.os == 'Linux'
+        run: corepack pnpm exec playwright install-deps chromium firefox webkit
+      - run: corepack pnpm build
+      - run: corepack pnpm storybook:build
+      - run: node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
+      - run: node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static
+      - run: corepack pnpm e2e:release
+      - run: corepack pnpm pack:local
+      - run: corepack pnpm local-release-manifest:audit
+      - name: Generate SBOM for the exact dependency lockfile
+        run: corepack pnpm dlx @cyclonedx/cyclonedx-npm --output-file artifacts/release/sbom.json --spec-version 1.5
+      - name: Hash the exact publishable tarballs and SBOM
+        run: node scripts/quality/hash-release-artifacts.mjs
+      - run: corepack pnpm consumer:packed-audit
+      - run: node scripts/quality/audit-package-performance.mjs
+      - run: node scripts/quality/record-final-waiver-audit.mjs
+      - run: node scripts/quality/record-provenance-evidence.mjs
+      - run: node scripts/quality/certify-release.mjs

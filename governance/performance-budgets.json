@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "performance-budgets.v1",
+  "sourceRevision": "calibrated-2026-08-09",
+  "packages": {
+    "@taliya/tokens": { "distBytes": 1500000, "cssBytes": 400000, "tarballBytes": 250000 },
+    "@taliya/ui": { "distBytes": 900000, "cssBytes": 250000, "tarballBytes": 500000 },
+    "@taliya/crm": { "distBytes": 3500000, "cssBytes": 1600000, "tarballBytes": 1600000 }
+  },
+  "runtime": {
+    "scenario": "representative-server-render",
+    "medianMsMax": 100,
+    "p95MsMax": 180,
+    "informationalVariancePercent": 20
+  }
+}

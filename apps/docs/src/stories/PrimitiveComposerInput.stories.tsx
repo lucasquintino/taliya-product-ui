@@ -5,10 +5,12 @@ import { ComposerInput } from "@taliya/ui";
 
 import { batch6SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof ComposerInput> = {
   title: "Primitives / UI / ComposerInput",
   component: ComposerInput,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch6SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

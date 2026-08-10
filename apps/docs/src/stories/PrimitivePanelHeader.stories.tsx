@@ -4,6 +4,7 @@ import { Button, Chip, IconButton, Panel, PanelHeader } from "@taliya/ui";
 
 import { batch4SourceDescription, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof PanelHeader> = {
   title: "Primitives / UI / PanelHeader",
   component: PanelHeader,
@@ -14,7 +15,8 @@ const meta: Meta<typeof PanelHeader> = {
         component: `${batch4SourceDescription}\n\nPanelHeader is the official reusable header slot for panel surfaces, with title, description, metadata, action, compact density, and heading-level control.`
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

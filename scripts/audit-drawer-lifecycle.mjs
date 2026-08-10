@@ -6,9 +6,9 @@ const checkMode = process.argv.includes("--check");
 const specDir = resolve(root, "specs/001-product-ui-foundation");
 const jsonPath = resolve(specDir, "drawer-lifecycle-audit.json");
 const mdPath = resolve(specDir, "drawer-lifecycle-audit.md");
-const crmIndex = readFileSync(resolve(root, "packages/crm/src/index.tsx"), "utf8");
+const crmIndex = readFileSync(resolve(root, "packages/crm/src/internal-crm-runtime.tsx"), "utf8");
 const crmStyles = readFileSync(resolve(root, "packages/crm/src/styles.css"), "utf8");
-const uiIndex = readFileSync(resolve(root, "packages/ui/src/index.tsx"), "utf8");
+const uiIndex = readFileSync(resolve(root, "packages/ui/src/internal-ui-runtime.tsx"), "utf8");
 const uiStyles = readFileSync(resolve(root, "packages/ui/src/styles.css"), "utf8");
 const uiDrawerSource = uiIndex.slice(uiIndex.indexOf("export interface DrawerProps"), uiIndex.indexOf("export interface DrawerHeaderProps"));
 

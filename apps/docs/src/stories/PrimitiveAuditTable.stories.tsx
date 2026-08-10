@@ -6,10 +6,12 @@ import source13JoaoPedro from "../assets/source13-joao-pedro.png";
 import source13NikkiOlaw from "../assets/source13-nikki-olaw.png";
 import { batch8SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof AuditTable> = {
   title: "Primitives / UI / AuditTable",
   component: AuditTable,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

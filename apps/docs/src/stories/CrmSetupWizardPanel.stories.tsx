@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { SetupWizardPanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof SetupWizardPanel> = { title: "CRM / Setup / SetupWizardPanel", component: SetupWizardPanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof SetupWizardPanel> = { title: "CRM / Setup / SetupWizardPanel", component: SetupWizardPanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

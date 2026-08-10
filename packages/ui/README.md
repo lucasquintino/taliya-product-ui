@@ -49,3 +49,6 @@ Importe o CSS junto com os tokens no app consumidor:
 import "@taliya/tokens/tokens.css";
 import "@taliya/ui/styles.css";
 ```
+# Security responsibility
+
+`@taliya/ui` renders prepared props and callbacks. It does not provide consumer authentication, authorization, tenant isolation, CSP, CSRF, rate limiting, storage, or backend audit controls.

@@ -19,10 +19,12 @@ import {
 import { batch4SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 import image79Avatar from "../assets/image79-avatar.png";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Panel> = {
   title: "Primitives / UI / Panel",
   component: Panel,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

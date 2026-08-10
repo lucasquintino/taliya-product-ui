@@ -3,7 +3,15 @@ import path from "node:path";
 
 const root = process.cwd();
 const checkMode = process.argv.includes("--check");
-const crmSourcePath = path.join(root, "packages/crm/src/index.tsx");
+const crmSourcePaths = [
+  "packages/crm/src/internal-crm-runtime.tsx",
+  "packages/crm/src/domains/agenda/index.tsx",
+  "packages/crm/src/domains/billing/index.tsx",
+  "packages/crm/src/domains/settings/index.tsx",
+  "packages/crm/src/domains/students/index.tsx",
+  "packages/crm/src/patterns/index.tsx",
+  "packages/crm/src/patterns/shell.tsx"
+].map((relativePath) => path.join(root, relativePath));
 const reportJsonPath = path.join(root, "specs/001-product-ui-foundation/domain-wrapper-audit.json");
 const reportMdPath = path.join(root, "specs/001-product-ui-foundation/domain-wrapper-audit.md");
 
@@ -281,7 +289,7 @@ function contractRow(source, contract) {
   };
 }
 
-const crmSource = read(crmSourcePath);
+const crmSource = crmSourcePaths.filter((filePath) => fs.existsSync(filePath)).map(read).join("\n");
 const rows = wrapperContracts.map((contract) => contractRow(crmSource, contract));
 const failedRows = rows.filter((row) => !row.pass);
 const legacyDirectDrawerRows = rows.filter((row) => (

@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { BillingGovernancePanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof BillingGovernancePanel> = { title: "CRM / Billing / BillingGovernancePanel", component: BillingGovernancePanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof BillingGovernancePanel> = { title: "CRM / Billing / BillingGovernancePanel", component: BillingGovernancePanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

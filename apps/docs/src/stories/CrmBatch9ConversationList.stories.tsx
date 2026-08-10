@@ -6,8 +6,10 @@ import type { Batch9StoryComponent } from "./CrmBatch9StoryFixtures";
 
 const component = "ConversationList" satisfies Batch9StoryComponent;
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
-  title: "CRM / Inbox / ConversationList"
+  title: "CRM / Inbox / ConversationList",
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;

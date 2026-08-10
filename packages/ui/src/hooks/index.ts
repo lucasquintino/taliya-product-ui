@@ -1,0 +1,2 @@
+/** Hook ownership seam. */
+export {};

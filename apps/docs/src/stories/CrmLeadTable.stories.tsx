@@ -63,6 +63,7 @@ const rows: LeadTableRow[] = [
   }
 ];
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Operational / LeadTable",
   component: LeadTable,
@@ -74,7 +75,8 @@ const meta = {
           "Tabela oficial de leads/listas operacionais. Usa DataTable e TablePagination de @taliya/ui; consumidores passam dados preparados e callbacks."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof LeadTable>;
 
 export default meta;

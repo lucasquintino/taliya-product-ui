@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { CrmRecordDrawer } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Operational / CrmRecordDrawer",
   component: CrmRecordDrawer,
@@ -14,7 +15,8 @@ const meta = {
           "Drawer base oficial para objetos operacionais: header, identidade, fatos, conteudo dinamico e footer de acoes. Presets especificos devem compor este drawer."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof CrmRecordDrawer>;
 
 export default meta;

@@ -13,10 +13,12 @@ const statusOptions = [
   { value: "marketing", label: "Marketing", disabled: true }
 ];
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Select> = {
   title: "Primitives / UI / Select",
   component: Select,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

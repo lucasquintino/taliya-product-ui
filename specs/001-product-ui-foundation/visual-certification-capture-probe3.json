@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 8,
+  "generatedAt": "2026-08-09T13:05:06.663Z",
+  "status": "pass-captured-not-certified",
+  "note": "Screenshot and pixel-diff evidence only. No row is visually approved by an automatic threshold.",
+  "captureMode": "static",
+  "storybookUrl": "http://127.0.0.1:6224",
+  "planSha256": "5b7f419fc9fc08dd9d8574a6e658afd4d263bb57b0b1b07eb62490b8ee2d60f4",
+  "targetContractSha256": "b8a867efe2e39ff8e1a0624a96b6a96fb17b3e40c064cfb7b970d291ad428f9e",
+  "renderContractSha256": "64d4e7de232379a6e9227440210f3c8bdf8163d290d8dc7c3534da31b3bb52eb",
+  "storybookStaticIndexContractSha256": "e974bf0a1d3300d18dd325bc16f2190acc0ba37057144df832c2d2d56e2612a8",
+  "sourceManifestContractSha256": "e462b4f3d506a459b2a290a3e41354efda6d56e08845615a10e8c451d6d63326",
+  "sourceManifestSha256": "1a77b0a8dcd48fe4abd52cb8f3002ce501e7327cd6c838660aaf5350d5862192",
+  "eligibleTargetCount": 63,
+  "attemptedCount": 1,
+  "capturedCount": 1,
+  "failedCount": 0,
+  "outputDir": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\visual-certification-probe3",
+  "rows": [
+    {
+      "image": "19_round-4.1A_hoje_03_estado-critico-do-dia.png",
+      "storyId": "crm-image-coverage-hoje--image-19-hoje-estado-critico",
+      "storyUrl": "http://127.0.0.1:6224/iframe.html?id=crm-image-coverage-hoje--image-19-hoje-estado-critico&viewMode=story",
+      "sourceSha256": "650d49629ecb7d35372f952743352ce655633fb7833e1e47e639bdd7a413d0fd",
+      "currentSha256": "a9ccb54a32f0b403dfeda2c3a24a5dbe4118f6bae2c0ac57a565704cd088dd4b",
+      "diffSha256": "99b3faddd2ba927058146ce09289030fc4ebe14d9def0bc1dcb3d083e7772c4d",
+      "currentArtifact": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\visual-certification-probe3\\19_round-4.1A_hoje_03_estado-critico-do-dia--current.png",
+      "diffArtifact": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\visual-certification-probe3\\19_round-4.1A_hoje_03_estado-critico-do-dia--diff.png",
+      "renderInspection": {
+        "bodyTextLength": 1442,
+        "storyRootChildCount": 1,
+        "errorPatterns": [],
+        "documentTitle": "crm-image-coverage-hoje--image-19-hoje-estado-critico",
+        "inspectionMethod": "runtime"
+      },
+      "renderErrors": [],
+      "renderValid": true,
+      "status": "captured",
+      "sourceDimensions": "1672x941",
+      "currentDimensions": "1672x941",
+      "dimensionMatch": true,
+      "differentPixelCount": 87499,
+      "differentPixelRatio": 0.055613111369865104,
+      "meanAbsoluteRgbDelta": 8.382874059121333,
+      "currentRgbStdDev": 26.038055911050897,
+      "visuallyBlank": false
+    }
+  ]
+}

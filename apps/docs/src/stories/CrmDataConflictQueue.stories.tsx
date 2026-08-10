@@ -5,7 +5,8 @@ import source13NikkiOlaw from "../assets/source13-nikki-olaw.png";
 import source13SaraAlves from "../assets/source13-sara-alves.png";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof DataConflictQueue> = { title: "CRM / Data Quality / DataConflictQueue", component: DataConflictQueue, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof DataConflictQueue> = { title: "CRM / Data Quality / DataConflictQueue", component: DataConflictQueue, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

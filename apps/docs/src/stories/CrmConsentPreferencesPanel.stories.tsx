@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { ConsentPreferencesPanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof ConsentPreferencesPanel> = { title: "CRM / Students / ConsentPreferencesPanel", component: ConsentPreferencesPanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof ConsentPreferencesPanel> = { title: "CRM / Students / ConsentPreferencesPanel", component: ConsentPreferencesPanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

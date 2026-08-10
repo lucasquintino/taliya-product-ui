@@ -3,13 +3,15 @@ import { useState } from "react";
 
 import { SettingsChannelsWorkspace } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Config / SettingsChannelsWorkspace",
   component: SettingsChannelsWorkspace,
   parameters: {
     layout: "centered",
     docs: { description: { component: "Workspace pós-live de Canais com status técnico contextual e ações de conexão." } }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof SettingsChannelsWorkspace>;
 
 export default meta;

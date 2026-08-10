@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taliya.local/schemas/public-api-snapshot.v1.json",
+  "type": "object",
+  "required": ["schemaVersion", "package", "runtimeExports", "typeExports", "styleExports", "exportMap", "fingerprint"],
+  "properties": {
+    "schemaVersion": { "const": "public-api-snapshot.v1" },
+    "package": { "type": "string", "pattern": "^@taliya/" },
+    "runtimeExports": { "type": "array", "items": { "type": "string" } },
+    "typeExports": { "type": "array", "items": { "type": "string" } },
+    "styleExports": { "type": "array", "items": { "type": "string" } },
+    "exportMap": { "type": "object" },
+    "fingerprint": { "type": "string", "minLength": 64, "maxLength": 64 }
+  },
+  "additionalProperties": false
+}

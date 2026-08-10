@@ -55,8 +55,8 @@ const futureAdoption = readJson("specs/001-product-ui-foundation/future-consumer
 const remainingPageCoverage = readJson("specs/001-product-ui-foundation/remaining-page-coverage-audit.json");
 const componentApiContract = readText("specs/001-product-ui-foundation/contracts/component-api-contract.md");
 const drawerLifecycleContract = readText("specs/001-product-ui-foundation/contracts/drawer-lifecycle-contract.md");
-const crmIndex = readText("packages/crm/src/index.tsx");
-const uiIndex = readText("packages/ui/src/index.tsx");
+const crmIndex = readText("packages/crm/src/internal-crm-runtime.tsx");
+const uiIndex = readText("packages/ui/src/internal-ui-runtime.tsx");
 
 const requiredPageKitComponents = [
   "CrmProductShell",

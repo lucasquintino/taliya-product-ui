@@ -10,7 +10,11 @@ import { CrmProductShell, DashboardGrid, ListDetailLayout, SetupShell, ThreePane
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 
 function readCrmStyles() {
-  return readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8").replace(/\r\n?/g, "\n");
+  const entry = readFileSync(resolve(rootDir, "packages/crm/src/styles.css"), "utf8");
+  const layers = [...entry.matchAll(/@import "(\.\/styles\/[^"]+)";/g)].map(([, relativePath]) =>
+    readFileSync(resolve(rootDir, "packages/crm/src", relativePath), "utf8")
+  );
+  return layers.join("\n").replace(/\r\n?/g, "\n");
 }
 
 function expectCss(styles: string) {

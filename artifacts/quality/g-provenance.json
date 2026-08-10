@@ -1,16 +1,46 @@
 {
-  "schemaVersion": "gate-evidence.v1",
+  "schemaVersion": "1.1.0",
+  "runId": "e50b7f58-007a-5a4e-b055-2f46c9369eba",
   "gateId": "G-PROVENANCE",
-  "decision": "pass",
-  "sourceRevision": "11a4a0b7f55e2688ae8eb5f27c92c806537a2217",
-  "runner": {
-    "operatingSystem": "win32",
-    "architecture": "x64",
-    "nodeVersion": "v24.15.0"
+  "profileIds": [
+    "full"
+  ],
+  "policyVersion": "1.0.0",
+  "stage": "release",
+  "source": {
+    "commitSha": "42909039bc191625ab77091808bda18118b6e7aa",
+    "sourceTreeHash": "c3c618283c5f303fa9c539f23f3b088a66bb21a89a01ceb540f34f2b374e41de",
+    "dirty": true
   },
-  "generatedAt": "2026-08-09T01:31:56.182Z",
-  "command": "C:\\Program Files\\nodejs\\node.exe --test scripts/quality/__tests__/gate-run-contract.test.mjs scripts/quality/__tests__/evidence-provenance.test.mjs scripts/quality/__tests__/evidence-validation.test.mjs",
+  "configHash": "8e64fac3b44e0926c2b1b119c18e7f7c05621db67997e452b0187bb8520956e1",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "scripts/quality/record-provenance-evidence.mjs"
+  ],
   "workingDirectory": ".",
-  "exitCode": 0,
-  "outputSha256": "06a6679ee59c996775fe07561712d1a7e77644b927817246fa813deefd9480b8"
+  "runner": {
+    "operatingSystem": "windows",
+    "architecture": "x64",
+    "nodeVersion": "v24.15.0",
+    "ci": false
+  },
+  "startedAt": "2026-08-10T17:59:16.369Z",
+  "endedAt": "2026-08-10T17:59:16.370Z",
+  "attempt": 1,
+  "status": "fail",
+  "exitCode": 1,
+  "failureCodes": [
+    "GATE_PROVENANCE_DIRTY"
+  ],
+  "inputFingerprints": {
+    "artifacts_visual_capture_report_json": "546e5184970e98173579a0c8caa18ec6461667c98c19d2a52d3e28c79c3029d0",
+    "artifacts_quality_story_interactions_json": "99692822a7bfdbd6e97ca5a15840a7f143f2d779c83ba5681dfb9657e374eefa",
+    "artifacts_visual_visual_comparison_json": "6038b4388f94efa590b3a92d596e5849ae31ba7957581a2d94d9096cb7f6dcca",
+    "artifacts_visual_approval_audit_json": "75a18409ab8fa87bb62916be7a9adfc4f921f0663b2b7d3a109ad6779f0a0081",
+    "governance_quality_policy_json": "8e64fac3b44e0926c2b1b119c18e7f7c05621db67997e452b0187bb8520956e1"
+  },
+  "evidenceIds": [
+    "eff9eedb-a199-53e7-b3ee-a43c4f625228"
+  ],
+  "decisionFingerprint": "9cfe71c96c947247ab2d6caf7d91d7ada7e07d475e7154a9ef9a20a810d7cb87"
 }

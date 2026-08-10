@@ -9,6 +9,7 @@ import {
 import type { PageFilterBarFilter, PageQuickFilterItem, TaskTableRow, WorkListDetailPageLayoutMode, WorkListDetailPageState } from "@taliya/crm";
 import { Button, Panel } from "@taliya/ui";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Layout / WorkListDetailPage",
   parameters: {
@@ -19,7 +20,8 @@ const meta = {
       }
     },
     layout: "fullscreen"
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;

@@ -4,10 +4,12 @@ import { Button, ButtonGroup } from "@taliya/ui";
 
 import { batch2SourceDescription, PrimitiveMatrix, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof ButtonGroup> = {
   title: "Primitives / UI / ButtonGroup",
   component: ButtonGroup,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

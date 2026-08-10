@@ -4,10 +4,12 @@ import { MoneyInput, Select } from "@taliya/ui";
 
 import { batch3SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof MoneyInput> = {
   title: "Primitives / UI / MoneyInput",
   component: MoneyInput,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

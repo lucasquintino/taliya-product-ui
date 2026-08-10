@@ -37,6 +37,7 @@ import { Button } from "@taliya/ui";
 
 import image79Avatar from "../assets/image79-avatar.png";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta = {
   title: "CRM / Shell / Components",
   parameters: {
@@ -47,7 +48,8 @@ const meta: Meta = {
           "Fonte canonica: 79_round-4.1S_app-shell_01_base-web-sem-conteudo.png. O shell oficial de produto usa os componentes CRM / Shell / Components derivados dessa imagem e compoe Primitives / UI."
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

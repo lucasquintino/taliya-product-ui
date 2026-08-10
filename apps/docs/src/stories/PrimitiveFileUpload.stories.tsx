@@ -45,7 +45,9 @@ export const AllStates: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole("button", { name: "Selecionar" }));
+    const selectButton = canvas.getAllByRole("button", { name: "Selecionar" })[0];
+    if (!selectButton) throw new Error("FileUpload must render an idle select action");
+    await userEvent.click(selectButton);
     await expect(onAction).toHaveBeenCalled();
   }
 };

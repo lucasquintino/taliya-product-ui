@@ -4,10 +4,12 @@ import { Button } from "@taliya/ui";
 
 import { batch2SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Button> = {
   title: "Primitives / UI / Button",
   component: Button,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch2SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

@@ -18,6 +18,7 @@ const statusOptions: Array<{ value: string; label: string; icon: IconName }> = [
   { value: "resolvido", label: "Resolvido", icon: "checkCircle" }
 ];
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof FilterSelect> = {
   title: "Primitives / UI / FilterSelect",
   component: FilterSelect,
@@ -28,7 +29,8 @@ const meta: Meta<typeof FilterSelect> = {
         component: `${batch3SourceDescription} FilterSelect e o primitive oficial para filtros dropdown simples; Select permanece reservado para formularios.`
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

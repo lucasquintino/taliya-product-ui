@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChecklistDrawer } from "@taliya/crm";
 import type { ChecklistDrawerStep } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Operational / ChecklistDrawer",
   parameters: {
@@ -14,7 +15,8 @@ const meta = {
       }
     },
     layout: "fullscreen"
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof ChecklistDrawer>;
 
 export default meta;

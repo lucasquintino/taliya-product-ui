@@ -5,10 +5,12 @@ import { Checkbox } from "@taliya/ui";
 
 import { batch3SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Checkbox> = {
   title: "Primitives / UI / Checkbox",
   component: Checkbox,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

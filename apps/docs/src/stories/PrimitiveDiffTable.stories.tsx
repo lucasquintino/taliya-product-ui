@@ -5,10 +5,12 @@ import { DiffTable } from "@taliya/ui";
 import source13JoaoPedro from "../assets/source13-joao-pedro.png";
 import { batch8SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof DiffTable> = {
   title: "Primitives / UI / DiffTable",
   component: DiffTable,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

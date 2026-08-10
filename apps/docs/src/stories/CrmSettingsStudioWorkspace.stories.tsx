@@ -4,13 +4,15 @@ import { useState } from "react";
 import type { SettingsStudioField } from "@taliya/crm";
 import { SettingsStudioWorkspace } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Config / SettingsStudioWorkspace",
   component: SettingsStudioWorkspace,
   parameters: {
     layout: "centered",
     docs: { description: { component: "Workspace pós-live de Studio, herdado da anatomia do setup inicial." } }
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof SettingsStudioWorkspace>;
 
 export default meta;

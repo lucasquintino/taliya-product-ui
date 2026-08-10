@@ -30,8 +30,7 @@
                            "ui-component":  {
                                                 "description":  "Changes to reusable component source or its public contract.",
                                                 "pathMatchers":  [
-                                                                     "packages/ui/src/**",
-                                                                     "packages/crm/src/**"
+                                                                     "packages/ui/src/**"
                                                                  ],
                                                 "impactLabels":  [
                                                                      "component",
@@ -47,13 +46,64 @@
                                                              },
                                                 "requiredGates":  {
                                                                       "pr":  [
-                                                                                 "G-ARCH"
+                                                                                 "G-GOV",
+                                                                                 "G-TYPE",
+                                                                                 "G-LINT",
+                                                                                 "G-UNIT",
+                                                                                 "G-COV",
+                                                                                 "G-ARCH",
+                                                                                 "G-TOKENS",
+                                                                                 "G-STORY-BUILD",
+                                                                                 "G-STORY-TEST",
+                                                                                 "G-A11Y",
+                                                                                 "G-E2E-PR",
+                                                                                 "G-E2E-RELEASE",
+                                                                                 "G-VISUAL",
+                                                                                 "G-SEC-SAST",
+                                                                                 "G-PERF",
+                                                                                 "G-PACK",
+                                                                                 "G-CONSUMER",
+                                                                                 "G-PROVENANCE"
                                                                              ],
                                                                       "nightly":  [
-                                                                                      "G-ARCH"
+                                                                                      "G-GOV",
+                                                                                      "G-TYPE",
+                                                                                      "G-LINT",
+                                                                                      "G-UNIT",
+                                                                                      "G-COV",
+                                                                                      "G-ARCH",
+                                                                                      "G-TOKENS",
+                                                                                      "G-STORY-BUILD",
+                                                                                      "G-STORY-TEST",
+                                                                                      "G-A11Y",
+                                                                                      "G-E2E-PR",
+                                                                                      "G-E2E-RELEASE",
+                                                                                      "G-VISUAL",
+                                                                                      "G-SEC-SAST",
+                                                                                      "G-PERF",
+                                                                                      "G-PACK",
+                                                                                      "G-CONSUMER",
+                                                                                      "G-PROVENANCE"
                                                                                   ],
                                                                       "release":  [
-                                                                                      "G-ARCH"
+                                                                                      "G-GOV",
+                                                                                      "G-TYPE",
+                                                                                      "G-LINT",
+                                                                                      "G-UNIT",
+                                                                                      "G-COV",
+                                                                                      "G-ARCH",
+                                                                                      "G-TOKENS",
+                                                                                      "G-STORY-BUILD",
+                                                                                      "G-STORY-TEST",
+                                                                                      "G-A11Y",
+                                                                                      "G-E2E-PR",
+                                                                                      "G-E2E-RELEASE",
+                                                                                      "G-VISUAL",
+                                                                                      "G-SEC-SAST",
+                                                                                      "G-PERF",
+                                                                                      "G-PACK",
+                                                                                      "G-CONSUMER",
+                                                                                      "G-PROVENANCE"
                                                                                   ]
                                                                   },
                                                 "nonApplicableGates":  {
@@ -63,10 +113,10 @@
                            "sdd-only":  {
                                             "examples":  {
                                                              "matches":  [
-                                                                             "packages/ui/src/Button.tsx"
+                                                                             "specs/006-engineering-quality-hardening/spec.md"
                                                                          ],
                                                              "doesNotMatch":  [
-                                                                                  "specs/006-engineering-quality-hardening/spec.md"
+                                                                                  "packages/ui/src/Button.tsx"
                                                                               ]
                                                          },
                                             "nonApplicableGates":  {
@@ -74,33 +124,31 @@
                                                                    },
                                             "description":  "Canonical sdd-only change profile.",
                                             "pathMatchers":  [
-                                                                 "packages/**",
-                                                                 "apps/**",
-                                                                 "scripts/**",
-                                                                 "governance/**"
+                                                                 ".specify/**",
+                                                                 "specs/006-engineering-quality-hardening/**"
                                                              ],
                                             "impactLabels":  [
                                                                  "governance"
                                                              ],
                                             "requiredGates":  {
                                                                   "pr":  [
-                                                                             "G-GOV"
+                                                                             "GATE-SDD-APPROVED"
                                                                          ],
                                                                   "nightly":  [
-                                                                                  "G-GOV"
+                                                                                  "GATE-SDD-APPROVED"
                                                                               ],
                                                                   "release":  [
-                                                                                  "G-GOV"
+                                                                                  "GATE-SDD-APPROVED"
                                                                               ]
                                                               }
                                         },
                            "governance":  {
                                               "examples":  {
                                                                "matches":  [
-                                                                               "packages/ui/src/Button.tsx"
+                                                                               "governance/quality-policy.json"
                                                                            ],
                                                                "doesNotMatch":  [
-                                                                                    "specs/006-engineering-quality-hardening/spec.md"
+                                                                                    "packages/ui/src/Button.tsx"
                                                                                 ]
                                                            },
                                               "nonApplicableGates":  {
@@ -108,33 +156,43 @@
                                                                      },
                                               "description":  "Canonical governance change profile.",
                                               "pathMatchers":  [
-                                                                   "packages/**",
-                                                                   "apps/**",
-                                                                   "scripts/**",
-                                                                   "governance/**"
+                                                                   "AGENTS.md",
+                                                                   ".agents/**",
+                                                                   ".codex/**",
+                                                                   "governance/**",
+                                                                   "scripts/quality/**"
                                                                ],
                                               "impactLabels":  [
                                                                    "governance"
                                                                ],
                                               "requiredGates":  {
                                                                     "pr":  [
-                                                                               "G-GOV"
+                                                                               "G-GOV",
+                                                                               "G-LINT",
+                                                                               "G-UNIT",
+                                                                               "G-PROVENANCE"
                                                                            ],
                                                                     "nightly":  [
-                                                                                    "G-GOV"
+                                                                                    "G-GOV",
+                                                                                    "G-LINT",
+                                                                                    "G-UNIT",
+                                                                                    "G-PROVENANCE"
                                                                                 ],
                                                                     "release":  [
-                                                                                    "G-GOV"
+                                                                                    "G-GOV",
+                                                                                    "G-LINT",
+                                                                                    "G-UNIT",
+                                                                                    "G-PROVENANCE"
                                                                                 ]
                                                                 }
                                           },
                            "documentation-only":  {
                                                       "examples":  {
                                                                        "matches":  [
-                                                                                       "packages/ui/src/Button.tsx"
+                                                                                       "README.md"
                                                                                    ],
                                                                        "doesNotMatch":  [
-                                                                                            "specs/006-engineering-quality-hardening/spec.md"
+                                                                                            "packages/ui/src/Button.tsx"
                                                                                         ]
                                                                    },
                                                       "nonApplicableGates":  {
@@ -142,33 +200,35 @@
                                                                              },
                                                       "description":  "Canonical documentation-only change profile.",
                                                       "pathMatchers":  [
-                                                                           "packages/**",
-                                                                           "apps/**",
-                                                                           "scripts/**",
-                                                                           "governance/**"
+                                                                           "README.md",
+                                                                           "docs/**",
+                                                                           "specs/**"
                                                                        ],
                                                       "impactLabels":  [
                                                                            "governance"
                                                                        ],
                                                       "requiredGates":  {
                                                                             "pr":  [
-                                                                                       "G-GOV"
+                                                                                       "G-GOV",
+                                                                                       "G-PROVENANCE"
                                                                                    ],
                                                                             "nightly":  [
-                                                                                            "G-GOV"
+                                                                                            "G-GOV",
+                                                                                            "G-PROVENANCE"
                                                                                         ],
                                                                             "release":  [
-                                                                                            "G-GOV"
+                                                                                            "G-GOV",
+                                                                                            "G-PROVENANCE"
                                                                                         ]
                                                                         }
                                                   },
                            "tokens":  {
                                           "examples":  {
                                                            "matches":  [
-                                                                           "packages/ui/src/Button.tsx"
+                                                                           "packages/tokens/src/index.ts"
                                                                        ],
                                                            "doesNotMatch":  [
-                                                                                "specs/006-engineering-quality-hardening/spec.md"
+                                                                                "packages/ui/src/Button.tsx"
                                                                             ]
                                                        },
                                           "nonApplicableGates":  {
@@ -176,33 +236,74 @@
                                                                  },
                                           "description":  "Canonical tokens change profile.",
                                           "pathMatchers":  [
-                                                               "packages/**",
-                                                               "apps/**",
-                                                               "scripts/**",
-                                                               "governance/**"
+                                                               "packages/tokens/**",
+                                                               "governance/token*",
+                                                               "specs/001-product-ui-foundation/*token*"
                                                            ],
                                           "impactLabels":  [
                                                                "governance"
                                                            ],
                                           "requiredGates":  {
                                                                 "pr":  [
-                                                                           "G-GOV"
+                                                                           "G-GOV",
+                                                                           "G-TYPE",
+                                                                           "G-LINT",
+                                                                           "G-UNIT",
+                                                                           "G-COV",
+                                                                           "G-ARCH",
+                                                                           "G-TOKENS",
+                                                                           "G-STORY-BUILD",
+                                                                           "G-STORY-TEST",
+                                                                           "G-A11Y",
+                                                                           "G-VISUAL",
+                                                                           "G-PERF",
+                                                                           "G-PACK",
+                                                                           "G-CONSUMER",
+                                                                           "G-PROVENANCE"
                                                                        ],
                                                                 "nightly":  [
-                                                                                "G-GOV"
+                                                                                "G-GOV",
+                                                                                "G-TYPE",
+                                                                                "G-LINT",
+                                                                                "G-UNIT",
+                                                                                "G-COV",
+                                                                                "G-ARCH",
+                                                                                "G-TOKENS",
+                                                                                "G-STORY-BUILD",
+                                                                                "G-STORY-TEST",
+                                                                                "G-A11Y",
+                                                                                "G-VISUAL",
+                                                                                "G-PERF",
+                                                                                "G-PACK",
+                                                                                "G-CONSUMER",
+                                                                                "G-PROVENANCE"
                                                                             ],
                                                                 "release":  [
-                                                                                "G-GOV"
+                                                                                "G-GOV",
+                                                                                "G-TYPE",
+                                                                                "G-LINT",
+                                                                                "G-UNIT",
+                                                                                "G-COV",
+                                                                                "G-ARCH",
+                                                                                "G-TOKENS",
+                                                                                "G-STORY-BUILD",
+                                                                                "G-STORY-TEST",
+                                                                                "G-A11Y",
+                                                                                "G-VISUAL",
+                                                                                "G-PERF",
+                                                                                "G-PACK",
+                                                                                "G-CONSUMER",
+                                                                                "G-PROVENANCE"
                                                                             ]
                                                             }
                                       },
                            "crm-component":  {
                                                  "examples":  {
                                                                   "matches":  [
-                                                                                  "packages/ui/src/Button.tsx"
+                                                                                  "packages/crm/src/index.tsx"
                                                                               ],
                                                                   "doesNotMatch":  [
-                                                                                       "specs/006-engineering-quality-hardening/spec.md"
+                                                                                       "packages/ui/src/Button.tsx"
                                                                                    ]
                                                               },
                                                  "nonApplicableGates":  {
@@ -210,33 +311,81 @@
                                                                         },
                                                  "description":  "Canonical crm-component change profile.",
                                                  "pathMatchers":  [
-                                                                      "packages/**",
-                                                                      "apps/**",
-                                                                      "scripts/**",
-                                                                      "governance/**"
+                                                                      "packages/crm/**"
                                                                   ],
                                                  "impactLabels":  [
                                                                       "governance"
                                                                   ],
                                                  "requiredGates":  {
                                                                        "pr":  [
-                                                                                  "G-GOV"
+                                                                                  "G-GOV",
+                                                                                  "G-TYPE",
+                                                                                  "G-LINT",
+                                                                                  "G-UNIT",
+                                                                                  "G-COV",
+                                                                                  "G-ARCH",
+                                                                                  "G-TOKENS",
+                                                                                  "G-STORY-BUILD",
+                                                                                  "G-STORY-TEST",
+                                                                                  "G-A11Y",
+                                                                                  "G-E2E-PR",
+                                                                                  "G-E2E-RELEASE",
+                                                                                  "G-VISUAL",
+                                                                                  "G-SEC-SAST",
+                                                                                  "G-PERF",
+                                                                                  "G-PACK",
+                                                                                  "G-CONSUMER",
+                                                                                  "G-PROVENANCE"
                                                                               ],
                                                                        "nightly":  [
-                                                                                       "G-GOV"
+                                                                                       "G-GOV",
+                                                                                       "G-TYPE",
+                                                                                       "G-LINT",
+                                                                                       "G-UNIT",
+                                                                                       "G-COV",
+                                                                                       "G-ARCH",
+                                                                                       "G-TOKENS",
+                                                                                       "G-STORY-BUILD",
+                                                                                       "G-STORY-TEST",
+                                                                                       "G-A11Y",
+                                                                                       "G-E2E-PR",
+                                                                                       "G-E2E-RELEASE",
+                                                                                       "G-VISUAL",
+                                                                                       "G-SEC-SAST",
+                                                                                       "G-PERF",
+                                                                                       "G-PACK",
+                                                                                       "G-CONSUMER",
+                                                                                       "G-PROVENANCE"
                                                                                    ],
                                                                        "release":  [
-                                                                                       "G-GOV"
+                                                                                       "G-GOV",
+                                                                                       "G-TYPE",
+                                                                                       "G-LINT",
+                                                                                       "G-UNIT",
+                                                                                       "G-COV",
+                                                                                       "G-ARCH",
+                                                                                       "G-TOKENS",
+                                                                                       "G-STORY-BUILD",
+                                                                                       "G-STORY-TEST",
+                                                                                       "G-A11Y",
+                                                                                       "G-E2E-PR",
+                                                                                       "G-E2E-RELEASE",
+                                                                                       "G-VISUAL",
+                                                                                       "G-SEC-SAST",
+                                                                                       "G-PERF",
+                                                                                       "G-PACK",
+                                                                                       "G-CONSUMER",
+                                                                                       "G-PROVENANCE"
                                                                                    ]
                                                                    }
                                              },
                            "storybook-docs":  {
                                                   "examples":  {
                                                                    "matches":  [
-                                                                                   "packages/ui/src/Button.tsx"
+                                                                                   "apps/docs/src/stories/PrimitiveButton.stories.tsx"
                                                                                ],
                                                                    "doesNotMatch":  [
-                                                                                        "specs/006-engineering-quality-hardening/spec.md"
+                                                                                        "packages/ui/src/Button.tsx"
                                                                                     ]
                                                                },
                                                   "nonApplicableGates":  {
@@ -244,33 +393,61 @@
                                                                          },
                                                   "description":  "Canonical storybook-docs change profile.",
                                                   "pathMatchers":  [
-                                                                       "packages/**",
-                                                                       "apps/**",
-                                                                       "scripts/**",
-                                                                       "governance/**"
+                                                                       "apps/docs/**",
+                                                                       ".storybook/**"
                                                                    ],
                                                   "impactLabels":  [
                                                                        "governance"
                                                                    ],
                                                   "requiredGates":  {
                                                                         "pr":  [
-                                                                                   "G-GOV"
+                                                                                   "G-GOV",
+                                                                                   "G-TYPE",
+                                                                                   "G-LINT",
+                                                                                   "G-UNIT",
+                                                                                   "G-STORY-BUILD",
+                                                                                   "G-STORY-TEST",
+                                                                                   "G-A11Y",
+                                                                                   "G-E2E-PR",
+                                                                                   "G-E2E-RELEASE",
+                                                                                   "G-VISUAL",
+                                                                                   "G-PROVENANCE"
                                                                                ],
                                                                         "nightly":  [
-                                                                                        "G-GOV"
+                                                                                        "G-GOV",
+                                                                                        "G-TYPE",
+                                                                                        "G-LINT",
+                                                                                        "G-UNIT",
+                                                                                        "G-STORY-BUILD",
+                                                                                        "G-STORY-TEST",
+                                                                                        "G-A11Y",
+                                                                                        "G-E2E-PR",
+                                                                                        "G-E2E-RELEASE",
+                                                                                        "G-VISUAL",
+                                                                                        "G-PROVENANCE"
                                                                                     ],
                                                                         "release":  [
-                                                                                        "G-GOV"
+                                                                                        "G-GOV",
+                                                                                        "G-TYPE",
+                                                                                        "G-LINT",
+                                                                                        "G-UNIT",
+                                                                                        "G-STORY-BUILD",
+                                                                                        "G-STORY-TEST",
+                                                                                        "G-A11Y",
+                                                                                        "G-E2E-PR",
+                                                                                        "G-E2E-RELEASE",
+                                                                                        "G-VISUAL",
+                                                                                        "G-PROVENANCE"
                                                                                     ]
                                                                     }
                                               },
                            "dependency-build":  {
                                                     "examples":  {
                                                                      "matches":  [
-                                                                                     "packages/ui/src/Button.tsx"
+                                                                                     "pnpm-lock.yaml"
                                                                                  ],
                                                                      "doesNotMatch":  [
-                                                                                          "specs/006-engineering-quality-hardening/spec.md"
+                                                                                          "packages/ui/src/Button.tsx"
                                                                                       ]
                                                                  },
                                                     "nonApplicableGates":  {
@@ -278,33 +455,70 @@
                                                                            },
                                                     "description":  "Canonical dependency-build change profile.",
                                                     "pathMatchers":  [
-                                                                         "packages/**",
-                                                                         "apps/**",
-                                                                         "scripts/**",
-                                                                         "governance/**"
+                                                                         "package.json",
+                                                                         "pnpm-lock.yaml",
+                                                                         "pnpm-workspace.yaml",
+                                                                         "tsconfig*.json",
+                                                                         "**/package.json"
                                                                      ],
                                                     "impactLabels":  [
                                                                          "governance"
                                                                      ],
                                                     "requiredGates":  {
                                                                           "pr":  [
-                                                                                     "G-GOV"
+                                                                                     "G-GOV",
+                                                                                     "G-TYPE",
+                                                                                     "G-LINT",
+                                                                                     "G-UNIT",
+                                                                                     "G-ARCH",
+                                                                                     "G-SEC-RUNTIME",
+                                                                                     "G-SEC-TOOLCHAIN",
+                                                                                     "G-SEC-SAST",
+                                                                                     "G-SEC-SECRETS",
+                                                                                     "G-PERF",
+                                                                                     "G-PACK",
+                                                                                     "G-CONSUMER",
+                                                                                     "G-PROVENANCE"
                                                                                  ],
                                                                           "nightly":  [
-                                                                                          "G-GOV"
+                                                                                          "G-GOV",
+                                                                                          "G-TYPE",
+                                                                                          "G-LINT",
+                                                                                          "G-UNIT",
+                                                                                          "G-ARCH",
+                                                                                          "G-SEC-RUNTIME",
+                                                                                          "G-SEC-TOOLCHAIN",
+                                                                                          "G-SEC-SAST",
+                                                                                          "G-SEC-SECRETS",
+                                                                                          "G-PERF",
+                                                                                          "G-PACK",
+                                                                                          "G-CONSUMER",
+                                                                                          "G-PROVENANCE"
                                                                                       ],
                                                                           "release":  [
-                                                                                          "G-GOV"
+                                                                                          "G-GOV",
+                                                                                          "G-TYPE",
+                                                                                          "G-LINT",
+                                                                                          "G-UNIT",
+                                                                                          "G-ARCH",
+                                                                                          "G-SEC-RUNTIME",
+                                                                                          "G-SEC-TOOLCHAIN",
+                                                                                          "G-SEC-SAST",
+                                                                                          "G-SEC-SECRETS",
+                                                                                          "G-PERF",
+                                                                                          "G-PACK",
+                                                                                          "G-CONSUMER",
+                                                                                          "G-PROVENANCE"
                                                                                       ]
                                                                       }
                                                 },
                            "workflow-release":  {
                                                     "examples":  {
                                                                      "matches":  [
-                                                                                     "packages/ui/src/Button.tsx"
+                                                                                     ".github/workflows/release-certification.yml"
                                                                                  ],
                                                                      "doesNotMatch":  [
-                                                                                          "specs/006-engineering-quality-hardening/spec.md"
+                                                                                          "packages/ui/src/Button.tsx"
                                                                                       ]
                                                                  },
                                                     "nonApplicableGates":  {
@@ -312,23 +526,55 @@
                                                                            },
                                                     "description":  "Canonical workflow-release change profile.",
                                                     "pathMatchers":  [
-                                                                         "packages/**",
-                                                                         "apps/**",
-                                                                         "scripts/**",
-                                                                         "governance/**"
+                                                                         ".github/workflows/**",
+                                                                         "changeset*",
+                                                                         "scripts/quality/certify-release.mjs"
                                                                      ],
                                                     "impactLabels":  [
                                                                          "governance"
                                                                      ],
                                                     "requiredGates":  {
                                                                           "pr":  [
-                                                                                     "G-GOV"
+                                                                                     "G-GOV",
+                                                                                     "G-LINT",
+                                                                                     "G-UNIT",
+                                                                                     "G-SEC-RUNTIME",
+                                                                                     "G-SEC-TOOLCHAIN",
+                                                                                     "G-SEC-SAST",
+                                                                                     "G-SEC-SECRETS",
+                                                                                     "G-PERF",
+                                                                                     "G-PACK",
+                                                                                     "G-CONSUMER",
+                                                                                     "G-PROVENANCE",
+                                                                                     "G-RELEASE"
                                                                                  ],
                                                                           "nightly":  [
-                                                                                          "G-GOV"
+                                                                                          "G-GOV",
+                                                                                          "G-LINT",
+                                                                                          "G-UNIT",
+                                                                                          "G-SEC-RUNTIME",
+                                                                                          "G-SEC-TOOLCHAIN",
+                                                                                          "G-SEC-SAST",
+                                                                                          "G-SEC-SECRETS",
+                                                                                          "G-PERF",
+                                                                                          "G-PACK",
+                                                                                          "G-CONSUMER",
+                                                                                          "G-PROVENANCE",
+                                                                                          "G-RELEASE"
                                                                                       ],
                                                                           "release":  [
-                                                                                          "G-GOV"
+                                                                                          "G-GOV",
+                                                                                          "G-LINT",
+                                                                                          "G-UNIT",
+                                                                                          "G-SEC-RUNTIME",
+                                                                                          "G-SEC-TOOLCHAIN",
+                                                                                          "G-SEC-SAST",
+                                                                                          "G-SEC-SECRETS",
+                                                                                          "G-PERF",
+                                                                                          "G-PACK",
+                                                                                          "G-CONSUMER",
+                                                                                          "G-PROVENANCE",
+                                                                                          "G-RELEASE"
                                                                                       ]
                                                                       }
                                                 },
@@ -349,10 +595,12 @@
                                                              "packages/**",
                                                              "apps/**",
                                                              "scripts/**",
-                                                             "governance/**"
+                                                             "governance/**",
+                                                             ".github/workflows/**",
+                                                             "pnpm-lock.yaml"
                                                          ],
                                         "impactLabels":  [
-                                                             "governance"
+                                                             "full"
                                                          ],
                                         "requiredGates":  {
                                                               "pr":  [

@@ -5,10 +5,12 @@ import { TablePagination } from "@taliya/ui";
 
 import { batch4SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof TablePagination> = {
   title: "Primitives / UI / TablePagination",
   component: TablePagination,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch4SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

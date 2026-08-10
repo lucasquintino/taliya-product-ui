@@ -5,10 +5,12 @@ import { Button, ButtonGroup, Input, Modal, Select, SegmentedControl } from "@ta
 
 import { batch5SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof Modal> = {
   title: "Primitives / UI / Modal",
   component: Modal,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

@@ -4,10 +4,12 @@ import { Badge, Chip, FilterBar, FilterChip, SearchInput } from "@taliya/ui";
 
 import { batch3SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof FilterBar> = {
   title: "Primitives / UI / FilterBar",
   component: FilterBar,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch3SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

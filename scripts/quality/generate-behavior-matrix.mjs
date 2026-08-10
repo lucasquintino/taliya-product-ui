@@ -9,8 +9,8 @@ const root = process.cwd();
 const output = path.join(root, 'tests', 'contracts', 'public-behavior-matrix.json');
 const sources = [
   ['tokens', 'packages/tokens/src/index.ts'],
-  ['ui', 'packages/ui/src/index.tsx'],
-  ['crm', 'packages/crm/src/index.tsx'],
+  ['ui', 'packages/ui/src/internal-ui-runtime.tsx'],
+  ['crm', 'packages/crm/src/internal-crm-runtime.tsx'],
   ['crm', 'packages/crm/src/standard-page-kit.ts']
 ];
 const rows = [];

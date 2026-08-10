@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { PlanAgentsPanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof PlanAgentsPanel> = { title: "CRM / Config / PlanAgentsPanel", component: PlanAgentsPanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof PlanAgentsPanel> = { title: "CRM / Config / PlanAgentsPanel", component: PlanAgentsPanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

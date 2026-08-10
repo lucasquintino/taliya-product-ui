@@ -5,10 +5,12 @@ import { Button, Chip, ConfirmDialog, InlineGroup, List, ListItem, MetaText } fr
 
 import { batch5SourceDescription, PrimitivePage, SourceGrid, SourceItem, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof ConfirmDialog> = {
   title: "Primitives / UI / ConfirmDialog",
   component: ConfirmDialog,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch5SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

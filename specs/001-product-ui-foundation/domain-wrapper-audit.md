@@ -1,6 +1,6 @@
 # Domain Wrapper Audit
 
-Generated: 2026-07-15T06:45:34.425Z
+Generated: 2026-08-09T12:00:03.832Z
 
 Status: pass
 
@@ -33,6 +33,7 @@ It is not source-image 1:1 certification.
 | `PaymentDrawer` | drawer | pass | wraps the official CrmDrawer with payment-specific summary, history, copilot context and finance actions | - |
 | `ReplacementDrawer` | drawer | pass | wraps the official CrmDrawer with replacement options, scheduling notes and replacement actions | - |
 | `LeadDrawer` | drawer | pass | wraps the official CrmDrawer with lead-specific checklist, timeline, sales facts and footer actions | - |
+| `ConversationDrawer` | drawer | pass | wraps the official CrmDrawer with conversation facts, recent history, related tasks, agent status and inbox actions | - |
 | `ChecklistDrawer` | drawer | pass | wraps the official CrmDrawer with checklist progress, step toggles, activity and footer actions | - |
 | `StudentDrawer` | drawer | pass | wraps the official CrmDrawer with student facts, classes, finance, presence and pending-action sections | - |
 | `ClassDrawer` | drawer | pass | wraps the official CrmDrawer with roster status controls, attendance summary and class footer actions | - |

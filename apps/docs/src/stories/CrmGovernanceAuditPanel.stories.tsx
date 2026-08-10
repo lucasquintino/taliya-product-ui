@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { GovernanceAuditPanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof GovernanceAuditPanel> = { title: "CRM / Timeline / GovernanceAuditPanel", component: GovernanceAuditPanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof GovernanceAuditPanel> = { title: "CRM / Timeline / GovernanceAuditPanel", component: GovernanceAuditPanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

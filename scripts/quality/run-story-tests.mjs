@@ -7,10 +7,12 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const root = process.cwd();
-const outputDir = fs.mkdtempSync(path.join(os.tmpdir(), 'taliya-storybook-'));
+const requestedDirIndex = process.argv.indexOf('--storybook-dir');
+const requestedDir = requestedDirIndex >= 0 ? process.argv[requestedDirIndex + 1] : null;
+const outputDir = requestedDir ? path.resolve(root, requestedDir) : fs.mkdtempSync(path.join(os.tmpdir(), 'taliya-storybook-'));
 const storybook = path.join(root, 'node_modules', 'storybook', 'dist', 'bin', 'dispatcher.js');
 const args = ['build', '--config-dir', path.join(root, 'apps', 'docs', '.storybook'), '--output-dir', outputDir];
-const result = spawnSync(process.execPath, [storybook, ...args], { cwd: root, encoding: 'utf8' });
+const result = requestedDir ? { status: 0, stdout: '', stderr: '' } : spawnSync(process.execPath, [storybook, ...args], { cwd: root, encoding: 'utf8' });
 if (result.stdout) process.stdout.write(result.stdout);
 if (result.stderr) process.stderr.write(result.stderr);
 const index = path.join(outputDir, 'index.json');
@@ -24,4 +26,4 @@ if (status === 'pass') {
   console.error(`STORY-TEST-BUILD-FAILED: exit ${result.status ?? 1}`);
   process.exitCode = result.status ?? 1;
 }
-fs.rmSync(outputDir, { recursive: true, force: true });
+if (!requestedDir) fs.rmSync(outputDir, { recursive: true, force: true });

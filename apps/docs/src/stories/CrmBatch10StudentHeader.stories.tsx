@@ -8,8 +8,10 @@ import { PrimitivePage } from "./PrimitiveStoryUtils";
 
 const component = "StudentHeader" satisfies Batch10StoryComponent;
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
-  title: "CRM / Students / StudentHeader"
+  title: "CRM / Students / StudentHeader",
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;

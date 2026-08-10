@@ -2,7 +2,8 @@ import type { Meta } from "@storybook/react-vite";
 import { GuardrailPolicyPanel } from "@taliya/crm";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof GuardrailPolicyPanel> = { title: "CRM / Config / GuardrailPolicyPanel", component: GuardrailPolicyPanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof GuardrailPolicyPanel> = { title: "CRM / Config / GuardrailPolicyPanel", component: GuardrailPolicyPanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

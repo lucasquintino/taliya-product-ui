@@ -15,6 +15,7 @@ const normalizedBytes = (file) => {
   catch { return raw; }
 };
 const sha256 = (bytes) => crypto.createHash('sha256').update(bytes).digest('hex');
+const isGeneratedEvidencePath = (relative) => relative.startsWith('artifacts/') || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
 const fileHash = (relative) => sha256(normalizedBytes(path.join(root, ...relative.split('/'))));
 const run = (command, args) => {
   const result = spawnSync(command, args, { cwd: root, encoding: 'utf8' });
@@ -30,7 +31,7 @@ if (porcelain) {
   const tracked = run('git', ['ls-files', '-co', '--exclude-standard', '-z']).output.split('\0')
     .filter(Boolean)
     .map((entry) => entry.replaceAll('\\', '/'))
-    .filter((entry) => entry !== artifactRelative)
+    .filter((entry) => !isGeneratedEvidencePath(entry))
     .sort();
   const sourceRows = tracked.map((relative) => `${relative}\0${fileHash(relative)}\0${normalizedBytes(path.join(root, ...relative.split('/'))).length}\n`);
   const sourceTreeHash = sha256(Buffer.from(sourceRows.join(''), 'utf8'));

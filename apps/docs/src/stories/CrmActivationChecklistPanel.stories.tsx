@@ -5,7 +5,8 @@ import source13NikkiOlaw from "../assets/source13-nikki-olaw.png";
 import source13SaraAlves from "../assets/source13-sara-alves.png";
 import { PrimitivePage } from "./PrimitiveStoryUtils";
 
-const meta: Meta<typeof ActivationChecklistPanel> = { title: "CRM / Setup / ActivationChecklistPanel", component: ActivationChecklistPanel, parameters: { layout: "fullscreen" } };
+import { playFirstInteractiveControl } from "./story-play";
+const meta: Meta<typeof ActivationChecklistPanel> = { title: "CRM / Setup / ActivationChecklistPanel", component: ActivationChecklistPanel, parameters: { layout: "fullscreen" } , play: playFirstInteractiveControl };
 export default meta;
 
 export function Source() {

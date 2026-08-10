@@ -4,7 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const checkMode = process.argv.includes("--check");
 const storiesDir = path.join(root, "apps/docs/src/stories");
-const crmSourcePath = path.join(root, "packages/crm/src/index.tsx");
+const crmSourcePath = path.join(root, "packages/crm/src/internal-crm-runtime.tsx");
 
 const allowedStoryPrefixes = [
   "Foundations / Tokens",

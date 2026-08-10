@@ -4,6 +4,7 @@ import { FieldStack, Input, Panel, Select, Textarea } from "@taliya/ui";
 
 import { batch3SourceDescription, PrimitivePage, PrimitiveState } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof FieldStack> = {
   title: "Primitives / UI / FieldStack",
   component: FieldStack,
@@ -14,7 +15,8 @@ const meta: Meta<typeof FieldStack> = {
         component: `${batch3SourceDescription}\n\nFieldStack is the official primitive for stacking multiple field controls inside a single grid cell without story-only spacing CSS.`
       }
     }
-  }
+  },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

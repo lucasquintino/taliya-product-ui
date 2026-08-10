@@ -7,7 +7,7 @@ import "../src/storybook.css";
 
 const preview: Preview = {
   parameters: {
-    a11y: { test: "todo" },
+    a11y: { test: "error" },
     backgrounds: {
       default: "Taliya page",
       values: [{ name: "Taliya page", value: "#E4E4E4" }]

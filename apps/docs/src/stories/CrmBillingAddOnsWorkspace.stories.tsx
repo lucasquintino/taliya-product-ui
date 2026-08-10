@@ -2,11 +2,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { BillingAddOnsWorkspace } from "@taliya/crm";
 
+import { playFirstInteractiveControl } from "./story-play";
+
 const meta = {
   title: "CRM / Billing / BillingAddOnsWorkspace",
   component: BillingAddOnsWorkspace,
   parameters: { layout: "centered" },
-  args: { onAddOnAction: () => undefined }
+  args: { onAddOnAction: () => undefined },
+  play: playFirstInteractiveControl
 } satisfies Meta<typeof BillingAddOnsWorkspace>;
 
 export default meta;

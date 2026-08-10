@@ -8,10 +8,12 @@ import source13NikkiOlaw from "../assets/source13-nikki-olaw.png";
 import source13SaraAlves from "../assets/source13-sara-alves.png";
 import { batch8SourceDescription, PrimitivePage, SourcePanel } from "./PrimitiveStoryUtils";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta: Meta<typeof RelationshipCard> = {
   title: "Primitives / UI / RelationshipCard",
   component: RelationshipCard,
-  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } }
+  parameters: { layout: "fullscreen", docs: { description: { component: batch8SourceDescription } } },
+  play: playFirstInteractiveControl
 };
 
 export default meta;

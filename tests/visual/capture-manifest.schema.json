@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://taliya.local/schemas/capture-manifest.v1.json",
+  "type": "object",
+  "required": ["schemaVersion", "sourceRevision", "storyCount", "components", "images"],
+  "properties": {
+    "schemaVersion": { "const": "capture-manifest.v1" },
+    "sourceRevision": { "type": "string", "minLength": 1 },
+    "storyCount": { "type": "integer", "minimum": 1 },
+    "components": { "type": "array", "minItems": 1 },
+    "images": { "type": "array", "minItems": 1 }
+  },
+  "additionalProperties": false
+}

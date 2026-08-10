@@ -13,11 +13,13 @@ import {
 } from "@taliya/crm";
 import { Button, ButtonGroup, Panel } from "@taliya/ui";
 
+import { playFirstInteractiveControl } from "./story-play";
 const meta = {
   title: "CRM / Layout / Official Compositions",
   parameters: {
     layout: "fullscreen"
-  }
+  },
+  play: playFirstInteractiveControl
 } satisfies Meta;
 
 export default meta;
