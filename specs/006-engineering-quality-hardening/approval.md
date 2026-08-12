@@ -20,7 +20,7 @@ This record deliberately does **not** infer implementation approval from any of 
 - the user's earlier request to create the SDD;
 - a coding agent's judgment.
 
-The approval is bound to readiness manifest `artifactManifestHash=22c101b75bdc9c51ec7deba4c7a53cff1cabc4593b9898dbc129e80aae8ab518`, `sourceTreeHash=009e787fbca4672a1d4b8b7cbd41581883f08a504b49544a9dbdb87906712b26`, and reviewed commit `a384da27925e6746019c8ada26db3e224248d157`. Any material change to scope, contracts, gates, task range, or evidence requirements invalidates this authorization and reopens review.
+The approval is bound to readiness manifest `artifactManifestHash=37b5c1ebb120884c45950214a0ec5cb676c123a535722092db619411edfa0439`, `sourceTreeHash=fcbaeb16464bb9c08ae0070273e8df910ab6408daec01366a55636f668c92808`, and reviewed base commit `898ef721859cf5efc7c6b2b5b0d8927c268857a8`. The implementation base was dirty by design; the manifest records the exact non-ignored working-tree files. Any material change to scope, contracts, gates, task range, or evidence requirements invalidates this authorization and reopens review.
 
 ## Review Scope
 
@@ -44,7 +44,7 @@ Approval does not expand the Product UI scope into backend, authentication, auth
 | Mandatory SDD artifacts exist | Complete and fingerprinted | PASS; `readiness-manifest.json` validates |
 | Clarifications/placeholders | None unresolved | PASS; integrated scan reports zero |
 | FR-to-story/decision/task/evidence mapping | Exact `FR-001` through `FR-048` coverage | PASS; one forward row per FR and one reverse row per task |
-| Task backlog | Exact `T101-T176`, ordered and all unchecked | PASS; 76 unique contiguous tasks, all blocked |
+| Task backlog | Exact `T101-T176`, ordered and evidence-reconciled | PASS; 76 unique contiguous tasks, with wave gates still authoritative |
 | Constitution check | No unauthorized exception | PASS; twelve principles and no exception |
 | SDD quality analysis | No critical inconsistency | PASS; schemas, fixtures, links, workflow, scope, vocabulary, and statuses agree |
 | User approval | Explicit instruction after `READY_FOR_APPROVAL` | PASS; explicit approval recorded below |
@@ -80,10 +80,10 @@ An approval transition must record all fields below in a reviewable documentatio
 | Authorization token | `APPROVED_FOR_IMPLEMENTATION` |
 | Approver | Repository owner / user |
 | Approval source | Explicit user instruction in the active Codex conversation |
-| Approval timestamp | `2026-08-09T00:39:43Z` |
-| Approved SDD commit | `a384da27925e6746019c8ada26db3e224248d157` |
-| Readiness source-tree hash | `009e787fbca4672a1d4b8b7cbd41581883f08a504b49544a9dbdb87906712b26` |
-| Artifact manifest hash | `22c101b75bdc9c51ec7deba4c7a53cff1cabc4593b9898dbc129e80aae8ab518` |
+| Approval timestamp | `2026-08-11T15:55:45Z` |
+| Approved SDD base commit | `898ef721859cf5efc7c6b2b5b0d8927c268857a8` |
+| Readiness source-tree hash | `fcbaeb16464bb9c08ae0070273e8df910ab6408daec01366a55636f668c92808` |
+| Artifact manifest hash | `37b5c1ebb120884c45950214a0ec5cb676c123a535722092db619411edfa0439` |
 | Candidate task range | `T101-T176` |
 | Approved task range | `T101-T176` |
 | Conditions or exclusions | Follow every dependency, gate, evidence, rollback, security, performance, and release condition; publication remains separately authorized |

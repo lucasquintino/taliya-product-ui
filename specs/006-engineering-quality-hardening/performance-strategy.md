@@ -1,6 +1,6 @@
 # Performance Strategy
 
-**Status**: planned; implementation blocked by `GATE-SDD-APPROVED`
+**Status**: in progress under approved task range; final performance certification remains pending
 **Primary requirements**: FR-036 through FR-040
 **Decision principle**: measure comparable production-like scenarios before optimizing or claiming impact
 

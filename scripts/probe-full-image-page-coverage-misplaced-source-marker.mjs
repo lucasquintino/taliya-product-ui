@@ -10,6 +10,21 @@ const targetStoryId = "crm-image-coverage-hoje--image-17-hoje-base";
 const targetImage = "17_round-4.1A_hoje_01_acima-da-dobra.png.png";
 const misplacedMarker = `story: "Fonte deslocada para probe: ${targetImage}."`;
 
+function restoreFile(filePath, contents) {
+  let lastError;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      writeFileSync(filePath, contents);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt === 7) break;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 125);
+    }
+  }
+  throw lastError;
+}
+
 const originalStory = readFileSync(storyPath, "utf8");
 const originalAuditJson = readFileSync(auditJsonPath, "utf8");
 const originalAuditMd = readFileSync(auditMdPath, "utf8");
@@ -43,7 +58,7 @@ try {
 
   console.log("Full image page coverage misplaced-source-marker probe passed.");
 } finally {
-  writeFileSync(storyPath, originalStory);
-  writeFileSync(auditJsonPath, originalAuditJson);
-  writeFileSync(auditMdPath, originalAuditMd);
+  restoreFile(storyPath, originalStory);
+  restoreFile(auditJsonPath, originalAuditJson);
+  restoreFile(auditMdPath, originalAuditMd);
 }

@@ -154,6 +154,12 @@ const reportMdPath = resolve(specDir, `${reportBaseName}.md`);
 
 const gates = [
   {
+    id: "coverage",
+    command: [process.execPath, "scripts/quality/run-coverage.mjs"],
+    commandText: "corepack pnpm coverage",
+    proves: "package coverage and changed-lines coverage meet the blocking quality policy"
+  },
+  {
     id: "tokens",
     command: [process.execPath, "scripts/audit-design-tokens.mjs", "--check"],
     commandText: "corepack pnpm tokens:audit",

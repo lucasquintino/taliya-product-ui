@@ -14,7 +14,7 @@ const normalizedHash = (value) => crypto.createHash("sha256").update(value).dige
 const isGeneratedEvidencePath = (relative) => relative.startsWith("artifacts/") || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
 const sourceTreeHash = (() => {
   const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
-  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative)).sort().map((relative) => {
+  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative) && fs.existsSync(path.join(root, relative))).sort().map((relative) => {
     const file = path.join(root, relative);
     const raw = fs.readFileSync(file);
     const text = raw.toString("utf8").replace(/\r\n?/g, "\n");

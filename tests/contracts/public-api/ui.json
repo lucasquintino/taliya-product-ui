@@ -70,6 +70,8 @@
     "PermissionTable",
     "PersonLabel",
     "Popover",
+    "PrimitiveButton",
+    "PrimitiveInput",
     "ProgressBar",
     "Radio",
     "RelationshipCard",
@@ -95,7 +97,9 @@
     "Toolbar",
     "Tooltip",
     "cn",
-    "iconRegistry"
+    "iconButtonIconSizeTokenBySize",
+    "iconRegistry",
+    "iconSizeTokenByName"
   ],
   "typeExports": [
     "AttachmentItem",
@@ -116,7 +120,6 @@
     "CardProps",
     "ChartPanelDatum",
     "ChartPanelPrimitiveProps",
-    "ChartPanelVariant",
     "CheckboxProps",
     "ChecklistItemProps",
     "ChecklistItemState",
@@ -220,7 +223,6 @@
     "TaliyaLogoProps",
     "TextareaProps",
     "TimelineItem",
-    "ToastProps",
     "ToggleProps",
     "ToolbarProps",
     "TooltipProps"
@@ -235,5 +237,5 @@
     },
     "./styles.css": "./src/styles.css"
   },
-  "fingerprint": "8f9d376b16243aa7107ca9fdd9b3aca491e02ae8e839df6db567a5c00cde362c"
+  "fingerprint": "70e691c0c16baf74efc82b545d224f2d421399a56c60042b44b2bd97818b0d27"
 }

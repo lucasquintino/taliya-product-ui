@@ -29,7 +29,7 @@ const isGeneratedEvidencePath = (relative) => relative.startsWith("artifacts/") 
 const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
 const sourceDirty = hasSourceChanges(root);
 const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
-const sourceRows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative)).sort().map((relative) => {
+const sourceRows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative) && fs.existsSync(path.join(root, relative))).sort().map((relative) => {
   const raw = fs.readFileSync(path.join(root, relative));
   const normalized = raw.toString("utf8").replace(/\r\n?/g, "\n");
   return `${relative}\0${sha256(normalized)}\0${raw.length}\n`;

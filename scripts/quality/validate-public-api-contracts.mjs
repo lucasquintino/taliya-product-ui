@@ -7,7 +7,7 @@ import fs from "node:fs";
 const inventory = JSON.parse(fs.readFileSync("artifacts/api/public-api-inventory.json", "utf8"));
 const errors = [];
 for (const row of inventory.packages) {
-  const file = `tests/contracts/public-api/${row.package.slice(9)}.json`;
+  const file = `tests/contracts/public-api/${row.snapshotFile ?? row.package.replace(/^@taliya\//, "")}.json`;
   if (!fs.existsSync(file)) { errors.push(`API-SNAPSHOT-MISSING:${row.package}`); continue; }
   const snapshot = JSON.parse(fs.readFileSync(file, "utf8"));
   const expected = crypto.createHash("sha256").update(JSON.stringify(row)).digest("hex");

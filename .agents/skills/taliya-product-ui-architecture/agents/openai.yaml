@@ -1,0 +1,4 @@
+interface:
+  display_name: "Taliya Product UI Architecture"
+  short_description: "Arquitetura oficial da biblioteca Taliya Product UI."
+  default_prompt: "Use esta skill para planejar, revisar ou implementar arquitetura, componentes globais, pacotes, page families, tokens e integrações da biblioteca taliya-product-ui."

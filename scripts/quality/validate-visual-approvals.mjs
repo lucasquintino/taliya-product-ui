@@ -32,14 +32,13 @@ const required = readJson(requiredPath, "required");
 const approvals = fs.existsSync(approvalsPath)
   ? readJson(approvalsPath, "approvals")
   : { schemaVersion: "visual-approval.v1", status: "awaiting-human-review", approvals: {} };
+const approvalRequiresReanchor = approvals.sourceTreeHash !== capture.sourceTreeHash || approvals.buildHash !== capture.buildHash;
 const captureById = new Map((capture.results ?? []).map((row) => [row.id, row]));
 const comparisonById = new Map((comparison.results ?? []).map((row) => [row.id, row]));
 const requiredIds = new Set((required.rows ?? []).map((row) => row.storyId).filter(Boolean));
 const errors = [];
 if (approvals.schemaVersion !== "visual-approval.v1") errors.push("VISUAL-APPROVAL-SCHEMA");
-for (const field of ["sourceRevision", "sourceTreeHash", "buildHash"]) {
-  if (approvals[field] && capture[field] && approvals[field] !== capture[field]) errors.push(`VISUAL-APPROVAL-${field.toUpperCase()}-MISMATCH`);
-}
+const approvalIdentityMismatch = ["sourceRevision", "sourceTreeHash", "buildHash"].some((field) => approvals[field] && capture[field] && approvals[field] !== capture[field]);
 if (!approvals.approvals || typeof approvals.approvals !== "object" || Array.isArray(approvals.approvals)) errors.push("VISUAL-APPROVAL-REGISTRY");
 const rows = [];
 for (const [id, approval] of Object.entries(approvals.approvals ?? {})) {
@@ -58,7 +57,7 @@ for (const [id, approval] of Object.entries(approvals.approvals ?? {})) {
   if (approval && typeof approval.sourceSha256 !== "string") rowErrors.push("RECORD-SOURCE-HASH-MISSING");
   if (approval && typeof approval.currentSha256 !== "string") rowErrors.push("RECORD-CURRENT-HASH-MISSING");
   if (approval?.sourceSha256 && comparisonRow?.sourceSha256 && approval.sourceSha256 !== comparisonRow.sourceSha256) rowErrors.push("RECORD-SOURCE-HASH-MISMATCH");
-  if (approval?.currentSha256 && comparisonRow?.currentSha256 && approval.currentSha256 !== comparisonRow.currentSha256) rowErrors.push("RECORD-CURRENT-HASH-MISMATCH");
+  if (!approvalRequiresReanchor && approval?.currentSha256 && comparisonRow?.currentSha256 && approval.currentSha256 !== comparisonRow.currentSha256) rowErrors.push("RECORD-CURRENT-HASH-MISMATCH");
   rows.push({ id, status: approval?.status ?? null, errors: rowErrors });
   if (rowErrors.length) errors.push(...rowErrors.map((error) => `${error}:${id}`));
 }
@@ -69,7 +68,7 @@ for (const id of requiredIds) {
 }
 const report = {
   schemaVersion: "visual-approval-audit.v1",
-  status: errors.length ? "fail" : pendingIds.length ? "blocked-human-review" : "pass",
+  status: errors.length ? "fail" : pendingIds.length || approvalIdentityMismatch ? "blocked-human-review" : "pass",
   sourceRevision: capture.sourceRevision ?? null,
   sourceTreeHash: capture.sourceTreeHash ?? null,
   buildHash: capture.buildHash ?? null,
@@ -78,6 +77,7 @@ const report = {
   requiredCount: requiredIds.size,
   approvalCount: rows.length,
   pendingCount: pendingIds.length,
+  requiresReanchor: approvalIdentityMismatch,
   approvedCount: rows.filter((row) => row.status === "approved").length,
   rejectedCount: rows.filter((row) => row.status === "rejected").length,
   errors,
@@ -88,4 +88,4 @@ const report = {
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(report, null, 2)}\n`);
 console.log(`VISUAL-APPROVALS: ${report.status}; approved=${report.approvedCount}; pending=${report.pendingCount}; errors=${errors.length}`);
-if (errors.length || pendingIds.length) process.exitCode = 1;
+if (errors.length || pendingIds.length || approvalIdentityMismatch) process.exitCode = 1;

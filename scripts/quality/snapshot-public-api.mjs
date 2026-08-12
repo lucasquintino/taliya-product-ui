@@ -11,6 +11,7 @@ const outputDir = path.join(root, "tests", "contracts", "public-api");
 fs.mkdirSync(outputDir, { recursive: true });
 for (const pkg of inventory.packages) {
   const snapshot = { schemaVersion: "public-api-snapshot.v1", package: pkg.package, runtimeExports: pkg.runtimeExports, typeExports: pkg.typeExports, styleExports: pkg.styleExports, exportMap: pkg.exportMap, fingerprint: crypto.createHash("sha256").update(JSON.stringify(pkg)).digest("hex") };
-  fs.writeFileSync(path.join(outputDir, `${pkg.package.slice(9)}.json`), `${JSON.stringify(snapshot, null, 2)}\n`);
+  const fileName = pkg.snapshotFile ?? pkg.package.replace(/^@taliya\//, "");
+  fs.writeFileSync(path.join(outputDir, `${fileName}.json`), `${JSON.stringify(snapshot, null, 2)}\n`);
 }
 console.log(`PUBLIC-API-SNAPSHOTS: ${inventory.packages.length} packages`);

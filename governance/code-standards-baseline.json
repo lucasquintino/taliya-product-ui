@@ -8,556 +8,556 @@
   "findings": [
     {
       "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 730,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "02d005854c9680d7ff4b1c56657e9aed876dbcfbb80e4d530ab449c1c7634927"
-    },
-    {
-      "ruleId": "REACT-EFFECT",
-      "file": "packages/ui/src/primitives/forms.tsx",
-      "line": 399,
-      "detail": "effect requires external synchronization justification",
-      "fingerprint": "047633dffc4139581c8f1944e35df308b9237a196a3fec1e9289a17b20fab609"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/ui/src/primitives/overlays.tsx",
-      "line": 1,
-      "detail": "logicalLines>578",
-      "fingerprint": "081e801bc69364711358b7373790d71e8d0df61a063e06ae2aba58f390237adc"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 143,
-      "detail": "array index key",
-      "fingerprint": "08fb57fec4fe1f1a854679cf6e37146c22327ae3739707d9e498825ee4fc9c06"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/settings/index.tsx",
-      "line": 1669,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "0adb73291a841787da1afca91452fa13cdcbcb5c36fbe1b57713d59905a5ff33"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 2530,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "0dc0c6540a55ced62a3ba6bbb8da55cc78dd70e2f0204ff03694739543a3c7e2"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/ui/src/components/workflow-data.tsx",
-      "line": 766,
-      "detail": "array index key",
-      "fingerprint": "13c0e66e32458c36682ac623389c9be705690e886092171fbbef24e7a58a73a8"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/patterns/index.tsx",
-      "line": 4601,
+      "line": 6235,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "13d50606cc9a05c7aa8d31001f7527f5507f52cd7e43d087e4aa9a8ffbe5049e"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 413,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "198b458c98c62a75f1f934db45938a9d89372ffeaed5ad668039a7abb34d70ec"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/agenda/index.tsx",
-      "line": 401,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "1b76d01b370600db036c3b726d1e5e3488c2bfe32535c38b878e421346d62ea4"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 4548,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "20531be93860afe63d4254472eba67234739badbbcf43e29150db7b6f61e9ed0"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/ui/src/components/state-list.tsx",
-      "line": 123,
-      "detail": "array index key",
-      "fingerprint": "23940750d61b02e4299cb4a1c65630e70f8246f16a40f902d74fac11fca1f526"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/domains/agenda/index.tsx",
-      "line": 188,
-      "detail": "array index key",
-      "fingerprint": "24199c973f590bb263338aae29504b7189d030fb5a82f15408b47817fd14d51d"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/settings/index.tsx",
-      "line": 328,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "24ecc455caf5f5bde2e1b01cdc350549d8637cae33d7a21a3abd82e228ba3af5"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 535,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "256576a870cf0a56b1ab62019c7f0cf97a390854a8269e0136c147369da8ec71"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/settings/index.tsx",
-      "line": 333,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "2b79cf2b7ab3e1f0e977628f2d3de3846f118627aa028fa5770fe2b5873345b3"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 2915,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "2de0d83cee5a11f48b8cba1717a12ce56cf1537bfa6f698c22e8100de774cf47"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 873,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "32a7f1ec05d0f81c0c78d2d3f8012bf9eae792e1f20f44489247cf2993cd911c"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 5729,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "35d1f0f472434d3b0bb63507b77d9cd3cf8a37b6e8e23267182e536a20d98c23"
-    },
-    {
-      "ruleId": "REACT-EFFECT",
-      "file": "packages/ui/src/components/controls.tsx",
-      "line": 61,
-      "detail": "effect requires external synchronization justification",
-      "fingerprint": "3d2b9d9df180488989e850f3386a132a6c111b28b099982cc00735f1eee7deae"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 550,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "40c003402e8fcb7ef7fa679c85bbb59de1dfa461274e2e165e210d0a6304a3dd"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/ui/src/components/controls.tsx",
-      "line": 1,
-      "detail": "logicalLines>577",
-      "fingerprint": "499a0a4765c6545deaf5115d2f8078c932d4123949d4d16d61e600e4034c57ef"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 6445,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "4d35e1b8b0aa8a60e897a8abe679394d9ec6418ba936685cb0612ad5054dfc51"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 2900,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "4f4e1f27ac2147c15245e4709c81b2a8a4d05c40d0245574d26ee3942d94ba21"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/internal-crm-runtime.tsx",
-      "line": 1013,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "532d8c12a55fc0292e51f0b7230ac09765bc41836664593a9310286a11ff5ae8"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 5006,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "559aafaec92fe945ffc381caaa69d92ebfd3f51611e8d795600bedcb11cdc42a"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 202,
-      "detail": "array index key",
-      "fingerprint": "5678a7eeb03ea2fb7f5d9dc0b44a71568e4bb423d793b4699e8bc2463e77d160"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/tokens/src/index.ts",
-      "line": 1,
-      "detail": "logicalLines>5056",
-      "fingerprint": "570f89289940cdd1bc80d92a3964abccfdbe129d40347226e0a3a3910f86b5c5"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/crm/src/domains/billing/index.tsx",
-      "line": 1,
-      "detail": "logicalLines>4719",
-      "fingerprint": "5f9f2557043a10155a62d8cd479437165a13f7317564856b8f2545130461ff30"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 978,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "61d433b61ac8065964a0d622bff621286516ff82952005bb35b5f8ceb2ea0ca8"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/ui/src/components/calendar-flow-chart.tsx",
-      "line": 232,
-      "detail": "array index key",
-      "fingerprint": "697c825df5cdbca776906db984c7d4bc59514465514e91542f7db348355bb1cb"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 3388,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "6a0c28cd711ef3242b5942ea35d67e5bf867ae9779a7c6a791d2f2073d136bdb"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 1701,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "6ebdfe814d3a4886f2a105fd41daf27d7b2609ed31d6252f79f536d00272ba6a"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 1,
-      "detail": "logicalLines>3058",
-      "fingerprint": "73d8fb804883dd8e9cdf5cad34912bef69b1b466d58aa4bc7a00ed3ed85f3d36"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 4739,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "75e98409dba23f573ea4269f923a8e1357a6cdca9b50cf26b3e58af3c1efafa3"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/ui/src/components/workflow-data.tsx",
-      "line": 683,
-      "detail": "array index key",
-      "fingerprint": "760ec6281a6cde5483540da9095e3737d3aabbcf7db2f60f7728a1d2509f3e3c"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 421,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "76599e26dded40565397a9f16e204fcdf4644c91e5bf0fb649e47cb78dacff0b"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/ui/src/components/workflow-data.tsx",
-      "line": 288,
-      "detail": "array index key",
-      "fingerprint": "7691c525fcfb69aa64217b5586e12acd8f6a3ff0907cad705ecf02f245662aea"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 5335,
-      "detail": "array index key",
-      "fingerprint": "77a62f7936f20b25d6b83bd0998e393db71d09502e3e7b2453ce891186300546"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/crm/src/domains/settings/index.tsx",
-      "line": 1,
-      "detail": "logicalLines>1819",
-      "fingerprint": "7d32efa27230dd2be63f61f289efead44b85168f851f79a18e90515c90ac9d73"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/settings/index.tsx",
-      "line": 726,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "8c9c324cb51697ba660fad993ad1c1654e807a282b2c9cb92655a475135517f5"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 2330,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "8da34ee6f515cf729d836c31827f5443d2bb420d297dc3fdb26ba28ce18b814f"
-    },
-    {
-      "ruleId": "REACT-EFFECT",
-      "file": "packages/ui/src/components/controls.tsx",
-      "line": 76,
-      "detail": "effect requires external synchronization justification",
-      "fingerprint": "8e186c14c1ef87427d287297215fa2630e98efcc5cba60e5eeb024004c0b3b7c"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 2418,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "8f1c7876e6e55a3462e57090a7c7da28807be61f6cbabbaf706f8658615ab780"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 1287,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "8f7fe872d7dda1ef5a919b8b3d9dc224ff3f7b243ed1548b32af94f4f0417105"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 119,
-      "detail": "array index key",
-      "fingerprint": "94bc2e7a0dbb601159fab1eee83bbee231db9a667aa4282a3b763ee7f9862484"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 2876,
-      "detail": "array index key",
-      "fingerprint": "95963c147702a1145f2d8c293ed7d629a5eebcb8ca1f818653fedf97f7a3f9cf"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 5156,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "9774d4df85f5e972f3102948406d6afb6404caa0edafa9169941678c49d5f1b7"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/internal-crm-runtime.tsx",
-      "line": 4628,
-      "detail": "array index key",
-      "fingerprint": "9c141e0f75cc7f0ec83b88fd8a969b69db19f5736d2e968465d2c1786b85f0ed"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 3228,
-      "detail": "array index key",
-      "fingerprint": "9ce7ab8e8b175fc7a00e21969dc1e38b6e772d08007e27b2f2efdc146af82e42"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 1718,
-      "detail": "array index key",
-      "fingerprint": "a0a41aeac910d52e4c4566cb40a1366239e2665f5199278a0771139d248fdf61"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/billing/index.tsx",
-      "line": 3918,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "a457eaea45216080046e4a8f9ecb2abcb37451708c49586e6498c6591125c6d8"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 1,
-      "detail": "logicalLines>1900",
-      "fingerprint": "a57b24b924c3de36e482279fd52013bff82a3cb431c3bcc82881c284a8acaa9c"
+      "fingerprint": "0339944079e7a61e34d406a9de41fe483d33e57139dc61ee05a45db4319f3f7b"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/domains/settings/index.tsx",
       "line": 336,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "a93f4d33fbc51348733702d364440cc11dde599fc4f3d9846b619b880912ea1f"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 6286,
-      "detail": "array index key",
-      "fingerprint": "b39344fd468eec3714d2ffde803dcc18d4a0fd44377355d3ad6b6bade3538f09"
+      "fingerprint": "0ac18d307bd2a7365b9a648eba327e1f7245898174004719932aaf8b103fb6b8"
     },
     {
       "ruleId": "REACT-STABLE-KEY",
       "file": "packages/crm/src/domains/students/index.tsx",
       "line": 1953,
       "detail": "array index key",
-      "fingerprint": "b40602e981a6a294fc2357a2e5780c70a2b4495e13a972335066a72cd6d3e104"
+      "fingerprint": "0d785a1f0f7a3b700d9ff4e7bf12293f049c03fc7cf65c996391f08919b77eab"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/settings/index.tsx",
+      "line": 726,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "0fad9f0e5da4cc2b08dfa53070d625018634e75156956ed0de44a7dd6e12f25b"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/domains/settings/index.tsx",
       "line": 1567,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "b826da75eef0581df941a27ea3245268c7a4f76e72a136127be30fb11f524029"
-    },
-    {
-      "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 1,
-      "detail": "logicalLines>6383",
-      "fingerprint": "c0855d0b314ff4cc95c30b845dcaa38074565b401fc38e8cf27c069587c374c1"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/billing/index.tsx",
-      "line": 4456,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "c16808db8632e250c08e889892e7c2798da95e6a4f46efb5695c683435b0c33e"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/ui/src/components/workflow-data.tsx",
-      "line": 1129,
-      "detail": "array index key",
-      "fingerprint": "c22858283f75cc3c67bf2887513460c4fd32c142007940b4a55592c50bfb718e"
+      "fingerprint": "0fad9f0e5da4cc2b08dfa53070d625018634e75156956ed0de44a7dd6e12f25b"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/domains/settings/index.tsx",
-      "line": 415,
+      "line": 1669,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "c6b5bc07c9cb4a25752622fec41d1fdcd1618ea2e8564ec081e440e3fd25cf4b"
+      "fingerprint": "0fad9f0e5da4cc2b08dfa53070d625018634e75156956ed0de44a7dd6e12f25b"
     },
     {
       "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/ui/src/components/workflow-data.tsx",
-      "line": 851,
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 119,
       "detail": "array index key",
-      "fingerprint": "c73a3f9ec7b01cbbe120a4e73f28e4dd43c2ae39ec4e7da8fefb80a3142240cf"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/internal-crm-runtime.tsx",
-      "line": 4631,
-      "detail": "array index key",
-      "fingerprint": "c8287255d37a2f5e6d23cfd9eea7d31341c2fa52690cf6e10149851a184aab9a"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/internal-crm-runtime.tsx",
-      "line": 4331,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "c94cecfbbd5fc63eb01407b19e550e56a1c7b133f348ebd82c325817e87cb031"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 1104,
-      "detail": "array index key",
-      "fingerprint": "c95e3e5fc9901f1d8852fb5a1b70fdaf56651a5ee2794909adfeacba873859fa"
+      "fingerprint": "1186a832d7353d2791a9e7c36eed1e35ce6d8d859b686d4b2f6d58569ac6c1c5"
     },
     {
       "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/crm/src/domains/agenda/index.tsx",
+      "file": "packages/ui/src/primitives/overlays.tsx",
       "line": 1,
-      "detail": "logicalLines>718",
-      "fingerprint": "cb8531354bb61945826e80528e4098512c0bd6f25f5d6bd612912f55cc3f1465"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/shell.tsx",
-      "line": 1191,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "cf76bfe43612f1ca7aad28692ee0d82af29a51b9617a3a31256ea470d78a7229"
-    },
-    {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 6235,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "d11579e2ea85c0e4b5b3918580b75f40f6ad50e335c02b853be546319a93d8a2"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/domains/billing/index.tsx",
-      "line": 3351,
-      "detail": "array index key",
-      "fingerprint": "d1abcc1fb7a1f547b5deaf2cf3921bcf8ad29ca153b7e1bcc7baebb37b5a95a9"
-    },
-    {
-      "ruleId": "REACT-STABLE-KEY",
-      "file": "packages/crm/src/domains/billing/index.tsx",
-      "line": 4464,
-      "detail": "array index key",
-      "fingerprint": "d2b09dd55ceee6137e49d6050622329f03c0b4ec3d2d6befaf46e6b6d095d00d"
+      "detail": "logicalLines>400",
+      "fingerprint": "11fcff7464d81bfee92f7bc89ed70c7ef6979a7d3f9373b1c14b135715a4e3de"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/domains/students/index.tsx",
       "line": 1081,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "d6638d12b50fc17a691c05ae764866dfb75711f9f4efcb4e80ee2ff7aab5ac33"
+      "fingerprint": "1230e5b233f1c89b8f8bdbfa8f44cdc6bc9a64cede0da2a5226fa7d34a871526"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/ui/src/components/workflow-data.tsx",
+      "line": 284,
+      "detail": "array index key",
+      "fingerprint": "126b051f7ded92b1ba8487e946d8065043790604b79f339481de797175222147"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/ui/src/components/workflow-data.tsx",
+      "line": 679,
+      "detail": "array index key",
+      "fingerprint": "126b051f7ded92b1ba8487e946d8065043790604b79f339481de797175222147"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/ui/src/components/workflow-data.tsx",
+      "line": 847,
+      "detail": "array index key",
+      "fingerprint": "126b051f7ded92b1ba8487e946d8065043790604b79f339481de797175222147"
+    },
+    {
+      "ruleId": "REACT-EFFECT",
+      "file": "packages/ui/src/components/controls.tsx",
+      "line": 61,
+      "detail": "effect requires external synchronization justification",
+      "fingerprint": "15c73fbbdac31ac52287dcf32402a5158c85507d130a7bf261d585f58e421da1"
+    },
+    {
+      "ruleId": "REACT-EFFECT",
+      "file": "packages/ui/src/components/controls.tsx",
+      "line": 76,
+      "detail": "effect requires external synchronization justification",
+      "fingerprint": "15c73fbbdac31ac52287dcf32402a5158c85507d130a7bf261d585f58e421da1"
+    },
+    {
+      "ruleId": "REACT-EFFECT",
+      "file": "packages/ui/src/primitives/forms.tsx",
+      "line": 398,
+      "detail": "effect requires external synchronization justification",
+      "fingerprint": "1fc651171aa26ab52f92deb287d55e9dd595a98f6a7886331d55ea095c75e4b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/internal-crm-runtime.tsx",
+      "line": 4331,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "275cfcdd3f43166f9fcf04e15bd941d6b8340a5d17495b691da15c6a4fd79359"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/domains/billing/index.tsx",
+      "line": 4464,
+      "detail": "array index key",
+      "fingerprint": "3395dbcd47fe435206c240ac707f837fd21f693f44826e377a82f6ac69f6495f"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/ui/src/components/workflow-data.tsx",
+      "line": 762,
+      "detail": "array index key",
+      "fingerprint": "3726037de4a11de4aaaf4f3cc4e07ab9493bfd868d2c0b18249ed544ac4e8958"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/settings/index.tsx",
+      "line": 415,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "37b58fef0eb02f3be234c27516aacf9a5ba5c2ec62ac5d62ee998fce42d41a79"
     },
     {
       "ruleId": "ARCH-MODULE-SIZE",
       "file": "packages/ui/src/components/workflow-data.tsx",
       "line": 1,
-      "detail": "logicalLines>1306",
-      "fingerprint": "dc371de6c8545cb24a2c98acd14ae9675ab0e57b7db7fcdfb79b39088c05b5e9"
+      "detail": "logicalLines>400",
+      "fingerprint": "39a6ca76a4067a97cc124c75a5d92e5c104068db5ce60e5d701bfe299cffd538"
     },
     {
-      "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/domains/students/index.tsx",
-      "line": 1034,
-      "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "dc45d6522e86a763b616097391997fe4797135b7dc13ca52917376712b656b04"
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 5335,
+      "detail": "array index key",
+      "fingerprint": "3f8e9458ea179546fd619fd776faad114f03a28acc5fb66696b69fa653c3cce1"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 6286,
+      "detail": "array index key",
+      "fingerprint": "3f8e9458ea179546fd619fd776faad114f03a28acc5fb66696b69fa653c3cce1"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/ui/src/components/workflow-data.tsx",
+      "line": 1125,
+      "detail": "array index key",
+      "fingerprint": "4b66f5e6f105fa6199ce450a5087534a92b5e289e22b568710240d26b7c36e7e"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/ui/src/components/state-list.tsx",
+      "line": 122,
+      "detail": "array index key",
+      "fingerprint": "51677fa246c7ef9adb8f30a37b2756f62abc2da4ab57395f1f56231b6b2063cd"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 3228,
+      "detail": "array index key",
+      "fingerprint": "534566d00a1d93885583a9ce23e327146377b18e7ff075fcdda73b6df3574e5f"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/domains/agenda/index.tsx",
       "line": 192,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "e7fffe3907f26e40e7b9fef462e56cb073a15213e2201b1d24687ec89c21bcd6"
+      "fingerprint": "577ab7f1f76ca0084603443f3d44d699353d2b1165cd279549b2af3b411b191e"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/agenda/index.tsx",
+      "line": 401,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "577ab7f1f76ca0084603443f3d44d699353d2b1165cd279549b2af3b411b191e"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/crm/src/domains/billing/index.tsx",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "5c0b9e8ed0fed41c99257a91b1927dc02904a691b91d302fef6556fa176ee026"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/settings/index.tsx",
+      "line": 333,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "5c3dee9f47bfb4b62dad1f0c6e86d28aced228176065fd63f7a5df780e842209"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/domains/agenda/index.tsx",
+      "line": 188,
+      "detail": "array index key",
+      "fingerprint": "66cfc4b592053bbfc856743a6bcc0b6996f92c11c61bd1c557a3c65b1ecddcae"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 1104,
+      "detail": "array index key",
+      "fingerprint": "69b2dc75bd8e0584d5b5f41904f2858b9a214345b5ca010cabd1c9fa1b196f65"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "734db8de45688c3a1aa29442fb63ad9fd2ceeb6818e34840f130ea7ca7188dcf"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 550,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "76a234514c4962fc816a00a8a4d8b1de03ada9e2e83dcd15ae360f4f2d0944d0"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/ui/src/primitives/forms.tsx",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "783c27f6c4bf3b183d71e4048d6e1df2a10c8e8428cf0bf739755d2b64f4e046"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/internal-crm-runtime.tsx",
+      "line": 1013,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "7f3e85908124470362122999dab025c48c1faf751c7b8b8e3af2c26a4196dd5e"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/billing/index.tsx",
+      "line": 4456,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "83271a0bc3debd5efb129744a2a839f69ebe8e3fc470716ace80836acfdf0858"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 202,
+      "detail": "array index key",
+      "fingerprint": "851d7120c0fa1b74bfba7292be89b438e761374772f5719ea609cd6445c63b05"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/internal-crm-runtime.tsx",
+      "line": 4631,
+      "detail": "array index key",
+      "fingerprint": "85600a08cad337a93e3dfa54a4b93fc65566930f6d01974b798374ace005db3b"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/billing/index.tsx",
+      "line": 3918,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "8aa9a2363561b26323c324c024004225c9eaac4ac86adc28884f7c194f91662f"
     },
     {
       "ruleId": "REACT-STABLE-KEY",
       "file": "packages/crm/src/patterns/index.tsx",
       "line": 5651,
       "detail": "array index key",
-      "fingerprint": "e99c15924f111b260ac0fa82c1c66b1c8e3e1f87fdffec73d242da6755b53985"
+      "fingerprint": "930a0f8a20f207f0cf64ed0a21da2c6329a693c6f84b2aaebe6993e09ee2a408"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/internal-crm-runtime.tsx",
+      "line": 4628,
+      "detail": "array index key",
+      "fingerprint": "94832a45f8e7570ce0fdeb843746e9bc2562e87e733a69afb3263690ddd92ec7"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/ui/src/components/calendar-flow-chart.tsx",
+      "line": 232,
+      "detail": "array index key",
+      "fingerprint": "96e1571edb9777a6746f4aae6d5f0675114d7502380110e419debae071cb0b00"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/tokens/src/index.ts",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "9a34cd986620cb7687b34905665387fb4df20329dde4fef91a19c114e9ee4e01"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
-      "file": "packages/crm/src/patterns/index.tsx",
-      "line": 6223,
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 421,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "f5b5b621443d38032706a8761d205ee260b16494e554fd7842a378a6e314711a"
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 730,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 1191,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 2330,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 2418,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 2530,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 2900,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 2915,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "9e5efe42a05167df92b24d07408c39a955aed71b9735e2205ac2e9043acb37b3"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "a66c1f21c28f3f15f3156998f46c0d863224c0df4acd55aff3ac5b54bd7f0e51"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 143,
+      "detail": "array index key",
+      "fingerprint": "a9971c64c8b17801a4f1e0cfe91354f56b3724da24a0512f211f95fb616cbd4c"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/settings/index.tsx",
+      "line": 328,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "b246a70c161f5b59841a354c8a21e4014a416e61befa14354e2b4e1e94926a5a"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/domains/billing/index.tsx",
+      "line": 3351,
+      "detail": "array index key",
+      "fingerprint": "ba526a1e17c961a5ac7b5339185f778ef5a66ef76a2769c2857abf374e00d81e"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/ui/src/components/controls.tsx",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "ca03c3e6132b395143e78574a09e0214208df609d367d602782149bb4095aceb"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/crm/src/domains/settings/index.tsx",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "cf6e6c0448f99bf0000195db534af5d467a58660cfbd761ca205eeb6e76048bc"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/patterns/index.tsx",
       "line": 4605,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "f8cc57aaaa3753637d4647ce4609b33823ed301d9739498f1125f5966ee221a9"
+      "fingerprint": "d2deccf8a6195a12cc258248a7e057d7fb61af04f250520d7a431b0660373e40"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 4601,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "d3566eafc3b5cd9c910d3ded5754e2c2bb299381af18e01ac5b0cc3fefdf215a"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 1287,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 1701,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 3388,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
     },
     {
       "ruleId": "REACT-RAW-CONTROL",
       "file": "packages/crm/src/patterns/index.tsx",
       "line": 4569,
       "detail": "CRM source uses raw control instead of official primitive",
-      "fingerprint": "fc17b1f8cb36a57c0e31f54d1cc026c61a1aba63f240f059ce81ec24c8243645"
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 4739,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 5006,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 5156,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 5729,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 6223,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 6445,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e13153ccdb12ef477f200afd6d4479cef8dc8d41a04e1cc4f3a2983b6730dd2f"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 413,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e22178deca4b8a796a8782990f1ec179fa65a120a48eb51e380e7a0a87cf5e87"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 535,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e22178deca4b8a796a8782990f1ec179fa65a120a48eb51e380e7a0a87cf5e87"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 978,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e22178deca4b8a796a8782990f1ec179fa65a120a48eb51e380e7a0a87cf5e87"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 1034,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "e22178deca4b8a796a8782990f1ec179fa65a120a48eb51e380e7a0a87cf5e87"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 873,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "ebc1c2f209226d30242aa9d944698f337bf5fd9cfd7d1aa5ad7338574fc79a87"
     },
     {
       "ruleId": "ARCH-MODULE-SIZE",
-      "file": "packages/ui/src/primitives/forms.tsx",
+      "file": "packages/crm/src/domains/agenda/index.tsx",
       "line": 1,
-      "detail": "logicalLines>669",
-      "fingerprint": "ffbe5852bc3319ecbb7c4afb64f7f75cbe47ef58075dad67301cc4c9a7b1296e"
+      "detail": "logicalLines>400",
+      "fingerprint": "ef55a51eabe866cb822823c8cbc6b23d7d85d9313a3cf265e708357a1e6a8ab0"
+    },
+    {
+      "ruleId": "REACT-RAW-CONTROL",
+      "file": "packages/crm/src/patterns/index.tsx",
+      "line": 4548,
+      "detail": "CRM source uses raw control instead of official primitive",
+      "fingerprint": "f1c405245ceb323e44c49f3fa10ab9aec1114cb6645a3565bc27dca0108b7730"
+    },
+    {
+      "ruleId": "ARCH-MODULE-SIZE",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 1,
+      "detail": "logicalLines>400",
+      "fingerprint": "f60c5446efbff3ea575e1fb64556d3d53683bebb0ef97772fb371b5584afdb88"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/patterns/shell.tsx",
+      "line": 2876,
+      "detail": "array index key",
+      "fingerprint": "f82c33e118e2f9c15dc5380c59ab0964f1c7444aaa68f33d06119a422dcc758f"
+    },
+    {
+      "ruleId": "REACT-STABLE-KEY",
+      "file": "packages/crm/src/domains/students/index.tsx",
+      "line": 1718,
+      "detail": "array index key",
+      "fingerprint": "fd9415b373180a42f985b80ab361bccab25e950c0c7e3fac4757dec4b4d91b30"
     }
   ]
 }

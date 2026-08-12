@@ -8,7 +8,7 @@ Status: pass
 
 - Contracts: 6
 - Failed: 0
-- Main implementation: 4665 lines / 203278 bytes
+- Main implementation: 4493 lines / 197098 bytes
 - Component registry: 290 lines / 19591 bytes
 
 | Contract | Status |

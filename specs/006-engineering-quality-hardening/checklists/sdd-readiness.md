@@ -1,8 +1,8 @@
 # SDD Readiness Checklist: Engineering Quality Hardening
 
 **Feature**: `006-engineering-quality-hardening`
-**Current state**: `READY_FOR_APPROVAL / READY_FOR_USER_APPROVAL / AWAITING_USER_APPROVAL`
-**Implementation state**: `BLOCKED BY GATE-SDD-APPROVED`
+**Current state**: `APPROVED / APPROVED_BY_USER / APPROVED_FOR_IMPLEMENTATION`
+**Implementation state**: `OPEN FOR T101-T176; wave gates still apply`
 **Validation date**: 2026-08-08
 
 ## Mandatory Artifact Manifest
@@ -11,7 +11,7 @@
 - [x] Audit/design artifacts exist: current-state audit, source-of-truth reconciliation, architecture migration, test/security/performance strategies, CI gate matrix, Definition of Done, traceability matrix, and risk register.
 - [x] All eight normative contracts exist under `contracts/`.
 - [x] Requirements, SDD-readiness, and implementation-readiness checklists exist under `checklists/`.
-- [x] `approval.md` exists and records `READY_FOR_APPROVAL / READY_FOR_USER_APPROVAL / AWAITING_USER_APPROVAL` without claiming implementation approval.
+- [x] `approval.md` exists and records the paired `APPROVED / APPROVED_BY_USER / APPROVED_FOR_IMPLEMENTATION` decision.
 - [x] `readiness-manifest.json` records and validates the final source-tree and mandatory-artifact hashes without self-reference.
 
 ## Requirement and Design Quality
@@ -33,7 +33,7 @@
 - [x] Every referenced implementation task is within T101 through T176.
 - [x] `tasks.md` contains exactly 76 unique, contiguous implementation tasks from T101 through T176.
 - [x] Every implementation task is unchecked and maps to a requirement or mandatory validation/checkpoint.
-- [x] All implementation tasks are blocked by `GATE-SDD-APPROVED`.
+- [x] All implementation tasks remain constrained by the approved task range, dependencies, and wave gates.
 
 ## Static SDD Validation
 
@@ -50,7 +50,7 @@
 
 ## Approval Boundary
 
-- [x] `approval.md`, the README, the spec, reconciliation, and both readiness checklists agree on `READY_FOR_APPROVAL / READY_FOR_USER_APPROVAL / AWAITING_USER_APPROVAL`, with implementation still blocked.
+- [x] `approval.md`, the README, the spec, reconciliation, and both readiness checklists agree on the approved implementation state.
 - [x] No implementation task is marked in progress or complete.
 - [x] No SDD artifact treats a green checklist, generated backlog, commit, or agent judgment as user approval.
 - [x] Publication remains a later separately authorized action guarded by `G-RELEASE`.
@@ -76,9 +76,9 @@ The final read-only validation was run against the integrated readiness candidat
 
 ## Decision
 
-**Decision**: `PASS / READY_FOR_USER_APPROVAL`. The SDD is complete and fingerprinted for review. This decision does not authorize implementation; a later explicit user approval must create the approval envelope and open `GATE-SDD-APPROVED`.
+**Decision**: `PASS / APPROVED_BY_USER`. The SDD is complete, fingerprinted, and opened for the approved task range; fresh wave evidence is still required for implementation completion.
 
 ```text
 SDD: READY FOR APPROVAL / READY FOR USER APPROVAL
-IMPLEMENTATION: BLOCKED BY GATE-SDD-APPROVED
+IMPLEMENTATION: OPEN FOR T101-T176; BLOCKED ONLY BY FAILED DEPENDENT GATES
 ```

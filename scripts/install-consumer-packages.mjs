@@ -107,7 +107,8 @@ if (!write) {
 const npmBin = process.platform === "win32" ? "npm.cmd" : "npm";
 const result = spawnSync(npmBin, installArgs, {
   cwd: consumerRoot,
-  stdio: "inherit"
+  stdio: "inherit",
+  shell: process.platform === "win32"
 });
 
 if (result.status !== 0 || result.error) {

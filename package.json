@@ -149,6 +149,7 @@
     "library-acceptance:audit:positive-probe": "node scripts/probe-library-acceptance-valid-evidence.mjs",
     "library-acceptance:audit:negative-probe": "node scripts/probe-library-acceptance-false-positive.mjs",
     "test": "corepack pnpm -r test && corepack pnpm --filter @taliya/docs test:smoke",
+    "coverage": "node scripts/quality/run-coverage.mjs",
     "lint": "corepack pnpm -r lint",
     "typecheck": "corepack pnpm -r --filter \"./packages/**\" build && corepack pnpm -r typecheck",
     "tokens:audit": "node scripts/audit-design-tokens.mjs --check",
@@ -237,6 +238,8 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/coverage-v8": "4.1.7",
+    "esbuild": "0.28.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "jsdom": "^27.2.0",
@@ -245,9 +248,8 @@
     "storybook": "^10.4.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.1",
-    "vite": "^7.3.5",
-    "vitest": "^4.0.14",
-    "esbuild": "0.28.1"
+    "vite": "7.3.5",
+    "vitest": "^4.0.14"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",

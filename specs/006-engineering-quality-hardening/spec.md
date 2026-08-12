@@ -2,7 +2,7 @@
 
 **Feature Branch**: `006-engineering-quality-hardening`
 **Created**: 2026-08-08
-**Status**: SDD READY FOR APPROVAL / READY FOR USER APPROVAL
+**Status**: IMPLEMENTATION IN PROGRESS / APPROVED FOR IMPLEMENTATION
 **Input**: User description: "Transform the complete engineering-quality recovery plan into SDD using Spec Kit, finish the SDD from start to finish, and do not implement until the SDD is complete and explicitly approved."
 
 ## Intent
@@ -23,7 +23,7 @@ Implementation is forbidden while any of the following is true:
 - the SDD acceptance checklist is incomplete;
 - the user has not explicitly authorized implementation.
 
-The integrated validation in `quickstart.md` has passed and the stable readiness manifest is present. The lifecycle state is `READY_FOR_APPROVAL`; implementation remains forbidden while authorization is `AWAITING_USER_APPROVAL` and until an explicit approval envelope opens `GATE-SDD-APPROVED`.
+The integrated SDD validation and approval envelope have passed. The lifecycle state is `APPROVED`; implementation is authorized for `T101-T176`, subject to ordered phase gates and stop conditions. The readiness manifest remains a pre-decision artifact whose hashes are bound by `approval.md`.
 
 ## Clarifications
 

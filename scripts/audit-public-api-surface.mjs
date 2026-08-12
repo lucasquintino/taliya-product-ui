@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import ts from "typescript";
 
 const root = process.cwd();
 const specDir = path.join(root, "specs/001-product-ui-foundation");
@@ -10,8 +11,8 @@ const standardPageKitPath = path.join(specDir, "contracts/standard-page-kit.mani
 const check = process.argv.includes("--check");
 
 const packageFiles = {
-  "@taliya/ui": path.join(root, "packages/ui/src/internal-ui-runtime.tsx"),
-  "@taliya/crm": path.join(root, "packages/crm/src/internal-crm-runtime.tsx")
+  "@taliya/ui": path.join(root, "packages/ui/dist/index.d.ts"),
+  "@taliya/crm": path.join(root, "packages/crm/dist/index.d.ts")
 };
 
 function read(filePath) {
@@ -22,29 +23,23 @@ function readJson(filePath) {
   return JSON.parse(read(filePath));
 }
 
-function exportNames(source) {
-  const names = new Set();
-  const patterns = [
-    /export\s+(?:function|const|class|interface|type)\s+([A-Za-z][A-Za-z0-9_]*)/g,
-    /export\s+type\s+\{\s*([^}]+)\s*\}/g,
-    /export\s+\{\s*([^}]+)\s*\}/g
-  ];
-
-  for (const pattern of patterns) {
-    let match;
-    while ((match = pattern.exec(source))) {
-      if (pattern === patterns[1] || pattern === patterns[2]) {
-        for (const part of match[1].split(",")) {
-          const name = part.trim().split(/\s+as\s+/).pop()?.trim();
-          if (name) names.add(name);
-        }
-        continue;
-      }
-      names.add(match[1]);
-    }
+function exportNames(entryPath) {
+  if (!fs.existsSync(entryPath)) {
+    throw new Error(`Package declaration entry is missing; run the package build first: ${path.relative(root, entryPath)}`);
   }
-
-  return names;
+  const program = ts.createProgram([entryPath], {
+    allowJs: false,
+    declaration: true,
+    module: ts.ModuleKind.NodeNext,
+    moduleResolution: ts.ModuleResolutionKind.NodeNext,
+    noEmit: true,
+    skipLibCheck: true,
+    target: ts.ScriptTarget.ES2022
+  });
+  const sourceFile = program.getSourceFile(entryPath);
+  const moduleSymbol = sourceFile && program.getTypeChecker().getSymbolAtLocation(sourceFile);
+  if (!moduleSymbol) throw new Error(`Could not resolve public module exports: ${path.relative(root, entryPath)}`);
+  return new Set(program.getTypeChecker().getExportsOfModule(moduleSymbol).map((symbol) => symbol.getName()));
 }
 
 function componentKey(component) {
@@ -74,7 +69,7 @@ if (manifestErrors.length > 0) {
 }
 
 const packageExports = Object.fromEntries(
-  Object.entries(packageFiles).map(([packageName, filePath]) => [packageName, exportNames(read(filePath))])
+  Object.entries(packageFiles).map(([packageName, filePath]) => [packageName, exportNames(filePath)])
 );
 
 function isExported(packageName, name) {

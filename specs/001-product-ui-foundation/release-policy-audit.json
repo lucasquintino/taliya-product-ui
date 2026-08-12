@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-05T17:00:39.168Z",
+  "generatedAt": "2026-08-12T06:10:17.018Z",
   "status": "pass-registry-policy",
   "contractPass": true,
   "currentChannel": "local-tarball",
@@ -123,7 +123,7 @@
       "id": "controlled-publish-workflow",
       "status": "pass",
       "evidence": ".github/workflows/publish-packages.yml",
-      "note": "publishing must be manual, environment-protected, authenticated, and provenance-enabled"
+      "note": "publishing must be manual, environment-protected, authenticated through npm trusted publishing, and provenance-enabled"
     },
     {
       "id": "changesets-versioning",

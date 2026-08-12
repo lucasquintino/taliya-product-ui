@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { closeSync, existsSync, fstatSync, mkdirSync, openSync, readFileSync, readdirSync, readSync, writeFileSync } from "node:fs";
 import { dirname, basename, resolve } from "node:path";
 import { inflateRawSync } from "node:zlib";
-import { resolveSourceAssetsDir } from "./source-assets-config.mjs";
+import { resolveSourceAssetsArchive, resolveSourceAssetsDir } from "./source-assets-config.mjs";
 import { readRouteTargets } from "./source-route-targets.mjs";
 
 const root = process.cwd();
@@ -120,7 +120,7 @@ function stable(value, generatedAt = value.generatedAt) {
 }
 
 const resolvedSource = resolveSourceAssetsDir({ root, args });
-const archivePath = resolve(optionValue("--source-archive", `${resolvedSource.path}.zip`));
+const archivePath = resolveSourceAssetsArchive({ root, args, sourcePath: resolvedSource.path, config: resolvedSource.config }).path;
 const mapPath = resolve(root, optionValue("--map", resolvedSource.config.coverageMap));
 const outputPath = resolve(root, optionValue("--output", "specs/002-readiness-evidence-portability/source-assets-reconciliation-audit.json"));
 const markdownPath = outputPath.replace(/\.json$/i, ".md");

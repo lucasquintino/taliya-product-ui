@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-05T19:24:04.081Z",
-  "status": "fail",
+  "generatedAt": "2026-08-12T06:10:29.528Z",
+  "status": "pass-current-internal-library",
   "currentInternalLibraryAccepted": true,
-  "currentInternalConsumptionPass": false,
+  "currentInternalConsumptionPass": true,
   "internalRouteWorkspacePass": true,
   "publicPageKitPass": true,
   "technicalReleaseCandidatePass": true,
@@ -66,8 +66,9 @@
     "future-consumer-adoption-negative-probe",
     "future-crm-adoption-handoff",
     "consumer-integration",
-    "registry-consumer-migration-probe",
-    "registry-consumer-adoption",
+    "consumer-package-sync",
+    "consumer-package-sync-negative-probe",
+    "consumer-vendor-versioning",
     "consumer-page-kit",
     "consumer-page-kit-shell-only-route-probe",
     "consumer-page-kit-wrapper-contract-probe",
@@ -87,7 +88,7 @@
     "visual-certification-plan-negative-probe",
     "goal-completion"
   ],
-  "distributionChannel": "npm-registry",
+  "distributionChannel": "vendor-local-tarballs",
   "missingReadinessGateIds": [],
   "rows": [
     {
@@ -98,8 +99,8 @@
     },
     {
       "id": "current-internal-consuming-official-kit",
-      "status": "fail",
-      "evidence": "consumer integration/page-kit/runtime and registry-consumer-adoption audits",
+      "status": "pass",
+      "evidence": "consumer integration/page-kit/runtime/package-sync/vendor-versioning audits",
       "meaning": "Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones."
     },
     {

@@ -9,11 +9,11 @@ const localReleaseManifest = JSON.parse(readFileSync(resolve(root, "dist-package
 const packageFiles = localReleaseManifest.packages.map((packageInfo) => packageInfo.tarball);
 const installedFiles = [
   ["packages/tokens", "node_modules/@taliya/tokens", ["README.md", "dist/index.d.ts", "dist/index.js", "src/tokens.css"]],
-  ["packages/ui", "node_modules/@taliya/ui", ["README.md", "dist/index.d.ts", "dist/index.js", "src/styles.css"]],
+  ["packages/ui", "node_modules/@taliya/ui", ["README.md", "dist/index.d.ts", "dist/index.js", "src/styles.css", "src/styles/foundation.css", "src/styles/controls.css", "src/styles/patterns.css", "src/styles/data-and-overlays.css"]],
   [
     "packages/crm",
     "node_modules/@taliya/crm",
-    ["README.md", "dist/index.d.ts", "dist/index.js", "dist/standard-page-kit.d.ts", "dist/standard-page-kit.js", "src/styles.css"]
+    ["README.md", "dist/index.d.ts", "dist/index.js", "dist/standard-page-kit.d.ts", "dist/standard-page-kit.js", "src/styles.css", "src/styles/foundation.css", "src/styles/primitives.css", "src/styles/patterns.css", "src/styles/domains.css"]
   ]
 ];
 
@@ -29,6 +29,10 @@ for (const fileName of packageFiles) {
   }
   copyFileSync(sourcePath, resolve(probeRoot, "vendor/taliya-product-ui", fileName));
 }
+copyFileSync(
+  resolve(root, "dist-packages/taliya-product-ui-local-manifest.json"),
+  resolve(probeRoot, "vendor/taliya-product-ui/taliya-product-ui-local-manifest.json")
+);
 
 for (const [sourceRoot, installedRoot, files] of installedFiles) {
   for (const file of files) {
@@ -43,8 +47,8 @@ for (const [sourceRoot, installedRoot, files] of installedFiles) {
   }
 }
 
-const staleFile = resolve(probeRoot, "node_modules/@taliya/crm/dist/index.d.ts");
-const staleText = readFileSync(staleFile, "utf8").replace(' | "compact-stacked"', "");
+const staleFile = resolve(probeRoot, "node_modules/@taliya/crm/src/styles.css");
+const staleText = readFileSync(staleFile, "utf8").replace('@import "./styles/domains.css";', "");
 writeFileSync(staleFile, staleText);
 
 const result = spawnSync(
@@ -73,7 +77,7 @@ if (result.status === 0) {
 }
 
 const combinedOutput = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
-if (!combinedOutput.includes("@taliya/crm/dist/index.d.ts")) {
+if (!combinedOutput.includes("@taliya/crm/src/styles.css")) {
   console.error("Negative probe failed: stale installed file was not reported in the audit output.");
   console.error(combinedOutput);
   process.exit(1);

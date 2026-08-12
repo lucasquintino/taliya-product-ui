@@ -422,15 +422,18 @@ function matchingDelimiterIndex(source, start, openChar, closeChar) {
 
 function forbiddenFragmentMatches(source, fragments) {
   const matches = [];
+  // Module names are dependency wiring, not rendered anatomy. Ignore them so
+  // a legitimate hook such as `use-lead-drawer` cannot satisfy a clone marker.
+  const structuralSource = source.replace(/\b(?:from|import)\s+["'][^"']+["']/g, "");
 
   for (const fragment of fragments) {
-    let index = source.indexOf(fragment);
+    let index = structuralSource.indexOf(fragment);
     while (index >= 0) {
       matches.push({
         fragment,
-        line: lineNumber(source, index)
+        line: lineNumber(structuralSource, index)
       });
-      index = source.indexOf(fragment, index + fragment.length);
+      index = structuralSource.indexOf(fragment, index + fragment.length);
     }
   }
 

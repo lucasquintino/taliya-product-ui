@@ -17,7 +17,7 @@ const installedPackages = [
     packageName: "@taliya/ui",
     sourcePath: "packages/ui",
     installedPath: "node_modules/@taliya/ui",
-    files: ["README.md", "dist/index.d.ts", "dist/index.js", "src/styles.css"]
+    files: ["README.md", "dist/index.d.ts", "dist/index.js", "src/styles.css", "src/styles/foundation.css", "src/styles/controls.css", "src/styles/patterns.css", "src/styles/data-and-overlays.css"]
   },
   {
     packageName: "@taliya/crm",
@@ -29,7 +29,11 @@ const installedPackages = [
       "dist/index.js",
       "dist/standard-page-kit.d.ts",
       "dist/standard-page-kit.js",
-      "src/styles.css"
+      "src/styles.css",
+      "src/styles/foundation.css",
+      "src/styles/primitives.css",
+      "src/styles/patterns.css",
+      "src/styles/domains.css"
     ]
   }
 ];

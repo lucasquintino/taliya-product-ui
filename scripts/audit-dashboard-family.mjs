@@ -263,7 +263,7 @@ function readRequired(filePath) {
   if (!existsSync(absolute)) {
     throw new Error(`Missing required source: ${filePath}`);
   }
-  return readFileSync(absolute, "utf8");
+  return readFileSync(absolute, "utf8").replace(/\r\n?/g, "\n");
 }
 
 function sourceWindowForFunction(source, functionName) {

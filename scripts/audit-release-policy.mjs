@@ -39,6 +39,21 @@ function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
+function writeWithRetry(filePath, contents) {
+  let lastError;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      fs.writeFileSync(filePath, contents);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt === 7) break;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 125);
+    }
+  }
+  throw lastError;
+}
+
 function relativeExists(relativePath) {
   return fs.existsSync(path.join(root, relativePath));
 }
@@ -150,12 +165,12 @@ const rows = [
   row(
     "controlled-publish-workflow",
     Boolean(publishWorkflowSource) &&
-      publishWorkflowSource.includes("environment: npm") &&
-      publishWorkflowSource.includes("NPM_TOKEN") &&
+      publishWorkflowSource.includes("environment: npm-trusted-publish") &&
+      publishWorkflowSource.includes("id-token: write") &&
       publishWorkflowSource.includes("NPM_CONFIG_PROVENANCE") &&
       publishWorkflowSource.includes("workflow_dispatch"),
     publishWorkflowPath || "missing",
-    "publishing must be manual, environment-protected, authenticated, and provenance-enabled"
+    "publishing must be manual, environment-protected, authenticated through npm trusted publishing, and provenance-enabled"
   ),
   row(
     "changesets-versioning",
@@ -257,8 +272,8 @@ if (check) {
 }
 
 if (!check) {
-  fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
-  fs.writeFileSync(reportMdPath, markdown);
+  writeWithRetry(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
+  writeWithRetry(reportMdPath, markdown);
 }
 
 if (status === "fail") {

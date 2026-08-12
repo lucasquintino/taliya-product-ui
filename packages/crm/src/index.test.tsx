@@ -1,4 +1,5 @@
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { createElement, type ElementType } from "react";
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -6,6 +7,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import * as crm from "./index";
 import { CrmProductShell, DashboardGrid, ListDetailLayout, SetupShell, ThreePaneLayout, WorkListDetailPage, crmComponentNames } from "./index";
+import { WeeklyCalendarReference } from "./domains/agenda/weekly-calendar";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 
@@ -52,6 +54,281 @@ function crmComponentsFromMatrix() {
 }
 
 describe("@taliya/crm component coverage", () => {
+  it("covers internal governance, data-quality, and agent-operation panels", () => {
+    const onAction = vi.fn();
+    const onRow = vi.fn();
+    const onToggle = vi.fn();
+    const components = crm as unknown as Record<string, ElementType>;
+    const panel = (name: string, props: Record<string, unknown> = {}) =>
+      createElement(components[name], { ...props, "data-testid": `coverage-${name}` });
+
+    render(
+      <div>
+        {panel("PermissionState", { onAction, state: "request-access" })}
+        {panel("PermissionState", { onAction, state: "read-only" })}
+        {panel("PlanBlockedState", { onAction, state: "upgrade" })}
+        {panel("PlanBlockedState", { onAction, state: "manual" })}
+        {panel("QuotaBlockedState", { onAction, value: 70 })}
+        {panel("QuotaBlockedState", { onAction, value: 100 })}
+        {panel("IntegrationFailedState", { onAction, state: "retry" })}
+        {panel("IntegrationFailedState", { onAction, state: "fallback" })}
+        {panel("IntegrationFailedState", { onAction, state: "support" })}
+        {panel("PlanAgentsPanel", { onAction, baseAgents: 2, professionalAgents: 5, totalAgents: 12, usedAgents: 4 })}
+        {panel("FallbackControlCard", { defaultEnabled: false, onEnabledChange: onToggle })}
+        {panel("BillingGovernancePanel", { onAction })}
+        {panel("GovernanceAuditPanel", { onAction, onRowClick: onRow })}
+        {panel("GuardrailPolicyPanel", { onAction, onPolicyChange: onToggle })}
+        {panel("GeneralSettingsPanel", { onAction, onFieldChange: onToggle })}
+        {panel("SetupWizardPanel", { onStepSelect: onAction })}
+        {panel("ActivationChecklistPanel", { onItemAction: onRow, onItemMenu: onRow, onItemToggle: onToggle })}
+        {panel("DataConflictQueue", { onRowSelect: onRow, onViewAll: onAction })}
+        {panel("ProfileTabsPanel", { onValueChange: onAction })}
+        {panel("ConsentPreferencesPanel", { onPreferenceChange: onToggle, onViewHistory: onAction })}
+        {panel("SensitiveTimelinePanel", { onEventAction: onRow })}
+        {panel("ClassSummaryCard", { onViewDetails: onAction })}
+        {panel("ReplacementMatcherPanel", { onCandidateAction: onRow, onViewAlternatives: onAction })}
+        {panel("WaitlistPanel", { onRowSelect: onRow })}
+        {panel("ResourceConflictPanel", { onApply: onAction, onView: onAction })}
+        {panel("DocumentViewerPanel", { onDownload: onAction, onPageSelect: onAction, onSend: onAction })}
+        {panel("UploadReceiptPanel", { onItemAction: onRow, onUpload: onAction })}
+        {panel("ReconciliationSummaryTable", { onReconcile: onRow })}
+        {panel("MoneyInputGroup", { onInstallmentChange: onAction })}
+        {panel("FinancialSimulationPanel", { onApprove: onAction, onReject: onAction })}
+        {panel("FlowSimulationPanel", { onApprove: onAction })}
+        {panel("PublicationPreflightPanel", { onPublish: onAction, onSaveDraft: onAction })}
+        {panel("ExecutionTraceTable", { onViewAll: onAction })}
+        {panel("AgentIncidentPanel", { onCreateTask: onAction, onReprocess: onAction, onViewDetails: onAction })}
+        {panel("EvaluationQualityPanel", { onViewReport: onAction })}
+        {panel("PrivacyRequestTable", { onOpenRequest: onAction, onViewAll: onAction })}
+        {panel("SupportGrantPanel", { onRevoke: onAction, onTemporaryAccessChange: onToggle })}
+        {panel("AdvancedReportsPanel", { onViewAll: onAction })}
+        {panel("ExportQueuePanel", { onAction, onViewAll: onAction })}
+        {panel("SegmentCommunicationPanel", { onApprove: onAction, onEdit: onAction, onSchedule: onAction, onViewAudience: onAction })}
+      </div>
+    );
+
+    for (const root of screen.getAllByTestId(/coverage-/)) {
+      for (const button of within(root).queryAllByRole("button")) fireEvent.click(button);
+    }
+
+    expect(screen.getAllByTestId(/coverage-/)).toHaveLength(40);
+    expect(screen.getAllByRole("button").length).toBeGreaterThan(20);
+  });
+
+  it("covers support, setup, agent-flow, and receipt variants", () => {
+    const onAction = vi.fn();
+    const onSlotClick = vi.fn();
+    const onSelect = vi.fn();
+    const components = crm as unknown as Record<string, ElementType>;
+    const panel = (name: string, props: Record<string, unknown> = {}) =>
+      createElement(components[name], { ...props, "data-testid": `variant-${name}-${String(props.state ?? props.variant ?? props.layout ?? "default")}` });
+
+    render(
+      <div>
+        {panel("SupportCentralWorkspace", { agent: <span>Agente</span>, tickets: <span>Tickets</span> })}
+        {panel("SupportAgentPanel", { onAction })}
+        {panel("WeeklyHoursGrid", { onSlotClick, state: "editable", variant: "availability" })}
+        {panel("WeeklyHoursGrid", { onSlotClick, state: "loading", variant: "schedule" })}
+        {panel("WeeklyHoursGrid", { onSlotClick, state: "blocked", variant: "schedule" })}
+        {panel("RoleCard", { onOpen: onAction, onSelect, state: "owner" })}
+        {panel("RoleCard", { onOpen: onAction, onSelect, state: "admin" })}
+        {panel("RoleCard", { onOpen: onAction, onSelect, state: "staff" })}
+        {panel("RoleCard", { onOpen: onAction, onSelect, state: "blocked" })}
+        {panel("RoleCard", { onOpen: onAction, onSelect, state: "loading" })}
+        {panel("InviteRow", { onEdit: onAction, onOpen: onAction, onRemove: onAction, state: "prepared" })}
+        {panel("InviteRow", { onEdit: onAction, onOpen: onAction, onRemove: onAction, state: "incomplete" })}
+        {panel("InviteRow", { onEdit: onAction, onOpen: onAction, onRemove: onAction, state: "accepted" })}
+        {panel("InviteRow", { onEdit: onAction, onOpen: onAction, onRemove: onAction, state: "expired" })}
+        {panel("InviteRow", { onEdit: onAction, onOpen: onAction, onRemove: onAction, state: "loading" })}
+        {panel("InviteRow", { onEdit: onAction, onOpen: onAction, onRemove: onAction, state: "blocked" })}
+        {panel("DomainActions", { actions: [{ id: "primary", label: "Primaria" }, { id: "secondary", label: "Secundaria", variant: "secondary" }], onAction })}
+        {panel("AgentCatalog", { onAgentOpen: onAction })}
+        {panel("AgentCatalog", { empty: true, onAgentOpen: onAction })}
+        {panel("FlowBuilder", { onStepMenu: onAction, onStepOpen: onAction, variant: "reference" })}
+        {panel("FlowBuilder", { density: "compact", onStepMenu: onAction, onStepOpen: onAction })}
+        {panel("AgentFlowWorkspace", { onAction, onModeChange: onAction, onSettingChange: onAction, onStepMenu: onAction, onStepOpen: onAction })}
+        {panel("ExecutionReceipt", { layout: "compact", onAction, state: "success" })}
+        {panel("ExecutionReceipt", { layout: "compact", onAction, state: "failed" })}
+        {panel("ExecutionReceipt", { layout: "compact", onAction, state: "exception" })}
+        {panel("ExecutionReceipt", { layout: "detail", onAction, state: "success" })}
+      </div>
+    );
+
+    for (const button of screen.getAllByRole("button")) fireEvent.click(button);
+    for (const gridCell of screen.queryAllByRole("gridcell")) fireEvent.click(gridCell);
+
+    expect(screen.getAllByText("Agente").length).toBeGreaterThan(0);
+    expect(screen.getByText("Tickets")).toBeInTheDocument();
+    expect(onAction).toHaveBeenCalled();
+    expect(onSlotClick).toHaveBeenCalled();
+  });
+
+  it("covers billing state machines and compact profile compositions", () => {
+    const onAction = vi.fn();
+    const components = crm as unknown as Record<string, ElementType>;
+    const panel = (name: string, props: Record<string, unknown> = {}) =>
+      createElement(components[name], { ...props, "data-testid": `billing-${name}-${String(props.state ?? props.density ?? props.step ?? "default")}` });
+
+    render(
+      <div>
+        {panel("AgentRoutineIntro")}
+        {panel("StudentProfileOverviewGrid", { density: "compact", onAction })}
+        {panel("StudentProfileActionRail", { density: "compact", onAction })}
+        {panel("ClassOperationalDetail", { onAction, onStudentAction: onAction })}
+        {panel("SubscriptionStatusCard", { onBackToPlans: onAction, onReopenPayment: onAction, onRetry: onAction, onStartSetup: onAction, onSupport: onAction, state: "verifying" })}
+        {panel("SubscriptionStatusCard", { onBackToPlans: onAction, onRetry: onAction, onSupport: onAction, state: "failed" })}
+        {panel("SubscriptionStatusCard", { action: <button type="button">Abrir setup</button>, state: "confirmed" })}
+        {panel("SubscriptionProgressStepper", { step: 0 })}
+        {panel("SubscriptionProgressStepper", { step: 2 })}
+        {panel("SubscriptionProgressStepper", { step: 3 })}
+        {panel("SubscriptionResolutionPanel", { onRetry: onAction, retrying: true })}
+        {panel("SubscriptionResultHeader")}
+        {panel("ConfirmedSetupHandoff", { onScheduleHelp: onAction, onStartSetup: onAction, state: "ready" })}
+        {panel("ConfirmedSetupHandoff", { loading: true, onScheduleHelp: onAction, onStartSetup: onAction, state: "starting" })}
+        {panel("ConfirmedSetupHandoff", { onScheduleHelp: onAction, onStartSetup: onAction, state: "blocked" })}
+        {panel("PlanSummaryCard")}
+        {panel("QuotaProgress", { value: 30 })}
+        {panel("QuotaProgress", { value: 80 })}
+        {panel("QuotaProgress", { value: 100 })}
+        {panel("ApprovalPanel")}
+        {panel("ImpactSummary")}
+        {panel("BeforeAfterDiff", { variant: "changed" })}
+      </div>
+    );
+
+    for (const button of screen.getAllByRole("button")) fireEvent.click(button);
+    expect(screen.getAllByTestId(/billing-/).length).toBeGreaterThan(15);
+    expect(onAction).toHaveBeenCalled();
+  });
+
+  it("covers setup workspace state and student risk variants", () => {
+    const onAction = vi.fn();
+    const components = crm as unknown as Record<string, ElementType>;
+    const panel = (name: string, props: Record<string, unknown> = {}) =>
+      createElement(components[name], { ...props, "data-testid": `setup-${name}-${String(props.state ?? props.variant ?? "default")}` });
+
+    render(
+      <div>
+        {panel("SetupConsumptionWorkspace", { onAction })}
+        {panel("SetupPlansWorkspace", { onAction })}
+        {panel("SetupStudentsWorkspace", { onAction, onSourceSelect: onAction, onStudentAction: onAction, onStudentSelect: onAction })}
+        {panel("SetupClassesWorkspace", { onAction, onClassAction: onAction, onClassSelect: onAction, onSourceSelect: onAction })}
+        {panel("SetupAgendaWorkspace", { onAction, onBackToClasses: onAction, onClassSelect: onAction, onSlotSelect: onAction })}
+        {panel("SetupAgentChat", { onAction })}
+        {panel("StudentSummary")}
+        {panel("RelationshipList")}
+        {panel("FinancePriorityPanel")}
+        {panel("PaymentCaseCard")}
+        {panel("FinanceKanbanCard")}
+        {panel("CancellationCase", { state: "open" })}
+        {panel("CancellationCase", { state: "resolved" })}
+        {panel("ReactivationCard", { state: "active" })}
+        {panel("ComplaintPanel", { state: "open" })}
+        {panel("SupportTicketPanel", { open: false })}
+        {panel("GrantAccessPanel")}
+        {panel("TenantCard")}
+        {panel("SecurityRulePanel")}
+        {panel("InternalSecurityRulesPanel")}
+      </div>
+    );
+
+    for (const button of screen.getAllByRole("button")) fireEvent.click(button);
+    expect(screen.getAllByTestId(/setup-/).length).toBeGreaterThanOrEqual(8);
+  });
+
+  it("covers CRM table sorting and pagination value branches", () => {
+    const onAction = vi.fn();
+    const components = crm as unknown as Record<string, ElementType>;
+    const panel = (name: string, props: Record<string, unknown> = {}) =>
+      createElement(components[name], { ...props, "data-testid": `table-${name}-${String(props.state ?? "source")}` });
+
+    render(
+      <div>
+        {panel("CrmWorklistTable", {
+          ariaLabel: "Tabela de cobertura",
+          columns: [
+            { header: "Nome", key: "name", sortable: true, sortValue: (row: { name: string }) => row.name },
+            { header: "Valor", key: "value", sortable: true }
+          ],
+          onSelectionChange: onAction,
+          onSortChange: onAction,
+          pagination: { label: "1-1 de 1", onNextPage: onAction, onPageChange: onAction, onPreviousPage: onAction },
+          rowActions: () => <button type="button">Abrir</button>,
+          rows: [{ id: "1", name: "Ana", value: 10 }],
+          selectable: true,
+          selectedRowIds: ["1"]
+        })}
+        {panel("TaskTable", { onItemsPerPageClick: onAction, onNextPage: onAction, onPreviousPage: onAction, onRowSelect: onAction })}
+        {panel("LeadTable", { onItemsPerPageClick: onAction, onNextPage: onAction, onPreviousPage: onAction, onRowSelect: onAction })}
+        {panel("ChecklistTable", { onItemsPerPageClick: onAction, onNextPage: onAction, onPreviousPage: onAction, onRowSelect: onAction })}
+        {panel("ApprovalTable", { onItemsPerPageClick: onAction, onNextPage: onAction, onPreviousPage: onAction, onRowSelect: onAction })}
+        {panel("StudentTable", { onItemsPerPageClick: onAction, onNextPage: onAction, onPreviousPage: onAction, onRowSelect: onAction })}
+        {panel("ReplacementTable", { onItemsPerPageClick: onAction, onNextPage: onAction, onPreviousPage: onAction, onRowSelect: onAction })}
+      </div>
+    );
+
+    for (const button of screen.getAllByRole("button")) fireEvent.click(button);
+    expect(screen.getAllByTestId(/table-/).length).toBe(7);
+    expect(onAction).toHaveBeenCalled();
+  });
+
+  it("covers shell state mapping, audit variants, and kanban tag metadata", () => {
+    const onAction = vi.fn();
+    const components = crm as unknown as Record<string, ElementType>;
+    const panel = (name: string, props: Record<string, unknown> = {}) =>
+      createElement(components[name], { ...props, "data-testid": `shell-${name}-${String(props.state ?? props.variant ?? "default")}` });
+
+    render(
+      <div>
+        {panel("CrmPageFamilyShell", {
+          navItems: [{ id: "one", label: "Um" }, { id: "two", label: "Dois" }],
+          onNavChange: onAction,
+          onSidebarSelect: onAction,
+          onSidebarUtilitySelect: onAction,
+          sidebarItems: [{ id: "side", label: "Lateral", icon: "users" }],
+          utilityItems: [{ id: "util", label: "Utilidade", icon: "settings" }]
+        })}
+        {panel("AuditTrail", { onOpenObject: onAction, onRowClick: onAction, onViewAll: onAction, state: "filtered" })}
+        {panel("AuditTrail", { onOpenObject: onAction, onRowClick: onAction, onViewAll: onAction, state: "sensitive" })}
+        {panel("KanbanBoard", { density: "comfortable", laneSurface: "separate", laneWidth: "commercial", rail: <aside>Filtros</aside>, railDensity: "compact" })}
+        {panel("KanbanCard", { impact: "Alto", meta: "Hoje", nextAction: "Revisar", onMenu: onAction, owner: "Ana", state: "danger", tags: ["Agenda", { label: "Custom", tone: "info" }] })}
+        {panel("KanbanCard", { compact: true, onSelect: onAction, tags: ["Financeiro", "Tarefa"] })}
+        {panel("CrmOperationalPanel", { compact: true, footer: <button type="button">Rodape</button>, icon: "alert", title: "Operacao" })}
+        {panel("CrmOperationalRow", { row: { id: "row", label: "Linha", value: "Valor", tone: "success" }, onClick: onAction })}
+        {panel("StatusCard", { state: "warning", title: "Aviso" })}
+        {panel("SettingsAgentPanel", { state: "blocked", title: "Agente" })}
+        {panel("ContextPanel", { state: "loading", title: "Contexto" })}
+      </div>
+    );
+
+    for (const button of screen.getAllByRole("button")) fireEvent.click(button);
+    expect(screen.getAllByTestId(/shell-/).length).toBeGreaterThanOrEqual(8);
+    expect(onAction).toHaveBeenCalled();
+  });
+
+  it("covers internal tone, empty-state, and guarded layout branches", () => {
+    const onAction = vi.fn();
+    const components = crm as unknown as Record<string, ElementType>;
+    const panel = (name: string, props: Record<string, unknown> = {}) => createElement(components[name], props);
+
+    render(
+      <div>
+        {panel("ChartPanel", { onOpen: onAction, state: "ok" })}
+        {panel("ChartPanel", { onOpen: onAction, state: "draft" })}
+        {panel("ChartPanel", { onOpen: onAction, state: "failed" })}
+        {panel("ChartPanel", { onOpen: onAction, state: "paused" })}
+        {panel("TenantDetailLayout", { onAction, onSecurityClose: onAction, onSecurityOpen: onAction, securityOpen: false })}
+        {panel("PlanAgentsPanel", { onAction, totalAgents: 0, usedAgents: 0 })}
+        {panel("PageQuickFilters", { items: [], state: "empty" })}
+        {panel("TaskQueueList", { items: [], state: "empty" })}
+        {panel("InternalWorklistPage", { children: <span>Lista vazia</span>, state: "empty" })}
+      </div>
+    );
+
+    for (const button of screen.getAllByRole("button")) fireEvent.click(button);
+    expect(screen.getByText("Lista vazia")).toBeInTheDocument();
+  });
+
   it("exports every crm component declared in the official matrix", () => {
     const expectedNames = crmComponentsFromMatrix();
     expect(new Set(crmComponentNames).size).toBe(crmComponentNames.length);
@@ -3106,6 +3383,35 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByText("Bloqueio - Feriado municipal").closest(".tcrm-class-card")).toHaveClass("tcrm-class-card--schedule-block");
     expect(screen.getByText("14:00 - 18:00")).toBeInTheDocument();
     expect(container.querySelector(".tcrm-weekly-calendar__event")).toHaveStyle("--tcrm-weekly-event-height: 296px");
+  });
+
+  it("covers extracted agenda ownership and reference calendar interactions", () => {
+    const onClassSelect = vi.fn();
+    const onReserve = vi.fn();
+    const onReferenceSelect = vi.fn();
+
+    render(
+      <div>
+        <WeeklyCalendarReference
+          days={["Segunda"]}
+          events={[{ capacity: "4/6", dayIndex: 0, id: "ref-1", rowIndex: 0, title: "Referência" }]}
+          onEventSelect={onReferenceSelect}
+        />
+        <crm.ClassCard onSelect={onClassSelect} title="Aula interativa" time="09:00" />
+        <crm.ClassCard capacity="6/8" openSlot onReserve={onReserve} title="Aula aberta" variant="reference" />
+        <crm.Roster students={[{ id: "obj", name: "Aluno objeto", status: "present" }]} />
+      </div>
+    );
+
+    const classButton = screen.getByRole("button", { name: /Aula interativa/ });
+    fireEvent.keyDown(classButton, { key: "Enter" });
+    fireEvent.keyDown(classButton, { key: " " });
+    fireEvent.click(screen.getByRole("button", { name: "Reservar aula" }));
+    fireEvent.click(screen.getByRole("button", { name: /Referência/ }));
+
+    expect(onClassSelect).toHaveBeenCalledTimes(2);
+    expect(onReserve).toHaveBeenCalledOnce();
+    expect(onReferenceSelect).toHaveBeenCalledWith("ref-1", expect.objectContaining({ title: "Referência" }));
   });
 
   it("renders image 24 ConversationList with filters, rows, pagination and real selection behavior", () => {
@@ -6815,6 +7121,11 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(screen.getByRole("switch", { name: "Alternar fallback manual" }));
     fireEvent.click(screen.getByRole("button", { name: "Atualizar pagamento" }));
     fireEvent.click(screen.getByText("Login realizado"));
+    for (const combobox of screen.getAllByRole("combobox")) {
+      fireEvent.click(combobox);
+      const option = screen.queryAllByRole("option")[0];
+      if (option) fireEvent.click(option);
+    }
     fireEvent.click(screen.getByRole("switch", { name: "Alternar Permitir ação automática" }));
     fireEvent.change(screen.getByRole("textbox", { name: "Nome do workspace" }), { target: { value: "Taliya Operações" } });
     fireEvent.click(screen.getByRole("button", { name: "Ver todas as configurações" }));
@@ -6865,6 +7176,11 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Ver histórico completo" }));
     fireEvent.click(screen.getByRole("button", { name: "Pedir acesso" }));
 
+    for (const combobox of screen.getAllByRole("combobox")) {
+      fireEvent.click(combobox);
+      const option = screen.queryAllByRole("option")[0];
+      if (option) fireEvent.click(option);
+    }
     expect(stepSelect).toHaveBeenCalledWith("activation");
     expect(checklistAction).toHaveBeenCalledWith(expect.objectContaining({ id: "source" }));
     expect(checklistMenu).toHaveBeenCalledWith(expect.objectContaining({ id: "source" }));

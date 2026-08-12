@@ -1,49 +1,49 @@
 {
-  "generatedAt": "2026-08-05T18:38:14.685Z",
-  "status": "not-adopted",
-  "consumerRoot": "/Users/lucasquintino/Documents/Codex/2026-07-09/v/work/taliya-internal",
+  "generatedAt": "2026-08-11T16:51:18.737Z",
+  "status": "pass-registry-adoption",
+  "consumerRoot": "C:\\Users\\lucas\\taliya-internal",
   "currentVersion": "0.1.1",
-  "registryPublicationPass": false,
-  "distributionConfigPass": false,
+  "registryPublicationPass": true,
+  "distributionConfigPass": true,
   "noEffectiveVendorDependencies": true,
-  "adoptedPackageCount": 0,
+  "adoptedPackageCount": 3,
   "expectedPackageCount": 3,
   "rows": [
     {
       "name": "@taliya/tokens",
       "version": "0.1.1",
       "expectedRange": "^0.1.1",
-      "dependency": "^0.1.0",
-      "rootLockDependency": "^0.1.0",
-      "lockVersion": "0.1.0",
-      "lockResolved": "https://registry.npmjs.org/@taliya/tokens/-/tokens-0.1.0.tgz",
-      "installedVersion": "0.1.0",
+      "dependency": "^0.1.1",
+      "rootLockDependency": "^0.1.1",
+      "lockVersion": "0.1.1",
+      "lockResolved": "https://registry.npmjs.org/@taliya/tokens/-/tokens-0.1.1.tgz",
+      "installedVersion": "0.1.1",
       "registryResolved": true,
-      "pass": false
+      "pass": true
     },
     {
       "name": "@taliya/ui",
       "version": "0.1.1",
       "expectedRange": "^0.1.1",
-      "dependency": "^0.1.0",
-      "rootLockDependency": "^0.1.0",
-      "lockVersion": "0.1.0",
-      "lockResolved": "https://registry.npmjs.org/@taliya/ui/-/ui-0.1.0.tgz",
-      "installedVersion": "0.1.0",
+      "dependency": "^0.1.1",
+      "rootLockDependency": "^0.1.1",
+      "lockVersion": "0.1.1",
+      "lockResolved": "https://registry.npmjs.org/@taliya/ui/-/ui-0.1.1.tgz",
+      "installedVersion": "0.1.1",
       "registryResolved": true,
-      "pass": false
+      "pass": true
     },
     {
       "name": "@taliya/crm",
       "version": "0.1.1",
       "expectedRange": "^0.1.1",
-      "dependency": "^0.1.0",
-      "rootLockDependency": "^0.1.0",
-      "lockVersion": "0.1.0",
-      "lockResolved": "https://registry.npmjs.org/@taliya/crm/-/crm-0.1.0.tgz",
-      "installedVersion": "0.1.0",
+      "dependency": "^0.1.1",
+      "rootLockDependency": "^0.1.1",
+      "lockVersion": "0.1.1",
+      "lockResolved": "https://registry.npmjs.org/@taliya/crm/-/crm-0.1.1.tgz",
+      "installedVersion": "0.1.1",
       "registryResolved": true,
-      "pass": false
+      "pass": true
     }
   ]
 }

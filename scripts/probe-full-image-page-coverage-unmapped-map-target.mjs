@@ -10,6 +10,21 @@ const syntheticImage = "99_round-4.1Z_probe_unmapped-covered-page.png";
 const insertionMarker = "| `17_round-4.1A_hoje_01_acima-da-dobra.png.png` | Covered / 99% Visual Accepted |";
 const syntheticRow = `| \`${syntheticImage}\` | Covered | synthetic unmapped page target probe | CrmProductShell, PageFilterBar, DataTable |`;
 
+function writeWithRetry(filePath, contents) {
+  let lastError;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      writeFileSync(filePath, contents);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt === 7) break;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 125);
+    }
+  }
+  throw lastError;
+}
+
 const originalMap = readFileSync(mapPath, "utf8");
 const originalAuditJson = readFileSync(auditJsonPath, "utf8");
 const originalAuditMd = readFileSync(auditMdPath, "utf8");
@@ -20,7 +35,7 @@ try {
   }
 
   const modifiedMap = originalMap.replace(insertionMarker, `${syntheticRow}\n${insertionMarker}`);
-  writeFileSync(mapPath, modifiedMap);
+  writeWithRetry(mapPath, modifiedMap);
 
   const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs"], {
     cwd: root,
@@ -39,7 +54,7 @@ try {
 
   console.log("Full image page coverage unmapped-map-target probe passed.");
 } finally {
-  writeFileSync(mapPath, originalMap);
-  writeFileSync(auditJsonPath, originalAuditJson);
-  writeFileSync(auditMdPath, originalAuditMd);
+  writeWithRetry(mapPath, originalMap);
+  writeWithRetry(auditJsonPath, originalAuditJson);
+  writeWithRetry(auditMdPath, originalAuditMd);
 }

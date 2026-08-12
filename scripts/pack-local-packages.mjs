@@ -16,7 +16,10 @@ function optionValue(name, fallback) {
 
 const outputDir = resolve(rootDir, optionValue("--output-dir", "dist-packages"));
 const packages = ["tokens", "ui", "crm"];
-const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
+// Always resolve the package manager through Corepack so clean-clone runs use
+// the version declared by package.json, not a globally installed pnpm.
+const pnpmCommand = process.platform === "win32" ? "corepack.cmd" : "corepack";
+const pnpmArgs = ["pnpm"];
 
 for (const packageName of packages) {
   const packageDir = resolve(rootDir, "packages", packageName);
@@ -26,7 +29,7 @@ for (const packageName of packages) {
 
 const buildResult = spawnSync(
   pnpmCommand,
-  ["-r", "--filter", "./packages/**", "build"],
+  [...pnpmArgs, "-r", "--filter", "./packages/**", "build"],
   {
     cwd: rootDir,
     stdio: "inherit",
@@ -47,7 +50,7 @@ for (const packageName of packages) {
   const packageDir = resolve(rootDir, "packages", packageName);
   const result = spawnSync(
     pnpmCommand,
-    ["pack", "--pack-destination", outputDir],
+    [...pnpmArgs, "pack", "--pack-destination", outputDir],
     {
       cwd: packageDir,
       stdio: "inherit",

@@ -1,6 +1,6 @@
 # Public API Surface Audit
 
-Generated: 2026-08-05T09:57:24.299Z
+Generated: 2026-08-11T14:33:48.953Z
 
 Status: pass
 

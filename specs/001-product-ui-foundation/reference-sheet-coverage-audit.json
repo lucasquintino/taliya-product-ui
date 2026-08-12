@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-05T19:37:00.529Z",
+  "generatedAt": "2026-08-12T05:58:58.130Z",
   "status": "pass-structural-not-visual",
   "note": "This maps each active reference-sheet component to an official Storybook target. It does not certify whole-sheet pixel parity.",
   "inputs": {
-    "imageCoverageMapSha256": "5503e430bbf659b928b6c8f5c3716406134fa7603a6a5edd9b5712f30b20a725",
-    "storybookIndexSha256": "29cb5171d7ed154b283aad032185bfd45e906d0174df587c9b39f10caaa3ac04",
-    "sourceAssetsManifestSha256": "1750e2923e8c7f2269d0b84d389f280c45852e3d06ecc63a5e8094fc4cea2c94"
+    "imageCoverageMapSha256": "a024e361f05bd83187f1fae5e639b9e5fe8a22d445570de0307c92efdcc48cf1",
+    "storybookIndexSha256": "e974bf0a1d3300d18dd325bc16f2190acc0ba37057144df832c2d2d56e2612a8",
+    "sourceAssetsManifestSha256": "b6c6038dd7e0dd458721c92c556d23ba3bb7f9f45c9ce7a0cd841d7b8268e1ca"
   },
   "referenceImageCount": 11,
   "mappedReferenceImageCount": 11,

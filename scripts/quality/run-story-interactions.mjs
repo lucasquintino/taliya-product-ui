@@ -16,7 +16,11 @@ const idFlag = process.argv.indexOf("--id");
 const storybookDir = path.resolve(root, storybookFlag >= 0 ? process.argv[storybookFlag + 1] : "artifacts/storybook-static");
 const outputPath = path.resolve(root, outputFlag >= 0 ? process.argv[outputFlag + 1] : "artifacts/quality/story-interactions.json");
 const workersFlag = process.argv.indexOf("--workers");
-const workerCount = Math.max(1, Number(workersFlag >= 0 ? process.argv[workersFlag + 1] : "1") || 1);
+// A fresh browser context is intentionally used per story. Keep enough
+// parallelism by default that the full static catalog does not exceed CI
+// timeouts, while still allowing constrained environments to opt down with
+// --workers.
+const workerCount = Math.max(1, Number(workersFlag >= 0 ? process.argv[workersFlag + 1] : "16") || 16);
 const isGeneratedEvidencePath = (relative) => relative.startsWith("artifacts/") || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
 const catalog = JSON.parse(fs.readFileSync(path.join(storybookDir, "index.json"), "utf8"));
 const requestedId = idFlag >= 0 ? process.argv[idFlag + 1] : null;
@@ -68,7 +72,7 @@ const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", 
 const dirty = hasSourceChanges(root);
 const sourceTreeHash = (() => {
   const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
-  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative)).sort().map((relative) => {
+  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative) && fs.existsSync(path.join(root, relative))).sort().map((relative) => {
     const raw = fs.readFileSync(path.join(root, relative));
     const normalized = raw.toString("utf8").replace(/\r\n?/g, "\n");
     return `${relative}\0${crypto.createHash("sha256").update(normalized).digest("hex")}\0${raw.length}\n`;

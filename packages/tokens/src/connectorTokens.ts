@@ -1,0 +1,35 @@
+import type { TokenRecord } from "./types.js";
+
+export const connectorTokens = {
+  "connector.width": "2px",
+  "connector.length": "76px",
+  "connector.height": "28px",
+  "connector.blue": "#5E8EE8",
+  "connector.red": "#EF4444",
+  "connector.gray": "rgba(16, 20, 26, 0.24)",
+  "connector.dotted": "rgba(16, 20, 26, 0.30)",
+  "connector.node.size": "8px",
+  "connector.node.top": "10px",
+  "connector.curve.radius": "12px",
+  "connector.line.center-y": "13px",
+  "connector.line.end-inset": "8px",
+  "connector.arrow.size": "7px",
+  "connector.arrow.top": "9px",
+  "connector.arrow.right": "1px",
+  "connector.elbow.height": "22px",
+  "connector.elbow.top": "3px",
+  "connector.curved.start-x": "6px",
+  "connector.start-node.x": "4px",
+  "connector.start-node.y": "14px",
+  "connector.start-node.radius": "3px",
+  "connector.start-node.cutoff": "4px",
+  "connector.start-line.left": "10px",
+  "connector.whatsapp.fg": "#16A34A",
+  "connector.instagram.fg": "#E1306C",
+  "connector.email.fg": "#5E8EE8",
+  "connector.calendar.fg": "#8B5CF6",
+  "connector.payments.fg": "#F59E0B",
+  "connector.webhook.fg": "#20B8C7",
+  "connector.inactive.fg": "rgba(16, 20, 26, 0.42)"
+} as const satisfies TokenRecord;
+

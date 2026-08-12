@@ -1,9 +1,16 @@
 {
   "schemaVersion": 2,
   "environmentVariable": "TALIYA_CRM_SOURCE_IMAGES_DIR",
+  "archiveEnvironmentVariable": "TALIYA_CRM_SOURCE_ARCHIVE",
   "coverageMap": "specs/001-product-ui-foundation/image-coverage-map.md",
   "defaultPaths": [
     "~/Downloads/taliya-crm-chatgpt-images-named-20260511-082508",
     "D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508"
+  ],
+  "defaultArchivePaths": [
+    "~/Downloads/taliya-crm-chatgpt-images-named-20260511-082508 (2).zip",
+    "D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508 (2).zip",
+    "~/Downloads/taliya-crm-chatgpt-images-named-20260511-082508.zip",
+    "D:/Downloads/taliya-crm-chatgpt-images-named-20260511-082508.zip"
   ]
 }

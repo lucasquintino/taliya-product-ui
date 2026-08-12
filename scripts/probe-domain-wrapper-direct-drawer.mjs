@@ -6,6 +6,7 @@ const root = process.cwd();
 const scriptPath = resolve(root, "scripts/audit-domain-wrappers.mjs");
 
 const originalScript = readFileSync(scriptPath, "utf8");
+const normalizedScript = originalScript.replace(/\r\n?/g, "\n");
 
 function fail(message, details = []) {
   console.error(message);
@@ -17,10 +18,10 @@ try {
   const target = 'name: "StudentDrawer",\n    kind: "drawer",\n    globalRoots: ["<CrmDrawer"],';
   const replacement = 'name: "StudentDrawer",\n    kind: "drawer",\n    globalRoots: ["<aside"],';
 
-  if (!originalScript.includes(target)) {
+  if (!normalizedScript.includes(target)) {
     fail("Probe setup failed: StudentDrawer CrmDrawer contract marker was not found.");
   } else {
-    const modifiedScript = originalScript.replace(target, replacement);
+    const modifiedScript = normalizedScript.replace(target, replacement);
     writeFileSync(scriptPath, modifiedScript);
 
     const result = spawnSync(process.execPath, ["scripts/audit-domain-wrappers.mjs", "--check"], {

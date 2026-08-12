@@ -32,6 +32,10 @@ function removeChromeProfile(profileDir) {
   }
 }
 
+function isCleanupOnlyWarning(error) {
+  return error?.code === "EPERM" || error?.code === "EBUSY";
+}
+
 function sourceManifestContractSha256(manifest) {
   const { generatedAt: _generatedAt, source: _source, ...contract } = manifest;
   return createHash("sha256").update(JSON.stringify(contract)).digest("hex");
@@ -80,11 +84,24 @@ const storybookStaticIndexPath = resolve(root, "apps/docs/storybook-static/index
 const sourceDir = resolveSourceAssetsDir({ root, args, requireExisting: !checkMode }).path;
 const storybookUrl = optionValue("--storybook-url", "http://127.0.0.1:6006").replace(/\/$/, "");
 const captureMode = optionValue("--storybook-mode", "static");
-const chromePath = optionValue("--chrome", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome");
+function defaultChromePath() {
+  const candidates = process.platform === "win32"
+    ? [
+      process.env.PROGRAMFILES ? `${process.env.PROGRAMFILES}\\Google\\Chrome\\Application\\chrome.exe` : "",
+      process.env["PROGRAMFILES(X86)"] ? `${process.env["PROGRAMFILES(X86)"]}\\Google\\Chrome\\Application\\chrome.exe` : "",
+      process.env.LOCALAPPDATA ? `${process.env.LOCALAPPDATA}\\Google\\Chrome\\Application\\chrome.exe` : ""
+    ]
+    : process.platform === "darwin"
+      ? ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"]
+      : ["/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser"];
+  return candidates.find((candidate) => candidate && existsSync(candidate)) ?? candidates.find(Boolean) ?? "";
+}
+const chromePath = optionValue("--chrome", defaultChromePath());
 const outputDir = resolve(root, optionValue("--output-dir", "tmp/visual-certification-current-batch"));
 const concurrency = Math.max(1, Number.parseInt(optionValue("--concurrency", "1"), 10) || 1);
 const limit = Math.max(0, Number.parseInt(optionValue("--limit", "0"), 10) || 0);
 const imageFilter = optionValue("--image", "");
+const retryFailed = args.includes("--retry-failed");
 
 const plan = JSON.parse(readFileSync(planPath, "utf8"));
 const sourceManifest = JSON.parse(readFileSync(sourceManifestPath, "utf8"));
@@ -108,9 +125,11 @@ for (const target of rawTargets) {
 const allTargets = [...targetByImage.values()];
 const filteredTargets = imageFilter ? allTargets.filter((target) => target.image === imageFilter) : allTargets;
 if (imageFilter && filteredTargets.length !== 1) throw new Error(`Visual capture target not found: ${imageFilter}`);
-const targets = limit > 0 ? filteredTargets.slice(0, limit) : filteredTargets;
 const existingReport = existsSync(reportJsonPath) ? JSON.parse(readFileSync(reportJsonPath, "utf8")) : { rows: [] };
 const existingRowsByImage = new Map((existingReport.rows ?? []).map((row) => [row.image, row]));
+const failedImages = new Set((existingReport?.rows ?? []).filter((row) => row.status === "capture-failed").map((row) => row.image));
+const retryTargets = retryFailed ? filteredTargets.filter((target) => failedImages.has(target.image)) : filteredTargets;
+const targets = limit > 0 ? retryTargets.slice(0, limit) : retryTargets;
 const currentRenderContractSha256 = renderContractSha256();
 const reusableReportContract =
   existingReport.schemaVersion === 8 &&
@@ -533,7 +552,7 @@ async function captureTarget(target, index) {
     };
   } finally {
     const cleanupError = removeChromeProfile(inspectionProfileDir);
-    if (cleanupError) {
+    if (cleanupError && !isCleanupOnlyWarning(cleanupError)) {
       cleanupWarning = `${inspectionProfileDir}: ${cleanupError.code}`;
       cleanupWarnings.push(cleanupWarning);
       console.warn(`VISUAL-CAPTURE-CLEANUP-WARNING: ${cleanupWarning}`);
@@ -557,11 +576,14 @@ async function captureAll() {
 }
 
 const rows = await captureAll();
-const capturedCount = rows.filter((row) => row.status === "captured").length;
+const mergedRowsByImage = new Map((existingReport.rows ?? []).map((row) => [row.image, row]));
+for (const row of rows) mergedRowsByImage.set(row.image, row);
+const reportRows = allTargets.map((target) => mergedRowsByImage.get(target.image)).filter(Boolean);
+const capturedCount = reportRows.filter((row) => row.status === "captured").length;
 const report = {
   schemaVersion: 8,
   generatedAt: new Date().toISOString(),
-  status: capturedCount === rows.length ? "pass-captured-not-certified" : "fail-capture",
+  status: capturedCount === allTargets.length && reportRows.length === allTargets.length ? "pass-captured-not-certified" : "fail-capture",
   note: "Screenshot and pixel-diff evidence only. No row is visually approved by an automatic threshold.",
   captureMode,
   storybookUrl,
@@ -574,14 +596,14 @@ const report = {
   eligibleTargetCount: allTargets.length,
   attemptedCount: rows.length,
   capturedCount,
-  failedCount: rows.length - capturedCount,
+  failedCount: reportRows.length - capturedCount,
   outputDir: outputDir.replace(`${root}/`, ""),
   cleanupWarnings,
-  rows
+  rows: reportRows
 };
 writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
 
-const table = rows.map((row) =>
+const table = reportRows.map((row) =>
   `| \`${row.image}\` | \`${row.storyId}\` | ${row.status} | ${row.renderValid ? "valid" : row.renderErrors?.join(", ") || "invalid"} | ${row.currentDimensions ?? "-"} | ${row.meanAbsoluteRgbDelta?.toFixed(2) ?? "-"} | ${row.differentPixelRatio != null ? (row.differentPixelRatio * 100).toFixed(2) : "-"}% |`
 ).join("\n");
 writeFileSync(reportMdPath, `# Visual Certification Capture Audit

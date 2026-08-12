@@ -6,10 +6,25 @@ export function readSourceAssetsConfig(root = process.cwd()) {
   const configPath = resolve(root, "taliya-source-assets.config.json");
   const config = JSON.parse(readFileSync(configPath, "utf8"));
   if (config.schemaVersion !== 2) throw new Error("Unsupported source-assets config schemaVersion.");
-  if (!config.environmentVariable || !Array.isArray(config.defaultPaths) || !config.coverageMap) {
+  if (!config.environmentVariable || !config.archiveEnvironmentVariable || !Array.isArray(config.defaultPaths) || !Array.isArray(config.defaultArchivePaths) || !config.coverageMap) {
     throw new Error("Invalid source-assets config contract.");
   }
   return { ...config, configPath };
+}
+
+export function resolveSourceAssetsArchive({ root = process.cwd(), args = process.argv.slice(2), sourcePath, config = readSourceAssetsConfig(root), requireExisting = true } = {}) {
+  const optionIndex = args.indexOf("--source-archive");
+  const equalsOption = args.find((arg) => arg.startsWith("--source-archive="));
+  const cliValue = equalsOption?.split("=").slice(1).join("=") || (optionIndex >= 0 ? args[optionIndex + 1] : "");
+  const envValue = process.env[config.archiveEnvironmentVariable] ?? "";
+  const candidates = [cliValue, envValue, ...config.defaultArchivePaths, sourcePath ? `${sourcePath}.zip` : ""]
+    .filter(Boolean)
+    .map((candidate) => candidate.startsWith("~/") ? resolve(homedir(), candidate.slice(2)) : candidate)
+    .map((candidate) => isAbsolute(candidate) ? candidate : resolve(root, candidate));
+  const existing = candidates.find((candidate) => existsSync(candidate));
+  if (existing) return { path: existing, source: existing === candidates[0] && cliValue ? "cli" : existing === candidates[0] && envValue ? "env" : "default" };
+  if (!requireExisting) return { path: candidates[0] ?? "", source: "unresolved" };
+  throw new Error(`Source archive not found. Set ${config.archiveEnvironmentVariable} or pass --source-archive <path>. Checked: ${candidates.join(", ") || "none"}`);
 }
 
 export function resolveSourceAssetsDir({ root = process.cwd(), args = process.argv.slice(2), requireExisting = true } = {}) {

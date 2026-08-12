@@ -45,9 +45,13 @@ const packageSpecs = [
       "package/README.md",
       "package/dist/index.js",
       "package/dist/index.d.ts",
-      "package/src/styles.css"
+      "package/src/styles.css",
+      "package/src/styles/foundation.css",
+      "package/src/styles/controls.css",
+      "package/src/styles/patterns.css",
+      "package/src/styles/data-and-overlays.css"
     ],
-    expectedFilesField: ["dist", "src/styles.css"],
+    expectedFilesField: ["dist", "src/styles.css", "src/styles"],
     requiredExports: [".", "./styles.css"],
     requiredPackedLocalDependencies: {
       "@taliya/tokens": "@taliya/tokens"

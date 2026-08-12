@@ -1,7 +1,6 @@
 import React from "react";
 import { cn, Icon, type IconName } from "../foundation.js";
-import type { MetaTextProps } from "../primitives/layout.js";
-import { MetaText } from "../primitives/layout.js";
+import { MetaText, type MetaTextProps } from "../primitives/layout.js";
 
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   grouped?: boolean;
@@ -120,7 +119,7 @@ export function LoadingState({ title = "Carregando", variant = "spinner", showTi
       ) : (
         <span aria-hidden="true" className="tl-skeleton-block">
           {Array.from({ length: skeletonRows }, (_, index) => (
-            <span key={index} />
+            <span key={`skeleton-${index}`} />
           ))}
         </span>
       )}

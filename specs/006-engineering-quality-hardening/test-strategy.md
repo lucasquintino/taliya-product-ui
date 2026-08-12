@@ -1,23 +1,21 @@
 # Automated Test and Quality-Evidence Strategy
 
-**Status**: planned; implementation blocked by `GATE-SDD-APPROVED`
+**Status**: in progress under approved task range; behavioral gates are green except coverage and source-asset integrity
 **Primary requirements**: FR-022 through FR-031
 **Target outcome**: every public behavior has risk-appropriate executable evidence, not merely a test file or story count
 
 ## Current Baseline
 
-A focused run on 2026-08-08 produced:
+A current run on 2026-08-11 produced:
 
 | Scope | Result | Interpretation |
 | --- | --- | --- |
-| `@taliya/tokens` | 5/5 pass | Small current token behavior suite is green |
-| `@taliya/ui` | 49/49 pass | Current jsdom component suite is green |
-| `@taliya/crm` | 194/202 pass; 8 fail | Overall test gate is red |
+| `@taliya/tokens` | 6/6 pass | Small current token behavior suite is green |
+| `@taliya/ui` | 53/53 pass | Current jsdom component suite is green |
+| `@taliya/crm` | 207/207 pass | Current jsdom component suite is green |
 | `@taliya/docs` smoke | 5/5 pass | Docs source smoke is green; this is not Storybook browser execution |
 
-All eight CRM failures are in `packages/crm/src/index.test.tsx` and assert LF-formatted raw CSS fragments against a CRLF checkout. They reveal non-portable test design; they do not by themselves prove a rendered CSS regression. P2/T116 must replace every one with normalized/parser-based semantic CSS plus rendered-layout assertions, preserve the intended regression signal, and make the CRM suite 202/202 green before P2/T119 can run.
-
-The current Vitest configs define no coverage thresholds. No maintained Playwright configuration exists. The historical static Storybook DOM audit is useful but stale and failing for responsive overflow. Therefore the current repository does not yet provide complete automated evidence.
+The CRM suite is now portable on the Windows checkout. The coverage runner and package thresholds are active, but the current measured result remains below policy (UI 82.26% lines / 82.15% functions / 66.19% branches; CRM 85.86% / 82.06% / 81.61%), so `G-COV` remains blocking until behavior-focused tests close the gap. The maintained Playwright PR suite is green (18/18), and static Storybook interaction evidence is green (636/636). Source-sized visual capture is current (63/63), but source-asset folder/ZIP integrity still fails and release certification was intentionally not rerun in this turn.
 
 ## Test Model
 

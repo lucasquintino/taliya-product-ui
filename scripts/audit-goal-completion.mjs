@@ -291,6 +291,7 @@ const requiredReleaseCandidateGateIds = [
   "lint",
   "test",
   "build",
+  "coverage",
   "readiness",
   "storybook-anatomy",
   "storybook-anatomy-override-probe",

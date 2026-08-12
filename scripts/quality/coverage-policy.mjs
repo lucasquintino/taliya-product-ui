@@ -13,6 +13,15 @@ export function validateCoveragePolicy(policy) {
   return errors;
 }
 
+export function evaluateChangedCoverage({ covered, total, threshold = thresholds.changedLines }) {
+  if (!Number.isInteger(covered) || !Number.isInteger(total) || covered < 0 || total < 0 || covered > total) {
+    return { status: "invalid", code: "COVERAGE-CHANGED-INPUT" };
+  }
+  if (total === 0) return { status: "not-applicable", covered, total, percent: 100, threshold };
+  const percent = Number(((covered / total) * 100).toFixed(2));
+  return { status: percent >= threshold ? "pass" : "fail", covered, total, percent, threshold };
+}
+
 export function loadCoverageFixtures() {
   const directory = path.join(root, 'tests', 'fixtures', 'coverage');
   return fs.readdirSync(directory).filter((file) => file.endsWith('.json')).sort().map((file) => JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8')));

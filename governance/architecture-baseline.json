@@ -17,23 +17,199 @@
       "logicalLines": 285,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "251ebdd01dc7249b25dc589fefd12358549206902427308142583a91b9118623"
+      "fingerprint": "88e825e7bded532bd422418310cb7d504521242f98a2018f72ec0c3188d65c77"
+    },
+    {
+      "file": "packages/crm/src/domains/agenda/class-card.tsx",
+      "package": "crm",
+      "logicalLines": 106,
+      "complexity": 10,
+      "compatibilityRuntime": false,
+      "fingerprint": "6f51d23685734673d6aff46f2ecfe03af1b2a397395bec321cb239a13488538a"
     },
     {
       "file": "packages/crm/src/domains/agenda/index.tsx",
       "package": "crm",
-      "logicalLines": 718,
-      "complexity": 33,
+      "logicalLines": 235,
+      "complexity": 6,
       "compatibilityRuntime": false,
-      "fingerprint": "6bdb624730c8d99fbab0c305d9c094c3c628d4eb1bdd44e6229b00f710994ff0"
+      "fingerprint": "2a260ebc4636a70b23df94b620c5e0f0d4df1adf6e85b506297c1c1a40e5e30b"
+    },
+    {
+      "file": "packages/crm/src/domains/agenda/mini-calendar.tsx",
+      "package": "crm",
+      "logicalLines": 128,
+      "complexity": 14,
+      "compatibilityRuntime": false,
+      "fingerprint": "f9e2500927df65938cbe171d18cb65480647356b3bf99350cb57c1bc0f5b138d"
+    },
+    {
+      "file": "packages/crm/src/domains/agenda/weekly-calendar.tsx",
+      "package": "crm",
+      "logicalLines": 260,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "6e1a13c2e0017e13ab2a0120c5bfc5c6a7f87d113dcc91a49c67c553c6f553e0"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-access.tsx",
+      "package": "crm",
+      "logicalLines": 171,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "bac07aa8b4a49d1c017b9bf38e97485bb4aca504c1fc079d3504094ad7658b5b"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-addons-usage-overview.tsx",
+      "package": "crm",
+      "logicalLines": 373,
+      "complexity": 12,
+      "compatibilityRuntime": false,
+      "fingerprint": "5f6400774544668d838c4a7a53914f5ad820ceaacb95121670e29d2d855f3bd6"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-approval-settings-core.tsx",
+      "package": "crm",
+      "logicalLines": 337,
+      "complexity": 13,
+      "compatibilityRuntime": false,
+      "fingerprint": "d9100125e76241d1c4bd13bc217f692c9937f70108cc1ae7f87c701686ce3abe"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-checkout.tsx",
+      "package": "crm",
+      "logicalLines": 239,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "5831b1eb1de38d297a76882ecd4b139af58e2684dfae427541cfa6a086a43a97"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-finance.tsx",
+      "package": "crm",
+      "logicalLines": 207,
+      "complexity": 2,
+      "compatibilityRuntime": false,
+      "fingerprint": "b68f90cc68f7d140f77e9c4159edd7b149dee6a0b8d7ee0d06252e89c054f456"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-impact-settings.tsx",
+      "package": "crm",
+      "logicalLines": 346,
+      "complexity": 19,
+      "compatibilityRuntime": false,
+      "fingerprint": "41e5c1e609f1bf45c09e7ed596ab02f9bae5f3ab5312bd44dd202403af0602c0"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-invoices.tsx",
+      "package": "crm",
+      "logicalLines": 219,
+      "complexity": 2,
+      "compatibilityRuntime": false,
+      "fingerprint": "06be2ed0f22ed25c8dbc804b3fa7c9bc159b5dac08c50e8484ca018dd69f2e2d"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-permissions-settings.tsx",
+      "package": "crm",
+      "logicalLines": 332,
+      "complexity": 26,
+      "compatibilityRuntime": false,
+      "fingerprint": "e4f2b3ae86957136b0605c9d4c93ac84eda68f6826f748196641b0557d092e65"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-plan-invoices.tsx",
+      "package": "crm",
+      "logicalLines": 269,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "fbfadc1989a64c036b18c2b8a949f0a1f2452f11437e15775749893fdbe355e9"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-settings-final-a.tsx",
+      "package": "crm",
+      "logicalLines": 320,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "4b97e9a2837668cd77e49dbc136de39ccfff59220fcf5677b6fb48ecc014016e"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-settings-final-b.tsx",
+      "package": "crm",
+      "logicalLines": 298,
+      "complexity": 2,
+      "compatibilityRuntime": false,
+      "fingerprint": "f4d697e8d7dfec39c812af21dc88cc9f12f35821475c8b5f926b217268b81db9"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-settings-hub.tsx",
+      "package": "crm",
+      "logicalLines": 206,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "b856003286d49f5212d719baa87af13c9b51d4658e715aa0361d4014b399ecb4"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-settings-studio.tsx",
+      "package": "crm",
+      "logicalLines": 313,
+      "complexity": 19,
+      "compatibilityRuntime": false,
+      "fingerprint": "07ec286c8058298c78f914af9e889d25047fc4c1cad0255de734ca1d9915774c"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-settings-workspaces.tsx",
+      "package": "crm",
+      "logicalLines": 128,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "448b829fdac41db37cd7e424ddb604666bcd9ea85731b956ab69f67117de7cd6"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-subscription.tsx",
+      "package": "crm",
+      "logicalLines": 387,
+      "complexity": 9,
+      "compatibilityRuntime": false,
+      "fingerprint": "44f485d83a5ba304a9734a0d15abe79660d68e7041b16b5c90d7d269d0de82b3"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-usage-ledger-table.tsx",
+      "package": "crm",
+      "logicalLines": 335,
+      "complexity": 26,
+      "compatibilityRuntime": false,
+      "fingerprint": "29d1d8821dedaabdc695c7a87b881bb16ecb21c03ec91eed6eeed5fbd11b7c62"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-usage-ledger.tsx",
+      "package": "crm",
+      "logicalLines": 120,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "20e700a4f894387241d792a791cb949ef91d4c7e10ed1ac3b9ee19f9359f2d05"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-usage-overview.tsx",
+      "package": "crm",
+      "logicalLines": 146,
+      "complexity": 4,
+      "compatibilityRuntime": false,
+      "fingerprint": "ee8a13a27c60a244884088eacb25b0b079334feebc3e3827a7c6f4a216592cb1"
+    },
+    {
+      "file": "packages/crm/src/domains/billing/billing-utilities.ts",
+      "package": "crm",
+      "logicalLines": 19,
+      "complexity": 5,
+      "compatibilityRuntime": false,
+      "fingerprint": "e04da468dd5ecf12bdffbd291c43b8bbe8c135b3eca0e2fc70abfcb01ddd947c"
     },
     {
       "file": "packages/crm/src/domains/billing/index.tsx",
       "package": "crm",
-      "logicalLines": 4719,
-      "complexity": 176,
+      "logicalLines": 37,
+      "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "5ccc99f76d6c9aa21c22d294b80ee3fb33d54a3d6ad1cf2d661caccd2f70e122"
+      "fingerprint": "e6b71eb02c1dfcd2a5fa0de73ad2086421c8eb37365888f85123a2c33bb95c8d"
     },
     {
       "file": "packages/crm/src/domains/classes/index.ts",
@@ -41,7 +217,7 @@
       "logicalLines": 2,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "034f48c7c26f22a26e7b528fd4262497ec419c8f43b2f5c7b81a087a6a0a42fa"
+      "fingerprint": "467f3b3c322ebc65961366c10ed9d735d1579a695c6259fddb00d5d68c417deb"
     },
     {
       "file": "packages/crm/src/domains/internal/index.ts",
@@ -49,7 +225,7 @@
       "logicalLines": 3,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "767e0706cb5d7d3da585071a9a793dfe9681645fa3d523c7d2d7876f3bb33721"
+      "fingerprint": "dc7fee67e84be7a44ac45c70964009d85c50e36131eb08d74db0be084006ab23"
     },
     {
       "file": "packages/crm/src/domains/review/index.ts",
@@ -57,23 +233,175 @@
       "logicalLines": 3,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "7fac89a7c4037d1f72205c072654b0ac63bc760fba24b7f1cd98dfd950b0cb0e"
+      "fingerprint": "7eb6d6f697a17efc1bf54bddffa4e83b50fab660fe78809de4e2b1e2532086c4"
     },
     {
       "file": "packages/crm/src/domains/settings/index.tsx",
       "package": "crm",
-      "logicalLines": 1819,
-      "complexity": 50,
+      "logicalLines": 302,
+      "complexity": 6,
       "compatibilityRuntime": false,
-      "fingerprint": "36a2784ae54ba964464545e5df1f6c47667911e48a5c00ccc2dc95891fdaee7a"
+      "fingerprint": "3b5c6ead0b36f4fff3658a5b321a1b833c72e20c77d030a9439acb5503ad648e"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-agent-contexts.ts",
+      "package": "crm",
+      "logicalLines": 184,
+      "complexity": 2,
+      "compatibilityRuntime": false,
+      "fingerprint": "00142c9c545e7d26a733972a21089d2bd066f99615d73e7c98f2ae9fdcbacc36"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-agent-experience.tsx",
+      "package": "crm",
+      "logicalLines": 146,
+      "complexity": 10,
+      "compatibilityRuntime": false,
+      "fingerprint": "9c0c2b640f04a77215cc9f1d4129180da583db462e710254792740ff7057eb86"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-data-workspaces.tsx",
+      "package": "crm",
+      "logicalLines": 184,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "d1797a3afff43518fbbf7730071c757bdca92e8bcfd17d3fcd514ab1448a732c"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-import-source-card.tsx",
+      "package": "crm",
+      "logicalLines": 59,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "5b3f186f2dca63fb8e88c7dfba0e356b2bc55ac0ad6cbe95761bbe73bd2d9d71"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-plans-payment.tsx",
+      "package": "crm",
+      "logicalLines": 210,
+      "complexity": 1,
+      "compatibilityRuntime": false,
+      "fingerprint": "ab3fae94fcb82e22f1ffb31e766deee70449a9aba0d8aa785f268e11fe58231f"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-shell.tsx",
+      "package": "crm",
+      "logicalLines": 378,
+      "complexity": 21,
+      "compatibilityRuntime": false,
+      "fingerprint": "57c0004a741452d735e89ff77c6912889baf47c95688ba16f64b24a3908b8ddd"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-team-channels.tsx",
+      "package": "crm",
+      "logicalLines": 193,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "c72b623569652cadf93b7b4415f9a55cfb482db3b179e2736128fff5095c605e"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-welcome-workspaces.tsx",
+      "package": "crm",
+      "logicalLines": 307,
+      "complexity": 7,
+      "compatibilityRuntime": false,
+      "fingerprint": "c25de050095ee12794113c963fde46c03acd832d3782809de5b5a45c6e2757fc"
+    },
+    {
+      "file": "packages/crm/src/domains/settings/setup-workspace-utilities.tsx",
+      "package": "crm",
+      "logicalLines": 20,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "8b4fc2f54553a3c35fb841f75ff25b5c858c2bc626dc32a6cb54f232f2a379ae"
     },
     {
       "file": "packages/crm/src/domains/students/index.tsx",
       "package": "crm",
-      "logicalLines": 1900,
-      "complexity": 31,
+      "logicalLines": 10,
+      "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "90e9ca5de1170af18580d53574f515d8700bdb18695d6fd330999ceb6e9d3a3e"
+      "fingerprint": "f3f218ff707174eae202a2fa2e41b5e47ab02eb62a22a65c19543f29dc034a07"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-access.tsx",
+      "package": "crm",
+      "logicalLines": 38,
+      "complexity": 1,
+      "compatibilityRuntime": false,
+      "fingerprint": "2ca6fbb9aaf6200eae67db45c566b65ae5e338eb24333b6976ab273d514453aa"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-finance.tsx",
+      "package": "crm",
+      "logicalLines": 279,
+      "complexity": 4,
+      "compatibilityRuntime": false,
+      "fingerprint": "051386127503127af4d844880545aedcc8f554f6d112fb5f4ed2f02e3f56ca9e"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-internal-overview.tsx",
+      "package": "crm",
+      "logicalLines": 230,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "8cf50d1095540c70432321e559bc2337cabf53e4e1f25bac47c2036935cff2e6"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-profile.tsx",
+      "package": "crm",
+      "logicalLines": 271,
+      "complexity": 1,
+      "compatibilityRuntime": false,
+      "fingerprint": "0e0904ab573cb4e1bc443eafa590293eb9d7bf4b8e9aca16709b4bebc03cf47f"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-reconciliation.tsx",
+      "package": "crm",
+      "logicalLines": 99,
+      "complexity": 1,
+      "compatibilityRuntime": false,
+      "fingerprint": "620c350fb452fbd92b884412d5d06996d7f0571c34c6256d4384113a97ac8f64"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-retention.tsx",
+      "package": "crm",
+      "logicalLines": 158,
+      "complexity": 1,
+      "compatibilityRuntime": false,
+      "fingerprint": "a9a18db6b44129eb44073c5660623d077ec3aff3d460624ecbc64da7cc2ecac3"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-sales-core.tsx",
+      "package": "crm",
+      "logicalLines": 353,
+      "complexity": 9,
+      "compatibilityRuntime": false,
+      "fingerprint": "e415104d9a6f535e66fc0e737dbf354036f8d0d7be41850c6befc46cb1da2567"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-security.tsx",
+      "package": "crm",
+      "logicalLines": 153,
+      "complexity": 5,
+      "compatibilityRuntime": false,
+      "fingerprint": "a158738da05608251e71ef17e0f62e928f450e512c5b6495965d7499d89e5180"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-support.tsx",
+      "package": "crm",
+      "logicalLines": 373,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "96636aadd7aa59682f5ac413fdafbcb882b5bebc7805dfc934e15b8d65ffc403"
+    },
+    {
+      "file": "packages/crm/src/domains/students/students-utilities.ts",
+      "package": "crm",
+      "logicalLines": 22,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "a8f7543c20813506e5e54dfec679fea64156ffcaddf9452f2a60084a6e5a7d06"
     },
     {
       "file": "packages/crm/src/domains/usage/index.ts",
@@ -81,7 +409,7 @@
       "logicalLines": 2,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "54942add5307f82d792f881889290d49077bf223cca893857ec463b54cc8558d"
+      "fingerprint": "e3c04c5ee0a86063d7fb2d73479079173d1cdb904982c453a604b4a3ecb2dd33"
     },
     {
       "file": "packages/crm/src/index.tsx",
@@ -89,15 +417,15 @@
       "logicalLines": 5,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "32c7cfa2259a0f921d06f015d760bb71f07c293e08a5b0a15b4af0b8d50f00f0"
+      "fingerprint": "8322f3f424ac3d7f8c54f91534670fd1da8a0e4e3bb93a4b10bdb4378b5aa311"
     },
     {
       "file": "packages/crm/src/internal-crm-runtime.tsx",
       "package": "crm",
-      "logicalLines": 4408,
-      "complexity": 138,
+      "logicalLines": 4244,
+      "complexity": 127,
       "compatibilityRuntime": true,
-      "fingerprint": "8c577bf3394ad1b60f4b4579dc1c6abf6a37f3917fd79d272801402c3c5422d3"
+      "fingerprint": "f8a431d5090172ae64b89a66a5a3ba0f7439a3d803e6f469ea8a9d163c6a7e52"
     },
     {
       "file": "packages/crm/src/internal/index.ts",
@@ -105,23 +433,375 @@
       "logicalLines": 2,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "3d54a3e41985496979a1fec12e18fefb6af556f967ff116557fd4d7f7e3d3532"
+      "fingerprint": "c7d9b429a04b9f195d47ed96b85da27f62058fb72f55521c7b1345bc3d6f4a68"
+    },
+    {
+      "file": "packages/crm/src/patterns/agent-catalog.tsx",
+      "package": "crm",
+      "logicalLines": 359,
+      "complexity": 10,
+      "compatibilityRuntime": false,
+      "fingerprint": "beacf061d72f7e1c6dcc8aba86f495f0a45938c4cea56d78308799c81720bbfa"
+    },
+    {
+      "file": "packages/crm/src/patterns/agent-flow-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 206,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "35b2d34c602e052c909e42fff03a428a0499b8c2267142cd361fc87385e1ce35"
+    },
+    {
+      "file": "packages/crm/src/patterns/agent-flow-workspace.tsx",
+      "package": "crm",
+      "logicalLines": 172,
+      "complexity": 1,
+      "compatibilityRuntime": false,
+      "fingerprint": "9cffd36e72102ae2a74366b818a484d407ad5cb8cd8879be4161ef51c7464110"
+    },
+    {
+      "file": "packages/crm/src/patterns/agent-publish-flow.tsx",
+      "package": "crm",
+      "logicalLines": 173,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "2ef9c297df456ec6176dec164856cd2fa3a197cf704d1f75e6091954d2c5e030"
+    },
+    {
+      "file": "packages/crm/src/patterns/agent-routine-workspace.tsx",
+      "package": "crm",
+      "logicalLines": 249,
+      "complexity": 15,
+      "compatibilityRuntime": false,
+      "fingerprint": "61b6bff2aa0624727f01798f5cc48c474ab1c617e9b3b75d4f2d676dc6fc905e"
+    },
+    {
+      "file": "packages/crm/src/patterns/agent-simulation.tsx",
+      "package": "crm",
+      "logicalLines": 367,
+      "complexity": 2,
+      "compatibilityRuntime": false,
+      "fingerprint": "13b4eb150541f4ac5c7b0eba40db3a65205f20b34cdf5d683a4c1229826f33ca"
+    },
+    {
+      "file": "packages/crm/src/patterns/case-drawer-core.tsx",
+      "package": "crm",
+      "logicalLines": 155,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "0f2dfef257bd4918583d5a70c4c6554e9917102fd5fa28f7220bab8abfc7bc01"
+    },
+    {
+      "file": "packages/crm/src/patterns/case-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 257,
+      "complexity": 26,
+      "compatibilityRuntime": false,
+      "fingerprint": "49182f748e92e553c17fd8fa070205a1dfbe6dc0b7c3e52ab20cb07e6997ad2b"
+    },
+    {
+      "file": "packages/crm/src/patterns/checklist-comments.tsx",
+      "package": "crm",
+      "logicalLines": 206,
+      "complexity": 7,
+      "compatibilityRuntime": false,
+      "fingerprint": "811d5128a7c8568b62ff529c317945000d28ecdbe0ae17e253c7451ee659e340"
+    },
+    {
+      "file": "packages/crm/src/patterns/checklist-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 224,
+      "complexity": 7,
+      "compatibilityRuntime": false,
+      "fingerprint": "9dcab2280f2dbc5f5c553f16072b4445a52c550c33221addd6dab94d49166738"
+    },
+    {
+      "file": "packages/crm/src/patterns/class-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 331,
+      "complexity": 14,
+      "compatibilityRuntime": false,
+      "fingerprint": "02722f4985d074b74cc92181889df2d595527cc1c5854ad87513585feb040ea5"
+    },
+    {
+      "file": "packages/crm/src/patterns/composer-and-handoff.tsx",
+      "package": "crm",
+      "logicalLines": 364,
+      "complexity": 12,
+      "compatibilityRuntime": false,
+      "fingerprint": "40ae492ec33aaf54a01a79945306170094a5715dbd861520972d9c80fe02b4d6"
+    },
+    {
+      "file": "packages/crm/src/patterns/conversation-list.tsx",
+      "package": "crm",
+      "logicalLines": 360,
+      "complexity": 20,
+      "compatibilityRuntime": false,
+      "fingerprint": "75b948863d884e1f3f2701e7480170e431e3c1c21e844e83b609789396e4c1a8"
+    },
+    {
+      "file": "packages/crm/src/patterns/conversation-thread.tsx",
+      "package": "crm",
+      "logicalLines": 250,
+      "complexity": 12,
+      "compatibilityRuntime": false,
+      "fingerprint": "ed73a2d269b892f284c16300fe1e2dd7877b19439d1801caf4c6d8cdb8d1451f"
+    },
+    {
+      "file": "packages/crm/src/patterns/domain-actions.tsx",
+      "package": "crm",
+      "logicalLines": 156,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "e22b670adb8ced63d7e6e2fefdfc21460a0c48610e85ec73ffd8b6c5b6afd6b1"
+    },
+    {
+      "file": "packages/crm/src/patterns/drawer-core.tsx",
+      "package": "crm",
+      "logicalLines": 254,
+      "complexity": 15,
+      "compatibilityRuntime": false,
+      "fingerprint": "6a183e6e0b9aefe2a81a2f033f2e2ac8dc4ee11034d5c3aa478bab23f091c0b5"
     },
     {
       "file": "packages/crm/src/patterns/index.tsx",
       "package": "crm",
-      "logicalLines": 6383,
-      "complexity": 287,
+      "logicalLines": 62,
+      "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "f7128fadad0bcc6a3bbe1fe211cdefc9f7b3616877493f66e78c2260cd903438"
+      "fingerprint": "266ebb14816887959a095d5ab4910556850352c7dba011ac15c84fa8d48deffd"
+    },
+    {
+      "file": "packages/crm/src/patterns/lead-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 247,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "af812e4474af642045599b378e5d4244d8d449d5c0f5e5aa8799e27be266f832"
+    },
+    {
+      "file": "packages/crm/src/patterns/patterns-utilities.tsx",
+      "package": "crm",
+      "logicalLines": 46,
+      "complexity": 7,
+      "compatibilityRuntime": false,
+      "fingerprint": "d3a288c07c91aaca2a24dfd743c7b18abe0884dbb62b9f6f30581cdfdfc42c7e"
+    },
+    {
+      "file": "packages/crm/src/patterns/payment-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 212,
+      "complexity": 15,
+      "compatibilityRuntime": false,
+      "fingerprint": "24df854c9c133347ac724321920f415232a9792e0ca4601b2b7bab4ca6be94ec"
+    },
+    {
+      "file": "packages/crm/src/patterns/payment-usage-export.tsx",
+      "package": "crm",
+      "logicalLines": 305,
+      "complexity": 22,
+      "compatibilityRuntime": false,
+      "fingerprint": "c6f69e458a5eece53bacdf6c308902cf8353d07736be72d90f304f6078652100"
+    },
+    {
+      "file": "packages/crm/src/patterns/replacement-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 169,
+      "complexity": 13,
+      "compatibilityRuntime": false,
+      "fingerprint": "93c19bd54c20020347111614f996c09b99077f3c2fe7364feb8ddd6819894285"
+    },
+    {
+      "file": "packages/crm/src/patterns/roles-and-invites.tsx",
+      "package": "crm",
+      "logicalLines": 323,
+      "complexity": 24,
+      "compatibilityRuntime": false,
+      "fingerprint": "de066c0997f96744dda15b1cb7aa84fec7def2bd47c201e75f77755a2117387c"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-activity-feed.tsx",
+      "package": "crm",
+      "logicalLines": 275,
+      "complexity": 13,
+      "compatibilityRuntime": false,
+      "fingerprint": "fb70424bd319259318a1ea93e847e04a5cadb9008d18594341bf80cab789d08d"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-audit-trail.tsx",
+      "package": "crm",
+      "logicalLines": 91,
+      "complexity": 9,
+      "compatibilityRuntime": false,
+      "fingerprint": "73f215a6dc7adbbcfdb480ffde3ddbbddf7b0f964127bf3a1f899af71d1dcec4"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-chrome-a.tsx",
+      "package": "crm",
+      "logicalLines": 285,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "04a7606c7dd8fe1d4760e8b217f2febce55dd3470999955978d46f2b0327b1c2"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-chrome-b.tsx",
+      "package": "crm",
+      "logicalLines": 166,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "9ae357b9c9872f86f9d9ab6d4f76597b8c3dfbe0f9697e53ca0ab5ec87e15dbe"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-empty.tsx",
+      "package": "crm",
+      "logicalLines": 155,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "a915025e1ae5c34c700275b59a32360c7845a76c08cbe03e89858e21fe00151d"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-foundation.tsx",
+      "package": "crm",
+      "logicalLines": 266,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "e0f576b21047ab2174ec8bca7f7c5f8d2ae08c1065eeda7e345bf19bedbf3546"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-kanban.tsx",
+      "package": "crm",
+      "logicalLines": 274,
+      "complexity": 25,
+      "compatibilityRuntime": false,
+      "fingerprint": "d29b555fbad131bd8d7c4c5545b322162de95a49604d91508f91b9396d60b666"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-layout-a.tsx",
+      "package": "crm",
+      "logicalLines": 382,
+      "complexity": 15,
+      "compatibilityRuntime": false,
+      "fingerprint": "c2d72f1ef585be52c392a52ebe56ed3289a6fbef38a42038a3e667f0e65273f7"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-layout-b.tsx",
+      "package": "crm",
+      "logicalLines": 209,
+      "complexity": 5,
+      "compatibilityRuntime": false,
+      "fingerprint": "0f4bd6c8f78febaf953b77bcaf4270e6808ed2e4138c09840b9212f9653f5b57"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-operation-activity.tsx",
+      "package": "crm",
+      "logicalLines": 113,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "9e43e85686dd42b75a532258e99e5c5b97f60dcca1cc1c197211d6f7b55f0e1c"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-operational-a.tsx",
+      "package": "crm",
+      "logicalLines": 272,
+      "complexity": 15,
+      "compatibilityRuntime": false,
+      "fingerprint": "fd4418c85bd03809351129c9d223ba60f44f51d125aba2d80bab45f84b2300b1"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-operational-b.tsx",
+      "package": "crm",
+      "logicalLines": 235,
+      "complexity": 4,
+      "compatibilityRuntime": false,
+      "fingerprint": "0b975072bc4ed7ed4e67e095962500c26ece259ef057e67bdbd2cbe222993dac"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-page-family.tsx",
+      "package": "crm",
+      "logicalLines": 316,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "f9a98613444b94a9860f009d43bcacf3186e26e4ca3b7ee0f3082e1f6ea6e1e0"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-product.tsx",
+      "package": "crm",
+      "logicalLines": 178,
+      "complexity": 24,
+      "compatibilityRuntime": false,
+      "fingerprint": "a6a07125e6fcc06a50c437e2996919b83784244aaacda40091902d5d89842ed5"
+    },
+    {
+      "file": "packages/crm/src/patterns/shell-utilities.ts",
+      "package": "crm",
+      "logicalLines": 27,
+      "complexity": 12,
+      "compatibilityRuntime": false,
+      "fingerprint": "6eaed919e8cb9391731652caca6da8e25ae1a550447e1678c1b4ebea47f10b2d"
     },
     {
       "file": "packages/crm/src/patterns/shell.tsx",
       "package": "crm",
-      "logicalLines": 3058,
-      "complexity": 140,
+      "logicalLines": 148,
+      "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "6976ecc260c247a4927c8430e073626ad0b269898007b6827e0fa80b6d00fcd7"
+      "fingerprint": "e0e9fa437f8247f621fcab02e9c25f0629e14fd90acbf41090191ef8e05a123a"
+    },
+    {
+      "file": "packages/crm/src/patterns/student-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 186,
+      "complexity": 5,
+      "compatibilityRuntime": false,
+      "fingerprint": "994109452e955be35cb03c31af70175a89de7df4f85641deb0771f77595dd324"
+    },
+    {
+      "file": "packages/crm/src/patterns/support-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 180,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "5abdb48c78d13edaf6d9dc93a37fef218051185da2033fb67ae89a5b0319a3d3"
+    },
+    {
+      "file": "packages/crm/src/patterns/task-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 198,
+      "complexity": 7,
+      "compatibilityRuntime": false,
+      "fingerprint": "6783b119808ee81a218ac259737f63d7b32853df221d6d524cbd397780f923ea"
+    },
+    {
+      "file": "packages/crm/src/patterns/tenant-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 201,
+      "complexity": 15,
+      "compatibilityRuntime": false,
+      "fingerprint": "edb10438625bbae354c7d98cc1cec600ee4fab8dfe203f4fa706c5a1f594be9b"
+    },
+    {
+      "file": "packages/crm/src/patterns/usage-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 183,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "b4918f3d9268d629d801571963b8ad41ad73658c134d8f1fdef9bb2c4aa9195f"
+    },
+    {
+      "file": "packages/crm/src/patterns/weekly-hours-grid.tsx",
+      "package": "crm",
+      "logicalLines": 126,
+      "complexity": 9,
+      "compatibilityRuntime": false,
+      "fingerprint": "01c8b9c3028a496c4f3e3a692ff073cdfff42d4f75742fd54a0ee83947651776"
+    },
+    {
+      "file": "packages/crm/src/patterns/worklist-table.tsx",
+      "package": "crm",
+      "logicalLines": 172,
+      "complexity": 11,
+      "compatibilityRuntime": false,
+      "fingerprint": "b7accab771ca6e8534454fcf644eba5332ae21e0534dedd7b5230fa52d7aa0d0"
     },
     {
       "file": "packages/crm/src/standard-page-kit.ts",
@@ -129,7 +809,7 @@
       "logicalLines": 69,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "527d8aabb4e1abe3cb7820f96795f41a64a6953c738bbce176558c5aca380f0e"
+      "fingerprint": "b1e24257d4fe37c6c35a318aeb0e94384dc5098f6e8a14a3d12f2f406d169af1"
     },
     {
       "file": "packages/crm/src/test.setup.ts",
@@ -137,7 +817,7 @@
       "logicalLines": 1,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "0e7296b1e76984a552dcb73157ad8baafb2c538d0dddbd2480f084ed6295b2f5"
+      "fingerprint": "2f4a9bc15bd9c5fab4c173edf71d5cb5ae08508022a95bbd580294b67c151b24"
     },
     {
       "file": "packages/crm/src/types/index.ts",
@@ -145,15 +825,199 @@
       "logicalLines": 7,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "56a779889449c5e8f8bf726531cad3c428bae4155c0e099bd5d2b0e36e275d1f"
+      "fingerprint": "005af5fd7daf4c58cf7ad0be3c3fcc45a9215cdcd97e719bfcac0db1601db941"
+    },
+    {
+      "file": "packages/tokens/src/borderTokens.ts",
+      "package": "tokens",
+      "logicalLines": 41,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "509e1de3856bbddec455381fbd5654e32d2e8cb9fb53d6e522b7b92ccf99c18b"
+    },
+    {
+      "file": "packages/tokens/src/certifiedCssTokens.ts",
+      "package": "tokens",
+      "logicalLines": 125,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "ae7605f2dd827d2ec35656becbf37f8eb3f2e2669e8492dce55ad97659071000"
+    },
+    {
+      "file": "packages/tokens/src/chartTokens.ts",
+      "package": "tokens",
+      "logicalLines": 42,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "e8e7e5ccd953d23e7fddc4d93f3c1736aa8164162c52129f33cf48b75f77ee1d"
+    },
+    {
+      "file": "packages/tokens/src/colorTokens.ts",
+      "package": "tokens",
+      "logicalLines": 857,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "6f67a37f2aa92429062425e32b6da0b871ec53afe2df1ef95a378a141902fcaa"
+    },
+    {
+      "file": "packages/tokens/src/connectorTokens.ts",
+      "package": "tokens",
+      "logicalLines": 33,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "51003b50a239db8c676c0bf507f933218d0f9ac3d08f88451335c8e2e01746bc"
+    },
+    {
+      "file": "packages/tokens/src/controlTokens.ts",
+      "package": "tokens",
+      "logicalLines": 2394,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "5e98443c9e01203bebae8ff3883c32161233765ce31233bd1b380f1d5cb4c158"
+    },
+    {
+      "file": "packages/tokens/src/crmProductShellSurfaceTokens.ts",
+      "package": "tokens",
+      "logicalLines": 24,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "54525b83b384780049d289d89b8d8b0bf91e6b685f666af42a4f592b3395ece0"
+    },
+    {
+      "file": "packages/tokens/src/densityTokens.ts",
+      "package": "tokens",
+      "logicalLines": 15,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "e83c26d4865bb24bd20545f3baf44f948342bffb0ad2290148886851b707b7c1"
+    },
+    {
+      "file": "packages/tokens/src/focusTokens.ts",
+      "package": "tokens",
+      "logicalLines": 10,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "b31fd9f0c337f0362fc5367288def8105209aa3b28c9a4b67790eaad163e1eac"
     },
     {
       "file": "packages/tokens/src/index.ts",
       "package": "tokens",
-      "logicalLines": 5056,
+      "logicalLines": 127,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "d882c050bdf142f7b154ac43d06e1959d8af89369fb2dc27df5711eb6d30e96c"
+      "fingerprint": "ada51a12ca032359a4121e88ae243f4c04952c55f9f5644033302d168805cd20"
+    },
+    {
+      "file": "packages/tokens/src/layoutTokens.ts",
+      "package": "tokens",
+      "logicalLines": 1039,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "721ed5490713f2800f40ffe20cbe9faf6523397ea99a762815c26c65d971c1e9"
+    },
+    {
+      "file": "packages/tokens/src/legacyTokens.ts",
+      "package": "tokens",
+      "logicalLines": 57,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "6e7618eeb379b3f9870a7e92a8703503b2d3f44d7eac97246eb575e454e81d8c"
+    },
+    {
+      "file": "packages/tokens/src/motionTokens.ts",
+      "package": "tokens",
+      "logicalLines": 14,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "14b2f87738c4be093adc735e01bb1407fcd0b2270f62918e020ada6bb8848264"
+    },
+    {
+      "file": "packages/tokens/src/operationalStateTokens.ts",
+      "package": "tokens",
+      "logicalLines": 14,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "c9eba8a5893688c2064bdc95257a547ca4049921b9467fd04fdd8727bec2674a"
+    },
+    {
+      "file": "packages/tokens/src/quotaTokens.ts",
+      "package": "tokens",
+      "logicalLines": 13,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "98ebba07516b48e391df253de436972d19883b3fd00514c9805adf268313711c"
+    },
+    {
+      "file": "packages/tokens/src/radiusTokens.ts",
+      "package": "tokens",
+      "logicalLines": 18,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "d99581de8f0ec2dc18ec1267a0b9ec2643366b078fef80da2d461c9bb80eba35"
+    },
+    {
+      "file": "packages/tokens/src/rawTokens.ts",
+      "package": "tokens",
+      "logicalLines": 17,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "e08f5bf3d9f47c788143b9d6b3136227d44472c5c7fb225e61a55717b6a8d20c"
+    },
+    {
+      "file": "packages/tokens/src/shadowTokens.ts",
+      "package": "tokens",
+      "logicalLines": 52,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "681585ca5c7f51c10ff8c0891745626b4efb9e19da7eed98c3013801cb7c6e48"
+    },
+    {
+      "file": "packages/tokens/src/spacingTokens.ts",
+      "package": "tokens",
+      "logicalLines": 14,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "b855d76c5f7bce9598ad1e056571cfa00de92e02f40a3c681db734d166877425"
+    },
+    {
+      "file": "packages/tokens/src/statusTokens.ts",
+      "package": "tokens",
+      "logicalLines": 75,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "cdb10e8a25d0ced79e265982eef75b0498585e40453add6b4033dc2d9846b7f1"
+    },
+    {
+      "file": "packages/tokens/src/surfaceTokens.ts",
+      "package": "tokens",
+      "logicalLines": 36,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "b9d6452473dac153551b01efe0966f22cc7582decf14d7da288c90d8280e0b19"
+    },
+    {
+      "file": "packages/tokens/src/token-families.ts",
+      "package": "tokens",
+      "logicalLines": 21,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "b23dd5402f1faca86b940a3c34ce071c14bd5e6fca7fbe6de641c66dc61906f2"
+    },
+    {
+      "file": "packages/tokens/src/types.ts",
+      "package": "tokens",
+      "logicalLines": 22,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "d3e0b90625a9734e5b265b7ba4db840a567edd046e8ebb12a2d15742005d5d56"
+    },
+    {
+      "file": "packages/tokens/src/typeTokens.ts",
+      "package": "tokens",
+      "logicalLines": 85,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "dd563de9dd2047d45a69a20429f43546c6c8b68d0db13b1150f69f2a9e269793"
     },
     {
       "file": "packages/ui/src/components/calendar-flow-chart.tsx",
@@ -161,7 +1025,7 @@
       "logicalLines": 290,
       "complexity": 25,
       "compatibilityRuntime": false,
-      "fingerprint": "f12c260de92a0d08f56ec209b2e217e0eb5b88407e8309ae77c83bb42774b983"
+      "fingerprint": "279bbbafad322a2c9f4c1f87c378a93192c55e385d7e371b1fed7e82224cea16"
     },
     {
       "file": "packages/ui/src/components/connectors.tsx",
@@ -169,15 +1033,15 @@
       "logicalLines": 45,
       "complexity": 3,
       "compatibilityRuntime": false,
-      "fingerprint": "18c36c1a908edb33d52fd74209eb68cd0591ac0f7d419784f1edaabf53d889e5"
+      "fingerprint": "e8b67bba9312e698ed520e474f589605af6e95d6d69f068b6af3ca143c4e0b15"
     },
     {
       "file": "packages/ui/src/components/controls.tsx",
       "package": "ui",
-      "logicalLines": 577,
-      "complexity": 47,
+      "logicalLines": 275,
+      "complexity": 28,
       "compatibilityRuntime": false,
-      "fingerprint": "06d870d436d974ef01cc1f2f60430cf119b89b165f07e131a076e3ac4c51b3f5"
+      "fingerprint": "8800966868f3433a294c6f2f819eb37e51699ee6451ca63a61ac3329d21a7a16"
     },
     {
       "file": "packages/ui/src/components/data-table.tsx",
@@ -185,7 +1049,15 @@
       "logicalLines": 241,
       "complexity": 18,
       "compatibilityRuntime": false,
-      "fingerprint": "d3b910b7b0879c5dc504e60acea50e99f61f47968e8f050b5b85de063a1a1543"
+      "fingerprint": "71f52492f0a36579ef2bc9b3e2b667b6c2fce70a84faf2a35515cfe2fb8dabfa"
+    },
+    {
+      "file": "packages/ui/src/components/filter-select.tsx",
+      "package": "ui",
+      "logicalLines": 306,
+      "complexity": 20,
+      "compatibilityRuntime": false,
+      "fingerprint": "8e7c42a1ee3279fa61d747a52b71bd7357d10ee79855514836c2a03f8bcd347b"
     },
     {
       "file": "packages/ui/src/components/identity.tsx",
@@ -193,7 +1065,7 @@
       "logicalLines": 113,
       "complexity": 4,
       "compatibilityRuntime": false,
-      "fingerprint": "5774f754e93eb8d74dabf48b32a9a8007da56ccbb52152064390d26c03810beb"
+      "fingerprint": "16d52f1b7a878c272c4a48a3ab015d104aa8e53e062969c747d3a5e7eced6172"
     },
     {
       "file": "packages/ui/src/components/index.ts",
@@ -201,7 +1073,7 @@
       "logicalLines": 7,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "2d1fd6d29450f23f64ce6b35484912a228abbd5bd958a96038ef35c5dd5c1209"
+      "fingerprint": "4cd14f14b22e1df91fb4835d0a731edec1d08ba018711a3932f41ef5da223e3f"
     },
     {
       "file": "packages/ui/src/components/navigation-data.tsx",
@@ -209,23 +1081,79 @@
       "logicalLines": 167,
       "complexity": 12,
       "compatibilityRuntime": false,
-      "fingerprint": "44ab39866dc4428c1c9276a423db98dba64682110024be4e217366adc788cd19"
+      "fingerprint": "059b5bc19e7644975c4c53e8c84554e78772be4d4c1e17658e8856dd732ff9b5"
     },
     {
       "file": "packages/ui/src/components/state-list.tsx",
       "package": "ui",
-      "logicalLines": 138,
+      "logicalLines": 137,
       "complexity": 9,
       "compatibilityRuntime": false,
-      "fingerprint": "efae678710d30297eaf22d95b2938352480d983e6c7aa4a1ccc90ce4cc991399"
+      "fingerprint": "773937ac0afdab95303afdca5d69dc40486848cedccf038a08ef54570adab24b"
+    },
+    {
+      "file": "packages/ui/src/components/workflow-audit-tables.tsx",
+      "package": "ui",
+      "logicalLines": 291,
+      "complexity": 21,
+      "compatibilityRuntime": false,
+      "fingerprint": "4065845d9b6ef1587d9acc3a0a7173d68e313164211d6617e8b67ba5bce3cc59"
+    },
+    {
+      "file": "packages/ui/src/components/workflow-cards.tsx",
+      "package": "ui",
+      "logicalLines": 258,
+      "complexity": 19,
+      "compatibilityRuntime": false,
+      "fingerprint": "d38528081f2eecb5ab5def3a0b4b462c45fbee9a86b5a91e37db1b462069f16e"
     },
     {
       "file": "packages/ui/src/components/workflow-data.tsx",
       "package": "ui",
-      "logicalLines": 1306,
-      "complexity": 91,
+      "logicalLines": 4,
+      "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "7b14f4f824f82d5c51e84860584516c71f352fffd2c45acce62fb66ba5f32287"
+      "fingerprint": "f8b12164078a75d674722c4054b86fd9e33d3b66d00e52cc4565350f65d1e718"
+    },
+    {
+      "file": "packages/ui/src/components/workflow-detail.tsx",
+      "package": "ui",
+      "logicalLines": 252,
+      "complexity": 10,
+      "compatibilityRuntime": false,
+      "fingerprint": "ba1d2bd7ce294c135284bce73124c4a99394672676fbecba45d27082cb957754"
+    },
+    {
+      "file": "packages/ui/src/components/workflow-messaging.tsx",
+      "package": "ui",
+      "logicalLines": 244,
+      "complexity": 18,
+      "compatibilityRuntime": false,
+      "fingerprint": "24cbfaefecd72ea07840870f88f3987cb3db91c4e135b4a6c06b37049307278e"
+    },
+    {
+      "file": "packages/ui/src/components/workflow-status.tsx",
+      "package": "ui",
+      "logicalLines": 274,
+      "complexity": 16,
+      "compatibilityRuntime": false,
+      "fingerprint": "65c185b9828c0463169b8992e87d6a50fc82bb9fa5f31d24e38241d8bc0c0997"
+    },
+    {
+      "file": "packages/ui/src/components/workflow-tables.tsx",
+      "package": "ui",
+      "logicalLines": 2,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "fe906ff5be624e8d1214c96bb9354940a97316afb75430de18e03099f413d6a7"
+    },
+    {
+      "file": "packages/ui/src/components/workflow-utilities.ts",
+      "package": "ui",
+      "logicalLines": 8,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "451ab2571587a9d03d81f4e167160cd081213b935faa2bb811894e9880e2bae3"
     },
     {
       "file": "packages/ui/src/constants/index.ts",
@@ -233,7 +1161,7 @@
       "logicalLines": 2,
       "complexity": 1,
       "compatibilityRuntime": false,
-      "fingerprint": "58ca5107c9ccd9896133024b5bb84df74d6cabe8910a9495cbafd3b24c40afd3"
+      "fingerprint": "5c966d7323089de459467a79002b11dc75fac647f556d5dabe446f4518343918"
     },
     {
       "file": "packages/ui/src/foundation.tsx",
@@ -241,7 +1169,7 @@
       "logicalLines": 329,
       "complexity": 1,
       "compatibilityRuntime": false,
-      "fingerprint": "2ed0539dcb4c653d9c241ad27e7c512277b0a314b081ebbd87e25ef28f82a347"
+      "fingerprint": "4281520ea1ce1583b8ee97a5e3c8fd80393ad31e1f809a626b4565dbb0a5f78f"
     },
     {
       "file": "packages/ui/src/hooks/index.ts",
@@ -249,7 +1177,7 @@
       "logicalLines": 2,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "f796a27a1c9b6150bb51fee55e10181851ba4641269588def4d8d187e526c205"
+      "fingerprint": "b0f782e161ad80eda6a4754ab7c1e1252ba1bcaf18f1b2c8c3703a52f195d958"
     },
     {
       "file": "packages/ui/src/index.tsx",
@@ -257,15 +1185,15 @@
       "logicalLines": 5,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "b7199cef8c2240c61a4c3c19d57835bfa5f1496cfc233e309c2dd621158740c1"
+      "fingerprint": "65b1dfbe94cefa18f25a0e444b5d83441238ead79f95371a692ac337e51d25d8"
     },
     {
       "file": "packages/ui/src/internal-ui-runtime.tsx",
       "package": "ui",
-      "logicalLines": 77,
+      "logicalLines": 78,
       "complexity": 0,
       "compatibilityRuntime": true,
-      "fingerprint": "0adc34ff7f1158a3e0fc03ba5066025dc1ec01f25260d0391d302c675aab2f31"
+      "fingerprint": "2445b1cd14080f898decb8f74eea6a345f864dcaad8add9b32153574593d8a40"
     },
     {
       "file": "packages/ui/src/internal/index.ts",
@@ -273,15 +1201,15 @@
       "logicalLines": 2,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "5cb3541e305a721289c7f8bd92b7b4e40889a91b64c64c64d81de5ccb397a47e"
+      "fingerprint": "002e6298bf1c7708e220f8dddceb6d637ec635e1e1ee5ed5954d6c04ac84cd4f"
     },
     {
       "file": "packages/ui/src/primitives/button.tsx",
       "package": "ui",
-      "logicalLines": 109,
-      "complexity": 12,
+      "logicalLines": 120,
+      "complexity": 14,
       "compatibilityRuntime": false,
-      "fingerprint": "5ff3159b1a485803b88b32f1b59aac04d212cc6008395a404147e9856332da5c"
+      "fingerprint": "eac3a82dab63d76775e18b1c8c42ea84c9ca80ab14623bd96d063d4768d25d44"
     },
     {
       "file": "packages/ui/src/primitives/feedback.tsx",
@@ -289,15 +1217,23 @@
       "logicalLines": 133,
       "complexity": 8,
       "compatibilityRuntime": false,
-      "fingerprint": "18e5b8f290164d5fc1fb62b8709e2463d233844db6876967662565891327b457"
+      "fingerprint": "c809e5dee5f569bcb69e1e1838939f3f32f8306af90bf37d46953a1415450f92"
+    },
+    {
+      "file": "packages/ui/src/primitives/field-controls.tsx",
+      "package": "ui",
+      "logicalLines": 369,
+      "complexity": 32,
+      "compatibilityRuntime": false,
+      "fingerprint": "b71e1b683b31c5104de34b6244f74d3cd9703a892b7bbc3c9afca2856944604b"
     },
     {
       "file": "packages/ui/src/primitives/forms.tsx",
       "package": "ui",
-      "logicalLines": 669,
-      "complexity": 53,
+      "logicalLines": 322,
+      "complexity": 22,
       "compatibilityRuntime": false,
-      "fingerprint": "b1e0c348e23178653dc47c6a2e492d2d787ce2bdb634d78941168aa7e4b4c854"
+      "fingerprint": "7fc5f94dbc514a6f21e34982ad6f95791315e26f198dab5acda5f93f65509f09"
     },
     {
       "file": "packages/ui/src/primitives/index.ts",
@@ -305,7 +1241,7 @@
       "logicalLines": 7,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "8d2d4d7a511c056dd30d2455f96c6f042dc38a82c00326916d0a8180658c17b9"
+      "fingerprint": "4083b37d5c23252eeb533a8ca1cd52c4c66a80f882923602bd9bf14580b3a423"
     },
     {
       "file": "packages/ui/src/primitives/layout.tsx",
@@ -313,15 +1249,31 @@
       "logicalLines": 136,
       "complexity": 14,
       "compatibilityRuntime": false,
-      "fingerprint": "dc9bcf3672a1daa521305777e19bd48557f7b857a8a42dea91127ec78078e36c"
+      "fingerprint": "6f419ddb1932c921ff2708cade1f26551c89ef8a0bb8f855e0e6effe9a5fd6a4"
+    },
+    {
+      "file": "packages/ui/src/primitives/modal.tsx",
+      "package": "ui",
+      "logicalLines": 123,
+      "complexity": 6,
+      "compatibilityRuntime": false,
+      "fingerprint": "44d27e6b8da4393bae316ec656bad4652b3e236fb7124f554e89df61554deab3"
+    },
+    {
+      "file": "packages/ui/src/primitives/overlay-utilities.tsx",
+      "package": "ui",
+      "logicalLines": 240,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "998e23ef4e058b4819cfa6d5551a8396f431d9760e4b57325b83dec41610adbe"
     },
     {
       "file": "packages/ui/src/primitives/overlays.tsx",
       "package": "ui",
-      "logicalLines": 578,
-      "complexity": 21,
+      "logicalLines": 218,
+      "complexity": 7,
       "compatibilityRuntime": false,
-      "fingerprint": "7f6c6dca1b81910c81ee8c874d8cced2da1c694c16bd5306fa932688e908c0ef"
+      "fingerprint": "e80b8ebb114150dc016ec2ba622f855f15d7b9cbf6ff2cc9748b6693b7fc1116"
     },
     {
       "file": "packages/ui/src/primitives/stepper.tsx",
@@ -329,7 +1281,7 @@
       "logicalLines": 99,
       "complexity": 10,
       "compatibilityRuntime": false,
-      "fingerprint": "950e115fc4af4cff6463b61b79ffa09ba33145610069d5de27c3213f5f60eaff"
+      "fingerprint": "2fd4d65cd0e657acd8bbee91ecb177c9a4bb5fd5d18a17fe10d946482bd270fd"
     },
     {
       "file": "packages/ui/src/test.setup.ts",
@@ -337,7 +1289,7 @@
       "logicalLines": 12,
       "complexity": 0,
       "compatibilityRuntime": false,
-      "fingerprint": "1ccc41d1bb23c41e97c6c19e1182d41ac4616b3be1f8509f7735d8909ffd5d61"
+      "fingerprint": "aa9e24107fa1c2750bfbe6346cf3b562baee673db5e28ea2f73220c86cda7996"
     },
     {
       "file": "packages/ui/src/types/index.ts",
@@ -345,14 +1297,14 @@
       "logicalLines": 3,
       "complexity": 1,
       "compatibilityRuntime": false,
-      "fingerprint": "37a8088d53636e04df1b3594f9db2ed9033985712098456c37a1ec691ba1726e"
+      "fingerprint": "8cf9545a7f184069a6387d277c76339c5f1a0c68485460cd28e0d92e63341089"
     }
   ],
   "edges": [
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/domains/agenda/index.tsx"
+      "source": "packages/crm/src/domains/agenda/class-card.tsx"
     },
     {
       "from": "crm",
@@ -362,12 +1314,182 @@
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/domains/billing/index.tsx"
+      "source": "packages/crm/src/domains/agenda/index.tsx"
     },
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/domains/billing/index.tsx"
+      "source": "packages/crm/src/domains/agenda/mini-calendar.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/agenda/weekly-calendar.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-access.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-addons-usage-overview.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-addons-usage-overview.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-approval-settings-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-approval-settings-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-checkout.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-finance.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-impact-settings.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-impact-settings.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-invoices.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-invoices.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-permissions-settings.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-permissions-settings.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-plan-invoices.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-plan-invoices.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-final-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-final-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-final-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-final-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-hub.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-hub.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-studio.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-studio.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-settings-workspaces.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-subscription.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-subscription.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-usage-ledger-table.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-usage-ledger-table.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-usage-ledger.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-usage-ledger.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-usage-overview.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-usage-overview.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/billing/billing-utilities.ts"
     },
     {
       "from": "crm",
@@ -382,12 +1504,157 @@
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/domains/students/index.tsx"
+      "source": "packages/crm/src/domains/settings/setup-agent-experience.tsx"
     },
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/domains/students/index.tsx"
+      "source": "packages/crm/src/domains/settings/setup-data-workspaces.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-data-workspaces.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-import-source-card.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-import-source-card.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-plans-payment.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-plans-payment.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-shell.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-shell.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-team-channels.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-team-channels.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-welcome-workspaces.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-welcome-workspaces.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/settings/setup-workspace-utilities.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-access.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-finance.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-finance.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-internal-overview.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-internal-overview.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-profile.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-profile.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-reconciliation.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-retention.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-retention.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-sales-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-sales-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-security.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-security.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-support.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-support.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/domains/students/students-utilities.ts"
     },
     {
       "from": "crm",
@@ -407,28 +1674,378 @@
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/internal-crm-runtime.tsx"
+      "source": "packages/crm/src/patterns/agent-catalog.tsx"
     },
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/patterns/index.tsx"
+      "source": "packages/crm/src/patterns/agent-catalog.tsx"
     },
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/patterns/index.tsx"
+      "source": "packages/crm/src/patterns/agent-flow-drawer.tsx"
     },
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/patterns/shell.tsx"
+      "source": "packages/crm/src/patterns/agent-flow-workspace.tsx"
     },
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/patterns/shell.tsx"
+      "source": "packages/crm/src/patterns/agent-publish-flow.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/agent-publish-flow.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/agent-routine-workspace.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/agent-routine-workspace.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/agent-simulation.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/case-drawer-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/case-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/checklist-comments.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/checklist-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/checklist-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/class-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/class-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/composer-and-handoff.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/composer-and-handoff.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/conversation-list.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/conversation-list.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/conversation-thread.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/conversation-thread.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/domain-actions.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/domain-actions.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/drawer-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/drawer-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/lead-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/lead-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/patterns-utilities.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/patterns-utilities.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/payment-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/payment-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/payment-usage-export.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/payment-usage-export.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/replacement-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/replacement-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/roles-and-invites.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/roles-and-invites.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-activity-feed.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-activity-feed.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-audit-trail.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-audit-trail.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-chrome-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-chrome-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-chrome-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-chrome-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-empty.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-foundation.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-foundation.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-kanban.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-kanban.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-layout-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-layout-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-layout-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-layout-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-operation-activity.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-operation-activity.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-operational-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-operational-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-operational-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-page-family.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-product.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/shell-utilities.ts"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/student-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/student-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/support-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/support-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/task-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/tenant-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/tenant-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/usage-drawer.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/weekly-hours-grid.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/weekly-hours-grid.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/worklist-table.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/patterns/worklist-table.tsx"
     }
   ],
-  "debtFingerprint": "aafc4055a87034a50c9ed010e40eaf693e8884bf47cd3a2a583429e90eafe895"
+  "debtFingerprint": "a2c44c36de2c63a2df85d7e2cbc50d2d87eaf352cadff540b5eb4c7fba0fbfe1"
 }

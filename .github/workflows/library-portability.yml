@@ -46,6 +46,9 @@ jobs:
       - name: Test official packages
         run: corepack pnpm --filter @taliya/tokens test && corepack pnpm --filter @taliya/ui test && corepack pnpm --filter @taliya/crm test
 
+      - name: Enforce package coverage thresholds
+        run: corepack pnpm coverage
+
       - name: Build packages and static Storybook
         run: corepack pnpm build
 
@@ -61,8 +64,20 @@ jobs:
       - name: Run deterministic quality gates
         run: |
           corepack pnpm quality:governance
+          corepack pnpm tokens:audit
+          corepack pnpm storybook-anatomy:audit:strict
+          corepack pnpm components:audit
+          corepack pnpm crm-module-boundaries:audit
+          corepack pnpm domain-wrappers:audit
+          corepack pnpm package-boundaries:audit
+          corepack pnpm public-api:audit
+          corepack pnpm public-api-surface:audit
+          corepack pnpm source-assets:audit
+          corepack pnpm source-assets:reconcile
+          corepack pnpm registry-publication:audit
+          corepack pnpm registry-consumer-adoption:audit
           node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
-          node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static
+          node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 16
           corepack pnpm e2e:pr
           node scripts/quality/audit-dependencies.mjs --prod
           node scripts/quality/audit-dependencies.mjs --full

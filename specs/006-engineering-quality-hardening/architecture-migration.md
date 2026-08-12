@@ -1,6 +1,6 @@
 # Architecture Migration Strategy
 
-**Status**: planned; execution blocked by `GATE-SDD-APPROVED`
+**Status**: in progress under approved task range; each extraction remains gate-controlled
 **Migration kind**: compatibility-first, behavior-preserving modularization
 **Primary requirements**: FR-011 through FR-021, FR-036, FR-045, FR-046
 

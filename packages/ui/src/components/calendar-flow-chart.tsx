@@ -229,7 +229,7 @@ function ChartPanelGraphic({ variant, data }: { variant: ChartPanelVariant; data
     return (
       <div className="tl-chart-panel__heatmap" aria-hidden="true">
         {Array.from({ length: 30 }).map((_, index) => (
-          <span key={index} className={`tl-chart-panel__heat-${(index % 4) + 1}`} />
+          <span key={`heat-${index}`} className={`tl-chart-panel__heat-${(index % 4) + 1}`} />
         ))}
       </div>
     );

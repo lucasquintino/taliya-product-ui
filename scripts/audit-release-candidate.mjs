@@ -20,6 +20,7 @@ function runCommand(commandText, timeoutMs = 300000) {
     encoding: "utf8",
     env: {
       ...process.env,
+      CI: process.env.CI ?? "true",
       TALIYA_RELEASE_CANDIDATE_IN_PROGRESS: "1"
     },
     maxBuffer: 1024 * 1024 * 80,
@@ -38,6 +39,37 @@ function runCommand(commandText, timeoutMs = 300000) {
       result.error ? `${result.error.name}: ${result.error.message}` : "",
       ...(result.stderr ?? "").trim().split(/\r?\n/).filter(Boolean).slice(-20)
     ].filter(Boolean)
+  };
+}
+
+function runReadinessCommand(commandText, timeoutMs = 360000) {
+  const startedAt = Date.now();
+  const check = commandText.includes("--check") || commandText === "corepack pnpm readiness:audit";
+  const args = ["scripts/audit-library-readiness.mjs", ...(check ? ["--check"] : [])];
+  const result = spawnSync(process.execPath, args, {
+    cwd: root,
+    encoding: "utf8",
+    env: {
+      ...process.env,
+      CI: process.env.CI ?? "true",
+      TALIYA_RELEASE_CANDIDATE_IN_PROGRESS: "1"
+    },
+    maxBuffer: 1024 * 1024 * 80,
+    timeout: timeoutMs
+  });
+  const timedOut = result.error?.code === "ETIMEDOUT";
+  return {
+    commandText,
+    status: result.status === 0 && !result.error ? "pass" : "fail",
+    exitCode: result.status,
+    durationMs: Date.now() - startedAt,
+    timedOut,
+    stdoutTail: (result.stdout ?? "").trim().split(/\r?\n/).slice(-20),
+    stderrTail: [
+      result.error ? `${result.error.name}: ${result.error.message}` : "",
+      ...(result.stderr ?? "").trim().split(/\r?\n/).filter(Boolean).slice(-20)
+    ].filter(Boolean),
+    execution: "direct-node"
   };
 }
 
@@ -65,6 +97,12 @@ const gateDefinitions = [
     commandText: "corepack pnpm build",
     timeoutMs: 1200000,
     proves: "packages and static Storybook build"
+  },
+  {
+    id: "coverage",
+    commandText: "corepack pnpm coverage",
+    timeoutMs: 600000,
+    proves: "package coverage and changed-lines coverage meet the blocking quality policy"
   },
   {
     id: "readiness",
@@ -661,24 +699,62 @@ const gateDefinitions = [
     proves: "goal-level readiness has no current-scope regression"
   }
 ];
+// In update mode the final `readiness-refresh-update` + `readiness-refresh`
+// pair is the authoritative aggregate evaluation. Running the same expensive
+// readiness graph as the first preflight gate would duplicate the complete
+// consumer/runtime suite before any release-candidate updates and can exceed
+// CI time limits. Keep the required `readiness` evidence row, but defer its
+// execution to the final refresh result below. Check mode still executes the
+// full read-only gate directly.
 const gates = checkMode
   ? gateDefinitions.filter((gate) => !gate.id.endsWith("-update"))
-  : gateDefinitions;
+  : gateDefinitions.filter((gate) => gate.id !== "readiness");
 
 const rows = [];
+let readinessCheckResult = null;
 for (const gate of gates) {
-  const row = {
-    ...gate,
-    ...runCommand(gate.commandText, gate.timeoutMs)
-  };
+  // In check mode, readiness and readiness-refresh are identical read-only
+  // evaluations with no mutating gates between them. Reuse the first result
+  // while retaining both gate rows in the release-candidate evidence. This
+  // avoids a second multi-minute aggregate run without weakening coverage or
+  // thresholds; update mode still executes both commands independently.
+  const row = checkMode && gate.id === "readiness-refresh" && readinessCheckResult
+    ? {
+        ...gate,
+        ...readinessCheckResult,
+        commandText: gate.commandText,
+        reusedFrom: "readiness"
+      }
+    : {
+        ...gate,
+        ...(gate.id === "readiness" || gate.id === "readiness-refresh"
+          ? runReadinessCommand(gate.commandText, gate.timeoutMs)
+          : runCommand(gate.commandText, gate.timeoutMs))
+      };
+  if (checkMode && gate.id === "readiness") readinessCheckResult = row;
   rows.push(row);
   if (checkMode && row.status !== "pass") break;
+}
+
+if (!checkMode) {
+  const readinessDefinition = gateDefinitions.find((gate) => gate.id === "readiness");
+  const readinessRefresh = rows.find((row) => row.id === "readiness-refresh");
+  rows.unshift({
+    ...readinessDefinition,
+    status: readinessRefresh?.status ?? "fail",
+    exitCode: readinessRefresh?.exitCode ?? 1,
+    durationMs: 0,
+    timedOut: false,
+    stdoutTail: readinessRefresh?.stdoutTail ?? [],
+    stderrTail: readinessRefresh?.stderrTail ?? [],
+    execution: "deferred-to-readiness-refresh"
+  });
 }
 
 const failedRows = rows.filter((row) => row.status !== "pass");
 const report = {
   generatedAt: new Date().toISOString(),
-  status: failedRows.length === 0 && rows.length === gates.length ? "pass" : "fail",
+  status: failedRows.length === 0 && rows.length === gates.length + (checkMode ? 0 : 1) ? "pass" : "fail",
   checkMode,
   rows,
   skipped: gates.slice(rows.length).map((gate) => ({

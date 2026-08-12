@@ -92,9 +92,9 @@ import {
   User,
   Users,
   WalletCards,
-  X
+  X,
+  type LucideIcon as LucideComponent
 } from "lucide-react";
-import type { LucideIcon as LucideComponent } from "lucide-react";
 
 const ShieldStarIcon = React.forwardRef<SVGSVGElement, React.ComponentPropsWithoutRef<LucideComponent>>(
   ({ color = "currentColor", size = 24, strokeWidth = 2, ...props }, ref) => (

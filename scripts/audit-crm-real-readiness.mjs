@@ -24,6 +24,21 @@ function readText(relativePath) {
   return readFileSync(absolutePath, "utf8");
 }
 
+function writeWithRetry(filePath, contents) {
+  let lastError;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      writeFileSync(filePath, contents);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt === 7) break;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 125);
+    }
+  }
+  throw lastError;
+}
+
 function row(id, status, evidence, meaning) {
   return { id, status, evidence, meaning };
 }
@@ -55,8 +70,33 @@ const futureAdoption = readJson("specs/001-product-ui-foundation/future-consumer
 const remainingPageCoverage = readJson("specs/001-product-ui-foundation/remaining-page-coverage-audit.json");
 const componentApiContract = readText("specs/001-product-ui-foundation/contracts/component-api-contract.md");
 const drawerLifecycleContract = readText("specs/001-product-ui-foundation/contracts/drawer-lifecycle-contract.md");
-const crmIndex = readText("packages/crm/src/internal-crm-runtime.tsx");
-const uiIndex = readText("packages/ui/src/internal-ui-runtime.tsx");
+const crmIndex = [
+  "packages/crm/src/internal-crm-runtime.tsx",
+  "packages/crm/src/patterns/index.tsx",
+  "packages/crm/src/patterns/shell.tsx",
+  "packages/crm/src/patterns/shell-product.tsx",
+  "packages/crm/src/patterns/drawer-core.tsx",
+  "packages/crm/src/patterns/checklist-drawer.tsx",
+  "packages/crm/src/patterns/case-drawer-core.tsx",
+  "packages/crm/src/patterns/student-drawer.tsx",
+  "packages/crm/src/patterns/class-drawer.tsx",
+  "packages/crm/src/patterns/payment-drawer.tsx",
+  "packages/crm/src/patterns/replacement-drawer.tsx",
+  "packages/crm/src/patterns/lead-drawer.tsx",
+  "packages/crm/src/patterns/agent-flow-drawer.tsx",
+  "packages/crm/src/patterns/usage-drawer.tsx",
+  "packages/crm/src/patterns/support-drawer.tsx",
+  "packages/crm/src/patterns/tenant-drawer.tsx",
+  "packages/crm/src/domains/billing/billing-approval-settings-core.tsx",
+  "packages/crm/src/domains/agenda/index.tsx",
+  "packages/crm/src/domains/billing/index.tsx",
+  "packages/crm/src/domains/settings/index.tsx",
+  "packages/crm/src/domains/students/index.tsx"
+].map(readText).join("\n");
+const uiIndex = [
+  "packages/ui/src/internal-ui-runtime.tsx",
+  "packages/ui/src/components/data-table.tsx"
+].map(readText).join("\n");
 
 const requiredPageKitComponents = [
   "CrmProductShell",
@@ -462,8 +502,8 @@ ${report.nextActions.map((item) => `- ${item}`).join("\n")}
 `;
 
 if (!checkMode) {
-  writeFileSync(resolve(specDir, "crm-real-readiness-audit.json"), `${JSON.stringify(report, null, 2)}\n`);
-  writeFileSync(resolve(specDir, "crm-real-readiness-audit.md"), md);
+  writeWithRetry(resolve(specDir, "crm-real-readiness-audit.json"), `${JSON.stringify(report, null, 2)}\n`);
+  writeWithRetry(resolve(specDir, "crm-real-readiness-audit.md"), md);
 }
 
 console.log(`CRM real readiness audit: ${report.status}`);

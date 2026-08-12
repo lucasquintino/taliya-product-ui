@@ -1,17 +1,17 @@
 # Implementation Readiness Checklist: Engineering Quality Hardening
 
 **Feature**: `006-engineering-quality-hardening`
-**Current decision**: `BLOCKED BY GATE-SDD-APPROVED`
-**SDD lifecycle state**: `READY_FOR_APPROVAL`
-**SDD review marker**: `READY_FOR_USER_APPROVAL`
-**Implementation authorization**: `AWAITING_USER_APPROVAL`
-**Permitted implementation tasks**: none
+**Current decision**: `OPEN — IMPLEMENTATION IN PROGRESS`
+**SDD lifecycle state**: `APPROVED`
+**SDD review marker**: `APPROVED_BY_USER`
+**Implementation authorization**: `APPROVED_FOR_IMPLEMENTATION`
+**Permitted implementation tasks**: `T101-T176`, subject to phase gates
 
 ## SDD Safeguards Already in Place
 
 - [x] Exactly one active feature directory is declared as `specs/006-engineering-quality-hardening`.
 - [x] `tasks.md` begins with an explicit implementation block.
-- [x] The future backlog is contiguous from T101 through T176 and every task is unchecked.
+- [x] The backlog is contiguous from T101 through T176; completed tasks retain their historical evidence checkmarks and reopened gate-blocked tasks remain unchecked.
 - [x] The backlog starts with governance/determinism before product refactoring and freezes the API before modularization.
 - [x] UI and CRM CSS work remains in the corresponding package modularization waves.
 - [x] Security precedes performance, and both precede exact-artifact release certification.
@@ -23,16 +23,15 @@
 The following items intentionally remain unchecked. Implementation must not begin while any one is unchecked.
 
 - [x] All SDD corrections are integrated and the complete validation passes.
-- [x] The lifecycle state is `READY_FOR_APPROVAL`, the review marker is `READY_FOR_USER_APPROVAL`, and the authorization state is `AWAITING_USER_APPROVAL`.
+- [x] The lifecycle state is `APPROVED`, the review marker is `APPROVED_BY_USER`, and the authorization state is `APPROVED_FOR_IMPLEMENTATION`.
 - [x] The exact source-tree and mandatory-artifact manifest hashes are generated from the stable review candidate.
-- [ ] The user has explicitly authorized implementation of Spec Kit 006.
-- [ ] `approval.md` atomically records lifecycle state `APPROVED` and authorization token `APPROVED_FOR_IMPLEMENTATION`, plus the human approver, approval source, and timestamp.
-- [ ] The approval record binds a full 40-character commit SHA, source-tree hash, and manifest hash for every mandatory SDD artifact.
-- [ ] The approved task range or first wave is explicit; approval is not inferred as authorization for every later publication action.
-- [ ] No material SDD change occurred after the recorded approval; otherwise approval has been invalidated and returned to review.
-- [ ] The implementation base revision and clean/dirty worktree state have been recorded.
-- [ ] The first selected task is dependency-ready under `tasks.md` and has a declared change profile.
-- [ ] Test-first/characterization evidence for the selected task is identified before implementation changes.
+- [x] The user has explicitly authorized implementation of Spec Kit 006.
+- [x] `approval.md` atomically records lifecycle state `APPROVED` and authorization token `APPROVED_FOR_IMPLEMENTATION`, plus the human approver, approval source, and timestamp.
+- [x] The approval record binds a full 40-character commit SHA, source-tree hash, and manifest hash for every mandatory SDD artifact.
+- [x] The approved task range is explicit; approval is not inferred as authorization for publication.
+- [x] The implementation base revision and dirty worktree state are recorded in the approval envelope.
+- [x] The first selected task is dependency-ready under `tasks.md` and has a declared change profile.
+- [x] Test-first/characterization evidence is identified before each implementation slice.
 
 ## First-Wave Preflight After Approval
 
@@ -61,8 +60,8 @@ Implementation remains or becomes blocked if:
 ## Current Result
 
 ```text
-SDD PACKAGE: READY FOR APPROVAL / READY FOR USER APPROVAL
-IMPLEMENTATION READINESS: BLOCKED
-BLOCKING CONDITION: EXPLICIT USER APPROVAL AND A VALID APPROVAL ENVELOPE HAVE NOT OCCURRED
-FIRST PERMITTED TASK AFTER A VALID APPROVAL: T101
+SDD PACKAGE: APPROVED / APPROVED BY USER
+IMPLEMENTATION READINESS: OPEN FOR T101-T176
+CURRENT CONDITION: APPROVAL ENVELOPE OPEN; WORK REMAINS GATE-BLOCKED WHERE FRESH EVIDENCE FAILS
+FIRST PERMITTED TASK: T101
 ```

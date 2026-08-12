@@ -2,9 +2,9 @@
 
 **Feature**: `006-engineering-quality-hardening`
 **Purpose**: reproduce the complete planning validation and stop at the human-decision boundary.
-**Current lifecycle**: `READY_FOR_APPROVAL`
-**Current review marker**: `READY_FOR_USER_APPROVAL`
-**Current authorization**: `AWAITING_USER_APPROVAL` (implementation remains blocked)
+**Current lifecycle**: `APPROVED`
+**Current review marker**: `APPROVED_BY_USER`
+**Current authorization**: `APPROVED_FOR_IMPLEMENTATION` for `T101-T176`
 
 ## Preconditions and stop rule
 
@@ -13,7 +13,7 @@
 - Do not run a product-stage Spec Kit command or workflow.
 - Do not change `packages/**`, `apps/**`, `scripts/**`, build/test configuration, baselines, generated reports, artifacts, package versions, or publication state.
 - Do not generate source-tree or artifact-manifest hashes while concurrent SDD edits are still being integrated.
-- A green automated run can move the package only to `READY_FOR_APPROVAL / READY_FOR_USER_APPROVAL / AWAITING_USER_APPROVAL`; it never opens the product-work gate.
+- A green automated run can produce a readiness candidate; only the explicit approval envelope in `approval.md` opens the product-work gate.
 
 ## 1. Confirm the repository and active feature
 
@@ -29,7 +29,7 @@ Expected for the validated readiness candidate:
 
 - the active feature directory is `specs/006-engineering-quality-hardening`;
 - Constitution is version `1.0.0` or later without a weaker replacement;
-- lifecycle, review marker, and authorization are `READY_FOR_APPROVAL / READY_FOR_USER_APPROVAL / AWAITING_USER_APPROVAL`.
+- lifecycle, review marker, and authorization are `APPROVED / APPROVED_BY_USER / APPROVED_FOR_IMPLEMENTATION` after the exact envelope is validated.
 
 ## 2. Check the local Spec Kit installation
 
@@ -447,9 +447,13 @@ fixed = {
     ".specify/templates/tasks-template.md",
     ".specify/workflows/speckit/workflow.yml",
     ".specify/workflows/workflow-registry.json",
+    ".specify/integrations/codex.manifest.json",
     "AGENTS.md",
     "README.md",
 }
+codex_manifest = repo / ".specify" / "integrations" / "codex.manifest.json"
+if codex_manifest.exists():
+    fixed.update(json.loads(codex_manifest.read_text(encoding="utf-8")).get("files", {}).keys())
 excluded = {
     "specs/006-engineering-quality-hardening/approval.md",
     "specs/006-engineering-quality-hardening/readiness-manifest.json",
@@ -493,7 +497,7 @@ git_files = subprocess.run(
     check=True,
     stdout=subprocess.PIPE,
 ).stdout.decode("utf-8").split("\0")
-source_paths = sorted(path for path in git_files if path and path.replace("\\", "/") not in excluded)
+source_paths = sorted(path for path in git_files if path and path.replace("\\", "/") not in excluded and (repo / path).exists())
 source_rows = []
 for relative in source_paths:
     relative = relative.replace("\\", "/")

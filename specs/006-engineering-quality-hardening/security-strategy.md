@@ -1,6 +1,6 @@
 # Security Strategy
 
-**Status**: planned; implementation blocked by `GATE-SDD-APPROVED`
+**Status**: in progress under approved task range; final security certification remains pending
 **Primary requirements**: FR-032 through FR-035, FR-040 through FR-044
 **Security boundary**: frontend component packages, their source/dependency/build/publish supply chain, and documented consumer obligations
 

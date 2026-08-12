@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { alertIconForTone } from "./components/workflow-utilities";
 
 import {
   ActionMenu,
@@ -8,6 +9,7 @@ import {
   AvatarStack,
   AuditTable,
   Badge,
+  Breadcrumb,
   Button,
   Chip,
   CalendarCell,
@@ -32,6 +34,7 @@ import {
   DrawerHeader,
   DrawerSection,
   EmptyState,
+  ErrorState,
   ExecutionRow,
   FileUpload,
   FieldGroup,
@@ -50,6 +53,9 @@ import {
   Input,
   KeyValueRow,
   LoadingState,
+  ListIcon,
+  List,
+  ListItem,
   MetricTile,
   MoneyInput,
   Modal,
@@ -61,9 +67,12 @@ import {
   Popover,
   PermissionTable,
   ProgressBar,
+  PrimitiveButton,
+  PrimitiveInput,
   RelationshipCard,
   Radio,
   SearchInput,
+  ScrollArea,
   SegmentedControl,
   Select,
   SocialAuthButton,
@@ -430,6 +439,40 @@ describe("@taliya/ui primitives", () => {
     expect(change).toHaveBeenCalledWith("agenda");
   });
 
+  it("covers disabled and controlled tab navigation plus timeline metadata", () => {
+    const onValueChange = vi.fn();
+    render(
+      <div>
+        <Tabs
+          aria-label="Navegacao"
+          compact
+          idBase="coverage-tabs"
+          items={[
+            { content: "Primeiro", label: "Primeiro", value: "one" },
+            { content: "Bloqueado", disabled: true, label: "Bloqueado", value: "blocked" },
+            { content: "Ultimo", label: "Ultimo", value: "last" }
+          ]}
+          onValueChange={onValueChange}
+          showPanel={false}
+          value="one"
+        />
+        <Timeline
+          items={[{ actor: "Ana", description: "Detalhes", icon: "check", id: "1", meta: "CRM", time: "10:00", title: "Evento", tone: "warning" }]}
+          variant="sensitive"
+        />
+        <Tabs items={[]} showPanel />
+      </div>
+    );
+
+    const first = screen.getByRole("tab", { name: "Primeiro" });
+    fireEvent.keyDown(first, { key: "ArrowRight" });
+    fireEvent.keyDown(screen.getByRole("tab", { name: "Ultimo" }), { key: "ArrowLeft" });
+    fireEvent.keyDown(screen.getByRole("tab", { name: "Primeiro" }), { key: "End" });
+
+    expect(onValueChange).toHaveBeenCalled();
+    expect(screen.getByText("Evento")).toBeInTheDocument();
+  });
+
   it("supports modal dialog close and controlled open changes", async () => {
     const change = vi.fn();
 
@@ -607,6 +650,13 @@ describe("@taliya/ui primitives", () => {
         <InlineAlert onDismiss={dismissAlert} title="Conflito" tone="danger">
           Ajuste o horario
         </InlineAlert>
+        <Chip tone="paused">Pausado</Chip>
+        <Chip tone="info">Informacao</Chip>
+        <Chip tone="update">Atualizacao</Chip>
+        <Chip tone="quota">Cota</Chip>
+        <StatusDot label="Atualizacao" status="update" />
+        <InlineAlert title="Info" tone="info">Mensagem</InlineAlert>
+        <Toast title="Neutro" tone="neutral">Mensagem neutra</Toast>
       </div>
     );
 
@@ -615,6 +665,27 @@ describe("@taliya/ui primitives", () => {
 
     expect(closeToast).toHaveBeenCalledTimes(1);
     expect(dismissAlert).toHaveBeenCalledTimes(1);
+  });
+
+  it("covers non-dismissible and inline overlay contracts", () => {
+    const closeInline = vi.fn();
+    render(
+      <div>
+        <Drawer description="Detalhes" dismissible={false} footer={<Button>Salvar</Button>} headerStatus={<Badge>Ativo</Badge>} loading open title="Painel" />
+        <Modal alert dismissible={false} icon="shield" open title="Modal protegido">Conteudo protegido</Modal>
+        <Modal footer={<Button>Salvar</Button>} icon="checkCircle" inline onOpenChange={closeInline} open title="Modal inline">Conteudo inline</Modal>
+        <Popover dismissible={false} open showArrow title="Popover protegido" trigger={<Button>Popover</Button>}>Conteudo popover</Popover>
+        <Popover inline open title="Popover inline" trigger="Abrir">Conteudo inline popover</Popover>
+      </div>
+    );
+
+    fireEvent.click(screen.getByRole("button", { hidden: true, name: /fechar modal/i }));
+    fireEvent.keyDown(document.querySelector(".tl-modal--destructive") as HTMLElement, { key: "Escape" });
+    fireEvent.pointerDown(document.body);
+
+    expect(closeInline).toHaveBeenCalledWith(false);
+    expect(screen.getByText("Conteudo popover")).toBeInTheDocument();
+    expect(screen.getByText("Conteudo inline popover")).toBeInTheDocument();
   });
 
   it("renders avatar primitives with badges and add action", () => {
@@ -641,6 +712,20 @@ describe("@taliya/ui primitives", () => {
     expect(screen.getByLabelText("Niki Olson")).toBeInTheDocument();
     expect(screen.getByText("+1")).toBeInTheDocument();
     expect(add).toHaveBeenCalledTimes(1);
+  });
+
+  it("covers avatar accessibility, selection, disabled, and stack limits", () => {
+    render(
+      <div>
+        <Avatar aria-hidden disabled name="Ana Paula" selected size="2xl" status="blocked" />
+        <Avatar name="Com Imagem" src="/avatar.png" />
+        <AvatarStack max={1} people={[{ id: "1", name: "Ana" }, { id: "2", name: "Bia" }]} />
+      </div>
+    );
+
+    expect(screen.getByText("AP")).toBeInTheDocument();
+    expect(screen.getByAltText("")).toHaveAttribute("src", "/avatar.png");
+    expect(screen.getByText("+1")).toBeInTheDocument();
   });
 
   it("removes filter chips through a separate accessible action", () => {
@@ -730,6 +815,74 @@ describe("@taliya/ui primitives", () => {
     expect(trigger.querySelector("[data-filter-clear]")).not.toBeInTheDocument();
   });
 
+  it("covers controlled filter loading, empty, clearing, and custom menu triggers", async () => {
+    const onOpenChange = vi.fn();
+    const onValueChange = vi.fn();
+    render(
+      <div>
+        <FilterSelect emptyText="Sem origens" label="Origem" loading open options={[]} />
+        <FilterMultiSelect emptyText="Sem prioridades" label="Prioridade" open options={[]} />
+        <FilterSelect defaultValue="agenda" label="Filtro" onOpenChange={onOpenChange} onValueChange={onValueChange} options={[{ value: "agenda", label: "Agenda" }]} />
+        <DropdownMenu
+          actions={[{ label: "Primeiro" }, { disabled: true, label: "Desabilitado" }, { label: "Ultimo" }]}
+          defaultOpen
+          label="Acoes"
+          trigger={({ label, onClick, onKeyDown }) => <button aria-label={label} onClick={onClick} onKeyDown={onKeyDown} type="button">Abrir</button>}
+        />
+      </div>
+    );
+
+    expect(await screen.findByText("Carregando opcoes...")).toBeInTheDocument();
+    expect(await screen.findByText("Sem prioridades")).toBeInTheDocument();
+    const filter = screen.getByRole("button", { name: "Filtro: Agenda" });
+    fireEvent.click(filter.querySelector("[data-filter-clear]") as HTMLElement);
+    expect(onValueChange).toHaveBeenCalledWith("");
+    fireEvent.keyDown(screen.getByRole("button", { name: "Acoes" }), { key: "ArrowDown" });
+    fireEvent.keyDown(screen.getByRole("menuitem", { name: "Primeiro" }), { key: "End" });
+    fireEvent.keyDown(screen.getByRole("menuitem", { name: "Ultimo" }), { key: "ArrowUp" });
+    fireEvent.pointerDown(document.body);
+    expect(onOpenChange).toHaveBeenCalled();
+  });
+
+  it("covers controlled filter callbacks, multi-clear semantics, and owned native primitives", async () => {
+    const onOpenChange = vi.fn();
+    const onValueChange = vi.fn();
+    const onMultiOpenChange = vi.fn();
+    const onMultiValueChange = vi.fn();
+    const onClick = vi.fn();
+
+    render(
+      <div>
+        <PrimitiveButton onClick={onClick}>Owned button</PrimitiveButton>
+        <PrimitiveInput aria-label="Owned input" defaultValue="ok" />
+        <FilterSelect
+          label="Controlado"
+          onOpenChange={onOpenChange}
+          onValueChange={onValueChange}
+          open
+          options={[{ value: "agenda", label: "Agenda" }, { value: "financeiro", label: "Financeiro" }]}
+          value="agenda"
+        />
+        <FilterMultiSelect
+          label="Multi"
+          onOpenChange={onMultiOpenChange}
+          onValueChange={onMultiValueChange}
+          open
+          options={[{ value: "a", label: "A" }, { value: "b", label: "B" }, { value: "c", label: "C" }]}
+          value={["a", "b", "c"]}
+        />
+      </div>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Owned button" }));
+    expect(onClick).toHaveBeenCalledTimes(1);
+    fireEvent.click(await screen.findByRole("option", { name: "Financeiro" }));
+    expect(onValueChange).toHaveBeenCalledWith("financeiro");
+    fireEvent.click(screen.getByRole("button", { name: "Multi: 3" }).querySelector("[data-filter-clear]") as HTMLElement);
+    expect(onMultiValueChange).toHaveBeenCalledWith([]);
+    expect(onMultiOpenChange).toHaveBeenCalledWith(false);
+  });
+
   it("falls back to avatar initials when an image fails", () => {
     const { container } = render(<Avatar name="Niki Olson" src="/missing-avatar.png" />);
 
@@ -759,6 +912,35 @@ describe("@taliya/ui primitives", () => {
     expect(screen.getByLabelText("Horario")).toBeInTheDocument();
     expect(screen.getByLabelText("Valor")).toHaveAttribute("inputmode", "decimal");
     expect(screen.getByLabelText("Bloqueado")).toBeDisabled();
+  });
+
+  it("covers form edge states, provider marks, and upload variants", async () => {
+    const onRemove = vi.fn();
+    const onSelect = vi.fn();
+    render(
+      <div>
+        <Input fieldSize="lg" fieldState="success" helperText="Ajuda" label="Nome" leadingIcon="user" leadingIconTone="info" leadingText="Sr." loading onClear={vi.fn()} readOnly trailingIcon="check" trailingIconTone="success" trailingText="OK" />
+        <Textarea blockedReason="Sem permissao" density="compact" label="Observacao" />
+        <TagInput error="Invalido" items={[]} label="Tags" placeholder="Adicionar" />
+        <TagInput items={["A", { id: "b", label: "B" }]} label="Tags 2" onRemove={onRemove} removable />
+        <Select error="Erro" label="Plano" onValueChange={onSelect} open options={[{ label: "Mensal", value: "mensal" }, { disabled: true, label: "Anual", value: "anual" }]} placeholder="Selecione" />
+        <Checkbox helperText="Ajuda" indeterminate label="Selecionar" />
+        <Radio disabled helperText="Bloqueado" label="Opcao" />
+        <SegmentedControl compact label="Visao" onChange={onSelect} options={[{ current: true, label: "Lista", value: "lista" }, { disabled: true, label: "Grade", value: "grade" }]} value="lista" variant="shell" />
+        <SocialAuthButton provider="Microsoft">Microsoft</SocialAuthButton>
+        <SocialAuthButton provider="Acme">Acme</SocialAuthButton>
+        {(["idle", "dragging", "uploading", "error", "complete"] as const).map((state) => <FileUpload key={state} state={state} title={`Upload ${state}`} />)}
+        <AttachmentList items={[{ id: "file", name: "arquivo.txt", state: "file" }, { id: "link", name: "link", state: "link" }, { id: "error", name: "falha", state: "error" }]} onRemove={onRemove} removable />
+      </div>
+    );
+
+    fireEvent.click(screen.getByRole("button", { hidden: true, name: "Remover A" }));
+    fireEvent.click(screen.getByRole("option", { name: "Mensal" }));
+    fireEvent.click(screen.getByRole("button", { hidden: true, name: "Grade" }));
+
+    expect(onRemove).toHaveBeenCalled();
+    expect(onSelect).toHaveBeenCalledWith("mensal");
+    expect(screen.getByText("Upload complete")).toBeInTheDocument();
   });
 
   it("renders headless select with open menu and value selection", async () => {
@@ -961,6 +1143,303 @@ describe("@taliya/ui primitives", () => {
     expect(screen.getByRole("progressbar", { name: /confianca/i })).toHaveAttribute("aria-valuenow", "86");
   });
 
+  it("covers workflow states, empty/loading/error branches, and action slots", () => {
+    const noop = vi.fn();
+    render(
+      <div>
+        {(["complete", "incomplete", "warning", "blocked"] as const).map((state) => (
+          <ChecklistItem key={state} actionLabel="Abrir" description="Detalhe" menu={<Button>Menu</Button>} onAction={noop} onToggle={noop} owner="Ana" showStateChip state={state} title={`Checklist ${state}`} />
+        ))}
+        <MetricTile action={<Button>Detalhes</Button>} compact delta="+10%" helperText="Hoje" icon="chart" label="Operacional" onSelect={noop} progressValue={125} tone="positive" variant="operational" value="100" />
+        <MetricTile disabled label="Desativado" tone="negative" value="0" />
+        <DiffTable actor="Ana" actorLabel="Responsavel" meta="Hoje" onApprove={noop} onReject={noop} onRevert={noop} origin="Web" rows={["changed", "removed", "added", "approved", "rejected"].map((status) => ({ after: "Novo", before: "Antigo", id: status, label: status, status: status as "changed" }))} showStatusColumn title="Alteracoes" />
+        <DiffTable error="Falha" rows={[]} />
+        <DiffTable loading rows={[]} />
+        <PermissionTable compact onRequestAccess={noop} rows={["allowed", "blocked", "request", "pending"].map((state) => ({ action: "Ver", id: state, module: state, profile: "Gestor", state: state as "allowed" }))} />
+        <AuditTable rows={["success", "pending", "alert", "denied"].map((status) => ({ action: "Atualizou", actor: "Ana", id: status, object: "#1", origin: "Web", status: status as "success", time: "10:00" }))} />
+        <AuditTable error="Falha" rows={[]} />
+        <AuditTable loading rows={[]} />
+        {(["running", "complete", "duplicate", "error", "paused"] as const).map((state) => (
+          <ImportProgressCard key={state} compact={state === "paused"} fileName="dados.csv" helperText="Processando" onDetails={noop} onPause={noop} onRetry={noop} onResume={noop} state={state} summary={state === "complete"} title={`Import ${state}`} value={40} />
+        ))}
+        {(["primary", "related", "conflict"] as const).map((variant) => (
+          <RelationshipCard details={[{ icon: "mail", value: "ana@example.com" }]} key={variant} name={`Relacionamento ${variant}`} onAction={noop} onSelect={noop} roleLabel="Aluno" variant={variant} />
+        ))}
+        {(["warning", "danger", "suggestion", "applied", "unresolved"] as const).map((state) => (
+          <ConflictCard key={state} onApply={noop} onIgnore={noop} onView={noop} state={state} suggestion="Revisar" title={`Conflito ${state}`} />
+        ))}
+        {(["preview", "signed", "pending", "error", "loading"] as const).map((state) => (
+          <DocumentPreview history={[{ id: "h1", label: "Historico", time: "09:00" }]} key={state} onDownload={noop} onFullscreen={noop} onPageSelect={noop} onSend={noop} onZoomIn={noop} onZoomOut={noop} pages={[{ id: "p1", label: "1" }, { id: "p2", label: "2" }]} state={state} title={`Documento ${state}`} />
+        ))}
+        {(["running", "success", "failed", "pending", "skipped"] as const).map((status) => (
+          <ExecutionRow compact details="Detalhes" error={status === "failed" ? "Erro" : undefined} expanded onOpen={noop} onRetry={noop} status={status} step={1} title={`Execucao ${status}`} />
+        ))}
+        {(["low", "medium", "high", "unknown"] as const).map((level) => (
+          <ConfidenceMeter helperText="Nivel" key={level} label={level} level={level} loading={level === "unknown"} segments={4} value={level === "low" ? 20 : 80} />
+        ))}
+        <SearchInput filterPlacement="embedded" loading onFilter={noop} resultCount="12" />
+        {(["inbound", "outbound", "internal", "failed", "suggestion"] as const).map((variant) => (
+          <MessageBubble action={<Button>Acao</Button>} confidence="90%" sender="Ana" status={variant === "failed" ? "failed" : "delivered"} timestamp="10:00" variant={variant}>Mensagem {variant}</MessageBubble>
+        ))}
+      </div>
+    );
+
+    expect(screen.getAllByText(/Checklist/)).toHaveLength(4);
+    expect(screen.getByText("Import complete")).toBeInTheDocument();
+    expect(screen.getByText("Documento signed")).toBeInTheDocument();
+  });
+
+  it("covers stable keys across repeated workflow and state collections", () => {
+    render(
+      <div>
+        <ChartPanelPrimitive title="Mapa de calor" variant="heatmap" />
+        <LoadingState title="Carregando dados" variant="skeleton" />
+        <StatusSummaryCard
+          details={[{ label: "Registros", value: "245" }, { label: "Erros", value: "2" }]}
+          state="ok"
+          title="Importacao concluida"
+        />
+        <StatusSummaryCard
+          layout="hero"
+          primaryAction={<Button>Continuar</Button>}
+          secondaryAction={<Button variant="secondary">Depois</Button>}
+          state="attention"
+          title="Revisao necessaria"
+        />
+        <ImportProgressCard
+          metrics={[{ label: "Processados", value: "245" }, { label: "Ignorados", value: "2" }]}
+          state="success"
+          title="Importacao finalizada"
+        />
+        <RelationshipCard avatarStatus={null} details={[{ icon: "mail", value: "joao@example.com" }, { value: <span>Sem icone</span> }]} name="Joao Pedro" />
+        <ConflictCard facts={[{ label: "Sala", value: "Studio 2" }, { label: "Horario", value: "09:00" }]} state="danger" title="Conflito" />
+        <ConfidenceMeter segments={3} value={67} />
+        <ConfidenceMeter value={45} />
+        <ConfidenceMeter value={0} />
+      </div>
+    );
+
+    expect(screen.getByText("Mapa de calor")).toBeInTheDocument();
+    expect(screen.getByText("Importacao concluida")).toBeInTheDocument();
+    expect(screen.getByText("joao@example.com")).toBeInTheDocument();
+    expect(screen.getByText("Studio 2")).toBeInTheDocument();
+    expect(screen.getAllByRole("progressbar", { name: /confianca/i })[0]).toHaveAttribute("aria-valuenow", "67");
+  });
+
+  it("covers workflow action callbacks and controlled interaction branches", () => {
+    const callbacks = {
+      checklistAction: vi.fn(),
+      diffApprove: vi.fn(),
+      diffReject: vi.fn(),
+      diffRevert: vi.fn(),
+      permissionRequest: vi.fn(),
+      permissionRow: vi.fn(),
+      auditOpen: vi.fn(),
+      auditRow: vi.fn(),
+      importPause: vi.fn(),
+      importResume: vi.fn(),
+      importRetry: vi.fn(),
+      importDetails: vi.fn(),
+      relationshipSelect: vi.fn(),
+      relationshipAction: vi.fn(),
+      conflictApply: vi.fn(),
+      conflictIgnore: vi.fn(),
+      conflictView: vi.fn(),
+      pageSelect: vi.fn(),
+      download: vi.fn(),
+      send: vi.fn(),
+      zoomIn: vi.fn(),
+      zoomOut: vi.fn(),
+      fullscreen: vi.fn(),
+      retry: vi.fn(),
+      open: vi.fn(),
+      toggle: vi.fn(),
+      filter: vi.fn()
+    };
+
+    render(
+      <div>
+        <ChecklistItem actionLabel="Abrir checklist" onAction={callbacks.checklistAction} state="warning" title="Consentimento" />
+        <DiffTable
+          data-testid="workflow-diff"
+          onApprove={callbacks.diffApprove}
+          onReject={callbacks.diffReject}
+          onRevert={callbacks.diffRevert}
+          rows={[{ after: "Novo", before: "Antigo", id: "plan", label: "Plano", status: "approved" }]}
+        />
+        <PermissionTable
+          data-testid="workflow-permissions"
+          onRequestAccess={callbacks.permissionRequest}
+          onRowClick={callbacks.permissionRow}
+          rows={[{ action: "Ler", id: "reports", module: "Relatorios", profile: "Gestor", state: "request" }]}
+        />
+        <AuditTable
+          data-testid="workflow-audit"
+          onOpenObject={callbacks.auditOpen}
+          onRowClick={callbacks.auditRow}
+          rows={[{ action: "Atualizou", actor: "Ana", id: "log-1", object: "Aluno", origin: "Web", status: "denied", time: "10:00" }]}
+        />
+        <ImportProgressCard
+          data-testid="workflow-import"
+          onDetails={callbacks.importDetails}
+          onPause={callbacks.importPause}
+          onRetry={callbacks.importRetry}
+          onResume={callbacks.importResume}
+          state="paused"
+          title="Importacao"
+          value={45}
+        />
+        <RelationshipCard
+          data-testid="workflow-relationship"
+          name="Ana"
+          onAction={callbacks.relationshipAction}
+          onSelect={callbacks.relationshipSelect}
+          selected
+          variant="related"
+        />
+        <ConflictCard
+          data-testid="workflow-conflict"
+          compact
+          onApply={callbacks.conflictApply}
+          onIgnore={callbacks.conflictIgnore}
+          onView={callbacks.conflictView}
+          state="warning"
+          suggestion="Usar horario sugerido"
+          title="Conflito"
+        />
+        <DocumentPreview
+          data-testid="workflow-document"
+          history={[{ id: "h1", label: "Historico", time: "09:00" }]}
+          onDownload={callbacks.download}
+          onFullscreen={callbacks.fullscreen}
+          onPageSelect={callbacks.pageSelect}
+          onSend={callbacks.send}
+          onZoomIn={callbacks.zoomIn}
+          onZoomOut={callbacks.zoomOut}
+          pages={[{ id: "p1", label: "1" }, { id: "p2", label: "2" }]}
+          selectedPageId="p2"
+          state="pending"
+          title="Contrato"
+        />
+        <ExecutionRow
+          data-testid="workflow-execution"
+          details="Detalhes"
+          expanded
+          onOpen={callbacks.open}
+          onRetry={callbacks.retry}
+          onToggle={callbacks.toggle}
+          status="failed"
+          step={2}
+          title="Executar"
+        />
+        <SearchInput data-testid="workflow-search" filterPlacement="separate" onFilter={callbacks.filter} placeholder="Buscar" />
+      </div>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Abrir checklist" }));
+    fireEvent.click(within(screen.getByTestId("workflow-diff")).getByRole("button", { name: "Reverter" }));
+    fireEvent.click(within(screen.getByTestId("workflow-diff")).getByRole("button", { name: "Rejeitar" }));
+    fireEvent.click(within(screen.getByTestId("workflow-diff")).getByRole("button", { name: "Aprovar" }));
+    fireEvent.click(within(screen.getByTestId("workflow-permissions")).getByRole("button", { name: "Solicitar acesso" }));
+    fireEvent.click(within(screen.getByTestId("workflow-permissions")).getByRole("button", { name: /abrir permissao reports/i }));
+    fireEvent.click(within(screen.getByTestId("workflow-audit")).getByRole("button", { name: "Abrir log-1" }));
+    fireEvent.click(within(screen.getByTestId("workflow-audit")).getByRole("button", { name: /abrir auditoria log-1/i }));
+    fireEvent.click(within(screen.getByTestId("workflow-import")).getByRole("button", { name: "Pausar" }));
+    fireEvent.click(within(screen.getByTestId("workflow-import")).getByRole("button", { name: "Continuar" }));
+    fireEvent.click(within(screen.getByTestId("workflow-import")).getByRole("button", { name: "Tentar novamente" }));
+    fireEvent.click(within(screen.getByTestId("workflow-import")).getByRole("button", { name: "Ver detalhes" }));
+    fireEvent.click(screen.getByTestId("workflow-relationship"));
+    fireEvent.click(within(screen.getByTestId("workflow-relationship")).getByRole("button", { name: "Acao de Ana" }));
+    fireEvent.click(within(screen.getByTestId("workflow-conflict")).getByRole("button", { name: "Aplicar sugestao" }));
+    fireEvent.click(within(screen.getByTestId("workflow-conflict")).getByRole("button", { name: "Ignorar" }));
+    fireEvent.click(within(screen.getByTestId("workflow-conflict")).getByRole("button", { name: "Ver cenario completo" }));
+    fireEvent.click(within(screen.getByTestId("workflow-document")).getByRole("button", { name: "Pagina 1" }));
+    fireEvent.click(within(screen.getByTestId("workflow-document")).getByRole("button", { name: "Baixar PDF" }));
+    fireEvent.click(within(screen.getByTestId("workflow-document")).getByRole("button", { name: "Enviar por e-mail" }));
+    fireEvent.click(within(screen.getByTestId("workflow-document")).getByRole("button", { name: "Aumentar zoom" }));
+    fireEvent.click(within(screen.getByTestId("workflow-document")).getByRole("button", { name: "Reduzir zoom" }));
+    fireEvent.click(within(screen.getByTestId("workflow-document")).getByRole("button", { name: "Tela cheia" }));
+    fireEvent.click(within(screen.getByTestId("workflow-execution")).getAllByRole("button")[0]);
+    fireEvent.click(within(screen.getByTestId("workflow-execution")).getByRole("button", { name: "Reprocessar" }));
+    fireEvent.click(within(screen.getByTestId("workflow-execution")).getByRole("button", { name: "Abrir detalhes" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir filtros" }));
+
+    expect(callbacks.checklistAction).toHaveBeenCalledOnce();
+    expect(callbacks.diffApprove).toHaveBeenCalledOnce();
+    expect(callbacks.diffReject).toHaveBeenCalledOnce();
+    expect(callbacks.diffRevert).toHaveBeenCalledOnce();
+    expect(callbacks.permissionRequest).toHaveBeenCalledWith("reports");
+    expect(callbacks.permissionRow).toHaveBeenCalledWith("reports");
+    expect(callbacks.auditOpen).toHaveBeenCalledWith("log-1");
+    expect(callbacks.auditRow).toHaveBeenCalledWith("log-1");
+    expect(callbacks.importPause).toHaveBeenCalledOnce();
+    expect(callbacks.importResume).toHaveBeenCalledOnce();
+    expect(callbacks.importRetry).toHaveBeenCalledOnce();
+    expect(callbacks.importDetails).toHaveBeenCalledOnce();
+    expect(callbacks.relationshipSelect).toHaveBeenCalledOnce();
+    expect(callbacks.relationshipAction).toHaveBeenCalledOnce();
+    expect(callbacks.conflictApply).toHaveBeenCalledOnce();
+    expect(callbacks.conflictIgnore).toHaveBeenCalledOnce();
+    expect(callbacks.conflictView).toHaveBeenCalledOnce();
+    expect(callbacks.pageSelect).toHaveBeenCalledWith("p1");
+    expect(callbacks.download).toHaveBeenCalledOnce();
+    expect(callbacks.send).toHaveBeenCalledOnce();
+    expect(callbacks.zoomIn).toHaveBeenCalledOnce();
+    expect(callbacks.zoomOut).toHaveBeenCalledOnce();
+    expect(callbacks.fullscreen).toHaveBeenCalledOnce();
+    expect(callbacks.toggle).toHaveBeenCalledOnce();
+    expect(callbacks.retry).toHaveBeenCalledOnce();
+    expect(callbacks.open).toHaveBeenCalledOnce();
+    expect(callbacks.filter).toHaveBeenCalledOnce();
+  });
+
+  it("covers alternate state, navigation, table, and overlay branches", async () => {
+    const onSortChange = vi.fn();
+    const onRowClick = vi.fn();
+    const onRowSelect = vi.fn();
+    const onPageChange = vi.fn();
+    const rows = [{ id: "1", name: "Ana", status: "Ativa" }];
+
+    render(
+      <div>
+        <Breadcrumb items={[{ label: "Inicio", href: "/" }, { label: "Alunos" }]} />
+        <List grouped dense divided><ListItem title="Ana" subtitle="Ativa" leading={<Icon name="user" />} trailing="1" /></List>
+        <EmptyState action={<Button>Recarregar</Button>} description="Tente novamente" icon="search" title="Vazio" variant="actionable" />
+        <ErrorState action={<Button>Repetir</Button>} blocking description="Falha" title="Erro" />
+        <DataTable
+          columns={[{ key: "name", header: "Nome", sortable: true }, { key: "status", header: "Status", align: "right", render: (row) => <strong>{row.status}</strong> }]}
+          compact
+          density="dense"
+          minWidth={420}
+          onRowClick={onRowClick}
+          onRowSelect={onRowSelect}
+          onSortChange={onSortChange}
+          pagination={<TablePagination label="1 de 1" page={1} pageCount={6} onPageChange={onPageChange} />}
+          rowActions={() => <Button size="sm">Abrir</Button>}
+          rows={rows}
+          selectable
+          selectedRowIds={["1"]}
+          sort={{ key: "name", direction: "ascending" }}
+        />
+        <ScrollArea height={120}><span>Conteudo rolavel</span></ScrollArea>
+        <Tabs items={[{ value: "one", label: "Um", content: "Painel um" }, { value: "two", label: "Dois", content: "Painel dois", disabled: true }]} showPanel={false} />
+        <Timeline compact items={[{ id: "t1", title: "Evento", actor: "Ana", meta: "CRM", description: "Detalhe", action: <Button>Ver</Button>, time: "10:00" }]} variant="sensitive" />
+      </div>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /ordenar por nome/i }));
+    fireEvent.click(screen.getByRole("checkbox", { name: /selecionar linha 1/i }));
+    fireEvent.click(screen.getByRole("row", { name: /Ana Ativa Abrir/ }));
+    fireEvent.click(screen.getByRole("button", { name: "6" }));
+
+    expect(screen.getByRole("link", { name: "Inicio" })).toHaveAttribute("href", "/");
+    expect(screen.getByText("Conteudo rolavel")).toBeInTheDocument();
+    expect(onSortChange).toHaveBeenCalledWith({ key: "name", direction: "descending" });
+    expect(onRowSelect).toHaveBeenCalledWith("1", false);
+    expect(onRowClick).toHaveBeenCalledWith(rows[0]);
+    expect(onPageChange).toHaveBeenCalledWith(6);
+  });
+
   it("can render numbered pending step markers for setup shell steppers", () => {
     render(
       <Stepper
@@ -978,6 +1457,69 @@ describe("@taliya/ui primitives", () => {
 
     expect(screen.getByRole("button", { name: /dados/i })).toHaveTextContent("2");
     expect(screen.getByRole("button", { name: /agenda/i })).toHaveTextContent("3");
+  });
+
+  it("covers stepper warning, pending, readonly, and progress modes", () => {
+    render(
+      <div>
+        <Stepper
+          onStepSelect={vi.fn()}
+          orientation="vertical"
+          progress={42}
+          readonly
+          steps={[
+            { description: "Concluido", id: "done", label: "Concluido", state: "complete" },
+            { description: "Aviso", id: "warning", label: "Aviso", state: "warning" },
+            { description: "Pendente", id: "pending", label: "Pendente", state: "pending" },
+            { id: "current", label: "Atual" }
+          ]}
+        />
+        <Stepper steps={[{ id: "one", label: "Um" }]} />
+      </div>
+    );
+
+    expect(screen.getByRole("progressbar", { name: "Progresso geral" })).toHaveAttribute("aria-valuenow", "42");
+    expect(screen.getAllByText("Aviso")).toHaveLength(2);
+  });
+
+  it("covers extracted workflow guards and controlled branches", async () => {
+    const onRowClick = vi.fn();
+    const onFilterChange = vi.fn();
+    const onMultiChange = vi.fn();
+    const onSend = vi.fn();
+    const onInternalChange = vi.fn();
+
+    render(
+      <div>
+        <DiffTable loading rows={[]} />
+        <AuditTable loading rows={[]} />
+        <DiffTable onRowClick={onRowClick} rows={[{ after: "Novo", before: "Antigo", id: "plan", label: "Plano", status: "changed" }]} />
+        <FilterSelect label="Estado" onValueChange={onFilterChange} open options={[{ disabled: true, label: "Bloqueado", value: "blocked" }]} />
+        <FilterMultiSelect defaultValue={["a"]} label="Prioridade" onValueChange={onMultiChange} open options={[{ label: "A", value: "a" }, { label: "B", value: "b" }]} />
+        <ComposerInput defaultValue="" onInternalChange={onInternalChange} onSend={onSend} />
+      </div>
+    );
+
+    expect(screen.getByText("Carregando diff")).toBeInTheDocument();
+    expect(screen.getByText("Carregando auditoria")).toBeInTheDocument();
+    const row = screen.getByRole("button", { name: /abrir alteracao plan/i });
+    fireEvent.keyDown(screen.getByText("Plano"), { key: "Enter" });
+    fireEvent.keyDown(row, { key: "Enter" });
+    fireEvent.keyDown(row, { key: " " });
+    fireEvent.click(await screen.findByRole("option", { name: "Bloqueado" }));
+    fireEvent.click(await screen.findByRole("option", { name: "A" }));
+    fireEvent.click(await screen.findByRole("option", { name: "A" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Mensagem" }), { target: { value: "Atualizada" } });
+    fireEvent.keyDown(screen.getByRole("textbox", { name: "Mensagem" }), { ctrlKey: true, key: "Enter" });
+    fireEvent.click(screen.getByRole("switch", { name: "Nota interna" }));
+
+    expect(onRowClick).toHaveBeenCalledWith("plan");
+    expect(onFilterChange).not.toHaveBeenCalled();
+    expect(onMultiChange).toHaveBeenCalled();
+    expect(onSend).toHaveBeenCalledWith("Atualizada", { internal: false });
+    expect(onInternalChange).toHaveBeenCalledWith(true);
+    expect(alertIconForTone("paused")).toBe("pause");
+    expect(alertIconForTone("neutral")).toBe("circle");
   });
 
   it("renders communication primitives and sends composer values", () => {
@@ -1000,6 +1542,41 @@ describe("@taliya/ui primitives", () => {
     expect(send).toHaveBeenCalledWith("Confirmar horario", { internal: true });
     expect(internal).toHaveBeenCalledWith(false);
     expect(screen.getByRole("alert")).toHaveTextContent("Falha no envio");
+  });
+
+  it("covers controlled composer updates and keyboard send branches", () => {
+    const onValueChange = vi.fn();
+    const onSend = vi.fn();
+    const onAttach = vi.fn();
+    const onQuickReply = vi.fn();
+    const onMedia = vi.fn();
+
+    render(
+      <ComposerInput
+        actionsOrder={["media", "quickReply", "attach"]}
+        onAttach={onAttach}
+        onMedia={onMedia}
+        onQuickReply={onQuickReply}
+        onSend={onSend}
+        onValueChange={onValueChange}
+        quickReplyControl={<Button onClick={onQuickReply}>Respostas</Button>}
+        showFieldIcon={false}
+        value="Mensagem controlada"
+      />
+    );
+
+    const input = screen.getByRole("textbox", { name: "Mensagem" });
+    fireEvent.change(input, { target: { value: "Mensagem atualizada" } });
+    fireEvent.keyDown(input, { ctrlKey: true, key: "Enter" });
+    fireEvent.click(screen.getByRole("button", { name: "Anexar arquivo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Respostas" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir midia interna" }));
+
+    expect(onValueChange).toHaveBeenCalledWith("Mensagem atualizada");
+    expect(onSend).toHaveBeenCalledWith("Mensagem controlada", { internal: false });
+    expect(onAttach).toHaveBeenCalledOnce();
+    expect(onQuickReply).toHaveBeenCalledOnce();
+    expect(onMedia).toHaveBeenCalledOnce();
   });
 
   it("renders calendar, flow, chart, connector, and timeline primitives", () => {
@@ -1030,5 +1607,72 @@ describe("@taliya/ui primitives", () => {
     expect(screen.getByText("Receber mensagem")).toBeInTheDocument();
     expect(selectNode).toHaveBeenCalledTimes(1);
     expect(openMenu).toHaveBeenCalledTimes(1);
+  });
+
+  it("covers calendar and chart visual variants", () => {
+    render(
+      <div>
+        <CalendarGrid columns={5}>
+          <CalendarCell
+            conflict
+            day="01"
+            eyebrow="Maio"
+            events={[{ id: "a", label: "Lotado", tone: "danger" }, { label: "B", tone: "warning" }, { label: "C" }, { label: "D" }, { label: "E" }]}
+            muted
+            selected
+          />
+          <CalendarCell day="02" events={[{ label: "Livre", tone: "success" }]} disabled />
+        </CalendarGrid>
+        {(["scheduled", "full", "available", "conflict", "cancelled"] as const).map((status) => (
+          <CalendarEventBlock action={<Button>Acao</Button>} capacity="4/8" compact key={status} meta="Studio" status={status} time="09:00" title={status} />
+        ))}
+        {(["trigger", "condition", "action", "approval", "fallback", "blocked"] as const).map((variant) => (
+          <FlowNode blocked={variant === "blocked"} description="Descricao" key={variant} selected={variant === "action"} status="Ativo" title={variant} variant={variant} />
+        ))}
+        <FlowNode onClick={vi.fn()} title="Interativo" />
+        <ChartPanelPrimitive data={[{ label: "A", value: 22 }, { label: "B", value: 48 }, { label: "C", value: 72 }]} title="Barras" variant="bar" />
+        <ChartPanelPrimitive data={[{ label: "A", value: 22 }, { label: "B", value: 48 }, { label: "C", value: 72 }]} title="Funil" variant="funnel" />
+        <ChartPanelPrimitive data={[{ label: "A", value: 22 }, { label: "B", value: 48 }, { label: "C", value: 72 }]} title="Ranking" variant="ranking" />
+        <ChartPanelPrimitive action={<Button>Atualizar</Button>} empty title="Sem dados" />
+        <ChartPanelPrimitive loading title="Carregando" />
+        <ConnectorLine endNode variant="straight" />
+        <ListIcon icon="check" tone="success" />
+      </div>
+    );
+
+    fireEvent.keyDown(screen.getByRole("button", { name: "Interativo" }), { key: "Enter" });
+    expect(screen.getAllByText("Sem dados")).toHaveLength(2);
+    expect(screen.getByText("Carregando")).toBeInTheDocument();
+    expect(screen.getByTitle("Lotado")).toBeInTheDocument();
+    expect(screen.getByText("Barras")).toBeInTheDocument();
+  });
+
+  it("covers feedback tones and overlay display modes", () => {
+    const onDismiss = vi.fn();
+    const onClose = vi.fn();
+
+    render(
+      <div>
+        <Chip icon="check" showDot={false} tone="success">Confirmado</Chip>
+        <Badge label="Aviso" tone="warning" variant="dot" />
+        <Badge tone="danger" variant="count">3</Badge>
+        <StatusDot label="Online" status="online" />
+        <InlineAlert action={<Button>Resolver</Button>} onDismiss={onDismiss} title="Atenção" tone="success">Tudo certo</InlineAlert>
+        <Toast action={<Button>Ver</Button>} onClose={onClose} title="Falha" tone="danger">Tente novamente</Toast>
+        <Popover defaultOpen footer={<Button>Salvar</Button>} showArrow title="Detalhes" trigger={<Button>Abrir detalhes</Button>} width="lg">Conteúdo</Popover>
+        <Popover inline open={false} title="Oculto" trigger="Ignorar">Não deve aparecer</Popover>
+        <ScrollArea orientation="both">Área</ScrollArea>
+        <ProgressBar helperText="Sincronizando" indeterminate label="Progresso" segmented tone="info" value={140} />
+      </div>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Fechar alerta" }));
+    fireEvent.click(screen.getByRole("button", { name: /Fechar notifica/ }));
+
+    expect(onDismiss).toHaveBeenCalledOnce();
+    expect(onClose).toHaveBeenCalledOnce();
+    expect(screen.getByText("Conteúdo")).toBeInTheDocument();
+    expect(screen.queryByText("Não deve aparecer")).not.toBeInTheDocument();
+    expect(screen.getByRole("progressbar", { name: "Progresso" })).not.toHaveAttribute("aria-valuenow");
   });
 });

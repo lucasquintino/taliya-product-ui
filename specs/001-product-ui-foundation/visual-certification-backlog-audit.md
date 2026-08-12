@@ -1,6 +1,6 @@
 # Visual Certification Backlog Audit
 
-Date: 2026-08-05
+Date: 2026-08-12
 
 Status: not-complete. Integrity gate: pass. This audit reads the Batch 9 and Batch 11 ledgers and makes the remaining visual-certification scope explicit. It does not certify pixels by itself. Component/image rows drive the global visual backlog; process follow-up rows are counted separately as operational history.
 

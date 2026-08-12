@@ -23,8 +23,9 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "@typescript-eslint/no-empty-object-type": "off",
-      "@typescript-eslint/no-explicit-any": "off"
+      "@typescript-eslint/no-empty-object-type": "error",
+      "@typescript-eslint/no-explicit-any": "error",
+      "no-warning-comments": ["warn", { "terms": ["TODO", "FIXME"], "location": "anywhere" }]
     }
   }
 );

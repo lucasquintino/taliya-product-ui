@@ -1,7 +1,7 @@
 # Definition of Done
 
 **Status**: authoritative completion vocabulary for Spec Kit 006
-**Implementation authorization**: blocked by `GATE-SDD-APPROVED`
+**Implementation authorization**: `APPROVED_FOR_IMPLEMENTATION` for `T101-T176`; final certification remains gated
 
 ## Core Rule
 
@@ -119,4 +119,4 @@ Evidence is valid only for the revision, source-tree/config/input fingerprints, 
 | `certified` | full release contract passed for exact artifacts |
 | `historical` | evidence retained but not current certification |
 
-At SDD authoring time, the only honest implementation status is `blocked`. This document cannot open `GATE-SDD-APPROVED`.
+The SDD approval envelope opens implementation, but it does not certify any wave. Only fresh same-revision gate evidence can move a task or checkpoint to `passed` or `certified`.

@@ -11,6 +11,18 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   trailingIcon?: IconName;
 }
 
+/**
+ * Semantics-preserving escape hatch for composed product patterns that need
+ * the native button DOM shape while still going through an owned UI primitive.
+ * Styling remains intentionally opt-in through `className`.
+ */
+export const PrimitiveButton = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(function PrimitiveButton(
+  { className, type = "button", ...props },
+  ref
+) {
+  return <button className={className} ref={ref} type={type} {...props} />;
+});
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({
   variant = "secondary",
   size = "md",
@@ -114,4 +126,3 @@ export function ButtonGroup({
 }: React.HTMLAttributes<HTMLDivElement> & { align?: "start" | "end" | "between" }) {
   return <div className={cn("tl-button-group", `tl-button-group--${align}`, className)} role={role} {...props} />;
 }
-

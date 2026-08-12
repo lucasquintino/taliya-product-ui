@@ -9,6 +9,18 @@ const auditMdPath = resolve(root, "specs/001-product-ui-foundation/full-image-pa
 const targetStoryId = "crm-image-coverage-hoje--image-17-hoje-base";
 const targetImage = "17_round-4.1A_hoje_01_acima-da-dobra.png.png";
 
+function writeWithRetry(filePath, contents) {
+  let lastError;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try { writeFileSync(filePath, contents); return; } catch (error) {
+      lastError = error;
+      if (attempt === 7) break;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 125);
+    }
+  }
+  throw lastError;
+}
+
 const originalIndex = readFileSync(storybookIndexPath, "utf8");
 const originalAuditJson = readFileSync(auditJsonPath, "utf8");
 const originalAuditMd = readFileSync(auditMdPath, "utf8");
@@ -20,7 +32,7 @@ try {
   }
 
   delete index.entries[targetStoryId];
-  writeFileSync(storybookIndexPath, `${JSON.stringify(index)}\n`);
+  writeWithRetry(storybookIndexPath, `${JSON.stringify(index)}\n`);
 
   const result = spawnSync(process.execPath, ["scripts/audit-full-image-page-coverage.mjs"], {
     cwd: root,
@@ -39,7 +51,7 @@ try {
 
   console.log("Full image page coverage missing-story probe passed.");
 } finally {
-  writeFileSync(storybookIndexPath, originalIndex);
-  writeFileSync(auditJsonPath, originalAuditJson);
-  writeFileSync(auditMdPath, originalAuditMd);
+  writeWithRetry(storybookIndexPath, originalIndex);
+  writeWithRetry(auditJsonPath, originalAuditJson);
+  writeWithRetry(auditMdPath, originalAuditMd);
 }

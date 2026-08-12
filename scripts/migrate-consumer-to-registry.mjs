@@ -86,9 +86,11 @@ if (write) {
   writeFileSync(readinessConfigPath, `${JSON.stringify(readinessConfig, null, 2)}\n`);
 
   const registrySpecs = packageSpecs.map((packageSpec) => `${packageSpec.name}@${expectedRange}`);
-  const install = spawnSync("npm", ["install", "--save", ...registrySpecs], {
+  const npmCommand = process.env.TALIYA_REGISTRY_MIGRATION_NPM ?? "npm";
+  const install = spawnSync(npmCommand, ["install", "--save", ...registrySpecs], {
     cwd: consumerRoot,
-    stdio: "inherit"
+    stdio: "inherit",
+    shell: process.platform === "win32" && npmCommand.toLowerCase().endsWith(".cmd")
   });
   if (install.status !== 0 || install.error) {
     restoreConsumerManifests();

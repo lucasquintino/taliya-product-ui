@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-08-05T19:35:00.805Z",
-  "status": "fail",
-  "officialConsumerReady": false,
+  "generatedAt": "2026-08-12T06:10:30.268Z",
+  "status": "pass-official-library-current-scope",
+  "officialConsumerReady": true,
   "globalGoalComplete": false,
   "currentVersion": "0.1.1",
   "consistentPackageVersion": true,
-  "currentInternalReady": false,
-  "crmRealCanStart": false,
+  "currentInternalReady": true,
+  "crmRealCanStart": true,
   "realFutureCrmAdoptionExecuted": false,
   "releaseCandidateStatus": "pass",
-  "releaseCandidateGateCount": 103,
+  "releaseCandidateGateCount": 104,
   "releaseChannelStatus": "pass-registry-release-channel",
   "releasePolicyStatus": "pass-registry-policy",
   "localTarballChannelReady": true,
@@ -22,9 +22,9 @@
   "reportRows": [
     {
       "id": "aggregate-readiness",
-      "status": "fail",
+      "status": "pass",
       "evidence": "library-readiness-gate.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "package-artifacts",
@@ -64,15 +64,15 @@
     },
     {
       "id": "library-consumption",
-      "status": "fail",
+      "status": "pass",
       "evidence": "library-consumption-status.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "crm-real-readiness",
-      "status": "fail",
+      "status": "pass",
       "evidence": "crm-real-readiness-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     },
     {
       "id": "release-policy",
@@ -94,9 +94,9 @@
     },
     {
       "id": "goal-completion",
-      "status": "fail",
+      "status": "pass",
       "evidence": "goal-completion-audit.json",
-      "note": "required gate report is not in an accepted state"
+      "note": "required gate report is in an accepted state"
     }
   ],
   "packageRows": [

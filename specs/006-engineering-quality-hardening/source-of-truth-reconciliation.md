@@ -1,7 +1,7 @@
 # Source-of-Truth Reconciliation
 
-**Status**: SDD READY FOR APPROVAL / READY FOR USER APPROVAL
-**Implementation authorization**: AWAITING USER APPROVAL / BLOCKED
+**Status**: IMPLEMENTATION IN PROGRESS / APPROVED BY USER
+**Implementation authorization**: APPROVED_FOR_IMPLEMENTATION for T101-T176
 **Applies from**: 2026-08-08
 
 ## Purpose
@@ -27,13 +27,13 @@ Executable gates determine whether an implementation satisfies the governing con
 | Field | Authoritative value |
 | --- | --- |
 | Active feature | `006-engineering-quality-hardening` |
-| Active phase | SDD ready for explicit user approval; implementation blocked |
+| Active phase | Approved implementation under the ordered T101-T176 phase gates |
 | Active plan | `specs/006-engineering-quality-hardening/plan.md` |
-| Product implementation allowed | No |
-| Dependency installation or update allowed | No |
-| Baseline/report/artifact regeneration allowed | No |
+| Product implementation allowed | Yes, within the approved task range and phase gates |
+| Dependency installation or update allowed | Yes, when required by an approved task and lockfile policy |
+| Baseline/report/artifact regeneration allowed | Only as an intentional, evidenced change; no debt laundering |
 | Package publication allowed | No |
-| Next review transition | Explicit user approval or rejection of the fingerprinted readiness candidate |
+| Next review transition | Gate checkpoint, remediation, or explicit re-approval after material SDD change |
 | Unlock condition | Lifecycle `APPROVED` **and** authorization token `APPROVED_FOR_IMPLEMENTATION`, both recorded by explicit user approval against exact hashes |
 
 ## Historical Spec Kit Classification
@@ -111,4 +111,4 @@ The integration manifest declares nine `.agents/skills/speckit-*` resources, but
 
 ## Unlock Decision
 
-This reconciliation does not authorize implementation. The current state is `READY_FOR_APPROVAL / READY_FOR_USER_APPROVAL / AWAITING_USER_APPROVAL`; the complete quickstart passed and the exact readiness manifest fingerprints the candidate. `GATE-SDD-APPROVED` opens only when the user records the paired `APPROVED / APPROVED_FOR_IMPLEMENTATION` decision against the exact reviewed revision and manifest.
+The user recorded the paired `APPROVED / APPROVED_FOR_IMPLEMENTATION` decision against the exact reviewed revision and manifest. `GATE-SDD-APPROVED` is open for `T101-T176`; a material change to the SDD or approval envelope reopens review.

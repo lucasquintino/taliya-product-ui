@@ -1,6 +1,6 @@
 # CI Gate Matrix
 
-**Status**: design contract; future execution blocked by `GATE-SDD-APPROVED`
+**Status**: active execution contract; `GATE-SDD-APPROVED` is open for T101-T176
 **Primary requirements**: FR-008 through FR-010, FR-022 through FR-041, FR-047 through FR-048
 **Default behavior**: fail closed
 
@@ -14,7 +14,7 @@ The command names prefixed with `planned:` below are target interfaces for futur
 
 | ID | Responsibility | Command/interface | PR | Nightly | Release | Current state |
 | --- | --- | --- | :---: | :---: | :---: | --- |
-| `GATE-SDD-APPROVED` | Validate complete SDD manifest and explicit human approval | `planned: corepack pnpm sdd:audit` | SDD | SDD | precondition | Closed; implementation forbidden |
+| `GATE-SDD-APPROVED` | Validate complete SDD manifest and explicit human approval | approval envelope + readiness-manifest validator | SDD | SDD | precondition | Open for T101-T176; material SDD changes reopen review |
 | `G-GOV` | Instructions, rules, profiles, skills, references, waivers, contradictions | `planned: corepack pnpm governance:audit` | Yes | Yes | Yes | Not implemented; manifest/`.agents` drift exists |
 | `G-TYPE` | Clean deterministic TypeScript graph and declarations | `corepack pnpm typecheck` plus stale-artifact probes | Yes | OS matrix | OS matrix | Precursor exists; artifact isolation needs hardening |
 | `G-LINT` | ESLint/React/Hook/security/complexity rules | `corepack pnpm lint` plus rule probes | Yes | Yes | Yes | Precursor exists; 006 rule set not implemented |

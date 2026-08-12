@@ -1,0 +1,38 @@
+import type { TokenRecord } from "./types.js";
+
+export const surfaceTokens = {
+  "surface.app": "#E4E4E4",
+  "surface.app-cool": "#E4E6EA",
+  "surface.canvas": "rgba(244, 245, 247, 0.82)",
+  "surface.panel": "rgba(255, 255, 255, 0.72)",
+  "surface.panel-strong": "rgba(255, 255, 255, 0.88)",
+  "surface.product-page": "#F9F9FB",
+  "surface.product-panel": "rgba(255, 255, 255, 0.76)",
+  "surface.product-drawer": "#FFFFFF",
+  "surface.product-control": "rgba(255, 255, 255, 0.74)",
+  "surface.product-row": "rgba(255, 255, 255, 0.48)",
+  "surface.product-row-hover": "var(--taliya-surface-field-disabled)",
+  "surface.card": "rgba(255, 255, 255, 0.86)",
+  "surface.card-hover": "rgba(255, 255, 255, 0.96)",
+  "surface.control": "rgba(255, 255, 255, 0.82)",
+  "surface.control-hover-faint": "rgba(16, 20, 26, 0.018)",
+  "surface.control-hover": "rgba(16, 20, 26, 0.05)",
+  "surface.control-selected": "#10141A",
+  "surface.field": "rgba(255, 255, 255, 0.72)",
+  "surface.field-disabled": "rgba(16, 20, 26, 0.035)",
+  "surface.field-disabled-soft": "rgba(16, 20, 26, 0.022)",
+  "surface.dropdown": "rgba(255, 255, 255, 0.94)",
+  "surface.selection-soft": "rgba(131, 162, 219, 0.18)",
+  "surface.selection": "#83A2DB",
+  "surface.accent-soft": "rgba(131, 162, 219, 0.16)",
+  "surface.accent-faint": "rgba(131, 162, 219, 0.14)",
+  "surface.segmented": "rgba(255, 255, 255, 0.52)",
+  "surface.skeleton-base": "rgba(16, 20, 26, 0.04)",
+  "surface.skeleton-highlight": "rgba(16, 20, 26, 0.10)",
+  "surface.scrollbar-thumb": "rgba(16, 20, 26, 0.22)",
+  "surface.inverse-glow": "rgba(255, 255, 255, 0.14)",
+  "surface.disabled": "rgba(16, 20, 26, 0.04)",
+  "surface.overlay": "rgba(16, 20, 26, 0.24)",
+  "surface.toast": "rgba(255, 255, 255, 0.94)"
+} as const satisfies TokenRecord;
+

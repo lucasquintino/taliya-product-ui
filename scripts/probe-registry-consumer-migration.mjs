@@ -88,6 +88,10 @@ ${npmMode === "success" ? successBody : `writeFileSync(${JSON.stringify(resolve(
 process.exit(${npmMode === "failure" ? 23 : 0});
 `
   );
+  // Windows resolves `npm` through npm.cmd before consulting extensionless
+  // executables. Provide a local shim so the probe exercises the fake
+  // registry install path on every supported OS.
+  writeFileSync(resolve(binRoot, "npm.cmd"), `@echo off\r\nnode "%~dp0npm" %*\r\n`);
   chmodSync(npmPath, 0o755);
 
   return {
@@ -114,7 +118,11 @@ function runMigration(fixture) {
     {
       cwd: root,
       encoding: "utf8",
-      env: { ...process.env, PATH: `${fixture.binRoot}${delimiter}${process.env.PATH ?? ""}` }
+      env: {
+        ...process.env,
+        PATH: `${fixture.binRoot}${delimiter}${process.env.PATH ?? ""}`,
+        TALIYA_REGISTRY_MIGRATION_NPM: resolve(fixture.binRoot, process.platform === "win32" ? "npm.cmd" : "npm")
+      }
     }
   );
 }

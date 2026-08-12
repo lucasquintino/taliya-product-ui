@@ -1,56 +1,56 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-16T00:51:16.561Z",
+  "generatedAt": "2026-08-12T06:10:33.356Z",
   "readiness": {
-    "generatedAt": "2026-07-16T00:45:46.705Z",
-    "status": "fail"
+    "generatedAt": "2026-08-12T06:04:41.137Z",
+    "status": "pass"
   },
   "status": "pass",
   "rows": [
     {
       "file": "release-candidate-audit.json",
-      "generatedAt": "2026-07-16T00:46:41.765Z",
-      "acceptanceClaim": false,
+      "generatedAt": "2026-08-12T06:10:19.953Z",
+      "acceptanceClaim": true,
       "staleByTime": false,
       "contradictsReadiness": false,
       "status": "pass"
     },
     {
       "file": "official-library-readiness-audit.json",
-      "generatedAt": "2026-07-16T00:51:02.164Z",
-      "acceptanceClaim": false,
+      "generatedAt": "2026-08-12T06:10:30.268Z",
+      "acceptanceClaim": true,
       "staleByTime": false,
       "contradictsReadiness": false,
       "status": "pass"
     },
     {
       "file": "library-consumption-status.json",
-      "generatedAt": "2026-07-16T00:51:02.549Z",
-      "acceptanceClaim": false,
+      "generatedAt": "2026-08-12T06:10:29.528Z",
+      "acceptanceClaim": true,
       "staleByTime": false,
       "contradictsReadiness": false,
       "status": "pass"
     },
     {
       "file": "crm-real-readiness-audit.json",
-      "generatedAt": "2026-07-16T00:50:33.436Z",
-      "acceptanceClaim": false,
+      "generatedAt": "2026-08-12T06:10:29.882Z",
+      "acceptanceClaim": true,
       "staleByTime": false,
       "contradictsReadiness": false,
       "status": "pass"
     },
     {
       "file": "library-acceptance-audit.json",
-      "generatedAt": "2026-07-16T00:46:39.372Z",
-      "acceptanceClaim": false,
+      "generatedAt": "2026-08-12T06:10:29.381Z",
+      "acceptanceClaim": true,
       "staleByTime": false,
       "contradictsReadiness": false,
       "status": "pass"
     },
     {
       "file": "goal-completion-audit.json",
-      "generatedAt": "2026-07-16T00:51:02.918Z",
-      "acceptanceClaim": false,
+      "generatedAt": "2026-08-12T06:10:32.592Z",
+      "acceptanceClaim": true,
       "staleByTime": false,
       "contradictsReadiness": false,
       "status": "pass"

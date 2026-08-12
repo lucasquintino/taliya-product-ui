@@ -1,7 +1,7 @@
 # Risk Register
 
 **Status**: active SDD risk register
-**Implementation authorization**: blocked by `GATE-SDD-APPROVED`
+**Implementation authorization**: `APPROVED_FOR_IMPLEMENTATION`; unresolved risks remain blocking for their dependent gates
 **Scoring**: likelihood (L) 1-5 x impact (I) 1-5; 15-25 critical program risk, 8-14 high, 4-7 moderate, 1-3 low
 
 ## Register

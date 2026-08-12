@@ -1,7 +1,8 @@
 import React from "react";
 import { cn } from "./foundation.js";
-export { Button, ButtonGroup, IconButton } from "./primitives/button.js";
+export { Button, ButtonGroup, IconButton, PrimitiveButton } from "./primitives/button.js";
 export type { ButtonProps, IconButtonProps } from "./primitives/button.js";
+export { PrimitiveInput } from "./primitives/forms.js";
 export { Tabs, Timeline } from "./components/navigation-data.js";
 export type { TabItem, TimelineItem } from "./components/navigation-data.js";
 export { Toast } from "./primitives/feedback.js";

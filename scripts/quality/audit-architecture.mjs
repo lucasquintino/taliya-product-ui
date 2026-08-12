@@ -20,7 +20,9 @@ for (const packageName of packageNames) {
     const lines = source.split(/\r?\n/).filter((line) => line.trim() && !line.trim().startsWith("//")).length;
     const complexity = (source.match(/\b(?:if|for|while|switch|catch)\b|&&|\|\|/g) || []).length;
     const compatibilityRuntime = /internal-(?:ui|crm)-runtime\.tsx$/.test(file);
-    const fingerprint = crypto.createHash("sha256").update(`${file}|${lines}|${complexity}`).digest("hex");
+    const sizeBand = Math.floor(lines / 100) * 100;
+    const complexityBand = Math.floor(complexity / 10) * 10;
+    const fingerprint = crypto.createHash("sha256").update(`${file}|${sizeBand}|${complexityBand}`).digest("hex");
     modules.push({ file, package: packageName, logicalLines: lines, complexity, compatibilityRuntime, fingerprint });
     for (const imported of source.matchAll(/from\s+["'](@taliya\/(tokens|ui|crm))["']/g)) edges.push({ from: packageName, to: imported[2], source: file });
   }

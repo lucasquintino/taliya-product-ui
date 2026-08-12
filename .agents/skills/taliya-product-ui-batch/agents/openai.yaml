@@ -1,0 +1,4 @@
+interface:
+  display_name: "Taliya Product UI Batch"
+  short_description: "Batches Taliya com clone visual 1:1"
+  default_prompt: "Use $taliya-product-ui-batch para implementar ou revisar um batch do Taliya Product UI com clone visual 1:1 antes de fechar."

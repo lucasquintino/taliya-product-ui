@@ -44,7 +44,7 @@ function sourceIdentity() {
   const commitSha = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
   const dirty = hasSourceChanges(root);
   const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
-  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative)).sort().map((relative) => {
+  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative) && fs.existsSync(path.join(root, relative))).sort().map((relative) => {
     const file = path.join(root, relative);
     const raw = fs.readFileSync(file);
     let payload;
@@ -52,7 +52,11 @@ function sourceIdentity() {
     const digest = crypto.createHash("sha256").update(payload, typeof payload === "string" ? "utf8" : undefined).digest("hex");
     return `${relative}\0${digest}\0${raw.length}\n`;
   });
-  return { commitSha, dirty, sourceTreeHash: digestRows(rows) };
+  const existingRows = rows.filter((row) => {
+    const relative = row.split("\0", 1)[0];
+    return fs.existsSync(path.join(root, relative));
+  });
+  return { commitSha, dirty, sourceTreeHash: digestRows(existingRows) };
 }
 
 function buildHash() {

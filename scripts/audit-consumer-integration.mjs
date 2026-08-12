@@ -69,13 +69,13 @@ const installedPackageSpecs = [
   {
     packageName: "@taliya/ui",
     packagePath: ["@taliya", "ui"],
-    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", "src/styles.css"],
+    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", "src/styles.css", "src/styles/foundation.css", "src/styles/controls.css", "src/styles/patterns.css", "src/styles/data-and-overlays.css"],
     requiredExports: [".", "./styles.css"]
   },
   {
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
-    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", "dist/standard-page-kit.js", "dist/standard-page-kit.d.ts", "src/styles.css"],
+    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", "dist/standard-page-kit.js", "dist/standard-page-kit.d.ts", "src/styles.css", "src/styles/foundation.css", "src/styles/primitives.css", "src/styles/patterns.css", "src/styles/domains.css"],
     requiredExports: [".", "./standard-page-kit", "./styles.css"]
   }
 ];
@@ -617,7 +617,7 @@ const installedPackageContractMarkers = [
       "browserUrl?: string;",
       "export interface SupportTicketDrawerProps",
       "variant?: \"support\" | \"internal\";",
-      "export interface InternalShellProps extends Omit<CrmProductShellProps, \"variant\">"
+      "export type InternalShellProps = Omit<CrmProductShellProps, \"variant\">;"
     ]
   },
   {
@@ -1526,12 +1526,34 @@ function installedPackageStatus() {
 }
 
 function installedPackageContractStatus() {
+  const textCache = new Map();
+  function packageCandidates(packageRoot, markerFile) {
+    const preferred = path.join(packageRoot, markerFile);
+    const candidates = fs.existsSync(preferred) ? [preferred] : [];
+    const extension = path.extname(markerFile).toLowerCase();
+    const rootDir = extension === ".css" ? path.join(packageRoot, "src") : path.join(packageRoot, "dist");
+    function walk(directory) {
+      if (!fs.existsSync(directory)) return;
+      for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+        const candidate = path.join(directory, entry.name);
+        if (entry.isDirectory()) walk(candidate);
+        else if (entry.isFile() && path.extname(entry.name).toLowerCase() === extension && !candidates.includes(candidate)) candidates.push(candidate);
+      }
+    }
+    walk(rootDir);
+    return candidates;
+  }
+  function readCached(filePath) {
+    if (!textCache.has(filePath)) textCache.set(filePath, fs.existsSync(filePath) ? read(filePath) : "");
+    return textCache.get(filePath);
+  }
   const rows = installedPackageContractMarkers.map((marker) => {
     const packageRoot = path.join(consumerRoot, "node_modules", ...marker.packagePath);
     const markerPath = path.join(packageRoot, marker.file);
     const fileExists = exists(markerPath);
-    const source = fileExists ? read(markerPath) : "";
-    const missingText = marker.requiredText.filter((text) => !source.includes(text));
+    const candidates = packageCandidates(packageRoot, marker.file);
+    const missingText = marker.requiredText.filter((text) => !candidates.some((candidate) => readCached(candidate).includes(text)));
+    const matchedFiles = marker.requiredText.map((text) => candidates.find((candidate) => readCached(candidate).includes(text)) ?? null);
 
     return {
       id: marker.id,
@@ -1540,6 +1562,7 @@ function installedPackageContractStatus() {
       fileExists,
       requiredText: marker.requiredText,
       missingText,
+      matchedFiles: matchedFiles.map((candidate) => candidate ? relativeToConsumer(candidate) : null),
       pass: fileExists && missingText.length === 0
     };
   });

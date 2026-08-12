@@ -3,15 +3,18 @@ import path from "node:path";
 
 const root = process.cwd();
 const checkMode = process.argv.includes("--check");
-const crmSourcePaths = [
-  "packages/crm/src/internal-crm-runtime.tsx",
-  "packages/crm/src/domains/agenda/index.tsx",
-  "packages/crm/src/domains/billing/index.tsx",
-  "packages/crm/src/domains/settings/index.tsx",
-  "packages/crm/src/domains/students/index.tsx",
-  "packages/crm/src/patterns/index.tsx",
-  "packages/crm/src/patterns/shell.tsx"
-].map((relativePath) => path.join(root, relativePath));
+function collectSourcePaths(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return collectSourcePaths(entryPath);
+    return /\.(?:ts|tsx)$/.test(entry.name) && !entry.name.endsWith(".test.tsx") ? [entryPath] : [];
+  });
+}
+
+// Wrapper contracts belong to the implementation module that owns the wrapper,
+// not necessarily to the public barrel. Scan the complete CRM source tree so
+// modularization cannot make a valid wrapper invisible to this gate.
+const crmSourcePaths = collectSourcePaths(path.join(root, "packages/crm/src"));
 const reportJsonPath = path.join(root, "specs/001-product-ui-foundation/domain-wrapper-audit.json");
 const reportMdPath = path.join(root, "specs/001-product-ui-foundation/domain-wrapper-audit.md");
 

@@ -11,6 +11,8 @@
     ".agents/skills/speckit-plan/SKILL.md": "bcaa53955e1c7d8cc4804bed8d076ab5191d71420911da9382dfcba06209d18d",
     ".agents/skills/speckit-specify/SKILL.md": "7e4a76ca5fe4b4120117fc475da88099d06e0f8525a563d99082c06606ee2a94",
     ".agents/skills/speckit-tasks/SKILL.md": "e0a813d019be17b9e138c4d53c484897bf832606a5c2896a8e74d13f48a43afe",
-    ".agents/skills/speckit-taskstoissues/SKILL.md": "e979418ac77c9804168f8398e94d0f7d59de6449d7cf7f2fb2de660089daad16"
+    ".agents/skills/speckit-taskstoissues/SKILL.md": "e979418ac77c9804168f8398e94d0f7d59de6449d7cf7f2fb2de660089daad16",
+    ".agents/skills/taliya-product-ui-architecture/SKILL.md": "4c76e70b3ec95f9f25e4a599d3d98fae406ed8fa94e487e60f71f6aabdc3bbd0",
+    ".agents/skills/taliya-product-ui-batch/SKILL.md": "6605241b319f66b8ccdf786b91ee252a243751e73dba3ab5d6dae4df6c625163"
   }
 }
