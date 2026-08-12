@@ -49,6 +49,8 @@ const vendorManifest = fs.existsSync(vendorManifestPath) ? JSON.parse(fs.readFil
 const localReleaseManifest = fs.existsSync(localReleaseManifestPath) ? JSON.parse(fs.readFileSync(localReleaseManifestPath, "utf8")) : null;
 const readinessConfig = fs.existsSync(readinessConfigPath) ? JSON.parse(fs.readFileSync(readinessConfigPath, "utf8")) : {};
 const distributionChannel = readinessConfig.distribution?.channel === "npm-registry" ? "npm-registry" : "local-tarball";
+const publishedStyleFiles = distributionChannel === "npm-registry" ? ["src/styles.css"] : ["src/styles.css", "src/styles/foundation.css", "src/styles/controls.css", "src/styles/patterns.css", "src/styles/data-and-overlays.css"];
+const publishedCrmStyleFiles = distributionChannel === "npm-registry" ? ["src/styles.css"] : ["src/styles.css", "src/styles/foundation.css", "src/styles/primitives.css", "src/styles/patterns.css", "src/styles/domains.css"];
 const requiredPackageSources = Object.fromEntries(
   requiredPackages.map((packageName) => {
     const manifestRow =
@@ -69,13 +71,13 @@ const installedPackageSpecs = [
   {
     packageName: "@taliya/ui",
     packagePath: ["@taliya", "ui"],
-    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", "src/styles.css", "src/styles/foundation.css", "src/styles/controls.css", "src/styles/patterns.css", "src/styles/data-and-overlays.css"],
+    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", ...publishedStyleFiles],
     requiredExports: [".", "./styles.css"]
   },
   {
     packageName: "@taliya/crm",
     packagePath: ["@taliya", "crm"],
-    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", "dist/standard-page-kit.js", "dist/standard-page-kit.d.ts", "src/styles.css", "src/styles/foundation.css", "src/styles/primitives.css", "src/styles/patterns.css", "src/styles/domains.css"],
+    requiredFiles: ["package.json", "dist/index.js", "dist/index.d.ts", "dist/standard-page-kit.js", "dist/standard-page-kit.d.ts", ...publishedCrmStyleFiles],
     requiredExports: [".", "./standard-page-kit", "./styles.css"]
   }
 ];
@@ -616,8 +618,13 @@ const installedPackageContractMarkers = [
     requiredText: [
       "browserUrl?: string;",
       "export interface SupportTicketDrawerProps",
-      "variant?: \"support\" | \"internal\";",
-      "export type InternalShellProps = Omit<CrmProductShellProps, \"variant\">;"
+      "variant?: \"support\" | \"internal\";"
+    ],
+    requiredAnyText: [
+      [
+        "export interface InternalShellProps",
+        "export type InternalShellProps = Omit<CrmProductShellProps, \"variant\">;"
+      ]
     ]
   },
   {
@@ -1552,18 +1559,25 @@ function installedPackageContractStatus() {
     const markerPath = path.join(packageRoot, marker.file);
     const fileExists = exists(markerPath);
     const candidates = packageCandidates(packageRoot, marker.file);
-    const missingText = marker.requiredText.filter((text) => !candidates.some((candidate) => readCached(candidate).includes(text)));
-    const matchedFiles = marker.requiredText.map((text) => candidates.find((candidate) => readCached(candidate).includes(text)) ?? null);
+    const requiredText = marker.requiredText ?? [];
+    const requiredAnyText = marker.requiredAnyText ?? [];
+    const missingText = requiredText.filter((text) => !candidates.some((candidate) => readCached(candidate).includes(text)));
+    const missingAnyText = requiredAnyText.filter((alternatives) => !alternatives.some((text) => candidates.some((candidate) => readCached(candidate).includes(text))));
+    const matchedFiles = requiredText.map((text) => candidates.find((candidate) => readCached(candidate).includes(text)) ?? null);
+    const matchedAnyFiles = requiredAnyText.map((alternatives) => alternatives.map((text) => candidates.find((candidate) => readCached(candidate).includes(text)) ?? null));
 
     return {
       id: marker.id,
       packageName: marker.packageName,
       file: relativeToConsumer(markerPath),
       fileExists,
-      requiredText: marker.requiredText,
+      requiredText,
+      requiredAnyText,
       missingText,
+      missingAnyText,
       matchedFiles: matchedFiles.map((candidate) => candidate ? relativeToConsumer(candidate) : null),
-      pass: fileExists && missingText.length === 0
+      matchedAnyFiles: matchedAnyFiles.map((files) => files.map((candidate) => candidate ? relativeToConsumer(candidate) : null)),
+      pass: fileExists && missingText.length === 0 && missingAnyText.length === 0
     };
   });
 
@@ -1571,7 +1585,7 @@ function installedPackageContractStatus() {
     pass: rows.every((row) => row.pass),
     rows,
     details: rows.map((row) =>
-      `${row.id}: ${row.pass ? "installed contract markers ok" : `missing ${row.missingText.join(", ") || "file"}`}`
+      `${row.id}: ${row.pass ? "installed contract markers ok" : `missing ${[...row.missingText, ...row.missingAnyText.map((alternatives) => alternatives.join(" OR "))].join(", ") || "file"}`}`
     )
   };
 }

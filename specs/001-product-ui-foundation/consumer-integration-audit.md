@@ -14,44 +14,100 @@ Vendor: `vendor/taliya-product-ui`
 | Tokenized global reset | Pass |
 | No forbidden implementation imports | Pass |
 | No forbidden Taliya package subpath imports | Pass |
+| No legacy drawer geometry variants | Pass |
 | No active local className hooks | Pass |
 | No extra active consumer CSS files | Pass |
 
 ## Details
 
-- @taliya/tokens: file:vendor/taliya-product-ui/taliya-tokens-0.0.0.tgz
-- @taliya/ui: file:vendor/taliya-product-ui/taliya-ui-0.0.0.tgz
-- @taliya/crm: file:vendor/taliya-product-ui/taliya-crm-0.0.0.tgz
+- @taliya/tokens: ^0.1.1
+- @taliya/ui: ^0.1.1
+- @taliya/crm: ^0.1.1
 - @taliya/tokens source: pass
 - @taliya/ui source: pass
 - @taliya/crm source: pass
 - Vendor release manifest: present (3/3) at vendor/taliya-product-ui/taliya-product-ui-local-manifest.json
 - @taliya/tokens: installed entrypoints ok
-- @taliya/tokens version: 0.0.0
+- @taliya/tokens version: 0.1.1
 - @taliya/tokens missing files: none
 - @taliya/tokens missing exports: none
 - @taliya/ui: installed entrypoints ok
-- @taliya/ui version: 0.0.0
+- @taliya/ui version: 0.1.1
 - @taliya/ui missing files: none
 - @taliya/ui missing exports: none
 - @taliya/crm: installed entrypoints ok
-- @taliya/crm version: 0.0.0
+- @taliya/crm version: 0.1.1
 - @taliya/crm missing files: none
 - @taliya/crm missing exports: none
-- crm-product-shell-drawer-size-api: installed contract markers ok
-- crm-product-shell-compact-drawer-css: installed contract markers ok
-- crm-task-drawer-compact-size-api: installed contract markers ok
-- crm-task-drawer-compact-size-css: installed contract markers ok
+- crm-product-shell-canonical-drawer-api: installed contract markers ok
+- crm-product-shell-canonical-drawer-css: installed contract markers ok
+- ui-canonical-drawer-api: installed contract markers ok
+- ui-canonical-drawer-css: installed contract markers ok
 - crm-task-drawer-activity-order-api: installed contract markers ok
-- crm-task-drawer-compact-density-css: installed contract markers ok
-- tokens-task-drawer-compact-work-list-density: installed contract markers ok
+- crm-task-drawer-standard-density-css: installed contract markers ok
+- tokens-work-list-density: installed contract markers ok
 - tokens-task-drawer-compact-inner-density: installed contract markers ok
 - crm-product-shell-page-header-rhythm-api: installed contract markers ok
+- crm-agent-catalog-source-frame-css: installed contract markers ok
+- tokens-agent-catalog-source-frame: installed contract markers ok
+- crm-agent-routines-source-frame-css: installed contract markers ok
+- tokens-agent-routines-source-frame: installed contract markers ok
+- crm-agent-publish-layout-api: installed contract markers ok
+- crm-agent-publish-layout-css: installed contract markers ok
+- tokens-agent-publish-layout: installed contract markers ok
+- crm-agent-execution-layout-api: installed contract markers ok
+- crm-agent-routine-layout-api: installed contract markers ok
+- crm-agent-routine-layout-css: installed contract markers ok
+- tokens-agent-routine-layout: installed contract markers ok
+- crm-agent-flow-layout-api: installed contract markers ok
+- crm-agent-flow-layout-css: installed contract markers ok
+- tokens-agent-flow-layout: installed contract markers ok
+- crm-agent-test-layout-api: installed contract markers ok
+- crm-agent-test-layout-css: installed contract markers ok
+- tokens-agent-test-layout: installed contract markers ok
+- crm-settings-hub-layout-api: installed contract markers ok
+- crm-settings-hub-layout-css: installed contract markers ok
+- tokens-settings-hub-layout: installed contract markers ok
+- crm-settings-permissions-layout-api: installed contract markers ok
+- crm-settings-permissions-layout-css: installed contract markers ok
+- tokens-settings-permissions-layout: installed contract markers ok
+- crm-settings-payments-layout-api: installed contract markers ok
+- crm-settings-payments-layout-css: installed contract markers ok
+- tokens-settings-payments-layout: installed contract markers ok
+- crm-settings-agenda-layout-api: installed contract markers ok
+- crm-settings-agenda-layout-css: installed contract markers ok
+- tokens-settings-agenda-layout: installed contract markers ok
+- crm-settings-notifications-layout-api: installed contract markers ok
+- crm-settings-notifications-layout-css: installed contract markers ok
+- tokens-settings-notifications-layout: installed contract markers ok
+- crm-billing-subscription-layout-api: installed contract markers ok
+- crm-billing-subscription-layout-css: installed contract markers ok
+- tokens-billing-subscription-layout: installed contract markers ok
 - crm-product-shell-content-layout-api: installed contract markers ok
 - crm-product-shell-content-layout-css: installed contract markers ok
+- crm-internal-overview-api: installed contract markers ok
+- crm-internal-overview-css: installed contract markers ok
+- crm-internal-tenants-api: installed contract markers ok
+- crm-internal-tenants-css: installed contract markers ok
+- crm-internal-tenant-detail-api: installed contract markers ok
+- crm-internal-tenant-detail-css: installed contract markers ok
+- crm-setup-shell-global-api: installed contract markers ok
+- crm-setup-shell-global-css: installed contract markers ok
+- crm-setup-students-worklist-api: installed contract markers ok
+- crm-setup-students-worklist-css: installed contract markers ok
+- tokens-setup-students-worklist: installed contract markers ok
+- crm-setup-classes-worklist-css: installed contract markers ok
+- tokens-setup-classes-worklist: installed contract markers ok
+- crm-weekly-hours-schedule-api: installed contract markers ok
+- crm-setup-agenda-schedule-css: installed contract markers ok
+- tokens-setup-guided-wide-agenda: installed contract markers ok
+- tokens-setup-guided-review: installed contract markers ok
+- crm-setup-welcome-agent-api: installed contract markers ok
+- crm-setup-welcome-agent-css: installed contract markers ok
+- tokens-setup-welcome-agent: installed contract markers ok
 - tokens-product-shell-content-layout: installed contract markers ok
-- crm-replacement-floating-drawer-css: installed contract markers ok
-- tokens-replacement-floating-drawer: installed contract markers ok
+- crm-replacement-canonical-drawer-css: installed contract markers ok
+- tokens-replacement-drawer-content: installed contract markers ok
 - tokens-activity-feed-source-density: installed contract markers ok
 - crm-product-shell-page-header-rhythm-css: installed contract markers ok
 - tokens-product-shell-page-header-rhythm: installed contract markers ok
@@ -62,9 +118,9 @@ Vendor: `vendor/taliya-product-ui`
 - ui-official-icon-sizing-css: installed contract markers ok
 - ui-official-base-icon-sizing-css: installed contract markers ok
 - ui-official-base-icon-sizing-runtime: installed contract markers ok
-- crm-product-shell-floating-drawer-reserve-css: installed contract markers ok
-- crm-product-shell-content-drawer-topbar-css: installed contract markers ok
-- tokens-product-shell-floating-drawer-reserve: installed contract markers ok
+- crm-product-shell-drawer-reserve-css: installed contract markers ok
+- crm-product-shell-canonical-drawer-topbar-css: installed contract markers ok
+- tokens-product-shell-canonical-drawer: installed contract markers ok
 - tokens-page-filter-bar-search-flow: installed contract markers ok
 - tokens-page-filter-bar-compact-flow: installed contract markers ok
 - tokens-page-filter-bar-tight-flow: installed contract markers ok
@@ -103,5 +159,6 @@ Vendor: `vendor/taliya-product-ui`
 - Root body uses official token variables.
 - Forbidden import matches: 0
 - Forbidden Taliya package subpath import matches: 0
+- Legacy drawer geometry variant matches: 0
 - Active className matches: 0
 - Extra active CSS files: 0
