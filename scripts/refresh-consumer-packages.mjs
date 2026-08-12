@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { relative, resolve } from "node:path";
 
 const root = process.cwd();
@@ -46,6 +46,9 @@ const outputDir = resolve(root, optionValue("--out-dir", specDir));
 const reportJsonPath = resolve(outputDir, `${reportBasename("consumer-refresh-audit")}.json`);
 const reportMdPath = resolve(outputDir, `${reportBasename("consumer-refresh-audit")}.md`);
 const commonArgs = ["--consumer", consumerRoot, "--vendor", vendorArg, "--manifest", manifestArg, ...reportLabelArgs];
+const readinessConfigPath = resolve(consumerRoot, "taliya-readiness.config.json");
+const readinessConfig = existsSync(readinessConfigPath) ? JSON.parse(readFileSync(readinessConfigPath, "utf8")) : {};
+const distributionChannel = readinessConfig.distribution?.channel === "npm-registry" ? "npm-registry" : "local-tarball";
 
 function runStep(id, commandArgs, options = {}) {
   const startedAt = Date.now();
@@ -92,15 +95,23 @@ const steps = [
     ...commonArgs,
     ...optionalArg("--out-dir")
   ]),
-  runStep("package-sync", [
-    "scripts/audit-consumer-package-sync.mjs",
-    "--check",
-    "--consumer",
-    consumerRoot,
-    "--vendor",
-    vendorArg,
-    ...reportLabelArgs
-  ])
+  distributionChannel === "npm-registry"
+    ? runStep("registry-adoption", [
+        "scripts/audit-registry-consumer-adoption.mjs",
+        "--check",
+        "--consumer",
+        consumerRoot,
+        ...reportLabelArgs
+      ])
+    : runStep("package-sync", [
+        "scripts/audit-consumer-package-sync.mjs",
+        "--check",
+        "--consumer",
+        consumerRoot,
+        "--vendor",
+        vendorArg,
+        ...reportLabelArgs
+      ])
 ];
 
 const failed = steps.filter((step) => step.required && step.status !== "pass");
@@ -112,6 +123,7 @@ const report = {
   consumerRoot,
   vendor: vendorArg,
   manifest: manifestArg,
+  distributionChannel,
   reportLabel: reportLabel || "default",
   steps
 };
