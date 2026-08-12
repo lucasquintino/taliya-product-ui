@@ -1,6 +1,6 @@
 {
   "schemaVersion": 8,
-  "generatedAt": "2026-08-12T06:37:43.888Z",
+  "generatedAt": "2026-08-12T08:15:10.368Z",
   "status": "pass-captured-not-certified",
   "note": "Screenshot and pixel-diff evidence only. No row is visually approved by an automatic threshold.",
   "captureMode": "static",
@@ -12,7 +12,7 @@
   "sourceManifestContractSha256": "e462b4f3d506a459b2a290a3e41354efda6d56e08845615a10e8c451d6d63326",
   "sourceManifestSha256": "b6c6038dd7e0dd458721c92c556d23ba3bb7f9f45c9ce7a0cd841d7b8268e1ca",
   "eligibleTargetCount": 63,
-  "attemptedCount": 0,
+  "attemptedCount": 63,
   "capturedCount": 63,
   "failedCount": 0,
   "outputDir": "C:\\Users\\lucas\\taliya-product-ui\\tmp\\visual-certification-current-batch",
