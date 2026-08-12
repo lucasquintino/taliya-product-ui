@@ -1,13 +1,13 @@
 # Visual Certification Capture Audit
 
-Generated: 2026-08-12T06:20:47.469Z
+Generated: 2026-08-12T06:37:43.888Z
 
 Status: pass-captured-not-certified
 
 This report records reproducible source-sized Storybook screenshots and raw pixel-diff metrics. It does not approve visual parity automatically.
 
 - Eligible pending targets with stories: 63
-- Attempted: 1
+- Attempted: 0
 - Captured: 63
 - Failed/invalid: 0
 - Local artifacts: `C:\Users\lucas\taliya-product-ui\tmp\visual-certification-current-batch`
