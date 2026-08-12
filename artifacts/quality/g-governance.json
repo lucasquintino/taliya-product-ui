@@ -3,13 +3,13 @@
   "artifactId": "g-governance",
   "gateId": "G-GOV",
   "decision": "pass",
-  "sourceRevision": "15f6fe9dba37c489c25d5db8eaca09df8110b9fa",
-  "sourceTreeHash": "924a2152d035b9d15de822ffa16488cc3eff11443acc267da693117b9993dee3",
-  "sourceTreeFileCount": 1677,
+  "sourceRevision": "4fab718eeff794a6863856fe3401435c0b0959dd",
+  "sourceTreeHash": "01f70ddb18f87ff3210feb85b26dd26eb991b85baad5263bddaf92c0227d07d0",
+  "sourceTreeFileCount": 1828,
   "cleanTreeBeforeCapture": true,
   "inputFingerprints": {
-    "policy": "f947400aa40bee0d45ec6f7ccc5f61544b07a0a5e1eb1201f40b1ef309ab0a1e",
-    "skillManifest": "c6660c118b3528603f2b65587664cdaa09154b1afc8a4d20b0d2ec835ece1bc3",
+    "policy": "09433b066303892f98c0f9b0ace53f4cc08046eac4b72a531fc7a8ef9236df21",
+    "skillManifest": "911a4371f282b7c239a94561ac588da318d740d336276f37ad127a47ccb809b1",
     "featurePointer": "985cfb8c71ec849da614a8600e90abccc8a14b690e38e90006449232dc38a7ff",
     "instructionRoot": "0e59d3461cc0c6ce7ffcba4f503ded8d6a311eb195a0b548defc0c8f86a051d3"
   },
@@ -19,8 +19,8 @@
     "nodeVersion": "v24.15.0",
     "ci": false
   },
-  "generatedAt": "2026-08-09T01:08:59.853Z",
-  "validUntil": "2026-08-10T01:08:59.853Z",
+  "generatedAt": "2026-08-12T06:43:57.513Z",
+  "validUntil": "2026-08-13T06:43:57.513Z",
   "commands": [
     {
       "id": "direct-policy",
@@ -34,7 +34,7 @@
       "command": "C:\\Program Files\\nodejs\\node.exe scripts/quality/run-governance-gate.mjs --check",
       "exitCode": 0,
       "passed": true,
-      "outputSha256": "aecf122bbe75704d5a1c431d9d97c9c81134dd017bb189713b53d2c989013f22"
+      "outputSha256": "facb226940cff20670ca18f14be9473dc0005ef626fc3746f8245b667ddf4467"
     },
     {
       "id": "negative-probes",
