@@ -16,10 +16,16 @@ function optionValue(name, fallback) {
 
 const outputDir = resolve(rootDir, optionValue("--output-dir", "dist-packages"));
 const packages = ["tokens", "ui", "crm"];
-// Always resolve the package manager through Corepack so clean-clone runs use
-// the version declared by package.json, not a globally installed pnpm.
-const pnpmCommand = process.platform === "win32" ? "corepack.cmd" : "corepack";
-const pnpmArgs = ["pnpm"];
+// Preserve the package-manager binary selected by the caller. CI installs the
+// exact packageManager version before this script runs; re-entering Corepack
+// here would bypass that selection on clean Windows, macOS, and Linux runners.
+const isWindows = process.platform === "win32";
+if (isWindows && /[&|<>^%!]/.test(outputDir)) {
+  console.error("The package output path contains Windows command metacharacters.");
+  process.exit(1);
+}
+const pnpmCommand = isWindows ? process.env.ComSpec || "cmd.exe" : "pnpm";
+const pnpmArgs = isWindows ? ["/d", "/s", "/c", "pnpm"] : [];
 
 for (const packageName of packages) {
   const packageDir = resolve(rootDir, "packages", packageName);
@@ -32,8 +38,7 @@ const buildResult = spawnSync(
   [...pnpmArgs, "-r", "--filter", "./packages/**", "build"],
   {
     cwd: rootDir,
-    stdio: "inherit",
-    shell: process.platform === "win32"
+    stdio: "inherit"
   }
 );
 
@@ -53,8 +58,7 @@ for (const packageName of packages) {
     [...pnpmArgs, "pack", "--pack-destination", outputDir],
     {
       cwd: packageDir,
-      stdio: "inherit",
-      shell: process.platform === "win32"
+      stdio: "inherit"
     }
   );
 

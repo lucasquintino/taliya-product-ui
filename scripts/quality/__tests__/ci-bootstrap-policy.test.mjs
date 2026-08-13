@@ -1,6 +1,11 @@
 import { strict as assert } from 'node:assert';
 import { test } from 'node:test';
-import { validatePackageManagerConfig, validateRepository, validateWorkflowBootstrap } from '../validate-ci-bootstrap.mjs';
+import {
+  validatePackageManagerConfig,
+  validatePnpmSubprocessDispatch,
+  validateRepository,
+  validateWorkflowBootstrap
+} from '../validate-ci-bootstrap.mjs';
 
 const setupPnpm = `      - uses: pnpm/action-setup@0123456789012345678901234567890123456789
         with:
@@ -48,6 +53,12 @@ test('package scripts do not re-enter Corepack after the caller selected pnpm', 
   };
   const errors = validatePackageManagerConfig(packageJson, 'packages:\n  - packages/*\n', 'overrides:\n  vite: 7.3.5\n');
   assert.match(errors[0], /^CI-PNPM-SCRIPT-DISPATCH:/);
+});
+
+test('Node subprocesses preserve the pnpm binary selected by the caller', () => {
+  const source = `const pnpmCommand = process.platform === 'win32' ? 'corepack.cmd' : 'corepack';\nspawnSync(pnpmCommand, ['pnpm', 'pack']);`;
+  assert.match(validatePnpmSubprocessDispatch(source, 'scripts/pack.mjs')[0], /^CI-PNPM-SUBPROCESS-DISPATCH:/);
+  assert.deepEqual(validatePnpmSubprocessDispatch(`spawnSync('pnpm', ['pack']);`), []);
 });
 
 test('override comparison is semantic rather than key-order dependent', () => {

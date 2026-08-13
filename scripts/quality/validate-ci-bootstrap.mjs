@@ -102,6 +102,24 @@ export function validatePackageManagerConfig(packageJson, workspaceSource, lockf
   return errors;
 }
 
+export function validatePnpmSubprocessDispatch(source, relativePath = 'script.mjs') {
+  const errors = [];
+  const directCorepackExecution = /(?:spawnSync|spawn|execFileSync|execFile)\s*\(\s*['"]corepack(?:\.cmd)?['"]/;
+  const corepackCommandVariable = /\b(?:const|let|var)\s+\w*(?:pnpm|corepack)\w*\s*=\s*[^;\r\n]*['"]corepack(?:\.cmd)?['"]/i;
+  if (directCorepackExecution.test(source) || corepackCommandVariable.test(source)) {
+    errors.push(`CI-PNPM-SUBPROCESS-DISPATCH: ${relativePath} bypasses the pnpm binary selected by the caller`);
+  }
+  return errors;
+}
+
+function walkJavaScriptFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const absolutePath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return entry.name === '__tests__' ? [] : walkJavaScriptFiles(absolutePath);
+    return /\.[cm]?js$/.test(entry.name) ? [absolutePath] : [];
+  });
+}
+
 export function validateRepository(root) {
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
   const expectedPnpmVersion = packageJson.packageManager?.replace(/^pnpm@/, '');
@@ -112,6 +130,10 @@ export function validateRepository(root) {
   for (const name of fs.readdirSync(workflowsDir).filter((entry) => /\.ya?ml$/.test(entry)).sort()) {
     const relativePath = path.posix.join('.github/workflows', name);
     errors.push(...validateWorkflowBootstrap(fs.readFileSync(path.join(workflowsDir, name), 'utf8'), expectedPnpmVersion, relativePath));
+  }
+  for (const absolutePath of walkJavaScriptFiles(path.join(root, 'scripts'))) {
+    const relativePath = path.relative(root, absolutePath).replaceAll(path.sep, '/');
+    errors.push(...validatePnpmSubprocessDispatch(fs.readFileSync(absolutePath, 'utf8'), relativePath));
   }
   return errors;
 }
