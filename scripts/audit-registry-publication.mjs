@@ -10,6 +10,23 @@ const reportJsonPath = resolve(specDir, "registry-publication-audit.json");
 const reportMdPath = resolve(specDir, "registry-publication-audit.md");
 const existingReport = existsSync(reportJsonPath) ? JSON.parse(readFileSync(reportJsonPath, "utf8")) : null;
 
+function annotateError(message) {
+  console.error(message);
+  if (process.env.GITHUB_ACTIONS === "true") {
+    console.error(`::error title=Registry publication audit::${message.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A")}`);
+  }
+}
+
+function firstDifferentLine(actual, expected) {
+  const actualLines = actual.split("\n");
+  const expectedLines = expected.split("\n");
+  const length = Math.max(actualLines.length, expectedLines.length);
+  for (let index = 0; index < length; index += 1) {
+    if (actualLines[index] !== expectedLines[index]) return index + 1;
+  }
+  return null;
+}
+
 const packageSpecs = ["tokens", "ui", "crm"].map((directory) => {
   const packageJson = JSON.parse(readFileSync(resolve(root, "packages", directory, "package.json"), "utf8"));
   return { directory, name: packageJson.name, version: packageJson.version };
@@ -87,11 +104,18 @@ if (check) {
   const normalizeNewlines = (value) => value.replaceAll("\r\n", "\n");
   const currentJson = existsSync(reportJsonPath) ? normalizeNewlines(readFileSync(reportJsonPath, "utf8")) : "";
   const currentMd = existsSync(reportMdPath) ? normalizeNewlines(readFileSync(reportMdPath, "utf8")) : "";
-  if (currentJson !== `${JSON.stringify(report, null, 2)}\n` || currentMd !== markdown) {
+  const expectedJson = `${JSON.stringify(report, null, 2)}\n`;
+  if (currentJson !== expectedJson || currentMd !== markdown) {
     for (const row of rows.filter((entry) => !entry.published || !entry.metadataPass)) {
-      console.error(`Registry publication mismatch: ${row.name}@${row.version}: ${row.reason ?? "metadata mismatch"}.`);
+      annotateError(`Registry publication mismatch: ${row.name}@${row.version}: ${row.reason ?? "metadata mismatch"}.`);
     }
-    console.error("Registry publication audit is stale. Run `corepack pnpm registry-publication:audit:update`.");
+    if (currentJson !== expectedJson) {
+      annotateError(`Registry publication JSON differs at line ${firstDifferentLine(currentJson, expectedJson) ?? "unknown"}.`);
+    }
+    if (currentMd !== markdown) {
+      annotateError(`Registry publication Markdown differs at line ${firstDifferentLine(currentMd, markdown) ?? "unknown"}.`);
+    }
+    annotateError("Registry publication audit is stale. Run `pnpm registry-publication:audit:update`.");
     process.exit(1);
   }
 } else {
