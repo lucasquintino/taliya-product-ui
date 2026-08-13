@@ -63,6 +63,11 @@ export function validateWorkflowBootstrap(source, expectedPnpmVersion, relativeP
     }
   }
 
+  const externalConsumerLine = lines.findIndex((line) => /registry-consumer-adoption:audit/.test(line));
+  if (externalConsumerLine >= 0 && /library-portability\.ya?ml$/.test(relativePath)) {
+    errors.push(`CI-HERMETIC-CONSUMER: ${relativePath}:${externalConsumerLine + 1} requires an unversioned sibling consumer in a clean-clone job`);
+  }
+
   return errors;
 }
 
