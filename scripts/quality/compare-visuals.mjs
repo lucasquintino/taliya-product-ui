@@ -7,6 +7,7 @@ import path from "node:path";
 import pixelmatch from "pixelmatch";
 import { PNG } from "pngjs";
 import { resolveSourceAssetsDir } from "../source-assets-config.mjs";
+import { capturedStoryPath } from "./visual-comparison-policy.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
@@ -62,7 +63,7 @@ function sourceBackedTargets() {
     const capture = captureById.get(id);
     const currentArtifact = row.captureEvidence?.currentArtifact ?? row.currentArtifact ?? null;
     const historicalCurrentPath = currentArtifact ? path.resolve(root, currentArtifact.replaceAll("\\", "/")) : null;
-    const capturedCurrentPath = row.image ? path.join(captureDir, row.image) : null;
+    const capturedCurrentPath = capturedStoryPath(captureDir, capture);
     const currentPath = historicalCurrentPath && fs.existsSync(historicalCurrentPath) ? historicalCurrentPath : capturedCurrentPath;
     const sourcePath = approvedRenderHashMode ? null : row.image ? path.resolve(sourceDir, row.image) : null;
     return { id, image: row.image ?? null, capture, sourcePath, currentPath, mode: "source-backed" };
@@ -154,4 +155,14 @@ const output = {
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(`VISUAL-COMPARE: ${output.passed}/${output.storyCount} pass (mode=${output.comparisonMode})`);
-if (output.failures.length) process.exitCode = 1;
+if (output.failures.length) {
+  for (const row of output.failures) {
+    const message = `VISUAL-COMPARE-FAIL ${row.id}: ${row.status}; raw=${row.rawStatus}; current=${row.currentPath ?? "missing"}`;
+    console.error(message);
+    if (process.env.GITHUB_ACTIONS === "true") {
+      const escaped = message.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
+      console.error(`::error title=Visual comparison failed::${escaped}`);
+    }
+  }
+  process.exitCode = 1;
+}
