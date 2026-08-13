@@ -1,13 +1,18 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("@taliya/ui browser contracts", () => {
-  test("renders, focuses, invokes callbacks, and preserves keyboard access", async ({ page }) => {
+  test("renders, focuses, invokes callbacks, and preserves keyboard access", async ({ page, browserName }) => {
     await page.goto("/");
 
     const name = page.getByRole("textbox", { name: "Nome do studio" });
     await name.focus();
     await expect(name).toBeFocused();
-    await page.keyboard.press("Tab");
+    // Safari on macOS uses Option+Tab to include buttons in sequential focus
+    // unless the runner enables the system-wide full keyboard access setting.
+    // Exercise the platform's real shortcut while preserving the same focus
+    // order and keyboard-activation contract asserted by the other browsers.
+    const nextControlKey = browserName === "webkit" && process.platform === "darwin" ? "Alt+Tab" : "Tab";
+    await page.keyboard.press(nextControlKey);
     await expect(page.getByRole("button", { name: "Salvar" })).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(page.getByTestId("saved-state")).toHaveText("Salvo");

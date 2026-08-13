@@ -74,6 +74,12 @@ export function validateWorkflowBootstrap(source, expectedPnpmVersion, relativeP
     if (releaseGateLine >= 0 && (buildLine < 0 || buildLine > releaseGateLine)) {
       errors.push(`CI-RELEASE-BUILD-ORDER: ${relativePath}:${releaseGateLine + 1} runs distributable public API gates before building declarations`);
     }
+    const performanceGateLine = lines.findIndex((line) => /record-performance-gate\.mjs/.test(line));
+    const performanceEvidenceLine = lines.findIndex((line) => /record-performance-evidence\.mjs/.test(line));
+    const performanceMeasurements = lines.filter((line) => /measure-performance\.mjs/.test(line)).length;
+    if (performanceGateLine >= 0 && (performanceEvidenceLine < 0 || performanceEvidenceLine > performanceGateLine || performanceMeasurements < 2)) {
+      errors.push(`CI-PERF-EVIDENCE-ORDER: ${relativePath}:${performanceGateLine + 1} runs the performance gate without two fresh measurements and a recorded optimization ledger`);
+    }
   }
 
   return errors;

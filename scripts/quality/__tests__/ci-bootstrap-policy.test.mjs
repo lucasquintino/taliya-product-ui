@@ -49,6 +49,11 @@ test('release certification builds declarations before distributable API gates',
   assert.match(validateWorkflowBootstrap(source, '9.15.4', '.github/workflows/release-certification.yml')[0], /^CI-RELEASE-BUILD-ORDER:/);
 });
 
+test('release certification records fresh performance evidence before the performance gate', () => {
+  const source = `jobs:\n  certify:\n    steps:\n${setupPnpm}\n${setupNode}\n      - run: node scripts/quality/record-performance-gate.mjs`;
+  assert.match(validateWorkflowBootstrap(source, '9.15.4', '.github/workflows/release-certification.yml')[0], /^CI-PERF-EVIDENCE-ORDER:/);
+});
+
 test('pnpm 9 rejects v11 workspace configuration placement', () => {
   const packageJson = { packageManager: 'pnpm@9.15.4', pnpm: { overrides: { vite: '7.3.5' } } };
   const errors = validatePackageManagerConfig(packageJson, 'packages:\n  - packages/*\noverrides:\n  vite: 7.3.5\n', 'overrides:\n  vite: 7.3.5\n');

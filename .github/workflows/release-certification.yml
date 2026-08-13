@@ -61,6 +61,12 @@ jobs:
         run: node scripts/quality/hash-release-artifacts.mjs
       - run: pnpm consumer:packed-audit
       - run: node scripts/quality/audit-package-performance.mjs
+      - name: Measure performance baseline
+        run: node scripts/quality/measure-performance.mjs --label before
+      - name: Measure performance candidate
+        run: node scripts/quality/measure-performance.mjs --label after
+      - name: Record performance optimization ledger
+        run: node scripts/quality/record-performance-evidence.mjs
       - run: node scripts/quality/record-final-waiver-audit.mjs
       - run: node scripts/quality/record-security-evidence.mjs
       - run: node scripts/quality/record-performance-gate.mjs
