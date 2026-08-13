@@ -39,12 +39,25 @@ if (fs.existsSync(reporterPath)) {
 }
 const stats = playwright?.stats ?? {};
 const observedProjects = new Set();
-const visit = (suite) => {
+const failures = [];
+const visit = (suite, parentTitles = []) => {
+  const titles = [...parentTitles, suite?.title].filter(Boolean);
   for (const spec of suite?.specs ?? []) for (const test of spec.tests ?? []) {
     if (test.projectName) observedProjects.add(test.projectName);
     for (const resultRow of test.results ?? []) if (resultRow.projectName) observedProjects.add(resultRow.projectName);
+    if (test.status === "unexpected") {
+      const failedResult = [...(test.results ?? [])].reverse().find((row) => row.status !== "passed");
+      const firstError = failedResult?.errors?.[0];
+      failures.push({
+        project: test.projectName ?? failedResult?.projectName ?? "unknown-project",
+        title: [...titles, spec.title].join(" > "),
+        file: spec.file ?? suite?.file ?? "",
+        line: spec.line ?? suite?.line ?? 1,
+        message: firstError?.message ?? firstError?.stack ?? `Playwright status: ${failedResult?.status ?? test.status}`
+      });
+    }
   }
-  for (const child of suite?.suites ?? []) visit(child);
+  for (const child of suite?.suites ?? []) visit(child, titles);
 };
 for (const suite of playwright?.suites ?? []) visit(suite);
 const missingProjects = projects.filter((project) => !observedProjects.has(project));
@@ -60,6 +73,7 @@ const report = {
   projects,
   observedProjects: [...observedProjects].sort(),
   missingProjects,
+  failures,
   stats: {
     expected: stats.expected ?? 0,
     unexpected: stats.unexpected ?? 0,
@@ -73,4 +87,12 @@ const report = {
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(report, null, 2)}\n`);
 console.log(`G-E2E-RELEASE: ${status}; expected=${report.stats.expected}; unexpected=${report.stats.unexpected}; flaky=${report.stats.flaky}`);
+for (const failure of failures) {
+  const message = `[${failure.project}] ${failure.title}: ${failure.message}`;
+  console.error(`G-E2E-RELEASE failure: ${message}`);
+  if (process.env.GITHUB_ACTIONS === "true") {
+    const escaped = message.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
+    console.log(`::error file=${failure.file},line=${failure.line}::${escaped}`);
+  }
+}
 if (status !== "pass") process.exitCode = 1;

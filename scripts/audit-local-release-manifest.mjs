@@ -8,6 +8,7 @@ const manifestPath = path.join(root, "dist-packages/taliya-product-ui-local-mani
 const reportJsonPath = path.join(specDir, "local-release-manifest-audit.json");
 const reportMdPath = path.join(specDir, "local-release-manifest-audit.md");
 const check = process.argv.includes("--check");
+const runtime = process.argv.includes("--runtime");
 const updateManifest = process.argv.includes("--update-manifest");
 const existingReport = fs.existsSync(reportJsonPath) ? JSON.parse(fs.readFileSync(reportJsonPath, "utf8")) : null;
 
@@ -134,7 +135,7 @@ This audit validates the consumer-facing local release manifest. The manifest gi
 ${rowsMd}
 `;
 
-if (check) {
+if (check && !runtime) {
   const nextJson = `${JSON.stringify(report, null, 2)}\n`;
   const existingJson = fs.existsSync(reportJsonPath) ? fs.readFileSync(reportJsonPath, "utf8") : "";
   const existingMd = fs.existsSync(reportMdPath) ? fs.readFileSync(reportMdPath, "utf8") : "";
@@ -144,7 +145,7 @@ if (check) {
   }
 }
 
-if (!check) {
+if (!check && !runtime) {
   fs.writeFileSync(reportJsonPath, `${JSON.stringify(report, null, 2)}\n`);
   fs.writeFileSync(reportMdPath, markdown);
 }

@@ -53,7 +53,8 @@ jobs:
       - run: node scripts/quality/validate-visual-approvals.mjs
       - run: node scripts/quality/run-release-e2e.mjs
       - run: pnpm pack:local
-      - run: pnpm local-release-manifest:audit
+      - name: Validate the freshly packed local release manifest
+        run: node scripts/audit-local-release-manifest.mjs --runtime
       - name: Generate SBOM for the exact dependency lockfile
         run: pnpm dlx @cyclonedx/cyclonedx-npm --ignore-npm-errors --output-file artifacts/release/sbom.json --spec-version 1.5
       - name: Hash the exact publishable tarballs and SBOM
