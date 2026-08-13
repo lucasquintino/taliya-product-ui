@@ -1,12 +1,14 @@
 import { strict as assert } from 'node:assert';
 import { test } from 'node:test';
-import { deterministicTimestamp, normalizeRepositoryPath, normalizeText, stableDecision } from '../portability.mjs';
+import { canonicalTextSha256, deterministicTimestamp, normalizeRepositoryPath, normalizeText, stableDecision } from '../portability.mjs';
 
 test('line endings normalize to the same decision', () => {
   const crlf = normalizeText('.a {\r\n  color: red;\r\n}');
   const lf = normalizeText('.a {\n  color: red;\n}');
   assert.equal(crlf, lf);
   assert.equal(Buffer.byteLength(crlf, 'utf8'), Buffer.byteLength(lf, 'utf8'));
+  assert.equal(canonicalTextSha256(crlf), canonicalTextSha256(lf));
+  assert.notEqual(canonicalTextSha256(lf), canonicalTextSha256(`${lf}changed`));
 });
 
 test('Windows and POSIX repository paths normalize identically', () => {

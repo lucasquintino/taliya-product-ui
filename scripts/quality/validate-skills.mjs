@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /* global console, process */
 
-import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import { canonicalTextSha256 } from './portability.mjs';
 
 const repoRoot = process.cwd();
 const manifestPath = path.join(repoRoot, '.specify', 'integrations', 'codex.manifest.json');
@@ -14,7 +14,7 @@ function fail(code, message) {
 }
 
 function sha256(filePath) {
-  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+  return canonicalTextSha256(fs.readFileSync(filePath, 'utf8'));
 }
 
 if (!fs.existsSync(manifestPath)) {
