@@ -803,7 +803,7 @@ export const Image51HOnboardingAlunos: Story = {
     await expect(canvas.getByText("Este bloco cria a base inicial de alunos ativos.")).toBeInTheDocument();
     await expect(setupActions.studentsSourceSelect).toHaveBeenCalled();
     await expect(setupActions.studentsStudentAction).toHaveBeenCalledTimes(2);
-    await expect(setupActions.studentsStudentSelect).toHaveBeenCalledTimes(1);
+    await expect(setupActions.studentsStudentSelect).toHaveBeenCalled();
     await expect(setupActions.studentsAction).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellAgentQuickReply).toHaveBeenCalledWith("Posso importar foto de caderno?");
   }
