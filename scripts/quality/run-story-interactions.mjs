@@ -76,7 +76,12 @@ fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(`STORY-INTERACTIONS: ${output.passed}/${output.storyCount} pass`);
 if (output.failed) {
   for (const row of results.filter((result) => result.status !== "pass")) {
-    console.error(`STORY-INTERACTION-FAIL ${row.id}: ${row.error ?? "unknown failure"}`);
+    const message = `STORY-INTERACTION-FAIL ${row.id}: ${row.error ?? "unknown failure"}`;
+    console.error(message);
+    if (process.env.GITHUB_ACTIONS === "true") {
+      const escaped = message.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
+      console.error(`::error title=Storybook interaction failed::${escaped}`);
+    }
   }
   process.exitCode = 1;
 }
