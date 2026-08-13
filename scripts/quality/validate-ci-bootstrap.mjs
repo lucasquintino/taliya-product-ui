@@ -55,6 +55,14 @@ export function validateWorkflowBootstrap(source, expectedPnpmVersion, relativeP
     }
   }
 
+  const storyInteractionLine = lines.findIndex((line) => /run-story-interactions\.mjs/.test(line));
+  if (storyInteractionLine >= 0) {
+    const browserInstallLine = lines.findIndex((line) => /playwright\s+install(?:\s+--with-deps)?\s+chromium/.test(line));
+    if (browserInstallLine < 0 || browserInstallLine > storyInteractionLine) {
+      errors.push(`CI-PLAYWRIGHT-INSTALL: ${relativePath}:${storyInteractionLine + 1} runs Storybook interactions before installing Chromium`);
+    }
+  }
+
   return errors;
 }
 

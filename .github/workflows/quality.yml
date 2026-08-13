@@ -33,6 +33,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm quality:select --profile "$QUALITY_PROFILE" --stage "$QUALITY_STAGE"
       - run: pnpm quality:governance
       - run: pnpm coverage

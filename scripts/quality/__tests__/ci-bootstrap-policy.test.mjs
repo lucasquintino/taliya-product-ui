@@ -29,6 +29,11 @@ test('workflow commands use the pnpm binary installed by the setup action', () =
   assert.match(validateWorkflowBootstrap(source, '9.15.4')[0], /^CI-PNPM-DISPATCH:/);
 });
 
+test('Storybook browser interactions require Chromium installation first', () => {
+  const source = `jobs:\n  test:\n    steps:\n${setupPnpm}\n${setupNode}\n      - run: node scripts/quality/run-story-interactions.mjs`;
+  assert.match(validateWorkflowBootstrap(source, '9.15.4')[0], /^CI-PLAYWRIGHT-INSTALL:/);
+});
+
 test('pnpm 9 rejects v11 workspace configuration placement', () => {
   const packageJson = { packageManager: 'pnpm@9.15.4', pnpm: { overrides: { vite: '7.3.5' } } };
   const errors = validatePackageManagerConfig(packageJson, 'packages:\n  - packages/*\noverrides:\n  vite: 7.3.5\n', 'overrides:\n  vite: 7.3.5\n');
