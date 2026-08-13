@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { fetchRegistryMetadata } from "./lib/registry-metadata.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
@@ -15,23 +16,9 @@ const packageSpecs = ["tokens", "ui", "crm"].map((directory) => {
 });
 
 const rows = await Promise.all(packageSpecs.map(async (spec) => {
-  const metadataUrl = `https://registry.npmjs.org/${encodeURIComponent(spec.name)}/${encodeURIComponent(spec.version)}`;
-  try {
-    const response = await fetch(metadataUrl, { signal: AbortSignal.timeout(15000) });
-    if (!response.ok) {
-      return {
-        ...spec,
-        metadataUrl,
-        httpStatus: response.status,
-        published: false,
-        metadataPass: false,
-        tarball: null,
-        integrity: null,
-        reason: response.status === 404 ? "package version is not published" : `registry returned HTTP ${response.status}`
-      };
-    }
-
-    const metadata = await response.json();
+  const result = await fetchRegistryMetadata(spec);
+  if (result.metadata) {
+    const metadata = result.metadata;
     const metadataPass =
       metadata?.name === spec.name &&
       metadata?.version === spec.version &&
@@ -42,26 +29,26 @@ const rows = await Promise.all(packageSpecs.map(async (spec) => {
 
     return {
       ...spec,
-      metadataUrl,
-      httpStatus: response.status,
+      metadataUrl: result.metadataUrl,
+      httpStatus: result.httpStatus,
       published: true,
       metadataPass,
       tarball: metadata?.dist?.tarball ?? null,
       integrity: metadata?.dist?.integrity ?? null,
       reason: metadataPass ? null : "published metadata is incomplete or mismatched"
     };
-  } catch (error) {
-    return {
-      ...spec,
-      metadataUrl,
-      httpStatus: null,
-      published: false,
-      metadataPass: false,
-      tarball: null,
-      integrity: null,
-      reason: error instanceof Error ? error.message : String(error)
-    };
   }
+
+  return {
+    ...spec,
+    metadataUrl: result.metadataUrl,
+    httpStatus: result.httpStatus,
+    published: false,
+    metadataPass: false,
+    tarball: null,
+    integrity: null,
+    reason: result.httpStatus === 404 ? "package version is not published" : result.error
+  };
 }));
 
 const versionsAligned = new Set(rows.map((row) => row.version)).size === 1;
@@ -97,9 +84,13 @@ ${rows.map((row) => `| \`${row.name}\` | \`${row.version}\` | ${row.httpStatus ?
 `;
 
 if (check) {
-  const currentJson = existsSync(reportJsonPath) ? readFileSync(reportJsonPath, "utf8") : "";
-  const currentMd = existsSync(reportMdPath) ? readFileSync(reportMdPath, "utf8") : "";
+  const normalizeNewlines = (value) => value.replaceAll("\r\n", "\n");
+  const currentJson = existsSync(reportJsonPath) ? normalizeNewlines(readFileSync(reportJsonPath, "utf8")) : "";
+  const currentMd = existsSync(reportMdPath) ? normalizeNewlines(readFileSync(reportMdPath, "utf8")) : "";
   if (currentJson !== `${JSON.stringify(report, null, 2)}\n` || currentMd !== markdown) {
+    for (const row of rows.filter((entry) => !entry.published || !entry.metadataPass)) {
+      console.error(`Registry publication mismatch: ${row.name}@${row.version}: ${row.reason ?? "metadata mismatch"}.`);
+    }
     console.error("Registry publication audit is stale. Run `corepack pnpm registry-publication:audit:update`.");
     process.exit(1);
   }
