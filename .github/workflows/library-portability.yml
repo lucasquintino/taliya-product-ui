@@ -63,18 +63,10 @@ jobs:
         run: pnpm future-consumer-fixture:audit
 
       - name: Run deterministic quality gates
+        run: node scripts/quality/run-portability-gates.mjs
+
+      - name: Run portable browser and security gates
         run: |
-          pnpm quality:governance
-          pnpm tokens:audit
-          pnpm storybook-anatomy:audit:strict
-          pnpm components:audit
-          pnpm crm-module-boundaries:audit
-          pnpm domain-wrappers:audit
-          pnpm package-boundaries:audit
-          pnpm public-api:audit
-          pnpm public-api-surface:audit
-          pnpm source-assets:versioned-audit
-          pnpm registry-publication:audit
           node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
           node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 4
           pnpm a11y:evidence
