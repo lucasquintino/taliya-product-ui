@@ -35,6 +35,16 @@ test('pnpm 9 rejects v11 workspace configuration placement', () => {
   assert.match(errors[0], /^CI-PNPM-CONFIG:/);
 });
 
+test('package scripts do not re-enter Corepack after the caller selected pnpm', () => {
+  const packageJson = {
+    packageManager: 'pnpm@9.15.4',
+    pnpm: { overrides: { vite: '7.3.5' } },
+    scripts: { typecheck: 'corepack pnpm -r typecheck' }
+  };
+  const errors = validatePackageManagerConfig(packageJson, 'packages:\n  - packages/*\n', 'overrides:\n  vite: 7.3.5\n');
+  assert.match(errors[0], /^CI-PNPM-SCRIPT-DISPATCH:/);
+});
+
 test('override comparison is semantic rather than key-order dependent', () => {
   const packageJson = { packageManager: 'pnpm@9.15.4', pnpm: { overrides: { vite: '7.3.5', esbuild: '0.28.1' } } };
   const errors = validatePackageManagerConfig(packageJson, 'packages:\n  - packages/*\n', 'overrides:\n  esbuild: 0.28.1\n  vite: 7.3.5\n');

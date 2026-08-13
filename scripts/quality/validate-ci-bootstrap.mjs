@@ -79,6 +79,11 @@ export function validatePackageManagerConfig(packageJson, workspaceSource, lockf
   if (major < 11 && /^(?:allowBuilds|overrides):/m.test(workspaceSource)) {
     errors.push('CI-PNPM-CONFIG: pnpm before v11 must keep overrides/build policy in package.json, not pnpm-workspace.yaml');
   }
+  for (const [name, command] of Object.entries(packageJson.scripts ?? {})) {
+    if (/\bcorepack\s+pnpm\b/.test(command)) {
+      errors.push(`CI-PNPM-SCRIPT-DISPATCH: package.json script ${name} bypasses the pnpm binary selected by the caller`);
+    }
+  }
   const configuredOverrides = packageJson.pnpm?.overrides ?? {};
   const lockedOverrides = parseLockfileOverrides(lockfileSource);
   const configuredEntries = Object.entries(configuredOverrides).sort(([left], [right]) => left.localeCompare(right));

@@ -72,4 +72,9 @@ const output = { schemaVersion: "story-interactions.v1", sourceRevision: revisio
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(`STORY-INTERACTIONS: ${output.passed}/${output.storyCount} pass`);
-if (output.failed) process.exitCode = 1;
+if (output.failed) {
+  for (const row of results.filter((result) => result.status !== "pass")) {
+    console.error(`STORY-INTERACTION-FAIL ${row.id}: ${row.error ?? "unknown failure"}`);
+  }
+  process.exitCode = 1;
+}
