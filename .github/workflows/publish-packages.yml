@@ -31,7 +31,8 @@ jobs:
           version: 9.15.4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: 22.12.0
+          node-version: 24.15.0
+          registry-url: https://registry.npmjs.org
           cache: pnpm
       - name: Download exact certified artifacts
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16
