@@ -6,6 +6,7 @@ import http from "node:http";
 import path from "node:path";
 import { chromium } from "@playwright/test";
 import { hasSourceChanges, sourceRevision, sourceTreeHash } from "./source-tree.mjs";
+import { isRetryableStoryFailure } from "./story-interaction-policy.mjs";
 
 const root = process.cwd();
 const storybookFlag = process.argv.indexOf("--storybook-dir");
@@ -35,33 +36,45 @@ const port = server.address().port;
 const browser = await chromium.launch({ headless: true });
 const results = [];
 let cursor = 0;
+
+async function runStoryAttempt(entry) {
+  const page = await browser.newPage();
+  const errors = [];
+  page.on("console", (message) => { if (message.type() === "error") errors.push(`${message.text().slice(0, 500)} @ ${JSON.stringify(message.location())}`); });
+  page.on("pageerror", (error) => errors.push(`pageerror: ${String(error?.stack ?? error).slice(0, 600)}`));
+  let status = "pass";
+  let error = null;
+  try {
+    const response = await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`, { waitUntil: "commit", timeout: 30000 });
+    if (!response || response.status() >= 400) { status = "fail"; error = `Story iframe HTTP ${response?.status() ?? "no-response"}`; }
+    // Wait for Storybook's preview lifecycle to finish. A fixed delay is not
+    // a reliable contract on cold or resource-constrained CI runners.
+    await page.waitForFunction(
+      () => window.__STORYBOOK_PREVIEW__?.currentRender?.phase === "finished",
+      { timeout: 30000 }
+    );
+    const body = await page.locator("body").innerText();
+    if (/There was an error rendering|Cannot read properties of undefined|Failed to fetch dynamically imported module/i.test(body)) { status = "fail"; error = body.slice(0, 500); }
+    if (errors.length) { status = "fail"; error = errors.join(" | "); }
+  } catch (cause) { status = "fail"; error = String(cause?.message ?? cause).slice(0, 500); }
+  finally { await page.close(); }
+  return { status, error };
+}
+
 async function worker() {
   while (cursor < entries.length) {
     const entry = entries[cursor++];
     // Use a fresh disposable context for every story. Play functions may keep
     // spies, focus, timers, and storage state; sharing a page makes parallel
     // evidence order-dependent and produces false interaction failures.
-    const page = await browser.newPage();
-    const errors = [];
-    page.on("console", (message) => { if (message.type() === "error") errors.push(`${message.text().slice(0, 500)} @ ${JSON.stringify(message.location())}`); });
-    page.on("pageerror", (error) => errors.push(`pageerror: ${String(error?.stack ?? error).slice(0, 600)}`));
-    let status = "pass";
-    let error = null;
-    try {
-      const response = await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`, { waitUntil: "commit", timeout: 30000 });
-      if (!response || response.status() >= 400) { status = "fail"; error = `Story iframe HTTP ${response?.status() ?? "no-response"}`; }
-      // Wait for Storybook's preview lifecycle to finish. A fixed delay is not
-      // a reliable contract on cold or resource-constrained CI runners.
-      await page.waitForFunction(
-        () => window.__STORYBOOK_PREVIEW__?.currentRender?.phase === "finished",
-        { timeout: 30000 }
-      );
-      const body = await page.locator("body").innerText();
-      if (/There was an error rendering|Cannot read properties of undefined|Failed to fetch dynamically imported module/i.test(body)) { status = "fail"; error = body.slice(0, 500); }
-      if (errors.length) { status = "fail"; error = errors.join(" | "); }
-    } catch (cause) { status = "fail"; error = String(cause?.message ?? cause).slice(0, 500); }
-    results.push({ id: entry.id, title: entry.title, status, error });
-    await page.close();
+    let attempt = 1;
+    let outcome = await runStoryAttempt(entry);
+    while (isRetryableStoryFailure(outcome.error, attempt)) {
+      console.warn(`STORY-INTERACTION-RETRY ${entry.id}: attempt=${attempt + 1}`);
+      attempt += 1;
+      outcome = await runStoryAttempt(entry);
+    }
+    results.push({ id: entry.id, title: entry.title, status: outcome.status, error: outcome.error, attempts: attempt });
   }
 }
 await Promise.all(Array.from({ length: Math.min(workerCount, entries.length) }, worker));
