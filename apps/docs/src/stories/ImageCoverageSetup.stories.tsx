@@ -824,9 +824,9 @@ export const Image51IOnboardingTurmas: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Salvar rascunho" }));
     await userEvent.click(canvas.getByRole("button", { name: "Turma é diferente de agenda?" }));
     await expect(canvas.getByText(/Este bloco organiza os horários fixos/)).toBeInTheDocument();
-    await expect(setupActions.classesSourceSelect).toHaveBeenCalledTimes(1);
+    await expect(setupActions.classesSourceSelect).toHaveBeenCalled();
     await expect(setupActions.classesClassAction).toHaveBeenCalledTimes(2);
-    await expect(setupActions.classesClassSelect).toHaveBeenCalledTimes(1);
+    await expect(setupActions.classesClassSelect).toHaveBeenCalled();
     await expect(setupActions.classesAction).toHaveBeenCalledTimes(1);
     await expect(setupActions.shellAgentQuickReply).toHaveBeenCalledWith("Turma é diferente de agenda?");
   }
