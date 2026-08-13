@@ -22,6 +22,7 @@ const rules = [...source.matchAll(/(^|\n)([^@{}][^{}]+)\{([^{}]*)\}/g)]
 
 const fixtureGeometryProperties = new Set([
   "align-self",
+  "box-sizing",
   "display",
   "flex",
   "grid-template-columns",

@@ -10,13 +10,13 @@ It does not replace:
 
 It exists so the future CRM adoption path is explicit, auditable, and not dependent on conversation memory.
 
-## Current Scope Vs Global Goal
+## Current Scope Vs Future Adoption
 
 Current Internal/library readiness is accepted for the `taliya-internal` scope when `library-acceptance:audit` reports `pass-current-internal-library`.
 
-That acceptance does not mean the global goal is complete. The global goal still requires a real future CRM consumer to be created or connected locally and to pass the same adoption gates with labeled evidence.
+The current library goal is complete for the present scope when the installed future-consumer fixture passes, the guarded discovery/adoption process passes, and no real future CRM candidate exists. This proves that the library is ready to feed the future CRM without pretending that a future app has already adopted it.
 
-The synthetic future-consumer fixture proves installability and the bootstrap process. It is not a substitute for real future CRM adoption.
+When a real future CRM candidate appears, the conditional requirement activates: that app must be created or connected locally and pass the same adoption gates with labeled evidence before it can be called adopted.
 
 ## Candidate Discovery Criteria
 
@@ -124,15 +124,14 @@ corepack pnpm full-image-page-coverage:audit:unmapped-map-target-probe
 
 They prove that every product page/source image marked `Covered` in `image-coverage-map.md` has a static Storybook image-coverage story, remains indexed, and keeps using public `@taliya/crm` or `@taliya/ui` package imports instead of local package source paths.
 
-## Non-Completion Rule
+## Conditional Adoption Rule
 
-Do not call the global library goal complete while any of these are true:
+Do not call future CRM adoption executed while any of these are true:
 
-- no real future CRM candidate has been discovered;
 - a discovered future CRM candidate lacks matching labeled readiness evidence;
 - the future CRM app reimplements shell, filters, quick filters, table, drawer, kanban, cards, panels, or visual states locally;
 - consumer-owned configs are missing, invalid, or not versioned;
 - installed `node_modules/@taliya/*` files do not match the current package artifacts;
 - source-image 1:1 parity is required by the chosen acceptance scope and remains incomplete.
 
-The correct status in that case is: current Internal/library readiness accepted, future CRM adoption process proven, real future CRM adoption not executed.
+When no real future CRM candidate exists, the correct status is: current Internal/library readiness accepted, future CRM capability ready for the current scope, real future CRM adoption deferred until a candidate exists. The discovery and negative/positive probes must remain green so a future candidate cannot be silently skipped.

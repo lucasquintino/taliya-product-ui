@@ -4,8 +4,15 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const reportPath = path.join(root, "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260805.json");
-const outputPath = path.join(root, "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260805.md");
+const args = process.argv.slice(2);
+const option = (name, fallback) => {
+  const index = args.indexOf(name);
+  if (index >= 0 && args[index + 1] && !args[index + 1].startsWith("--")) return args[index + 1];
+  const equals = args.find((arg) => arg.startsWith(`${name}=`));
+  return equals ? equals.slice(name.length + 1) : fallback;
+};
+const reportPath = path.resolve(root, option("--report", "specs/005-joint-product-certification/visual-diagnostics/joint-story-runtime-audit-20260805.json"));
+const outputPath = path.resolve(root, option("--output", reportPath.replace(/\.json$/, ".md")));
 const report = JSON.parse(await readFile(reportPath, "utf8"));
 const rows = report.rows ?? [];
 const overflowFailures = report.failures.filter((row) => row.metrics.overflowX);

@@ -1,6 +1,6 @@
 # Public Component Inventory
 
-Generated: 2026-08-05T19:42:53.495Z
+Generated: 2026-08-09T00:01:55.407Z
 
 - Public visual components detected: 367
 - @taliya/ui: 92

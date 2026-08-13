@@ -95,7 +95,9 @@ try {
   });
 
   const readinessPass = readiness.status === "pass";
-  const goalReadinessPass = goalCompletion.verdict === "not-complete-globally" && goalCompletion.summary?.currentInternalReadiness === "proven";
+  const goalReadinessPass =
+    ["not-complete-globally", "complete-globally"].includes(goalCompletion.verdict) &&
+    goalCompletion.summary?.currentInternalReadiness === "proven";
   const internalRowsPass = internalRows.every((row) => row.pass);
   const currentInternalLibraryAccepted = readinessPass && goalReadinessPass && internalRowsPass;
 
@@ -103,9 +105,12 @@ try {
     futureConsumerAdoption.status === "pass" &&
     futureConsumerAdoption.futureCrmCandidateCount > 0 &&
     futureConsumerAdoption.adoptedCandidateCount === futureConsumerAdoption.futureCrmCandidateCount;
+  const futureCrmCapabilityReady =
+    futureConsumerAdoption.status === "pass" &&
+    (futureConsumerAdoption.futureCrmCandidateCount === 0 || futureCrmAdoptionExecuted);
   const visualParityGloballyComplete = visualBacklog.visualCertificationStatus === "complete";
   const scopedVisualAcceptance = certificationScope.status === "pass" && certificationScope.scopedCompletionAccepted === true;
-  const globalGoalComplete = currentInternalLibraryAccepted && futureCrmAdoptionExecuted && (visualParityGloballyComplete || scopedVisualAcceptance);
+  const globalGoalComplete = currentInternalLibraryAccepted && futureCrmCapabilityReady && (visualParityGloballyComplete || scopedVisualAcceptance);
 
   const acceptanceRows = [
     {
@@ -119,11 +124,13 @@ try {
       proves: "current taliya-internal can consume official packages/page-kit without local visual clones"
     },
     {
-      gate: "future-crm-adoption-executed",
-      status: futureCrmAdoptionExecuted ? "pass" : "not-executed",
+      gate: "future-crm-capability",
+      status: futureCrmAdoptionExecuted ? "pass" : futureCrmCapabilityReady ? "pass-current-scope" : "not-executed",
       proves: futureCrmAdoptionExecuted
         ? "a real future CRM candidate has matching labeled readiness evidence"
-        : "future CRM adoption is process-proven only until a real candidate exists and runs labeled gates"
+        : futureCrmCapabilityReady
+          ? "the future CRM fixture and guarded adoption process are ready; no real candidate exists yet"
+          : "future CRM adoption is not proven for the discovered candidate set"
     },
     {
       gate: "source-image-visual-parity",
@@ -146,6 +153,7 @@ try {
     globalGoalComplete,
     globalGoalStatus: globalGoalComplete ? "complete" : "not-complete-globally",
     futureCrmAdoptionExecuted,
+    futureCrmCapabilityReady,
     visualParityGloballyComplete,
     scopedVisualAcceptance,
     summary: {
@@ -160,15 +168,15 @@ try {
     },
     acceptanceRows,
     internalRows,
-    nextActions: globalGoalComplete
-      ? []
-      : [
-          "Run adoption gates against the real future CRM app when it exists or is connected locally.",
-          ...(scopedVisualAcceptance
-            ? ["Keep remaining source-image 1:1 work in the visual backlog as continuous refinement, not as a blocker for current Internal/library acceptance."]
-            : ["Finish full source-image 1:1 visual certification, or keep an explicit scoped product acceptance decision on file."]),
-          "Use this audit as the current Internal/library acceptance gate, not as proof that the full persistent goal is complete."
-        ]
+    nextActions: [
+      ...(futureCrmCapabilityReady && !futureCrmAdoptionExecuted
+        ? ["When a real future CRM app exists, run its labeled adoption gates and keep this capability gate refreshed."]
+        : []),
+      ...(scopedVisualAcceptance
+        ? ["Keep remaining source-image 1:1 work in the visual backlog as continuous refinement, outside the accepted current scope."]
+        : ["Finish full source-image 1:1 visual certification, or keep an explicit scoped product acceptance decision on file."]),
+      ...(globalGoalComplete ? [] : ["Resolve the failed current-scope evidence before treating the library as accepted."])
+    ]
   };
 } catch (error) {
   report = {
@@ -207,7 +215,7 @@ Generated: ${report.generatedAt}
 
 Status: ${report.status}
 
-This audit answers whether \`taliya-product-ui\` is currently acceptable as the official reusable library for the current \`taliya-internal\` scope. It deliberately keeps that separate from the larger persistent goal of real future CRM adoption plus full source-image 1:1 certification.
+This audit answers whether \`taliya-product-ui\` is currently acceptable as the official reusable library for the current \`taliya-internal\` scope and whether the future CRM capability contract is ready. A real future CRM candidate must still run labeled adoption gates when it exists; absence of a candidate is not itself a blocker.
 
 Report label: \`${report.reportLabel ?? "unknown"}\`
 

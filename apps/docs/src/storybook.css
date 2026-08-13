@@ -1206,8 +1206,25 @@ body {
 }
 
 @media (max-width: 760px) {
+  .sb-crm-worklist-table-story,
+  .sb-crm-worklist-table-story .tcrm-worklist-table,
+  .sb-crm-worklist-table-story .sb-primitive-state,
+  .sb-crm-worklist-table-story .sb-primitive-state > div {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
   #storybook-root {
     box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+  }
+
+  #storybook-root > * {
+    box-sizing: border-box;
+    max-width: 100%;
     min-width: 0;
     width: 100%;
   }
@@ -2401,6 +2418,14 @@ body {
 
 .sb-crm-batch10-page .sb-primitive-matrix {
   grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 761px) {
+  .sb-crm-batch10-page .sb-primitive-matrix {
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-x: auto;
+  }
 }
 
 .sb-crm-batch10-page .sb-crm-batch10-agent-card-grid {

@@ -70,7 +70,7 @@ type Story = StoryObj<typeof meta>;
 
 function WorklistTableExample({ state = "source" }: { state?: CrmWorklistTableState }) {
   return (
-    <div style={{ width: 780 }}>
+    <div className="sb-crm-worklist-table-story" style={{ width: "min(100%, 780px)" }}>
       <CrmWorklistTable
         ariaLabel="Tabela padrao da familia worklist"
         columns={columns}
@@ -96,7 +96,7 @@ export const Source: Story = {
 
 export const WithRowActions: Story = {
   render: () => (
-    <div style={{ width: 780 }}>
+    <div className="sb-crm-worklist-table-story" style={{ width: "min(100%, 780px)" }}>
       <CrmWorklistTable
         actionColumnWidth="44px"
         ariaLabel="Tabela padrao da familia worklist com acoes"
@@ -115,7 +115,7 @@ export const WithRowActions: Story = {
 
 export const CompactRows: Story = {
   render: () => (
-    <div style={{ width: 780 }}>
+    <div className="sb-crm-worklist-table-story" style={{ width: "min(100%, 780px)" }}>
       <CrmWorklistTable
         ariaLabel="Tabela compacta da familia worklist"
         columns={columns}

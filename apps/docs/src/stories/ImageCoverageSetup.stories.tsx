@@ -797,9 +797,11 @@ export const Image51HOnboardingAlunos: Story = {
     await userEvent.click(canvas.getByText("Ana Martins", { exact: true }));
     await userEvent.click(canvas.getByRole("button", { name: "Editar Ana Martins" }));
     await userEvent.click(canvas.getByRole("button", { name: "Ver Ana Martins" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Ana Martins/ }));
     await userEvent.click(canvas.getByRole("button", { name: "Salvar rascunho" }));
     await userEvent.click(canvas.getByRole("button", { name: "Posso importar foto de caderno?" }));
     await expect(canvas.getByText("Este bloco cria a base inicial de alunos ativos.")).toBeInTheDocument();
+    await expect(setupActions.studentsSourceSelect).toHaveBeenCalledTimes(1);
     await expect(setupActions.studentsStudentAction).toHaveBeenCalledTimes(2);
     await expect(setupActions.studentsStudentSelect).toHaveBeenCalledTimes(1);
     await expect(setupActions.studentsAction).toHaveBeenCalledTimes(1);
@@ -818,6 +820,7 @@ export const Image51IOnboardingTurmas: Story = {
     await userEvent.click(canvas.getByRole("cell", { name: "Ter/Qui 18h" }));
     await userEvent.click(canvas.getByRole("button", { name: "Editar Ter/Qui 18h" }));
     await userEvent.click(canvas.getByRole("button", { name: "Ver Ter/Qui 18h" }));
+    await userEvent.click(canvas.getByRole("row", { name: /Ter\/Qui 18h/ }));
     await userEvent.click(canvas.getByRole("button", { name: "Salvar rascunho" }));
     await userEvent.click(canvas.getByRole("button", { name: "Turma é diferente de agenda?" }));
     await expect(canvas.getByText(/Este bloco organiza os horários fixos/)).toBeInTheDocument();
