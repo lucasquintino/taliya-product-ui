@@ -125,7 +125,7 @@ export const FluidConsumerContainer: Story = {
           title="Hoje"
         >
           <Panel>
-            <List dense>
+            <List aria-label="Pendências internas" dense role="group">
               <CrmOperationalRow
                 row={{
                   id: "lead-hot",

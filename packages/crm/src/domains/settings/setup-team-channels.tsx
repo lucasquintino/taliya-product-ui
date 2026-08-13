@@ -70,7 +70,7 @@ export function SetupTeamWorkspace({
         </section>
         <section>
           <h3>3. Equipe preparada</h3>
-          <List>
+          <List aria-label="Equipe preparada" role="group">
             {invites.map((item) => (
               <InviteRow
                 invite={item.invite}

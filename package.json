@@ -22,6 +22,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release:npm": "corepack pnpm -r --filter \"./packages/**\" publish --access public --provenance --no-git-checks",
+    "release:npm:artifacts": "npm publish dist-packages/taliya-tokens-*.tgz --access public --provenance --no-git-checks && npm publish dist-packages/taliya-ui-*.tgz --access public --provenance --no-git-checks && npm publish dist-packages/taliya-crm-*.tgz --access public --provenance --no-git-checks",
     "release:npm:dry-run": "corepack pnpm -r --filter \"./packages/**\" publish --access public --provenance --no-git-checks --dry-run",
     "registry-publication:audit": "node scripts/audit-registry-publication.mjs --check",
     "registry-publication:audit:update": "node scripts/audit-registry-publication.mjs",
@@ -115,6 +116,7 @@
     "joint-certification:families:record": "node scripts/record-joint-family-review.mjs",
     "source-assets:audit": "node scripts/audit-source-assets.mjs --check",
     "source-assets:audit:update": "node scripts/audit-source-assets.mjs --update",
+    "source-assets:versioned-audit": "node scripts/quality/validate-versioned-source-assets.mjs",
     "source-assets:reconcile": "node scripts/audit-source-assets-reconciliation.mjs --check",
     "source-assets:reconcile:update": "node scripts/audit-source-assets-reconciliation.mjs --update",
     "source-assets:reconcile:nested-exclusion-probe": "node scripts/probe-source-assets-reconciliation-nested-exclusion.mjs",
@@ -206,6 +208,7 @@
     "behavior-matrix:audit:update": "node scripts/quality/generate-behavior-matrix.mjs --update",
     "story:tests": "node scripts/quality/run-story-tests.mjs",
     "story:interactions": "node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static",
+    "a11y:evidence": "node scripts/quality/run-a11y.mjs --storybook-dir apps/docs/storybook-static --workers 4",
     "security:sast": "node scripts/quality/run-sast.mjs",
     "security:secrets": "node scripts/quality/run-secrets.mjs",
     "security:probe": "node scripts/quality/probe-security-gates.mjs",
@@ -222,7 +225,8 @@
     "wave5:evidence": "node scripts/quality/record-wave-package-evidence.mjs --package ui",
     "wave6:evidence": "node scripts/quality/record-wave-package-evidence.mjs --package crm",
     "e2e:pr": "playwright test --project=chromium-pr --project=chromium-mobile",
-    "e2e:release": "playwright test --project=chromium-release --project=chromium-release-mobile --project=firefox-release --project=firefox-release-mobile --project=webkit-release --project=webkit-release-mobile"
+    "e2e:release": "playwright test --project=chromium-release --project=chromium-release-mobile --project=firefox-release --project=firefox-release-mobile --project=webkit-release --project=webkit-release-mobile",
+    "e2e:release:evidence": "node scripts/quality/run-release-e2e.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",

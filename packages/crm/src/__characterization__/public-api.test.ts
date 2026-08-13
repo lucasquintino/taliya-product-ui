@@ -29,6 +29,8 @@ describe("@taliya/crm characterization contract", () => {
     expect(css).toContain(".tcrm-weekly-calendar-reference");
     expect(css).toContain(".tcrm-drawer-frame");
     expect(css).toContain(".tcrm-tenant-summary-drawer");
+    expect(css).toContain(".tcrm-activation-checklist__columns");
+    expect(css).toContain("color: var(--taliya-color-text-secondary)");
   });
 
   it("keeps every inventoried runtime export available during extraction", () => {

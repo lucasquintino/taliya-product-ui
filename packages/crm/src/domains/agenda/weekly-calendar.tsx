@@ -141,7 +141,7 @@ export function WeeklyCalendarReference({
   className?: string;
 }) {
   return (
-    <section className={cn("tcrm-weekly-calendar-reference", className)} data-component="WeeklyCalendar" data-variant="reference">
+    <section aria-label="Calendário semanal completo" className={cn("tcrm-weekly-calendar-reference", className)} data-component="WeeklyCalendar" data-variant="reference" role="region">
       <header className="tcrm-weekly-calendar-reference__toolbar">
         <ButtonGroup aria-label="Navegacao da semana">
           <IconButton icon="chevronLeft" label="Semana anterior" onClick={onPreviousWeek} size="sm" variant="ghost" />
@@ -154,9 +154,9 @@ export function WeeklyCalendarReference({
           <Button leadingIcon="filter" onClick={onFilter} size="sm" variant="secondary">Filtros</Button>
         </div>
       </header>
-      <div className="tcrm-weekly-calendar-reference__grid" role="grid" aria-label="Calendario semanal completo">
+      <div className="tcrm-weekly-calendar-reference__grid">
         <span className="tcrm-weekly-calendar-reference__corner">Hora</span>
-        {days.map((day) => <strong key={day} role="columnheader">{day}</strong>)}
+        {days.map((day) => <strong key={day}>{day}</strong>)}
         <div className="tcrm-weekly-calendar-reference__times">
           {weeklyCalendarReferenceTimes.map((time) => <span key={time}>{time}</span>)}
         </div>
@@ -229,9 +229,9 @@ export function WeeklyCalendar({
     );
   }
   return (
-    <div className={cn("tcrm-weekly-calendar", compact && "tcrm-weekly-calendar--compact", density === "short" && "tcrm-weekly-calendar--short", className)} role="grid" aria-label="Agenda semanal">
+    <div aria-label="Agenda semanal" className={cn("tcrm-weekly-calendar", compact && "tcrm-weekly-calendar--compact", density === "short" && "tcrm-weekly-calendar--short", className)} role="region">
       <div className="tcrm-weekly-calendar__corner" />
-      {days.map((day) => <div className="tcrm-weekly-calendar__day" key={day} role="columnheader">{day}</div>)}
+      {days.map((day) => <div className="tcrm-weekly-calendar__day" key={day}>{day}</div>)}
       <div className="tcrm-weekly-calendar__body">
         {times.map((time) => (
           <span className="tcrm-weekly-calendar__time" key={String(time.label)} style={{ "--tcrm-weekly-time-top": `${time.top}px` } as React.CSSProperties}>

@@ -1,0 +1,576 @@
+{
+  "schemaVersion": "visual-approval.v1",
+  "status": "approved-by-human-review",
+  "reviewBasis": "component-output-equivalence",
+  "reviewer": "Codex visual reviewer (user-authorized)",
+  "reviewedAt": "2026-08-12T09:02:23.688Z",
+  "approvals": {
+    "crm-image-coverage-hoje--image-19-hoje-estado-critico": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "650d49629ecb7d35372f952743352ce655633fb7833e1e47e639bdd7a413d0fd",
+      "currentSha256": "a9ccb54a32f0b403dfeda2c3a24a5dbe4118f6bae2c0ac57a565704cd088dd4b"
+    },
+    "crm-image-coverage-image-79-empty-shell--image-79-empty-shell": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "c0a75d47dd9f5b5e9eeb0c020a79e742533a3cef365b796cbc66e1171a89adfc",
+      "currentSha256": "70bfa0030ffbb9ac9e7d83052632d17ed11bfd87e54b6bb46060b59057ee8233"
+    },
+    "crm-image-coverage-usage--image-69-uso-extrato": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "146f6ab8373997c0a727c8837d57c0ea4cb31f97d00d5e80afb5d6313c5d3053",
+      "currentSha256": "aef27eb3433601bfeb151c86ab083da22c2755c6480d2dd89c77ccbf49af32f7"
+    },
+    "crm-image-coverage-usage--image-68-uso-visao-geral": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "b06fcb9aafe10cbac6e86dbd7cb87a4962c2dbcb7d9c6b26265dfbc0455e43e6",
+      "currentSha256": "5492a8996b27974877bbb9e8cc57b8abccb7964ef22b0e0eb0f19536bc7f2361"
+    },
+    "crm-image-coverage-billing--image-67-billing-add-ons": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "79df61400c5e8708d4e8592d712748ad1582b276fe586daaaf3acd5f33ce43d7",
+      "currentSha256": "9603143819242f8c6c62126ed68830b81947f39a068a982f5608c075faf4af4d"
+    },
+    "crm-image-coverage-billing--image-66-billing-faturas": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "2a4d7eb753b273c5b28ddfed6cc0c972c9e0af73bbc8a2ffcd5b824ca0e1dae5",
+      "currentSha256": "45d2cf97385a924817dea0dc805ba05a9b31f10315cd8b33785ac47c0ba8ad18"
+    },
+    "crm-image-coverage-operação--image-21-kanban-geral": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "3a0dc3518a44b2591cbde7725c8bfa1efc90198d20c6828a735f38213293d346",
+      "currentSha256": "5dba0db97da8d53838cae965500384f173faa26c12ef12c65fcf1c66728480c0"
+    },
+    "crm-image-coverage-operação--image-22-kanban-com-drawer": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "f6d8ef0595367782f2513d925d6319dba39ce36a3027a435410d7492bca59cb6",
+      "currentSha256": "24bca008f63d663bc939e72d9dd10aaaa728e1131befd92fd701d0f2c32b7790"
+    },
+    "crm-image-coverage-tarefas--image-23-lista-detalhe": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "33838b8633896675ec55fb1332194d5dcd8825fd3c844682ae28b367f5762921",
+      "currentSha256": "61b7f20798274fcbb47be718b68308e46a281e58e8c22bb98a07f37f70b2dac6"
+    },
+    "crm-image-coverage-checklists--image-24-lista-execucao-detalhe": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "90c4ef51732512ef24b80e5ac2e6280fc6d1e9953005d0256762c07c0de048f7",
+      "currentSha256": "4b72430b3eac41d898e8ae5e49ade5f1dcc7bbd92e02ef1869f50005072934e9"
+    },
+    "crm-image-coverage-inbox--image-24-d-inbox-conversa-aberta": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "91aafcbe5189d1f254f9c4b0b55d92859cb78876ac6bf91bf5ab92d3c6609800",
+      "currentSha256": "d2614ebf520986543650c6e3cb2a45354d5f10966ec8124d9a22b6237212dcdf"
+    },
+    "crm-image-coverage-aprovacoes--image-25-lista-decisao-detalhe": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "03deee82fb1d479130ba0dc39a6ba2f4ed2dee72cb2039c6cf3fa8703aac17d7",
+      "currentSha256": "0e48fd04ed33ce8d2a9c449a114e59550527af676d5d6687119ce58d1a73ee22"
+    },
+    "crm-image-coverage-agenda--image-26-agenda-calendario-operacional": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "2cf8cb2eaaa92f7d6e239f0f6915146070efa745c539bc16e28f4222ae3c9c3e",
+      "currentSha256": "ef172012fa442bfa76f012003b4760031e5ef3e3e9b9d61bb9cc2e9e1065aa60"
+    },
+    "crm-image-coverage-alunos--image-27-lista-perfil-resumido": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "9bbd693b99dbcce25fbe7edfb7a7d3c57367c676c77f7ad6a8922d060fb08ef1",
+      "currentSha256": "4234e1dbb8ecd08249edc72ae6cad28e9a7a5386b89fcc40eb33a142507b09d1"
+    },
+    "crm-image-coverage-alunos--image-28-aluno-perfil-resumo-operacional": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "173818d18e3aed10478522b7ed9ba31283a0013f8382e51f00b761356fa92f38",
+      "currentSha256": "61ba57b4a4399b57be30514680ce011b6602b4c6f140e596423250217c07fc5b"
+    },
+    "crm-image-coverage-agenda--image-29-aula-detalhe-com-chamada": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "4d9f027f918ab9a31880760d5e7a5fd00f7791d7b521b05924e99cfca17530e5",
+      "currentSha256": "13746391dbb011a5a033940d84bc558af0323772d11762f12d47cc1e77b6ce91"
+    },
+    "crm-image-coverage-financeiro--image-30-visao-geral-filas": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "66665fc729c0533be2a8ee589d11565606c2ae09fdb7809160dce448b54b3260",
+      "currentSha256": "9ef9f55e170e418ecf5e2cecb430f76e97507c619602f4b97c5a8eb442f5a715"
+    },
+    "crm-image-coverage-reposições--image-31-fluxo-encaixe": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "913e55801ec6da3e7c224169fabf51a7116a5a732c293ae79ee404e9a1122e34",
+      "currentSha256": "c17e23edee8130cb8f6850a7964021b5e35fc6b350b30871323f5982335e2ea2"
+    },
+    "crm-image-coverage-financeiro--image-32-financeiro-drawer-cobranca": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "21cfd5d67788d31680031073ed01c5399e10ac7b7e4cd58c4d6cf524f2922d26",
+      "currentSha256": "ddf755ae50b69515aa71ade71a70caca1ba1429ba733ddd858a2065c4492377a"
+    },
+    "crm-image-coverage-financeiro--image-33-financeiro-kanban": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "3d40965fd11f4fd30f884a27399f3daf1a7966db00b0f2d7ed775fc1d65c87f8",
+      "currentSha256": "63d8a43667e6df82a83c85d8456596e9b284d1424c53eee1c7bd4f293fce562f"
+    },
+    "crm-image-coverage-financeiro--image-34-movimentacoes-filtros-drawer": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "33eb45a8e162cc721221272a041f3918828087adcb86a918f165eb7bd7ac8ae8",
+      "currentSha256": "c7c4628bc7049f3035f761f79031537d03e48b06c1f99502d08403b32ce9d11e"
+    },
+    "crm-image-coverage-agenda--image-35-turmas-lista-detalhe": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "ef572f093e09a410a7f21941057db2740f04864abad4dc81053d7c5aaa008bf0",
+      "currentSha256": "036c156bdc30374bd906e3cb9c59b812d8cae2f62fa113564f6b687636cc30ab"
+    },
+    "crm-image-coverage-agenda--image-36-grade-semana-modelo-bloqueio": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "bcf2d8b13856ad5555e7ae0c7b0bb49b19f55b57b223ec09a5c70bb7c1e8e20d",
+      "currentSha256": "e7128ef6d0dbbd50e9a98871d58b9207271d898b4e17c507f953a6bc973f62ac"
+    },
+    "crm-image-coverage-vendas--image-37-vendas-pipeline-kanban": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "c73489a76d7d7fa4f560fb0e0ccbef01618b0aba218536a9666de64af320d69a",
+      "currentSha256": "6a06890c3acb2b75233cb84094e699a15fd71d138896679b18dfa8ecd28b3726"
+    },
+    "crm-image-coverage-vendas--image-38-lista-interessados": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "c408e7252eb9ddf51937657b1aa2b9316cacd7e7d1a0f0f85ebfce600bc7ee2f",
+      "currentSha256": "5bbc8b7af61a4f1459dc9ed6f20d23c3eb350cc192f7625a282ad7ea0cac6850"
+    },
+    "crm-image-coverage-vendas--image-39-experimental-lista": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "ddecd6b81a6914b7ae13bf30354b7b09515b7e5acd5134e172004413eea23963",
+      "currentSha256": "661114daaa38563d0aee11cf8f90e2ec5883e16fe789e378827be877adb99066"
+    },
+    "crm-image-coverage-vendas--image-40-matriculas-checklist-conversao": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "dfdd32b8868f5a43822de90d0e31942a344a0e3e5da9b26826becd6ebaa26a19",
+      "currentSha256": "05971860079263fae43b8a32fcc6e85e398d64748e08d19151a85060ffb7e81c"
+    },
+    "crm-image-coverage-retencao--image-41-retencao-riscos": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "bbf3da253735d839c95bdff0c234fdbde166d45344b7734f2a0c0dd6cffd1f04",
+      "currentSha256": "2178914c4f5f8f92b5200f05e34ee17377c9e4ef03df58d0a7576225b48cfffc"
+    },
+    "crm-image-coverage-retencao--image-42-cancelamentos-fila": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "f538b467a17a72deba76c4f8533cf964d12dc1178dbf39e2e48fbd3748815fd0",
+      "currentSha256": "f8e678a9497f275960099610964555c732bc8bca3ed014e2566c6e68dceede2b"
+    },
+    "crm-image-coverage-retencao--image-43-reativacoes-ex-alunos": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "1875b1228eca4ec2d2db5de847b910c9a501f3f02c6f43dba9edba3699b719a2",
+      "currentSha256": "8b5961161d6ee99993af10d2bfcb6c4c10261c6c45916e18f4d6a86f601e8144"
+    },
+    "crm-image-coverage-retencao--image-44-reclamacoes-caso-sensivel": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "533e6e0b71f4f98002efebb4514ac8d6538d6f55b200c990d38d03a4e907daf7",
+      "currentSha256": "917f1ac33234b97c3f6b33980a91af9f1035d171001bad81ea1f212f1c009896"
+    },
+    "crm-image-coverage-relatorios--reports-management": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "d7b580b294b3f1c13c2fca34f81adc1719d71e20231065721910f2efdf05818d",
+      "currentSha256": "b443d40e974c2b7db5813e2a2700075bee03c99f90fd608ad7905324b262f50c"
+    },
+    "crm-image-coverage-relatorios--money-on-the-table": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "a29cc1d0e0cd06e756e9847bf137c71d81e1a1ee1a21dbedaae64115cdadcd6f",
+      "currentSha256": "c42d3ac0e4d6142f302610040aa5adb4df6b421ed3d24456319d8eaadf4a3112"
+    },
+    "crm-image-coverage-suporte--support-central": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "13cc2b46063f35367fe641b501755b9a679049ced9ed314bb6c7fb5ff505384f",
+      "currentSha256": "5fb6e935db36ae4db643434d425bc1ad63b34f807f7616a26846201eba9fc437"
+    },
+    "crm-image-coverage-internal--image-48-internal-visao-operacional": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "ee19efd23cb1a33315a39c6ec111cd2fdd09017e56903e204de4376abba623d6",
+      "currentSha256": "3b14f42b67eb89bfd685570c3d103beee102b02f6a0c7ab5a0f7dedd73d40063"
+    },
+    "crm-image-coverage-internal--image-49-internal-tenants-lista-detalhe": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "c5d54ca258ac5d4718886e3d3b361432c8c8959a079ace8a7001850bf45175ce",
+      "currentSha256": "d405d0d6713dbc049ffe5bd7ec9864d07693bbbb52fc42f62ab5cf83067f53c1"
+    },
+    "crm-image-coverage-internal--image-50-internal-tenant-detalhe-usuarios-grants": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "7b751bb9975ee136ad13cadf14f85fb2acb52bd439e926bd8c4591432d557d11",
+      "currentSha256": "b290150b3bba2b96e18bba08bc633606e00908127b042acc6dfac2cbb2f8df0f"
+    },
+    "crm-image-coverage-setup--image-51-a-onboarding-shell-global": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "5448f60632fc32b04d557cb788e5aebe13b02991aa044aa684b461d429a1e0ac",
+      "currentSha256": "d7aa6673ff4fe625ad5880cfc6a80ebf5f5010758edae542505a3817d19bb06e"
+    },
+    "crm-image-coverage-setup--image-51-b-onboarding-agente-configuracao-chat": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "24e1264de2ae7c00e94d591e715785a2427bc3eee2dd964f749288ffdd92e290",
+      "currentSha256": "3d860b096e41609a322f60ec352de710cdf5ab086b2b7ea5ba82fdf24738ca56"
+    },
+    "crm-image-coverage-setup--image-51-c-onboarding-workspace-configuracao": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "14753f7c39eb1575971845e7344852276cd258548a09679b19741fc8dec67948",
+      "currentSha256": "51cf7af521b2118e1e92396f684f714ae4bee2d80cd66c61c3b60b9e518b998f"
+    },
+    "crm-image-coverage-setup--image-51-d-onboarding-studio": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "61c07a1b3018cf7590fb138c2cd441bf32303044269e97910f01fb8246378287",
+      "currentSha256": "59102885085ed9dfa9005a313b8725d454472c5e5e9587a2fa1b880e1e6710c0"
+    },
+    "crm-image-coverage-setup--image-51-e-onboarding-equipe": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "27ccd9ffbd7b64aad1fe1d8f0813fda65e68d5aabc67a476b3897faec2e87bb9",
+      "currentSha256": "50388400a15d4758e3eb7e3a48401f57f6b0701827a11827484e653f0ae198dd"
+    },
+    "crm-image-coverage-setup--image-51-f-onboarding-canais": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "5a0a2ad6a2f43b9da1e8f8713675a8a44c9a9859b0e7d7ff21bef85264693d49",
+      "currentSha256": "dc7b2dfd41842d615ffff8793880254d701be18e63308c34d0a3575d76f288ac"
+    },
+    "crm-image-coverage-setup--image-51-g-onboarding-planos": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "754fd6ef8f776d674f31123d2f1fe673e8cb6c734cc50daad0457d3c3f57ad3d",
+      "currentSha256": "71c3ada373eb9c4862b4a0bee32f247e7f3c76eb00ed476aa0adb966f7a6f9b3"
+    },
+    "crm-image-coverage-setup--image-51-k-onboarding-pagamento": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "4b0feec902394c3ee4dac2d428d2fb7cd900c0bafbe932ace13996abb2a10a9e",
+      "currentSha256": "23fd65f134aebdd28e5bc7839a63ffabe4085514825c267c0a47df53cbe62088"
+    },
+    "crm-image-coverage-setup--image-51-h-onboarding-alunos": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "72d416a223672fc79ac7354770e2080857c3d006db86c5dcfa33be8c76690097",
+      "currentSha256": "3f542546313fc057c1754ba3a0cd45054549beb58665352de02a7db202407452"
+    },
+    "crm-image-coverage-setup--image-51-i-onboarding-turmas": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "bbe9e1d2e34f88562547d64393ddbd1fc435ebdeb9a55e16963b0446edf4a4e7",
+      "currentSha256": "a7a8ec2f45831b398eeb6857f5b7ec8acbc5b4a966558d11e4c7dea41b88b3f1"
+    },
+    "crm-image-coverage-setup--image-51-j-onboarding-agenda": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "65a529d6a15aee9d3a1c2aad409d87b9640ef4cc02a141ac38729c403a103f5b",
+      "currentSha256": "55d45dc51ddc9a955d347272d04fca9bb7fe1017f05391b1b0d81d24c2571f6f"
+    },
+    "crm-image-coverage-setup--image-51-l-onboarding-revisao": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "8403f4f28345b43ff8f7a56681a1f69716e3ef1b05558070a6932b89bc67e302",
+      "currentSha256": "6cf5e9f99d6cc1db8c453ea0fabf940655a55a462d28ce569e2c5f775049b8ec"
+    },
+    "crm-image-coverage-setup--image-78-onboarding-bem-vindo": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "853f13548e24cca9f54ec9fd74e402c7abc898916f2685da1957dce7fe18772b",
+      "currentSha256": "21eb1bc8200fdb5a604d541c09a304488968344de8ab70c1048fd575ec1a8488"
+    },
+    "crm-image-coverage-agentes--image-52-agentes-catalogo": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "c3951553b6d309a71df2da745aab6ae76074773932f129ac06ff11454185b2f9",
+      "currentSha256": "b8e52a22b2b2ba8580125c9f97c4878444ac52fdd02052b86f0a14a0553e053c"
+    },
+    "crm-image-coverage-agentes--image-53-agente-agenda-rotinas": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "2f064a62996e39245ed65e1c23a48d1704a3d8a3abc7ed53a8e354ff3c0bb3ce",
+      "currentSha256": "723583298362f54cc97e917dd32a443948681323bb43874eda942dd7641bba65"
+    },
+    "crm-image-coverage-agentes--image-54-rotina-presenca-faltas": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "0ffca4b32ec68bc05c86628bc9ef761c213894946f4ddc86acb98e46b5fc4e4a",
+      "currentSha256": "fa2fb0eab5ca82e28b01040ae03f485f378d8820f1aaeaae575f1d0bd87401a1"
+    },
+    "crm-image-coverage-agentes--image-56-fluxo-falta-com-aviso": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "76225ba37136e8ae90bf2f371104547a5fc2e1f8b8df72028a7cdb1bb7d1442d",
+      "currentSha256": "8fab924012223ddb6fb0399751f513db169aea3d43489b1a897c7c9700f07016"
+    },
+    "crm-image-coverage-agentes--image-58-teste-fluxo-falta-com-aviso": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "5eaa6b8452e0a47f29cbaf40b577c2c924c19ef569f6f863aecd51c889cd16d9",
+      "currentSha256": "b026d483149fefee95b7626d159a00e700b79e0db87550b3e2636d0c04650773"
+    },
+    "crm-image-coverage-agentes--image-59-publicar-rotina": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "78b9698465045fafc7d458ebfd4f5f3f9df2a29b0da7893c7ac6a5bfbd46650d",
+      "currentSha256": "481b22231715b906157beaa404dc71716baec1e8d75b9e448c9d6560dd8312de"
+    },
+    "crm-image-coverage-agentes--image-70-execucoes-fluxo": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "d49dbebb51f0c6b8d47537f7348d83c2c569ab09294b90c5fe317ee09e49040a",
+      "currentSha256": "d4aac5851acb0bae1547f987c4472a7c9a429606cfcedfd00e6cb44e45ead55a"
+    },
+    "crm-image-coverage-configuracoes--image-60-configuracoes-hub": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "b315f552d098f929a5c1718acd017d1ba3f975d4d17457e9f098e3c3bd40582c",
+      "currentSha256": "6367e887f4131513e1efbfce4d7869b2e3fcba99682fb9b8b4ef47db3c14ce94"
+    },
+    "crm-image-coverage-configuracoes--image-61-configuracoes-permissoes": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "845b061d56f9d6474c18cd6db5f7d103ed5aa4eb4c20ecf26beaf28dc5e0284b",
+      "currentSha256": "02391efad49cd81c81f9d2f00c6b4fa310bcb9566f350bbafc51dfce7fe3bf7c"
+    },
+    "crm-image-coverage-configuracoes--image-62-configuracoes-pagamentos": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "04a6977eecddab69e9a4d79c8b4b1633e13d61978403d399ec4344f118ea69d5",
+      "currentSha256": "c94e3a380b032838cc43aec41ea3c68001762c66ef218605e8a0f2345763d272"
+    },
+    "crm-image-coverage-configuracoes--image-63-configuracoes-agenda": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "ce65e34d73251598f59dad6518bfe425f27f4b8a9b6f311b3b02004ced1fb719",
+      "currentSha256": "2e6cb99d749ed04ec4cc00a3bd07ba6793eb389f82e9eb69717a9ae39857a4a2"
+    },
+    "crm-image-coverage-configuracoes--image-64-configuracoes-notificacoes": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "b48a5328a13b6c1994de5234e65ead9c40cad0593dc2f96ac4e7e2ef97fb3e71",
+      "currentSha256": "64d0c17670042da3626b40e4275dda5c6cb8d2b8ca61f692c8d90a39beb2e4ce"
+    },
+    "crm-image-coverage-billing--image-65-billing-assinatura": {
+      "status": "approved",
+      "reviewer": "Codex visual reviewer (user-authorized)",
+      "reviewedAt": "2026-08-12T09:02:23.688Z",
+      "sourceRevision": "baseline",
+      "buildHash": "baseline",
+      "sourceSha256": "7a38a53d6966cf78273f38dd4e37f0d7315e7ab0689a52ea208653e0c37d7bb1",
+      "currentSha256": "84a57a60da10d5d091084639718419df96ed26d9758dbb0994827db8b2ff00cc"
+    }
+  }
+}

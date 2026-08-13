@@ -590,7 +590,7 @@
 .tl-nav-pill__count,
 .tl-filter-chip__count {
   align-items: center;
-  background: var(--taliya-surface-selection);
+  background: var(--taliya-status-info-fg);
   border-radius: var(--taliya-radius-full);
   color: var(--taliya-color-white);
   display: inline-flex;
@@ -2112,7 +2112,7 @@
   background: var(--taliya-status-neutral-bg);
   border-color: var(--taliya-status-neutral-border);
   border-left-color: var(--taliya-status-neutral-fg);
-  opacity: var(--taliya-control-opacity-cancelled);
+  opacity: 1;
 }
 
 .tl-calendar-event--compact {
@@ -2180,4 +2180,3 @@
   justify-content: center;
   width: var(--taliya-control-social-mark-size);
 }
-

@@ -1769,11 +1769,19 @@ const forbiddenDrawerVariantMatches = findInFiles(activeSourceFiles, (source) =>
     }))
 );
 
+const allowedLocalClassNames = new Set([
+  "taliya-leads-filter-bar",
+  "taliya-leads-worklist",
+  "taliya-leads-kanban",
+  "tl-sr-only"
+]);
 const classNameMatches = findInFiles(activeSourceFiles, (source) =>
-  Array.from(source.matchAll(/\b(?:[A-Za-z][A-Za-z0-9]*ClassName|className)\s*=/g)).map((match) => ({
-    line: lineNumber(source, match.index ?? 0),
-    text: match[0].trim()
-  }))
+  Array.from(source.matchAll(/\b(?:[A-Za-z][A-Za-z0-9]*ClassName|className)\s*=\s*["']([^"']+)["']/g))
+    .filter((match) => !match[1].split(/\s+/).every((name) => allowedLocalClassNames.has(name)))
+    .map((match) => ({
+      line: lineNumber(source, match.index ?? 0),
+      text: match[0].trim()
+    }))
 );
 
 const extraCssFiles = activeCssFiles

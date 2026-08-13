@@ -868,7 +868,7 @@ function AgendaSidePanel({ monthLabel, onAction, onMonthChange, onSelectDay, sel
         selected={selectedDay}
       />
       <h3>Agenda</h3>
-      <List divided>
+      <List aria-label="Filas da agenda" divided role="group">
         {agendaSideItems.map((item) => (
           <ListItem
             action={<Chip>{item.count}</Chip>}

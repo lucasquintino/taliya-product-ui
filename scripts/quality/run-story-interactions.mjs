@@ -2,12 +2,10 @@
 /* global console, process */
 
 import fs from "node:fs";
-import crypto from "node:crypto";
 import http from "node:http";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { chromium } from "@playwright/test";
-import { hasSourceChanges } from "./source-identity.mjs";
+import { hasSourceChanges, sourceRevision, sourceTreeHash } from "./source-tree.mjs";
 
 const root = process.cwd();
 const storybookFlag = process.argv.indexOf("--storybook-dir");
@@ -20,8 +18,7 @@ const workersFlag = process.argv.indexOf("--workers");
 // parallelism by default that the full static catalog does not exceed CI
 // timeouts, while still allowing constrained environments to opt down with
 // --workers.
-const workerCount = Math.max(1, Number(workersFlag >= 0 ? process.argv[workersFlag + 1] : "16") || 16);
-const isGeneratedEvidencePath = (relative) => relative.startsWith("artifacts/") || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
+const workerCount = Math.max(1, Number(workersFlag >= 0 ? process.argv[workersFlag + 1] : "4") || 4);
 const catalog = JSON.parse(fs.readFileSync(path.join(storybookDir, "index.json"), "utf8"));
 const requestedId = idFlag >= 0 ? process.argv[idFlag + 1] : null;
 const entries = Object.values(catalog.entries ?? {}).filter((entry) => entry.type === "story" && (!requestedId || entry.id === requestedId));
@@ -68,18 +65,10 @@ async function worker() {
 await Promise.all(Array.from({ length: Math.min(workerCount, entries.length) }, worker));
 await browser.close();
 await new Promise((resolve) => server.close(resolve));
-const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
 const dirty = hasSourceChanges(root);
-const sourceTreeHash = (() => {
-  const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
-  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative) && fs.existsSync(path.join(root, relative))).sort().map((relative) => {
-    const raw = fs.readFileSync(path.join(root, relative));
-    const normalized = raw.toString("utf8").replace(/\r\n?/g, "\n");
-    return `${relative}\0${crypto.createHash("sha256").update(normalized).digest("hex")}\0${raw.length}\n`;
-  });
-  return crypto.createHash("sha256").update(rows.join("")).digest("hex");
-})();
-const output = { schemaVersion: "story-interactions.v1", sourceRevision, sourceTreeHash, dirty, storyCount: results.length, passed: results.filter((row) => row.status === "pass").length, failed: results.filter((row) => row.status !== "pass").length, results };
+const revision = sourceRevision(root);
+const treeHash = sourceTreeHash(root);
+const output = { schemaVersion: "story-interactions.v1", sourceRevision: revision, sourceTreeHash: treeHash, dirty, storyCount: results.length, passed: results.filter((row) => row.status === "pass").length, failed: results.filter((row) => row.status !== "pass").length, results };
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(`STORY-INTERACTIONS: ${output.passed}/${output.storyCount} pass`);

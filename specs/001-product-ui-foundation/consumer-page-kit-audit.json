@@ -6,7 +6,7 @@
     "pass": true,
     "errors": []
   },
-  "generatedAt": "2026-08-12T03:01:38.820Z",
+  "generatedAt": "2026-08-12T19:58:31.779Z",
   "surfaceRows": [
     {
       "id": "shell",
@@ -297,7 +297,7 @@
         }
       ],
       "forbiddenFragments": [
-        "filter-bar",
+        "legacy-filter-bar",
         "quick-queues",
         "lead-table",
         "lead-drawer",

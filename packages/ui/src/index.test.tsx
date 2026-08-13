@@ -1119,7 +1119,7 @@ describe("@taliya/ui primitives", () => {
 
     fireEvent.keyDown(screen.getByRole("button", { name: /abrir alteracao plan/i }), { key: "Enter" });
     fireEvent.keyDown(screen.getByRole("button", { name: /abrir permissao reports/i }), { key: "Enter" });
-    fireEvent.keyDown(screen.getByRole("button", { name: /abrir auditoria log-1/i }), { key: " " });
+    fireEvent.keyDown(screen.getByRole("row", { name: /abrir auditoria log-1/i }), { key: " " });
     fireEvent.click(screen.getByRole("button", { name: /mapeamento/i }));
     fireEvent.click(screen.getByRole("checkbox", { name: /revisar consentimento/i }));
     fireEvent.click(screen.getByRole("button", { name: /casos abertos/i }));
@@ -1343,7 +1343,7 @@ describe("@taliya/ui primitives", () => {
     fireEvent.click(within(screen.getByTestId("workflow-permissions")).getByRole("button", { name: "Solicitar acesso" }));
     fireEvent.click(within(screen.getByTestId("workflow-permissions")).getByRole("button", { name: /abrir permissao reports/i }));
     fireEvent.click(within(screen.getByTestId("workflow-audit")).getByRole("button", { name: "Abrir log-1" }));
-    fireEvent.click(within(screen.getByTestId("workflow-audit")).getByRole("button", { name: /abrir auditoria log-1/i }));
+    fireEvent.click(within(screen.getByTestId("workflow-audit")).getByRole("row", { name: /abrir auditoria log-1/i }));
     fireEvent.click(within(screen.getByTestId("workflow-import")).getByRole("button", { name: "Pausar" }));
     fireEvent.click(within(screen.getByTestId("workflow-import")).getByRole("button", { name: "Continuar" }));
     fireEvent.click(within(screen.getByTestId("workflow-import")).getByRole("button", { name: "Tentar novamente" }));
@@ -1597,7 +1597,7 @@ describe("@taliya/ui primitives", () => {
       </div>
     );
 
-    fireEvent.click(screen.getByRole("button", { name: /gatilho/i }));
+    fireEvent.click(screen.getByRole("group", { name: /gatilho/i }));
     fireEvent.click(screen.getByRole("button", { name: /abrir opcoes do no/i }));
 
     expect(screen.getByRole("button", { name: /21/i })).toHaveAttribute("aria-current", "date");

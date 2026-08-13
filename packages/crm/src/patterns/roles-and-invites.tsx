@@ -292,7 +292,6 @@ export function InviteRow({
       )}
       data-component="InviteRow"
       data-state={state}
-      role="listitem"
       {...props}
     >
       {onOpen ? (
@@ -338,4 +337,3 @@ export function InviteRow({
     </article>
   );
 }
-

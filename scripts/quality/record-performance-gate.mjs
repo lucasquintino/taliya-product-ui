@@ -5,6 +5,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { hasSourceChanges, sourceRevision, sourceTreeHash } from "./source-tree.mjs";
 
 const root = process.cwd();
 const run = (id, script, args = []) => {
@@ -25,8 +26,7 @@ else {
     results.push({ id: "G-PERF-LEDGER", status: valid ? "pass" : "fail", entryCount: ledger.entries?.length ?? 0 });
   } catch (error) { results.push({ id: "G-PERF-LEDGER", status: "fail", reason: error.message }); }
 }
-const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
-const output = { schemaVersion: "gate-run.v1", gateId: "G-PERF", sourceRevision, mode: "check", status: results.every((row) => row.status === "pass") ? "pass" : "fail", checks: results };
+const output = { schemaVersion: "gate-run.v1", gateId: "G-PERF", sourceRevision: sourceRevision(root), sourceTreeHash: sourceTreeHash(root), dirty: hasSourceChanges(root), mode: "check", status: results.every((row) => row.status === "pass") ? "pass" : "fail", checks: results };
 const outputPath = path.join(root, "artifacts/quality/g-performance.json");
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);

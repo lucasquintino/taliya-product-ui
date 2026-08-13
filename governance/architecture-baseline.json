@@ -422,10 +422,10 @@
     {
       "file": "packages/crm/src/internal-crm-runtime.tsx",
       "package": "crm",
-      "logicalLines": 4244,
-      "complexity": 127,
+      "logicalLines": 2,
+      "complexity": 1,
       "compatibilityRuntime": true,
-      "fingerprint": "f8a431d5090172ae64b89a66a5a3ba0f7439a3d803e6f469ea8a9d163c6a7e52"
+      "fingerprint": "f3235266d37f052486871b5bac396bd5828aaacc96a58909d101d13fce279fc7"
     },
     {
       "file": "packages/crm/src/internal/index.ts",
@@ -802,6 +802,278 @@
       "complexity": 11,
       "compatibilityRuntime": false,
       "fingerprint": "b7accab771ca6e8534454fcf644eba5332ae21e0534dedd7b5230fa52d7aa0d0"
+    },
+    {
+      "file": "packages/crm/src/runtime/filters-bar.tsx",
+      "package": "crm",
+      "logicalLines": 63,
+      "complexity": 9,
+      "compatibilityRuntime": false,
+      "fingerprint": "08fca23abbb8e0d6e1395f51da6bbe2c89517b958ad4e86c3684aafe89aa107f"
+    },
+    {
+      "file": "packages/crm/src/runtime/filters-queue.tsx",
+      "package": "crm",
+      "logicalLines": 1,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "b793b837b1feed4c73f8019f306d26198fbcbc2329713a506105733f241bebbc"
+    },
+    {
+      "file": "packages/crm/src/runtime/filters-quick.tsx",
+      "package": "crm",
+      "logicalLines": 54,
+      "complexity": 5,
+      "compatibilityRuntime": false,
+      "fingerprint": "2e9ab79a90d5aed40e6b7f06c36d2ff4fa26b6d15339bfea6a537225af4637f0"
+    },
+    {
+      "file": "packages/crm/src/runtime/filters-types.tsx",
+      "package": "crm",
+      "logicalLines": 109,
+      "complexity": 18,
+      "compatibilityRuntime": false,
+      "fingerprint": "c3a91ffa56e256d8cdb0864cd96347e8dcacf92830e6839aa3a8561f8937ca25"
+    },
+    {
+      "file": "packages/crm/src/runtime/governance-panels.tsx",
+      "package": "crm",
+      "logicalLines": 122,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "2c8589a588a6b3011c5dff55d3c1c74dd122cda4677abd9b631af15b9ce75bc6"
+    },
+    {
+      "file": "packages/crm/src/runtime/governance-setup.tsx",
+      "package": "crm",
+      "logicalLines": 214,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "754c0d245527a463083135371b4e8416fadd41cbf3a261bf0002e29a341a4b62"
+    },
+    {
+      "file": "packages/crm/src/runtime/governance-states.tsx",
+      "package": "crm",
+      "logicalLines": 152,
+      "complexity": 3,
+      "compatibilityRuntime": false,
+      "fingerprint": "833b62730f8d567438908431b575409c2b283effc9e12edc2329b89e6c13bb88"
+    },
+    {
+      "file": "packages/crm/src/runtime/import-mapping.tsx",
+      "package": "crm",
+      "logicalLines": 67,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "c29033899545727d7f9bf9fbed5777065590b4602ed3abfcaf6568f2e99bfd3f"
+    },
+    {
+      "file": "packages/crm/src/runtime/import-progress.tsx",
+      "package": "crm",
+      "logicalLines": 69,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "4e996bbb9ad5d3d4bdbefe462169dcb48cec6b265680de638c96c9c134330127"
+    },
+    {
+      "file": "packages/crm/src/runtime/import-resolution.tsx",
+      "package": "crm",
+      "logicalLines": 47,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "5edd333f69c10eb22b67bd352e41ba3952c8c9740d4c7667e49836ef72e3d882"
+    },
+    {
+      "file": "packages/crm/src/runtime/index.ts",
+      "package": "crm",
+      "logicalLines": 46,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "303692f63685f67c2ac2aa575d2bc977d36532494109a4fce5b94300f58ee2b3"
+    },
+    {
+      "file": "packages/crm/src/runtime/opportunity-types.tsx",
+      "package": "crm",
+      "logicalLines": 90,
+      "complexity": 8,
+      "compatibilityRuntime": false,
+      "fingerprint": "1daff9f856b60e5127aa3940efb11ee8f0a3aa945c085b8241d6f824f37081f2"
+    },
+    {
+      "file": "packages/crm/src/runtime/opportunity.tsx",
+      "package": "crm",
+      "logicalLines": 30,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "1ea211aab68341826ebe2eb2de0789f0fea590e3b61dd7daaa5f3de8f5a13cfd"
+    },
+    {
+      "file": "packages/crm/src/runtime/reference-agent.tsx",
+      "package": "crm",
+      "logicalLines": 161,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "46f883a1c7f98c13e1e8b5f189a1580fd17e1e55b3deb208d0390c2557e70b78"
+    },
+    {
+      "file": "packages/crm/src/runtime/reference-core.tsx",
+      "package": "crm",
+      "logicalLines": 178,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "6bb97e2acdb37769d89cd116d5497465d740e7c4ef4de18e32875bb054735638"
+    },
+    {
+      "file": "packages/crm/src/runtime/shell-core.tsx",
+      "package": "crm",
+      "logicalLines": 217,
+      "complexity": 13,
+      "compatibilityRuntime": false,
+      "fingerprint": "79eb4621707bb44ed18d3d7ef6afe80d0854c1d0b4d97a56aedab0196796b3bb"
+    },
+    {
+      "file": "packages/crm/src/runtime/shell-operational.tsx",
+      "package": "crm",
+      "logicalLines": 31,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "feb92aa7a7319ca0cd353c654d8fa802d68146f57815061b9663fdd35a10a75f"
+    },
+    {
+      "file": "packages/crm/src/runtime/shell-report.tsx",
+      "package": "crm",
+      "logicalLines": 90,
+      "complexity": 4,
+      "compatibilityRuntime": false,
+      "fingerprint": "8d0456e79df319218337a76a35f95aafe7bff7d800b34e1321e073ae469911ce"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-approval-types-a.tsx",
+      "package": "crm",
+      "logicalLines": 67,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "37f00323794a6fa7dc1d53a07b84d0b33e4b82182d45f086a76b493a643cfdb9"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-approval-types-b.tsx",
+      "package": "crm",
+      "logicalLines": 208,
+      "complexity": 13,
+      "compatibilityRuntime": false,
+      "fingerprint": "38cadf447e14ed5f9b42c48d153d986e32c4e74cda25867bdf7e44c6ed64b158"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-approval.tsx",
+      "package": "crm",
+      "logicalLines": 1,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "aa2b568f6aa97511d8ddd323eae458b7c9316d3d75e8f9c94b0fa529e3c908b2"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-checklist-types.tsx",
+      "package": "crm",
+      "logicalLines": 218,
+      "complexity": 11,
+      "compatibilityRuntime": false,
+      "fingerprint": "b75879d9c8190e75e2ac8667f6c7afb9aa53d8ce2d34c6881d19ad2fe1c6c2de"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-checklist.tsx",
+      "package": "crm",
+      "logicalLines": 1,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "3ca12280036a52d349b636929535dac7544cd4309c8d5adb4cbdb2db4b8d0e8f"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-drawer-types.tsx",
+      "package": "crm",
+      "logicalLines": 74,
+      "complexity": 2,
+      "compatibilityRuntime": false,
+      "fingerprint": "38a78b80f05ba889035980b576ae28df4d187e61b48041fd4a5050e5f3446785"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-drawer.tsx",
+      "package": "crm",
+      "logicalLines": 1,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "c183f2d1b6e0af4796a1b3d884b88621601884b56344aa671be02c824c289ef4"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-lead-types.tsx",
+      "package": "crm",
+      "logicalLines": 160,
+      "complexity": 11,
+      "compatibilityRuntime": false,
+      "fingerprint": "d3a7615cff7c1874762cbfb531861c2fc3a203ef03a01823ee7476ebbd8f3d26"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-lead.tsx",
+      "package": "crm",
+      "logicalLines": 1,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "8a7ad9a6352e89dcbb42061b816e65388779088ba642c39557464ce5981600c9"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-replacement-types.tsx",
+      "package": "crm",
+      "logicalLines": 237,
+      "complexity": 10,
+      "compatibilityRuntime": false,
+      "fingerprint": "bacae21af8777e423b5815a3d3e2a77c5f3a0e4ee43130fe6c53ad9c57db2dd5"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-replacement.tsx",
+      "package": "crm",
+      "logicalLines": 11,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "dd0ade5a8a5403ad06e7404e1bc06ef198b463b0a0ac8370a838c35453084cce"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-student-types-a.tsx",
+      "package": "crm",
+      "logicalLines": 85,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "5a01df8f35d07722df4f85d57856f0f10d4ef1315c8c81f028e35292902a3ed6"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-student-types-b.tsx",
+      "package": "crm",
+      "logicalLines": 215,
+      "complexity": 13,
+      "compatibilityRuntime": false,
+      "fingerprint": "2748e93fd716643f1c6614dbb90f1f03ee0d4898646da7a7b6d3d6e1d09390fe"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-student.tsx",
+      "package": "crm",
+      "logicalLines": 1,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "ec42c2ea3e85b0a472c2de47d408e2b19d2cbc82e1266447afcaf7d6f68a39cf"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-task-types.tsx",
+      "package": "crm",
+      "logicalLines": 216,
+      "complexity": 7,
+      "compatibilityRuntime": false,
+      "fingerprint": "c012027e99feee6f5fa664e73fcd0bdfaa328aa1e5c0f280be6c9d4d97c811da"
+    },
+    {
+      "file": "packages/crm/src/runtime/worklist-task.tsx",
+      "package": "crm",
+      "logicalLines": 1,
+      "complexity": 0,
+      "compatibilityRuntime": false,
+      "fingerprint": "7c6e392ad57a5f60bd2558e24b2020be2c2ffeb318a57ce973721710d6079725"
     },
     {
       "file": "packages/crm/src/standard-page-kit.ts",
@@ -1659,21 +1931,6 @@
     {
       "from": "crm",
       "to": "ui",
-      "source": "packages/crm/src/internal-crm-runtime.tsx"
-    },
-    {
-      "from": "crm",
-      "to": "ui",
-      "source": "packages/crm/src/internal-crm-runtime.tsx"
-    },
-    {
-      "from": "crm",
-      "to": "ui",
-      "source": "packages/crm/src/internal-crm-runtime.tsx"
-    },
-    {
-      "from": "crm",
-      "to": "ui",
       "source": "packages/crm/src/patterns/agent-catalog.tsx"
     },
     {
@@ -2045,7 +2302,217 @@
       "from": "crm",
       "to": "ui",
       "source": "packages/crm/src/patterns/worklist-table.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/filters-bar.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/filters-bar.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/filters-quick.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/filters-quick.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/filters-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/filters-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/governance-panels.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/governance-panels.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/governance-setup.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/governance-setup.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/governance-states.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/import-mapping.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/import-progress.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/import-progress.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/import-resolution.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/index.ts"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/opportunity-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/opportunity-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/opportunity.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/reference-agent.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/reference-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/reference-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/shell-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/shell-core.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/shell-operational.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/shell-report.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/shell-report.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-approval-types-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-approval-types-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-approval-types-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-checklist-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-checklist-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-drawer-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-drawer-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-lead-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-lead-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-replacement-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-replacement-types.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-replacement.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-student-types-a.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-student-types-b.tsx"
+    },
+    {
+      "from": "crm",
+      "to": "ui",
+      "source": "packages/crm/src/runtime/worklist-task-types.tsx"
     }
   ],
-  "debtFingerprint": "a2c44c36de2c63a2df85d7e2cbc50d2d87eaf352cadff540b5eb4c7fba0fbfe1"
+  "debtFingerprint": "494f169df60b7c669b85713c492617778be0709e07e31c78b4816b24688d308c"
 }

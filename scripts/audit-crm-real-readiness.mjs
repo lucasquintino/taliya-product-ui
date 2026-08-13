@@ -87,6 +87,10 @@ const crmIndex = [
   "packages/crm/src/patterns/usage-drawer.tsx",
   "packages/crm/src/patterns/support-drawer.tsx",
   "packages/crm/src/patterns/tenant-drawer.tsx",
+  "packages/crm/src/runtime/filters-types.tsx",
+  "packages/crm/src/runtime/filters-bar.tsx",
+  "packages/crm/src/runtime/worklist-drawer-types.tsx",
+  "packages/crm/src/runtime/worklist-lead.tsx",
   "packages/crm/src/domains/billing/billing-approval-settings-core.tsx",
   "packages/crm/src/domains/agenda/index.tsx",
   "packages/crm/src/domains/billing/index.tsx",
@@ -511,6 +515,14 @@ console.log("Wrote specs/001-product-ui-foundation/crm-real-readiness-audit.md")
 console.log("Wrote specs/001-product-ui-foundation/crm-real-readiness-audit.json");
 
 if (checkMode && failedRows.length > 0) {
-  console.error(`Failed CRM real readiness rows: ${failedRows.map((item) => item.id).join(", ")}`);
+  const diagnostics = failedRows.map((item) => {
+    const detail = item.id === "dynamic-page-contracts"
+      ? dynamicApiRows.filter((row) => !row.pass).map((row) => `${row.component}: ${row.missing.join(", ")}`).join("; ")
+      : item.id === "dynamic-drawer-contracts"
+        ? drawerApiRows.filter((row) => !row.pass).map((row) => `${row.component}: ${row.missing.join(", ")}`).join("; ")
+        : "see generated readiness report";
+    return `${item.id} (${detail || "contract text mismatch"})`;
+  }).join(" | ");
+  console.error(`Failed CRM real readiness rows: ${diagnostics}`);
   process.exit(1);
 }

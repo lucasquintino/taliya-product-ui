@@ -95,7 +95,7 @@ export function SettingsAgentPanel({
         <div className="tcrm-settings-agent-panel__insights">
           {insights.map((insight) => <Card key={insight.id}>{insight.content}</Card>)}
         </div>
-        <div aria-label="Perguntas sugeridas" className="tcrm-settings-agent-panel__questions" role="list">
+        <div aria-label="Perguntas sugeridas" className="tcrm-settings-agent-panel__questions" role="group">
           {questions.map((question) => (
             <Button key={question} leadingIcon="help" onClick={() => onQuestionSelect?.(question)} variant="secondary">
               {question}

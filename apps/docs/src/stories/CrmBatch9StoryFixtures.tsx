@@ -2909,20 +2909,28 @@ const storyRenderers = {
         </SourceFrame>
         <PrimitiveMatrix>
           <PrimitiveState label="source - image 23">
-            <ChecklistRow index={1} title="Verificar horários disponíveis" onToggle={(checked) => setEvent(`source:${checked}`)} />
+            <div role="list" aria-label="Checklist source">
+              <ChecklistRow index={1} title="Verificar horários disponíveis" onToggle={(checked) => setEvent(`source:${checked}`)} />
+            </div>
           </PrimitiveState>
           <PrimitiveState label="hover / selected">
-            <ChecklistRow className="is-hover" index={2} title="Confirmar com Ana" />
-            <ChecklistRow className="is-selected" index={2} state="complete" title="Confirmar com Ana" />
+            <div role="list" aria-label="Checklist hover e selecionado">
+              <ChecklistRow className="is-hover" index={2} title="Confirmar com Ana" />
+              <ChecklistRow className="is-selected" index={2} state="complete" title="Confirmar com Ana" />
+            </div>
           </PrimitiveState>
           <PrimitiveState label="states">
-            <ChecklistRow index={1} state="complete" title="Verificar horários disponíveis" />
-            <ChecklistRow index={2} state="warning" title="Confirmar com Ana" />
-            <ChecklistRow index={3} state="sensitive" title="Atualizar reposição na agenda" />
-            <ChecklistRow index={4} state="blocked" title="Revisar regra bloqueada" />
+            <div role="list" aria-label="Checklist estados">
+              <ChecklistRow index={1} state="complete" title="Verificar horários disponíveis" />
+              <ChecklistRow index={2} state="warning" title="Confirmar com Ana" />
+              <ChecklistRow index={3} state="sensitive" title="Atualizar reposição na agenda" />
+              <ChecklistRow index={4} state="blocked" title="Revisar regra bloqueada" />
+            </div>
           </PrimitiveState>
           <PrimitiveState label="disabled">
-            <ChecklistRow disabled index={1} title="Verificar horários disponíveis" />
+            <div role="list" aria-label="Checklist disabled">
+              <ChecklistRow disabled index={1} title="Verificar horários disponíveis" />
+            </div>
           </PrimitiveState>
         </PrimitiveMatrix>
         <output aria-live="polite" className="tl-sr-only">{event}</output>

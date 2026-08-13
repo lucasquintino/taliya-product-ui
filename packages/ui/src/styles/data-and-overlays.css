@@ -2150,8 +2150,8 @@ button.tl-metric-tile {
 }
 
 .tl-status-summary__details span,
-.tl-conflict-card__facts span,
-.tl-import-progress__metrics span {
+.tl-conflict-card__facts div,
+.tl-import-progress__metrics div {
   border-left: var(--taliya-border-width-default) solid var(--taliya-border-color-subtle);
   display: grid;
   gap: var(--taliya-border-width-focus);
@@ -2490,13 +2490,13 @@ button.tl-metric-tile {
   gap: 0;
 }
 
-.tl-import-progress--compact .tl-import-progress__metrics span {
+.tl-import-progress--compact .tl-import-progress__metrics div {
   min-height: var(--taliya-control-crm-rule-row-height);
   padding-left: var(--taliya-space-3);
 }
 
-.tl-import-progress--compact .tl-import-progress__metrics span:first-child,
-.tl-import-progress--summary .tl-import-progress__metrics span {
+.tl-import-progress--compact .tl-import-progress__metrics div:first-child,
+.tl-import-progress--summary .tl-import-progress__metrics div {
   border-left: 0;
   padding-left: 0;
 }
@@ -2515,11 +2515,11 @@ button.tl-metric-tile {
   line-height: var(--taliya-type-caption-line-height);
 }
 
-.tl-import-progress--summary .tl-import-progress__metrics span {
+.tl-import-progress--summary .tl-import-progress__metrics div {
   gap: var(--taliya-border-width-focus);
 }
 
-.tl-import-progress--compact.tl-import-progress--summary .tl-import-progress__metrics span {
+.tl-import-progress--compact.tl-import-progress--summary .tl-import-progress__metrics div {
   min-height: var(--taliya-space-6);
 }
 
@@ -3138,4 +3138,3 @@ button.tl-relationship-card {
     grid-template-columns: 1fr;
   }
 }
-

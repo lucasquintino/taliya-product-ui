@@ -6,9 +6,9 @@ Status: pass
 
 ## Summary
 
-- Contracts: 6
+- Contracts: 9
 - Failed: 0
-- Main implementation: 4493 lines / 197098 bytes
+- Main implementation: 3 lines / 93 bytes
 - Component registry: 290 lines / 19591 bytes
 
 | Contract | Status |
@@ -19,5 +19,8 @@ Status: pass
 | standard-page-kit-module | pass |
 | package-does-not-import-docs | pass |
 | package-does-not-import-landing | pass |
+| runtime-modules-present | pass |
+| legacy-runtime-facade | pass |
+| runtime-module-size-budget | pass |
 
-The component registry and standard page-kit now have explicit module boundaries. The main CRM implementation and stylesheet remain large and should be split incrementally by domain after public behavior is stabilized. This audit does not claim that all modularization work is complete.
+The component registry, standard page-kit, runtime composition families, and stylesheet have explicit module boundaries. The public runtime file is a thin compatibility facade and each runtime module remains within the 400 logical-line budget.

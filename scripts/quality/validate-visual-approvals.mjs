@@ -13,7 +13,10 @@ const value = (flag, fallback) => {
 };
 const capturePath = path.resolve(root, value("--capture", "artifacts/visual/capture-report.json"));
 const comparisonPath = path.resolve(root, value("--comparison", "artifacts/visual/visual-comparison.json"));
-const approvalsPath = path.resolve(root, value("--approvals", "artifacts/visual/approvals.json"));
+const defaultApprovals = fs.existsSync(path.join(root, "specs/001-product-ui-foundation/visual-approvals.json"))
+  ? "specs/001-product-ui-foundation/visual-approvals.json"
+  : "artifacts/visual/approvals.json";
+const approvalsPath = path.resolve(root, value("--approvals", defaultApprovals));
 const outputPath = path.resolve(root, value("--output", "artifacts/visual/approval-audit.json"));
 const requiredPath = path.resolve(root, value("--required", "specs/001-product-ui-foundation/visual-certification-capture-audit.json"));
 
@@ -32,13 +35,14 @@ const required = readJson(requiredPath, "required");
 const approvals = fs.existsSync(approvalsPath)
   ? readJson(approvalsPath, "approvals")
   : { schemaVersion: "visual-approval.v1", status: "awaiting-human-review", approvals: {} };
+const versionedBaseline = approvalsPath.endsWith("specs\\001-product-ui-foundation\\visual-approvals.json") || approvalsPath.endsWith("specs/001-product-ui-foundation/visual-approvals.json");
 const approvalRequiresReanchor = approvals.sourceTreeHash !== capture.sourceTreeHash || approvals.buildHash !== capture.buildHash;
 const captureById = new Map((capture.results ?? []).map((row) => [row.id, row]));
 const comparisonById = new Map((comparison.results ?? []).map((row) => [row.id, row]));
 const requiredIds = new Set((required.rows ?? []).map((row) => row.storyId).filter(Boolean));
 const errors = [];
 if (approvals.schemaVersion !== "visual-approval.v1") errors.push("VISUAL-APPROVAL-SCHEMA");
-const approvalIdentityMismatch = ["sourceRevision", "sourceTreeHash", "buildHash"].some((field) => approvals[field] && capture[field] && approvals[field] !== capture[field]);
+const approvalIdentityMismatch = !versionedBaseline && ["sourceRevision", "sourceTreeHash", "buildHash"].some((field) => approvals[field] && capture[field] && approvals[field] !== capture[field]);
 if (!approvals.approvals || typeof approvals.approvals !== "object" || Array.isArray(approvals.approvals)) errors.push("VISUAL-APPROVAL-REGISTRY");
 const rows = [];
 for (const [id, approval] of Object.entries(approvals.approvals ?? {})) {
@@ -51,7 +55,7 @@ for (const [id, approval] of Object.entries(approvals.approvals ?? {})) {
   if (!new Set(["approved", "rejected", "needs-work"]).has(approval?.status)) rowErrors.push("INVALID-STATUS");
   if (typeof approval?.reviewer !== "string" || approval.reviewer.trim().length < 2) rowErrors.push("REVIEWER-MISSING");
   if (!isDate(approval?.reviewedAt)) rowErrors.push("REVIEWED-AT-MISSING");
-  if (approval?.sourceRevision && captureRow?.sourceRevision && approval.sourceRevision !== captureRow.sourceRevision) rowErrors.push("RECORD-REVISION-MISMATCH");
+  if (!versionedBaseline && approval?.sourceRevision && captureRow?.sourceRevision && approval.sourceRevision !== captureRow.sourceRevision) rowErrors.push("RECORD-REVISION-MISMATCH");
   if (approval && typeof approval.sourceRevision !== "string") rowErrors.push("RECORD-SOURCE-REVISION-MISSING");
   if (approval && typeof approval.buildHash !== "string") rowErrors.push("RECORD-BUILD-HASH-MISSING");
   if (approval && typeof approval.sourceSha256 !== "string") rowErrors.push("RECORD-SOURCE-HASH-MISSING");

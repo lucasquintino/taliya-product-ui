@@ -79,6 +79,7 @@ export function CrmEmptyShellCanvas({
         aria-label={state === "empty" ? "Área de conteúdo vazia" : "Estado da área de conteúdo"}
         className={cn("tcrm-empty-shell-canvas__state", className)}
         data-state={state}
+        role={state === "loading" ? "status" : "region"}
       >
         {content}
       </div>

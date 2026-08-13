@@ -288,8 +288,8 @@ export function AuditTable({ rows, onOpenObject, onRowClick, compact = false, lo
                 key={row.id}
                 onClick={onRowClick ? () => onRowClick(row.id) : undefined}
                 onKeyDown={onRowClick ? (event) => handleInteractiveRowKeyDown(event, () => onRowClick(row.id)) : undefined}
-                role={onRowClick ? "button" : undefined}
-                tabIndex={onRowClick ? 0 : undefined}
+                role={onRowClick && !onOpenObject ? "button" : undefined}
+                tabIndex={onRowClick && !onOpenObject ? 0 : undefined}
               >
                 <td><PersonLabel avatarSrc={row.actorAvatarSrc} name={row.actor} /></td>
                 <td>{row.object}</td>

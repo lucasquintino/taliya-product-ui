@@ -1,6 +1,6 @@
 # Library Consumption Status
 
-Generated: 2026-08-12T06:10:29.528Z
+Generated: 2026-08-12T21:11:23.064Z
 
 Status: pass-current-internal-library
 
@@ -34,7 +34,7 @@ This report is the quick current-state answer for whether `taliya-product-ui` ca
 | Area | Status | Evidence | Meaning |
 | --- | --- | --- | --- |
 | `current-internal-accepted` | pass | library-acceptance-audit.json | Current Internal can use taliya-product-ui as the official reusable UI library. |
-| `current-internal-consuming-official-kit` | pass | consumer integration/page-kit/runtime/package-sync/vendor-versioning audits | Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones. |
+| `current-internal-consuming-official-kit` | pass | consumer integration/page-kit/runtime and registry-consumer-adoption audits | Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones. |
 | `current-internal-routes-render-workspaces` | pass | consumer-page-kit-audit.json route requiredLocalComponents | Every discovered Internal route renders InternalShell plus its local workspace wrapper, so shell-only route regressions fail. |
 | `public-page-kit-runtime` | pass | @taliya/crm and @taliya/crm/standard-page-kit runtime manifest audits | Consumers can discover the standard page kit from the installed package. |
 | `technical-release-candidate` | pass | release-candidate-audit.json | The current package/readiness/release gate bundle is green and includes compact consumption-status and future CRM process gates. |

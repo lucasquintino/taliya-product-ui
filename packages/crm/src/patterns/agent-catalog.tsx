@@ -60,7 +60,6 @@ export function AgentRoutineCard({
       data-state={state}
       disabled={blocked}
       interactive={Boolean(onOpen) && !blocked}
-      role="listitem"
       selected={selected}
       {...props}
     >
@@ -200,7 +199,6 @@ export function AgentRoutineFlowCard({
       data-component="AgentRoutineFlowCard"
       data-flow-id={id}
       interactive={Boolean(onOpen)}
-      role="listitem"
       {...props}
     >
       <div className="tcrm-agent-routine-flow-card__summary">
@@ -260,7 +258,7 @@ export function AgentCatalog({
   }
 
   return (
-    <div className={cn("tcrm-agent-catalog", className)} role="list" {...props}>
+    <div aria-label="Catálogo de agentes" className={cn("tcrm-agent-catalog", className)} role="group" {...props}>
       {children ?? agents.map((agent) => <AgentCard key={agent.id} {...agent} onOpen={onAgentOpen} />)}
     </div>
   );

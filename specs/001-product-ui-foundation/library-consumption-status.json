@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T06:10:29.528Z",
+  "generatedAt": "2026-08-12T21:11:23.064Z",
   "status": "pass-current-internal-library",
   "currentInternalLibraryAccepted": true,
   "currentInternalConsumptionPass": true,
@@ -66,9 +66,8 @@
     "future-consumer-adoption-negative-probe",
     "future-crm-adoption-handoff",
     "consumer-integration",
-    "consumer-package-sync",
-    "consumer-package-sync-negative-probe",
-    "consumer-vendor-versioning",
+    "registry-consumer-migration-probe",
+    "registry-consumer-adoption",
     "consumer-page-kit",
     "consumer-page-kit-shell-only-route-probe",
     "consumer-page-kit-wrapper-contract-probe",
@@ -88,7 +87,7 @@
     "visual-certification-plan-negative-probe",
     "goal-completion"
   ],
-  "distributionChannel": "vendor-local-tarballs",
+  "distributionChannel": "npm-registry",
   "missingReadinessGateIds": [],
   "rows": [
     {
@@ -100,7 +99,7 @@
     {
       "id": "current-internal-consuming-official-kit",
       "status": "pass",
-      "evidence": "consumer integration/page-kit/runtime/package-sync/vendor-versioning audits",
+      "evidence": "consumer integration/page-kit/runtime and registry-consumer-adoption audits",
       "meaning": "Internal consumes official shell, filters, table, drawer, kanban/page-kit roots without local visual clones."
     },
     {

@@ -99,6 +99,7 @@ export function AgentFlowWorkspace({
               value={resolvedSettings.messageTone}
             />
             <Textarea
+              aria-label="Template da mensagem"
               density="compact"
               onChange={(event) => onSettingChange?.("messageTemplate", event.currentTarget.value)}
               value={resolvedSettings.messageTemplate}

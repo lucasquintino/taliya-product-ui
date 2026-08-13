@@ -2,7 +2,7 @@
 
 **Branch**: `006-engineering-quality-hardening` | **Date**: 2026-08-08 | **Spec**: [spec.md](./spec.md)
 **Input**: Complete engineering-quality recovery plan covering governance, code, React, componentization, architecture, testing, accessibility, security, performance, artifacts, and releases.
-**Authorization**: Planning complete does not authorize implementation; `GATE-SDD-APPROVED` remains closed until explicit user approval is recorded in `approval.md`.
+**Authorization**: `APPROVED_FOR_IMPLEMENTATION` for T101-T176 is recorded in `approval.md`; final certification and publication remain separately gated.
 
 ## Summary
 
@@ -16,7 +16,7 @@ Implementation is divided into independently reversible waves: reconcile the sou
 **Runtime/Package Manager**: Node `^20.19.0 || >=22.12.0`, pnpm `9.15.4`
 **Primary Dependencies**: React 19, Radix wrappers, Lucide; Vite `^7.2.4`; Storybook `^10.4.1`
 **Storage**: Versioned Markdown, one canonical JSON policy, reports, screenshots, and package artifacts; no runtime database
-**Testing**: Vitest `^4.0.14`, Testing Library, Storybook browser/Vitest integration, Playwright planned, axe, deterministic visual comparison, packed-consumer fixtures
+**Testing**: Vitest `^4.0.14`, Testing Library, Storybook browser/Vitest integration, Playwright release/PR projects, axe, deterministic visual comparison, packed-consumer fixtures
 **Target Platform**: Published ESM browser packages; development and certification on Windows, macOS, and Linux; Chromium on PR, Chromium/Firefox/WebKit on release
 **Project Type**: Monorepo component library with `@taliya/tokens`, `@taliya/ui`, `@taliya/crm`, and a Storybook docs application
 **Performance Goals**: No package/CSS/tarball/tree-shaking regression beyond calibrated budgets; no representative render/update regression beyond a reproducible ratchet; no unmeasured performance claim
@@ -42,7 +42,7 @@ Implementation is divided into independently reversible waves: reconcile the sou
 | XI. Secure And Deterministic Delivery | Runtime/toolchain audits, immutable actions, least privilege, OIDC, provenance, and clean consumers are planned. | PASS |
 | XII. Measured Performance And Certified Releases | Reproducible baselines precede budgets; final certification rejects waivers and stale evidence. | PASS |
 
-Current gaps such as non-blocking accessibility, missing maintained E2E, stale artifacts, vulnerable toolchain dependencies, monolithic modules, and absent runtime performance baselines are implementation debt described by this feature. They are not exceptions to the Constitution.
+Historical gaps such as non-blocking accessibility, missing maintained E2E, stale artifacts, vulnerable toolchain dependencies, monolithic modules, and absent runtime performance baselines are addressed by the implementation waves. Final certification still requires fresh evidence for the exact clean revision.
 
 ## Project Structure
 
@@ -181,9 +181,9 @@ Canonical machine-readable statuses are `pass`, `fail`, `blocked`, `error`, and 
 
 ### Wave 0 - SDD approval
 
-Complete this documentation package, validate schemas/placeholders/traceability, record `AWAITING_USER_APPROVAL`, and stop. No implementation command, dependency change, baseline update, product source edit, or publication is allowed.
+Complete this documentation package, validate schemas/placeholders/traceability, record `AWAITING_USER_APPROVAL`, and stop. This gate was completed and the user approved T101-T176; subsequent waves execute only within their declared dependencies. Publication remains separately guarded.
 
-**Exit**: SDD checks pass and the user explicitly changes the decision to `APPROVED`.
+**Exit**: SDD checks pass and the user explicitly changed the decision to `APPROVED`.
 
 ### Wave 1 / P1 - Source of truth and portable governance
 

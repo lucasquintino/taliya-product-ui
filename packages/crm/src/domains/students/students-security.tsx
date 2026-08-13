@@ -34,7 +34,7 @@ export function TenantCard({
   const ticketsText = key === "warning" ? "2 abertos" : "1 aberto";
 
   return (
-    <article className={cn("tcrm-tenant-card", className)} data-state={key} role="row" aria-label={String(name)}>
+    <article aria-label={String(name)} className={cn("tcrm-tenant-card", className)} data-state={key}>
       <Checkbox aria-label={`Selecionar ${String(name)}`} defaultChecked={key === "active"} />
       <span className="tcrm-tenant-card__avatar">{String(name).split(" ").slice(-2).map((part) => part[0]).join("") || "TV"}</span>
       <Button className="tcrm-tenant-card__name" onClick={() => onOpen?.()} size="sm" variant="ghost">{name}</Button>

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-12T01:25:37.441Z",
-  "sourceCommit": "898ef721859cf5efc7c6b2b5b0d8927c268857a8",
-  "sourceTreeSha256": "a341cb1f1bef8315e39e72a48e6836845de2ace6856c3555400e38532e1adbf8",
+  "generatedAt": "2026-08-13T00:15:52.678Z",
+  "sourceCommit": "614803e5753c2abafc02dce83c212d6e9e710b33",
+  "sourceTreeSha256": "4fa238578686db910ff0ef3562a0463cf3a7d05e8332815067cb528d192ab121",
   "reportCount": 72,
   "reports": [
     {
@@ -22,7 +22,7 @@
     },
     {
       "file": "specs/001-product-ui-foundation/component-architecture-audit.json",
-      "sha256": "267b94a45ffcdc85fe84ddca7fb51811211de777a212ab896fcff9eeb8d35afa",
+      "sha256": "5a0332e73891e00798fe70daf8fefcef3027647bfab49d2d4122fe94aa606606",
       "dependencies": []
     },
     {
@@ -62,7 +62,7 @@
     },
     {
       "file": "specs/001-product-ui-foundation/consumer-integration-audit.json",
-      "sha256": "e4b3ff2ea8d480d72fbbd50d5d0e6c178487f5d24aa51a48bb8bf0575c2f588a",
+      "sha256": "9bc7e30c0b1e2bf714618e36ab7f36a4d202631f370886ffe342cc52d18447cd",
       "dependencies": []
     },
     {
@@ -132,7 +132,7 @@
     },
     {
       "file": "specs/001-product-ui-foundation/consumer-page-kit-audit.json",
-      "sha256": "5a77aabd980e6c77d9c1854ed27f9fbbf536f3b05a0e81523e150ef4b0be4bb3",
+      "sha256": "90f6a42126465beaff8c0d38ae19e79980e91d36a0cc29c35ad73fee159e5b77",
       "dependencies": []
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "file": "specs/001-product-ui-foundation/consumer-refresh-audit.json",
-      "sha256": "f2415ae6a66336c948fa4f1017e47d37ee81e3bee27dfc54e015b6aaa542a90a",
+      "sha256": "e7c0f9c3b7b961a8f5fbb14a378c3d421cd220b803c87eda3286cb66776d1afb",
       "dependencies": []
     },
     {
@@ -152,7 +152,7 @@
     },
     {
       "file": "specs/001-product-ui-foundation/consumer-runtime-audit.json",
-      "sha256": "3415f6e27e3bb615fb3b522b4e925195162952243b200d330f3cfd12f0ed2088",
+      "sha256": "fd96fc09fa60bbaa0d8b5fe696588303b6b7bf5f15cc50c4258f1c41ec86d7ed",
       "dependencies": []
     },
     {
@@ -172,17 +172,17 @@
     },
     {
       "file": "specs/001-product-ui-foundation/crm-module-boundaries-audit.json",
-      "sha256": "e43d4a7bd1e766dc7a59ac1cf5fd50d6c5b5d668ad696707d1df34d12302fd15",
+      "sha256": "b86c7dc43d6a4656ee5fadf69faf994e66986b3e1e29c0a3ef7df7332d4b5f7b",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/crm-real-readiness-audit.json",
-      "sha256": "cc12a4c4808a29f4e9d5d68680e7d1edac7e031787d1cb4624952c70c3d983ea",
+      "sha256": "1faf9efc163683880c3ddde73bb1d11d5e931f6027f43ffe21bae686d6069f6d",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/dashboard-family-audit.json",
-      "sha256": "9b921253a3c844f43ce57e1a006fa640a73bc3ef01b2f19800002015305d09eb",
+      "sha256": "41bb33f838aed93fd5fc8d0d8559dc7ce7d1ba2cbc716fcb39db230fbc85935a",
       "dependencies": []
     },
     {
@@ -197,7 +197,7 @@
     },
     {
       "file": "specs/001-product-ui-foundation/full-image-page-coverage-audit.json",
-      "sha256": "7922ed6ddf4086476942c9f59ee85b393fa9a8ba0e36c75a18d8e65ca42d1039",
+      "sha256": "a5320e483dca8d80f04aa88d044c9a480012dec6fe13fff6b54a26b2ccf5a505",
       "dependencies": []
     },
     {
@@ -227,12 +227,12 @@
     },
     {
       "file": "specs/001-product-ui-foundation/goal-completion-audit.json",
-      "sha256": "ec7a3ded55e7ed77a51cb8b6e846eeaf5bcdc5f339abf9f3dc749bb8b3caa902",
+      "sha256": "33a9b90a21200ece09d43030c680e5102983a00aa519c3d820743163972b6fa8",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/kanban-family-audit.json",
-      "sha256": "3e0782fa6d17c9e0b703cb8b1ca37f1f6fb7c21ec2c0d6e2cffebc40f3e82e7e",
+      "sha256": "1c8fb45831f568eb6cfe618c5be3392358c5d1e988657f957ae8892c7fb6aff8",
       "dependencies": []
     },
     {
@@ -247,12 +247,12 @@
     },
     {
       "file": "specs/001-product-ui-foundation/library-acceptance-audit.json",
-      "sha256": "8629ce50f7adf9669316d509cf7be37b5f51c064cecba390e32feeae31196aaf",
+      "sha256": "49edd78d77dc7e4a38293aa826d4f3fa43b340f121c83933391bf3a52404bde6",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/library-consumption-status.json",
-      "sha256": "43577d2c0fffd1c5ad7e12babaa1e4f0706124f3422312e826122dcdbe2b74a3",
+      "sha256": "6deee9ec160c3f9f34e27d5cda2ad4ea9857ae0b97a29b919608782547cf5ea8",
       "dependencies": []
     },
     {
@@ -262,17 +262,17 @@
     },
     {
       "file": "specs/001-product-ui-foundation/library-readiness-gate.json",
-      "sha256": "5830e87f516440bc3cf0bbdcac87148ba815870edee1f34d37130072ba44f48e",
+      "sha256": "82ff2567b58397617996da81b0b6b89eddbba10f0228b41085ff287eac54bd3e",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/local-release-manifest-audit.json",
-      "sha256": "eb73bbbfb449ac25eae073155e4e0899941aa1843300a2628183184dc5bacdaf",
+      "sha256": "5e590a7089ffb7dec5ebb88ad45c4480d4118b0b88e8e48d162816886bcd891b",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/official-library-readiness-audit.json",
-      "sha256": "e1e279f7ebc974575ed312ce7116aa6a5f6787b1ec13b3b135e356501191bf3c",
+      "sha256": "9c828fc232bd7f94ac90b1292608ab615a7af14ed37b5b526f0bf09c989109b2",
       "dependencies": []
     },
     {
@@ -297,12 +297,12 @@
     },
     {
       "file": "specs/001-product-ui-foundation/reference-sheet-coverage-audit.json",
-      "sha256": "276c21ef465c726437aeac167f37651985825b6c57093e014295368778ce31f9",
+      "sha256": "2c4338485b94ea2dd56f555fc210575008458a1b1dca250cbb6b2b458edd5914",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/registry-consumer-adoption-audit.json",
-      "sha256": "2fee1772f1ce88ff79043bbafb15f14a41ee877f92a8dbfafbfd1ede86a7da00",
+      "sha256": "70ef11f8b4595b706b043198bd0840fec0fb4c4face189ffb5137e4b79bdc56e",
       "dependencies": []
     },
     {
@@ -312,32 +312,32 @@
     },
     {
       "file": "specs/001-product-ui-foundation/release-candidate-audit.json",
-      "sha256": "8c6813b1895b5dbc2ccdd76594ca3c05dc163ab2edf0ec279ba23d61ed829c87",
+      "sha256": "93585dab153412f73c6bbb1e4e23f406b59351885860ffbc1bb5eb0074f1dcb9",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/release-channel-audit.json",
-      "sha256": "86f55e4191e27bb6096268a7a47a8f2b293f27a8a649412d72860650f60ce5a8",
+      "sha256": "20fd83e50c2c69251e82710936ced5344c1aee91e6fe279ff222ed941e07d74a",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/release-policy-audit.json",
-      "sha256": "f531d17992e8232e175b2fd1a21857e68587ab5544a24854e21cf1ea4b2cb622",
+      "sha256": "ee5eebe0fc574bace6e904a6b2fc492ce9de8398a06eed363c4907b28ac07574",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/remaining-page-coverage-audit.json",
-      "sha256": "a7b7426f4fc2cb261f622501aeadf58ab0b4d0981cae1990120aa8e2f32e0d92",
+      "sha256": "bd5eeb52988872a911233b050a01e04314006bdd6e239ef642c03fd96cf72f8c",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/visual-certification-backlog-audit.json",
-      "sha256": "09879290e630f89dd21edb92f550995ea941edcef57ec6d61b4adb7a4daa0f5b",
+      "sha256": "4a81d1bfe45a18992f0f86f2ad6a700e8eccd878c3a00c623bd4f828e39b3e7e",
       "dependencies": []
     },
     {
       "file": "specs/001-product-ui-foundation/visual-certification-capture-audit.json",
-      "sha256": "a91e09183eea0b872f6c8d5739af89b642dc48229b0b80d187dafc1cf935170e",
+      "sha256": "45bc1cb67c8ca0c3d6d254799b7908844ee2c389918f3e6e225d655a1f7ffd25",
       "dependencies": []
     },
     {
@@ -347,27 +347,27 @@
     },
     {
       "file": "specs/001-product-ui-foundation/visual-product-review-audit.json",
-      "sha256": "0a0d1745edd25c831b32841da7468f18d89e33499a0549baa09f5fce9c04cbf0",
+      "sha256": "7a07c3e2e8d012a290f44e5a9442a83ea248d1d855d71862cb5f7966e5a1e4d6",
       "dependencies": []
     },
     {
       "file": "specs/002-readiness-evidence-portability/report-freshness-audit.json",
-      "sha256": "edfb35c68727b896f71335d24b9797f78eb8cf9c40ea1e9a7f0e371075d6cd03",
+      "sha256": "2a793ce5167e11294a4e467b9ba32cdb8b0bcc28a649ff14634cedae334d4e0c",
       "dependencies": []
     },
     {
       "file": "specs/002-readiness-evidence-portability/source-assets-manifest.json",
-      "sha256": "f0ef74bede19b004b131f2bbe50143057ae27db829ee23c22e139645ca5cd1f5",
+      "sha256": "45f354a5bb85bb1e02771d5250639e08d9de5389ae871e28d1f1c358b3121dcc",
       "dependencies": []
     },
     {
       "file": "specs/002-readiness-evidence-portability/source-assets-reconciliation-audit.json",
-      "sha256": "668e59c9f73f56f54fbbfc9d4020cbc6d1dd243c5e1476840a50aaef2fbf36b5",
+      "sha256": "e1ecbd90f89b3857eb268bd412af2790d20e76d5a580a8b2d30efd17a9cc1300",
       "dependencies": [
         {
           "file": "../002-readiness-evidence-portability/source-assets-manifest.json",
           "exists": true,
-          "sha256": "f0ef74bede19b004b131f2bbe50143057ae27db829ee23c22e139645ca5cd1f5"
+          "sha256": "45f354a5bb85bb1e02771d5250639e08d9de5389ae871e28d1f1c358b3121dcc"
         },
         {
           "file": "../001-product-ui-foundation/image-coverage-map.md",

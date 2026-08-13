@@ -72,12 +72,12 @@ jobs:
           corepack pnpm package-boundaries:audit
           corepack pnpm public-api:audit
           corepack pnpm public-api-surface:audit
-          corepack pnpm source-assets:audit
-          corepack pnpm source-assets:reconcile
+          corepack pnpm source-assets:versioned-audit
           corepack pnpm registry-publication:audit
           corepack pnpm registry-consumer-adoption:audit
           node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
-          node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 16
+          node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 4
+          corepack pnpm a11y:evidence
           corepack pnpm e2e:pr
           node scripts/quality/audit-dependencies.mjs --prod
           node scripts/quality/audit-dependencies.mjs --full

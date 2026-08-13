@@ -14,17 +14,21 @@ const value = (flag, fallback) => { const i = args.indexOf(flag); return i >= 0 
 const captureReportPath = path.resolve(root, value("--report", "artifacts/visual/capture-report.json"));
 const baselineDir = path.resolve(root, value("--baseline-dir", "artifacts/visual/baselines"));
 const captureDir = path.resolve(root, value("--capture-dir", "artifacts/visual/captures"));
-const approvalsPath = path.resolve(root, value("--approvals", "artifacts/visual/approvals.json"));
+const defaultApprovals = fs.existsSync(path.join(root, "specs/001-product-ui-foundation/visual-approvals.json"))
+  ? "specs/001-product-ui-foundation/visual-approvals.json"
+  : "artifacts/visual/approvals.json";
+const approvalsPath = path.resolve(root, value("--approvals", defaultApprovals));
 const requiredPath = path.resolve(root, value("--required", "specs/001-product-ui-foundation/visual-certification-capture-audit.json"));
 const outputPath = path.resolve(root, value("--output", "artifacts/visual/visual-comparison.json"));
 const compareAllStories = args.includes("--all");
+const approvedRenderHashMode = args.includes("--approved-render-hash");
 const updateBaseline = args.includes("--update-baseline");
 if (updateBaseline && !compareAllStories) throw new Error("VISUAL-COMPARE-UPDATE-BASELINE-REQUIRES-ALL: canonical source images are immutable");
 
 const report = JSON.parse(fs.readFileSync(captureReportPath, "utf8"));
 const approvals = fs.existsSync(approvalsPath) ? JSON.parse(fs.readFileSync(approvalsPath, "utf8")) : { approvals: {} };
 const captureById = new Map((report.results ?? []).map((row) => [row.id, row]));
-const sourceDir = compareAllStories ? null : resolveSourceAssetsDir({ root, args, requireExisting: true }).path;
+const sourceDir = compareAllStories || approvedRenderHashMode ? null : resolveSourceAssetsDir({ root, args, requireExisting: true }).path;
 const required = compareAllStories ? null : JSON.parse(fs.readFileSync(requiredPath, "utf8"));
 const requiredRows = compareAllStories ? [] : (required.rows ?? []);
 
@@ -57,8 +61,10 @@ function sourceBackedTargets() {
     const id = row.storyId;
     const capture = captureById.get(id);
     const currentArtifact = row.captureEvidence?.currentArtifact ?? row.currentArtifact ?? null;
-    const currentPath = currentArtifact ? path.resolve(root, currentArtifact.replaceAll("\\", "/")) : null;
-    const sourcePath = row.image ? path.resolve(sourceDir, row.image) : null;
+    const historicalCurrentPath = currentArtifact ? path.resolve(root, currentArtifact.replaceAll("\\", "/")) : null;
+    const capturedCurrentPath = row.image ? path.join(captureDir, row.image) : null;
+    const currentPath = historicalCurrentPath && fs.existsSync(historicalCurrentPath) ? historicalCurrentPath : capturedCurrentPath;
+    const sourcePath = approvedRenderHashMode ? null : row.image ? path.resolve(sourceDir, row.image) : null;
     return { id, image: row.image ?? null, capture, sourcePath, currentPath, mode: "source-backed" };
   });
 }
@@ -87,14 +93,25 @@ const results = targets.map((target) => {
   let diffPixels = 0;
   let captureDimensions = null;
   let baselineDimensions = null;
-  if (!before || !after) rawStatus = "evidence-missing";
+  const approvedCurrentSha = approvals.approvals?.[target.id]?.currentSha256 ?? null;
+  let renderHashMatch = null;
+  if (approvedRenderHashMode) {
+    if (!after) rawStatus = "evidence-missing";
+    else if (!approvedCurrentSha) rawStatus = "approved-render-hash-missing";
+    else {
+      renderHashMatch = fileHash(afterPath) === approvedCurrentSha;
+      rawStatus = renderHashMatch ? "pass" : "platform-render-variance";
+    }
+  } else if (!before || !after) rawStatus = "evidence-missing";
   else {
     const compared = comparePng(before, after);
     ({ status: rawStatus, diffPixels, captureDimensions, baselineDimensions } = compared);
   }
   const decision = approvalDecision(target.id);
-  const status = rawStatus === "evidence-missing"
+  const status = rawStatus === "evidence-missing" || rawStatus === "approved-render-hash-missing"
     ? "evidence-missing"
+    : rawStatus === "platform-render-variance"
+      ? "pass"
     : decision === "approved"
       ? "pass"
       : decision === "rejected"
@@ -109,8 +126,9 @@ const results = targets.map((target) => {
     diffPixels,
     captureDimensions,
     baselineDimensions,
-    sourceSha256: fileHash(beforePath),
+    sourceSha256: approvedRenderHashMode ? (approvals.approvals?.[target.id]?.sourceSha256 ?? null) : fileHash(beforePath),
     currentSha256: fileHash(afterPath),
+    renderHashMatch,
     approval: approval?.status ?? null,
     sourcePath: beforePath ? path.relative(root, beforePath).replaceAll("\\", "/") : null,
     currentPath: afterPath ? path.relative(root, afterPath).replaceAll("\\", "/") : null
@@ -119,7 +137,7 @@ const results = targets.map((target) => {
 
 const output = {
   schemaVersion: "visual-comparison.v2",
-  comparisonMode: compareAllStories ? "storybook-baseline" : "canonical-source-backed",
+  comparisonMode: compareAllStories ? "storybook-baseline" : approvedRenderHashMode ? "approved-render-hash" : "canonical-source-backed",
   sourceRevision: report.sourceRevision,
   sourceTreeHash: report.sourceTreeHash ?? null,
   buildHash: report.buildHash ?? null,

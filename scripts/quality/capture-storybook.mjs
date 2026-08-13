@@ -5,9 +5,9 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { chromium } from "@playwright/test";
 import { hasSourceChanges } from "./source-identity.mjs";
+import { sourceRevision as canonicalSourceRevision, sourceTreeHash as canonicalSourceTreeHash } from "./source-tree.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
@@ -27,10 +27,6 @@ function digestRows(rows) {
   return crypto.createHash("sha256").update(rows.join(""), "utf8").digest("hex");
 }
 
-function isGeneratedEvidencePath(relative) {
-  return relative.startsWith("artifacts/") || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
-}
-
 function fileDigest(file) {
   const raw = fs.readFileSync(file);
   try {
@@ -41,22 +37,7 @@ function fileDigest(file) {
 }
 
 function sourceIdentity() {
-  const commitSha = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
-  const dirty = hasSourceChanges(root);
-  const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
-  const rows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative) && fs.existsSync(path.join(root, relative))).sort().map((relative) => {
-    const file = path.join(root, relative);
-    const raw = fs.readFileSync(file);
-    let payload;
-    try { payload = raw.toString("utf8").replace(/\r\n?/g, "\n"); } catch { payload = raw.toString("base64"); }
-    const digest = crypto.createHash("sha256").update(payload, typeof payload === "string" ? "utf8" : undefined).digest("hex");
-    return `${relative}\0${digest}\0${raw.length}\n`;
-  });
-  const existingRows = rows.filter((row) => {
-    const relative = row.split("\0", 1)[0];
-    return fs.existsSync(path.join(root, relative));
-  });
-  return { commitSha, dirty, sourceTreeHash: digestRows(existingRows) };
+  return { commitSha: canonicalSourceRevision(root), dirty: hasSourceChanges(root), sourceTreeHash: canonicalSourceTreeHash(root) };
 }
 
 function buildHash() {

@@ -33,7 +33,9 @@ export function AgentRoutineWorkspace({ mode = "autonomo", flows = defaultAgentR
         <ModeSelector onChange={onModeChange} value={mode} variant="routine" />
       </AgentFlowSectionPanel>
       <AgentFlowSectionPanel columns={2} gridDensity="compact" title="Fluxos desta rotina">
-        {flows.map((flow) => <AgentRoutineFlowCard key={flow.id} {...flow} onOpen={onFlowOpen} />)}
+        <div role="list" aria-label="Fluxos desta rotina">
+          {flows.map((flow) => <div role="listitem" key={flow.id}><AgentRoutineFlowCard {...flow} onOpen={onFlowOpen} /></div>)}
+        </div>
       </AgentFlowSectionPanel>
       <AgentFlowActionBar>
         <Button leadingIcon="play" onClick={() => onAction?.("simulate")} variant="primary">Simular rotina</Button>
@@ -86,6 +88,7 @@ export function FlowStepCard({
   ...props
 }: FlowStepCardProps) {
   const interactive = Boolean(onOpen) && state !== "blocked";
+  const keyboardInteractive = interactive && !onMenu;
   const fallbackSections = sections ?? [
     {
       items: [{ label: description ?? "Etapa do fluxo.", tone: state === "exception" || state === "blocked" ? "danger" : state === "start" ? "info" : "success" }]
@@ -106,13 +109,13 @@ export function FlowStepCard({
       onClick={interactive ? () => onOpen?.(id) : undefined}
       onKeyDown={(event) => {
         onKeyDown?.(event);
-        if (!event.defaultPrevented && interactive && (event.key === "Enter" || event.key === " ")) {
+        if (!event.defaultPrevented && keyboardInteractive && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
           onOpen?.(id);
         }
       }}
-      role={interactive ? "button" : "listitem"}
-      tabIndex={interactive ? 0 : undefined}
+      role={keyboardInteractive ? "button" : "group"}
+      tabIndex={keyboardInteractive ? 0 : undefined}
       {...props}
     >
       <header>
@@ -244,7 +247,7 @@ export function FlowBuilder({
   return (
     <Panel compact className={cn("tcrm-flow-builder", density !== "default" && `tcrm-flow-builder--${density}`, className)}>
       {title ? <h3>{title}</h3> : null}
-      <div className="tcrm-flow-builder__lane" role="list">
+      <div aria-label="Etapas do fluxo" className="tcrm-flow-builder__lane" role="group">
         {flowSteps.map((step, index) => (
           <React.Fragment key={step.id ?? index}>
             <FlowStepCard density={density} {...step} onMenu={onStepMenu} onOpen={onStepOpen} />

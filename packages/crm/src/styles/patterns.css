@@ -752,7 +752,7 @@
   align-items: start;
   background: var(--taliya-color-crm-lead-drawer-suggestion-bg);
   border-radius: var(--taliya-space-2);
-  color: var(--taliya-color-certified-css-072);
+  color: var(--taliya-color-text-primary);
   display: grid;
   gap: var(--taliya-control-crm-lead-drawer-copilot-gap);
   grid-template-columns: var(--taliya-type-numeric-line-height) minmax(0, 1fr);
@@ -1487,7 +1487,7 @@
   background: var(--taliya-color-crm-kanban-board-bg);
   border: 0;
   box-shadow: none;
-  color: var(--taliya-color-certified-css-074);
+  color: var(--taliya-color-text-primary);
   height: var(--taliya-control-timeline-line-top);
   min-height: var(--taliya-control-timeline-line-top);
   width: var(--taliya-control-timeline-line-top);
@@ -1548,7 +1548,7 @@
 }
 
 .tcrm-usage-drawer__question.tl-button > .tl-icon:last-child {
-  color: var(--taliya-color-certified-css-075);
+  color: var(--taliya-color-text-primary);
   justify-self: end;
 }
 
@@ -5691,7 +5691,7 @@ button.tcrm-pipeline-card__select:focus-visible,
 
 .tcrm-lead-summary > span,
 .tcrm-trial-class-card > span {
-  color: var(--taliya-color-certified-css-078);
+  color: var(--taliya-color-text-primary);
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -7992,7 +7992,7 @@ button.tcrm-pipeline-card__select:focus-visible,
 }
 
 .tcrm-security-rule-panel__facts svg {
-  color: var(--taliya-color-certified-css-081);
+  color: var(--taliya-color-text-primary);
 }
 
 .tcrm-security-rule-panel__alert {
@@ -8145,12 +8145,12 @@ button.tcrm-pipeline-card__select:focus-visible,
   gap: 0;
 }
 
-.tcrm-import-progress-panel__main-card .tl-import-progress__metrics span {
+.tcrm-import-progress-panel__main-card .tl-import-progress__metrics div {
   min-height: var(--taliya-control-crm-rule-row-height);
   padding-left: var(--taliya-space-3);
 }
 
-.tcrm-import-progress-panel__main-card .tl-import-progress__metrics span:first-child {
+.tcrm-import-progress-panel__main-card .tl-import-progress__metrics div:first-child {
   border-left: 0;
   padding-left: 0;
 }
@@ -8226,7 +8226,7 @@ button.tcrm-pipeline-card__select:focus-visible,
   margin-left: var(--taliya-control-crm-usage-origin-row-height);
 }
 
-.tcrm-import-progress-panel__summary-card .tl-import-progress__metrics span {
+.tcrm-import-progress-panel__summary-card .tl-import-progress__metrics div {
   border-left: 0;
   gap: var(--taliya-border-width-focus);
   padding-left: 0;

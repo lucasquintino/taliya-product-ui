@@ -146,6 +146,7 @@ export function FlowNode({
   };
   const actionable = Boolean(onClick);
   const interactive = actionable && !blocked;
+  const keyboardInteractive = interactive && !onMenu;
 
   return (
     <div
@@ -162,13 +163,13 @@ export function FlowNode({
       onClick={interactive ? onClick : undefined}
       onKeyDown={(event) => {
         onKeyDown?.(event);
-        if (!event.defaultPrevented && interactive && (event.key === "Enter" || event.key === " ")) {
+        if (!event.defaultPrevented && keyboardInteractive && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
           onClick?.(event as unknown as React.MouseEvent<HTMLDivElement>);
         }
       }}
-      role={actionable ? "button" : "group"}
-      tabIndex={interactive ? 0 : undefined}
+      role={keyboardInteractive ? "button" : "group"}
+      tabIndex={keyboardInteractive ? 0 : undefined}
       {...props}
     >
       <span className="tl-flow-node__port tl-flow-node__port--in" />

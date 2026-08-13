@@ -233,9 +233,7 @@ export function LeadSummary({
 
   return (
     <div
-      aria-selected={selected || undefined}
       className={cn("tcrm-lead-summary", `tcrm-lead-summary--${key}`, selected && "tcrm-lead-summary--selected", className)}
-      role="row"
     >
       <Avatar className="tcrm-commercial-avatar" name={name} size="sm" src={avatarSrc} />
       <strong className="tcrm-commercial-name">{name}</strong>
@@ -339,7 +337,7 @@ export function EnrollmentChecklist({
         <strong>{title}</strong>
         <span>{countLabel ?? `${completedItems}/${checklist.length}`}</span>
       </header>
-      <List className="tcrm-enrollment-checklist__list">
+      <List aria-label="Itens da checklist" className="tcrm-enrollment-checklist__list" role="group">
         {checklist.map((item) => {
           const itemKey = stateKey(item.state) || "incomplete";
           return (

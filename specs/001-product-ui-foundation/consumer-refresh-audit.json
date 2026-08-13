@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T08:46:50.825Z",
+  "generatedAt": "2026-08-13T00:32:25.734Z",
   "status": "pass",
   "mode": "check",
   "checkMode": true,
@@ -15,7 +15,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 111,
+      "durationMs": 131,
       "stdoutTail": [
         "Consumer vendor sync dry-run for C:\\Users\\lucas\\taliya-internal",
         "unchanged: vendor/taliya-product-ui/taliya-tokens-0.1.1.tgz",
@@ -31,7 +31,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 86,
+      "durationMs": 130,
       "stdoutTail": [
         "Consumer dependency sync dry-run for C:\\Users\\lucas\\taliya-internal (npm-registry)",
         "unchanged: @taliya/tokens -> ^0.1.1",
@@ -46,7 +46,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 102,
+      "durationMs": 125,
       "stdoutTail": [
         "Consumer package install plan for C:\\Users\\lucas\\taliya-internal",
         "ready: @taliya/tokens dependency-ok registry-ok",
@@ -63,7 +63,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 117,
+      "durationMs": 107,
       "stdoutTail": [
         "Consumer lockfile audit: pass",
         "Wrote specs/001-product-ui-foundation/consumer-lockfile-audit.md",
@@ -77,7 +77,7 @@
       "required": true,
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 112,
+      "durationMs": 110,
       "stdoutTail": [
         "Registry consumer adoption audit: pass-registry-adoption; 3/3 packages."
       ],

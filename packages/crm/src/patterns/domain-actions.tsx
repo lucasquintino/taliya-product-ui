@@ -143,7 +143,6 @@ export function AgentCard({
       data-agent-id={id}
       disabled={blocked}
       interactive={Boolean(onOpen) && !blocked}
-      role="listitem"
       selected={selected}
       {...props}
     >

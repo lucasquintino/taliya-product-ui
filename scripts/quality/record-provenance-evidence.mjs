@@ -4,8 +4,8 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { hasSourceChanges } from "./source-identity.mjs";
+import { sourceRevision as canonicalSourceRevision, sourceTreeHash as canonicalSourceTreeHash } from "./source-tree.mjs";
 
 const root = process.cwd();
 const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex");
@@ -25,21 +25,15 @@ const hashFile = (relative) => {
   const file = path.join(root, relative);
   return fs.existsSync(file) ? sha256(fs.readFileSync(file)) : null;
 };
-const isGeneratedEvidencePath = (relative) => relative.startsWith("artifacts/") || /^specs\/001-product-ui-foundation\/.*-audit(?:-[^/]+)?\.(?:json|md)$/.test(relative);
-const sourceRevision = process.env.GIT_COMMIT ?? spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).stdout.trim();
+const sourceRevision = canonicalSourceRevision(root);
 const sourceDirty = hasSourceChanges(root);
-const listing = spawnSync("git", ["ls-files", "-co", "--exclude-standard", "-z"], { cwd: root, encoding: "buffer" }).stdout.toString("utf8");
-const sourceRows = listing.split("\0").filter(Boolean).map((relative) => relative.replaceAll("\\", "/")).filter((relative) => !isGeneratedEvidencePath(relative) && fs.existsSync(path.join(root, relative))).sort().map((relative) => {
-  const raw = fs.readFileSync(path.join(root, relative));
-  const normalized = raw.toString("utf8").replace(/\r\n?/g, "\n");
-  return `${relative}\0${sha256(normalized)}\0${raw.length}\n`;
-});
-const sourceTreeHash = sha256(sourceRows.join(""));
+const sourceTreeHash = canonicalSourceTreeHash(root);
 const evidencePaths = [
   "artifacts/visual/capture-report.json",
   "artifacts/quality/story-interactions.json",
   "artifacts/visual/visual-comparison.json",
   "artifacts/visual/approval-audit.json",
+  "artifacts/quality/g-source-assets.json",
   "governance/quality-policy.json"
 ];
 const evidence = evidencePaths.map((relativePath) => ({ relativePath, value: readJson(relativePath), hash: hashFile(relativePath) }));
@@ -47,8 +41,10 @@ const failures = [];
 if (sourceDirty) failures.push("GATE_PROVENANCE_DIRTY");
 for (const item of evidence) {
   if (!item.value || !item.hash) failures.push(`GATE_PROVENANCE_MISSING_${item.relativePath.replaceAll(/[/.\\-]/g, "_").toUpperCase()}`);
-  if (item.value?.sourceRevision && item.value.sourceRevision !== sourceRevision) failures.push(`GATE_PROVENANCE_REVISION_${item.relativePath.replaceAll(/[/.\\-]/g, "_").toUpperCase()}`);
-  if (item.value?.sourceTreeHash && item.value.sourceTreeHash !== sourceTreeHash) failures.push(`GATE_PROVENANCE_TREE_${item.relativePath.replaceAll(/[/.\\-]/g, "_").toUpperCase()}`);
+  const identity = item.value?.source ?? item.value;
+  if (identity?.commitSha && identity.commitSha !== sourceRevision) failures.push(`GATE_PROVENANCE_REVISION_${item.relativePath.replaceAll(/[/.\\-]/g, "_").toUpperCase()}`);
+  if (identity?.sourceRevision && identity.sourceRevision !== sourceRevision) failures.push(`GATE_PROVENANCE_REVISION_${item.relativePath.replaceAll(/[/.\\-]/g, "_").toUpperCase()}`);
+  if (identity?.sourceTreeHash && identity.sourceTreeHash !== sourceTreeHash && item.relativePath !== "artifacts/quality/g-source-assets.json") failures.push(`GATE_PROVENANCE_TREE_${item.relativePath.replaceAll(/[/.\\-]/g, "_").toUpperCase()}`);
 }
 const startedAt = new Date().toISOString();
 const runId = stableUuid(`G-PROVENANCE:${sourceRevision}:${sourceTreeHash}`);

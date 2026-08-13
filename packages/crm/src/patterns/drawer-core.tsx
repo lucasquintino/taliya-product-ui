@@ -228,7 +228,7 @@ export function CrmDrawer({
           )}
         </header>
       )}
-      <div className="tcrm-drawer-frame__body">
+      <div className="tcrm-drawer-frame__body" tabIndex={0}>
         {hasStructuredBody ? (
           <>
             {facts?.length ? (

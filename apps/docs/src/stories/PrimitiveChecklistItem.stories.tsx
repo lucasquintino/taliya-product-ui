@@ -21,10 +21,12 @@ export function AllStates() {
     <PrimitivePage>
       <PrimitiveMatrix>
         <PrimitiveState label="states">
-          <ChecklistItem actionLabel="Revisar" owner="Sam Frank" state="complete" title="Conectar fonte de dados" />
-          <ChecklistItem actionLabel="Abrir" onToggle={setChecked} owner="Nikki Olaw" state={checked ? "complete" : "incomplete"} title="Revisar consentimento" />
-          <ChecklistItem actionLabel="Validar" owner="Joao Silva" state="warning" title="Validar responsaveis" />
-          <ChecklistItem actionDisabled actionLabel="Bloqueado" disabled owner="Sara Alves" state="blocked" title="Publicar perfis" />
+          <div role="group" aria-label="Estados da checklist">
+            <ChecklistItem actionLabel="Revisar" owner="Sam Frank" state="complete" title="Conectar fonte de dados" />
+            <ChecklistItem actionLabel="Abrir" onToggle={setChecked} owner="Nikki Olaw" state={checked ? "complete" : "incomplete"} title="Revisar consentimento" />
+            <ChecklistItem actionLabel="Validar" owner="Joao Silva" state="warning" title="Validar responsaveis" />
+            <ChecklistItem actionDisabled actionLabel="Bloqueado" disabled owner="Sara Alves" state="blocked" title="Publicar perfis" />
+          </div>
         </PrimitiveState>
       </PrimitiveMatrix>
     </PrimitivePage>

@@ -7,7 +7,7 @@
     "present": true,
     "packageCount": 3
   },
-  "generatedAt": "2026-08-12T07:35:06.786Z",
+  "generatedAt": "2026-08-12T20:34:17.386Z",
   "packageStatus": {
     "pass": true,
     "missing": [],
@@ -151,11 +151,14 @@
           "drawer?: React.ReactNode;",
           "showGlobalActionsWithDrawer?: boolean;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -168,12 +171,15 @@
           "height: var(--taliya-layout-viewport-dynamic-height);",
           "width: var(--taliya-control-drawer-width-md);"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -185,11 +191,14 @@
           "export interface DrawerProps",
           "modal?: boolean;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/dist/index.d.ts",
           "node_modules/@taliya/ui/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -202,12 +211,15 @@
           "height: var(--taliya-layout-viewport-dynamic-height);",
           "width: min(var(--taliya-control-drawer-width-md), 100vw);"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -219,11 +231,14 @@
           "export type TaskDrawerActivityOrder = \"history-comments\" | \"comments-history\";",
           "activityOrder?: TaskDrawerActivityOrder;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -236,12 +251,15 @@
           ".tcrm-task-drawer__copilot",
           ".tcrm-task-drawer__checklist"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -256,7 +274,9 @@
           "--taliya-control-crm-work-list-detail-filter-count-size: 18px;",
           "--taliya-control-crm-work-list-detail-filter-count-padding-x: 0px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -264,6 +284,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -277,13 +298,16 @@
           "--taliya-control-crm-task-drawer-compact-section-gap: 10px;",
           "--taliya-control-crm-task-drawer-compact-copilot-icon-size: 18px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -296,12 +320,15 @@
           "export type CrmProductShellPageHeaderRhythm = \"default\" | \"spacious\" | \"compact-stacked\" | \"dashboard\" | \"reports\" | \"support\" | \"internal-overview\" | \"internal-tenants\" | \"stacked\" | \"agents\" | \"agents-routines\" | \"agents-routine-detail\" | \"agents-flow-detail\" | \"agents-publish\" | \"settings-hub\" | \"overview\" | \"operation\" | \"inbox\" | \"usage\" | \"usage-overview\" | \"billing\" | \"billing-invoices\";",
           "pageHeaderRhythm?: CrmProductShellPageHeaderRhythm;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -314,12 +341,15 @@
           ".tcrm-product-shell-stage--page-header-agents .tcrm-product-shell-page-header",
           "grid-template-columns: var(--taliya-layout-crm-agent-catalog-columns);"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -333,13 +363,16 @@
           "--taliya-layout-crm-product-shell-main-header-agents-height: 123px;",
           "--taliya-layout-crm-product-shell-header-agents-copy-offset-y: 31px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -353,13 +386,16 @@
           "var(--taliya-layout-crm-agent-routines-intro-grid-gap)",
           "var(--taliya-control-crm-agent-routine-card-min-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -374,7 +410,9 @@
           "--taliya-control-crm-agent-routine-card-min-height: 265px;",
           "--taliya-control-crm-agent-routine-intro-gap: 27px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -382,6 +420,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -394,12 +433,15 @@
           "rightPanelVariant?",
           "AgentPublishRoutineWorkspace"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -412,12 +454,15 @@
           ".tcrm-product-shell-stage--content-agent-publish .tcrm-page-family-content.tcrm-product-shell-content",
           "var(--taliya-layout-crm-product-shell-content-agent-publish-padding)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -431,13 +476,16 @@
           "--taliya-layout-crm-product-shell-header-agents-publish-margin-left: 86px;",
           "--taliya-layout-crm-product-shell-content-agent-publish-padding: 0 6px 18px 82px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -450,12 +498,15 @@
           "AgentFlowDrawerState = \"flow\" | \"routine\" | \"test\" | \"publish\" | \"execution\"",
           "ExecutionReceipt"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -469,13 +520,16 @@
           "AgentRoutineWorkspace",
           "AgentFlowDrawerState = \"flow\" | \"routine\""
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -489,13 +543,16 @@
           ".tcrm-product-shell-stage--content-agent-routine",
           ".tcrm-product-shell-stage > .tcrm-agent-flow-drawer"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -508,12 +565,15 @@
           "--taliya-control-drawer-width-md: 420px;",
           "--taliya-control-crm-agent-routine-flow-card-routine-detail-height: 198px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -527,13 +587,16 @@
           "AgentFlowWorkspace",
           "AgentFlowDrawerState = \"flow\" | \"routine\""
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -547,13 +610,16 @@
           ".tcrm-agent-flow-section-panel--mode.tl-panel",
           ".tcrm-product-shell-stage > .tcrm-agent-flow-drawer"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -566,12 +632,15 @@
           "--taliya-control-drawer-width-md: 420px;",
           "--taliya-control-crm-agent-flow-section-panel-mode-flow-detail-height: 148px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -584,12 +653,15 @@
           "SimulationRunner",
           "AgentFlowDrawerState = \"flow\" | \"routine\" | \"test\""
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -602,12 +674,15 @@
           ".tcrm-agent-flow-drawer--test",
           ".tcrm-product-shell-stage > .tcrm-agent-flow-drawer"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -620,12 +695,15 @@
           "--taliya-control-crm-simulation-runner-test-panel-height: 572px;",
           "--taliya-control-crm-simulation-runner-test-action-height: 51px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -638,12 +716,15 @@
           "SettingsHubCard",
           "topNavSelection?: \"auto\" | \"none\";"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -656,12 +737,15 @@
           ".tcrm-product-shell-stage--content-settings-hub .tcrm-page-family-content.tcrm-product-shell-content",
           "var(--taliya-layout-crm-product-shell-content-settings-hub-padding)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -675,13 +759,16 @@
           "--taliya-layout-crm-product-shell-header-settings-hub-margin-left: 96px;",
           "--taliya-layout-crm-product-shell-content-settings-hub-padding: 0 67px 28px 94px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -694,12 +781,15 @@
           "SettingsPermissionsWorkspace",
           "SettingsAgentPanel"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -712,12 +802,15 @@
           ".tcrm-product-shell-stage--content-settings-permissions .tcrm-product-shell-main::before",
           "var(--taliya-layout-crm-right-panel-settings-permissions-columns)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -731,13 +824,16 @@
           "--taliya-layout-crm-settings-permissions-source-width: 847px;",
           "--taliya-control-crm-permission-matrix-settings-permissions-height: 256px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -750,12 +846,15 @@
           "SettingsPaymentsWorkspace",
           "PaymentMethodRowState"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -768,12 +867,15 @@
           ".tcrm-product-shell-stage--content-settings-payments",
           "var(--taliya-layout-crm-right-panel-settings-payments-columns)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -786,12 +888,15 @@
           "--taliya-layout-crm-right-panel-settings-payments-rail-width: 352px;",
           "--taliya-control-crm-settings-payments-method-row-height: 144px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -804,12 +909,15 @@
           "SettingsAgendaWorkspace",
           "SettingsAgendaWorkspaceProps"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -822,12 +930,15 @@
           ".tcrm-product-shell-stage--content-settings-agenda",
           "var(--taliya-layout-crm-right-panel-settings-agenda-columns)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -840,12 +951,15 @@
           "--taliya-layout-crm-right-panel-settings-agenda-rail-width: 382px;",
           "--taliya-control-crm-settings-agenda-first-section-height: 266px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -858,12 +972,15 @@
           "SettingsNotificationsWorkspace",
           "SettingsNotificationsWorkspaceProps"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -876,12 +993,15 @@
           ".tcrm-product-shell-stage--content-settings-notifications",
           "var(--taliya-layout-crm-right-panel-settings-notifications-columns)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -894,12 +1014,15 @@
           "--taliya-layout-crm-right-panel-settings-notifications-rail-width: 386px;",
           "--taliya-control-crm-settings-notifications-first-section-height: 293px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -912,12 +1035,15 @@
           "BillingSubscriptionWorkspace",
           "BillingSubscriptionWorkspaceProps"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -930,12 +1056,15 @@
           ".tcrm-product-shell-stage--content-billing-subscription",
           "var(--taliya-layout-crm-right-panel-billing-subscription-columns)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -948,12 +1077,15 @@
           "--taliya-layout-crm-right-panel-billing-subscription-rail-width: 334px;",
           "--taliya-type-crm-billing-subscription-drawer-title-size: 14px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -974,7 +1106,9 @@
           "\"internal-tenant-detail\"",
           "contentLayout?: CrmProductShellContentLayout;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
@@ -988,6 +1122,7 @@
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1003,7 +1138,9 @@
           ".tcrm-product-shell-stage--content-kanban .tcrm-product-shell-content",
           "var(--taliya-layout-crm-product-shell-content-kanban-padding)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1012,6 +1149,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1022,15 +1160,26 @@
         "requiredText": [
           "browserUrl?: string;",
           "export interface SupportTicketDrawerProps",
-          "variant?: \"support\" | \"internal\";",
-          "export interface InternalShellProps"
+          "variant?: \"support\" | \"internal\";"
+        ],
+        "requiredAnyText": [
+          [
+            "export interface InternalShellProps",
+            "export type InternalShellProps = Omit<CrmProductShellProps, \"variant\">;"
+          ]
         ],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
-          "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
+        ],
+        "matchedAnyFiles": [
+          [
+            "node_modules/@taliya/crm/dist/index.d.ts",
+            null
+          ]
         ],
         "pass": true
       },
@@ -1045,13 +1194,16 @@
           ".tcrm-product-shell-stage--page-header-internal-overview .tcrm-product-shell-page-header",
           ".tcrm-product-shell-stage > .tcrm-support-ticket-drawer"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1064,12 +1216,15 @@
           "export interface TenantSummaryDrawerProps",
           "export declare function TenantSummaryDrawer"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1083,13 +1238,16 @@
           ".tcrm-product-shell-stage--page-header-internal-tenants .tcrm-product-shell-page-header",
           ".tcrm-product-shell-stage > .tcrm-tenant-summary-drawer"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1102,12 +1260,15 @@
           "footerNote?: React.ReactNode;",
           "export declare function TenantDetailLayout"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1121,13 +1282,16 @@
           ".tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-tenant-detail-layout__footer",
           ".tcrm-product-shell-stage--content-internal-tenant-detail .tcrm-product-shell-content"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1140,12 +1304,15 @@
           "frameVariant?: \"default\" | \"guided\" | \"guided-block\" | \"guided-main\" | \"guided-wide\" | \"guided-review\" | \"shell-global\";",
           "export declare function SetupPage"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1164,7 +1331,9 @@
           "--taliya-layout-crm-setup-shell-columns: var(--taliya-layout-crm-setup-shell-global-columns)",
           "--taliya-layout-crm-setup-bottom-bar-height: var(--taliya-layout-crm-setup-shell-global-bottom-bar-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1176,6 +1345,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1189,13 +1359,16 @@
           "export interface SetupStudentsWorkspaceProps",
           "export declare function SetupStudentsWorkspace"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1209,13 +1382,16 @@
           "var(--taliya-layout-crm-setup-students-summary-height)",
           "var(--taliya-layout-crm-setup-students-worklist-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1229,13 +1405,16 @@
           "--taliya-control-crm-setup-students-list-row-height: 44px;",
           "--taliya-control-crm-setup-students-worklist-row-height: 39px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1249,13 +1428,16 @@
           "var(--taliya-layout-crm-setup-classes-source-card-height)",
           "var(--taliya-layout-crm-setup-classes-worklist-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1269,13 +1451,16 @@
           "--taliya-layout-crm-setup-classes-source-card-height: 66px;",
           "--taliya-control-crm-setup-classes-worklist-row-height: 39px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1291,7 +1476,9 @@
           "variant?: \"availability\" | \"schedule\";",
           "export declare function WeeklyHoursGrid"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
@@ -1300,6 +1487,7 @@
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1314,7 +1502,9 @@
           "var(--taliya-layout-crm-setup-agenda-schedule-axis-rows)",
           "var(--taliya-control-crm-setup-agenda-schedule-event-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1322,6 +1512,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1337,7 +1528,9 @@
           "--taliya-layout-crm-setup-agenda-schedule-axis-rows: repeat(6, 50px);",
           "--taliya-control-crm-setup-agenda-schedule-event-height: 44px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -1346,6 +1539,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1361,7 +1555,9 @@
           "--taliya-control-crm-setup-shell-guided-review-step-row-height: 60px;",
           "--taliya-control-crm-setup-shell-guided-review-step-marker-size: 24px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -1370,6 +1566,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1382,12 +1579,15 @@
           "variant?: \"step\" | \"welcome\";",
           "export declare function SetupAgentChat"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1402,7 +1602,9 @@
           "var(--taliya-layout-crm-setup-shell-welcome-topbar-height)",
           "var(--taliya-control-crm-setup-agent-chat-welcome-message-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1410,6 +1612,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1424,7 +1627,9 @@
           "--taliya-control-crm-setup-agent-chat-welcome-message-height: 302px;",
           "--taliya-control-crm-setup-agent-chat-welcome-quick-height: 45px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -1432,6 +1637,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1444,12 +1650,15 @@
           "--taliya-layout-crm-product-shell-content-main-priority-padding: 0 28px 27px 16px;",
           "--taliya-layout-crm-product-shell-content-kanban-padding: 0 28px 28px 24px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1463,13 +1672,16 @@
           ".tcrm-replacement-drawer__fact[data-fact=\"credit\"]",
           "var(--taliya-control-crm-replacement-drawer-credit-fact-row-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1482,12 +1694,15 @@
           "--taliya-control-crm-replacement-drawer-credit-fact-row-height: 45px;",
           "--taliya-control-crm-replacement-drawer-footer-gap: 5px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1501,13 +1716,16 @@
           "--taliya-control-crm-activity-feed-row-height: 64px;",
           "--taliya-control-crm-activity-feed-row-gap: 8px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1533,7 +1751,9 @@
           "var(--taliya-layout-crm-product-shell-main-header-overview-height)",
           "var(--taliya-control-crm-page-filter-bar-overview-padding)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1552,6 +1772,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1572,7 +1793,9 @@
           "--taliya-layout-crm-product-shell-header-stacked-actions-offset-y: 26px;",
           "--taliya-control-crm-page-filter-bar-overview-padding: 10px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -1586,6 +1809,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1602,7 +1826,9 @@
           "--taliya-color-crm-product-shell-segmented-border: transparent;",
           "--taliya-shadow-crm-product-shell-segmented: none;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -1612,6 +1838,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1624,12 +1851,15 @@
           "--taliya-shadow-crm-product-shell-panel: 0 10px 20px rgba(20, 22, 28, 0.012), 0 1px 0 rgba(255, 255, 255, 0.74) inset;",
           "--taliya-shadow-crm-product-shell-control: 0 6px 14px rgba(20, 22, 28, 0.018), 0 1px 0 rgba(255, 255, 255, 0.72) inset;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1648,7 +1878,9 @@
           "var(--taliya-control-segmented-shell-item-height)",
           "var(--taliya-control-segmented-shell-item-padding-x)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css",
@@ -1660,6 +1892,7 @@
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1673,13 +1906,16 @@
           "return (_jsx(CrmTopbarNavChip",
           "onChange?.(item.id)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.js",
           "node_modules/@taliya/crm/dist/index.js",
           "node_modules/@taliya/crm/dist/index.js",
           "node_modules/@taliya/crm/dist/index.js"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1695,7 +1931,9 @@
           ".tl-filter-select__option-icon > .tl-icon",
           ".tl-filter-select__option-check > .tl-icon"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css",
@@ -1704,6 +1942,7 @@
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1716,12 +1955,15 @@
           "--tl-icon-size",
           "var(--taliya-control-icon-size-md)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1734,12 +1976,15 @@
           "const iconStyle",
           "style: iconStyle"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/dist/index.js",
           "node_modules/@taliya/ui/dist/index.js",
           "node_modules/@taliya/ui/dist/index.js"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1752,12 +1997,15 @@
           ".tcrm-product-shell-window--drawer .tcrm-product-shell-main .tcrm-empty-shell-topbar",
           "var(--taliya-control-drawer-width-md)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1769,11 +2017,14 @@
           ".tcrm-product-shell-window--drawer .tcrm-product-shell-main .tcrm-empty-shell-topbar",
           "right: var(--taliya-control-drawer-width-md);"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1785,11 +2036,14 @@
           "--taliya-layout-crm-product-shell-drawer-z-index: 50;",
           "--taliya-control-drawer-width-md: 420px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1802,12 +2056,15 @@
           "--taliya-layout-crm-page-filter-bar-search-basis: 320px;",
           "--taliya-layout-crm-page-filter-bar-search-max-width: 360px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1821,13 +2078,16 @@
           "--taliya-layout-crm-page-filter-bar-compact-search-max-width: 260px;",
           "--taliya-layout-crm-page-filter-bar-compact-filter-width: 84px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1842,7 +2102,9 @@
           "--taliya-layout-crm-page-filter-bar-tight-filter-width: 78px;",
           "--taliya-control-crm-page-filter-bar-tight-action-padding-x: 12px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -1850,6 +2112,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1862,12 +2125,15 @@
           "--taliya-color-crm-page-quick-filter-selected-soft-border: rgba(94, 142, 232, 0.18);",
           "--taliya-color-crm-page-quick-filter-selected-soft-fg: var(--taliya-color-crm-kanban-manual-fg);"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1879,11 +2145,14 @@
           "--taliya-control-crm-approval-panel-timeline-item-height: 16px;",
           "--taliya-control-crm-approval-panel-timeline-time-width: 36px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1896,12 +2165,15 @@
           "--taliya-control-crm-finance-priority-panel-gap: 12px;",
           "--taliya-control-crm-finance-priority-panel-row-height: 50px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1918,7 +2190,9 @@
           ".tcrm-page-filter-bar__actions",
           "margin-left: auto;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1928,6 +2202,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1939,11 +2214,14 @@
           "density?: \"standard\" | \"comfortable\" | \"compact\" | \"tight\";",
           "export declare function PageFilterBar"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1958,7 +2236,9 @@
           "var(--taliya-layout-crm-page-filter-bar-compact-search-min-width)",
           "var(--taliya-layout-crm-page-filter-bar-compact-filter-width)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1966,6 +2246,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -1981,7 +2262,9 @@
           "var(--taliya-layout-crm-page-filter-bar-tight-filter-width)",
           "var(--taliya-control-crm-page-filter-bar-tight-action-padding-x)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -1990,6 +2273,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2001,11 +2285,14 @@
           "export type PageQuickFiltersSelectionTone = \"strong\" | \"soft\";",
           "selectionTone?: PageQuickFiltersSelectionTone;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2019,13 +2306,16 @@
           "var(--taliya-color-crm-page-quick-filter-selected-soft-border)",
           "var(--taliya-color-crm-page-quick-filter-selected-soft-fg)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2038,12 +2328,15 @@
           "var(--taliya-control-crm-approval-panel-timeline-time-width)",
           "var(--taliya-control-crm-approval-panel-timeline-item-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2057,13 +2350,16 @@
           "var(--taliya-control-crm-finance-priority-panel-gap)",
           "var(--taliya-control-crm-finance-priority-panel-row-height)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2078,7 +2374,9 @@
           "\"wide-main\"",
           "layoutMode?: WorkListDetailPageLayoutMode;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts",
@@ -2086,6 +2384,7 @@
           "node_modules/@taliya/crm/dist/index.d.ts",
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2104,7 +2403,9 @@
           "var(--taliya-control-crm-work-list-detail-main-priority-filter-count-size)",
           "var(--taliya-control-crm-work-list-detail-main-priority-filter-count-padding-x)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -2116,6 +2417,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2132,7 +2434,9 @@
           "--taliya-control-crm-work-list-detail-main-priority-filter-count-size: 18px;",
           "--taliya-control-crm-work-list-detail-main-priority-filter-count-padding-x: 0px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -2142,6 +2446,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2155,13 +2460,16 @@
           "triggerDisplay?: \"label-value\" |",
           "\"value\";"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/dist/index.d.ts",
           "node_modules/@taliya/ui/dist/index.d.ts",
           "node_modules/@taliya/ui/dist/index.d.ts",
           "node_modules/@taliya/ui/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2172,10 +2480,13 @@
         "requiredText": [
           "filterPlacement?: \"separate\" | \"embedded\";"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2188,12 +2499,15 @@
           ".tl-search-input--filter-embedded .tl-search-input__field .tl-input-shell",
           ".tl-search-input--filter-embedded .tl-search-input__filter"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css",
           "node_modules/@taliya/ui/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2204,10 +2518,13 @@
         "requiredText": [
           "searchFilterPlacement?: \"separate\" | \"embedded\";"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/dist/index.d.ts"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2222,7 +2539,9 @@
           "--taliya-control-crm-checklist-drawer-step-row-padding-y: 5px;",
           "--taliya-control-crm-checklist-drawer-step-index-width: 16px;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css",
@@ -2230,6 +2549,7 @@
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2241,11 +2561,14 @@
           "--taliya-color-crm-checklist-row-bg-selected: rgba(94, 142, 232, 0.06);",
           "--taliya-shadow-crm-checklist-table-row-selected: none;"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/tokens/src/tokens.css",
           "node_modules/@taliya/tokens/src/tokens.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2261,7 +2584,9 @@
           "var(--taliya-control-crm-checklist-drawer-step-row-padding-y)",
           "var(--taliya-control-crm-checklist-drawer-step-index-width)"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
@@ -2270,6 +2595,7 @@
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       },
       {
@@ -2283,13 +2609,16 @@
           "var(--taliya-shadow-crm-checklist-table-row-selected)",
           ".tcrm-checklist-table__title-cell.is-selected::before"
         ],
+        "requiredAnyText": [],
         "missingText": [],
+        "missingAnyText": [],
         "matchedFiles": [
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css",
           "node_modules/@taliya/crm/src/styles.css"
         ],
+        "matchedAnyFiles": [],
         "pass": true
       }
     ],

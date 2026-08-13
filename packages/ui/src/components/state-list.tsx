@@ -8,8 +8,14 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   divided?: boolean;
 }
 
+const ListContext = React.createContext(false);
+
 export function List({ grouped = false, dense = false, divided = false, className, ...props }: ListProps) {
-  return <div className={cn("tl-list", grouped && "tl-list--grouped", dense && "tl-list--dense", divided && "tl-list--divided", className)} role="list" {...props} />;
+  return (
+    <ListContext.Provider value={true}>
+      <div className={cn("tl-list", grouped && "tl-list--grouped", dense && "tl-list--dense", divided && "tl-list--divided", className)} role="list" {...props} />
+    </ListContext.Provider>
+  );
 }
 
 export interface ListItemProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
@@ -38,6 +44,7 @@ export function ListItem({
   children,
   ...props
 }: ListItemProps) {
+  const isListChild = React.useContext(ListContext);
   return (
     <div
       className={cn(
@@ -49,7 +56,7 @@ export function ListItem({
         className
       )}
       aria-disabled={disabled || undefined}
-      role="listitem"
+      role={isListChild ? "listitem" : undefined}
       {...props}
     >
       {leading ? <div className="tl-list-item__leading">{leading}</div> : null}
@@ -71,7 +78,7 @@ export interface KeyValueRowProps extends Omit<ListItemProps, "title" | "trailin
 }
 
 export function KeyValueRow({ label, value, valueTone = "default", ...props }: KeyValueRowProps) {
-  return <ListItem title={label} trailing={<MetaText tone={valueTone}>{value}</MetaText>} {...props} />;
+  return <ListItem role="listitem" title={label} trailing={<MetaText tone={valueTone}>{value}</MetaText>} {...props} />;
 }
 
 export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -109,7 +116,7 @@ export function LoadingState({ title = "Carregando", variant = "spinner", showTi
       aria-busy="true"
       aria-label={showTitle ? undefined : title}
       className={cn("tl-state", "tl-state--loading", `tl-state--${variant}`, className)}
-      role={variant === "spinner" ? "status" : undefined}
+      role="status"
       {...props}
     >
       {variant === "spinner" ? (

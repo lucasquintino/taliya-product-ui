@@ -93,7 +93,7 @@ export function FinancePriorityPanel({
     >
       <PanelHeader compact headingLevel={2} title={title} />
       {rows.length ? (
-        <div className="tcrm-finance-priority-panel__list" role="list">
+        <div aria-label="Prioridades financeiras" className="tcrm-finance-priority-panel__list" role="group">
           {rows.map((item) => {
             const tone = item.tone ?? "info";
             const rowDisabled = disabled || item.disabled;
@@ -219,7 +219,7 @@ export function PaymentCaseCard({
         <b>{displayedTotal}</b>
         {onMenu ? <IconButton icon="more" label={`Mais acoes da fila ${String(heading)}`} onClick={onMenu} size="sm" variant="ghost" /> : null}
       </header>
-      <div className="tcrm-payment-case-card__rows" role="list">
+      <div aria-label={`Cobranças de ${String(heading)}`} className="tcrm-payment-case-card__rows" role="group">
         {rows.map((item) => (
           <PrimitiveButton
             aria-label={`Abrir cobranca de ${String(item.payer)}`}

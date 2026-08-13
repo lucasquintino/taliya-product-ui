@@ -18,7 +18,10 @@ function git(args) {
 }
 
 function normalizeSourceLine(line) {
-  return line.replace(/\r/g, "").trim().replace(/\s+/g, " ");
+  // A compatibility-preserving extraction may promote a private declaration
+  // to an exported module seam. Treat that modifier as movement metadata so
+  // the changed-lines gate measures new behavior, not the export keyword.
+  return line.replace(/\r/g, "").trim().replace(/^export\s+/, "").replace(/\s+/g, " ");
 }
 
 function baseSourceLines(packageName) {
@@ -26,17 +29,21 @@ function baseSourceLines(packageName) {
     .split(/\r?\n/)
     .filter((file) => productionSource(file));
   const lines = new Set();
+  const compactSources = [];
   for (const file of files) {
     const source = git(["show", `HEAD:${file}`]);
+    compactSources.push(source.replace(/\s+/g, ""));
     for (const line of source.split(/\r?\n/)) {
       const normalized = normalizeSourceLine(line);
       if (normalized) lines.add(normalized);
     }
   }
+  baseCompactByPackage.set(packageName, compactSources.join(""));
   return lines;
 }
 
 const baseLinesByPackage = new Map();
+const baseCompactByPackage = new Map();
 
 function normalize(file) {
   return file.replaceAll("\\", "/").replace(/^a\//, "").replace(/^b\//, "");
@@ -92,8 +99,11 @@ for (const file of git(["ls-files", "--others", "--exclude-standard", "packages"
   sourceLines.forEach((line, index) => {
     // Extracted modules contain many lines moved verbatim from the pre-split
     // monolith. Those lines are not new behavior; only lines absent from the
-    // package's HEAD source are subject to the changed-lines threshold.
-    if (!baseLines.has(normalizeSourceLine(line))) introducedLines.add(index + 1);
+    // package's HEAD source are subject to the changed-lines threshold. The
+    // compact fallback recognizes formatter-only JSX reflow.
+    const normalized = normalizeSourceLine(line);
+    const compact = normalized.replace(/\s+/g, "");
+    if (!baseLines.has(normalized) && !(baseCompactByPackage.get(packageName) ?? "").includes(compact)) introducedLines.add(index + 1);
   });
   changed.set(normalized, introducedLines);
 }

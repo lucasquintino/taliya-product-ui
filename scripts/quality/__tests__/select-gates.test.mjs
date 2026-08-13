@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { selectGates } from '../select-gates.mjs';
 
 test('profile and stage select canonical gates', () => {
-  assert.deepEqual(selectGates({ profile: 'governance', stage: 'pr' }).requiredGates, ['G-GOV']);
+  assert.deepEqual(selectGates({ profile: 'governance', stage: 'pr' }).requiredGates, ['G-GOV', 'G-LINT', 'G-UNIT', 'G-PROVENANCE']);
   assert.ok(selectGates({ profile: 'full', stage: 'release' }).requiredGates.includes('G-RELEASE'));
 });
 

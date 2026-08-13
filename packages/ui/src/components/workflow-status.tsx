@@ -73,7 +73,6 @@ export function ChecklistItem({
         showStateChip && "tl-checklist-item--with-chip",
         className
       )}
-      role="listitem"
       {...props}
     >
       {onToggle ? (

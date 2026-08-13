@@ -223,7 +223,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-roster.columns"]).toBe("52px minmax(0, 1fr) 122px 31px");
     expect(allTokens["control.crm-roster.row-height"]).toBe("73.2px");
     expect(allTokens["control.crm-roster.chip-height"]).toBe("24px");
-    expect(allTokens["color.crm-roster-warning.fg"]).toBe("#FF6F16");
+    expect(allTokens["color.crm-roster-warning.fg"]).toBe("#8A4B00");
     expect(allTokens["shadow.crm-checklist-table.row-selected"]).toBe("none");
     expect(allTokens["layout.crm-checklist-table.status-column"]).toBe("10.75%");
     expect(allTokens["layout.crm-checklist-table.next-step-column"]).toBe("10.5%");
@@ -336,7 +336,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-subscription-status-card.failed-width"]).toBe("706px");
     expect(allTokens["layout.crm-subscription-status-card.confirmed-width"]).toBe("546px");
     expect(allTokens["color.crm-subscription.title"]).toBe("#172033");
-    expect(allTokens["color.crm-subscription.text-muted"]).toBe("rgba(46, 57, 83, 0.68)");
+    expect(allTokens["color.crm-subscription.text-muted"]).toBe("#52617E");
     expect(allTokens["color.crm-subscription.card-border"]).toBe("var(--taliya-border-subtle)");
     expect(allTokens["color.crm-subscription.card-bg"]).toBe("var(--taliya-surface-card)");
     expect(allTokens["color.crm-subscription.verifying-card-bg"]).toBe("#FBFCFE");
@@ -344,11 +344,11 @@ describe("@taliya/tokens", () => {
     expect(allTokens["color.crm-subscription.secure-bg"]).toBe("rgba(22, 163, 74, 0.045)");
     expect(allTokens["color.crm-subscription.failed-callout-bg"]).toBe("rgba(245, 158, 11, 0.045)");
     expect(allTokens["color.crm-subscription.failed-callout-border"]).toBe("rgba(245, 158, 11, 0.22)");
-    expect(allTokens["color.crm-subscription.failed-callout-body"]).toBe("rgba(46, 57, 83, 0.56)");
+    expect(allTokens["color.crm-subscription.failed-callout-body"]).toBe("#6B4F16");
     expect(allTokens["color.crm-subscription.failed-details-border"]).toBe("var(--taliya-surface-field-disabled)");
-    expect(allTokens["color.crm-subscription.failed-header-subcopy"]).toBe("rgba(46, 57, 83, 0.66)");
+    expect(allTokens["color.crm-subscription.failed-header-subcopy"]).toBe("#52617E");
     expect(allTokens["color.crm-subscription.failed-link"]).toBe("rgba(46, 57, 83, 0.72)");
-    expect(allTokens["color.crm-subscription.failed-supporting"]).toBe("rgba(46, 57, 83, 0.58)");
+    expect(allTokens["color.crm-subscription.failed-supporting"]).toBe("#52617E");
     expect(allTokens["color.crm-subscription.failed-action-fg"]).toBe("rgba(255, 255, 255, 0.88)");
     expect(allTokens["layout.crm-confirmed-setup-handoff.width"]).toBe("607px");
     expect(allTokens["layout.crm-checkout-review-panel.width"]).toBe("1076px");
@@ -429,7 +429,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["control.crm-kanban-card.chip-font-size"]).toBe("9px");
     expect(allTokens["control.crm-kanban-card.menu-size"]).toBe("18px");
     expect(allTokens["control.crm-kanban-card.menu-icon-size"]).toBe("13px");
-    expect(allTokens["color.crm-kanban-blocked.fg"]).toBe("#FF2B31");
+    expect(allTokens["color.crm-kanban-blocked.fg"]).toBe("#A33B3B");
     expect(allTokens["control.crm-agent-card.min-height"]).toBe("216px");
     expect(allTokens["control.crm-agent-card.padding"]).toBe("20px");
     expect(allTokens["control.crm-agent-card.column-gap"]).toBe("24px");
@@ -499,7 +499,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["control.crm-agent-flow-settings-panel.stack-offset-y"]).toBe("-17px");
     expect(allTokens["control.crm-agent-flow-settings-panel.textarea-min-height"]).toBe("61px");
     expect(allTokens["control.crm-agent-flow-settings-panel.textarea-padding"]).toBe("7px");
-    expect(allTokens["control.crm-agent-flow-settings-panel.textarea-color"]).toBe("rgba(20, 25, 34, 0.52)");
+    expect(allTokens["control.crm-agent-flow-settings-panel.textarea-color"]).toBe("#52617E");
     expect(allTokens["control.crm-agent-flow-settings-panel.textarea-resize"]).toBe("none");
     expect(allTokens["control.crm-agent-flow-settings-panel.message-label-color"]).toBe("var(--taliya-color-text-body)");
     expect(allTokens["control.crm-agent-flow-settings-panel.stack-gap"]).toBe("7px");
@@ -689,7 +689,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["layout.crm-context-panel.width"]).toBe("280px");
     expect(allTokens["control.crm-context-panel.height"]).toBe("762px");
     expect(allTokens["control.crm-context-panel.title-size"]).toBe("13.5px");
-    expect(allTokens["color.crm-context-panel.link"]).toBe("#1473FF");
+    expect(allTokens["color.crm-context-panel.link"]).toBe("#154DA9");
     expect(allTokens["layout.crm-integration-status-row.width"]).toBe("224px");
     expect(allTokens["layout.crm-integration-status-row.columns"]).toBe("71px minmax(0, 1fr)");
     expect(allTokens["color.crm-integration-status-row.bg"]).toBe("var(--taliya-surface-card)");
@@ -734,7 +734,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["control.crm-payment-case-card.row-meta-font-size"]).toBe("9px");
     expect(allTokens["control.crm-finance-kanban-card.min-height"]).toBe("135px");
     expect(allTokens["control.crm-finance-kanban-card.gap"]).toBe("6px");
-    expect(allTokens["status.finance.today.fg"]).toBe("#E65F00");
+    expect(allTokens["status.finance.today.fg"]).toBe("#A84800");
     expect(allTokens["status.finance.validation.bg"]).toBe("rgba(139, 92, 246, 0.13)");
     expect(allTokens["color.crm-finance.payment-method-pix"]).toBe("#18A982");
     expect(allTokens["control.crm-reconciliation-row.height"]).toBe("55px");
@@ -867,7 +867,7 @@ describe("@taliya/tokens", () => {
     expect(allTokens["color.crm-quota-progress.fill"]).toBe("#005CFF");
     expect(allTokens["layout.crm-usage-ledger.width"]).toBe("893px");
     expect(allTokens["control.crm-usage-ledger.table-height"]).toBe("408px");
-    expect(allTokens["color.crm-usage-ledger.link"]).toBe("#005CFF");
+    expect(allTokens["color.crm-usage-ledger.link"]).toBe("#154DA9");
     expect(allTokens["layout.crm-impact-summary.width"]).toBe("848px");
     expect(allTokens["control.crm-impact-summary.height"]).toBe("185px");
     expect(allTokens["control.crm-impact-summary.title-weight"]).toBe("700");

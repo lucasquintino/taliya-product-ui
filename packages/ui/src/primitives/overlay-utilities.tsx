@@ -96,7 +96,7 @@ export function Tooltip({
   const childIsDisabled = React.isValidElement(children) && Boolean((children.props as { disabled?: boolean }).disabled);
   const triggerElement =
     childIsDisabled || variant === "disabled" ? (
-      <span aria-disabled={childIsDisabled ? "true" : undefined} className="tl-tooltip__disabled-trigger" tabIndex={0}>
+      <span aria-disabled={childIsDisabled ? "true" : undefined} aria-label={typeof label === "string" ? label : undefined} className="tl-tooltip__disabled-trigger" tabIndex={0}>
         {children}
       </span>
     ) : (
@@ -209,7 +209,7 @@ export function ScrollArea({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & { orientation?: "vertical" | "horizontal" | "both" }) {
-  return <div className={cn("tl-scroll-area", `tl-scroll-area--${orientation}`, className)} {...props} />;
+  return <div className={cn("tl-scroll-area", `tl-scroll-area--${orientation}`, className)} tabIndex={0} {...props} />;
 }
 
 export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -240,7 +240,7 @@ export function ProgressBar({
         {!indeterminate ? <strong>{normalizedValue}%</strong> : null}
       </div>
       <div
-        aria-label={label}
+        aria-label={label ?? `${normalizedValue}% concluído`}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={indeterminate ? undefined : normalizedValue}

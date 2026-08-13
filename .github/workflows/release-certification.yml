@@ -33,6 +33,20 @@ jobs:
           cache: pnpm
       - run: corepack enable && corepack prepare pnpm@9.15.4 --activate
       - run: corepack pnpm install --frozen-lockfile
+      - name: Run governance and source-of-truth gates
+        run: |
+          corepack pnpm quality:governance
+          corepack pnpm tokens:audit
+          corepack pnpm package-boundaries:audit
+          corepack pnpm public-api:audit
+          corepack pnpm public-api-surface:audit
+          corepack pnpm storybook-anatomy:audit:strict
+          corepack pnpm components:audit
+          corepack pnpm crm-module-boundaries:audit
+          corepack pnpm domain-wrappers:audit
+          corepack pnpm architecture:standards
+          corepack pnpm architecture:ratchet
+          corepack pnpm source-assets:versioned-audit
       - run: corepack pnpm exec playwright install chromium firefox webkit
       - if: runner.os == 'Linux'
         run: corepack pnpm exec playwright install-deps chromium firefox webkit
@@ -40,16 +54,32 @@ jobs:
       - run: corepack pnpm coverage
       - run: corepack pnpm storybook:build
       - run: node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
-      - run: node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 16
-      - run: corepack pnpm e2e:release
+      - run: node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 4
+      - run: corepack pnpm a11y:evidence
+      - run: node scripts/quality/capture-storybook.mjs --storybook-dir apps/docs/storybook-static --output-dir artifacts/visual/captures --report artifacts/visual/capture-report.json --timeout 30000
+      - run: node scripts/quality/audit-story-runtime.mjs --capture-report artifacts/visual/capture-report.json
+      - run: node scripts/quality/compare-visuals.mjs --approved-render-hash
+      - run: node scripts/quality/validate-visual-approvals.mjs
+      - run: node scripts/quality/run-release-e2e.mjs
       - run: corepack pnpm pack:local
       - run: corepack pnpm local-release-manifest:audit
       - name: Generate SBOM for the exact dependency lockfile
-        run: corepack pnpm dlx @cyclonedx/cyclonedx-npm --output-file artifacts/release/sbom.json --spec-version 1.5
+        run: corepack pnpm dlx @cyclonedx/cyclonedx-npm --ignore-npm-errors --output-file artifacts/release/sbom.json --spec-version 1.5
       - name: Hash the exact publishable tarballs and SBOM
         run: node scripts/quality/hash-release-artifacts.mjs
       - run: corepack pnpm consumer:packed-audit
       - run: node scripts/quality/audit-package-performance.mjs
       - run: node scripts/quality/record-final-waiver-audit.mjs
+      - run: node scripts/quality/record-security-evidence.mjs
+      - run: node scripts/quality/record-performance-gate.mjs
       - run: node scripts/quality/record-provenance-evidence.mjs
       - run: node scripts/quality/certify-release.mjs
+      - name: Upload exact certified artifacts
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-certified-artifacts
+          path: |
+            dist-packages/*.tgz
+            artifacts/release/**
+          if-no-files-found: error

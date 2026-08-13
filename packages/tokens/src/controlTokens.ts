@@ -654,7 +654,7 @@ export const controlTokens = {
   "control.crm-agent-flow-settings-panel.textarea-padding": "7px",
   "control.crm-agent-flow-settings-panel.textarea-size": "11px",
   "control.crm-agent-flow-settings-panel.textarea-line-height": "15px",
-  "control.crm-agent-flow-settings-panel.textarea-color": "rgba(20, 25, 34, 0.52)",
+  "control.crm-agent-flow-settings-panel.textarea-color": "#52617E",
   "control.crm-agent-flow-settings-panel.textarea-resize": "none",
   "control.crm-agent-flow-settings-panel.message-label-color": "var(--taliya-color-text-body)",
   "control.crm-agent-flow-settings-panel.stack-gap": "7px",

@@ -1093,7 +1093,11 @@ if (!checkMode) {
 }
 
 if (readinessFailed) {
-  console.error("Goal completion audit found a readiness regression.");
+  const failedNames = requirements.filter((item) => item.status === "failed").map((item) => item.requirement).join(" | ");
+  console.error(`Goal completion audit found a readiness regression: ${failedNames}`);
+  if (failedNames.includes("official shell") || failedNames.includes("route pages")) {
+    console.error(`Page-kit diagnostics: summary=${consumerPageKit.summary?.pass}; wrapper=${consumerPageKitWrapperContractsPass}; routes=${consumerPageKitRouteWorkspacesPass}; rows=${JSON.stringify(consumerPageKitRouteWorkspaceRows)}`);
+  }
   process.exit(1);
 }
 

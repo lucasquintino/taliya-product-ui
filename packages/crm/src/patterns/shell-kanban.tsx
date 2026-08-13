@@ -70,7 +70,8 @@ export function KanbanBoard({ className, children, density = "standard", laneSur
       data-lane-surface={laneSurface}
       data-lane-width={laneWidth}
       data-rail-density={hasRail ? railDensity : undefined}
-      role="list"
+      aria-label="Quadro Kanban"
+      role="region"
       {...props}
     >
       {hasRail ? <aside className="tcrm-kanban-board__rail">{rail}</aside> : null}
@@ -118,7 +119,7 @@ export function KanbanColumn({
         !hasChildren && "tcrm-kanban-column--empty",
         className
       )}
-      role="listitem"
+      role="group"
       {...props}
     >
       <header className="tcrm-kanban-column__header">
@@ -234,9 +235,9 @@ export function KanbanCard({
         {meta && !tags.length ? <small>{meta}</small> : null}
         {owner || impact || nextAction ? (
           <dl className="tcrm-kanban-card__facts">
-            {owner ? <span><dt>Dono:</dt><dd>{owner}</dd></span> : null}
-            {impact ? <span><dt>Impacto:</dt><dd>{impact}</dd></span> : null}
-            {nextAction ? <span><dt>Próx. ação:</dt><dd>{nextAction}</dd></span> : null}
+            {owner ? <div><dt>Dono:</dt><dd>{owner}</dd></div> : null}
+            {impact ? <div><dt>Impacto:</dt><dd>{impact}</dd></div> : null}
+            {nextAction ? <div><dt>Próxima ação:</dt><dd>{nextAction}</dd></div> : null}
           </dl>
         ) : null}
         {state ? <Chip className="tcrm-kanban-card__status" showDot={false} tone={toneForState(state)}>{stateLabel ?? state}</Chip> : null}

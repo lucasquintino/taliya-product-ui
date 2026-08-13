@@ -805,6 +805,10 @@ if (!checkMode) {
 }
 
 if (checkMode && report.status !== "pass") {
-  console.error(`Failed release candidate gates: ${failedRows.map((row) => row.id).join(", ") || "incomplete"}`);
+  const details = failedRows.map((row) => {
+    const tail = [...(row.stderrTail ?? []), ...(row.stdoutTail ?? [])].filter(Boolean).slice(-3).join(" | ");
+    return `${row.id}${tail ? ` (${tail})` : ""}`;
+  }).join(", ") || "incomplete";
+  console.error(`Failed release candidate gates: ${details}`);
   process.exit(1);
 }

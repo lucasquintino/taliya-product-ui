@@ -1167,7 +1167,9 @@
 }
 
 .tcrm-quota-progress__progress-value {
-  color: var(--taliya-color-crm-quota-progress-fill-label);
+  background: var(--taliya-color-crm-quota-progress-track);
+  border-radius: var(--taliya-radius-full);
+  color: var(--taliya-color-text-primary);
   font-size: var(--taliya-control-crm-quota-progress-progress-label-size);
   left: clamp(
     var(--taliya-control-crm-quota-progress-progress-label-min-left),
@@ -3707,7 +3709,7 @@
 }
 
 .tcrm-settings-section--blocked .tcrm-settings-section__grid {
-  opacity: var(--taliya-control-opacity-disabled);
+  opacity: 1;
 }
 
 @media (max-width: var(--taliya-control-table-min-width)) {
@@ -5704,7 +5706,7 @@
 .tcrm-task-drawer--loading .tcrm-task-drawer__details,
 .tcrm-task-drawer--loading .tcrm-task-drawer__checklist,
 .tcrm-task-drawer--loading .tcrm-task-drawer__activity {
-  opacity: 0.58;
+  opacity: 1;
 }
 
 .tcrm-checklist-drawer.tcrm-drawer-frame .tcrm-drawer-frame__footer {
@@ -5999,7 +6001,7 @@
 .tcrm-checklist-drawer--loading .tcrm-checklist-drawer__steps,
 .tcrm-checklist-drawer--loading .tcrm-checklist-drawer__activity,
 .tcrm-checklist-drawer--loading .tcrm-checklist-drawer__comment {
-  opacity: 0.58;
+  opacity: 1;
 }
 
 .tcrm-case-drawer {
@@ -6854,7 +6856,7 @@
 .tcrm-case-drawer--loading .tcrm-case-drawer__facts,
 .tcrm-case-drawer--loading .tcrm-case-drawer__card,
 .tcrm-case-drawer--loading .tcrm-case-drawer__history {
-  opacity: 0.58;
+  opacity: 1;
 }
 
 .tcrm-student-drawer {
@@ -7149,7 +7151,7 @@
 
 .tcrm-student-drawer__pending-count.tl-badge {
   background: var(--taliya-color-certified-css-060);
-  color: var(--taliya-color-certified-css-061);
+  color: var(--taliya-status-danger-fg);
   font-size: var(--taliya-radius-chip);
   height: var(--taliya-space-5);
   min-width: var(--taliya-space-5);
@@ -8110,12 +8112,12 @@
 
 .tcrm-payment-drawer__status--failed.tl-chip {
   background: var(--taliya-color-certified-css-063);
-  color: var(--taliya-color-certified-css-064);
+  color: var(--taliya-status-warning-fg);
 }
 
 .tcrm-payment-drawer.tcrm-drawer-frame .tcrm-drawer-frame__status.tl-chip:has(.tcrm-payment-drawer__status-label--failed) {
   background: var(--taliya-color-certified-css-063);
-  color: var(--taliya-color-certified-css-064);
+  color: var(--taliya-status-warning-fg);
 }
 
 .tcrm-payment-drawer.tcrm-drawer-frame .tcrm-drawer-frame__body {

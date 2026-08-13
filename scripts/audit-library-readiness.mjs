@@ -956,13 +956,17 @@ function runGate(gate) {
     }
   }
 
-  const result = spawnSync(gate.command[0], gate.command.slice(1), {
-    cwd: root,
-    encoding: "utf8",
-    env: gate.id === "goal-completion"
-      ? { ...process.env, TALIYA_READINESS_IN_PROGRESS: "1" }
-      : process.env
-  });
+  const env = gate.id === "goal-completion"
+    ? { ...process.env, TALIYA_READINESS_IN_PROGRESS: "1" }
+    : process.env;
+  let result = spawnSync(gate.command[0], gate.command.slice(1), { cwd: root, encoding: "utf8", env });
+  // Windows can terminate long-running child trees without an exit code while
+  // the child itself is still healthy. Retry that transport-level failure once;
+  // real non-zero exits remain failures and are never hidden.
+  if (result.status === null && !result.error && !result.stderr && !result.stdout) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 250);
+    result = spawnSync(gate.command[0], gate.command.slice(1), { cwd: root, encoding: "utf8", env });
+  }
   const durationMs = Date.now() - startedAt;
   const spawnError = result.error ? `${result.error.name}: ${result.error.message}` : "";
 
@@ -1045,7 +1049,9 @@ if (!checkMode) {
 }
 
 if (checkMode && report.status !== "pass") {
-  const failedIds = failed.map((row) => row.id).join(", ") || "incomplete gate run";
-  console.error(`Failed readiness gates: ${failedIds}`);
+  const failedDetails = failed.length > 0
+    ? failed.map((row) => `${row.id}: ${row.stderr || "no diagnostic"}`).join(" | ")
+    : "incomplete gate run";
+  console.error(`Failed readiness gates: ${failedDetails}`);
   process.exit(1);
 }

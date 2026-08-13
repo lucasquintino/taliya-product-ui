@@ -267,7 +267,7 @@ export function ConversationList({
           variant="neutral"
         />
       ) : (
-        <List className="tcrm-conversation-list__rows">
+        <List aria-label="Conversas" className="tcrm-conversation-list__rows" role="group">
           {effectiveRows.map((row) => {
             const selected = conversationListRowKey(row, selectedId);
             const disabled = row.disabled || isBlocked;

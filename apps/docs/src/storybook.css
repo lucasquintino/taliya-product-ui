@@ -169,7 +169,7 @@ body {
 
 .sb-source-panel__number {
   align-items: center;
-  background: #83a2db;
+  background: var(--taliya-color-crm-kanban-muted);
   border-radius: var(--taliya-radius-full);
   color: var(--taliya-color-white);
   display: inline-flex;
@@ -522,7 +522,7 @@ body {
 }
 
 .sb-batch4-disabled-inline {
-  opacity: 0.48;
+  opacity: 1;
 }
 
 .sb-batch4-connector-grid {
@@ -3084,7 +3084,7 @@ body {
 }
 
 .sb-crm-right-panel-rail label span {
-  color: #7a8498;
+  color: var(--taliya-color-crm-kanban-muted);
   font-size: 14px;
 }
 
@@ -3112,7 +3112,7 @@ body {
 
 .sb-crm-right-panel-rail footer {
   align-self: end;
-  color: #7a8498;
+  color: var(--taliya-color-crm-kanban-muted);
   font-size: 12px;
 }
 
@@ -3335,9 +3335,9 @@ body {
 }
 
 .sb-crm-list-detail-fixture-detail header span {
-  background: rgba(130, 96, 255, 0.16);
+  background: var(--taliya-color-crm-kanban-suggested-bg);
   border-radius: 7px;
-  color: #654dff;
+  color: var(--taliya-color-crm-kanban-suggested-fg);
   font-size: 12px;
   font-weight: 700;
   justify-self: start;

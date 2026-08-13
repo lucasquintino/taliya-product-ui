@@ -671,7 +671,7 @@
 
 .tcrm-task-queue-list__item.is-danger,
 .tcrm-task-queue-list__item.is-danger .tl-filter-chip__count {
-  color: var(--taliya-color-certified-css-088);
+  color: var(--taliya-status-danger-fg);
 }
 
 .tcrm-task-queue-list__item:hover:not(:disabled) {
@@ -800,7 +800,7 @@
 }
 
 .tcrm-task-table__deadline.is-danger {
-  color: var(--taliya-color-certified-css-088);
+  color: var(--taliya-status-danger-fg);
   font-weight: var(--taliya-control-crm-permission-matrix-title-weight);
 }
 
@@ -827,17 +827,17 @@
 
 .tcrm-task-table__status.is-open {
   background: var(--taliya-color-certified-css-091);
-  color: var(--taliya-color-certified-css-092);
+  color: var(--taliya-status-info-fg);
 }
 
 .tcrm-task-table__status.is-progress {
   background: var(--taliya-color-certified-css-091);
-  color: var(--taliya-color-certified-css-092);
+  color: var(--taliya-status-info-fg);
 }
 
 .tcrm-task-table__status.is-waiting {
   background: var(--taliya-color-certified-css-093);
-  color: var(--taliya-color-certified-css-094);
+  color: var(--taliya-status-warning-fg);
 }
 
 .tcrm-task-table__status.is-unassigned {
@@ -847,12 +847,12 @@
 
 .tcrm-task-table__status.is-late {
   background: var(--taliya-color-certified-css-096);
-  color: var(--taliya-color-certified-css-088);
+  color: var(--taliya-status-danger-fg);
 }
 
 .tcrm-task-table__status.is-done {
   background: var(--taliya-color-certified-css-097);
-  color: var(--taliya-color-certified-css-098);
+  color: var(--taliya-status-success-fg);
 }
 
 .tcrm-task-table__priority {
@@ -885,17 +885,17 @@
 
 .tcrm-task-table__mode.is-copilot {
   background: var(--taliya-color-certified-css-100);
-  color: var(--taliya-color-certified-css-101);
+  color: var(--taliya-color-text-primary);
 }
 
 .tcrm-task-table__mode.is-manual {
   background: var(--taliya-color-certified-css-091);
-  color: var(--taliya-color-certified-css-092);
+  color: var(--taliya-status-info-fg);
 }
 
 .tcrm-task-table__mode.is-automation {
   background: var(--taliya-color-certified-css-096);
-  color: var(--taliya-color-certified-css-088);
+  color: var(--taliya-status-danger-fg);
 }
 
 .tcrm-task-table__mode.is-none {

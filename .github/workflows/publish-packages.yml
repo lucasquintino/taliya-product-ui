@@ -2,9 +2,15 @@ name: Publish packages
 
 on:
   workflow_dispatch:
+    inputs:
+      certification_run_id:
+        description: GitHub Actions run ID that produced release-certified-artifacts for this commit
+        required: true
+        type: string
 
 permissions:
   contents: read
+  actions: read
   id-token: write
 
 jobs:
@@ -13,6 +19,7 @@ jobs:
     environment: npm-trusted-publish
     permissions:
       contents: read
+      actions: read
       id-token: write
       attestations: write
     steps:
@@ -23,18 +30,16 @@ jobs:
         with:
           node-version: 22.12.0
           cache: pnpm
-      - name: Enable pinned package manager
-        run: corepack enable && corepack prepare pnpm@9.15.4 --activate
-      - run: corepack pnpm install --frozen-lockfile
-      - run: corepack pnpm typecheck
-      - run: corepack pnpm lint
-      - run: corepack pnpm build
-      - run: corepack pnpm pack:local
-      - run: corepack pnpm package-artifacts:audit
-      - run: corepack pnpm future-consumer-fixture:audit
-      - name: Hash publishable artifacts
-        run: sha256sum dist-packages/*.tgz > dist-packages/SHA256SUMS
-      - name: Publish through npm trusted publishing
-        run: corepack pnpm release:npm
+      - name: Download exact certified artifacts
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16
+        with:
+          name: release-certified-artifacts
+          path: .
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.certification_run_id }}
+      - name: Verify exact certified handoff
+        run: node scripts/quality/verify-release-handoff.mjs
+      - name: Publish exact certified tarballs through npm trusted publishing
+        run: corepack pnpm release:npm:artifacts
         env:
           NPM_CONFIG_PROVENANCE: "true"

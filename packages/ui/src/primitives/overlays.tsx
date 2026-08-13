@@ -64,7 +64,7 @@ export function Drawer({
     />
   ) : null;
   const body = (
-    <div className={cn("tl-drawer__body", bodyClassName)}>
+    <div className={cn("tl-drawer__body", bodyClassName)} tabIndex={0}>
       {loading ? <LoadingState title="Carregando dados" variant="panel" /> : null}
       {blockedReason ? (
         <InlineAlert tone="warning" title="Acao bloqueada">

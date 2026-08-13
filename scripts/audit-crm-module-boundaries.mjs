@@ -1,6 +1,6 @@
 /* global console, process */
 
-import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseMode } from "./quality/modes.mjs";
 
@@ -8,12 +8,23 @@ const root = process.cwd();
 const checkMode = parseMode(process.argv) === "check";
 const sourceDir = resolve(root, "packages/crm/src");
 const indexPath = resolve(sourceDir, "internal-crm-runtime.tsx");
+const runtimeDir = resolve(sourceDir, "runtime");
 const registryPath = resolve(sourceDir, "component-registry.ts");
 const pageKitPath = resolve(sourceDir, "standard-page-kit.ts");
 const jsonPath = resolve(root, "specs/001-product-ui-foundation/crm-module-boundaries-audit.json");
 const mdPath = resolve(root, "specs/001-product-ui-foundation/crm-module-boundaries-audit.md");
 const indexSource = readFileSync(indexPath, "utf8");
+const runtimeIndexPath = resolve(runtimeDir, "index.ts");
+const runtimeIndexSource = existsSync(runtimeIndexPath) ? readFileSync(runtimeIndexPath, "utf8") : "";
 const registrySource = existsSync(registryPath) ? readFileSync(registryPath, "utf8") : "";
+const runtimeFiles = existsSync(runtimeDir)
+  ? readdirSync(runtimeDir).filter((file) => /\.(?:ts|tsx)$/.test(file) && !/\.(?:test|spec)\./.test(file))
+  : [];
+const runtimeLogicalLines = runtimeFiles.map((file) => {
+  const source = readFileSync(resolve(runtimeDir, file), "utf8");
+  return { file, lines: source.split(/\r?\n/).filter((line) => line.trim() && !line.trim().startsWith("//")).length };
+});
+const maxRuntimeLines = runtimeLogicalLines.length ? Math.max(...runtimeLogicalLines.map(({ lines }) => lines)) : 0;
 const auditDate = "deterministic";
 
 const rows = [
@@ -23,7 +34,7 @@ const rows = [
   },
   {
     contract: "component-registry-reexport",
-    pass: indexSource.includes('from "./component-registry.js"')
+    pass: runtimeIndexSource.includes('from "../component-registry.js"')
   },
   {
     contract: "component-registry-not-inline",
@@ -31,15 +42,27 @@ const rows = [
   },
   {
     contract: "standard-page-kit-module",
-    pass: existsSync(pageKitPath) && indexSource.includes('from "./standard-page-kit.js"')
+    pass: existsSync(pageKitPath) && runtimeIndexSource.includes('from "../standard-page-kit.js"')
   },
   {
     contract: "package-does-not-import-docs",
-    pass: !/(?:from|import\s*)\s*["'][^"']*apps\/docs/.test(`${indexSource}\n${registrySource}`)
+    pass: !/(?:from|import\s*)\s*["'][^"']*apps\/docs/.test(`${indexSource}\n${runtimeIndexSource}\n${registrySource}`)
   },
   {
     contract: "package-does-not-import-landing",
-    pass: !`${indexSource}\n${registrySource}`.includes("agentes-landing-system")
+    pass: !`${indexSource}\n${runtimeIndexSource}\n${registrySource}`.includes("agentes-landing-system")
+  },
+  {
+    contract: "runtime-modules-present",
+    pass: runtimeFiles.length >= 10
+  },
+  {
+    contract: "legacy-runtime-facade",
+    pass: indexSource.split(/\r?\n/).filter((line) => line.trim()).length <= 5
+  },
+  {
+    contract: "runtime-module-size-budget",
+    pass: maxRuntimeLines <= 400
   }
 ].map((row) => ({ ...row, status: row.pass ? "pass" : "fail" }));
 
@@ -52,11 +75,13 @@ const audit = {
   metrics: {
     indexBytes: statSync(indexPath).size,
     indexLines: indexSource.split("\n").length,
+    runtimeFileCount: runtimeFiles.length,
+    maxRuntimeLogicalLines: maxRuntimeLines,
     registryBytes: existsSync(registryPath) ? statSync(registryPath).size : 0,
     registryLines: registrySource ? registrySource.split("\n").length : 0
   },
   rows: rows.map(({ contract, status }) => ({ contract, status })),
-  note: "The registry and standard page-kit have explicit module boundaries. The main CRM implementation and stylesheet remain large and require incremental domain extraction; this gate does not claim that modularization is complete."
+  note: "The registry, standard page-kit, runtime composition families, and stylesheet have explicit module boundaries. The public runtime file is a thin compatibility facade and each runtime module remains within the 400 logical-line budget."
 };
 
 const table = audit.rows.map((row) => `| ${row.contract} | ${row.status} |`).join("\n");
@@ -77,7 +102,7 @@ Status: ${audit.status}
 | --- | --- |
 ${table}
 
-The component registry and standard page-kit now have explicit module boundaries. The main CRM implementation and stylesheet remain large and should be split incrementally by domain after public behavior is stabilized. This audit does not claim that all modularization work is complete.
+The component registry, standard page-kit, runtime composition families, and stylesheet have explicit module boundaries. The public runtime file is a thin compatibility facade and each runtime module remains within the 400 logical-line budget.
 `;
 
 const json = `${JSON.stringify(audit, null, 2)}\n`;

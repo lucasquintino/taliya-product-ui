@@ -4,7 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const checkMode = process.argv.includes("--check");
 const storiesDir = path.join(root, "apps/docs/src/stories");
-const crmSourcePath = path.join(root, "packages/crm/src/internal-crm-runtime.tsx");
+const crmRuntimeDir = path.join(root, "packages/crm/src/runtime");
 
 const allowedStoryPrefixes = [
   "Foundations / Tokens",
@@ -120,9 +120,16 @@ const stories = storyFiles().map((filePath) => {
   };
 });
 
-const crmSource = read(crmSourcePath);
-const nativeControlDebt = componentBlocks(crmSource)
-  .map(({ name, body }) => {
+const crmSourceFiles = fs.readdirSync(crmRuntimeDir)
+  .filter((file) => file.endsWith(".tsx") && !/\.(?:test|spec)\./.test(file))
+  .map((file) => path.join(crmRuntimeDir, file));
+const crmSources = crmSourceFiles.map((filePath) => ({
+  file: path.relative(root, filePath).replaceAll("\\", "/"),
+  source: read(filePath)
+}));
+const crmComponentBlocks = crmSources.flatMap(({ file, source }) => componentBlocks(source).map((block) => ({ ...block, file })));
+const nativeControlDebt = crmComponentBlocks
+  .map(({ name, body, file }) => {
     const nativeControls = Object.fromEntries(
       nativeControlPatterns
         .map(([kind, pattern]) => [kind, countMatches(body, pattern)])
@@ -132,7 +139,7 @@ const nativeControlDebt = componentBlocks(crmSource)
       return new RegExp(`<${componentName}(\\s|>|\\.)`).test(body);
     });
 
-    return { component: name, nativeControls, primitiveUses };
+    return { component: name, file, nativeControls, primitiveUses };
   })
   .filter((row) => Object.keys(row.nativeControls).length > 0);
 
@@ -259,7 +266,7 @@ const report = {
     legacyBatchTitles: stories.filter((story) => story.legacyBatchTitle)
   },
   crmPrimitiveReuse: {
-    scannedComponents: componentBlocks(crmSource).length,
+    scannedComponents: crmComponentBlocks.length,
     componentsWithNativeControls: nativeControlDebt.length,
     nativeControlTotals,
     primitiveReuseClassification,

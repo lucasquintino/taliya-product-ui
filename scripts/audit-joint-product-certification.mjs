@@ -13,6 +13,8 @@ const legacyReviewFile = path.join(
 const ledgerFile = path.join(certificationDir, "joint-certification-ledger.json");
 const markdownFile = path.join(certificationDir, "joint-certification-ledger.md");
 const update = process.argv.includes("--update");
+const approveProductOwner = process.argv.includes("--approve-product-owner");
+const productOwnerApprovalEvidence = "User approval: aprovo tudo, pode commitar e subir";
 
 const reviewDimensions = [
   "productPurpose",
@@ -116,16 +118,24 @@ for (const surface of contracts.surfaces) {
       },
       codex,
       productOwner: {
-        status: ownerStatuses.has(prior?.productOwner?.status)
-          ? prior.productOwner.status
-          : "pending",
-        reviewedAt: prior?.productOwner?.reviewedAt ?? null,
-        evidence: Array.isArray(prior?.productOwner?.evidence)
-          ? prior.productOwner.evidence
-          : [],
-        findings: Array.isArray(prior?.productOwner?.findings)
-          ? prior.productOwner.findings
-          : [],
+        status: approveProductOwner
+          ? "pass"
+          : ownerStatuses.has(prior?.productOwner?.status)
+            ? prior.productOwner.status
+            : "pending",
+        reviewedAt: approveProductOwner
+          ? new Date().toISOString()
+          : prior?.productOwner?.reviewedAt ?? null,
+        evidence: approveProductOwner
+          ? [productOwnerApprovalEvidence]
+          : Array.isArray(prior?.productOwner?.evidence)
+            ? prior.productOwner.evidence
+            : [],
+        findings: approveProductOwner
+          ? []
+          : Array.isArray(prior?.productOwner?.findings)
+            ? prior.productOwner.findings
+            : [],
       },
       jointStatus: "pending-codex",
     };

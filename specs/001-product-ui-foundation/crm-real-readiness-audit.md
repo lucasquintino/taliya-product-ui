@@ -1,6 +1,6 @@
 # CRM Real Readiness Audit
 
-Generated: 2026-08-12T08:55:03.713Z
+Generated: 2026-08-12T21:11:25.310Z
 
 Status: pass-ready-to-start-crm-real
 

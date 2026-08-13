@@ -699,7 +699,7 @@
 
 .tcrm-reference15-header > span {
   align-items: center;
-  background: var(--taliya-color-action-primary);
+  background: var(--taliya-status-info-fg);
   border-radius: var(--taliya-radius-full);
   color: var(--taliya-color-text-inverse);
   display: flex;
@@ -959,7 +959,7 @@
 
 .tcrm-reference-panel__header > span {
   align-items: center;
-  background: var(--taliya-surface-selection);
+  background: var(--taliya-status-info-fg);
   border-radius: var(--taliya-radius-full);
   color: var(--taliya-color-white);
   display: inline-flex;
@@ -991,7 +991,7 @@
 }
 
 .tcrm-activation-checklist__columns {
-  color: var(--taliya-color-text-muted);
+  color: var(--taliya-color-text-secondary);
   display: grid;
   font-size: var(--taliya-type-caption-size);
   gap: var(--taliya-control-checklist-action-gap);
@@ -2631,7 +2631,7 @@
 
 .tcrm-context-panel__status.tl-chip {
   background: var(--taliya-color-crm-context-panel-success-bg);
-  color: var(--taliya-color-certified-css-001);
+  color: var(--taliya-status-success-fg);
   font-size: var(--taliya-radius-chip);
   height: var(--taliya-control-crm-context-panel-status-chip-height);
   justify-self: start;
@@ -4259,6 +4259,7 @@
 
 .tcrm-kanban-card.tl-card--disabled {
   cursor: not-allowed;
+  opacity: 1 !important;
 }
 
 button.tcrm-kanban-card {
@@ -4351,10 +4352,27 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 
 .tcrm-kanban-card__select-button:disabled {
   cursor: not-allowed;
+  opacity: 1;
+}
+
+button.tcrm-kanban-card:disabled {
+  opacity: 1;
+}
+
+.tcrm-kanban-card.tl-card--disabled .tl-chip {
+  color: var(--taliya-color-crm-kanban-manual-fg) !important;
+  opacity: 1 !important;
+}
+
+.tcrm-kanban-card.tl-card--disabled .tcrm-kanban-card__status > span {
+  background: var(--taliya-color-crm-kanban-manual-bg) !important;
+  color: var(--taliya-color-crm-kanban-manual-fg) !important;
+  opacity: 1 !important;
 }
 
 .tcrm-kanban-card__select-button:focus-visible {
-  outline: 0;
+  outline: var(--taliya-focus-ring-width) solid var(--taliya-focus-ring-info);
+  outline-offset: var(--taliya-focus-ring-offset);
 }
 
 .tcrm-kanban-card__compact-meta {
@@ -4415,7 +4433,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 .tcrm-kanban-card__header,
 .tcrm-kanban-card__context,
 .tcrm-kanban-card__tags,
-.tcrm-kanban-card__facts span {
+.tcrm-kanban-card__facts div {
   align-items: center;
   display: flex;
   gap: var(--taliya-space-2);
@@ -4488,7 +4506,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   overflow-wrap: anywhere;
 }
 
-.tcrm-kanban-card__facts span {
+.tcrm-kanban-card__facts div {
   align-items: baseline;
   display: grid;
   gap: var(--taliya-space-1);
@@ -4552,7 +4570,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 .tcrm-kanban-card__tag--inbox,
 .tcrm-kanban-card__tag--sistema {
   background: var(--taliya-color-crm-conversation-thread-divider);
-  color: var(--taliya-color-crm-kanban-muted);
+  color: var(--taliya-status-neutral-fg);
 }
 
 .tcrm-kanban-card--state-manual-disponivel .tcrm-kanban-card__status {
@@ -4927,7 +4945,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   align-items: center;
   background: var(--taliya-color-crm-kanban-board-bg);
   border: 0;
-  color: var(--taliya-color-certified-css-005);
+  color: var(--taliya-status-info-fg);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
@@ -5063,7 +5081,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 }
 
 .tcrm-weekly-hours-grid > p {
-  color: var(--taliya-color-certified-css-013);
+  color: var(--taliya-color-text-secondary);
   font-size: var(--taliya-type-body-size);
   font-weight: var(--taliya-control-crm-checklist-row-font-weight);
   line-height: var(--taliya-control-crm-profile-tabs-gap);
@@ -5078,7 +5096,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 
 .tcrm-weekly-hours-grid[data-state="loading"] .tcrm-weekly-hours-grid__matrix,
 .tcrm-weekly-hours-grid[data-state="loading"] > p {
-  opacity: 0.55;
+  opacity: 1;
 }
 
 .tcrm-weekly-hours-grid[data-state="conflict"] .tcrm-weekly-hours-grid__column:nth-of-type(4) .tcrm-weekly-hours-grid__break {
@@ -5276,7 +5294,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 
 .tcrm-invite-row[data-state="accepted"] .tcrm-invite-row__avatar.tl-avatar {
   background: var(--taliya-color-certified-css-017);
-  color: var(--taliya-color-certified-css-018);
+  color: var(--taliya-status-success-fg);
 }
 
 .tcrm-invite-row[data-state="incomplete"] .tcrm-invite-row__avatar.tl-avatar {
@@ -5381,7 +5399,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   background: var(--taliya-color-crm-kanban-board-bg);
   border-color: var(--taliya-color-crm-kanban-board-bg);
   box-shadow: none;
-  color: var(--taliya-color-certified-css-020);
+  color: var(--taliya-color-text-secondary);
   height: var(--taliya-control-crm-invite-row-action-size);
   min-height: var(--taliya-control-crm-invite-row-action-size);
   padding: 0;
@@ -6484,7 +6502,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
 .tcrm-setup-stepper-panel .tl-stepper__marker {
   background: var(--taliya-color-certified-css-026);
   border: 0;
-  color: var(--taliya-color-certified-css-027);
+  color: var(--taliya-color-text-secondary);
   font-size: var(--taliya-type-nav-pill-size);
   font-weight: var(--taliya-control-crm-permission-matrix-title-weight);
   height: var(--taliya-control-crm-setup-stepper-pending-marker-size);
@@ -6573,7 +6591,7 @@ button.tcrm-kanban-card--selected:hover:not(:disabled),
   align-items: center;
   border: var(--taliya-border-width-default) var(--taliya-border-style-dashed) var(--taliya-color-certified-css-028);
   border-radius: var(--taliya-type-cardTitle-size);
-  color: var(--taliya-color-certified-css-029);
+  color: var(--taliya-color-text-secondary);
   display: flex;
   height: var(--taliya-control-crm-setup-shell-stage-icon-size);
   justify-content: center;

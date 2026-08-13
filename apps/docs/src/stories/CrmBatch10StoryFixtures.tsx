@@ -230,6 +230,7 @@ function AgentFlowSettingsPanelStory() {
               ]}
             />
             <Textarea
+              aria-label="Template da mensagem"
               defaultValue="Oi, {{nome}}. Vi aqui que voce nao vai conseguir vir a aula de {{horario}}. Vou registrar sua falta e verificar o melhor proximo passo."
               density="compact"
             />

@@ -46,6 +46,7 @@ export function ChecklistRow({
       disabled={isDisabled}
       menu={false}
       onToggle={onToggle ? (checked) => onToggle(checked, { id: itemId, index, state, title }) : undefined}
+      role="listitem"
       state={primitiveState}
       title={<><span className="tcrm-checklist-row__index">{index}.</span><span className="tcrm-checklist-row__title">{title}</span></>}
       {...props}

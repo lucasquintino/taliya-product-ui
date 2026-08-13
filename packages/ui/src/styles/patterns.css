@@ -157,7 +157,7 @@
 }
 
 .tl-card--disabled {
-  opacity: var(--taliya-control-opacity-muted);
+  opacity: 1;
 }
 
 .tl-panel {
@@ -271,7 +271,7 @@
 }
 
 .tl-meta-text--info {
-  color: var(--taliya-color-blue-400);
+  color: var(--taliya-status-info-fg);
 }
 
 .tl-stack {
@@ -628,4 +628,3 @@
 .tl-attachment-list__item small {
   color: var(--taliya-color-text-muted);
 }
-

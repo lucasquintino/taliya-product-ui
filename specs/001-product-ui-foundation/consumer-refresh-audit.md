@@ -1,6 +1,6 @@
 # Consumer Refresh Audit
 
-Generated: 2026-08-12T08:46:50.825Z
+Generated: 2026-08-13T00:32:25.734Z
 
 Status: pass
 
@@ -16,8 +16,8 @@ This audit orchestrates the local package refresh flow for a consumer: vendor sy
 
 | Step | Command | Status | Exit code | Duration ms |
 | --- | --- | --- | ---: | ---: |
-| `vendor-sync` | `node scripts/sync-consumer-vendor.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 111 |
-| `dependency-sync` | `node scripts/sync-consumer-dependencies.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 86 |
-| `install-plan` | `node scripts/install-consumer-packages.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 102 |
-| `lockfile` | `node scripts/audit-consumer-lockfile.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 117 |
-| `registry-adoption` | `node scripts/audit-registry-consumer-adoption.mjs --check --consumer C:\Users\lucas\taliya-internal` | pass | 0 | 112 |
+| `vendor-sync` | `node scripts/sync-consumer-vendor.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 131 |
+| `dependency-sync` | `node scripts/sync-consumer-dependencies.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 130 |
+| `install-plan` | `node scripts/install-consumer-packages.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 125 |
+| `lockfile` | `node scripts/audit-consumer-lockfile.mjs --check --consumer C:\Users\lucas\taliya-internal --vendor vendor/taliya-product-ui --manifest dist-packages/taliya-product-ui-local-manifest.json` | pass | 0 | 107 |
+| `registry-adoption` | `node scripts/audit-registry-consumer-adoption.mjs --check --consumer C:\Users\lucas\taliya-internal` | pass | 0 | 110 |

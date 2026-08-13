@@ -281,6 +281,10 @@
     "WeeklyCalendar",
     "WeeklyHoursGrid",
     "WorkListDetailPage",
+    "approvalTableRiskLabel",
+    "approvalTableStatusLabel",
+    "approvalTableTypeIcon",
+    "approvalTableTypeLabel",
     "crmAccessShellBrowserToolbarItems",
     "crmBrowserToolbarItems",
     "crmComponentNames",
@@ -299,7 +303,15 @@
     "setupAgentContexts",
     "setupPlansDefaultFieldValues",
     "setupShellSourceSteps",
-    "standardPageKitManifest"
+    "standardPageKitManifest",
+    "stateKey",
+    "studentTableFinanceAccessibleLabel",
+    "studentTableFinanceLabel",
+    "studentTableFinanceTone",
+    "studentTableRiskLabel",
+    "studentTableRiskTone",
+    "studentTableStatusLabel",
+    "studentTableStatusTone"
   ],
   "typeExports": [
     "ActivationChecklistItem",
@@ -310,6 +322,7 @@
     "AddOnCardProps",
     "AddOnCardState",
     "AdvancedReportsPanelProps",
+    "AdvancedStateAction",
     "AgentCardData",
     "AgentCardProps",
     "AgentFlowActionBarProps",
@@ -848,5 +861,5 @@
     },
     "./styles.css": "./src/styles.css"
   },
-  "fingerprint": "4dad82c889dff768581f7eaff466c436ef672d7e2a5e16225ec9db0f1c161e62"
+  "fingerprint": "4cff749ca13ea0f1292943c66964e7c960bd8ad511cb5fa0f2f75fbff163ef30"
 }

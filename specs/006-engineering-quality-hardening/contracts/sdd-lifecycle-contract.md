@@ -2,7 +2,7 @@
 
 **Contract ID**: SDD-LIFECYCLE-001
 **Applies to**: Spec Kit feature 006-engineering-quality-hardening
-**Current implementation authorization**: BLOCKED
+**Current implementation authorization**: APPROVED_FOR_IMPLEMENTATION (T101-T176); final certification remains gated
 
 ## Objective
 
@@ -127,4 +127,4 @@ Each probe records its expected stable failure code. An aggregate SDD gate must 
 
 ## Stop Rule
 
-At the time this contract is authored, implementation is BLOCKED. No content in this feature changes that state. Only a complete SDD package, a valid pre-decision readiness manifest, explicit user approval, and a valid approval envelope carrying `APPROVED_FOR_IMPLEMENTATION` can transition to APPROVED.
+The SDD package was explicitly approved by the user and the active feature is in `IMPLEMENTATION_IN_PROGRESS`. No content in this contract grants release publication or bypasses the phase gates. Only a valid certification record for one clean revision and exact artifacts can transition the implementation to `CERTIFIED`.

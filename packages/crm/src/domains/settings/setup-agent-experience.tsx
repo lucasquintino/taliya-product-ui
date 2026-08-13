@@ -60,6 +60,7 @@ export function SetupAgentChat({
       data-component="SetupAgentChat"
       data-state={state}
       data-variant={variant}
+      tabIndex={0}
       {...props}
     >
       <header className="tcrm-setup-agent-chat__header">

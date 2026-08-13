@@ -84,6 +84,7 @@ export function MiniCalendar({
     <div
       aria-busy={loading || undefined}
       aria-disabled={blocked || undefined}
+      aria-label={monthLabel}
       className={cn("tcrm-mini-calendar", !showHeader && "tcrm-mini-calendar--headerless", loading && "tcrm-mini-calendar--loading", blocked && "tcrm-mini-calendar--blocked", className)}
       role="group"
       {...props}
@@ -97,9 +98,9 @@ export function MiniCalendar({
           </div>
         </header>
       ) : null}
-      <div className="tcrm-mini-calendar__grid" role="grid" aria-label={monthLabel}>
+      <div className="tcrm-mini-calendar__grid">
         {weekdays.map((weekday, index) => (
-          <span className="tcrm-mini-calendar__weekday" key={`${weekday}-${index}`} role="columnheader">
+          <span className="tcrm-mini-calendar__weekday" key={`${weekday}-${index}`}>
             {weekday}
           </span>
         ))}
@@ -130,4 +131,3 @@ export function MiniCalendar({
     </div>
   );
 }
-

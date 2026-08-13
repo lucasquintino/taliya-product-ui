@@ -37,6 +37,7 @@ export function AllStates() {
                 ]}
               />
               <Textarea
+                aria-label="Template da mensagem"
                 defaultValue="Oi, {{nome}}. Vou registrar sua falta e verificar o melhor proximo passo."
                 density="compact"
               />

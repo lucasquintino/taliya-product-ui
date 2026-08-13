@@ -81,7 +81,7 @@ export function ReconciliationRow({
   const paymentMethod = method ?? defaults.method;
 
   return (
-    <div className={cn("tcrm-reconciliation-row", `tcrm-reconciliation-row--${key}`, className)} role="row">
+    <div className={cn("tcrm-reconciliation-row", `tcrm-reconciliation-row--${key}`, className)}>
       <Avatar name={String(displayName)} size="sm" src={avatarSrc} />
       <strong>{displayName}</strong>
       <Chip className="tcrm-reconciliation-row__type" showDot={false} tone={key === "dispute" ? "danger" : key === "matched" ? "success" : "info"}>{displayType}</Chip>

@@ -1,11 +1,13 @@
 {
   "date": "deterministic",
   "status": "pass",
-  "rowCount": 6,
+  "rowCount": 9,
   "failedCount": 0,
   "metrics": {
-    "indexBytes": 197098,
-    "indexLines": 4493,
+    "indexBytes": 93,
+    "indexLines": 3,
+    "runtimeFileCount": 34,
+    "maxRuntimeLogicalLines": 237,
     "registryBytes": 19591,
     "registryLines": 290
   },
@@ -33,7 +35,19 @@
     {
       "contract": "package-does-not-import-landing",
       "status": "pass"
+    },
+    {
+      "contract": "runtime-modules-present",
+      "status": "pass"
+    },
+    {
+      "contract": "legacy-runtime-facade",
+      "status": "pass"
+    },
+    {
+      "contract": "runtime-module-size-budget",
+      "status": "pass"
     }
   ],
-  "note": "The registry and standard page-kit have explicit module boundaries. The main CRM implementation and stylesheet remain large and require incremental domain extraction; this gate does not claim that modularization is complete."
+  "note": "The registry, standard page-kit, runtime composition families, and stylesheet have explicit module boundaries. The public runtime file is a thin compatibility facade and each runtime module remains within the 400 logical-line budget."
 }

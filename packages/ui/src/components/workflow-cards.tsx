@@ -80,10 +80,10 @@ export function ImportProgressCard({
       {metrics.length ? (
         <dl className="tl-import-progress__metrics">
           {metrics.map((metric, index) => (
-            <span key={`metric-${index}-${String(metric.label)}`}>
+            <div key={`metric-${index}-${String(metric.label)}`}>
               <dt>{metric.value}</dt>
               <dd>{metric.label}</dd>
-            </span>
+            </div>
           ))}
         </dl>
       ) : null}
@@ -248,10 +248,10 @@ export function ConflictCard({
       {facts.length ? (
         <dl className="tl-conflict-card__facts">
           {facts.map((fact, index) => (
-            <span key={`fact-${index}-${String(fact.label)}`}>
+            <div key={`fact-${index}-${String(fact.label)}`}>
               <dt>{fact.label}</dt>
               <dd>{fact.value}</dd>
-            </span>
+            </div>
           ))}
         </dl>
       ) : null}

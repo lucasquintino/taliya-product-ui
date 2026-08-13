@@ -4,7 +4,9 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
+import { hasSourceChanges, sourceRevision, sourceTreeHash } from './source-tree.mjs';
 
 const root = process.cwd();
 const packFlag = process.argv.indexOf('--pack-dir');
@@ -12,6 +14,7 @@ const packDir = path.resolve(root, packFlag >= 0 ? process.argv[packFlag + 1] : 
 const packages = ['taliya-tokens', 'taliya-ui', 'taliya-crm'];
 const errors = [];
 const tarballs = new Map();
+const digest = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 for (const name of packages) {
   const tarball = fs.readdirSync(packDir, { withFileTypes: true }).find((entry) => entry.isFile() && entry.name.startsWith(`${name}-`) && entry.name.endsWith('.tgz'));
   if (!tarball) { errors.push(`CONSUMER-TARBALL-MISSING:${name}`); continue; }
@@ -52,5 +55,21 @@ if (!errors.length) {
     fs.rmSync(fixture, { recursive: true, force: true });
   }
 }
-console.log(JSON.stringify({ packDir: path.relative(root, packDir).replaceAll('\\', '/'), status: errors.length ? 'fail' : 'pass', errors }, null, 2));
+const output = {
+  schemaVersion: 'consumer-packed.v1',
+  gateId: 'G-CONSUMER-PACKED',
+  sourceRevision: sourceRevision(root),
+  sourceTreeHash: sourceTreeHash(root),
+  dirty: hasSourceChanges(root),
+  packDir: path.relative(root, packDir).replaceAll('\\', '/'),
+  tarballs: [...tarballs.entries()].map(([name, file]) => ({ name, path: path.relative(root, file).replaceAll('\\', '/'), sha256: digest(file) })),
+  workspaceLinks: errors.some((error) => error.includes('WORKSPACE-LEAK')),
+  cleanConsumer: !errors.some((error) => error.includes('WORKSPACE-LEAK')),
+  status: errors.length ? 'fail' : 'pass',
+  errors
+};
+const reportPath = path.join(root, 'artifacts/quality/consumer-packed.json');
+fs.mkdirSync(path.dirname(reportPath), { recursive: true });
+fs.writeFileSync(reportPath, `${JSON.stringify(output, null, 2)}\n`);
+console.log(JSON.stringify(output, null, 2));
 if (errors.length) process.exitCode = 1;

@@ -14,7 +14,7 @@ const report = runChildren(
     command: process.execPath,
     args: [vitest, "run", "--coverage", "--config", "vitest.config.ts"],
     cwd: path.join(root, "packages", name),
-    timeoutMs: 120000
+    timeoutMs: 180000
   })),
   { cwd: root }
 );

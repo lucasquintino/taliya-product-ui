@@ -1,21 +1,21 @@
 # Automated Test and Quality-Evidence Strategy
 
-**Status**: in progress under approved task range; behavioral gates are green except coverage and source-asset integrity
+**Status**: in progress under approved task range; local behavioral, coverage, source-asset, browser, visual, security, performance, and consumer gates are green; clean-clone release certification remains pending
 **Primary requirements**: FR-022 through FR-031
 **Target outcome**: every public behavior has risk-appropriate executable evidence, not merely a test file or story count
 
 ## Current Baseline
 
-A current run on 2026-08-11 produced:
+A current run on 2026-08-12 produced:
 
 | Scope | Result | Interpretation |
 | --- | --- | --- |
 | `@taliya/tokens` | 6/6 pass | Small current token behavior suite is green |
-| `@taliya/ui` | 53/53 pass | Current jsdom component suite is green |
-| `@taliya/crm` | 207/207 pass | Current jsdom component suite is green |
+| `@taliya/ui` | 68/68 pass; 94% statements / 96% lines / 95% functions / 86.79% branches | Current jsdom component suite and package coverage policy are green |
+| `@taliya/crm` | 220/220 pass; 92% statements / 93.66% lines / 92.09% functions / 86.48% branches | Current jsdom component suite and package coverage policy are green |
 | `@taliya/docs` smoke | 5/5 pass | Docs source smoke is green; this is not Storybook browser execution |
 
-The CRM suite is now portable on the Windows checkout. The coverage runner and package thresholds are active, but the current measured result remains below policy (UI 82.26% lines / 82.15% functions / 66.19% branches; CRM 85.86% / 82.06% / 81.61%), so `G-COV` remains blocking until behavior-focused tests close the gap. The maintained Playwright PR suite is green (18/18), and static Storybook interaction evidence is green (636/636). Source-sized visual capture is current (63/63), but source-asset folder/ZIP integrity still fails and release certification was intentionally not rerun in this turn.
+The CRM suite is portable on the Windows checkout and both package thresholds are green. The maintained Playwright PR suite is green (18/18), the local six-project release E2E evidence is green (54 expected, 0 unexpected, 0 flaky), static Storybook interaction evidence is green (636/636), source-sized visual capture is current (63/63), and source-asset folder/ZIP integrity is green (73/73 route targets and 164/164 recursive/ZIP images). The three-OS clean-clone release workflow remains authoritative for final certification.
 
 ## Test Model
 
@@ -112,7 +112,7 @@ PR runs use Chromium for affected journeys. Release certification runs the full 
 - Link every changed component to its isolated story and every source-mapped component to its canonical capture.
 - Triage every current overflow to an owning source path under `packages/ui/src/**`, `packages/crm/src/**`, or `apps/docs/src/**`. A confirmed defect is fixed in the smallest explicitly approved component/visual slice and re-probed; an unresolved defect remains `blocked` and requires its separately approved slice before P3/T136. Merely refreshing or cataloguing the report cannot make `G-STORY-TEST` or `G-VISUAL` pass.
 
-The existing 635-story report is a historical input, not a baseline pass: it reports 85 stories with horizontal overflow across 87 checks.
+The current 636-story responsive report is the active evidence and records zero unresolved overflow rows; historical overflow reports remain diagnostic inputs only.
 
 ## Accessibility Strategy
 

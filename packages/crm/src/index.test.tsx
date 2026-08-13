@@ -569,7 +569,7 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(screen.getByRole("button", { name: "Tentar pagamento novamente" }));
     fireEvent.click(screen.getByRole("button", { name: "Voltar aos planos" }));
     fireEvent.click(screen.getByRole("button", { name: "Falar com suporte" }));
-    fireEvent.keyDown(screen.getByRole("button", { name: "Qualificar lead" }), { key: "Enter" });
+    fireEvent.click(screen.getByRole("group", { name: "Qualificar lead" }));
     fireEvent.click(screen.getByRole("button", { name: "Opcoes da qualificacao" }));
 
     expect(onSetupAction).toHaveBeenCalledOnce();
@@ -689,7 +689,7 @@ describe("@taliya/crm component coverage", () => {
 
   it("supports commercial-width kanban lanes", () => {
     render(<crm.KanbanBoard aria-label="Pipeline" laneWidth="commercial"><crm.KanbanColumn title="Novo" /></crm.KanbanBoard>);
-    expect(screen.getByRole("list", { name: "Pipeline" })).toHaveClass("tcrm-kanban-board--commercial-lanes");
+    expect(screen.getByRole("region", { name: "Pipeline" })).toHaveClass("tcrm-kanban-board--commercial-lanes");
   });
 
   it("renders core shell and layout anatomy", () => {
@@ -2273,10 +2273,10 @@ describe("@taliya/crm component coverage", () => {
     );
 
     expect(screen.getByText("Filtros").closest(".tcrm-kanban-page-stack")).toHaveClass("tcrm-page-family-stack");
-    expect(screen.getByRole("list")).toHaveClass("tcrm-kanban-board--compact-rail");
-    expect(screen.getByRole("list")).toHaveClass("tcrm-kanban-board--comfortable", "tcrm-kanban-board--separate-lanes");
-    expect(screen.getByRole("list")).toHaveAttribute("data-lane-surface", "separate");
-    expect(screen.getByRole("list")).toHaveAttribute("data-rail-density", "compact");
+    expect(screen.getByRole("region", { name: "Quadro Kanban" })).toHaveClass("tcrm-kanban-board--compact-rail");
+    expect(screen.getByRole("region", { name: "Quadro Kanban" })).toHaveClass("tcrm-kanban-board--comfortable", "tcrm-kanban-board--separate-lanes");
+    expect(screen.getByRole("region", { name: "Quadro Kanban" })).toHaveAttribute("data-lane-surface", "separate");
+    expect(screen.getByRole("region", { name: "Quadro Kanban" })).toHaveAttribute("data-rail-density", "compact");
   });
 
   it("exposes the operation page-header rhythm through CrmKanbanPage", () => {
@@ -2296,9 +2296,9 @@ describe("@taliya/crm component coverage", () => {
       </crm.CrmKanbanPage>
     );
 
-    expect(screen.getByRole("list")).toHaveClass("tcrm-kanban-board--finance-lanes");
-    expect(screen.getByRole("list").closest(".tcrm-kanban-page-stack")).toHaveClass("tcrm-kanban-page-stack--finance");
-    expect(screen.getByRole("list")).toHaveAttribute("data-lane-width", "finance");
+    expect(screen.getByRole("region", { name: "Quadro Kanban" })).toHaveClass("tcrm-kanban-board--finance-lanes");
+    expect(screen.getByRole("region", { name: "Quadro Kanban" }).closest(".tcrm-kanban-page-stack")).toHaveClass("tcrm-kanban-page-stack--finance");
+    expect(screen.getByRole("region", { name: "Quadro Kanban" })).toHaveAttribute("data-lane-width", "finance");
   });
 
   it("owns the commercial kanban inset, separate lanes, and wide tracks", () => {
@@ -2308,7 +2308,7 @@ describe("@taliya/crm component coverage", () => {
       </crm.CrmKanbanPage>
     );
 
-    const board = screen.getByRole("list");
+    const board = screen.getByRole("region", { name: "Quadro Kanban" });
     expect(board.closest(".tcrm-kanban-page-stack")).toHaveClass("tcrm-kanban-page-stack--commercial");
     expect(board).toHaveAttribute("data-lane-surface", "separate");
     expect(board).toHaveAttribute("data-lane-width", "commercial");
@@ -3236,7 +3236,7 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(beforeAfterDiff.getByRole("button", { name: "Rejeitar" }));
     fireEvent.click(beforeAfterDiff.getByRole("button", { name: "Aprovar" }));
     const auditTrail = within(screen.getByTestId("audit-trail"));
-    fireEvent.click(auditTrail.getByRole("button", { name: /Abrir auditoria cs-1043/ }));
+    fireEvent.click(auditTrail.getByRole("row", { name: /Abrir auditoria cs-1043/ }));
     fireEvent.click(auditTrail.getByRole("button", { name: /Abrir cs-1043/ }));
     fireEvent.click(auditTrail.getByRole("button", { name: "Ver auditoria completa" }));
 
@@ -4751,7 +4751,7 @@ describe("@taliya/crm component coverage", () => {
     fireEvent.click(within(screen.getByTestId("agent-catalog")).getByRole("button", { name: /Abrir Agenda/ }));
     fireEvent.click(within(screen.getByTestId("agent-routine-card")).getByRole("button", { name: "Abrir rotina" }));
     fireEvent.click(within(screen.getByTestId("mode-selector")).getByRole("button", { name: /Manual/ }));
-    fireEvent.click(within(screen.getByTestId("flow-builder")).getByRole("button", { name: "Início" }));
+    fireEvent.click(within(screen.getByTestId("flow-builder")).getByRole("group", { name: "Início" }));
     fireEvent.click(within(screen.getByTestId("flow-builder")).getAllByRole("button", { name: /Abrir opções do nó/ })[0]);
     fireEvent.click(within(screen.getByTestId("preflight")).getByRole("checkbox", { name: /WhatsApp conectado/ }));
     fireEvent.click(within(screen.getByTestId("preflight")).getAllByRole("button", { name: "Revisar" })[0]);
@@ -5495,7 +5495,7 @@ describe("@taliya/crm component coverage", () => {
     const remove = vi.fn();
 
     const { rerender } = render(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} />);
-    const row = screen.getByRole("listitem", { name: /Ana Martins.*Professor.*Convite preparado/i });
+    const row = screen.getByRole("article", { name: /Ana Martins.*Professor.*Convite preparado/i });
     const openAction = screen.getByRole("button", { name: "Abrir Ana Martins" });
 
     expect(row).toHaveAttribute("data-component", "InviteRow");
@@ -5514,17 +5514,17 @@ describe("@taliya/crm component coverage", () => {
     expect(remove).toHaveBeenCalledWith(expect.objectContaining({ id: "ana-martins" }), "prepared");
 
     rerender(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} state="incomplete" />);
-    expect(screen.getByRole("listitem", { name: /Roberto Lima.*Dados incompletos/i })).toHaveAttribute("data-state", "incomplete");
+    expect(screen.getByRole("article", { name: /Roberto Lima.*Dados incompletos/i })).toHaveAttribute("data-state", "incomplete");
     expect(screen.getByText("RL")).toBeInTheDocument();
     expect(screen.getByText("Dados incompletos")).toBeInTheDocument();
 
     rerender(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} state="loading" />);
-    expect(screen.getByRole("listitem", { name: /Carregando equipe.*Atualizando/i })).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByRole("article", { name: /Carregando equipe.*Atualizando/i })).toHaveAttribute("aria-busy", "true");
     expect(screen.getByRole("button", { name: "Abrir Carregando equipe" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Editar Carregando equipe" })).toBeDisabled();
 
     rerender(<crm.InviteRow onEdit={edit} onOpen={open} onRemove={remove} state="blocked" />);
-    expect(screen.getByRole("listitem", { name: /Acesso bloqueado.*Bloqueado/i })).toHaveAttribute("data-state", "blocked");
+    expect(screen.getByRole("article", { name: /Acesso bloqueado.*Bloqueado/i })).toHaveAttribute("data-state", "blocked");
     expect(screen.getByRole("button", { name: "Abrir Acesso bloqueado" })).toBeDisabled();
     expect(screen.getByRole("button", { name: "Remover Acesso bloqueado" })).toBeDisabled();
   });
@@ -6587,7 +6587,7 @@ describe("@taliya/crm component coverage", () => {
     expect(screen.getByRole("heading", { name: "Como funciona neste modo" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Ajustes deste fluxo" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /Copiloto/i }));
-    fireEvent.click(screen.getByRole("button", { name: "Início" }));
+    fireEvent.click(screen.getByRole("group", { name: "Início" }));
     fireEvent.click(screen.getAllByRole("button", { name: "Abrir opções do nó" })[0]);
     fireEvent.click(screen.getByRole("button", { name: "Remover Recepção" }));
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "Mensagem atualizada" } });
