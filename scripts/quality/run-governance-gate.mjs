@@ -10,6 +10,7 @@ const scripts = [
   ['validate-waivers.mjs', ['--check']],
   ['validate-skills.mjs', []],
   ['validate-codex-rules.mjs', []],
+  ['validate-ci-bootstrap.mjs', []],
   ['validate-spec-status.mjs', []]
 ];
 const policyIndex = process.argv.indexOf('--policy');

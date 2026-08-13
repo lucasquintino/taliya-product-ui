@@ -17,12 +17,13 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 1
+      - uses: pnpm/action-setup@a15d269cd4658e1107c09f1fabf4cbd7bd1f308a
+        with:
+          version: 9.15.4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 22.12.0
           cache: pnpm
-      - name: Enable pinned package manager
-        run: corepack enable && corepack prepare pnpm@9.15.4 --activate
       - name: Install immutable workspace
         run: corepack pnpm install --frozen-lockfile
       - name: Runtime dependency audit
