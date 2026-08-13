@@ -14,9 +14,14 @@ export const portabilityGateIds = [
   "package-boundaries:audit",
   "public-api:audit",
   "public-api-surface:audit",
-  "source-assets:versioned-audit",
-  "registry-publication:audit"
+  "source-assets:versioned-audit"
 ];
+
+// Registry state is an external release-channel fact. A new candidate must be
+// certifiable before its version exists on npm, so it cannot be a portability
+// gate for pull requests, main pushes, or the pre-publication certification
+// workflow. The dedicated registry-publication/release-channel audits remain
+// the post-publication adoption checks.
 
 export const releaseArchitectureGateIds = [
   "architecture:standards",
