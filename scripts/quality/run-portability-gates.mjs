@@ -18,12 +18,17 @@ export const portabilityGateIds = [
   "registry-publication:audit"
 ];
 
+export const releaseArchitectureGateIds = [
+  "architecture:standards",
+  "architecture:ratchet"
+];
+
 function annotation(message) {
   return message.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
 }
 
-export function runPortabilityGates({ spawn = spawnSync, cwd = process.cwd() } = {}) {
-  for (const gateId of portabilityGateIds) {
+export function runPortabilityGates({ spawn = spawnSync, cwd = process.cwd(), gateIds = portabilityGateIds } = {}) {
+  for (const gateId of gateIds) {
     console.log(`PORTABILITY-GATE-START: ${gateId}`);
     const isWindows = process.platform === "win32";
     const command = isWindows ? process.env.ComSpec || "cmd.exe" : "pnpm";
@@ -41,4 +46,9 @@ export function runPortabilityGates({ spawn = spawnSync, cwd = process.cwd() } =
 }
 
 const isCli = process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1]);
-if (isCli) process.exit(runPortabilityGates());
+if (isCli) {
+  const gateIds = process.argv.includes("--release")
+    ? [...portabilityGateIds, ...releaseArchitectureGateIds]
+    : portabilityGateIds;
+  process.exit(runPortabilityGates({ gateIds }));
+}

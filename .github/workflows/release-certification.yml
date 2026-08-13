@@ -36,19 +36,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Run governance and source-of-truth gates
-        run: |
-          pnpm quality:governance
-          pnpm tokens:audit
-          pnpm package-boundaries:audit
-          pnpm public-api:audit
-          pnpm public-api-surface:audit
-          pnpm storybook-anatomy:audit:strict
-          pnpm components:audit
-          pnpm crm-module-boundaries:audit
-          pnpm domain-wrappers:audit
-          pnpm architecture:standards
-          pnpm architecture:ratchet
-          pnpm source-assets:versioned-audit
+        run: node scripts/quality/run-portability-gates.mjs --release
       - run: pnpm exec playwright install chromium firefox webkit
       - if: runner.os == 'Linux'
         run: pnpm exec playwright install-deps chromium firefox webkit
