@@ -35,12 +35,13 @@ jobs:
           node-version: 22.12.0
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Build distributable declarations for public API gates
+        run: pnpm build
       - name: Run governance and source-of-truth gates
         run: node scripts/quality/run-portability-gates.mjs --release
       - run: pnpm exec playwright install chromium firefox webkit
       - if: runner.os == 'Linux'
         run: pnpm exec playwright install-deps chromium firefox webkit
-      - run: pnpm build
       - run: pnpm coverage
       - run: pnpm storybook:build
       - run: node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static

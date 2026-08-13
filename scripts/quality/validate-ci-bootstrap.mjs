@@ -68,6 +68,14 @@ export function validateWorkflowBootstrap(source, expectedPnpmVersion, relativeP
     errors.push(`CI-HERMETIC-CONSUMER: ${relativePath}:${externalConsumerLine + 1} requires an unversioned sibling consumer in a clean-clone job`);
   }
 
+  if (/release-certification\.ya?ml$/.test(relativePath)) {
+    const releaseGateLine = lines.findIndex((line) => /run-portability-gates\.mjs\s+--release/.test(line));
+    const buildLine = lines.findIndex((line) => /run:\s+pnpm\s+build\s*$/.test(line));
+    if (releaseGateLine >= 0 && (buildLine < 0 || buildLine > releaseGateLine)) {
+      errors.push(`CI-RELEASE-BUILD-ORDER: ${relativePath}:${releaseGateLine + 1} runs distributable public API gates before building declarations`);
+    }
+  }
+
   return errors;
 }
 

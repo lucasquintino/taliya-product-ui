@@ -44,6 +44,11 @@ test('clean-clone portability does not require a machine-local sibling consumer'
   assert.match(validateWorkflowBootstrap(source, '9.15.4', '.github/workflows/library-portability.yml')[0], /^CI-HERMETIC-CONSUMER:/);
 });
 
+test('release certification builds declarations before distributable API gates', () => {
+  const source = `jobs:\n  certify:\n    steps:\n${setupPnpm}\n${setupNode}\n      - run: node scripts/quality/run-portability-gates.mjs --release\n      - run: pnpm build`;
+  assert.match(validateWorkflowBootstrap(source, '9.15.4', '.github/workflows/release-certification.yml')[0], /^CI-RELEASE-BUILD-ORDER:/);
+});
+
 test('pnpm 9 rejects v11 workspace configuration placement', () => {
   const packageJson = { packageManager: 'pnpm@9.15.4', pnpm: { overrides: { vite: '7.3.5' } } };
   const errors = validatePackageManagerConfig(packageJson, 'packages:\n  - packages/*\noverrides:\n  vite: 7.3.5\n', 'overrides:\n  vite: 7.3.5\n');
