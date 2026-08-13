@@ -50,10 +50,12 @@ async function worker() {
     try {
       const response = await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`, { waitUntil: "commit", timeout: 30000 });
       if (!response || response.status() >= 400) { status = "fail"; error = `Story iframe HTTP ${response?.status() ?? "no-response"}`; }
-      // Allow Storybook's async `play` phase and React effects to settle before
-      // inspecting console/page errors. A short fixed delay caused intermittent
-      // false negatives in long setup stories on cold static builds.
-      await page.waitForTimeout(800);
+      // Wait for Storybook's preview lifecycle to finish. A fixed delay is not
+      // a reliable contract on cold or resource-constrained CI runners.
+      await page.waitForFunction(
+        () => window.__STORYBOOK_PREVIEW__?.currentRender?.phase === "finished",
+        { timeout: 30000 }
+      );
       const body = await page.locator("body").innerText();
       if (/There was an error rendering|Cannot read properties of undefined|Failed to fetch dynamically imported module/i.test(body)) { status = "fail"; error = body.slice(0, 500); }
       if (errors.length) { status = "fail"; error = errors.join(" | "); }
