@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-13T11:49:01.278Z",
+  "generatedAt": "2026-08-13T20:17:54.099Z",
   "status": "pass-registry-policy",
   "contractPass": true,
   "currentChannel": "local-tarball",
-  "currentVersion": "0.1.1",
+  "currentVersion": "0.1.2",
   "placeholderVersion": "0.0.0",
   "registryReady": true,
   "registryVersionReady": true,
@@ -12,15 +12,15 @@
   "packageVersions": [
     {
       "filePath": "packages/tokens/package.json",
-      "version": "0.1.1"
+      "version": "0.1.2"
     },
     {
       "filePath": "packages/ui/package.json",
-      "version": "0.1.1"
+      "version": "0.1.2"
     },
     {
       "filePath": "packages/crm/package.json",
-      "version": "0.1.1"
+      "version": "0.1.2"
     }
   ],
   "packageMetadata": [
@@ -98,7 +98,7 @@
     {
       "id": "package-versions-aligned",
       "status": "pass",
-      "evidence": "packages/tokens/package.json=0.1.1, packages/ui/package.json=0.1.1, packages/crm/package.json=0.1.1",
+      "evidence": "packages/tokens/package.json=0.1.2, packages/ui/package.json=0.1.2, packages/crm/package.json=0.1.2",
       "note": "all public packages must share the same release version"
     },
     {

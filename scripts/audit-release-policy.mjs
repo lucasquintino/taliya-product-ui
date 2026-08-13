@@ -165,10 +165,12 @@ const rows = [
   row(
     "controlled-publish-workflow",
     Boolean(publishWorkflowSource) &&
-      publishWorkflowSource.includes("environment: npm-trusted-publish") &&
+      (publishWorkflowSource.includes("environment: npm-trusted-publish") ||
+        publishWorkflowSource.includes("inputs.auth_mode == 'token' && 'npm' || 'npm-trusted-publish'")) &&
       publishWorkflowSource.includes("id-token: write") &&
       publishWorkflowSource.includes("NPM_CONFIG_PROVENANCE") &&
-      publishWorkflowSource.includes("workflow_dispatch"),
+      publishWorkflowSource.includes("workflow_dispatch") &&
+      publishWorkflowSource.includes("auth_mode"),
     publishWorkflowPath || "missing",
     "publishing must be manual, environment-protected, authenticated through npm trusted publishing, and provenance-enabled"
   ),

@@ -7,6 +7,14 @@ on:
         description: GitHub Actions run ID that produced release-certified-artifacts for this commit
         required: true
         type: string
+      auth_mode:
+        description: Publish authentication mode; prefer OIDC after npm Trusted Publisher is configured
+        required: true
+        default: oidc
+        type: choice
+        options:
+          - oidc
+          - token
 
 permissions:
   contents: read
@@ -16,7 +24,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: npm-trusted-publish
+    environment: ${{ inputs.auth_mode == 'token' && 'npm' || 'npm-trusted-publish' }}
     permissions:
       contents: read
       actions: read
@@ -46,4 +54,5 @@ jobs:
       - name: Publish exact certified tarballs through npm trusted publishing
         run: pnpm release:npm:artifacts
         env:
+          NODE_AUTH_TOKEN: ${{ inputs.auth_mode == 'token' && secrets.NPM_TOKEN || '' }}
           NPM_CONFIG_PROVENANCE: "true"
