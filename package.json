@@ -37,7 +37,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release:npm": "pnpm -r --filter \"./packages/**\" publish --access public --provenance --no-git-checks",
-    "release:npm:artifacts": "npm publish dist-packages/taliya-tokens-*.tgz --access public --provenance --no-git-checks && npm publish dist-packages/taliya-ui-*.tgz --access public --provenance --no-git-checks && npm publish dist-packages/taliya-crm-*.tgz --access public --provenance --no-git-checks",
+    "release:npm:artifacts": "npm publish ./dist-packages/taliya-tokens-*.tgz --access public --provenance --no-git-checks && npm publish ./dist-packages/taliya-ui-*.tgz --access public --provenance --no-git-checks && npm publish ./dist-packages/taliya-crm-*.tgz --access public --provenance --no-git-checks",
     "release:npm:dry-run": "pnpm -r --filter \"./packages/**\" publish --access public --provenance --no-git-checks --dry-run",
     "registry-publication:audit": "node scripts/audit-registry-publication.mjs --check",
     "registry-publication:audit:update": "node scripts/audit-registry-publication.mjs",
