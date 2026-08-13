@@ -1,6 +1,6 @@
 # Release Channel Audit
 
-Generated: 2026-08-12T21:11:30.387Z
+Generated: 2026-08-13T20:52:03.948Z
 
 Status: pass-registry-release-channel
 
@@ -10,7 +10,7 @@ This report separates the current local install channel from a future registry p
 
 - Local tarball channel ready: `true`
 - Registry ready: `true`
-- Current package version: `0.1.1`
+- Current package version: `0.1.2`
 - Package artifacts pass: `true`
 - Local release manifest pass: `true`
 - Local release manifest: `dist-packages/taliya-product-ui-local-manifest.json`
@@ -27,9 +27,9 @@ This report separates the current local install channel from a future registry p
 
 | Package | Version | Private | Tarball exists | Registry version ready |
 | --- | --- | --- | --- | --- |
-| `@taliya/tokens` | `0.1.1` | no | yes | yes |
-| `@taliya/ui` | `0.1.1` | no | yes | yes |
-| `@taliya/crm` | `0.1.1` | no | yes | yes |
+| `@taliya/tokens` | `0.1.2` | no | yes | yes |
+| `@taliya/ui` | `0.1.2` | no | yes | yes |
+| `@taliya/crm` | `0.1.2` | no | yes | yes |
 
 ## Registry Blockers
 

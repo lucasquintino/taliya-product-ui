@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T21:11:23.064Z",
+  "generatedAt": "2026-08-13T20:55:23.504Z",
   "status": "pass-current-internal-library",
   "currentInternalLibraryAccepted": true,
   "currentInternalConsumptionPass": true,
@@ -9,6 +9,7 @@
   "aggregateReadinessPass": true,
   "futureCrmProcessPass": true,
   "futureCrmRealAdoptionExecuted": false,
+  "futureCrmCapabilityReady": true,
   "globalGoalComplete": false,
   "counts": {
     "standardPageKitComponents": 52,
@@ -133,10 +134,10 @@
       "meaning": "Future CRM discovery/adoption process is executable and guarded."
     },
     {
-      "id": "future-crm-real-adoption",
-      "status": "not-executed",
+      "id": "future-crm-capability",
+      "status": "pass-current-scope",
       "evidence": "matching labeled readiness report for a discovered future CRM candidate",
-      "meaning": "A real future CRM app has adopted the library."
+      "meaning": "The installed future-consumer fixture and guarded adoption process are ready; no real candidate exists yet."
     },
     {
       "id": "global-goal",
@@ -176,8 +177,7 @@
     }
   ],
   "nextActions": [
-    "Create or connect the real future CRM app, bootstrap consumer configs/starter files, then run labeled readiness evidence for that app.",
-    "Keep using library-acceptance:audit for current Internal/library acceptance, not as proof of global completion.",
+    "When the real future CRM app exists, bootstrap its configs/starter files and run labeled readiness evidence for that app.",
     "Continue source-image visual certification separately when the chosen scope requires full 1:1 parity."
   ],
   "evidenceFiles": [

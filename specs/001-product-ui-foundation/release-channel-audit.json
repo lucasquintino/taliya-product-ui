@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-12T21:11:30.387Z",
+  "generatedAt": "2026-08-13T20:52:03.948Z",
   "status": "pass-registry-release-channel",
   "localTarballChannelReady": true,
   "registryReady": true,
@@ -9,7 +9,7 @@
   "sourceTarballsExist": true,
   "packageMetadataPublishable": true,
   "packageVersionsAligned": true,
-  "currentVersion": "0.1.1",
+  "currentVersion": "0.1.2",
   "releasePolicyStatus": "pass-registry-policy",
   "releasePolicyPath": "specs/001-product-ui-foundation/contracts/release-policy.json",
   "registryPublicationStatus": "pass-published",
@@ -23,7 +23,7 @@
   "packageRows": [
     {
       "name": "@taliya/tokens",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "private": false,
       "tarball": "dist-packages/taliya-tokens-0.1.1.tgz",
       "tarballExists": true,
@@ -32,7 +32,7 @@
     },
     {
       "name": "@taliya/ui",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "private": false,
       "tarball": "dist-packages/taliya-ui-0.1.1.tgz",
       "tarballExists": true,
@@ -41,7 +41,7 @@
     },
     {
       "name": "@taliya/crm",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "private": false,
       "tarball": "dist-packages/taliya-crm-0.1.1.tgz",
       "tarballExists": true,

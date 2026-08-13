@@ -1,6 +1,6 @@
 # Official Library Readiness Audit
 
-Generated: 2026-08-12T21:22:55.724Z
+Generated: 2026-08-13T20:55:22.167Z
 
 Status: pass-official-library-current-scope
 
@@ -13,7 +13,7 @@ This report answers whether `taliya-product-ui` is ready to act as the official 
 - CRM real can start: `true`
 - Real future CRM adoption executed: `false`
 - Global goal complete: `false`
-- Package version: `0.1.1`
+- Package version: `0.1.2`
 - Release-candidate gates: `104`
 - Release channel: `pass-registry-release-channel`
 - Release policy: `pass-registry-policy`
@@ -37,9 +37,9 @@ This report answers whether `taliya-product-ui` is ready to act as the official 
 | `release-channel` | pass | release-channel-audit.json | required gate report is in an accepted state |
 | `release-candidate` | pass | release-candidate-audit.json | required gate report is in an accepted state |
 | `goal-completion` | pass | goal-completion-audit.json | required gate report is in an accepted state |
-| `@taliya/tokens` | pass | 0.1.1 | package metadata supports official consumer installation |
-| `@taliya/ui` | pass | 0.1.1 | package metadata supports official consumer installation |
-| `@taliya/crm` | pass | 0.1.1 | package metadata supports official consumer installation |
+| `@taliya/tokens` | pass | 0.1.2 | package metadata supports official consumer installation |
+| `@taliya/ui` | pass | 0.1.2 | package metadata supports official consumer installation |
+| `@taliya/crm` | pass | 0.1.2 | package metadata supports official consumer installation |
 
 ## Registry Manual Items
 
