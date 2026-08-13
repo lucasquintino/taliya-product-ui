@@ -33,63 +33,63 @@ jobs:
           cache: pnpm
 
       - name: Install frozen workspace
-        run: corepack pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Install PR browser
-        run: corepack pnpm exec playwright install chromium
+        run: pnpm exec playwright install chromium
 
       - name: Typecheck
-        run: corepack pnpm typecheck
+        run: pnpm typecheck
 
       - name: Lint
-        run: corepack pnpm lint
+        run: pnpm lint
 
       - name: Test official packages
-        run: corepack pnpm --filter @taliya/tokens test && corepack pnpm --filter @taliya/ui test && corepack pnpm --filter @taliya/crm test
+        run: pnpm --filter @taliya/tokens test && pnpm --filter @taliya/ui test && pnpm --filter @taliya/crm test
 
       - name: Enforce package coverage thresholds
-        run: corepack pnpm coverage
+        run: pnpm coverage
 
       - name: Build packages and static Storybook
-        run: corepack pnpm build
+        run: pnpm build
 
       - name: Pack current packages
-        run: corepack pnpm pack:local
+        run: pnpm pack:local
 
       - name: Audit package artifacts
-        run: corepack pnpm package-artifacts:audit
+        run: pnpm package-artifacts:audit
 
       - name: Install synthetic future consumer
-        run: corepack pnpm future-consumer-fixture:audit
+        run: pnpm future-consumer-fixture:audit
 
       - name: Run deterministic quality gates
         run: |
-          corepack pnpm quality:governance
-          corepack pnpm tokens:audit
-          corepack pnpm storybook-anatomy:audit:strict
-          corepack pnpm components:audit
-          corepack pnpm crm-module-boundaries:audit
-          corepack pnpm domain-wrappers:audit
-          corepack pnpm package-boundaries:audit
-          corepack pnpm public-api:audit
-          corepack pnpm public-api-surface:audit
-          corepack pnpm source-assets:versioned-audit
-          corepack pnpm registry-publication:audit
-          corepack pnpm registry-consumer-adoption:audit
+          pnpm quality:governance
+          pnpm tokens:audit
+          pnpm storybook-anatomy:audit:strict
+          pnpm components:audit
+          pnpm crm-module-boundaries:audit
+          pnpm domain-wrappers:audit
+          pnpm package-boundaries:audit
+          pnpm public-api:audit
+          pnpm public-api-surface:audit
+          pnpm source-assets:versioned-audit
+          pnpm registry-publication:audit
+          pnpm registry-consumer-adoption:audit
           node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
           node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 4
-          corepack pnpm a11y:evidence
-          corepack pnpm e2e:pr
+          pnpm a11y:evidence
+          pnpm e2e:pr
           node scripts/quality/audit-dependencies.mjs --prod
           node scripts/quality/audit-dependencies.mjs --full
           node scripts/quality/run-sast.mjs
           node scripts/quality/run-secrets.mjs
 
       - name: Reject stale artifacts and reports
-        run: corepack pnpm pack:local:stale-artifact-probe && corepack pnpm report-freshness:audit:stale-probe
+        run: pnpm pack:local:stale-artifact-probe && pnpm report-freshness:audit:stale-probe
 
       - name: Prove checks are read-only
-        run: corepack pnpm audit-checks:read-only-probe
+        run: pnpm audit-checks:read-only-probe
 
       - name: Upload Storybook build
         if: matrix.os == 'ubuntu-latest'

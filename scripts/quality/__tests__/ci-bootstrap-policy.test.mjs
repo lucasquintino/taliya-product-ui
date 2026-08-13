@@ -24,6 +24,11 @@ test('workflow pnpm setup must match the packageManager pin', () => {
   assert.match(validateWorkflowBootstrap(source, '9.15.4')[0], /^CI-PNPM-VERSION:/);
 });
 
+test('workflow commands use the pnpm binary installed by the setup action', () => {
+  const source = `jobs:\n  test:\n    steps:\n${setupPnpm}\n${setupNode}\n      - run: corepack pnpm install --frozen-lockfile`;
+  assert.match(validateWorkflowBootstrap(source, '9.15.4')[0], /^CI-PNPM-DISPATCH:/);
+});
+
 test('pnpm 9 rejects v11 workspace configuration placement', () => {
   const packageJson = { packageManager: 'pnpm@9.15.4', pnpm: { overrides: { vite: '7.3.5' } } };
   const errors = validatePackageManagerConfig(packageJson, 'packages:\n  - packages/*\noverrides:\n  vite: 7.3.5\n', 'overrides:\n  vite: 7.3.5\n');

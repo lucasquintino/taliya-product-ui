@@ -48,6 +48,13 @@ export function validateWorkflowBootstrap(source, expectedPnpmVersion, relativeP
     }
   }
 
+  if (pnpmSteps.length > 0) {
+    const corepackLine = lines.findIndex((line) => /\bcorepack\s+pnpm\b/.test(line));
+    if (corepackLine >= 0) {
+      errors.push(`CI-PNPM-DISPATCH: ${relativePath}:${corepackLine + 1} bypasses the pnpm binary installed by pnpm/action-setup`);
+    }
+  }
+
   return errors;
 }
 

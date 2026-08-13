@@ -25,10 +25,11 @@ describe("@taliya/ui characterization contract", () => {
   });
 
   it("keeps every inventoried runtime export available during extraction", () => {
-    const inventory = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../../../../artifacts/api/public-api-inventory.json"), "utf8")) as {
-      packages: Array<{ package: string; runtimeExports: string[] }>;
+    const contract = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "../../../../tests/contracts/public-api/ui.json"), "utf8")) as {
+      package: string;
+      runtimeExports: string[];
     };
-    const expected = inventory.packages.find((entry) => entry.package === "@taliya/ui")?.runtimeExports ?? [];
-    expect(Object.keys(ui)).toEqual(expect.arrayContaining(expected));
+    expect(contract.package).toBe("@taliya/ui");
+    expect(Object.keys(ui)).toEqual(expect.arrayContaining(contract.runtimeExports));
   });
 });

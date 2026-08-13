@@ -43,6 +43,6 @@ jobs:
       - name: Verify exact certified handoff
         run: node scripts/quality/verify-release-handoff.mjs
       - name: Publish exact certified tarballs through npm trusted publishing
-        run: corepack pnpm release:npm:artifacts
+        run: pnpm release:npm:artifacts
         env:
           NPM_CONFIG_PROVENANCE: "true"
