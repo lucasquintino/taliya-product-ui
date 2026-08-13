@@ -8,6 +8,7 @@ import path from "node:path";
 import { chromium } from "@playwright/test";
 import { hasSourceChanges } from "./source-identity.mjs";
 import { sourceRevision as canonicalSourceRevision, sourceTreeHash as canonicalSourceTreeHash } from "./source-tree.mjs";
+import { isRetryableStoryFailure, waitForStorybookRender } from "./story-interaction-policy.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
@@ -20,6 +21,7 @@ const mergeReportPath = mergeReportOption ? path.resolve(root, mergeReportOption
 const requestedIds = value("--ids", "").split(",").filter(Boolean);
 const navigationTimeout = Number(value("--timeout", "10000"));
 const screenshotTimeout = Number(value("--screenshot-timeout", "30000"));
+const workerCount = Math.max(1, Number(value("--workers", "4")) || 4);
 const measureOnly = args.includes("--measure-only");
 const indexPath = path.join(storybookDir, "index.json");
 
@@ -84,23 +86,33 @@ else {
       let status = "pass";
       let error = null;
       const fileName = `${entry.id}.png`;
-      try {
-        const response = await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`, { waitUntil: "commit", timeout: navigationTimeout });
-        if (!response || response.status() >= 400) throw new Error(`Story iframe HTTP ${response?.status() ?? "no-response"}`);
-        await page.waitForTimeout(1000);
-        await page.evaluate(() => Promise.race([document.fonts?.ready, new Promise((resolve) => setTimeout(resolve, 1000))]));
-        if (!measureOnly) await page.screenshot({ path: path.join(outputDir, fileName), fullPage: false, timeout: screenshotTimeout });
-      } catch (cause) {
-        status = "fail";
-        error = String(cause?.message ?? cause).slice(0, 500);
+      let attempt = 1;
+      while (attempt <= 2) {
+        try {
+          const response = await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`, { waitUntil: "commit", timeout: navigationTimeout });
+          if (!response || response.status() >= 400) throw new Error(`Story iframe HTTP ${response?.status() ?? "no-response"}`);
+          await waitForStorybookRender(page, navigationTimeout);
+          await page.evaluate(() => Promise.race([document.fonts?.ready, new Promise((resolve) => setTimeout(resolve, 1000))]));
+          if (!measureOnly) await page.screenshot({ path: path.join(outputDir, fileName), fullPage: false, timeout: screenshotTimeout });
+          status = "pass";
+          error = null;
+          break;
+        } catch (cause) {
+          status = "fail";
+          error = String(cause?.message ?? cause).slice(0, 500);
+          if (!isRetryableStoryFailure(error, attempt)) break;
+          console.warn(`STORYBOOK-CAPTURE-RETRY ${entry.id}: attempt=${attempt + 1}`);
+          attempt += 1;
+          await page.goto("about:blank").catch(() => {});
+        }
       }
       const imagePath = path.join(outputDir, fileName);
       const layout = status === "pass" ? await page.evaluate(() => ({ viewportWidth: window.innerWidth, clientWidth: document.documentElement.clientWidth, scrollWidth: document.documentElement.scrollWidth, horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1 })) : null;
-      results.push({ id: entry.id, importPath: entry.importPath, title: entry.title, viewport: { width: 1440, height: 1024, deviceScaleFactor: 1 }, browser: "chromium", fontReady: status === "pass", theme: "light", density: "comfortable", locale: "pt-BR", status, error, durationMs: Date.now() - started, layout, image: !measureOnly && status === "pass" ? fileName : null, sha256: !measureOnly && status === "pass" ? crypto.createHash("sha256").update(fs.readFileSync(imagePath)).digest("hex") : null });
+      results.push({ id: entry.id, importPath: entry.importPath, title: entry.title, viewport: { width: 1440, height: 1024, deviceScaleFactor: 1 }, browser: "chromium", fontReady: status === "pass", theme: "light", density: "comfortable", locale: "pt-BR", status, error, attempts: attempt, durationMs: Date.now() - started, layout, image: !measureOnly && status === "pass" ? fileName : null, sha256: !measureOnly && status === "pass" ? crypto.createHash("sha256").update(fs.readFileSync(imagePath)).digest("hex") : null });
     }
     await page.close();
   };
-  await Promise.all(Array.from({ length: Math.min(4, entries.length) }, captureWorker));
+  await Promise.all(Array.from({ length: Math.min(workerCount, entries.length) }, captureWorker));
   await browser.close();
   await new Promise((resolve) => server.close(resolve));
   let report = { schemaVersion: "storybook-capture.v1", sourceRevision: identity.commitSha, sourceTreeHash: identity.sourceTreeHash, dirty: identity.dirty, buildHash: staticBuildHash, storybookDir: path.relative(root, storybookDir).replaceAll("\\", "/"), outputDir: path.relative(root, outputDir).replaceAll("\\", "/"), generatedAt: "deterministic", storyCount: results.length, passed: results.filter((row) => row.status === "pass").length, failed: results.filter((row) => row.status === "fail").length, results };
@@ -113,5 +125,15 @@ else {
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
   fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
   console.log(`STORYBOOK-CAPTURE: ${report.passed}/${report.storyCount} pass`);
-  if (report.failed) process.exitCode = 1;
+  if (report.failed) {
+    for (const row of report.results.filter((result) => result.status === "fail")) {
+      const message = `STORYBOOK-CAPTURE-FAIL ${row.id} after ${row.attempts} attempt(s): ${row.error ?? "unknown failure"}`;
+      console.error(message);
+      if (process.env.GITHUB_ACTIONS === "true") {
+        const escaped = message.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
+        console.error(`::error title=Storybook capture failed::${escaped}`);
+      }
+    }
+    process.exitCode = 1;
+  }
 }
