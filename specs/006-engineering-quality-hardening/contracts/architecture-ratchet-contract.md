@@ -2,7 +2,7 @@
 
 **Contract ID**: ARCH-RATCHET-001
 **Scope**: Handwritten source, generated artifacts, package boundaries, dependency edges, module budgets, and historical findings
-**Implementation status**: DESIGN ONLY; execution is blocked until SDD approval
+**Implementation status**: ENFORCED; architecture/code-standard ratchets passed in release certification `31725704038`
 
 ## Objective
 

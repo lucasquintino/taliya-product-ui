@@ -1,10 +1,10 @@
 # CI Gate Matrix
 
-**Status**: active execution contract; `GATE-SDD-APPROVED` is open for T101-T176 and implementation is in progress
+**Status**: active execution contract; `T101-T176` is complete and `G-RELEASE` certified run `31725704038`
 **Primary requirements**: FR-008 through FR-010, FR-022 through FR-041, FR-047 through FR-048
 **Default behavior**: fail closed
 
-The implemented command equivalents are wired in `package.json`, `.github/workflows/library-portability.yml`, and `.github/workflows/release-certification.yml`. Final release claims still require the clean-clone matrix and exact artifact handoff.
+The implemented command equivalents are wired in `package.json`, `.github/workflows/library-portability.yml`, and `.github/workflows/release-certification.yml`. The final clean-clone matrix and exact artifact handoff passed in run `31725704038`.
 
 ## Gate Semantics
 
@@ -16,7 +16,7 @@ The command names below are the implemented interfaces used by the current workf
 
 | ID | Responsibility | Command/interface | PR | Nightly | Release | Current state |
 | --- | --- | --- | :---: | :---: | :---: | --- |
-| `GATE-SDD-APPROVED` | Validate complete SDD manifest and explicit human approval | approval envelope + readiness-manifest validator | SDD | SDD | precondition | Open for T101-T176; material SDD changes reopen review |
+| `GATE-SDD-APPROVED` | Validate complete SDD manifest and explicit human approval | approval envelope + readiness-manifest validator | SDD | SDD | precondition | Passed; material SDD changes reopen review |
 | `G-GOV` | Instructions, rules, profiles, skills, references, waivers, contradictions | `corepack pnpm quality:governance` | Yes | Yes | Yes | Implemented; 10 profiles, 23 gates, 11 repository-local skills, and status/rules validators pass |
 | `G-TYPE` | Clean deterministic TypeScript graph and declarations | `corepack pnpm typecheck` plus stale-artifact probes | Yes | OS matrix | OS matrix | Precursor exists; artifact isolation needs hardening |
 | `G-LINT` | ESLint/React/Hook/security/complexity rules | `corepack pnpm lint` plus `architecture:standards` | Yes | Yes | Yes | Implemented; ESLint and code-standard ratchets pass locally |
@@ -28,7 +28,7 @@ The command names below are the implemented interfaces used by the current workf
 | `G-STORY-TEST` | Story render, interaction, console, empty-root checks in browser | `story:tests` + `story:interactions` | affected | full | full | Implemented; static Storybook interactions pass 636/636 |
 | `G-A11Y` | axe plus keyboard/focus/name/semantic/reduced-motion contracts | `scripts/quality/run-a11y.mjs` + browser contracts | affected | full | full | Implemented; axe/name/focus/reduced-motion contracts run in browser workflows |
 | `G-E2E-PR` | Critical packed-consumer journeys in Chromium | `corepack pnpm e2e:pr` | affected | Yes | Yes | Implemented; 18/18 Chromium PR journeys pass locally |
-| `G-E2E-RELEASE` | Full packed-consumer journeys in Chromium/Firefox/WebKit | `corepack pnpm e2e:release:evidence` | No | scheduled | Yes | Implemented; six local projects are structured and green; clean-clone OS matrix remains release-blocking |
+| `G-E2E-RELEASE` | Full packed-consumer journeys in Chromium/Firefox/WebKit | `corepack pnpm e2e:release:evidence` | No | scheduled | Yes | Passed; six projects are green in the certified three-OS matrix |
 | `G-VISUAL` | Static captures, canonical mapping, diffs, human 1:1 decision | capture + `compare-visuals.mjs` + `validate-visual-approvals.mjs` | affected | full | full | Implemented; 63/63 current targets and tracked human approval registry |
 | `G-SEC-RUNTIME` | Production dependency security | `security:dependencies --prod` | lock/runtime | Yes | Yes | Implemented; current runtime audit is clean |
 | `G-SEC-TOOLCHAIN` | Full build/test/publish dependency security | `security:dependencies` | lock/workflow | Yes | Yes | Implemented; current toolchain audit has no blocking high/critical finding |
@@ -38,7 +38,7 @@ The command names below are the implemented interfaces used by the current workf
 | `G-PACK` | Fresh tarballs, contents, exports, declarations, CSS, SBOM | `corepack pnpm pack:local` plus `package-artifacts:audit` | public/build | Yes | Yes | Strong precursor; exact-artifact chain incomplete |
 | `G-CONSUMER` | Clean packed-consumer compile/runtime/browser compatibility | `corepack pnpm future-consumer-fixture:audit` + `consumer:packed-audit` + Playwright E2E | public/build | Yes | Yes | Implemented; packed consumer and browser journeys pass locally; clean-clone release matrix remains required |
 | `G-PROVENANCE` | Same-revision source/input/evidence/artifact hashes and freshness | `provenance:evidence` + `certify-release.mjs` | Yes | Yes | Yes | Implemented; final decision still requires a clean revision and exact release artifacts |
-| `G-RELEASE` | Certify and publish exact tested artifacts through protected identity | `certify-release.mjs` + release workflow + exact-artifact handoff | No | dry run | Yes | Implemented workflow; certification remains blocked until clean revision, SBOM/hash bundle, and CI matrix pass |
+| `G-RELEASE` | Certify and publish exact tested artifacts through protected identity | `certify-release.mjs` + release workflow + exact-artifact handoff | No | dry run | Yes | Passed in run `31725704038`; publication remains separately authorized and was not performed |
 
 `affected` means selected by the union of path profile and declared impact. Unknown or ambiguous production scope receives the full profile.
 

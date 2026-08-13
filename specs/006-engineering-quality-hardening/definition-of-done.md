@@ -1,7 +1,7 @@
 # Definition of Done
 
 **Status**: authoritative completion vocabulary for Spec Kit 006
-**Implementation authorization**: `APPROVED_FOR_IMPLEMENTATION` for `T101-T176`; final certification remains gated
+**Implementation authorization**: `APPROVED_FOR_IMPLEMENTATION` for `T101-T176`; final certification `31725704038` passed
 
 ## Core Rule
 

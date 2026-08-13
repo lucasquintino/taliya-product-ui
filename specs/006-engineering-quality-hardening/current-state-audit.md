@@ -2,7 +2,7 @@
 
 **Snapshot date**: 2026-08-12
 **Scope**: repository governance, packages, React/component architecture, tests, browser evidence, accessibility, security, performance, artifacts, CI, and release readiness
-**Decision**: implementation is authorized by the SDD envelope; local hardening gates, coverage, source-asset integrity, visual capture, PR/release browser evidence, security, performance, and package checks are green. Final certification remains blocked until one clean committed revision produces the exact SBOM/hash handoff and the three-OS CI release matrix passes.
+**Decision**: implementation is complete and release-certified. Local hardening gates, coverage, source-asset integrity, visual capture, PR/release browser evidence, security, performance, package, provenance, and ratchet checks are green; release certification run `31725704038` passed the exact clean revision on Linux, Windows, and macOS and uploaded the SBOM/hash handoff.
 **Use of this document**: planning baseline, not release certification
 
 ## Executive Conclusion

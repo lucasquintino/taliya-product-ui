@@ -2,7 +2,7 @@
 
 **Contract ID**: PUBLIC-API-001
 **Packages**: @taliya/tokens, @taliya/ui, @taliya/crm
-**Implementation status**: DESIGN ONLY; execution is blocked until SDD approval
+**Implementation status**: ENFORCED; public API inventory and compatibility gates passed in release certification `31725704038`
 
 ## Purpose
 

@@ -1,11 +1,11 @@
 # Tasks: Engineering Quality Hardening
 
 **Feature**: `006-engineering-quality-hardening`
-**Status**: `IMPLEMENTATION IN PROGRESS — BLOCKED BY G-RELEASE / CLEAN-REVISION-CI`
+**Status**: `IMPLEMENTATION COMPLETE — G-RELEASE CERTIFIED`
 **Implementation authorization**: `APPROVED_FOR_IMPLEMENTATION`
 **Task range**: `T101-T176`
 
-**Evidence reconciliation (2026-08-12)**: coverage now passes (tokens 100%, UI 94% statements / 96% lines / 95% functions / 86.79% branches, CRM 92% / 93.66% / 92.09% / 86.48%), source-assets checks pass (73/73 route targets and 164/164 recursive/ZIP images), and local six-project release E2E evidence passes (54 expected, 0 unexpected, 0 flaky). Final certification remains blocked until one clean committed revision produces the SBOM/hash bundle and the three-OS CI release matrix passes.
+**Evidence reconciliation (2026-08-13)**: coverage, source-assets, six-project release E2E, 636/636 Storybook interactions, 636/636 accessibility stories, 63/63 visual comparisons, packed-consumer, security, performance, provenance, and ratchet gates pass. Release certification run `31725704038` certified commit `1e2e13a52f9aa2a3c18cd8bfeda7c76f073b035b` on Linux, Windows, and macOS and uploaded `release-certified-artifacts` containing the SBOM, hashes, and certification bundle.
 
 ## Non-Negotiable Start Gate
 
@@ -162,7 +162,7 @@ The approval gate is open. Each task remains subject to its declared dependency,
 - [x] T173 [P] [US6] Run the final waiver inventory and expiry audit with the P1 validator from T103 across `governance/waivers/*.json`, close or revoke resolved entries, and emit `artifacts/quality/final-waiver-audit.json`; evidence: every record is schema-valid and semantically revalidated at the release revision, expired/broadened/unowned/unapproved/prohibited entries fail, no active waiver remains, and any human display label "accepted risk" is stored as canonical status `risk-accepted`. Verified no active waiver.
 - [x] T174 [P] [US6] Implement finding-level architecture/security/quality baseline fingerprints and no-growth/no-reintroduction checks in `scripts/quality/validate-ratchets.mjs`; evidence: moving, renaming, adding, or reintroducing debt fails even when aggregate counts do not grow. Verified ratchet pass.
 - [x] T175 [US5] Build the release-candidate workflow in `.github/workflows/release-certification.yml`; evidence: the workflow is SHA-pinned, runs governance/architecture/visual/release-E2E/security/performance/provenance gates, hashes exact artifacts, and uploads a handoff consumed by the separate publish workflow without rebuilding.
-- [ ] T176 [US5] Run final project certification and produce `artifacts/release/release-certification.json`; evidence: local prerequisites pass, but this task remains blocked until the implementation is committed, the release workflow produces the SBOM/hash handoff on a clean revision, and Linux/Windows/macOS release matrix evidence passes.
+- [x] T176 [US5] Run final project certification and produce `artifacts/release/release-certification.json`; evidence: release certification run `31725704038` passed on Linux, Windows, and macOS for commit `1e2e13a52f9aa2a3c18cd8bfeda7c76f073b035b`, with the exact SBOM/hash/certification handoff uploaded as `release-certified-artifacts`.
 
 ## Dependency Graph
 

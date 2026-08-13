@@ -2,7 +2,7 @@
 
 **Contract ID**: SDD-LIFECYCLE-001
 **Applies to**: Spec Kit feature 006-engineering-quality-hardening
-**Current implementation authorization**: APPROVED_FOR_IMPLEMENTATION (T101-T176); final certification remains gated
+**Current implementation authorization**: APPROVED_FOR_IMPLEMENTATION (T101-T176); implementation complete and release certified by run `31725704038`
 
 ## Objective
 
@@ -57,7 +57,7 @@ READY_FOR_APPROVAL requires all of the following:
 5. Contract schemas parse as JSON and validate their positive and controlled negative examples.
 6. The task backlog begins with an explicit implementation block and contains no task already marked complete.
 7. Constitution checks, source-of-truth precedence, risk owners, rollback boundaries, and phase dependencies are explicit.
-8. The implementation-readiness checklist remains blocked until the user grants approval.
+8. Before approval, the implementation-readiness checklist was blocked; approval is recorded and the T101-T176 implementation is now closed by release certification `31725704038`.
 9. The Git diff contains no package/component source, dependency, baseline, generated release artifact, or publication change.
 10. `approval.md` remains pending and contains neither `approvedRevision` nor `APPROVED_FOR_IMPLEMENTATION` before the human decision.
 

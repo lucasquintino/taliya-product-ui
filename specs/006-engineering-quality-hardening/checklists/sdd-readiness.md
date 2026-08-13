@@ -2,7 +2,7 @@
 
 **Feature**: `006-engineering-quality-hardening`
 **Current state**: `APPROVED / APPROVED_BY_USER / APPROVED_FOR_IMPLEMENTATION`
-**Implementation state**: `OPEN FOR T101-T176; wave gates still apply`
+**Implementation state**: `COMPLETE; T101-T176 checked and G-RELEASE certified`
 **Validation date**: 2026-08-08
 
 ## Mandatory Artifact Manifest
@@ -32,7 +32,7 @@
 - [x] Every referenced research ID is within R-001 through R-014.
 - [x] Every referenced implementation task is within T101 through T176.
 - [x] `tasks.md` contains exactly 76 unique, contiguous implementation tasks from T101 through T176.
-- [x] Every implementation task is unchecked and maps to a requirement or mandatory validation/checkpoint.
+- [x] Every implementation task is checked and maps to a requirement or mandatory validation/checkpoint.
 - [x] All implementation tasks remain constrained by the approved task range, dependencies, and wave gates.
 
 ## Static SDD Validation
@@ -67,7 +67,7 @@ The final read-only validation was run against the integrated readiness candidat
 | Structured placeholder scan | PASS; 0 unresolved |
 | Exact FR / SC / R / task ID sets | PASS; 48 / 18 / 14 / 76 |
 | One trace row per FR / SC and no unknown reference | PASS |
-| Reverse trace row for every T101-T176 | PASS |
+| Reverse trace row for every T101-T176 | PASS; 76/76 tasks checked |
 | Canonical profile / gate sets | PASS; 10 / 23 |
 | Workflow / registry planning-only consistency | PASS; v2.0.0 |
 | Local Markdown links | PASS |
@@ -76,9 +76,9 @@ The final read-only validation was run against the integrated readiness candidat
 
 ## Decision
 
-**Decision**: `PASS / APPROVED_BY_USER`. The SDD is complete, fingerprinted, and opened for the approved task range; fresh wave evidence is still required for implementation completion.
+**Decision**: `PASS / APPROVED_BY_USER`. The SDD is complete, fingerprinted, all 76 tasks are checked, and release certification run `31725704038` passed the exact revision.
 
 ```text
-SDD: READY FOR APPROVAL / READY FOR USER APPROVAL
-IMPLEMENTATION: OPEN FOR T101-T176; BLOCKED ONLY BY FAILED DEPENDENT GATES
+SDD: COMPLETE / APPROVED BY USER
+IMPLEMENTATION: COMPLETE / RELEASE CERTIFIED (T101-T176)
 ```

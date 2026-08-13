@@ -94,11 +94,12 @@ The approval authorizes agents to begin at the first dependency-ready unchecked 
 
 Package publication remains a later, separate outcome guarded by `G-RELEASE`; SDD approval alone never authorizes publication.
 
-## Current Stop Decision
+## Final Decision
 
 ```text
 SDD: APPROVED / APPROVED BY USER
-IMPLEMENTATION: APPROVED FOR IMPLEMENTATION
-CURRENT TASK: T101
-NEXT CHECKPOINT: G-GOV after T109
+IMPLEMENTATION: COMPLETE / RELEASE CERTIFIED
+CERTIFICATION RUN: 31725704038
+CERTIFIED COMMIT: 1e2e13a52f9aa2a3c18cd8bfeda7c76f073b035b
+PUBLICATION: NOT PERFORMED; SEPARATE AUTHORIZATION REQUIRED
 ```
