@@ -1,8 +1,9 @@
 /* global console, process */
 
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseMode } from "./quality/modes.mjs";
+import { normalizeText } from "./quality/portability.mjs";
 
 const root = process.cwd();
 const checkMode = parseMode(process.argv) === "check";
@@ -73,11 +74,11 @@ const audit = {
   rowCount: rows.length,
   failedCount: failedRows.length,
   metrics: {
-    indexBytes: statSync(indexPath).size,
+    indexBytes: Buffer.byteLength(normalizeText(indexSource), "utf8"),
     indexLines: indexSource.split("\n").length,
     runtimeFileCount: runtimeFiles.length,
     maxRuntimeLogicalLines: maxRuntimeLines,
-    registryBytes: existsSync(registryPath) ? statSync(registryPath).size : 0,
+    registryBytes: registrySource ? Buffer.byteLength(normalizeText(registrySource), "utf8") : 0,
     registryLines: registrySource ? registrySource.split("\n").length : 0
   },
   rows: rows.map(({ contract, status }) => ({ contract, status })),
@@ -106,7 +107,11 @@ The component registry, standard page-kit, runtime composition families, and sty
 `;
 
 const json = `${JSON.stringify(audit, null, 2)}\n`;
-const stale = !existsSync(jsonPath) || !existsSync(mdPath) || readFileSync(jsonPath, "utf8") !== json || readFileSync(mdPath, "utf8") !== md;
+const stale =
+  !existsSync(jsonPath) ||
+  !existsSync(mdPath) ||
+  normalizeText(readFileSync(jsonPath, "utf8")) !== json ||
+  normalizeText(readFileSync(mdPath, "utf8")) !== md;
 
 if (!checkMode) {
   writeFileSync(jsonPath, json);

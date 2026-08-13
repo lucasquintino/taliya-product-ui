@@ -3,7 +3,10 @@ import { test } from 'node:test';
 import { deterministicTimestamp, normalizeRepositoryPath, normalizeText, stableDecision } from '../portability.mjs';
 
 test('line endings normalize to the same decision', () => {
-  assert.equal(normalizeText('.a {\r\n  color: red;\r\n}'), normalizeText('.a {\n  color: red;\n}'));
+  const crlf = normalizeText('.a {\r\n  color: red;\r\n}');
+  const lf = normalizeText('.a {\n  color: red;\n}');
+  assert.equal(crlf, lf);
+  assert.equal(Buffer.byteLength(crlf, 'utf8'), Buffer.byteLength(lf, 'utf8'));
 });
 
 test('Windows and POSIX repository paths normalize identically', () => {
