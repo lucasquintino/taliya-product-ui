@@ -6,7 +6,7 @@ import http from "node:http";
 import path from "node:path";
 import { chromium } from "@playwright/test";
 import { hasSourceChanges, sourceRevision, sourceTreeHash } from "./source-tree.mjs";
-import { isRetryableStoryFailure } from "./story-interaction-policy.mjs";
+import { isRetryableStoryFailure, waitForStorybookRender } from "./story-interaction-policy.mjs";
 
 const root = process.cwd();
 const storybookFlag = process.argv.indexOf("--storybook-dir");
@@ -50,10 +50,7 @@ async function runStoryAttempt(entry) {
     if (!response || response.status() >= 400) { status = "fail"; error = `Story iframe HTTP ${response?.status() ?? "no-response"}`; }
     // Wait for Storybook's preview lifecycle to finish. A fixed delay is not
     // a reliable contract on cold or resource-constrained CI runners.
-    await page.waitForFunction(
-      () => window.__STORYBOOK_PREVIEW__?.currentRender?.phase === "finished",
-      { timeout: storyRenderTimeoutMs }
-    );
+    await waitForStorybookRender(page, storyRenderTimeoutMs);
     const body = await page.locator("body").innerText();
     if (/There was an error rendering|Cannot read properties of undefined|Failed to fetch dynamically imported module/i.test(body)) { status = "fail"; error = body.slice(0, 500); }
     if (errors.length) { status = "fail"; error = errors.join(" | "); }
