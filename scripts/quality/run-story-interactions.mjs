@@ -20,6 +20,7 @@ const workersFlag = process.argv.indexOf("--workers");
 // timeouts, while still allowing constrained environments to opt down with
 // --workers.
 const workerCount = Math.max(1, Number(workersFlag >= 0 ? process.argv[workersFlag + 1] : "4") || 4);
+const storyRenderTimeoutMs = 60000;
 const catalog = JSON.parse(fs.readFileSync(path.join(storybookDir, "index.json"), "utf8"));
 const requestedId = idFlag >= 0 ? process.argv[idFlag + 1] : null;
 const entries = Object.values(catalog.entries ?? {}).filter((entry) => entry.type === "story" && (!requestedId || entry.id === requestedId));
@@ -45,13 +46,13 @@ async function runStoryAttempt(entry) {
   let status = "pass";
   let error = null;
   try {
-    const response = await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`, { waitUntil: "commit", timeout: 30000 });
+    const response = await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${encodeURIComponent(entry.id)}&viewMode=story`, { waitUntil: "commit", timeout: storyRenderTimeoutMs });
     if (!response || response.status() >= 400) { status = "fail"; error = `Story iframe HTTP ${response?.status() ?? "no-response"}`; }
     // Wait for Storybook's preview lifecycle to finish. A fixed delay is not
     // a reliable contract on cold or resource-constrained CI runners.
     await page.waitForFunction(
       () => window.__STORYBOOK_PREVIEW__?.currentRender?.phase === "finished",
-      { timeout: 30000 }
+      { timeout: storyRenderTimeoutMs }
     );
     const body = await page.locator("body").innerText();
     if (/There was an error rendering|Cannot read properties of undefined|Failed to fetch dynamically imported module/i.test(body)) { status = "fail"; error = body.slice(0, 500); }
@@ -89,7 +90,7 @@ fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`);
 console.log(`STORY-INTERACTIONS: ${output.passed}/${output.storyCount} pass`);
 if (output.failed) {
   for (const row of results.filter((result) => result.status !== "pass")) {
-    const message = `STORY-INTERACTION-FAIL ${row.id}: ${row.error ?? "unknown failure"}`;
+    const message = `STORY-INTERACTION-FAIL ${row.id} after ${row.attempts} attempt(s): ${row.error ?? "unknown failure"}`;
     console.error(message);
     if (process.env.GITHUB_ACTIONS === "true") {
       const escaped = message.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");

@@ -68,7 +68,7 @@ jobs:
       - name: Run portable browser and security gates
         run: |
           node scripts/quality/run-story-tests.mjs --storybook-dir apps/docs/storybook-static
-          node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 4
+          node scripts/quality/run-story-interactions.mjs --storybook-dir apps/docs/storybook-static --workers 2
           pnpm a11y:evidence
           pnpm e2e:pr
           node scripts/quality/audit-dependencies.mjs --prod
