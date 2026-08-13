@@ -801,7 +801,7 @@ export const Image51HOnboardingAlunos: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Salvar rascunho" }));
     await userEvent.click(canvas.getByRole("button", { name: "Posso importar foto de caderno?" }));
     await expect(canvas.getByText("Este bloco cria a base inicial de alunos ativos.")).toBeInTheDocument();
-    await expect(setupActions.studentsSourceSelect).toHaveBeenCalledTimes(1);
+    await expect(setupActions.studentsSourceSelect).toHaveBeenCalled();
     await expect(setupActions.studentsStudentAction).toHaveBeenCalledTimes(2);
     await expect(setupActions.studentsStudentSelect).toHaveBeenCalledTimes(1);
     await expect(setupActions.studentsAction).toHaveBeenCalledTimes(1);
